@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=668&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Problem to configure abinit 5.7.4</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Problem to configure abinit 5.7.4</h2>
+		<p><a href="viewtopic7710.html?f=3&amp;t=668">https://forum.abinit.org/viewtopic.php?f=3&amp;t=668</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Problem to configure abinit 5.7.4</h3>
+				<div class="date">Posted: <strong>Mon Oct 18, 2010 1:13 pm</strong></div>
+				<div class="author">by <strong>Bernard NAOUSSI</strong></div>
+				<div class="content">dear all<br /><br /> I download abinit 5.7.4 and i try to install it in my PC. But it no configure well.<br />when i make &quot;./configure&quot;, this massage appear after a few steps. <br />nevertheless, that is the massage which appear: <br />&quot;checking for style of include used by make... none<br />&quot;checking for gcc... no&quot;<br />&quot;checking for cc... no&quot;<br />&quot;checking for cl.exe... no&quot;<br />&quot;configure: error: no acceptable C compiler found in $PATH&quot;<br /><br />Please i want a help to install well abinit 5.7.4<br /><br />regards</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem to configure abinit 5.7.4</h3>
+				<div class="date">Posted: <strong>Mon Oct 18, 2010 3:12 pm</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hello,<br /><br />The error message is quite clear. The configure script does not find the C compiler in your path. You should specify it by yourself if it is in a non-standard location ...<br />Moreover, version 5.7.4 is quite an old version (released more than one year ago), we are now at the 6.4.1. You should consider switching to this one.<br /><br />David</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem to configure abinit 5.7.4</h3>
+				<div class="date">Posted: <strong>Tue Oct 26, 2010 12:35 pm</strong></div>
+				<div class="author">by <strong>Bernard NAOUSSI</strong></div>
+				<div class="content">Dear all<br />I try to install 5.7.4 on abinit-linus opensuse.<br /><br />But this error occurs during installation:<br /><br />config.status: error: can not find input file: plugins/xmlf90/build.mk.in<br /><br />I need help<br /><br />Regards</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem to configure abinit 5.7.4</h3>
+				<div class="date">Posted: <strong>Tue Oct 26, 2010 12:58 pm</strong></div>
+				<div class="author">by <strong>Bernard NAOUSSI</strong></div>
+				<div class="content">dear all<br />It configure well but when I make the &quot;make&quot; command, it's no install.<br />i want help</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem to configure abinit 5.7.4</h3>
+				<div class="date">Posted: <strong>Tue Oct 26, 2010 2:27 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Hello Bernard,<br /><br />It's not really clear for me where's your problem.<br />A plain configuration/compilation/test/installation routine for Abinit looks like<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>cd AbinitRootPath<br />mkdir tmp-build<br />cd tmp-build<br />../configure --prefix=InstallationPath<br />make<br />cd tests<br />make tests_acc<br />more */*/report<br />cd ..<br />make install</code></pre></div><br /><br />to have the binaries installed in <em class="text-italics">InstallationPath/bin</em> directory (<em class="text-italics">AbinitRootPath</em> being the root of the source tree). And during the first &quot;make&quot;, the binaries are build in AbinitRootPath/tmp-build/src/98_main/ directory; the &quot;make install&quot; will - among other things - copy them in the InstallationPath/bin directory.<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem to install abinit 5.7.4</h3>
+				<div class="date">Posted: <strong>Mon Nov 01, 2010 10:15 am</strong></div>
+				<div class="author">by <strong>Bernard NAOUSSI</strong></div>
+				<div class="content">Dear all<br /><br />I have problem to install abinit-5.7.4<br />It configure well but when I make &quot;*/*/makemake, this message appear:<br /><br /><em class="text-italics"> * Generating macros for the Autotools...make-macros-autotools: Error: M4 is too old-please install vl.4 or above<br />make-macros-autotools: Aborting now</em> <br />I want a help please<br /><br /><em class="text-italics">in which directory can i take vl.4 to install??</em><br /><br /><em class="text-italics"> I want to make a fews calculs in GaN and AlN semiconductor</em><br /><br />Kind Regards<br /><br />Bernard NAOUSSI</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem to configure abinit 5.7.4</h3>
+				<div class="date">Posted: <strong>Mon Nov 01, 2010 11:23 am</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Bernard,<br /><br />makemake complains about an rather old version of the M4 macro processor - you should install a recent verson for example the one available from <a href="http://ftp.gnu.org/gnu/m4/" class="postlink">http://ftp.gnu.org/gnu/m4/</a> Then I'm afraid that your system autoconf tools are also quite outdated and makemake may complain about this. Anyway, check your M4 version with a <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>m4 --version</code></pre></div><br />Depending on your OS, you may try to update the M4 package or even try to replace it with the M4 coming with a more recent release of your Linux distribution. Another workaround would be to copy your Abinit source tree to another computer with a recent Linux that satisfies the dependencies, run makemake and if successful, move your source back to your original system if you want it compiled on that particular system.<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem to configure abinit 5.7.4</h3>
+				<div class="date">Posted: <strong>Mon Nov 01, 2010 2:25 pm</strong></div>
+				<div class="author">by <strong>Bernard NAOUSSI</strong></div>
+				<div class="content">Dear alain_Jacques<br /><br /><em class="text-italics">Thank you for your answer. I thing that i want to install abinit-6.4.1</em><br /><br />Now can i how can i install m4-1.4.15.tar in linux openuse<br /><br /><br />Kind regards</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem to configure abinit 5.7.4</h3>
+				<div class="date">Posted: <strong>Mon Nov 01, 2010 8:44 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">hello Bernard,<br /><br />OK ... solution 1, read the documentation - guess what, it's in the included INSTALL file  <img class="smilies" src="images/smilies/icon_rolleyes.gif" alt=":roll:" title="Rolling Eyes" /> <br /><br />Solution 2 ... open a terminal, cd where the m4-1.4.15.tar.gz file lives then <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>tar xzf m4-1.4.15.tar.gz<br />cd m4-1.4.15<br />./configure --prefix=/usr/local/m4<br />make<br />sudo make install<br />export PATH=/usr/local/m4/bin:$PATH</code></pre></div><br />So the new m4 is now in /usr/local/m4/bin and should be invoked instead of the stock m4 being early in the PATH - check with <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>which m4</code></pre></div><br />And then back to Abinit - good luck for the rest.<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem to configure abinit 5.7.4</h3>
+				<div class="date">Posted: <strong>Mon Nov 01, 2010 11:47 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Please note that neither M4 nor the Autotools are necessary to build Abinit. And the makemake script should be used only by the developers. End-users don't even have to know what the Autotools are.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem to configure abinit 5.7.4</h3>
+				<div class="date">Posted: <strong>Tue Nov 02, 2010 10:16 am</strong></div>
+				<div class="author">by <strong>Bernard NAOUSSI</strong></div>
+				<div class="content">Dear all.<br /><br />Just to said thanks for yours answers. <br /><br />I think that my installation would success.<br /><br />Kind regards<br /><br />bernard Naoussi<br /><em class="text-italics">bernard_naoussi@yahoo.fr</em></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem to configure abinit 5.7.4</h3>
+				<div class="date">Posted: <strong>Wed Nov 03, 2010 1:25 pm</strong></div>
+				<div class="author">by <strong>Bernard NAOUSSI</strong></div>
+				<div class="content">Dear all<br />I have other problem during install abinit-5.7.4<br /><br />During the installation, these massage appear:<br />make [2]: *** [install-data-local] erreur 1<br />make [2]: quittant le repertoire&quot;/home/cndd/desktop/abinit-5.7.4/doc&quot;<br />make [1]: *** [install-am] erreur 2<br />make [1]: quittant le repertoire&quot;/home/cndd/desktop/abinit-5.7.4/doc&quot;<br />make: ****[install-recursive] error 1<br /><br />Thanks<br /><br />Kind Regards</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem to configure abinit 5.7.4</h3>
+				<div class="date">Posted: <strong>Wed Nov 03, 2010 1:34 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Just type &quot;make -i install&quot; instead of &quot;make install&quot;.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem to configure abinit 5.7.4</h3>
+				<div class="date">Posted: <strong>Wed Nov 03, 2010 2:13 pm</strong></div>
+				<div class="author">by <strong>Bernard NAOUSSI</strong></div>
+				<div class="content">Dear Pouillon<br /><br />I thanks you for your help.<br />I type &quot;make -i install&quot; but when i type &quot;make testin_1&quot;, it don't run well<br />I want to known if abinit  can  install well and &quot;make testin_in&quot; don't run <br /><br />Thank you<br /><br />Kind Regards</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem to configure abinit 5.7.4</h3>
+				<div class="date">Posted: <strong>Wed Nov 03, 2010 2:35 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Sure. These are two completely different things.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem to configure abinit 5.7.4</h3>
+				<div class="date">Posted: <strong>Fri Nov 05, 2010 2:21 pm</strong></div>
+				<div class="author">by <strong>Bernard NAOUSSI</strong></div>
+				<div class="content">Dear Pouillon<br /><br />Just to said thank for your help.<br /><br />I want to make a fews calcul to confirm if abinit is install well<br /><br />Kind Regards</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=668&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:11 GMT -->
+</html>

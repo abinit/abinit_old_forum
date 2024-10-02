@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1454&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:53:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Parallelisation run crashes - npband (solved)</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Parallelisation run crashes - npband (solved)</h2>
+		<p><a href="viewtopic9fb5.html?f=9&amp;t=1454">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1454</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Parallelisation run crashes - npband (solved)</h3>
+				<div class="date">Posted: <strong>Fri Dec 02, 2011 2:55 pm</strong></div>
+				<div class="author">by <strong>nleconte</strong></div>
+				<div class="content">Hi all,<br /><br />I'm trying to parallelize my code over bands for a spin-orbit calculation. For that, I use, as a first test, paral_kgb 1 npkpt 2 npband 4.<br />All other variables are kept the same as when I was not forcing any band paralellization.<br /><br />The number of bands is 48, which is a multiplier of npband 4...<br /><br />For some reason, it crashes with no specific warning or error. Sometimes, depending on the number of processors I ask, it does not really crash, but the jobs hangs at the same place indefinitely.<br /><br />I do ask for the amount of memory estimated at the beginning of the abinit run.<br /><br />Here the input file :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># SO calculation<br />&nbsp;nspinor 2&nbsp; # spinor instead of scalar <br />&nbsp;nsppol 1&nbsp; &nbsp;# mandatory if nspinor 2<br />&nbsp;nspden 4&nbsp; # if magnetic system (1 would be useful for bulk Bi)<br /><br /># Paralellization<br />&nbsp;paral_kgb 1<br />&nbsp;npkpt 2<br />&nbsp;npband 4<br /><br /># Common data<br />&nbsp;ecut 60 <br />&nbsp;kptrlatt&nbsp; 2&nbsp; &nbsp;0&nbsp; &nbsp;0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -2&nbsp; &nbsp;2&nbsp; &nbsp;0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp;0&nbsp; &nbsp;1<br />&nbsp;shiftk&nbsp; &nbsp; 0&nbsp; &nbsp;0&nbsp; &nbsp;0<br />&nbsp;tsmear 0.001<br />&nbsp;intxc 1&nbsp; &nbsp; &nbsp; <br />&nbsp;ixc 1<br />&nbsp;kptopt 4&nbsp; # 1 or 2 not allowed for nspden 4 (no time reversal symmetry), value of 4 all symmetries except time reversal<br /><br /># Relaxation<br />&nbsp;nstep 0 <br />&nbsp;ionmov 2<br />&nbsp;ntime 10<br />&nbsp;optcell 0<br />&nbsp;#dilatmx 1.1<br />&nbsp;ecutsm 0.5<br /><br /><br /># Unit cell parameters of the 2x2x1 supercell<br />&nbsp;acell&nbsp; &nbsp;9.2336153342E+00&nbsp; 9.2336153342E+00&nbsp; 2.0000000000E+01<br />&nbsp;rprim&nbsp; &nbsp;0.000000000000000&nbsp; 1.000000000000000&nbsp; 0.000000000000000<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.866025403784439&nbsp; 0.500000000000000&nbsp; 0.000000000000000<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.000000000000000&nbsp; 0.000000000000000 -1.000000000000000<br /><br /># Number and types of the atoms<br />&nbsp;ntypat&nbsp; 2<br />&nbsp;natom 9<br />&nbsp;typat 1 1 1 1 2 1 1 1 1 <br />&nbsp;znucl 6 83<br />&nbsp;occopt&nbsp; 7<br /><br /># Reduced coordinates of the atoms<br />&nbsp;xred&nbsp; &nbsp; &nbsp;1.6667993666E-01&nbsp; 1.6667994614E-01&nbsp; 2.0984311651E-02<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1.6667994614E-01&nbsp; 6.6664011720E-01&nbsp; 2.0984311651E-02<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 6.6664011720E-01&nbsp; 1.6667993666E-01&nbsp; 2.0984311651E-02<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 6.6666666667E-01&nbsp; 6.6666666667E-01&nbsp; 1.9803656205E-02<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 6.6666666667E-01&nbsp; 6.6666666667E-01 -2.8076970156E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3.3333333333E-01&nbsp; 3.3333333333E-01&nbsp; 2.0882092730E-02<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3.3282070492E-01&nbsp; 8.3358965318E-01&nbsp; 2.0710339224E-02<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 8.3358964190E-01&nbsp; 3.3282070492E-01&nbsp; 2.0710339224E-02<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 8.3358965318E-01&nbsp; 8.3358964190E-01&nbsp; 2.0710339224E-02<br /><br />&nbsp;tolvrs 1.0d-14<br />&nbsp;<br />#~abinit/users/utils/AbinitStructureViewer.py<br /></code></pre></div><br /><br />And here, the end of the log file before it crashes :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>---SELF-CONSISTENT-FIELD CONVERGENCE--------------------------------------------<br /><br />&nbsp;getcut: wavevector=&nbsp; 0.0000&nbsp; 0.0000&nbsp; 0.0000&nbsp; ngfft=&nbsp; 72&nbsp; 72 144<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ecut(hartree)=&nbsp; &nbsp; &nbsp;60.000&nbsp; &nbsp;=&gt; boxcut(ratio)=&nbsp; &nbsp;2.06487<br />&nbsp; scfcv : before setvtr, energies%e_hartree=&nbsp; 0.000000000000000E+000<br /><br />&nbsp;ewald : nr and ng are&nbsp; &nbsp; 4 and&nbsp; &nbsp;21<br />&nbsp; mklocl_recipspace : will add potential with strength vprtrb(:)=<br />&nbsp; 0.000000000000000E+000&nbsp; 0.000000000000000E+000<br />&nbsp; setvtr : istep,n1xccc,moved_rhor=&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0<br />&nbsp; scfcv : after setvtr, energies%e_hartree=&nbsp; 0.000000000000000E+000<br /></code></pre></div><br /><br />Thanks in advance for any help you can provide.<br /><br />EDIT : Thanks to David, it is solved. I don't know when or why, but in the process of parallelizing the input file, I changed the nstep variable to zero. A non-zero positive value solves the problem. So in the end, it had nothing to do with the parallelization.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1454&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:53:19 GMT -->
+</html>

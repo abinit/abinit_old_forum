@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=5218&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:31:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; How do you calculate defect formation energies?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>How do you calculate defect formation energies?</h2>
+		<p><a href="viewtopic0863.html?f=9&amp;t=5218">https://forum.abinit.org/viewtopic.php?f=9&amp;t=5218</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>How do you calculate defect formation energies?</h3>
+				<div class="date">Posted: <strong>Wed Nov 25, 2020 4:27 pm</strong></div>
+				<div class="author">by <strong>kalkm1</strong></div>
+				<div class="content">I am trying to calculate the defect formation energy for a Cd-vacancy (<em class="text-italics">Vcd</em>) and Te-antisite (<em class="text-italics">Tecd</em>) in CdTe, but I am struggling to get the expected formation energies in line with other works in the literature.  <br>
+<br>
+I want to ask what the fundamental steps are and the main points that must be considered in order to calculate the formation energy (as I feel that I must be missing something)?<br>
+<br>
+<span style="text-decoration:underline">What I am currently doing is as follows:</span><br>
+1. I assume a neutrally charged defect such that the formation energy (<em class="text-italics">Ef</em>) is given by: <strong class="text-strong">Ef = Etot(D) - Etot + u(Cd) - u(Te)</strong><br>
+where <em class="text-italics">Etot</em> is the total energy of the whole bulk system, <em class="text-italics">Etot(D)</em> the energy of the total system that includes the single defect, and <em class="text-italics">u(Cd)</em> and <em class="text-italics">u(Te)</em> are the chemical potential energy of a single Cd atom and single Te atom respectively. <em class="text-italics">u(Te)</em> is only subtracted in the case of the Te-antisite calculation of course. <br>
+<br>
+2. I calculate <em class="text-italics">Ef</em> using supercell sizes of 64, 216 and 512 atoms. Because of the spurious interaction between the defect in the repeating supercell due to the periodic boundary condition (PBC), the formation energy should change as a function of supercell size and reach its true value in the limit of an infinitely large supercell. Using these three points I should be able to through extrapolation approximate <em class="text-italics">Ef</em> at an infinitely large supercell. Even if extrapolation is not possible, the <em class="text-italics">Ef</em> obtained for a supercell of 512 atoms should be pretty close to its true value (within 0.1 eV). <br>
+<br>
+3. For all total energy (<em class="text-italics">Etot</em>) calculations, I relax the supercell structure until the stresses are below 10^-4 Ha/Bohr. This has proved to be a considerable challenge for the supercells containing the defect, where the difference in energy between the SCF iterations begins to increase (instead of decrease!) and the relaxation abruptly stops. I've had the most luck when I fix all of the atom positions except for the defect and its nearest neighbours and use ionmov 2 and optcell 0 (i.e. fixing the volume to that of the relaxed bulk structure and only allowing atoms which are not fixed to move). <br>
+<br>
+4 a). How do you get the chemical potentials of the atoms, <em class="text-italics">u(Cd)</em> and <em class="text-italics">u(Te)</em>? This part I'm very unsure about (yet its something papers in the literature seem to skip over as being trivial). I believe that the condition <em class="text-italics">u(Cd)</em> + <em class="text-italics">u(Te)</em> = <em class="text-italics">Etot(CdTe)</em>, where <em class="text-italics">Etot(CdTe)</em> is the total energy of a CdTe pair, must be satisfied? Initially, for <em class="text-italics">u(Cd)</em> for example, I would place a single isolated Cd atom in the middle of the unit cell with a volume fixed to that of the relaxed corresponding bulk supercell size. When I did this for Cd and Te, the condition above was not satisfied. Furthermore, for CdTe, defect formation energies are often given in terms of Cd-rich or Te-rich conditions. If I use the isolated atom approach to calculate the chemical potential energies, do I get the Cd-rich or Te-rich formation energies? Or neither?<br>
+<br>
+4 b). In order to calculate the formation energy of the defects in Te-rich conditions, I determine <em class="text-italics">u(Te)</em> from a calculation of bulk Te where I define a unit cell containing 3 Te atoms arranged in a trigonal lattice, and relax the structure. Then, <em class="text-italics">u(Te)</em> = <em class="text-italics">Etot(Te)</em>/3 and <em class="text-italics">u(Cd)</em> = <em class="text-italics">Etot(CdTe)</em> - <em class="text-italics">u(Te)</em>. This of course satisfies the condition above. <br>
+<br>
+Doing all this, the formation energies I obtain for <em class="text-italics">Vcd</em> and <em class="text-italics">Tecd</em> are still out by ~1-2 eV and neither is the relationship between <em class="text-italics">Ef</em> and supercell size (which I plot as <em class="text-italics">1/L</em> where <em class="text-italics">L</em> is the cubic root of the number of atoms) linear - it appears more to plateau at the larger supercell sizes. <br>
+<br>
+<span style="text-decoration:underline">Some quick further questions:</span> Am I correct in relaxing the supercell when I introduce the defect? Do I need to add a charge to the defect (and is this done using the charge variable)? Even in my current case of a neutrally charged defect am I correct in thinking there would still be spurious interaction between the supercells in the PBC due to valance electrons moving around the defect?<br>
+<br>
+For context, I am using PAW datasets from the JTH table v1.1 with LDA. <br>
+<br>
+Any help or tips from your own experience calculating formation energies would be greatly appreciated!<br>
+<br>
+Cheers,<br>
+Kjell</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How do you calculate defect formation energies?</h3>
+				<div class="date">Posted: <strong>Tue Dec 01, 2020 4:12 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Kjell,<br>
+I cannot help you in calculating the formation energy but I would start to not relax the cell parameter as for a concentration going to zero the cell parameter should be the pure bulk one.<br>
+Additionally, if you have to add a charge to the supercell to get charge neutrality, then 100% sure you cannot relax the cell parameter as the stress is ill defined in this condition, see:<br>
+<a href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.86.140103" class="postlink">https://journals.aps.org/prb/abstract/1 ... .86.140103</a><br>
+<a href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.91.024107" class="postlink">https://journals.aps.org/prb/abstract/1 ... .91.024107</a><br>
+<br>
+Hope this can help a bit.<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How do you calculate defect formation energies?</h3>
+				<div class="date">Posted: <strong>Wed Dec 09, 2020 11:31 am</strong></div>
+				<div class="author">by <strong>kalkm1</strong></div>
+				<div class="content">Dear Eric,<br>
+<br>
+Thank you for your reply and the link to the papers.<br>
+<br>
+Relaxing the structures containing the defects does seem to be the common approach in the literature when calculating formation energies and I too observe that it has a significant effect on the formation energies calculated, therefore I do believe I need to perform a relaxation. <br>
+<br>
+I am a little confused about if my supercell is charged or not when I introduce the defects. If I remove a Cd atom to introduce the Cd Vacancy, will my supercell be charged by default (given that Cd is the cation in CdTe)? And I therefore need to include "charge +2" in my input file to achieve charge neutrality? Up until now I've been assuming that my supercell, even with a defect, is always neutral unless I explicitly tell abinit there is a net charge by using the "charge" input parameter.<br>
+<br>
+Best regards and thank you in advance!<br>
+<br>
+Kjell</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How do you calculate defect formation energies?</h3>
+				<div class="date">Posted: <strong>Thu Dec 10, 2020 2:24 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content"><blockquote class="uncited"><div>
+I am a little confused about if my supercell is charged or not when I introduce the defects. If I remove a Cd atom to introduce the Cd Vacancy, will my supercell be charged by default (given that Cd is the cation in CdTe)?
+</div></blockquote>
+
+No, the unit cell is always charge-neutral unless you use the charge input variable<br>
+
+<blockquote class="uncited"><div>
+Up until now I've been assuming that my supercell, even with a defect, is always neutral unless I explicitly tell abinit there is a net charge by using the "charge" input parameter.
+</div></blockquote>
+
+Right.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=5218&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:31:04 GMT -->
+</html>

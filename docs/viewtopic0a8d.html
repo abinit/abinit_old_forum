@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4436&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:16:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Non primitive cells, space groups</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Non primitive cells, space groups</h2>
+		<p><a href="viewtopic01f1.html?f=9&amp;t=4436">https://forum.abinit.org/viewtopic.php?f=9&amp;t=4436</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Non primitive cells, space groups</h3>
+				<div class="date">Posted: <strong>Thu Jun 04, 2020 6:08 pm</strong></div>
+				<div class="author">by <strong>jerkov</strong></div>
+				<div class="content">Hi all, <br>
+<br>
+I am working with a cell that can either be expressed as primitive, monoclinic Pm or non-primitive (2 formula units), orthorhmobic Amm2. I want to use the larger, orthorhombic cell for a certain calculation, specifically because it has orthogonal lattice vectors. <br>
+<br>
+To allow Abinit to complete the run, I need to put chkprim 0. The Bravais lattice is still identified as orthorhombic, but not the point group or space group. I would like to confirm that my cell is indeed Amm2 in the calculation, and also use that as a constraint during the relaxation. I tried matching the number of symmetry elements through counting the symrel matrices, but this isn't giving me the results I expected. <br>
+<br>
+Is there a way to know this from the output files?<br>
+<br>
+Cheers, <br>
+J</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Non primitive cells, space groups</h3>
+				<div class="date">Posted: <strong>Fri Jun 05, 2020 11:01 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Jerkov,<br>
+You need to analyze the relaxed cell with a program that will tell you the exact crystal space group in the case of supercell calculation. Abipy or qAgate are directly interfaced with Abinit and can do the job through the spglib python library. You can also use the FINDSYM software from ISTROPY (<a href="https://stokes.byu.edu/iso/findsym.php" class="postlink">https://stokes.byu.edu/iso/findsym.php</a>). I would say that if you did not make a mistake in the initial Abinit input position and cell parameter then chkprim keeps the right symmetries.<br>
+All the best,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Non primitive cells, space groups&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Tue Jun 09, 2020 4:41 pm</strong></div>
+				<div class="author">by <strong>jerkov</strong></div>
+				<div class="content">Hi Eric, <br>
+<br>
+Thanks for the suggestions. I confirmed the cell was Amm2 with a separate software, and I also made sense of the symrel printed by Abinit. As I said earlier, I only expected to see 4 matrices, not 8 as I do in the log file.  However, each one is a duplicate, so there are only 4 different matrices, which I guess are printing twice because the multiplicity of the cell is 2. And as I just checked, there are only these 4 different matrices in the out file. <br>
+The symrel are the 4 elements of the Amm2 I expect to see, so we're good!<br>
+<br>
+Cheers, <br>
+J</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Non primitive cells, space groups</h3>
+				<div class="date">Posted: <strong>Wed Jun 10, 2020 8:56 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">OK, great!<br>
+The symrel are indeed duplicated with a translation vector that you can see in the output file through <em class="text-italics">tnons</em>.<br>
+Best,<br>
+Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4436&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:16:18 GMT -->
+</html>

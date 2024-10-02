@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1506&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:54:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] Not able to configure abinit-6.10.1</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] Not able to configure abinit-6.10.1</h2>
+		<p><a href="viewtopic8df7.html?f=3&amp;t=1506">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1506</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] Not able to configure abinit-6.10.1</h3>
+				<div class="date">Posted: <strong>Wed Jan 25, 2012 5:00 pm</strong></div>
+				<div class="author">by <strong>roycuevas</strong></div>
+				<div class="content">Dear all:<br /><br />I am new to abinit. I have been trying to configure the 6.10.1 version in on of my group's server with no success. <br /><br />First I have typed: <br /><br /><span style="color: #0040FF">./configure --enable-mpi=no FC=/opt/intel/composerxe-2011.0.084/bin/intel64/ifort</span><br /><br />So far so good. After a while I get the &quot;go&quot; message to continue and do make. Then I do<br /><br /><span style="color: #0040FF">make mj4</span><br /><br />And after a while it seems to be finished correctly. Nevertheless when I try doing the first test:<br /><br /><span style="color: #0040FF">make testin_1</span><br /><br />I get<br /><br /><span style="color: #FF0000">echo &quot;Running built-in test in_1&quot;<br />Running built-in test in_1<br />cd tests ; /usr/bin/perl .././tests/Scripts/run-basic-tests.pl built-in in_1 /home/wychem/rs244/abinit-6.10.1<br />../../../src/98_main/abinit: error while loading shared libraries: libifport.so.5: cannot open shared object file: No such file or directory</span><br /><br />Could anyone give me some guidance on this?. It would be greatly appreciated!!!<br /><br />Rogelio</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Not able to configure abinit-6.10.1</h3>
+				<div class="date">Posted: <strong>Wed Jan 25, 2012 6:22 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Usual misconfiguration of LD_LIBRARY_PATH. See e.g. <!-- l --><a class="postlink-local" href="viewtopicb686.html?f=3&amp;t=963&amp;p=3105&amp;hilit=error+while+loading+shared+libraries+ifort#p3105">viewtopic.php?f=3&amp;t=963&amp;p=3105&amp;hilit=error+while+loading+shared+libraries+ifort#p3105</a><!-- l --><br /><br />In the case of ifort, you should have a ifortvars.sh script somewhere that you can source:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>source /path/to/ifortvars.sh</code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Not able to configure abinit-6.10.1</h3>
+				<div class="date">Posted: <strong>Wed Jan 25, 2012 7:55 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br /><blockquote><div><cite>roycuevas wrote:</cite><span style="color: #0040FF">./configure --enable-mpi=no FC=/opt/intel/composerxe-2011.0.084/bin/intel64/ifort</span><br />...<br /><span style="color: #FF0000">echo &quot;Running built-in test in_1&quot;<br />Running built-in test in_1<br />cd tests ; /usr/bin/perl .././tests/Scripts/run-basic-tests.pl built-in in_1 /home/wychem/rs244/abinit-6.10.1<br />../../../src/98_main/abinit: error while loading shared libraries: libifport.so.5: cannot open shared object file: No such file or directory</span><br /></div></blockquote><br /><br />as suggested by Yann, probably a problem with LD_LIBRARY_PATH<br />try :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>source /opt/intel/composerxe-2011.0.084/bin/compilervars.sh intel64</code></pre></div><br /><br />2 remarks :<br /><ul>- there is a 6.10.3 version released<br />- there is a update of the intel composer ( composer_xe_2011_sp1.7.25 ) : highly recommended</ul><br />regards<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Not able to configure abinit-6.10.1</h3>
+				<div class="date">Posted: <strong>Wed Jan 25, 2012 8:05 pm</strong></div>
+				<div class="author">by <strong>roycuevas</strong></div>
+				<div class="content">Thanks Yan and Michele for your prompt response.<br /><br />I will try what you suggested. I firstly download the latest version (thanks Michele).<br /><br />If I need further help (hopefully no) I will let you know.<br /><br />Rogelio</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Not able to configure abinit-6.10.1</h3>
+				<div class="date">Posted: <strong>Wed Jan 25, 2012 11:38 pm</strong></div>
+				<div class="author">by <strong>roycuevas</strong></div>
+				<div class="content"><blockquote><div><cite>roycuevas wrote:</cite>Thanks Yan and Michele for your prompt response.<br /><br />I will try what you suggested. I firstly download the latest version (thanks Michele).<br /><br />If I need further help (hopefully no) I will let you know.<br /><br />Rogelio</div></blockquote><br /><br /><br />Thank you both. After a couple of tricks it worked. The make tests did what they were supposed to. <br />Thanks a lot!</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1506&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:54:44 GMT -->
+</html>

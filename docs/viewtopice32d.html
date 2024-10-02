@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1699&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:02:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; the size of rhog in tddft.F90</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>the size of rhog in tddft.F90</h2>
+		<p><a href="viewtopic0013.html?f=19&amp;t=1699">https://forum.abinit.org/viewtopic.php?f=19&amp;t=1699</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>the size of rhog in tddft.F90</h3>
+				<div class="date">Posted: <strong>Fri Jun 15, 2012 3:21 am</strong></div>
+				<div class="author">by <strong>tsukagoshi</strong></div>
+				<div class="content">In tddft.F90, rhog is allocated as<br /><br /> <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>allocate(rhog(nfftdiel,2),vhartr(nfftdiel))</code></pre></div><br /><br />and forwarded to fourdp and hartre. In these routines, however, rhog is defined as rhog(2,nfft). <br />In tddft.F90, although, that might not affect the calculation because the size of the array does not change. <br />Indeed, I have changed rhog as<br /> <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;allocate(rhog(2,nfftdiel),vhartr(nfftdiel))</code></pre></div><br /><br />and checked the result. As expected, the result did not changed, however, I would propose to allocate rhog as (2,nfftdiel) to avoid confusion.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1699&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:02:34 GMT -->
+</html>

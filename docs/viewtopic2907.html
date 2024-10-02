@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1561&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:54:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; configure with FoX library</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>configure with FoX library</h2>
+		<p><a href="viewtopic9c1b.html?f=3&amp;t=1561">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1561</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>configure with FoX library</h3>
+				<div class="date">Posted: <strong>Wed Mar 07, 2012 4:25 pm</strong></div>
+				<div class="author">by <strong>maperez</strong></div>
+				<div class="content">Hi everyone!<br /><br />I am trying to compile ABINIT 6.12.1 with the FoX library to be able to use *xml pseudopotentials but I have some problems with the generation of the config.mk file, I can not enable the Fox option  --enable-fox <br />I type  ./configure --enable-fox FC=ifort CC=icc CXX=c++  and get something like this <br /><br />....<br /><br />configure: fallbacks to enable =&gt; atompaw bigdft etsf_io libxc linalg netcdf wannier90                <br />checking whether to build atompaw... yes                                                              <br />checking whether to build bigdft... yes                                                               <br />checking whether to build etsf_io... yes                                                              <br />checking whether to build fox... no                                                                   <br />checking whether to build libxc... yes                                                                <br />checking whether to build linalg... yes                                                               <br />checking whether to build netcdf... yes                                                               <br />checking whether to build wannier90... yes                                                            <br />configure: using tarball repository /home/MAPerez/.abinit/tarballs      <br /><br />......<br /><br />=== configuring in fallbacks (/home/MAPerez/abinit/test2/abinit-6.12.1/fallbacks)<br />configure: running /bin/sh ./configure --disable-option-checking '--prefix=/usr/local'  '--enable-fox=yes' 'FC=ifort' 'CC=icc' 'CXX=c++' '--enable-gui-build=yes' '--enable-atompaw=yes' '--enable-bigdft=yes' '--enable-etsf-io=yes' '--enable-fox=no' '--enable-libxc=yes' '--enable-linalg=yes' '--enable-netcdf=yes' '--enable-wannier90=yes' '--with-fc-vendor=intel' '--with-fc-version=10.1' '--with-tardir=/home/MAPerez/.abinit/tarballs' --cache-file=/dev/null --srcdir=.  <br /><br />....<br /><br />=== configuring in tests (/home/MAPerez/abinit/test2/abinit-6.12.1/tests)                             <br />configure: running /bin/sh ./configure --disable-option-checking '--prefix=/usr/local'  '--enable-fox=yes' 'FC=ifort' 'CC=icc' 'CXX=c++' '--enable-gui-build=yes' '--enable-atompaw=yes' '--enable-bigdft=yes' '--enable-etsf-io=yes' '--enable-fox=no' '--enable-libxc=yes' '--enable-linalg=yes' '--enable-netcdf=yes' '--enable-wannier90=yes' '--with-fc-vendor=intel' '--with-fc-version=10.1' '--with-tardir=/home/MAPerez/.abinit/tarballs' --cache-file=/dev/null --srcdir=.   <br /><br /><br />Could you give me advices to make CONFIGURE enables this library?<br /><br />Thanks.<br /><br />Miguel Angel</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: configure with FoX library</h3>
+				<div class="date">Posted: <strong>Wed Mar 07, 2012 8:42 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi Miguel,<br /><br />FoX is currently supported and tested with GCC and XLF compilers...<br /><br />I can try with fort 10.1, 11.1 and 12.1<br /><br />what is the version of your compiler ?<br /><br />regards<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: configure with FoX library</h3>
+				<div class="date">Posted: <strong>Wed Mar 07, 2012 11:54 pm</strong></div>
+				<div class="author">by <strong>maperez</strong></div>
+				<div class="content">Hi JMB!<br /><br />I am using ifort 10.1, the same version for icc and 4.1.2 for c++<br />I think the problem is that ./configure does not recognize the option --enable-fox as input and uses the default value for it (=NO), since I have checked  ./configure -help and found --enable-fox is not an option. <br /><br />Thanks again.<br /><br />Miguel Angel</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: configure with FoX library</h3>
+				<div class="date">Posted: <strong>Thu Mar 08, 2012 12:59 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />you must use, with abinit version 6.12.1,<br /><br />--with-trio-flavor=netcdf+etsf_io+fox<br /><br />the compilation works for me  with FoX-4.1.2...but not the tests  <img class="smilies" src="images/smilies/icon_e_confused.gif" alt=":?" title="Confused" /> <br />segfault !<br /><br />regards<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: configure with FoX library</h3>
+				<div class="date">Posted: <strong>Thu Mar 08, 2012 4:13 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">but tests of FoX succeed with the last version of ifort Version 12.1.1.256  <img class="smilies" src="images/smilies/icon_cool.gif" alt="8-)" title="Cool" /> <br /><br />jmb</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1561&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:54:32 GMT -->
+</html>

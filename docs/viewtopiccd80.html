@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=920&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:53:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Input file for polarization calculation of BiFeo3</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Input file for polarization calculation of BiFeo3</h2>
+		<p><a href="viewtopic7b3b.html?f=9&amp;t=920">https://forum.abinit.org/viewtopic.php?f=9&amp;t=920</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Input file for polarization calculation of BiFeo3</h3>
+				<div class="date">Posted: <strong>Tue Mar 01, 2011 12:59 pm</strong></div>
+				<div class="author">by <strong>mina</strong></div>
+				<div class="content">Dear all,<br />i'm calculating polarization of Bifeo3 and i have studied its tutorials but in abinit test/v5/t12.in and tests/v5/t12.in.FromPHermet i have these input files to calculate<br />Berry Phase polarisation:<br />Input(t12.in):<br /> acell 3*4.62 angstrom<br />   rprim 0.0 0.5 0.5<br />         0.5 0.0 0.5<br />         0.5 0.5 0.0<br /><br />#Atom definition<br />#***************<br />   natom 2<br />   ntypat 2<br />   znucl 11 9 <br />   typat 1 2<br /><br />#SCF parameters<br />#**************<br />   iscf 17<br />   nstep 1<br /><br /><br />#Planewave basis<br />#***************<br />   pawecutdg 80.<br /><br />   ecut  40.<br />   kptopt 3 <br />   ngkpt 2 2 2 <br />   nshiftk 4<br />   shiftk 0.5 0.5 0.5<br />          0.5 0.0 0.0<br />          0.0 0.5 0.0<br />          0.0 0.0 0.5<br />   toldfe 1.0d-12<br /><br /># Berry phase calculation of the polarization<br />#********************************************<br />   berryopt -1<br />   rfdir 1 1 1<br /><br /> xcart   1.0000000000E-02  0.0000000000E+00  0.0000000000E+00<br />         4.3652673487E+00  4.3652673487E+00  4.3652673487E+00<br /><br /> nbdbuf 0<br /><br />and Input(t112.in.FromPHermet):<br />acell 3*4.62 angstrom<br />   rprim 0.0 0.5 0.5<br />         0.5 0.0 0.5<br />         0.5 0.5 0.0<br /><br />#Atom definition<br />#***************<br />   natom 2<br />   ntypat 2<br />   znucl 11 9 <br />   typat 1 2<br /><br />#SCF parameters<br />#**************<br />   iscf 17<br />   nstep 100<br /><br /><br />#Planewave basis<br />#***************<br />   usepaw 1<br />   pawecutdg 80.<br /><br />   ecut  40.<br />   kptopt 1 <br />   ngkpt 6 6 6 <br />   nshiftk 4<br />   shiftk 0.5 0.5 0.5<br />          0.5 0.0 0.0<br />          0.0 0.5 0.0<br />          0.0 0.0 0.5<br />   toldfe 1.0d-12<br /><br /># Berry phase calculation of the polarization<br />#********************************************<br />   berryopt -1<br />   rfdir 1 1 1<br /><br />ndtset 3<br />jdtset 1 2 3<br /><br /> xcart1   0.0000000000E+00  0.0000000000E+00  0.0000000000E+00<br />          4.3652673487E+00  4.3652673487E+00  4.3652673487E+00<br /><br /> xcart2   1.0000000000E-02  0.0000000000E+00  0.0000000000E+00<br />          4.3652673487E+00  4.3652673487E+00  4.3652673487E+00<br /><br /> xcart3  -1.0000000000E-02  0.0000000000E+00  0.0000000000E+00<br />          4.3652673487E+00  4.3652673487E+00  4.3652673487E+00<br /><br /><br /><br />nbdbuf 0<br /><br />would you please guide me which input we have to use to calculate Berry phase calculation of polarization?<br />Best regards.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Input file for polarization calculation of BiFeo3</h3>
+				<div class="date">Posted: <strong>Thu Mar 03, 2011 12:22 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">All you need to compute polarization with Berrys phase is <br /><br />berryopt -1<br />rfdir 1 1 1<br /><br />In these files, the polarization is being computed as a function of atomic displacement, which gives in addition a finite differences approach to computation of the Born effective charges.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=920&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:53:44 GMT -->
+</html>

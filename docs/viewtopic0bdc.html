@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2753&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:47:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; GS LiFePO4 : gradients have not converged yet</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>GS LiFePO4 : gradients have not converged yet</h2>
+		<p><a href="viewtopic782c.html?f=9&amp;t=2753">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2753</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>GS LiFePO4 : gradients have not converged yet</h3>
+				<div class="date">Posted: <strong>Thu Jul 31, 2014 12:59 am</strong></div>
+				<div class="author">by <strong>evgenii</strong></div>
+				<div class="content">Hi,<br /><br />I'm studying LiFePO4 (Pnma 62 orthorombic,  28 atoms in unit cell).<br /><br />1)I have prepared *.in file from cif(data_72545-ICSD)  - <a href="https://github.com/materialsproject/pymatgen/blob/master/test_files/MultiStructure.cif" class="postlink">https://github.com/materialsproject/pymatgen/blob/master/test_files/MultiStructure.cif</a><br /><br />2)then I have fixed positions of Li atom (x y z : 0 0 0) and y = 1/4 of Fe, P, O1, O2 - as I understand from symmetry <br /><br />3)For begining I choose potentials GGA.fhi - <a href="http://www.abinit.org/downloads/psp-links/gga_fhi" class="postlink">http://www.abinit.org/downloads/psp-links/gga_fhi</a><br /><br />4)optcell = 2, ecut = 15 and k point grid = 4 x 7 x 9, ixc = 11<br /><br />I have attached *.in, and 2 *.out files - one as result , one dump from console - to better understand my situation <br /><br />I have very bad gradients convergence and don't know my mistake - I also tryied computations, for example,  with unfixed all atoms (remove code with natfix and iatfix) or set optcell = 0 - doesn't change situation<br /><br />may be need add options of spin-polarisation?<br /><br />My final aim is elastic tensor of LFP. <br /><br />Please explain, Evgenii</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: GS LiFePO4 : gradients have not converged yet&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Thu Jul 31, 2014 4:53 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Evgenii,<br /><br />A few comments:<br /><br />- First of all, you don't have to fix atoms that are in high symmetric positions, such as Li, Abinit detects automatically the symmetries and will not move the atoms that are in high symmetric positions.<br />- Fe is magnetic such as you'll better run spin polarized calculations. If you don't do it you'll have to set up metallic occupations (occopt input flag) since by construction your system with partially occupied orbitals will be metallic.<br />- ecut=15 Ha is certainly too small for norm-conserving pseudopotentials, if you want to use small ecut you have to use PAW instead. Check your convergence once in production.<br />- in your calculations, you setup the number of relaxation steps (ntime flag) to 5 and 12. This is too small, you have to increase it in order to give enough relaxation steps for the program to converge (~50 will be better).<br /><br />All the best,<br />Eric<br /><br />PS: You'll probably have to use LDA+U in order to treat correctly the d-orbitals of Fe.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: GS LiFePO4 : gradients have not converged yet</h3>
+				<div class="date">Posted: <strong>Mon Sep 08, 2014 8:49 am</strong></div>
+				<div class="author">by <strong>evgenii</strong></div>
+				<div class="content">Thank you very much Eric<br /><br />I have success with occopt = 6 (I ve heard that this option good for transitional metal), besides occopt I use spin-polarized computation - for &quot;Fe&quot; -  &quot;+--+&quot;(spin directions), potentials : *_ps.abinit.paw(paw from uspp), ntime 50<br /><br />I dont fix Lithium position(LP) but I see that after convergence sometime LP != 0,  0 , 0 - slightly negative but close to 0, 0, 0<br /><br />Best regards, Evgenii</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: GS LiFePO4 : gradients have not converged yet</h3>
+				<div class="date">Posted: <strong>Tue Sep 09, 2014 8:39 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">OK, great!<br /><br /><blockquote><div><cite>evgenii wrote:</cite>I dont fix Lithium position(LP) but I see that after convergence sometime LP != 0,  0 , 0 - slightly negative but close to 0, 0, 0<br /></div></blockquote><br /><br />By default Abinit keeps the symmetries up to 1.0E-8 (see tolsym <a href="http://www.abinit.org/documentation/helpfiles/for-v7.6/input_variables/vargeo.html#tolsym" class="postlink">http://www.abinit.org/documentation/helpfiles/for-v7.6/input_variables/vargeo.html#tolsym</a>), so I guess the deviation away from the high symmetric position should be very small.<br /><br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2753&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:47:19 GMT -->
+</html>

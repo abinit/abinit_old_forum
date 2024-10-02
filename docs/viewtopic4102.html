@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=4510&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 16:00:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Relax structure at finite electric field</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Relax structure at finite electric field</h2>
+		<p><a href="viewtopic6213.html?f=10&amp;t=4510">https://forum.abinit.org/viewtopic.php?f=10&amp;t=4510</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Relax structure at finite electric field&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Mon Aug 31, 2020 8:17 am</strong></div>
+				<div class="author">by <strong>tangds</strong></div>
+				<div class="content">Hi,<br>
+<br>
+I would like to consult how to relax the structure at finite electric field?<br>
+<br>
+My main purpose is to calculate thermal properties of GaN under electric field. So, I want to relax the structure at finite electric field. I modified the example for structure optimization calculation of wurtzite structure to do my calculations, as shown in attached input file. Is that correct?<br>
+<br>
+I ran this file. It works without error, but some warnings especially the following one besides berryphase_new warning:<br>
+<br>
+chkinp : WARNING -<br>
+  Constant unreduced E calculation with relaxation of cell parameters is allowed.<br>
+  But we strongly recommend users to use reduced ebar calculation (berryopt=14)<br>
+  with the relaxation of cell parameters, for internal consistency purpose.<br>
+  For more information, please refer to "M. Stengel, N.A. Spaldin and D.Vanderbilt,<br>
+  Nat. Phys., 5, 304,(2009)" and its supplementary notes.<br>
+<br>
+I didn’t understand this paper well since I am not familiar with basic theory relevant to electric field in solids. Could you give me some advice on this warning in calculations? <br>
+<br>
+Thanks,<br>
+Daosheng</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Relax structure at finite electric field</h3>
+				<div class="date">Posted: <strong>Mon Aug 31, 2020 6:00 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hi Daosheng,<br>
+<br>
+this gets a bit technical. The electrical displacement D you probably know about (berryopt 16), and you'll have to read the supplementary of Stengel's paper to grasp the difference for the reduced stuff. Or just trust them and use berryopt 14 (which is what I would do)! <br>
+<br>
+The issue is with cell relaxation rather than positions, and the change in spatial metric when you modify the cell (so you really have a quantity which is held fixed during the relaxation). The comments in their SI after eq 31 are quite clear, actually, have a look. Do be careful the units will be different from the E field, but if you are looking to do finite differences anyway it should be fine.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Relax structure at finite electric field</h3>
+				<div class="date">Posted: <strong>Fri Sep 04, 2020 9:40 am</strong></div>
+				<div class="author">by <strong>tangds</strong></div>
+				<div class="content">Dear Professor,<br>
+<br>
+Actually, I want to obtain the optimized structure at finite electric field which can be used for further phonon calculations. The reduced E only supports cell relaxation without atomic position. So, how should we do to relax both cells and atomic positions at finite electric field?<br>
+<br>
+Thanks,<br>
+Daosheng</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Relax structure at finite electric field</h3>
+				<div class="date">Posted: <strong>Fri Sep 04, 2020 11:53 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Daosheng,<br>
+A good advise is to start to understand the theory related to the calculations you want to do, otherwise you'll not understand the output data you get and you'll not be able to criticize your results if they go wrong, this is quite important.<br>
+Regarding the status of the implementation with applied electric field.<br>
+- Relaxing the cell and atomic position with "regular" applied electric field works for both norm-concerving and PAW. It is only reduced to parallelization on k-points only.<br>
+- Getting the phonons under applied electric field works only in sequential and might have a bug in it (see <a href="viewtopic89d8.html?f=10&amp;t=3987&amp;p=12184&amp;hilit=Antonio#p12184" class="postlink">viewtopic.php?f=10&amp;t=3987&amp;p=12184&amp;hilit=Antonio#p12184</a> and <a href="viewtopicd634.html?f=10&amp;t=4346&amp;p=12989&amp;hilit=applied+field#p12989" class="postlink">viewtopic.php?f=10&amp;t=4346&amp;p=12989&amp;hilit ... eld#p12989</a>). I works ONLY with norm-conserving.<br>
+- Applied D-field also works only in sequential and norm-conserving (see above links).<br>
+- Reduced e-field, I'm not sure if it has been extended to PAW but norm-conserving is OK and probably only in sequential too.<br>
+<br>
+The reduced e-field is better than simple applied E-field when you relax the cell parameter because in E.P term P depends on the volume.<br>
+<br>
+In any case, relaxing the internal atomic positions always work in all the cases, why do you say that only cell parameter can be relaxed?<br>
+<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Relax structure at finite electric field</h3>
+				<div class="date">Posted: <strong>Fri Sep 04, 2020 2:20 pm</strong></div>
+				<div class="author">by <strong>tangds</strong></div>
+				<div class="content">Dear Eric,<br>
+<br>
+Thank you very much for your detailed reply. I got it how to relax structure at finite electric field now.<br>
+It is OK to relax both cells and atomic position, which I made a mistake.<br>
+<br>
+Best,<br>
+Daosheng</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=4510&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 16:00:37 GMT -->
+</html>

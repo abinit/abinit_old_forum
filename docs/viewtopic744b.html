@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=38&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:11:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; another symmetry problem</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>another symmetry problem</h2>
+		<p><a href="viewtopic4135.html?f=9&amp;t=38">https://forum.abinit.org/viewtopic.php?f=9&amp;t=38</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>another symmetry problem</h3>
+				<div class="date">Posted: <strong>Thu Jan 28, 2010 12:55 pm</strong></div>
+				<div class="author">by <strong>maciek</strong></div>
+				<div class="content">Dear Abinit users.<br /><br />I have some xred values from experimental data for systems with free parameters. In crystallography tables Wyckoff positions for this space group are considerably different.<br /><br />When I prepare .in file the normal way (xred and rprim or angdeg) Abinit chooses automatically the other space group.<br /><br />when I add spgroup X to .in file I obtain this:<br />...<br /> chkprimit : ERROR -<br />  According to the symmetry finder, the unit cell is<br />  NOT primitive. The multiplicity is  2 .<br />  The use of non-primitive unit cells is allowed<br />  only when the input variable chkprim is 0.<br />  Action : either change your unit cell (rprim or angdeg),<br />  or set chkprim to 0.<br />...<br /><br />for spgroup X and chkprim 0:<br />...<br /> symatm : WARNING -<br />  Trouble finding symmetrically equivalent atoms<br />...<br /> symatm : ERROR -<br />  Largest error (above) is so large that either input  atomic coordinat es (xred)<br />  are wrong or space group symmetry data is wrong.<br />  Action : correct your input file.<br />...<br /><br />I can use other software (e.g. FPLO) but I think ABINIT can do it much faster (PAW).<br /><br />How can I force my ABINIT (5.8.3) to do it without symmetry problems?<br /><br />With Regards,<br /><br />Maciej Winiarski</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: another symmetry problem</h3>
+				<div class="date">Posted: <strong>Sun Jan 31, 2010 2:07 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content"><blockquote><div><cite>maciek wrote:</cite>Dear Abinit users.<br /><br />I have some xred values from experimental data for systems with free parameters. In crystallography tables Wyckoff positions for this space group are considerably different.<br /><br />When I prepare .in file the normal way (xred and rprim or angdeg) Abinit chooses automatically the other space group.<br /></div></blockquote><br />Make sure you are using the correct primitive cell, not the conventional one, and that your xred are correct wrt the lattice abinit is actually using. What do you mean &quot;the other space group&quot;?<br /><br /><blockquote class="uncited"><div><br />when I add spgroup X to .in file I obtain this:<br />...<br /> chkprimit : ERROR -<br />  According to the symmetry finder, the unit cell is<br />  NOT primitive. The multiplicity is  2 .<br />  The use of non-primitive unit cells is allowed<br />  only when the input variable chkprim is 0.<br />  Action : either change your unit cell (rprim or angdeg),<br />  or set chkprim to 0.<br />...<br /></div></blockquote><br />If you set spgroup, abinit will symmetrize all the positions you give, eventually adding atoms. Normally you should set only the irreducible atoms with natrd &lt; natom, and let abinit find the symmetric positions. If you give all positions, and they are not perfectly symmetrized, abinit will duplicate atoms which are not perfectly (to within tolsym which defaults to 1e-10) on the high symmetry points.<br /><br /><blockquote class="uncited"><div>for spgroup X and chkprim 0:<br /><br /></div></blockquote><br />This is not the way to go - you want a primitive cell. With your full input file it would be easier to see your problem.<br /><br /><br />Matthieu<br /><br /><blockquote class="uncited"><div>...<br /> symatm : WARNING -<br />  Trouble finding symmetrically equivalent atoms<br />...<br /> symatm : ERROR -<br />  Largest error (above) is so large that either input  atomic coordinat es (xred)<br />  are wrong or space group symmetry data is wrong.<br />  Action : correct your input file.<br />...<br /><br />I can use other software (e.g. FPLO) but I think ABINIT can do it much faster (PAW).<br /><br />How can I force my ABINIT (5.8.3) to do it without symmetry problems?<br /><br />With Regards,<br /><br />Maciej Winiarski</div></blockquote></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: another symmetry problem</h3>
+				<div class="date">Posted: <strong>Mon Mar 22, 2010 1:02 am</strong></div>
+				<div class="author">by <strong>maciek</strong></div>
+				<div class="content">Hello,<br />I'm sorry for my first post. It was too chaotic.<br />The problem is: I don't know how to set up calculations for any structure with free parameters.<br /><br />My input file is following:<br />...<br />natom  3                                # number of atoms<br />ntypat  3                                # number of atom types<br />typat   1 2 3                           # list of atom types<br />acell   5.0 5.0 10.0 angstrom  # unit cell parameters<br />spgroup 139                          # this space group is needed<br />xred  0 0 0                            <br />        0 0.5 0.25<br />        0 0   0.36<br />...<br /><br />and then output:<br />...<br /> symlatt : the Bravais lattice is tP (primitive tetragonal)<br />  xred   is defined in input file<br /> ingeo : takes atomic coordinates from input array xred<br /><br /> symlatt : the Bravais lattice is tP (primitive tetragonal)<br /><br /> chkprimit : ERROR -<br />  According to the symmetry finder, the unit cell is<br />  NOT primitive. The multiplicity is  2 .<br />  The use of non-primitive unit cells is allowed<br />  only when the input variable chkprim is 0.<br />  Action : either change your unit cell (rprim or angdeg),<br />  or set chkprim to 0.<br />...<br /><br />How can I do basic calculations on primitive cell generated by abinit? <br />I'm going to investigate magnetism (AFM) and using non-primitive unit cells. <br />How should I give the xred manually for all atoms in unit cell (needed for other magnetic moments on the same site)? <br /><br />with regards,<br />Maciek</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: another symmetry problem</h3>
+				<div class="date">Posted: <strong>Mon Mar 22, 2010 8:51 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">If you want an AFM system, you need to specify spinat - this will make spin up and down atoms inequivalent by normal symmetries, and the chkprim will not be an issue any more (the space group is magnetic with more operations)<br /><br />From your snippets I can't tell whether this would be enough: no idea what the full set of positions and cell look like once the spgroup has been used. Send <strong class="text-strong">full</strong> input and log information if you want a proper answer.<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: another symmetry problem</h3>
+				<div class="date">Posted: <strong>Mon Mar 22, 2010 2:12 pm</strong></div>
+				<div class="author">by <strong>maciek</strong></div>
+				<div class="content">Hello once again,<br />I think my problem is a little knowledge about ABINIT. I have studied on simple systems like fcc, hcp, or bcc, but now I don't know how to prepare input for any larger unit cells. Let's forget my earlier posts and take an example:<br /><br />I would like to do some calculations for BaFe2As2 compound which forms structure in space group Fmmm (# 69). I found in papers wykoff positions of Ba (0,0,0), Fe (1/4,1/4,1/4) and As (0,0,036). All my attempts to prepare input failed. Other software takes only wykoffs and primitive or unit cell is built automatically, but copies of that xreds and rprims are useless in ABINIT. Primitive cell is formed by 5 atoms, unit cell has 10 atoms.<br /><br />I found rprims and site symmetries at <!-- m --><a class="postlink" href="http://cst-www.nrl.navy.mil/lattice/struk/b24.html">http://cst-www.nrl.navy.mil/lattice/struk/b24.html</a><!-- m --> and Bilbao Crystallographic Server, and prepared the input for hypothetical compound SrNi2Si2 in the same structure:<br />........<br /># SrNi2Si2 in space group 69<br />natom   5               <br />ntypat  3               <br />znucl   38 28 14        <br />typat   1 2 2 3 3<br />acell   20.5 20.7 34.0<br />rprim   0.0  0.5 0.5    <br />        0.5  0.0 0.5     <br />        0.5  0.5 0.0<br />xred   0.0     0.0     0.0            <br />        0.25    0.25    0.25           <br />        0.75    0.75    0.75<br />        0.0     0.0      0.3538         <br />        0.0     0.0     -0.3538<br /><br />(the rest of input is unimportant)<br />.........<br /><br />but output is then:<br />.........<br /> inpspheads : deduce mpsang  =   3, n1xccc  =   1.<br /><br /> invars1m : enter jdtset=     0<br /> invars1 : treat image number     1<br /><br /> symlatt : the Bravais lattice is aP (primitive triclinic)<br />  xred   is defined in input file<br /> ingeo : takes atomic coordinates from input array xred<br /><br /> symlatt : the Bravais lattice is aP (primitive triclinic)<br /><br /> symlatt : the Bravais lattice is aP (primitive triclinic)<br /> symspgr : the symmetry operation no.   1 is the identity<br /> symspgr : the symmetry operation no.   2 is an inversion<br /> symspgr : spgroup=   2  P-1   (=Ci^1)<br /> getkgrid : length of smallest supercell vector (bohr)=    2.899138E+01<br />       Simple Lattice Grid<br /> symkpt : found identity, with number  1<br />  inkpts : after getkgrid, nkpt=           0<br /> invars1: mkmem  undefined in the input file. Use default mkmem  = nkpt<br /> invars1: With nkpt_me=    4 and mkmem  =     4, ground state wf handled in core.<br /> invars1: mkqmem undefined in the input file. Use default mkqmem = nkpt<br /> invars1: With nkpt_me=    4 and mkqmem =     4, ground state wf handled in core.<br /> invars1: mk1mem undefined in the input file. Use default mk1mem = nkpt<br /> invars1: With nkpt_me=    4 and mk1mem =     4, ground state wf handled in core.<br /><br /> Symmetries : space group P-1 (#  2); Bravais aP (primitive triclinic)<br /> getkgrid : length of smallest supercell vector (bohr)=    2.899138E+01<br />       Simple Lattice Grid<br /> symkpt : found identity, with number  1<br />  inkpts : after getkgrid, nkpt=           4<br /> chkneu : initialized the occupation numbers for occopt=    3<br />    spin-unpolarized case : <br /><br />(and so on)<br />........<br /><br />ABINIT found only 2 symrels, but Fmmm has 8 symrels. Is it good for final results of calculations? Every other combinations (non-primitive unit cell and so on) lead to space group 2 or 1, but how can I attain the proper space group? I think I missed the point.<br /><br />with regards,<br />Maciek</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: another symmetry problem</h3>
+				<div class="date">Posted: <strong>Mon Mar 22, 2010 3:01 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">acell are the lengths of the lattice vectors you give with rprim<br /><br />they are <strong class="text-strong">not</strong> the conventional lattice constants, unless you set things up that way. In your case the cell is tetragonal (not cubic) so you should either<br />1) set acell 1 1 1 and put the rprim properly by hand (simplest)<br />2) use a different unit cell, e.g. with c along the z axis (so acell(3) = c) and then adjust the fractional coordinates of the first 2 lattice vectors along z to fit the c/a ratio you want<br /><br />and in any case make sure that the xred are correctly represented wrt the unit cell you chose.<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: another symmetry problem</h3>
+				<div class="date">Posted: <strong>Mon Mar 22, 2010 7:02 pm</strong></div>
+				<div class="author">by <strong>maciek</strong></div>
+				<div class="content">Ok. Thanks for replies,<br />I will rather use non-primitive cells to bypass all my symmetries problems. <br /><br />Maciek</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=38&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:11:16 GMT -->
+</html>

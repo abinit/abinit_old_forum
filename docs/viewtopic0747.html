@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=718&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:36:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; abinit 6.4.1 + fftw =&gt; running time doubled?!</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>abinit 6.4.1 + fftw =&gt; running time doubled?!</h2>
+		<p><a href="viewtopicaf74.html?f=3&amp;t=718">https://forum.abinit.org/viewtopic.php?f=3&amp;t=718</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>abinit 6.4.1 + fftw =&gt; running time doubled?!</h3>
+				<div class="date">Posted: <strong>Thu Nov 04, 2010 11:09 am</strong></div>
+				<div class="author">by <strong>sbecuwe</strong></div>
+				<div class="content">Hello,<br /><br />I have installed 6.4.1 using icc 11.1.046, ifort 11.1.046, impi 3.2.1.009, imkl 10.2.1.017 (MKL + Scalapack) on Intel Harpertown architecture<br />with following plugins: ETSFIO 1.0.2, libxc svn-r6071-fixed, Wannier90 1.1, BigDFT 1.2.0.2.<br /><br />I have made 3 configurations:<br />- one without FFTW support<br />- one with FFTW 3.2.2<br />- one with Intel MKL FFTW<br /><br />Running times are surprising (for a given problem, on 3 nodes with 2 quad core processors each):<br /><br />- without FFTW:<br />Proc.   0 individual time (sec): cpu=       1865.9  wall=       1865.9<br />Overall time at end (sec) : cpu=      44783.0  wall=      44783.0<br /><br />- with FFTW 3.2.2:<br />Proc.   0 individual time (sec): cpu=       3189.2  wall=       3189.2<br />Overall time at end (sec) : cpu=      76541.7  wall=      76541.7<br /><br />- with Intel MKL FFTW<br />Proc.   0 individual time (sec): cpu=       3124.3  wall=       3124.3<br />Overall time at end (sec) : cpu=      74986.3  wall=      74986.3<br /><br />Is this a known behaviour?  On an Opteron cluster with Intel compilers, OpenMPI and ACML, we don't see this (strange) behaviour.<br /><br />Regards<br /><br />Stefan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 6.4.1 + fftw =&gt; running time doubled?!</h3>
+				<div class="date">Posted: <strong>Sat Nov 06, 2010 1:25 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Did you check that the FFTW-based build passes all the tests in the test suite? On my machines it does not. The internal FFT codes (from Stefan Goedecker) in abinit are extremely good and I would be surprised if you got significantly better performance with FFTW. On the other hand, as FFTW is a relatively recent addition and is not I believe yet fully ready for production release, I am NOT surprised that it is not always working as well as the internal FFT.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 6.4.1 + fftw =&gt; running time doubled?!</h3>
+				<div class="date">Posted: <strong>Sat Nov 06, 2010 2:25 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">All the parts of Abinit don't benefit from FFTW - there are probably more enhancements in GW for the moment so it should be considered as work in progress. FFT data size has a strong influence. Matteo can confirm that he has significant speed improvements on specific cases. So don't expect skyrocketing performance on any test case and size by switching to FFTW<br /><br />Stefan - a daft question - did you correctly set the fftalg variable to perform your different benchmarks? Compiling with FFTW doesn't mean that FFTW equivalent routines are automatically invoked. The default is still Goedecker.<br /><br />A caveat emptor for all FFTW/MKL adopters. FFTW libraries are very often available as multi threaded. Mixing MPI parallelism with multi threaded libraries is often leading to a decrease in terms of performance due to CPU overloading. I would advise to link sequential FFTW3 or MKL libraries with a MPI parallelized Abinit; multi threading FFT (and LAPACK) may be only efficient on very large datasets that cannot be MPI parallelized. Check that you're not creating more threads than available cores during an Abinit run - do a &quot;top&quot;, press &quot;H&quot; to see all Abinit instances running at the same time and if it is more than all the available cores in your box then you're in fact slowing things down due to context switching.<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 6.4.1 + fftw =&gt; running time doubled?!</h3>
+				<div class="date">Posted: <strong>Sun Nov 07, 2010 10:14 pm</strong></div>
+				<div class="author">by <strong>sbecuwe</strong></div>
+				<div class="content">Since we did not use fftalg for this particular test, and as a consequence use the built-in fft routines, we did not expect to see any difference whether abinit is linked with(out) FFTW or MKL...  It seems mysterious.<br /><br />Regards<br />Stefan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 6.4.1 + fftw =&gt; running time doubled?!</h3>
+				<div class="date">Posted: <strong>Thu Nov 11, 2010 9:12 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">The  default value for fftalg is set to 312 when FFTW3 support is enabled (see indefo.F90), hence <br /> the last two calculations have been done with the FFTW3 routines instead of the FFT code from Goedecker.<br /><br />I made this choice simply because it facilitates the testing of the Abinit+FFTW3 executable on the test farm <br />we routinely use here in Louvain.<br /><br />A possible explanations for the degradation in the performance of the code might be:<br /><br />1) The FFT divisions are not optimal for the FFTW3 library. This usually happens when ngfft(1:3) contains powers of 7-11 or greater.<br />    At present there is no check on the FFT divisions used for FFTW3, we just use the values that are supported by Goedecker's library.   <br /><br />2)  FFTW3 doesn't yet support the augmentation of the FFT mesh to reduce cache conflicts. <br />     Cache conflicts might be detrimental especially  when ngfft(1:2) is even. What is the value of ngfft used for your tests?<br /><br />Could you post the running times obtained on the opteron cluster?<br /><br />BTW: <br />There's a small tool in 98_main named fftprof that can be used to analyze the performance of the different FFT libraries for <br />a given values of ecut and lattice parameters. <br />The code can be run interactively and it will report the CPU and WALL time spent to perform the FFT with different algorithms<br />(complex-to-complex, real-to-complex, zero padding FFT ....)<br />Having some profiling of the FFT machinery for your particular architecture would be extremely helpful to spot the problem.<br /><br />Best regards,<br />Matteo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 6.4.1 + fftw =&gt; running time doubled?!</h3>
+				<div class="date">Posted: <strong>Tue Nov 16, 2010 10:40 am</strong></div>
+				<div class="author">by <strong>sbecuwe</strong></div>
+				<div class="content">We had not noticed that the default was changed.  Adding fftalg 112 gives the old (better) timings in 6.4.1.  <br /><br />It seems that in our setup fftw3 is slower.  Using fftprof, fftw3 shows to be faster for all kinds of fft, except &quot;fourdp with cplex 1&quot; (see output below).  <br />So one question left: do you notice this behaviour on other platforms too and would it be better to use the original Goedeker in this specific case?<br /><br />Regards<br />Stefan<br /><br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;==== FFT mesh ====<br />&nbsp; FFT mesh divisions ........................&nbsp; &nbsp; 90&nbsp; &nbsp;90&nbsp; &nbsp;60<br />&nbsp; Augmented FFT divisions ...................&nbsp; &nbsp; 91&nbsp; &nbsp;91&nbsp; &nbsp;60<br />&nbsp; FFT algorithm .............................&nbsp; &nbsp;112<br />&nbsp; FFT cache size ............................&nbsp; &nbsp; 16<br />&nbsp;getmpw: optimal value of mpw=&nbsp; &nbsp;24617<br />&nbsp;==== FFT mesh ====<br />&nbsp; FFT mesh divisions ........................&nbsp; &nbsp; 90&nbsp; &nbsp;90&nbsp; &nbsp;60<br />&nbsp; Augmented FFT divisions ...................&nbsp; &nbsp; 91&nbsp; &nbsp;91&nbsp; &nbsp;60<br />&nbsp; FFT algorithm .............................&nbsp; &nbsp;312<br />&nbsp; FFT cache size ............................&nbsp; &nbsp; &nbsp;0<br />&nbsp;For input ecut=&nbsp; 1.050000E+02 best grid ngfft=&nbsp; &nbsp; &nbsp; 90&nbsp; &nbsp; &nbsp; 90&nbsp; &nbsp; &nbsp; 60<br />&nbsp; &nbsp; &nbsp; &nbsp;max ecut=&nbsp; 1.233701E+02<br />&nbsp;==== FFT mesh ====<br />&nbsp; FFT mesh divisions ........................&nbsp; &nbsp; 90&nbsp; &nbsp;90&nbsp; &nbsp;60<br />&nbsp; Augmented FFT divisions ...................&nbsp; &nbsp; 91&nbsp; &nbsp;91&nbsp; &nbsp;60<br />&nbsp; FFT algorithm .............................&nbsp; &nbsp;112<br />&nbsp; FFT cache size ............................&nbsp; &nbsp; 16<br />==== fourdp with cplex 1 ====<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Library&nbsp; &nbsp; &nbsp; &nbsp; CPU-time&nbsp; WALL-time&nbsp; ncalls<br />&nbsp; &nbsp; FFTW; R2C; zero-pad+cache&nbsp; &nbsp;0.072&nbsp; &nbsp;0.072&nbsp; &nbsp; &nbsp;10<br />Goedeker; R2C; zero-pad+cache&nbsp; &nbsp;0.016&nbsp; &nbsp;0.016&nbsp; &nbsp; &nbsp;10<br />&nbsp;==== fourdp with cplex 2 ====<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Library&nbsp; &nbsp; &nbsp; &nbsp; CPU-time&nbsp; WALL-time&nbsp; ncalls<br />&nbsp; &nbsp; FFTW; R2C; zero-pad+cache&nbsp; &nbsp;0.019&nbsp; &nbsp;0.019&nbsp; &nbsp; &nbsp;10<br />Goedeker; R2C; zero-pad+cache&nbsp; &nbsp;0.044&nbsp; &nbsp;0.044&nbsp; &nbsp; &nbsp;10<br />&nbsp;==== fourdp_cplx in-place (GW code) ====<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Library&nbsp; &nbsp; &nbsp; &nbsp; CPU-time&nbsp; WALL-time&nbsp; ncalls<br />&nbsp; &nbsp; FFTW; R2C; zero-pad+cache&nbsp; &nbsp;0.019&nbsp; &nbsp;0.019&nbsp; &nbsp; &nbsp;10<br />Goedeker; R2C; zero-pad+cache&nbsp; &nbsp;0.059&nbsp; &nbsp;0.059&nbsp; &nbsp; &nbsp;10<br />&nbsp;==== fourdp_cplx out-of-place (GW code) ====<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Library&nbsp; &nbsp; &nbsp; &nbsp; CPU-time&nbsp; WALL-time&nbsp; ncalls<br />&nbsp; &nbsp; FFTW; R2C; zero-pad+cache&nbsp; &nbsp;0.015&nbsp; &nbsp;0.015&nbsp; &nbsp; &nbsp;10<br />Goedeker; R2C; zero-pad+cache&nbsp; &nbsp;0.058&nbsp; &nbsp;0.058&nbsp; &nbsp; &nbsp;10<br />&nbsp;==== fourwf with cplex=2 and option=0 ====<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Library&nbsp; &nbsp; &nbsp; &nbsp; CPU-time&nbsp; WALL-time&nbsp; ncalls<br />&nbsp; &nbsp; FFTW; R2C; zero-pad+cache&nbsp; &nbsp;0.017&nbsp; &nbsp;0.017&nbsp; &nbsp; &nbsp;10<br />Goedeker; R2C; zero-pad+cache&nbsp; &nbsp;0.022&nbsp; &nbsp;0.022&nbsp; &nbsp; &nbsp;10</code></pre></div></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=718&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:36:17 GMT -->
+</html>

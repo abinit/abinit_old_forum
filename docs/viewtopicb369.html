@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=873&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:49:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] BLYP pseudopotentials</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] BLYP pseudopotentials</h2>
+		<p><a href="viewtopic72bd.html?f=14&amp;t=873">https://forum.abinit.org/viewtopic.php?f=14&amp;t=873</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] BLYP pseudopotentials</h3>
+				<div class="date">Posted: <strong>Fri Feb 04, 2011 7:51 am</strong></div>
+				<div class="author">by <strong>ilya</strong></div>
+				<div class="content">Dear All,<br />Could you help me to find (or get some package to construct) BLYP spin-orbit pseudopotentials, e.g., for Tl, Pb, Bi, Sb, Te, Se?  Thanks in advance.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: BLYP pseudopotentials</h3>
+				<div class="date">Posted: <strong>Fri Feb 04, 2011 12:12 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">You will need abinit built with plug-in libxc support, and also atompaw built with libxc support. Then you can construct PAW datasets for your elements using B86 or B88 exchange and LYP correlation (that gives BLYP altogether). Then when you run calculations you can use the pawspnorb option to include at least on-site spin-orbit interaction in the PAW calculations.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: BLYP pseudopotentials</h3>
+				<div class="date">Posted: <strong>Fri Feb 04, 2011 1:04 pm</strong></div>
+				<div class="author">by <strong>ilya</strong></div>
+				<div class="content">Thanks a lot. I will try to realize such a scheme.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] BLYP pseudopotentials</h3>
+				<div class="date">Posted: <strong>Thu Nov 17, 2011 6:17 am</strong></div>
+				<div class="author">by <strong>Mutta</strong></div>
+				<div class="content">Dear sir<br />After I generated with atompaw which  construct PAW datasets for  using B86 or B88 exchange and LYP correlation but abinit not support<br />and Can I used ixc=18 for internally for GGA BLYP pseudopotentials from M. Krack, see Theor. Chem. Acc. 114, 145 (2005), available from the CP2K repository - use the LibXC instead, with ixc=-106131<br />see my input files below<br /># =======================================<br /># CuBO2: computation of the optimal lattice parameter<br /># =======================================<br /><br />optcell 2<br /><br />#Optimization of the lattice parameters<br />ionmov  2<br />ntime   1000<br />dilatmx 1.1<br />ecutsm  0.5<br /><br />##Definition of the unit cell<br />acell   3*5.7456   angstrom<br />brvltt  7<br />spgaxor 2<br />spgroup 166<br />angdeg  3*28.62<br />ixc     -106131<br /><br />#Definition of the atoms<br />ntypat  3 <br />znucl   29 5 8<br />natom 4<br />typat 1 2 3 3<br />xred <br />0.0 0.0 0.0<br />0.5 0.5 0.5<br />1/9 1/9 1/9<br />8/9 8/9 8/9<br /><br />#Definition of the k-point grid<br />ecut    30<br />#pawecutdg 35<br />kptopt  1  <br />ngkpt   8 8 8<br />nshiftk 1<br />shiftk  0.5 0.5 0.5<br />        <br />#Definition of the SCF procedure<br />nstep  1000        <br />toldfe 1.0d-6 <br /> <br />thank<br />Abdulmutta</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=873&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:49:24 GMT -->
+</html>

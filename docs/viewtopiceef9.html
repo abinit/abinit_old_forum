@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=1592&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:48:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] Atompaw: The LibXC functional family -1 unsupported</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] Atompaw: The LibXC functional family -1 unsupported</h2>
+		<p><a href="viewtopic4212.html?f=14&amp;t=1592">https://forum.abinit.org/viewtopic.php?f=14&amp;t=1592</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] Atompaw: The LibXC functional family -1 unsupported</h3>
+				<div class="date">Posted: <strong>Thu Mar 29, 2012 9:28 pm</strong></div>
+				<div class="author">by <strong>raul_l</strong></div>
+				<div class="content">Dear Users,<br />I'm trying to generate a PAW dataset using the Teter 93 parametrization. With<br /><br />W 74<br />XC_LDA_XC_TETER93 scalarrelativistic loggrid 2001<br />...<br /><br />I get<br /><br /> Error in libxc_functionals_init:<br />  The LibXC functional family  -1<br />  is currently unsupported by AtomPAW !<br />  (at present only LGA or GGA are supported)<br /><br />However, if I try for example<br /><br />W 74<br />XC_GGA_X_PBE+XC_GGA_C_PBE  scalarrelativistic loggrid 2001<br />...<br /><br />I get no error. Why doesn't Atompaw accept a single exchange-correlation functional instead of choosing exchange and correlation separately? I also get no error with XC_LDA_XC_TETER93+XC_LDA_XC_TETER93 in the input but according to the manual this is not the correct way to do it. I configured Atompaw-3.0.1.4 with<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>FC=ifort CC=icc --with-linalg-flavor=mkl --with-linalg-libs=&quot;-L$MKLROOT/lib/intel64 -lmkl_intel_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core&quot; --enable-libxc --with-libxc-incs=&quot;-I/opt/etsf/include&quot; --with-libxc-libs=&quot;-L/opt/etsf/lib -lxc&quot; --disable-shared --enable-static</code></pre></div><br />Thank You.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Atompaw: The LibXC functional family -1 unsupported</h3>
+				<div class="date">Posted: <strong>Fri Mar 30, 2012 4:45 pm</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">Dear Raul,<br /><br />You actually found a little bug.<br />This is now (already) corrected in the atompaw repository and will be publish on its website soon; should be available in Abinit in the next release.<br /><br />The correction is indicated below...<br /><br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Index: src/libxc_mod.F90<br />===================================================================<br />--- src/libxc_mod.F90&nbsp; &nbsp;(revision 1228)<br />+++ src/libxc_mod.F90&nbsp; &nbsp;(working copy)<br />@@ -111,8 +111,12 @@<br />&nbsp; &nbsp;call uppercase(xcstrg(ii))<br /><br />&nbsp; &nbsp;id(ii)=libxc_id(xcstrg(ii))<br />-&nbsp; if (id(ii)&lt;0) exit<br /><br />+&nbsp; if (id(ii)&lt;0.and.ii==2) then<br />+&nbsp; &nbsp; id(ii)=0<br />+&nbsp; &nbsp; exit<br />+&nbsp; end if<br />+<br />&nbsp; &nbsp;if (id(ii)==0.and.xcstrg(ii)(1:6)==&quot;LIBXC_&quot;) then<br />&nbsp; &nbsp; read(unit=xcstrg(ii)(7:),fmt=*,err=333,end=333) id(ii)<br />&nbsp;333 continue<br />@@ -310,6 +314,8 @@<br /><br />&nbsp; do ii=1,2<br /><br />+&nbsp; if (libxc_funcs(ii)%id==0) cycle<br />+<br />&nbsp; &nbsp;select case (xc_f90_info_kind(libxc_funcs(ii)%info))<br />&nbsp; &nbsp; case (XC_EXCHANGE)<br />&nbsp; &nbsp; &nbsp;write(unt,'(a)') 'Exchange functional (LibXC):'<br /></code></pre></div></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=1592&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:48:57 GMT -->
+</html>

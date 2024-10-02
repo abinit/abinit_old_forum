@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=804&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:30:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; DOS error :  simpson_int</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>DOS error :  simpson_int</h2>
+		<p><a href="viewtopic693a.html?f=9&amp;t=804">https://forum.abinit.org/viewtopic.php?f=9&amp;t=804</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>DOS error :  simpson_int</h3>
+				<div class="date">Posted: <strong>Mon Dec 20, 2010 10:46 am</strong></div>
+				<div class="author">by <strong>bahadir</strong></div>
+				<div class="content">Hi abinit users, <br /><br />i have a dos calculation input as in below<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>ndtset 3<br />jdtset 1 2 3<br /><br />#definition of the SPCGRP 198 unit-cell of CrSi<br /><br />acell 8.5364985239E+00&nbsp; 8.5364985239E+00&nbsp; 8.5364985239E+00 Bohr<br />spgroup 198<br />angdeg 3*90<br />brvltt -1<br />chkprim 0<br />natrd&nbsp; &nbsp;2<br />ntypat&nbsp; 2<br />znucl&nbsp; &nbsp;24 14<br />natom&nbsp; &nbsp;8<br />nband&nbsp; &nbsp;30<br />typat&nbsp; &nbsp;1 2<br /><br />xred 1.3712676367E-01&nbsp; 1.3712676367E-01&nbsp; 1.3712676367E-01<br />&nbsp; &nbsp; &nbsp;8.4777928211E-01&nbsp; 8.4777928211E-01&nbsp; 8.4777928211E-01<br /><br />ecut 35<br />nstep 80<br />diemac&nbsp; &nbsp;9.0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Model dielectric preconditioner<br />iscf&nbsp; &nbsp;7&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Use conjugate-gradient SCF cycle<br />prtgeo 3<br />#occopt 4<br />#tsmear 0.01<br />###########################################################################<br /><br />#Dataset 1 : usual self-consistent calculation<br />prtden1&nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# Print the density, for use by dataset 2<br />toldfe1&nbsp; 1.0d-6<br />kptopt1 1<br />ngkpt1 6 6 6<br />prtdos 2<br />#########################################################################<br />#Dataset 2 : selected k-points, to prepare cut3d analysis<br />&nbsp;getden2&nbsp; 1<br />&nbsp;getwfk2&nbsp; 1<br />&nbsp;kptopt2&nbsp; 0<br />&nbsp; &nbsp;nkpt2&nbsp; 3<br />&nbsp; nband2&nbsp; 30<br />&nbsp; &nbsp;iscf2 -2<br />&nbsp;tolwfr2&nbsp; 1.0d-12<br />&nbsp;istwfk2&nbsp; 1 1 1&nbsp; &nbsp; &nbsp; # For the time being, use the simplest storage mode<br /><br />kpt2<br />0&nbsp; &nbsp;0&nbsp; &nbsp;0&nbsp; &nbsp; #GM<br />1/2 1/2 1/2&nbsp; #R<br />1/2 1/2 0&nbsp; &nbsp; #M<br />0&nbsp; &nbsp;1/2 0&nbsp; &nbsp; #X<br />0&nbsp; &nbsp;0&nbsp; &nbsp;0&nbsp; &nbsp; #G<br /><br />###########################################################################<br />#Dataset 3 : partial DOS calculation<br /><br />&nbsp; iscf3&nbsp; &nbsp;-3<br />&nbsp; getden3&nbsp; 1<br />&nbsp; getwfk3&nbsp; 1<br />&nbsp; prtdos3&nbsp; 3<br />&nbsp; natsph3&nbsp; 2<br />&nbsp; iatsph3&nbsp; 1 2<br />&nbsp; prtdensph3 1<br />&nbsp; kptopt3 1<br />&nbsp; ngkpt3 6 6 6<br />&nbsp; #nkpt3&nbsp; &nbsp; 3<br />&nbsp; nshiftk3 1<br />&nbsp; shiftk3&nbsp; 0.5 0.5 0.5&nbsp; &nbsp; &nbsp;# For hexagonal lattices, one can use nshiftk= 1 and shiftk 0.0 0.0 0.5<br />&nbsp; ratsph3&nbsp; 1.5&nbsp; &nbsp; &nbsp; # This has been ajusted to give approximately 4 valence<br />&nbsp; tolwfr3&nbsp; 1.0d-7<br /><br />#############################################################################<br /></code></pre></div><br /><br />but i got an error in DATASET 3 <br />it says &quot;simpson_int : number of points in function must be &gt;=6&quot;<br /><br />what does this mean? any suggestions?</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=804&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:30:57 GMT -->
+</html>

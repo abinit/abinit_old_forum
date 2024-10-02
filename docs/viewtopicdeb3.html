@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=1079&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:19:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Getting a KSS file from a large supercell</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Getting a KSS file from a large supercell</h2>
+		<p><a href="viewtopic1db6.html?f=11&amp;t=1079">https://forum.abinit.org/viewtopic.php?f=11&amp;t=1079</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Getting a KSS file from a large supercell</h3>
+				<div class="date">Posted: <strong>Mon May 09, 2011 6:19 pm</strong></div>
+				<div class="author">by <strong>ivasan</strong></div>
+				<div class="content">Dear all,<br /><br />I am trying to generate a KSS file in a 219 atom supercell to perform subsequent GW calculations.<br /><br />For the GS calculation I used these variables (apart from others related to the atoms, paralelization ...):<br /><br />toldff 5.0d-5<br />ecut  15.0<br />nband 496<br />kptopt 1<br />ngkpt 2 2 2<br />nshiftk 1<br />shiftk 0.0 0.0 0.0<br /><br />Due to the size of my system, I will like to include as few empty states as possible as F. Bruneval and X. Gonze did in Phys. Rev. B 78, 085125 (2008), but I didn't find in the abinit website how to do it. For this purpose I thought the following.<br /><br />First, to perform a new calculation with the following variables in the input file:<br /><br />symmorphi 0<br />iscf -2<br />getden -1<br />tolwfk 1d-12<br />ecut  15.0<br />kptopt 1<br />nband 496<br />ngkpt 2 2 2<br />nshiftk 1<br />shiftk 0.0 0.0 0.0<br />nbandkss 538         #corresponds to 100 empty bands<br />istwfk *1<br />kssform 1<br /><br />Then, I will repeat this calculation for different values of nbandkss corresponding to different values of empty bands in order to get the convergence.<br /><br />Nevertheless, I have some questions:<br /><br />1.- Is the previous procedure for finding the lowest number of occupied bands right?<br />2.- Being nband=496 in the GS calculation, can I use nbandkss &gt; nband to get the KSS?<br /><br />Thanks in advance for your time,<br /><br />Kind regards,<br /><br />Iván</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=1079&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:19:57 GMT -->
+</html>

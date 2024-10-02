@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3256&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:03:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; advantage of doing shiftk?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>advantage of doing shiftk?</h2>
+		<p><a href="viewtopice2df.html?f=9&amp;t=3256">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3256</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>advantage of doing shiftk?</h3>
+				<div class="date">Posted: <strong>Thu Apr 07, 2016 11:26 pm</strong></div>
+				<div class="author">by <strong>temok</strong></div>
+				<div class="content">Dear all,<br /><br />For hexagonal lattices, the documentation of the keyword shiftk suggests<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;nshiftk&nbsp; 1<br />&nbsp;shiftk 0.0 0.0 0.5</code></pre></div><br /><br />1) What's the advantage of doing shiftk (in general)?<br /><br />2) Is there any reason to apply this shift for a 2D material, like graphene?<br />(by shifting by 0.5 along b_3 we will miss the Dirac point 1/3, 1/3, 0).<br /><br />I am using the <span style="color: #0080FF">optic</span> utility for graphene, where we need to compute WFK and 1WF (matrix elements) <br />over a <span style="color: #0040FF">homogeneous k-grid</span>; I am wondering if I should use the shiftk given above, or a null shift.<br />My preliminar results seem to be sensitive to this shift, but not completely different.<br />The unsifted grid misses some absorption peaks in the dielectric function.<br /><br />Thanks,<br />Temok<br /><br />p.s. Here my concern with more details. If<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>ngkpt &lt;N&gt;&nbsp; &lt;N&gt;&nbsp; 1&nbsp; # &lt;N&gt; is a multiple of 3</code></pre></div><br />then<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>1/3&nbsp; &nbsp; 1/3&nbsp; &nbsp; 1/2&nbsp; # will be included <br />1/3&nbsp; &nbsp; 1/3&nbsp; &nbsp; 0.0&nbsp; # will not be included</code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: advantage of doing shiftk?</h3>
+				<div class="date">Posted: <strong>Fri Apr 08, 2016 8:59 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello Temok,<br /><br />Have a look at the paper of Monkhorst and Pack (H. J. Monkhorst and J. D. Pack, Phys. Rev. B 13, 5188 (1976)) for a classic example. The idea is to optimize the precision of an _integral_ in k space (Etot, Force, stress...) with respect to the number of reduced k-points. If you use symmetry, and center the grid at Gamma, the Gamma point is alone and can not be reduced by symmetry. Idem for high symmetry points at the zone boundary (there will be 4, 6, 8 of them, instead of 48 for a general point in some cubic groups). By shifting the grid slightly, you end up with only points which are _off_ the symmetry operations (planes and axes), such that they are all reducible by symmetry. For the same density of k-points you have a greater precision in the integral. The shift must respect the symmetry, however: in tetragonal either along the 4 axis or 4 equivalent shifts off of the axis; in hexagonal either along the 6 axis or 6 equivalent shifts off of it. <br /><br />Further, if your unit cell has a strong aspect ratio (very pointy -FCC- or very flattened -BCC) the default grid you get may have points very close together in certain directions (typically in planes perpendicular to the long direction of the BZ), which is not efficient either. The ideal is a homogeneous grid in _Cartesian_ space, while by default with ngkpt you make the grid homogeneous in _reduced_ k coordinates. To fix this, you can use several coordinated shifts, or equivalently set the kptrlatt, which is the basis of vectors for the k-grid (each vector is divided by its integer length, so (10, 0, 0,   0, 10, 0,   0, 0, 10) gives an actual vector (0.1, 0, 0,   0, 0.1, 0,   0, 0, 0.1)). To optimize, it turns out you need to set kptrlatt to the reciprocal lattice of the reciprocal lattice, which is the real space lattice directions (again the norm is determined by how dense a grid you want)!! This is quite subtle but general: you get a homogeneous Cartesian grid by choosing kptrlatt proportional to the real space lattice directions. If you set kptrlen and ask abinit to generate a set of grids, it will automatically optimize the grid density and directions, and give you a list with increasing quality (integral error and low nkpt).<br /><br />Also see our previous conversation <a href="viewtopic6ce7.html?f=8&amp;t=3&amp;hilit=shiftk#p15" class="postlink">http://forum.abinit.org/viewtopic.php?f=8&amp;t=3&amp;hilit=shiftk#p15</a> with pretty pictures.<br /><br />However! This is for integrals, which is great for converging your ground state and structure. But if you want spectroscopic properties (Band structures, optical absorption etc...) you need specific k-points (Gamma, zone boundaries) because that is where the band extrema and the important transitions sit (most band gaps and band edges, though not all cfr Silicon). Here you should revert to a centered grid, though the Cartesian space argument still holds, so you could choose the abinit proposed kptrlatt values, but with shiftk 0 0 0. You have to do this for phonon q-grids as well in most cases, unless the only thing you care about is the integrated quantities, such as free energy or DOS. Usually you want a band structure, so you Gamma center your q grid. So in a word, you are correct - you want to center your grid. You could even relax with a shifted grid, then do a non shifted, non SCF calculation for optic/conducti/other.<br /><br />ciao<br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3256&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:03:26 GMT -->
+</html>

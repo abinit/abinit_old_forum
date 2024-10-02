@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2069&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:20:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Abinit 7.2.1 GCC 4.6.3 openmpi</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Abinit 7.2.1 GCC 4.6.3 openmpi</h2>
+		<p><a href="viewtopic1b4c.html?f=3&amp;t=2069">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2069</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Abinit 7.2.1 GCC 4.6.3 openmpi</h3>
+				<div class="date">Posted: <strong>Fri Apr 05, 2013 3:48 am</strong></div>
+				<div class="author">by <strong>JEJohns</strong></div>
+				<div class="content">Hi Everyone,<br />  I'm having an issue updating to the newest version of abinit.  My HPC system upgraded their software, and I so I had to recompile anyways.  I'm getting the following error during MAKE:<br /><blockquote class="uncited"><div>../../../abinit-7.2.1/src/66_paw/m_paw_dmft.F90:587.132:<br /><br />ft%mbandc,nspinor,dtset%natom,(2*paw_dmft%maxlpawu+1)), stat=ABI_ALLOC_STAT<br />                                                                           1                                                         <br />Error: Syntax error in ALLOCATE statement at (1)</div></blockquote><br /><br />My configuration input looks like<br />../abinit-7.2.1/configure --prefix=&quot;/projects/p20129/abinit7.2&quot; --enable-64bit-flags=&quot;yes&quot; --enable-mpi=&quot;yes&quot; --enable-mpi-io=&quot;yes&quot;  CC=&quot;mpicc&quot; FC=&quot;mpif90&quot; FCFLAGS=&quot;-g -O3&quot;  --with-FFT-flavor=&quot;fftw3&quot; --with-dft-flavor=&quot;atompaw+libxc+bigdft+wannier90&quot; &gt; c.log <br /><br />the only errors I that pop up during configuration are the warnings about not linking back to an external linalg library (which I will do  at a very soon but later date).  <br />Does anyone have any suggestions?<br />Best,<br />James</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit 7.2.1 GCC 4.6.3 openmpi</h3>
+				<div class="date">Posted: <strong>Fri Apr 05, 2013 6:22 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />2 little remarks :<br /><br />1) if you use : --enable-mpi=&quot;yes&quot;  , it's better to use   '--with-mpi-prefix' to point to your openmpi installation<br />    for ex : --with-mpi-prefix=&quot;/usr/local/openmpi&quot; ,  then, no needed to use CC and/or FC<br /><br />2) if you use : --with-FFT-flavor=&quot;fftw3&quot; , you need to set  &quot;--with-fft-libs=&quot; <br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit 7.2.1 GCC 4.6.3 openmpi</h3>
+				<div class="date">Posted: <strong>Fri Apr 12, 2013 8:21 pm</strong></div>
+				<div class="author">by <strong>JEJohns</strong></div>
+				<div class="content">I thought I'd post this as solved.  In the past, on our HPC,  using the --with-mpi-prefix option hadn't worked (as recently as 7.0), and I had to specify the compilers as FC=mpif90 etc. Secondly, I still couldn't get the FFT=FFTW3 to make (error in 98 main) using gcc, but using the intel comilers and --with-fft-flavor=fftw-mkl with the appropriate libraries worked great.  As an aside for anyone who reads this, while doing a ground state calculation unit cell optimization spread over 24 processors, I had a speed up of 2x for using the ifort with the MKL fft and linalg libraries over using gcc and scalapack 2.0.2 libraries on the following HPC system<br /><br />Interconnect: Infiniband DDR<br />Number of Nodes: 504 (4032 cores)<br />Processor: Intel Nehalem E5520, 64-bit, 8M Cache, 2.26 GHz, 5.86 GT/s Intel® QPI, 1066Mhz FSB<br />Memory: Per node (Per Core) 48GB's (6GB's), Type: DDR3 1066 MHz<br /><br />Cheers, <br />James</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit 7.2.1 GCC 4.6.3 openmpi</h3>
+				<div class="date">Posted: <strong>Mon Apr 22, 2013 12:20 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Regarding the speed, you can significantly improve performance with GCC using link-time optimizations (LTO), starting with GCC 4.7. They are not yet enabled by default in the build system of Abinit, thus you'll have to provide these flags by yourself for now.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit 7.2.1 GCC 4.6.3 openmpi</h3>
+				<div class="date">Posted: <strong>Sat Apr 27, 2013 8:37 pm</strong></div>
+				<div class="author">by <strong>Abdennour</strong></div>
+				<div class="content">i ask how to run ABINIT in parallel for  Windows version</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit 7.2.1 GCC 4.6.3 openmpi - syntax error</h3>
+				<div class="date">Posted: <strong>Sun May 12, 2013 7:37 pm</strong></div>
+				<div class="author">by <strong>gryko</strong></div>
+				<div class="content">Hello:  <br /><br /> There are several posts on Syntax error in Abinit-7.2.1, in m_paw_dmft.F90.  I am getting the same error<br /> and I cannot solve the problem.  Here is an excerpt from the make:<br /><br />make[3]: Leaving directory `/home/gryko/abinit-7.2.1/src/65_psp'<br />Making all in 66_paw<br />make[3]: Entering directory `/home/gryko/abinit-7.2.1/src/66_paw'<br />/home/gryko/abinit-7.2.1/config/wrappers/wrap-mpifc -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs -I/home/gryko/abinit-7.2.1/fallbacks/exports/include -I/home/gryko/abinit-7.2.1/fallbacks/exports/include -I/home/gryko/abinit-7.2.1/fallbacks/exports/include   -ffree-form -J/home/gryko/abinit-7.2.1/src/mods   -O3 -L/home/gryko/OPEN64/lib -I/home/gryko/OPEN64/include -c -o m_paw_dmft.o m_paw_dmft.F90<br />m_paw_dmft.F90:587.132:<br /><br />ft%mbandc,nspinor,dtset%natom,(2*paw_dmft%maxlpawu+1)), stat=ABI_ALLOC_STAT<br />                                                                           1                                                         <br />Error: Syntax error in ALLOCATE statement at (1)<br />make[3]: *** [m_paw_dmft.o] Error 1<br /><br /> The same error shows up with both gfortran and open64 compilers. I tried various configuration settings, such as<br /> --with-mpi-level=1 --with-dft-flavor=&quot;libxc&quot;, and no optimization, and the error is the same.<br />  My PC is AMD FX 8350 (8CPU), with mpich-3.0.4., running Fedora 18.<br /><br /> The source file, m_paw_dmft.F90 seems to be fine.   <br /><br /> Thank you very much,<br /> Jan Gryko, <br /> Jacksonville State Univ., AL</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit 7.2.1 GCC 4.6.3 openmpi</h3>
+				<div class="date">Posted: <strong>Mon May 13, 2013 1:49 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">replace<br /><br />ABI_ALLOCATE(paw_dmft%psichi,(dtset%nsppol,dtset%nkpt,paw_dmft%mbandc,nspinor,dtset%natom,(2*paw_dmft%maxlpawu+1)))<br /><br />with <br /><br />allocate(paw_dmft%psichi,(dtset%nsppol,dtset%nkpt,paw_dmft%mbandc,nspinor,dtset%natom,(2*paw_dmft%maxlpawu+1)))</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit 7.2.1 GCC 4.6.3 openmpi</h3>
+				<div class="date">Posted: <strong>Mon May 13, 2013 4:43 pm</strong></div>
+				<div class="author">by <strong>gryko</strong></div>
+				<div class="content">Thank you very much for your tip.  Unfortunately, the error is the same, no change.  The binary version of abinit-7.2.1 from the abinit web<br /> site runs OK, but I want to compile abinit with different options and compare.  Thank you very much for your help.<br /><br /> The   configure script was:<br /><br />  ./configure --with-prefix=/home/gryko/abinit_OPEN64 \<br />&gt; --enable-mpi=yes  --with-mpi-prefix=/home/gryko/mpich-install  --with-mpi-level=1 \<br />&gt; FC=/home/gryko/OPEN64/bin/openf90-4.5.2.1 \<br />&gt; CC=/home/gryko/OPEN64/bin/opencc-4.5.2.1 \<br />&gt; F77=/home/gryko/OPEN7=64/bin/openf90 \<br />&gt; FCFLAGS=&quot;-Ofast -L/home/gryko/OPEN64/lib  -I/home/gryko/OPEN64/include&quot; \<br />&gt; CFLAGS=&quot;-Ofast -L/home/gryko/OPEN64/lib -I/home/gryko/OPEN64/include&quot; \<br />&gt; --enable-optim=&quot;aggressive&quot;<br /><br /><br /> Best,<br /> JG</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit 7.2.1 GCC 4.6.3 openmpi&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Thu May 16, 2013 3:22 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi gryko,<br /><br />this is my ac file for open64 (4.2.5.2) with openmpi<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>enable_64bit_flags = yes<br />enable_gw_dpc = yes<br />enable_debug = no<br /># problem with 79_seqpar_mpi/lobpcgwf.F90 ( compiler bug )<br />fcflags_opt_79_seqpar_mpi = -O0 -m64 -align64<br />enable_mpi = yes<br />enable_mpi_io = no<br />with_mpi_prefix = /usr/local/openmpi_open64<br />with_linalg_flavor = custom<br />with_linalg_libs = -L/opt/acml4.4.0/gfortran64/lib -lacml</code></pre></div><br /><br />two things about your config :<br />- try without &quot;--enable-optim=&quot;aggressive&quot; <br />- try with  --enable-mpi-io=no<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit 7.2.1 GCC 4.6.3 openmpi</h3>
+				<div class="date">Posted: <strong>Wed May 22, 2013 3:26 pm</strong></div>
+				<div class="author">by <strong>gryko</strong></div>
+				<div class="content">Hello jmb:<br /><br /> Thank you very much for your help.  The problem was with &quot;aggressive&quot; option. <br /> JG</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit 7.2.1 GCC 4.6.3 openmpi</h3>
+				<div class="date">Posted: <strong>Wed Sep 04, 2013 12:45 pm</strong></div>
+				<div class="author">by <strong>lawilog</strong></div>
+				<div class="content">I also had the above syntax error and google brought me here. My solution to this <strong class="text-strong">syntax error</strong> was <strong class="text-strong">not</strong> changing the MPI implementation, decreasing the optimization level or doing a benchmark with 24 processors and the MKL library. <br /><br />The problem is that the GNU compiler (gfortran) has a default free-line-length of 132. This causes problems with the ABI_ALLOCATE makro.<br />To solve it, you need to configure with FCFLAGS=&quot;-ffree-line-length-none&quot;.<br />(I think this flag should be set automatically in future releases.)</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2069&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:20:46 GMT -->
+</html>

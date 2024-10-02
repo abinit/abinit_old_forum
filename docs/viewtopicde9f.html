@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2622&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:43:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Possible bug in interface for several files</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Possible bug in interface for several files</h2>
+		<p><a href="viewtopic2550-2.html?f=3&amp;t=2622">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2622</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Possible bug in interface for several files&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Fri Apr 04, 2014 11:38 am</strong></div>
+				<div class="author">by <strong>zeroth</strong></div>
+				<div class="content">Dear developers,<br /><br />I am compiling abinit and looking at the output I found a couple of warnings (which I agree with <img class="smilies" src="images/smilies/icon_e_wink.gif" alt=";)" title="Wink" /> ).<br /><br />Here is an outline of an example code that has a bug (starting from line 573 in 68_dmft/m_hu.F90):<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>subroutine rotatevee_hu(cryst_struc,hu,nspinor,nsppol,pawprtvol,rot_mat,udens_atoms)<br />... lots of code ...<br />&nbsp;type(coeff2_type),intent(out) :: udens_atoms(cryst_struc%natom)<br />&nbsp;... start of code ...<br />&nbsp; &nbsp;write(std_out,*)&quot;udens before vee2udensaomt&quot;, udens_atoms(1)%value<br />... down to end of code ...</code></pre></div><br />As you can see the udens_atoms is defined with intent(out). However, it is only used as a print-out statement.<br />I regard this as a bug as the udens_atoms *could* be undefined on return.<br />Looking at the remaining code it seems like it previously was set, hence I would recommend that you change the interface to intent(inout).<br /><br />This is also the case for these files:<br />src/70_gw/m_screen.F90 (line 1651, routine screen_times_ket), variable &quot;sigcme&quot; * this is unimportant as it has to do with an unimplemented feature *, should be &quot;intent(inout)&quot;<br />src/69_wfdesc/m_oscillators.F90 (line 1288, routine calc_pw_oscillator), variable &quot;Osc&quot;, should be &quot;intent(in)&quot; or &quot;intent(inout)&quot;, it gets deferred further down in other calls<br />src/65_lotf_base/m_glue_lotf.F90 (line 192, routine glue_pair_devs), variable &quot;r_au&quot;, should be &quot;intent(in)&quot;<br /><br />Kind regards Nick</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Possible bug in interface for several files</h3>
+				<div class="date">Posted: <strong>Fri Apr 04, 2014 11:22 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content"><blockquote class="uncited"><div>I am compiling abinit and looking at the output I found a couple of warnings (which I agree with <img class="smilies" src="images/smilies/icon_e_wink.gif" alt=";)" title="Wink" /> ).<br /></div></blockquote><br /><br />and I agree with you as well  <img class="smilies" src="images/smilies/icon_e_wink.gif" alt=";)" title="Wink" /> <br />Solved in 7.6.3. <br /><br />For the record, many other similar problems have been solved in v7.7 but we are not going <br />to backport these changes (it would be too difficult). <br /><br />Many thank for reporting these problems.<br />Best regards,<br />Matteo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Possible bug in interface for several files</h3>
+				<div class="date">Posted: <strong>Fri Apr 04, 2014 11:40 pm</strong></div>
+				<div class="author">by <strong>zeroth</strong></div>
+				<div class="content">Ok. Thanks for the response!<br />I regard this as closed then... <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /><br /><br />Regards Nick</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2622&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:43:53 GMT -->
+</html>

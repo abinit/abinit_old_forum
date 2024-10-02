@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?p=14153 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:58:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Calculating eigenvectors for the dielectric tensor of Hafnia - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopicf5a5.html?t=5199">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="4"><a href="viewforum31e6.html?f=4" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Running Abinit</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="10"><a href="viewforum15ca.html?f=10" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Response calculations</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopicf55b.html?f=10&amp;t=5199">Calculating eigenvectors for the dielectric tensor of Hafnia</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Phonons, DFPT, electron-phonon, electric-field response, mechanical response…<br /></div>
+<p>
+	<strong>Moderators:</strong> <a href="memberlist32d1.html?mode=viewprofile&amp;u=72" class="username">mverstra</a>, <a href="memberlistce31.html?mode=viewprofile&amp;u=2727" class="username">joaocarloscabreu</a>
+</p>
+
+
+<div class="action-bar bar-top">
+	
+			<a href="postingb827.html?mode=reply&amp;f=10&amp;t=5199" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic7163.html?f=10&amp;t=5199&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="5199" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			7 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p14106" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile14106">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist9901.html?mode=viewprofile&amp;u=2921" class="username">qwin</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchab1b.html?author_id=2921&amp;sr=posts">5</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Sep 16, 2020 10:29 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Switzerland</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content14106">
+
+						<h3 class="first"><a href="#p14106">Calculating eigenvectors for the dielectric tensor of Hafnia</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingaa79.html?mode=quote&amp;f=10&amp;p=14106" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic063a.html?p=14106#p14106" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist9901.html?mode=viewprofile&amp;u=2921" class="username">qwin</a></strong> &raquo; </span>Fri Oct 23, 2020 9:29 am
+			</p>
+			
+			
+			
+			<div class="content">Hello <br>
+I want to find the eigenvectors, the full dielectric (also the relaxed ion part) and piezoelectric tensor of Hafnia . So I followed the DFPT RF2 tutorial.<br>
+<br>
+first I generate a set of k points (kpt.in) like it is explained in the tutorial. I used these points for the new input file (kpt2.in), but here i get the following error message:<br>
+<br>
+<br>
+--- !ERROR<br>
+message: |<br>
+    The file ./tmp/kpt2_o_DS1_WFK cannot be used to start the <br>
+      present calculation. It was asked that the wavefunctions be accurate, but<br>
+      at least one of the k points could not be generated from a symmetrical one.<br>
+      dksqmax=    7.611730E-05<br>
+      Action: check your wf file and k point input variables<br>
+        (e.g. kptopt or shiftk might be wrong in the present dataset or the preparatory one.<br>
+src_file: inwffil.F90<br>
+src_line: 417<br>
+<br>
+I cannot understand what I should change for the kptopt or the shiftk. In the next steps I want to use the dieflag, piezoflag and the eivec. <br>
+<br>
+I work with PAW's, so my input file for kpt2.in looks like the following: <br>
+<br>
+kpt.in<br>
+./out/kpt.out<br>
+./tmp/tmp_kpti<br>
+./tmp/tmp_kpto<br>
+./tmp/tmp_kpt<br>
+./ps/Hf.LDA_PW-JTH.xml<br>
+./ps/O.LDA_PW-JTH.xml<br>
+<br>
+<br>
+Can somebody explain me what is wrong in the file? <br>
+Thanks a lot!</div>
+			
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file910c.php?id=1991">kpt.in</a></dt>
+			<dd><em>Input to create a set of k-points</em></dd>			<dd>(1.41 KiB) Downloaded 406 times</dd>
+		</dl>
+		
+		
+			</dd>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file969c.php?id=1992">kpt.out</a></dt>
+			<dd><em>output with k-points</em></dd>			<dd>(14.26 KiB) Downloaded 411 times</dd>
+		</dl>
+		
+		
+			</dd>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file277d.php?id=1994">kpt2.in</a></dt>
+			<dd><em>generate derivative databases</em></dd>			<dd>(5.92 KiB) Downloaded 429 times</dd>
+		</dl>
+		
+		
+			</dd>
+									</dl>
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p14107" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile14107">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search82c3.html?author_id=682&amp;sr=posts">469</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 19, 2011 11:13 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> University of Liege, Belgium</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content14107">
+
+						<h3 ><a href="#p14107">Re: Calculating eigenvectors for the dielectric tensor of Hafnia</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingb1ec.html?mode=quote&amp;f=10&amp;p=14107" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic8549.html?p=14107#p14107" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a></strong> &raquo; </span>Fri Oct 23, 2020 8:56 pm
+			</p>
+			
+			
+			
+			<div class="content">Dear qwin,<br>
+At which dataset do you have this error message?<br>
+A question: do you only want to compute dielectric constant and piezoelectric tensor? If so, they are only qpt=Gamma (0 0 0) point properties such that you do not need all these different qpt phonons to be calculated.<br>
+Best wishes,<br>
+Eric</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p14116" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile14116">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist9901.html?mode=viewprofile&amp;u=2921" class="username">qwin</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchab1b.html?author_id=2921&amp;sr=posts">5</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Sep 16, 2020 10:29 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Switzerland</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content14116">
+
+						<h3 ><a href="#p14116">Re: Calculating eigenvectors for the dielectric tensor of Hafnia</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting9db2.html?mode=quote&amp;f=10&amp;p=14116" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicc030.html?p=14116#p14116" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist9901.html?mode=viewprofile&amp;u=2921" class="username">qwin</a></strong> &raquo; </span>Mon Oct 26, 2020 11:01 am
+			</p>
+			
+			
+			
+			<div class="content">Thank you Eric for your fast answer!<br>
+<br>
+My main goal is to find the full dielectric tensor(purley electronic contribution + contribution from the phonon modes) and the full piezoelectric tensor. And more for interests it would be nice to generate also the phonon band structure.<br>
+<br>
+If i compare my result to other papers, I just found just the optical or purely electronic part of the dielectric tensor<br>
+So I thought i would try calculating it with help of the RF2-tutorial and set the dieflag = 3.<br>
+<br>
+But It does not work. I generated 65 k points, I think I did it like the tutorial told it,  but i just can generate {DS1_DDB, DS3_DDB, DS4_DDB, DS5_DDB , DS6_DDB, DS7_DDB} (I expected 65 DDB files), afterwards it aborts. So kpt2.in generates just 6 files. I still merged them and tried to calculate the dielectric tensor,  But than i get the message:<br>
+<br>
+    Information is missing in the DDB.<br>
+    The dynamical matrix number 8 cannot be built,<br>
+<br>
+Could you may give me a hint, what the best way is to calculate the full tensors.<br>
+<br>
+Thanks many time for you help!</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p14135" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile14135">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search82c3.html?author_id=682&amp;sr=posts">469</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 19, 2011 11:13 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> University of Liege, Belgium</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content14135">
+
+						<h3 ><a href="#p14135">Re: Calculating eigenvectors for the dielectric tensor of Hafnia</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postinge368.html?mode=quote&amp;f=10&amp;p=14135" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicb09b.html?p=14135#p14135" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a></strong> &raquo; </span>Mon Nov 02, 2020 8:43 am
+			</p>
+			
+			
+			
+			<div class="content">Dear qwin,<br>
+OK, this means that you should at least get the epsilon (elec and total) and piezo tensor right now with only Gamma point (if you forget about the phonon dispersion)?<br>
+Regarding the phonon dispersion, I think you mist one point is that Abinit can use interpolation of phonon dispersion between DFPT calculated points (very useful for insulator to reduce the number of DFPT calculations). The interpolation is done with anaddb on a grid of q-point that has "brav"(<a href="https://docs.abinit.org/variables/anaddb/#brav" class="postlink">https://docs.abinit.org/variables/anaddb/#brav</a>) possibilities. The grid of DFPT should correspond to the ngqpt grid (2 2 2 or 4 4 4 or etc) with or without a shift (nqshft).<br>
+In your case you can set brav to 1 and ngqpt to 2 2 2 (and no shift) to start with such that you need only Gamma and zone boundary points, which is already a good start. You can go to 4 4 4  to improve the interpolation but you don't need to do all qpt points with DFPT... (see section 4 of the RF2 tuto for the details).<br>
+Best wishes,<br>
+Eric</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p14153" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile14153">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist9901.html?mode=viewprofile&amp;u=2921" class="username">qwin</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchab1b.html?author_id=2921&amp;sr=posts">5</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Sep 16, 2020 10:29 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Switzerland</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content14153">
+
+						<h3 ><a href="#p14153">Re: Calculating eigenvectors for the dielectric tensor of Hafnia</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting9aff.html?mode=quote&amp;f=10&amp;p=14153" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic4a0e.html?p=14153#p14153" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist9901.html?mode=viewprofile&amp;u=2921" class="username">qwin</a></strong> &raquo; </span>Fri Nov 06, 2020 11:35 am
+			</p>
+			
+			
+			
+			<div class="content">Hello Eric<br>
+<br>
+Thank you for your helpful answers!<br>
+<br>
+I think I need also to calculate the uniaxial and shear strain to find the whole dielectrical tensor. I am not sure if I did it correctly:<br>
+<br>
+Now I generate another dataset for the strain:<br>
+<br>
+#DS 4 Strain Pertubation of Q=0 <br>
+#*************************************************<br>
+qpt4 0.00000000E+00  0.00000000E+00  0.00000000E+00<br>
+<br>
+getddk4   2   #from the ddk part<br>
+getwfk4   1    #from the ground state data set<br>
+kptopt4   2   <br>
+rfstrs4   3     #now i want uniaxial and shear stress<br>
+rfphon4    1          <br>
+rfatpol4   1 12       <br>
+rfdir4     1 1 1    <br>
+tolvrs4    1.0d-8     <br>
+<br>
+So at the end I have 11 Datasets: <br>
+
+<ul><li>DS 1: Ground State</li></ul>
+<ul><li>DS 2 : Response function calculation of d/dk wave function  (at Q=0)</li></ul>
+<ul><li>DS 3 : Response function calculation of Q=0 phonons and electric field pert.</li></ul>
+<ul><li>DS 4: Strain Pertubation of Q=0</li> </ul>
+<ul><li>DS 5-11: Dynamical Matrix at wavevectors other than Gamma</li></ul>
+
+Than i will merge DS 3 - DS 11 (so also with the strain DS). <br>
+And than I can calculate  the full dielectric tensor with<br>
+<br>
+!Flags<br>
+  dieflag 4<br>
+  elaflag 3<br>
+  instrflag 1<br>
+!Wavevector grid number 1<br>
+ brav 1<br>
+ ngqpt 2 2 2<br>
+<br>
+Kind Regards<br>
+Qwin</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p14159" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile14159">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist9901.html?mode=viewprofile&amp;u=2921" class="username">qwin</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchab1b.html?author_id=2921&amp;sr=posts">5</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Sep 16, 2020 10:29 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Switzerland</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content14159">
+
+						<h3 ><a href="#p14159">Re: Calculating eigenvectors for the dielectric tensor of Hafnia</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingbef2.html?mode=quote&amp;f=10&amp;p=14159" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic263a.html?p=14159#p14159" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist9901.html?mode=viewprofile&amp;u=2921" class="username">qwin</a></strong> &raquo; </span>Mon Nov 09, 2020 9:34 am
+			</p>
+			
+			
+			
+			<div class="content">Also with this new Database where i calculate the strain I could not calculate the full dielectric tensor. Sadly I have no further idea how to get more than the optical part. <br>
+<br>
+mpi_rank: 0<br>
+message: |<br>
+    <br>
+     matrginv : BUG -<br>
+      The matrix that has been passed in argument of this subroutine<br>
+      is probably either singular or nearly singular.<br>
+      The LAPACK routine dgetrf failed.<br>
+      Action: Contact ABINIT group<br>
+<br>
+<br>
+<br>
+if I set dieflag 3, I get:<br>
+<br>
+<br>
+--- !ERROR<br>
+src_file: m_ddb_diel.F90<br>
+src_line: 368<br>
+mpi_rank: 0<br>
+message: |<br>
+    The lowest mode appears to be a "true" negative mode,<br>
+    and not an acoustic mode. This precludes the computation<br>
+    of the frequency-dependent dielectric tensor.<br>
+    Action : likely there is no action to be taken, although you,<br>
+    could try to raise your convergence parameters (ecut and k-points).<br>
+    For your information, here are the four lowest frequencies :<br>
+     -6.86186463E-04 -4.51226777E-04 -1.12986344E-06 -8.52060867E-07<br>
+...<br>
+Kind regards</div>
+			
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file760d.php?id=1998">die1_strainpertubation.in</a></dt>
+						<dd>(4.47 KiB) Downloaded 422 times</dd>
+		</dl>
+		
+		
+			</dd>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file4d5c.php?id=1999">die_wS3.in</a></dt>
+						<dd>(200 Bytes) Downloaded 393 times</dd>
+		</dl>
+		
+		
+			</dd>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file7938.php?id=2000">die_wS4.in</a></dt>
+						<dd>(84 Bytes) Downloaded 418 times</dd>
+		</dl>
+		
+		
+			</dd>
+									</dl>
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p14165" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile14165">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search82c3.html?author_id=682&amp;sr=posts">469</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 19, 2011 11:13 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> University of Liege, Belgium</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content14165">
+
+						<h3 ><a href="#p14165">Re: Calculating eigenvectors for the dielectric tensor of Hafnia</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting2327.html?mode=quote&amp;f=10&amp;p=14165" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic02db.html?p=14165#p14165" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a></strong> &raquo; </span>Thu Nov 12, 2020 12:24 pm
+			</p>
+			
+			
+			
+			<div class="content">Dear Qwin,<br>
+The last error message you report is quite clear I think: you have an unstable phonon mode at Gamma (probably polar) such that the dielectric is not defined.<br>
+It is possible that the space group in which you are running corresponds to a high-symmetry phase which is not stable and you'll not be able to compute the dielectric constant of this phase due to the presence of unstable modes.<br>
+But the unstable phonons could be an artefact of the numerical calculation if you did not impose the acoustic sum rules, did you set asr flag in your input (I do not see it)?<br>
+Best wishes,<br>
+Eric</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="postingb827.html?mode=reply&amp;f=10&amp;t=5199" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic7163.html?f=10&amp;t=5199&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=10&amp;t=5199">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			7 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforum15ca.html?f=10" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Response calculations”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?p=14153 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:58:24 GMT -->
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1259&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:05:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Negative Phonon Frequencies</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Negative Phonon Frequencies</h2>
+		<p><a href="viewtopic7659.html?f=10&amp;t=1259">https://forum.abinit.org/viewtopic.php?f=10&amp;t=1259</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Negative Phonon Frequencies</h3>
+				<div class="date">Posted: <strong>Sat Aug 13, 2011 10:36 am</strong></div>
+				<div class="author">by <strong>toughpkh</strong></div>
+				<div class="content">Hello,<br />I have tried to generate the phonon band structure by following the RF2 instruction.<br />I obtained a set of q-points(12 points) from GS calculation and set 'nband' to 15. (It gave me errors with less than 15)<br />A material is a rhombohedral structure with 4 basis, and I acquired 'acell' and 'rprim' from the convergence studies.<br />I guess my problems are caused by the definition of k-point grid. First I tried with<br /><br />  ngkpt   4  4  4          <br />  nshifk  1<br />  shiftk 0.5 0.5 0.5<br /><br />because it's neither FCC nor BCC. It took more than 30 hrs to generate the dynamical matrices at the q-points and eventually<br />produced negative phonon frequencies at some wave vectors. In addition to the negative frequencies, the shape of the phonon<br />dispersion curves were fluctuating more than expected. I tried to use a different definition on the grid like<br /><br /> nkpt  5<br /> nshifk  1<br /> shiftk 0.5 0.5 0.5<br /> kptrlatt  -2 2 2<br />             2 -2 2<br />             2 2 -2<br /><br />but it kept giving me errors with wrong nkpt values. I've tried more than 10 times with different inputs and pseudopotential data <br />to correct this problem. Any help on this problem will be very appreciated. I looked up the similar posting in the forum, but <br />the answers to the previous posting didn't help. Other parameters in my input files are<br /><br />For the q-points other than gamma point<br />getwfk 1<br />kptopt 3<br />rfphon 1<br />rfatpol   1 5<br />rfdir   1 1 1<br />tolvrs   1.0d-8<br /><br />#Common input variables   <br />ecut 10<br />nband 15<br />ixc 1<br />iscf 5<br />nstep 100<br /><br />The rest of the parameters are the same as the inputs in RF2 tutorial.<br />Thank you.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Negative Phonon Frequencies</h3>
+				<div class="date">Posted: <strong>Sun Aug 14, 2011 5:41 am</strong></div>
+				<div class="author">by <strong>Robin</strong></div>
+				<div class="content">I think you should tighten the convergence parameter together with a larger nstep. I use &quot;tolwfr  1.0d-22&quot; and &quot;nstep 1000&quot;.<br /><br />Additionally, is you geometrical structure fully relaxed?  I use &quot;tolmxf   1.85d-6&quot; in such calculation. <br /><br />Sincerely,<br />Guangfu Luo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Negative Phonon Frequencies</h3>
+				<div class="date">Posted: <strong>Mon Aug 15, 2011 5:29 pm</strong></div>
+				<div class="author">by <strong>blackburn</strong></div>
+				<div class="content">Your ecut is quite low, especially if you're using norm-conversing pseudo. Are you sure you are converged?<br /><br />Also, your k-grid seems small (it's hard to tell without rprim and acell). Increasing it might get rid of these imaginary frequencies.<br /><br />Simon</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Negative Phonon Frequencies</h3>
+				<div class="date">Posted: <strong>Wed Aug 17, 2011 6:52 pm</strong></div>
+				<div class="author">by <strong>toughpkh</strong></div>
+				<div class="content">Thank you, Guangfu and Simon.<br /><br />My geometrical structure is fully relaxed, and 'ecut' in my simulations was actually 20.<br />My 'ngkpt 4 4 4' was from the convergence study as following the tutorial#4, <br />and my simulation took more than 100 hrs to get the final results. Do I still need to try with larger k-grid?<br /> <br />I just got another error message from the latest simulation. <br /><br />scfcge : ERROR -<br />  Potential-based CG line minimization not converged after 13 restarts.<br />  Action : read the eventual warnings about lack of convergence.<br />  Some might be relevant. Otherwise, raise nband.<br /><br />Would it be due to the insufficient 'ntstep'? I am still not sure if it needs to be greater than 200.<br />Someone in the forum suggested to use iscf 7 instead of iscf 5 to recover the error above.<br />Is it also okay for the response calculation?<br /><br />I'll try to run a new simulation with your suggestions, reduced the tolerances and larger nstep.<br />I really appreciate your helps.<br /><br />Sincerely,<br />Jung</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1259&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:05:43 GMT -->
+</html>

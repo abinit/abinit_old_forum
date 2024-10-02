@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=893&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:41:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; parallization and crashing</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>parallization and crashing</h2>
+		<p><a href="viewtopic6382.html?f=10&amp;t=893">https://forum.abinit.org/viewtopic.php?f=10&amp;t=893</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>parallization and crashing</h3>
+				<div class="date">Posted: <strong>Thu Feb 17, 2011 7:36 am</strong></div>
+				<div class="author">by <strong>dfgtyx</strong></div>
+				<div class="content">All,<br /><br />Do RF calculations parallelize?  I cannot make it work.<br /><br />When I set paral_rf and ngroup_rf the code segmentation faults straight away.<br /><br />When I try to use any other kind of parallelization I get an error message like the following:<br /><br />-P-0000  leave_test : error -      4 processors are not answering. Exiting...<br /><br />I've tried this input file with abinit 6.2.4 and 6.4.  I've also tried using gfortran/openmpi intel fortran/openmpi and intel fortran/mpich2 same problem for all.<br /><br />Regards,<br />Nathan<br /><br />here is my input file:<br /><br />chkprim                      0   # bomb if cell is not primative                <br />ndtset                       2   # number of data sets (a strange, yet wonderful, ABINIT feature)<br />vacwidth                     5   # a gap (in Bohr) longer than this settings becomes flagged as a vacuum<br />boxcutmin                    2   # controls accuracy in reciprocal space 2.0 is exact, matters for response function calculations<br />nstep                      200   # maximum number of SCF cycles                 <br />localrdwf                    0   # each processor uses its own local input files<br /><br />occopt                       1   # controls how the code fills orbitals, includes temperature effects<br />nsppol                       1   # do spin polarized calculation                <br />iprcel                       0   # set the preconditioner                       <br />ecut                        25   # cut off for fourier shape-functions          <br />ixc                          2   # sets the exchange-correlation functional     <br />iscf                         5   # specifies algorithm for scf iteration        <br />iscf2                         5   # specifies algorithm for scf iteration        <br />tolvrs                   1e-20   # convergence tolerance                        <br />nsym                         0   # number of symmetries, 0=automatic            <br />tsmear                   5e-07   # sets the temperature corresponding to the occopt<br />ecutsm                 2.5e-06   # slightly reduces the KE of the highest-frequency modes stabilizing relaxation<br /><br />irdwfk                       0   # controls where starting wave function comes from<br />irdden                       0   # controls where the starting density comes from<br />prtwf                        1   # print the wave function                      <br />prtden                       0   # write the charge density to disk             <br />prteig                       0   # write out the energy eigenvalues             <br /><br />nshiftk                      1   # number of k-point shifts                     <br />shiftk                   0 0 0   #                                              <br /><br /><br />kptopt                       1   # use full symmetry to generate the kpoints    <br />ngkpt                 12 12 12   #                                              <br /><br /><br />#<br /># The array of lattice constants<br />#<br />acell 10.1975585743926 10.1975585743926 10.1975585743926<br /><br />#<br /># Atomic data<br />#<br />ntypat                       1   # number of atoms (and psuedopotential lines) to read in<br />typat                            # specify atom type                            <br />                             1   # the index of the atom                        <br />                             1   # the index of the atom                        <br /><br />natom                        2   # number of atoms                              <br /><br />xred<br />0 0 0<br />0.25 0.25 0.25<br /><br /><br />znucl<br />14<br />14<br />  <br />rprim<br />0.505 0.5 0<br />0 0.5 0.5<br />0.505 0 0.5<br /><br /><br /><br /><br /><br />kptopt2                       2<br />nqpt2                         1   # number of q-points for the response-function calculation<br />qpt2                      0 0 0   # mechanical behavior depends upon only the lowest modes<br />rfstrs2                       3   # compute both shear and uniaxial strains      <br />rfphon2                       1   # the phonon response function calculation is used for relaxing the anadb results<br />rfatpol2                    1 2   # perturb all the atoms                        <br />rfdir2                    1 1 1   # compute the perturbation in all directions   <br />getwfk2 -1<br />istwfk *1<br />#ngroup_rf 5<br />#paral_rf 1<br />#nproc_kpt 5<br />paral_kgb 1<br />npband 5<br />npfft 1<br />npkpt 1<br />wfoptalg 4<br />fftalg 401</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallization and crashing</h3>
+				<div class="date">Posted: <strong>Thu Feb 17, 2011 6:28 pm</strong></div>
+				<div class="author">by <strong>dfgtyx</strong></div>
+				<div class="content">I compiled it with debug and reran it and it produced the following message:<br /><br />Backtrace for this error:<br />  + /lib64/libc.so.6 [0x3cadc30280]<br />  + function wfsinp (0x60CE0F)<br />    at line 566 of file wfsinp.F90<br />  + function inwffil (0x5DA3FE)<br />    at line 652 of file inwffil.F90<br />  + function respfn (0x47A835)<br />    at line 425 of file respfn.F90<br />  + function driver (0x449AE6)<br />    at line 649 of file driver.F90<br />  + function abinit (0x43D5D8)<br />    at line 445 of file abinit.F90<br />  + /lib64/libc.so.6(__libc_start_main+0xf4) [0x3cadc1d974]<br />--------------------------------------------------------------------------<br />mpirun has exited due to process rank 0 with PID 2761 on<br />node compute-0-0.local exiting without calling &quot;finalize&quot;. This may<br />have caused other processes in the application to be<br />terminated by signals sent by mpirun (as reported here).<br />--------------------------------------------------------------------------<br /><br />When I run with the following parallelization options:<br /><br />ngroup_rf 5<br />paral_rf 1<br /><br /><br />Alternatively, when I run with parallelization over bands I still get the &quot;4 procesors are not answering&quot; error with no aditional information.<br /><br />Regards,<br />Nathan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallization and crashing</h3>
+				<div class="date">Posted: <strong>Fri Feb 18, 2011 4:35 pm</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hello,<br /><br />I think that the option paral_kgb 1 is only available for ground-state calculations (not for RF).<br /><br />David</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallization and crashing</h3>
+				<div class="date">Posted: <strong>Fri Feb 18, 2011 6:30 pm</strong></div>
+				<div class="author">by <strong>dfgtyx</strong></div>
+				<div class="content">Thank you for your reply!<br /><br />The documentation causes me to think that band-level parallelization is possible for a response functional calculation<br /><br /><blockquote><div><cite>http://www.abinit.org/documentation/helpfiles/for-v6.6/tutorial/lesson_parallelism.html wrote:</cite>Pararallelism over the bands<br /><br />The parallelism over bands in the ground-state case is controlled by the wfoptalg and nbdblock input variables.<br />By contrast, for <strong class="text-strong">response-function</strong> jobs, the band parallelism is automatically activated when needed. </div></blockquote><br /><br />I tried this by setting:<br /><br />wfoptalg  1<br />nbdblock  5<br /><br />And it still crashed:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>accrho3.F90:158 : enter<br /><br />accrho3.F90:309 : exit<br /><br />-P-0000&nbsp; leave_test : synchronization done...<br />-P-0000&nbsp; leave_test : error -&nbsp; &nbsp; &nbsp; 4 procesors are not answering. Exiting...<br />&#91;nathan@compute-0-0 si.elast&#93;$ <br />&nbsp;with the following message:</code></pre></div><br /><br />Thanks in advance.<br /><br />P.S. While I've begun looking through it, I still don't really know the code structure of ABINIT, so I'd not be good at debugging, but, if it turns out that something is unmaintained and needs to be updated, I'd be happy to give it a try, provided somebody could tell me, roughly, what needs to be done.<br /><br />Regards,<br />Nathan<br /><br /><br /><blockquote><div><cite>david.waroquiers wrote:</cite>Hello,<br /><br />I think that the option paral_kgb 1 is only available for ground-state calculations (not for RF).<br /><br />David</div></blockquote></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallization and crashing</h3>
+				<div class="date">Posted: <strong>Sat Feb 26, 2011 2:28 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Your main input choices were for _perturbation level_ parallelization. It is not clear that this still works, and using different datasets is simpler so you can submit different jobs.<br /><br />In RF the k-point and band parallelizations are automatic. No need for the kgb input variabls (they will be ignored).<br />I have not seen conclusive tests of the band parallelism, but the k-point one works great for phonons etc... I recommend using nkpt processors (remember nkpt will change for each perturbation, depending on the residual symmetry in the little group) - if you impose kptopt 3 then nkpt will be constant across all perturbations.<br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=893&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:41:44 GMT -->
+</html>

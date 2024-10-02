@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=430&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:53:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Issues with phonon band structures</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Issues with phonon band structures</h2>
+		<p><a href="viewtopic95c2.html?f=10&amp;t=430">https://forum.abinit.org/viewtopic.php?f=10&amp;t=430</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Issues with phonon band structures</h3>
+				<div class="date">Posted: <strong>Fri Jun 25, 2010 4:55 pm</strong></div>
+				<div class="author">by <strong>jrh</strong></div>
+				<div class="content">I have been trying to calculate phonon band structures for Si and Ge using the Troullier-Martins pseudo potentials. The results I get agree largely with<br />what is published in the literature (for example, Wei and Chou, PRB 50, 1994, 2221), but there are some small differences. First, the lowest bands<br />which are exactly the same in the paper between the L and Gamma points are slightly different in my calculation (both for Si and Ge). Second,<br />there is an additional &quot;peak&quot; between the W and L points which is not present in the paper. I have varied the number of q vectors, but the results<br />are almost identical. I have attached the input for Si and the resulting band structure plots.<br />Any hint on what might be wrong is appreciated.<br /><br />Jörg</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Issues with phonon band structures</h3>
+				<div class="date">Posted: <strong>Sat Jun 26, 2010 10:33 am</strong></div>
+				<div class="author">by <strong>gonze</strong></div>
+				<div class="content"><blockquote><div><cite>jrh wrote:</cite>First, the lowest bands<br />which are exactly the same in the paper between the L and Gamma points are slightly different in my calculation (both for Si and Ge)</div></blockquote><br />You mean : they should be degenerate. Yes, indeed. I suspect that nband 6 is the cause of the problem,<br />perhaps there is a degeneracy between the 6th and 7th band in some of the k point you are sampling.<br />Could you try simply to use nband 4 ?<br /><br />Best,<br />X</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Issues with phonon band structures</h3>
+				<div class="date">Posted: <strong>Mon Jun 28, 2010 4:24 pm</strong></div>
+				<div class="author">by <strong>jrh</strong></div>
+				<div class="content">I have tried your suggestion, but it has made things much worse. I have attached a pdf file containing the phonon band structure I am trying to<br />reproduce and the results of some of the attempts I have made. The closest I can come to the published results is when I run with a 12x12x12<br />grid of q vectors, but even there I still have differences between W and L as marked in the pdf file. Reducing the number of bands result in<br />a complete catastrophe.<br />I am not sure if the observed behavior has something to do with the way the q vectors are choosen. I am using the following procedure:<br />- I run an Abinit calculation with kptopt 1, ngkpt 8 8 8, nshiftk 1, shiftk 0.0 0.0 0.0<br />- I take the k points printed in the output of this run and copy them to the qpt keyword in the response function input where I use<br />nkpt 0, kptopt 3, ngkpt 8 8 8 for the k point<br />which is as I understand the procedure you have suggested in the second Abinit response function tutorial. Maybe the q vectors have to<br />be choosen differently. Therefore, I would appreciate any explanation and how this is supposed to be done in Abinit.<br /><br />Thanks for your help,<br />Jörg</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Issues with phonon band structures</h3>
+				<div class="date">Posted: <strong>Wed Jul 28, 2010 7:07 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Perhaps a minor point. If you do not specify the shiftk explicitly it will be nshiftk 1 shiftk 0.5 0.5 0.5, which will probably break symmetry for an FCC system. Set this to the usual nshiftk 4 shiftk 0.5 0.5 0.5   0.5 0 0  0 0.5 0   0 0 0.5, or use a shift of 0 0 0 to check.<br /><br />matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=430&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:53:28 GMT -->
+</html>

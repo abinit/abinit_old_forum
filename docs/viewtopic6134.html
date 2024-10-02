@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3398&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:13:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Structural optimization error</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Structural optimization error</h2>
+		<p><a href="viewtopic6260.html?f=9&amp;t=3398">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3398</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Structural optimization error</h3>
+				<div class="date">Posted: <strong>Wed Oct 12, 2016 4:15 pm</strong></div>
+				<div class="author">by <strong>MANISH ANAND</strong></div>
+				<div class="content">Hi abinit user,<br />I am working on structural optimization for PbTiO3. but every time I am getting boxcut error. even though I am reducing ecut or increasing ngkpt is not working for me. Please help. here is the content of input file.<br />#Definition of the atom types<br />ntypat 3           <br />znucl 82 22 8      <br /><br />#Definition of the atoms<br />natom 5               <br />typat 1 2 3 3 3  <br /><br />#Definition of the planewave basis set<br />#ndtset 12<br />ecut 40 Hartree     <br />ecutsm 0.5 Hartree<br />#Definition of the k-point grid<br />kptopt  1<br />occopt  1<br />ngkpt  8 8 8<br />nband 17<br />ngfft 40 40 40<br />#Definition of the SCF proceed         <br />#toldff 1.0d-8<br />ionmov 2<br />dilatmx 2.0<br />optcell 2<br />strfact 20      <br />diemac 6.0             <br />toldff  5.0e-6<br />tolmxf  5.0e-5<br />nstep 20<br />ntime 10                 <br /># coordinate of the complex<br />xred<br /> 0.0000000000000000  0.0000000000000000  0.0000000000000000 <br /> 0.5000000000000000  0.5000000000000000  0.5000000000000000 <br /> 0.0000000000000000  0.5000000000000000  0.5000000000000000 <br /> 0.5000000000000000  0.0000000000000000  0.5000000000000000 <br /> 0.5000000000000000  0.5000000000000000  0.0000000000000000 <br /> <br />#%% [files]<br />#%% [paral_info]<br />#%% max_nprocs = 1<br />#%% [extra_info]<br />#%% authors = Unknown<br />#%% keywords = <br />#%% descrition = DFT calculation for PbTiO3<br /><br />   and here is the error which I am getting<br /><br /><br />--- !ERROR<br />message: |<br /><br />     getcut: ERROR -<br />      Choice of acell, ngfft, and ecut<br />      ===&gt; basis sphere extends BEYOND fft box !<br />      Recall that boxcut=Gcut(box)/Gcut(sphere)  must be &gt; 1.<br />      Action : try larger ngfft or smaller ecut.<br />      Note that ecut=effcut/boxcut**2 and effcut=    2.956891<br />src_file: getcut.F90<br />src_line: 157<br />...<br /><br /><br /> leave_new : decision taken to exit ...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Structural optimization error</h3>
+				<div class="date">Posted: <strong>Thu Oct 13, 2016 8:41 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Hi,<br /><br />It seems you did not define the variable <a href="http://www.abinit.org/doc/helpfiles/for-v8.0/input_variables/html_automatically_generated/varbas.html#acell" class="postlink">acell</a> which is the lattice parameters a b and c<br />For a perovkite like PbTiO3 you should have acell = 7.3 7.3 7.3 bohr (check litterature for a better value)<br /><br />Cheers</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Structural optimization error</h3>
+				<div class="date">Posted: <strong>Thu Oct 13, 2016 8:49 am</strong></div>
+				<div class="author">by <strong>MANISH ANAND</strong></div>
+				<div class="content">Hi Jordan. <br />Thanks for reply. I have used acell =3.89239000 3.89239000 3.89239000. I have just forgot to paste it here. so should I use the acell value which you have suggested?<br />Thanks.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Structural optimization error</h3>
+				<div class="date">Posted: <strong>Thu Oct 13, 2016 1:54 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Manish Anand,<br />Regarding the cell parameters, a good guess is to start with the experimental ones.<br />For your boxcut problem this is related to the too big dilatmx you defined. Please use something like 1.05 or 1.10.<br />Your calculations will be faster too, please read the doc regarding dilatmx:<br /><!-- m --><a class="postlink" href="http://www.abinit.org/doc/helpfiles/for-v8.0/input_variables/html_automatically_generated/varrlx.html#dilatmx">http://www.abinit.org/doc/helpfiles/for ... ml#dilatmx</a><!-- m --><br />Best,<br />Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3398&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:13:08 GMT -->
+</html>

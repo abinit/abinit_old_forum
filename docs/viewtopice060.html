@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1621&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:50:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] ABINIT 6.12.3 building problems on CentOS cluster</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] ABINIT 6.12.3 building problems on CentOS cluster</h2>
+		<p><a href="viewtopicc103-2.html?f=3&amp;t=1621">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1621</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] ABINIT 6.12.3 building problems on CentOS cluster</h3>
+				<div class="date">Posted: <strong>Thu Apr 19, 2012 1:02 am</strong></div>
+				<div class="author">by <strong>belhor</strong></div>
+				<div class="content">Hi,<br /><br />I've been trying to build ABINIT on a CentOS (5.4) cluster but until now I only received errors. So I hope that you can help me...<br /><br />Currently I'm using ABINIT 6.12.3 package and for the configuration process I'm using this method:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../configure --enable-mpi=yes FC=/opt/intel/Compiler/11.1/059/bin/intel64/ifort</code></pre></div><br /><br />* All seems to be fine at this point.<br /><br />After that:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make multi multi_nprocs=8</code></pre></div><br /><br />At this point after a couple of minutes received this error:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>/opt/intel/Compiler/11.1/059/bin/intel64/ifort -DHAVE_CONFIG_H -I. -I../../../src/01_interfaces_ext -I../.. -I../../src/incs -I../../../src/incs -I/root/abinit-6.12.3/build1_parallel/fallbacks/exports/include -I/root/abinit-6.12.3/build1_parallel/fallbacks/exports/include&nbsp; &nbsp;-free -module /root/abinit-6.12.3/build1_parallel/src/mods -O2 -xHost -g -extend-source -vec-report0 -noaltparam -nofpscomp&nbsp; -c -o m_iso_c_bindings.o ../../../src/01_interfaces_ext/m_iso_c_bindings.F90<br />config.h(634): #error:&nbsp; &quot;HAVE_MPI1 and HAVE_MPI2 are both undefined&quot;<br /><br />make&#91;4&#93;: *** &#91;m_iso_c_bindings.o&#93; Error 1<br />make&#91;4&#93;: Leaving directory `/root/abinit-6.12.3/build1_parallel/src/01_interfaces_ext'<br />make&#91;3&#93;: *** &#91;all-recursive&#93; Error 1<br />make&#91;3&#93;: Leaving directory `/root/abinit-6.12.3/build1_parallel/src'<br />make&#91;2&#93;: *** &#91;all-recursive&#93; Error 1<br />make&#91;2&#93;: Leaving directory `/root/abinit-6.12.3/build1_parallel'<br />make&#91;1&#93;: *** &#91;all&#93; Error 2<br />make&#91;1&#93;: Leaving directory `/root/abinit-6.12.3/build1_parallel'<br />make: *** &#91;multi&#93; Error 2</code></pre></div><br /><br />Any suggestions?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ABINIT 6.12.3 building problems on CentOS cluster</h3>
+				<div class="date">Posted: <strong>Thu Apr 19, 2012 10:15 am</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">You're trying to build MPI source code with a compiler that is not MPI-capable, hence the error. The recommended way to build a parallel version of Abinit is to leave CC, CXX and FC unset, while using the --with-mpi-prefix option.<br /><br />Please look at ~abinit/doc/config/build-config.ac - as stated in the forum rules above - for details.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ABINIT 6.12.3 building problems on CentOS cluster</h3>
+				<div class="date">Posted: <strong>Tue Apr 24, 2012 12:12 am</strong></div>
+				<div class="author">by <strong>belhor</strong></div>
+				<div class="content">Hi Pouillon,<br /><br />finally I have a working installation of ABINIT in the cluster, thanks for everything!<br /><br />PS Also I have configured <em class="text-italics">~abinit/doc/config/build-config.ac</em> file correctly.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1621&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:50:19 GMT -->
+</html>

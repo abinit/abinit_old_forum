@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3718&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:24:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; segmentation fault (core dumped) when run abinit 8.6.1</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>segmentation fault (core dumped) when run abinit 8.6.1</h2>
+		<p><a href="viewtopic3a33.html?f=9&amp;t=3718">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3718</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>segmentation fault (core dumped) when run abinit 8.6.1</h3>
+				<div class="date">Posted: <strong>Sun Nov 19, 2017 9:06 am</strong></div>
+				<div class="author">by <strong>jianzhifu</strong></div>
+				<div class="content">Dear all, <br />When I run abinit 8.6.1 for a  test with the input file in tests folder (in the v5 folder for t09.in).<br />There is a segmentation fault (core dumped).<br />The abinit 8.6.1 is compiled with intel compilers_and_libraries_2016.3.210(or intel parallel_studio_xe_2016.3.067). The OS is centos 7 x86_64 with intel xeon E5 2680v3.<br />The install file is :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure \<br />CC=&quot;/opt/intel2016up3/compilers_and_libraries_2016.3.210/linux/mpi/intel64/bin/mpiicc&quot; \<br />CXX=&quot;/opt/intel2016up3/compilers_and_libraries_2016.3.210/linux/mpi/intel64/bin/mpiicpc&quot; \<br />FC=&quot;/opt/intel2016up3/compilers_and_libraries_2016.3.210/linux/mpi/intel64/bin/mpiifort&quot; \<br />--prefix=/home/sunlight/work/abinit/861 \<br />--with-tardir=/home/sunlight/work/abinit/tarballs \<br />--enable-64bit-flags=&quot;yes&quot; \<br />--enable-mpi \<br />--with-trio-flavor=&quot;netcdf&quot; \<br />--with-fft-flavor=&quot;fftw3&quot; \<br />--with-fft-libs=&quot;-L/opt/intel2016up3/compilers_and_libraries_2016.3.210/linux/mkl/lib/intel64 -Wl,--start-group&nbsp; -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group&quot; \<br />--with-linalg-flavor=&quot;mkl&quot; \<br />--with-linalg-libs=&quot;-L/opt/intel2016up3/compilers_and_libraries_2016.3.210/linux/mkl/lib/intel64 -Wl,--start-group&nbsp; -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group&quot; \<br />--with-dft-flavor=&quot;atompaw+bigdft+libxc+wannier90&quot; \<br />--enable-gw-dpc=&quot;yes&quot;</code></pre></div><br />The file f09.stdin:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>t09.in<br />t09.out<br />t09i<br />t09o<br />t09<br />/home/sunlight/work/abinit/abinit-8.6.1/tests/Psps_for_tests/Al.gga.uspp.paw</code></pre></div><br /><br />The file f09.in:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># ----------------------------------------<br /># -&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Input file for abinit&nbsp; &nbsp; &nbsp; &nbsp;-<br /># -&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -<br /># -&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Alu fcc&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -<br /># ----------------------------------------<br /><br /># 2-Options for output:<br /># ---------------------<br />&nbsp; enunit 2<br />&nbsp; prtvol 0<br />&nbsp; prtden 0<br />&nbsp; prtnabla 2<br /><br /># 3-Parameters governing the convergence:<br /># ---------------------------------------<br />&nbsp; ecut 10.<br />&nbsp; pawecutdg 50.<br />&nbsp; nband 10<br />&nbsp; nstep 5<br />&nbsp; toldfe 1.d-5<br /><br /># 4-Options for the choice of calculation:<br /># ----------------------------------------<br />&nbsp; occopt 3<br />&nbsp; tsmear 0.0036749<br />&nbsp; ionmov 0<br />&nbsp; optcell 0<br /><br /># 5-Definition of the unit cell:<br /># ------------------------------<br />&nbsp; acell 3*7.38796<br />&nbsp; rprim 1.0 0.0 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; 0.0 1.0 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; 0.0 0.0 1.0<br />&nbsp; natom 4<br />&nbsp; ntypat 1<br />&nbsp; typat 4*1<br />&nbsp; znucl 13<br />&nbsp; xred&nbsp; 0.0 0.0 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; 0.5 0.5 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; 0.5 0.0 0.5<br />&nbsp; &nbsp; &nbsp; &nbsp; 0.0 0.5 0.5<br />&nbsp; amu 26.98<br /><br /># 6-Definition of special K-points:<br /># ---------------------------------<br />&nbsp; kptopt 0<br />&nbsp; nkpt 1<br />&nbsp; kpt 0. 0. 0.<br />&nbsp; wtk&nbsp; 1.0<br />&nbsp; istwfk 1<br /><br /># 7-Symmetries of the lattice:<br /># ----------------------------<br />&nbsp; nsym 1<br />&nbsp; chkprim 0</code></pre></div><br /><br />Could you give me some advice?<br />Thanks.<br /><br /><br />zj.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3718&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:24:46 GMT -->
+</html>

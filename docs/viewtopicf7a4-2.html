@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4453&hilit=mismatch&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:04:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Make error 9.0.4</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Make error 9.0.4</h2>
+		<p><a href="viewtopic6733.html?f=3&amp;t=4453">https://forum.abinit.org/viewtopic.php?f=3&amp;t=4453</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Make error 9.0.4&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Fri Jun 19, 2020 3:59 pm</strong></div>
+				<div class="author">by <strong>tback</strong></div>
+				<div class="content">I'm running Fedora 32 with gcc 10.1.  I can run configure successfully (results below).  However, I am getting errors with make.  Not sure how to correct this (error output below)?  Can anyone help?<br>
+<br>
+Configuration Results:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Core build parameters
+---------------------
+
+  * C compiler       : gnu version 10.1
+  * Fortran compiler : gnu version 10.1
+  * architecture     : unknown unknown (64 bits)
+  * debugging        : basic
+  * optimizations    : standard
+
+  * OpenMP enabled   : no (collapse: ignored)
+  * MPI    enabled   : yes (flavor: auto)
+  * MPI    in-place  : yes
+  * MPI-IO enabled   : yes
+  * GPU    enabled   : no (flavor: none)
+
+  * LibXML2 enabled  : no
+  * HDF5 enabled     : yes (MPI support: yes)
+  * NetCDF enabled   : yes (MPI support: yes)
+  * NetCDF-F enabled : yes (MPI support: yes)
+
+  * FFT flavor       : goedecker (libs: auto-detected)
+  * LINALG flavor    : netlib+openblas (libs: auto-detected)
+
+  * Build workflow   : monolith
+
+0 deprecated options have been used:.
+
+Configuration complete.
+You may now type "make" to build Abinit.
+(or "make -j&lt;n&gt;", where &lt;n&gt; is the number of available processors)</code></pre></div>
+
+ERROR OUTPUT:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>mpifort -DHAVE_CONFIG_H -I. -I../../..  -I../../../shared/common/src/10_defs -I../../../shared/common/src/10_defs -I../../../shared/common/src/11_memory_mpi -I../../../shared/common/src/11_memory_mpi -I../../../shared/common/src/12_hide_mpi -I../../../shared/common/src/12_hide_mpi -I../../../shared/common/src/14_hidewrite -I../../../shared/common/src/14_hidewrite -I../../../shared/common/src/16_hideleave -I../../../shared/common/src/16_hideleave -I../../../shared/common/src/33_xc_lowlevel -I../../../shared/common/src/33_xc_lowlevel -I../../../shared/libpaw/src -I../../../shared/libpaw/src -I../../../shared/common/src/incs -I../../../shared/common/src/incs -I../../../shared/common/src/mods -I../../../shared/common/src/mods -I../../../src/incs -I../../../src/incs -I../../../src/mods -I../../../src/mods -I../../../shared/libpaw/incs -I../../../shared/libpaw/incs -I../../../shared/libpaw/mods -I../../../shared/libpaw/mods -I/usr/lib64/gfortran/modules/openmpi/   -ffree-form -J../mods   -w -fallow-argument-<span class="posthilit">mismatch</span> -O2     -c -o m_pawrhoij.o m_pawrhoij.F90
+m_pawrhoij.F90:2450:132:
+
+ 2450 |           NCF_CHECK(nf90_inq_dimid(ncid, "pawrhoij_cplex", cplex_id))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2451:132:
+
+ 2451 |           NCF_CHECK(nf90_inquire_dimension(ncid, cplex_id, len=my_cplex))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2453:132:
+
+ 2453 |           NCF_CHECK(nf90_inq_varid(ncid, "rhoijsel_atoms", nsel56_id))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2454:132:
+
+ 2454 |           NCF_CHECK(nf90_get_var(ncid, nsel56_id, nsel56))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2466:132:
+
+ 2466 |            NCF_CHECK(nf90_inq_dimid(ncid, "pawrhoij_cplex", cplex_id))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2467:132:
+
+ 2467 |            NCF_CHECK(nf90_inquire_dimension(ncid, cplex_id, len=my_cplex))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2468:132:
+
+ 2468 |            NCF_CHECK(nf90_inq_dimid(ncid, "pawrhoij_nspden", nspden_id))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2469:132:
+
+ 2469 |            NCF_CHECK(nf90_inquire_dimension(ncid, nspden_id, len=my_nspden))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2470:132:
+
+ 2470 |            NCF_CHECK(nf90_inq_varid(ncid, "nrhoijsel_atoms", nsel56_id))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2471:132:
+
+ 2471 |            NCF_CHECK(nf90_get_var(ncid, nsel56_id, nsel56))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2473:132:
+
+ 2473 |              NCF_CHECK(nf90_inquire_dimension(ncid, qphase_id, len=my_qphase))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2495:132:
+
+ 2495 |            NCF_CHECK(nf90_inq_varid(ncid, "rhoijselect_atoms", ibuffer_id))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2496:132:
+
+ 2496 |            NCF_CHECK(nf90_get_var(ncid, ibuffer_id, ibuffer))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2497:132:
+
+ 2497 |            NCF_CHECK(nf90_inq_varid(ncid, "rhoijp_atoms", buffer_id))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2498:132:
+
+ 2498 |            NCF_CHECK(nf90_get_var(ncid, buffer_id, buffer))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2541:132:
+
+ 2541 |          NCF_CHECK(nf90_def_dim(ncid, "number_of_atoms", natom, natom_id))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2543:132:
+
+ 2543 |        NCF_CHECK(nf90_def_var(ncid, "nrhoijsel_atoms", NF90_INT, natom_id, nsel56_id))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2545:132:
+
+ 2545 |        NCF_CHECK(nf90_def_dim(ncid, "pawrhoij_cplex", my_cplex, cplex_id))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2546:132:
+
+ 2546 |        NCF_CHECK(nf90_def_dim(ncid, "pawrhoij_nspden", my_nspden, nspden_id))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2547:132:
+
+ 2547 |        NCF_CHECK(nf90_def_dim(ncid, "pawrhoij_qphase", my_qphase, qphase_id))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2549:132:
+
+ 2549 |          NCF_CHECK(nf90_def_dim(ncid, "rhoijselect_atoms_dim", bsize, bsize_id))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2550:132:
+
+ 2550 |          NCF_CHECK(nf90_def_dim(ncid, "rhoijp_atoms_dim", bsize*my_nspden*my_qphase*my_cplex, bufsize_id))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2552:132:
+
+ 2552 |          NCF_CHECK(nf90_def_var(ncid, "rhoijselect_atoms", NF90_INT, bsize_id, ibuffer_id))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2553:132:
+
+ 2553 |          NCF_CHECK(nf90_def_var(ncid, "rhoijp_atoms", NF90_DOUBLE, bufsize_id, buffer_id))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2561:132:
+
+ 2561 |        NCF_CHECK(nf90_put_var(ncid, nsel56_id, nsel56))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2585:132:
+
+ 2585 |          NCF_CHECK(nf90_put_var(ncid, ibuffer_id, ibuffer))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+m_pawrhoij.F90:2586:132:
+
+ 2586 |          NCF_CHECK(nf90_put_var(ncid, buffer_id,  buffer))
+      |                                                                                                                                    1
+Error: Missing ‘)’ in statement at or before (1)
+make[4]: *** [Makefile:1272: m_pawrhoij.o] Error 1
+make[4]: Leaving directory '/home/backtc/Documents/ABINIT/abinit-9.0.4/shared/libpaw/src'
+make[3]: *** [Makefile:1161: all-recursive] Error 1
+make[3]: Leaving directory '/home/backtc/Documents/ABINIT/abinit-9.0.4/shared/libpaw'
+make[2]: *** [Makefile:1156: all-recursive] Error 1
+make[2]: Leaving directory '/home/backtc/Documents/ABINIT/abinit-9.0.4/shared'
+make[1]: *** [Makefile:1441: all-recursive] Error 1
+make[1]: Leaving directory '/home/backtc/Documents/ABINIT/abinit-9.0.4'
+make: *** [Makefile:1366: all] Error 2</code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Make error 9.0.4</h3>
+				<div class="date">Posted: <strong>Sat Jun 20, 2020 4:36 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">It seems the compiler is ignoring characters beyond column 132.<br>
+Can you reconfigure with: <br>
+<br>
+FCFLAGS="-g -O2 --free-line-length-none"<br>
+<br>
+M</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Make error 9.0.4</h3>
+				<div class="date">Posted: <strong>Sat Jun 20, 2020 6:43 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br>
+<br>
+GNU 10.1 is not yet supported...<br>
+The last GNU version supported is 9.3<br>
+<br>
+I tried, but, yes, there are problems...  <img class="smilies" src="images/smilies/icon_rolleyes.gif" width="15" height="17" alt=":roll:" title="Rolling Eyes">  <img class="smilies" src="images/smilies/icon_rolleyes.gif" width="15" height="17" alt=":roll:" title="Rolling Eyes"> <br>
+See: <br>
+<a href="https://gcc.gnu.org/gcc-10/porting_to.html" class="postlink">https://gcc.gnu.org/gcc-10/porting_to.html</a><br>
+<br>
+jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Make error 9.0.4</h3>
+				<div class="date">Posted: <strong>Sat Jun 20, 2020 10:31 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br>
+<br>
+The suggestion of gmatteo is the solution !<br>
+I'm just tested under Fedora 32 / OpenMPI / GNU 10.1  ( under VirtualBox VM )<br>
+<br>
+I don't know your ac9 file, but here's mine.<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>FCFLAGS_EXTRA="-g -O2 --free-line-length-none -fallow-argument-<span class="posthilit">mismatch</span> -w"
+
+with_mpi="${MPI_HOME}"
+enable_mpi_io="yes"
+
+with_linalg_flavor="openblas"
+LINALG_LIBS="-L/usr/lib64 -lopenblas"
+
+with_fft_flavor="fftw3"
+FFTW3_CPPFLAGS="-I/usr/include"
+FFTW3_FCFLAGS="-I/usr/include"
+FFTW3_LIBS="-L/usr/lib64 -lfftw3 -lfftw3f"
+
+with_libxc="/usr/lib64"
+
+with_hdf5="/usr/lib64/openmpi"
+with_netcdf="/usr/lib64/openmpi"
+
+NETCDF_FORTRAN_CFLAGS="`nf-config --cflags`"
+NETCDF_FORTRAN_LIBS="`nf-config --flibs`"
+NETCDF_FORTRAN_FCFLAGS="`nf-config --fflags`"
+
+WANNIER90_LIBS="-L/usr/lib64 -lwannier"
+
+with_libxml2="yes"
+
+enable_gw_dpc="yes"
+</code></pre></div>
+
+I ran some tests( fast and libxc ) : Passed  <img class="smilies" src="images/smilies/icon_cool.gif" width="15" height="17" alt="8-)" title="Cool"><br>
+<br>
+thanks</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Make error 9.0.4</h3>
+				<div class="date">Posted: <strong>Sun Jun 21, 2020 7:21 pm</strong></div>
+				<div class="author">by <strong>tback</strong></div>
+				<div class="content">Thanks gmatteo and jbeuken!  I now have a working version of Abinit!</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4453&hilit=mismatch&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:04:56 GMT -->
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=693&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Compilation of 6.4.2</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Compilation of 6.4.2</h2>
+		<p><a href="viewtopic25ef.html?f=3&amp;t=693">https://forum.abinit.org/viewtopic.php?f=3&amp;t=693</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Compilation of 6.4.2</h3>
+				<div class="date">Posted: <strong>Tue Oct 26, 2010 10:38 pm</strong></div>
+				<div class="author">by <strong>JEJohns</strong></div>
+				<div class="content">Dear all,<br />    I'm currently having trouble during the make portion of the abinit-6.4.1 installation.  I have previously installed 6.2.2 and other abinit builds on this system.  I will attempt to be as specific as possible to avoid wasting anyone's time.  I am working on a 4 core Xenon processor machine using Suse10.1, Open Mpi 1.4.1, and the GCC compilers version 4.4.3.    These are the same versions I compiled 6.2.2 with many months ago.  Just to make sure that it isn't a path problem on my part I did rebuild 6.2.2 today as well.<br /> For compiling...<br />I make a temporary build directory<br />cd /builddirectory<br />/somepath/abinit-6.4.1/configure --enable-mpi FC=mpif90 CXX=mpicxx CC=mpicc --enable-mpi-io<br />./make<br /><br />I've attached both config.log files (6.4 &amp; 6.2 each) and have included  below the region where they differ.  Below is a long series of errors that do not show up when I try to compile the 6.2.2 package<br /><blockquote class="uncited"><div>configure:24020: result: yes<br />configure:24026: checking whether the C++ compiler supports MPI<br />configure:24271: mpicxx -o conftest  -g -O3 -mtune=native -march=native -funroll-loops -ffast-math              conftest.cpp       &gt;&amp;5<br />/tmp/ccMFqqlv.s: Assembler messages:<br />/tmp/ccMFqqlv.s:2147: Error: no such instruction: `pmovzxbw %xmm6,%xmm4'<br />/tmp/ccMFqqlv.s:2149: Error: no such instruction: `pmovzxwd %xmm4,%xmm5'<br />/tmp/ccMFqqlv.s:2152: Error: no such instruction: `pmovzxbw %xmm6,%xmm3'<br />/tmp/ccMFqqlv.s:2154: Error: no such instruction: `pmovzxwd %xmm3,%xmm1'<br />/tmp/ccMFqqlv.s:2155: Error: no such instruction: `pmovzxwd %xmm4,%xmm2'<br />/tmp/ccMFqqlv.s:2160: Error: no such instruction: `pmovzxwd %xmm3,%xmm0'<br />/tmp/ccMFqqlv.s:2174: Error: no such instruction: `pmovzxbw %xmm9,%xmm7'<br />/tmp/ccMFqqlv.s:2176: Error: no such instruction: `pmovzxwd %xmm7,%xmm8'<br />/tmp/ccMFqqlv.s:2177: Error: no such instruction: `pmovzxbw %xmm9,%xmm0'<br />/tmp/ccMFqqlv.s:2179: Error: no such instruction: `pmovzxwd %xmm0,%xmm5'<br />/tmp/ccMFqqlv.s:2182: Error: no such instruction: `pmovzxwd %xmm7,%xmm6'<br />/tmp/ccMFqqlv.s:2183: Error: no such instruction: `pmovzxwd %xmm0,%xmm2'<br />/tmp/ccMFqqlv.s:2191: Error: no such instruction: `pmovzxbw %xmm3,%xmm14'<br />/tmp/ccMFqqlv.s:2193: Error: no such instruction: `pmovzxwd %xmm14,%xmm15'<br /></div></blockquote><br /><br />and it is during the make that it seems to fail, specifically during the linalg preq routine.  I've attached a piped copy of the output  of make during the make procedure, and below is  a copy of the error messages that pop up during make.<br /><blockquote class="uncited"><div> drotmg.f:138.15:<br /><br />      GO TO IGO(120,150,180,210)                                        <br />               1<br />Warning: Deleted feature: Assigned GOTO statement at (1)<br />drotmg.f:144.72:<br /><br />      ASSIGN 120 TO IGO                                                 <br />                                                                        1<br />Warning: Deleted feature: ASSIGN statement at (1)<br />drotmg.f:156.72:<br /><br />      ASSIGN 150 TO IGO                                                 <br />                                                                        1<br />Warning: Deleted feature: ASSIGN statement at (1)<br />drotmg.f:169.72:<br /><br />      ASSIGN 180 TO IGO                                                 <br />                                                                        1<br />Warning: Deleted feature: ASSIGN statement at (1)<br />drotmg.f:180.72:<br /><br />      ASSIGN 210 TO IGO                                                 <br />                                                                        1<br />Warning: Deleted feature: ASSIGN statement at (1)<br />srotmg.f:140.15:<br /><br />      GO TO IGO(120,150,180,210)                                        <br />               1<br />Warning: Deleted feature: Assigned GOTO statement at (1)<br />srotmg.f:146.72:<br /><br />      ASSIGN 120 TO IGO                                                 <br />                                                                        1<br />Warning: Deleted feature: ASSIGN statement at (1)<br />srotmg.f:158.72:<br /><br />      ASSIGN 150 TO IGO                                                 <br />                                                                        1<br />Warning: Deleted feature: ASSIGN statement at (1)<br />srotmg.f:171.72:<br /><br />      ASSIGN 180 TO IGO                                                 <br />                                                                        1<br />Warning: Deleted feature: ASSIGN statement at (1)<br />srotmg.f:182.72:<br /><br />      ASSIGN 210 TO IGO                                                 <br />                                                                        1<br />Warning: Deleted feature: ASSIGN statement at (1)<br />/tmp/ccWvD4SX.s: Assembler messages:<br />/tmp/ccWvD4SX.s:196: Error: no such instruction: `pinsrd $0x1,%r10d,%xmm1'<br />/tmp/ccWvD4SX.s:200: Error: no such instruction: `pinsrd $0x1,%ebx,%xmm0'<br />make[5]: *** [cgttrf.o] Error 1<br />make[4]: *** [build-stamp] Error 2<br />make[3]: *** [package-ready] Error 2<br />make[2]: *** [all-recursive] Error 1<br />make[1]: *** [all-recursive] Error 1<br />make: *** [all] Error 2<br /></div></blockquote><br />  Any help you could provide would sincerely be appreciate.<br />--James</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compilation of 6.4.2</h3>
+				<div class="date">Posted: <strong>Wed Oct 27, 2010 3:49 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Hello James,<br /><br />I don't like too much to mix mpi with FC=, CC=, ... vars .So would you be so kind to test the configuration and compilation again with the following recipe.<br /><br />Start with a clean /builddirectory. Edit a test.ac file with the following content (or convert it to a configure line by changing the _ with - )<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>prefix=/usr/local<br />enable_64bit_flags=&quot;yes&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_debug=&quot;no&quot;<br />enable_fft=&quot;no&quot;<br />enable_linalg=&quot;no&quot;<br />with_mpi_prefix=/usr<br />enable_optim=&quot;aggressive&quot;</code></pre></div><br /><br />Well enable_optim aggressive is maybe not too safe for the moment as you have compilations difficulties - maybe remove that line for the moment; it should be fine later. Change the prefix and mpi_prefix according to your system preferences (here mpif90 is expected in /usr/bin/mpif90). Invoke the configurator with <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>/somepath/abinit/configure --with-config-file=./test.ac</code></pre></div>Then if all went fine, go on with a &quot;make&quot; (or &quot;make multi&quot;), &quot;cd tests&quot; and &quot;make tests_acc&quot; (or &quot;make tests_acc4&quot;). <br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compilation of 6.4.2</h3>
+				<div class="date">Posted: <strong>Wed Oct 27, 2010 4:42 pm</strong></div>
+				<div class="author">by <strong>JEJohns</strong></div>
+				<div class="content">Alain,  <br />   I made the test.ac file as you suggested, made a new build directory, and changed the prefix and mpi prefix to the appropriate directories.  In the config file, it clearly has the flag enable_linalg=&quot;no&quot;, but the make  still seems to dive into the prereqs/linalg directory and fails in there with the same message.  Any other suggestions?<br />Any help is most appreciated,<br />James</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compilation of 6.4.2</h3>
+				<div class="date">Posted: <strong>Wed Oct 27, 2010 6:23 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">For the explanation of the error codes. First of all, don't worry about the warnings - nothing deadly here.<br />Now for the errors pinsrd and pmovzxbw. Both are SSE4.1 processor instructions. The -mtune/-march=&quot;native&quot; option ask the compiler to produce code specific to the processor in your system. It has recognized a &quot;penryn&quot; or Core i7 variant and pushed SSE4.1 enhanced capabilities. But apparently the backend assembler doesn't recognize them - looks like very outdated binutils.<br /><br />Try to add enable_optim=&quot;safe&quot; to the test.ac file; clean the builddirectory with a rm -rf * (don't nuke ypur test.ac file ... or your whole source tree) and redo the configure/make steps. If it fails, show me the last mpif90 invocation line - I would like to check that there is only -O2 and no -mtune/-march anymore. BTW I cannot look at the attached files - it says &quot;not downloaded yet. Are you working with an Abinit distribution file or a CVS copy?<br /><br />And yes, the enable_linalg=no was there by purpose to force the use of the internal lapack. Otherwise make may pick up some external libblas or liblapack that it finds suitable on your system.<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compilation of 6.4.2</h3>
+				<div class="date">Posted: <strong>Wed Oct 27, 2010 7:08 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">I agree with Alain: you have mismatch between GCC and your assembler.<br /><br />Try setting FCFLAGS=&quot;-g -O3 -funroll-loops -ffast-math&quot; in your test.ac and reconfigure Abinit. This should work.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compilation of 6.4.2</h3>
+				<div class="date">Posted: <strong>Wed Oct 27, 2010 7:42 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Hello Yann,<br /><br />He'll loose the per-directory optimization flags by forcing an FCFLAG ... libxc will fail its tests with more than -O2 on gcc-4.4. Anyway, James please tell us if it works.<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compilation of 6.4.2</h3>
+				<div class="date">Posted: <strong>Wed Oct 27, 2010 9:12 pm</strong></div>
+				<div class="author">by <strong>JEJohns</strong></div>
+				<div class="content">I should be able to do it this evening (Central standard time, GMT-5).  After the original test.ac file didn't work, I started a convergence test of ecutwfn using icutcoul=2  versus not using it, which looks like it should be finishing up in ~5 hours.<br />-James</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compilation of 6.4.2</h3>
+				<div class="date">Posted: <strong>Thu Oct 28, 2010 12:36 am</strong></div>
+				<div class="author">by <strong>JEJohns</strong></div>
+				<div class="content">the enable-optim=&quot;safe&quot; option seems to have worked.  Am I losing anything or any speed by using that flag, and should I still try to recompile with the FC flags suggested above?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compilation of 6.4.2</h3>
+				<div class="date">Posted: <strong>Thu Oct 28, 2010 11:40 am</strong></div>
+				<div class="author">by <strong>loefaas</strong></div>
+				<div class="content">Dear all,<br /><br />I have also some problems with the compilation of abinit 6.4.1 using MPI. I don't know if anything have changed from 6.2.2 which I have compiled with out problems. I am using the suggested test.ac from above, and both configure and make works with out trouble. I am using OpenMPi 1.4.2 + Intel 10.1<br /><br />But when running a PAW+GW calculation in MPI I get the following error in the start of the Sigma-calculation<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>-P-0000&nbsp; rkdss: will read 2004 states<br /><br />&nbsp;k&nbsp; &nbsp; &nbsp; &nbsp;eigenvalues &#91;eV&#93;<br />forrtl: severe (174): SIGSEGV, segmentation fault occurred<br />Image&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PC&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Routine&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Line&nbsp; &nbsp; &nbsp; &nbsp; Source&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />abinit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;000000000105A307&nbsp; Unknown&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Unknown&nbsp; Unknown<br />abinit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;00000000010592CA&nbsp; Unknown&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Unknown&nbsp; Unknown<br />abinit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0000000000AC9476&nbsp; Unknown&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Unknown&nbsp; Unknown<br />abinit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0000000000503269&nbsp; Unknown&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Unknown&nbsp; Unknown<br />abinit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;000000000045C8F7&nbsp; Unknown&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Unknown&nbsp; Unknown<br />abinit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;000000000044BE55&nbsp; Unknown&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Unknown&nbsp; Unknown<br />abinit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0000000000448162&nbsp; Unknown&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Unknown&nbsp; Unknown<br />libc.so.6&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 000000392BA1D994&nbsp; Unknown&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Unknown&nbsp; Unknown<br />abinit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0000000000448089&nbsp; Unknown&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Unknown&nbsp; Unknown<br /></code></pre></div><br /><br />The same input works with the serial version of abinit 6.4.1 and also with abinit 6.2.2 with MPI. I have attached the config.log also.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compilation of 6.4.2</h3>
+				<div class="date">Posted: <strong>Thu Oct 28, 2010 1:11 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">James,<br /><br />Well &quot;-O2&quot; optimization is less effective than &quot;-O3&quot; - that's for sure. Now the impact on your calculation is difficult to predict; it could be around 15% slowdown, maybe even less. You may try Yann's FCFLAGS suggestion but be sure to run the full testsuite afterwards  (tests_acc - or even tests_acc4 - as you have a multicore CPU to pinpoint errors).<br />If you want to improve speed, I would suggest to investigate why the assembler rejects the gcc/gfortran compiler output. Did you install a recent compilers toolchain on an old Linux installation? If it is your case, install a new binutils package - they are quite simple to compile; install them in f.e. /usr/local/binutils, add the corresponding directory to $PATH and recompile Abinit in that environment with an aggressive enable_optim.<br />Another efficient speedup is to use advanced BLAS/LAPACK instead of the &quot;generic&quot; ones included in Abinit. Good candidates are MKL and GotoBLAS(+LAPACK). Same story by adding accelerated FFTW3 - actually MKL included FFT is quite performing.<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compilation of 6.4.2</h3>
+				<div class="date">Posted: <strong>Thu Oct 28, 2010 5:25 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">With this - as well as some similar problems recently encountered on the test farm - I've realized that there is a design flaw in the build system. I'll try to fix it for the upcoming 6.4.2.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compilation of 6.4.2</h3>
+				<div class="date">Posted: <strong>Thu Oct 28, 2010 9:04 pm</strong></div>
+				<div class="author">by <strong>JEJohns</strong></div>
+				<div class="content">Thanks Yann &amp; Alain for all the help.  I'll try buliding new lapack /blas libraries, and see what the slowdown / speed up is.  Now back to the grind of trying to get these 2d GW/icutcoul calculations to work.  Thanks again for all the help <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compilation of 6.4.2</h3>
+				<div class="date">Posted: <strong>Fri Oct 29, 2010 4:06 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">You're welcome. <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":-)" title="Smile" /><br /><br />The design flaw has now been fixed.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compilation of 6.4.2</h3>
+				<div class="date">Posted: <strong>Sat Nov 06, 2010 5:11 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">IMHO fp-speculation=safe is not so safe even inherently dangerous; I would recommend =off i.e. stop and issue an error message when a floating point exception occurs.<br />I am puzzled about how this option popped in the makefiles. I assume you use a development branch. Do you see that option in your &lt;root_of_abinit_source&gt;/config/optim/fc_intel_default-optim.conf file?<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compilation of 6.4.2</h3>
+				<div class="date">Posted: <strong>Sat Nov 06, 2010 6:45 pm</strong></div>
+				<div class="author">by <strong>JEJohns</strong></div>
+				<div class="content">Alain,<br />That option just popped up when I used the flag enable_optim=&quot;safe&quot;.  When I turned off that flag, it compiled and built just fine on the Quest system.  That's why I deleted the original post.  Apparently though I should have deleted it faster, as you were lightening fast to respond!  Sorry for the trouble<br />--James</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=693&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:11 GMT -->
+</html>

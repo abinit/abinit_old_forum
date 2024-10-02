@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=2204&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:21:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; BUG in NLO calculation</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>BUG in NLO calculation</h2>
+		<p><a href="viewtopicaadd-3.html?f=10&amp;t=2204">https://forum.abinit.org/viewtopic.php?f=10&amp;t=2204</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>BUG in NLO calculation</h3>
+				<div class="date">Posted: <strong>Mon Jun 24, 2013 10:34 pm</strong></div>
+				<div class="author">by <strong>antonio</strong></div>
+				<div class="content">Dear all,<br /><br />I'm trying to do a NLO response calculation with abinit 7.2.1 using the following settings:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp; &nbsp;ixc&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3<br />#Parameters of the SCF cycles<br />#****************************<br />&nbsp; &nbsp;iscf&nbsp; &nbsp; &nbsp; &nbsp; 5<br />&nbsp; &nbsp;nstep&nbsp; &nbsp; &nbsp; &nbsp;150<br />&nbsp; &nbsp;istwfk&nbsp; &nbsp; &nbsp; *1<br />#Plane wave basis and k-point grid<br />#*********************************<br />&nbsp; &nbsp;ecut&nbsp; &nbsp; &nbsp; &nbsp; 800 eV<br />&nbsp; &nbsp;ecutsm&nbsp; &nbsp; &nbsp; 0.5<br />&nbsp; &nbsp; ngkpt&nbsp; &nbsp; &nbsp; &nbsp;5 5 5<br /><br />ndtset 5&nbsp; &nbsp; &nbsp;jdtset 1 2 3 4 5 <br /><br />#DATASET1 : scf calculation: GS WF in the BZ<br />#********************************************<br />&nbsp; &nbsp;prtden1&nbsp; &nbsp; 1<br />&nbsp; &nbsp;kptopt1&nbsp; &nbsp; 2<br />&nbsp; &nbsp;toldfe1&nbsp; &nbsp; 1.0d-12<br /><br />#DATASET2 : non scf calculation: GS WF in the whole BZ<br />#*****************************************************<br />&nbsp; &nbsp;getden2&nbsp; &nbsp; 1<br />&nbsp; &nbsp;kptopt2&nbsp; &nbsp; 2<br />&nbsp; &nbsp; &nbsp;iscf2&nbsp; &nbsp;-2<br />&nbsp; &nbsp;getwfk2&nbsp; &nbsp; 1<br />&nbsp; &nbsp;tolwfr2&nbsp; &nbsp; 1.0d-22<br />&nbsp; &nbsp; nband2&nbsp; &nbsp; 120<br /><br /><br />#DATASET3 : ddk on the MP grid of k-points<br />#*****************************************<br />&nbsp; &nbsp;getwfk3&nbsp; &nbsp; 2<br />&nbsp; &nbsp; rfdir3&nbsp; &nbsp; 1 1 1<br />&nbsp; &nbsp;rfelfd3&nbsp; &nbsp; 2<br />&nbsp; &nbsp;tolwfr3&nbsp; &nbsp; 1.0d-22<br />&nbsp; &nbsp; nband3&nbsp; &nbsp; 120<br />&nbsp; &nbsp;kptopt3&nbsp; &nbsp; 2<br /><br />#DATASET4 : ddE on the MP grid of k-points<br />#*****************************************<br />&nbsp; &nbsp;prtden4&nbsp; &nbsp; 1<br />&nbsp; &nbsp;getwfk4&nbsp; &nbsp; 2<br />&nbsp; &nbsp;getddk4&nbsp; &nbsp; 3<br />&nbsp; &nbsp; rfdir4&nbsp; &nbsp; 1 1 1<br />&nbsp; &nbsp;rfphon4&nbsp; &nbsp; 1<br />&nbsp; rfatpol4&nbsp; &nbsp; 1 18<br />&nbsp; &nbsp;tolvrs4&nbsp; &nbsp; 1.0d-12<br />&nbsp; &nbsp;rfelfd4&nbsp; &nbsp; 3<br />&nbsp; &nbsp; nband4&nbsp; &nbsp; 120<br />&nbsp; &nbsp;kptopt4&nbsp; &nbsp; 2<br />&nbsp; prepanl4&nbsp; &nbsp; 1<br /><br />#DATASET5 : 3DTE calculation<br />#***************************<br />&nbsp; &nbsp;getden5&nbsp; &nbsp; 1<br />&nbsp; get1den5&nbsp; &nbsp; 4<br />&nbsp; &nbsp;getwfk5&nbsp; &nbsp; 2<br />&nbsp; &nbsp;get1wf5&nbsp; &nbsp; 4<br />&nbsp; &nbsp; nband5&nbsp; &nbsp; 120<br />&nbsp; &nbsp;kptopt5&nbsp; &nbsp; 2<br />optdriver5&nbsp; &nbsp; 5<br />&nbsp; rf1elfd5&nbsp; &nbsp; 1<br />&nbsp; rf1phon5&nbsp; &nbsp; 1<br />&nbsp;rf1atpol5&nbsp; &nbsp; 1 18<br />&nbsp; &nbsp;rf1dir5&nbsp; &nbsp; 1 1 1<br />&nbsp; rf2elfd5&nbsp; &nbsp; 1<br />&nbsp; &nbsp;rf2dir5&nbsp; &nbsp; 1 1 1<br />&nbsp; rf3elfd5&nbsp; &nbsp; 1<br />&nbsp; &nbsp;rf3dir5&nbsp; &nbsp; 1 1 1<br /><br />nbdbuf 0<br /></code></pre></div><br /><br />At the end of the first dataset, when SCF has converged I get the following WARNING:<br />   <br /> Subroutine Unknown:0:WARNING <br />   WF file is written using standard Fortran I/O<br />   and Kpt-band-FFT parallelization is active !<br />   This is only allowed for testing purposes.<br />   The produced WF file will be incomplete and not useable.<br /><br />Then, at the beginning of the second dataset I get the following error:<br /><br /> Subroutine Unknown:0:BUG<br />  Reading option of rwwf. One should have npw=npw1<br /> However, npw=14047, and npw1=4667.<br />  Action : contact ABINIT group.<br /> <br />I think that maybe the two things are related.<br /><br />I really appreciate your help in advance.<br /><br />Best<br /><br />Antonio</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=2204&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:21:34 GMT -->
+</html>

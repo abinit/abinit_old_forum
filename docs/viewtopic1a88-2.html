@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1102 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:38:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>ixc=1 problem in nonlinear response calculation - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopic2139.html?t=1102">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="4"><a href="viewforum31e6.html?f=4" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Running Abinit</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="10"><a href="viewforum15ca.html?f=10" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Response calculations</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopic1a88-2.html?f=10&amp;t=1102">ixc=1 problem in nonlinear response calculation</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Phonons, DFPT, electron-phonon, electric-field response, mechanical response…<br /></div>
+<p>
+	<strong>Moderators:</strong> <a href="memberlist32d1.html?mode=viewprofile&amp;u=72" class="username">mverstra</a>, <a href="memberlistce31.html?mode=viewprofile&amp;u=2727" class="username">joaocarloscabreu</a>
+</p>
+
+
+<div class="action-bar bar-top">
+	
+			<a href="posting48c7.html?mode=reply&amp;f=10&amp;t=1102" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic3bb1.html?f=10&amp;t=1102&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="1102" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			3 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p3564" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile3564">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist6d5e.html?mode=viewprofile&amp;u=429" class="username">mazuju</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchbf27.html?author_id=429&amp;sr=posts">15</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Jul 14, 2010 2:05 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content3564">
+
+						<h3 class="first"><a href="#p3564">ixc=1 problem in nonlinear response calculation</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting1e52.html?mode=quote&amp;f=10&amp;p=3564" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicc8e2-3.html?p=3564#p3564" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist6d5e.html?mode=viewprofile&amp;u=429" class="username">mazuju</a></strong> &raquo; </span>Thu May 19, 2011 10:32 am
+			</p>
+			
+			
+			
+			<div class="content">Dear all,<br /><br />I have a problem in the nonlinear response calculation.<br />The input file is show below.<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># Linear and nonlinear response calculation<br /># Perturbations: electric fields &amp; atomic displacements<br /># (M. Veithen, 21.4.2005)<br /><br />#Definition of lattice parameters<br />#********************************<br />acell&nbsp; &nbsp; &nbsp;2.1514196567E+01&nbsp; 1.0930762115E+01&nbsp; 2.1913430467E+01 Bohr<br />angdeg&nbsp; &nbsp; 90.00000000&nbsp; 89.15405976&nbsp; 90.00000000<br /><br />#Definition of atomic positions and types<br />#*************************************<br />&nbsp; &nbsp;natom&nbsp; &nbsp; &nbsp; &nbsp;32<br />&nbsp; &nbsp;ntypat&nbsp; &nbsp; &nbsp; 3<br />&nbsp; &nbsp;znucl&nbsp; &nbsp; &nbsp; &nbsp;11 33 34<br />&nbsp; &nbsp;typat&nbsp; &nbsp; &nbsp; &nbsp;8*1 8*2 16*3<br />&nbsp; &nbsp;xred&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 9.7952872705E-01&nbsp; 4.7802694231E-01&nbsp; 7.6400207817E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2.3853805048E-01&nbsp; 9.8178542576E-01&nbsp; 2.4386528385E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4.7998601442E-01&nbsp; 5.0972762118E-01&nbsp; 7.3663927906E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;7.3818964742E-01&nbsp; 5.2768042659E-01&nbsp; 5.0131769572E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;9.7952872705E-01 -4.7802694231E-01&nbsp; 1.2640020782E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2.3853805048E-01 -9.8178542576E-01&nbsp; 7.4386528385E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4.7998601442E-01 -5.0972762118E-01&nbsp; 1.2366392791E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;7.3818964742E-01 -5.2768042659E-01&nbsp; 1.0013176957E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;7.4380025684E-01&nbsp; 9.3299475525E-01&nbsp; 7.7576256468E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2.9307365002E-04&nbsp; 9.1639727973E-01 -4.2041522417E-03<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2.4094987151E-01&nbsp; 5.4607695553E-01&nbsp; 9.6440799078E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4.9815309108E-01&nbsp; 9.8226685013E-01&nbsp; 9.5348113633E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;7.4380025684E-01 -9.3299475525E-01&nbsp; 1.2757625647E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2.9307365002E-04 -9.1639727973E-01&nbsp; 4.9579584776E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2.4094987151E-01 -5.4607695553E-01&nbsp; 1.4644079908E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4.9815309108E-01 -9.8226685013E-01&nbsp; 1.4534811363E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;9.6396337901E-01&nbsp; 9.7936941322E-01&nbsp; 7.9685495820E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2.2929107707E-01&nbsp; 5.1868627655E-01&nbsp; 7.6630383948E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4.6092710204E-01&nbsp; 5.8373017861E-01&nbsp; 9.8874037255E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;5.0203857945E-01&nbsp; 9.8897530069E-01&nbsp; 2.5480739275E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;7.1231004160E-01&nbsp; 9.7372615953E-01&nbsp; 9.8154633776E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2.1614239417E-01&nbsp; 9.5830849506E-01&nbsp; 9.9433331845E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;9.9806264760E-01&nbsp; 4.8087697596E-01&nbsp; 5.1414702901E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;7.3031610201E-01&nbsp; 5.3770831975E-01&nbsp; 7.5162494626E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;9.6396337901E-01 -9.7936941322E-01&nbsp; 1.2968549582E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2.2929107707E-01 -5.1868627655E-01&nbsp; 1.2663038395E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4.6092710204E-01 -5.8373017861E-01&nbsp; 1.4887403726E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;5.0203857945E-01 -9.8897530069E-01&nbsp; 7.5480739275E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;7.1231004160E-01 -9.7372615953E-01&nbsp; 1.4815463378E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2.1614239417E-01 -9.5830849506E-01&nbsp; 1.4943333184E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;9.9806264760E-01 -4.8087697596E-01&nbsp; 1.0141470290E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;7.3031610201E-01 -5.3770831975E-01&nbsp; 1.2516249463E+00<br />&nbsp; &nbsp;ixc&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3&nbsp; # ???<br /><br />#Parameters of the SCF cycles<br />#****************************<br />&nbsp; &nbsp;iscf&nbsp; &nbsp; &nbsp; &nbsp; 7<br />&nbsp; &nbsp;nstep&nbsp; &nbsp; &nbsp; &nbsp;100<br /><br /><br />#Plane wave basis and k-point grid<br />#*********************************<br />&nbsp; &nbsp;ecut&nbsp; &nbsp; &nbsp; &nbsp; 45<br />&nbsp; &nbsp;ecutsm&nbsp; &nbsp; &nbsp; 0.5<br />&nbsp; &nbsp;dilatmx&nbsp; &nbsp; &nbsp;1.05<br />&nbsp; &nbsp;ngkpt&nbsp; &nbsp; &nbsp; &nbsp;4 6 4<br />&nbsp; &nbsp;nshiftk&nbsp; &nbsp; &nbsp;1<br />&nbsp; &nbsp;shiftk&nbsp; &nbsp; &nbsp; 0.5 0.5 0.5<br /><br /><br />ndtset 2&nbsp; &nbsp; &nbsp;<br /><br />#DATASET1 : scf calculation: GS WF in the BZ<br />#********************************************<br />&nbsp; &nbsp;prtden1&nbsp; &nbsp; 1<br />&nbsp; &nbsp;kptopt1&nbsp; &nbsp; 1<br />&nbsp; &nbsp;toldfe1&nbsp; &nbsp; 1.0d-12<br /><br />#DATASET2 : non scf calculation: GS WF in the whole BZ<br />#*****************************************************<br />&nbsp; &nbsp;getden2&nbsp; &nbsp; 1<br />&nbsp; &nbsp;kptopt2&nbsp; &nbsp; 2<br />&nbsp; &nbsp; &nbsp;iscf2&nbsp; &nbsp;-2<br />&nbsp; &nbsp;getwfk2&nbsp; &nbsp; 1<br />&nbsp; &nbsp;tolwfr2&nbsp; &nbsp; 1.0d-22<br />&nbsp; &nbsp; nband2&nbsp; &nbsp; 72<br /><br /><br />#DATASET3 : ddk on the MP grid of k-points<br />#*****************************************<br />&nbsp; &nbsp;getwfk3&nbsp; &nbsp; 2<br />&nbsp; &nbsp; rfdir3&nbsp; &nbsp; 1 1 1<br />&nbsp; &nbsp;rfelfd3&nbsp; &nbsp; 2<br />&nbsp; &nbsp;tolwfr3&nbsp; &nbsp; 1.0d-22<br />&nbsp; &nbsp; nband3&nbsp; &nbsp; 72<br />&nbsp; &nbsp;kptopt3&nbsp; &nbsp; 2<br /><br />#DATASET4 : ddE on the MP grid of k-points<br />#*****************************************<br />&nbsp; &nbsp;prtden4&nbsp; &nbsp; 1<br />&nbsp; &nbsp;getwfk4&nbsp; &nbsp; 2<br />&nbsp; &nbsp;getddk4&nbsp; &nbsp; 3<br />&nbsp; &nbsp; rfdir4&nbsp; &nbsp; 1 1 1<br />&nbsp; &nbsp;rfphon4&nbsp; &nbsp; 1<br />&nbsp; rfatpol4&nbsp; &nbsp; 1 32<br />&nbsp; &nbsp;tolvrs4&nbsp; &nbsp; 1.0d-12<br />&nbsp; &nbsp;rfelfd4&nbsp; &nbsp; 3<br />&nbsp; &nbsp; nband4&nbsp; &nbsp; 72<br />&nbsp; &nbsp;kptopt4&nbsp; &nbsp; 2<br />&nbsp; prepanl4&nbsp; &nbsp; 1<br /><br />#DATASET5 : 3DTE calculation<br />#***************************<br />&nbsp; &nbsp;getden5&nbsp; &nbsp; 1<br />&nbsp; get1den5&nbsp; &nbsp; 4<br />&nbsp; &nbsp;getwfk5&nbsp; &nbsp; 2<br />&nbsp; &nbsp;get1wf5&nbsp; &nbsp; 4<br />&nbsp; &nbsp; nband5&nbsp; &nbsp; 72<br />&nbsp; &nbsp;kptopt5&nbsp; &nbsp; 2<br />optdriver5&nbsp; &nbsp; 5<br />&nbsp; rf1elfd5&nbsp; &nbsp; 1<br />&nbsp; rf1phon5&nbsp; &nbsp; 1<br />&nbsp;rf1atpol5&nbsp; &nbsp; 1 32<br />&nbsp; &nbsp;rf1dir5&nbsp; &nbsp; 1 1 1<br />&nbsp; rf2elfd5&nbsp; &nbsp; 1<br />&nbsp; &nbsp;rf2dir5&nbsp; &nbsp; 1 1 1<br />&nbsp; rf3elfd5&nbsp; &nbsp; 1<br />&nbsp; &nbsp;rf3dir5&nbsp; &nbsp; 1 1 1<br /><br />nbdbuf 0</code></pre></div><br />When I used the LDA pseudopotential files(LDA_TM) and the ixc = 1, the calculation will stop and the log file shows：<br />____________________________________________________________________<br />&quot;chkint_prt: ERROR -<br />Context : the value of the variable ixc is 1.<br />The value of the input variable optdriver is 5, while it must be<br />different from one of the following: 5<br />Action : you should change the input variables optdriver or ixc.<br />&quot;_____________________________________________________________________<br /><br />If I changed  ixc=3 , the calculation will finish sucessfully.<br />But the log file will show a WARNING:<br />--------------------------------------------------------------------------------------------------<br /> pspatm: WARNING -<br />  Pseudopotential file pspxc=       1,<br />  not equal to input ixc=       3.<br />  These parameters must agree to get the same xc<br />  in ABINIT code as in psp construction.<br />  Action : check psp design or input file.<br />  Assume experienced user. Execution will continue.<br />--------------------------------------------------------------------------------------------------<br />Anyone can give me some suggestions? Thank you!</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p3574" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile3574">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistab3b.html?mode=viewprofile&amp;u=127" class="username">ilukacevic</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search4ff0.html?author_id=127&amp;sr=posts">271</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Jan 16, 2010 12:05 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Dept. of Physics, University J. J. Strossmayer, Osijek, Croatia</dd>
+							
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact ilukacevic">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact ilukacevic</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://www.fizika.unios.hr/~ilukacevic/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content3574">
+
+						<h3 ><a href="#p3574">Re: ixc=1 problem in nonlinear response calculation</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting7714.html?mode=quote&amp;f=10&amp;p=3574" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic2f60-2.html?p=3574#p3574" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistab3b.html?mode=viewprofile&amp;u=127" class="username">ilukacevic</a></strong> &raquo; </span>Fri May 20, 2011 7:34 am
+			</p>
+			
+			
+			
+			<div class="content">Dear mazuju,<br /><br />The first error tells you that non-lin. response is not yet implemented for pseudos with ixc=1.<br /><br />The second warning tells you that you have set up ixc=3 in your input file, while kept using the pseudo with ixc=1 (check your files file and your pseudos' headers to see which ixc it correlates to). I presume that you have to change your pseudos to the ones which correlate to ixc=3 (Teters' extended norm conserving pseudos - you have some on the abinit web site).<br /><br />Cheers!<br /><br />Igor L.</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p3607" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile3607">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist32d1.html?mode=viewprofile&amp;u=72" class="username">mverstra</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search1bef.html?author_id=72&amp;sr=posts">655</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Aug 19, 2009 12:01 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content3607">
+
+						<h3 ><a href="#p3607">Re: ixc=1 problem in nonlinear response calculation</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting1378.html?mode=quote&amp;f=10&amp;p=3607" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicea44.html?p=3607#p3607" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist32d1.html?mode=viewprofile&amp;u=72" class="username">mverstra</a></strong> &raquo; </span>Wed May 25, 2011 4:58 pm
+			</p>
+			
+			
+			
+			<div class="content">this should be ok: it's just another implementation of LDA. Check the source code of chkprt for the values of ixc which are acceptable. To be really clean, follow Igor's recommendation.<br /><br />Matthieu</div>
+			
+			
+			
+									
+									<div id="sig3607" class="signature">Matthieu Verstraete<br />University of Liege, Belgium</div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="posting48c7.html?mode=reply&amp;f=10&amp;t=1102" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic3bb1.html?f=10&amp;t=1102&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=10&amp;t=1102">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			3 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforum15ca.html?f=10" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Response calculations”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1102 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:38:28 GMT -->
+</html>

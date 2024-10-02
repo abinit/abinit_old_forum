@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2666&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:52:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Bug in internal netcdf for mac</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Bug in internal netcdf for mac</h2>
+		<p><a href="viewtopiccc06.html?f=3&amp;t=2666">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2666</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Bug in internal netcdf for mac&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Thu May 15, 2014 8:16 am</strong></div>
+				<div class="author">by <strong>ldamewood</strong></div>
+				<div class="content">There is a <a href="http://www.unidata.ucar.edu/software/netcdf/docs/known_problems.html#clang-ncgen3" class="postlink">small bug</a> in netcdf that makes it not compile on Mac OS X 10.9 using the Xcode compiler. It requires adding a single line of code to netcdf. I haven't seen any other post about this bug so I don't know if it's been addressed before. Since the abinit build system tries to build netcdf, I attached a patch for abinit v7.6.4 (it's a patch within a patch!) that fixed it for me. The abinit build system will apply the netcdf patch automatically.<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>mv 0001-Fic-NetCDF-bug.log 0001-Fic-NetCDF-bug.patch<br />cd abinit-7.6.4<br />patch -p1 &lt; ../0001-Fix-NetCDF-bug.patch<br />make clean &amp;&amp; ./configure --with-trio-flavor=&quot;netcdf+etsf_io&quot; &amp;&amp; make<br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Bug in internal netcdf for mac</h3>
+				<div class="date">Posted: <strong>Thu May 22, 2014 10:51 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />I use the ports<br /><br />netcdf +gcc48 +gfortran<br />netcdf-fortran<br />mpich-gcc48<br /><br />from MacPorts under MacOS X 10.8<br /><br />and use <br /><br />with_netcdf_incs=&quot;-I/opt/local/include&quot;<br />with_netcdf_libs=&quot;-L/opt/local/lib -lnetcdf -lnetcdff&quot;<br /><br />in my ac file and <br /><br />everything works… without patch...<br /><br />my 5¢<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Bug in internal netcdf for mac</h3>
+				<div class="date">Posted: <strong>Sat Jun 14, 2014 3:11 am</strong></div>
+				<div class="author">by <strong>ldamewood</strong></div>
+				<div class="content">I hope the patch will be useful for people who do not wish to use macports and useful for the build system maintainers in the next versions of abinit.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2666&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:52:35 GMT -->
+</html>

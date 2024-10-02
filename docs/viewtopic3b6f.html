@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3252&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:17:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Error occurs when enable fallbacks as well as gpu.</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Error occurs when enable fallbacks as well as gpu.</h2>
+		<p><a href="viewtopic70a2.html?f=3&amp;t=3252">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3252</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Error occurs when enable fallbacks as well as gpu.</h3>
+				<div class="date">Posted: <strong>Tue Apr 05, 2016 4:03 pm</strong></div>
+				<div class="author">by <strong>kinsang</strong></div>
+				<div class="content">Hi, everyone.<br />When I enable fallbacks and used cpu only, abinit-7-10-5 works well.<br />But when I enable GPU, some errors occurred as follows.<br /><br /><strong class="text-strong">configure.ac:</strong><br /># configure file<br />FC=mpiifort<br />CC=mpiicc<br />CXX=mpiicpc<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />enable_debug=&quot;no&quot;<br />enable_optim=&quot;yes&quot;<br />enable_hints=&quot;yes&quot;<br /><br />enable_fallbacks=&quot;yes&quot;<br />enable_connectors=&quot;yes&quot;<br /><br />with_dft_flavor=&quot;atompaw+bigdft+libxc+wannier90&quot;<br />with_trio_flavor=&quot;netcdf+etsf_io+fox&quot;<br /><br />enable_gpu=&quot;yes&quot;<br />with_gpu_flavor=&quot;cuda-double&quot;<br />with_gpu_prefix=&quot;/usr/local/cuda-7.5&quot;<br /><br /><strong class="text-strong">Error Message:</strong><br />cd fallbacks &amp;&amp; make <br />make[1]: Entering directory `/public/home/xuwt/abinit/abinit-7.10.5-mpi+cuda+magma+fallbacks/fallbacks'<br />make fox<br />make[2]: Entering directory `/public/home/xuwt/abinit/abinit-7.10.5-mpi+cuda+magma+fallbacks/fallbacks'<br />make[2]: Nothing to be done for `fox'.<br />make[2]: Leaving directory `/public/home/xuwt/abinit/abinit-7.10.5-mpi+cuda+magma+fallbacks/fallbacks'<br />Checking build of fox fallback<br />test -e stamps/fox-install-stamp<br />make libxc<br />make[2]: Entering directory `/public/home/xuwt/abinit/abinit-7.10.5-mpi+cuda+magma+fallbacks/fallbacks'<br />make[2]: Nothing to be done for `libxc'.<br />make[2]: Leaving directory `/public/home/xuwt/abinit/abinit-7.10.5-mpi+cuda+magma+fallbacks/fallbacks'<br />Checking build of libxc fallback<br />test -e stamps/libxc-install-stamp<br />make linalg<br />make[2]: Entering directory `/public/home/xuwt/abinit/abinit-7.10.5-mpi+cuda+magma+fallbacks/fallbacks'<br />make[2]: Nothing to be done for `linalg'.<br />make[2]: Leaving directory `/public/home/xuwt/abinit/abinit-7.10.5-mpi+cuda+magma+fallbacks/fallbacks'<br />Checking build of linalg fallback<br />test -e stamps/linalg-install-stamp<br />make netcdf<br />make[2]: Entering directory `/public/home/xuwt/abinit/abinit-7.10.5-mpi+cuda+magma+fallbacks/fallbacks'<br />make[2]: Nothing to be done for `netcdf'.<br />make[2]: Leaving directory `/public/home/xuwt/abinit/abinit-7.10.5-mpi+cuda+magma+fallbacks/fallbacks'<br />Checking build of netcdf fallback<br />test -e stamps/netcdf-install-stamp<br />make atompaw<br />make[2]: Entering directory `/public/home/xuwt/abinit/abinit-7.10.5-mpi+cuda+magma+fallbacks/fallbacks'<br />cd sources/atompaw-4.0.0.10 &amp;&amp; make -j 1 <br />make[3]: Entering directory `/public/home/xuwt/abinit/abinit-7.10.5-mpi+cuda+magma+fallbacks/fallbacks/sources/atompaw-4.0.0.10'<br />make  all-recursive<br />make[4]: Entering directory `/public/home/xuwt/abinit/abinit-7.10.5-mpi+cuda+magma+fallbacks/fallbacks/sources/atompaw-4.0.0.10'<br />Making all in src<br />make[5]: Entering directory `/public/home/xuwt/abinit/abinit-7.10.5-mpi+cuda+magma+fallbacks/fallbacks/sources/atompaw-4.0.0.10/src'<br />/bin/sh ../libtool --tag=FC   --mode=link mpiifort  -free -xHost -mkl  -g -O2  -version-info 0:0:0  -o libatompaw.la -rpath /public/home/xuwt/abinit/abinit-7.10.5-mpi+cuda+magma+fallbacks/fallbacks/exports/lib abinitinterface.lo aeatom.lo anderson_driver.lo atomdata.lo atompaw_report.lo blockdavidson_mod.lo excor.lo exx_mod.lo exx_pseudo.lo exxdata.lo fock.lo general_mod.lo globalmath.lo graphatom_report.lo gridmod.lo hf_mod.lo hf_pseudo.lo interpolation_mod.lo ldagga_mod.lo libxc_mod.lo numerov_mod.lo paw_sub.lo pseudo_sub.lo pseudo.lo pseudodata.lo pwscfinterface.lo radialsr.lo report_mod.lo search_sort.lo tools_mod.lo xmlinterface.lo atompaw_lib.lo pkginfo.lo  -L/public/home/xuwt/abinit/abinit-7.10.5-mpi+cuda+magma+fallbacks/fallbacks/exports/lib -lxc -L/public/home/xuwt/abinit/abinit-7.10.5-mpi+cuda+magma+fallbacks/fallbacks/exports/lib -lxc <br />libtool: link: ar cru .libs/libatompaw.a  abinitinterface.o aeatom.o anderson_driver.o atomdata.o atompaw_report.o blockdavidson_mod.o excor.o exx_mod.o exx_pseudo.o exxdata.o fock.o general_mod.o globalmath.o graphatom_report.o gridmod.o hf_mod.o hf_pseudo.o interpolation_mod.o ldagga_mod.o libxc_mod.o numerov_mod.o paw_sub.o pseudo_sub.o pseudo.o pseudodata.o pwscfinterface.o radialsr.o report_mod.o search_sort.o tools_mod.o xmlinterface.o atompaw_lib.o pkginfo.o<br />ar: hf_pseudo.o: No such file or directory<br />make[5]: *** [libatompaw.la] Error 1<br />make[5]: Leaving directory `/public/home/xuwt/abinit/abinit-7.10.5-mpi+cuda+magma+fallbacks/fallbacks/sources/atompaw-4.0.0.10/src'<br />make[4]: *** [all-recursive] Error 1<br />make[4]: Leaving directory `/public/home/xuwt/abinit/abinit-7.10.5-mpi+cuda+magma+fallbacks/fallbacks/sources/atompaw-4.0.0.10'<br />make[3]: *** [all] Error 2<br />make[3]: Leaving directory `/public/home/xuwt/abinit/abinit-7.10.5-mpi+cuda+magma+fallbacks/fallbacks/sources/atompaw-4.0.0.10'<br />make[2]: *** [stamps/atompaw-build-stamp] Error 2<br />make[2]: Leaving directory `/public/home/xuwt/abinit/abinit-7.10.5-mpi+cuda+magma+fallbacks/fallbacks'<br />make[1]: [all-local] Error 2 (ignored)<br />Checking build of atompaw fallback<br />test -e stamps/atompaw-install-stamp<br />make[1]: *** [all-local] Error 1<br />make[1]: Leaving directory `/public/home/xuwt/abinit/abinit-7.10.5-mpi+cuda+magma+fallbacks/fallbacks'<br />make: *** [multi] Error 2<br /><br /><strong class="text-strong">Enclosing the conf.log</strong></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Error occurs when enable fallbacks as well as gpu.&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Wed Apr 13, 2016 1:51 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Simply use the following:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>with_dft_flavor=&quot;bigdft+libxc+wannier90&quot;</code></pre></div><br /><br />AtomPAW is not necessary to build nor run Abinit, and you can easily build it separately.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3252&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:17:17 GMT -->
+</html>

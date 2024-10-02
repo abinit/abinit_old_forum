@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1911&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:42:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Error while running ABINIT parallelly</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Error while running ABINIT parallelly</h2>
+		<p><a href="viewtopic2014.html?f=3&amp;t=1911">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1911</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Error while running ABINIT parallelly</h3>
+				<div class="date">Posted: <strong>Sun Dec 09, 2012 3:17 am</strong></div>
+				<div class="author">by <strong>gvtheen</strong></div>
+				<div class="content">Respected Sir and abinit users<br />    Greetings <br />    I have successfully compiled abinit 6-10.1 on Linux TC5000 2.6.18-164.el5 in parallel.<br />    However, when I run the code( /public/program/mpi/openmpi/1.6.3/bin/mpirun --mca btl ^openib -np 4  /public/program/abinit-6.10.1/bin/abinit &lt; t11.file &gt;log ), there are some following error:<br />&quot;<br />MPI_ABORT was invoked on rank 0 in communicator MPI_COMM_WORLD <br />with errorcode 14.<br /><br />NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.<br />You may or may not see output from other processes, depending on<br />exactly when Open MPI kills them.<br />--------------------------------------------------------------------------<br />--------------------------------------------------------------------------<br />mpirun has exited due to process rank 0 with PID 21771 on<br />node TC5000 exiting improperly. There are two reasons this could occur:<br /><br />1. this process did not call &quot;init&quot; before exiting, but others in<br />the job did. This can cause a job to hang indefinitely while it waits<br />for all processes to call &quot;init&quot;. By rule, if one process calls &quot;init&quot;,<br />then ALL processes must call &quot;init&quot; prior to termination.<br /><br />2. this process called &quot;init&quot;, but exited without calling &quot;finalize&quot;.<br />By rule, all processes that call &quot;init&quot; MUST call &quot;finalize&quot; prior to<br />exiting or it will be considered an &quot;abnormal termination&quot;<br /><br />This may have caused other processes in the application to be<br />terminated by signals sent by mpirun (as reported here).<br /><br />&quot;<br />The t11.in is a copy of the test file in ~/abinit-6.10.1/tests/tutorial/Input/t11.in.<br /><br />1. Compile openmpi-1.6.3:<br />#./configure CC=/root/gcc-4.5.1/gcc-4.5.0/bin/gcc CXX=/root/gcc-4.5.1/gcc-4.5.0/bin/g++ F77=/root/gcc-4.5.1/gcc-4.5.0/bin/gfortran FC=/root/gcc-4.5.1/gcc-4.5.0/bin/gfortran --enable-static --disable-shared --prefix=/public/program/mpi/openmpi/1.6.3 --enable-mpirun-prefix-by-default --enable-mca-no-build=maffinity-libnuma,openib --with-tm=/opt/gridview/pbs/dispatcher<br /># make<br /># make install<br /><br />Via the test, it is ok! As follow:<br /># /public/program/mpi/openmpi/1.6.3/bin/mpirun --mca btl ^openib -np 4 hello_c<br />Hello, world, I am 0 of 4<br />Hello, world, I am 1 of 4<br />Hello, world, I am 2 of 4<br />Hello, world, I am 3 of 4<br /><br />2. Compile abinit-6.10.1<br />#./configure --prefix=/public/program/abinit-6.10.1 --with-mpi-prefix=/public/program/mpi/openmpi/1.6.3 --enable-mpi=yes --enable-vdwxc=yes<br /># make<br /># make mj4<br /><br />############################<br />Bestwishes!<br />gvtheen</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Error while running ABINIT parallelly&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Thu Feb 07, 2013 8:29 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Hi gvtheen,<br /><br />there could be many reasons why a MPI job crashes and very little info here to diagnose it. Thanks for choosing the tutorial t11.in example - as far as I remember an hydrogen molecule in a large box with only ONE k-point as a relevant test for parallelization.<br /><br />Did you read Open MPI FAQ about static linking? I captured you don't want InfiniBand transfer layer but which one works then?<br />Did you run the test suite? Did you have any success with an example in the tutorial about parallel execution? <br />Did you check the log file to figure out where abinit crashed?<br />Did you try to run the code with only one instance? Did you try a sequential build?<br />Did you provide a config.log?<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1911&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:42:14 GMT -->
+</html>

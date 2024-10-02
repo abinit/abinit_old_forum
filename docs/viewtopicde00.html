@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3937&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:59:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; pawovlp is not equal to 5 per default</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>pawovlp is not equal to 5 per default</h2>
+		<p><a href="viewtopic5378.html?f=9&amp;t=3937">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3937</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>pawovlp is not equal to 5 per default</h3>
+				<div class="date">Posted: <strong>Tue Oct 09, 2018 1:35 pm</strong></div>
+				<div class="author">by <strong>woffermans</strong></div>
+				<div class="content">Dear abinit friends,<br /><br />Contrary to the manual (<!-- m --><a class="postlink" href="https://docs.abinit.org/variables/paw/#pawovlp">https://docs.abinit.org/variables/paw/#pawovlp</a><!-- m -->), the default value of pawovlp is not correctly processed by abinit:<br /><br />If pawovlp &gt;5, then pawovlp is correctly processed.<br /><br />If pawovlp &lt;=5, then pawovlp is unexpectedly set to another value or otherwise incorrectly processed.<br /><br />I encountered an overlap of 0.04%:<br /><br />message: |<br />    PAW COMPENSATION DENSITIES ARE OVERLAPPING !!!!<br />       There are     2 pairs of overlapping atoms.<br />       The maximum overlap percentage is obtained for the atoms  22 and  24.<br />        | Distance between atoms  22 and  24 is  :   2.17565<br />        | PAW radius of the sphere around atom  22 is:   1.20000<br />        | PAW radius of the sphere around atom  24 is:   1.41465<br />        | This leads to a (voluminal) overlap ratio of  0.04 %<br />    THIS IS DANGEROUS !, as PAW formalism assumes non-overlapping compensation densities.<br /><br />I could only circumvent this by setting the pawovlp to 6. pawovlp equal to 5 or less led to above error message.<br /><br />B.t.w. is it possible to force abinit to print also the default values to output file?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: pawovlp is not equal to 5 per default</h3>
+				<div class="date">Posted: <strong>Tue Oct 09, 2018 5:32 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Willem,<br />On my side, the tests I did so far show that pawovlp can be increased up to 10 without much troubles, thought it is always advised to test if some results look unusual while changing the default. <br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: pawovlp is not equal to 5 per default</h3>
+				<div class="date">Posted: <strong>Thu Oct 11, 2018 10:29 am</strong></div>
+				<div class="author">by <strong>woffermans</strong></div>
+				<div class="content">Dear Eric,<br /><br />Did you have an overlap ratio of 0.04 % and did you set pawovlp to 5 (default value)?<br /><br />ABINIT should continue calculation with this setting and measurement, to my opinion.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: pawovlp is not equal to 5 per default</h3>
+				<div class="date">Posted: <strong>Wed Oct 17, 2018 8:58 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Willem,<br />If the overlap is too big, this might increases the completeness of the basis and drives troubles or errors in some cases, this is why it was decided to stop the calculation to be sure the user is aware there is something going on. The default stop value has been set to 5 to be always on the safe side, but the user can then tune it by changing the pawovlp as he wants. I've already set pawovlp to 10 or even 15 in some of my cases, mostly during the relaxation and then I restart a calculation with a lower value if I want to do DFPT or anything else that will use the ground state WF.<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3937&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:59:40 GMT -->
+</html>

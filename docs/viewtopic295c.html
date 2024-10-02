@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1257&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:33:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; problem with adatom</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>problem with adatom</h2>
+		<p><a href="viewtopic7588.html?f=9&amp;t=1257">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1257</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>problem with adatom</h3>
+				<div class="date">Posted: <strong>Fri Aug 12, 2011 3:09 am</strong></div>
+				<div class="author">by <strong>photon</strong></div>
+				<div class="content">Hello.<br />I am trying to add 1 atom (more in future..) to the surface of quartz (SiO2)<br />I use 36 atoms of SiO2 and 1 atom of C.<br />Thickness of quartz layer is 5.457 A and then layer of vacuum of the thickness 10.914 A <br />When there is no C atom SCF cycles converges very good.  <br /><br />But when I put this C atom, there is no convergence! Energy goes back and forth all the time in the range [1e-1, 10]<br /><br />Any thoughts will be appreciated. <br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>acell 9.993 9.993 16.371 angstrom&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br /><br />angdeg 90 90 120 # corresponds to vectors in rprim (I calculated this)<br /><br />#Definition of the atom types<br />ntypat 3&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />znucl 14 8 6&nbsp; &nbsp; &nbsp; <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />#Definition of the atoms<br />natom 37&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # number of atoms<br />typat<br />1 2 1 2 2 2 2 1 2 <br />1 2 1 2 2 2 2 1 2 <br />1 2 1 2 2 2 2 1 2 <br />1 2 1 2 2 2 2 1 2<br />3<br /><br />xred<br />0.25 0.3962 0.333333333&nbsp; <br />0.1038 0.2924 0.27777778&nbsp; <br />0.25 0.1462 0.111111113&nbsp; <br />0.2076 0 0.055555557&nbsp; <br />0.1038 0.1038 0.166666667&nbsp; <br />0.3962 0.1886 0.166666667&nbsp; <br />0.2924 0.2924 0.055555557&nbsp; <br />0.5 0.1462 0.222222223&nbsp; <br />0.3962 0.5 0.27777778&nbsp; <br />0.75 0.3962 0.333333333&nbsp; <br />0.6038 0.2924 0.27777778&nbsp; <br />0.75 0.1462 0.111111113&nbsp; <br />0.7076 0 0.055555557&nbsp; <br />0.6038 0.1038 0.166666667&nbsp; <br />0.8962 0.1886 0.166666667&nbsp; <br />0.7924 0.2924 0.055555557&nbsp; <br />1 0.1462 0.222222223&nbsp; <br />0.8962 0.5 0.27777778&nbsp; <br />0.25 0.8962 0.333333333&nbsp; <br />0.1038 0.7924 0.27777778&nbsp; <br />0.25 0.6462 0.111111113&nbsp; <br />0.2076 0.5 0.055555557&nbsp; <br />0.1038 0.6038 0.166666667&nbsp; <br />0.3962 0.6886 0.166666667&nbsp; <br />0.2924 0.7924 0.055555557&nbsp; <br />0.5 0.6462 0.222222223&nbsp; <br />0.3962 1 0.27777778&nbsp; <br />0.75 0.8962 0.333333333&nbsp; <br />0.6038 0.7924 0.27777778&nbsp; <br />0.75 0.6462 0.111111113&nbsp; <br />0.7076 0.5 0.055555557&nbsp; <br />0.6038 0.6038 0.166666667&nbsp; <br />0.8962 0.6886 0.166666667&nbsp; <br />0.7924 0.7924 0.055555557&nbsp; <br />1 0.6462 0.222222223&nbsp; <br />0.8962 1 0.27777778&nbsp; <br />0.5 0.5 0.4<br /><br />chksymbreak=0 <br />chkprim 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br /><br />ecut 10.0&nbsp; <br /><br />#Definition of the k-point grid<br />kptopt 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br /><br />ngkpt 2 2 2<br /><br />nshiftk 1 <br />shiftk 0 0 0<br /><br />#Definition of the SCF procedure<br />nstep 30&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Maximal number of SCF cycles<br />toldfe 1.0d-3&nbsp; &nbsp; &nbsp;# Will stop when, twice in a row, the difference <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # between two consecutive evaluations of total energy <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # differ by less than toldfe (in Hartree) <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # This value is way too large for most realistic studies of material<br /><br />diemac 2.0&nbsp; &nbsp; &nbsp; &nbsp; # Although this is not mandatory, it is worth to<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # precondition the SCF cycle. The model dielectric<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # function used as the standard preconditioner<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # is described in the &quot;dielng&quot; input variable section.<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Here, we follow the prescriptions for molecules <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # in a big box<br /><br /></code></pre></div></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1257&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:33:15 GMT -->
+</html>

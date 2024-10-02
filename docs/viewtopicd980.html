@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2802&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:19:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Configure error with Abinit-7.8.2 on Ubuntu14.04</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Configure error with Abinit-7.8.2 on Ubuntu14.04</h2>
+		<p><a href="viewtopic18b9.html?f=3&amp;t=2802">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2802</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Configure error with Abinit-7.8.2 on Ubuntu14.04</h3>
+				<div class="date">Posted: <strong>Sat Sep 20, 2014 11:25 am</strong></div>
+				<div class="author">by <strong>johnnyw</strong></div>
+				<div class="content">Dear devolper and users,<br />I tried to configure abinit-7.8.2 with the suggested recipe by this forum ( i.e. same as abinit-7.6.3 for Ubuntu 13.04), but on the newest ubuntu14.04. I got an error related to  etsf_io, error message is as follow<br /><span style="text-decoration: underline"><strong class="text-strong">configure: error: external etsf_io support does not work</strong><br /></span><br /><br />When I delete all the etsf_io configure scripts in the .ac file, the cofiguration went well. but the 'make' process terminated unexpected with error information also related to etsf (check the attachments)<br /><br />could you show me how to solve this problem?<br /><br />Many thanks,<br /><br />Johnny</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configure error with Abinit-7.8.2 on Ubuntu14.04</h3>
+				<div class="date">Posted: <strong>Mon Sep 22, 2014 5:01 pm</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">The reason is simple : on Ubuntu 14.04, the package containing etsf_io was not compiled with the same default compiler (gcc4.8.2) therefore the module file are not compatible and you try to compile something with those .mod file you have this error.<br /><br />The easiest fix is to download etsf_io and compile it or just use the fallback.<br /><br />I've attached a script (download it, rename it install.sh and make sure you can execute it (chmod u+x install.sh)) that should install abinit with the same features than the recipe on the forum. It has been tested on a brand new Ubuntu14.04<br />You will need a internet connection.<br />All the fallbacks are downloaded and compiled separetely in $HOME/Downloads and installed in $HOME/Codes.<br />You can replace this install directory by whatever you want, just edit the script and change line 12<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>INSTALLDIR=$HOME/Codes<br /></code></pre></div><br /><br />It has never been tested by someone else than I so let me know if there is any issue.<br /><br />Cheers<br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configure error with Abinit-7.8.2 on Ubuntu14.04</h3>
+				<div class="date">Posted: <strong>Tue Sep 23, 2014 10:44 am</strong></div>
+				<div class="author">by <strong>johnnyw</strong></div>
+				<div class="content">Dear Jordan,<br />Thank you very much for your kind help. I have run the script you gave to me. It went well initially untill following error message came up <img class="smilies" src="images/smilies/icon_e_sad.gif" alt=":(" title="Sad" /> . <br /><br />Making all in src/low_level<br />make[1]: Entering directory `/home/johnnyw/Downloads/etsf_io-1.0.4/src/low_level'<br />make[1]: Nothing to be done for `all'.<br />make[1]: Leaving directory `/home/johnnyw/Downloads/etsf_io-1.0.4/src/low_level'<br />Making all in src/group_level<br />make[1]: Entering directory `/home/johnnyw/Downloads/etsf_io-1.0.4/src/group_level'<br />make[1]: Nothing to be done for `all'.<br />make[1]: Leaving directory `/home/johnnyw/Downloads/etsf_io-1.0.4/src/group_level'<br />Making all in src/utils<br />make[1]: Entering directory `/home/johnnyw/Downloads/etsf_io-1.0.4/src/utils'<br />gfortran -I/usr/include -I../../src/low_level -I../../src/group_level -g -O2 -I/usr/include  -c -o etsf_io_file.o  etsf_io_file.f90<br />etsf_io_file.f90:29.6:<br /><br />  use etsf_io_low_level<br />      1<br />Fatal Error: Cannot read module file 'etsf_io_low_level.mod' opened at (1), because it was created by a different version of GNU Fortran<br />make[1]: *** [etsf_io_file.o] Error 1<br />make[1]: Leaving directory `/home/johnnyw/Downloads/etsf_io-1.0.4/src/utils'<br />make: *** [all-recursive] Error 1<br /><br />Many thanks, <br />Johnny</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configure error with Abinit-7.8.2 on Ubuntu14.04&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Tue Sep 23, 2014 11:31 am</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">In order to avoid any possible confusion for the compiler, you have to first remove the etsf-io* packages from your system before recompiling from the source.<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>sudo apt-get remove etsf-io libetsf-io-dev</code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configure error with Abinit-7.8.2 on Ubuntu14.04</h3>
+				<div class="date">Posted: <strong>Fri Sep 26, 2014 2:22 am</strong></div>
+				<div class="author">by <strong>johnnyw</strong></div>
+				<div class="content">Dear Jordan and Yann ,<br />After I did what Yann told me, i successfully install Abinit-7.8.2 on my Ubuntu14.04 with Jordan's script. Now, it works well. Thank you both a lot for helping me to work this out <img class="smilies" src="images/smilies/icon_e_biggrin.gif" alt=":D" title="Very Happy" /> . You guys are amazing.<br />Best regards,<br />Johnny</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configure error with Abinit-7.8.2 on Ubuntu14.04</h3>
+				<div class="date">Posted: <strong>Tue Jan 23, 2018 10:41 am</strong></div>
+				<div class="author">by <strong>GSRush</strong></div>
+				<div class="content"><blockquote><div><cite>Jordan wrote:</cite>I've attached a script (download it, rename it install.sh and make sure you can execute it (chmod u+x install.sh)) that should install abinit with the same features than the recipe on the forum. It has been tested on a brand new Ubuntu14.04<br /><br />Cheers<br />Jordan</div></blockquote><br /><br />Thank you! It's work for me too.<br />However, I had to change the date in Ubuntu to 2014 year.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2802&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:19:07 GMT -->
+</html>

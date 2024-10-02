@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=1556&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:48:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Sulfur - sufficient gridsize</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Sulfur - sufficient gridsize</h2>
+		<p><a href="viewtopicb809.html?f=14&amp;t=1556">https://forum.abinit.org/viewtopic.php?f=14&amp;t=1556</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Sulfur - sufficient gridsize</h3>
+				<div class="date">Posted: <strong>Sat Mar 03, 2012 5:38 pm</strong></div>
+				<div class="author">by <strong>crischawo</strong></div>
+				<div class="content">Dear all,<br /><br />as an unexperienced user of abinit/atompaw I try to generate PAW-Potentials for La and S to do geometry-optimizations.<br /><br />Using the given atompaw.input files for La and S I chose &quot;loggrid&quot; and then lowered the number of gridpoints until there was a difference in energy of 1mHa between all-e and pseudo. Is it necessary to stick to the same convergence-criteria (1mHa) as used in later calculations here, or what does one usually stick to?<br />For La (+scalarrelativistic) that was the case for &quot;800&quot;, for S it seems to be 1500. Is there any way to get that value lower, as I want to do geometry optimizations and the calculations using that S-paw are really slow (ecut 28Ha to have no energydif. from that)?<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>S 16<br />GGA-PBE loggrid 1500<br />3 3 0 0 0 0 <br />3 1 4 <br />0 0 0 <br />c <br />v <br />v <br />v <br />v <br />1<br />1.51<br />n <br />n <br />VANDERBILT&nbsp; &nbsp;<br />2 0<br />1.51<br />1.51<br />1.51<br />1.51<br />2<br />default<br />0</code></pre></div><br /><br />Sincerely Yours,<br />Christian</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Sulfur - sufficient gridsize</h3>
+				<div class="date">Posted: <strong>Tue Mar 06, 2012 11:18 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Hi Christian,<br /><br />1mHa is a rule of thumb ... the important is to know if this is significant for your problem. Ecuts are generally reported at 1mHa or 0.1mHa.<br /><br />Reducing the grid size will improve speed but ecut optimization is primordial. Your S PAW pseudo is weird, almost everything is in valence and there is no extra projector. As it comes from a reliable source, I wouldn't pretend it isn't a good one.<br />If you have time to try another version, please find mine hereunder...<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>S 16<br />GGA-PBE scalarrelativistic loggrid 800<br />3 3 0 0 0<br />3 1 4<br />0 0 0<br />c<br />c<br />v<br />c<br />v<br />1<br />1.8<br />y<br />0.7<br />n<br />y<br />2.0<br />n<br />vanderbilt<br />2 0 ultrasoft<br />1.8<br />1.8<br />1.8<br />1.8<br />2<br />prtcorewf noxcnhat nospline noptim<br />0</code></pre></div><br /><br />I would be delighted to have a feedback about its results.<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Sulfur - sufficient gridsize</h3>
+				<div class="date">Posted: <strong>Fri Mar 16, 2012 6:16 pm</strong></div>
+				<div class="author">by <strong>crischawo</strong></div>
+				<div class="content">Dear Alain,<br /><br />thank You very much for help! Meanwhile it makes sense to me that a smaller value of r_paw leads to fewer projectors - at the cost of more planewaves/valence declarations needed to describe the excluded regions. I will report my experiences of the running geometry-optimizations.<br /><br />Christian</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=1556&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:48:57 GMT -->
+</html>

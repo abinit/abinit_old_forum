@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=3833&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:26:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Pseudopotentials and alchemy</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Pseudopotentials and alchemy</h2>
+		<p><a href="viewtopic2548.html?f=14&amp;t=3833">https://forum.abinit.org/viewtopic.php?f=14&amp;t=3833</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Pseudopotentials and alchemy</h3>
+				<div class="date">Posted: <strong>Wed May 02, 2018 6:11 pm</strong></div>
+				<div class="author">by <strong>Nahasamapetilah</strong></div>
+				<div class="content">Dear All,<br /><br />I want to study the effect of doping in the electronic structure of a certain compound. Until now, I have used PAW pseudopotentials because the ecut needed for them (and for my system) is acceptable. However, I read that doping via <em class="text-italics">mixalch</em> can only be performed with Norm Conserving (NC) pseudopotentials. The problem is that with NC pseudopotentials my system requires around ecut=1400 eV to ensure a convergence of 0.1 eV in the energy obtained in SCF calculations. I think that I need a much better accuracy. What do you recommend?<br /><br />Thank you very much.<br /><br />Nahasamapetilah</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Pseudopotentials and alchemy&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Wed May 02, 2018 8:32 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Nahasamapetilah,<br />Indeed VCA does not work with PAW in Abinit, you have to use NC pseudos.<br />Which NC pseudos did you use? If you are not using them, I advise you to use the ones from the recent Pseudodojo table (v0.4):<br /><a href="http://www.pseudo-dojo.org/" class="postlink">http://www.pseudo-dojo.org/</a><br />And the related paper:<br /><a href="https://www.sciencedirect.com/science/article/pii/S0010465518300250?via%3Dihub" class="postlink">https://www.sciencedirect.com/science/article/pii/S0010465518300250?via%3Dihub</a><br />These pseudos usually require lower ecut depending on what you want to calculate (30-35 Ha).<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Pseudopotentials and alchemy</h3>
+				<div class="date">Posted: <strong>Thu May 03, 2018 3:08 pm</strong></div>
+				<div class="author">by <strong>Nahasamapetilah</strong></div>
+				<div class="content">Dear ebousquet,<br /><br />I am using the NC pseudopotentials of the first table of <a href="https://www.abinit.org/psp-tables" class="postlink">https://www.abinit.org/psp-tables</a>, which is the official page of Abinit. Are these the same than the ones you recommended me (<a href="http://www.pseudo-dojo.org/" class="postlink">http://www.pseudo-dojo.org</a>)?<br /><br />Thank you for your help. I am looking forward to your answer.<br /><br />Nahasamapetilah</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Pseudopotentials and alchemy</h3>
+				<div class="date">Posted: <strong>Thu May 03, 2018 4:32 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Nahasamapetilah,<br />The pseudos from Abinit and Pseudodojo websites are supposed to be the same, you have more exchange correlation functionals in Pseudodojo (as of today).<br />Your system might be tricky and you need large ecut? Be careful that looking at the total energy convergence only might induce you larger ecut than the one you need for the physical properties you want to look at (which are usually related to energy differences). <br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Pseudopotentials and alchemy</h3>
+				<div class="date">Posted: <strong>Fri May 11, 2018 10:24 am</strong></div>
+				<div class="author">by <strong>Nahasamapetilah</strong></div>
+				<div class="content">Dear ebousquet,<br /><br />I tried with the pseudopotentials that you recommended me and it worked well. Finally, I reached a good precision after the convergence studies. Thank you.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=3833&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:26:02 GMT -->
+</html>

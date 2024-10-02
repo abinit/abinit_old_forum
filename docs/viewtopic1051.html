@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4038&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:38:10 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; installationerror</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>installationerror</h2>
+		<p><a href="viewtopic8604.html?f=3&amp;t=4038">https://forum.abinit.org/viewtopic.php?f=3&amp;t=4038</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>installationerror</h3>
+				<div class="date">Posted: <strong>Thu Feb 14, 2019 4:50 am</strong></div>
+				<div class="author">by <strong>haider</strong></div>
+				<div class="content">Dear all,<br /><br />I am trying to install abinit in parallel, for this I run the command<br /><br />./configure --with-mpi-prefix=/usr/local/bin<br /><br />I have 10 machine, all having 4 core<br /><br />So next I run the command<br /><br />make multi multi_nprocs=40<br /><br />it gives me an error<br /><br />m_spin_model_primitive.F90:905:0: internal compiler error: in gfc_conv_descriptor_data_get, at fortran/trans-array.c:145<br /> end module m_spin_model_primitive<br /> ^<br />Please submit a full bug report,<br />with preprocessed source if appropriate.<br />See &lt;file:///usr/share/doc/gcc-4.9/README.Bugs&gt; for instructions.<br />Makefile:1004: recipe for target 'm_spin_model_primitive.o' failed<br />make[4]: *** [m_spin_model_primitive.o] Error 1<br />make[4]: Leaving directory '/home/mpiuser/abinit-8.10.1/src/78_effpot'<br />Makefile:924: recipe for target 'all-recursive' failed<br />make[3]: *** [all-recursive] Error 1<br />make[3]: Leaving directory '/home/mpiuser/abinit-8.10.1/src'<br />Makefile:2317: recipe for target 'all-recursive' failed<br />make[2]: *** [all-recursive] Error 1<br />make[2]: Leaving directory '/home/mpiuser/abinit-8.10.1'<br />Makefile:2245: recipe for target 'all' failed<br />make[1]: *** [all] Error 2<br />make[1]: Leaving directory '/home/mpiuser/abinit-8.10.1'<br />Makefile:2806: recipe for target 'multi' failed<br />make: *** [multi] Error 2<br />root@master:/home/mpiuser/abinit-8.10.1# <br /><br /><br />could you please let me know, where I am making a mistake.<br /><br />Thanking in advance<br /><br />Haider</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: installationerror</h3>
+				<div class="date">Posted: <strong>Thu Feb 14, 2019 10:45 am</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />we need more infos...<br /><br />which type/version of compiler ?<br /><br />what is the output of theses cmd ?:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>mpif90 --version<br />mpif90 -show</code></pre></div><br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: installationerror</h3>
+				<div class="date">Posted: <strong>Sat Feb 16, 2019 7:35 am</strong></div>
+				<div class="author">by <strong>haider</strong></div>
+				<div class="content">root@master:~# mpif90 --version<br />GNU Fortran (Ubuntu 4.9.1-16ubuntu6) 4.9.1<br />Copyright (C) 2014 Free Software Foundation, Inc.<br /><br />GNU Fortran comes with NO WARRANTY, to the extent permitted by law.<br />You may redistribute copies of GNU Fortran<br />under the terms of the GNU General Public License.<br />For more information about these matters, see the file named COPYING<br /><br />root@master:~# mpif90 -show<br />gfortran -I/usr/local/include -I/usr/local/include -L/usr/local/lib -lmpifort -Wl,-rpath -Wl,/usr/local/lib -Wl,--enable-new-dtags -lmpi<br />root@master:~#</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: installationerror</h3>
+				<div class="date">Posted: <strong>Sun Feb 17, 2019 4:05 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content"><blockquote class="uncited"><div>oot@master:~# mpif90 --version<br />GNU Fortran (Ubuntu 4.9.1-16ubuntu6) 4.9.1<br />Copyright (C) 2014 Free Software Foundation, Inc.</div></blockquote><br />pretty old env... : 4.9 no more supported (  &gt;= gnu 5.3 )<br /><br /><blockquote class="uncited"><div>root@master:~# mpif90 -show<br />gfortran -I/usr/local/include -I/usr/local/include -L/usr/local/lib -lmpifort -Wl,-rpath -Wl,/usr/local/lib -Wl,--enable-new-dtags -lmpi<br /></div></blockquote><br /><br />strange to find  this  library in the mpif90 wrapper : -lmpifort  !?!  <br />mismatch environment... intel vs GNU ?<br /><br />jmb</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4038&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:38:10 GMT -->
+</html>

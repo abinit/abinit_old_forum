@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=502&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Multiple Unit cells yielding apparent discrepancy</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Multiple Unit cells yielding apparent discrepancy</h2>
+		<p><a href="viewtopiccf86.html?f=9&amp;t=502">https://forum.abinit.org/viewtopic.php?f=9&amp;t=502</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Multiple Unit cells yielding apparent discrepancy</h3>
+				<div class="date">Posted: <strong>Tue Jul 20, 2010 5:28 am</strong></div>
+				<div class="author">by <strong>JEJohns</strong></div>
+				<div class="content">I've attached two input codes that I used to study the primitive unit cell of graphene (2 atoms / cell) and 4x the primitive unit cell (8 atoms/cell, acell(1) and acell(2) are double the lengths of the original acell), and then looked at the band structure from M to Gamma to K to M (for the quadruple cell, I denoted them as K' and M').  For the primitive unit cell, there is a clear linear approach to K from Gamma, and the degeneracy at K conincides with teh Fermi level. For the multiple unit cell, the degeneracy between conduction and valence bands is still at the K point and the Fermi level, but the approach from Gamma to K' is no longer linear, but parabolic. Fitting it to a parabola, it's nearly free electron like with an effective mass m* = 0.060 me.  I've attached the band structure from M--&gt;Gamma--&gt;K. This does not fit my physical picture of band folding.  Since K' is 1/2 of K, I would have expected the band to fold once it reached K' by one lattice vector G' back to -K', and intersect the fermi level at the point Gamma' in a linear band.  Is this my understanding at fault, or is there something wonky in my input file?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Multiple Unit cells yielding apparent discrepancy</h3>
+				<div class="date">Posted: <strong>Wed Jul 28, 2010 7:02 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Your input files look perfect, so I think everything is as it should be: the problem is that your band folding for a 2x2 unit cell is happening with respect to certain lines in reciprocal space, &quot;perpendicular&quot; to the gamma-X directions (not really perpendicular, since you have a non-orthogonal unit cell). This means you are not folding along Gamma-K, and therefore the bands you get for the 2x2 cell give a different dispersion close to K'. It is well known that the bands around K are not a perfect cone, and the Fermi speed depends on the direction of approach. Here for K' you have a different direction, and therefore a different slope of the bands. It should still be linear, but maybe you have to get closer to K' along this direction, than you did to K, in order to see linear bands.<br /><br />you can also try to use a different supercell, such that Gamma-K is perpendicular to the plane of folding. Then you should see the same dispersion at K'. It's probably enough to rotate the atom basis such that the C-C bond is along on lattice vector, in order to get the desired supercell afterwards.<br /><br />For some detailed analysis of single and multilayer graphene BS, see Latil and Henrard PRL 97 036803 <br /><!-- m --><a class="postlink" href="http://prl.aps.org/abstract/PRL/v97/i3/e036803">http://prl.aps.org/abstract/PRL/v97/i3/e036803</a><!-- m --><br /><br />matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Multiple Unit cells yielding apparent discrepancy</h3>
+				<div class="date">Posted: <strong>Fri Aug 06, 2010 12:24 am</strong></div>
+				<div class="author">by <strong>JEJohns</strong></div>
+				<div class="content">Thanks for the excellent reply matthieu.  I've read that paper and the PRL papers by Steve Louie &amp; others, and am trying to think about your comment about the zone folding and whether it's perpendicular to the Gamma--&gt;K direction.  <br />Well, in the course of attempting to draw a figure to explain my confusion, I think I convinced my self that you of course are correct.  Shown in the figure I was making is what I was thinking of.  As I understand your comment, the reason why this is wrong is that the Gamma--&gt;K direction is NOT along a single G vector.  If I were travelling along Gamma--&gt;M, then this would be correct.  But in reality what happens is that as you traverse Gamma-&gt;K, once you get to K2 (as labelled in the figure), get reflected by 1 G (where G points from from one Gamma to another Gamma in the repeating Zone Scheme), which does not bring you to -K2, but to some random point.  You then continue to traverse along the same slope, but you end up at 1 of 6 equivalent spots in the reduced Bruillon Zone.   My problem was lay in thinking of this in my head as too similar to a 1D system, where being reflected at the BZ edge by a G vector always takes you back to the opposite BZ edge. Is this correct?  (Obviously, this has transgressed and wondered into the realm of a basic physical misunderstanding, and not into an abinit specific question.  Please delete immediately if you think it is inappropriate.)</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=502&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:14 GMT -->
+</html>

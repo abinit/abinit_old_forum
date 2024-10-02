@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1456&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:54:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Problem with compiling abinit 6.10.2 on iMac 2011</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Problem with compiling abinit 6.10.2 on iMac 2011</h2>
+		<p><a href="viewtopicc59e.html?f=3&amp;t=1456">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1456</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Problem with compiling abinit 6.10.2 on iMac 2011</h3>
+				<div class="date">Posted: <strong>Sun Dec 04, 2011 1:40 am</strong></div>
+				<div class="author">by <strong>xiangpisai</strong></div>
+				<div class="content">Hi everyone, <br />I am trying to compile abinit 6.10.2 on an iMac 2011 with a Core i-5 quad core CPU. I did the following steps:<br />1. Install Xcode<br />2. Install Gfortran binary from GNU website<br />3. Download, untar, and configure abinit package with the following options: --with-dft-flavor=&quot;none&quot; --with-trio-flavor=&quot;none&quot;<br />4. make<br />I was able to run configure successfully, however when I type make, it gave me an instant error with the following message:<br /><br />gfortran -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs   -ffree-form -J/Users/pzhu/Downloads/abinit-6.10.2/src/mods -O2 -mtune=native -march=native -mfpmath=sse -g -ffree-line-length-none  -c -o io.o io.F90<br />gfortran -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs   -ffree-form -J/Users/pzhu/Downloads/abinit-6.10.2/src/mods -O2 -mtune=native -march=native -mfpmath=sse -g -ffree-line-length-none  -c -o iorho.o iorho.F90<br />gfortran -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs   -ffree-form -J/Users/pzhu/Downloads/abinit-6.10.2/src/mods -O2 -mtune=native -march=native -mfpmath=sse -g -ffree-line-length-none  -c -o numeric.o numeric.F90<br />/var/folders/yf/1q2hhgzx1_x1p4w1slhywwvw0000gn/T//cckEZVGR.s:172:no such instruction: `vmovsd LC2(%rip), %xmm0'<br />/var/folders/yf/1q2hhgzx1_x1p4w1slhywwvw0000gn/T//cckEZVGR.s:174:no such instruction: `vcvtsi2sd %eax, %xmm2,%xmm2'<br />/var/folders/yf/1q2hhgzx1_x1p4w1slhywwvw0000gn/T//cckEZVGR.s:175:no such instruction: `vdivsd %xmm2, %xmm0,%xmm2'<br />/var/folders/yf/1q2hhgzx1_x1p4w1slhywwvw0000gn/T//cckEZVGR.s:179:no such instruction: `vmulsd LC3(%rip), %xmm2,%xmm0'<br />/var/folders/yf/1q2hhgzx1_x1p4w1slhywwvw0000gn/T//cckEZVGR.s:180:no such instruction: `vmovsd %xmm2, (%rsp)'<br /><br />There are a lot of similar errors. <br />BTW: when I do the same thing with my 2010 Macbook Air with a C2D processor, it works like a charm. <br /><br />Does anyone know what problem is about? Thank you so much for answering!<br />Sincerely, <br />xiangpisai</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem with compiling abinit 6.10.2 on iMac 2011</h3>
+				<div class="date">Posted: <strong>Mon Dec 05, 2011 10:29 am</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />I suppose that your iMac2011 runs under Lion (10.7.x)...<br /><br />I download and install the binaries found on : <a href="http://gcc.gnu.org/wiki/GFortranBinaries#MacOS" class="postlink">http://gcc.gnu.org/wiki/GFortranBinaries#MacOS</a>  ( gcc v4.6.2 )<br /><br />I add/ajust in my environment : <br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>export PATH=/usr/local/gfortran/bin:$PATH<br />export DYLD_LIBRARY_PATH=/usr/local/gfortran/lib:$DYLD_LIBRARY_PATH<br /></code></pre></div><br /><br />my build.ac is :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>CC=&quot;gcc&quot;<br />FC=&quot;gfortran&quot;<br />F77=&quot;gfortran&quot;<br />CXX=&quot;g++&quot;<br />CPP=&quot;cpp&quot;<br /><br />enable_64bit_flags=&quot;yes&quot;<br />enable_debug=&quot;no&quot;<br />enable_mpi=&quot;no&quot;<br />enable_mpi_io=&quot;no&quot;<br />with_trio_flavor=&quot;none&quot;<br />with_dft_flavor=&quot;none&quot;<br />enable_gw_dpc=&quot;yes&quot;<br />enable_maintainer_checks=&quot;no&quot;<br />enable_test_timeout=&quot;yes&quot;<br />enable_gui_build=&quot;no&quot;<br /></code></pre></div><br /><br />and I runs <br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure --with-config-file=./build.ac<br />make mj4<br />cd tests; make tests_in</code></pre></div><br /><br />and it works...<br /><br />note that  I also try with all plugins but there is a problem with wannier ( some tests failed )...<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem with compiling abinit 6.10.2 on iMac 2011</h3>
+				<div class="date">Posted: <strong>Tue Dec 06, 2011 2:54 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Dear xiangpisai,<br /><br />which is the version of your OS ?<br />the error can be explained if the version is 10.6.7 or less...<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem with compiling abinit 6.10.2 on iMac 2011</h3>
+				<div class="date">Posted: <strong>Tue Dec 06, 2011 3:53 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">The error message you get seems to indicate that you installed the GFortran binaries for another architecture, which causes the assembly stage to fail.<br /><br />This should work much better as soon as you install the correct GFortran binary.<br /><br />In the meantime, a temporary workaround could be to configure with generic optimization flags, e.g.:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../configure CFLAGS_OPT=&quot;-O2&quot; FCFLAGS_OPT=&quot;-O2&quot; ...</code></pre></div><br />Of course, this will decrease significantly the performance of Abinit, and there is no guarantee that it will be sufficient to let you build the whole package.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem with compiling abinit 6.10.2 on iMac 2011</h3>
+				<div class="date">Posted: <strong>Wed Dec 07, 2011 2:28 am</strong></div>
+				<div class="author">by <strong>xiangpisai</strong></div>
+				<div class="content"><blockquote><div><cite>jbeuken wrote:</cite>Hi,<br /><br />I suppose that your iMac2011 runs under Lion (10.7.x)...<br /><br />I download and install the binaries found on : <a href="http://gcc.gnu.org/wiki/GFortranBinaries#MacOS" class="postlink">http://gcc.gnu.org/wiki/GFortranBinaries#MacOS</a>  ( gcc v4.6.2 )<br /><br />I add/ajust in my environment : <br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>export PATH=/usr/local/gfortran/bin:$PATH<br />export DYLD_LIBRARY_PATH=/usr/local/gfortran/lib:$DYLD_LIBRARY_PATH<br /></code></pre></div><br /><br />my build.ac is :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>CC=&quot;gcc&quot;<br />FC=&quot;gfortran&quot;<br />F77=&quot;gfortran&quot;<br />CXX=&quot;g++&quot;<br />CPP=&quot;cpp&quot;<br /><br />enable_64bit_flags=&quot;yes&quot;<br />enable_debug=&quot;no&quot;<br />enable_mpi=&quot;no&quot;<br />enable_mpi_io=&quot;no&quot;<br />with_trio_flavor=&quot;none&quot;<br />with_dft_flavor=&quot;none&quot;<br />enable_gw_dpc=&quot;yes&quot;<br />enable_maintainer_checks=&quot;no&quot;<br />enable_test_timeout=&quot;yes&quot;<br />enable_gui_build=&quot;no&quot;<br /></code></pre></div><br /><br />and I runs <br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure --with-config-file=./build.ac<br />make mj4<br />cd tests; make tests_in</code></pre></div><br /><br />and it works...<br /><br />note that  I also try with all plugins but there is a problem with wannier ( some tests failed )...<br /><br />jmb</div></blockquote><br />Hi jmb,<br />Thank you so much for the reply!<br />I tried your method but I got the same error, just as the first thread. I think I will need further help with the problem. Thank you again!<br />Sincerely, <br />Xiangpisai</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem with compiling abinit 6.10.2 on iMac 2011</h3>
+				<div class="date">Posted: <strong>Wed Dec 07, 2011 2:30 am</strong></div>
+				<div class="author">by <strong>xiangpisai</strong></div>
+				<div class="content"><blockquote><div><cite>jbeuken wrote:</cite>Dear xiangpisai,<br /><br />which is the version of your OS ?<br />the error can be explained if the version is 10.6.7 or less...<br /><br />jmb</div></blockquote><br />hi jbeuken,<br />I am currently using the latest version of Mac OS, should be 10.7.1. I am sure I upgraded to Lion the first day it came out <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem with compiling abinit 6.10.2 on iMac 2011</h3>
+				<div class="date">Posted: <strong>Wed Dec 07, 2011 2:34 am</strong></div>
+				<div class="author">by <strong>xiangpisai</strong></div>
+				<div class="content"><blockquote><div><cite>pouillon wrote:</cite>The error message you get seems to indicate that you installed the GFortran binaries for another architecture, which causes the assembly stage to fail.<br /><br />This should work much better as soon as you install the correct GFortran binary.<br /><br />In the meantime, a temporary workaround could be to configure with generic optimization flags, e.g.:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../configure CFLAGS_OPT=&quot;-O2&quot; FCFLAGS_OPT=&quot;-O2&quot; ...</code></pre></div><br />Of course, this will decrease significantly the performance of Abinit, and there is no guarantee that it will be sufficient to let you build the whole package.</div></blockquote><br />Hi pouillon,<br />Thank you so much for your reply! I double checked my downloaded file and I am pretty sure that it is the correct version---64bit, for Lion. BTW: if you see the end of my first post, I said that the same steps work flawlessly for my Macbook Air which is also running Lion. It is really weird. I am suspecting there are something wrong with my CPU, lol. BTW: I tried your method but it seems that it won't finish.<br />Sincerely, <br />xiangpisai</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem with compiling abinit 6.10.2 on iMac 2011</h3>
+				<div class="date">Posted: <strong>Wed Dec 07, 2011 1:28 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">This is not so much a question of 32/64 bits, but much more of processor architecture. Your processor is lacking the AVX instruction set, that the compiler is expecting. This means that you should install a version of GCC recompiled for your architecture.<br /><br />Please see the following and links therein for details: <!-- m --><a class="postlink" href="http://en.wikipedia.org/wiki/Advanced_Vector_Extensions">http://en.wikipedia.org/wiki/Advanced_Vector_Extensions</a><!-- m -->.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1456&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:54:58 GMT -->
+</html>

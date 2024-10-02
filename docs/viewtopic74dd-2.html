@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1603&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:55:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; abinit-6.10.3 and Error 77</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>abinit-6.10.3 and Error 77</h2>
+		<p><a href="viewtopic42c1.html?f=3&amp;t=1603">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1603</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>abinit-6.10.3 and Error 77</h3>
+				<div class="date">Posted: <strong>Mon Apr 02, 2012 9:05 pm</strong></div>
+				<div class="author">by <strong>Mascha</strong></div>
+				<div class="content">Hallo to all,<br /><br />i have the order to install abinit-6.10.3 on a server. I could solve some problems by myself, but as a beginner I am now at the corner of my possibilities. I ask you for help!!!<br /><br />Here the details:<br /><br />distributor: SUSE Linux Enterprise Server 10 (ppc)<br />power5-pc<br />pp64 - 64-bit-architecture<br /><br />I used the following command for compilation:<br /><br />./compile with_fallbacks_tardir=&quot;.../abinit-6.10.3/tarballs&quot; with_dft_flavor=&quot;atompaw+libxc+wannier90&quot; FC=&quot;xlf&quot;<br /><br />It went well and I used the make-command. But the following was the end of the output: Error 77.<br /><br /><div class="inline-attachment">
+			
+				<dl class="thumbnail">
+			<dt><a href="download/file0b3c.png?id=538&amp;mode=view"><img src="download/filec3af.png?id=538&amp;t=1" class="postimage" alt="output - error77" title="output.png (29.98 KiB) Viewed 9537 times" /></a></dt>
+			<dd> output - error77</dd>		</dl>
+		
+		
+		
+		
+			</div><br /><br />And this is the log-file (divided in 2 parts):<br /><br /><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file4373.php?id=540">config.log</a></dt>
+						<dd>(252.8 KiB) Downloaded 352 times</dd>
+		</dl>
+		
+		
+			</div><br /><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file87a4.php?id=541">config2.log</a></dt>
+						<dd>(254.39 KiB) Downloaded 348 times</dd>
+		</dl>
+		
+		
+			</div><br /><br />Someone suggested me to use <br />CCFLAGS_OPTIM=&quot;-O2 -mcpu=power5&quot; CCFLAGS=&quot;-g -ffree-line-length-none  -O2 -mcpu=power5&quot;<br />in the configure-command, but it also did not work.<br /><br />Please help.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit-6.10.3 and Error 77</h3>
+				<div class="date">Posted: <strong>Tue Apr 03, 2012 11:34 am</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Just try Abinit 6.12.2 first, and let us know if you get the same problems.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit-6.10.3 and Error 77</h3>
+				<div class="date">Posted: <strong>Tue Apr 03, 2012 12:08 pm</strong></div>
+				<div class="author">by <strong>Mascha</strong></div>
+				<div class="content">I already tried. I used the following command<br /><br />   sh ./configure FC=&quot;xlf&quot;<br /><br />but the following was the end of the output.<br /><br /><div class="inline-attachment">
+			
+				<dl class="thumbnail">
+			<dt><a href="download/file1e83.png?id=542&amp;mode=view"><img src="download/file41d8.png?id=542&amp;t=1" class="postimage" alt="output - problem with tarballs" title="output2.png (21.78 KiB) Viewed 9528 times" /></a></dt>
+			<dd> output - problem with tarballs</dd>		</dl>
+		
+		
+		
+		
+			</div><br /><br />But I already downloaded the data<br /><br />   netcdf-4.1.1.tar.gz<br /><br />in the specified directory, also the other tarballs. The command with_dtf_flavor was not accepted.<br /><br />How should I go forward?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit-6.10.3 and Error 77</h3>
+				<div class="date">Posted: <strong>Tue Apr 03, 2012 5:30 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">You should then download the NetCDF tarball again or use the --with-trio-flavor=&quot;none&quot; option.<br /><br />Please have a look to ~abinit/doc/config/build-config.ac as well, as stated in this forum's rules. It contains important information on all available options.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit-6.10.3 and Error 77</h3>
+				<div class="date">Posted: <strong>Tue Apr 17, 2012 8:37 am</strong></div>
+				<div class="author">by <strong>Mascha</strong></div>
+				<div class="content">Hello,<br /><br />I waited for the new ABINIT-version <span style="color: #FF0000">6.12.3</span> in hope to handle with less problems.<br />After I configured with<br /><br />sh ./configure FC=&quot;xlf&quot; with_dtf_flavor=&quot;none&quot; with_trio_flavor=&quot;none&quot; enable_64bit_flags=&quot;yes&quot;<br /><br />I typed make and the following problem appeared seen in the output and log-data.<br /><br /><div class="inline-attachment">
+			
+				<dl class="thumbnail">
+			<dt><a href="download/file5063.png?id=543&amp;mode=view"><img src="download/fileec39.png?id=543&amp;t=1" class="postimage" alt="output3.png" title="output3.png (76.21 KiB) Viewed 9486 times" /></a></dt>
+					</dl>
+		
+		
+		
+		
+			</div><br /><br />The log-data is divided in 2 parts:<br /><br /><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file47a7.php?id=544">config.log</a></dt>
+						<dd>(255.24 KiB) Downloaded 311 times</dd>
+		</dl>
+		
+		
+			</div><br /><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/filef7b9.php?id=545">config2.log</a></dt>
+						<dd>(255.67 KiB) Downloaded 300 times</dd>
+		</dl>
+		
+		
+			</div><br /><br />Please help solving this problem.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit-6.10.3 and Error 77</h3>
+				<div class="date">Posted: <strong>Tue Apr 17, 2012 6:04 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">see <!-- l --><a class="postlink-local" href="viewtopic6ace-2.html?f=2&amp;t=1596">viewtopic.php?f=2&amp;t=1596</a><!-- l --></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit-6.10.3 and Error 77</h3>
+				<div class="date">Posted: <strong>Tue May 29, 2012 3:21 pm</strong></div>
+				<div class="author">by <strong>Mascha</strong></div>
+				<div class="content">I read the link of your response. But I could not transfer this posts to my problem.<br />I wonder if the main reason for this failure is the outdated system I have to work with.<br /><br />Is it possible at all to compile abinit-6.12.3 with this following programs?<br /><br />gcc (GCC) 4.1.2 20070115<br />and<br />IBM XL Fortran Advanced Edition for Linux, V11.1<br />and<br />GNU Make 3.80<br /><br />regards<br /><br />Maria</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit-6.10.3 and Error 77</h3>
+				<div class="date">Posted: <strong>Tue May 29, 2012 4:24 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">In principle yes. You'll probably have to do the following: <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../configure --enable-fc-wrapper --with-trio-flavor=&quot;none&quot; --with-dft-flavor=&quot;none&quot;</code></pre></div><br />It is also possible that you have to provide some Fortran flags yourself to <em class="text-italics">configure</em> through <em class="text-italics">FCFLAGS_EXTRA</em> or <em class="text-italics">FCFLAGS_OPTIM</em>.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit-6.10.3 and Error 77</h3>
+				<div class="date">Posted: <strong>Wed May 30, 2012 2:06 pm</strong></div>
+				<div class="author">by <strong>Mascha</strong></div>
+				<div class="content">Thank you very much for the last hint. The building process seems to finish soon. <br /><br />But a new failure appeared. Please look at the output.<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>ABINIT WRAPPER BEGIN<br />cpp -P -traditional-cpp&nbsp; -DHAVE_CONFIG_H&nbsp; -I. -I../.. -I../../src/incs -I../../src/incs -I/home/unimainz/maust/abinit-6.12.3/fallbacks/exports/include -I/home/unimainz/maust/abinit-6.12.3/src/mods symfind.F90 &gt; symfind_cpp.f90<br />xlf -q64&nbsp; -DHAVE_CONFIG_H -P -traditional-cpp -qsuffix=cpp=F90:f=f90 -qfree=f90 -qmoddir=/home/unimainz/maust/abinit-6.12.3/src/mods -O3 -qmaxmem=65536 -qspill=2000 -qarch=auto -qtune=auto -qcache=auto -qstrict -qsuppress=1520-022:1520-031 -q64 -qzerosize -c -o symfind.o&nbsp; -I. -I../.. -I../../src/incs -I../../src/incs -I/home/unimainz/maust/abinit-6.12.3/fallbacks/exports/include -I/home/unimainz/maust/abinit-6.12.3/src/mods symfind_cpp.f90<br />xlf: 1501-257 (W) Option P is not recognized.&nbsp; Option will be ignored.<br />&quot;symfind_cpp.f90&quot;, 1516-036 (S) Entity class&nbsp; has undefined type.<br />** symfind&nbsp; &nbsp;=== End of Compilation 1 ===<br />1501-511&nbsp; Compilation failed for file symfind_cpp.f90.<br />ABINIT WRAPPER END (exit code 1)<br />make&#91;3&#93;: *** &#91;symfind.o&#93; Error 1<br />make&#91;3&#93;: Leaving directory `/home/unimainz/maust/abinit-6.12.3/src/42_geometry'<br />make&#91;2&#93;: *** &#91;all-recursive&#93; Error 1<br />make&#91;2&#93;: Leaving directory `/home/unimainz/maust/abinit-6.12.3/src'<br />make&#91;1&#93;: *** &#91;all-recursive&#93; Error 1<br />make&#91;1&#93;: Leaving directory `/home/unimainz/maust/abinit-6.12.3'<br />make: *** &#91;all&#93; Error 2<br /></code></pre></div><br /><br />And please help me again.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit-6.10.3 and Error 77</h3>
+				<div class="date">Posted: <strong>Thu May 31, 2012 1:05 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Difficult to tell without more info. Make a diff between <em class="text-italics">symfind.F90</em> and <em class="text-italics">symfind_cpp.f90</em>, and look at what could have gone wrong. It will give you hints.<br /><br />A possible solution could be to find a GNU cpp or compatible on your system and give the <em class="text-italics">FPP=&quot;/path/to/your/cpp&quot;</em> argument to <em class="text-italics">configure</em>.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit-6.10.3 and Error 77</h3>
+				<div class="date">Posted: <strong>Thu May 31, 2012 8:14 pm</strong></div>
+				<div class="author">by <strong>Mascha</strong></div>
+				<div class="content">I made it. The building process finished with the help of your last hint. Thank you Pouillon.<br /><br />Then I wanted to make internal tests. And again went something wrong.<br /><br />The following output appeared after typing &quot;make testin_1&quot;:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make: *** No rule to make target `testin_1'.&nbsp; Stop.<br /></code></pre></div><br /><br />And after typing &quot;make tests_in&quot;:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make basic_tests<br />make&#91;1&#93;: Entering directory `/home/unimainz/maust/abinit-6.12.3'<br />cd ./tests &amp;&amp; make tests_in<br />make&#91;2&#93;: Entering directory `/home/unimainz/maust/abinit-6.12.3/tests'<br />make testin_1 testin_2 testin_3 testin_bigdft testin_etsf_io testin_libxc testin_wannier90<br />make&#91;3&#93;: Entering directory `/home/unimainz/maust/abinit-6.12.3/tests'<br />echo &quot;Running built-in test in_1&quot;<br />Running built-in test in_1<br />timeout=&quot;0&quot; perl ./Scripts/run-basic-tests.pl built-in in_1 /home/unimainz/maust/abinit-6.12.3/tests<br /><br />&nbsp;Status file, with repetition rate&nbsp; 99, status number&nbsp; &nbsp; 10<br /><br />&nbsp; Level abinit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: call macroin2<br />sh: line 1: 20177 Segmentation fault&nbsp; &nbsp; &nbsp; ../../../src/98_main/abinit &lt;testin_1.files &gt;testin_1.log<br /><br />&nbsp;Status file, with repetition rate&nbsp; 99, status number&nbsp; &nbsp; 10<br /><br />&nbsp; Level abinit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: call macroin2<br />echo &quot;Running built-in test in_2&quot;<br />Running built-in test in_2<br />timeout=&quot;0&quot; perl ./Scripts/run-basic-tests.pl built-in in_2 /home/unimainz/maust/abinit-6.12.3/tests<br /><br />&nbsp;Status file, with repetition rate&nbsp; 49, status number&nbsp; &nbsp; 10<br /><br />&nbsp; Level abinit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: call macroin2<br /><br />&nbsp;Status file, with repetition rate&nbsp; 49, status number&nbsp; &nbsp; 10<br /><br />&nbsp; Level abinit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: call macroin2<br />sh: line 1: 20195 Segmentation fault&nbsp; &nbsp; &nbsp; ../../../src/98_main/abinit &lt;testin_2.files &gt;testin_2.log<br /><br />&nbsp;Status file, with repetition rate&nbsp; 49, status number&nbsp; &nbsp; 10<br /><br />&nbsp; Level abinit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: call macroin2<br />echo &quot;Running built-in test in_3&quot;<br />Running built-in test in_3<br />timeout=&quot;0&quot; perl ./Scripts/run-basic-tests.pl built-in in_3 /home/unimainz/maust/abinit-6.12.3/tests<br />sh: line 1: 20218 Segmentation fault&nbsp; &nbsp; &nbsp; ../../../src/98_main/abinit &lt;testin_3.files &gt;testin_3.log<br /><br />&nbsp;Status file, with repetition rate&nbsp; 49, status number&nbsp; &nbsp; 10<br /><br />&nbsp; Level abinit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: call macroin2<br />make&#91;3&#93;: Nothing to be done for `testin_bigdft'.<br />make&#91;3&#93;: Nothing to be done for `testin_etsf_io'.<br />make&#91;3&#93;: Nothing to be done for `testin_libxc'.<br />make&#91;3&#93;: Nothing to be done for `testin_wannier90'.<br /></code></pre></div><br /><br />What should I do?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit-6.10.3 and Error 77</h3>
+				<div class="date">Posted: <strong>Fri Jun 01, 2012 3:35 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Since you built a parallel version of Abinit, you might have to submit a job in order to be able to run the tests.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit-6.10.3 and Error 77</h3>
+				<div class="date">Posted: <strong>Fri Jun 01, 2012 10:11 pm</strong></div>
+				<div class="author">by <strong>Mascha</strong></div>
+				<div class="content">Please write more in detail. Don't forget, I'm just a rookie. <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /><br />What do you mean with submit a job?<br />Yes, there is a old and working Abinit version on the server. Is it possible to install the new version without deleting the other one, or not?<br /><br />regards<br /><br />Maria</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit-6.10.3 and Error 77</h3>
+				<div class="date">Posted: <strong>Mon Jun 04, 2012 6:29 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">These are details you have to discuss with your system administrator.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1603&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:55:14 GMT -->
+</html>

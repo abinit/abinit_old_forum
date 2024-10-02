@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1612&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:53:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Installing abinit parallel on centOS 5.6</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Installing abinit parallel on centOS 5.6</h2>
+		<p><a href="viewtopic2277.html?f=3&amp;t=1612">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1612</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Installing abinit parallel on centOS 5.6</h3>
+				<div class="date">Posted: <strong>Tue Apr 10, 2012 7:23 pm</strong></div>
+				<div class="author">by <strong>lamsalc</strong></div>
+				<div class="content">Hi everyone,<br />   I got the following error message after I ran &quot;make multi multi_nprocs=8&quot;. However ./configure went well. I would be grateful for suggesting what the following error message indicates:<br /><strong class="text-strong">checking for linker flag to name executables... configure: error: Could not determine flag to name executables<br />See `config.log' for more details.</strong><br />_______________________________________________________________________________<br /><br /> cd fallbacks &amp;&amp; make<br />make[1]: Entering directory `/tmp/abinit-6.12.2/fallbacks'<br />make fox<br />make[2]: Entering directory `/tmp/abinit-6.12.2/fallbacks'<br />cd sources/FoX-4.1.2 &amp;&amp; \<br />          CPP=&quot;gcc -E&quot; \<br />          CPPFLAGS=&quot; -I/tmp/abinit-6.12.2/fallbacks/exports/include&quot; \<br />          CC=&quot;gcc&quot; \<br />          CFLAGS=&quot;-g -O2&quot; \<br />          CXX=&quot;g++&quot; \<br />          CXXFLAGS=&quot;&quot; \<br />          FCCPP=&quot;cpp -P -std=c99&quot; \<br />          F77=&quot;gfortran&quot; \<br />          FFLAGS=&quot;-ffixed-form -g    -O2 -mtune=native -march=native -mfpmath=sse -g -O2 -I/tmp/abinit-6.12.2/fallbacks/exports/include&quot; \<br />          F90=&quot;gfortran&quot; \<br />          F90FLAGS=&quot;-ffree-form -g    -O2 -mtune=native -march=native -mfpmath=sse -g -O2 -I/tmp/abinit-6.12.2/fallbacks/exports/include&quot; \<br />          FC=&quot;gfortran&quot; \<br />          FCFLAGS=&quot;-ffree-form -g    -O2 -mtune=native -march=native -mfpmath=sse -g -O2 -I/tmp/abinit-6.12.2/fallbacks/exports/include&quot; \<br />          LDFLAGS=&quot; &quot; \<br />          LIBS=&quot;&quot; \<br />          AR=&quot;ar&quot; \<br />          ARFLAGS=&quot;rc&quot; \<br />          RANLIB=&quot;ranlib&quot; \<br />          /bin/sh ./configure \<br />            --prefix=&quot;/tmp/abinit-6.12.2/fallbacks/exports&quot; \<br />            --program-suffix=&quot;-abinit&quot; \<br />            --enable-sax<br />checking build system type... x86_64-unknown-linux-gnu<br />checking host system type... x86_64-unknown-linux-gnu<br /><strong class="text-strong">checking for linker flag to name executables... configure: error: Could not determine flag to name executables<br />See `config.log' for more details.</strong><br />make[2]: *** [stamps/fox-config-stamp] Error 1<br />make[2]: Leaving directory `/tmp/abinit-6.12.2/fallbacks'<br />make[1]: [all-local] Error 2 (ignored)<br />Checking build of fox fallback<br />test -e stamps/fox-install-stamp<br />make[1]: *** [all-local] Error 1<br />make[1]: Leaving directory `/tmp/abinit-6.12.2/fallbacks'<br />make: *** [multi] Error 2<br /><br />Thank you!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Installing abinit parallel on centOS 5.6</h3>
+				<div class="date">Posted: <strong>Tue Apr 10, 2012 9:28 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />not enough infos !<br /><br />- your configure command and the config.log<br />- result of command <br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>which gfortran</code></pre></div><br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Installing abinit parallel on centOS 5.6</h3>
+				<div class="date">Posted: <strong>Tue Apr 10, 2012 11:12 pm</strong></div>
+				<div class="author">by <strong>lamsalc</strong></div>
+				<div class="content">Dear jmb,<br />     1) I configured with command &quot;./configure --with-config-file=./build.ac&quot;<br />where build.ac is:<br />_____________________________________________________________________________<br />enable_exports=&quot;yes&quot;<br />enable_pkg_check=&quot;yes&quot;<br />enable_gw_dpc=&quot;yes&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_prefix=&quot;/usr/lib64/openmpi&quot;<br />with_trio_flavor=&quot;netcdf+etsf_io+fox&quot;<br />with_dft_flavor=&quot;atompaw+bigdft+libxc+wannier90&quot;<br />with_linalg_flavor=&quot;atlas&quot;<br />with_linalg_libs=&quot;-L/usr/lib64/atlas -llapack -lf77blas -lcblas -latlas&quot;<br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_incs=&quot;-I/usr/include&quot;<br />with_fft_libs=&quot;-L/usr/lib64 -lfftw3&quot;<br />with_netcdf_incs=&quot;-I/usr/lib64/gfortran/modules&quot;<br />with_netcdf_libs=&quot;-L/usr/lib64 -lnetcdf -lnetcdff&quot;<br />with_libxc_incs=&quot;-I/usr/include -I/usr/lib64/gfortran/modules&quot;<br />with_libxc_libs=&quot;-L/usr/lib64 -lxc&quot;<br />__________________________________________________________<br />2) RESULT OF COMMAND:<br />Summary of important options:<br /><br />  * C compiler      : gnu version 4.1<br />  * Fortran compiler: gnu version 4.1<br />  * architecture    : intel xeon (64 bits)<br /><br />  * debugging       : basic<br />  * optimizations   : standard<br /><br />  * MPI    enabled  : yes<br />  * MPI-IO enabled  : yes<br />  * GPU    enabled  : no (none)<br /><br />  * TRIO   flavor = netcdf+etsf_io-fallback+fox-fallback<br />  * TIMER  flavor = abinit (libs: ignored)<br />  * LINALG flavor = atlas (libs: user-defined)<br />  * ALGO   flavor = none (libs: ignored)<br />  * FFT    flavor = fftw3 (libs: user-defined)<br />  * MATH   flavor = none (libs: ignored)<br />  * DFT    flavor = libxc+atompaw-fallback+bigdft-fallback+wannier90-fallback<br /><br />Configuration complete.<br /><br />3) config.log file is too long. If you want I can send it also.<br />Thank you very much!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Installing abinit parallel on centOS 5.6</h3>
+				<div class="date">Posted: <strong>Wed Apr 11, 2012 7:45 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hello<br /><br /><blockquote class="uncited"><div>* C compiler : gnu version 4.1<br />* Fortran compiler: gnu version 4.1</div></blockquote><br /><br />this version is very very very old and never supported  <img class="smilies" src="images/smilies/icon_rolleyes.gif" alt=":roll:" title="Rolling Eyes" /> <br /><br />the last supported version is gcc 4.3.x<br /><br />with this old OS version, it's possible to install gcc 4.4<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>yum install gcc44-gfortran.x86_64</code></pre></div><br /><br />good luck<br /><br />jmb</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1612&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:53:50 GMT -->
+</html>

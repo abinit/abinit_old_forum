@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=1071&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:19:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; problem in GW approximation</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>problem in GW approximation</h2>
+		<p><a href="viewtopicebf3.html?f=11&amp;t=1071">https://forum.abinit.org/viewtopic.php?f=11&amp;t=1071</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>problem in GW approximation</h3>
+				<div class="date">Posted: <strong>Thu May 05, 2011 4:29 pm</strong></div>
+				<div class="author">by <strong>amiri</strong></div>
+				<div class="content">Daer all users<br />I apply the GW-correction on the graphene sheet but i have a strange letters in the part of GW-energy. Does someone knows whats is the reason of that?<br />my input file is as below:<br /><br /><br />   # graphene  sheet<br /># Calculation of the G_0 W_0 corrections<br /><br />     ndtset   3<br /><br /># Dataset1: usual self-consistent ground-state calculation<br /> prtden1     1                 # Print out density<br /> prtpot1     1               # Print out the Hartree potential<br /> prtvxc1     1               # Print out the Hartree potential    <br /> nband1      20<br /> nbandkss1   20              # Number of bands in KSS file (the maximum possible)<br /> kssform1    3               # conjugate gradient algorithm<br /><br /># Calculation of the dielectric matrix<br />optdriver2    3<br />  getkss2     1<br /> ecuteps2     3.0 <br /> ecutwfn2     25.0<br />    awtr2     1<br />  nband2     20  <br /> gw_EET2     2   # switch on energy effective technique (EET) by Berger et al. PRB 82, 041103 (2010).<br /><br /><br /># Calculation of the GW corrections<br />    optdriver3   4<br />    getkss3      1<br />    getscr3      2<br />    nband3      20<br />    ecutwfn3    25.0<br />    ecutsigx3   8.0<br />    gw_EET3     2   # switch on energy effective technique (EET) by Berger et al. PRB 82, 041103 (2010).<br />    nkptgw3     1<br />    kptgw3      0.000   0.000   0.000<br />      # 1/3     0.000   0.000<br />    <br />    bdgw3       2  16<br />        # 2  16<br /><br /># GW calculation general parameters<br /># ppmfrq    10.0 eV<br />ppmodel     2      # Hybertson-Louie plasmon pole model<br />icutcoul    2        # =&gt; cylinder (nanowires, nanotubes)<br />vcutgeo     1 1 0    # along the z-axis, Beigi's approach, PRB 73, 233103<br />rcut        20  # radius of sphere for Coulomb potential cutoff<br />inclvkb     2    # When inclvkb==2 the commutator F(r1,r2) = [Vnl(r1,r2),r2] is rewritten<br />                # in reciprocal space in a fully separable form so that the storage<br />                # of the huge two-dimensional matrix F(G1,G2) is not needed.<br />                # On the contrary Inclvkb==1 requires the entire F(G1,G2) matrix hence<br />                # it is much more memory demanding and much slower for large cutoff energies.  <br />              # Hartree and xc potential is computed (which can require some<br />                # sizeable memory space also).<br />gwmem       0    # gwmem governs the memory strategy during a screening and/or a sigma run.<br />                # * gwmem = 1x , the screening matrix are read for all q-vectors and stored in the memory.<br />                # * gwmem = 0x , the screening matrix are read just a q-vector after another.<br />                # * gwmem = x1 , the real-space wavefunctions are stored in the memory.<br />                # * gwmem = x0 , the real-space wavefunctions are not stored,<br />                #                but rather recalculated on-fly each abinit needs them using FFTs.<br />                # The default is gwmem = 11, which is the fastest, but also the most memory consuming.<br />                # When experiencing memory shortage, one should try gwmem = 0. The first digit is<br />                # only meaningful when performing sigma calculations.<br /># mkmem     0    # Sets the maximum number of k points for which the ground state wavefunctions<br />                # are kept in core memory at one time.<br />                # This value should either be 0, in which case an out-of-core solution will be used<br />                # A reduction of the requireed memory can be achieved by opting for an out-of-core<br />                # solution (mkmem=0, only coded for optdriver=3) at the price of a drastic worsening<br />                # of the performance.<br />gwpara      1    # =&gt; parallelisation on bands<br />mffmem      1 <br /># Definition of the SCF procedure<br />ecut     25.0         # Maximal kinetic energy cut-off, in Hartree<br />nstep    120   <br />toldfe   1e-10<br />diemac   2.0    <br />iscf     7<br /><br /># BZ sampling   <br />kptopt      1               # Option for the automatic generation of k points,<br />nshiftk     1<br />shiftk      0.0 0.0 0.0     # These shifts will be the same for all grids<br />istwfk      *1  <br />ngkpt       2 1 1<br />symmorphi   0               # Use only symmorphic operations<br /><br /><br />####################################################################################<br /># Definition of the structure<br />####################################################################################<br />chkprim       0<br />chksymbreak   0<br />acell   4.6390262670  8.077574780  40.0000<br /><br />rprim   1.0  0.0  0.0<br />          0.0  1.0  0.0<br />          0.0  0.0  1.0<br /><br /># Definition of the atom types<br />ntypat  1<br />znucl   6<br /> natom   4<br />typat   1 1 1 1<br />xangst<br /><br />       8.5905895062E+00   3.5515456535E+00   0.0000000000E+00<br />       9.8181907544E+00   4.266591258E+00    0.0000000000E+00<br />       8.5904597857E+00   2.1292785330E+00   0.0000000000E+00<br />       9.8181668072E+00   1.4145377489E+00   0.0000000000E+00<br /><br /><br /><br />and the part of my output file that include strange letters is as below:<br /><br />k =    0.000   0.000   0.000<br /> Band     E0 &lt;VxcLDA&gt;   SigX SigC(E0)      Z dSigC/dE  Sig(E)    E-E0       E<br />    2 -16.814 -16.076 -23.436    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ<br />    3 -15.827 -15.592 -21.572    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ<br />    4 -10.207 -12.806 -16.012    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ<br />    5  -8.910 -16.985 -21.238    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ<br />    6  -5.679 -17.455 -20.688    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ<br />    7  -5.546 -17.576 -21.264    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ<br />    8  -4.955 -13.838 -15.232    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ<br />    9  -0.908 -13.134  -7.499    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ<br />   10   0.613  -3.002  -1.144    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ<br />   11   1.378  -1.458  -0.313    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ<br />   12   1.679  -0.304  -0.089    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ<br />   13   2.478  -0.896  -0.208    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ<br />   14   2.898  -0.885  -0.335    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ<br />   15   4.364  -1.133  -0.290    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ<br />   16   4.928  -1.249  -0.464    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ    NaNQ<br /><br /><br /><br />the output file and log file are also attached to this e-mail. <br />Any suggestion will be appreciated.<br />Thanks<br />Peiman</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem in GW approximation</h3>
+				<div class="date">Posted: <strong>Sat May 07, 2011 5:42 pm</strong></div>
+				<div class="author">by <strong>Robin</strong></div>
+				<div class="content">Dear Peiman,<br /><br />   I did such calculation before and the attached is my input file for your reference.<br /><br />Sincerely,<br />Guangfu Luo</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=1071&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:19:57 GMT -->
+</html>

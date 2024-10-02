@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=2164&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:14:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Converged parameters in tgw2 tutorial</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Converged parameters in tgw2 tutorial</h2>
+		<p><a href="viewtopic4e14-2.html?f=11&amp;t=2164">https://forum.abinit.org/viewtopic.php?f=11&amp;t=2164</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Converged parameters in tgw2 tutorial</h3>
+				<div class="date">Posted: <strong>Fri May 31, 2013 4:07 am</strong></div>
+				<div class="author">by <strong>KalaShayminS</strong></div>
+				<div class="content">The GW2 tutourial mentioned that if parameters in Bruneval[2006] is used, the G0W0 band width should be 10.54eV.<br /><br />I tried to modified tgw2_x series input files and obtain this value, but my result is ( New Fermi 7.179047eV - Gamma point lowest energy -2.737eV) 9.92eV , which is different from 10.54eV. Also, as the nfreqre increases, the result keeps changing in the order of 0.1eV .<br /><br />Could anyone help where is the problem of the input file? <br />Thanks very much.<br /><br /><br />the input file:<br />-----------------------------------<br />ndtset    4<br />paral_kgb 0<br /><br /><br />  nband1    10<br /> toldfe1   1.0d-8<br />  ngkpt1   4 4 4<br />nshiftk1   4<br /> shiftk1   0 0 0   1/2 1/2 0   1/2 0 1/2  0 1/2 1/2<br /> istwfk1     *1<br /><br />   ngkpt      4 4 4<br /> nshiftk     1<br />  shiftk      0  0  0<br />  istwfk      *1<br /><br />iscf2        -2<br />getden2      1<br />kssform2     3<br />nband2      105<br />nbdbuf2      5<br />nbandkss2   100<br />tolwfr2     1.0d-10<br />#npwkss2     89<br /><br />getkss3   2<br /><br />optdriver3    3<br />gwcalctyp3   22<br />nband3       50<br />ecuteps3     4<br />ecutwfn3     4<br /><br />nfreqim3      6<br />nfreqre3     20<br />freqremax3    1.<br />awtr3         0       # Note : the default awtr 1 is better<br /><br />#Step 4:GW calculation<br /><br />getkss4  2<br />getscr4  3<br /><br />optdriver4    4<br />nband4       50<br />ecutsigx4    7<br />ecutwfn4     7<br /><br />gwcalctyp4   22<br /><br /> nkptgw4       8<br /> kptgw4<br />       0.000000    0.000000    0.000000<br />       0.250000    0.000000    0.000000<br />       0.500000    0.000000    0.000000<br />       0.250000    0.250000    0.000000<br />       0.500000    0.250000    0.000000<br />      -0.250000    0.250000    0.000000<br />       0.500000    0.500000    0.000000<br />      -0.250000    0.500000    0.250000<br /><br /> bdgw4<br />            1 8<br />            1 8<br />            1 8<br />            1 8<br />            1 8<br />            1 8<br />            1 8<br />            1 8<br /><br />#Definition of occupation numbers<br />occopt 3<br />tsmear 0.05<br /><br />#Definition of the unit cell<br />acell 3*7.652<br /><br />rprim  0.0  0.5  0.5   # FCC primitive vectors (to be scaled by acell)<br />       0.5  0.0  0.5<br />       0.5  0.5  0.0<br /><br />#Definition of the atom types<br />ntypat 1<br />znucl 13<br /><br />#Definition of the atoms<br />natom 1<br />typat 1<br />xred  0.0  0.0  0.0<br /><br />#Definition of the planewave basis set<br />ecut  8.0<br /><br />#Definition of the SCF procedure<br />nstep 50<br />#toldfe 1.0d-8     <br /><br />prtvol     5<br />enunit     1<br /># add to conserve old &lt; 6.7.2 behavior for calculating forces at each SCF step<br />optforces 1<br />---------------------------------------------------------</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=2164&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:14:45 GMT -->
+</html>

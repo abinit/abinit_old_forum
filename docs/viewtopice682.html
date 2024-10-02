@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3595&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:56:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Phonon Calculation</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Phonon Calculation</h2>
+		<p><a href="viewtopic44af.html?f=10&amp;t=3595">https://forum.abinit.org/viewtopic.php?f=10&amp;t=3595</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Phonon Calculation</h3>
+				<div class="date">Posted: <strong>Fri May 12, 2017 8:53 pm</strong></div>
+				<div class="author">by <strong>xh59</strong></div>
+				<div class="content">Dear all,<br /><br />I was trying to calculate niobium (bcc structure) phonon dispersion using response function method.<br />Here I followed tutorial <a href="http://www.abinit.org/doc/helpfiles/for-v8.2/tutorial/lesson_rf2.html" class="postlink">http://www.abinit.org/doc/helpfiles/for-v8.2/tutorial/lesson_rf2.html</a><br /><br />So I used trf2_2.in to generate my qpt for trf2_1.in. <br />When I use ngkpt 4 4 4, everything is right and I can get my phonon dispersion.<br /><br />But if I used ngkpt 5 5 5, anaddb said body centered lattice must use even ngqpt.<br /><br />--- !ERROR<br />message: |<br />    For body-centered lattices, the numbers ngqpt(1:3)<br />      must be even, while they are :<br />      ngqpt(1)*nshiftk =      5<br />      ngqpt(2)*nshiftk =      5<br />      ngqpt(3)*nshiftk =      5<br />      Action : modify ngqpt(1:3) in the input file.<br />src_file: smpbz.F90<br />src_line: 330<br /><br /><br />Could you tell me why it must be even? I thought I can use any grid I want.<br /><br />Thanks,<br />Xing</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Phonon Calculation&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Tue May 16, 2017 9:23 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hi Xing,<br /><br />you can use a _centered_ default grid (shiftk 0 0 0 nshiftk 1) of any density, including 5 5 5.<br /><br />The _optimal_ grid for BCC systems uses 2 shifts and has to be even (see paragraph under shiftk in the input variables web site) - this gives you the best quality integral for a given number of irreducible k-points.<br /><br />Further, as your q-points have to be differences of k-point grids, using a prime number like 5 or 7 is very constraining. You will have to do ngqpt 5 5 5 as well...<br /><br />cheers</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3595&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:56:57 GMT -->
+</html>

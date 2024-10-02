@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=4156&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 16:24:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Phonon calculations</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Phonon calculations</h2>
+		<p><a href="viewtopic6948.html?f=11&amp;t=4156">https://forum.abinit.org/viewtopic.php?f=11&amp;t=4156</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Phonon calculations</h3>
+				<div class="date">Posted: <strong>Wed Jul 24, 2019 5:27 pm</strong></div>
+				<div class="author">by <strong>saikrishna</strong></div>
+				<div class="content">Hello <br />I am doing tutorials trf1_3.in and I am stuck in the place where they calculate the dynamical matrices for phonons. Can someone help me out with that?<br /><br />Thank you in advance.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Phonon calculations</h3>
+				<div class="date">Posted: <strong>Thu Jul 25, 2019 11:12 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear saikrishna,<br />What do you mean by &quot;stuck&quot;, I mean what is blocking you exactly?<br />Cheers,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Phonon calculations</h3>
+				<div class="date">Posted: <strong>Tue Aug 13, 2019 5:24 pm</strong></div>
+				<div class="author">by <strong>saikrishna</strong></div>
+				<div class="content">Hey Eric<br />I found the answer for my previous question but I have a doubt on what is a q point in brillouin zone?<br /><br />Thanks in advance <br />Sai krishna.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Phonon calculations</h3>
+				<div class="date">Posted: <strong>Thu Aug 22, 2019 12:10 pm</strong></div>
+				<div class="author">by <strong>saikrishna</strong></div>
+				<div class="content">Hey<br />I have a doubt here in executing the file which I wrote. Please tell me my mistake  and the correct me asap.<br />PFA.<br />Thanks in advance <br />Sai krishna</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Phonon calculations</h3>
+				<div class="date">Posted: <strong>Mon Sep 02, 2019 3:25 pm</strong></div>
+				<div class="author">by <strong>saikrishna</strong></div>
+				<div class="content">Hey everybody,<br />I am running phonon calculations for a material for which I obtained negative frequencies. May I know what does it mean or is it something wrong in the code which is responsible?<br /><br />Thanks in advance<br />Sai krishna N.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Phonon calculations</h3>
+				<div class="date">Posted: <strong>Mon Oct 28, 2019 10:42 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Sai krishna,<br />Negative frequencies corresponds actually to imaginary frequencies. <br />1) These values can appears if your system is not stable w.r.t. atomic displacements (unstable phonon), meaning your structure is not the ground state one. You can find the ground state structure by displacing the atoms following the eigenvector given by the unstable mode(s) (also called mode condensation). Then you know your structure is stable once no &quot;negative&quot; frequency is present in your calculation. In this case these negative frequencies are physically relevant.<br />2) Your system is supposed to be stable locally or supposed to be the ground state and you still find negative values for phonon frequencies. Here two source cases can be discussed: <br /> a) Your calculation gives the so called &quot;acoustic sum rule&quot; (ASR) problem (the translation invariance is broken in your calculation, which is revealed by missing 3 phonons at zero frequency exactly). You can fix that after your Abinit calculation by using the post-processing tool anaddb and re-enforce the ASR by using the flag asr <a href="https://docs.abinit.org/variables/anaddb/#asr" class="postlink">https://docs.abinit.org/variables/anaddb/#asr</a>.<br /> b) if after imposing the asr it is still a problem then there is probably a problem of convergence of your calculation.<br />Note that the ASR can be violated a bit a by few cm-1, this still gives a good result for the phonons.<br />ASR can be imposed directly in the abinit DFPT calculation (<a href="https://docs.abinit.org/variables/eph/#asr" class="postlink">https://docs.abinit.org/variables/eph/#asr</a>) but if an ASR violation is present you will not notice it, which can be usefull information; I advise to impose it after DFPT calculation with anaddb for example.<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Phonon calculations</h3>
+				<div class="date">Posted: <strong>Thu Nov 07, 2019 10:22 am</strong></div>
+				<div class="author">by <strong>saikrishna</strong></div>
+				<div class="content">Hey Eric,<br />Thank you for your reply and now I have a doubt with the code which I have attached and so please help me in solving the issue.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Phonon calculations</h3>
+				<div class="date">Posted: <strong>Thu Nov 21, 2019 2:57 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Sai krishna,<br>
+Could you tell us a bit more about what you want to calculate, system, etc?<br>
+Thanks,<br>
+Eric<br>
+PS: note that you posted in the GW forum while it is a problem of phonon/linear response you are asking for. Please be careful to choose the right forum topic that is in line with your problem as much as possible. Thanks!</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=4156&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 16:24:44 GMT -->
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=4498&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 16:00:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; In repfn calculation, istwfk is supposed to be 1</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>In repfn calculation, istwfk is supposed to be 1</h2>
+		<p><a href="viewtopic8302.html?f=10&amp;t=4498">https://forum.abinit.org/viewtopic.php?f=10&amp;t=4498</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>In repfn calculation, istwfk is supposed to be 1</h3>
+				<div class="date">Posted: <strong>Mon Aug 10, 2020 10:07 pm</strong></div>
+				<div class="author">by <strong>tyst3273</strong></div>
+				<div class="content">Hi Abinit users,<br>
+<br>
+I am using Abinit 9.0.4.<br>
+<br>
+(I created another post a few minutes ago for a similar calculation, but I believe that problem is unrelated to this one. I am not double posting to get my problem seen! Sorry if these two issues are related!)<br>
+<br>
+<br>
+While trying to do a response function calculation, Abinit crashes complaining that istwfk is supposed to be 1 for all kpoints. I don't set this number in the input file and it apparently is supposed to be enforced automatically by Abinit for respfn calculations (the variables webpage says this!).<br>
+<br>
+The code crashes with the following error: <br>
+<br>
+ chkinp: Checking input parameters for consistency, jdtset=   1.<br>
+<br>
+--- !ERROR<br>
+src_file: m_chkinp.F90<br>
+src_line: 1282<br>
+mpi_rank: 0<br>
+message: |<br>
+    Only the gamma point can use time-reversal and wfoptalg=4 or 14<br>
+    Action: put istwfk to 1 or remove k points with half integer coordinates<br>
+    Also contact ABINIT group to say that you need that option.<br>
+...<br>
+<br>
+--- !ERROR<br>
+src_file: m_chkinp.F90<br>
+src_line: 3665<br>
+mpi_rank: 0<br>
+message: |<br>
+    One of the components of istwfk is not equal to 1 or 2.<br>
+    Time-reversal symmetry is not yet programmed in the case of band-FFT parallelization.<br>
+    Action: set istwfk to 1 or 2 for all k-points<br>
+...<br>
+<br>
+ chkinp: Checking input parameters for consistency, jdtset=   2.<br>
+<br>
+--- !ERROR<br>
+src_file: m_chkinp.F90<br>
+src_line: 3855<br>
+mpi_rank: 0<br>
+message: |<br>
+    Checking consistency of input data against itself gave 2 inconsistencies.<br>
+    The details of the problems can be found above.<br>
+...<br>
+<br>
+<br>
+<br>
+The q-point is 0.5 0 0. <br>
+<br>
+The input pert.in and gs.in files are attached.<br>
+<br>
+Any help is appreciated! <br>
+<br>
+Thanks a lot, <br>
+<br>
+Ty</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: In repfn calculation, istwfk is supposed to be 1</h3>
+				<div class="date">Posted: <strong>Wed Aug 12, 2020 12:01 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Ty,<br>
+Strange indeed, what about if you remove the nsppol, nspden and spinat flags since you have no magnetism?<br>
+I would also remove completely autoparal flag because the error is associated to the algo used for parallelism and for DFPT paral_kgb is not working. Could you test this and tell us the result?<br>
+Otherwise just set istwfk *1 as requested...<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: In repfn calculation, istwfk is supposed to be 1</h3>
+				<div class="date">Posted: <strong>Wed Aug 12, 2020 5:09 pm</strong></div>
+				<div class="author">by <strong>tyst3273</strong></div>
+				<div class="content">Hi Eric,<br>
+Thanks again for the reply!<br>
+<br>
+I removed autoparal and it runs without crashing (so far, it is still running). nsppol, etc. had no effect. <br>
+<br>
+Apparently the problem occurred during the nscf (k+q) step with autoparal present. I should have noticed and mentioned that istwfk in the .abo file was correct (only 1's and 0's) for the response function dataset (with rfphon=1). It looks like Abinit was complaining about istwfk being wrong in the nscf (with k+q) run (1's, 3's, and 0's is what I saw). Does istwfk need to be only 1's in the nscf run?<br>
+<br>
+Thanks again,<br>
+Ty</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: In repfn calculation, istwfk is supposed to be 1</h3>
+				<div class="date">Posted: <strong>Wed Aug 19, 2020 10:23 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Hi Ty,<br>
+It sounds that at your nscf k+q, you end up with a grid that is not OK with time-reversal symmetry (well, as it is presently implemented). Just setting istwfk*1 or *0 works fine a the end?<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: In repfn calculation, istwfk is supposed to be 1</h3>
+				<div class="date">Posted: <strong>Tue Aug 25, 2020 5:58 pm</strong></div>
+				<div class="author">by <strong>tyst3273</strong></div>
+				<div class="content">Hi Eric,<br>
+<br>
+I removed autoparal and it solved my problem. I considered this satisfactory and didn't bother setting istwfk.<br>
+<br>
+For troubleshooting purposes, would you like me to try this?<br>
+<br>
+Thanks again,<br>
+Ty</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: In repfn calculation, istwfk is supposed to be 1&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Wed Aug 26, 2020 10:34 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Hi Ty,<br>
+OK, thank you for your response, no need to test istwfk *1 if autoparall worked at the end, I'll keep in mind this potential problem.<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=4498&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 16:00:39 GMT -->
+</html>

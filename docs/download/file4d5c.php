@@ -1,0 +1,12 @@
+die_wS3.ddb.out
+HfO2 phonons on 2 2 2 mesh
+9
+die_wS_o_DS3_DDB
+die_wS_o_DS4_DDB
+die_wS_o_DS5_DDB
+die_wS_o_DS6_DDB
+die_wS_o_DS7_DDB
+die_wS_o_DS8_DDB
+die_wS_o_DS9_DDB
+die_wS_o_DS10_DDB
+die_wS_o_DS11_DDB

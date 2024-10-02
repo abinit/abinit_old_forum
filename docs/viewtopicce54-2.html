@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?p=839 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Convergence stops due to NaN after 20 Broyden steps - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopic789c.html?t=281">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="4"><a href="viewforum31e6.html?f=4" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Running Abinit</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="9"><a href="viewforumfdc5.html?f=9" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Ground state</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopicf275.html?f=9&amp;t=281">Convergence stops due to NaN after 20 Broyden steps</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Total energy, geometry optimization, DFT+U, spin....<br /></div>
+<p>
+	<strong>Moderator:</strong> <a href="memberlista146.html?mode=viewprofile&amp;u=2687" class="username">bguster</a>
+</p>
+
+
+<div class="action-bar bar-top">
+	
+			<a href="postinge034.html?mode=reply&amp;f=9&amp;t=281" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopicd88c.html?f=9&amp;t=281&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="281" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			4 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p839" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile839">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistb003.html?mode=viewprofile&amp;u=190" class="username">marcs</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search0cc3.html?author_id=190&amp;sr=posts">12</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Mar 01, 2010 9:07 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content839">
+
+						<h3 class="first"><a href="#p839">Convergence stops due to NaN after 20 Broyden steps</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting3e90.html?mode=quote&amp;f=9&amp;p=839" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicce54-2.html?p=839#p839" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistb003.html?mode=viewprofile&amp;u=190" class="username">marcs</a></strong> &raquo; </span>Thu Apr 29, 2010 9:59 am
+			</p>
+			
+			
+			
+			<div class="content">Hi forum,<br /><br />after 20 Broyden/MD steps the convergence stops with lots of NaN values.<br />I am using abinit 6.0.3 and are calculating charged O-Vacancies in ZnO with jellium background.<br />Calculations without charge and with &quot;charge +1&quot; ran fine, &quot;charge +2&quot; ends up with NaN error.<br />USPP and PAW was used.<br /><br />Any help is very much appreciated.<br /><br />Marc<br /><br />BTW: Couldn't upload log file as *.gz or *.7z so I had to insert some of the text below.<br /><br /><strong class="text-strong">Part of the log file:</strong><br /><br />******  TOTAL Dij    in Ha (atom      1) *****<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN ...<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN ...<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN ...<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN ...<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN ...<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN ...<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN ...<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN ...<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN ...<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN ...<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN ...<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN ...<br />   ...  only 12  components have been written...<br /><br /> ******  TOTAL Dij    in Ha (atom     71) *****<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN<br /><br /> ITER STEP NUMBER    31<br /> vtorho : nnsclo_now=  1, note that nnsclo,dbl_nnsclo,istep=  0 0 31<br /> starting lobpcg, with nblockbd,mpi_enreg%nproc_band          47           7<br /> WARNING in zheev, info=           6<br />WARNING in zpotrf, info=  1<br /> WARNING in zhegv, info=          13<br />WARNING in zpotrf, info=  1<br />WARNING in zpotrf, info=  1<br /> WARNING in zheev, info=          20<br /> condition number of the Gram matrix= NaN                    <br /> Lobpcgccwf: restart performed<br /><br /><br /><br /><br /><br /><strong class="text-strong">Part of the input file:</strong><br /><br />#ZnO wurzite (hexagonal) structure<br />#Structural optimization run<br /><br />#Datasets: convergence on ecut<br />  ndtset 1 jdtset 1<br /><br /># Set 1 : Internal coordinate optimization<br />irdwfk1    1<br />ionmov1   2            # Use BFGS algorithm for structural optimization<br />ntime1    80            # Maximum number of optimization steps<br />tolmxf1   1.0e-6       # Optimization is converged when maximum force<br />tolvrs1   1.0d-15      # Strict tolerance on (squared) residual of the SCF<br /><br /><br />kptopt   1<br />ngkpt    2 2 2        # 2x2x2 Monkhorst-Pack grid<br />nshiftk  1            # Use one copy of grid only (default)<br />shiftk   0.0 0.0 0.5  # This choice of origin for the k point grid<br />                        # preserves the hexagonal symmetry of the grid,<br />                        # which would be broken by the default choice.<br /><br /># GGA+U definition<br />  usepawu  1<br />  lpawu    2 -1<br />  upawu   9.5 0.0 eV   # Relaxation without U<br />  jpawu   1.0 0.0 eV   # Relaxation without J<br /><br />#Common input data<br />#Starting approximation for the unit cell<br />   acell    1.8537890785E+01  1.8537890785E+01  1.9866355563E+01 Bohr<br />   rprim  sqrt(0.75) 0.5 0.0<br />          -sqrt(0.75) 0.5 0.0<br />          0.0  0.0  1.0<br />   chkprim 0<br /><br />#Definition of the atom types and atoms<br /> ntypat  2 <br /> znucl   30 8<br /> natom   71<br /> typat   36*1 35*2<br /><br />             xred    1.1158587310E-01  2.2245960322E-01 -1.1879629568E-03<br />                     4.4518115260E-01  2.2369563853E-01  1.8061593371E-03<br />                     7.7754039678E-01  2.2245960322E-01 -1.1879629568E-03                     <br />                     1.1093572920E-01  5.5520479173E-01 -1.0589297328E-03<br />                     4.4518115260E-01  5.5481884740E-01  1.8061593371E-03<br />                     7.7630436147E-01  5.5481884740E-01  1.8061593371E-03<br />                     1.1093572920E-01  8.8906427080E-01 -1.0589297328E-03<br />                     4.4479520827E-01  8.8906427080E-01 -1.0589297328E-03<br />                     7.7754039678E-01  8.8841412690E-01 -1.1879629568E-03<br />                     1.1165198357E-01  2.2249265845E-01  4.9982369899E-01<br />                     4.5176319710E-01  2.3685972753E-01  4.9441137386E-01<br />                     7.7750734155E-01  2.2249265845E-01  4.9982369899E-01<br />                     1.1117830071E-01  5.5568993475E-01  4.9933888661E-01<br />                     4.5176319710E-01  5.4823680290E-01  4.9441137386E-01<br />                     7.6314027247E-01  5.4823680290E-01  4.9441137386E-01<br />                     1.1117830071E-01  8.8882169929E-01  4.9933888661E-01<br />                     4.4431006525E-01  8.8882169929E-01  4.9933888661E-01<br />                     7.7750734155E-01  8.8834801643E-01  4.9982369899E-01<br />                     2.2232943022E-01  1.1154468830E-01  2.4981368076E-01<br />                     5.5588192475E-01  1.1154468830E-01  2.4981368076E-01<br />                     8.8888888889E-01  1.1111111111E-01  2.4913885622E-01<br />                     2.2232943022E-01  4.4411807525E-01  2.4981368076E-01<br />                     5.5555555556E-01  4.4444444444E-01  2.6579918406E-01<br />                     8.8845531170E-01  4.4411807525E-01  2.4981368076E-01<br />                     2.2222222222E-01  7.7777777778E-01  2.4904616371E-01<br />                     5.5588192475E-01  7.7767056978E-01  2.4981368076E-01<br />                     8.8845531170E-01  7.7767056978E-01  2.4981368076E-01<br />                     2.2359868664E-01  1.1179025810E-01  7.4836279846E-01<br />                     5.5485823813E-01  1.1179025810E-01  7.4836279846E-01<br />                     8.8888888889E-01  1.1111111111E-01  7.4957808757E-01<br />                     2.2359868664E-01  4.4514176187E-01  7.4836279846E-01<br />                     5.5555555556E-01  4.4444444444E-01  7.4981788550E-01<br />                     8.8820974190E-01  4.4514176187E-01  7.4836279846E-01<br />                     2.2222222222E-01  7.7777777778E-01  7.4945537609E-01<br />                     5.5485823813E-01  7.7640131336E-01  7.4836279846E-01<br />                     8.8820974190E-01  7.7640131336E-01  7.4836279846E-01<br />                     1.1113184592E-01  2.2223258962E-01  1.8925571115E-01<br />                     4.4623509068E-01  2.2580351469E-01  1.9281540640E-01<br />                     7.7776741038E-01  2.2223258962E-01  1.8925571115E-01<br />                     1.1087055125E-01  5.5507443583E-01  1.8964361359E-01<br />                     4.4623509068E-01  5.5376490932E-01  1.9281540640E-01<br />                     7.7419648531E-01  5.5376490932E-01  1.9281540640E-01<br />                     1.1087055125E-01  8.8912944875E-01  1.8964361359E-01<br />                     4.4492556417E-01  8.8912944875E-01  1.8964361359E-01<br />                     7.7776741038E-01  8.8886815408E-01  1.8925571115E-01<br />                     1.1120090020E-01  2.2226711677E-01  6.8984914045E-01<br />                     4.4538387608E-01  2.2410108550E-01  6.8547647903E-01<br />                     7.7773288323E-01  2.2226711677E-01  6.8984914045E-01<br />                     1.1103721008E-01  5.5540775349E-01  6.8948926684E-01<br />                     4.4538387608E-01  5.5461612392E-01  6.8547647903E-01<br />                     7.7589891450E-01  5.5461612392E-01  6.8547647903E-01<br />                     1.1103721008E-01  8.8896278992E-01  6.8948926684E-01<br />                     4.4459224651E-01  8.8896278992E-01  6.8948926684E-01<br />                     7.7773288323E-01  8.8879909980E-01  6.8984914045E-01<br />                     2.2526913149E-01  1.1335176965E-01  4.4015508590E-01<br />                     5.5474930483E-01  1.1335176965E-01  4.4015508590E-01<br />                     8.8888888889E-01  1.1111111111E-01  4.3970831420E-01<br />                     2.2526913149E-01  4.4525069517E-01  4.4015508590E-01<br />                     8.8664823035E-01  4.4525069517E-01  4.4015508590E-01<br />                     2.2222222222E-01  7.7777777778E-01  4.3914801371E-01<br />                     5.5474930483E-01  7.7473086851E-01  4.4015508590E-01<br />                     8.8664823035E-01  7.7473086851E-01  4.4015508590E-01<br />                     2.2352660024E-01  1.1170637492E-01  9.3926452617E-01<br />                     5.5484644135E-01  1.1170637492E-01  9.3926452617E-01<br />                     8.8888888889E-01  1.1111111111E-01  9.3975656713E-01<br />                     2.2352660024E-01  4.4515355865E-01  9.3926452617E-01<br />                     5.5555555556E-01  4.4444444444E-01  9.3909401631E-01<br />                     8.8829362508E-01  4.4515355865E-01  9.3926452617E-01<br />                     2.2222222222E-01  7.7777777778E-01  9.3970511776E-01<br />                     5.5484644135E-01  7.7647339976E-01  9.3926452617E-01<br />                     8.8829362508E-01  7.7647339976E-01  9.3926452617E-01<br /><br /><br />#Definition of the plane wave basis set<br />  ecut   16.0           # Maximum kinetic energy cutoff (Hartree)<br />  ecutsm   0.5          # Smoothing energy needed for lattice paramete<br />  pawecutdg 32.0<br /><br /><br />#Definition of the self-consistency procedure<br />  diemac   9.0          # Model dielectric preconditioner<br />  nstep   80            # Maxiumum number of SCF iterations<br />  istwfk  *1             # Do NOT take advantage of the time-reversal symmetry<br />  charge  2<br />#Definition of parallelization<br /><br />paral_kgb 1           # Parallelize over k-points<br />wfoptalg 14           # Locally Optimal Block Preconditioned ConjugateGradient<br />fftalg 401            # FFT routines for MPI<br />intxc 0               # &quot;Usual&quot; xc quadrature on fft grid<br />fft_opt_lob 2         # Calls to getghc made parallel on set of bands nbdblock<br />npkpt 2               # Number of processors for k-point parallelization<br />npband 7              # Number of processors for band parallization<br />npfft 1               # Number of processors for fft parallelization<br />bandpp 1              # Bands per processor<br />iprcch 6              # Forces corrected with use of Harris functional formula<br />accesswff 1           # Make wave functions accessible via MPI I/O</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p880" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile880">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist32d1.html?mode=viewprofile&amp;u=72" class="username">mverstra</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search1bef.html?author_id=72&amp;sr=posts">655</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Aug 19, 2009 12:01 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content880">
+
+						<h3 ><a href="#p880">Re: Convergence stops due to NaN after 20 Broyden steps</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingc1c0.html?mode=quote&amp;f=9&amp;p=880" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic0d89.html?p=880#p880" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist32d1.html?mode=viewprofile&amp;u=72" class="username">mverstra</a></strong> &raquo; </span>Tue May 04, 2010 5:02 pm
+			</p>
+			
+			
+			
+			<div class="content">Have you checked that the atomic positions are still reasonable at the last steps? Broyden may have exploded the cell or something. Try restarting with the final positions to see whether it is a &quot;real&quot; bug or some accumulated error in the current wavefunctions/projectors.<br /><br />Does the ETOT stay reasonable, and is it only the Dij which contain NaNs?<br /><br />Matthieu</div>
+			
+			
+			
+									
+									<div id="sig880" class="signature">Matthieu Verstraete<br />University of Liege, Belgium</div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p901" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile901">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistb003.html?mode=viewprofile&amp;u=190" class="username">marcs</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search0cc3.html?author_id=190&amp;sr=posts">12</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Mar 01, 2010 9:07 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content901">
+
+						<h3 ><a href="#p901">Re: Convergence stops due to NaN after 20 Broyden steps</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting41e5-2.html?mode=quote&amp;f=9&amp;p=901" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicead7.html?p=901#p901" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistb003.html?mode=viewprofile&amp;u=190" class="username">marcs</a></strong> &raquo; </span>Wed May 05, 2010 9:29 pm
+			</p>
+			
+			
+			
+			<div class="content">Thanks Matthieu for your response.<br /><br />The atomic positions in the output file still seem reasonable to me. But restarting with these positions does not converge and gives ETOT between 2880 and up to 138000 Ha. Maybe you are right about the exploded cell. <br /><br />Attached you will find the ETOT of the last Broyden step. Not only Dij shows NaN, it is also etotal, fcart and strten.<br /><br /> ETOT 20  -2878.4926707535     8.595E-11 1.399E-07 7.458E-10 1.212E-06 5.057E-04<br /> ETOT 21  -2878.4926707538    -3.101E-10 1.451E-07 1.235E-09 1.657E-06 5.054E-04<br /> ETOT 22  -2878.4926707541    -3.101E-10 1.456E-07 6.548E-10 7.661E-07 5.055E-04<br /> ETOT 23  -2878.4926707537     4.075E-10 1.390E-07 5.117E-10 1.560E-07 5.055E-04<br /> ETOT 24  -2878.4926707532     5.152E-10 1.295E-07 3.031E-10 4.269E-07 5.055E-04<br /> ETOT 25  -2878.4926707537    -4.702E-10 1.094E-07 4.816E-10 5.502E-07 5.054E-04<br /> ETOT 26  -2878.4926707541    -4.584E-10 1.193E-07 3.974E-10 6.315E-07 5.055E-04<br /> ETOT 27  -2878.4926707544    -2.528E-10 1.111E-07 4.117E-10 7.349E-07 5.053E-04<br /> ETOT 28                   NaN NaN       1.192E-07 NaN       NaN       NaN<br /> ETOT 29                   NaN NaN       0.000E+00 NaN       NaN       NaN<br /> ETOT 30                   NaN NaN       0.000E+00 NaN       NaN       NaN<br /><br />Kind regards,<br />Marc</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p1163" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile1163">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistf025.html?mode=viewprofile&amp;u=116" class="username">Robin</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search83ec.html?author_id=116&amp;sr=posts">61</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jan 14, 2010 3:18 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content1163">
+
+						<h3 ><a href="#p1163">Re: Convergence stops due to NaN after 20 Broyden steps</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingcc0b.html?mode=quote&amp;f=9&amp;p=1163" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic18c0.html?p=1163#p1163" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistf025.html?mode=viewprofile&amp;u=116" class="username">Robin</a></strong> &raquo; </span>Sat Jun 12, 2010 1:14 pm
+			</p>
+			
+			
+			
+			<div class="content">I also encountered such problem several times before in both geometrical and RF calculations. I increased the value of toldfe, and Abinit worked again.<br /><br />Sincerely,<br />Guangfu Luo</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="postinge034.html?mode=reply&amp;f=9&amp;t=281" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopicd88c.html?f=9&amp;t=281&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=9&amp;t=281">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			4 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforumfdc5.html?f=9" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Ground state”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?p=839 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:23 GMT -->
+</html>

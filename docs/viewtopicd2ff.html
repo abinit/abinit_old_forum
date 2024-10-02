@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=910&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:43:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; timeout.c compilation on ibm</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>timeout.c compilation on ibm</h2>
+		<p><a href="viewtopic71e5.html?f=3&amp;t=910">https://forum.abinit.org/viewtopic.php?f=3&amp;t=910</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>timeout.c compilation on ibm</h3>
+				<div class="date">Posted: <strong>Fri Feb 25, 2011 10:02 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">On my IBM xlf 12.1 linux platform I still have a problem with the latest 6.7.0 version of timeout.c:<br /><br /><br />mpicc -DHAVE_CONFIG_H -I. -I../.. -I../../../tests/Nightly    -O0 -qlanglvl=stdc99 -O3 -q64 -qspill=2000 -qarch=pwr6 -qtune=auto -qcache=auto -qstrict -qsuppress=1520-031:1520-003 -c -o timeout-timeout.o `test -f 'timeout.c' || echo '../../../tests/Nightly/'`timeout.c<br />1506-352 (W) An invalid combination of the -qarch and -qtune options has been specified. The -qtune option is ignored.<br />&quot;../../../tests/Nightly/timeout.c&quot;, line 131.28: 1506-280 (S) Function argument assignment between types &quot;union {...}&quot; and &quot;int*&quot; is not allowed.<br /><br /><br />Does not influence normal abinit build, but nightly fails.<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: timeout.c compilation on ibm</h3>
+				<div class="date">Posted: <strong>Sun Mar 20, 2011 9:45 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">still a problem in 6.7.1...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: timeout.c compilation on ibm</h3>
+				<div class="date">Posted: <strong>Sun Mar 20, 2011 1:42 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">What happens if you set the following:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>CFLAGS_EXTRA=&quot;-qlanglvl=extc99&quot;<br /></code></pre></div><br /><br />or replace it on the coomand line?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: timeout.c compilation on ibm</h3>
+				<div class="date">Posted: <strong>Sun Mar 20, 2011 10:55 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">that works, great! Should we change the .ac files in the distribution?<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: timeout.c compilation on ibm&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Mon Mar 21, 2011 11:32 am</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Done in pouillon/6.6.2-public/567.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=910&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:43:03 GMT -->
+</html>

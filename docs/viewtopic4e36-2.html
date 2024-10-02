@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1005&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:05:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; install 6.6.2</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>install 6.6.2</h2>
+		<p><a href="viewtopice107.html?f=3&amp;t=1005">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1005</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>install 6.6.2</h3>
+				<div class="date">Posted: <strong>Mon Apr 04, 2011 8:41 pm</strong></div>
+				<div class="author">by <strong>zjuer</strong></div>
+				<div class="content">Hello,<br />when I install 6.6.2 on my computer, there are some errors show up. Could anyone help me out? Thanks.<br /><br />Making all in 10_defs<br />make[3]: Entering directory `/home/pc/Downloads/abinit-6.6.2/src/10_defs'<br />/usr/lib64/openmpi/bin/mpif90 -m64 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs    -ffree-form -J/home/pc/Downloads/abinit-6.6.2/src/mods -O2 -mtune=native -march=native -mfpmath=sse -m64 -g -ffree-line-length-none -Wstrict-aliasing=2  -c -o defs_basis.o defs_basis.F90<br />/usr/lib64/openmpi/bin/mpif90 -m64 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs    -ffree-form -J/home/pc/Downloads/abinit-6.6.2/src/mods -O2 -mtune=native -march=native -mfpmath=sse -m64 -g -ffree-line-length-none -Wstrict-aliasing=2  -c -o defs_aimfields.o defs_aimfields.F90<br />/usr/lib64/openmpi/bin/mpif90 -m64 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs    -ffree-form -J/home/pc/Downloads/abinit-6.6.2/src/mods -O2 -mtune=native -march=native -mfpmath=sse -m64 -g -ffree-line-length-none -Wstrict-aliasing=2  -c -o defs_aimprom.o defs_aimprom.F90<br />/usr/lib64/openmpi/bin/mpif90 -m64 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs    -ffree-form -J/home/pc/Downloads/abinit-6.6.2/src/mods -O2 -mtune=native -march=native -mfpmath=sse -m64 -g -ffree-line-length-none -Wstrict-aliasing=2  -c -o defs_parameters.o defs_parameters.F90<br />/usr/lib64/openmpi/bin/mpif90 -m64 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs    -ffree-form -J/home/pc/Downloads/abinit-6.6.2/src/mods -O2 -mtune=native -march=native -mfpmath=sse -m64 -g -ffree-line-length-none -Wstrict-aliasing=2  -c -o defs_datatypes.o defs_datatypes.F90<br />defs_datatypes.F90:86.34:<br /> use BigDFT_API, only : atoms_data                                  1<br />Fatal Error: Can't open module file 'bigdft_api.mod' for reading at (1): No such file or directory<br />make[3]: *** [defs_datatypes.o] Error 1<br />make[3]: Leaving directory `/home/pc/Downloads/abinit-6.6.2/src/10_defs'<br />make[2]: *** [all-recursive] Error 1<br />make[2]: Leaving directory `/home/pc/Downloads/abinit-6.6.2/src'<br />make[1]: *** [all-recursive] Error 1<br />make[1]: Leaving directory `/home/pc/Downloads/abinit-6.6.2'<br />make: *** [all] Error 2</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: install 6.6.2</h3>
+				<div class="date">Posted: <strong>Mon Apr 04, 2011 9:57 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Try to configure with the following option:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../configure --with-dft-flavor=&quot;libxc+wannier90&quot;</code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: install 6.6.2</h3>
+				<div class="date">Posted: <strong>Mon Apr 04, 2011 10:13 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Hi zjuer,<br /><br />It sounds fishy ... you should have a -I pointing to the plugins/bigdft directory in the invocations of src/10_defs. Would you please tell me if you have the module compiled and installed? You should find 2 copies: in plugins/bigdft/bigdft-1.2.0.2/src/bigdft_api.mod and in plugins/bigdft/bigdft_api.mod. Do you find them? <br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: install 6.6.2</h3>
+				<div class="date">Posted: <strong>Tue Apr 05, 2011 6:06 pm</strong></div>
+				<div class="author">by <strong>zjuer</strong></div>
+				<div class="content">Hello Alain,<br />I have recompiled abinit662. but there is no bigdft_api.mod exist. Last time I also encountered the same problem and I tried  to cope a bigdft_api.mod from other machine, but it didn't work as well. I don't know what's the problem is? Do you have any idea? Thanks<br /><br />Best regards,<br /><br />Zjuer</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: install 6.6.2</h3>
+				<div class="date">Posted: <strong>Tue Apr 05, 2011 10:59 pm</strong></div>
+				<div class="author">by <strong>zjuer</strong></div>
+				<div class="content"><blockquote><div><cite>pouillon wrote:</cite>Try to configure with the following option:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../configure --with-dft-flavor=&quot;libxc+wannier90&quot;</code></pre></div></div></blockquote><br /><br />Hello pouillon,<br />I also compiled abinit662 following your suggestion, but it still not succeed.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: install 6.6.2</h3>
+				<div class="date">Posted: <strong>Wed Apr 06, 2011 2:23 pm</strong></div>
+				<div class="author">by <strong>Lastik2004</strong></div>
+				<div class="content">Hello,<br />I've realized similar confusing problem, where no 'bigdft_api.mod' is detected on the machine. <br />When the last suggestion<blockquote><div><cite>pouillon wrote:</cite>../configure --with-dft-flavor=&quot;libxc+wannier90&quot;</div></blockquote> has been tried the &quot;make&quot; crushed with following message:<br />##################################################<br />cc/x86_64-suse-linux/4.5/../../../../x86_64-suse-linux/lib -L/usr/lib64/gcc/x86_64-suse-linux/4.5/../../.. -lgfortran -lm <br />../../src/67_common/lib67_common.a(mlwfovlp.o): In function `mlwfovlp':<br />/home/spodi/SimulCodes/abinit-6.6.2/src/67_common/mlwfovlp.F90:1044: undefined reference to `wannier_run_'<br />../../src/67_common/lib67_common.a(mlwfovlp_setup.o): In function `mlwfovlp_setup':<br />/home/spodi/SimulCodes/abinit-6.6.2/src/67_common/mlwfovlp_setup.F90:211: undefined reference to `wannier_setup_'<br />collect2: ld returned 1 exit status<br />make[3]: *** [abinit] Error 1<br />make[3]: Leaving directory `/home/spodi/SimulCodes/abinit-6.6.2/src/98_main'<br />make[2]: *** [all-recursive] Error 1<br />make[2]: Leaving directory `/home/spodi/SimulCodes/abinit-6.6.2/src'<br />make[1]: *** [all-recursive] Error 1<br />make[1]: Leaving directory `/home/spodi/SimulCodes/abinit-6.6.2'<br />make: *** [all] Error 2<br />#####################################################<br />It would be great if somebody could give us a hint what is going on there.<br />Regards,<br />Anatoliy Senyshyn aka Lastik2004</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: install 6.6.2</h3>
+				<div class="date">Posted: <strong>Wed Apr 06, 2011 8:49 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Hi Lastik2004,<br /><br />Refering to your config.log ...<blockquote class="uncited"><div>configure:34043: using tarball repository /root/.abinit/tarballs<br />configure:34055: WARNING: no 'patch' command available<br />configure:34058: WARNING: disabling BigDFT (requires patch)<br />configure:34063: WARNING: disabling Wannier90 (requires patch)<br />configure:34234: checking for a source tarball of LINALG</div></blockquote><br /><br />The patch utility is missing and, as a consequence, plugins requiring to be patched during Abinit compilation are disabled - I agree that the logic behind the disable is broken (Yann ... up to you). I suggest to use Suse repositories to install patch; it's certainly available - it's a classic tool. Then cleanup the build directory, reconfigure and make again.<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: install 6.6.2</h3>
+				<div class="date">Posted: <strong>Thu Apr 07, 2011 2:41 pm</strong></div>
+				<div class="author">by <strong>zjuer</strong></div>
+				<div class="content">Hello Alain, <br />  I attached my config.log ,could you have a look to see what's the problem with it? Thank you.<br /><br />Best,<br /><br />zjuer</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: install 6.6.2</h3>
+				<div class="date">Posted: <strong>Thu Apr 07, 2011 4:59 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Hello Zjuer,<br /><br />Look in config.log ... <blockquote class="uncited"><div>configure:34043: using tarball repository /home/pc/.abinit/tarballs<br />configure:34055: WARNING: no 'patch' command available<br />configure:34058: WARNING: disabling BigDFT (requires patch)<br />configure:34063: WARNING: disabling Wannier90 (requires patch)</div></blockquote><br /><br />Same story for you: no patch installed on your system. So configure tries to disable all options that will require patch and fails to do it cleanly. Please install patch from Fedora repositories ... probably with a plain <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>sudo yum install patch</code></pre></div><br />Then cleanup Abinit build attempts, reconfigure and make - and it should compile smoothly.<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: install 6.6.2</h3>
+				<div class="date">Posted: <strong>Thu Apr 07, 2011 8:30 pm</strong></div>
+				<div class="author">by <strong>zjuer</strong></div>
+				<div class="content"><blockquote><div><cite>Alain_Jacques wrote:</cite>Hello Zjuer,<br /><br />Look in config.log ... <blockquote class="uncited"><div>configure:34043: using tarball repository /home/pc/.abinit/tarballs<br />configure:34055: WARNING: no 'patch' command available<br />configure:34058: WARNING: disabling BigDFT (requires patch)<br />configure:34063: WARNING: disabling Wannier90 (requires patch)</div></blockquote><br /><br />Same story for you: no patch installed on your system. So configure tries to disable all options that will require patch and fails to do it cleanly. Please install patch from Fedora repositories ... probably with a plain <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>sudo yum install patch</code></pre></div><br />Then cleanup Abinit build attempts, reconfigure and make - and it should compile smoothly.<br /><br />Kind regards,<br /><br />Alain</div></blockquote><br /><br /><br />Hello Alian,<br />According to you suggestion I compiled abinit successfully. But when I try to run abinit there is a fault like &quot;error while loading shared libraries: libmpi_f90.so.0: cannot open shared object file: No such file or directory&quot;<br />Is it because my wrong configure parameter? I used ./configure --enable-mpi --enable-64bit-flags=yes --with-mpi-prefix=/usr/lib64/openmpi to configure. Thanks.<br /><br />Best,<br /><br />zjuer</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: install 6.6.2</h3>
+				<div class="date">Posted: <strong>Thu Apr 07, 2011 8:53 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Looking at your mpi-prefix option, I assume that libmpi*.so file reside in /usr/lib64/openmpi/lib/ ... right?<br />If Abinit doesn't find its dynamic libraries, i.e. a <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>ldd abinit</code></pre></div> returns one or several &quot;not found&quot; libs them give it a clue by setting ...<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>export LD_LIBRARY_PATH=/usr/lib64/openmpi/lib:$LD_LIBRARY_PATH</code></pre></div> Now the ldd should return the path to all dynamic libraries.<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: install 6.6.2</h3>
+				<div class="date">Posted: <strong>Sat Apr 09, 2011 1:58 am</strong></div>
+				<div class="author">by <strong>zjuer</strong></div>
+				<div class="content">Hello Alain,<br />Thanks your suggestion. It work fine up to now.<br /><br />Best,<br /><br />Zjuer</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1005&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:05:24 GMT -->
+</html>

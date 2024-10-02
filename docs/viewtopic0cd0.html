@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=918&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:13:52 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Abinit determination of the wurtzite space group</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Abinit determination of the wurtzite space group</h2>
+		<p><a href="viewtopic31f2.html?f=9&amp;t=918">https://forum.abinit.org/viewtopic.php?f=9&amp;t=918</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Abinit determination of the wurtzite space group</h3>
+				<div class="date">Posted: <strong>Tue Mar 01, 2011 4:59 am</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">Dear all,<br /><br />I am running some tests on the wurtzite structure (CdS) and I find some strange results.<br /><br />First, in my INPUT file, when I use RPRIM to define the cell, the space group determined by abinit is Cmc21 (No 36) instead of P63mc (No 186). <br /><br />My INPUT file looks like:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>NATOM= 4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />NTYPAT= 2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />TYPAT= 1 1 2 2&nbsp; &nbsp; &nbsp; &nbsp; <br />ZNUCL= 48 16&nbsp; &nbsp; &nbsp; <br />XRED&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />0.66666667&nbsp; 0.33333333&nbsp; 0.50000000<br />0.33333333&nbsp; 0.66666667&nbsp; 0.00000000<br />0.66666667&nbsp; 0.33333333&nbsp; 0.87500000<br />0.33333333&nbsp; 0.66666667&nbsp; 0.37500000<br /><br />ACELL&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />4.141&nbsp; &nbsp;4.141&nbsp; &nbsp;6.720&nbsp; &nbsp;angstrom<br /><br />RPRIM<br />0.500&nbsp; -0.866&nbsp; &nbsp;0.000<br />0.500&nbsp; &nbsp;0.866&nbsp; &nbsp;0.000<br />0.000&nbsp; &nbsp;0.000&nbsp; &nbsp;1.000<br /></code></pre></div><br /><br />Is there a mistake in my definition of the crystalline structure?<br /><br />Second, I've looked in the forum and I've seen that people usually use ANGDEG and SPGROUP to build a wurtzite structure. So I've replaced the RPRIM keyword in my INPUT file:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>ACELL<br />4.141&nbsp; &nbsp;4.141&nbsp; &nbsp;6.720&nbsp; &nbsp;angstrom<br /><br />ANGDEG 90. 90. 120.<br />SPGROUP 186<br /></code></pre></div><br /><br />but in this case I end up with Abinit crashing with the following message:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;Subroutine Unknown:0:WARNING<br />&nbsp; &nbsp;Trouble finding symmetrically equivalent atoms<br />&nbsp; Applying inv of symm number&nbsp; 2 to atom number&nbsp; &nbsp;2&nbsp; of typat&nbsp; 1<br />&nbsp; gives tratom=&nbsp; 6.6667E-01&nbsp; 3.3333E-01 -5.0000E-01.<br />&nbsp; This is further away from every atom in crystal than the allowed tolerance.<br />&nbsp; The inverse symmetry matrix is&nbsp; 0 -1&nbsp; 0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1&nbsp; 1&nbsp; 0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; 0&nbsp; 1<br />&nbsp; and the nonsymmorphic transl. tnons =&nbsp; &nbsp; 0.0000000&nbsp; &nbsp; 0.0000000&nbsp; &nbsp; 0.5000000<br />&nbsp; The nearest coordinate differs by&nbsp; 1.110E-16&nbsp; 1.000E-08&nbsp; 0.000E+00<br />&nbsp; for indsym(nearest atom)=&nbsp; &nbsp; 1<br />forrtl: severe (27): too many records in I/O statement, unit -5, file Internal Formatted Write<br /></code></pre></div><br /><br />What surprises me is: <br /><strong class="text-strong"> The nearest coordinate differs by  1.110E-16  1.000E-08  0.000E+00</strong><br /><br />This is definitely a small difference. Abinit shouldn't stop right?<br /><br />Thank you for your help.<br /><br />Boris</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit determination of the wurtzite space group</h3>
+				<div class="date">Posted: <strong>Fri Mar 04, 2011 2:32 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">You need much more precision in the rprim values<br /><br />0.500  -0.866   0.000<br />0.500   0.866   0.000<br /><br />by default abinit checks symmetries up to 8-10 digits! Not 3. Same for xred.<br /><br />for the unit cell you can use &quot;angdeg&quot; instead of rprim.<br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=918&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:13:52 GMT -->
+</html>

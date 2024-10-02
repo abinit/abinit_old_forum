@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1270&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:05:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; the N2 molecule bond length calculations</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>the N2 molecule bond length calculations</h2>
+		<p><a href="viewtopicf7de-2.html?f=9&amp;t=1270">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1270</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>the N2 molecule bond length calculations</h3>
+				<div class="date">Posted: <strong>Wed Aug 17, 2011 3:20 pm</strong></div>
+				<div class="author">by <strong>Paul</strong></div>
+				<div class="content">After testing the tutorial #2 of the H2 molecule bond length calcuations, I want to calculate the N2 molecule bong length. Following the tutoial, I write the computer file of N2 molecule, but the result is very bad, larger than the experimental value of 15 times, and the CPU time is also very long, about one hour in 2.8 GHz PC. This is my in. file , can you tell me which parameters I set have a problem, and  which parameters need to be supplemented. And I am a new in abinit, hope you can forgive my ignorance. Thanks !<br /><br />ixc 11<br />acell 35 35 35<br />ecut 31<br />natom 2<br />ionmov 2<br />optcell 0<br />ntime 50<br />tolmxf 5.0d-4<br />xcart -0.5 0.0 0.0<br />          0.5 0.0 0.0<br />toldff 5.0d-5<br />nband 7 <br />ntypat 1<br />znucl 7<br />typat 1 1<br />kptopt 0<br />nkpt 1<br />nstep 100<br />diemac 2.0<br /><br />The result is :<br />xcart(Bohr)             -1.6464254618E+01 -2.4981282203E-31 -1.9420830621E-31<br />                                1.6464254618E+01  2.4981282203E-31  1.9420830621E-31<br /><br />and the the experimental value is :<br />1.09 Å</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: the N2 molecule bond length calculations</h3>
+				<div class="date">Posted: <strong>Wed Aug 17, 2011 10:54 pm</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hello,<br /><br />Your atoms seems to be ok except they are very far from their initial position, they made a bond of 35-(2*16.464) = 2.072 Bohr which is equal to 1.096 angstroms. It is pretty close to your experimental value. Remember you are working with periodic boundary conditions (-16.464 is equivalent to -16.464+35=18.536). For some reason (the initial positions of your atoms), they relaxed in a different way you expected and bonded together at the &quot;end&quot; of the box.<br /><br />David</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: the N2 molecule bond length calculations</h3>
+				<div class="date">Posted: <strong>Thu Aug 18, 2011 3:36 am</strong></div>
+				<div class="author">by <strong>Paul</strong></div>
+				<div class="content">Hi，<br />Thank you very much David. I have learned after reading your explanation. But I have another problem. Why does my results appeared in this situation? However, the tutorial did not do. whether do I need to set some parameters in order to limit the periodic boundary conditions to ensure that this will not happen? Because  this calculation to the bond length is a little trouble. Also what is the meaninig of these words&quot;(-16.464 is equivalent to -16.464+35=18.536)&quot;? Does it mean I set the parameter acell to 18.536 will be better?  Thanks ~</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: the N2 molecule bond length calculations</h3>
+				<div class="date">Posted: <strong>Thu Aug 18, 2011 10:56 am</strong></div>
+				<div class="author">by <strong>sponce</strong></div>
+				<div class="content">Dear Paul, <br /><br />I think that what David mean is that your result seems to be correct. As you have periodic boundary condition of 35 Bohr it mean that the two N_2 atoms are distant from only 1.096 angstroms and these two atoms are repeated infinitely. <br /><br />If you want to obtain a result closer to what you obtain in the tutorial, maybe you should use an input file like:<br /><br />ixc 11<br />acell 35 35 35<br />ecut 31<br />natom 2<br />ionmov 2<br />optcell 0<br />ntime 50<br />tolmxf 5.0d-4<br /><strong class="text-strong">xcart -1.0 0.0 0.0<br />1.0 0.0 0.0</strong><br />toldff 5.0d-5<br />nband 7<br />ntypat 1<br />znucl 7<br />typat 1 1<br />kptopt 0<br />nkpt 1<br />nstep 100<br />diemac 2.0<br /><br />This way your starting position is closer to the final one. I think that what happen is that you have a first very strong repulsion that will shoot your atoms far away from each other. Then the system will slowly stabilize. <br /><br />With this input file the calculation should also be a bit faster.<br /><br />Cheers!<br /><br />Samuel.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: the N2 molecule bond length calculations</h3>
+				<div class="date">Posted: <strong>Thu Aug 18, 2011 1:31 pm</strong></div>
+				<div class="author">by <strong>Paul</strong></div>
+				<div class="content">Dear Samuel,<br /> Thank you for your patience and guidance, and it let me  have a better understanding of the periodic boundary condition. I will follow your way to a new calculation. Thanks again!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: the N2 molecule bond length calculations</h3>
+				<div class="date">Posted: <strong>Fri Aug 19, 2011 10:05 am</strong></div>
+				<div class="author">by <strong>Paul</strong></div>
+				<div class="content">Dear Samuel,<br />I have run a new calculation following your way, and the result is very well. It does not  appear that kind of situation. Thanks !</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1270&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:05:35 GMT -->
+</html>

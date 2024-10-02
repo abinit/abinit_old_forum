@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2270&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:35:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Questions about the build system</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Questions about the build system</h2>
+		<p><a href="viewtopic4117.html?f=3&amp;t=2270">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2270</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Questions about the build system</h3>
+				<div class="date">Posted: <strong>Wed Sep 04, 2013 4:48 pm</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Dear Yann,<br /><br />I have just noticed that sometimes, when we are in the build folder and run &quot;make clean&quot;  the configure script is run before cleaning.<br />Is this really necessary  ?<br />In the same idea, it happens that we do a &quot;make clean&quot; just to rebuild  everything, therefore we don't need the configure script to be run. Unfortunately, make clean deletes de Makefile...<br />Maybe there should have a soft &quot;make clean&quot; compared to the &quot;make distclean&quot; ?<br /><br />Also for the configure stage, I wonder why the configure script can not automatically find all the include directories and librairy directories for fallbacks (using pkg-config?)<br />One has to add something like --with-PACKAGE-incs=&quot;$(pkg-config --cflags libpackage)&quot;  whereas it should be more user friendly to get that automated as for fftw, shouldn't it ?<br /><br />Thank you<br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Questions about the build system&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Mon Sep 09, 2013 12:07 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content"><blockquote class="uncited"><div>I have just noticed that sometimes, when we are in the build folder and run &quot;make clean&quot; the configure script is run before cleaning.<br />Is this really necessary ?</div></blockquote><br /><br />It is not necessary and hence not done. I don't have this problem on any of my computers, and the test farm checks that 'make clean' duly performs its duty. If such a thing happened, we would see it.<br /><br /><blockquote class="uncited"><div>In the same idea, it happens that we do a &quot;make clean&quot; just to rebuild everything, therefore we don't need the configure script to be run. Unfortunately, make clean deletes de Makefile...<br />Maybe there should have a soft &quot;make clean&quot; compared to the &quot;make distclean&quot; ?</div></blockquote><br /><br />It doesn't seem to be a generic problem. Could you describe your exact configuration and build environment, the way you build Abinit (e.g. with or without build dir, ...), and give every possible detail, so that I get a chance to reproduce the issue?<br /><br /><blockquote class="uncited"><div>Also for the configure stage, I wonder why the configure script can not automatically find all the include directories and librairy directories for fallbacks (using pkg-config?)<br />One has to add something like --with-PACKAGE-incs=&quot;$(pkg-config --cflags libpackage)&quot; whereas it should be more user friendly to get that automated as for fftw, shouldn't it ?<br /></div></blockquote><br /><br />I wish we could rely on this simple and efficient procedure! Unfortunately, in practice, most supercomputers are at best ill-configured, with different versions and build variants of many libraries hanging around, accompanied by inconsistent settings of the environment variables. For example, it is not uncommon to find several instances of FFTW, one or two builds for version 2, other builds for version 3, some of them with OpenMP, other with MPI, others with both, ... How could the build system guess which one you want to use? If you're extremely lucky and your system is perfectly configured, then you can indeed use pkg-config and I can tell you one thing: take very good care of your systems administrators! One day, your case may become the rule ... in 2000 or 3000 years at the current pace.<br /><br />Another thing is that the projects for which we provide fallbacks are external to Abinit and totally free in their evolution. To make things worse, different versions of Abinit need different versions of the fallbacks. Only some of them currently support pkg-config, some only from recently, and there is no guarantee that they will keep on doing so. As such, the build system cannot make any assumption on the way to build them.<br /><br />I did my best to find the most generic and efficient compromise, but I don't claim I've found *THE* solution. Feel free to share any proposal you think would work better and satisfy all stakeholders: users, developers, maintainers and packagers.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Questions about the build system</h3>
+				<div class="date">Posted: <strong>Wed Sep 11, 2013 1:53 pm</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Thank you for your answer,<br /><br />Trying to give you more details I now understand my issues. The two first points were linked.<br /><br />Let assume we run the make script. Then, for debugging reason, I run makemake which creats a new configure file. Thus running the old Makefile with &quot;make clean&quot; starts the configure script and cleans. As the Makefile was (?) removed, I had to run configure again before building but It seems that the Makefile is not deleted with make clean.<br /><br />About the third point, I understand your point and I don't have THE solution. It would have been nice if it had worked.<br />For your example i guess that the build system should use the fftw with the same parallelism options as for abinit. How to guess the directories ? I have no clue. The prefix used for the installation may be enough.<br /><br />Once again, thank you for the explanations.<br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Questions about the build system</h3>
+				<div class="date">Posted: <strong>Thu Sep 12, 2013 1:04 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">To complete my answer, I just wanted to add that I've already planned to simplify the user interface of the build system. I'm just waiting the 7.5.3 branches to start the implementation.<br /><br />By the way: &quot;make clean&quot; will never remove a Makefile, but &quot;makemake --clean&quot; does remove all of them.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Questions about the build system</h3>
+				<div class="date">Posted: <strong>Wed Sep 25, 2013 8:04 pm</strong></div>
+				<div class="author">by <strong>atha1984</strong></div>
+				<div class="content">Dear All,<br /><br />I have to apologize beforehand if my question is going to be <br />a repeat. I have problems right from the start where I have to configure and I <br />want to use an &lt;myhostname&gt;.ac <br />My configuration is unsuccessful and the output config.log says: <br />configure: 3615: checking build system type<br />configure : 3626: error /bin/sh config/gnu/config.sub &lt;myhostname&gt;.ac failed<br /><br />The machine details and abinit version are:<br /><br />[root@hostname abinit-7.4.2]# uname -a<br />Linux hostname 3.10.11-200.fc19.x86_64 GNU/Linux<br /><br />Any advice would be appreciated.<br />Regards,</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Questions about the build system</h3>
+				<div class="date">Posted: <strong>Thu Sep 26, 2013 8:42 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">You have to replace the &quot;&lt;myhostname&gt;&quot; keyword by the output of the &quot;hostname&quot; command.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Questions about the build system</h3>
+				<div class="date">Posted: <strong>Thu Sep 26, 2013 11:00 pm</strong></div>
+				<div class="author">by <strong>atha1984</strong></div>
+				<div class="content">Hello,<br /><br />I already had!<br />So  when I had &lt;myhostname&gt;= Atefeh (which is my hostname), it didn't work.<br />But I just changed it to the output of <br />#./config.guess<br /><br />it seems it started to work...<br />I am a bit confused about this.<br />Thank you</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Questions about the build system</h3>
+				<div class="date">Posted: <strong>Fri Sep 27, 2013 12:38 am</strong></div>
+				<div class="author">by <strong>atha1984</strong></div>
+				<div class="content">Hi,<br /><br />I prepared my .ac file according to <!-- m --><a class="postlink" href="http://www.youtube.com/watch?v=DppLQ-KQA68">http://www.youtube.com/watch?v=DppLQ-KQA68</a><!-- m --> with correct library paths.<br /><br />The configuration starts with a warning<br /><br />[root@Atefeh abinit-7.4.2]# ./configure --with-config-file x86_64-unknown-linux-gnu.ac<br />configure: WARNING: you should use --build, --host, --target<br /> ==============================================================================<br /> === Overall startup                                                        ===<br /> ==============================================================================<br /><br />checking build system type... x86_64-unknown-linux-gnu.ac<br />checking host system type... x86_64-unknown-linux-gnu.ac<br />checking target system type... x86_64-unknown-linux-gnu.ac<br />checking for a BSD-compatible install... /usr/bin/install -c<br />checking whether build environment is sane... yes<br />checking for a thread-safe mkdir -p... /usr/bin/mkdir -p<br />checking for gawk... gawk<br />checking whether make sets $(MAKE)... yes<br />checking whether make sets $(MAKE)... (cached) yes<br />checking whether ln -s works... yes<br />checking for a sed that does not truncate output... /usr/bin/sed<br />checking for gawk... (cached) gawk<br />checking for grep that handles long lines and -e... /usr/bin/grep<br />checking for egrep... /usr/bin/grep -E<br />checking for realpath,readlink... no<br />configure: error: config file yes not found<br /><br />And I have attached my config.log as well.<br />Thanks very much for your attention and time.<br />BR, Ati</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Questions about the build system</h3>
+				<div class="date">Posted: <strong>Wed Oct 02, 2013 12:17 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">You're missing an equal sign after --with-config-file, which is equivalent to say --with-config-file=&quot;yes&quot;. Thus your file is taken as a separate argument and hence the warning and the error.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2270&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:35:56 GMT -->
+</html>

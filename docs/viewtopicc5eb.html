@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4048&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:37:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Segmentation fault on plane wave computations</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Segmentation fault on plane wave computations</h2>
+		<p><a href="viewtopic30ee.html?f=3&amp;t=4048">https://forum.abinit.org/viewtopic.php?f=3&amp;t=4048</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Segmentation fault on plane wave computations</h3>
+				<div class="date">Posted: <strong>Tue Feb 26, 2019 6:40 am</strong></div>
+				<div class="author">by <strong>JimEvans</strong></div>
+				<div class="content">Hello,<br /><br />I am getting segmentation faults on PAW calculations just after the SCF converges. Here is the message that comes up on running the first PAW tutorial:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Program received signal SIGSEGV: Segmentation fault - invalid memory reference.<br /><br />Backtrace for this error:<br />#0&nbsp; 0x7fa84194491a in ???<br />#1&nbsp; 0x7fa841943b43 in ???<br />#2&nbsp; 0x7fa8415d70ff in ???<br />#3&nbsp; 0x7fa84273a603 in ???<br />#4&nbsp; 0x5637c5583914 in __m_pawrhoij_MOD_pawrhoij_io<br />&nbsp; &nbsp; &nbsp; &nbsp; at ../../../src/42_libpaw/m_pawrhoij.F90:2555<br />#5&nbsp; 0x5637c507bf94 in __m_hdr_MOD_hdr_ncwrite<br />&nbsp; &nbsp; &nbsp; &nbsp; at ../../../src/56_io_mpi/m_hdr.F90:3666<br />#6&nbsp; 0x5637c469d9f0 in __m_outscfcv_MOD_outscfcv<br />&nbsp; &nbsp; &nbsp; &nbsp; at ../../../src/94_scfcv/m_outscfcv.F90:611<br />#7&nbsp; 0x5637c4689c16 in __m_scfcv_core_MOD_scfcv_core<br />&nbsp; &nbsp; &nbsp; &nbsp; at ../../../src/94_scfcv/m_scfcv_core.F90:2112<br />#8&nbsp; 0x5637c46811b7 in scfcv_scfcv<br />&nbsp; &nbsp; &nbsp; &nbsp; at ../../../src/94_scfcv/m_scfcv.F90:746<br />#9&nbsp; 0x5637c466e393 in __m_gstate_MOD_gstate<br />&nbsp; &nbsp; &nbsp; &nbsp; at ../../../src/95_drive/m_gstate.F90:1331<br />#10&nbsp; 0x5637c4582f49 in __m_gstateimg_MOD_gstateimg<br />&nbsp; &nbsp; &nbsp; &nbsp; at ../../../src/95_drive/m_gstateimg.F90:543<br />#11&nbsp; 0x5637c4572b4c in __m_driver_MOD_driver<br />&nbsp; &nbsp; &nbsp; &nbsp; at ../../../src/95_drive/m_driver.F90:705<br />#12&nbsp; 0x5637c456a95b in abinit<br />&nbsp; &nbsp; &nbsp; &nbsp; at ../../../src/98_main/abinit.F90:444<br />#13&nbsp; 0x5637c456725e in main<br />&nbsp; &nbsp; &nbsp; &nbsp; at ../../../src/98_main/abinit.F90:94</code></pre></div><br /><br />I've tried different PAW runs and psps, but they all seem to break like this. I am using Ubuntu 18.10 on a 64 bit PC.<br /><br />Cheers,<br /><br />     Jim</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault on plane wave computations</h3>
+				<div class="date">Posted: <strong>Tue Feb 26, 2019 4:05 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Jim,<br />Without more info about the calculation you are doing (input/output is welcome, also send what the command &quot;abinit -b&quot; is returning regarding compilations flags/options, etc ) it'll be impossible to help you.<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault on plane wave computations</h3>
+				<div class="date">Posted: <strong>Wed Feb 27, 2019 12:40 am</strong></div>
+				<div class="author">by <strong>JimEvans</strong></div>
+				<div class="content">Dear Eric,<br /><br />My apologies, input, output and configuration details are attached. This is the standard PAW tutorial file that comes with Abinit, so it should run fine. I've tried some of the other PAW-related files and different PSPs, and it gives the same error.<br /><br />Many thanks,<br /><br />    Jim<br /><br /><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file0c75.php?id=1685">abinit.log</a></dt>
+						<dd>(3.26 KiB) Downloaded 242 times</dd>
+		</dl>
+		
+		
+			</div><br /><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file7af1.php?id=1686">tpaw1_1.in</a></dt>
+						<dd>(675 Bytes) Downloaded 239 times</dd>
+		</dl>
+		
+		
+			</div><br /><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/filedd01.php?id=1687">tpaw1_1.out</a></dt>
+						<dd>(12.83 KiB) Downloaded 231 times</dd>
+		</dl>
+		
+		
+			</div><br /><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file0248.php?id=1688">tpaw1.log</a></dt>
+						<dd>(61.17 KiB) Downloaded 261 times</dd>
+		</dl>
+		
+		
+			</div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault on plane wave computations</h3>
+				<div class="date">Posted: <strong>Thu Feb 28, 2019 5:16 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Jim,<br />Indeed, I've tested it on my machine and everything goes fine... <br />Did you check if your compilation passes most of the automatic tests (by going into the tests folder and run ./runtests.py j=number of CPU)?<br />On which architecture are you running Abinit?<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault on plane wave computations</h3>
+				<div class="date">Posted: <strong>Sat Mar 02, 2019 10:56 pm</strong></div>
+				<div class="author">by <strong>JimEvans</strong></div>
+				<div class="content">Hi Eric,<br /><br />I am on a 64 bit x86 laptop running Ubintu 18.10. Abinit was compiled with gcc/gfortran 8.2. I ran the fast tests with &quot;make test&quot; after compiling but not the full runtest.py yet.<br /><br />Cheers,<br /><br />    Jim</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault on plane wave computations</h3>
+				<div class="date">Posted: <strong>Fri Mar 08, 2019 3:40 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Hi Jim,<br />OK and did you try to run all the tests? It is surprising that the make test works and not a run from tutorial...<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4048&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:37:58 GMT -->
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=835&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:51:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; question about the density matrix</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>question about the density matrix</h2>
+		<p><a href="viewtopic1c8a.html?f=9&amp;t=835">https://forum.abinit.org/viewtopic.php?f=9&amp;t=835</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>question about the density matrix</h3>
+				<div class="date">Posted: <strong>Mon Jan 10, 2011 12:47 pm</strong></div>
+				<div class="author">by <strong>localspin</strong></div>
+				<div class="content">Hello everyone! I am a rookie. Now i have a question about the density matrix used in the paw+u methods. <br /><br /> About input variable &quot;dmatpawu&quot;,  &quot;initial Density Matirx for PAW+U&quot;, the helpfiles says,<br /> &quot;For the case l=2 (d states), the five columns<br />corresponds respectively to (the normalisation factor has been<br />dropped)<br />m=-2, xy<br />m=-1, yz<br />m=0, 3z^2-r^2<br />m=1, xz<br />m=2, x^2-y^2&quot;<br /><br />And in the output file of a code using LDA+U, for example the tldau_3.out of the tutorial LDA+U about NiO, there are matrics called &quot;Occupation matrix for correlated orbitals&quot;<br /><br />I think the elements of the matrix might be seen as the following:<br /><br />If there is a d state density matrix M,  so M=<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; xy&nbsp; &nbsp; &nbsp; &nbsp; yz&nbsp; &nbsp; &nbsp; &nbsp;3z^2-r^2&nbsp; &nbsp; &nbsp; &nbsp;xz&nbsp; &nbsp; &nbsp; x^2-y^2&quot;<br />xy&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;M(1,1)<br />yz&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />3z^2-r^2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;........<br />xz<br />x^2-y^2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;M(5,5)</code></pre></div> <br /><br />the elements of the matirx M, for example, M(1,1) stands for the projection on the xy orbital, etc. therefore, only the diagonal elements are valid. And if there are only t2g electrons, the elements M(3,3)and M(5,5) who stand for the projection on  3z^2-r^2 and x^2-y^2 should not appear.<br /><br />But in my computaional results, every element of the matrix is comparably large and can not be neglected. So i think maybe there is something wrong with my understanding about the density matrix and the input variable &quot;dmatpawu&quot;. <br /><br />Can anybody tell me how to define input density matrixes and analyze the orbital from the output matrixes?<br /><br />Thanks a lot!<br /> <br />Yours' localspin</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: question about the density matrix</h3>
+				<div class="date">Posted: <strong>Mon Jan 10, 2011 3:52 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Well, one kind of issue I've had with this output is the following: the directions of the 5 orbitals (the x, y, and z in d_x2-y2, d_z2 etc) are the cartesian axes of the cell. If you are thinking about the orbitals in a chemical way, you might be thinking of them as directed along bonds (for example, a sigma bond made by the overlap of a dz2 orbital on one with a neighbor). In this case the implicit z direction doesn't correspond to the cell z direction, and you will have to rotate the output of abinit from cell coordinates to whatever bond-centered directions you want. I am not sure I understood your question exactly but it sounds like this is the sort of issue you are running into.<br /><br />Joe</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: question about the density matrix</h3>
+				<div class="date">Posted: <strong>Tue Jan 11, 2011 2:14 pm</strong></div>
+				<div class="author">by <strong>localspin</strong></div>
+				<div class="content"><blockquote><div><cite>jzwanzig wrote:</cite>Well, one kind of issue I've had with this output is the following: the directions of the 5 orbitals (the x, y, and z in d_x2-y2, d_z2 etc) are the cartesian axes of the cell. If you are thinking about the orbitals in a chemical way, you might be thinking of them as directed along bonds (for example, a sigma bond made by the overlap of a dz2 orbital on one with a neighbor). In this case the implicit z direction doesn't correspond to the cell z direction, and you will have to rotate the output of abinit from cell coordinates to whatever bond-centered directions you want. I am not sure I understood your question exactly but it sounds like this is the sort of issue you are running into.<br /><br />Joe</div></blockquote><br /><br /><br />Dear Prof. Zwanziger<br /><br />   Thanks for your answering. I think you are right. I'll try to rotate it in order to get the right orbital.<br /><br />    Best Regards!<br /><br />yours localspin</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: question about the density matrix</h3>
+				<div class="date">Posted: <strong>Tue Jan 11, 2011 4:03 pm</strong></div>
+				<div class="author">by <strong>localspin</strong></div>
+				<div class="content">But the transformation of a 5*5 matrix seems to be very complicated. Maybe it is more convenient to rotate axes into  bond-centered directions at first in the input files?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: question about the density matrix</h3>
+				<div class="date">Posted: <strong>Wed Jan 12, 2011 8:54 am</strong></div>
+				<div class="author">by <strong>localspin</strong></div>
+				<div class="content"><blockquote><div><cite>jzwanzig wrote:</cite>Well, one kind of issue I've had with this output is the following: the directions of the 5 orbitals (the x, y, and z in d_x2-y2, d_z2 etc) are the cartesian axes of the cell. If you are thinking about the orbitals in a chemical way, you might be thinking of them as directed along bonds (for example, a sigma bond made by the overlap of a dz2 orbital on one with a neighbor). In this case the implicit z direction doesn't correspond to the cell z direction, and you will have to rotate the output of abinit from cell coordinates to whatever bond-centered directions you want. I am not sure I understood your question exactly but it sounds like this is the sort of issue you are running into.<br /><br />Joe</div></blockquote><br /><br />Dear Prof. Zwanziger<br /><br />I've computed some peroveskite structures such as BaTiO3 and LaTiO3 using LDA+U. Just for test, the structures of them are set to cubic. In that way, the cell axes are parallel to the bond-centered directions.  After running, I found in the output matrixes were indeed diagonalized. <br /><br /> In BaTiO3, it is a 3d0 electronic structure,  but the output matrixes shows the 5 orbitals, 3 t2g and 2 eg, have occupied components . And in LaTiO3, the 3d1 structure, only t2g orbital components should exist, but there were still eg components. There must be something wrong with my input.<br /><br />Prof. Zwanziger,  I read your excellent work PRB  79, 033112 (2009). In this paper, you get the reasonable d-orbital populations of LaTiO3 from the output matrix.  According to your experience,  what do you think about the my result? Is there any tricks to control and get reasonable orbital populations?<br /><br />Best regards,<br /><br />Yours localspin</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=835&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:51:42 GMT -->
+</html>

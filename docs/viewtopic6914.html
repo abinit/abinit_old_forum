@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3925&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:38:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Is 'getden' working properly?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Is 'getden' working properly?</h2>
+		<p><a href="viewtopicc2ef-2.html?f=9&amp;t=3925">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3925</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Is 'getden' working properly?</h3>
+				<div class="date">Posted: <strong>Tue Sep 25, 2018 1:11 am</strong></div>
+				<div class="author">by <strong>cgs12</strong></div>
+				<div class="content">Dear all,<br /><br />I am trying to use the variable 'getden' such that the electronic density obtained from the converged SCF calculation of dataset 1 is used as an initial guess of SCF for dataset 2. Both datasets deal with the same electronic structure calculations. I would expect the energy in dataset 2 should be almost the same as the converged value even in the first few iterations. However this is not the case.<br /><br />I repeat the same thing for dataset 3 except that instead of using density as input, we use wavefunction as input using 'getwfk', and this works well since the energy computed in the first iteration is close enough to the converged value.<br /><br />I have attached the input and output file for your reference.<br /><br />Thanks so much for your attention.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Is 'getden' working properly?&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Tue Sep 25, 2018 1:27 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content"><blockquote class="uncited"><div> I would expect the energy in dataset 2 should be almost the same as the converged value even in the first few iterations. However this is not the case.<br /></div></blockquote><br /><br />As expected...  <br />The initial Hamiltonian is built with the previous (converged) density but the **wavefunctions** are initialized with<br />random numbers. The eigensolver will start the minimization from these random wavefunctions , compute a new set of trial eigenstates<br />and recompute the density from these wfs.<br />So the density at iteration 1 will be significantly different from the starting point and you need to iterate to find the (same) self-consistent solution.<br /><br />Restarting from well-converged wfs will give you results at the first iteration that are very close to dataset 1.<br />From the wfs, the code will recompute the DEN, and initialize the eigensolver with KS states and energies <br />that are already solution of the KS equations.<br /><br />Restarting from WFK is much better than restarting from a DEN file (the same holds also for DFPT).<br />The drawback is that WFK files occupy much more disk space that DEN files.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Is 'getden' working properly?</h3>
+				<div class="date">Posted: <strong>Tue Sep 25, 2018 11:30 pm</strong></div>
+				<div class="author">by <strong>cgs12</strong></div>
+				<div class="content">Thanks so much for your reply.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3925&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:38:59 GMT -->
+</html>

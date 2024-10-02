@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3624&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:01:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Density went &lt; 0 for norm conserving PPs</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Density went &lt; 0 for norm conserving PPs</h2>
+		<p><a href="viewtopicdd70.html?f=9&amp;t=3624">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3624</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Density went &lt; 0 for norm conserving PPs</h3>
+				<div class="date">Posted: <strong>Mon Jun 12, 2017 11:26 am</strong></div>
+				<div class="author">by <strong>kdd</strong></div>
+				<div class="content">I am performing a transition metal slab calculation using norm conserving PPs.<br />For some reason or the other, the calculation seems to converge much faster for iscf=17 than for iscf=7. When using iscf=17, however, I get warnings about the density going negative. Taking a look at the code, it says: <br /><blockquote class="uncited"><div>!!  Note that, ignoring model core charge, as long as boxcut&gt;=2<br />!!  the shifted density is derivable from the square of a Fourier<br />!!  interpolated charge density =&gt; CANNOT go &lt; 0.<br />...<br />!!  Fourier interpolated core charge can go &lt; 0 due to Gibbs<br />!!  oscillations;...</div></blockquote><br /><br />Does this mean that the negative densities could arise from the fact that I have a pseudo-core? How come this only happens for iscf=17? <br />Ecut and boxcut should be OK. Any good suggestions what to do otherwise to prevent this behaviour?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Density went &lt; 0 for norm conserving PPs</h3>
+				<div class="date">Posted: <strong>Thu Jul 26, 2018 11:37 am</strong></div>
+				<div class="author">by <strong>Annelinde</strong></div>
+				<div class="content">Hi,<br /><br />Since you have a slab, I assume you have a lot of vacuum in your unit cell. The negative densities are caused because of this vacuum (Fourier transformation of the localized boundary between material and vacuum needs an infinite basis to be described exact, cfr that complain about Gibbs oscillations), and instead of describing the vacuum by a zero electronic density, the electronic density can be numerically a (small) negative density. <br /><br />These warnings either aren't triggered in different algorithms (because the convergence runs differently) or because they just aren't implemented.<br />When your calculation aborts of this warning you can play with other electronic convergence parameters (I suggest looking into iprcel between 41 and 49 if you haven't implemented this already).<br /><br />with kind regards,<br /><br />Annelinde</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3624&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:01:44 GMT -->
+</html>

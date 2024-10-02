@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2484&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:48:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Compile abinit 7.6 under raspbian (raspberry pi)</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Compile abinit 7.6 under raspbian (raspberry pi)</h2>
+		<p><a href="viewtopic9496.html?f=3&amp;t=2484">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2484</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Compile abinit 7.6 under raspbian (raspberry pi)</h3>
+				<div class="date">Posted: <strong>Thu Mar 13, 2014 4:17 pm</strong></div>
+				<div class="author">by <strong>Magniff</strong></div>
+				<div class="content">Hello there)<br />Currently I am experiencing some difficulties with compiling abinit 7.6 under raspberry pi (yep, i do understand that this task is practically useless).<br />The problem is that RPi has an ARM11 like cpu, which based on deprecated armv6 arch (v7 arch supported just great, no problem with ARM CortexA9 and so on).<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure yields following:<br />Summary of important options:<br /><br />&nbsp; * C compiler&nbsp; &nbsp; &nbsp; : gnu version 4.6<br />&nbsp; * Fortran compiler: gnu version 4.6<br />&nbsp; * architecture&nbsp; &nbsp; :&nbsp; &nbsp;( bits)<br /><br />&nbsp; * debugging&nbsp; &nbsp; &nbsp; &nbsp;: basic<br />&nbsp; * optimizations&nbsp; &nbsp;: standard<br /><br />&nbsp; * OpenMP enabled&nbsp; : no (collapse: ignored)<br />&nbsp; * MPI&nbsp; &nbsp; enabled&nbsp; : no<br />&nbsp; * MPI-IO enabled&nbsp; : no<br />&nbsp; * GPU&nbsp; &nbsp; enabled&nbsp; : no (flavor: none)<br /><br />&nbsp; * TRIO&nbsp; &nbsp;flavor = none<br />&nbsp; * TIMER&nbsp; flavor = abinit (libs: ignored)<br />&nbsp; * LINALG flavor = netlib-fallback (libs: ignored)<br />&nbsp; * ALGO&nbsp; &nbsp;flavor = none (libs: ignored)<br />&nbsp; * FFT&nbsp; &nbsp; flavor = none (libs: ignored)<br />&nbsp; * MATH&nbsp; &nbsp;flavor = none (libs: ignored)<br />&nbsp; * DFT&nbsp; &nbsp; flavor = none</code></pre></div><br /><br />So, it seams that linalg libs from tarballs are not usable. Open-BLAS could not be compilled from src for v6 arch.<br />What would you advise?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compile abinit 7.6 under raspbian (raspberry pi)&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Sun Mar 16, 2014 8:38 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br /><blockquote class="uncited"><div>LINALG flavor = netlib-fallback<br />...<br />So, it seams that linalg libs from tarballs are not usable. </div></blockquote><br /><br />why did you say that ?<br />the build system said that external linalg library is not available and therefore, it use the linalg library provided by abinit (= netlib and fallback)<br />PS : I have tested this, and it works...<br /><br />but, on my raspberry under Debian 7, I have installed :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>apt-get install gfortran<br />apt-get install liblapack-dev</code></pre></div><br /><br />and I use this shell script to configure :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#!/bin/bash<br />#<br />export CC=gcc<br />export CFLAGS=&quot;-O2&quot;<br />export CXX=g++<br />export CXXFLAGS=&quot;-O2&quot;<br />#<br />export F77=gofrtran<br />export FFLAGS=&quot;-O2 -g&quot;<br />export FC=gfortran<br />export FCFLAGS=&quot;-O2 -g&quot;<br />#<br />./configure \<br />&nbsp; &nbsp; &nbsp;--with-trio-flavor=none \<br />&nbsp; &nbsp; &nbsp;--with-dft-flavor=none \<br />&nbsp; &nbsp; &nbsp;--with-linalg-flavor=netlib \<br />&nbsp; &nbsp; &nbsp;--with-linalg-libs=&quot;-L/usr/lib -llapack -lblas&quot;</code></pre></div><br /><br />but, due to a buggy version of gcc 4.6.3 under &quot;Debian 4.6.3-14+rpi1&quot; , you must also apply two patches on code :<br /><br />1) in src/incs/abi_common.h<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--- abi_common.h&nbsp; &nbsp;2014-03-16 19:24:55.051144814 +0000<br />+++ abi_common.h_new&nbsp; &nbsp;2014-03-16 19:24:41.271794157 +0000<br />@@ -34,7 +34,7 @@<br />&nbsp;/** #define DEBUG_MODE&nbsp; &nbsp;**/<br />&nbsp;<br />&nbsp;/** define WHEREARG __FILE__,__LINE__**/<br />-#if defined(HAVE_FC_LONG_LINES) || defined(__INTEL_COMPILER)<br />+#if defined(HAVE_FC_LONG_LINES) || defined(__INTEL_COMPILER) || defined (FC_GNU)<br />&nbsp;# define NEWLINE ;<br />&nbsp;#else<br />&nbsp;# define NEWLINE \newline</code></pre></div><br /><br />2) in src/42_libpaw/m_gaussfit.F90<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--- m_gaussfit.F90&nbsp; &nbsp;2014-03-16 19:28:21.431421198 +0000<br />+++ m_gaussfit.F90_new&nbsp; &nbsp;2014-03-16 19:28:00.682398977 +0000<br />@@ -2537,7 +2537,7 @@<br />&nbsp;!!<br />&nbsp;!! SOURCE<br />&nbsp;<br />-subroutine gaussfit_apply_constrains(const,limit,nparam,param_in,param_out)<br />+subroutine gaussfit_apply_constrains(const1,limit,nparam,param_in,param_out)<br />&nbsp;<br />&nbsp;<br />&nbsp;!This section has been created automatically by the script Abilint (TD).<br />@@ -2552,7 +2552,7 @@<br />&nbsp; integer,parameter::positive=2<br />&nbsp; integer,parameter::restricted=3<br />&nbsp; integer,intent(in)::nparam<br />- integer,intent(in)::const(nparam)<br />+ integer,intent(in)::const1(nparam)<br />&nbsp; real(dp),intent(in)::limit(nparam),param_in(nparam)<br />&nbsp; real(dp),intent(out)::param_out(nparam)<br />&nbsp; !<br />@@ -2563,9 +2563,9 @@<br />&nbsp;!<br />&nbsp; param_out=param_in<br />&nbsp; do ii=1,nparam<br />-&nbsp; &nbsp;if(const(ii)==positive) param_out(ii)=abs(param_in(ii))<br />+&nbsp; &nbsp;if(const1(ii)==positive) param_out(ii)=abs(param_in(ii))<br />&nbsp;!&nbsp; <br />-&nbsp; &nbsp;if(const(ii)==restricted) then<br />+&nbsp; &nbsp;if(const1(ii)==restricted) then<br />&nbsp; &nbsp; &nbsp; if(param_in(ii)&lt;limit(ii)) then<br />&nbsp; &nbsp; &nbsp; &nbsp; param_out(ii)=limit(ii)<br />&nbsp; &nbsp; &nbsp; end if<br /></code></pre></div><br /><br />you can start the compilation with : make<br />now, you have time to drink 3 beers and eat two pizza  <img class="smilies" src="images/smilies/icon_lol.gif" alt=":lol:" title="Laughing" /> <br /><br />when, it finished, you can start some checks :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>root@pi:~/WorkSpace/abinit-7.6.2/tests# ./runtests.py fast<br />Regenerating database...<br />Saving database to file /root/WorkSpace/abinit-7.6.2/tests/test_suite.cpkl<br />Running ntests = 26, MPI_nprocs = 1, py_nthreads = 1...<br />&#91;fast&#93;&#91;t00&#93; succeeded<br />...<br />&#91;fast&#93;&#91;t30&#93; succeeded<br />Test suite completed in 655.73 s (average time for test = 55.46 s, stdev = 65.86 s)<br />failed: 0, succeeded: 11, passed: 0, skipped: 0, disabled: 0<br />&#91;fast&#93;&#91;t27-t28-t29&#93; has run_etime 224.43 s<br />Suite&nbsp; &nbsp;failed&nbsp; passed&nbsp; succeeded&nbsp; skipped&nbsp; disabled&nbsp; run_etime&nbsp; tot_etime<br />fast&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;11&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;610.08&nbsp; &nbsp; &nbsp;649.32<br /></code></pre></div><br /><br />I succeeded also with the same recipe with a UDOO ( quad raspbery version : <!-- m --><a class="postlink" href="http://shop.udoo.org/eu/product/udoo-quad.html">http://shop.udoo.org/eu/product/udoo-quad.html</a><!-- m --> )<br /><br />regards...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compile abinit 7.6 under raspbian (raspberry pi)</h3>
+				<div class="date">Posted: <strong>Sat Mar 22, 2014 1:42 pm</strong></div>
+				<div class="author">by <strong>Magniff</strong></div>
+				<div class="content">Yep, it seams i took too much beer that day) Moreover, in attempt to use OpenBlas - alternative linalg lib, I actually found a bug. It fixed now.<br /><!-- m --><a class="postlink" href="https://github.com/xianyi/OpenBLAS/issues/355">https://github.com/xianyi/OpenBLAS/issues/355</a><!-- m --><br /><br />So, thanx, and best wishes!<br />Magniff</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2484&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:48:16 GMT -->
+</html>

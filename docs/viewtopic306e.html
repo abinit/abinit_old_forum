@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=626&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:20:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Self consistency in gwcalctyp 22</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Self consistency in gwcalctyp 22</h2>
+		<p><a href="viewtopicca93.html?f=11&amp;t=626">https://forum.abinit.org/viewtopic.php?f=11&amp;t=626</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Self consistency in gwcalctyp 22</h3>
+				<div class="date">Posted: <strong>Wed Sep 29, 2010 7:07 pm</strong></div>
+				<div class="author">by <strong>JEJohns</strong></div>
+				<div class="content">I have followed the tutorials, and I have a couple of questions that revolve around the Lebegue contour deformation method and self consistency.  When performing this type of calculation, we introduce the &quot;new&quot; variables nfreqre and nfreqim.  Is it important to do convergence tests with respect to the number of frequencies along both the real and imaginary axes?  The tutorials just give some numbers nfreqre=10 &amp; nfreqim=4 if I recall.  Should these be evenly distributed along their respective axes from 0 to   Secondly, in regards to self consistency, ie gwcalctyp2X, how do what cutoff is used to determine self consistency?  Is it change in the Fermi energy, is it change in the band gap, is it a tolwfr?  The variable info for gwcalctyp &amp; the tutorials simply don't say.  There is a GW variable called gw_nstep  in the gw variable section, but it refers to optdriver=8.  When I check the input variable information for &quot;optdriver&quot; it doesn't go past 5.  <br /><br />Secondly, and this is only related to super cell calculations.   Because of the empty vacuum space increasing the size of the unit cell, the number of bands and G vectors can get quite large.  For a 35Ha cutoff with 8 carbon &amp; 2 fluorine atoms, you get ~15000 Gvectors and 14000 bands if you calculate the full KSS (ie nbandkss -1).  Many other groups don't report an &quot;nband cutoff&quot;.  Is it it sufficient to test the  convergence nband for screening and gw calculations (which I believe must be less than nbandkss)?<br /><br />Thanks for the help.<br />--James</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Self consistency in gwcalctyp 22</h3>
+				<div class="date">Posted: <strong>Wed Oct 13, 2010 4:26 am</strong></div>
+				<div class="author">by <strong>JEJohns</strong></div>
+				<div class="content">From 6.2 release notes<br />D.18 A new optdriver level has been addded for performing self-consistent GW calculations.<br />    Related input variables (not operational) gw_nstep, gw_sctype, gw_sctype_name, gw_toldfeig.<br />    QPSCGW + PAW is still under testing due to some regressions introduced in the previous merges.<br />    one-shot COHSEX + PAW is available for production, self-consistency with COHSEX + PAW is under testing.<br />    The memory is better controlled, thanks to the gwmem input variable.<br />    Two different FFT meshes defined by ecuteps and ecusigx are used to calculate the <br />    matrix elements the exchange and the correlation part of the self-energy, respectively.<br />    Extrapolar works with SCGW. Also with PAW.<br />    On-going effort to take into account the anisotropy of the inverse dielectric matrix in the<br />    optical limit: the full dielectric tensor is now available thus opening the way to<br />    a more accurate treatment of the Coulomb divergence in the correlated self-energy thanks to the <br />    use of the Lebedev-Laikov quadrature scheme on the sphere.<br />    Preliminary implementation of SCGW with symmetries (not fully operational yet)<br />    Hermitianicity of HF, COHSEX, SEX is employed to speed up SCGW<br />    Work by M. Giantomassi <br /><br />has changed to:<br />in 6.4<br />B.3 Several advanced features of the GW part of ABINIT can now be used safely.<br />    In particular QPSCGW + PAW is OK, as well as self-consistent COHSEX + PAW.<br />    Extrapolar works with SCGW, also with PAW.<br />    SCGW has now been implemented with symmetries (HF, COHSEX, SEX), and use of<br />    hermitianity (speed up of the calculations).<br />    The memory is better controlled, thanks to the gwmem input variable.<br />    Two different FFT meshes defined by ecuteps and ecusigx are used to calculate the<br />    matrix elements the exchange and the correlation part of the self-energy, respectively.<br />    A new optdriver level has been addded for performing self-consistent GW calculations.<br />    Related input variables gw_nstep, gw_sctype, gw_sctype_name, gw_toldfeig.<br />    Work by M. Giantomassi<br /><br /><br />Can someone comment a bit about these changes, and how GW self consistency was implemented before in the gwcalctyp 22 scheme?</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=626&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:20:36 GMT -->
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=4076&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:44:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Wrong Berry phase with LOBPCG</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Wrong Berry phase with LOBPCG</h2>
+		<p><a href="viewtopic67a5.html?f=10&amp;t=4076">https://forum.abinit.org/viewtopic.php?f=10&amp;t=4076</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Wrong Berry phase with LOBPCG</h3>
+				<div class="date">Posted: <strong>Mon Mar 25, 2019 5:53 pm</strong></div>
+				<div class="author">by <strong>antonio</strong></div>
+				<div class="content">Dear all,<br />I compiled abinit 8.10.2 on the <a href="https://docs.it4i.cz/anselm/introduction" class="postlink">anselm</a> cluster using the following config parameters<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure --prefix=/home/acamm/bin/abinit-8.10.2 \<br />&nbsp;--enable-mpi --enable-mpi-io --enable-optim=&quot;aggressive&quot; \<br />&nbsp;--enable-mpi-inplace \<br />&nbsp;--enable-zdot-bugfix=&quot;yes&quot; \<br />&nbsp;--with-fft-flavor=&quot;fftw3-mpi&quot; \<br />&nbsp;--with-fft-libs=&quot;-lfftw3 -lfftw3f -lfftw3_mpi -lfftw3f_mpi -lfftw3_threads -lfftw3f_threads&quot; \<br />&nbsp;--with-fft-incs=&quot;-I/apps/all/FFTW/3.3.7-gompi-2018a/include&quot; \<br />&nbsp;--with-linalg-libs=&quot;-lscalapack -lopenblas&quot; \<br />&nbsp;--with-dft-flavor=&quot;libxc&quot; \<br />&nbsp;--with-libxc-libs=&quot;-L/home/acamm/local/lib/libxc-3.0.0/lib -lxcf90 -lxc&quot; \<br />&nbsp;--with-libxc-incs=&quot;-I/home/acamm/local/lib/libxc-3.0.0/include&quot; \<br />&nbsp;FC=mpif90 \<br />&nbsp;CC=mpicc \<br />&nbsp;CXX=mpicxx<br /></code></pre></div><br /><br />I am using norm-conserving pseudopotentials downloaded from the abinit website.<br />I ran a berryphase calculation in the presence of electric field testing different combinations of fftalg and wfoptalg options to improve the speed of the calculation. Unfortunately, only the wfoptalg=0 (file out_1 attached) gives reliable values of the forces on the atoms and the polarization, but it's the slowest. Whenever the LOBPCG  algorithm is active, the forces on the atoms are larger and the polarization is smaller by 2-3 order of magnitude with respect to the case in which wfoptalg=0. In the examples I posted here, with wfoptalg!=0 I used nbdblock=1 to reduce to the minimum numerical instabilities but I get the same differences in the forces and polarization which I get with nbdblock&gt;1. I also tested ortalg=2 with  wfoptalg!=0 (file out_4 attached) but with no results.<br /><br />I need to do several of this calculations to compute the phonons with the frozen phonon approach. Unfortunately, the use of wfoptalg=0 requires a too large computation time and makes this approach prohibitive; on the other side, the DFPT approach has other <a href="viewtopic0bcb.html?f=10&amp;t=3987" class="postlink">issues</a>; the combination of wfoptalg=114 with fftalg0=312 gives the best computation time and it would be the ideal one if it worked.<br /><br />Please, note also that the run in out_2 and out_4 didn't converge because they reached the limit of 1000 scf steps; however, both are really close to the convergence and no improvement is expected to make the forces and polarization values comparable to those in the out_1 file.<br /><br />I am not sure, but this problem seems to be related to <a href="viewtopic0bcb.html?f=10&amp;t=3987" class="postlink">this</a> topic I opened some time ago.<br /><br />Output files are large and cannot be uploaded here. This is the <a href="https://drive.google.com/open?id=1pNfI28YnSaPL0A905umiNfdq5NKTS9WC" class="postlink">link</a> to download them.<br /><br />Thanks a lot in advance for your kind help.<br /><br />Antonio</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Wrong Berry phase with LOBPCG</h3>
+				<div class="date">Posted: <strong>Tue Apr 02, 2019 4:59 pm</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Dear antonio,<br /><br />I implemented the wfoptalg 114 (new LOBPCG version) (BTW wfoptalg 4 should not be used)<br />My remarks :<br />1: all outputs give the same energy +/- 0.8 meV -&gt; so I guess the calculation is correct (at least for the wave functions and the density)<br />2: the density are all converge pretty nicely <br />3: forces seem to be different but only for  the z direction where there are several order of magnitude.<br /><br />What I would test to be sure:<br />1) Add a few bands<br />2) I'd like to say put paral_kgb 1 and don't change anything else (this can have a consequence for LOBPCG) but I am afraid berry phase will fail so go to next point.<br />3) Test just one GS calculation with LOBPCG, with and witout paral_kgb (no berry phase) and compare forces with defautl wfoptalg 0<br />4) If everything is the same except the forces, I would suggest to switch to PAW and redo previous test. If the problem is still there, then I know exactly where the problem is.<br /><br />Cheers <br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Wrong Berry phase with LOBPCG</h3>
+				<div class="date">Posted: <strong>Wed Apr 10, 2019 10:47 am</strong></div>
+				<div class="author">by <strong>antonio</strong></div>
+				<div class="content">Dear Jordan,<br /><br />concerning your remarks:<br />1) yes, the energy is OK,<br />2) also the density is OK, and<br />3) forces are different only along the z direction because the electric field is applied along only the z direction<br /><br />Concerning the tests:<br />1) I cannot try it because with electric field the number of bands must be equal to the number of occupied bands;<br />2) paral_kgb doesn't work with Berry phase, hence with E-field turned on;<br />3) without Berry phase calculation everything is OK;<br />4) I tested the same calculation with paw. I first got a converged scf without E-field, then I got the wfk and den with a Berry phase calculation starting from the previous converged scf without e-field. Starting from the wfk and den of the Berry phase calculation, I then set wfoptalg 114: the polarization and the forces are similar to the case with wfoptalg 114 and NC pseudos, then the problem persists. With wfoptalg 114, the single scf step takes about 1:12 min with NC pseudos and 3:25 min with paw but the convergence is way much faster with paw (11 steps needed with paw against 118 steps with NC).<br /><br />So, the optimal setup would be use paw with wfoptalg 114. I attach the output of the paw calculation with wfoptalg 114. I tried to test the paw case with default wfoptalg but each scf step takes about 1h and the calculation is still far to converge.<br /><br />Please, let me know if there are other tests which I can do to help to solve the problem.<br /><br />Thanks<br /><br />Antonio</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Wrong Berry phase with LOBPCG</h3>
+				<div class="date">Posted: <strong>Tue May 28, 2019 3:21 pm</strong></div>
+				<div class="author">by <strong>antonio</strong></div>
+				<div class="content">Dear Jordan,<br />is there any update on this? I can provide further tests if necessary.<br />Thanks.<br /><br />Best<br /><br />Antonio</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=4076&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:44:27 GMT -->
+</html>

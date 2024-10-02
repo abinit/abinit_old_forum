@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1952&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:09:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Restarting Energy Barrier Calculatons</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Restarting Energy Barrier Calculatons</h2>
+		<p><a href="viewtopic48f0.html?f=9&amp;t=1952">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1952</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Restarting Energy Barrier Calculatons</h3>
+				<div class="date">Posted: <strong>Tue Jan 15, 2013 10:12 am</strong></div>
+				<div class="author">by <strong>zacbullard</strong></div>
+				<div class="content">Hello Everyone,<br /><br />   I have searched the forums and the internet for the answer to this question, to no avail. Please forgive me if I missed something obvious.<br /><br />   I have both completed and interrupted NEB energy barrier calculations that I would like to restart and continue. I would love to find out how to do so if possible, with an example of the input variables.<br /><br />   Here are the NEB variables used in the input file:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;nimage 12&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# Number of points along the string<br />&nbsp;imgmov 2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Selection of &quot;String Method&quot; algo<br />&nbsp;ntimimage 50&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Max. number of relaxation steps of the string<br />&nbsp;tolimg 5.0d-5&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# Tol. criterion (will stop when average energy of cells &lt; tolimg)<br />&nbsp;dynimage 0 10*1 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# Keep first and last images fixed<br />&nbsp;fxcartfactor 1.0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Time step for evolution&nbsp; step of string metho<br />&nbsp;prtvolimg 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# Printing volume (0=full, 1=intermediate, 2=minimal)</code></pre></div><br /><br />   Thank you for your time.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Restarting Energy Barrier Calculatons</h3>
+				<div class="date">Posted: <strong>Fri Nov 30, 2018 12:16 pm</strong></div>
+				<div class="author">by <strong>woffermans</strong></div>
+				<div class="content">Dear ABINIT friends,<br /><br />I encounter the same problem.<br /><br />What is the procedure to continue an interrupted minimum energy path calculation?<br /><br />I cannot find the info in the tutorials.<br /><br />Can someone help me out?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Restarting Energy Barrier Calculatons</h3>
+				<div class="date">Posted: <strong>Fri Nov 30, 2018 9:03 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Willem,<br />I think the restartxf flag is what you are looking for.<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Restarting Energy Barrier Calculatons</h3>
+				<div class="date">Posted: <strong>Mon Dec 03, 2018 1:18 pm</strong></div>
+				<div class="author">by <strong>woffermans</strong></div>
+				<div class="content">The restartxf flag does indeed help ... but only partially.<br /><br />If one analyses the previous  calculation, then it appears that the calculation stopped at image 6 of time step 2:<br /><br />Previous calculation: $grep STRING ../5M5V2x2_test2/pd.log <br /> STRING METHOD - TIME STEP     1<br /> STRING METHOD - CELL #    1/   7<br /> STRING METHOD - CELL #    2/   7<br /> STRING METHOD - CELL #    3/   7<br /> STRING METHOD - CELL #    4/   7<br /> STRING METHOD - CELL #    5/   7<br /> STRING METHOD - CELL #    6/   7<br /> STRING METHOD - CELL #    7/   7<br /> STRING METHOD:<br /> STRING METHOD - TIME STEP     2<br /> STRING METHOD - CELL #    2/   7<br /> STRING METHOD - CELL #    3/   7<br /> STRING METHOD - CELL #    4/   7<br /> STRING METHOD - CELL #    5/   7<br /> STRING METHOD - CELL #    6/   7<br /><br />If one analyses the restarted calculation, then it appears that the calculation starts at image 2 of time step 2.<br /><br />Restarted calculation: $grep STRING pd.log <br /> STRING METHOD:<br /> STRING METHOD - TIME STEP     2<br /> STRING METHOD - CELL #    2/   7<br /><br />Does time step 2 need to be recalculated for all images or can the calculation be restarted at image 6 of time step 2?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Restarting Energy Barrier Calculatons</h3>
+				<div class="date">Posted: <strong>Fri Dec 07, 2018 12:35 pm</strong></div>
+				<div class="author">by <strong>woffermans</strong></div>
+				<div class="content">Dear Eric and ABINIT friends,<br /><br />A renewed restart of the STRING calculation showed that restartxf flag is not the only parameter to consider.<br /><br />Once more, all files of the previous run were present. I did not change anything, before I resubmitted the job.<br /><br />After the job was started, I got the following in my output file:<br /><br />&lt;snip&gt;<br />...<br />================================================================================<br /> STRING METHOD FOR 1 TIME STEP<br />================================================================================<br />&lt;/snip&gt;<br /><br />The end of the output file of the previous job showed:<br /><br />&lt;snip&gt;<br />... <br />Moving images of the cell...<br /> <br /> <br />================================================================================<br /> STRING METHOD - TIME STEP     3<br />================================================================================<br />&lt;/snip&gt;<br /><br />This is more frustrating, since it was only for a trivial reason that the previous job was stopped.<br /><br />The parameter pawovlp did not do its work! <img class="smilies" src="images/smilies/icon_e_sad.gif" alt=":(" title="Sad" /></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1952&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:09:40 GMT -->
+</html>

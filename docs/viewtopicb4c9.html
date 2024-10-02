@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3648&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:20:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; MEP Using NEB+Improved Tangent</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>MEP Using NEB+Improved Tangent</h2>
+		<p><a href="viewtopic0a3e.html?f=9&amp;t=3648">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3648</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>MEP Using NEB+Improved Tangent</h3>
+				<div class="date">Posted: <strong>Wed Jul 19, 2017 8:23 pm</strong></div>
+				<div class="author">by <strong>umanzorme</strong></div>
+				<div class="content">Hello,<br /><br />I am trying to perform solve for the MEP of a particular system, using the NEB method under the improved tangent implementation. I started with just 6 images, keeping the first and last fixed, so far the code seems to be working, or at least I have not received an error message yet, however I think my resources request is a little conservative.<br /><br />This is my input file:<br /><br />#Definition of parallelism<br /> autoparal 1<br /><br />#Definition of GGA-PBE functional<br />     ixc 11<br /><br />#Definition of +U variables<br />  usepawu 1           #Full Localized Limit Method<br />    lpawu 3           #Alpha-Uranium has f-orbital occupation<br />    upawu 1.24 eV     #From Wei Xei et al<br />   #jpawu 0           #Let abinit deal with default values for J<br /><br />#Definition of spin<br />   occopt 4    #Alpha-U has metallic occupation<br />   nsppol 2    #occopt is 4, metallic occupation<br />  nspinor 1    #Tied up with nsppol 2<br />   nspden 2    #Sacalar magnetization<br />              <br />#Definition of the SCF cycle<br /> toldff 1.0d-3     #Use force difference as stopping creteria<br />  nstep 100        #Max. Number of SCF steps<br /> diemac 1.0d6    #Value recommended for metals<br /><br />#Definition of the unit cell<br />    rprim   1.000000000  0.000000000  0.000000000<br />            0.000000000  1.000000000  0.000000000<br />            0.000000000  0.000000000  1.000000000<br /><br />#Atomic data<br />    natom 31         #There are four atoms within the conventional cell<br />    nband 651        #14 Bands per U atom, 50%<br />   ntypat 1          #There is only one type of atom<br />    znucl 92         #Z number for U<br />    typat 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1  #We are dealing with just one type of atom<br /><br />#Definition of the k-point grid<br />  #kptopt 1<br /> #nshiftk 1<br />  #shiftk 0.0 0.0 0.0<br />   #ngkpt 2 2 2<br />   kptopt 0<br />     nkpt 1<br />      kpt 0 0 0 #Gamma point<br /><br />#Definition of the path<br /> acell  10.363267115 22.322895979 18.772253591<br />  xred -0.000577159 -0.000084567 -0.000850529<br />           0.250000000  0.249223904 -0.001104593<br />          -0.000891373  0.100497575  0.250000000<br />           0.250000000  0.350896052  0.250000000<br />           0.500577159 -0.000084567 -0.000850529<br />           0.750000000  0.250430685 -0.000356463<br />           0.500891373  0.100497575  0.250000000<br />           0.750000000  0.350865781  0.250000000<br />          -0.000472425  0.500313899  0.000119583<br />           0.250000000  0.751403498 -0.004526546<br />           0.000677969  0.600673331  0.250000000<br />           0.250000000  0.851189815  0.250000000<br />           0.500472425  0.500313899  0.000119583<br />           0.750000000  0.754076168 -0.003584907<br />           0.499322031  0.600673331  0.250000000<br />           0.750000000  0.849381702  0.250000000<br />          -0.000577159 -0.000084567  0.500850529<br />           0.250000000  0.249223904  0.501104593<br />          -0.002337565  0.098849122  0.750000000<br />           0.250000000  0.350820732  0.750000000<br />           0.500577159 -0.000084567  0.500850529<br />           0.750000000  0.250430685  0.500356463<br />           0.502337565  0.098849122  0.750000000<br />           0.750000000  0.350134097  0.750000000<br />          -0.000472425  0.500313899  0.499880417<br />           0.250000000  0.751403498  0.504526546<br />          -0.000131717  0.601291299  0.750000000<br />           0.250000000  0.847521076  0.750000000<br />           0.500472425  0.500313899  0.499880417<br />           0.750000000  0.754076168  0.503584907<br />           0.500131717  0.601291299  0.750000000<br /><br />acell_lastimg 10.354945024 22.284282376 18.744231480<br />  xred_lastimg 0.000303843 0.000167714 -0.000175325<br />               0.250048090 0.250567720  0.000272182<br />               0.000505010 0.100548368  0.249838112<br />               0.249961763 0.350599803  0.249831300<br />               0.499675029 0.000214860 -0.000367106<br />               0.749959149 0.249504679 -0.000733663<br />               0.499494711 0.100657230  0.249858875<br />               0.750027720 0.350795457  0.250231967<br />               0.000153205 0.500530048  0.000179132<br />               0.249968011 0.752981726 -0.003637382<br />              -0.000717542 0.600233275  0.250212852<br />               0.249958834 0.849762134  0.250266787<br />               0.499850247 0.500509751  0.000275914<br />               0.750037718 0.751368743 -0.003455412<br />               0.500710811 0.600300384  0.249746875<br />               0.750035969 0.850697224  0.249455367<br />               0.000386601 0.000228154  0.500172179<br />               0.249912048 0.250549252  0.499727314<br />               0.001806549 0.099157349  0.750165761<br />               0.249978123 0.350306177  0.750132560<br />               0.499615972 0.000275965  0.500354226<br />               0.750080011 0.249582161  0.500709735<br />               0.498224895 0.099240700  0.750128481<br />               0.749996353 0.350895902  0.749746298<br />               0.000260724 0.500520503  0.499788643<br />               0.249893080 0.752900783  0.503510226<br />               0.000007706 0.601106496  0.749781602<br />               0.499729428 0.500409044  0.499703914<br />               0.750155381 0.751221296  0.503458933<br />               0.499945965 0.601218731  0.750237098<br />               0.750034594 0.847566116  0.750582555<br /><br />       nimage 6         #Number of replicas of the system<br />      imgmov 5         #Nudged Elastic Band Method<br />    neb_algo 1         #Improved tangent option<br />  ntimimage 20       #Max. Number of relaxation steps<br />        tolimg 1.0d-3  #Stopping criteria for image relaxation<br />   dynimage 0 4*1 0 #Keep initial and final states fixed<br /> mep_solver 2        #L-BFGS Algorithm, not sure if this is redundant with SCF definition<br />  prtvolimg 0          #Complete output file<br /><br />#General input data<br />             ecut 24      #From convergence studies<br />   pawecutdg 50      #From convergence studies<br />     optforces 1        #Enforce calculation of forces at each SCF step<br />chksymbreak 0        #To by-pass the warning message on the value of tnons<br />       chkprim 0        #Do not check if cell is primitive<br />            nsym 1        #Turn off symmetry<br /><br />#End of input file<br /><br />So far, I have several output files, but no numerical results yet (the job has been running for 11 hours at the date of this message). After checking the output file, I noticed that the number of processors differ from what I requested (336 versus 384), and perhaps this is linked to the &quot;autoparal&quot; tool. Could you please give me a hand with this? I think I need to request more processors, especially given the size of my system, but I am not sure how the number of processors per image is assigned.<br /><br />Thank you,<br />Manuel</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MEP Using NEB+Improved Tangent</h3>
+				<div class="date">Posted: <strong>Tue Aug 01, 2017 3:04 am</strong></div>
+				<div class="author">by <strong>umanzorme</strong></div>
+				<div class="content">Greetings all,<br /><br />Has anyone experienced the issue described below?<br /><br />forrtl: severe (174): SIGSEGV, segmentation fault occurred<br /><br />Thank you,<br />Manuel</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3648&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:20:43 GMT -->
+</html>

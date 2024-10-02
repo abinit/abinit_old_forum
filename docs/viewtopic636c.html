@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=5378&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:04:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Compilation error for abinit-9.4.2</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Compilation error for abinit-9.4.2</h2>
+		<p><a href="viewtopic399f.html?f=3&amp;t=5378">https://forum.abinit.org/viewtopic.php?f=3&amp;t=5378</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Compilation error for abinit-9.4.2</h3>
+				<div class="date">Posted: <strong>Thu May 06, 2021 11:00 am</strong></div>
+				<div class="author">by <strong>bs544</strong></div>
+				<div class="content">Hi,<br>
+<br>
+I'm trying to go from version 9.2.2 to 9.4.2 using the same configuration file, but it looks like some bits in 02_clib/sockets.c are causing the following errors when I run make:<br>
+
+<blockquote class="uncited"><div>
+sockets.c(84): error: incomplete type is not allowed<br>
+        struct addrinfo hints, *res;  <br>
+                        ^<br>
+<br>
+sockets.c(90): error: identifier "AI_PASSIVE" is undefined<br>
+        hints.ai_flags = AI_PASSIVE;<br>
+                         ^<br>
+<br>
+sockets.c(93): warning #266: function "getaddrinfo" declared implicitly<br>
+        ai_err = getaddrinfo(host, service, &amp;hints, &amp;res); <br>
+                 ^<br>
+<br>
+sockets.c(97): error: pointer to incomplete class type is not allowed<br>
+        sockfd = socket(res-&gt;ai_family, res-&gt;ai_socktype, res-&gt;ai_protocol);<br>
+                        ^<br>
+<br>
+sockets.c(97): error: pointer to incomplete class type is not allowed<br>
+        sockfd = socket(res-&gt;ai_family, res-&gt;ai_socktype, res-&gt;ai_protocol);<br>
+                                        ^<br>
+<br>
+sockets.c(97): error: pointer to incomplete class type is not allowed<br>
+        sockfd = socket(res-&gt;ai_family, res-&gt;ai_socktype, res-&gt;ai_protocol);<br>
+                                                          ^<br>
+<br>
+sockets.c(101): error: pointer to incomplete class type is not allowed<br>
+        if (connect(sockfd, res-&gt;ai_addr, res-&gt;ai_addrlen) &lt; 0) <br>
+                            ^<br>
+<br>
+sockets.c(101): error: pointer to incomplete class type is not allowed<br>
+        if (connect(sockfd, res-&gt;ai_addr, res-&gt;ai_addrlen) &lt; 0) <br>
+                                          ^<br>
+<br>
+sockets.c(103): warning #266: function "freeaddrinfo" declared implicitly<br>
+        freeaddrinfo(res);<br>
+        ^
+</div></blockquote>
+
+I've put the contents of my configuration file below. Is there something I should change in there to sort this out?<br>
+<br>
+Thanks for any help,<br>
+Ben<br>
+<br>
+config file:
+<blockquote class="uncited"><div>
+prefix='/home/bs544/local/lib/abinit-9.2.2/ben'<br>
+FC=mpiifort<br>
+CC=mpiicc<br>
+CXX=mpiicpc<br>
+<br>
+FCFLAGS="-O3 -heap-arrays 64"<br>
+<br>
+enable_mpi_io="yes"<br>
+<br>
+with_optim_flavor="aggressive"<br>
+with_mpi="/opt/intel/oneapi/mpi/latest/"<br>
+MPI_LIBS="-L/opt/intel/oneapi/mpi/latest/lib -lmpi_lp64"<br>
+<br>
+#LINALG<br>
+with_linalg_flavor="mkl"<br>
+wihh_fft_flavor="dfti"<br>
+<br>
+<br>
+# HDF5<br>
+with_hdf5=$HDF5_DIR<br>
+<br>
+H5CC="${HDF5_DIR}/bin/h5pcc"<br>
+HDF5_CPPFLAGS="-I${HDF5_DIR}/include"<br>
+HDF5_CFLAGS="-std=c99"<br>
+HDF5_LDFLAGS=""<br>
+HDF5_LIBS="-L${HDF5_DIR}/lib -lhdf5 -lhdf5_hl"<br>
+<br>
+# NetCDF<br>
+with_netcdf=$NETCDF_DIR<br>
+<br>
+NETCDF_CPPFLAGS="-I${NETCDF_DIR}/include"<br>
+NETCDF_FCFLAGS="-I${NETCDF_DIR}/include"<br>
+NETCDF_LIBS="-L${NETCDF_DIR}/lib -lnetcdf"<br>
+<br>
+# NetCDF-Fortran<br>
+NETCDFF_DIR=${NETCDF_FORTRAN_DIR}<br>
+<br>
+with_netcdf_fortran=${NETCDFF_DIR}<br>
+NETCDF_FORTRAN_CPPFLAGS="-I${NETCDFF_DIR}/include"<br>
+NETCDF_FORTRAN_FCFLAGS="-I${NETCDFF_DIR}/include"<br>
+NETCDF_FORTRAN_LIBS="-L${NETCDFF_DIR}/lib -lnetcdff"<br>
+<br>
+# LibXC<br>
+LIBXC_DIR="/home/bs544/local/lib/libxc-4.3.4/ben"<br>
+<br>
+with_libxc=$LIBXC_DIR<br>
+LIBXC_CPPFLAGS="-I${LIBXC_DIR}/include"<br>
+LIBXC_CFLAGS="-I${LIBXC_DIR}/include"<br>
+LIBXC_FCFLAGS="-I${LIBXC_DIR}/include"<br>
+LIBXC_LIBS="-L${LIBXC_DIR}/lib -lxc" #f90 -lxcf03 -lxc"
+</div></blockquote></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compilation error for abinit-9.4.2</h3>
+				<div class="date">Posted: <strong>Mon May 10, 2021 11:30 am</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br>
+<br>
+Maybe some packages are missing depending on your OS   <img class="smilies" src="images/smilies/icon_question.gif" width="15" height="17" alt=":?:" title="Question"> <br>
+<br>
+We find /usr/include/sys/socket.h : <br>
+- for Ubuntu 18  : libc6-dev-amd64<br>
+- for CentOS 7  : glibc-headers-2.17-323.el7_9.x86_64</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=5378&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:04:45 GMT -->
+</html>

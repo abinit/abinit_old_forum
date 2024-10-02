@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2848&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 20:59:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Cell+ion relaxation with electric displacement</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Cell+ion relaxation with electric displacement</h2>
+		<p><a href="viewtopicb232.html?f=9&amp;t=2848">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2848</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Cell+ion relaxation with electric displacement</h3>
+				<div class="date">Posted: <strong>Tue Nov 04, 2014 6:16 pm</strong></div>
+				<div class="author">by <strong>antonio</strong></div>
+				<div class="content">Dear all,<br /><br />I'm trying to do a full (cell shape+atom position) relaxation with a non-null electric displacement with abinit version 7.6.4 . This is the setting I'm using:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp; &nbsp;ixc&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3<br /><br />#Parameters of the SCF cycles<br />#****************************<br />&nbsp; &nbsp;iscf&nbsp; &nbsp; &nbsp; &nbsp; 4<br />&nbsp; &nbsp;nstep&nbsp; &nbsp; &nbsp; &nbsp;2000<br />&nbsp; toldfe&nbsp; &nbsp; &nbsp; &nbsp;1.0d-10<br /><br />#Plane wave basis and k-point grid<br />#*********************************<br />&nbsp; &nbsp;ecut&nbsp; &nbsp; &nbsp; &nbsp; 800 eV<br />&nbsp; &nbsp;ecutsm&nbsp; &nbsp; &nbsp; 0.5<br />&nbsp; &nbsp;dilatmx&nbsp; &nbsp; &nbsp;1.30<br />&nbsp; &nbsp;ngkpt&nbsp; &nbsp; &nbsp; &nbsp;7 7 7<br /><br />ndtset 1&nbsp; &nbsp;jdtset 1<br /><br />##DATASET1 : full cell optimization<br />##*****************************************************<br />&nbsp; &nbsp; kptopt1&nbsp; &nbsp;3<br />&nbsp; &nbsp; ionmov1&nbsp; &nbsp;3<br />&nbsp; &nbsp;optcell1&nbsp; &nbsp;1<br />&nbsp; &nbsp; &nbsp;ntime1&nbsp; &nbsp;200<br />&nbsp; &nbsp; tolmxf1&nbsp; &nbsp;5.0d-6<br />&nbsp;restartxf1&nbsp; &nbsp;-1<br />&nbsp; &nbsp; &nbsp;nband1&nbsp; &nbsp;20 # with a finite field, nband must be = num occupied bands<br />&nbsp; berryopt1&nbsp; &nbsp;16<br />red_dfield1&nbsp; &nbsp;0.0 0.0 0.001<br /></code></pre></div><br /><br />After printing<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;Summary of the results<br />&nbsp;Electronic Berry phase&nbsp; &nbsp; -5.641126032E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Ionic phase&nbsp; &nbsp; &nbsp;0.000000000E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Total phase&nbsp; &nbsp; -5.641126032E-01<br />&nbsp; &nbsp; Remapping in &#91;-1,1&#93;&nbsp; &nbsp; -5.641126032E-01<br />&nbsp;P(1) Shifted polarization branch to minimize red_efield&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; k from&nbsp; &nbsp; -5.641126032E-01 by -1<br /><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Polarization&nbsp; &nbsp; &nbsp;7.885445358E-03 (a.u. of charge)/bohr^2<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Polarization&nbsp; &nbsp; &nbsp;4.511638753E-01 C/m^2<br /><br /><br />&nbsp;Computing the polarization (Berry phase) for reciprocal vector:<br />&nbsp; 0.00000&nbsp; 0.14286&nbsp; 0.00000 (in reduced coordinates)<br />&nbsp; 0.00000&nbsp; 0.01921&nbsp; 0.00000 (in cartesian coordinates - atomic units)<br />&nbsp;Number of strings:&nbsp; &nbsp; 49<br />&nbsp;Number of k points in string:&nbsp; &nbsp; 7<br /></code></pre></div><br /><br /> it exits without any error message. Is there any conflicting/wrong option I'm using?<br /><br />Thanks a lot in advance for your help</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Cell+ion relaxation with electric displacement</h3>
+				<div class="date">Posted: <strong>Tue Nov 04, 2014 6:19 pm</strong></div>
+				<div class="author">by <strong>antonio</strong></div>
+				<div class="content">Update: in serial mode I get the following error message:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;Summary of the results<br />&nbsp;Electronic Berry phase&nbsp; &nbsp; -5.641126032E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Ionic phase&nbsp; &nbsp; &nbsp;0.000000000E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Total phase&nbsp; &nbsp; -5.641126032E-01<br />&nbsp; &nbsp; Remapping in &#91;-1,1&#93;&nbsp; &nbsp; -5.641126032E-01<br />&nbsp;P(1) Shifted polarization branch to minimize red_efield&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; k from&nbsp; &nbsp; -5.641126032E-01 by -1<br /><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Polarization&nbsp; &nbsp; &nbsp;7.885445358E-03 (a.u. of charge)/bohr^2<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Polarization&nbsp; &nbsp; &nbsp;4.511638753E-01 C/m^2<br /><br /><br />&nbsp;Computing the polarization (Berry phase) for reciprocal vector:<br />&nbsp; 0.00000&nbsp; 0.14286&nbsp; 0.00000 (in reduced coordinates)<br />&nbsp; 0.00000&nbsp; 0.01921&nbsp; 0.00000 (in cartesian coordinates - atomic units)<br />&nbsp;Number of strings:&nbsp; &nbsp; 49<br />&nbsp;Number of k points in string:&nbsp; &nbsp; 7<br />&nbsp;DATA TYPE INFORMATION: <br />&nbsp;REAL:&nbsp; &nbsp; &nbsp; Data type name: REAL(DP) <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Kind value:&nbsp; &nbsp; &nbsp; 8<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Precision:&nbsp; &nbsp; &nbsp; 15<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Smallest nonnegligible quantity relative to 1:&nbsp; 0.22204460E-15<br /><br />--- !BUG<br />message: |<br />&nbsp; &nbsp; For k-point #&nbsp; 220,<br />&nbsp; &nbsp; &nbsp; the determinant of the overlap matrix is found to be 0.<br />src_file: berryphase_new.F90<br />src_line: 880<br />...<br /><br />&nbsp; Action : contact ABINIT group.<br /><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Smallest positive number:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.22250739-307<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Largest representable number:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.17976931+309<br />&nbsp;INTEGER:&nbsp; &nbsp;Data type name: INTEGER(default) <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Kind value: 4<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Bit size:&nbsp; &nbsp;32<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Largest representable number: 2147483647<br />&nbsp;LOGICAL:&nbsp; &nbsp;Data type name: LOGICAL <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Kind value: 4<br />&nbsp;CHARACTER: Data type name: CHARACTER&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Kind value: 1<br />&nbsp; ==== Using MPI-2 specifications ==== <br />&nbsp; MPI-IO support is ON<br />&nbsp; xmpi_tag_ub ................&nbsp; &nbsp;1073741823<br />&nbsp; xmpi_bsize_ch ..............&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />&nbsp; xmpi_bsize_int .............&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 4<br />&nbsp; xmpi_bsize_sp ..............&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 4<br />&nbsp; xmpi_bsize_dp ..............&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 8<br />&nbsp; xmpi_bsize_spc .............&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 8<br />&nbsp; xmpi_bsize_dpc .............&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;16<br />&nbsp; xmpio_bsize_frm ............&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 4<br />&nbsp; xmpi_address_kind ..........&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 8<br />&nbsp; xmpi_offset_kind ...........&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 8<br />&nbsp; MPI_WTICK ..................&nbsp; &nbsp; 9.9999999999999995E-007<br /><br />&nbsp;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /><br />&nbsp;=== Build Information === <br />&nbsp; Version&nbsp; &nbsp; &nbsp; &nbsp;: 7.6.4<br />&nbsp; Build target&nbsp; : x86_64_linux_gnu4.8<br />&nbsp; Build date&nbsp; &nbsp; : 20140512<br /><br />&nbsp;=== Compiler Suite === <br />&nbsp; C compiler&nbsp; &nbsp; &nbsp; &nbsp;: gnu4.8<br />&nbsp; CFLAGS&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:&nbsp; -g -O2 -mtune=native -march=native<br />&nbsp; C++ compiler&nbsp; &nbsp; &nbsp;: gnu4.8<br />&nbsp; CXXFLAGS&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:&nbsp; -g -O2 -mtune=native -march=native<br />&nbsp; Fortran compiler : gnu4.8<br />&nbsp; FCFLAGS&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; :&nbsp; -g -ffree-line-length-none<br />&nbsp; FC_LDFLAGS&nbsp; &nbsp; &nbsp; &nbsp;: <br /><br />&nbsp;=== Optimizations === <br />&nbsp; Debug level&nbsp; &nbsp; &nbsp; &nbsp; : basic<br />&nbsp; Optimization level : standard<br />&nbsp; Architecture&nbsp; &nbsp; &nbsp; &nbsp;: intel_xeon<br /><br />&nbsp;=== Multicore === <br />&nbsp; Parallel build : yes<br />&nbsp; Parallel I/O&nbsp; &nbsp;: yes<br />&nbsp; Time tracing&nbsp; &nbsp;: no<br />&nbsp; openMP support : no<br />&nbsp; GPU support&nbsp; &nbsp; : no<br /><br />&nbsp;=== Connectors / Fallbacks === <br />&nbsp; Connectors on : yes<br />&nbsp; Fallbacks on&nbsp; : yes<br />&nbsp; DFT flavor&nbsp; &nbsp; : libxc-fallback+atompaw-fallback+bigdft-fallback+wannier90-fallback<br />&nbsp; FFT flavor&nbsp; &nbsp; : fftw3<br />&nbsp; LINALG flavor : netlib-fallback<br />&nbsp; MATH flavor&nbsp; &nbsp;: none<br />&nbsp; TIMER flavor&nbsp; : abinit<br />&nbsp; TRIO flavor&nbsp; &nbsp;: netcdf-fallback+etsf_io-fallback+fox-fallback<br /><br />&nbsp;=== Experimental features === <br />&nbsp; Bindings&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : no<br />&nbsp; Exports&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: no<br />&nbsp; GW double-precision : yes<br /><br />&nbsp;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /><br /><br />--- !BUG<br />message: |<br />&nbsp; &nbsp; For k-point #&nbsp; 220,<br />&nbsp; &nbsp; &nbsp; the determinant of the overlap matrix is found to be 0.<br />src_file: berryphase_new.F90<br />src_line: 880<br />...<br /><br />&nbsp; Action : contact ABINIT group.<br /><br />.Delivered&nbsp; &nbsp; 2 WARNINGs and&nbsp; &nbsp;2 COMMENTs to log file.<br /><br />&nbsp;leave_new : decision taken to exit ...<br />&nbsp;MPI_ERROR_STRING: Unknown error.&nbsp; Please file a bug report.<br />&#91;unset&#93;: aborting job:<br />application called MPI_Abort(MPI_COMM_WORLD, 13) - process 0<br /></code></pre></div><br /><br />Thanks for your help</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2848&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 20:59:04 GMT -->
+</html>

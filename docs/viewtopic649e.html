@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3482&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:52:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; How to link wannier lib with abinit</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>How to link wannier lib with abinit</h2>
+		<p><a href="viewtopicfb30.html?f=3&amp;t=3482">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3482</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>How to link wannier lib with abinit</h3>
+				<div class="date">Posted: <strong>Tue Jan 10, 2017 10:08 am</strong></div>
+				<div class="author">by <strong>qnclqq</strong></div>
+				<div class="content">Hi everyone, <br /><br />I try to go through the tutorial of wannier, so I compiled wannier90-2.0.1 and then recomplied abinit. <br />I used configure command as follows:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure \<br />--enable-wannier90 \<br />--with-wannier90-libs=&quot;-L/home/lrl/Desktop/wannier/wannier90-2.0.1/libwannier.a&quot; \<br />--enable-mpi=yes --enable-mpi-io FC=mpif90 CC=mpicc</code></pre></div><br />But as-maked abinit did not support wanner90, with error &quot;prtwant==2 is only relevant if wannier90 library is linked Action: check compilation options&quot;.<br />I searched the installation file and forum to find some related topics, but none could tell me how to configure with details. <br /><br />Another question is what should I install before abinit, I use<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;apt-get install openmpi-bin openmpi-common libopenmpi-dev libfftw3-mpi-dev liblapack-dev libxc-dev </code></pre></div><br />What else should I install to make abinit better? The config-log told me that my pthon can not be used, will this be harmful?<br /> <br />I am looking forward someone will reply.<br />Rulin Liu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to link wannier lib with abinit</h3>
+				<div class="date">Posted: <strong>Tue Jan 10, 2017 9:27 pm</strong></div>
+				<div class="author">by <strong>admin</strong></div>
+				<div class="content">Hi<br /><br />perhaps a problem of syntax...<br /><br />try <br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure \<br />--with-wannier90-libs=&quot;-L/home/lrl/Desktop/wannier/wannier90-2.0.1&nbsp; -lwannier&quot; \<br />--enable-mpi=yes --enable-mpi-io FC=mpif90 CC=mpicc<br /></code></pre></div><br /><br />or <br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure \<br />--with-wannier90-libs=&quot;/home/lrl/Desktop/wannier/wannier90-2.0.1/libwannier.a&quot; \<br />--enable-mpi=yes --enable-mpi-io FC=mpif90 CC=mpicc<br /></code></pre></div><br /><br />and check the config.log if support of wannier90 is ok</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to link wannier lib with abinit</h3>
+				<div class="date">Posted: <strong>Wed Jan 11, 2017 8:19 am</strong></div>
+				<div class="author">by <strong>qnclqq</strong></div>
+				<div class="content">Dear admin,<br /><br />Thanks for your reply. I tried both syntaxs, but they did not work.<br /><br />Finally, I use the following parameter in configure<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--with-dft-flavor=wannier90 </code></pre></div><br />Abinit automatically downloaded and installed wannier-2.0.1.1. Everything seems OK now.<br /><br />Rulin Liu<br /><br /><br /><blockquote><div><cite>admin wrote:</cite>Hi<br /><br />perhaps a problem of syntax...<br /><br />try <br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure \<br />--with-wannier90-libs=&quot;-L/home/lrl/Desktop/wannier/wannier90-2.0.1&nbsp; -lwannier&quot; \<br />--enable-mpi=yes --enable-mpi-io FC=mpif90 CC=mpicc<br /></code></pre></div><br /><br />or <br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure \<br />--with-wannier90-libs=&quot;/home/lrl/Desktop/wannier/wannier90-2.0.1/libwannier.a&quot; \<br />--enable-mpi=yes --enable-mpi-io FC=mpif90 CC=mpicc<br /></code></pre></div><br /><br />and check the config.log if support of wannier90 is ok</div></blockquote></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3482&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:52:53 GMT -->
+</html>

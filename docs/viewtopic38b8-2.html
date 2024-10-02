@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1610&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:56:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] QLOGIC</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] QLOGIC</h2>
+		<p><a href="viewtopic7481.html?f=3&amp;t=1610">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1610</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] QLOGIC</h3>
+				<div class="date">Posted: <strong>Mon Apr 09, 2012 7:27 pm</strong></div>
+				<div class="author">by <strong>Ubiq</strong></div>
+				<div class="content">Hello, everyone!<br /><br />I have faced problem during launching ABINIT 6.12.2. <br /><br />I have configured and compiled ABINIT  and it is OK. <br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure FC=mpif90 CC=mpicc --with-trio-flavor=&quot;etsf_io+netcdf&quot; --with-dft-flavor=&quot;none&quot; --enable-mpi=&quot;yes&quot; --enable-mpi-io=&quot;yes&quot; CC=mpicc </code></pre></div><br /><br />When I am launching sequantial task, ABINIT is OK, When I am launching parallel task over k points, ABINIT is also GOOD. But when am launching ABINIT with paral_kgb 1, I have got an error:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--------------------------------------------------------------------------<br />orterun has exited due to process rank 25 with PID 4057 on<br />node node2 exiting without calling &quot;finalize&quot;. This may<br />have caused other processes in the application to be<br />terminated by signals sent by orterun (as reported here).<br />--------------------------------------------------------------------------<br /></code></pre></div><br /><br />As far as I understand it is due to Qlogic things that they are using with mpi (I am using  openmpi-1.4.2-qlc). But I don't know how to solve this problem. Could you please give me a tip?<br /><br />Peter Zhilyaev</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: QLOGIC</h3>
+				<div class="date">Posted: <strong>Sat Apr 14, 2012 11:41 pm</strong></div>
+				<div class="author">by <strong>Ubiq</strong></div>
+				<div class="content">I will reply to myself.<br /><br />I've solved this issue, I have simply changed the mpi wrapper from mpif90 to mpiifort and mpicc to mpiicc. I think it is the specific of the cluster. But may be it will help somebody.<br /><br />Peter Zhilyaev</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1610&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:56:14 GMT -->
+</html>

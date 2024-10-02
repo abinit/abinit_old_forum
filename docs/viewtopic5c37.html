@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?p=3196 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:42:52 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>running abinit on Blue Gene - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopic0ea9.html?t=996">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="1"><a href="viewforum58da.html?f=1" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Building ABINIT</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="3"><a href="viewforum4d6b.html?f=3" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Configuring and compiling ABINIT</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopic65aa.html?f=3&amp;t=996">running abinit on Blue Gene</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">option, parallelism,...<br /></div>
+<p>
+	<strong>Moderators:</strong> <a href="memberlist5296.html?mode=viewprofile&amp;u=2740" class="username">fgoudreault</a>, <a href="memberlist7468.html?mode=viewprofile&amp;u=53" class="username">mcote</a>
+</p>
+
+	<div class="rules">
+		<div class="inner">
+
+					<strong>Forum rules</strong><br />
+			Please have a look at ~abinit/doc/config/build-config.ac in the source package for detailed and up-to-date information about the configuration of Abinit 8 builds.<br>
+For a video explanation on how to build Abinit 7.x for Linux, please go to: <a href="http://www.youtube.com/watch?v=DppLQ-KQA68" class="postlink">http://www.youtube.com/watch?v=DppLQ-KQA68</a>.<br>
+<strong class="text-strong">IMPORTANT: when an answer solves your problem, please check the little green V-like button on its upper-right corner to accept it.</strong>
+		
+		</div>
+	</div>
+
+<div class="action-bar bar-top">
+	
+			<a href="postingdf96.html?mode=reply&amp;f=3&amp;t=996" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic8fbf-2.html?f=3&amp;t=996&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="996" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			8 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p3195" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile3195">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist3c7e.html?mode=viewprofile&amp;u=656" class="username">xiangpisai</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search1821.html?author_id=656&amp;sr=posts">19</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Mar 24, 2011 3:02 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content3195">
+
+						<h3 class="first"><a href="#p3195">running abinit on Blue Gene</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting64b4.html?mode=quote&amp;f=3&amp;p=3195" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic419a.html?p=3195#p3195" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist3c7e.html?mode=viewprofile&amp;u=656" class="username">xiangpisai</a></strong> &raquo; </span>Wed Mar 30, 2011 6:26 pm
+			</p>
+			
+			
+			
+			<div class="content">Hi everyone, <br />I just compiled an abinit on Blue Gene. But the minimum nodes allowed on bluegene is 32 cpus, which is way too many for some small calculations. What's more, I found I cannot run tgw1_3.in located in the tutorial folder. I found it can only run at one single cpu. So is there any way to specify how many cpus abinit uses? I mean, if the system gave me, like, 512 cpus, can I reduce them, by using abinit command, to, say, 32 cpus? Thank you very much for your help!<br />Sincerely, <br />xiangpisai</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p3196" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile3196">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist2651.html?mode=viewprofile&amp;u=166" class="username">Boris</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search4e55.html?author_id=166&amp;sr=posts">128</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Feb 16, 2010 10:13 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> France</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content3196">
+
+						<h3 ><a href="#p3196">Re: running abinit on Blue Gene</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postinga2f5.html?mode=quote&amp;f=3&amp;p=3196" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic5c37.html?p=3196#p3196" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist2651.html?mode=viewprofile&amp;u=166" class="username">Boris</a></strong> &raquo; </span>Wed Mar 30, 2011 6:41 pm
+			</p>
+			
+			
+			
+			<div class="content">Hi <br /><br />I'm not sure I understand your question, but abinit uses the number of cpus that you are providing in the script file when you submit your job on BG.<br /><br />For instance, when submitting your job on BG, if you specify 4 nodes, with 8 processors on each node, then abinit will use 32 procs.<br /><br />Did I answer your question?<br /><br />Boris</div>
+			
+			
+			
+									
+									<div id="sig3196" class="signature">----------------------------------------------------------<br />Boris Dorado<br />Atomic Energy Commission<br />France<br />----------------------------------------------------------</div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p3197" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile3197">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberliste9a7.html?mode=viewprofile&amp;u=60" class="avatar"><img class="avatar" src="download/filecff2.jpg?avatar=60_1348167350.jpg" width="92" height="92" alt="User avatar" /></a>														</div>
+								<a href="memberliste9a7.html?mode=viewprofile&amp;u=60" class="username">Alain_Jacques</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search1175.html?author_id=60&amp;sr=posts">279</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Aug 15, 2009 9:34 pm</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Université catholique de Louvain - Belgium</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content3197">
+
+						<h3 ><a href="#p3197">Re: running abinit on Blue Gene</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting5cfd.html?mode=quote&amp;f=3&amp;p=3197" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic78e5.html?p=3197#p3197" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberliste9a7.html?mode=viewprofile&amp;u=60" class="username">Alain_Jacques</a></strong> &raquo; </span>Wed Mar 30, 2011 11:58 pm
+			</p>
+			
+			
+			
+			<div class="content">Hello xiangsipai,<br /><br />As Boris said, there are variables in Abinit that control how the different parallelization schemes work; look in <a href="http://www.abinit.org/documentation/helpfiles/for-v6.6/input_variables/varpar.html" class="postlink">http://www.abinit.org/documentation/helpfiles/for-v6.6/input_variables/varpar.html</a> for a list and follow the tutorial at <a href="http://www.abinit.org/documentation/helpfiles/for-v6.6/tutorial/lesson_parallelism.html" class="postlink">http://www.abinit.org/documentation/helpfiles/for-v6.6/tutorial/lesson_parallelism.html</a><br />Whatever scheme - k-point, band, ... - you choose, you have to launch Abinit with coherent parameters and, of course, this is related to the parallelization library/environment you linked Abinit with when compiling. With openMPI, the launcher command will look similar to &quot;mpirun -np X abinit ...&quot;, with MPICH2 to &quot;mpiexec -n X abinit ...&quot;, with POE (a classic on Blue Gene) &quot;poe abinit -procs X ...&quot; where X is the number of parallel processes and ... extra parameters relevant to your own cluster. I cannot guess what's running on your system and how you configured Abinit but I'm pretty sure that the BG admins can provide extensive information on how to submit batch jobs on your Blue Gene system (and reserve a certain number of nodes) and how to call the parallel launcher within them.<br />The logic is 1) setup parallel variables in the Abinit input file 2) define the corresponding X in the parallel launcher command (probably poe on BG) - set 1) and 2) maybe with the help of paral_kgb as we discussed before 3) write a batch submission file  to reserve enough BG nodes and to invoke the mpi launcher ... and then submit it to the queue (probably managed by LoadLeveler on BG).<br /><br />Kind regards,<br /><br />Alain</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p3201" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile3201">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist3c7e.html?mode=viewprofile&amp;u=656" class="username">xiangpisai</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search1821.html?author_id=656&amp;sr=posts">19</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Mar 24, 2011 3:02 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content3201">
+
+						<h3 ><a href="#p3201">Re: running abinit on Blue Gene</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting09a8.html?mode=quote&amp;f=3&amp;p=3201" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicba95.html?p=3201#p3201" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist3c7e.html?mode=viewprofile&amp;u=656" class="username">xiangpisai</a></strong> &raquo; </span>Thu Mar 31, 2011 6:08 pm
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>Boris wrote:</cite>Hi <br /><br />I'm not sure I understand your question, but abinit uses the number of cpus that you are providing in the script file when you submit your job on BG.<br /><br />For instance, when submitting your job on BG, if you specify 4 nodes, with 8 processors on each node, then abinit will use 32 procs.<br /><br />Did I answer your question?<br /><br />Boris</div></blockquote><br />Dear Boris, <br />I know there are 32 procs if I do what you said. But the problem is, the system's minimum allowed nodes is 512, which is way too many for me. I want know if there is a way that I can get 512 nodes specified to me, and control that I only want 32 for abinit and waste all the rest. But still, your answer is helpful. Thank you very much!<br />Best Regards<br />xiangpisai</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p3202" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile3202">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist3c7e.html?mode=viewprofile&amp;u=656" class="username">xiangpisai</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search1821.html?author_id=656&amp;sr=posts">19</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Mar 24, 2011 3:02 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content3202">
+
+						<h3 ><a href="#p3202">Re: running abinit on Blue Gene</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingb89f.html?mode=quote&amp;f=3&amp;p=3202" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic126a.html?p=3202#p3202" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist3c7e.html?mode=viewprofile&amp;u=656" class="username">xiangpisai</a></strong> &raquo; </span>Thu Mar 31, 2011 6:10 pm
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>Alain_Jacques wrote:</cite>Hello xiangsipai,<br /><br />As Boris said, there are variables in Abinit that control how the different parallelization schemes work; look in <a href="http://www.abinit.org/documentation/helpfiles/for-v6.6/input_variables/varpar.html" class="postlink">http://www.abinit.org/documentation/helpfiles/for-v6.6/input_variables/varpar.html</a> for a list and follow the tutorial at <a href="http://www.abinit.org/documentation/helpfiles/for-v6.6/tutorial/lesson_parallelism.html" class="postlink">http://www.abinit.org/documentation/helpfiles/for-v6.6/tutorial/lesson_parallelism.html</a><br />Whatever scheme - k-point, band, ... - you choose, you have to launch Abinit with coherent parameters and, of course, this is related to the parallelization library/environment you linked Abinit with when compiling. With openMPI, the launcher command will look similar to &quot;mpirun -np X abinit ...&quot;, with MPICH2 to &quot;mpiexec -n X abinit ...&quot;, with POE (a classic on Blue Gene) &quot;poe abinit -procs X ...&quot; where X is the number of parallel processes and ... extra parameters relevant to your own cluster. I cannot guess what's running on your system and how you configured Abinit but I'm pretty sure that the BG admins can provide extensive information on how to submit batch jobs on your Blue Gene system (and reserve a certain number of nodes) and how to call the parallel launcher within them.<br />The logic is 1) setup parallel variables in the Abinit input file 2) define the corresponding X in the parallel launcher command (probably poe on BG) - set 1) and 2) maybe with the help of paral_kgb as we discussed before 3) write a batch submission file  to reserve enough BG nodes and to invoke the mpi launcher ... and then submit it to the queue (probably managed by LoadLeveler on BG).<br /><br />Kind regards,<br /><br />Alain</div></blockquote><br />Dear Alain,<br />Thanks so much for your kind help. I failed to figure out what MPI the BG is using. We use slurm to queue the jobs, and the submitting script reads: mpirun -mode VN -cwd `pwd` my/path/abinit-6.6.1/abinit &lt;1.files&gt;&amp; log. It seems to be an openmpi, so I tried your option -np 16. the job is still in the queue, I will update again if I got any result. Thank you.</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p3203" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile3203">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlist981e.html?mode=viewprofile&amp;u=71" class="avatar"><img class="avatar" src="download/fileb0c3.png?avatar=g8_1366628657.png" width="64" height="64" alt="User avatar" /></a>														</div>
+								<a href="memberlist981e.html?mode=viewprofile&amp;u=71" style="color: #6633FF;" class="username-coloured">pouillon</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search42e4.html?author_id=71&amp;sr=posts">651</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Aug 19, 2009 10:08 am</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Spain</dd>
+												
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact pouillon">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact pouillon</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="https://www.materialsevolution.es/" title="Website">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																																																<a href="skype:ypouillon80?userinfo" title="Skype" class="last-cell">
+										<span class="contact-icon phpbb_skype-icon">Skype</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content3203">
+
+						<h3 ><a href="#p3203">Re: running abinit on Blue Gene</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting3869-2.html?mode=quote&amp;f=3&amp;p=3203" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic657c-2.html?p=3203#p3203" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist981e.html?mode=viewprofile&amp;u=71" style="color: #6633FF;" class="username-coloured">pouillon</a></strong> &raquo; </span>Thu Mar 31, 2011 7:14 pm
+			</p>
+			
+			
+			
+			<div class="content">To know which implementation of MPI you have, the following command might help:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>mpif90 -show</code></pre></div><br />The option can also be sometimes &quot;-showme&quot;.</div>
+			
+			
+			
+									
+									<div id="sig3203" class="signature">Yann Pouillon<br /><em class="text-italics">Simune Atomistics<br />Donostia-San Sebastián, Spain</em></div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p3204" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile3204">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist3c7e.html?mode=viewprofile&amp;u=656" class="username">xiangpisai</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search1821.html?author_id=656&amp;sr=posts">19</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Mar 24, 2011 3:02 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content3204">
+
+						<h3 ><a href="#p3204">Re: running abinit on Blue Gene</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting43a9.html?mode=quote&amp;f=3&amp;p=3204" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic8a03.html?p=3204#p3204" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist3c7e.html?mode=viewprofile&amp;u=656" class="username">xiangpisai</a></strong> &raquo; </span>Thu Mar 31, 2011 7:37 pm
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>pouillon wrote:</cite>To know which implementation of MPI you have, the following command might help:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>mpif90 -show</code></pre></div><br />The option can also be sometimes &quot;-showme&quot;.</div></blockquote><br />Thank you for your kind help. On the BG I use, there is no mpif90 command. I use mpixlf90 instead and it pop-up a very long path, saying /opt/ibmcmp/xlf/bg/10.1/bin/blrts_xlf90 with a lot of .rts files. I cannot find anything like openmpi or so. But, my submitting script uses mpirun.</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p3209" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile3209">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberliste9a7.html?mode=viewprofile&amp;u=60" class="avatar"><img class="avatar" src="download/filecff2.jpg?avatar=60_1348167350.jpg" width="92" height="92" alt="User avatar" /></a>														</div>
+								<a href="memberliste9a7.html?mode=viewprofile&amp;u=60" class="username">Alain_Jacques</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search1175.html?author_id=60&amp;sr=posts">279</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Aug 15, 2009 9:34 pm</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Université catholique de Louvain - Belgium</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content3209">
+
+						<h3 ><a href="#p3209">Re: running abinit on Blue Gene</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting3c2e.html?mode=quote&amp;f=3&amp;p=3209" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopice226.html?p=3209#p3209" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberliste9a7.html?mode=viewprofile&amp;u=60" class="username">Alain_Jacques</a></strong> &raquo; </span>Fri Apr 01, 2011 10:11 am
+			</p>
+			
+			
+			
+			<div class="content">If I understand, your jobs reserve 512 cores, only use a small fraction ... and are probably buried forever in the slurm queue. Both MPI parameters and slurm commands have to be adjusted accordingly. As discussed before MPI uses -n xxx or -np xxx or -procs parameters depending on the variant - you have to figure out which one your cluster uses. And you probably have to add a &quot;#SBATCH --ntasks=xxx&quot; line in your slurm submission jobs; xxx is the number of parallel tasks and the number of reserved cores - should be the same although this can be modified by the cluster setup (BG cpus are somewhat exotic). You should probably also adjust slurm &quot;#SBATCH --mem-per-cpu=&quot; and &quot;#SBATCH --time=&quot; commands<br /><br />Alain</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="postingdf96.html?mode=reply&amp;f=3&amp;t=996" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic8fbf-2.html?f=3&amp;t=996&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=3&amp;t=996">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			8 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforum4d6b.html?f=3" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Configuring and compiling ABINIT”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?p=3196 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:42:52 GMT -->
+</html>

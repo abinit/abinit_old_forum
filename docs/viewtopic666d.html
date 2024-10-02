@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3953&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:09:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Phase transition under pressure?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Phase transition under pressure?</h2>
+		<p><a href="viewtopic607a.html?f=9&amp;t=3953">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3953</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Phase transition under pressure?</h3>
+				<div class="date">Posted: <strong>Mon Oct 29, 2018 8:42 am</strong></div>
+				<div class="author">by <strong>new_986</strong></div>
+				<div class="content">Hello everybody <br />I am trying to investigate properties of a perovskite compound, experimentally phase undergoes through transition at 4 GPa, <br />I also increase the pressure and I do relaxation to the unit cell for all pressures up to 10 GPa, but my structure keeps the same which is cubic (doesn't undergo phase transition)<br />see the input file please <br /><br />optcell 2 <br />prtcif 1<br /><br />prtgeo 1<br />#tsmear 0.02<br />ndtset 10<br />strtarget1 -3.39892892272001E-05 -3.39892892272001E-05 -3.39892892272001E-05 0 0 0<br />strtarget2 -6.79785784544003E-05 -6.79785784544003E-05 -6.79785784544003E-05 0 0 0<br />strtarget3 -0.0001019679 -0.0001019679 -0.0001019679 0 0 0<br />strtarget4 -0.0001359572 -0.0001359572 -0.0001359572 0 0 0<br />strtarget5 -0.0001699464 -0.0001699464 -0.0001699464 0 0 0<br />strtarget6 -0.0002039357 -0.0002039357 -0.0002039357 0 0 0<br />strtarget7 -0.000237925 -0.000237925 -0.000237925 0 0 0<br />strtarget8 -0.0002719143 -0.0002719143 -0.0002719143 0 0 0<br />strtarget9 -0.0003059036 -0.0003059036 -0.0003059036 0 0 0<br />strtarget10 -0.0003398929 -0.0003398929 -0.0003398929 0 0 0<br />#relaxation<br />ionmov  2              <br />ntime   100             <br />tolmxf  5.0d-6<br />dilatmx 1.1<br />#Cell and atoms definition<br /> acell 3*6.0045791044 Angstr<br /> rprim 0.0 0 1<br />       1 0.0 0<br />       0 1 0<br /> ntypat 3  natom 5  typat 1 2 3 3 3<br />  xangst      0.0000000000E+00  0.0000000000E+00  0.0000000000E+00<br />                       3.0022903116E+00  3.0022903116E+00  3.0022903116E+00<br />                       3.0022903116E+00  0.0000000000E+00  3.0022903116E+00<br />                       3.0022903116E+00  3.0022903116E+00  0.0000000000E+00<br />                       0.0000000000E+00  3.0022903116E+00  3.0022903116E+00<br /> znucl 55 82 35  nband 40<br /><br />#Basis definitions<br /> ecut 45<br /> ecutsm 0.5<br />pawecutdg 100<br /><br />#SCF cycle parameters<br /> tolvrs 1.0d-15<br /> nstep 200<br />iscf    5<br />#K-points and sym<br /> #nsym 0       <br /> occopt 1<br /> ngkpt 6 6 6<br /> nshiftk 4<br /> shiftk 0.5 0.5 0.5<br />        0.5 0.0 0.0<br />        0.0 0.5 0.0<br />        0.0 0.0 0.5<br /><br />#I/O parameters<br />prtwf 1 prtden 0  prteig 0<br />getwfk -1<br />timopt  2<br /><br /><br />Any help please ? <br /><br />Nawzad</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Phase transition under pressure?</h3>
+				<div class="date">Posted: <strong>Fri Nov 30, 2018 2:52 pm</strong></div>
+				<div class="author">by <strong>gregory</strong></div>
+				<div class="content">Dear Nawzad<br />ABINIT performs the structural optimizations by keeping the symmetries of the initial structure. It seems that your system has the cubic symmetry (Pm-3m). If you do not allow ABINIT to leave this space group, it is normal that the system remains always cubic. Simply break the symmetries by, e.g., displacing randomly all the atoms by very small displacements, and then restart your optimization: if the system wants to be cubic, the optimization will bring you back to the cubic structure; if it wants to be something else, ABINIT should normally lead the system to the energy minimum which is the closest from the initial structure.<br />Gregory</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Phase transition under pressure?</h3>
+				<div class="date">Posted: <strong>Sat Dec 01, 2018 10:57 am</strong></div>
+				<div class="author">by <strong>new_986</strong></div>
+				<div class="content"><blockquote><div><cite>gregory wrote:</cite>Dear Nawzad<br />ABINIT performs the structural optimizations by keeping the symmetries of the initial structure. It seems that your system has the cubic symmetry (Pm-3m). If you do not allow ABINIT to leave this space group, it is normal that the system remains always cubic. Simply break the symmetries by, e.g., displacing randomly all the atoms by very small displacements, and then restart your optimization: if the system wants to be cubic, the optimization will bring you back to the cubic structure; if it wants to be something else, ABINIT should normally lead the system to the energy minimum which is the closest from the initial structure.<br />Gregory</div></blockquote><br />Dear Gregory<br />Thanks for the reply<br />to what direction should I displace atoms, any direction? all direction ? or a specific direction? if a specific direction, x , y or z?<br /><br />best regards<br /><br />Nawzad</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Phase transition under pressure?</h3>
+				<div class="date">Posted: <strong>Wed Dec 05, 2018 10:05 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Nawzad,<br />I would say the most general directions to break all the symmetries.<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Phase transition under pressure?</h3>
+				<div class="date">Posted: <strong>Mon Dec 17, 2018 10:08 am</strong></div>
+				<div class="author">by <strong>new_986</strong></div>
+				<div class="content"><blockquote><div><cite>ebousquet wrote:</cite>Dear Nawzad,<br />I would say the most general directions to break all the symmetries.<br />Best wishes,<br />Eric</div></blockquote><br />Thanks Eric<br />I will try that<br /><br />Nawzad</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3953&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:09:40 GMT -->
+</html>

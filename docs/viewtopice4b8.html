@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=647&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [Solved] compilation problem</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[Solved] compilation problem</h2>
+		<p><a href="viewtopic8931.html?f=3&amp;t=647">https://forum.abinit.org/viewtopic.php?f=3&amp;t=647</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[Solved] compilation problem</h3>
+				<div class="date">Posted: <strong>Sat Oct 09, 2010 7:22 pm</strong></div>
+				<div class="author">by <strong>gurinder</strong></div>
+				<div class="content">Hello Users<br />I am new to Abinit Program. I m trying to compile Abinit-6.2.3. on fedora I met with following error when I give command ../configure<br /><br /><strong class="text-strong">make[3]: Entering directory `/root/Desktop/abinit-6.2.3/config/src/66_paw' <br />gfortran -DHAVE_CONFIG_H -I. -I../../../src/66_paw -I../.. -I../../src/incs -I../../../src/incs    -ffree-form -J/root/Desktop/abinit-6.2.3/config/src/mods -I/root/Desktop/abinit-6.2.3/config/src/mods -O2 -march=pentium4 -mmmx -msse -msse2 -g   -c -o indgrid.o ../../../src/66_paw/indgrid.F90 <br /> In file ../../../src/66_paw/indgrid.F90:120 <br /><br />esh.' <br />    1 <br />Error: Syntax error in argument list at (1) <br />make[3]: *** [indgrid.o] Error 1 <br />make[3]: Leaving directory `/root/Desktop/abinit-6.2.3/config/src/66_paw' <br />make[2]: *** [all-recursive] Error 1 <br />make[2]: Leaving directory `/root/Desktop/abinit-6.2.3/config/src' <br />make[1]: *** [all-recursive] Error 1 <br />make[1]: Leaving directory `/root/Desktop/abinit-6.2.3/config' <br />make: *** [all] Error 2  </strong><br /><br />Kindly help me out to solve this problem.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: compilation problem</h3>
+				<div class="date">Posted: <strong>Sat Oct 09, 2010 8:01 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">The error message is just in the middle of a call to MSG_ERROR - really a vintage function that shouldn't cause any concern. So the offending part probably comes earlier. You said you compiled on a fedora box. What's your gfortran version? Find it with a <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>gfortran -v</code></pre></div><br />Anything that's earlier than gfortran 4.2 is buggy and unsuitable for Abinit.<br /><br />Cheers,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: compilation problem</h3>
+				<div class="date">Posted: <strong>Sat Oct 09, 2010 8:10 pm</strong></div>
+				<div class="author">by <strong>gurinder</strong></div>
+				<div class="content">After typing gfortran -v its showing <br /><br />gcc version 4.1.2 20070502 (Red Hat 4.1.2-12)<br /><br />Kindly suggest a remedy</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: compilation problem</h3>
+				<div class="date">Posted: <strong>Sat Oct 09, 2010 8:14 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">What happens if you remove the calls to MSG_ERROR in src/66_paw/indgrid.F90<br /><br />!Check coatofin to make sure there are no zeros!<br /> do ii=1,ubound(coatofin,1)<br />   if (coatofin(ii)==0) then<br />     MSG_ERROR('A zero was found in coatofin.')       &lt;&lt;&lt;&lt; remove this line<br />     MSG_ERROR('Check that the fine FFT mesh is finer in each dimension than the coarse FFT mesh.')         &lt;&lt;&lt;&lt; and this one<br />     stop<br />   end if<br /> end do<br /><br /><br />One should check the CPP preprocessed file but I guess that the macro, once expanded, exceeds the standard Fortran limit.<br /><br />Cheers,<br />Matteo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: compilation problem</h3>
+				<div class="date">Posted: <strong>Sat Oct 09, 2010 8:43 pm</strong></div>
+				<div class="author">by <strong>gurinder</strong></div>
+				<div class="content">Thanks very much I m able to run  the program</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: compilation problem</h3>
+				<div class="date">Posted: <strong>Sat Oct 09, 2010 8:54 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">gfortran 4.1.2 is really outdated and buggy. Abinit is routinely tested against version 4.3, 4.4 and 4.5. Matteo suggestion may hep you compile despite this apparent gfortran 4.1 bug. I would suggest to install a new fortran compiler. There are several options to do that:<br /><br />x build a new gcc/gfortan compiler after downloading the source code of gcc-4.4.5 from gcc.gnu.org. There are a few dependencies that should be fulfilled (gmp, mpfr, mpc ...). Nothing really very complicated but definitely takes some time.<br /><br />x if you are eligible for free license Intel CC and Fortran compilers, dowload the latest 11.1.073 from <!-- m --><a class="postlink" href="http://www.intel.com/">http://www.intel.com</a><!-- m --> website. Quite a huge download but an efficient compiler. When combined with MKL linear algebra libraries, it will probably produce the fastest binaries.<br /><br />x I should push the latest Abinit production release binaries on <a href="http://www.etsf.eu/resources/software/etsf_software_repository" class="postlink">http://www.etsf.eu/resources/software/etsf_software_repository</a>  But it will take a few days.<br /><br />Alain</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=647&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:46 GMT -->
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=2102&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:59:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [Solved]Phonon Calculations Error</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[Solved]Phonon Calculations Error</h2>
+		<p><a href="viewtopic90cc.html?f=10&amp;t=2102">https://forum.abinit.org/viewtopic.php?f=10&amp;t=2102</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[Solved]Phonon Calculations Error</h3>
+				<div class="date">Posted: <strong>Fri Apr 26, 2013 4:01 pm</strong></div>
+				<div class="author">by <strong>uma</strong></div>
+				<div class="content">I am trying to get the phonon frequencies of an insulator. I am using 10 datasets in the input file. The code does not proceed beyond the ddk calculation. ie dataset3. I get the following error message:<br /><blockquote class="uncited"><div></div></blockquote> <span style="color: #FF0000">Subroutine Unknown:0:ERROR<br />   The file cg-trf2_1o_DS1_WFK cannot be used to start the <br />  present calculation. It was asked that the wavefunctions be accurate, but<br />  at least one of the k points could not be generated from a symmetrical one.<br />  dksqmax=    1.209678E-03<br />  Action: check your wf file and k point input variables<br />    (e.g. kptopt or shiftk might be wrong in the present dataset or the preparatory one.<br /><br /> Subroutine Unknown:0:ERROR<br />   The file cg-trf2_1o_DS1_WFK cannot be used to start the <br />  present calculation. It was asked that the wavefunctions be accurate, but<br />  at least one of the k points could not be generated from a symmetrical one.<br />  dksqmax=    1.209678E-03<br />  Action: check your wf file and k point input variables<br />    (e.g. kptopt or shiftk might be wrong in the present dataset or the preparatory one.<br /><br /> leave_new : decision taken to exit ...</span><br /><blockquote class="uncited"><div></div></blockquote><br />I have attached the input file:<br />ndtset   10<br />#Set 1 : ground state self-consistency<br /><br />  getwfk1   0            # Cancel default<br />  kptopt1   1            # Automatic generation of k points, taking<br />                         # into account the symmetry<br />    nqpt1   0            # Cancel default<br />  tolvrs1   1.0d-18      # SCF stopping criterion (modify default)<br />  rfphon1   0            # Cancel default<br /> <br />#Q vectors for all datasets<br /><br />#Complete set of symmetry-inequivalent qpt chosen to be commensurate<br /># with kpt mesh so that only one set of GS wave functions is needed.<br />#Generated automatically by running GS calculation with kptopt=1,<br /># nshift=0, shiftk=0 0 0 (to include gamma) and taking output kpt set<br /># file as qpt set. Set nstep=1 so only one iteration runs.<br /><br />     nqpt   1            # One qpt for each dataset (only 0 or 1 allowed)<br />                         # This is the default for all datasets and must<br />                         #  be explicitly turned off for dataset 1.<br />               <br />            qpt2   0.00000000E+00  0.00000000E+00  0.00000000E+00<br />            qpt3   0.00000000E+00  0.00000000E+00  0.00000000E+00<br />            qpt4   1.25000000E-01  1.25000000E-01  1.25000000E-01<br />            qpt5   3.75000000E-01  1.25000000E-01  1.25000000E-01<br />           qpt6   -1.25000000E-01  1.25000000E-01  1.25000000E-01<br />            qpt7   -3.75000000E-01  3.75000000E-01  1.25000000E-01<br />            qpt8   -1.25000000E-01  3.75000000E-01  1.25000000E-01<br />            qpt9   -3.75000000E-01 -3.75000000E-01  1.25000000E-01<br />            qpt10  -3.75000000E-01  3.75000000E-01  3.75000000E-01<br /><br />#Set 2 : Response function calculation of d/dk wave function <br /><br />    iscf2   -3         # Need this non-self-consistent option for d/dk<br />  kptopt2   2          # Modify default to use time-reversal symmetry<br />  rfphon2   0          # Cancel default<br />  rfelfd2   2          # Calculate d/dk wave function only<br />  tolwfr2   1.0d-22    # Use wave function residual criterion instead<br />  <br />#Set 3 : Response function calculation of Q=0 phonons and electric field pert.<br /><br />  getddk3   2          # d/dk wave functions from last dataset<br />  kptopt3   2          # Modify default to use time-reversal symmetry<br />  rfelfd3   3          # Electric-field perturbation response only<br /><br />#Sets 4-10 : Finite-wave-vector phonon calculations (defaults for all datasets)<br /><br />   getwfk   1          # Use GS wave functions from dataset1<br />   kptopt4   3          # Need full k-point set for finite-Q response<br />   kptopt5   3<br />   kptopt6   3<br />   kptopt7   3<br />   kptopt8   3<br />   kptopt9   3<br />   kptopt10  3<br />   rfphon   1          # Do phonon response<br />  rfatpol   1 4       # Treat displacements of all atoms<br />    rfdir   1 1 1      # Do all directions (symmetry will be used)<br />   tolvrs   1.0d-8     # This default is active for sets 3-10<br /><br />#######################################################################<br />#Common input variables<br /><br />#Definition of the unit cell<br />    acell   3.8037 3.8037 3.8037 angstrom<br />    rprim -0.5000000000000000    0.5000000000000000    0.5000000000000000<br />        0.5000000000000000   -0.5000000000000000    0.5000000000000000<br />        0.5000000000000000    0.5000000000000000   -0.5000000000000000<br /><br />#Definition of the atom types<br />   ntypat   1         # There are two types of atom<br />    znucl   7.0     # The keyword &quot;znucl&quot; refers to the atomic number of the <br />                      # possible type(s) of atom. The pseudopotential(s) <br />                      # mentioned in the &quot;files&quot; file must correspond<br />                      # to the type(s) of atom. <br /><br />#Definition of the atoms<br />    natom   4         # There are two atoms<br />    typat   1 1 1 1   # 4 atoms of the same type .<br /><br /><br />    xred   0.17000000000000017  0.1700000000000017  0.1700000000000017<br />        0.5000000000000000  0.0000000000000000  0.3299999999999983<br />        0.0000000000000000  0.3299999999999983  0.5000000000000000<br />        0.3299999999999983  0.5000000000000000  0.0000000000000000<br />                   <br /><br />#Gives the number of band, explicitely (do not take the default)<br />    nband   20         <br /><br />#Exchange-correlation functional<br /><br />      ixc   11             # GGA, Perdew-Burke-Ernzerhof GGA functional<br /><br />#Definition of the planewave basis set<br /><br />     ecut   500 eV           # Maximal kinetic energy cut-off, in eV<br /><br />#Definition of the k-point grid<br />    ngkpt   4  4  4          <br />    nshiftk   1              # Use one copy of grid only (default)<br />   shiftk   0.0 0.0 0.0    # This gives the usual fcc Monkhorst-Pack grid<br />#            0.5 0.5 0.5<br />#            0.5 0.5 0.5<br />#            0.5 0.5 0.5<br /><br />#Definition of the SCF procedure<br />     iscf   5          # Self-consistent calculation, using algorithm 5<br />    nstep   25         # Maximal number of SCF cycles<br />   diemac   1.0d0        # Although this is not mandatory, it is worth to<br />                       # precondition the SCF cycle. The model dielectric<br />                       # function used as the standard preconditioner<br />                       # is described in the &quot;dielng&quot; input variable section.<br />                 # add to conserve old &lt; 6.7.2 behavior for calculating forces at each SCF step<br /> optforces 1<br /><br /><br />Could you please tell me what leads to this error and how I can correct it. Thanks in advance</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Phonon Calculations Error</h3>
+				<div class="date">Posted: <strong>Mon Apr 29, 2013 6:15 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">I ran your input file using the 7n.pspnc pseudopotential from the website, and got the same error. I tracked it down to the fact that the qpt's you are using are not coherent with the kpts you are using. To do self-consistent phonon calculations abinit needs the qpts to be chosen such that they are differences of the kpts used. You get the proper list (the tutorials discuss this) by doing a ground state run with <br /><br />kptopt 1<br />nshiftk 1<br />shiftk 3*0<br />ngkpt &lt;whatever you are using&gt;<br /><br />then, take the kpts used (they are listed in the output file) as the qpts for your phonon calc. I did this in your input file and it runs fine.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Phonon Calculations Error</h3>
+				<div class="date">Posted: <strong>Tue Apr 30, 2013 11:12 am</strong></div>
+				<div class="author">by <strong>uma</strong></div>
+				<div class="content">Thank you Professor. But I did that step and the code generates this message before completing DATASET3 calculations:<br /><br /><blockquote class="uncited"><div></div></blockquote><br /><span style="color: #FF0000">==&gt; Compute Derivative Database &lt;==<br />  dyout3 : exit <br /> <br /> phonon wavelength (reduced coordinates) , norm, and energies in hartree<br />  0.00 0.00 0.00 1.00<br />  6.321301927E-03  6.321528599E-03  6.321844904E-03  7.052112004E-03  7.052307063E-03<br />  7.580224962E-03  7.717861425E-03  7.717929610E-03  7.718146785E-03  7.869545599E-03<br />  7.869649589E-03  7.869741256E-03<br /> Zero Point Motion energy (sum of freqs/2)=  4.370609686E-02<br />.......................<br /><br />Subroutine Unknown:0:ERROR<br />  fxphas_seq:<br /> The eigenvector number1 has zero norm.<br /><br /> Subroutine Unknown:0:ERROR<br />  fxphas_seq:<br /> The eigenvector number1 has zero norm.<br /><br /> leave_new : decision taken to exit ...<blockquote class="uncited"><div></div></blockquote></span><br /><br />Sorry.. but something is still wrong...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Phonon Calculations Error</h3>
+				<div class="date">Posted: <strong>Tue Apr 30, 2013 12:08 pm</strong></div>
+				<div class="author">by <strong>uma</strong></div>
+				<div class="content">Sorry.. Professor, the code runs fine with your suggestion. I had made a typo in my input file.<br /><br />Thanks a lot..<br />Uma <img class="smilies" src="images/smilies/icon_e_biggrin.gif" alt=":D" title="Very Happy" /></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Solved: Phonon Calculations Error</h3>
+				<div class="date">Posted: <strong>Tue May 07, 2013 3:11 pm</strong></div>
+				<div class="author">by <strong>uma</strong></div>
+				<div class="content">Many thanks.<br />Uma</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=2102&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:59:35 GMT -->
+</html>

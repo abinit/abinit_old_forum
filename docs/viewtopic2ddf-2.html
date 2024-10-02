@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=533&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:03:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLV] band parallelization (1 k-point); paral_kgb, wfoptalg</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLV] band parallelization (1 k-point); paral_kgb, wfoptalg</h2>
+		<p><a href="viewtopiccbeb.html?f=9&amp;t=533">https://forum.abinit.org/viewtopic.php?f=9&amp;t=533</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLV] band parallelization (1 k-point); paral_kgb, wfoptalg</h3>
+				<div class="date">Posted: <strong>Thu Aug 12, 2010 4:05 pm</strong></div>
+				<div class="author">by <strong>elena.mol</strong></div>
+				<div class="content">Hello,<br />i'm trying to run “optic” calculations with Abinit5.8.4 in parallel, and I would like to parallelize only on bands (I have a single molecule in a big box, so i'm using 1 k-point). <br /><br />If I use the keywords: wfoptalg (=1) and nbdblock (=4 for instance), without setting paral_kgb, the calculation runs, but with bad scaling with respect to the number of processors used, and in the .log file I find:<br /><br />“ inkpts : istwfk preprocessed, gives following first values (max. 6): 2<br /><br /> npfft, npband and npkpt 1 1 4<br /><br /> mpi_enreg%sizecart(1),np_fft 1 1<br /><br /> mpi_enreg%sizecart(2),np_band 1 1<br /><br /> mpi_enreg%sizecart(3),np_kpt 4 4”<br /><br /><br />so it seems Abinit is taking for kpoints the number I specify for bands.<br /><br /><br />If instead I use:<br />paral_kgb 1<br />wfoptalg 4<br />npband n<br />npfft 1<br /><br />as suggested in the input variables page, (n is the n. of processors I want to use), I get something like<br /><br /> inkpts : istwfk preprocessed, gives following first values (max. 6): 2<br /><br /> npfft, npband and npkpt 1 16 1<br /><br /> mpi_enreg%sizecart(1),np_fft 1 1<br /><br /> mpi_enreg%sizecart(2),np_band 16 16<br /><br /> mpi_enreg%sizecart(3),np_kpt 1 1<br /><br /><br />where in this case I have put npband=16<br /><br />but then Abinit stops with the following error:<br /><br /> “chkint: ERROR -<br /><br />  Context : the value of the variable fftalg is 112.<br /><br />  The value of the input variable wfoptalg is    4, while it must be<br /><br />  equal to one of the following:   0   1   2   3  10  11<br /><br />  Action : you should change the input variable wfoptalg.”<br /><br /><br /><br />So I tried this:<br /><br />paral_kgb 1<br /><strong class="text-strong">wfoptalg 1</strong><br />npband n<br />npfft 1<br /><br />but in this case I get: <br /><br /> chkinp : ERROR -<br /><br />  The value of wfoptalg is found to be   1<br /><br />  This is not allowed in the case of band-FFT parallelization.<br /><br />  Action : put wfoptalg = 4 or 14 in your input file<br /><br /><br />So, which is the correct set of keywords to use in this case, i.e., to parallelize only on bands? By the way, I don't think the problem is specific for the “optic” module; with structural optimization runs (ionmov=2) I find an analogous behaviour with respect to parallelization keywords.<br /><br /><br />Thanks a lot in advance<br />Elena Molteni<br />Department of Physics<br />University of Milan<br />via Celoria, 16 <br />20133, Milan, Italy</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: band parallelization (1 k-point); paral_kgb, wfoptalg</h3>
+				<div class="date">Posted: <strong>Fri Aug 20, 2010 1:18 pm</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">Dear Elena,<br /><br />Try using this set of keywords. These are the ones I'm using for hundred atom supercells and it works pretty well:<br /><br />PARAL_KGB= 1<br />NPKPT= 1           <br />NPBAND= N<br />NPFFT= 1                      <br />WFOPTALG= 14<br />NLOALG= 4<br />FFTALG= 401<br />FFT_OPT_LOB= 2<br />ACCESSWFF = 1 <br /><br />The last keyword is not mandatory but I find it useful for restarting a calculation that hasn't converged in the given run time. I also noticed that the larger NPBAND, the easier the convergence.<br /><br />Regards<br /><br />Boris Dorado</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: band parallelization (1 k-point); paral_kgb, wfoptalg</h3>
+				<div class="date">Posted: <strong>Thu Sep 09, 2010 12:06 pm</strong></div>
+				<div class="author">by <strong>elena.mol</strong></div>
+				<div class="content">Hello,<br />thanks Boris for your suggestion! I used the set of keywords you indicated<br /><br />paral_kgb 1 <br />npkpt 1 <br />npband n<br />npfft 1 <br />wfoptalg 14 <br />nloalg 4 <br />fftalg 401 <br />fft_opt_lob 2 <br />accesswff 1 <br /><br />but with version 6.2.2. of abinit, as suggested in the meantime by Matthieu answering my post on restartxf (<!-- l --><a class="postlink-local" href="viewtopic4bac.html?f=8&amp;t=561">viewtopic.php?f=8&amp;t=561</a><!-- l -->, thanks Matthieu for your suggestion!) <br />This version, used on geometry optimization calculations, solved my problems both on restartxf and on band parallelizaiton. <br /><br />Then I tried &quot;optic&quot; calculations, with the same abinit6.2.2 version, following the examples in  .../abinit-6.2.2/tests/tutorespfn/Input/ , adapted to my system, but with the same scheme of subsequent datasets, and using the same set of parallelization keywords as above (i'm attaching the input file, toptic_3.in). The code runs through the first 3 datasets, and then stops with this error :<br /><br /><br /> mkrho.F90:500:BUG<br /><br /> the bandfft tabs are not allocated !<br /><br />  Action : contact ABINIT group.<br /><br /><br />while the same calculations run in serial mode work correctly.<br />For comparison, the same calculations with abinit5.8.4 “parallelized in a wrong way” i.e. taking npband as if it were npkpt, or stopped with errors, depending on the parallelization keywords used (<!-- l --><a class="postlink-local" href="viewtopic345d.html?f=8&amp;t=533">viewtopic.php?f=8&amp;t=533</a><!-- l --> )<br /><br />Can someone tell me if there is some “macroscopic” error in my input, or anyway how to avoid this problems?<br /><br />many thanks in advance<br />Elena Molteni<br />Department of Physics<br />University of Milan<br />via Celoria, 16 <br />20133, Milan, Italy</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: band parallelization (1 k-point); paral_kgb, wfoptalg</h3>
+				<div class="date">Posted: <strong>Sat Sep 25, 2010 3:22 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">It's probable that the ddk calculations are not compatible with the full kgb parallelization. Full DFPT (phonon) calculations use band parallelism by default (you don't need to do anything), and it's possible that ddk does too (can someone confirm this?). You'll need to remove the kgb stuff for the ddk datasets in any event.<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: band parallelization (1 k-point); paral_kgb, wfoptalg</h3>
+				<div class="date">Posted: <strong>Thu Sep 30, 2010 2:41 pm</strong></div>
+				<div class="author">by <strong>elena.mol</strong></div>
+				<div class="content">Thanks Mathieu for your suggestion!<br />I splitted the &quot;optic&quot; calculation (with abinit6.2.2) into 2 different runs (since i noticed that paral_kgb cannot be specified separately on different datasets): the first run corresponding to the first 3 datasets of the original &quot;optic&quot; tutorial, where i specified paral_kgb and related keywords, and the second run corresponding to datasets 4 to 6 (involving ddk), where i didn't put any parallelization keywords. This way it works fine.<br />Thanks<br /><br />Elena Molteni<br />Department of Physics<br />University of Milan<br />via Celoria, 16 <br />20133, Milan, Italy</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=533&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:03:50 GMT -->
+</html>

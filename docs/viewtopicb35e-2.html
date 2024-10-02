@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=543&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:03:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Struggling to learn abinit</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Struggling to learn abinit</h2>
+		<p><a href="viewtopicdf40.html?f=9&amp;t=543">https://forum.abinit.org/viewtopic.php?f=9&amp;t=543</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Struggling to learn abinit</h3>
+				<div class="date">Posted: <strong>Wed Aug 18, 2010 7:42 pm</strong></div>
+				<div class="author">by <strong>jmullen</strong></div>
+				<div class="content">Greetings all,<br /><br />I have been using Quantum Espresso for a few years now and I am atttempting to learn abinit through the tutorials as well as reproducing previous results from QE. So far, I have succeeded in all but one task, which is reproducing the band structure of graphene. I start with a configuration for the rprim, acell , and xangst for the atomic positions. I have calculated multiple datasets for changing acell to find the minimum energy and ionmov=3 for relaxing the atomic positions. The energy minimization curves look good in that I get well-fitted data, but when I try to run the band structure along high symmetry lines, I still get a band gap at K. Of course, I am sure this is due to my mistakes, so I am hoping that someone can point out where I have gone wrong. For brevity, I am attaching one input file which shows the calculation parameters for the band structure which are a result of the convergence studies.<br /><br />Thanks for any help<br />Jeff Mullen<br />North Carolina State University</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Struggling to learn abinit</h3>
+				<div class="date">Posted: <strong>Thu Aug 19, 2010 5:05 am</strong></div>
+				<div class="author">by <strong>Robin</strong></div>
+				<div class="content">Dear Jeff,<br /><br />The coordinates of K point is incorrect, which should be (0.577639, 0.577639, 0) in your system. By the way, an ecut of 120 Ha is too large for carbon; the comment for xangst is incorrect.<br /><br />Sincerely,<br />Guangfu Luo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Struggling to learn abinit</h3>
+				<div class="date">Posted: <strong>Thu Aug 19, 2010 6:41 pm</strong></div>
+				<div class="author">by <strong>jmullen</strong></div>
+				<div class="content">Thanks for your response.<br /><br />I replaced my k points in the input file as you suggested and the final energies calculated are <br /><br />kpt=  0.5776  0.5776  0.0000 (reduced coord)<br /> -14.42183 -13.59451  -8.77891 <strong class="text-strong"> -2.58747   0.75599</strong>   9.20998  10.94101  11.02132<br /><br />I am unsure where to go from here. Either my geometry is wrong, or I am calculating the wrong k point path (using the wrong coordinates).<br /><br />Thanks for your help<br />Jeff Mullen<br />North Carolina State University<br /><br />P.S. Attached are my new input file and the .files (named is changed because I could not upload the &quot;files&quot; extension)</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Struggling to learn abinit</h3>
+				<div class="date">Posted: <strong>Fri Aug 20, 2010 4:39 am</strong></div>
+				<div class="author">by <strong>Robin</strong></div>
+				<div class="content">Dear Jeff,<br /><br />    Check the files I use and the results they produce.<br /><br />Sincerely,<br />Guangfu Luo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Struggling to learn abinit</h3>
+				<div class="date">Posted: <strong>Mon Aug 23, 2010 8:54 pm</strong></div>
+				<div class="author">by <strong>jmullen</strong></div>
+				<div class="content">Thanks for your help. Between your input file and several hours of experimentation I fixed the multiple problems I had with my geometry and am now reproducing the desired results.<br /><br />Jeff Mullen<br />North Carolina State University</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Struggling to learn abinit</h3>
+				<div class="date">Posted: <strong>Sat Sep 04, 2010 9:45 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello,<br /><br /><br />in passing, you shouldn't need 120 Ha unless you are doing all electron carbon (note-pwscf uses Ry)<br /><br />your atomic positions were probably not precise enough (use reduced coordinates 1/3 2/3 0 to make sure you preserve symmetry)<br /><br />The K point, however, was correct as stated &quot;1/3 1/3 0&quot;<br /><br />You could have  problems because the default shift for k-points (0.5 0.5 0.5) has not been removed. You might check this and reset it with &quot;shiftk 0 0 0&quot;<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Struggling to learn abinit</h3>
+				<div class="date">Posted: <strong>Wed Sep 08, 2010 8:26 pm</strong></div>
+				<div class="author">by <strong>jmullen</strong></div>
+				<div class="content">Hi Matthieu,<br /><br />Thanks for your comments. Since making the original post, I have improved my understanding of the units and how to declare a unit to be in eV instead of Hartree when I need it as well as many other parameters. Once I realized these mistakes, I immediately calculated the correct results.<br /><br />Regards<br />Jeff</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=543&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:03:54 GMT -->
+</html>

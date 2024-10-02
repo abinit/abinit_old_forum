@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=497&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] boxcut &gt; 2.2 ???</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] boxcut &gt; 2.2 ???</h2>
+		<p><a href="viewtopic2d5f.html?f=9&amp;t=497">https://forum.abinit.org/viewtopic.php?f=9&amp;t=497</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] boxcut &gt; 2.2 ???</h3>
+				<div class="date">Posted: <strong>Fri Jul 16, 2010 5:10 pm</strong></div>
+				<div class="author">by <strong>spamrefuse</strong></div>
+				<div class="content">Hi,<br /><br />When I run abinit, I have this comment in the log file:<br />---------------------------------------------------------------------<br /> getcut : COMMENT -<br />  Note that boxcut &gt; 2.2 ; recall that boxcut=Gcut(box)/Gcut(sphere) = 2<br />  is sufficient for exact treatment of convolution.<br />  Such a large boxcut is a waste : you could raise ecut<br />  e.g. ecut=  XXXXXXX Hartrees makes boxcut=2<br />---------------------------------------------------------------------<br /><br />where XXXXX suggests some larger value for ecut.<br /><br />When I put this suggested value for ecut in the input file, I get the same<br />comment suggesting an even larger value; when I then try that larger value<br />it again suggests me to use a much larger value, etc. etc.<br />I've been trying for ecut:<br />     35 -&gt; 75 -&gt; 115 -&gt; 160 -&gt; 300 -&gt; 470<br /><br />What is this?<br />Should I ignore this comment, as its suggestion does not seem to solve<br />the problem.......or is this a bug in abinit?<br /><br />Is there another way to solve this?<br /><br />Thank you!<br />Rob.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: boxcut &gt; 2.2 ???</h3>
+				<div class="date">Posted: <strong>Fri Jul 16, 2010 7:41 pm</strong></div>
+				<div class="author">by <strong>pmanglade</strong></div>
+				<div class="content">The only &quot;sensible&quot; explanation I can guess for such a behavior is that you always round Abinit suggestion to a slightly greater number. Could it be the case ? What happens if you try a value of ecut slightly lower than what is suggested by Abinit ?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: boxcut &gt; 2.2 ???</h3>
+				<div class="date">Posted: <strong>Wed Jul 28, 2010 6:06 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello,<br /><br />just leave the ecut as it was, and converge it alone. You are probably using dilatmx and ecutsm. This means the effective ecut_eff is larger than ecut, and the density cutoff is 2*ecut_eff. The warning (which just means that ecut is smaller than it could be given the density grid) should be ignored in these cases, as you really want the ecut_eff to be a bit too big, in order to accomodate the possibility of a changing unit cell size.<br /><br />matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=497&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:18 GMT -->
+</html>

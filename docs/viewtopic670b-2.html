@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=4431&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:43:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; ANADBB calculations in AlAs</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>ANADBB calculations in AlAs</h2>
+		<p><a href="viewtopic8498.html?f=10&amp;t=4431">https://forum.abinit.org/viewtopic.php?f=10&amp;t=4431</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>ANADBB calculations in AlAs</h3>
+				<div class="date">Posted: <strong>Sun May 31, 2020 5:04 am</strong></div>
+				<div class="author">by <strong>suman</strong></div>
+				<div class="content">Dear users,<br>
+<br>
+I was trying to calculate elastic constants and piezoelectric coefficients for AlAs as per abinit website given in the link (<a href="https://docs.abinit.org/tutorial/elastic/" class="postlink">https://docs.abinit.org/tutorial/elastic/</a>).<br>
+<br>
+1. No issue in the ground-state geometry of (hypothetical) wurtzite AlAs<br>
+<br>
+2. No issue in response-function calculations of several second derivatives of the total <br>
+energy<br>
+<br>
+3.  But had issues in ANADDB calculation of atom-relaxation effects<br>
+<br>
+For this steps my input files are as follows<br>
+telast_3.in<br>
+telast_3files.in<br>
+DDB_telast2.out (from step 2 calculation)<br>
+<br>
+Running this steps gave me an error as:<br>
+<br>
+--- !ERROR<br>
+src_file: m_pspheads.F90<br>
+src_line: 149<br>
+mpi_rank: 0<br>
+message: |<br>
+    Fortran open returned iostat 29 while opening: dummy_epout<br>
+    IOMSG: file not found, unit 1024, file /global/cscratch1/sd/suman/AlAs/ANADDB/k01/01-Density/dummy_epout<br>
+<br>
+When I checked log file error pops out as <br>
+<br>
+-instrng: 28 lines of input have been read from file telast_3.in<br>
+ <br>
+<br>
+ Please give name of formatted atomic psp file<br>
+ iofn2 : for atom type 1, psp file is dummy_epout<br>
+ <br>
+--- !ERROR<br>
+src_file: m_pspheads.F90<br>
+src_line: 149<br>
+mpi_rank: 0<br>
+message: |<br>
+    Fortran open returned iostat 29 while opening: dummy_epout<br>
+    IOMSG: file not found, unit 1024, file /global/cscratch1/sd/srajpand/AlAs/ANADDB/k01/01-Density/dummy_epout<br>
+<br>
+I believe problem is in the pseudopotentials and I am using abinit 8.10.3.<br>
+<br>
+Could you please let  me  know any issues in my attached files?<br>
+Any help would be highly appreciable.<br>
+Thank you<br>
+<br>
+...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ANADBB calculations in AlAs</h3>
+				<div class="date">Posted: <strong>Mon Jun 01, 2020 9:48 pm</strong></div>
+				<div class="author">by <strong>suman</strong></div>
+				<div class="content">Hi abinit users,<br>
+<br>
+I was able to sort out the issue on my own.<br>
+Thank you</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=4431&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:43:47 GMT -->
+</html>

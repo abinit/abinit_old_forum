@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2627&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:20:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Error on &quot;make&quot;, involving FREEIF in defs.h</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Error on &quot;make&quot;, involving FREEIF in defs.h</h2>
+		<p><a href="viewtopicf581.html?f=3&amp;t=2627">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2627</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Error on &quot;make&quot;, involving FREEIF in defs.h</h3>
+				<div class="date">Posted: <strong>Tue Apr 08, 2014 10:14 pm</strong></div>
+				<div class="author">by <strong>FranklinDFT</strong></div>
+				<div class="content">Hello,<br /><br />We are attempting to install ABINIT v7.6 in a non-parallel implementation. The configure step was successful, but when we attempt to &quot;make&quot;, there is an error compiling the file &quot;src/62_ctqmc/m_ListCdagC.F90&quot; with gfortran-4.3. The Error message is as follows:<br /><br />gfortran-4.3 -DHAVE_CONFIG_H -I. -I../../../src/62_ctqmc -I../.. -I../../src/incs -I../../../src/incs -I/users2/mikclark/abinit-7.6.2/build/fallbacks/exports/include   -ffree-form -J/users2/mikclark/abinit-7.6.2/build/src/mods   -O2 -c -o m_ListCdagC.o ../../../src/62_ctqmc/m_ListCdagC.F90<br />../../../src/62_ctqmc/m_ListCdagC.F90:129.31:<br /><br />  IF(ALLOCATED( list_1%list )) THEN \newline deallocate( list_1%list , stat=ABI<br />                              1<br />Error: Cannot assign to a named constant at (1)<br />../../../src/62_ctqmc/m_ListCdagC.F90:242.29:<br /><br />    IF(ALLOCATED(list_temp)) THEN \newline deallocate(list_temp, stat=ABI_ALLOC<br />                            1<br />Error: Cannot assign to a named constant at (1)<br />../../../src/62_ctqmc/m_ListCdagC.F90:954.29:<br /><br />  IF(ALLOCATED(list_1%list)) THEN \newline deallocate(list_1%list, stat=ABI_ALL<br />                            1<br />Error: Cannot assign to a named constant at (1)<br />make[3]: *** [m_ListCdagC.o] Error 1<br />make[3]: Leaving directory `/users2/mikclark/abinit-7.6.2/build/src/62_ctqmc'<br />make[2]: *** [all-recursive] Error 1<br />make[2]: Leaving directory `/users2/mikclark/abinit-7.6.2/build/src'<br />make[1]: *** [all-recursive] Error 1<br />make[1]: Leaving directory `/users2/mikclark/abinit-7.6.2/build'<br />make: *** [all] Error 2<br /><br /><br />By looking in the F90 file, it seems that something is going wrong with FREEIF(list_1%list). The FREEIF function is defined in the &quot;defs.h&quot; header file and list_1 is a user-defined data type called ListCdagC. However, this error DOES NOT OCCUR when other F90 files are compiled, even if they also use FREEIF with a user-defined data-type. It seems there is a problem with the file m_ListCdagC.F90, but I cannot trace where it could be, particularly since the error above is not descriptive. Can anyone assist us or provide any advice?<br /><br />Thanks in advance.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Error on &quot;make&quot;, involving FREEIF in defs.h</h3>
+				<div class="date">Posted: <strong>Tue Apr 08, 2014 11:47 pm</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Hi,<br /><br />A quick and efficient fix is to configure abinit with<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>FCFLAGS_EXTRA=&quot;-ffree-line-lenght-none -DHAVE_HAVE_FC_LONG_LINES&quot;</code></pre></div><br />that you can add in your *.ac file or directly on the command line <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure FCFLAGS_EXTRA=&quot;-ffree-line-lenght-none -DHAVE_HAVE_FC_LONG_LINES&quot;</code></pre></div><br /><br />The build should success.<br /><br />If that does not work, please let me know.<br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Error on &quot;make&quot;, involving FREEIF in defs.h</h3>
+				<div class="date">Posted: <strong>Sun Jun 15, 2014 1:10 pm</strong></div>
+				<div class="author">by <strong>eimamagi</strong></div>
+				<div class="content">Hello, <br /><br />I am getting the same error with the version 7.6.4 and mvapich2 1.8-1 (gcc-gfortran-4.4.7-4.el6.x86_64 on RHEL 6). I tried setting the FCFLAGS_EXTRA in configure step but the error is still there. Is there anything else that could be done to solve this issue?<br /><br />Thanks in advance<br />emir</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Error on &quot;make&quot;, involving FREEIF in defs.h</h3>
+				<div class="date">Posted: <strong>Mon Jun 16, 2014 12:19 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Please note that GCC 4.3 is not supported anymore by Abinit and that GCC 4.4 is quite outdated. They both have bugs which are triggered by Abinit, which means that, even if your build succeeds, you may encounter strange issues at run-time. Using a more recent version of GCC and/or waiting for the upcoming 7.8.1 version of Abinit (beginning of July) would already improve the situation significantly.<br /><br />In the meantime, you may try the &quot;--enable-fc-wrapper&quot; option of configure, which may partly solve your problem.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Error on &quot;make&quot;, involving FREEIF in defs.h</h3>
+				<div class="date">Posted: <strong>Mon Jun 16, 2014 3:13 pm</strong></div>
+				<div class="author">by <strong>eimamagi</strong></div>
+				<div class="content">Hello, <br /><br />thanks for a quick response. I modified the --configure with the option you suggested, but now it is failing with:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>/usr/lib64/mvapich2/bin/mpif90 -m64 read_upf_pwscf_cpp.f90&nbsp; -DHAVE_CONFIG_H -P -ffree-form -J/root/rpmbuild/BUILD/abinit-7.6.4/src/mods -O2 -DLINUX -D_FILE_OFFSET_BITS=<br />64 -D_LARGEFILE64_SOURCE -c -o read_upf_pwscf.o&nbsp; -I. -I../.. -I../../src/incs -I../../src/incs -I/root/rpmbuild/BUILD/abinit-7.6.4/fallbacks/exports/include<br />read_upf_pwscf_cpp.f90:67.24:<br /><br />&nbsp; &nbsp; &nbsp;if (matches (&quot;&lt;PP_&quot;<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Error: Syntax error in argument list at (1)<br />read_upf_pwscf_cpp.f90:69.36:<br /><br />300 call errore ('scan_begin', 'No '<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Error: Syntax error in argument list at (1)<br />read_upf_pwscf_cpp.f90:66.44:<br /><br />&nbsp; &nbsp; &nbsp;read (iunps, *, iostat = ios, err = 300) rstring<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Error: ERR tag label 300 at (1) not defined<br />read_upf_pwscf_cpp.f90:87.22:<br /><br />&nbsp; if (matches (&quot;&lt;/PP_&quot;<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Error: Syntax error in argument list at (1)<br />read_upf_pwscf_cpp.f90:89.12:<br /><br />&nbsp; &nbsp; &nbsp; &nbsp;'No '<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Error: Syntax error in argument list at (1)<br />read_upf_pwscf_cpp.f90:86.45:<br /><br />&nbsp; read (iunps, '(a)', iostat = ios, err = 300) rstring<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1<br />Error: ERR tag label 300 at (1) not defined<br />ABINIT WRAPPER END (exit code 1)<br /></code></pre></div><br /><br />Since we're using RHEL6 it is not trivial to replace default gcc and rebuild mvapich2. Do you think GCC 4.4 will be fully supported in Abinit 7.8.1 or should we start working on newer versions of gcc?<br /><br />Thanks in advance<br />emir</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Error on &quot;make&quot;, involving FREEIF in defs.h</h3>
+				<div class="date">Posted: <strong>Mon Jun 16, 2014 8:03 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Should still work, and we'll do our best to help you with it, since it's a highly-bugfixed release. But future versions of Abinit will likely require GCC &gt;= 4.6. If you do a manual upgrade, think of GCC 4.9. Our tests give very good results with it.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2627&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:20:16 GMT -->
+</html>

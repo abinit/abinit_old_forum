@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=399&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Effective mass</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Effective mass</h2>
+		<p><a href="viewtopic96fa.html?f=9&amp;t=399">https://forum.abinit.org/viewtopic.php?f=9&amp;t=399</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Effective mass</h3>
+				<div class="date">Posted: <strong>Sun Jun 13, 2010 3:55 pm</strong></div>
+				<div class="author">by <strong>Martin</strong></div>
+				<div class="content">Dear ABINITers,<br /><br />is there a way to directly calculate the <strong class="text-strong">effective mass</strong> with ABINIT? A naïve approach would be to fit a curve (locally: 2nd order polynomial) to the band structure and take the second derivative. Does this work? How can I get the band structure, e.g. near Gamma, with sufficient accuracy? Wannier interpolation?<br /><br />Thanks &amp; Best regards,<br /><br />Martin Haeufel<br />TU Munich, WSI (T33)<br /><!-- m --><a class="postlink" href="http://www.wsi.tum.de/">http://www.wsi.tum.de</a><!-- m --></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Effective mass</h3>
+				<div class="date">Posted: <strong>Mon Jun 14, 2010 9:22 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content"><blockquote><div><cite>Martin wrote:</cite>Dear ABINITers,<br /><br />is there a way to directly calculate the <strong class="text-strong">effective mass</strong> with ABINIT? A naïve approach would be to fit a curve (locally: 2nd order polynomial) to the band structure and take the second derivative. Does this work?<br /></div></blockquote><br />certainly - you just have to be careful with the units for the k-vectors: to get a correctly dimensioned m* you need to know the energy unit but also the delta k which you will be dividing or using to fit. The easiest probably is to rescale the branches of band structure which you are fitting, to express the k axis in bohr-1, then fit and you will have m* in clean atomic units. Just multiply the reduced k-point you input to abinit by the reciprocal lattice vectors (search for PRIM in the output file), and don't forget a 2*pi factor where needed: the reciprocal lattice in abinit is strict bohr-1, without the 2pi<br /><br /><br /><blockquote class="uncited"><div> How can I get the band structure, e.g. near Gamma, with sufficient accuracy? Wannier interpolation?<br /></div></blockquote><br />it would certainly be efficient, but the simplest would be a non-self consistent band structure calculation (as in the tutorials) with just a few k-points around gamma in the directions you are interested in.<br /><br /><br />matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Effective mass</h3>
+				<div class="date">Posted: <strong>Tue Jun 15, 2010 1:18 pm</strong></div>
+				<div class="author">by <strong>Martin</strong></div>
+				<div class="content">Thanks Matthieu!<br /><br /><blockquote><div><cite>matthieu wrote:</cite>the simplest would be a non-self consistent band structure calculation (as in the tutorials) with just a few k-points around gamma in the directions you are interested in.</div></blockquote><br /><br />Is there a way to combine this with GW or does one have to use interpolation techniques? Are there any tutorials/papers on this? Are there any systematic ways/ external tools to get a weighted set of k-points that contain the high-symmetry points for the given structural symmetry? I used to have access to Materials Studio at Qimonda, which I think had this as a built-in feature. Or would this just lead to a very inefficient k-point set and one should use interpolation anyway?<br /><br />Martin</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=399&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:23 GMT -->
+</html>

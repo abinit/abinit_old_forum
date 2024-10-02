@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2560&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:39:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; : catastrophic error: **Internal compiler error: internal ab</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>: catastrophic error: **Internal compiler error: internal ab</h2>
+		<p><a href="viewtopic8d60-2.html?f=3&amp;t=2560">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2560</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>: catastrophic error: **Internal compiler error: internal ab</h3>
+				<div class="date">Posted: <strong>Mon Mar 24, 2014 4:14 am</strong></div>
+				<div class="author">by <strong>weitong</strong></div>
+				<div class="content">I am building abinit7.6.2, but  always get &quot;catastrophic error&quot; when making.<br />../configure --with-config-file=../config-weitong.ac, This is succussful.<br />But make gives <br />&quot;: catastrophic error: **Internal compiler error: internal abort** Please report this error along with the circumstances in which it occurred in a Software Problem Report.  Note: File and line given may not be explicit cause of this error.<br />compilation aborted for ../../../src/66_wfs/prep_fourwf.F90 (code 1)<br />make[4]: *** [prep_fourwf.o] error 1&quot;<br /><br />config-weitong.ac is (with referecne to this post <!-- l --><a class="postlink-local" href="viewtopic9edb.html?f=3&amp;t=2071">viewtopic.php?f=3&amp;t=2071</a><!-- l -->)<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>enable_64bit_flags=&quot;yes&quot;<br />prefix=&quot;/usr/local/abinit7.6.2&quot;<br />CC=&quot;mpicc&quot;<br />CXX=&quot;mpicxx&quot;<br />FC=&quot;mpif90&quot;<br />fcflags_opt_66_wfs =&quot;-O1 -xHost -g -extend-source -vec-report0 -noaltparam -nofpscomp&quot; <br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_prefix=&quot;/usr/local/mpich&quot;<br />with_trio_flavor=&quot;netcdf+etsf_io+fox&quot;<br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_libs=&quot;-L/opt/intel/composer_xe_2013.3.163/mkl/lib/intel64 -Wl,--start-group&nbsp; -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group&quot;<br />with_linalg_flavor = &quot;mkl&quot;<br />with_linalg_libs =&quot;-L/opt/intel/composer_xe_2013.3.163/mkl/lib/intel64 -Wl,--start-group&nbsp; -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group&quot;<br />with_dft_flavor=&quot;atompaw+bigdft+libxc+wannier90&quot;<br />enable_fallbacks=&quot;yes&quot;<br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: : catastrophic error: **Internal compiler error: interna</h3>
+				<div class="date">Posted: <strong>Mon Mar 24, 2014 12:56 pm</strong></div>
+				<div class="author">by <strong>delaveau</strong></div>
+				<div class="content">May be you don't need to specify fcflags_opt_66_wfs<br />Try without specfify it and if it doesn't work try with -O0 instead of -O1</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: : catastrophic error: **Internal compiler error: interna</h3>
+				<div class="date">Posted: <strong>Mon Mar 24, 2014 1:27 pm</strong></div>
+				<div class="author">by <strong>weitong</strong></div>
+				<div class="content">Following the recipe in <!-- l --><a class="postlink-local" href="viewtopic9edb.html?f=3&amp;t=2071">viewtopic.php?f=3&amp;t=2071</a><!-- l -->. By set FCFLAGS=&quot;-O1&quot;  for 1st time configure and make, no errors appear. Then back to FCFLAGS=&quot;-O2&quot;, and configure and make again.  Everything looks OK.<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>enable_64bit_flags=&quot;yes&quot;<br />prefix=&quot;/usr/local/abinit7.6.2&quot;<br />CC=&quot;mpicc&quot;<br />CXX=&quot;mpicxx&quot;<br />FC=&quot;mpif90&quot;<br />FCFLAGS=&quot;-O1&quot; # for 1st time, &quot;-O2&quot; fot the 2nd time.<br />fcflags_opt_66_wfs =&quot;-O1 -xHost -g -extend-source -vec-report0 -noaltparam -nofpscomp&quot; <br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_prefix=&quot;/usr/local/mpich&quot;<br />with_trio_flavor=&quot;netcdf+etsf_io+fox&quot;<br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_libs=&quot;-L/opt/intel/composer_xe_2013.3.163/mkl/lib/intel64 -Wl,--start-group&nbsp; -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group&quot;<br />with_linalg_flavor = &quot;mkl&quot;<br />with_linalg_libs =&quot;-L/opt/intel/composer_xe_2013.3.163/mkl/lib/intel64 -Wl,--start-group&nbsp; -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group&quot;<br />with_dft_flavor=&quot;atompaw+bigdft+libxc+wannier90&quot;<br />enable_fallbacks=&quot;yes&quot;<br /></code></pre></div><br /><br /><strong class="text-strong">But, when I run  ../../tests/runtests.py,  there is 2 tests failed:<br />[v67mbpt][t28] failed: relative error 0.8577 &gt; 0.5<br />[wannier90][t00] within 1.5 of tolerance (relative error 0.0004138, accepted 0.0004 ).<br />How can I do with these 2  fails?</strong><br />Here is the result.<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Test suite completed in 449.78 s (average time for test = 7.55 s, stdev = 16.34 s)<br />failed: 2, succeeded: 546, passed: 118, skipped: 113, disabled: 0<br /><br />Suite&nbsp; &nbsp; &nbsp; &nbsp; failed&nbsp; passed&nbsp; succeeded&nbsp; skipped&nbsp; disabled&nbsp; run_etime&nbsp; tot_etime<br />atompaw&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;100.42&nbsp; &nbsp; &nbsp;100.69<br />bigdft&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;19&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;538.53&nbsp; &nbsp; &nbsp;539.76<br />built-in&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 7&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;5.06&nbsp; &nbsp; &nbsp; &nbsp;5.07<br />etsf_io&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 7&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; 14.29&nbsp; &nbsp; &nbsp; 14.65<br />fast&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;11&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; 30.18&nbsp; &nbsp; &nbsp; 31.58<br />fox&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; 59.45&nbsp; &nbsp; &nbsp; 59.57<br />gpu&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; 4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0.00&nbsp; &nbsp; &nbsp; &nbsp;0.00<br />libxc&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;6&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;15&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;174.72&nbsp; &nbsp; &nbsp;178.31<br />mpiio&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp;13&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;2.04&nbsp; &nbsp; &nbsp; &nbsp;2.10<br />paral&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;6&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;15&nbsp; &nbsp; &nbsp; &nbsp;64&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;337.32&nbsp; &nbsp; &nbsp;341.70<br />seq&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;18&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0.00&nbsp; &nbsp; &nbsp; &nbsp;0.00<br />tutoparal&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0.33&nbsp; &nbsp; &nbsp; &nbsp;0.34<br />tutoplugs&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; 16.41&nbsp; &nbsp; &nbsp; 16.70<br />tutorespfn&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;8&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;14&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;816.48&nbsp; &nbsp; &nbsp;825.52<br />tutorial&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;7&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;41&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;637.60&nbsp; &nbsp; &nbsp;646.13<br />unitary&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;16&nbsp; &nbsp; &nbsp; &nbsp;13&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; 31.68&nbsp; &nbsp; &nbsp; 32.03<br />v1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;75&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;168.50&nbsp; &nbsp; &nbsp;176.14<br />v2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; 11&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;69&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;227.63&nbsp; &nbsp; &nbsp;237.29<br />v3&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; 11&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;71&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;321.69&nbsp; &nbsp; &nbsp;339.11<br />v4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; 14&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;49&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;364.19&nbsp; &nbsp; &nbsp;378.76<br />v5&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; 15&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;59&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;760.96&nbsp; &nbsp; &nbsp;785.74<br />v6&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; 12&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;48&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;561.73&nbsp; &nbsp; &nbsp;579.73<br />v67mbpt&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;12&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;222.55&nbsp; &nbsp; &nbsp;226.37<br />v7&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;7&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;13&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;442.94&nbsp; &nbsp; &nbsp;448.97<br />vdwxc&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; 10.86&nbsp; &nbsp; &nbsp; 10.94<br />wannier90&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp;5&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; 34.05&nbsp; &nbsp; &nbsp; 34.54<br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: : catastrophic error: **Internal compiler error: interna</h3>
+				<div class="date">Posted: <strong>Mon Mar 24, 2014 9:50 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />my recipe with intel 13 is :<br /><br />1) use  13.1.3  and mkl 11.0  (with this version, no problem with 66_wfs )<br />  ( all tests pass and/or succeed )<br /><br />2)  my ac file :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_prefix=&quot;/usr/local/openmpi_intel13&quot;<br />with_trio_flavor=&quot;netcdf+etsf_io+fox&quot;<br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_libs=&quot;-L/opt/intel/mkl/lib/intel64 -Wl,--start-group&nbsp; -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group&quot;<br />with_linalg_flavor=&quot;mkl&quot;<br />with_linalg_libs=&quot;-L/opt/intel/mkl/lib/intel64 -Wl,--start-group&nbsp; -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group&quot;<br />with_dft_flavor=&quot;atompaw+bigdft+libxc+wannier90&quot;<br />enable_gw_dpc=&quot;yes&quot;</code></pre></div><br /><br />concerning the failed tests :<br /><br /><blockquote class="uncited"><div>[v67mbpt][t28] failed: relative error 0.8577 &gt; 0.5<br />[wannier90][t00] within 1.5 of tolerance (relative error 0.0004138, accepted 0.0004 ).</div></blockquote><br /><br />&quot;within 1.5 of tolerance&quot;  -&gt; not considered as a error…  <img class="smilies" src="images/smilies/icon_e_wink.gif" alt=";)" title="Wink" /> <br />&quot;[v67mbpt][t28]&quot; -&gt;  <img class="smilies" src="images/smilies/icon_rolleyes.gif" alt=":roll:" title="Rolling Eyes" /> <br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: : catastrophic error: **Internal compiler error: interna</h3>
+				<div class="date">Posted: <strong>Tue Mar 25, 2014 7:40 am</strong></div>
+				<div class="author">by <strong>weitong</strong></div>
+				<div class="content">Thanks. <br />I installed Intel® Fortran and C Composer XE 2013 for Linux, Update 3 (2013.3.163), they include  Intel® Math Kernel Library(Intel® MKL) 11_0 for Linux, Update 2 (11.0.2.146).<br /><br />So what does it mean &quot;[v67mbpt][t28] failed: relative error 0.8577 &gt; 0.5&quot;?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: : catastrophic error: **Internal compiler error: interna</h3>
+				<div class="date">Posted: <strong>Tue Mar 25, 2014 10:02 am</strong></div>
+				<div class="author">by <strong>weitong</strong></div>
+				<div class="content">I tried your recipe. It seems it is necessary to set FCFLAGS=&quot;-O1&quot; first. Otherwise, always getting error message<br />&quot;catastrophic error: **Internal compiler error: internal abort** Please report this error along with the circumstances in which it occurred in a Software Problem Report.  Note: File and line given may not be explicit cause of this error.<br />compilation aborted for ../../../src/66_wfs/prep_fourwf.F90 (code 1)<br />make[4]: *** [prep_fourwf.o] error 1&quot;</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: : catastrophic error: **Internal compiler error: interna&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Thu Mar 27, 2014 5:13 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">You should not worry so much about these 2 errors. Abinit uses a single set of reference files and tolerances for its hundreds of tests, which means that there will always be architecture/compiler/optimizations combinations going out of the allowed intervals. The error messages you get are just telling you that one value in one Many-Body Perturbation Theory test, as well as one value in a Wannier function based test, are slightly going out of the expected intervals, although the executions of the tests themselves went fine.<br /><br />These 2 tests are about features which can generate subtantial errors, since the input parameters are not converged to keep the execution time as low as possible. This is not always the case, e.g. when you test ground-state features. At the end, determining whether a test really fails is above all a question of the underlying physics and the sensitivity of the implementation to (lack of) convergence.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2560&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:39:12 GMT -->
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=499&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:52:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Add process ID to the STATUS file.</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Add process ID to the STATUS file.</h2>
+		<p><a href="viewtopic7e5d.html?f=19&amp;t=499">https://forum.abinit.org/viewtopic.php?f=19&amp;t=499</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Add process ID to the STATUS file.</h3>
+				<div class="date">Posted: <strong>Mon Jul 19, 2010 1:36 am</strong></div>
+				<div class="author">by <strong>spamrefuse</strong></div>
+				<div class="content">Hi,<br /><br />On my system often there are several instances running of abinit.<br />Occasionally I have to kill one of those abinits running.<br /><br />It is then difficult to find out which process id (PID) I should kill.<br />If the STATUS file would also show the PID of the running abinit,<br />that would make life much easier.<br /><br />Is it possible to add the PID in the STATUS file?<br /><br />Regards,<br />Rob.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Add process ID to the STATUS file.</h3>
+				<div class="date">Posted: <strong>Fri Jul 23, 2010 3:43 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Accessing the PID would require writing some code in C and consequently add dependencies of Abinit to some C libraries, which would somewhat decrease the portability and further increase the complexity of the build process.<br /><br />For these reasons, I would not do it, even if the idea itself seems nice to me.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Add process ID to the STATUS file.</h3>
+				<div class="date">Posted: <strong>Mon Jul 26, 2010 8:22 am</strong></div>
+				<div class="author">by <strong>pmanglade</strong></div>
+				<div class="content">Hi Yann,<br /><br />I've almost never had a look to the build system but would it be difficult to test if a simple fortran program calling &quot;getpid()&quot; compile and then to choose whether the available getpid() shall be compiled or a dummy function returning 0 ?<br /><br />regards<br /><br />PMA</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Add process ID to the STATUS file.</h3>
+				<div class="date">Posted: <strong>Wed Aug 04, 2010 6:50 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">That's an idea. I could declare a CPP option called HAVE_FC_GETPID in the build system with the result of the test, and it would be simple to do.<br /><br />However, someone else has to take care of the rest, since I have other priorities and emergencies.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Add process ID to the STATUS file.</h3>
+				<div class="date">Posted: <strong>Wed Aug 04, 2010 7:16 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Done in my 6.2.2 branch. I now pass the torch to any volunteer.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Add process ID to the STATUS file.</h3>
+				<div class="date">Posted: <strong>Sun Aug 08, 2010 1:50 pm</strong></div>
+				<div class="author">by <strong>pmanglade</strong></div>
+				<div class="content">In case no one could do it before september, I'll try to do it at that time.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Add process ID to the STATUS file.</h3>
+				<div class="date">Posted: <strong>Fri Sep 03, 2010 6:16 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">The stage is yours ... <img class="smilies" src="images/smilies/icon_e_wink.gif" alt=";)" title="Wink" /></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=499&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:52:40 GMT -->
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=68&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 20:54:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; KSS calculation: diagonalized eig differ from gradient eig</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>KSS calculation: diagonalized eig differ from gradient eig</h2>
+		<p><a href="viewtopicaed6.html?f=11&amp;t=68">https://forum.abinit.org/viewtopic.php?f=11&amp;t=68</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>KSS calculation: diagonalized eig differ from gradient eig</h3>
+				<div class="date">Posted: <strong>Sat Feb 20, 2010 5:21 pm</strong></div>
+				<div class="author">by <strong>Mamikon Gulian</strong></div>
+				<div class="content">Hello,<br /><br />When calculating a KSS file I periodically get this warning every few k-points:<br /><br /> outkss.F90:1403:WARNING<br />  The diagonalized eigenvalues differ by more than 10^-3 Hartree<br /> with respect to the conjugated gradient values.<br /><br />My questions: (1) If its calculating both the Conjugated Gradient values and Diagonalized values and then comparing, can I just get it to write out two KSS files instead of one, for each method? (that way I can <em class="text-italics">really</em> see what the difference between the two is). (2) How should I alleviate this difference? Should I use tighter convergence parameters? On wavefunctions? Energy?<br /><br />Thanks,<br />Mamikon</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: KSS calculation: diagonalized eig differ from gradient eig</h3>
+				<div class="date">Posted: <strong>Mon Feb 22, 2010 10:59 am</strong></div>
+				<div class="author">by <strong>bruneval</strong></div>
+				<div class="content">Hello,<br /><br />I think this message is not really robust. You should not carry too much attention to it.<br />Just make sure that your eigenvalues/wavefunctions are well converged within the CG technique.<br />Sorry for this sloppy reply.<br /><br />Fabien</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: KSS calculation: diagonalized eig differ from gradient eig</h3>
+				<div class="date">Posted: <strong>Thu Feb 25, 2010 11:51 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">The diagonalization step performed during the KSS generation can be seen as an additional SCF iteration. <br />The diagonalized eigenvalues and eigenfunctions are therefore close to the ones calculated during the <br />SCF (NSCF) run provided that the SCF (NSCF) cycle is very well converged.<br /><br />You don't have your input file but I guess that only the high energy states produced <br />by the direct diagonalization differ from the conjugate gradient ones.<br />To get rid of the annoying message you might do the following:<br /><br />* Use a stricter criterion for tolwfr (&lt; 10^-16)<br />* Increase the number of bands (nband) as well as the value of nbdbuf such that <br />  (nband - nbdbuf) spans the energy range you are planning to use for GW.<br /><br />The highest states are indeed difficult to converge when iterative techniques (e.g CG) are used.<br />and the nbdbuf trick partly cures the problem.<br /><br />Note that tolwfr is the recommended stopping criterion to be used to generate the  KSS file,<br />even when the KSS is produced at the end of a SCF run.<br />Neither toldfe nor tolvrs are good estimators for the accuracy of the band structure <br />as they only probe the converge of the occupied states. Besides the energy functional<br />is variational with respect to density variations...<br /><br />Hope it helps<br />Matteo Giantomassi</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: KSS calculation: diagonalized eig differ from gradient eig</h3>
+				<div class="date">Posted: <strong>Fri Feb 26, 2010 4:31 am</strong></div>
+				<div class="author">by <strong>Mamikon Gulian</strong></div>
+				<div class="content">Matteo, Fabien,<br /><br />Thanks for your replies. I did feel that the warnings were not very dangerous, but wanted to take care of them anyway. I'll try out your suggestions next time I calculate a KSS file and post the results.<br /><br />-Mamikon Gulian</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: KSS calculation: diagonalized eig differ from gradient eig</h3>
+				<div class="date">Posted: <strong>Thu Mar 04, 2010 6:59 am</strong></div>
+				<div class="author">by <strong>Mamikon Gulian</strong></div>
+				<div class="content">Just an update: I increased the convergence parameters and that made the warnings vanish, but as it turned out, this caused no difference in results- that is, the previous settings were already well converged despite the warnings. I guess the warnings were not essential.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=68&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 20:54:49 GMT -->
+</html>

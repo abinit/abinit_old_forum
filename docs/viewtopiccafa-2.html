@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=962&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:43:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Scalapack</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Scalapack</h2>
+		<p><a href="viewtopic278d-2.html?f=3&amp;t=962">https://forum.abinit.org/viewtopic.php?f=3&amp;t=962</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Scalapack</h3>
+				<div class="date">Posted: <strong>Thu Mar 17, 2011 12:10 am</strong></div>
+				<div class="author">by <strong>maurosgroi</strong></div>
+				<div class="content">Dear all,<br />I'd like to have some advice related to the necessity to use scalapack on a cluster composed by 24 cores (6 nodes with 4 core each) connected by Infiniband.<br />Does it make the code faster in comparison with standard lapack?<br />Thanks a lot in advance,<br />Mauro.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Scalapack</h3>
+				<div class="date">Posted: <strong>Mon Mar 21, 2011 12:43 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello Mauro,<br /><br />for the moment scalapack does not replace lapack in abinit, but is used in specific parts, like the BSE code. Use is being extended, but certain things should certainly go faster. I would bet more on band and FFT parallelism for the moment, if you have a good network.<br /><br />cheers<br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Scalapack</h3>
+				<div class="date">Posted: <strong>Mon Mar 21, 2011 2:16 am</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Dear Mauro,<br /><br />If the purpose is to speed up processing, a proper use of accelerated BLAS/LAPACK will do the job - consider --with-linalg=atlas or mkl (and MPI of course as advised by Matthieu). Scalapack only has sense if your study is so large that it requires to distribute linalg memory on several nodes.<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Scalapack</h3>
+				<div class="date">Posted: <strong>Mon Mar 21, 2011 9:59 pm</strong></div>
+				<div class="author">by <strong>maurosgroi</strong></div>
+				<div class="content">Dear Matthieu and Alain,<br />thanks a lot for the information!<br />My best regards,<br />Mauro.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=962&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:43:03 GMT -->
+</html>

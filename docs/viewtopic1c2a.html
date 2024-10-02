@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2912&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:15:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Band Structure keyerror</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Band Structure keyerror</h2>
+		<p><a href="viewtopic11bc.html?f=9&amp;t=2912">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2912</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Band Structure keyerror</h3>
+				<div class="date">Posted: <strong>Tue Jan 27, 2015 1:10 pm</strong></div>
+				<div class="author">by <strong>sheng</strong></div>
+				<div class="content">Dear all users,<br /><br />Recently I tried to plot band structure using AbinitBandStructureMaker.py but I got this error instead:<br /><br />  File &quot;AbinitBandStructureMaker.py&quot;, line 1012, in &lt;module&gt;<br />    dico[k] = '{l%s}' %ctrl.alphabet[L]<br />KeyError: 27<br /><br />It is only happen with one dataset of total 4 datasets.<br /><br />The input file is attached below (problem in dataset 4 only (vector path 3)).<br />I wish to attach the output file and but unfortunately it is too big (9.5MB).<br /><br />Thanks.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Band Structure keyerror</h3>
+				<div class="date">Posted: <strong>Sat Apr 11, 2015 8:25 pm</strong></div>
+				<div class="author">by <strong>8BitTRex</strong></div>
+				<div class="content">I think I have figured out the solution. AbinitBandStructureMaker.py is recognizing a lot of special k-points. Since this number is greater than 26, (the number of letters in the alphabet), abinit runs into a key error because it has defined ctrl.alphabet to have only 26 options for special k pts. Note: the special k-pts recognized by ABSM.py may not be the points you indicated in your program.<br /><br /> But there is a simple workaround:<br /><br />ctrl.alphabet={<br />     1:'A', 2:'B', 3:'C', 4:'D', 5:'E', 6:'F', 7:'G', 8:'H', 9:'I',10:'J',11:'K',12:'L',13:'M',<br />    14:'N',15:'O',16:'P',17:'Q',18:'R',19:'S',20:'T',21:'U',22:'V',23:'W',24:'X',25:'Y',26:'Z',27:'27',<br />28:'28',29:'29',30:'30',31:'31',32:'32',33:'33',34:'34',35:'35',36:'36',37:'37',38:'38',39:'39',40:'40'}<br /><br />simply change the length of ctrl.alphabet to be really long to make up for any keyerrors. I have added up to 40.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2912&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:15:49 GMT -->
+</html>

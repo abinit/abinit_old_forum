@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=3429&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:28:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; SCF convergence problem with one anion in a box</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>SCF convergence problem with one anion in a box</h2>
+		<p><a href="viewtopicafa4.html?f=14&amp;t=3429">https://forum.abinit.org/viewtopic.php?f=14&amp;t=3429</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>SCF convergence problem with one anion in a box</h3>
+				<div class="date">Posted: <strong>Wed Nov 16, 2016 2:53 pm</strong></div>
+				<div class="author">by <strong>dyu</strong></div>
+				<div class="content">I have trouble for SCF convergence for an anion in a vacuum box.<br />Does anyone have suggestions? Below is my input file.<br />Thanks you.<br /><br /># Definition of the unit cell<br />#The length of the primitive vectors<br />#                    1 Bohr=0.5291772108 Angstroms<br /># acell 10.497600 10.497600 25.000000 Angstroms<br />acell 19.837589 19.837589 47.243153<br />rprim<br />    1.000000  0.000000  0.000000<br />    0.000000  1.000000  0.000000<br />    0.000000  0.000000  1.000000<br /><br />#Definition of the atom types<br />#      10 kind of atoms<br />#       ['H', 'C', 'O']<br />ntypat 3<br />znucl  1 6 8<br /><br />#Definition of tha atoms<br />natom  10<br />typat  1 1 1 1 1 2 2 2 3 3<br />xred<br />    0.54953 0.488194 0.263709<br />   0.597746  0.44301 0.198492<br />    0.40342 0.654867 0.224919<br />   0.436457 0.598672 0.159489<br />   0.558207 0.677447 0.197446<br />   0.477334 0.610456 0.199734<br />   0.516663 0.480623  0.22194<br />   0.409358 0.378494 0.219028<br />   0.345217 0.374438 0.176113<br />   0.396924 0.306535  0.25944<br /><br />#Basis definitions<br /> ecut 20<br /> ecutsm 0.5<br /> pawecutdg 30.<br /><br />#geometry optimziation<br />ionmov  2              # Use the modified Broyden algorithm<br />ntime   100             # Maximum number of Broyden &quot;timesteps&quot;<br />tolmxf  5.0d-5         # Stopping criterion for the geometry optimization : when<br /><br />                       # the residual forces are less than tolmxf, the Broyden<br />                       #                        # algorithm can stop<br /><br />#SCF cycle parameters<br /> tolvrs 1.0d-10<br /> nstep 200<br /><br />#K-points and sym<br />kptopt 0  # Enter the k points manually<br />nkpt   1  # one k point<br /><br />#dielectric<br />diemac 1.5<br /><br />charge -1<br /><br />pawovlp 15.0<br /><br />usepotzero 2<br />#parallization parameters<br />autoparal 1<br /><br />#I/O parameters<br /> prtwf 1 prtden 0  prteig 0<br /> getwfk -1</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF convergence problem with one anion in a box</h3>
+				<div class="date">Posted: <strong>Mon Dec 19, 2016 10:09 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">I would suggest to look at the eigenvalues to understand what's happening.<br />If there are degeneracies, you may try to use tsmear and a &quot;metallic occupation scheme. <br />See: <!-- m --><a class="postlink" href="http://www.abinit.org/doc/helpfiles/for-v7.4/input_variables/varbas.html#occopt">http://www.abinit.org/doc/helpfiles/for ... tml#occopt</a><!-- m --></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=3429&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:28:25 GMT -->
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4030&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:08:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; ABINIT Documentation is insufficient</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>ABINIT Documentation is insufficient</h2>
+		<p><a href="viewtopic91dd.html?f=9&amp;t=4030">https://forum.abinit.org/viewtopic.php?f=9&amp;t=4030</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>ABINIT Documentation is insufficient</h3>
+				<div class="date">Posted: <strong>Thu Jan 31, 2019 10:48 am</strong></div>
+				<div class="author">by <strong>woffermans</strong></div>
+				<div class="content">Dear ABINIT friends,<br /><br />I'm currently performing STRING calculations.<br />There is documentation to this topic within the ABINIT documentation set:<br /><br /><!-- m --><a class="postlink" href="https://docs.abinit.org/topics/TransPath/">https://docs.abinit.org/topics/TransPath/</a><!-- m --><br /><br />However, after reading the above, I'm still left behind with questions:<br /><br />1) How do I restart a STRING calculation?<br />2) How do I ensure that the previous WFK files are reused in the new run?<br /><br />At the moment there are some bugs in ABINIT, which prevent a swift calculation. A string calculation can in principle be restarted, but the calculation stops just before finalising the TIME STEP. A segmentation error occurs.<br /><br />So I want to extract the atom positions of the images out of the HIST.nc file. There is no documentation on how to do this. At least I cannot find it.<br /><br />3) How can atom positions of the images being extracted from HIST.nc file?<br /><br />I would love to contribute to the ABINIT documentation, but I will firstly need answers to my questions.<br /><br />So if someone is willing to respond, I would be very grateful.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ABINIT Documentation is insufficient</h3>
+				<div class="date">Posted: <strong>Thu Jan 31, 2019 11:27 am</strong></div>
+				<div class="author">by <strong>woffermans</strong></div>
+				<div class="content">Dear ABINIT friends,<br /><br />To answer my questions partially, it is possible to dump the content of the NetCDF file (HIST.nc) into ASCII.<br /><br />ncdump is your friend:<br /><br /><br /><!-- m --><a class="postlink" href="https://www.unidata.ucar.edu/software/netcdf/docs/faq.html#How-do-I-convert-netCDF-data-to-ASCII-or-text">https://www.unidata.ucar.edu/software/n ... II-or-text</a><!-- m --><br /><br />I don't know how to get ncdump. It was installed on my macOS: <br /><br />/Users/willem/anaconda3/bin/ncdump<br /><br />So it came with some package within anaconda.<br /><br />At least one can now read the content of the HIST.nc file.<br /><br />This is exactly the documentation, that I'm missing.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ABINIT Documentation is insufficient</h3>
+				<div class="date">Posted: <strong>Thu Jan 31, 2019 3:14 pm</strong></div>
+				<div class="author">by <strong>woffermans</strong></div>
+				<div class="content">Dear ABINIT friends,<br /><br />It is relatively easy to extract the atom positions of the images of the STRING calculation, stored in the HIST.nc file.<br /><br />I hope you know a bit of bash scripting:<br /><br />&lt;snip&gt;<br />#! /bin/sh<br />###############################################################################<br /># <br /># <br />#       a quick hack to extract Cartesian atom positions from a <br />#       STRING calculation, stored in a NetCDF history file<br />#<br />#<br />#       <!-- e --><a href="mailto:Willem.Offermans@vito.be">Willem.Offermans@vito.be</a><!-- e -->        31/01/2019<br />#<br />#       Dump content of HIST.nc file into a ASCII text file:<br />#       for example: <br />#               `ncdump pdo_HIST.nc &gt; pdo_HIST.txt`<br />#<br />#<br />###############################################################################<br /><br /><br />HISTFILE='./pdo_HIST.txt'<br /><br />NoAtomsPerImage=`grep &quot;natom =&quot; ${HISTFILE} | awk '{print $3}'`<br />NoImages=`grep &quot;nimage =&quot; ${HISTFILE} | awk '{print $3}'`<br />xcartPOS=`grep -n 'xcart =' ${HISTFILE} | awk 'BEGIN{FS=&quot;:&quot;}{print $1}'`<br />xredPOS=`grep -n 'xred =' ${HISTFILE} | awk 'BEGIN{FS=&quot;:&quot;}{print $1}'`<br />xredLinesPos=$((${xredPOS}-${xcartPOS}-2))<br /><br />grep -A${xredLinesPos} &quot;xcart =&quot; ${HISTFILE} | \<br />tail -n${xredLinesPos} | \<br />awk '<br />        # set some variables for awk<br />        BEGIN{lineCounter=0;atomCounter=0;imageCounter=1;tstep=1}<br />        {<br />        # reset image lineCounter to 1, if all images of a TIME STEP have been processed<br />        if((imageCounter-1) % '${NoImages}' ==0)<br />                {<br />                        imageCounter=1;<br />                };<br />        # print TIME STEP if lineCounter is multiple of timeStep*NumberOfImages*NumerOfAtomsPerImage<br />        # update timeStep<br />        if((lineCounter % (tstep * '${NoImages}' * '${NoAtomsPerImage}')) == 0)<br />                {<br />                        if(lineCounter!=0){tstep++};<br />                        print &quot;================================================================================&quot;;<br />                        printf &quot;STRING METHOD - TIME STEP    %.i\n&quot;,tstep;<br />                        print &quot;================================================================================&quot;;<br />                };<br />        # print xangst for each image<br />        # reset atomCounter<br />        # update imageCounter<br />        if((atomCounter % '${NoAtomsPerImage}')==0)<br />                {<br />                        printf &quot;xangst_%iimg\n&quot;, imageCounter;<br />                        atomCounter=0;<br />                        imageCounter++<br />                };<br />        {printf&quot;%.9f %.9f %.9f \n&quot;, $1*0.52917721067,$2*0.52917721067,$3*0.52917721067};<br />        atomCounter++;<br />        lineCounter++;<br />        }    '<br /><br />exit 0<br />&lt;/snip&gt;<br /><br />I hope it will help you as well <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ABINIT Documentation is insufficient</h3>
+				<div class="date">Posted: <strong>Mon Feb 04, 2019 2:50 pm</strong></div>
+				<div class="author">by <strong>woffermans</strong></div>
+				<div class="content">Dear ABINIT friends,<br /><br />For the people who like to work with python. The same script as above, but now in python code:<br /><br />&lt;snip&gt;<br />#! /Users/willem/anaconda3/bin/python3.7<br />###############################################################################<br /># <br /># <br /># a quick hack to extract Cartesian atom positions from a <br /># STRING calculation, stored in a NetCDF history file<br />#<br />#<br /># <!-- e --><a href="mailto:Willem.Offermans@vito.be">Willem.Offermans@vito.be</a><!-- e --> 04/02/2019<br />#<br />#<br />#<br />###############################################################################<br /><br />from netCDF4 import Dataset<br />import numpy as np<br /><br /># Read dataset from NetCDF file<br />myDS = Dataset(&quot;pdo_HIST.nc&quot;, &quot;r&quot;)<br /><br /># recalculate to Angstrom<br />timeStepsImagesAtomCartPos=myDS.variables['xcart'][:].data*0.5291772105638411<br /><br />for timeStepCounter in range(0,len(timeStepsImagesAtomCartPos)):<br />        print('================================================================================')<br />        print('STRING METHOD - TIME STEP    '+str(timeStepCounter+1))<br />        print('================================================================================')<br />        for imageCounter in range(0,len(timeStepsImagesAtomCartPos[timeStepCounter])):<br />                print('xangst_'+str(imageCounter+1)+'img')<br />                print('\n'.join((&quot;%20.14f &quot;*timeStepsImagesAtomCartPos[timeStepCounter][imageCounter].shape[1] % tuple(x) for x in timeStepsImagesAtomCartPos[timeStepCounter][imageCounter])))<br /><br />&lt;/snip&gt;</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ABINIT Documentation is insufficient</h3>
+				<div class="date">Posted: <strong>Tue Feb 05, 2019 10:45 am</strong></div>
+				<div class="author">by <strong>woffermans</strong></div>
+				<div class="content">Dear ABINIT friends,<br /><br />For the people who like to work with python and ASE, the following script will convert an ABINIT NetCDF History file into an ASE trajectory file:<br /><br />&lt;snip&gt;<br />#! /Users/willem/anaconda3/bin/python3.7<br />###############################################################################<br /># <br /># <br /># Create a ASE trajectory file from ABINIT NetCDF history file<br />#<br />#<br /># <!-- e --><a href="mailto:Willem.Offermans@vito.be">Willem.Offermans@vito.be</a><!-- e --> 04/02/2019<br />#<br />#<br />#<br />###############################################################################<br /># Don't reinvent the wheel<br /># but import the good stuff others have made<br />import datetime<br />import numpy as np<br />import os<br />import shutil<br />import sys<br />from ase.calculators.singlepoint import SinglePointCalculator<br />from ase import Atoms<br />from ase.io.trajectory import Trajectory<br />from ase.units import create_units<br />from netCDF4 import Dataset<br /><br /># The program needs an ABINIT HISTORY NetCDF file as input<br />if len(sys.argv) != 2:<br />        print('usage: ' + str(sys.argv[0]) + ' &lt;ABINIT HISTORY NetCDF FILE&gt;')<br />        exit(0)<br /><br /># Set an output file<br />ABINITtrajectoryFile = './ABINIT.traj'<br /><br /># CODATA 2014<br />units = create_units('2014')<br /><br /># Read dataset from NetCDF file/ABINIT HISTORY file<br />myDS = Dataset(str(sys.argv[1]), &quot;r&quot;)<br /><br /># List of integers of considered nuclei<br />znuclList = list(map(int,myDS.variables['znucl'][:].data.tolist()))<br /><br /># Determine the length of znuclList<br />znuclLength = len(znuclList)<br /><br /># Determine the length of typat<br />typatLength = len(myDS.variables['typat'][:])<br /><br /># Create a typatLength x znuclLength matrix with only zeros<br />znuclMask = np.zeros( (typatLength, znuclLength) )<br /><br /># The matrix will serve as a mask for the nuclei, once it is<br /># filled with ones at the right positions<br /># Set the column with index i to 1 by traversing the rows of <br /># the znuclMask. The index i is from the typat vector<br /><br />for typAtomCounter in range(0,len(myDS.variables['typat'][:].data)):<br />        columnIndex = int(myDS.variables['typat'][typAtomCounter].data.tolist())-1<br />        znuclMask[typAtomCounter,columnIndex]=1<br /><br />timeStepsImagesAtomCartPos=myDS.variables['xcart'][:].data*units.Bohr<br /><br /># Ensure that ABINIT trajectory file is not overwritten<br />suffix = datetime.datetime.now().strftime(&quot;%y%m%d_%H%M%S&quot;)<br /><br />if os.path.exists(ABINITtrajectoryFile):<br />        shutil.copy2(ABINITtrajectoryFile, ABINITtrajectoryFile + '_' + suffix)<br />        os.remove(ABINITtrajectoryFile)<br /><br /># Open ABINIT trajectory file to write data<br />nebTraj = Trajectory(ABINITtrajectoryFile, 'a')<br /><br /># Loop over TIME STEPS<br />for timeStepCounter in range(0,len(timeStepsImagesAtomCartPos)):<br />        # Loop over images<br />        for imageCounter in range(0,len(timeStepsImagesAtomCartPos[timeStepCounter])):<br />                image=Atoms(<br />                        symbols=list(map(int,np.matmul(znuclMask,znuclList))),<br />                        positions=timeStepsImagesAtomCartPos[timeStepCounter][imageCounter],<br />                        cell=myDS.variables['rprimd'][timeStepCounter][imageCounter].data*units.Bohr,<br />                        pbc=[1, 1, 0]<br />                )<br />                image.set_calculator(SinglePointCalculator(<br />                                atoms=image, <br />                                energy=myDS.variables['etotal'][timeStepCounter][imageCounter]*units.Hartree, <br />                                forces=myDS.variables['fcart'][timeStepCounter][imageCounter].data*units.Hartree/units.Bohr)<br />                )<br />                nebTraj.write(image)<br /><br /><br />nebTraj.close()<br /><br />&lt;/snip&gt;</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4030&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:08:21 GMT -->
+</html>

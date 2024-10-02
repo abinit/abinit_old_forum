@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1397&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:54:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [Q][SOLVED] open64 for abinit?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[Q][SOLVED] open64 for abinit?</h2>
+		<p><a href="viewtopice617-2.html?f=3&amp;t=1397">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1397</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[Q][SOLVED] open64 for abinit?</h3>
+				<div class="date">Posted: <strong>Wed Nov 02, 2011 9:00 pm</strong></div>
+				<div class="author">by <strong>bjeon</strong></div>
+				<div class="content">Hi, I am trying to install abinit using open64 compiler, with AMD processors.<br />Has anyone made with open64? It seems that abinit configure script doesn't  recognize openf95.<br /><br />I used as:<br /><br />export FC=/home/xx/open64-4.2.4/bin/openf95<br />export F90=/home/xx/open64-4.2.4/bin/openf95<br />export CC=/home/xx/open64-4.2.4/bin/opencc<br />export CPP='/home/xx/open64-4.2.4/bin/opencc -E'<br />export CXX=/home/xx/open64-4.2.4/bin/openCC<br />./configure --prefix=/home/xx/abinit_serial<br /><br /><br />But there are error messages such as:<br />openf95-855 openf95: ERROR DEFS_DATATYPES, File = defs_datatypes.F90, Line = 81, Column = 8 <br />  The compiler has detected errors in module &quot;DEFS_DATATYPES&quot;.  No module information file will be created for this module.<br /><br /><br />Any comment will be greatly appreciated.<br /><br />ByoungSeon</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [Q] open64 for abinit?</h3>
+				<div class="date">Posted: <strong>Wed Nov 02, 2011 11:17 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">If the compiler doesn't say what these errors consist in, I'm afraid we'll not be able to help you much.<br /><br />I don't remember why I didn't put Open64 support in the Abinit build system, but seeing this error message, I guess it is probably because it was unable to build the source code.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [Q] open64 for abinit?</h3>
+				<div class="date">Posted: <strong>Sat Nov 05, 2011 10:24 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi ByoungSeon,<br /><br />for information, I successed to compile  sequential ABINIT 6.9.1 (patched by me (not published))<br />with the AMD version of open64 ( 4.2.5.1 ) <br />( <!-- m --><a class="postlink" href="http://developer.amd.com/tools/open64/Pages/default.aspx">http://developer.amd.com/tools/open64/P ... fault.aspx</a><!-- m --> )  under a HP/DL185 ( 2x OctoOpteron )<br /><br />the result of tests are pretty good...<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>6.9.1-private/r694<br />======================================================<br />Tests SEQ start at 15:25 and done after&nbsp; &nbsp; &nbsp;2685s <br />&nbsp;test built_in OK<br />========================================================<br />&nbsp; &nbsp; &nbsp;Serie&nbsp; #tests&nbsp; #succes&nbsp; #passed&nbsp; #failed&nbsp; #missing <br />========================================================<br />&nbsp; &nbsp;atompaw&nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp; bigdft&nbsp; &nbsp; 13&nbsp; &nbsp; &nbsp; &nbsp;13&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp;etsf_io&nbsp; &nbsp; &nbsp;9&nbsp; &nbsp; &nbsp; &nbsp; 9&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp; &nbsp; fast&nbsp; &nbsp; 27&nbsp; &nbsp; &nbsp; &nbsp;27&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp; &nbsp;libxc&nbsp; &nbsp; 13&nbsp; &nbsp; &nbsp; &nbsp;12&nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp; &nbsp; &nbsp;seq&nbsp; &nbsp; 35&nbsp; &nbsp; &nbsp; &nbsp;26&nbsp; &nbsp; &nbsp; &nbsp;8&nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp;tutoplugs&nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />tutorespfn&nbsp; &nbsp; 46&nbsp; &nbsp; &nbsp; &nbsp;39&nbsp; &nbsp; &nbsp; &nbsp;7&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; tutorial&nbsp; &nbsp; 53&nbsp; &nbsp; &nbsp; &nbsp;40&nbsp; &nbsp; &nbsp; 13&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp;unitary&nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; 4&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp; &nbsp; &nbsp; v1&nbsp; &nbsp; 96&nbsp; &nbsp; &nbsp; &nbsp;96&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp; &nbsp; &nbsp; v2&nbsp; &nbsp; 95&nbsp; &nbsp; &nbsp; &nbsp;88&nbsp; &nbsp; &nbsp; &nbsp;7&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp; &nbsp; &nbsp; v3&nbsp; &nbsp; 93&nbsp; &nbsp; &nbsp; &nbsp;86&nbsp; &nbsp; &nbsp; &nbsp;7&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp; &nbsp; &nbsp; v4&nbsp; &nbsp; 94&nbsp; &nbsp; &nbsp; &nbsp;79&nbsp; &nbsp; &nbsp; 15&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp; &nbsp; &nbsp; v5&nbsp; &nbsp; 99&nbsp; &nbsp; &nbsp; &nbsp;74&nbsp; &nbsp; &nbsp; 24&nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp; &nbsp; &nbsp; v6&nbsp; &nbsp; 88&nbsp; &nbsp; &nbsp; &nbsp;64&nbsp; &nbsp; &nbsp; 24&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp;wannier90&nbsp; &nbsp; &nbsp;3&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;3&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />========================================================<br /></code></pre></div><br />but the problem with the seq test is so serious that I decided not to publish the source changes to support open64...<br /><br />a new version of open64 was released ( 4.2.5.2 ) : I will try to compile abinit 6.10.x with it...  <img class="smilies" src="images/smilies/icon_rolleyes.gif" alt=":roll:" title="Rolling Eyes" /> <br /><br />to be followed...<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [Q] open64 for abinit?</h3>
+				<div class="date">Posted: <strong>Mon Nov 14, 2011 9:58 pm</strong></div>
+				<div class="author">by <strong>bjeon</strong></div>
+				<div class="content">Hi, thanks for the comment.<br />Seems that some of source codes need to be modified.<br />Anyway, I hope that new compiler may solve the issue - even though I tried before with 6.8.1.<br />If you post the result when you're done, it will be great help.<br /><br /><br />Best regards,<br /><br />ByoungSeon<br /><br /><blockquote><div><cite>jbeuken wrote:</cite>Hi ByoungSeon,<br /><br />for information, I successed to compile  sequential ABINIT 6.9.1 (patched by me (not published))<br />with the AMD version of open64 ( 4.2.5.1 ) <br />( <!-- m --><a class="postlink" href="http://developer.amd.com/tools/open64/Pages/default.aspx">http://developer.amd.com/tools/open64/P ... fault.aspx</a><!-- m --> )  under a HP/DL185 ( 2x OctoOpteron )<br /><br />but the problem with the seq test is so serious that I decided not to publish the source changes to support open64...<br /><br />a new version of open64 was released ( 4.2.5.2 ) : I will try to compile abinit 6.10.x with it...  <img class="smilies" src="images/smilies/icon_rolleyes.gif" alt=":roll:" title="Rolling Eyes" /> <br /><br />to be followed...<br /><br />jmb</div></blockquote></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [Q] open64 for abinit?</h3>
+				<div class="date">Posted: <strong>Wed Feb 22, 2012 7:04 pm</strong></div>
+				<div class="author">by <strong>bjeon</strong></div>
+				<div class="content">Using abinit 6.12.1 and open64 5.0, abinit could have been installed.<br />Thanks abinit developers for the effort.<br /><br />Also I leave the configure commands I used as references.<br /><br />ByoungSeon<br /><br />******** install openmpi -&gt; then install abinit 6.12.1<br />1) install openmpi 1.4.5 using open64 5.0<br />$ ./configure --prefix=some_dir_for_openmpi  CC=/open64_dir/bin/opencc CXX=/open64_dir/bin/openCC F77=/open64_dir/bin/openf90 FC=/open64_dir/bin/openf90<br />$ make<br />$ sudo make install<br /><br />2) install abinit 6.12.1 using installed openmpi<br />$./configure --prefix=some_dir_for_abinit  --enable-mpi --with-mpi-prefix=some_dir_for_openmpi<br />$ make<br />$ sudo make install<br />$ cd tests<br />$ make tests</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [Q][SOLVED] open64 for abinit?</h3>
+				<div class="date">Posted: <strong>Tue Mar 06, 2012 10:04 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi, <br /><br />my experience with open64 5.0  from open64.org <br />( better under Xeon / CentOS 6.2 than open64 4.2.5 from AMD !?!   <img class="smilies" src="images/smilies/icon_e_confused.gif" alt=":?" title="Confused" />  )<br /><br />I use openmpi 1.4.4 and my .ac file for configure of abinit is :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;no&quot;<br />with_mpi_prefix=&quot;/usr/local/openmpi_open64&quot;<br />enable_64bit_flags=&quot;yes&quot;<br />enable_gw_dpc=&quot;yes&quot;</code></pre></div><br /> <br /><em class="text-italics">remark : the mpiio test Q4 failed ( as for the pathscale compiler  ) then I put &quot;enable_mpi_io=&quot;no&quot;&quot;</em><br /><br />all the tests passed except one  : <strong class="text-strong">v6#t48 -&gt; segfault</strong> !?!    <img class="smilies" src="images/smilies/icon_eek.gif" alt=":shock:" title="Shocked" /> <br /><br />After a painful research of the problem, the workaround is the to add a line of code in  &quot;src/32_util/ys.F90&quot;<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>...<br />mone = -one<br />&nbsp;ys_val = czero<br /><br />! strange workaround for open64 5.0 to prevent segfault with v6#t48<br />! add by jmb 1/3/12<br />&nbsp;write(std_out,*)'ys :&nbsp; ys_val = ',ys_val<br /><br />&nbsp;if (lp == ll) then<br />...<br /></code></pre></div><br /><br />regards<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [Q][SOLVED] open64 for abinit?</h3>
+				<div class="date">Posted: <strong>Thu Mar 08, 2012 6:42 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Does the segfault on v6#t48 still happen if you recompile the file without optimizations?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [Q][SOLVED] open64 for abinit?</h3>
+				<div class="date">Posted: <strong>Thu Mar 08, 2012 10:50 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi Yann,<br /><br /><blockquote><div><cite>pouillon wrote:</cite>Does the segfault on v6#t48 still happen if you recompile the file without optimizations?</div></blockquote><br /><br />if I compile only &quot;32_util/ysF90&quot; with -O0 ( and without the workaround ),  the test succeeds !<br /><br />I try to modify the code inside ys.F90 ( for ex : replace the case construction,... ) without success<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [Q][SOLVED] open64 for abinit?</h3>
+				<div class="date">Posted: <strong>Fri Mar 09, 2012 1:30 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Then this proves that it comes from a bug in the compiler.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1397&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:54:32 GMT -->
+</html>

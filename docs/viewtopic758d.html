@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1479&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:51:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [Q]parallel run with gamma point calculations</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[Q]parallel run with gamma point calculations</h2>
+		<p><a href="viewtopic16cd.html?f=9&amp;t=1479">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1479</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[Q]parallel run with gamma point calculations</h3>
+				<div class="date">Posted: <strong>Wed Dec 28, 2011 9:07 pm</strong></div>
+				<div class="author">by <strong>bjeon</strong></div>
+				<div class="content">Hi, I am testing surface problems with large vacuum space. <br />Using gamma point (kpt=0,0,0,) run, I am trying to run parallel run calculations as:<br /><br /># for 2-CPU run<br />paral_kgb 1<br />npkpt 1<br />npband 2<br />npfft 1<br />bandpp 1<br /><br />Because there is a single K-point, npkpt is given as 1. I am trying to configure npband or npfft. But this run shows slower results than a single CPU run (77 -&gt; 103 sec for 10 SCF loops). A test problem has 58 bands and  40x40x160 FFT grids. <br /><br />Are options right? Or the tested problem is too small for parallel run check? I tried different npband/npfft with different number of CPUs but still results are not good (getting worse for more CPUs). Any comment will be very appreciated.<br /><br />ByoungSeon</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [Q]parallel run with gamma point calculations</h3>
+				<div class="date">Posted: <strong>Mon Jan 02, 2012 3:14 pm</strong></div>
+				<div class="author">by <strong>nleconte</strong></div>
+				<div class="content">When doing parallelisation over bands, make sure the communications between CPU's are efficient or have it work on the same node to share memory. I for instance had a very bad efficiency (almost factor of then) when doing a job requiring 8 CPU's when it was being distributed on different nodes instead of one same node...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [Q]parallel run with gamma point calculations</h3>
+				<div class="date">Posted: <strong>Sun Jan 22, 2012 4:10 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">You are probably right that the problem is small. Hard to see speed up on 2 procs as well. Above all, the execution time is small, so you will have a large fraction of system time (start up, file i/o etc...) and some pollution if there are other processes around. <br /><br />Have you checked what Nicolas mentioned, that the processes truly are being distributed by your mpi implementation and batch system?<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [Q]parallel run with gamma point calculations</h3>
+				<div class="date">Posted: <strong>Tue Jan 24, 2012 2:55 am</strong></div>
+				<div class="author">by <strong>bjeon</strong></div>
+				<div class="content">Hi.<br /><br />Thanks for the comments and help.<br />Yes, I have been testing the jobs on SMP or multiple-core machines, not distributed environment.<br />But the still efficiency is not good. Or do I need any other compiling options? I used a following command for configuration.<br /><br />./configure --enable-mpi --with-mpi-level=2 --prefix=/home/aaa/abinit FC=/opt/ompi143/bin/mpif90<br /><br />Do I have to configure openMP or Pthreads?<br /><br />As mentioned before, parallel run is very good on multiple K-points. Problem is that parallel calculations on a gamma point<br />calculation (a single K-point) is not good. <br /><br />Best regards,<br /><br />ByoungSeon</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [Q]parallel run with gamma point calculations</h3>
+				<div class="date">Posted: <strong>Tue May 01, 2012 11:33 pm</strong></div>
+				<div class="author">by <strong>bjeon</strong></div>
+				<div class="content">I leave some observations regarding gamma point parallelism.<br /><br />1. For Xeon desktop (6corexhyperthread=12 threads) with intel fortran compiler didn't yield (?) any speed up in gamma point parallelism.<br /><br />2. For AMD Opteron(tm) Processor 6176, 48 cores, with open64 5.0, 45x45x216 ngfft size problem, parallel option is given as:<br />paral_kgb 1<br />npkpt 1<br />npband 8 #---&gt; change as 1, 2, 4, 8<br />nband 120<br />npfft 1<br />bandpp 1<br /><br />20 SCF loops are done and the wall times are:<br />1cpu = 908.4 sec<br />2cpu = 743.4sec<br />4cpu = 385.6sec<br />8cpu = 245.1sec<br /><br />There might be some overheads but gamma point parallelism seems working good. But also hw/compiler might be double-checked.<br /><br />B.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1479&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:51:42 GMT -->
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=2120&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:08:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Solved-Convergence problem in response function calculations</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Solved-Convergence problem in response function calculations</h2>
+		<p><a href="viewtopic68e0-2.html?f=10&amp;t=2120">https://forum.abinit.org/viewtopic.php?f=10&amp;t=2120</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Solved-Convergence problem in response function calculations</h3>
+				<div class="date">Posted: <strong>Mon May 06, 2013 1:54 pm</strong></div>
+				<div class="author">by <strong>uma</strong></div>
+				<div class="content">I am trying to get the phonon frequencies of an insulator. I used the trf2_1.in template and am working with 10 datasets. Dataset 2 does not converge. I had given nsteps = 30 . Other datasets have converged total energies. Though I waas able to run till the Anaddb part, the phonon frequencies generated were all absurd. I have attached the input file that I am working with. Could you please tell me where I am wrong? Thanks in advance. Uma<br /><br />[quote][/quote] <br />Crystalline cgN : computation of the phonon spectrum<br /><br />   ndtset   10<br />#Set 1 : ground state self-consistency<br /><br />  getwfk1   0            # Cancel default<br />  kptopt1   1            # Automatic generation of k points, taking<br />                         # into account the symmetry<br />    nqpt1   0            # Cancel default<br />  tolvrs1   1.0d-18      # SCF stopping criterion (modify default)<br />  rfphon1   0            # Cancel default<br />  getddk1   0<br />  optdriver1 0<br />  rfelfd1 0<br />  tolwfr1  0<br /><br />#Q vectors for all datasets<br /><br />#Complete set of symmetry-inequivalent qpt chosen to be commensurate<br /># with kpt mesh so that only one set of GS wave functions is needed.<br />#Generated automatically by running GS calculation with kptopt=1,<br /># nshift=0, shiftk=0 0 0 (to include gamma) and taking output kpt set<br /># file as qpt set. Set nstep=1 so only one iteration runs.<br /><br />     nqpt   1            # One qpt for each dataset (only 0 or 1 allowed)<br />                         # This is the default for all datasets and must<br />                         #  be explicitly turned off for dataset 1.<br />               <br />                   qpt2    0.00000000E+00  0.00000000E+00  0.00000000E+00<br />                   qpt3    0.00000000E+00  0.00000000E+00  0.00000000E+00<br />                   qpt4    2.50000000E-01  0.00000000E+00  0.00000000E+00<br />                   qpt5    5.00000000E-01  0.00000000E+00  0.00000000E+00<br />                   qpt6    2.50000000E-01  2.50000000E-01  0.00000000E+00<br />                   qpt7    2.50000000E-01  2.50000000E-01  2.50000000E-01<br />                   qpt8   -2.50000000E-01  2.50000000E-01  2.50000000E-01<br />                   qpt9    5.00000000E-01  5.00000000E-01  2.50000000E-01<br />                   qpt10   5.00000000E-01  5.00000000E-01  5.00000000E-01<br /><br /><br /><br />Set 2 : Response function calculation of d/dk wave function <br /><br />    iscf2   -3         # Need this non-self-consistent option for d/dk<br />  kptopt2   2          # Modify default to use time-reversal symmetry<br />  rfphon2   0          # Cancel default<br />  rfelfd2   2          # Calculate d/dk wave function only<br />  tolwfr2   1.0d-22    # Use wave function residual criterion instead<br />  getwfk2   1<br />  getddk2    0<br />  optdriver 1<br />  tolvrs2  0<br />#Set 3 : Response function calculation of Q=0 phonons and electric field pert.<br /><br />  getddk3   2          # d/dk wave functions from last dataset<br />  kptopt3   2          # Modify default to use time-reversal symmetry<br />  rfelfd3   3          # Electric-field perturbation response only<br />  getwfk3   1<br />  tolwfr    0<br />#Sets 4-10 : Finite-wave-vector phonon calculations (defaults for all datasets)<br />   getddk    0<br />   getwfk    1          # Use GS wave functions from dataset1<br />   kptopt4   3          # Need full k-point set for finite-Q response<br />   kptopt5   3<br />   kptopt6   3<br />   kptopt7   3<br />   kptopt8   3<br />   kptopt9   3<br />   kptopt10  3<br />   rfphon   1          # Do phonon response<br />   rfelfd  0<br />   rfatpol   1 4       # Treat displacements of all atoms<br />    rfdir   1 1 1      # Do all directions (symmetry will be used)<br />   tolvrs   1.0d-8     # This default is active for sets 3-10<br /><br />#######################################################################<br />#Common input variables<br /><br />#Definition of the unit cell<br />    acell   3.8037 3.8037 3.8037 angstrom<br />    rprim -0.5000000000000000    0.5000000000000000    0.5000000000000000<br />        0.5000000000000000   -0.5000000000000000    0.5000000000000000<br />        0.5000000000000000    0.5000000000000000   -0.5000000000000000<br /><br />#Definition of the atom types<br />   ntypat   1         # There is one type of atom<br />    znucl   7.0     # The keyword &quot;znucl&quot; refers to the atomic number of the <br />                      # possible type(s) of atom. The pseudopotential(s) <br />                      # mentioned in the &quot;files&quot; file must correspond<br />                      # to the type(s) of atom. <br /><br />#Definition of the atoms<br />:<br />Definition of the atoms<br />    natom   4         # There are 4 atoms<br />    typat   1 1 1 1   # 4 atoms of the same type .<br />    xred   0.17000000000000017  0.1700000000000017  0.1700000000000017<br />        0.5000000000000000  0.0000000000000000  0.3299999999999983<br />        0.0000000000000000  0.3299999999999983  0.5000000000000000<br />        0.3299999999999983  0.5000000000000000  0.0000000000000000<br />                   <br />#Gives the number of band, explicitely (do not take the default)<br />    nband   20         <br /><br />#Exchange-correlation functional<br /><br />      ixc   11             # GGA, Perdew-Burke-Ernzerhof GGA functional<br /><br />#Definition of the planewave basis set<br /><br />     ecut   500 eV           # Maximal kinetic energy cut-off, in eV<br />     <br />#Definition of the k-point grid<br />    ngkpt   8  8  8          <br />   nshiftk   1              # Use one copy of grid only (default)<br />   shiftk   0.0 0.0 0.0    # This gives the usual fcc Monkhorst-Pack grid<br /><br />#Definition of the SCF procedure<br />     iscf   5          # Self-consistent calculation, using algorithm 5<br />    nstep   30         # Maximal number of SCF cycles<br />   diemac   3.0d0        # Although this is not mandatory, it is worth to<br />                       # precondition the SCF cycle. The model dielectric<br />                       # function used as the standard preconditioner<br />                       # is described in the &quot;dielng&quot; input variable section.<br />                 # add to conserve old &lt; 6.7.2 behavior for calculating forces at each SCF step<br /> optforces 1</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>[Solved] Convergence problem in response function calculatio</h3>
+				<div class="date">Posted: <strong>Fri May 10, 2013 1:31 pm</strong></div>
+				<div class="author">by <strong>uma</strong></div>
+				<div class="content">I was able to arrive at the convergence by reducing diemac to 2.0 and increasing nsteps to 3000.<br />Uma <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=2120&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:08:48 GMT -->
+</html>

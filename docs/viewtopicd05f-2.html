@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=98&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:20:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] required file `src/98_main/abinis.in' not found</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] required file `src/98_main/abinis.in' not found</h2>
+		<p><a href="viewtopic9a52.html?f=3&amp;t=98">https://forum.abinit.org/viewtopic.php?f=3&amp;t=98</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] required file `src/98_main/abinis.in' not found</h3>
+				<div class="date">Posted: <strong>Mon Mar 01, 2010 3:54 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Perhaps here I will catch Yann's eye and ear: Like Marco I have the following problem when running makemake with the latest merge of trunk 6.1.0<br /><br />It looks a lot like missing files in a &quot;bzr add&quot; command, but I don't know how it passed the tests.<br /><br />I _have_ done a dist clean, and it still generates the same errors.<br /><br /><br />Matthieu<br /><br /><br />...<br />...<br /><br />Autotools framework (for Autoconf)<br />----------------------------------<br /><br />BEGIN<br /> * Generating aclocal.m4...done.<br /> * Generating config.h.in...done.<br /> * Generating configure script...done.<br /> * Generating Makefile.in for each directory:<br />configure.ac:1271: required file `src/98_main/abinis.in' not found<br />configure.ac:1271: required file `src/98_main/abinip.in' not found<br />tests/Makefile.am:440: DO_TEST_BIGDFT does not appear in AM_CONDITIONAL<br />tests/Makefile.am:507: DO_TEST_ETSF_IO does not appear in AM_CONDITIONAL<br />tests/Makefile.am:675: DO_TEST_LIBXC does not appear in AM_CONDITIONAL<br />tests/Makefile.am:712: DO_TEST_NETCDF does not appear in AM_CONDITIONAL<br />tests/Makefile.am:2555: DO_TEST_WANNIER90 does not appear in AM_CONDITIONAL<br />tests/Makefile.am:2641: DO_TEST_BIGDFT does not appear in AM_CONDITIONAL<br />tests/Makefile.am:2644: DO_TEST_WANNIER90 does not appear in AM_CONDITIONAL<br />tests/Makefile.am:2647: DO_TEST_ETSF_IO does not appear in AM_CONDITIONAL<br />tests/Makefile.am:2650: DO_TEST_LIBXC does not appear in AM_CONDITIONAL<br />tests/Makefile.am:2679: DO_TEST_BIGDFT does not appear in AM_CONDITIONAL<br />tests/Makefile.am:2682: DO_TEST_WANNIER90 does not appear in AM_CONDITIONAL<br />tests/Makefile.am:2685: DO_TEST_ETSF_IO does not appear in AM_CONDITIONAL<br />tests/Makefile.am:2688: DO_TEST_LIBXC does not appear in AM_CONDITIONAL<br />tests/Makefile.am:2839: DO_TEST_BIGDFT does not appear in AM_CONDITIONAL<br />tests/Makefile.am:2845: DO_TEST_ETSF_IO does not appear in AM_CONDITIONAL<br />tests/Makefile.am:2851: DO_TEST_LIBXC does not appear in AM_CONDITIONAL<br />tests/Makefile.am:2857: DO_TEST_WANNIER90 does not appear in AM_CONDITIONAL<br />configure.ac:1271: required file `config.py.in' not found</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: required file `src/98_main/abinis.in' not found</h3>
+				<div class="date">Posted: <strong>Mon Mar 01, 2010 3:56 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">PS: these files were voluntarily removed from trunk, bzr status gives:<br /><br />removed:<br />  config.py.in<br />  config/scripts/make-macros-linalg<br />  config/specs/linalg.conf<br />  src/18_timing/abinit.amf<br />  src/18_timing/cclock_.c<br />  src/98_main/abinip.in<br />  src/98_main/abinis.in<br />  src/98_main/abinit.amf<br />  util/maintainers/tests.env_bin</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: required file `src/98_main/abinis.in' not found</h3>
+				<div class="date">Posted: <strong>Mon Mar 01, 2010 6:30 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Hi Matthieu,<br /><br />I had the same problem but it magically disappeared when I ran makemake in a new archive created with bzr get -r</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: required file `src/98_main/abinis.in' not found</h3>
+				<div class="date">Posted: <strong>Mon Mar 01, 2010 8:21 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">That's what I was about to ask: did you run makemake?<br /><br />Actually, this time you have to run ./config/scripts/clean-source-tree as well, ideally before merging.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: required file `src/98_main/abinis.in' not found</h3>
+				<div class="date">Posted: <strong>Mon Mar 01, 2010 11:45 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello boys,<br /><br />yes, I had run clean-source-tree, and the error occurs during the running of makemake. I can do a full new checkout but it's annoying. Architecture xeon cluster with CVOS and ifort 11 (if it ever gets that far <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /><br /><br />For the moment I have reverted the merge and kept going on my way.<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: required file `src/98_main/abinis.in' not found</h3>
+				<div class="date">Posted: <strong>Tue Mar 02, 2010 1:24 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">I didn't merge yet. I'll do it and let you know.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: required file `src/98_main/abinis.in' not found</h3>
+				<div class="date">Posted: <strong>Tue Mar 02, 2010 4:45 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Update: I did it and everything went fine.<br /><br />The only possible problem I see is if there are duplicate M4 macros left. in such a case, issuing:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>rm config/m4/do-not-edit-*<br /></code></pre></div><br /><br />should do.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: required file `src/98_main/abinis.in' not found</h3>
+				<div class="date">Posted: <strong>Sat Mar 06, 2010 1:00 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Ok - the removing of m4 files did it ok.<br /><br />Thanks Yann.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=98&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:20:49 GMT -->
+</html>

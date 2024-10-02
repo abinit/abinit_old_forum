@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4443&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 17:43:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; kptopt in input for Wannier90</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>kptopt in input for Wannier90</h2>
+		<p><a href="viewtopic34be.html?f=9&amp;t=4443">https://forum.abinit.org/viewtopic.php?f=9&amp;t=4443</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>kptopt in input for Wannier90</h3>
+				<div class="date">Posted: <strong>Wed Jun 10, 2020 10:58 am</strong></div>
+				<div class="author">by <strong>resu</strong></div>
+				<div class="content">Dear all,<br>
+I want to generate UKN files for Wannier90, but for particular high-symmetry points, rather than a grid or a path in the BZ. The problem is that I am not sure how kptopt should be set in .in file for that. <br>
+I have tried setting <strong class="text-strong">kptopt=0</strong> and giving with<strong class="text-strong"> kpt</strong> the k-points for which I want the UKN files, together with <strong class="text-strong">nkpt</strong>, but I get an error and the calculation stops (I leave the .in lines at the end of this message, also the error in log). Which is the reason for this error? What should I write in the .in file to generate UKN files for particular k-points?<br>
+<br>
+Best regards.<br>
+<br>
+<span style="color:#0040FF"><br>
+prtwant3 2   # Call to Wannier90<br>
+w90prtunk3 1 # Print UNK files<br>
+kptopt3 0<br>
+nkpt3 6<br>
+nshiftk3 1<br>
+shiftk3 0.0 0.0 0.0<br>
+kpt3 0.0 0.0 0.0<br>
+     0.0 0.5 0.0<br>
+     0.5 0.5 0.0<br>
+     0.0 0.0 0.5<br>
+     0.0 0.5 0.5<br>
+     0.5 0.5 0.5<br>
+</span><br>
+<br>
+<span style="color:#FF0000"><br>
+   mlwfovlp:  you should give k-point in the full brillouin zone <br>
+   with explicit k-points (or kptopt=3) and istwfk 1<br>
+ <br>
+** mlwfovlp_setup:  call wannier90 library subroutine wannier_setup<br>
+ Non-symmetric k-point neighbours!<br>
+Error: examine the output/error file for details<br>
+</span></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4443&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 17:43:01 GMT -->
+</html>

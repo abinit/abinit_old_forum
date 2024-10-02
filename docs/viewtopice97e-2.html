@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3242&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:37:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Follow-up) problems with large natom errors</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Follow-up) problems with large natom errors</h2>
+		<p><a href="viewtopic7571.html?f=3&amp;t=3242">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3242</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Follow-up) problems with large natom errors</h3>
+				<div class="date">Posted: <strong>Mon Mar 28, 2016 2:07 am</strong></div>
+				<div class="author">by <strong>anemonekgo</strong></div>
+				<div class="content">Dear all,<br /><br />I'm always thankful for the help.<br />This time is a subsequent report of the following subject.<br />#Subject: About &quot;signal 11 (Segmentation fault)&quot; error when value of natom is making to big.<br /><!-- l --><a class="postlink-local" href="viewtopic4cfd-2.html?f=2&amp;t=3217">viewtopic.php?f=2&amp;t=3217</a><!-- l --><br />*Because the last time is a long sentence, please refer to a link<br /><br />I understood that an error occur when I made natom big by a trial run of the parallel computer.<br /><br />First it is a LAN traffic error, I was able to calculate without a problem when 10Gbps LAN card and switch change only master node.<br />By this operation, a calculation was possible to natom=396.<br />=================================================================================================================<br />Ru_1	natom    48 	No problem calculation end by 1Gbps_LAN_system	<br />Ru_2	natom    156 	I can calculate without a problem when 10Gbps LAN card and switch change only master node.	<br />Ru_3	natom    252 	Same as above<br />Ru_4	natom    300	Same as above	<br />Ru_5	natom    348	Same as above	<br />Ru_6	natom    396 	Same as above	<br />Ru_7	natom    444 	#error appears at $filename_o_DS1_TIM6.cif(DEN) and does Stop	<br />Ru_8	natom    492  #error appears at $filename_o_DS1_TIM4.cif(DEN) and does Stop	<br />=================================================================================================================<br /><br />*I tried to change the value of ecut at Run_7.	<br /><br />ecut=5 ,pawecutdg=20 :	error appears at $filename_o_DS1_TIM2.cif(DEN) and does Stop	<br />ecut=10,pawecutdg=20 :	error appears at $filename_o_DS1_TIM6.cif(DEN) and does Stop	<br />ecut=15,pawecutdg=30 :	error appears at $filename_o_DS1_TIM8.cif(DEN) and does Stop	<br />ecut=20,pawecutdg=40 :	calculation finish $filename_o_DS1_TIM8.cif(DEN), But error appears at EIG file writting stage and stop.<br />ecut=25,pawecutdg=50 :	calculation complete! I can get EIG file. But computing time is very long.<br /><br />So it's a question.<br /><br />#Question_1<br />When natom becomes big, why can't it be calculated any more? (natom : 396&lt;=&gt;444 )<br />*On the other hand even if ngkpt is made big, it can be calculated.<br />I thought that I was caused by shortage of somewhere memory (RAM, L3,etc)???<br /><br />#Question_2<br />Why is it that I become able to calculate by making ecut big?<br />*I was thinking increase of ecut was increase of a memory. However, this hypothesis is the result and reverse.<br /><br />Please tell me what is going on in this series of operations.<br />I want to find the key to solution to the problem.<br /><br />Best regards,<br />Haruyuki Satou<br />(anemonekgo)</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Follow-up) problems with large natom errors&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Mon Apr 11, 2016 1:54 am</strong></div>
+				<div class="author">by <strong>anemonekgo</strong></div>
+				<div class="content"><blockquote><div><cite>anemonekgo wrote:</cite>Dear all,<br /><br />I'm always thankful for the help.<br />This time is a subsequent report of the following subject.<br />#Subject: About &quot;signal 11 (Segmentation fault)&quot; error when value of natom is making to big.<br /><!-- l --><a class="postlink-local" href="viewtopic4cfd-2.html?f=2&amp;t=3217">viewtopic.php?f=2&amp;t=3217</a><!-- l --><br />*Because the last time is a long sentence, please refer to a link<br /><br />I understood that an error occur when I made natom big by a trial run of the parallel computer.<br /><br />First it is a LAN traffic error, I was able to calculate without a problem when 10Gbps LAN card and switch change only master node.<br />By this operation, a calculation was possible to natom=396.<br />=================================================================================================================<br />Ru_1	natom    48 	No problem calculation end by 1Gbps_LAN_system	<br />Ru_2	natom    156 	I can calculate without a problem when 10Gbps LAN card and switch change only master node.	<br />Ru_3	natom    252 	Same as above<br />Ru_4	natom    300	Same as above	<br />Ru_5	natom    348	Same as above	<br />Ru_6	natom    396 	Same as above	<br />Ru_7	natom    444 	#error appears at $filename_o_DS1_TIM6.cif(DEN) and does Stop	<br />Ru_8	natom    492  #error appears at $filename_o_DS1_TIM4.cif(DEN) and does Stop	<br />=================================================================================================================<br /><br />*I tried to change the value of ecut at Run_7.	<br /><br />ecut=5 ,pawecutdg=20 :	error appears at $filename_o_DS1_TIM2.cif(DEN) and does Stop	<br />ecut=10,pawecutdg=20 :	error appears at $filename_o_DS1_TIM6.cif(DEN) and does Stop	<br />ecut=15,pawecutdg=30 :	error appears at $filename_o_DS1_TIM8.cif(DEN) and does Stop	<br />ecut=20,pawecutdg=40 :	calculation finish $filename_o_DS1_TIM8.cif(DEN), But error appears at EIG file writting stage and stop.<br />ecut=25,pawecutdg=50 :	calculation complete! I can get EIG file. But computing time is very long.<br /><br />So it's a question.<br /><br />#Question_1<br />When natom becomes big, why can't it be calculated any more? (natom : 396&lt;=&gt;444 )<br />*On the other hand even if ngkpt is made big, it can be calculated.<br />I thought that I was caused by shortage of somewhere memory (RAM, L3,etc)???<br /><br />#Question_2<br />Why is it that I become able to calculate by making ecut big?<br />*I was thinking increase of ecut was increase of a memory. However, this hypothesis is the result and reverse.<br /><br />Please tell me what is going on in this series of operations.<br />I want to find the key to solution to the problem.<br /><br />Best regards,<br />Haruyuki Satou<br />(anemonekgo)</div></blockquote>Dear all,<br /><br />I'm always thankful for the help.<br />Because it was settled by oneself, I report it.<br />Of course I do not know where is the most important point of course.<br />Therefore please take care of advice somehow.<br />As a result, what I was able to calculate to natom 492 did the following two operations.<br /><br />----------------------------------------------------------------------------------------<br />1) I changed gcc,g++,gfortran=4.8 =&gt; 4.9 with optimization<br />   <br />I added the following to build(ubuntu).ac file when I do configure abinit.<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>FC=&quot;mpif90&quot;<br />F77=&quot;mpif90&quot;<br />FCFLAGS=&quot;-lgfortran -L/usr/lib/gcc/x86_64-linux-gnu/4.9 -O2 -fstack-arrays -m64 -fsignaling-nans -funroll-all-loops -mtune=native -march=native -ftree-vectorize -ffast-math -fno-protect-parens -g -ffree-line-length-none&quot;<br />CC=&quot;mpicc&quot;<br />CFLAGS=&quot;-lgcc -L/usr/lib/gcc/x86_64-linux-gnu/4.9 -O2 -ffast-math -m64 -ftree-vectorize -mtune=native -march=native -funroll-all-loops -g&quot;<br />CXX=&quot;mpicxx&quot;<br />CXXFLAGS=&quot;-lstdc++6 -L/usr/lib/gcc/x86_64-linux-gnu/4.9 -O2 -ffast-math -m64 -ftree-vectorize -mtune=native -march=native -funroll-all-loops -g&quot;</code></pre></div><br /><br />2) I changed linear algebra from &quot;ATLAS&quot; to &quot;Netlib+ScaLAPACK&quot;<br /><br />----------------------------------------------------------------------------------------<br /><br />If it is possible, let me ask you a question. <br />Where would be important in this operation?<br />Can't I also have advice for a future reference?<br /><br />Best regards,<br />Haruyuki Satou<br />(anemonekgo)</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3242&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:37:29 GMT -->
+</html>

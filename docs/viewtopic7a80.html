@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1625&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:02:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Problem in adding some code in Abinit</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Problem in adding some code in Abinit</h2>
+		<p><a href="viewtopiceaf2-2.html?f=19&amp;t=1625">https://forum.abinit.org/viewtopic.php?f=19&amp;t=1625</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Problem in adding some code in Abinit</h3>
+				<div class="date">Posted: <strong>Fri Apr 20, 2012 8:36 am</strong></div>
+				<div class="author">by <strong>amosyang101</strong></div>
+				<div class="content">Hi,<br />  Recently, I am considering to add some code into the part of exc_spectral.F90 to calculate the temperature-dependent optical spectrum. Though I succeed into passing the make and installation process. The modifed code cannot produce the desired result. I don't figure it out for days. <br />  So I turn to your help! The code is listed in the following.<br />  <br /><br />The main idea is to read thermal correction data from files resulting <br />from calculation of electron-phonon interaction and to plug into the building <br />of excitons<br /><br />files: 2nd thermal corrections and broadening of phonon lifetime<br />(thm3.out_ep_TBS and thm4.out_ep_TBS)<br /><br /> open(100,file='shift_thmflag3.out_ep_TBS')<br /> open(200,file='broadening_thmflag4.out_ep_TBS')<br /><br /> !************************************************************************<br />integer :: ikpt,istv,istc,istt,iiii<br />real(dp), dimension(:,:),allocatable:: revalv,ievalv,revalc,ievalc,rbroadenv,ibroadenv,rbroadenc,ibroadenc<br />real(dp), dimension(:),allocatable:: exc_shift,exc_broaden<br />allocate(revalv(4,512),ievalv(4,512),revalc(4,512),ievalc(4,512))<br />allocate(rbroadenv(4,512),ibroadenv(4,512),rbroadenc(4,512),ibroadenc(4,512))<br />allocate(exc_shift(ntrans),exc_broaden(ntrans))<br />!************************************************************************<br /><br />do ikpt=1,512<br /><br />read(100,*)<br />read(200,*)<br /><br />do istv=1,4<br />read(100,*) revalv(istv,ikpt),ievalv(istv,ikpt)<br />revalv(istv,ikpt)=revalv(istv,ikpt)/(13.60569172*2._dp)<br />read(200,*) rbroadenv(istv,ikpt),ibroadenv(istv,ikpt)<br />rbroadenv(istv,ikpt)=rbroadenv(istv,ikpt)/(13.60569172*2._dp)<br />end do<br /><br />do istc=1,4<br />read(100,*) revalc(istc,ikpt),ievalc(istc,ikpt)<br />revalc(istc,ikpt)=revalc(istc,ikpt)/(13.60569172*2._dp)<br />read(200,*) rbroadenc(istc,ikpt),ibroadenc(istc,ikpt)<br />rbroadenc(istc,ikpt)=rbroadenc(istc,ikpt)/(13.60569172*2._dp)<br />end do<br /><br />do istt=1,17<br />read(100,*)<br />read(200,*)<br />end do<br /><br />end do<br /><br />do ikpt=1,512<br />do istv=1,4<br />do istc=1,4<br />exc_shift(istc+(istv-1)*4+(ikpt-1)*16)=revalc(istc,ikpt)-revalv(istv,ikpt)<br />exc_broaden(istc+(istv-1)*4+(ikpt-1)*16)=rbroadenc(istc,ikpt)+rbroadenv(istv,ikpt)<br />end do<br />end do<br />end do<br /><br />deallocate(revalv,ievalv,revalc,ievalc,rbroadenv,ibroadenv,rbroadenc,ibroadenc)<br /><br /><br /><br />!************************************************************************<br /><br /> do ll=1,neig_read ! Sum over all excitonic eigenstates.<br />   do iq=1,BSp%nq<br />      do iw=1,nomega<br />        !eps = cone<br />        !eps = eps + fact * ostrength(ll,iq) * (one/(exc_ene(ll) - omega(iw)) - one/(-exc_ene(ll) - omega(iw)))<br />        eps_exc(iw,iq) = eps_exc(iw,iq) +  &amp;<br />&amp;         fact * ostrength(ll,iq) * (one/(exc_ene(ll) + exc_shift(ll) - omega(iw) - (0,1)*exc_broaden(ll) ) - one/(-exc_ene(ll) - exc_shift(ll) - omega(iw) - (0,1)*exc_broaden(ll) ))<br />      end do<br />   end do ! ll<br /> end do ! iw<br /><br /> close(100)<br /> close(200)</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1625&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:02:35 GMT -->
+</html>

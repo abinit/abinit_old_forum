@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=527&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:03:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Job exiting after P000</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Job exiting after P000</h2>
+		<p><a href="viewtopic3c56.html?f=9&amp;t=527">https://forum.abinit.org/viewtopic.php?f=9&amp;t=527</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Job exiting after P000</h3>
+				<div class="date">Posted: <strong>Thu Aug 05, 2010 11:15 pm</strong></div>
+				<div class="author">by <strong>JEJohns</strong></div>
+				<div class="content">While running abinit, I'm consistently getting jobs which exit early on larger jobs (either during the first iteration or beforehand) just after the following message.<br /><br />&quot;-P-0000  leave_test : synchronization done...<br />-P-0000  leave_test : exiting...&quot;<br /><br />This happened when I went from a 2x2 unit cell of graphene to a 3x3 unit cell of graphene, and when I increased the vacuum spacing on a silver slab to a large unit cell.  I would have thought it was due to a memory usage issue, but it doesn't go away if I increase the number of nodes &amp; processors (&amp; thus the available memory). Am I doing something dumb?  I've attached  the input, output, and log files for the graphene unit cell where this happens (labelled as graphod.* for my own personal naming reasons).  I've queued this job on 2 nodes with 20GB on each node.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Job exiting after P000</h3>
+				<div class="date">Posted: <strong>Thu Aug 05, 2010 11:22 pm</strong></div>
+				<div class="author">by <strong>JEJohns</strong></div>
+				<div class="content">I'm so sorry this is clearly in the wrong forum.  I meant to place this in the Input file or Platform specific forum.  I'm running these jobs on carver.nersc.gov, one of the Lawrence Berkeley National Lab computers using abinit 6.0.3</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Job exiting after P000</h3>
+				<div class="date">Posted: <strong>Sat Sep 04, 2010 9:31 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello JEJohns,<br /><br />in the latest versions (6.2 I think, and certainly upcoming 6.4) I have made this error message more verbose: it arises because some of your processors are not responding. This can be due to:<br /><br />1) some of them didn't manage to allocate memory. Check the individual *LOG* files for each one. This is the most common reason.<br />2) you have chosen a proc distribution which is not consistent (e.g. more than you have k-points) in which case some processors end up empty and complain.<br />3) other, real, error on the nodes. If possible check which nodes are complaining.<br /><br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Job exiting after P000</h3>
+				<div class="date">Posted: <strong>Wed Sep 08, 2010 7:22 am</strong></div>
+				<div class="author">by <strong>JEJohns</strong></div>
+				<div class="content">Thanks for the reply.  Unfortunately, I've switched positions and am now working @ Northwestern &amp; argon, but I hear that they upgraded carver.nersc.gov to 6.2.1, so I'll pass the info along. Thanks<br />James</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=527&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:03:54 GMT -->
+</html>

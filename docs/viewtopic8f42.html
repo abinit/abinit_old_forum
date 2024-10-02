@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4467&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:15:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; How to define kpath for supercell structure</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>How to define kpath for supercell structure</h2>
+		<p><a href="viewtopic2cf2.html?f=9&amp;t=4467">https://forum.abinit.org/viewtopic.php?f=9&amp;t=4467</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>How to define kpath for supercell structure</h3>
+				<div class="date">Posted: <strong>Mon Jul 06, 2020 4:16 pm</strong></div>
+				<div class="author">by <strong>abgs01</strong></div>
+				<div class="content">Dear abinit users,<br>
+<br>
+I need your help. I want to compare the primitive cell band structure and supercell band strucutre of cubic BaTiO3. I have calculated unit cell band strucuture of cubic BaTiO3 using the attached primitive cell.input file. But, I don't know how to define kptbounds (M, X, R, G, M, R points) variable for supercell BaTiO3. I have also attached the supercell.input file for supercell BaTiO3. <br>
+Thanks already for your help.  <br>
+<br>
+Best wishes</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to define kpath for supercell structure</h3>
+				<div class="date">Posted: <strong>Tue Jul 07, 2020 11:55 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear abgs01,<br>
+You have a 2x2x2 supercell such that the zone boundary points of the unit cell (with 1/2 coordinates, i.e. X, M, A, etc) are folded into Gamma point of the supercell. You have to use an unfolding method if you want to recover the right dispersion but it depends what you need, if it is the band gap then this is fine. For the kptbounds, you can keep the same but knowing that 1/2 is folded into Gamma in the supercell.<br>
+There is a code in Abinit to unfold the bands but I never used it...<br>
+You can also use an external packages to unfold such as:<br>
+<a href="https://www.ifm.liu.se/theomod/compphys/band-unfolding/" class="postlink">https://www.ifm.liu.se/theomod/compphys/band-unfolding/</a><br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4467&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:15:50 GMT -->
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1331&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:51:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; some problems about tutorial #4</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>some problems about tutorial #4</h2>
+		<p><a href="viewtopicb97f-2.html?f=9&amp;t=1331">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1331</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>some problems about tutorial #4</h3>
+				<div class="date">Posted: <strong>Wed Sep 21, 2011 2:22 pm</strong></div>
+				<div class="author">by <strong>Paul</strong></div>
+				<div class="content">Hi,<br />I am a new to abinit, and during the learning the tutorials I have some problems in the tutorial #4, and they  had troubled me for a long time.<br />I deeply hope someone can answer me .<br /><br />1. About the parameter rprim sets:<br />In t43.in file ,the parameter rprim is seting<br />      rprim  0.0  0.5  0.5     <br />               0.5  0.0  0.5   <br />                0.5  0.5  0.0<br />,however , in t44.in file ,it sets <br />     rprim  0.5 -0.5  0.0        <br />               0.5  0.5  0.0        <br />               0.0  0.0  1.0    <br />and in t45.in , it sets the last line 0.0 0.0 2.0, Can you tell me why ?<br /><br />2. About the parameter shiftk sets:<br />In t43 , the shift is seting :<br />    nshiftk 4<br />   shiftk  0.5 0.5 0.5  <br />             0.5 0.0 0.0<br />             0.0 0.5 0.0<br />             0.0 0.0 0.5<br />but in t44, it sets <br />   nshiftk 2<br />   shiftk  0.5 0.0 0.5<br />             0.0 0.5 0.5<br />and in t45, it becomes <br />   nshiftk 2<br />   shiftk  0.5 0.0 0.0<br />             0.0 0.5 0.0<br /><br />Can you tell me what I should base on to set it? <br /><br />3. About the supercell:<br />I do not understand the defiitione of the supercell very well , and in the literature there is 2*2*2 supercell ,and what does it mean? <br />During t44.in file , it says it have  set up a supercell,  and can you tell me which parameter is for the supercell setting ？In other words ,through which parameter can we find the supercell setting?<br /><br />I know these questions which asking are stupid, but I really do not understand . Also can you recommend some books or  literature to me for the abinit learning ?<br />Thank you very much!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: some problems about tutorial #4</h3>
+				<div class="date">Posted: <strong>Wed Sep 21, 2011 10:33 pm</strong></div>
+				<div class="author">by <strong>jolafc</strong></div>
+				<div class="content">Hi Paul,<br /><br /><blockquote class="uncited"><div>1. About the parameter rprim sets:<br />In t43.in file ,the parameter rprim is seting<br />rprim 0.0 0.5 0.5 <br />0.5 0.0 0.5 <br />0.5 0.5 0.0<br />,however , in t44.in file ,it sets <br />rprim 0.5 -0.5 0.0 <br />0.5 0.5 0.0 <br />0.0 0.0 1.0 <br />and in t45.in , it sets the last line 0.0 0.0 2.0, Can you tell me why ?</div></blockquote><br /><br />The vectors <br />rprim <br />0.0 0.5 0.5 <br />0.5 0.0 0.5 <br />0.5 0.5 0.0<br />together with the atomic coordinates <br />xred 0.0 0.0 0.0<br />define the face centered cubic crystal structure of aluminum. Now, we want to introduce a layer of vacuum in the z direction. This requires that we can repeat some layer of atoms with a periodicity larger than the thickness of the layer. To do this easily, we would like to have a set of vectors defining our crystal structure among which one is in the z direction. The crystal structure defined by <br />rprim <br />0.5 -0.5 0.0 <br />0.5 0.5 0.0 <br />0.0 0.0 1.0<br />xred <br />0.0 0.0 0.0<br />0.5 0.5 0.5<br />does just that : the crystalline structure generated is exactly the same as the preceding one, but we have one vector in the z direction. Increasing it's size to (0.0 0.0 2.0) will cause the layer of atoms defined by xred and the first 2 rprim vectors to be repeated with a layer of vacuum between each.<br /><br /><blockquote class="uncited"><div>2. About the parameter shiftk sets:<br />In t43 , the shift is seting :<br />nshiftk 4<br />shiftk 0.5 0.5 0.5 <br />0.5 0.0 0.0<br />0.0 0.5 0.0<br />0.0 0.0 0.5<br />but in t44, it sets <br />nshiftk 2<br />shiftk 0.5 0.0 0.5<br />0.0 0.5 0.5<br />and in t45, it becomes <br />nshiftk 2<br />shiftk 0.5 0.0 0.0<br />0.0 0.5 0.0<br /><br />Can you tell me what I should base on to set it? <br /></div></blockquote><br /><br />These values of shiftk define Monkhorst-Pack grids, as mentioned in the help on the keyword :<br /><a href="http://www.abinit.org/documentation/helpfiles/for-v6.8/input_variables/varbas.html#shiftk" class="postlink">http://www.abinit.org/documentation/helpfiles/for-v6.8/input_variables/varbas.html#shiftk</a><br />They are explained in the article:<br /><a href="http://link.aps.org/doi/10.1103/PhysRevB.13.5188" class="postlink">http://link.aps.org/doi/10.1103/PhysRevB.13.5188</a><br />The idea is to carry out integrations on the Brillouin's zone more efficiently than with a simple homogeneous sampling. However, if the speed of your calculations are not a major issue to you, you can just use :<br />ngkpt 8 8 8 <br />nshiftk 1<br />shiftk 0.0 0.0 0.0<br />instead of :<br />ngkpt 4 4 4<br />nshiftk 4<br />shiftk 0.5 0.5 0.5 <br />0.5 0.0 0.0<br />0.0 0.5 0.0<br />0.0 0.0 0.5<br />to obtain results at least as good, but with more k-points. <br /><br /><blockquote class="uncited"><div>3. About the supercell:<br />I do not understand the defiitione of the supercell very well , and in the literature there is 2*2*2 supercell ,and what does it mean? <br />During t44.in file , it says it have set up a supercell, and can you tell me which parameter is for the supercell setting ？In other words ,through which parameter can we find the supercell setting?</div></blockquote><br /><br />A supercell is a unit cell bigger than the primitive cell. For instance, the unit cell defined in t44.in is a supercell of the primitive cell defined in t43.in. Also, if we have a simple cubic crystal :<br />rprim<br />1 0 0 <br />0 1 0<br />0 0 1<br />natom 1<br />typat 1<br />xred <br />0 0 0<br />We can define a 2*2*1 supercell by writing<br />rprim <br />2 0 0<br />0 2 0<br />0 0 1<br />natom 4<br />typat 1 1 1 1<br />xred<br />0 0 0 <br />1 0 0<br />0 1 0<br />1 1 0</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: some problems about tutorial #4</h3>
+				<div class="date">Posted: <strong>Tue Sep 27, 2011 10:39 am</strong></div>
+				<div class="author">by <strong>Paul</strong></div>
+				<div class="content">Dear  jolafc,<br />Thank you very much! <br />Please forgive me to thanks late, because I undertand it until now~<br />Thanks again for your detailed answers .</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1331&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:51:28 GMT -->
+</html>

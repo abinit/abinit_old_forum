@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=909&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:13:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [Solved] Compiling Abinit 6.4.3 on SGI Altix (Jade)</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[Solved] Compiling Abinit 6.4.3 on SGI Altix (Jade)</h2>
+		<p><a href="viewtopicf12c.html?f=3&amp;t=909">https://forum.abinit.org/viewtopic.php?f=3&amp;t=909</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[Solved] Compiling Abinit 6.4.3 on SGI Altix (Jade)</h3>
+				<div class="date">Posted: <strong>Fri Feb 25, 2011 6:10 pm</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">Hi everyone,<br /><br />I am trying to compile Abinit 6.4.3 on a SGI Altix platform. The command line I used is as follows:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../configure --enable-mpi -enable-scalapack FC=ifort</code></pre></div><br /><br />I took care of specifying the fortran compiler because without that, it uses gfortran, which is not the best thing to do, I think.<br /><br />The configure script went fine, except one warning:<br /><strong class="text-strong">configure: WARNING: MPI support is broken!</strong><br /><br />and the compilation actually failed with lots of errors complaining about MPI...<br /><br />Without specifying the fortran compiler, it uses gfortran with the same warning. Plus, there are additional warnings during the compilation and the compilation also fails. For instance:<br /><strong class="text-strong">drotmg.f:138.15:<br /><br />      GO TO IGO(120,150,180,210)                                        <br />               1<br />Warning: Deleted feature: Assigned GOTO statement at (1)<br />drotmg.f:144.72:<br /><br />      ASSIGN 120 TO IGO                                                 <br />                                                                        1<br />Warning: Deleted feature: ASSIGN statement at (1)<br /></strong><br /><br />Finally I changed a bit my command line according to what I've read on the forum. I explicitely put the path to the MPI library:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../configure&nbsp; --enable-mpi=&quot;yes&quot; --with-mpi-prefix=&quot;/opt/sgi/mpt/mpt-2.02/&quot; --enable-scalapack --disable-all-plugins<br /></code></pre></div><br /><br />But now I got the following error message:<br /><strong class="text-strong">configure: error: use --with-mpi-prefix or set FC, not both</strong><br /><br />Which is strange since I did not set FC.<br /><br />Could you please help me with that?<br /><br />Thank you<br /><br />Boris</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling Abinit 6.4.3 on SGI Altix</h3>
+				<div class="date">Posted: <strong>Fri Feb 25, 2011 7:00 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Hello Boris,<br /><br />Abinit is not tested (anymore?) on this kind of platform so I have no success story for you but there is no prior reason why it should not work.<br /><br />Anyway don't mix mpi options with FC. When MPI compilers are invoked - mpif90, mpicc - they call the compiler backend that has been defined when building the MPI libraries i.e. you cannot change &quot;on the fly so those options are exclusive&quot;. To reveal the backend compiler, use &quot;mpif90 -show&quot; (-show works with MPICH2, your own implementation should have a similar option). Furthermore scalapack also rely on MPI so you have to be consistent.<br /><br />So prepare your environment - it means that a plain &quot;mpif90 test.F90&quot; should produce a working MPI binary and configure Abinit with <blockquote class="uncited"><div>../configure --enable-mpi --with-mpi-prefix=/XXX --enable scalapack </div></blockquote> with /XXX is the path to MPI installation i.e. /XXX/bin/mpif90, /XXX/bin/include/mpi.h, ... exist. And maybe try first without the scalapack option - do you have such large systems that you want to distribute linear algebra routines on your cluster?<br />Check config.dump and src/98_main/Makefile to see if the suitable libraries have been detected.<br /><br />... your post seems to change while I edit mine. Did you clean the prior attempts with a make clean (or rm -rf your build directory). Could you please copy the part of config.log corresponding to the &quot;MPI support is broken&quot; error message (this one is really toxic)? What are the versions of MPI and backend fortran compiler?<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling Abinit 6.4.3 on SGI Altix</h3>
+				<div class="date">Posted: <strong>Fri Feb 25, 2011 7:07 pm</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">Hi Alain,<br /><br />Thank you for your answer. The platform I am compiling on is the french supercalculator Jade, which is a SGI Altix. How come Abinit is not tested anymore on such a big machine?<br /><br />The problem I encountered is that there is no such compilers as mpif90 (that surprised me). In the bin directory of the MPI library (where the compilers should be right?), I can find:<br /><strong class="text-strong">mpiexec_mpt     mpirun          mpt_checkpoint  mpt_forward     mpt_restart     omplace         rail-config</strong><br /><br />Can I use one of those?<br /><br />Thank you again<br /><br />Boris<br /><br />Edit: Yes sorry I edited my post many times depending on my attempts. I always clear everything or delete the whole build folder.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling Abinit 6.4.3 on SGI Altix</h3>
+				<div class="date">Posted: <strong>Fri Feb 25, 2011 7:55 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content"><blockquote class="uncited"><div>How come Abinit is not tested anymore on such a big machine?</div></blockquote><br /><br />Abinit tesfarm is quite impressive but no SGI anymore ... I need an account on Jade <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":-)" title="Smile" /> 27th on Top500 - should be a nice system. Good news is that you have Intel ifort compiler - this one is heavily tested and Altix or not shouldn't change that Abinit works fine with this one. More disturbing to me is the parallel environment. I've never played with MPT but SGI says it's MPI 2.2 compliant so it should be fine. The binaries you listed seem to be the runtime environment i.e. launchers for MPI applications. Again I have no experience with Jade particularities bit it seems that you don't have the development environment for MPT - with the mpif90 wrapper, include files, etc ... Now having a quick look on MPT docs on <a href="http://www.ncsa.illinois.edu/UserInfo/Resources/Hardware/SGIAltix/Doc/Compile.html" class="postlink">http://www.ncsa.illinois.edu/UserInfo/Resources/Hardware/SGIAltix/Doc/Compile.html</a> it seems that MPT has no equivalent mpif90, mpicc wrappers (so goodbye for the compliance) and that you have to call ifort -lmpi directly. Before even thinking about (severe) configuration hacking to take this into account, are you sure that there is no other MPI &quot;solutions&quot; on Jade like accelerated MPICH2 or openMPI? Nothing unusual to have several coexisting MPI environments.<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling Abinit 6.4.3 on SGI Altix</h3>
+				<div class="date">Posted: <strong>Fri Feb 25, 2011 9:16 pm</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">Alain, <br /><br />Jade is indeed a nice system. I looked at the documentation, and there are actually several possibilities. I can use SGI MPI library (MPT), but if I do that, as you said, I have to call ifort -lmpi, which sounds a bit complicated. Fortunately, I can use IntelMPI with mpi wrappers mpiifort. I will try with this one.<br /><br />I will let you know about this. <br /><br />Edit: <br />Well, IntelMPI didn't work. There was a problem with the c compiler not working. So I tried with OpenMPI and the configure step went very fine with the following command line:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../configure --enable-mpi --with-mpi-prefix=&quot;/opt/software/SGI/opensource/MPI/openmpi/1.4.1/intel/11.1.059/&quot; --disable-all-plugins</code></pre></div><br /><br />The compilation went fine and abinit is up and running!<br /><br />Thanks a lot for your help!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [Solved] Compiling Abinit 6.4.3 on SGI Altix (Jade)</h3>
+				<div class="date">Posted: <strong>Tue May 10, 2011 12:08 am</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">Hi all,<br /><br />I'm bumping the topic because I still can't figure out this error message from abinit:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>configure: error: use --with-mpi-prefix or set CC, not both</code></pre></div><br /><br />My command line is very simple:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../configure --enable-mpi --with-mpi-prefix=/opt/OpenMPI/openmpi-1.4.3-intel</code></pre></div><br /><br />Each time I use the above configure, abinit stops and displays the error message. If I want the configure script to work, I have to define explicitly the path to the compilers, for instance:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../configure --enable-mpi FC=/opt/OpenMPI/openmpi-1.4.3-intel/bin/mpif90 CC=/opt/OpenMPI/openmpi-1.4.3-intel/bin/mpicc CXX=/opt/OpenMPI/openmpi-1.4.3-intel/bin/mpic++</code></pre></div><br /><br />In the end, the above command line is exactly the same as if I used &quot;with-mpi-prefix=/opt/OpenMPI/openmpi-1.4.3-intel/&quot;, right? How come the latter doesn't work? Am I missing something?<br /><br />Thank you for your answers<br /><br />Boris</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [Solved] Compiling Abinit 6.4.3 on SGI Altix (Jade)</h3>
+				<div class="date">Posted: <strong>Tue May 10, 2011 5:48 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Having a proper MPI support in any build system is not a trivial thing. In the case of Abinit, you are not allowed to manually set the compilers while using the --with-mpi-prefix option. The build system considers the latter as a &quot;please detect and set all relevant MPI parameters for me within the subtree of the specified directory&quot;. This process involves setting the values of CC, CXX, and FC, which in practice has caused some confusion in various cases when these environment variables were already set.<br /><br />If you get an error when using the --with-mpi-prefix option only, this means that CC, CXX, and FC, have been set by your system administrator. If you want to be able to use it again, you have to do the following before running configure (or put it at the beginning of your config file):<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>unset CC; unset CXX; unset FC</code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [Solved] Compiling Abinit 6.4.3 on SGI Altix (Jade)</h3>
+				<div class="date">Posted: <strong>Tue May 10, 2011 6:03 pm</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">Ok I now understand<br /><br />Thank you for the information<br /><br />Boris</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=909&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:13:49 GMT -->
+</html>

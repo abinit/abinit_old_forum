@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=314&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:33:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Linux - IFC 10.1 Abinit automatic test fail</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Linux - IFC 10.1 Abinit automatic test fail</h2>
+		<p><a href="viewtopicf66d.html?f=3&amp;t=314">https://forum.abinit.org/viewtopic.php?f=3&amp;t=314</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Linux - IFC 10.1 Abinit automatic test fail</h3>
+				<div class="date">Posted: <strong>Fri May 14, 2010 2:27 pm</strong></div>
+				<div class="author">by <strong>sestak</strong></div>
+				<div class="content">Dear Abinit users,<br /><br />I successfully compiled the Abinit serial version (6.0.3) using IFORT, ICC, ICPC Version 10.1 compiler with optimalization level 2 on linux machine. After that, I ran the test in &quot;test&quot; directory using the &quot;make tests_min4&quot; command. However, when I looked to the report files in the test subdirectories I found some errors in dir v4-6. Most of these errors look similar so I describe only the errors in the v4 dir here. <br />The report files contain these warning:<br /><br />v4:<br />======================================================================<br /> Case_84<br />The diff analysis cannot be done : the number of lines to be analysed<br />differ.<br />File 1: 1505 lines, 55 ignored<br />File 2: 1506 lines, 55 ignored<br /><br />Summary Case_84 : fatal error, see above message<br /><br /> Case_85<br />The diff analysis cannot be pursued : the command sign differ.<br />File 1, line 1636, 55 ignored, character: <br />File 2, line 1636, 55 ignored, character:=<br /><br />Summary Case_85 : fatal error, see above message<br /><br /> Case_86<br />The diff analysis cannot be pursued : the command sign differ.<br />File 1, line 924, 57 ignored, character:=<br />File 2, line 924, 57 ignored, character: <br /><br />Summary Case_86 : fatal error, see above message<br /><br /> Case_87<br />The diff analysis cannot be pursued : the command sign differ.<br />File 1, line 1121, 59 ignored, character:=<br />File 2, line 1121, 59 ignored, character: <br /><br />Summary Case_87 : fatal error, see above message<br /><br /> Case_88<br />The diff analysis cannot be done : the number of lines to be analysed<br />differ.<br />File 1: 1005 lines, 56 ignored<br />File 2: 1006 lines, 56 ignored<br /><br />Summary Case_88 : fatal error, see above message<br />======================================================================<br /><br />Detailed examination of diff files (diff.t8x) shows, that  significant differences between my out files and ref. out files can be found. The diff files related to these error are included. (I cant upload the files. So, the output can be found: <a href="http://jaja.kn.vutbr.cz/~sestak/" class="postlink">http://jaja.kn.vutbr.cz/~sestak/</a>)<br /><br />I would like to ask if there is a way how to solve this problem or I can ignore it. I was also trying to find some answers in this forum and I have found the thread of Prof. Zwanziger at link:<br /><a href="viewtopic397d.html?f=18&amp;t=55&amp;p=160&amp;hilit=the+command+sign+differ&amp;sid=6b9e57daad09a60643c8d3dc782c9456#p160." class="postlink">http://forum.abinit.org/viewtopic.php?f=18&amp;t=55&amp;p=160&amp;hilit=the+command+sign+differ&amp;sid=6b9e57daad09a60643c8d3dc782c9456#p160.</a><br />but I don't know if this solution will help me. If some other files will be needed I will send them.<br /><br />Thanks for suggestions<br /><br />Best Regards<br /><br />Petr Sestak<br /><br />-- <br />Dr. Petr Sestak<br />Institute of Engineering Physics<br />Faculty of Mechanical Engineering<br />Brno University of Technology<br />Technicka 2896/2, Brno 616 69, Czech Republic<br /><br />Tel.:          +420 541142812<br />Mail:          sestakATfmeDOTvutbrDOTcz</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Linux - IFC 10.1 Abinit automatic test fail</h3>
+				<div class="date">Posted: <strong>Fri May 14, 2010 5:59 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Dear Sestak,<br /><br />I had a look at the output files of the failing tests. All of them concern GW calculations (the features added in v4).<br />It seems that the direct diagonalization of the KS Hamiltonian produces completely wrong results leading to Nans <br />in the GW part.<br />At this point I think there's some problem in the blas or lapack installation but we need more information<br />on the compilation options. Are you using the internal linalg library or an external blas-lapack library. <br />Could you upload  your config.log file as well as the the log files of the failing tests so that we can have a look at the problem in more detail.<br /><br />Thanks for reporting the problem,<br />Matteo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Linux - IFC 10.1 Abinit automatic test fail</h3>
+				<div class="date">Posted: <strong>Sat May 15, 2010 12:29 pm</strong></div>
+				<div class="author">by <strong>sestak</strong></div>
+				<div class="content">Hi Matteo,<br />Thanks for your prompt reaction. I added all requested files into link <a href="http://www.kn.vutbr.cz/~sestak" class="postlink">http://www.kn.vutbr.cz/~sestak</a>. There you can find my makefile &quot;localhost.ac&quot; as well as configure.log with all logs files.<br /><br />Regards<br />Peter</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Linux - IFC 10.1 Abinit automatic test fail</h3>
+				<div class="date">Posted: <strong>Mon May 17, 2010 10:16 pm</strong></div>
+				<div class="author">by <strong>sestak</strong></div>
+				<div class="content">Hi Matheo,<br /><br />thanks again. I compiled the Abinit with an external blas and lapack libraries. I used standard blas and lapack in our linux distribution. The makefile was completely same as I used before. After that, I ran the test again and the most of the mentioned errors disappeared. However, four errors still remain. Two of them are in dir v5 a two in dir v6.<br /><br />v5 t77:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;Case_77<br />2<br />&lt; .Version 6.0.3&nbsp; of ABINIT <br />&gt; .Version 6.0.0&nbsp; of ABINIT <br />3<br />&lt; .(sequential version, prepared for a i686_linux_intel10.1 computer) <br />&gt; .(MPI version, prepared for a x86_64_linux_gnu4.4 computer) <br />17<br />&lt; .Starting date : Mon 17 May 2010.<br />&gt; .Starting date : Mon 18 Jan 2010.<br />1113<br />&lt;&nbsp; Fermi (or HOMO) energy (hartree) =&nbsp; &nbsp;0.22573&nbsp; &nbsp;Average Vxc (hartree)=&nbsp; -0.37996<br />&gt;&nbsp; Fermi (or HOMO) energy (hartree) =&nbsp; &nbsp;0.23035&nbsp; &nbsp;Average Vxc (hartree)=&nbsp; -0.37996<br />2457<br />&lt;&nbsp; Fermi (or HOMO) energy (hartree) =&nbsp; &nbsp;0.22575&nbsp; &nbsp;Average Vxc (hartree)=&nbsp; -0.37997<br />&gt;&nbsp; Fermi (or HOMO) energy (hartree) =&nbsp; &nbsp;0.23036&nbsp; &nbsp;Average Vxc (hartree)=&nbsp; -0.37997<br />2759<br />&lt; +Overall time at end (sec) : cpu=&nbsp; &nbsp; &nbsp; &nbsp; 182.3&nbsp; wall=&nbsp; &nbsp; &nbsp; &nbsp; 193.3<br />&gt; +Overall time at end (sec) : cpu=&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;68.9&nbsp; wall=&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;68.9<br />Summary Case_77 : different lines= 2 , max discrepancies absolute= 0.00462000000000001 , relative= 0.0101298017891598<br /></code></pre></div><br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>v5 t80:<br />&nbsp;Case_80<br />The diff analysis cannot be pursued : the command sign differ.<br />File 1, line 897, 103 ignored, character:=<br />File 2, line 897, 103 ignored, character: <br /><br />Summary Case_80 : fatal error, see above message<br /></code></pre></div><br /><br />The last two errors (t21 and t91) are similar to the others. So, I did not describe them in detail here. All mentioned failed tests can be found in the out files at the link <a href="http://www.kn.vutbr.cz/~sestak/compilation_with_external_lapack_and_blas" class="postlink">http://www.kn.vutbr.cz/~sestak/compilation_with_external_lapack_and_blas</a>. I dont know what to do with these errors. The two of them are due to some differences between ref and my values and I am not sure if these differences are important or not. I will appreciate any suggestion how to solve this.<br /><br />Best Regards<br /><br />Peter</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=314&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:33:31 GMT -->
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=5251&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:30:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Thermal conductivity calculation using abinit+phono3py</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Thermal conductivity calculation using abinit+phono3py</h2>
+		<p><a href="viewtopic9433.html?f=9&amp;t=5251">https://forum.abinit.org/viewtopic.php?f=9&amp;t=5251</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Thermal conductivity calculation using abinit+phono3py</h3>
+				<div class="date">Posted: <strong>Sun Dec 20, 2020 6:47 am</strong></div>
+				<div class="author">by <strong>tangds</strong></div>
+				<div class="content">Dear developers,<br>
+<br>
+I met the problem in calculating thermal conductivity using abinit+phono3py. The 3rd interatomic force constants are calculated using finite difference supercell method, in which the force for each displaced supercell is calculated using abinit. However, the thermal conductivity results are not well enough, with a large deviation with experimental results while VASP+phono3py can give a reasonable results. Do you have any idea about accuracy in calculating forces of abinit?<br>
+<br>
+The pseudopotential used in abinit calculations is psp8 form, for Ga and N atoms.<br>
+<br>
+Thanks,<br>
+Daosheng</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Thermal conductivity calculation using abinit+phono3py</h3>
+				<div class="date">Posted: <strong>Sun Dec 20, 2020 1:58 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content"><blockquote class="uncited"><div>
+Do you have any idea about accuracy in calculating forces of abinit?
+</div></blockquote>
+
+The cutoff energy and the converge criterion used to stop the SCF cycle can affect the quality of the forces<br>
+but it's hard to say without looking at your input file.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Thermal conductivity calculation using abinit+phono3py</h3>
+				<div class="date">Posted: <strong>Tue Dec 29, 2020 1:22 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Can you try to increase the value of boxcutmin from 2 to e.g. 4?<br>
+<br>
+We found some difference when comparing Abinit DFPT phonons with phonopy finite difference method with Abinit forces and  we managed to make the phonopy results agree with DFPT by increasing boxcutmin.<br>
+<br>
+BTW: Are you using ADDGRID=True (<a href="https://www.vasp.at/wiki/index.php/ADDGRID" class="postlink">https://www.vasp.at/wiki/index.php/ADDGRID</a>) in your Vasp calculations?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Thermal conductivity calculation using abinit+phono3py</h3>
+				<div class="date">Posted: <strong>Tue Dec 29, 2020 1:46 pm</strong></div>
+				<div class="author">by <strong>tangds</strong></div>
+				<div class="content">Thanks for your reply. <br>
+<br>
+It is weird that abinit+phonopy can produce good phonon dispersion relations compared with vasp+phonopy, where the settings in calculating 2nd IFCs are exactly the same with those in 3rd IFCs calculations. <br>
+<br>
+The input file used for 3rd IFCs calculations is attached which takes 00001 case as an example. For psp8, tests show that a large cutoff energy is needed and 1000 eV is used here. Using supercell size 4*4*3, about 190 W/mK thermal conductivity is obtained with abinit which is much lower than 270 W/mK from VASP. <br>
+<br>
+I will try to increase boxcutmin to find out the difference.<br>
+<br>
+Best,<br>
+Daosheng</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Thermal conductivity calculation using abinit+phono3py</h3>
+				<div class="date">Posted: <strong>Tue Dec 29, 2020 1:47 pm</strong></div>
+				<div class="author">by <strong>tangds</strong></div>
+				<div class="content"><blockquote><div><cite><a href="memberlist6f62.html?mode=viewprofile&amp;u=61">gmatteo</a> wrote: <a href="viewtopic9b95.html?p=14264#p14264" data-post-id="14264" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><div class="responsive-hide">Tue Dec 29, 2020 1:22 am</div></cite>
+Can you try to increase the value of boxcutmin from 2 to e.g. 4?<br>
+<br>
+We found some difference when comparing Abinit DFPT phonons with phonopy finite difference method with Abinit forces and  we managed to make the phonopy results agree with DFPT by increasing boxcutmin.<br>
+<br>
+BTW: Are you using ADDGRID=True (<a href="https://www.vasp.at/wiki/index.php/ADDGRID" class="postlink">https://www.vasp.at/wiki/index.php/ADDGRID</a>) in your Vasp calculations?
+</div></blockquote>
+
+<br>
+Yes, ADDGRID=True is used in vasp calculations.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=5251&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:30:46 GMT -->
+</html>

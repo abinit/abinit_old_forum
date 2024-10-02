@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=5195&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:06:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; error when compile 9.2.1 fallback</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>error when compile 9.2.1 fallback</h2>
+		<p><a href="viewtopicd59a.html?f=3&amp;t=5195">https://forum.abinit.org/viewtopic.php?f=3&amp;t=5195</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>error when compile 9.2.1 fallback</h3>
+				<div class="date">Posted: <strong>Wed Oct 21, 2020 10:36 am</strong></div>
+				<div class="author">by <strong>jianzhifu</strong></div>
+				<div class="content">Dear all,<br>
+When I compile abinit 9.2.1 fallback by build-abinit-fallbacks.sh,<br>
+There is an error: the file "abinit-fallbacks-config" can not be found.<br>
+I use centos 8.2, intel compilers_and_libraries_2020.2.254 &amp;&amp;  parallel_studio_xe_2020.2.108<br>
+<br>
+The build-abinit-fallbacks.sh file is:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#!/bin/bash
+
+# Init
+fallbacks_prefix="/home/sunlight/work/abinit/abinit-9.2.1/build/fallbacks/install_fb/intel/19.1"
+
+# Find and Unpack tarball
+tarfile=`basename "$(ls /home/sunlight/work/abinit/abinit-9.2.1/build/../fallbacks/*.tar.gz)"`
+source=${tarfile%.tar.gz}
+
+mkdir -p $source &amp;&amp; tar -xzf /home/sunlight/work/abinit/abinit-9.2.1/build/../fallbacks/$tarfile -C $source --strip-components=1
+cd $source
+
+# Configure
+./configure \
+  --prefix="${fallbacks_prefix}" \
+  --with-tardir="${HOME}/.abinit/tarballs" \
+  --with-linalg-incs="-I/opt/intel2020up2/compilers_and_libraries_2020.2.254/linux/mkl/include" \
+  --with-linalg-libs="-L/opt/intel2020up2/compilers_and_libraries_2020.2.254/linux/mkl/lib/intel64 -lmkl_intel_ilp64 -lmkl_core -lmkl_intel_thread -lmkl_scalapack_ilp64 -lmkl_blacs_intelmpi_ilp64 -lpthread -lm" \
+  --with-fc-vendor="intel" \
+  --with-fc-version="19.1" \
+  --disable-atompaw \
+  LIBS_NETCDF4_FORTRAN="-ldl -lm -lz" \
+  CC="mpiicc" \
+  CXX="mpiicpc" \
+  FC="mpiifort"
+
+make -j 4 install
+rc=`echo $?`
+
+if test "$rc" = "0"; then
+  printf "$(tput bold)----------------------------------------------------------------------$(tput sgr0)\n\n"
+  echo "The fallbacks are now ready to use."; \
+  echo "You can link these fallbacks with Abinit by copying the following options to your ac9 file.";
+
+  list_of_fbks=( libxc hdf5 netcdf4 netcdf4_fortran linalg xmlf90 libpsml wannier90 )
+  for i in "${list_of_fbks[@]}"; do
+    if test "`${fallbacks_prefix}/bin/abinit-fallbacks-config --enabled ${i}`" = "yes"; then
+      Prefix=`${fallbacks_prefix}/bin/abinit-fallbacks-config --libs ${i}`
+      printf "\n$(tput bold)"
+      echo "with_${i}=${Prefix}" | sed '-e s/-L//;  s/\/lib //; s/netcdf4/netcdf/; s/-l.*$//'
+      printf "$(tput sgr0)"
+    fi  
+  done
+  printf "\n"
+else
+  printf "We have detected a problem while generating fallbacks : contact Abinit's team\n"
+fi
+
+exit</code></pre></div>
+and config.ac file is:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># MPI settings
+FC="mpiifort"
+CC="mpiicc"
+CXX="mpiicpc"
+with_mpi="yes"
+enable_mpi_io="yes"
+
+# linear algebra settings
+with_linalg_flavor="mkl"
+LINALG_CPPFLAGS="-I${MKLROOT}/include"
+LINALG_FCFLAGS="-I${MKLROOT}/include"
+LINALG_LIBS="-L${MKLROOT}/lib/intel64 -lmkl_intel_ilp64 -lmkl_core -lmkl_intel_thread -lmkl_scalapack_ilp64 -lmkl_blacs_intelmpi_ilp64 -lpthread -lm"
+
+# mandatory libraries
+with_hdf5="yes"
+with_netcdf="yes"
+with_netcdf_fortran="yes"
+with_libxc="yes"
+
+# FFT flavor
+with_fft_flavor="dfti"
+FFT_FCFLAGS="-I${MKLROOT}/include"
+
+# Enable Netcdf mode in Abinit (use netcdf as default I/O library)
+enable_netcdf_default="yes"</code></pre></div>
+
+<br>
+Could you give me some advice?<br>
+Thanks!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: error when compile 9.2.1 fallback&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Fri Dec 04, 2020 1:17 am</strong></div>
+				<div class="author">by <strong>jianzhifu</strong></div>
+				<div class="content">when install abinit 9.2.2 ，the problem is solved</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=5195&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:06:03 GMT -->
+</html>

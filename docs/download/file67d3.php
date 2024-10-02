@@ -1,0 +1,18 @@
+prefix="/data2/arindam/VASP/ABINIT/"
+enable_mpi="yes"
+enable_mpi_io="yes"
+with_mpi_prefix="/data2/arindam/VASP/openmpi-4.0.2"
+with_trio_flavor="netcdf"
+with_netcdf_incs="-I/data2/arindam/VASP/ABINIT/abinit-8.10.1/build/netcdf/include"
+with_netcdf_libs="-L/data2/arindam/VASP/ABINIT/abinit-8.10.1/build/netcdf/lib -lnetcdf -lnetcdff"
+with_fft_flavor="fftw3"
+with_fft_incs="-I/data2/arindam/VASP/ABINIT/abinit-8.10.1/build/fftw3/include/"
+with_fft_libs="-L/data2/arindam/VASP/ABINIT/abinit-8.10.1/build/fftw3/lib -lfftw3"
+with_linalg_flavor="atlas"
+with_linalg_libs="-L/data2/arindam/VASP/ABINIT/abinit-8.10.1/build/ATLAS/my_buid_dir/lib -llapack -lf77blas -lcblas -latlas"
+with_dft_flavor="atompaw+libxc"
+#with_dft_flavor="atompaw+bigdft+libxc+wannier90"
+#enable_gw_dpc="yes"
+#enable_maintainer_checks="no"
+
+

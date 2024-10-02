@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2741&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:52:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; xnorm error</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>xnorm error</h2>
+		<p><a href="viewtopicaed1.html?f=3&amp;t=2741">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2741</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>xnorm error</h3>
+				<div class="date">Posted: <strong>Sun Jul 20, 2014 6:58 am</strong></div>
+				<div class="author">by <strong>ntuxi</strong></div>
+				<div class="content">Dear Developers<br /><br />I have checked the forum, the XNORM error is tough,  <br /><br /><br /> normev.F90:85:BUG<br /><br /> normev:<br />   Starting xnorm should be close to one (tol is tol6).<br />   However, for state number     8, xnorm=    1.012190E+00<br />   It might be that your LAPACK library has not been correctly installed.<br />  Action : contact ABINIT group.<br /><br /><br />I am using intel ifort 11-064, also tried ifort 12, and 13, this error still comes out  in V7.2 and V7.6,<br /><br />could you recommend some compiler and mkl with version?<br /><br />Thanks</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: xnorm error</h3>
+				<div class="date">Posted: <strong>Sun Jul 20, 2014 10:49 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />ifort 11.x is no longer supported<br /><br />on the other side, abinit 7.8 has been tested with the following three configurations with success :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>ifort &gt;= 12.1.5 with mkl 10.3&nbsp; ( -O2 -xhost )<br />ifort &gt;= 13.1.3.192 with mkl 11.0&nbsp; ( -O2 -xhost )<br />ifort &gt;= 14.0.3 with mkl 11.0&nbsp; &nbsp; ( -O3 -xhost )</code></pre></div><br /><br />we use fft from mkl<br /><br />regards<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: xnorm error</h3>
+				<div class="date">Posted: <strong>Mon Jul 21, 2014 4:40 am</strong></div>
+				<div class="author">by <strong>ntuxi</strong></div>
+				<div class="content">Dear jbeuken;<br /><br />Thanks very much for the information !<br /><br />by the way, have you tested the large cell structures (like 50x50x50 angstrom)?  <br /><br />the XNORM error always appears in such conditions. <br /><br />Thanks</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: xnorm error</h3>
+				<div class="date">Posted: <strong>Tue Jul 22, 2014 8:42 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi, <br /><br /><blockquote class="uncited"><div>by the way, have you tested the large cell structures (like 50x50x50 angstrom)? </div></blockquote><br /><br />I don't known  : I'm just a poor &quot;Computer Scientist&quot;  <img class="smilies" src="images/smilies/icon_lol.gif" alt=":lol:" title="Laughing" /> <br /><br />I manage the test farm but I don't create tests of the test suite…<br /><br />the tests of the test suite are used to cover the functionalities of ABINIT not to test some &quot;production&quot; tests and, of course, it's a pity...<br />but, the fastest bot takes 40 mins to complete the 600 tests…<br /><br />then, if you want, you can send me your input file…<br /><br />jmb</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2741&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:52:35 GMT -->
+</html>

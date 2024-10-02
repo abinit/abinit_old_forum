@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=931&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:11:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; problem with anaddb</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>problem with anaddb</h2>
+		<p><a href="viewtopicab6e.html?f=10&amp;t=931">https://forum.abinit.org/viewtopic.php?f=10&amp;t=931</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>problem with anaddb</h3>
+				<div class="date">Posted: <strong>Fri Mar 04, 2011 3:36 pm</strong></div>
+				<div class="author">by <strong>awanker</strong></div>
+				<div class="content">Dear all<br />   I calculate the electron-phonon interaction with follow input file:<br />  #########################################################################<br />ndtset 6<br /> <br />#<br /># DATASET 1 : make ground state wavefunctions and density<br /># <br />tolwfr1 1.0d-15<br />#nline1 8    # This is to expedite the convergence of higher-lying bands<br />rfphon1  0  # for DS1 do _not_ do perturbation<br />nqpt1 0     # for DS1 do _not_ do perturbation<br />prtwf1 1    # need GS wavefunctions for further runs<br />getwfk1  0<br /> <br />        qpt2         0.00000000E+00  0.00000000E+00  0.00000000E+00<br />        qpt3         0.00000000E+00  0.00000000E+00  0.00000000E+00<br />        qpt4         5.00000000E-01  0.00000000E+00  0.00000000E+00<br />        qpt5         5.00000000E-01  5.00000000E-01  0.00000000E+00<br />        qpt6         5.00000000E-01  5.00000000E-01  5.00000000E-01<br /> <br />#Set 2 : Response function calculation of d/dk wave function <br /> <br />    iscf2   -3         # Need this non-self-consistent option for d/dk<br />  kptopt2   2          # Modify default to use time-reversal symmetry<br />  rfphon2   0          # Cancel default<br />  rfelfd2   2          # Calculate d/dk wave function only<br />  tolwfr2   1.0d-15    # Use wave function residual criterion instead<br />  prtwf2 1<br /> <br />#Set 3 : Response function calculation of Q=0 phonons and electric field pert.<br /> <br />  getddk3   2          # d/dk wave functions from last dataset<br />  kptopt3   2          # Modify default to use time-reversal symmetry<br />  rfelfd3   3          # Electric-field perturbation response only<br /> <br />#<br /># general data for all phonon calculations:<br />#<br />rfatpol  1 12<br />rfdir  1 1 1<br />rfphon  1<br />prtwf   0  # for response function runs, do not keep first order wavefunctions<br />tolvrs   1.0e-8<br />getwfk  1<br />nqpt 1<br />prepgkk 1 # force all perturbations to be calculated for q-points considered<br />prtgkk 1 # print out GKK files containing electron-phonon coupling<br /> <br />#<br />#  Common data for GS and perturbation runs<br />#<br /> <br />#<br />#  the kpoint grid is minimalistic to keep the calculation<br />#   manageable.<br />#<br />ngkpt 4 4 4<br />kptopt 3 # keep all k-points. Also for ground state, because of eventual transport calculations<br />#<br />#  use a centered grid for the kpoints: obligatory for el-ph for the moment<br />#<br />nshiftk 1<br />shiftk 0.0 0.0 0.0<br /> <br />#<br />#  as is the kinetic energy cutoff<br />#<br />ecut 40.0<br /> <br />acell 3*1.00<br />rprim <br />   -4.89864463178838E+00  4.89864463178838E+00  1.08828974363585E+01<br />    4.89864463178838E+00 -4.89864463178839E+00  1.08828974363585E+01<br />    4.89864463178838E+00  4.89864463178838E+00 -1.08828974363585E+01<br /> <br />nband 48<br /> <br />#<br />#  include metallic occupation function with a small smearing<br />#<br />occopt 1<br />#tsmear 0.001<br />natom 12<br />typat 1 1 1 1 1 1 1 1 2 2 3 3<br />xred  1.0872288846E+00  4.8421399949E-01  9.0813587221E-01<br />5.7607812728E-01  1.1790930124E+00  9.1864127789E-02<br />1.2342139995E+00 -1.7392187272E-01 -1.0301488514E-01<br />9.2909301242E-01  2.3372288846E+00  1.1030148851E+00<br />-3.3722888463E-01 -2.3421399949E-01 -4.0813587221E-01<br />1.1739218727E+00  1.0709069876E+00  1.4081358722E+00<br />-4.8421399949E-01  4.2392187272E-01  6.0301488514E-01<br /> 8.2090698758E-01 -8.7228884628E-02  3.9698511486E-01<br /> 7.5000000000E-01  2.5000000000E-01  5.0000000000E-01<br /> 1.0000000000E+00 -5.5509608618E-17  3.4028916580E-21<br /> 1.2500000000E+00  7.5000000000E-01  5.0000000000E-01<br /> 1.5000000000E+00  5.0000000000E-01  0.0000000000E+00<br /> <br />nstep 200<br />ntypat 3 <br />znucl 8 23 83 <br /><br />#########################################################################<br /><br />As the totorial said, the q grid must be sub grid of k mesh. I use 2*2*2 q grid and 4*4*4 k grid. But, when I use mrgddb to merge DDBs after the calculation, an error occurs as follow:<br /><br />.......<br /> read     1 blocks from the input DDB<br /> <br /> read the input derivative database number     2<br /> compare the current and input DDB information<br /> chki8 : ERROR -<br />  Comparing integers for variable  nkpt.<br />  Value from input DDB is        36 and<br />        from transfer DDB is        64.<br />  Action : check your DDBs.<br /> <br /> leave_new : decision taken to exit ...<br />.......<br /><br />I then found that the nkpt for 6 datatsets are 64, 36, 36, 64, 64 and 64 respectively.<br />Can anyone tell me how to solve this problem?<br /><br />Thanks a lot<br />Yours<br />Wjj</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem with anaddb</h3>
+				<div class="date">Posted: <strong>Fri Mar 11, 2011 5:20 pm</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">Hi<br /><br />It's strange that you have more kpoint in the first dataset (GS calculation) than in the d/dk computation and phonon/electric field perturbations.<br /><br />You should add in your first dataset kptopt1= 2. You'll then have the same kpoint grid in the first three datasets.<br /><br />I don't know if it will solve your problem, but you can begin with this.<br /><br />Boris</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem with anaddb</h3>
+				<div class="date">Posted: <strong>Wed May 25, 2011 5:13 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Using kptopt 3 for all dtset would be the simplest.<br /><br />M.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=931&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:11:11 GMT -->
+</html>

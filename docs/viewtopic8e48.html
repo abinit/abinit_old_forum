@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1533&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:04:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Bug Report: OpenMP in 6.12.1</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Bug Report: OpenMP in 6.12.1</h2>
+		<p><a href="viewtopic205d.html?f=19&amp;t=1533">https://forum.abinit.org/viewtopic.php?f=19&amp;t=1533</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Bug Report: OpenMP in 6.12.1</h3>
+				<div class="date">Posted: <strong>Tue Feb 14, 2012 5:44 am</strong></div>
+				<div class="author">by <strong>kaneod</strong></div>
+				<div class="content">Since it was reported in the previous equivalent thread that OpenMP is (possibly) much better in 6.12, thought I'd post some of the OpenMP bugs here to help clean it up. All these are reported as errors by gfortran-4.6.3 on the Intel x86_64 platform. Compilation used the flags &quot;-O3 -march=native -funroll-loops -floop-block -flto -fopenmp&quot; and whatever else the build system adds by itself (something like -m64 -g -ffree-line-length-none).<br /><br />43_ffts/fourwf.F90 line 787: the !$OMP END PARALLEL DO statement has to actually end after a &quot;end do&quot;! Moving it up one line (before the end if) fixes.<br /><br />56_mixing/dotprodm_vn.F90: there are repetitions of PRIVATE variables in the directives at lines 272-274, 312-313. Remove them.<br /><br />56_xc/rhohxc.F90: derived types (blah%moreblah) can't be used in OpenMP directives! Remove dtset%ixc from the directive cluster at line 699. It's only a single integer so copying it across the different OpenMP threads will not destroy performance. In the future, assign dtset%ixc to a local variable and use the local variable name in the SHARED directive instead.<br /><br />56_xc/xcden.F90 and xcpot.F90: there are PARALLEL DO loops here which don't start with a Fortran DO statement - need to move ifft = 0 assignment outside the loop (it will still be copied to all the individual threads as 0 in the first place).<br /><br />65_nonlocal/mkffnl.F90: Line 466 is missing a trailing continuation &amp; after the OMP directive. Line 467: Typo, variable &quot;wf_ffnl1&quot; in the SHARED directive should be wk_ffnl1.<br /><br />65_nonlocal/mkkpg.F90: Line 105, what is variable kkpg doing in the OMP directive? It doesn't exist! Remove to get working. Line 93: two_pi isn't a variable, it's a parameter.<br /><br />65_nonlocal/opernlb_ylm.F90: Lines 178 and 179 are missing &amp; continuations. Why is the OpenMP styling so inconsistent across the files even within the same folder? Is there not a style guide for this project?<br /><br /><br />65_nonlocal/opernla_ylm.F90: Missing continuations in the block near line 166.<br /><br />The biggest danger of these missing continuations is that they only come up (by default) as *warnings*, hence the parallelization is incomplete in the final build.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Bug Report: OpenMP in 6.12.1</h3>
+				<div class="date">Posted: <strong>Wed Feb 15, 2012 12:27 am</strong></div>
+				<div class="author">by <strong>kaneod</strong></div>
+				<div class="content">Further to the previous post, here is a patch that corrects all the OpenMP directive errors (placement, contents) I've found in the abinit 6.12.1 source tree. It will also create a config.ac file (called m2-login1.ac) in ~abinit that lists the build options I used.<br /><br />Note that my corrections for derived types (blah%moreblah) are suboptimal - where a derived type is in a SHARED directive, really either the whole derived type (dtset, say) should be made SHARED or the particular component (dtset%nspden) should be assigned to a local variable, say, nspden, and that can then be SHARED. Since the things that are being shared in almost all cases are essentially just integers to give the max limit of a parallel DO loop, the latter is probably better. I see that in some places in the code these assignments have been made.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Bug Report: OpenMP in 6.12.1</h3>
+				<div class="date">Posted: <strong>Wed Feb 15, 2012 12:29 am</strong></div>
+				<div class="author">by <strong>kaneod</strong></div>
+				<div class="content">Ok, patches are apparently banned - moderator, email me (kane dot odonnell at synchrotron dot org dot au) if you want the patch.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Bug Report: OpenMP in 6.12.1</h3>
+				<div class="date">Posted: <strong>Wed Feb 15, 2012 2:38 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello kaneod,<br /><br />this is great thanks! The patch is not banned, you just have to use a suffix that the forum likes, such as .txt<br /><br />OpenMP is being revamped in abinit as we speak, to I will forward your patch to the appropriate developers (or better point them to this conversation).<br /><br />cheers<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Bug Report: OpenMP in 6.12.1</h3>
+				<div class="date">Posted: <strong>Wed Feb 15, 2012 4:20 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Hello kaneod,<br /><br />Thank you very much for reporting these problems.<br />I've already solved most of them in my development version but unfortunately <br />these bug fixes have not been included in version 6.12. They will be made available in version 6.13<br /><br />I would strongly discourage the use of OpenMP in version 6.12 since there are several<br />problems and inefficiencies that we are still trying to solve.  In particular, the OMP sections <br />used for the application of the non-local part of the potential are completely wrong.   <br />The orthogonalization algorithm should be rewritten with BLAS3 routines in order to achieve better parallel efficiency.<br /><br /><blockquote class="uncited"><div>Why is the OpenMP styling so inconsistent across the files even within the same folder? Is there not a style guide for this project?</div></blockquote><br /><br />No, as far as I know. Note that most of the OMP sections were coded long time ago, and then disabled since the core developers<br />prefer to concentrate most of effort on the pure MPI version.<br />Now OpenMP is being revamped in abinit (in particular in the GW code), since we are trying to improve the scalability of the code <br />by using a hybrid MPI-OpenMP implementation.<br /><br />Contributions and bug fixes are obviously welcome. <br />The main problem, however, is that I'm rewriting most of the OMP sections and this will complicate the merge of<br /> patches done on top of version 6.12.<br />The best solution would be to create a development branch and then use bazaar to manage the different contributions.<br /><br />People who want to contribute to the development of the OMP parallelism can contact me by mail.<br /><br />Best regards,<br />Matteo Giantomassi</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Bug Report: OpenMP in 6.12.1</h3>
+				<div class="date">Posted: <strong>Thu Feb 16, 2012 12:34 am</strong></div>
+				<div class="author">by <strong>kaneod</strong></div>
+				<div class="content">Thanks for the replies! Well, having OpenMP working for me is only an interest rather than a necessity - the bands parallelism in abinit seems quite effective at getting good speedup for molecular systems (nkpts=1) across MPI. I imagine in the long term though, the scalability will be better for a code with well-integrated OpenMP/MPI hybrid routines where only one thread per node actually communicates via MPI. <br /><br />It's all a bit academic as I get segfaults (constantly) with the executable that compiles cleanly with -fopenmp in gfortran 4.6.3. I guess this is stack issue, I will explore whether expanding OMP_STACKSIZE helps. <br /><br />With regards to posting the patch - I did try using a .txt extension and it still said I wasn't allowed to upload it. I'll put it on my github (github.com/kaneod) in the &quot;bits of python for physics&quot; repo for devs that are interested. <br /><br />Kane</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1533&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:04:56 GMT -->
+</html>

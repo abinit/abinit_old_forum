@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1765&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:56:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; input file for response function</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>input file for response function</h2>
+		<p><a href="viewtopic9185-2.html?f=9&amp;t=1765">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1765</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>input file for response function</h3>
+				<div class="date">Posted: <strong>Fri Jul 20, 2012 1:56 pm</strong></div>
+				<div class="author">by <strong>BAMGBOSE, M. K.</strong></div>
+				<div class="content">Someone should help me out. I got this error message,<br />   &quot; memana : ERROR -<br />  Test failed to allocate    7050.164 Mbytes<br />  It is not worth to continue<br />  Action : modify input variable to fit the available memory.<br />  or increase limit on available memory.<br />P This job should need less than  7050.164 Mbytes of memory.&quot;<br /> And my input file is <br />#Prepare the computation of linear optic properties<br />#of CaB6 crystal : ground-state with few bands,<br />#Prepare the computation of linear optic properties (for the imaginary spectrum only)<br /><br /> ndtset 6<br /><br />#First dataset : SC run with kpoints in the IBZ<br />   iscf1  3<br />  nband1  10     <br />  nstep1 25   <br /> kptopt1 1<br /> nbdbuf1 0<br /> prtden1 1   getden1 0   getwfk1 0    <br /><br />#Second dataset : NSC run with large number of bands, and points in the IBZ<br />    iscf2 -2  <br />   nband2  18  <br />   nstep2 25<br />  kptopt2  1<br />  getwfk2  1   getden2 1   <br /><br />#Third dataset : NSC run with large number of bands, and points in the the full BZ<br />    iscf3 -2  <br />   nband3  18 <br />   nstep3 25<br />  kptopt3  2  <br />  getwfk3  2   getden3 1   <br /><br /><br />#Fourth dataset : ddk response function along axis 1<br />   iscf4 -3<br />  nband4  18 <br />  nstep4  1  nline4  0<br /> kptopt4  2   <br /><br />   nqpt4  1  qpt4  0.0d0 0.0d0 0.0d0 <br />  rfdir4  1 0 0<br /> rfelfd4  2<br /> getwfk4  3<br /><br />#Fifth dataset : ddk response function along axis 2<br />   iscf5 -3<br />  nband5  18  <br />  nstep5  1  nline5  0<br /> kptopt5  2  <br /><br />   nqpt5  1  qpt5  0.0d0 0.0d0 0.0d0<br />  rfdir5  0 1 0<br /> rfelfd5  2<br /> getwfk5  3<br /><br />#Sixth dataset : ddk response function along axis 3<br />   iscf6 -3<br />  nband6  18  <br />  nstep6  1  nline6  0<br /> kptopt6  2   <br /><br />   nqpt6  1  qpt6  0.0d0 0.0d0 0.0d0<br />  rfdir6  0 0 1<br /> rfelfd6  2<br /> getwfk6  3<br /><br /> <br />#Data common to all datasets<br /> nshiftk 1<br /> shiftk  0.0 0.0 0.0<br /> ngkpt  24  24  24        <br /><br /> amu 40.078  10.81<br />diemac 10.0 <br /> iscf 3<br /># add to conserve old &lt; 6.7.2 behavior for calculating forces at each SCF step<br /> optforces 1<br /><br />#COMMON INPUT DATA###########################################################                  <br />#<br />ecut    50<br />ecutsm  0.5<br />nstep   50<br /><br /># CaB6 lattice structure<br />ntypat  2<br />znucl   20 5<br />natom   7    nbdbuf 2<br />typat   1 2 2 2 2 2 2  <br />tolwfr  1.e-20<br />tnons 72*0.0<br /><br />#Definition of the unit cell<br />acell   3*4.19<br />angdeg  90  90  90<br />spgroup 221<br /><br /># Atomic positions <br />xred       0.00   0.00   0.00  #Ca1<br />           0.50   0.50   0.20  #B2<br />           0.50   0.50  -0.20  #B2<br />           0.50   0.20   0.50  #B2<br />           0.50  -0.20   0.50  #B2<br />           0.20   0.50   0.50  #B2<br />           0.80   0.50   0.50  #B2<br />          <br /><br />ixc     11<br />timopt  2<br /><br />    Thanks</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1765&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:56:01 GMT -->
+</html>

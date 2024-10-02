@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2171&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:57:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Useful information from an object</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Useful information from an object</h2>
+		<p><a href="viewtopic682f.html?f=9&amp;t=2171">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2171</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Useful information from an object</h3>
+				<div class="date">Posted: <strong>Wed Jun 05, 2013 8:56 am</strong></div>
+				<div class="author">by <strong>Serge</strong></div>
+				<div class="content">Hello All.<br /><br />I have been puzzled by a question relative to what kind of Abinit basic parameters I need to add to the input file represented below in order to receive useful information from output files as much as possible.<br /><br />Please, prompt, what are the parameters necessary to set, et to what do I need to pay attention especially for program correct work?<br /><br />Many thanks!<br /><br />Serge.<br /><br />This is the, properly set to work, input file of semimetal Bi:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># Definition of the unit cell<br />acell 3*4.746 angstrom<br />angdeg 3*57.23<br />chkprim 0<br /><br /># Definition of the occupation number<br />#occopt 1<br />tsmear 0.04<br /><br /># Definition of the k-point grid<br />kptopt 1<br />ngkpt 2 2 2<br />nshiftk 4<br />shiftk<br />0.0&nbsp; 0.0&nbsp; 0.0<br />0.25 0.25 0.25<br />0.5&nbsp; 0.5&nbsp; 0.5<br />0.75 0.75 0.75<br /><br /># Definition of the atom types<br />ntypat 1<br />znucl 83<br /><br /># Definition of the atoms<br />natom 9<br />typat 9*1<br />xangst<br />0 0 0<br />4.1663 -2.2730 0<br />4.1663 2.2730 0<br />8.3326 0 0<br />2.9263 0 3.7365<br />7.0926 -2.2730 3.7365<br />7.0926 2.2730 3.7365<br />11.2589 0 3.7365<br />5.6295 0 1.8682<br /><br /># Exchange-correlation functional<br />#ixc 9<br /><br /># Definition of the planewave basis set<br />ecut 20<br />ecutsm 0.05<br /><br /># Definition of the SCF procedure<br />nstep 50<br />tolvrs 1.0d-5<br />iscf 7<br /><br /># Definition of the spin-polarization<br />nsppol 2<br />#npulayit 20<br /><br /># Definition of the electric field ( -- with or without)<br />berryopt 4<br />efield 3*0.0001<br />#nband 45<br />nbdbuf 0<br /><br />occopt 2<br />occ 23*1.0 <br />&nbsp; &nbsp; &nbsp; 22*1.0<br />charge 43 <br />nband 45*1</code></pre></div><br /><br />And this is its pseudopotential:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Hartwigsen-Goedecker-Hutter psp for Bi,&nbsp; from PRB58, 3641 (1998) <br />&nbsp; &nbsp;83&nbsp; &nbsp;5&nbsp; 010605 zatom,zion,pspdat<br />&nbsp;3 1&nbsp; &nbsp;2 0 2001 0&nbsp; pspcod,pspxc,lmax,lloc,mmax,r2well <br />&nbsp; 0.605000&nbsp; &nbsp; 6.679437&nbsp; &nbsp; 0.000000&nbsp; &nbsp; 0.000000&nbsp; &nbsp;0.000000 rloc, c1, c2, c3, c4<br />&nbsp; 0.678858&nbsp; &nbsp; 1.377634&nbsp; &nbsp;-0.513697&nbsp; &nbsp;-0.471028&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; rs, h11s, h22s, h33s<br />&nbsp; 0.798673&nbsp; &nbsp; 0.655578&nbsp; &nbsp;-0.402932&nbsp; &nbsp; 0.000000&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; rp, h11p, h22p, h33p<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.305314&nbsp; &nbsp;-0.023134&nbsp; &nbsp; 0.000000&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; k11p, k22p, k33p<br />&nbsp; 0.934683&nbsp; &nbsp; 0.378476&nbsp; &nbsp; 0.000000&nbsp; &nbsp; 0.000000&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; rd, h11d, h22d, h33d<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.029217&nbsp; &nbsp; 0.000000&nbsp; &nbsp; 0.000000&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; k11d, k22d, k33d<br />&nbsp; 0.000000&nbsp; &nbsp; 0.000000&nbsp; &nbsp; 0.000000&nbsp; &nbsp; 0.000000&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; rf, h11f, h22f, h33f<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.000000&nbsp; &nbsp; 0.000000&nbsp; &nbsp; 0.000000&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; k11f, k22f, k33f</code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Useful information from an object</h3>
+				<div class="date">Posted: <strong>Sat Jun 08, 2013 10:07 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">You have a number of odd features in this input file, most notably that you are trying to compute finite e-field with berry phase in the presence of tsmear--but this method requires no empty or partially filled bands. Also very strange is that you have the total charge of the cell set to 43, which will be very unstable, and is certainly incompatible with berry phase. Have you done all the tutorials relevant to berry phase and finite electric field? What is it that you are trying to calculate, anyway?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Useful information from an object</h3>
+				<div class="date">Posted: <strong>Mon Jun 10, 2013 1:15 pm</strong></div>
+				<div class="author">by <strong>Serge</strong></div>
+				<div class="content">Thank you to the answer. I try, in sum, to learn to compute electrical conductivity of metals (or semimetals). To achieve it, I suggest that I need to make computation at first by giving electrical field, after to use the &quot;conducti&quot; tool. I understand you that the working code presented here is not quite proper, so I am thinking about how to make it proper.<br /><br />The tutorials on such questions I began to look through just only because of not knowing about their existing.<br /><br />If you have any advices, please, prompt.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2171&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:57:26 GMT -->
+</html>

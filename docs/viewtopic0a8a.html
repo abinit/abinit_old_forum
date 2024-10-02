@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2045&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:30:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; compilation options and test failures</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>compilation options and test failures</h2>
+		<p><a href="viewtopic1bd6.html?f=3&amp;t=2045">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2045</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>compilation options and test failures</h3>
+				<div class="date">Posted: <strong>Tue Mar 19, 2013 5:57 pm</strong></div>
+				<div class="author">by <strong>oivulf</strong></div>
+				<div class="content">Hallo,<br />a comparison of abinit-7.0.5 and abinit packaged by debian 4.3 evidenced different results.<br />So I ran the tests and found that many of them did not pass.<br />I found the same on abinit-6.12.3 and 4.8.5 and so began varying the compilation options:<br />gfortran4.7 gfortran4.4, with and without openmpi<br />atlas openblas and netlib<br />I also tried a different machine but with no luck.<br />In the input that started all,<br />abinit compiled by me gives several warnings about density being lower than -0.05,<br />abinit from debian package gives different etot and no such warning.<br />What might the problem be?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: compilation options and test failures</h3>
+				<div class="date">Posted: <strong>Tue Mar 19, 2013 7:10 pm</strong></div>
+				<div class="author">by <strong>oivulf</strong></div>
+				<div class="content">When I compile abinit-7.0.5 with debug&gt;enhanced<br />I get instead<br />Program received signal SIGSEGV: Segmentation fault - invalid memory reference.<br /><br />Backtrace for this error:<br />#0  0x7F122AB0C667<br />#1  0x7F122AB0CC34<br />#2  0x7F1229EB04EF<br />#3  0x7F122CF1573F<br />#4  0x7F122CF15708<br />#5  0x7F122CA7437C<br />#6  0x7F122D16C7CF<br />#7  0x4050169 in __m_cgtools_MOD_cg_zdotc at m_cgtools.F90:494<br />#8  0x7764F5 in vtowfk_ at vtowfk.F90:878<br />#9  0x70A53F in vtorho_ at vtorho.F90:1089<br />#10  0x67D24E in scfcv_ at scfcv.F90:1334<br />#11  0x6408B3 in scfcv_new_ at scfcv_new.F90:240<br />#12  0x641085 in scfcv_new2_ at scfcv_new2.F90:144<br />#13  0x5DA699 in gstate_ at gstate.F90:1105<br />#14  0x4AE83B in gstateimg_ at gstateimg.F90:421<br />#15  0x48AA5F in driver_ at driver.F90:581<br />#16  0x46BBF1 in abinit at abinit.F90:435<br />might it be related?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: compilation options and test failures</h3>
+				<div class="date">Posted: <strong>Wed Mar 20, 2013 1:33 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Hi,<br /><br />The segmentation fault is probably related to a bug in your implementation of BLAS. Configure abinit with the option --enable-zdot-bugfix and recompile. You may still have problems with Wannier functions if you use them.<br /><br />About the consistency between Abinit versions.<br />A great care is devoted to the reproducibility of the results but it is unwise to do comparisons between version 4 and 6/7. There have been changes to the default values of several variables and this may affect the results. And I wouldn't do comparisons between absolute total energies but rather between differences.<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: compilation options and test failures</h3>
+				<div class="date">Posted: <strong>Thu Mar 21, 2013 7:37 am</strong></div>
+				<div class="author">by <strong>oivulf</strong></div>
+				<div class="content">Putting<br />nsim 1<br />eliminates the density &lt; -0.05 warnings and gives reasonable results again in version 7.0.5,<br />and equal to results from versions before 5.4.4p.<br />The same does displacing an atom by a physically irrelevant quantity to break symmetry.<br />  <img class="smilies" src="images/smilies/icon_redface.gif" alt=":oops:" title="Embarrassed" /> So compilation options and libraries had nothing to do with the problem.<br />From the manual, I had deduced nsim has only to do with editing of coordinate nuclei,<br />but apparently it is not so.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: compilation options and test failures</h3>
+				<div class="date">Posted: <strong>Fri Mar 22, 2013 5:17 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Configure options and libs explain the segfaults you experienced, not the difference between versions<br /><br /> nsim? I don't know that one ... are you talking about nsym? <img class="smilies" src="images/smilies/icon_rolleyes.gif" alt=":roll:" title="Rolling Eyes" /> By specifying nsym 1 you force to have no symmetry i.e. only identity (and I would add symrel to be sure which one is applied). Which spacegroup comes out of your test?<br />Looking at your input file, I can hardly recognize the bulk gold crystal in such a tiny cell. IMHO, gold is fcc, spacegroup 225 with a cell length of 4.0785A - according to Wyckoff. So I would define the crystall as ...<br />ntypat 1<br />znucl 79<br />acell 3*4.07825 angstrom<br />natom 1<br />typat 1<br />rprim 0.0 1/2 1/2<br />      1/2 0.0 1/2<br />      1/2 1/2 0.0<br />xred 0.0 0.0 0.0<br /><br />and let the symmetry finder do its job.<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: compilation options and test failures</h3>
+				<div class="date">Posted: <strong>Mon Mar 25, 2013 7:37 am</strong></div>
+				<div class="author">by <strong>oivulf</strong></div>
+				<div class="content">Yes, nsym I meant.<br />It is a 3 layer sqrt(3)xsqrt(3) slab, coordinates are from previous calculations on crystal (the program).<br />It was written so, because ready for geometry relaxation and an adsorption study.<br />The symmetry and multiplicity are recognized correctly, imo<br />--------------------------------<br /> symlatt : the Bravais lattice is hP (primitive hexagonal)<br /><br /> chkprimit : COMMENT -<br />  According to the symmetry finder, the unit cell is<br />  not primitive, with multiplicity=  3.<br />  This is allowed, as the input variable chkprim is 0.<br />.........<br />    nsym =        36  n1xccc =         0  ntypat =         1  occopt =         4<br />.........<br />           symrel      1  0  0   0  1  0   0  0  1       1  0  0   0  1  0   0  0  1<br />                       1  0  0   0  1  0   0  0  1      -1  0  0   0 -1  0   0  0 -1<br />                      -1  0  0   0 -1  0   0  0 -1      -1  0  0   0 -1  0   0  0 -1<br />                      -1  1  0   0  1  0   0  0  1      -1  1  0   0  1  0   0  0  1<br />                      -1  1  0   0  1  0   0  0  1       1 -1  0   0 -1  0   0  0 -1<br />                       1 -1  0   0 -1  0   0  0 -1       1 -1  0   0 -1  0   0  0 -1<br />                      -1  1  0  -1  0  0   0  0  1      -1  1  0  -1  0  0   0  0  1<br />                      -1  1  0  -1  0  0   0  0  1       1 -1  0   1  0  0   0  0 -1<br />                       1 -1  0   1  0  0   0  0 -1       1 -1  0   1  0  0   0  0 -1<br />                       0 -1  0  -1  0  0   0  0  1       0 -1  0  -1  0  0   0  0  1<br />                       0 -1  0  -1  0  0   0  0  1       0  1  0   1  0  0   0  0 -1<br />                       0  1  0   1  0  0   0  0 -1       0  1  0   1  0  0   0  0 -1<br />                       0 -1  0   1 -1  0   0  0  1       0 -1  0   1 -1  0   0  0  1<br />                       0 -1  0   1 -1  0   0  0  1       0  1  0  -1  1  0   0  0 -1<br />                       0  1  0  -1  1  0   0  0 -1       0  1  0  -1  1  0   0  0 -1<br />                       1  0  0   1 -1  0   0  0  1       1  0  0   1 -1  0   0  0  1<br />                       1  0  0   1 -1  0   0  0  1      -1  0  0  -1  1  0   0  0 -1<br />                      -1  0  0  -1  1  0   0  0 -1      -1  0  0  -1  1  0   0  0 -1<br />----------------------------------<br />My question is still, why should automatic symmetry recognition change the results?</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2045&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:30:31 GMT -->
+</html>

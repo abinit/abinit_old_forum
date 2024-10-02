@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3987&hilit=Antonio&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 20:24:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; parallel berryopt  -1 crashing with more than one node</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>parallel berryopt  -1 crashing with more than one node</h2>
+		<p><a href="viewtopic0bcb.html?f=10&amp;t=3987">https://forum.abinit.org/viewtopic.php?f=10&amp;t=3987</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>parallel berryopt  -1 crashing with more than one node</h3>
+				<div class="date">Posted: <strong>Wed Dec 05, 2018 5:02 pm</strong></div>
+				<div class="author">by <strong>antonio</strong></div>
+				<div class="content">Dear all,<br />I compiled abinit 8.10.1 on the <a href="https://docs.it4i.cz/salomon/introduction/" class="postlink">salomon</a> and <a href="https://docs.it4i.cz/anselm/introduction/" class="postlink">anselm</a> clusters using intel 17.0 compilers, libxc 3.0.0 and the following config parameters (config and make logs attached):<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure --prefix=/home/acamm/bin/abinit-8.10.1 \<br />&nbsp;--enable-mpi --enable-mpi-io --enable-optim \<br />&nbsp;--with-dft-flavor=libxc \<br />&nbsp;--with-mpi-level=2 \<br />&nbsp;--enable-mpi-inplace \<br />&nbsp;--with-trio-flavor=netcdf-fallback \<br />&nbsp;--enable-fallbacks \<br />&nbsp;--enable-avx-safe-mode \<br />&nbsp;--with-fc-vendor=intel \<br />&nbsp;--with-fft-flavor=fftw3-mkl \<br />&nbsp;--with-fft-libs=&quot;-lmkl_intel_lp64 -lmkl_sequential -lmkl_core&quot; \<br />&nbsp;--with-linalg-flavor=&quot;mkl+scalapack&quot; \<br />&nbsp;--with-linalg-libs=&quot;-lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lmkl_blacs_intelmpi_lp64 -lpthread -lm -ldl&quot; \<br />&nbsp;FCFLAGS=&quot;-O2 -axCORE-AVX2 -xavx -mkl -fp-model precise -heap-arrays &quot; \<br />&nbsp;FFLAGS=&quot;-O2 -axCORE-AVX2 -xavx -mkl -fp-model precise -heap-arrays &quot; \<br />&nbsp;CFLAGS=&quot;-O2 -axCORE-AVX2 -xavx -mkl -fp-model precise -heap-arrays &quot; \<br />&nbsp;CXXFLAGS=&quot;-O2 -axCORE-AVX2 -xavx -mkl -fp-model precise -heap-arrays &quot; \<br />&nbsp;FC=mpiifort \<br />&nbsp;CC=mpiicc \<br />&nbsp;CXX=mpiicpc <br /></code></pre></div><br /><br />I am trying to run a berry phase calculation in preparation for a geometry relaxation in the presence of electric field. I start the calculation from previously converged wavefunction and density files, attached you find the input. The calculation terminates correctly if I run the calculation on only one node. If I run it on two or more nodes, then abinit crashes without any error message. I tried to compile it by adding/removing one by one and combining them: <br />1) the enable-mpi-* tags<br />2) enable-optim,<br />3) --with-mpi-level=1or 2<br />4) --enable-zdot-bugfix<br />5) --enable-avx-safe-mode<br /><br />in all the cases, the job ends cleanly if I use only one node.<br />Any suggestion is really appreciated.<br /><br />Thanks a lot in advance<br /><br /><span class="posthilit">Antonio</span> Cammarata</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel berryopt  -1 crashing with more than one node</h3>
+				<div class="date">Posted: <strong>Thu Dec 06, 2018 9:23 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear <span class="posthilit">Antonio</span>,<br />I don't see something really wrong in your compilation. It looks like it is a machine architecture specific problem, you could contact the IT guys of the clusters to ask them to get more detailed error message from the machine.<br />A few questions: <br />How many k-points do you have in your calculation? <br />If you do other type of calculations, like relaxation or single point energy, do you have the same problem (to know if this is linked to the E-field or not)?<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel berryopt  -1 crashing with more than one node</h3>
+				<div class="date">Posted: <strong>Thu Dec 06, 2018 10:19 am</strong></div>
+				<div class="author">by <strong>antonio</strong></div>
+				<div class="content">Dear Eric,<br /><br />thanks for your quick answer. The number of kpoints is that in the attached berry.in file<br />ngkpt       9 9 9<br /><br />When I run this job on a single node, it terminates cleanly. I then used the converged WFK and DEN files to restart a calculation on 2 nodes where I optimize the same structure with non-null efield. I tried efield, red_efield and red_efieldbar but, in each case, whenever the job enters the computation of the Berry phase, it crashes; if I use only one node, then it continues without any problem (I could not terminate the relaxation because it takes too long with one node). I therefore believe that the problem is related to the Berry phase routine and the parallelization scheme over multiple nodes.<br />As an update, I run again the berry.in calculation attached before and managed to have the error flushed into a file. When it crashes, the __ABI_MPIABORTFILE__ file contains the following error:<br /><br /> <br />--- !BUG<br />src_file: m_berryphase_new.F90<br />src_line: 1009<br />mpi_rank: 14<br />message: |<br />    For k-point #  173,<br />      the determinant of the overlap matrix is found to be 0.<br />...<br /> <br />It therefore seems to me that there is a lack of communication between the nodes such that some part of the overlap matrix is not received by the master node or the result of the overlap integrals are not correctly collected and then zeroed; as a consequence, the determinant is null. This is just an idea, I am not an expert of programming languages.<br /><br />Thanks again for your help.<br />Best<br /><span class="posthilit">Antonio</span></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel berryopt  -1 crashing with more than one node</h3>
+				<div class="date">Posted: <strong>Fri Dec 14, 2018 7:05 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Hi, <br />I need more information to give a helpful answer. In particular, how many kpts are you using? How many nodes? PAW or NCPP?<br /><br />thanks,<br />Joe</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel berryopt  -1 crashing with more than one node</h3>
+				<div class="date">Posted: <strong>Thu Jan 10, 2019 12:50 am</strong></div>
+				<div class="author">by <strong>antonio</strong></div>
+				<div class="content">Dear Joe,<br />thanks for your answer. I have an update on this. I recompiled abinit with the gnu compilers on the salomon machine I mentioned in my first post and now the calculation of the ab.in file that I attached before ends correctly. So, it looks like that the issue is related to the kind of compilers. I here attach a file containing the configure settings and the compilers and libraries loaded at compilation time for future reference.<br /><br />Unfortunately, this version doesn't work for a phonon calculation in the presence of electric field. The input file is ab_pho.in; I run it on the Salomon cluster using 2 nodes for a total of 48 cores (24 cores per node). Once the calculation enters DATASET 3, abinit stops producing the errors reported in the job.err file. I attach the abinit output (ab.out) and the standard output (std.out).<br /><br />I tried to recompile abinit by removing the optimization option, the mpi-io and mpi-inplace ooptions, by using the non-mpi fftw3, but it stops at the same point and with the same errors. I also enabled the debug option but I didn't obtain any further information. Only the serial version works but it is extremely slow.<br /><br />Thanks a lot for your help<br /><br />Best<br /><br /><span class="posthilit">Antonio</span></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel berryopt  -1 crashing with more than one node</h3>
+				<div class="date">Posted: <strong>Sun Jan 27, 2019 10:45 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Hi <span class="posthilit">Antonio</span>,<br />If you use PAW, phonons under electric field is not implemented... A clear stop message should be added in the code.<br />All the best,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel berryopt  -1 crashing with more than one node</h3>
+				<div class="date">Posted: <strong>Mon Jan 28, 2019 9:47 am</strong></div>
+				<div class="author">by <strong>antonio</strong></div>
+				<div class="content">Hi Eric,<br />no, I don't use PAWs, I use the norm-conserving pseudopotentials from the abinit webpage.<br /><br /><span class="posthilit">Antonio</span></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel berryopt  -1 crashing with more than one node</h3>
+				<div class="date">Posted: <strong>Mon Jan 28, 2019 10:30 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Hi <span class="posthilit">Antonio</span>,<br />OK for not using PAW. In the three dataset you have 50, 260 and 512 k-points while you are running on 48 CPU, which does not make an efficient parallelism. This could also make some calculation crashing depending on the compilation, etc, thought I agree it should not but to be sure I would adapt the number of CPU accordingly (also you have a &quot;Segmentation fault - invalid memory reference.&quot; error from the machine).<br />I also suspect that you don't have enough RAM memory for the dataset 3 (typical case where the error message could end up of a segmentation fault from the machine instead of just saying &quot;not enough memory&quot;...). <br />All the best,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel berryopt  -1 crashing with more than one node</h3>
+				<div class="date">Posted: <strong>Wed Jan 30, 2019 4:47 pm</strong></div>
+				<div class="author">by <strong>antonio</strong></div>
+				<div class="content">Dear Eric,<br />each computing node on salomon cluster has 128 GB RAM. I tested the job on up to 10 nodes for a total of 240 cores (each node has 24 cores); I also tested the job on more nodes with less than 24 cores per node, so as to have more memory for the processes per node, but the job stops at the same point with the same error. When I was using the intel compilers, I got an error like &quot;the determinant of the overlap matrix is found to be 0.&quot;. This does not happen if I run the job in serial, whatever is the compiler I use. So I believe that the problem is related on how the master node collects the information from the remaining other nodes to build some specific matrix; possibly, the matrix is not properly filled and the determinant is null. I think this can also explain the &quot;invalid memory reference&quot;: maybe some address is associated to some parts of such matrix but they are never filled and the resulting matrix is missing elements. It's only my guess, I don't know the detail of the code.<br /><br />If I can do any test to help in finding the problem, do not hesitate to ask.<br />Thanks a lot in advance for your help.<br />All the best<br /><span class="posthilit">Antonio</span></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel berryopt  -1 crashing with more than one node</h3>
+				<div class="date">Posted: <strong>Fri Feb 01, 2019 5:27 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear <span class="posthilit">Antonio</span>,<br />OK, sounds like a fix can be done but I need you to test it.<br />In the file src/67_common/m_berryphase_new.F90, you have the following lines:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;<br />&nbsp;998&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (sqrt(dtm_k(1)*dtm_k(1) + dtm_k(2)*dtm_k(2)) &lt; tol12) then<br />&nbsp;999&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; write(message,'(a,i5,a,a,a)')&amp;<br />1000 &amp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'&nbsp; For k-point #',ikpt1,',',ch10,&amp;<br />1001 &amp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'&nbsp; the determinant of the overlap matrix is found to be 0.'<br />1002&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; MSG_BUG(message)<br />1003&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; end if<br /></code></pre></div><br /><br />Could you replace the line 1002 &quot;MSG_BUG(message)&quot; by the following lines:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>write(std_out,*)message,dtm_k(1:2)<br />if(abs(dtm_k(1))&lt;=1d-12)dtm_k(1)=1d-12<br />if(abs(dtm_k(2))&lt;=1d-12)dtm_k(2)=1d-12<br />write(std_out,*)' Changing to:',dtm_k(1:2)<br /></code></pre></div><br /><br />As you can see if the dtm_k(1:2) is found to be &quot;zero&quot; (machine precision...) then the code stop. Here the fix will just replace the value by 10^-12, I'll see later what's the best value to put there to make a definitive fix in the code. This will solve the stop regarding &quot;the determinant of the overlap matrix is found to be 0&quot; and hopefully this will solve the problem...<br /><br />After these line replacements you'll have to recompile quickly abinit.<br />Let me know how this goes, fingers crossed!<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel berryopt  -1 crashing with more than one node</h3>
+				<div class="date">Posted: <strong>Wed Feb 06, 2019 1:46 pm</strong></div>
+				<div class="author">by <strong>antonio</strong></div>
+				<div class="content">Dear Eric,<br />I recompiled abinit with both intel and gnu compilers after making the changes you suggested but I get exactly the same errors.<br /><br /><span class="posthilit">Antonio</span></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel berryopt  -1 crashing with more than one node</h3>
+				<div class="date">Posted: <strong>Tue Feb 12, 2019 4:28 pm</strong></div>
+				<div class="author">by <strong>antonio</strong></div>
+				<div class="content">Dear Eric,<br />I have an update on this. I get the same error if I run a single point in the presence of electric field (berryopt 4, efield 0.0 0.0 0.0005) and I specify by hand the parallel distribution; the error is the same, no matter the values I use for npkpt, npfft, npband, bandpp, either if I follow the suggestions from autoparal or not. I digged a bit into the code and it looks like that the &quot;invalid memory reference&quot; is related to a bad definition of the mpi_enreg%* variables; the code stops in src/52_fft_mpi_noabirule/m_fftcore.F90 at the line<br />       mpi_enreg%my_kgtab(i1,ikpt_this_proc) = kg_ind(i1)<br />when I do the dftp calculation and at the line<br />   np_band=1; if(mpi_enreg%paral_kgb==1) np_band=max(1,mpi_enreg%nproc_band)<br />when I just do an SCF with berryopt 4 and I turn on the manual parallelization with paral_kgb 1 and the related keywords.<br /><br />I hope this helps to solve the issue.<br /><br />Thanks<br /><span class="posthilit">Antonio</span></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel berryopt  -1 crashing with more than one node</h3>
+				<div class="date">Posted: <strong>Thu Feb 21, 2019 5:39 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear <span class="posthilit">Antonio</span>,<br />It seems there might be a problem with memory, I'm looking at it.<br />I would like to clarify one thing, you said that at some point you manage to get the error message that terminates by &quot;the determinant of the overlap matrix is found to be 0.&quot;. The fix I've sent you should overpass this problem, is it the case (this is not a memory problem)? Or do you have instead the memory problem?<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel berryopt  -1 crashing with more than one node</h3>
+				<div class="date">Posted: <strong>Thu Feb 21, 2019 5:55 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">OK, with the enable_debug='naughty' and with_fno_backtrace=&quot;yes&quot; compilation mode I get a bit more details regarding where it crashes exactly:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;kpgio: loop on k-points done in parallel<br />At line 481 of file m_dfpt_fef.F90<br />Fortran runtime error: Index '126613' of dimension 1 of array 'pwindall' above upper bound of 126612<br /><br />Error termination. Backtrace:<br />At line 481 of file m_dfpt_fef.F90<br />Fortran runtime error: Index '126613' of dimension 1 of array 'pwindall' above upper bound of 126612<br /><br />Error termination. Backtrace:<br />At line 481 of file m_dfpt_fef.F90<br />Fortran runtime error: Index '126613' of dimension 1 of array 'pwindall' above upper bound of 126612<br /><br />Error termination. Backtrace:<br />At line 481 of file m_dfpt_fef.F90<br />Fortran runtime error: Index '126613' of dimension 1 of array 'pwindall' above upper bound of 126612<br /></code></pre></div><br /><br />...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel berryopt  -1 crashing with more than one node</h3>
+				<div class="date">Posted: <strong>Sun Feb 24, 2019 6:14 pm</strong></div>
+				<div class="author">by <strong>antonio</strong></div>
+				<div class="content"><blockquote><div><cite>ebousquet wrote:</cite>Dear <span class="posthilit">Antonio</span>,<br />It seems there might be a problem with memory, I'm looking at it.<br />I would like to clarify one thing, you said that at some point you manage to get the error message that terminates by &quot;the determinant of the overlap matrix is found to be 0.&quot;. The fix I've sent you should overpass this problem, is it the case (this is not a memory problem)? Or do you have instead the memory problem?<br />Best wishes,<br />Eric</div></blockquote><br /><br />I did the test with your fix and it didn't work (see my post above on Feb 6). I still have the memory problem which, after your last post, it looks like related to a bad sizing of some matrix, consistently with what I saw (see my post on Feb 12). If there is some test I can do to help, please, let me know.<br />Thanks for your help.<br /><br /><span class="posthilit">Antonio</span></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel berryopt  -1 crashing with more than one node</h3>
+				<div class="date">Posted: <strong>Tue Feb 26, 2019 4:16 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear <span class="posthilit">Antonio</span>,<br />OK, there is indeed a problem in the implementation of this m_dfpt_fef.F90 in parallel, I don't even understand how the guy who coded that could have a code working in parallel, there is a problem with the number of k-point mkmem used for mpi and the total number of k-point nkpt (as Matteo pointed it to me). This is working in sequential because mkmem=nkpt and the summing over k-point is then OK. <br />I'll try to fix it but this can take some time since I don't know this routine...<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel berryopt  -1 crashing with more than one node</h3>
+				<div class="date">Posted: <strong>Sun Mar 03, 2019 1:48 pm</strong></div>
+				<div class="author">by <strong>antonio</strong></div>
+				<div class="content">Dear Eric,<br />I'm glad that the problem has been identified, I look forward to news. If I can be of any help with testing, please, let me know.<br /><br />Best<br /><span class="posthilit">Antonio</span></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel berryopt  -1 crashing with more than one node</h3>
+				<div class="date">Posted: <strong>Fri Mar 22, 2019 4:58 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">OK, actually the developer reported in the automatic test v5/t23 that the phonons under electric fields fails if MPI... <br />So, the bug has never been fixed!<br />Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3987&hilit=Antonio&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 20:24:27 GMT -->
+</html>

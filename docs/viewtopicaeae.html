@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3998&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:38:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Configuration failure: C preprocessor</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Configuration failure: C preprocessor</h2>
+		<p><a href="viewtopica0e7.html?f=3&amp;t=3998">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3998</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Configuration failure: C preprocessor&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Wed Dec 19, 2018 10:11 pm</strong></div>
+				<div class="author">by <strong>zlevine@nist.gov</strong></div>
+				<div class="content">I am trying to install abinit-8.10.1 on a second computer.  On my home machine, I succeeded without problem.  The OS is: 3.10.0-862.14.4.el7.x86_64, so GNU/Linux Red Hat Enterprise 7.<br /><br />I ran <br /><br />./configure --prefix=/home/zlevine/Code/Abinit/abinit-8.10.1/Abinit --with-mpi-prefix=/usr/lib64/openmpi<br /><br />It ends with this:<br /><br />checking for /share/sw/pgi/linux86-64/17.10/bin/pgcc... no<br />configure: error: could not run C preprocessor &quot;/share/sw/pgi/linux86-64/17.10/bin/pgcc -Mcpp&quot;<br /><br />I tried both:<br />./configure --prefix=/home/zlevine/Code/Abinit/abinit-8.10.1/Abinit --with-mpi-prefix=/usr/lib64/openmpi<br />./configure --prefix=/home/zlevine/Code/Abinit/abinit-8.10.1/Abinit --with-mpi-prefix=/usr/lib64/openmpi CPP=&quot;/share/sw/pgi/linux86-64/17.10/bin/pgcc -Mcpp&quot;<br /><br />The odd thing is that I have that program:<br /><br />ls -l /share/sw/pgi/linux86-64/17.10/bin/pgcc<br />-r-xr-xr-x 1 root root 208336 Oct 30  2017 /share/sw/pgi/linux86-64/17.10/bin/pgcc*<br /><br />Also, if I do<br />/share/sw/pgi/linux86-64/17.10/bin/pgcc -Mcpp hello.c<br /><br />on a simple file with C preprocessor commands, it responds correctly, making a &quot;hello.i&quot; file.<br /><br />So why is it failing the check for the C preprocessor?<br /><br />I thought perhaps it would be better to use gcc.   So I did this:<br /><br />./configure --prefix=/home/zlevine/Code/Abinit/abinit-8.10.1/Abinit CC=&quot;/usr/bin/gcc&quot; CPP=&quot;/usr/bin/gcc -E&quot;<br /><br />That leads to a similar error.  (Taking out the mpi without gcc also leads to a similar error as above.)<br /><br />configure: error: could not run C preprocessor &quot;/usr/bin/gcc -E&quot;<br /><br />What to do?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configuration failure: C preprocessor</h3>
+				<div class="date">Posted: <strong>Thu Dec 27, 2018 6:49 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Sorry but, there has been no more PGI support for a long time....<br />PGI has some difficulties to compile ABINIT  <img class="smilies" src="images/smilies/icon_e_confused.gif" alt=":?" title="Confused" /></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3998&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:38:21 GMT -->
+</html>

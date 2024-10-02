@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=446&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Compiling abinit 6.0.x on Mac OS X 10.6.4 using ifort 11.1</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Compiling abinit 6.0.x on Mac OS X 10.6.4 using ifort 11.1</h2>
+		<p><a href="viewtopicd7ca.html?f=3&amp;t=446">https://forum.abinit.org/viewtopic.php?f=3&amp;t=446</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Compiling abinit 6.0.x on Mac OS X 10.6.4 using ifort 11.1</h3>
+				<div class="date">Posted: <strong>Wed Jun 30, 2010 9:04 pm</strong></div>
+				<div class="author">by <strong>ldamewood</strong></div>
+				<div class="content">I am having issues compiling any of the abinit 6.0.x packages using ifort 11.1.088 on Mac OS X 10.6.4. The problem is that I receive undefined symbol errors while linking abinit, but the symbols appear to exist in the linking command. Here is an overview of what I found:<br /><br />(1) I created a very minimal configuration using the following command<br />$ ../configure FC=ifort CC=icc CXX=icpc --disable-all-plugins --with-linalg-libs=&quot;-llapack -lblas&quot;<br />Output attached as configure.log<br /><br />(2) Run make<br />$ make<br />Output here: <a href="http://ms.physics.ucdavis.edu/~ldamewood/make.log" class="postlink">http://ms.physics.ucdavis.edu/~ldamewood/make.log</a><br /><br />(3) One of the undefined symbols from the make log is &quot;_pseudo_pwscf_mp_ecutrho_&quot; from lib45_psp_parser.a. I checked to see if this symbol exists anywhere and it appears to exist in lib45_psp_parser.a itself.<br />$ nm -A src/45_psp_parser/lib45_psp_parser.a | grep _pseudo_pwscf_mp_ecutrho_<br />src/45_psp_parser/lib45_psp_parser.a:m_pseudo_pwscf.o: 0000000000000010 C _pseudo_pwscf_mp_ecutrho_<br />src/45_psp_parser/lib45_psp_parser.a:read_upf_pwscf.o:                  U _pseudo_pwscf_mp_ecutrho_<br /><br />(4) This problem does not exist when using gfortran where the symbol type is different.<br />$ nm -A src/45_psp_parser/lib45_psp_parser.a | grep ecutrho<br />src/45_psp_parser/lib45_psp_parser.a:m_pseudo_pwscf.o: 0000000000149940 D ___pseudo_pwscf_MOD_ecutrho<br />src/45_psp_parser/lib45_psp_parser.a:read_upf_pwscf.o:                  U ___pseudo_pwscf_MOD_ecutrho<br /><br />I'm not exactly sure what the difference between a common symbol (C) and a data section symbol (D) is, or if that really matters. This issue seems to be a bug in the mac version of ifort or how abinit handles the pwscf module; I'm also using an older version of ifort in RHL and everything appears to work there. I don't currently have access to that machine so I can't upload any logs from it. I hope this information provides some clue on how to avoid or fix this bug.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling abinit 6.0.x on Mac OS X 10.6.4 using ifort 11</h3>
+				<div class="date">Posted: <strong>Wed Jun 30, 2010 11:24 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hello,<br /><br />try with <br /><br />FC_LDFLAGS_EXTRA=&quot;-Wl,-search_paths_first&quot;<br /><br />in the configure command<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling abinit 6.0.x on Mac OS X 10.6.4 using ifort 11</h3>
+				<div class="date">Posted: <strong>Thu Jul 01, 2010 12:36 am</strong></div>
+				<div class="author">by <strong>ldamewood</strong></div>
+				<div class="content"><blockquote><div><cite>jbeuken wrote:</cite>Hello,<br /><br />try with <br /><br />FC_LDFLAGS_EXTRA=&quot;-Wl,-search_paths_first&quot;<br /><br />in the configure command<br /><br />jmb</div></blockquote><br /><br />jmb, <br /><br />Thanks for the suggestion. Unfortunately, I get the same error. However, it did inspire me to read the manual page for ld. I decided to try relinking lib45_psp_parser.a like so:<br /><br />ld -d -r -o lib45_psp_parser.a flib_pwscf.o functionals_pwscf.o inpspheads.o m_pseudo_pwscf.o m_pseudo_types.o psxml2ab.o read_upf_pwscf.o upfheader2abi.o interfaces_45_psp_parser.o<br /><br />The &quot;-d&quot; option claims to &quot;force the definition of common symbols&quot;. This allowed the main program to link and so far, the executable appears to work! I don't know if this is a good solution, but I'm happy that it links and runs.<br /><br />Thanks again for the suggestion! It certainly put me on the right path.<br />--liam</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling abinit 6.0.x on Mac OS X 10.6.4 using ifort 11</h3>
+				<div class="date">Posted: <strong>Mon Sep 20, 2010 9:18 pm</strong></div>
+				<div class="author">by <strong>jolafc</strong></div>
+				<div class="content">I've got the same problem with the compilation of abinit 6.2.2 using ifort 11.1.067 on Mac OS X 10.6.4. <br /><br />Running, in the build directory,<br />$ ranlib -c src/01_qespresso_ext/lib01_qespresso_ext.a<br />solve the symbol definition error, but result in corrupt abinit executable.<br /><br />However, if you upgrade to the latest version of ifort (11.1.089), this issue is solved (you still need to run ranlib, but the executable works). This looks related to a know incompatibility of the pre-11.1.089 ifort compiler with post-3.2.1 versions of Xcode : <br /><!-- m --><a class="postlink" href="http://software.intel.com/en-us/articles/intel-fortran-for-mac-os-x-incompatible-with-xcode-322/">http://software.intel.com/en-us/article ... xcode-322/</a><!-- m --><br /><br />Yet, we still have some (8) tests that fail in test_acc.  <br /><br />Hope this helps.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling abinit 6.0.x on Mac OS X 10.6.4 using ifort 11</h3>
+				<div class="date">Posted: <strong>Wed Sep 22, 2010 4:30 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">I have had some similar problems, which come from the presence of several ld and ranlib in different paths on macosx: one from MacPorts and one from the XCode distrib. Try redefining your path such that it goes through /opt/local stuff first (or the other way around), and it should pick up the ld/libtool/ranlib/gfortran etc... that you actually want (having installed it yourself). They have to be compatible very specifically with the compiler you are using...<br /><br />ciao<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling abinit 6.0.x on Mac OS X 10.6.4 using ifort 11</h3>
+				<div class="date">Posted: <strong>Wed Sep 22, 2010 4:31 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">PS: macosx is not very intelligent in this way. A bit ridiculous I should have 3-4 different versions of gfortran/python/etc... on my system, and am unable to remove any of them without breaking something!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling abinit 6.0.x on Mac OS X 10.6.4 using ifort 11</h3>
+				<div class="date">Posted: <strong>Fri Sep 24, 2010 6:59 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Please look at this post for complementary information:<br /><br />  <!-- l --><a class="postlink-local" href="viewtopice8be.html?f=2&amp;t=598&amp;p=1773#p1773">viewtopic.php?f=2&amp;t=598&amp;p=1773#p1773</a><!-- l --></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=446&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:51 GMT -->
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2329&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:27:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; processor distribution rules</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>processor distribution rules</h2>
+		<p><a href="viewtopic2b4f-3.html?f=9&amp;t=2329">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2329</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>processor distribution rules</h3>
+				<div class="date">Posted: <strong>Wed Nov 13, 2013 3:00 pm</strong></div>
+				<div class="author">by <strong>Emile</strong></div>
+				<div class="content">Dear users,<br /><br />I am writing because I am facing efficiency problem. I can do massive parallel calculations, with a 2000 procs as a maximum and 6h/12h calculation times. Thus, I have to reach the highest efficiency as possible for my calculations.<br /><br />Here is an example of automatic distribution of processors according to paral_kgb -2000 (ngkpt:2x2x2; nband:1800). (Version 7.4.2 of Abinit)<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp; &nbsp; &nbsp;npimage|&nbsp; &nbsp; &nbsp; &nbsp;npkpt|&nbsp; &nbsp; npspinor|&nbsp; &nbsp; &nbsp; &nbsp;npfft|&nbsp; &nbsp; &nbsp; npband|&nbsp; &nbsp; &nbsp;bandpp |&nbsp; &nbsp; &nbsp; &nbsp;nproc|&nbsp; &nbsp; &nbsp; weight|<br />&nbsp; &nbsp;1 -&gt;&nbsp; &nbsp; 1|&nbsp; &nbsp;1 -&gt;&nbsp; &nbsp; 4|&nbsp; &nbsp;1 -&gt;&nbsp; &nbsp; 1|&nbsp; &nbsp;1 -&gt;&nbsp; &nbsp;68|&nbsp; &nbsp;1 -&gt; 1800|&nbsp; &nbsp;1 -&gt;&nbsp; 180|&nbsp; &nbsp;2 -&gt; 2000|&nbsp; &nbsp;1 -&gt; 2000|<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 25|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 25|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1|&nbsp; &nbsp; &nbsp; &nbsp; 1875|&nbsp; &nbsp; 1247.93 |<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 25|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 25|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2|&nbsp; &nbsp; &nbsp; &nbsp; 1875|&nbsp; &nbsp; 1194.18 |<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 30|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 30|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1|&nbsp; &nbsp; &nbsp; &nbsp; 1800|&nbsp; &nbsp; 1169.85 |<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 32|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 30|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1|&nbsp; &nbsp; &nbsp; &nbsp; 1920|&nbsp; &nbsp; 1160.33 |<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 24|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 24|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1|&nbsp; &nbsp; &nbsp; &nbsp; 1728|&nbsp; &nbsp; 1158.64 |<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 24|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 25|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1|&nbsp; &nbsp; &nbsp; &nbsp; 1800|&nbsp; &nbsp; 1154.12 |<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 25|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 24|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1|&nbsp; &nbsp; &nbsp; &nbsp; 1800|&nbsp; &nbsp; 1153.79 |<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 27|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 24|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1|&nbsp; &nbsp; &nbsp; &nbsp; 1944|&nbsp; &nbsp; 1148.80 |<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 30|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 30|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2|&nbsp; &nbsp; &nbsp; &nbsp; 1800|&nbsp; &nbsp; 1108.69 |<br /></code></pre></div><br /><br />As you can see, efficiency (weight) only reaches 1247 and is always far to match with the number of processors.<br /><br />Same calculation with the version 7.0.3 of Abinit provides:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;For dataset=&nbsp; &nbsp;1&nbsp; a possible choice for less than 2000 processors is:<br />&nbsp; nproc&nbsp; &nbsp; &nbsp;npkpt&nbsp; npspinor&nbsp; &nbsp; npband&nbsp; &nbsp; &nbsp;npfft&nbsp; &nbsp; bandpp&nbsp; &nbsp; weight<br />&nbsp; 1872&nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; 36&nbsp; &nbsp; &nbsp; &nbsp; 13&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp; 0.50<br />&nbsp; 1824&nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; 24&nbsp; &nbsp; &nbsp; &nbsp; 19&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; 0.25<br />&nbsp; 1800&nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp;225&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp;28.00<br />&nbsp; 1800&nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp;450&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; 112.50<br />&nbsp; 1800&nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; 25&nbsp; &nbsp; &nbsp; &nbsp; 18&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; 0.25<br />&nbsp; 1800&nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; 30&nbsp; &nbsp; &nbsp; &nbsp; 15&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; 0.50<br />&nbsp; 1800&nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; 45&nbsp; &nbsp; &nbsp; &nbsp; 10&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; 1.00<br />&nbsp; 1800&nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; 50&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;9&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; 1.25<br />&nbsp; 1800&nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; 75&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;6&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; 3.00<br />&nbsp; 1800&nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; 90&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;5&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; 4.50<br /></code></pre></div><br /><br />Here, as you can see, the efficiency is totally different with a good distribution of 1800 processors (weight should match 1 in previous version of abinit).<br /><br />Maybe the parallel version of abinit-7.4.2 improves the efficiency of processor distribution, but the way processors are distributed is now difficult to understand.<br /><br />In abinit-7.0.3, distribution is following the rules:<br /> - distribution over k-points first<br /> - Then distribution over bands and fft grid with best efficiency when npband &gt; 4xnpfft<br /><br />As you can see these rules are no longer available with abinit-7.4.2. The problem is I do not know if an efficiency of 1248 for 1875 processors is acceptable or not. And if it is not, since processors distribution rules changed, I do not know how to change nband (I think it is the only parameter I can play with) in order to improve efficiency. <br /><br />All advices are welcome,<br />Best regards,<br /><br />Emile</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2329&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:27:13 GMT -->
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3990&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:44:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; RF calculation (iscf=-3) is very slow...</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>RF calculation (iscf=-3) is very slow...</h2>
+		<p><a href="viewtopic24f4.html?f=10&amp;t=3990">https://forum.abinit.org/viewtopic.php?f=10&amp;t=3990</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>RF calculation (iscf=-3) is very slow...</h3>
+				<div class="date">Posted: <strong>Sun Dec 09, 2018 8:55 am</strong></div>
+				<div class="author">by <strong>Hiroki</strong></div>
+				<div class="content">Dear ABINIT developers/users<br /><br />I tried to calculate the response functions with iscf = -3 and previous SCF result(WFK file).<br />The calculation terminated successfully, but took a lot of time (3-4 times longer than SCF cycle). I think this is a problem.<br />Looking the log file to survey the cause, I found below comments:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--- !WARNING<br />src_file: mpi_setup.F90<br />src_line: 672<br />message: |<br />&nbsp; &nbsp; Your number of spins*k-points (=4) and bands (=400) will not distribute&nbsp; &nbsp; &nbsp; correctly<br />&nbsp; &nbsp; with the current number of processors (=144).<br />&nbsp; &nbsp; You will leave some empty.<br />&nbsp; &nbsp; YOU ARE STRONGLY ADVICED TO ACTIVATE AUTOMATIC PARALLELIZATION!<br />&nbsp; &nbsp; PUT &quot;AUTOPARAL=1&quot; IN THE INPUT FILE.<br />...<br /><br />&nbsp;-&nbsp; &nbsp;nproc =&nbsp; 144&nbsp; &nbsp;-&gt; not optimal: autoparal keyword recommended in input file<br /></code></pre></div><br />In this run, however, I put &quot;autoparal=1&quot; in my input file.<br />I can't figure out what this message means...<br /><br />And I tried to calculate without autoparal, set parameters with respect to parallelization using paral_kgb.<br />But I got the following comment again:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--- !WARNING<br />src_file: mpi_setup.F90<br />src_line: 672<br />message: |<br />&nbsp; &nbsp; Your number of spins*k-points (=4) and bands (=400) will not distribute&nbsp; &nbsp; &nbsp; correctly<br />&nbsp; &nbsp; with the current number of processors (=144).<br />&nbsp; &nbsp; You will leave some empty.<br />&nbsp; &nbsp; YOU ARE STRONGLY ADVICED TO ACTIVATE AUTOMATIC PARALLELIZATION!<br />&nbsp; &nbsp; PUT &quot;AUTOPARAL=1&quot; IN THE INPUT FILE.<br /><br />--- !WARNING<br />src_file: mpi_setup.F90<br />src_line: 240<br />message: |<br />&nbsp; &nbsp; For non ground state calculation, set bandpp, npfft, npband, npspinor npkpt and nphf to 1<br />...<br /></code></pre></div><br />So, according to error comments, I need to use autoparal...<br />What should I do to optimize the parallelization for RF calculation?<br /><br />The attached files are what I used in this calculation.<br /><br />Sincerely yours,</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: RF calculation (iscf=-3) is very slow...</h3>
+				<div class="date">Posted: <strong>Fri Dec 14, 2018 4:25 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Hiroki,<br />You should indeed adapt the number of CPU w.r.t. the number of k-points and the number of bands, etc.<br />Please have alook here on advises to do so here:<br /><!-- l --><a class="postlink-local" href="viewtopicaeb9.html?f=8&amp;t=3837">viewtopic.php?f=8&amp;t=3837</a><!-- l --><br /><br />For a convergence problem in this calculation, I also advise you to set nline to a larger value than the default, something like 8 to 12.<br /><br />Let us know if this fix your problems,<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3990&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:44:32 GMT -->
+</html>

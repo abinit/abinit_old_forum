@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=2654&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 20:37:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; qp-DOS</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>qp-DOS</h2>
+		<p><a href="viewtopic0a90.html?f=11&amp;t=2654">https://forum.abinit.org/viewtopic.php?f=11&amp;t=2654</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>qp-DOS</h3>
+				<div class="date">Posted: <strong>Wed Apr 30, 2014 10:37 am</strong></div>
+				<div class="author">by <strong>Chem</strong></div>
+				<div class="content">Hello All<br /><br />How to get the GW density of states ?<br /><br />Bests.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: qp-DOS</h3>
+				<div class="date">Posted: <strong>Wed Apr 30, 2014 8:50 pm</strong></div>
+				<div class="author">by <strong>raul_l</strong></div>
+				<div class="content">The GW DOS can be interpolated using maximally localized Wannier functions (MLWFs). This feature has recently been added to Wannier90 v 2.0, although currently abinit ships with an older version. What you can do is first generate MLWFs as you normally would for GW band structure interpolation. Then, install the newest Wannier90 and run postw90.x in you work directory. Your Wannier90 input file should contain at least the following information in addition to the usual keywords:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>mp_grid ...<br /><br />begin unit_cell_cart<br />bohr<br />...<br />end unit_cell_cart<br /><br />begin atoms_frac<br />...<br />end atoms_frac<br /><br />begin kpoints<br />...<br />end kpoints<br /><br />dos true<br />dos_kmesh 25</code></pre></div><br />The last two keywords can only be present when using Wannier90 v 2.0 or newer. Also, you might need to rename some files. If Wannier90 complains, just do as it says. If you are not familiar with GW band structure interpolation, see the relevant tutorials first.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: qp-DOS</h3>
+				<div class="date">Posted: <strong>Fri May 09, 2014 2:49 pm</strong></div>
+				<div class="author">by <strong>Chem</strong></div>
+				<div class="content">Dear Raul<br /><br />Thank you for your reply. Itried your suggestion by interpolate the GW band structure and then run postw90, but I found this error in the last step :<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Found a mismatch in wannier90.eig<br />Wanted band&nbsp; : 16 found band&nbsp; : 1<br />Wanted kpoint: 1 found kpoint: 2<br /><br />A common cause of this error is using the wrong<br />number of bands. Check your input files.<br />If your pseudopotentials have shallow core states remember<br />to account for these electrons.<br /><br />&nbsp;Exiting.......<br />&nbsp;param_read: mismatch in wannier90.eig<br /></code></pre></div><br />It seems that is related to change of the checkpoint format between the version1.2 and 2.0.0<br />Heve you an idea to resolve this problem.<br /><br />Cheers.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: qp-DOS</h3>
+				<div class="date">Posted: <strong>Mon May 12, 2014 9:11 pm</strong></div>
+				<div class="author">by <strong>raul_l</strong></div>
+				<div class="content">I tried to reproduce your error but failed. Perhaps you could provide a simple input and output that illustrates the problem.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: qp-DOS</h3>
+				<div class="date">Posted: <strong>Tue Dec 09, 2014 10:52 pm</strong></div>
+				<div class="author">by <strong>raul_l</strong></div>
+				<div class="content">I now encountered the same error as above, using a different system. This can be solved by including the num_bands keyword in the input file.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=2654&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 20:37:43 GMT -->
+</html>

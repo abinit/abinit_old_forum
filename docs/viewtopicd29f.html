@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=5331&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:56:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; ASR violation in AlAs fermi smearing</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>ASR violation in AlAs fermi smearing</h2>
+		<p><a href="viewtopic34d1.html?f=10&amp;t=5331">https://forum.abinit.org/viewtopic.php?f=10&amp;t=5331</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>ASR violation in AlAs fermi smearing</h3>
+				<div class="date">Posted: <strong>Tue Feb 16, 2021 10:34 pm</strong></div>
+				<div class="author">by <strong>KonradG</strong></div>
+				<div class="content">Hello<br>
+<br>
+I am having trouble running phonon calculations with metallic compounds and I went back to the tutorial and tried running AlAs as a metal (occopt 3) and ended up with huge differences in the DFPT calculations.<br>
+<br>
+Am I missing something obvious? I am using the standard pseudopotentials from the abinit tutorial and all I changed was the occupation scheme between the two runs. <br>
+<br>
+Thank You</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ASR violation in AlAs fermi smearing</h3>
+				<div class="date">Posted: <strong>Thu Apr 15, 2021 4:36 pm</strong></div>
+				<div class="author">by <strong>KonradG</strong></div>
+				<div class="content">Hello, I have since solved my issue.<br>
+<br>
+The problem lies with the default value of nbdbuf. It automatically assumes that there are 2 or more unoccupied bands in the ground state but for small systems this is not true. For AlAs, the code was freezing an occupied band when doing RF calculations thus giving incorrect results.<br>
+<br>
+The solution is to set nbdbuf to 0.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=5331&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:56:54 GMT -->
+</html>

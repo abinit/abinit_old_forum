@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=5341&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 17:19:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; BUG -  rfgd array must be allocated at rfgd(3,nfgd)!</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>BUG -  rfgd array must be allocated at rfgd(3,nfgd)!</h2>
+		<p><a href="viewtopic4ab4.html?f=14&amp;t=5341">https://forum.abinit.org/viewtopic.php?f=14&amp;t=5341</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>BUG -  rfgd array must be allocated at rfgd(3,nfgd)!&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Thu Mar 04, 2021 11:21 am</strong></div>
+				<div class="author">by <strong>positronner</strong></div>
+				<div class="content">I found a bug using the Ipnut file which I've attached below! <br>
+<br>
+--- !BUG<br>
+src_file: m_paw_finegrid.F90<br>
+src_line: 131<br>
+mpi_rank: 0<br>
+message: |<br>
+    rfgd array must be allocated at rfgd(3,nfgd)!<br>
+...<br>
+<br>
+  Action: contact ABINIT group (please attach the output of `abinit -b`)<br>
+---------------------------------------------------------------------------------------<br>
+<br>
+#################################################################<br>
+# Input file for the positron tutorial                          #<br>
+#    Positron lifetime calculation within PAW                   #<br>
+#                                                               #<br>
+#              SrTiO3, 4 atoms in the box                       #<br>
+#################################################################<br>
+<br>
+# Datasets definition<br>
+<br>
+autoparal 1<br>
+<br>
+  positron  -10     ! We perform automatic calculation of electrons and positron densities in the two-component DFT context<br>
+  postoldfe  1d-5   ! We will repeat the electon and positron steps until the energy difference is lower than 1d-5<br>
+  posnstep   20     ! Maximum number of electon and positron steps<br>
+<br>
+  ixcpositron  1  ! We are using the Boronski and Nieminen parametrization<br>
+  <br>
+<br>
+<br>
+# Common input parameters<br>
+  ! Unit cell<br>
+    acell   3*11.715 angstrom<br>
+    rprim   1.0 0.0 0.0<br>
+            0.0 1.0 0.0<br>
+            0.0 0.0 1.0<br>
+    chkprim 0<br>
+    natom  134<br>
+    ntypat  3<br>
+    typat  26*1  27*2  81*3<br>
+    znucl 38 22 8<br>
+    xred 0 0 0<br>
+0.3333333333 0 0<br>
+0.6666666667 0 0<br>
+0 0.3333333333 0<br>
+0.3333333333 0.3333333333 0<br>
+0.6666666667 0.3333333333 0<br>
+0 0.6666666667 0<br>
+0.3333333333 0.6666666667 0<br>
+0.6666666667 0.6666666667 0<br>
+0 0 0.3333333333<br>
+0.3333333333 0 0.3333333333<br>
+0.6666666667 0 0.3333333333<br>
+0 0.3333333333 0.3333333333<br>
+0.3333333333 0.3333333333 0.3333333333<br>
+0.6666666667 0.3333333333 0.3333333333<br>
+0 0.6666666667 0.3333333333<br>
+0.3333333333 0.6666666667 0.3333333333<br>
+0.6666666667 0.6666666667 0.3333333333<br>
+0 0 0.6666666667<br>
+0.3333333333 0 0.6666666667<br>
+0.6666666667 0 0.6666666667<br>
+0 0.3333333333 0.6666666667<br>
+0.3333333333 0.3333333333 0.6666666667<br>
+0.6666666667 0.3333333333 0.6666666667<br>
+0 0.6666666667 0.6666666667<br>
+0.3333333333 0.6666666667 0.6666666667<br>
+!0.6666666667 0.6666666667 0.6666666667<br>
+0.1666666667 0.1666666667 0.1666666667<br>
+0.5 0.1666666667 0.1666666667<br>
+0.8333333333 0.1666666667 0.1666666667<br>
+0.1666666667 0.5 0.1666666667<br>
+0.5 0.5 0.1666666667<br>
+0.8333333333 0.5 0.1666666667<br>
+0.1666666667 0.8333333333 0.1666666667<br>
+0.5 0.8333333333 0.1666666667<br>
+0.8333333333 0.8333333333 0.1666666667<br>
+0.1666666667 0.1666666667 0.5<br>
+0.5 0.1666666667 0.5<br>
+0.8333333333 0.1666666667 0.5<br>
+0.1666666667 0.5 0.5<br>
+0.5 0.5 0.5<br>
+0.8333333333 0.5 0.5<br>
+0.1666666667 0.8333333333 0.5<br>
+0.5 0.8333333333 0.5<br>
+0.8333333333 0.8333333333 0.5<br>
+0.1666666667 0.1666666667 0.8333333333<br>
+0.5 0.1666666667 0.8333333333<br>
+0.8333333333 0.1666666667 0.8333333333<br>
+0.1666666667 0.5 0.8333333333<br>
+0.5 0.5 0.8333333333<br>
+0.8333333333 0.5 0.8333333333<br>
+0.1666666667 0.8333333333 0.8333333333<br>
+0.5 0.8333333333 0.8333333333<br>
+0.8333333333 0.8333333333 0.8333333333<br>
+0 0.1666666667 0.1666666667<br>
+0.3333333333 0.1666666667 0.1666666667<br>
+0.6666666667 0.1666666667 0.1666666667<br>
+0 0.5 0.1666666667<br>
+0.3333333333 0.5 0.1666666667<br>
+0.6666666667 0.5 0.1666666667<br>
+0 0.8333333333 0.1666666667<br>
+0.3333333333 0.8333333333 0.1666666667<br>
+0.6666666667 0.8333333333 0.1666666667<br>
+0 0.1666666667 0.5<br>
+0.3333333333 0.1666666667 0.5<br>
+0.6666666667 0.1666666667 0.5<br>
+0 0.5 0.5<br>
+0.3333333333 0.5 0.5<br>
+0.6666666667 0.5 0.5<br>
+0 0.8333333333 0.5<br>
+0.3333333333 0.8333333333 0.5<br>
+0.6666666667 0.8333333333 0.5<br>
+0 0.1666666667 0.8333333333<br>
+0.3333333333 0.1666666667 0.8333333333<br>
+0.6666666667 0.1666666667 0.8333333333<br>
+0 0.5 0.8333333333<br>
+0.3333333333 0.5 0.8333333333<br>
+0.6666666667 0.5 0.8333333333<br>
+0 0.8333333333 0.8333333333<br>
+0.3333333333 0.8333333333 0.8333333333<br>
+0.6666666667 0.8333333333 0.8333333333<br>
+0.1666666667 0 0.1666666667<br>
+0.5 0 0.1666666667<br>
+0.8333333333 0 0.1666666667<br>
+0.1666666667 0.3333333333 0.1666666667<br>
+0.5 0.3333333333 0.1666666667<br>
+0.8333333333 0.3333333333 0.1666666667<br>
+0.1666666667 0.6666666667 0.1666666667<br>
+0.5 0.6666666667 0.1666666667<br>
+0.8333333333 0.6666666667 0.1666666667<br>
+0.1666666667 0 0.5<br>
+0.5 0 0.5<br>
+0.8333333333 0 0.5<br>
+0.1666666667 0.3333333333 0.5<br>
+0.5 0.3333333333 0.5<br>
+0.8333333333 0.3333333333 0.5<br>
+0.1666666667 0.6666666667 0.5<br>
+0.5 0.6666666667 0.5<br>
+0.8333333333 0.6666666667 0.5<br>
+0.1666666667 0 0.8333333333<br>
+0.5 0 0.8333333333<br>
+0.8333333333 0 0.8333333333<br>
+0.1666666667 0.3333333333 0.8333333333<br>
+0.5 0.3333333333 0.8333333333<br>
+0.8333333333 0.3333333333 0.8333333333<br>
+0.1666666667 0.6666666667 0.8333333333<br>
+0.5 0.6666666667 0.8333333333<br>
+0.8333333333 0.6666666667 0.8333333333<br>
+0.1666666667 0.1666666667 0<br>
+0.5 0.1666666667 0<br>
+0.8333333333 0.1666666667 0<br>
+0.1666666667 0.5 0<br>
+0.5 0.5 0<br>
+0.8333333333 0.5 0<br>
+0.1666666667 0.8333333333 0<br>
+0.5 0.8333333333 0<br>
+0.8333333333 0.8333333333 0<br>
+0.1666666667 0.1666666667 0.3333333333<br>
+0.5 0.1666666667 0.3333333333<br>
+0.8333333333 0.1666666667 0.3333333333<br>
+0.1666666667 0.5 0.3333333333<br>
+0.5 0.5 0.3333333333<br>
+0.8333333333 0.5 0.3333333333<br>
+0.1666666667 0.8333333333 0.3333333333<br>
+0.5 0.8333333333 0.3333333333<br>
+0.8333333333 0.8333333333 0.3333333333<br>
+0.1666666667 0.1666666667 0.6666666667<br>
+0.5 0.1666666667 0.6666666667<br>
+0.8333333333 0.1666666667 0.6666666667<br>
+0.1666666667 0.5 0.6666666667<br>
+0.5 0.5 0.6666666667<br>
+0.8333333333 0.5 0.6666666667<br>
+0.1666666667 0.8333333333 0.6666666667<br>
+0.5 0.8333333333 0.6666666667<br>
+0.8333333333 0.8333333333 0.6666666667<br>
+<br>
+  ! K-points and occupations<br>
+    kptopt 1<br>
+nkpt 1<br>
+    occopt 1<br>
+    nband 750<br>
+<br>
+    posocc 1  ! Occupation number for the positron (should be set &lt;1 for bulk calculation with a small cell).<br>
+               ! Here the zero positron density limit is used, so results do not depend on posocc.<br>
+<br>
+  ! Convergence parameters<br>
+    ecut 15. pawecutdg 30.<br>
+    iscf 17<br>
+    nstep 50<br>
+    toldfe 1.d-8<br>
+pawovlp -1<br>
+<br>
+!   Miscelaneous<br>
+    prtwf 0 prteig 0           ! To save disk space<br>
+<br>
+## After modifying the following section, one might need to regenerate the pickle database with runtests.py -r<br>
+#%%&lt;BEGIN TEST_INFO&gt;<br>
+#%% [setup]<br>
+#%% executable = abinit<br>
+#%% [files]<br>
+#%% files_to_test =<br>
+#%%   tpositron_1.out, tolnlines=  0, tolabs= 0.0, tolrel= 0.0, fld_options= -easy<br>
+#%% psp_files = Si.LDA-PW-paw.abinit<br>
+#%% [paral_info]<br>
+#%% max_nprocs = 10<br>
+#%% [extra_info]<br>
+#%% authors = J. Wiktor<br>
+#%% keywords = POSITRON,PAW<br>
+#%% description = First step of the tutorial on electron-positron annihilation<br>
+#%%&lt;END TEST_INFO&gt;</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: BUG -  rfgd array must be allocated at rfgd(3,nfgd)!</h3>
+				<div class="date">Posted: <strong>Fri Apr 09, 2021 12:11 pm</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">Hi Positronner,<br>
+(not that this is not the correct forum place for this topic)<br>
+<br>
+Thanks for pointing us a bug, apparently appeared since a modification of Abinit default behviour related to forces calculations.<br>
+<br>
+If you are not interested in structure relaxation, you can simply add this in your input file to bypass the problem:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>optforces 0  optstress 0
+</code></pre></div>
+
+If you are, you have to correct the source code.<br>
+Edit the <span style="color:#BF4000">src/91_scfcv/m_scfcv_core.F90</span>, and change the following lines (around line 1100) :
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>       if (forces_needed==1.or.(dtset%xclevel==2.and.dtset%pawnhatxc&gt;0.and.usexcnhat&gt;0)) then
+         optgr1=dtset%pawstgylm;if (stress_needed==1) optrad=1; if (dtset%pawprtwf==1) optrad=1
+       end if
+</code></pre></div>
+into
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>       if (forces_needed==1.or.(dtset%xclevel==2.and.dtset%pawnhatxc&gt;0.and.usexcnhat&gt;0).or. &amp;
+&amp;         (dtset%positron/=0.and.forces_needed==2)) then
+         optgr1=dtset%pawstgylm;if (stress_needed==1) optrad=1; if (dtset%pawprtwf==1) optrad=1
+       end if
+</code></pre></div>
+
+Should work now...</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=5341&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 17:19:25 GMT -->
+</html>

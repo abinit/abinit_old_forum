@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3202&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:16:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Failed to perform DATASET 2</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Failed to perform DATASET 2</h2>
+		<p><a href="viewtopic9ab8-2.html?f=9&amp;t=3202">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3202</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Failed to perform DATASET 2</h3>
+				<div class="date">Posted: <strong>Mon Feb 15, 2016 10:03 am</strong></div>
+				<div class="author">by <strong>gh.phys</strong></div>
+				<div class="content">I am running a band structure calculation on a cluster (64 cores and paral-kgb=1). When the first DATASET is done, the DATASET 2 does not start due to the following error: <br /><br /><blockquote class="uncited"><div> ----iterations are completed or convergence reached----<br /><br /> outwf: write wavefunction to file output_DS1_WFK, with accesswff 1<br />File locking failed in ADIOI_Set_lock(fd 16,cmd F_SETLKW/7,type F_WRLCK/1,whence 0) with return value FFFFFFFF and errno 26.<br />- If the file system is NFS, you need to use NFS version 3, ensure that the lockd daemon is running on all the machines, and mount the directory with the 'noac' option (no attribute caching).<br />- If the file system is LUSTRE, ensure that the directory is mounted with the 'flock' option.<br />ADIOI_Set_lock:: Function not implemented<br />ADIOI_Set_lock:offset 1551170, length 524288<br />--------------------------------------------------------------------------<br />MPI_ABORT was invoked on rank 0 in communicator MPI_COMM_WORLD <br />with errorcode 1.</div></blockquote> <br /><br />I have complied abinit using the following configurations:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>FCFLAGS_EXTRA=&quot;-O2 -mtune=native -march=native -mfpmath=sse -ffree-line-length-$<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_prefix=&quot;/common/sw/alarik/pkg/openmpi/1.6.4/gcc/4.6.2&quot;<br />with_trio_flavor=&quot;netcdf+etsf_io&quot;<br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_incs=&quot;-I/common/sw/alarik/pkg/intel/14.0/composer_xe_2013_sp1.2.144/mk$<br />with_fft_libs=&quot;-L/common/sw/alarik/pkg/intel/14.0/composer_xe_2013_sp1.2.144/mk$<br />with_linalg_flavor=&quot;mkl&quot;<br />with_linalg_incs=&quot;-I/common/sw/alarik/pkg/intel/14.0/composer_xe_2013_sp1.2.144$<br />with_linalg_libs=&quot;-L/common/sw/alarik/pkg/intel/14.0/composer_xe_2013_sp1.2.144$<br />with_dft_flavor=&quot;atompaw+libxc+wannier90&quot;<br />enable_clib=&quot;yes&quot;<br />enable_gw_dpc=&quot;yes&quot;<br />enable_memory_profiling=&quot;no&quot;<br />enable_openmp=&quot;no&quot;<br />enable_maintainer_checks=&quot;no&quot;</code></pre></div><br /><br />I appreciate your help.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Failed to perform DATASET 2</h3>
+				<div class="date">Posted: <strong>Mon Feb 22, 2016 10:02 am</strong></div>
+				<div class="author">by <strong>gh.phys</strong></div>
+				<div class="content">Does anyone have any input on the above error? I do appreciate any help.<br /><br />By the way, I also installed Abinit 10.7.5 with gcc 4.9 compiler and the same error happened afetr the first dataset finished.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Failed to perform DATASET 2</h3>
+				<div class="date">Posted: <strong>Mon Feb 22, 2016 4:05 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hi Masoomeh,<br /><br />your run is not able to print the output WFK file at the end of dataset 1. This seems to be a network disk related issue (not abinit related) - perhaps you can post your job submission file and &quot;files&quot; file, but normally only your local sysadmin can fix this kind of thing for you (probably just tell you what you are doing wrong in the setting up of paths and directories for execution and in your files file). <br /><br />It could also be an issue with parallel io over your network. Could you try a test run in sequential (1 proc), perhaps with very low nstep and ecut, to see if it can save the file? Are all of the files on a local scratch on the node, and are you running on a single node? NB: if you run on several nodes and the WFK are stored on local disks, only the mother node has access to the WFK to start DS2 - this is a classic error - and will fail. If you copy stuff back to your original submission directory, and relaunch DS2 it will work because the WFK is now copied to all participating nodes.<br /><br />cheers<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Failed to perform DATASET 2&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Wed Feb 24, 2016 10:11 am</strong></div>
+				<div class="author">by <strong>gh.phys</strong></div>
+				<div class="content">Hi Matthieu,<br /><br />Thanks for your reply. You are right. I did a test and the job works fine on one node. At least, now I know that it is not abinit-related. I have contacted our grid support to see how I can run on more nodes.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3202&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:16:16 GMT -->
+</html>

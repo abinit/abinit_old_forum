@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=3539&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:27:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Compensation charge over fine fft grid in nscf run with PAW</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Compensation charge over fine fft grid in nscf run with PAW</h2>
+		<p><a href="viewtopic162f.html?f=14&amp;t=3539">https://forum.abinit.org/viewtopic.php?f=14&amp;t=3539</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Compensation charge over fine fft grid in nscf run with PAW</h3>
+				<div class="date">Posted: <strong>Thu Mar 16, 2017 5:27 am</strong></div>
+				<div class="author">by <strong>thanusit</strong></div>
+				<div class="content">Dear All<br />I've tried to generate the input files for the Boltzrap code in the calculation using PAW, with Abinit 8.0.8b.<br />I used the the input files from &quot;tpaw1&quot; as my study. I added to the input file a nscf calculation (dataset2) <br />following a usual ground state scf (dataset1), at higher k-grid density. The input file is listed as below.<br />The log file are attached.<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># =======================================<br /># Input for PAW1 tutorial<br /># Diamond at experimental volume<br /># =======================================<br />ndtset 2<br /><br />#dataset1: ground state scf<br />ngkpt1 6 6 6<br /><br />#dataset2: nscf at a denser k-grid &amp; output the files for Boltztrap code<br />iscf2 -3<br />getden2 1<br />ngkpt2 12 12 12<br />prtbltztrp2 1<br /><br />#Cell and atoms definition<br />&nbsp;acell 3*3.567 angstrom<br />&nbsp;rprim 0.0 1/2 1/2<br />&nbsp; &nbsp; &nbsp; &nbsp;1/2 0.0 1/2<br />&nbsp; &nbsp; &nbsp; &nbsp;1/2 1/2 0.0<br />&nbsp;ntypat 1&nbsp; natom 2&nbsp; typat 2*1<br />&nbsp;xred 0.0 0.0 0.0<br />&nbsp; &nbsp; &nbsp; 1/4 1/4 1/4<br />&nbsp;znucl 6&nbsp; nband 6<br /><br />#Grid definitions<br />&nbsp;ecut 15.<br />&nbsp;ecutsm 0.5<br /><br />#PAW-Energy CUToff for the Double Grid<br />pawecutdg 50<br /><br />#SCF cycle parameters<br />&nbsp;tolvrs 1.0d-10<br />&nbsp;nstep 20<br /><br />#K-points and sym<br />&nbsp;nsym 0&nbsp; &nbsp; &nbsp; &nbsp;<br />&nbsp;occopt 1<br />&nbsp;kptopt 1<br />&nbsp;nshiftk 4<br />&nbsp;shiftk 0.5 0.5 0.5<br />&nbsp; &nbsp; &nbsp; &nbsp; 0.5 0.0 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; 0.0 0.5 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; 0.0 0.0 0.5<br /><br />#I/O parameters<br />prtden 1 prtdos 2<br /></code></pre></div><br /><br />The calculation was completed and all the needed files were generated. I checked the output file for the &quot;PAW TEST&quot; section<br />and found:<br />-for dataset1 (scf)<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;<br />PAW TEST:<br />&nbsp;==== Compensation charge inside spheres ============<br />&nbsp;The following values must be close to each other ...<br />&nbsp;Compensation charge over spherical meshes =&nbsp; &nbsp; &nbsp; 0.413178580175431<br />&nbsp;Compensation charge over fine fft grid&nbsp; &nbsp; =&nbsp; &nbsp; &nbsp; 0.413177280327792<br /></code></pre></div><br /><br />for dataset2 (nscf)<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;PAW TEST:<br />&nbsp;==== Compensation charge inside spheres ============<br />&nbsp;The following values must be close to each other ...<br />&nbsp;Compensation charge over spherical meshes =&nbsp; &nbsp; &nbsp; 0.413178429102933<br />&nbsp;Compensation charge over fine fft grid&nbsp; &nbsp; =&nbsp; &nbsp; &nbsp; 0.000000000000000<br /></code></pre></div><br /><br />I am not sure if the &quot;Compensation charge over fine fft grid = 0.000000000000000&quot; is what we normally <br />have when doing nscf in calculations using PAW? , or if I did something wrong?<br /><br />Kind Regards,<br />Thanusit</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=3539&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:27:29 GMT -->
+</html>

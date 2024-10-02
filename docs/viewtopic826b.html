@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3480&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:13:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Testing/running in Cray operating system troubles.</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Testing/running in Cray operating system troubles.</h2>
+		<p><a href="viewtopic4529.html?f=3&amp;t=3480">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3480</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Testing/running in Cray operating system troubles.</h3>
+				<div class="date">Posted: <strong>Fri Jan 06, 2017 4:44 pm</strong></div>
+				<div class="author">by <strong>rsheppar</strong></div>
+				<div class="content">Hello All,<br />  Sorry if I missed this being addressed already.  I did look...<br />  Abinit built fine in the Cray Compiling Environment (XE-6). It found the machine FFTW3 flavor anf the MPI libs, but took a pass on the libsci libraries for BLAS/LAPACK etc.  I used a GNU environment and loaded Python 2.7.8. The problem comes with testing/running.  The Cray does  not use mpirun/mpiexec.  A typical failure line would be as at the bottom of this note.  So I decided to try running the water tutorial to see what that does.  I receive the following:<br /><br /> ./abinit &lt; tbase1_x.files &gt;&amp;<br />-bash: syntax error near unexpected token `newline'<br /><br />The tbase1_x.files file looks fine with no unprinted characters.  Please let me knowwhat has to change.<br />Thanks in advance!<br />Ray<br />______________________________________________________________<br />No YAML Error found in [v7][t87][np=1]<br />Command   /N/dc2/projects/ray/br2/abinit/abinit-8.0.8/src/98_main/abinit &lt; /N/dc2/projects/ray/br2/abinit/abinit-8.0.8/tests/Test_suite/v7_t85-t86-t87-t88/t88             .stdin &gt; /N/dc2/projects/ray/br2/abinit/abinit-8.0.8/tests/Test_suite/v7_t85-t86-t87-t88/t88.stdout 2&gt; /N/dc2/projects/ray/br2/abinit/abinit-8.0.8/tests/Test_             suite/v7_t85-t86-t87-t88/t88.stderr<br /> returned exit_code: 134<br /><br />[v7][t88][np=1]: fldiff.pl fatal error:<br />Unable to open input file /N/dc2/projects/ray/br2/abinit/abinit-8.0.8/tests/Test_suite/v7_t85-t86-t87-t88/t88.out [file=t88.out]<br />[v7][t88][np=1]: fldiff.pl fatal error:<br />Unable to open input file /N/dc2/projects/ray/br2/abinit/abinit-8.0.8/tests/Test_suite/v7_t85-t86-t87-t88/t88o_DS1_EDOS [file=t88o_DS1_EDOS]<br />[v7][t88][np=1]: fldiff.pl fatal error:<br />Unable to open input file /N/dc2/projects/ray/br2/abinit/abinit-8.0.8/tests/Test_suite/v7_t85-t86-t87-t88/t88o_DS1_BXSF [file=t88o_DS1_BXSF]<br />[v7][t88][np=1]: fldiff.pl fatal error:<br />Unable to open input file /N/dc2/projects/ray/br2/abinit/abinit-8.0.8/tests/Test_suite/v7_t85-t86-t87-t88/t88o_DS1_NEST [file=t88o_DS1_NEST]<br />[v7][t88][np=1]: fldiff.pl fatal error:<br />Unable to open input file /N/dc2/projects/ray/br2/abinit/abinit-8.0.8/tests/Test_suite/v7_t85-t86-t87-t88/t88o_DS1_PHDOS [file=t88o_DS1_PHDOS]<br />[v7][t88][np=1]: fldiff.pl fatal error:<br />Unable to open input file /N/dc2/projects/ray/br2/abinit/abinit-8.0.8/tests/Test_suite/v7_t85-t86-t87-t88/t88o_DS2_PHDOS [file=t88o_DS2_PHDOS]<br />[v7][t88][np=1]: fldiff.pl fatal error:<br />Unable to open input file /N/dc2/projects/ray/br2/abinit/abinit-8.0.8/tests/Test_suite/v7_t85-t86-t87-t88/t88o_DS1_PHGAMMA [file=t88o_DS1_PHGAMMA]<br />[v7][t88][np=1]: fldiff.pl fatal error:<br />Unable to open input file /N/dc2/projects/ray/br2/abinit/abinit-8.0.8/tests/Test_suite/v7_t85-t86-t87-t88/t88o_DS2_PHGAMMA [file=t88o_DS2_PHGAMMA]<br />[v7][t88][np=1]: fldiff.pl fatal error:<br />Unable to open input file /N/dc2/projects/ray/br2/abinit/abinit-8.0.8/tests/Test_suite/v7_t85-t86-t87-t88/t88o_DS1_NOINTP_A2FW [file=t88o_DS1_NOINTP_A2FW]<br />[v7][t88][np=1]: fldiff.pl fatal error:<br />Unable to open input file /N/dc2/projects/ray/br2/abinit/abinit-8.0.8/tests/Test_suite/v7_t85-t86-t87-t88/t88o_DS1_A2FW [file=t88o_DS1_A2FW]<br />[v7][t88][np=1]Test was not expected to fail but subprocesses returned 134<br />libhugetlbfs [login1:6359]: WARNING: No mount point found for default huge page size. Using first available mount point.<br />libhugetlbfs [login1:6359]: WARNING: Hugepage size 2097152 unavailable[Thu Jan  5 04:14:16 2017] [unknown] Fatal error in MPI_Init: Other MPI error, error sta             ck:<br />MPIR_Init_thread(525):<br />MPID_Init(225).......: channel initialization failed<br />MPID_Init(598).......:  PMI2 init failed: 1<br /><br />Program received signal SIGABRT: Process abort signal.<br /><br />Backtrace for this error:<br />libhugetlbfs [login1:6359]: WARNING: New heap segment map at 0x10000000000 failed: Cannot allocate memory<br />#0  0x23A219CD in _gfortrani_backtrace at backtrace.c:258<br />#1  0x23A21040 in _gfortrani_backtrace_handler at compile_options.c:129<br />#2  0x210DA24F in __open_nocancel<br />#3  0x23C354BB in raise at pt-raise.c:42<br />#4  0x23CA4830 in abort at abort.c:92<br />#5  0x23AE1281 in MPID_Abort<br />#6  0x23ACA89F in MPIR_Handle_fatal_error<br />#7  0x23ACA991 in MPIR_Err_return_comm<br />#8  0x23AB2ADE in MPI_Init<br />#9  0x23A765E3 in mpi_init__<br />#10  0x20D89149 in __m_xmpi_MOD_xmpi_init at m_xmpi.F90:601<br />#11  0x20010DB7 in abinit at abinit.F90:215<br /><br />No YAML Error found in [v7][t88][np=1]...<br />____________________________</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Testing/running in Cray operating system troubles.</h3>
+				<div class="date">Posted: <strong>Mon Jan 23, 2017 8:26 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Hi,<br /><br />The typical use is<br />[code]<br />./abinit &lt; tbase1_x.files &gt; log &amp;<br />[/code/<br /><br />Note that &quot;&lt;&quot; means read the standard input from the following file while &quot;&gt;&quot; means send the standard output to the following file.<br />Does this work ?<br />Cheers.<br />Jordan</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3480&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:13:02 GMT -->
+</html>

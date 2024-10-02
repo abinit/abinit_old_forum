@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1722&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:48:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Abinit 6.12.3 on Win7 64bit</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Abinit 6.12.3 on Win7 64bit</h2>
+		<p><a href="viewtopic3d72-2.html?f=3&amp;t=1722">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1722</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Abinit 6.12.3 on Win7 64bit</h3>
+				<div class="date">Posted: <strong>Sat Jun 30, 2012 9:39 pm</strong></div>
+				<div class="author">by <strong>ljludwig</strong></div>
+				<div class="content">Hello everyone:<br /><br />        I tried to install abinit 6.12.3 binary on Win7 64 bit, simply I extraced the zip file &quot;abinit-6.12.3_i686_cygwin_gnu4.5&quot; to /usr/local in my cygwin. <br /><br />       However when I try to run abinit, it says:<br /><br /> /usr/local/bin/abinit.exe: error while loading shared libraries: ?: cannot open shared object file: No such file or directory<br /><br />       This looks quite weird for me. Could you please shed some light on this point?<br /><br />Many thanks!!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>[CORRECTED/UPDATED] Re: Abinit 6.12.3 on Win7 64bit&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Sun Jul 01, 2012 9:03 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />abinit run natively under the &quot;command prompt&quot; of Windows and <strong class="text-strong"><span style="text-decoration: underline"><span style="font-size: 200%; line-height: 116%;">ALSO</span></span></strong> under cygwin...<br /><br />the DLL were missing in the package : a new package is available !<br /><br />sorry,<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [Solved] Abinit 6.12.3 on Win7 64bit</h3>
+				<div class="date">Posted: <strong>Tue Jul 03, 2012 3:10 am</strong></div>
+				<div class="author">by <strong>ljludwig</strong></div>
+				<div class="content">Thank you very much!! It is really amazing that it can run directly under windows not cygwin!<br /><br />Well I already used Cygwin and source package to compile it, so I'd like to list the procedure for Cygwin for future reference (I'm also new to Cygwin): <br /><br />1. Install Cygwin with full function, not default<br /><br />2. Install mpich2<br />	<!-- m --><a class="postlink" href="http://www.mcs.anl.gov/research/projects/mpich2/downloads/index.php?s=downloads">http://www.mcs.anl.gov/research/project ... =downloads</a><!-- m --><br />configure and make <br /><br />3. Install Abinit with 4 cpus.<br />	#./configure --prefix=/home/usrname/software/abinit-6.12.3 --enable-mpi=yes --with-mpi-prefix=/home/usrname/software/mpich2<br />	#make multi multi_nprocs=4<br />	#make install<br />4. Add environment variables:<br />     open ~/.bashrc, then add:<br />	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/usrname/software/abinit-6.12.3/lib<br />	PATH=$PATH:/home/ML/software/abinit-6.12.3/bin<br />	export PATH<br />5.    Run Abinit in parallel<br />	mpiexec -n 4 /home/usrname/software/abinit-6.12.3/bin/abinit.exe &lt;t3x.files&gt;&amp; log</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1722&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:48:27 GMT -->
+</html>

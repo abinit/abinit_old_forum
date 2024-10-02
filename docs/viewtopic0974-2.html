@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=3017&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:58:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; bug fix help in paral_kgb case</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>bug fix help in paral_kgb case</h2>
+		<p><a href="viewtopic8bd5.html?f=19&amp;t=3017">https://forum.abinit.org/viewtopic.php?f=19&amp;t=3017</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>bug fix help in paral_kgb case</h3>
+				<div class="date">Posted: <strong>Thu Jun 04, 2015 8:09 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Hi,<br />my routine make_efg_el.F90 fails in the fft parallel case. The idea in this routine is to FFT the converged ground state density rhor to reciprocal space, and do some sums involving the G vectors and the density. In the non-parallel case I knew the size of rhor and its transform based on elements of nfft(18) but in the parallel case apparently I don't anymore. Can someone direct me to the right documentation to understand how the parallel fft case works?<br /><br />thanks,<br />Joe</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: bug fix help in paral_kgb case&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Tue Jun 09, 2015 5:21 pm</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">Hi Joe,<br /><br />You should have a look in routines doing a similar job, for instance hartre.F90.<br /><br />I see several modifications to perform:<br />- eliminate mpi_enreg_seq and replace it by the true mpi_enreg (passed as argument)<br />- call the ptabs_fourdp routine to inialize (if necessary) the parallel fft tabs<br />- add a line &quot;if (fftn2_distrib(i2) == me_fft) then&quot; in the igfft2 loop<br />- call xmpi_reduce on efg(:,:,:) after the loops to merge the computation of the procs<br /><br />This done, you'll see if debug is necessary or not...<br /><br />A bientôt,<br />Marc</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: bug fix help in paral_kgb case</h3>
+				<div class="date">Posted: <strong>Wed Jun 10, 2015 5:49 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">thanks, Marc, this is really helpful--I figured I could understand what's going on if I had an example to compare to.<br /><br />By way did you see my question posted in the response function section about DDK eigenvalues? I'd be grateful to get your take on that--<br /><br />thanks<br />Joe</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=3017&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:58:17 GMT -->
+</html>

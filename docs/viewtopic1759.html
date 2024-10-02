@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=5239&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:56:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Computing the relaxed ion elastic tensor</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Computing the relaxed ion elastic tensor</h2>
+		<p><a href="viewtopicf860.html?f=10&amp;t=5239">https://forum.abinit.org/viewtopic.php?f=10&amp;t=5239</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Computing the relaxed ion elastic tensor</h3>
+				<div class="date">Posted: <strong>Tue Dec 01, 2020 8:19 pm</strong></div>
+				<div class="author">by <strong>Salah</strong></div>
+				<div class="content">Dear All, <br>
+I have been trying to compute the relaxed ion elastic tensor. I used DFPT for computing the shear and normal stress/strains components. <br>
+<br>
+The relevant contents of the DFPT input file are: <br>
+rfstrs  3  #  Response Function with respect to STRainS; <br>
+<br>
+rfdir   1  1  1  #  Response Function: DIRections; Gives the directions to be considered for response function calculations;  <br>
+<br>
+rfddk  1  # Response Function with respect to Derivative with respect to K; (d/dK);<br>
+<br>
+rfatpol 1, 6  # The 1st element of the vector rfatpol, Response Function: ATomic POLarisation, <br>
+              # &amp; the 2nd element of the vector rfatpol, Here natom=6<br>
+ <br>
+Then, I used the "anaddb" utility for computing the elastic tensor. I am attaching hereto the input file and the output file on the  "anaddb" utility. <br>
+<br>
+The contents of the ".files" file for  the "anaddb" utility are: <br>
+h-Primitive.in<br>
+h-Primitive.out<br>
+h-Primitiveo_DDB<br>
+dummy_moldyn<br>
+dummy_GKK<br>
+5b.3.hgh<br>
+7n.5.hgh<br>
+6c.4.hgh<br>
+<br>
+As can be gathered from the output file of computing the elastic tensor using the "anaddb" utility, only the "clamped ion elastic tensor" is computed. The "relaxed ion elastic tensor" appears with all of its elements "Nan". <br>
+<br>
+Thus, could you advise me on the reason behind that "Nan" suppression of the computation of the "relaxed ion elastic tensor" and help me in resolving this issue?  I thankfully look forward to your consideration and reply at your earliest convenience.  <br>
+With thanks and kind regards, <br>
+Salah</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Computing the relaxed ion elastic tensor</h3>
+				<div class="date">Posted: <strong>Sun Dec 06, 2020 5:38 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Salah,<br>
+How the SCF of each DFPT calculations are converged?<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Computing the relaxed ion elastic tensor</h3>
+				<div class="date">Posted: <strong>Mon Dec 07, 2020 11:22 am</strong></div>
+				<div class="author">by <strong>Salah</strong></div>
+				<div class="content">Dear Eric, <br>
+Thank you for your reply and consideration. You are most welcome. I highly appreciate your valuable contributions to the Abinit Forum and your insightful feedback. <br>
+<br>
+I have scrutinized the output file of the DFPT calculations  and have found that the SCF in the DFPT has not converged. The following warning message appears in the output file:   <br>
+<br>
+scprqt:  WARNING -<br>
+  nstep= 3000 was not enough SCF cycles to converge;<br>
+  maximum residual=  8.231E-02 exceeds tolwfr=  1.000E-10<br>
+<br>
+Thus, although the current value of the “nstep” seems to be large enough for reaching convergence and the value of “tolwfr” seems to be reasonable enough for reaching convergence, the SCF convergence in the DFPT  has not been reached.   For your convenience, I am attaching hereto the DFPT input file and output file. It is noteworthy that I have removed some parts of the output file and have changed the extension of its name in order to enable this file to get through the online attachments constraints.  I thankfully look forward to further hearing from you in this regard at your earliest convenience. I look forward to resolving this issue. <br>
+<br>
+With thanks and kind regards,<br>
+Salah</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Computing the relaxed ion elastic tensor</h3>
+				<div class="date">Posted: <strong>Mon Dec 07, 2020 9:35 pm</strong></div>
+				<div class="author">by <strong>mmazdz</strong></div>
+				<div class="content">You need in ABINIT input also: rfphon 1 #do atomic displacement perturbation<br>
+Best wishes,<br>
+Marcin</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Computing the relaxed ion elastic tensor</h3>
+				<div class="date">Posted: <strong>Tue Dec 08, 2020 6:55 pm</strong></div>
+				<div class="author">by <strong>Salah</strong></div>
+				<div class="content">Dear Marcin, <br>
+Thank you for your reply and consideration. I highly appreciate your suggestion and your attempt to help in solving that issue. <br>
+<br>
+I have scrutinized the keyword “rfphon” and have found that it is basically used in “Response Function with respect to PHONons”   ( <a href="https://docs.abinit.org/variables/dfpt/#rfphon" class="postlink">https://docs.abinit.org/variables/dfpt/#rfphon</a> ). This is not the case here where I am seeking here to compute  the relaxed ion elastic tensor. Actually, I am seeking here to compute the elastic constants, rather than phonons. In fact, I have even tried to add this keyword “rfphon” with the value “1” in the input file for the “ANADDB” computational utility, but the issue of the resulting “Nan” in the relaxed ion elastic tensor has remained the same. <br>
+    <br>
+Therefore, I hope you may kindly refine your suggestion for solving that issue in the direction of computing  the relaxed ion elastic tensor, rather than in the direction of Phonons computations.  I thankfully look forward to your consideration as well as to the consideration of the experienced contributors to the Abinit Forum for finding the root cause of that issue. <br>
+With thanks and kind regards,<br>
+Salah</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Computing the relaxed ion elastic tensor</h3>
+				<div class="date">Posted: <strong>Wed Dec 09, 2020 12:39 am</strong></div>
+				<div class="author">by <strong>Salah</strong></div>
+				<div class="content">Dear Marcin and Eric, <br>
+Many thanks for your insightful feedback and consideration. I highly appreciate the insightful suggestions of each of you. Your insightful suggestions have enlightened the way for me for resolving that issue. <br>
+<br>
+I have modified the input file for the DFPT. The relaxed ion elastic tensor is now computed reasonably. <br>
+<br>
+I have noticed that there is a small warning in the output file on the “ddb_piezo”:  <br>
+(Unstable eigenvalue detected in force constant matrix at Gamma point).  <br>
+<br>
+I am attaching hereto this output file. Thus, I hope you may kindly advise me on the possible cause behind that warning statement.  I thankfully look forward to your consideration as well as to the consideration of the experienced contributors to the Abinit Forum for finding the root cause of that warning statement.  <br>
+With thanks and kind regards,<br>
+Salah</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Computing the relaxed ion elastic tensor</h3>
+				<div class="date">Posted: <strong>Thu Dec 10, 2020 2:31 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Salah,<br>
+Comment regarding the first problem: relaxed ions means you want the effect of atoms moving due to the change of interatomic force constants related to a strain perturbation such that you nee calculation of phonons to get it, see:<br>
+<a href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.72.035105" class="postlink">https://journals.aps.org/prb/abstract/1 ... .72.035105</a><br>
+<br>
+Regarding the negative IFC in your calculation, it sounds like you have an unstable phonon mode in your system but you do not print them in the anaddb, could you add the print of phonon frequencies such that we can see if there is indeed an unstable mode?<br>
+<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Computing the relaxed ion elastic tensor</h3>
+				<div class="date">Posted: <strong>Thu Dec 10, 2020 4:58 pm</strong></div>
+				<div class="author">by <strong>mmazdz</strong></div>
+				<div class="content">Dear Salah,<br>
+I have noticed further problems with your results:<br>
+- Elastic Tensor must be symmetric or close to symmetry, yours is not<br>
+- If the crystal is mechanically stable, its Elastic Tensor is positive-definite (in Mandel notation all Kelvin moduli must be positive),  yours is not: Kelvin moduli = {12.6588, 11.3204, -7.43272, 6.34902, 1.49906, -1.49094} (see attachment)<br>
+Best wishes,<br>
+Marcin</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Computing the relaxed ion elastic tensor</h3>
+				<div class="date">Posted: <strong>Thu Dec 31, 2020 10:47 pm</strong></div>
+				<div class="author">by <strong>Salah</strong></div>
+				<div class="content">Dear Eric and Marcin,   <br>
+Many thanks for your replies. I highly appreciate your insightful replies and helpful consideration. <br>
+<br>
+I have been acting accordingly for several days continuously. In fact, I have improved the code accordingly and have run the computations again and have got better results. For your convenience, I am attaching hereto the input files and the output files in this regard. <br>
+ <br>
+Now, the tensor of the elastic constants is symmetric with all values of its elements positive, except for a couple of values which are almost zero. This can be due to a sort of vacuum in the unit cell, or due to not getting very tight convergence in the tolwfk. Thus, there can be 9% room for improvement. <br>
+ <br>
+The corresponding values of the elastic properties of the materials are reasonably comparable with the results of similar studies.  <br>
+<br>
+In addition, in the output of the DFT I have got improved results on phonons. Now, all the frequencies of phonons are positive, except for two frequencies whose values are small. This can be due to a sort of vacuum in the unit cell, or due to not getting very tight convergence in the tolwfk. Thus, there can be 9% room for improvement. <br>
+<br>
+I am going later to further investigate in the near future the phonons results and analysis on this proposed system of materials. If I have further questions on that, I may make another post.  <br>
+<br>
+I wish you all best wishes of good health and a prosperous new year.  I thankfully look forward to keeping in touch. <br>
+ <br>
+With thanks and kind regards,  <br>
+Salah</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=5239&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:56:56 GMT -->
+</html>

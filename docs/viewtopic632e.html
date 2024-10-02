@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=343&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:33:30 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; default compiler optimisation: 6.0.4 hangs, 5.8.4 doesn't</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>default compiler optimisation: 6.0.4 hangs, 5.8.4 doesn't</h2>
+		<p><a href="viewtopic8f61.html?f=3&amp;t=343">https://forum.abinit.org/viewtopic.php?f=3&amp;t=343</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>default compiler optimisation: 6.0.4 hangs, 5.8.4 doesn't</h3>
+				<div class="date">Posted: <strong>Fri May 21, 2010 5:04 pm</strong></div>
+				<div class="author">by <strong>spamrefuse</strong></div>
+				<div class="content">Hi,<br /><br />When I compile abinit 6.0.4, it hangs (calculation never ends!) under certain<br />circumstances; for example, tutorial example 3.1 never ends.....<br /><br />If use same configure/compile conditions with 5.8.4p, this &quot;hang&quot; does not occur! <br /><br />If I switch off the optimisations with configure option  --enable-optim=&quot;no&quot;, then<br />the 6.0.4 executable does not hang anymore.....<br />(Does this mean, it is a GCC compiler bug?!? I have Fedora Linux 12, with the<br />GCC compiler suite version 4.4.3 )<br /><br />I investigated further by running the 6.0.4 &quot;hanging&quot; executable with the gdb<br />debugger, to hopefully find where it hangs. This is the result:<br /><br />$ gdb /opt/abinit/6.0/bin/abinit<br />GNU gdb (GDB) Fedora (7.0.1-45.fc12)<br />Copyright (C) 2009 Free Software Foundation, Inc.<br />License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;<br />This is free software: you are free to change and redistribute it.<br />There is NO WARRANTY, to the extent permitted by law.  Type &quot;show copying&quot;<br />and &quot;show warranty&quot; for details.<br />This GDB was configured as &quot;i686-redhat-linux-gnu&quot;.<br />For bug reporting instructions, please see:<br />&lt;http://www.gnu.org/software/gdb/bugs/&gt;...<br />Reading symbols from /opt/abinit/6.0/bin/abinit...done.<br />(gdb) run<br />Starting program: /opt/abinit/6.0/bin/abinit <br />  ABINIT <br />  <br />  Give name for formatted input file: <br />t31.in<br />t31.in<br />  Give name for formatted output file:<br />t3x.out<br />t3x.out<br />  Give root name for generic input files:<br />t3xi<br />t3xi<br />  Give root name for generic output files:<br />t3xo<br />t3xo<br />  Give root name for generic temporary files:<br />t3x<br />t3x<br /><br />.Version 6.0.4  of ABINIT <br />.(sequential version, prepared for a i686_linux_gnu4.4 computer) <br /><br />&lt;...snip...&gt;<br /><br /> === Build Information === <br />  Version       : 6.0.4<br />  Build target  : i686_linux_gnu4.4<br />  Build date    : 20100521<br /><br /> === Compiler Suite === <br />  C compiler       : gnu4.4<br />  CFLAGS           : -ggdb<br />  C++ compiler     : gnu4.4<br />  CXXFLAGS         : -ggdb<br />  Fortran compiler : gnu4.4<br />  FCFLAGS          :   -g  -ffree-line-length-none<br />  FC_LDFLAGS       : <br /><br /> === Optimizations === <br />  Debug level        : yes<br />  Optimization level : standard<br />  Architecture       : unknown_unknown<br /><br /> === MPI === <br />  Parallel build : no<br />  Parallel I/O   : no<br /><br /> === Linear algebra === <br />  Library type  : abinit<br />  Use ScaLAPACK : no<br /> <br />=== Plug-ins === <br />  BigDFT    : no<br />  ETSF I/O  : no<br />  LibXC     : no<br />  FoX       : no<br />  NetCDF    : no<br />  Wannier90 : no<br /><br /> === Experimental features === <br />  Bindings            : no<br />  Error handlers      : no<br />  Exports             : no<br />  GW double-precision : no<br />  Macroave build      : yes<br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /><br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /> CPP options activated during the build:<br /><br />                    CC_GNU                   CXX_GNU                    FC_GNU<br /><br />              HAVE_FC_EXIT             HAVE_FC_FLUSH             HAVE_FC_GAMMA<br /><br /> HAVE_FC_GET_ENVIRONMEN...              HAVE_FC_NULL          HAVE_FORTRAN2003<br /><br />                HAVE_NUMPY              HAVE_STDIO_H              USE_MACROAVE<br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /><br />&lt;...snip...&gt;<br /><br />================================================================================<br /><br />     iter   Etot(hartree)      deltaE(h)  residm     vres2    diffor    maxfor<br /><br /> getcut: wavevector=  0.0000  0.0000  0.0000  ngfft=  20  20  20<br />         ecut(hartree)=      8.000   =&gt; boxcut(ratio)=   2.18216<br />  scfcv : before setvtr, energies%e_hartree=   0.0000000000000000     <br /><br /> ewald : nr and ng are    3 and   11<br />  mklocl_recipspace : will add potential with strength vprtrb(:)=   0.0000000000000000        0.0000000000000000     <br />  setvtr : istep,n1xccc,moved_rhor=           1        2501           0<br />  scfcv : after setvtr, energies%e_hartree=   0.0000000000000000     <br /><br /> ITER STEP NUMBER     1<br /> vtorho : nnsclo_now=  2, note that nnsclo,dbl_nnsclo,istep=  0 0  1<br /><br /> Non-SCF iterations; k pt #    1  k= -0.25000  0.50000  0.00000  band residuals:<br /> res:  2.20E-02  2.77E-02  2.68E-02  4.76E-02  1.55E-02<br /><br />&lt;...HERE IT IS HANGING...I use CTRL-C to interrupt&gt;<br /><br />(gdb) where<br />#0  dlamc3 (a=can't compute CFA for this frame<br />) at dlamch.f:627<br />#1  0x0891ce71 in dlamc1 (beta=0, t=0, rnd=.TRUE., ieee1=.FALSE.) at dlamch.f:314<br />#2  0x0891c68a in dlamc2 (beta=1, t=144955274, rnd=144049282, eps=2.2204460492503131e-16, emin=144956590, <br />    rmin=7.7941770627915757e-255, emax=1, rmax=0) at dlamch.f:439<br />#3  0x0891d0ae in dlamch (cmach='B', _cmach=1) at dlamch.f:99<br />#4  0x08961674 in dlartg (f=0.1184800244732927, g=-0.11053278714129217, cs=1, sn=1, r=2.2063636054861382) at dlartg.f:85<br />#5  0x08949d8e in zsteqr (compz='V', n=5, d=..., e=..., z=..., ldz=5, work=..., info=0, _compz=1) at zsteqr.f:294<br />#6  0x0893753b in zhpev (jobz='V', uplo='U', n=5, ap=..., w=..., z=..., ldz=5, work=..., rwork=..., info=0, _jobz=1, <br />    _uplo=1) at zhpev.f:179<br />#7  0x0817f4e9 in subdiago (cg=..., eig_k=..., evec=..., gsc=..., icg=0, igsc=0, istwf_k=1, mcg=2890, mgsc=0, <br />    mpi_enreg=..., nband_k=5, npw_k=283, nspinor=1, paral_kgb=0, subham=..., subovl=..., use_subovl=0, usepaw=0)<br />    at subdiago.F90:351<br />#8  0x08135c46 in vtowfk (cg=..., cgq=..., cprj=..., cpus=0, dimcprj=..., dimffnl=1, dphase_k=..., dtefield=..., <br />    dtfil=..., dtset=..., eig_k=..., ek_k=..., ek_k_nd=..., enl_k=..., fixed_occ=.TRUE., ffnl=..., grnl_k=..., <br />    gs_hamk=..., ibg=0, icg=0, ikpt=1, iscf=7, isppol=1, kg_k=..., kinpw=..., kpg_k=..., lmnmax=2, matblk=2, <br />    mband_cprj=0, mcg=2890, mcgq=1, mgfft=20, mkgq=1, mpi_enreg=..., mpsang=3, mpssoang=3, mpw=289, natom=2, nband_k=5, <br />    nkpg=0, nkpt=2, nnsclo_now=2, npw_k=283, npwarr=..., nspinor=1, ntypat=1, nvloc=1, n4=21, n5=21, n6=20, occ_k=..., <br />    optforces=1, ph3d=..., prtvol=0, pwind=..., pwind_alloc=1, pwnsfac=..., pwnsfacq=..., resid_k=..., rhoaug=..., <br />    use_dmft=0, usecprj=0, vlocal=..., wtk=0.75, zshift=...) at vtowfk.F90:466<br />#9  0x0812cc17 in vtorho (afford=1, atindx=..., atindx1=..., cg=..., compch_fft=3.4597648938201542e-255, cpus=0, <br />    dbl_nnsclo=0, dielop=0, dielstrt=0, dphase=..., dtefield=..., dtfil=..., dtset=..., eigen=..., <br />    electronpositron=0x0, energies=..., etotal=0, gbound_diel=..., gmet=..., gprimd=..., grnl=..., <br />    gsqcut=1.6211389382774044, hdr=..., indsym=..., irrzon=..., irrzondiel=..., istep=1, istep_mix=1, kg=..., <br />    kg_diel=..., kxc=..., lmax_diel=0, mgfftdiel=1, mpi_enreg=..., mpsang=3, natom=2, nattyp=..., nfftf=8000, <br />    nfftdiel=1, ngfftdiel=..., nhat=..., nkxc=0, npwarr=..., npwdiel=1, nres2=0, nspinor=1, ntypat=1, nvresid=..., <br />    occ=..., optforces=1, optres=0, paw_dmft=..., paw_ij=..., pawang=..., pawfgr=..., pawfgrtab=..., pawrhoij=..., <br />    pawtab=..., phnons=..., phnonsdiel=..., ph1d=..., ph1ddiel=..., psps=..., pwind=..., pwind_alloc=1, pwnsfac=..., <br />    resid=..., residm=3.4597648938201542e-255, rhog=..., rhor=..., rmet=..., rprimd=..., susmat=..., symrec=..., <br />    taug=..., taur=..., ucvol=263.74445799999995, wffnew=..., wffnow=..., vtrial=..., wvl=..., xred=..., ylm=..., <br />    ylmdiel=...) at vtorho.F90:982<br />#10 0x080f8f07 in scfcv (atindx=..., atindx1=..., cg=..., cpus=0, dtefield=..., dtfil=..., dtpawuj=..., dtset=..., <br />    ecore=22.941917142441731, eigen=..., electronpositron=0x0, fatvshift=1, hdr=..., iapp=0, indsym=..., initialized=0, <br />    irrzon=..., kg=..., mpi_enreg=..., nattyp=..., ndtpawuj=0, nfftf=8000, npwarr=..., occ=..., paw_dmft=..., <br />    pawang=..., pawfgr=..., pawrad=..., pawrhoij=..., pawtab=..., phnons=..., psps=..., pwind=..., pwind_alloc=1, <br />    pwnsfac=..., rec_set=..., resid=..., results_gs=..., rhog=..., rhor=..., rprimd=..., scf_history=..., symrec=..., <br />    taug=..., taur=..., wffnew=..., wffnow=..., wvl=..., xred=..., xred_old=..., ylm=..., ylmgr=...) at scfcv.F90:1187<br />#11 0x080afca6 in gstate (acell=..., codvsn='6.0.4 ', cpui=995514.12699999998, dtfil=..., dtset=..., iexit=0, <br />    mpi_enreg=..., npwtot=..., nspinor=1, occ=..., pawang=..., pawrad=..., pawtab=..., psps=..., results_gs=..., <br />    rprim=..., vel=..., xred=..., _codvsn=6) at gstate.F90:1018<br />#12 0x0805dd46 in gstateimg (acell_img=..., codvsn='6.0.4 ', cpui=995514.12699999998, dtfil=..., dtset=..., <br />    etotal_img=..., fcart_img=..., fred_img=..., iexit=0, mpi_enreg=..., npwtot=..., nspinor=1, occ_img=..., <br />    pawang=..., pawrad=..., pawtab=..., psps=..., rprim_img=..., strten_img=..., vel_img=..., xred_img=..., _codvsn=6)<br />    at gstateimg.F90:338<br />#13 0x080536b9 in driver (codvsn='6.0.4 ', cpui=995514.12699999998, dtsets=..., filnam=..., <br />    filstat='t3x_STATUS', ' ' &lt;repeats 254 times&gt;, mpi_enreg=..., ndtset=0, ndtset_alloc=1, npsp=1, pspheads=..., <br />    results_out=..., _codvsn=6, _filnam=264, _filstat=264) at driver.F90:623<br />#14 0x0804bbde in abinit () at abinit.F90:437<br />#15 0x089a66cc in main ()<br />#16 0x00930bb6 in __libc_start_main () from /lib/libc.so.6<br />#17 0x08049c61 in _start ()<br /><br />Does this give any clue?<br /><br />Rob.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: default compiler optimisation: 6.0.4 hangs, 5.8.4 doesn'</h3>
+				<div class="date">Posted: <strong>Fri May 21, 2010 6:25 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">I had a similar problem on my laptop using the same version of gcc:<br />dlamch enters an infinite loop and doesn't return.<br /><br />I solved it by linking an external blas &amp; lapack library.<br />Hope it helps<br />Matteo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: default compiler optimisation: 6.0.4 hangs, 5.8.4 doesn'</h3>
+				<div class="date">Posted: <strong>Sat May 22, 2010 8:50 am</strong></div>
+				<div class="author">by <strong>spamrefuse</strong></div>
+				<div class="content">It's awkward though that this does not happen with abinit version 5.8.4p<br />(same compiler options and same GCC version).<br /><br />It's apparently a rather inconvenient interplay between the abinit version and<br />the GCC version.....<br /><br />Rob.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=343&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:33:30 GMT -->
+</html>

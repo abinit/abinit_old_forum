@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=2758&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:34:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; elastic constants (transition metals) with PAW (LDA+U)</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>elastic constants (transition metals) with PAW (LDA+U)</h2>
+		<p><a href="viewtopicc247-2.html?f=10&amp;t=2758">https://forum.abinit.org/viewtopic.php?f=10&amp;t=2758</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>elastic constants (transition metals) with PAW (LDA+U)</h3>
+				<div class="date">Posted: <strong>Fri Aug 08, 2014 12:42 pm</strong></div>
+				<div class="author">by <strong>Andrij</strong></div>
+				<div class="content">hello everyone!<br />I would like to calculate elastic constants for some oxides of transition metals of d block. I am using 7.8.2 version of abinit.<br />The geometry is preliminary relaxed with highly converged results.<br />Using LDA only gives me not realistic results and is problematic no metter how big is plane-waves basis set or how fine is k-point grid, and whether or not I take spin polarization into account (e.g. twice larger values for C11, C12 elements in comparence to the experimental values, negative values for C44, unability to calculate relaxed-ion elastic tensor, anaddb complains about violation of acoustic sum rule, stability of a system ..)<br />At the same time if I use PAW method (with or without LDA+U) a code crashes with a bug:<br /><br />    Inconsistency between variables choice and ngrhoij !<br />src_file: m_pawrhoij.F90<br /><br />I would very appreciate any suggestions, guys.<br /><br />Here is an example of an input file:<br /><br /> ndtset  2<br /><br /># Set 1:  gs<br />       iscf1   7<br />  kptopt1   1<br />   tolvrs1   1.0d-18<br /><br /># Set 2 : rf<br />  getwfk2  -1<br />       iscf2   7<br />    ptopt2   2     <br />      nqpt2   1<br />       qpt2   0. 0. 0.<br />   rfphon2   1    <br />  rfatpol2   1 2  <br />   rfstrs2   3      <br />     rfdir2   1 1 1<br />  tolvrs2   1.0d-10<br /><br />#Atomic system data<br />#so and so<br /><br />#PW basis<br />   ecut   12.0       <br /> ecutsm   0.5      <br />pawecutdg 30.    <br />                         <br />#k-point grid<br /> kptopt   1              <br />  ngkpt   4 4 4         <br />nshiftk   4              <br /> shiftk   0.5 0.5 0.5 <br />          0.5 0.0 0.0    <br />          0.0 0.5 0.0    <br />          0.0 0.0 0.5<br />#scf<br /> diemac   4.0   #the last thing I was trying to calculate belongs to Mott insulators<br />      iscf   7    <br />  nstep   200 <br />                    <br /> optforces 1<br /> pawxcdev 0       #Exchange-corr. part in the spherical part of energy<br />                         #is computed on the angular mesh<br />#Spin<br /> nsppol 2           #FM case<br /> nspden 2<br /> nspinor 1<br /> spinat 0 0 2.0<br />           0 0  0</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: elastic constants (transition metals) with PAW (LDA+U)</h3>
+				<div class="date">Posted: <strong>Sat Aug 09, 2014 1:39 pm</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">Hi<br /><br />The calculation of elastic constants is not yet available in PAW.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=2758&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:34:28 GMT -->
+</html>

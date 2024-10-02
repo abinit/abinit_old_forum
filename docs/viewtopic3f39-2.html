@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2946&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:21:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Problem DFT+U vector magnetization</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Problem DFT+U vector magnetization</h2>
+		<p><a href="viewtopicb93e.html?f=9&amp;t=2946">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2946</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Problem DFT+U vector magnetization</h3>
+				<div class="date">Posted: <strong>Tue Mar 17, 2015 3:37 pm</strong></div>
+				<div class="author">by <strong>alexzai</strong></div>
+				<div class="content">Hallo<br /><br />In new ABINIT 7.10.4 version remain the same problems with calculation of U-correction with nspden=4.  <img class="smilies" src="images/smilies/icon_e_sad.gif" alt=":(" title="Sad" /> <br /><br />Best regards <br />Alex</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem DFT+U vector magnetization</h3>
+				<div class="date">Posted: <strong>Fri May 29, 2015 10:01 am</strong></div>
+				<div class="author">by <strong>amadon</strong></div>
+				<div class="content">Dear Alex,<br /><br />Sorry for the delay.<br />What is the problem with the DFT+U vector magnetization with nspden=4 ?<br /><br />Best regards<br />Bernard Amadon<br /><br />PS: Could you give your name and affiliation, thanks!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem DFT+U vector magnetization</h3>
+				<div class="date">Posted: <strong>Tue Jun 02, 2015 7:48 pm</strong></div>
+				<div class="author">by <strong>alexzai</strong></div>
+				<div class="content">Thank you for the answer.<br /><br />The problem is definition of U-parameter in  antiferromagnetic  system with spin-orbit coupling. At calculation of U-parameter with spin-orbit-coupling the result consist of zeros and arises errors in .out file: &quot;Matrix response chi_0 is singular Probably too many symmetries kept Matrix response chi is singular Probably too many symmetries kept&quot;  and warning in .log file: <br />&quot;-- !WARNING<br />message: |<br />    LDA+U+SpinOrbit is still on test <br />      (not yet in production)<br />src_file: chkinp.F90<br />src_line: 2591&quot;<br />My system is very asymmetrical and the further reduction of symmetry is not possible. I see, that this function unfortunately today is not realized and hope to realisation in future. Know you other methods of U parameter in the systems definition? Now i can run only the collinear calculation. <br /><br />Best regards <br />Alexander Zaichenko<br />Göttingen</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem DFT+U vector magnetization</h3>
+				<div class="date">Posted: <strong>Wed Jun 03, 2015 8:40 am</strong></div>
+				<div class="author">by <strong>amadon</strong></div>
+				<div class="content">Dear Alexander,<br /><br />Sorry, I was missing your point. The calculation of U within cRPA is implemented in ABINIT only if nspinor=1 (collinear case). It<br />was not written in the doc. So I have just updated it now (input variable: ucrpa) in the doc.<br /><br />Best regards<br />Bernard</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem DFT+U vector magnetization</h3>
+				<div class="date">Posted: <strong>Wed Jun 03, 2015 1:39 pm</strong></div>
+				<div class="author">by <strong>alexzai</strong></div>
+				<div class="content">Thank you for the fast answer <br /><br />But i have used linear response method, not RPA and i did not know, that in GW calculation is the same problem.<br /><br />Best regards<br />Alexander</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem DFT+U vector magnetization</h3>
+				<div class="date">Posted: <strong>Thu Jun 04, 2015 1:20 pm</strong></div>
+				<div class="author">by <strong>amadon</strong></div>
+				<div class="content">In fact, my point is that the calculation of the effective Coulomb Interaction U with the constrained Random Phase Approximation (cRPA)<br />is not implemented in the case nspinor=2. (I am not discussing GW calculations in general).<br /><br />Concerning the linear response method to compute U, to my knowledge, it was also not implemented in non collinear case.<br /><br />Best regards<br />Bernard</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2946&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:21:35 GMT -->
+</html>

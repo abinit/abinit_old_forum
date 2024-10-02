@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=2979&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:28:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Long range force (Ewald sum) for finite q</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Long range force (Ewald sum) for finite q</h2>
+		<p><a href="viewtopic784f-2.html?f=10&amp;t=2979">https://forum.abinit.org/viewtopic.php?f=10&amp;t=2979</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Long range force (Ewald sum) for finite q</h3>
+				<div class="date">Posted: <strong>Mon May 04, 2015 10:49 pm</strong></div>
+				<div class="author">by <strong>churna</strong></div>
+				<div class="content">This question is primarily for the abinit code developer. In phonon LO/TO splitting response function calculation, we use non-analyticity contribution at q~0. If I am not correct, the anaddb code also handles that once we have DDB dataset from abinit output. Although, long-range macrscopic dipole field contributes q-&gt;0, in abinit we calculate at q=0. I guess in reciprocal space, the long-range force constant(Ewald contribution) is finite not only at q=0, rather it should somehow fall off or deacy if we go away from q=0. I would like to see how long-range force constant behaves or depends on q. We know already that we can calculate phonon frequency at finite q but I am not sure how to see lon-range and short-range part of force constant separately in the result.  Is it posssible to calculate this  in the latest version of abinit or is there anyway we can do some modification in source code to handle this issue.<br /><br />I would really appreciate if you could reply me.<br /><br />Thanks<br /><br />Churna</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Long range force (Ewald sum) for finite q</h3>
+				<div class="date">Posted: <strong>Tue May 05, 2015 10:16 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content"><!-- m --><a class="postlink" href="http://www.abinit.org/doc/helpfiles/for-v7.10/users/anaddb_help.html#ifcana">http://www.abinit.org/doc/helpfiles/for ... tml#ifcana</a><!-- m --><br /><br />set it to 1 and you have to look through the output and log for the IFC (short and long range) as a function of neighbor.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re:  Long range force (Ewald sum) for finite q</h3>
+				<div class="date">Posted: <strong>Tue May 05, 2015 6:17 pm</strong></div>
+				<div class="author">by <strong>churna</strong></div>
+				<div class="content">Thanks for your quick reply. Sorry, may be I did not ask problem correctly. Yes you right, it calculates interatomic force constant (IFC) if we set ifcana 1. I think IFC are calculated as a function of neighbor distance in real space for q=0. But I want to see for finite q.  I think for finite q there is no non-analyticity expression. Could you please tell me, exactly how you include longrange effect if IFC for finite q. There is LO/TO splitting even at finite q, so there must be this effect if I am not wrong. I am trying to understand the PRB by Gonze how longrange part is calculated for general q.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Long range force (Ewald sum) for finite q</h3>
+				<div class="date">Posted: <strong>Mon May 11, 2015 11:43 pm</strong></div>
+				<div class="author">by <strong>Benoit Van Troeye</strong></div>
+				<div class="content">Dear Churna,<br /><br />The long-rage behaviour of the IFCs is well-detailled in the Gonze paper of 1997 (Vol. 55, num. 16). I suppose this was the paper you mentioned in your previous message. In short, the dynamical matrix with q-&gt;0 is strongly nonanalytical and depends on the direction alongside which you go to Gamma. This nonanalytical part is related to the Born effective charges and the dielectric permittivity tensor. <br /><br />In practice, if you want to compute the phonon at a given q-vector (e.g. 0.125 0 0), you can use the variable qpt 0.125 0 0. You just have to be careful that the q-point you want to study is included in your k-point grid. Another possibility is to make a non-self consistent cycle to generate a wfq file:<br /><br />getden2  1<br /> iscf2   -2<br /> nqpt2    1<br /> qpt2     0.125 0.0 0.0<br /> nbdbuf2  2<br /> tolwfr2  1.0d-22<br /><br />and then use getwfq3 -1 (where you make your phonon computation). So in this case you can compute the phonon at any q you want. If you are only interested in lim q-&gt;0, and if your eigendisplacement at q=0 and at q-&gt;0 are identical, you have to following expression : omega_LO^2 = omega_TO^2 + 4pi/Omega_0 q.Sm.q / q.epsilon^infty.q with Sm the force oscillator strength tensor related to the Born effective charge. So if you want to compute the phonon at q-&gt;0, the best way is to compute omega_TO(q=0), then the dde to get the dielectric tensor and the born effective charge then using anaddb to analize your results.<br /><br />If your question was related to how, starting from a q-mesh of phonons computed in Abinit which do not include q-point close to Gamma, anaddb compute the dynamical matrix for q close to 0 i.e. 0.01 0 0 (corresponding to long-range IFCs) ? If I'm wright, the section IX. of the previously introduced you the desired expression of the IFCs at long-range. <br /><br />Hope it helps ! <br /><br />Best regards,<br /><br />Benoit</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Long range force (Ewald sum) for finite q</h3>
+				<div class="date">Posted: <strong>Mon May 18, 2015 6:17 pm</strong></div>
+				<div class="author">by <strong>churna</strong></div>
+				<div class="content">Dear Benoit,<br /><br />I am glad that you catch up problem correctly. <br /><br />I understand to caculate the phonon at finite q as you sadi in the email. Actually, I have also caculated the phonon band strcuture using anaddb using ddb obatined from abinit output file for q points.<br /><br /><span style="color: #804000">If your question was related to how, starting from a q-mesh of phonons computed in Abinit which do not include q-point close to Gamma, anaddb compute the dynamical matrix for q close to 0 i.e. 0.01 0 0 (corresponding to long-range IFCs) ? If I'm wright, the section IX. of the previously introduced you the desired expression of the IFCs at long-range</span><br /><br />In the paper onze paper of 1997 (Vol. 55, num. 16).  The FT of 1/r is 4pi/q^2. so how can a dipole potential that goes as 1/r^3 also give a 1/q^2 ?<br />Do you understand how that works? I am also not sure whether Born effectic charge(Z*) depends on q or not.  Perhaps, the Eq. 75 is the correct expression to calculate the dipole-dipole (Lonag-range forcce constant)  contribution at finte q. I want to see explicitly C_DD(q). For small q-&gt;0, it depends on the direction not in the magnitude.  As you said, <span style="color: #800000">anaddb compute the dynamical matrix for q close to 0 i.e. 0.01 0 0 (corresponding to long-range IFCs) ?</span> I think abinit calculates both short and long-range force constant(dynamical matrix) for a given q. But not sure how to print out those force constant in output file. I only see the Ewald and shor-range force conatsnat at q-&gt;0 in anaddb output.<br /><br />Thanks,<br /><br />Churna</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Long range force (Ewald sum) for finite q</h3>
+				<div class="date">Posted: <strong>Wed Oct 07, 2015 3:53 am</strong></div>
+				<div class="author">by <strong>charlesdarnay</strong></div>
+				<div class="content">Hi,<br /><br />I'm not sure this will help. It's also been a couple of months already. You were asking what happens with the non-analytical term away from q=0. I think you are right that the expression at finite q is given by (75) of Gonze and Lee 1997.<br /><br />As for the Born effective charge, it is defined at q=0 as in eq. (39). That is, with all the atoms (in the sublattice Kappa) getting displaced in the amount in the direction alpha. I guess though one could higher order terms that do depend on q? But that's not how it's done in the paper. And I'm sorry, but I don't know about separating both force contributions away from q=0.<br /><br />I have a question myself. What is the corresponding (&quot;divergent&quot;, although it does diverge at finite q) finite q expression for the first derivative of the Hamiltonian with respect to the atomic displacements? I'm wondering if it's the same expression as when q-&gt;0, from the following:<br /><br />Gonze an Lee 1997 has (60), the dynamical expression for q-&gt;0; and then (75) for finite q, which contains actually the same expression (ok, except for the exponential) for G=0. Ponce et al. 2015 arxiv: 1504.05992v1 has (A78) together with (A77) for the non-analytical part of the Hamiltonian for q-&gt;0. <strong class="text-strong">What is the expression for finite q?</strong> I'm wondering if it's actually just the same expression as for q-&gt;0, analogously to the two expressions for the dynamical matrix.<br /><br />Thanks.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Long range force (Ewald sum) for finite q(SOLVED)&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Sun Feb 14, 2016 9:58 pm</strong></div>
+				<div class="author">by <strong>churna</strong></div>
+				<div class="content">Hi,<br /><br />Thanks for your remarks and answers about long-range and short range IFC at finite q. Now I understand how elegantly it has been done in abinit or by Xavier Xonze in his paper. It looks like we do not need Dipole Dipole term or Born charges to get LO/TO splittings if we use sufficiently large <em class="text-italics">K</em>-point mesh, although which is not possible in computational point of view. So, the limit q=&gt;0 is really undefined limit, which in fact depends how many <em class="text-italics">K</em>-points you choose in your Brillouin zone sampling. I though there would be some real physical length scale of the limit, but it looks like there isn't.<br /><br /><br />Thanks,<br /><br />Churna</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=2979&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:28:49 GMT -->
+</html>

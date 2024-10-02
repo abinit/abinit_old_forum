@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1677&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:37:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; config file for Huygens</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>config file for Huygens</h2>
+		<p><a href="viewtopic6718-4.html?f=3&amp;t=1677">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1677</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>config file for Huygens</h3>
+				<div class="date">Posted: <strong>Wed May 23, 2012 1:53 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Below is a functional .ac file for the huygens supercomputer (IBM xlf P6 chips) at SARA in the Netherlands, along with a list of loaded modules. xlf 12.1 has some problems with optional arguments, and xlf13.1 looks much better.<br /><br />One tweak was necessary, and has been fixed in development version 6.15.0: the compiler wrapper links with the source file at the end of the command line, which is incorrect for xlf (it looks for libraries to link with only _after_ the source file). This makes some of the configures for the fallbacks fail. The patch is the following:<br /><br /><blockquote class="uncited"><div>--- config/wrappers/wrap-fc.in	2011-12-19 20:53:13 +0000<br />+++ config/wrappers/wrap-fc.in	2012-05-22 11:33:42 +0000<br />@@ -121,8 +121,8 @@<br /> <br />   # DEFS should not be included anymore, since they may trigger<br />   # another preprocessing from the buggy compiler<br />-  echo &quot;${FC} ${FCFLAGS} ${INCLUDES} ${fc_cpp}&quot;<br />-  ${FC} ${FCFLAGS} ${INCLUDES} ${fc_cpp}<br />+  echo &quot;${FC} ${fc_cpp} ${FCFLAGS} ${INCLUDES}&quot;<br />+  ${FC}  ${fc_cpp} ${FCFLAGS} ${INCLUDES}<br />   fc_ret=&quot;${?}&quot;<br />   if test &quot;${fc_debug}&quot; = &quot;no&quot; -a &quot;${fc_ret}&quot; = &quot;0&quot;; then<br />     rm ${fc_cpp}<br /><br /></div></blockquote><br /><br />Almost all tests pass (some fancy PAW + phonons or DDK and several AIM tests do not ).<br /><br />Modules loaded:<br /><blockquote class="uncited"><div>Currently Loaded Modulefiles:<br /> 1) python/2.5.1       5) c++/ibm/11.1       9) valgrind/3.6.1    <br /> 2) fftw3/3.3          6) c/ibm/11.1        10) vampirtrace/5.8.2 <br /> 3) netcdf-mp/4.1.2    7) papi/4.1.1        11) hpct/5.1.1.3      <br /> 4) fortran/ibm/13.1   8) totalview/8.9.2-0 <br /></div></blockquote><br /><br /><br />huygens.ac<br /><blockquote class="uncited"><div>enable_64bit_flags=&quot;yes&quot;<br />enable_optim=&quot;yes&quot;<br /><br />CPP=&quot;/usr/bin/cpp&quot;<br />CC=&quot;mpcc&quot;<br /><br />CFLAGS=&quot;-qlanglvl=extc99 -O3 -q64 -qspill=2000 -qarch=pwr6 -qtune=auto -qcache=auto -qstrict -qsuppress=1520-031:1520-003&quot;<br />CXX=&quot;mpCC&quot;<br />FC=&quot;mpfort&quot;<br />FCFLAGS=&quot;-O3 -q64 -qzerosize -qfree -qstrict -qhot -qarch=pwr6 -qtune=auto -qsuppress=1520-031:1520-003 -qmaxmem=-1 -qcache=auto&quot; #&quot; -<br />qessl -qipa&quot;<br />enable_fc_wrapper=&quot;yes&quot;<br />AR=&quot;ar&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_level=&quot;2&quot;<br />MPI_RUNNER=&quot;/usr/bin/poe&quot;<br />with_trio_flavor=&quot;netcdf&quot; #&quot;+fox&quot;<br /><br />with_netcdf_incs=&quot;-I/sara/sw/netcdf/4.1.2/include&quot;<br />with_netcdf_libs=&quot;-L/sara/sw/netcdf/4.1.2/lib -lnetcdf -lnetcdff&quot;<br /><br />with_fft_flavor=&quot;fftw3&quot;<br /><br />with_fft_incs=&quot;-I/sara/sw/fftw3/3.3/include&quot;<br />with_fft_libs=&quot;-L/sara/sw/fftw3/3.3/lib -lfftw3&quot;<br /><br />with_linalg_flavor=&quot;netlib&quot;<br />with_linalg_libs=&quot;-L/sara/sw/lapack/3.4.1/CCI/xlf13.1/lib/ -llapack -lessl &quot;<br /><br />with_dft_flavor=&quot;atompaw+libxc&quot; #+wannier90&quot;<br />enable_clib=&quot;yes&quot;<br />enable_gw_dpc=&quot;yes&quot;<br />enable_memory_profiling=&quot;no&quot;<br />enable_maintainer_checks=&quot;no&quot;<br />enable_test_timeout=&quot;yes&quot;<br />with_fc_vendor=&quot;ibm&quot;<br />with_fc_version=&quot;13.1&quot;<br />enable_gui_build=&quot;no&quot;<br /></div></blockquote></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: config file for Huygens</h3>
+				<div class="date">Posted: <strong>Wed May 23, 2012 5:44 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Since the wrapper is mainly aimed at XLF, any patch that works around XLF-related issues with the build system of Abinit is warmly welcome. Thank you for this one, and feel free to tweak it more if needed.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: config file for Huygens</h3>
+				<div class="date">Posted: <strong>Wed May 23, 2012 6:07 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Note that I still have to force it to use the wrapper:<br /><br />enable_fc_wrapper=&quot;yes&quot;</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: config file for Huygens</h3>
+				<div class="date">Posted: <strong>Wed May 23, 2012 7:33 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Yes, this is normal, since some versions of XLF work without wrapping and I am an incurable optimist. <img class="smilies" src="images/smilies/icon_e_wink.gif" alt=";-)" title="Wink" /></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1677&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:37:28 GMT -->
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=506&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:42:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; problem with anaddb ?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>problem with anaddb ?</h2>
+		<p><a href="viewtopicc447.html?f=10&amp;t=506">https://forum.abinit.org/viewtopic.php?f=10&amp;t=506</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>problem with anaddb ?</h3>
+				<div class="date">Posted: <strong>Wed Jul 21, 2010 4:12 pm</strong></div>
+				<div class="author">by <strong>fdatchi</strong></div>
+				<div class="content">Hi all,<br /><br />I've been using ABINIT v5.8.4 to calculate the properties of a high pressure phase of CO2, space group P42/mnm.<br /><br />I first optimized the strucutre (cell paramaters + atomic positions) for a given stress target <br />then I ran a response function calculation to get the phonon dispersion in the IBZ, following the indications given in the tutorials (file CO2ph2_13.in). <br /><br /><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/filea262.php?id=132">CO2Ph2_13.in</a></dt>
+						<dd>(5.93 KiB) Downloaded 401 times</dd>
+		</dl>
+		
+		
+			</div><br /><br />Everything looked to be working out right  so far. I then merged the DDB  and ran anaddb to get the phonon bands (file CO2ph2_15.in). <br /><br /><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file9b05.php?id=134">CO2Ph2_15.in</a></dt>
+						<dd>(4.17 KiB) Downloaded 353 times</dd>
+		</dl>
+		
+		
+			</div><br /><br />The results showed imaginary modes on the lower acoustic branch along Gamma-M(0.5,0.5,0). To make sure this was not due to convergence issues, I increased ecut from 35 Ha to 40 Ha but got the same result. I upload the figure, this is an eps file but added the &quot;.in&quot; extension to be able to upload it  <img class="smilies" src="images/smilies/icon_e_wink.gif" alt=";)" title="Wink" /> <br /><br />Since I found the presence of these imaginary modes rather weird, I ran more rf calculations at 2 wavevectors along Gamma-M, q=[0.1,0.1,0] and q=[0.15,0.15,0].  The reuslts do not agree at all with those given by anaddb, in particular all frequencies are positive in these direct rf calculations. They are shown with &quot;+&quot; symobls on the figure. <br /><br />I also made a rf calculation along Gamma-X(0,0.5,0),q=[0,0.15,0], and in this case the results are in perfect agreement with the output of anaddb.<br /><br />Can someone help me understand what the problem is ?<br /><br />Thanks in advance,<br />Frederic.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem with anaddb ?</h3>
+				<div class="date">Posted: <strong>Mon Jul 26, 2010 2:46 pm</strong></div>
+				<div class="author">by <strong>pboulanger</strong></div>
+				<div class="content">Hi,<br /><br />Did you try removing the variable symdynmat from the input file for ANADDB?<br />The default (symdynmat 1) is better has it restores the symmetry of the system, even with Fourier interpolation.<br />I am not sure this will correct the behavior, I would need to see the outputs.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem with anaddb ?</h3>
+				<div class="date">Posted: <strong>Tue Jul 27, 2010 11:35 am</strong></div>
+				<div class="author">by <strong>fdatchi</strong></div>
+				<div class="content">Hi,<br />Thanks for your suggestion. I m out of office at present, I will try it out as soon as I come back. <br />Frederic</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem with anaddb ?</h3>
+				<div class="date">Posted: <strong>Wed Jul 28, 2010 7:33 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Your approach is quite correct: check that the negative modes are &quot;real&quot; by doing explicit calculations at the given q-points. As you showed the modes should be positive. this means that the negative values are a result of the interpolation scheme. The straightforward solution is to increase the density of q-points. You will get better converged real-space interatomic force constants, and the negative dips will disappear.<br /><br />You can also use an approximation, with the rifcsph anaddb input variable. It cuts off the IFC at the given radius, and will eventually eliminate the large, long-range IFC which are causing the dips, but also other oscillations and dips which may be physical. Start with a large value like 60 bohr, then reduce rifcsph progressively to see the effect. Again, to be used with caution, as it is a severe approximation (see the appendix of prb 78 045119 ).<br /><br />matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem with anaddb ?</h3>
+				<div class="date">Posted: <strong>Mon Aug 16, 2010 1:22 pm</strong></div>
+				<div class="author">by <strong>fdatchi</strong></div>
+				<div class="content">Thanls Matthieu.<br /><br />I tried with symdinmat 1, it did not change anything.<br /><br />I then tried to use decreasing values of rifcsph, it does affect the results below 20 Bohr but does not help to recover the correct behavior along Gamma-M and introduces more negative values.<br /><br />Could you indicate how to generate a grid of denser q-points ?<br /><br />Thanks,<br />Frederic</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem with anaddb ?</h3>
+				<div class="date">Posted: <strong>Sat Sep 04, 2010 10:45 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">That's the safe way to go.<br /><br />Run a ground state calculation (with nstep 1 and ecut as low as you want) with a k-point grid equal to the q-point grid you need, e.g.<br /><br />prtvol 10<br />ngkpt 8 8 8<br />shiftk 0 0 0<br />kptopt 1<br /><br />you will get from the output the irreducible k-points for your cell, which you can use as q-points for the phonons. Note that if you already have the DDB for a 4x4x4 grid you only have to do the _new_ q-points which were not in the previous grid. Add the new datasets on and merge the final DDBs for everybody. Obviously if you choose 6x6x6, say, you can't reuse the 0.25 0 0 q-point.<br /><br />matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem with anaddb ?</h3>
+				<div class="date">Posted: <strong>Mon Sep 06, 2010 3:52 pm</strong></div>
+				<div class="author">by <strong>fdatchi</strong></div>
+				<div class="content">Thanks matthieu.<br /><br />Using a 8x8x8 grid adds a lot more q-points and thus as many more rf calculations.<br />Since the problem seems to be only for the Gamma-M branch, is it possible to only increase the number of q-points along this branch ?<br /><br />Frederic</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem with anaddb ?</h3>
+				<div class="date">Posted: <strong>Mon Sep 06, 2010 6:46 pm</strong></div>
+				<div class="author">by <strong>fdatchi</strong></div>
+				<div class="content">Another question: should I use the same number/grid of k-points as of q-points or these are completely unrelated ?<br /><br />Frederic</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem with anaddb ?</h3>
+				<div class="date">Posted: <strong>Mon Oct 11, 2010 12:28 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Your q-grid and k-grid are better off if they are compatible: q is Gamma centered and a sub grid of the k.<br /><br />However this is not obligatory, if it's not the case you need to calculate the wavefunctions at k+q explicitly (see tutorials).<br /><br />matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=506&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:42:08 GMT -->
+</html>

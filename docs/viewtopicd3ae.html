@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=5394&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 13:30:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; band structure of Cobalt monolayer</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>band structure of Cobalt monolayer</h2>
+		<p><a href="viewtopic2c5d.html?f=9&amp;t=5394">https://forum.abinit.org/viewtopic.php?f=9&amp;t=5394</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>band structure of Cobalt monolayer</h3>
+				<div class="date">Posted: <strong>Fri Jun 11, 2021 4:22 am</strong></div>
+				<div class="author">by <strong>Abdullah137</strong></div>
+				<div class="content">Dear all;,<br>
+ I tried to make the band structure of monolayer of Cobalt, but what I get is just flat band , <br>
+I attached the input file and the band structure I got , <br>
+I will be grateful for any feedback or remaks <br>
+Thank you very much for your comprehnsion <br>
+with nice regards <br>
+<br>
+-------------------<br>
+# Crystalline Cobalt 13/06/2020<br>
+#<br>
+# Computation of the band structure.<br>
+# First, a SCF density computation, then a non-SCF band structure calculation.<br>
+<br>
+ndtset 2<br>
+<br>
+#Dataset 1 : usual self-consistent calculation<br>
+kptopt1 3          # Option for the automatic generation of k points,<br>
+                   # taking into account the full symmetry         <br>
+#ngkpt1  4 4 1  <br>
+prtden1  1         # Print the density, for use by dataset 2<br>
+toldfe1  1.0d-12    # This value is way too large for most realistic studies of materials<br>
+prtdos2  2<br>
+#prtdos1  2<br>
+ngkpt1  12 12 1<br>
+#Dataset 2 : the band structure<br>
+iscf2    -2<br>
+getden2  -1<br>
+kptopt2  -3   # nb of segments Only 2 segment:  G-&gt;K and K-&gt;M  to compare with VASP results<br>
+nband2   9<br>
+ndivk2   100  70  37      # 10, 12 and 17 divisions of the 2 segments, delimited<br>
+                                                # by 3 points.<br>
+kptbounds  0   0   0     # Gamma<br>
+           2/3 -1/3 0    # K<br>
+           1/2 0   0     # M<br>
+           0   0   0     # Gamma<br>
+          <br>
+tolwfr2  1.0d-12<br>
+enunit  1             # Will output the eigenenergies in eV <br>
+<br>
+<br>
+<br>
+#Definition of the unit cell<br>
+#acell 4.737732368 4.737732368 7.690240466<br>
+#angdeg 90 90 120<br>
+<br>
+acell    4.737732368 4.737732368 7.690240466     <br>
+rprim    0.8660254038E+00  5.0000000000E-01  0.0000000000E+00             <br>
+         -0.8660254038E+00  5.0000000000E-01  0.0000000000E+00               <br>
+         0.0000000000E+00  0.0000000000E+00  1.0000000000E+00<br>
+<br>
+pseudos "Co.GGA_PBE-JTH"<br>
+<br>
+#Definition of the atom types<br>
+ntypat 1          # There is one types of atoms<br>
+znucl  27          # The keyword "znucl" refers to the atomic number of the <br>
+                  # possible type(s) of atom. The pseudopotential(s) <br>
+                  # mentioned in the "files" file must correspond<br>
+                  # to the type(s) of atom. Here, the only type is Silicon.<br>
+                         <br>
+<br>
+#Definition of the atoms<br>
+natom 6           # There are three atoms<br>
+typat 1 1 1 1 1 1      # They  are of type 1 Mo,type 2 sulphur .<br>
+#xred              # This keyword indicate that the location of the atoms<br>
+#   1/3  2/3  1/4<br>
+#   2/3  1/3  3/4<br>
+#or <br>
+xcart <br>
+  0.  0.  0.        #Bohr     <br>
+  4.7377  0  0.    #Bohr  <br>
+  0   0.  7.96024    #Bohr<br>
+  4.7377  0  7.96024   #Bohr<br>
+  2.36885 4.102968 0.    #Bohr<br>
+  2.36885 4.102968 7.96024    #Bohr<br>
+<br>
+<br>
+<br>
+<br>
+#Definition of the planewave basis set<br>
+ecut 20.0         # Maximal kinetic energy cut-off, in Hartree<br>
+<br>
+#Definition of the SCF procedure<br>
+nstep 50          # Maximal number of SCF cycles<br>
+diemac 12.0       # Although this is not mandatory, it is worth to<br>
+                  # precondition the SCF cycle. The model dielectric<br>
+                  # function used as the standard preconditioner<br>
+                  # is described in the "dielng" input variable section.<br>
+                  # Here, we follow the prescription for bulk silicon.<br>
+<br>
+# add to conserve old &lt; 6.7.2 behavior for calculating forces at each SCF step<br>
+optforces 1<br>
+prtebands  2<br>
+prtgeo  2<br>
+pawovlp -1<br>
+pawecutdg 30<br>
+<br>
+-------------</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: band structure of Cobalt monolayer</h3>
+				<div class="date">Posted: <strong>Mon Jun 28, 2021 11:06 am</strong></div>
+				<div class="author">by <strong>bguster</strong></div>
+				<div class="content">Dear Abdullah, <br>
+<br>
+The structure that one gets from your input file is not a correct one.<br>
+The Co atoms that are in the (x,y, 0) plane are too close to the atoms that in your structure are in the (x,y, 7.96024) plane (  Please see the figure with the overlapping spheres when the latter atoms are folded back in the primary unit cell due to the periodic boundary conditions(PBC) ). <br>
+<br>
+Moreover Co contains in bulk 2 atoms in the primitive cell, so you could start for the monolayer with one atom in the unit cell with the appropriate lattice vectors, for example:<br>
+<br>
+acell 4.737732368 4.737732368 15.0000 # the z direction should be large enough to eliminate the interaction between the single-layer and the replicas due to PBC. You will need to perform a convergence study for the total energy with respect to the size of the cell in the z-direction.<br>
+<br>
+xcart<br>
+0.00000 0.000000 0.00000 #Bohr - Only one atom in the unit cell like, for example, in the case of graphene<br>
+<br>
+Please let me know if you have any further questions.<br>
+Good luck!<br>
+Bogdan</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=5394&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 13:30:38 GMT -->
+</html>

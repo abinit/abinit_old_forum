@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=481&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:19:52 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Determining ion radii from valence electron density</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Determining ion radii from valence electron density</h2>
+		<p><a href="viewtopicde39.html?f=12&amp;t=481">https://forum.abinit.org/viewtopic.php?f=12&amp;t=481</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Determining ion radii from valence electron density</h3>
+				<div class="date">Posted: <strong>Fri Jul 09, 2010 12:55 pm</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Dear colleagues,<br /><br />as already stated in my previous post, we are trying to determine the radii of atoms in order to compute projected DOS with prtdos 3. Could someone confirm to me if it would be physically correct to conclude the atomic radii from the width of the bulge which corresponds to valence electron density obtained from cut3d (plane density which containes the atoms) analyses of DEN files?<br /><br />Thank you very much in advance!<br /><br />Yours<br /><br />Igor Lukacevic</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Determining ion radii from valence electron density</h3>
+				<div class="date">Posted: <strong>Wed Jul 28, 2010 9:32 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello Igor,<br /><br />1) I don't think there are any radii in the Hirschfeld method, this is probably an error in the documentation.<br /><br />2) You usually don't need to vary the radii much. The idea is the following: if you choose a radius which is too small there isn't enough wavefunction to integrate and you will get slightly arbitrary results. If you choose a radius which is too big, then the wf will be very different from an atomic one, and you will get strong contributions from higher angular momenta (f,g,h...) which do not correspond to the analysis you want. Basically, the best idea is to use the smallest radius which gives you a well converged and calculated projection of the wf onto the Ylm * radial bit. The proportions of s,p,d will shift a bit according to the radius, according to the point raised above, so keep the radius &quot;small&quot; The default has proved fine in most cases so far.<br /><br />using the width of the density bulge will probably overestimate the useful value, as the density of the atom is strongly modified at the edge (where the valence electrons appear).<br /><br />cheers<br /><br />matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Determining ion radii from valence electron density</h3>
+				<div class="date">Posted: <strong>Tue Aug 10, 2010 1:52 pm</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">OK. Thanks, Matthieu!<br /><br />My general idea about the radii choices was the same, but the valence charge density contribution at the edge idea is new.<br /><br />The issue (i.e. the reason I posted the question) is that our results for the PDOS for V and N atoms in VN crystal do not agree with the previous theoretical results (see Fig. 4 in PRB 63, 155106 (2001)), especially for nitrogen states. Since we obtained different band structure, we would like to get to the bottom of the thing by looking at the DOS.<br />Also, we are confused because we obtain quite similar PDOS for N and V atoms, which almost differ only in the value of DOS (their distribution along energy axes is almost the same). This is the reason that we suspect that there is an error in our calculations. I would attach the figure of our results to clarify this point, but it's too big.<br /><br />Cheers!<br /><br />Igor</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=481&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:19:52 GMT -->
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1826&start=25&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:55:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; supercell and doping - Page 2</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>supercell and doping</h2>
+		<p><a href="viewtopic55d2-2.html?f=9&amp;t=1826">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1826</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>2</strong> of <strong>2</strong></div>
+					<div class="post">
+				<h3>Re: supercell and doping</h3>
+				<div class="date">Posted: <strong>Sat Oct 06, 2012 5:36 pm</strong></div>
+				<div class="author">by <strong>maxim</strong></div>
+				<div class="content">maybe you should try PAW psps <!-- m --><a class="postlink" href="http://www.abinit.org/downloads/PAW2">http://www.abinit.org/downloads/PAW2</a><!-- m --> - it can speed up the calculation (note that you can not upload these PAW pseudos to nanohub), but I think it is not too necessarily now.<br /><br />Best wishes, Maxim</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: supercell and doping</h3>
+				<div class="date">Posted: <strong>Mon Nov 12, 2012 4:10 pm</strong></div>
+				<div class="author">by <strong>BAMGBOSE, M. K.</strong></div>
+				<div class="content">Dear Maxim, <br />  long time, look at this statements from my log file,<br /><br />&quot;  symlatt : the Bravais lattice is cP (primitive cubic)<br />  xred   is defined in input file<br /> ingeo : takes atomic coordinates from input array xred<br /><br /> symlatt : the Bravais lattice is cP (primitive cubic)<br /><br /> symlatt : the Bravais lattice is cP (primitive cubic)<br /><br /> symbrav : COMMENT -<br />  The Bravais lattice determined only from the primitive<br />  vectors, bravais(1)=  7, is more symmetric<br />  than the real one, iholohedry=  1, obtained by taking into<br />  account the atomic positions. Start deforming the primitive vector set.<br /><br /> symlatt : the Bravais lattice is hR (rhombohedral)<br /><br /> symbrav : COMMENT -<br />  The Bravais lattice determined from modified primitive<br />  vectors, bravais(1)=  5, has a lower symmetry than before,<br />  but is still more symmetric than the real one, iholohedry=  1<br />  obtained by taking into account the atomic positions.<br />symlatt : the Bravais lattice is mC (one-face-centered monoclinic)<br /><br /> symbrav : COMMENT -<br />  The Bravais lattice determined from modified primitive<br />  vectors, bravais(1)=  2, has a lower symmetry than before,<br />  but is still more symmetric than the real one, iholohedry=  1<br />  obtained by taking into account the atomic positions.<br /><br /> symlatt : the Bravais lattice is aP (primitive triclinic)<br /> symspgr : the symmetry operation no.   1 is the identity<br /> symspgr : spgroup=   1  P1   (=C1^1)<br />  inkpts : enter<br /> getkgrid : length of smallest supercell vector (bohr)=    1.480000E+01<br />       Simple Lattice Grid&quot;<br /><br />Now thus this mean that my doped system is primitive triclinic. <br />Thanks</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: supercell and doping</h3>
+				<div class="date">Posted: <strong>Tue Nov 13, 2012 5:19 pm</strong></div>
+				<div class="author">by <strong>maxim</strong></div>
+				<div class="content">So the calculation is succeed?<br /><br />my best wishes Maxim   <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: supercell and doping</h3>
+				<div class="date">Posted: <strong>Thu Nov 29, 2012 11:43 am</strong></div>
+				<div class="author">by <strong>sevket simsek</strong></div>
+				<div class="content">Dear Maxim<br /><br />I want to create 1x1x3 supercell of Bi2S3. İts space group R-3m (#166).But<br />I dont know how I creat 1x1x3 süpercell (along z-axes).my input file is as a following. Can you help me to do 1x1x3 supercell.<br /><br />Best regards...<br /><br /># Bi2Se3 : computation of the total energy<br /># Convergence with respect to the number of k points.<br /><br />ndtset 6<br /><br />#Definition of the k-point grids<br />kptopt 1          # Option for the automatic generation of k points, taking<br />                  # into account the symmetry<br />#nshiftk 4<br />#shiftk  0.5 0.5 0.5  # These shifts will be the same for all grids<br />        #0.5 0.0 0.0<br />        #0.0 0.5 0.0<br />        #0.0 0.0 0.5<br /><br />#ngkpt1  2 2 2     # Definition of the different grids<br />#ngkpt2  4 4 4 <br />#ngkpt3  6 6 6<br />ngkpt4  8 8 8<br />ecut: 18  ecut+ 2<br /><br />getwfk -1         # This is to speed up the calculation, by restarting<br />                  # from previous wavefunctions, transferred from the old <br />                  # to the new k-points.<br /><br /><br /><br />#Definition of the unit cell<br />acell 3*18.6        # This is equivalent to   10.18 10.18 10.18<br /><br />angdeg      3*24<br /><br /><br />#Definition of the atom types<br />ntypat 2          # There is only one type of atom<br />znucl 83 34          # The keyword &quot;znucl&quot; refers to the atomic number of the <br />                  # possible type(s) of atom. The pseudopotential(s) <br />                  # mentioned in the &quot;files&quot; file must correspond<br />                  # to the type(s) of atom. Here, the only type is Silicon.<br />                         <br /><br />#Definition of the atoms<br />natom 5           # There are two atoms<br />typat 2*1 3*2        # They both are of type 1, that is, Silicon<br />xred              # This keyword indicate that the location of the atoms<br />                  # will follow, one triplet of number for each atom<br />0.399 0.399 0.399 <br />-0.399 -0.399 -0.399<br />0.0 0.0 0.0<br />0.206 0.206 0.206<br />-0.206 -0.206 -0.206<br /><br />    <br />#Definition of the planewave basis set<br />#ecut  8.0         # Maximal kinetic energy cut-off, in Hartree<br /><br />#Definition of the SCF procedure<br />nstep 1000          # Maximal number of SCF cycles<br />toldfe 1.0d-6     # Will stop when, twice in a row, the difference <br />                  # between two consecutive evaluations of total energy <br />                  # differ by less than toldfe (in Hartree) <br />#diemac 12.0       # Although this is not mandatory, it is worth to<br />                  # precondition the SCF cycle. The model dielectric<br />                  # function used as the standard preconditioner<br />                  # is described in the &quot;dielng&quot; input variable section.<br />                  # Here, we follow the prescription for bulk silicon.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: supercell and doping</h3>
+				<div class="date">Posted: <strong>Fri Nov 30, 2012 8:45 am</strong></div>
+				<div class="author">by <strong>maxim</strong></div>
+				<div class="content">You should simply do:<br />if x y z is initial state, then:<br />x y z/3<br />x y (z/3)+(1/3)<br />x y (z/3)+(2/3)<br />is your 1x1x3 supercell.<br /><br />Best wishes, Maxim</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: supercell and doping</h3>
+				<div class="date">Posted: <strong>Fri Nov 30, 2012 8:54 am</strong></div>
+				<div class="author">by <strong>sevket simsek</strong></div>
+				<div class="content">Dear Maxim, <br />thanks your reply.<br /><br />then how should I define acell or rprim of crystals. If I define acell as a=18.6 b=18.6 c=3x18.6=55.8, is it correct.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: supercell and doping</h3>
+				<div class="date">Posted: <strong>Fri Nov 30, 2012 9:18 am</strong></div>
+				<div class="author">by <strong>maxim</strong></div>
+				<div class="content">Dear sevket simsek, <br /><br />I think that it is correct. You may check this supercell simly by plotting it in e. g. Diamond.<br /><br /> Best wishes, Maxim.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: supercell and doping</h3>
+				<div class="date">Posted: <strong>Sat Dec 01, 2012 11:40 am</strong></div>
+				<div class="author">by <strong>maxim</strong></div>
+				<div class="content">Does your dopant has the same valence as the host cation, or different? If the same, then maybe you can not create a supercell, and use mixalch only. If different valence, then it is necessary to create vacancies in a supercell and use mixalch simultaneously. You can check valencies here <!-- m --><a class="postlink" href="http://materialsproject.org/janrain/loginpage/?next=/apps/structure_predictor/">http://materialsproject.org/janrain/log ... predictor/</a><!-- m --> (Sign Up and select your elements) and <!-- m --><a class="postlink" href="https://materialsproject.org/wiki/index.php/File:Ions_correl_60_best_23_Jul_an_2.png">https://materialsproject.org/wiki/index ... l_an_2.png</a><!-- m -->.<br /><br />Maybe to set initial value of acell maximally close to your case (doping and solid solution) you should consider Vegard rule <!-- m --><a class="postlink" href="http://www.google.ru/search?q=vegard+rule&amp;rlz=1C1CHHP_ruRU469RU469&amp;aq=1&amp;oq=vegard+r&amp;sugexp=chrome,mod=15&amp;sourceid=chrome&amp;ie=UTF-8">http://www.google.ru/search?q=vegard+ru ... e&amp;ie=UTF-8</a><!-- m -->.<br /><br />Best wishes, Maxim.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: supercell and doping</h3>
+				<div class="date">Posted: <strong>Thu Dec 20, 2012 9:25 pm</strong></div>
+				<div class="author">by <strong>BAMGBOSE, M. K.</strong></div>
+				<div class="content">Dear Maxim,<br /> I have little problem on how to run abinit on nanohub, also my hub is looking for java software. Kindly help me out of this two problems. Thanks</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: supercell and doping</h3>
+				<div class="date">Posted: <strong>Sun Dec 30, 2012 8:10 pm</strong></div>
+				<div class="author">by <strong>maxim</strong></div>
+				<div class="content">If you have windows then maybe 2install java proceed e. g. <!-- m --><a class="postlink" href="https://nanohub.org/kb/misc/java;">https://nanohub.org/kb/misc/java;</a><!-- m --><br />nanohub requires rprim - so you should put <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>rprim 1.0000000000E+00 0.0000000000E+00 0.0000000000E+00<br />0.0000000000E+00&nbsp; 1.0000000000E+00&nbsp; 0.0000000000E+00<br />0.0000000000E+00&nbsp; 0.0000000000E+00&nbsp; 1.0000000000E+00</code></pre></div><br />in case if you have ortogonal system, in other cases run at your local PC for e.g. 10 minutes (it's enough time for symmetry finder of abinit), then terminate job and look in rprim in *.out or *.log.<br />Nonohub has very limited disc space, so use this:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>prtden 0 #to reduce output size<br />prtwf 0 #to reduce output size<br />prteig 0 #to reduce output size</code></pre></div><br />My file is attached here. It does work.<br />You have acess to this forum - so you surely will have acess to nanohub - you need PC and internet for a little time to submit job and to take results after some time. <br /><br />Merry christmas and happy new year!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: supercell and doping</h3>
+				<div class="date">Posted: <strong>Mon Dec 31, 2012 7:55 am</strong></div>
+				<div class="author">by <strong>BAMGBOSE, M. K.</strong></div>
+				<div class="content">Dear Maxim,<br /> Thanks alot. Happy new year</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: supercell and doping</h3>
+				<div class="date">Posted: <strong>Sat Jan 26, 2013 5:55 pm</strong></div>
+				<div class="author">by <strong>BAMGBOSE, M. K.</strong></div>
+				<div class="content">Dear Maxim,<br /> is it every material that i dope will be primitive triclinic ?. look at the following from my log file.<br /> CaB6 is doped with Ba, and i have this<br /> DATASET   11 : space group P1 (#  1); Bravais aP (primitive triclinic)<br />================================================================================<br /> Values of the parameters that define the memory need for DATASET 11.<br />   intxc =         0  ionmov =         2    iscf =         7 xclevel =         2<br />  lmnmax =         8   lnmax =         8   mband =         9  mffmem =         1<br />P  mgfft =        80   mkmem =         4 mpssoang=         4     mpw =     30451<br />  mqgrid =      3874   natom =         7    nfft =    512000    nkpt =         4<br />  nloalg =         4  nspden =         1 nspinor =         1  nsppol =         1<br />    nsym =         1  n1xccc =      2501  ntypat =         2  occopt =         1<br />================================================================================<br /><br /><br />And for MgB2 doped with Ca, i have this<br /> DATASET    1 : space group P1 (#  1); Bravais aP (primitive triclinic)<br />================================================================================<br /> Values of the parameters that define the memory need for DATASET  1.<br />   intxc =         0  ionmov =         2    iscf =         7 xclevel =         2<br />  lmnmax =         8   lnmax =         8   mband =         5  mffmem =         1<br />P  mgfft =        64   mkmem =       365 mpssoang=         4     mpw =     10938<br />  mqgrid =      3010   natom =         3    nfft =    186624    nkpt =       365<br />  nloalg =         4  nspden =         1 nspinor =         1  nsppol =         1<br />    nsym =         1  n1xccc =      2501  ntypat =         2  occopt =         1<br />================================================================================<br /><br />I think this means that doped system in both cases are primitive triclinic.<br /><br />The second question is that if i get value of  lattice parameter a, how am i going to get b and c parameters<br /> Prof thanks alot for your usual understanding.<br /><br />-Bamgbose.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: supercell and doping</h3>
+				<div class="date">Posted: <strong>Sun Jan 27, 2013 9:09 pm</strong></div>
+				<div class="author">by <strong>maxim</strong></div>
+				<div class="content">Because you use nsym=1 (this blocks symmetry finder of abinit), abinit will always recognize your structure as primitive triclinic, even if it has symmetry. Maybe you can take your final optimized coordinates and re-run with nsym=0 (with symmetry finder enabled) to see which symmetry your optimized cell have. You can terminate your job after a small time - symmetry finder launches before any SCF iterations (use input file without relaxation and with nstep 1-2 only). Perhaps there are other ways to recognize symmetry of your optimized cell.<br /><img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /><br /><br />Best wishes, Maxim.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: supercell and doping</h3>
+				<div class="date">Posted: <strong>Tue Feb 19, 2013 5:12 pm</strong></div>
+				<div class="author">by <strong>BAMGBOSE, M. K.</strong></div>
+				<div class="content">Dear Maxim,<br /> Thanks alot for your usual assistance all along. The real thing i want to find out now is that if i dope a cubic structure will the doped system remain cubic ? Please explain what actually happens whenever i dope as per their structures. <br /> Thanks.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: supercell and doping</h3>
+				<div class="date">Posted: <strong>Wed Jul 03, 2013 11:11 am</strong></div>
+				<div class="author">by <strong>BAMGBOSE, M. K.</strong></div>
+				<div class="content">Dear Maxim, <br /> kind held me to do necessary correction to this file so that the output etot vs acell will give me a parabola.<br /># Crystalline ScAlN : computation of the total energy<br /><br /># definition of unit cell<br />diemac 12<br />ndtset 10<br />acell: 3*8.3<br />acell+ 3*0.1<br />chksymbreak 0 <br />chkprim 0<br />rprim 0 0.5 0.5<br />      0.5 0 0.5 <br />      0.5 0.5 0  <br /><br />#alchemical input<br />znucl 7 21 13<br />nband 36  <br />ntypat 3<br />natom 2<br />npsp  3<br />typat 1 2<br />#ntypalch 1<br />mixalch 0.95 0.05<br /><br /><br /><br />xred  0.0 0.0 0.0<br />      0.5 0.5 0.5<br />      <br /><br />#Relaxation inputs<br />optcell 1<br />ionmov  3<br />ntime   20<br />dilatmx 1.1<br />ecutsm  0.5<br />strfact 100<br />tolmxf  5.0d-5<br /><br />#SCF procedure       <br />nstep 20<br />toldfe 1.0d-7<br />iscf 7 <br /><br />#Examine multiple cutoff energies<br />getwfk -1<br />ecut 40<br /><br />#Definition of the k-point grids<br />kptopt 1         <br />nshiftk 4<br />shiftk  0.5 0.5 0.5<br />        0.0 0.5 0.5<br />        0.5 0.0 0.5<br />        0.5 0.5 0.0<br /><br />ngkpt 4 4 4    <br />occopt 1<br /><br />Thanks for your usual assistance.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>2</strong> of <strong>2</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1826&start=25&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:55:27 GMT -->
+</html>

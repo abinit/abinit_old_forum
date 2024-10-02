@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=5392&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 13:23:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; MPI support for ABINIT 9.4.1 on a Cray XC40 cluster</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>MPI support for ABINIT 9.4.1 on a Cray XC40 cluster</h2>
+		<p><a href="viewtopic5fce.html?f=3&amp;t=5392">https://forum.abinit.org/viewtopic.php?f=3&amp;t=5392</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>MPI support for ABINIT 9.4.1 on a Cray XC40 cluster</h3>
+				<div class="date">Posted: <strong>Wed Jun 02, 2021 3:13 pm</strong></div>
+				<div class="author">by <strong>johanhellsvik</strong></div>
+				<div class="content">Hi,<br>
+<br>
+We are installing ABINIT 9.4.1 on a Cray XC40 cluster (beskow.pdc.kth.se) and have encountered issues with the MPI support.<br>
+<br>
+Configuration, compilation, and linking work out fine for a non-MPI build. The problem arise when we activate MPI. The settings that I have tried, building on a compute node, are<br>
+<br>
+------<br>
+#!/bin/bash<br>
+<br>
+#SBATCH -J abinit<br>
+#SBATCH -A &lt;projname&gt;<br>
+#SBATCH -t 02:00:00<br>
+#SBATCH --nodes=1<br>
+#SBATCH --ntasks-per-node=1<br>
+#SBATCH --cpus-per-task=32<br>
+<br>
+#wget <a href="https://www.abinit.org/sites/default/files/packages/abinit-9.4.1.tar.gz" class="postlink">https://www.abinit.org/sites/default/fi ... 4.1.tar.gz</a><br>
+#tar xf abinit-9.4.1.tar.gz<br>
+#cd abinit-9.4.1<br>
+<br>
+# Load the build environment<br>
+# PrgEnv-intel<br>
+# ----------------------<br>
+<br>
+module load cdt/19.06<br>
+module load intel/18.0.0.128<br>
+module swap PrgEnv-cray PrgEnv-intel<br>
+module load cray-fftw/3.3.8.3<br>
+module load cray-netcdf/4.6.3.0<br>
+module load cray-hdf5/1.10.6.1<br>
+module load libxc/4.0.3<br>
+module load anaconda/2019.03/py37<br>
+<br>
+export CRAYPE_LINK_TYPE=dynamic<br>
+export CC="cc -D_Float128=__float128"<br>
+export CXX=CC<br>
+export FC=ftn<br>
+<br>
+mkdir build<br>
+cd build<br>
+srun -n 1 ../configure \<br>
+	--with-libxc=/pdc/vol/libxc/4.0.3/ \<br>
+	--with-netcdf=/opt/cray/pe/netcdf/4.6.3.0/INTEL/19.0/ \<br>
+	--with-netcdf-fortran=/opt/cray/pe/netcdf/4.6.3.0/INTEL/19.0/<br>
+srun -n 1 make -j 32 &gt; build_log.txt 2&gt; build_error.txt<br>
+------<br>
+<br>
+for which the configure script renders the error message<br>
+<br>
+------<br>
+checking whether the MPI C compiler is set... no<br>
+checking whether the MPI C++ compiler is set... no<br>
+checking whether the MPI Fortran compiler is set... no<br>
+------<br>
+<br>
+Adding as argument to configure '--with_mpi_prefix=/opt/cray/pe/craype/2.6.1/bin/'<br>
+<br>
+gave the error message.<br>
+<br>
+configure: error: unrecognized option: `--with_mpi_prefix=/opt/cray/pe/craype/2.6.1/bin/<br>
+<br>
+What I can see the ABINIT configure script uses the variables CC, CXX, and FC. These I have set to the standard compiler wrappers for the Cray system.<br>
+<br>
+Any suggestions on what additional environment variable(s) or flag(s) could be used for the configure script are most welcome.<br>
+<br>
+Best regards,<br>
+Johan Hellsvik</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MPI support for ABINIT 9.4.1 on a Cray XC40 cluster</h3>
+				<div class="date">Posted: <strong>Thu Jun 03, 2021 1:46 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br>
+
+<blockquote class="uncited"><div>configure: error: unrecognized option: `--with_mpi_prefix=/opt/cray/pe/craype/2.6.1/bin/</div></blockquote>
+
+can you try with<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--with-mpi=/opt/cray/pe/craype/2.6.1/
+</code></pre></div>
+or
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--with-mpi="yes"
+export FC="mpifort"
+export CC="mpicc"
+export CXX="mpicxx"</code></pre></div>
+
+jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MPI support for ABINIT 9.4.1 on a Cray XC40 cluster</h3>
+				<div class="date">Posted: <strong>Fri Jun 04, 2021 11:55 am</strong></div>
+				<div class="author">by <strong>johanhellsvik</strong></div>
+				<div class="content">Hi,<br>
+<br>
+Thank you for the advice. Unfortunately the MPI compilers are still not detected<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--with-mpi=/opt/cray/pe/craype/2.6.1/</code></pre></div>
+
+gave the error message<br>
+<br>
+configure: error: invalid MPI settings<br>
+                  Please adjust --with-mpi and/or CC and re-run configure<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--with-mpi="yes"
+export FC="mpifort"
+export CC="mpiicc"
+export CXX="mpicxx"</code></pre></div>
+
+gave the error message<br>
+<br>
+configure: error: could not run Fortran compiler "mpifort"<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--with-mpi="yes"
+export FC="mpiifort" #(added an "i")
+export CC="mpiicc"  #(added an "i")
+export CXX="mpicxx"
+</code></pre></div>
+gave the error message<br>
+<br>
+checking whether the MPI C compiler is set... no<br>
+checking whether the MPI C++ compiler is set... no<br>
+checking whether the MPI Fortran compiler is set... no<br>
+<br>
+Best regards,<br>
+Johan Hellsvik</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MPI support for ABINIT 9.4.1 on a Cray XC40 cluster</h3>
+				<div class="date">Posted: <strong>Sun Jun 20, 2021 1:25 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi, <br>
+<br>
+Sorry for the slow reaction...<br>
+<br>
+It is necessary to start from the beginning, i.e. know the environment<br>
+<br>
+From your batch script, can you run the following commands to fix the env :
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>module load cdt/19.06
+module load intel/18.0.0.128
+module swap PrgEnv-cray PrgEnv-intel
+module load cray-fftw/3.3.8.3
+module load cray-netcdf/4.6.3.0
+module load cray-hdf5/1.10.6.1
+module load libxc/4.0.3
+module load anaconda/2019.03/py37</code></pre></div>
+
+now, can you send the outputs of :<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>which mpifort
+mpifort -show
+which mpiifort
+mpiifort -show
+which mpif90
+mpif90 -show
+which ifort
+echo $FC</code></pre></div>
+
+best,</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=5392&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 13:23:08 GMT -->
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=3278&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:57:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Proposed Bug Comments</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Proposed Bug Comments</h2>
+		<p><a href="viewtopic87f0.html?f=19&amp;t=3278">https://forum.abinit.org/viewtopic.php?f=19&amp;t=3278</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Proposed Bug Comments&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Wed May 18, 2016 1:27 pm</strong></div>
+				<div class="author">by <strong>NPike</strong></div>
+				<div class="content">Hello all,<br /><br />During some recent calculations I found instances where the bug, and the resulting comments, needed clarification or are incorrect and wanted to point them out for the benefit of others.<br /><br />For example, while using fully-relativistic pseudo-potentials I received an error message that read <br />--- !ERROR<br />message: |<br />    Pseudopotential input file requires linear radial mesh<br />    starting at zero.<br />    Action : check your pseudopotential input file.<br />src_file: Subroutine Unknown<br />src_line: 0<br />...<br /><br />However, the real error in the calculation was not the pseudopotential file, but was an incorrectly set input variable nspinor.  If possible, it would be nice to catch this error when Abinit reads in the pseudopotential file by comparing the value of nspinor and the extension switch.  If they are the same then no error is given, if they are different then the program should break and the appropriate error message printed. <br /><br />Additionally, during a phonon calculation the following error message occurred during a response function calculation.<br /> --- !ERROR<br />src_file: Subroutine Unknown<br />src_line: 0<br />message: |<br />    error in mvrecord<br />...<br />This error occurs when the wave functions of the previous steps in the response function calculations are not fully converged.  Would it be possible to make the non-convergence of the wave function in a response function calculation an error warning? Since, if the wave function is not converged, then the results of the later steps in the calculation will necessarily contain errors.<br /><br />Thanks!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Proposed Bug Comments</h3>
+				<div class="date">Posted: <strong>Wed May 25, 2016 6:19 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content"><blockquote class="uncited"><div>However, the real error in the calculation was not the pseudopotential file, but was an incorrectly set input variable nspinor. If possible, it would be nice to catch this error when Abinit reads in the pseudopotential file by comparing the value of nspinor and the extension switch. If they are the same then no error is given, if they are different then the program should break and the appropriate error message printed. <br /></div></blockquote><br /><br />There was a bug triggered by the particular combination (nspinor==1, relativistic psp8 file with spin-orbit terms) that has been <br />solved in the new version 8.0.6. <br />Note that the code does not complain if you use the default value of nspinor (i.e. 1) in a calculation done with SOC pseudos.<br />The SOC projectors are simply ignored when the non-local part of the Hamitonian is applied.<br />You need to set nspinor=2 explicitly in the input file if you want to include SOC in the calculation. <br /><br /><br /><blockquote class="uncited"><div>Additionally, during a phonon calculation the following error message occurred during a response function calculation.<br />--- !ERROR<br />src_file: Subroutine Unknown<br />src_line: 0<br />message: |<br />error in mvrecord<br />...<br />This error occurs when the wave functions of the previous steps in the response function calculations are not fully converged. Would it be possible to make the non-convergence of the wave function in a response function calculation an error warning? Since, if the wave function is not converged, then the results of the later steps in the calculation will necessarily contain errors.<br /></div></blockquote><br /><br />Strange. mvrecord usually indicates that your file is either corrupted/empty or that there's an inconsistency between the dimensions<br />of the WFK file and the dimensions of the actual calculation. <br /><br />As concerns your suggestion:<br />Unfortunately the WFK file does not have enough info to understand <br />if the calculation was converged (too many tolerances can be in principle specified by the user).<br />For the time being, one has to check the output file of the GS run before using the WFK file for DFPT as <br />Abinit issues a warning if the SCF calculation didn't converge.<br /> <br />One could check the value of tolwfr reported in the WFK and issue a warning if the WFK is not &quot;accurate&quot; enough <br />but I would refrain from making the code stop <br /><br />M</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=3278&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:57:34 GMT -->
+</html>

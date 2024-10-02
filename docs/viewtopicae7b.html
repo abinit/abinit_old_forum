@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=5242&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:30:52 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Posdoppler variable missing</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Posdoppler variable missing</h2>
+		<p><a href="viewtopic007a.html?f=9&amp;t=5242">https://forum.abinit.org/viewtopic.php?f=9&amp;t=5242</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Posdoppler variable missing</h3>
+				<div class="date">Posted: <strong>Thu Dec 03, 2020 10:08 pm</strong></div>
+				<div class="author">by <strong>Error123</strong></div>
+				<div class="content">Dear all,<br>
+<br>
+im new here and i jsut finished base tutorials. Now Im trying to finish pozitron tutorial. I managed to finish all parts of the tutorial but computing the electron-positron momentum distribution (Doppler spectrum) of a Si lattice, since it wont start the calculation. It has a problem with posdoppler input variable.<br>
+<br>
+chkvars.F90:334:ERROR<br>
+   Found the token POSDOPPLER in the input file.<br>
+  This name is not one of the registered input variable names (see the Web list of input variables).<br>
+  Action : check your input file. You likely mistyped the input variable.<br>
+<br>
+This is what i get after running the program. Since i work on windows 10 im using abinit v 7.4.3. I checked the input variables which this version contains and posdoppler variable is missing. That is probably why it shows the error.<br>
+<br>
+If i get a new version i dont think it will work on windows. Maybe updating the variables would solve this problem but i dont know how to do that.<br>
+<br>
+Here is the whole code im using:<br>
+<br>
+#################################################################<br>
+# Input file for the positron tutorial                          #<br>
+#    Doppler spectrum calculation within PAW                    #<br>
+#                                                               #<br>
+#              Si, 2 atoms in the box                           #<br>
+#################################################################<br>
+<br>
+  positron -10    ! Electron/positron GS calculation<br>
+                  ! Automatic electron-positron loop has to be switched on in Doppler calculations<br>
+                  ! to have both electron and positron wavefunctions in memory<br>
+<br>
+  posnstep  2     ! We simulate a delocalized positron, so we only perform two steps of electon-positron calculations.<br>
+                  ! It means that the electronic wavefunction is not affected by the positron.<br>
+  posdoppler 1    ! Activation of Doppler broadening calculation<br>
+<br>
+  ixcpositron  1  ! We are using the Boronski and Nieminen parametrization<br>
+<br>
+# Common input parameters<br>
+  ! Unit cell<br>
+    acell   3*5.43 angstrom<br>
+    rprim   0.0 0.5 0.5<br>
+            0.5 0.0 0.5<br>
+            0.5 0.5 0.0<br>
+<br>
+    natom  2<br>
+    ntypat  1<br>
+    typat 2*1<br>
+    znucl 14<br>
+    xred  0.0   0.0   0.0<br>
+          0.25 0.25 0.25<br>
+<br>
+  ! K-points and occupations<br>
+  ! In Doppler calculation we need to have a uniform <br>
+  ! grid in the momentum space. Symmetries are not used,<br>
+  ! so the full grid needs to be specified.<br>
+<br>
+    kptopt 0<br>
+    istwfk *1<br>
+    nkpt 8   ! This corresponds to a 2x2x2 grid, denser grids may be needed to get converged spectra<br>
+    kpt<br>
+    0 0 0<br>
+    0 0 0.5<br>
+    0 0.5 0<br>
+    0.5 0 0<br>
+    0 0.5 0.5<br>
+    0.5 0 0.5<br>
+    0.5 0.5 0<br>
+    0.5 0.5 0.5 <br>
+<br>
+    occopt 1<br>
+    nband 6<br>
+<br>
+    posocc 1.0   ! Occupation number for the positron (should be set &lt;1 for bulk calculation with a small cell).<br>
+                 ! Here the zero positron density limit is used, so results do not depend on posocc.<br>
+<br>
+  ! Convergence parameters<br>
+    ecut 8. pawecutdg 15.<br>
+    iscf 17<br>
+    nstep 50 tolvrs 1.d-8<br>
+<br>
+!   Miscelaneous<br>
+    prtwf 0 prteig 0           ! To save disk space<br>
+    optforces 0 optstress 0    ! Not relevant here<br>
+<br>
+<br>
+<br>
+#%%&lt;BEGIN TEST_INFO&gt;<br>
+#%% [setup]<br>
+#%% executable = abinit<br>
+#%% [files]<br>
+#%% files_to_test =<br>
+#%%   tpositron_5.out, tolnlines= 5, tolabs= 2.6e-2, tolrel= 3.8e-2, fld_options= -easy<br>
+#%% [paral_info]<br>
+#%% max_nprocs = 10<br>
+#%% [extra_info]<br>
+#%% authors = J. Wiktor<br>
+#%% keywords = POSITRON,PAW<br>
+#%% description = Fifth step of the tutorial on electron-positron annihilation<br>
+#%%&lt;END TEST_INFO&gt;<br>
+<br>
+Sorry for my english and thanks for any advice.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Posdoppler variable missing</h3>
+				<div class="date">Posted: <strong>Sun Dec 06, 2020 5:44 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Error123,<br>
+The tutorial input file works fine on my side. Which version of Abinit are you using? If it is the latest, could you check that there is no hidden typo in the flag name?<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Posdoppler variable missing</h3>
+				<div class="date">Posted: <strong>Sun Dec 13, 2020 11:35 am</strong></div>
+				<div class="author">by <strong>Error123</strong></div>
+				<div class="content"><blockquote><div><cite><a href="memberlist58ee.html?mode=viewprofile&amp;u=682">ebousquet</a> wrote: <a href="viewtopic8a10.html?p=14226#p14226" data-post-id="14226" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><div class="responsive-hide">Sun Dec 06, 2020 5:44 pm</div></cite>
+Dear Error123,<br>
+The tutorial input file works fine on my side. Which version of Abinit are you using? If it is the latest, could you check that there is no hidden typo in the flag name?<br>
+Best wishes,<br>
+Eric
+</div></blockquote>
+
+Thank you for the answer. <br>
+<br>
+Im using verison 7.4.3 as i mentioned before, i also checked for the typo and there was not any.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Posdoppler variable missing</h3>
+				<div class="date">Posted: <strong>Tue Dec 22, 2020 12:54 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content"><blockquote class="uncited"><div>
+Im using verison 7.4.3 as i mentioned before, i also checked for the typo and there was not any.
+</div></blockquote>
+
+I don't think the posdoppler input variable is available in v 7.4.3.<br>
+I would suggest to use a more recent Abinit version.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=5242&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:30:52 GMT -->
+</html>

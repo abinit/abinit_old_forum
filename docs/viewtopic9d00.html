@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=91&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:20:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; PB with the installation of abinit-5.8.4 on Snow Leopard</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>PB with the installation of abinit-5.8.4 on Snow Leopard</h2>
+		<p><a href="viewtopic6f2a.html?f=3&amp;t=91">https://forum.abinit.org/viewtopic.php?f=3&amp;t=91</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>PB with the installation of abinit-5.8.4 on Snow Leopard</h3>
+				<div class="date">Posted: <strong>Fri Feb 26, 2010 6:55 pm</strong></div>
+				<div class="author">by <strong>tchanier</strong></div>
+				<div class="content">Dear All,<br /><br />After upgrading my system from leopard (Mac 10.5) to snow leopard (Mac 10.6), there is now a problem with the abinit 5.8.4 installation. Abinit-5.8.4 worked well on Leopard, a 32 bit architecture. Snow leopard works in 64 bit architecture, so I just add the enable 64bit flag to the previous configure. Here is my command line for the configuration:<br />./configure --prefix=/home/chanier/installdir --enable-mpi=&quot;yes&quot; --enable-mpi-io=&quot;yes&quot; --with-mpi-prefix=&quot;/sw/openmpi&quot; --enable-64bit-flags=&quot;yes&quot;<br /><br />I installed a new 64 bits openmpi. The new openmpi works well with abinit-6.0.1 with I just installed.  With abinit-5.8.4, it issues the following error message :<br /> <br />LAPACK for ABINIT has been built.<br />touch build-stamp<br />lapack-abinit_5.7 has been built.<br />config/gnu/install-sh -c -d tmp/lib<br />make[4]: config/gnu/install-sh: No such file or directory<br />make[4]: *** [install-stamp] Error 1<br />make[3]: *** [package-ready] Error 2<br />make[2]: *** [all-recursive] Error 1<br />make[1]: *** [all-recursive] Error 1<br />make: *** [all] Error 2<br /><br />Does anyone has an idea how to solve this problem? What's the main difference between running abinit-5.8.4 and abinit-6.0.1? In particular, is there any additional keywords to add to abinit.in to do parallel TDDFT calculations? Since abinit-6.0.1 is a release candidate, do I need to do specific tests to see if everything is working properly?<br /><br />Thank you in advance,<br /><br />Best,<br /><br />Thomas Chanier</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: PB with the installation of abinit-5.8.4 on Snow Leopard</h3>
+				<div class="date">Posted: <strong>Sat Feb 27, 2010 7:30 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hello,<br /><br />it's a &quot;classic&quot; problem on MacOS<br /><br />This is a problem related to the mkdir command, which behaves non-standardly on your system.<br /><br />but the &quot;native&quot; /bin/mkdir  makes a good job<br /> <br />before running configure, you may try with:<br /><br />export MKDIR_P=&quot;mkdir -p&quot;<br /><br />jmb</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=91&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:20:49 GMT -->
+</html>

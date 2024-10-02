@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=742&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:20:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Resource Management during Screening</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Resource Management during Screening</h2>
+		<p><a href="viewtopic0290-2.html?f=11&amp;t=742">https://forum.abinit.org/viewtopic.php?f=11&amp;t=742</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Resource Management during Screening</h3>
+				<div class="date">Posted: <strong>Thu Nov 11, 2010 1:50 am</strong></div>
+				<div class="author">by <strong>JEJohns</strong></div>
+				<div class="content">I'm trying to do a Convergence on the energy cutoff for wavefunctions during a screening calculation.  I've attached a successful input file below.  My question is about the memory usage of Abinit during a screening calculation.  I'm running these calculations on the Quest machine at Northwestern, which consists of groups of 72 nodes, each node having 8 processors and 48 GB of ram.  The memory usage during the calculation, is highly (and it seems unnecessarily) front loaded.  The initial memory usage increases linearly until it writes out the screening for the first several q-points.  After it writes out the first several q-points, memory usage then drops drastically (in this case to about a 5th of total levels), stays at these levels throughout the calculation, and writes out to the screening file (*_o_SCR) after every q-point.  I used a process monitor to capture the memory usage for 4 hours and plotted it below.  If the memory usage during the initial ramp up in memory exceeds the 48 GB/node that I have access to, the program terminates.  In order to get this job to process then, I needed to use multiple nodes with less than 8 processes per node (4 / node in this case) in order to give each process extra available memory.  But I don't understand why this is necessary since after the first write out, the memory usage stays quite low.  Results are similar using gwpara=1 or gwpara=2, though I am currently collecting the equivalent data  with a resource monitor for gwpara=2 now.  Is there a workaround for this?<br />--James Johns<br /><br /><div class="inline-attachment">
+			
+				<dl class="thumbnail">
+			<dt><a href="download/filebd3f.gif?id=223&amp;mode=view"><img src="download/file1a3d.gif?id=223&amp;t=1" class="postimage" alt="GW_Para1.gif" title="GW_Para1.gif (11.06 KiB) Viewed 6031 times" /></a></dt>
+					</dl>
+		
+		
+		
+		
+			</div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Resource Management during Screening</h3>
+				<div class="date">Posted: <strong>Thu Nov 11, 2010 5:15 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">I think that the peak in the memory you are observing is mainly due to <br />the allocation of an extra array needed for evaluating the optical limit of the head<br />and of the wings of the polarizability at q==0 <br /><br />See<br /><!-- m --><a class="postlink" href="http://www.abinit.org/documentation/helpfiles/for-v6.2/input_variables/vargw.html#inclvkb">http://www.abinit.org/documentation/hel ... ml#inclvkb</a><!-- m --><br /><br />The default value for inclvkb is 1 although the corresponding algorithm is very slow and memory-demanding.<br />Could you rerun the same test with inclvkb 2 and then post the new graph? Thanks<br /><br />Matteo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Resource Management during Screening</h3>
+				<div class="date">Posted: <strong>Thu Nov 11, 2010 6:14 pm</strong></div>
+				<div class="author">by <strong>JEJohns</strong></div>
+				<div class="content">I'll do that asap.  Unfortunately, all nodes are down &amp; reserved for maintenance, so I'll do it as soon as they come back up and the queue clears (Probably thurs or friday).</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Resource Management during Screening</h3>
+				<div class="date">Posted: <strong>Fri Nov 12, 2010 6:04 pm</strong></div>
+				<div class="author">by <strong>JEJohns</strong></div>
+				<div class="content">Ok, so I ran the same input file, but with inclvkb=2 as you suggested.  This used way less memory per node.  Below is a graph of the memory usage.  I read the documentation for inclvkb, but only 0 &amp; 1 have any documentation, inclvkb=2  is mentioned, but I have no idea from the input variable help how it differs from 1.  Am I missing important information in my screening?<br />--James<br /><div class="inline-attachment">
+			
+				<dl class="thumbnail">
+			<dt><a href="download/file549d.gif?id=227&amp;mode=view"><img src="download/file7f12.gif?id=227&amp;t=1" class="postimage" alt="inclvkb.gif" title="inclvkb.gif (9.82 KiB) Viewed 6004 times" /></a></dt>
+					</dl>
+		
+		
+		
+		
+			</div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Resource Management during Screening</h3>
+				<div class="date">Posted: <strong>Sat Nov 13, 2010 3:04 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Dear James,<br /><br />The two different algorithms corresponding to inclvkb 1 and 2 are equivalent, they just correspond to <br />a different formulation of the same problem.<br /><br />When inclvkb==2 the commutator F(r1,r2) = [Vnl(r1,r2),r2] is rewritten in reciprocal space in a fully separable <br />form so that the storage of the huge two-dimensional matrix  F(G1,G2) is not needed. <br />On the contrary Inclvkb==1 requires the entire F(G1,G2) matrix hence it is much more memory demanding and <br />much slower for large cutoff energies.<br /><br />Calculations done with inclvkb 1 or 2 are exact in the sense that the head and the wings of the polarizability<br />in the optical limit are evaluated taking all the different contributions to the commutator [H,r] into account.<br /><br />The heads and wings obtained with inclvkb=0 are not &quot;exact&quot; since the term [Vnl, r] is not evaluated.<br />Neglecting [Vnl, r]  should not introduce significant errors in the GW results for bulk systems but might lead <br />to important errors in optical properties or in GW calculations done in isolated systems in which the weight of the <br />gamma point is important.<br /><br />Matteo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Resource Management during Screening</h3>
+				<div class="date">Posted: <strong>Sat Nov 13, 2010 3:46 pm</strong></div>
+				<div class="author">by <strong>JEJohns</strong></div>
+				<div class="content">Thanks so much Matteo.  I don't think I would have ever figured that out without your help &amp; clarification.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=742&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:20:36 GMT -->
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3178&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:36:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; enable-etsf-io</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>enable-etsf-io</h2>
+		<p><a href="viewtopice82f.html?f=3&amp;t=3178">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3178</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>enable-etsf-io&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Thu Jan 14, 2016 6:31 pm</strong></div>
+				<div class="author">by <strong>natalie</strong></div>
+				<div class="content">Using abinit 7.10.5, I would like to write out the full wavefunctions at the end of the calculation using <br />pawprtwf 1<br /><br />However, when it came time to write out the wavefunctions, the program gave the error message:<br />message: |<br />    ETSF-IO support must be enabled in order to output AE PAW wavefunction. <br />     No output will be produced, use --enable-etsf-io at configure-time.<br /><br />In fact, the first time I received that message, I did install etsf-io from the  fall-back directory and changed the configure options accordingly.  Perhaps there is something wrong with my configure options???     the beginning of the config.log is as follows:<br /><br />../configure --prefix=/home/natalie/EL6/publiccode/abinit/abinit-7.10.5 --exec-prefix=/home/natalie/EL6/publiccode/abinit/abinit-7.10.5 --enable-mpi --with-mpi-prefix=/rhel6/opt/openmpi/1.6-intel --with-fft-flavor=fftw3-mkl --with-linalg-flavor=mkl --with-dft-flavor=libxc --with-libxc-incs=-I/home/natalie/EL6/publiccode/libxc/libxc-2.0.0/include --with-libxc-libs=-L/home/natalie/EL6/publiccode/libxc/libxc-2.0.0/lib -lxc --with-netcdf-incs=-I/home/natalie/EL6/publiccode/netcdf/netcdf-4.1.1/include --with-netcdf-libs=-L/home/natalie/EL6/publiccode/netcdf/netcdf-4.1.1/lib --with-etsf-io-incs=-I/home/natalie/EL6/publiccode/etsf_io/etsf_io-1.0.4/include --with-etsf-io-libs=-L/home/natalie/EL6/publiccode/etsf_io/etsf_io-1.0.4/lib FC=ifort CC=icc CPP=icc -E --no-create --no-recursion<br /><br />Thanks in advance for any advice.   Natalie</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: enable-etsf-io</h3>
+				<div class="date">Posted: <strong>Mon Jan 18, 2016 11:38 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Dear Natalie,<br /><br />Use --with-trio-flavor=&quot;etsf_io+netcdf&quot; to  enable ETSF-IO and netcdf support.<br />Please note that there's a problem in the specification of the link flags used for netcdf and etsf-io.<br />One should specify the name of the directory containing the libraries after the -L option (-Ldirectory_name)<br />as well as the libraries to be linked (-l option).<br /><br />These are the flags I use to build abinit with etsf-io support:<br /><br />--with-trio-flavor=&quot;netcdf+etsf_io&quot;<br />--with-netcdf-libs=&quot;-L$HOME/Local/lib -lnetcdff -lnetcdf&quot;<br />--with-etsf-io-libs=&quot;-L$HOME/Local/lib -letsf_io -letsf_io_low_level -letsf_io_utils&quot;<br /><br />In your case, $HOME/local/lib should be replaced with <br />-L/home/natalie/EL6/publiccode/netcdf/netcdf-4.1.1/lib <br />for the netcdf libs and with<br />-L/home/natalie/EL6/publiccode/etsf_io/etsf_io-1.0.4/lib<br />for the etsf-io-libs<br /><br />At the end of the configuration, the configure script will give a summary with the most important options.<br />You should see something like<br /><br />  * TRIO   flavor = netcdf+etsf_io <br /><br />if the libraries have been correctly detected (Send me the full config.log file, if you continue to have problems with the configuration).<br /><br />For more examples of configuration files, see the templates in ~abinit/doc/build/config-examples <br /><br />Btw, if you use --with-trio-flavor=&quot;netcdf+etsf_io&quot; without specifying  --with-netcdf-libs and --with-etsf-io-libs,<br />the build system will try to activate the internal fallbacks. This option is handy if you don't want to compile your own libraries.<br /><br />Best regards,<br />Matteo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: enable-etsf-io</h3>
+				<div class="date">Posted: <strong>Tue Jan 19, 2016 2:39 pm</strong></div>
+				<div class="author">by <strong>natalie</strong></div>
+				<div class="content">Thanks Matteo,<br />         --with-trio-flavor=&quot;etsf_io+netcdf&quot;   worked well and seems to have solved the problem.   With my open compiles of netcdf and etsf_io, it still did not work, but perhaps we can leave that mystery alone and get back to physics.      Thanks so much for your help.    Natalie</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3178&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:36:58 GMT -->
+</html>

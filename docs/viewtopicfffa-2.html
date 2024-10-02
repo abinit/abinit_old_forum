@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2037&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:58:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; ionmov (keep some ions fixed) + Abinit as a library</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>ionmov (keep some ions fixed) + Abinit as a library</h2>
+		<p><a href="viewtopica9ea.html?f=9&amp;t=2037">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2037</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>ionmov (keep some ions fixed) + Abinit as a library</h3>
+				<div class="date">Posted: <strong>Tue Mar 12, 2013 11:03 am</strong></div>
+				<div class="author">by <strong>davydden</strong></div>
+				<div class="content">Dear all,<br /><br />I wonder if it is currently possible to run structural optimization (ionmov) but keep some of the ions fixed?<br />There are many reasons people do it including coupling to MD (effectively prescribing the boundary conditions in terms of ions positions) <br />as well as some surface energy calculations of the slab with bottom ions fixed during optimization. <br />I know that this option is implemented in VASP, since the book i was looking for give some examples calculated via this code. <br /><br />Do you think it is relatively straight forward to modify Abinit code to implement this?<br />I would assume one could add a couple of lines in those BFGS procedures and actually keep positions of certain ions (given by their index in the rang of [0;natom-1]) fixed, whereas let the others to move towards the minimum. If one is to do so, which files should be actually modified? <br /><br />A related question is, can Abinit be compiled as a library and used from the &quot;driver&quot;? <br /><br />Kind regards,<br />Denis.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ionmov (keep some ions fixed) + Abinit as a library</h3>
+				<div class="date">Posted: <strong>Thu Mar 14, 2013 9:03 am</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hello Denis,<br /><br /><br />You should look at the natfix/iatfix variables for fixing atoms as well as natfixx, natfixy, natfixz and iatfixx, iatfixy and iatfixz for fixing atoms only in a given direction (or two if you wish).<br /><br /><br />David</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ionmov (keep some ions fixed) + Abinit as a library</h3>
+				<div class="date">Posted: <strong>Sat Mar 16, 2013 12:14 pm</strong></div>
+				<div class="author">by <strong>davydden</strong></div>
+				<div class="content">thanks a lot, David! I just started to play with Abinit and missed those variables. That's exactly what i was looking for.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2037&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:58:55 GMT -->
+</html>

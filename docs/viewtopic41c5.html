@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=335&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:33:30 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] atompaw compilation</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] atompaw compilation</h2>
+		<p><a href="viewtopicf131.html?f=3&amp;t=335">https://forum.abinit.org/viewtopic.php?f=3&amp;t=335</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] atompaw compilation</h3>
+				<div class="date">Posted: <strong>Wed May 19, 2010 6:47 pm</strong></div>
+				<div class="author">by <strong>ppy</strong></div>
+				<div class="content">I tried to compile atompaw with intel 11.1 compiler but it ends with this error message:<br /><br />anderson_realmix.f90:(.text+0x122c): undefined reference to `dgesdd_'                                 <br />basis.o: In function `basis_mp_diagonalizer_':                                                        <br />basis.f90:(.text+0x36720): undefined reference to `dsyev_'                                            <br />basis.f90:(.text+0x3745c): undefined reference to `dsyev_'                                            <br />make: *** [atompaw] Erreur 1<br /><br />my makefile is the following:<br />LIBDIR=/opt/intel/Compiler/11.1/064/mkl/lib/em64t<br />LIBS=  -L$(LIBDIR) -lmkl -lmkl_lapack -lmkl_em64t -lguide -lpthread -lm<br />F90 = /opt/intel/Compiler/11.1/064/bin/intel64/ifort<br />F90FLAGS = -O3<br />#F90FLAGS = -O3 -tpp7  / -g -O2 -O2 -tpp7 -xW -mp -static<br />LDFLAGS = $(F90FLAGS)<br /><br />I am not sure if all the needed libraries are in the directory &quot;/opt/intel/Compiler/11.1/064/mkl/lib/em64t&quot;, below is the list of the libraries in this directory:<br />libmkl_avx.so                   libmkl_core.a          libmkl_intel_sp2dp.so      libmkl_scalapack_lp64.so<br />libmkl_blacs_ilp64.a            libmkl_core.so         libmkl_intel_thread.a      libmkl_sequential.a<br />libmkl_blacs_intelmpi_ilp64.a   libmkl_def.so          libmkl_intel_thread.so     libmkl_sequential.so<br />libmkl_blacs_intelmpi_ilp64.so  libmkl_gf_ilp64.a      libmkl_lapack95_ilp64.a    libmkl_solver_ilp64.a<br />libmkl_blacs_intelmpi_lp64.a    libmkl_gf_ilp64.so     libmkl_lapack95_lp64.a     libmkl_solver_ilp64_sequential.a<br />libmkl_blacs_intelmpi_lp64.so   libmkl_gf_lp64.a       libmkl_lapack.so           libmkl_solver_lp64.a<br />libmkl_blacs_lp64.a             libmkl_gf_lp64.so      libmkl_mc3.so              libmkl_solver_lp64_sequential.a<br />libmkl_blacs_openmpi_ilp64.a    libmkl_gnu_thread.a    libmkl_mc.so               libmkl_vml_avx.so<br />libmkl_blacs_openmpi_lp64.a     libmkl_gnu_thread.so   libmkl_p4n.so              libmkl_vml_def.so<br />libmkl_blacs_sgimpt_ilp64.a     libmkl_intel_ilp64.a   libmkl_pgi_thread.a        libmkl_vml_mc2.so<br />libmkl_blacs_sgimpt_lp64.a      libmkl_intel_ilp64.so  libmkl_pgi_thread.so       libmkl_vml_mc3.so<br />libmkl_blas95_ilp64.a           libmkl_intel_lp64.a    libmkl_scalapack_ilp64.a   libmkl_vml_mc.so<br />libmkl_blas95_lp64.a            libmkl_intel_lp64.so   libmkl_scalapack_ilp64.so  libmkl_vml_p4n.so<br />libmkl_cdft_core.a              libmkl_intel_sp2dp.a   libmkl_scalapack_lp64.a    locale<br /><br />I don't know if there are any missing libraries here?<br /><br />I hope someone will be able to help me.<br />Thanks a lot,<br /><br />Best Regards<br /><br />ppy</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: atompaw compilation</h3>
+				<div class="date">Posted: <strong>Thu May 20, 2010 10:13 am</strong></div>
+				<div class="author">by <strong>dcaliste</strong></div>
+				<div class="content">Hello,<br /><br />   Giving the directory with the libraries there through the -L option is not sufficient to link. The -l (small L) are required to indeed give the libraries to link with. Here I guess some MKL are missing in -l.<br /><br />   To know what to link with when using the juggle of MKL, I advice to use the Intel web page:<br /><!-- m --><a class="postlink" href="http://software.intel.com/en-us/articles/intel-mkl-link-line-advisor/">http://software.intel.com/en-us/article ... e-advisor/</a><!-- m --> that can give the -l that are required depending on the architecture you want to run on.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: atompaw compilation</h3>
+				<div class="date">Posted: <strong>Wed Jun 30, 2010 7:12 pm</strong></div>
+				<div class="author">by <strong>ppy</strong></div>
+				<div class="content">Thanks a lot !<br />It's working now.<br />Cheers</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=335&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:33:30 GMT -->
+</html>

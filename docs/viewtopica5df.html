@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1442&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:17:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [answered] How to check the crystal structure in abinit</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[answered] How to check the crystal structure in abinit</h2>
+		<p><a href="viewtopic3280-2.html?f=9&amp;t=1442">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1442</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[answered] How to check the crystal structure in abinit</h3>
+				<div class="date">Posted: <strong>Tue Nov 22, 2011 12:16 pm</strong></div>
+				<div class="author">by <strong>samabdel</strong></div>
+				<div class="content">Dear all,<br />I am trying to make calculations for fullerene (C60) and I would like to visualize the structure before lunching a run.<br />I need to make sure that the atoms are located in the right positions.<br />Thanks,</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to check the crystal structure in abinit</h3>
+				<div class="date">Posted: <strong>Thu Nov 24, 2011 6:47 pm</strong></div>
+				<div class="author">by <strong>jolafc</strong></div>
+				<div class="content">Hi samabdel,<br /><br />Visualizing a structure is unfortunately not yet built-in in abinit. Therefore, to visualise a crystal structure, there are 3 steps you have to do and some require you to install extra software. <br /><br />First, run your calculation a short time (about 10 s) to allow abinit to produce an .out file with the header properly written. Then, just kill the calculation. <br /><br />Second, use the AbinitStructureViewer2.py file (attached at the end of this post with the .py extension replaced by .in to allow the file to be attached; replace it by .py to be able to use it) on one of your output :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>python ~/AbinitStructureViewer2.py *.out</code></pre></div><br />This assumes that you have access to a shell (e.g. you run abinit on a mac or a linux computer) and that you have python installed somewhere with numpy available. It also assumes that you put the AbinitStructureViewer2.py file in your home directory (just change the path ~/AbinitStructureViewer2.py to something else if you put it elsewhere). Also, you need to be in the directory where the .out file is. <br /><br />Once you have run the code, you should see :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>$ /opt/local/bin/python2.5 /Users/jonathan/programmes/AbinitStructureViewer2.py 123.out <br /><br />==========================<br />&nbsp;AbinitStructureViewer.py<br />&nbsp;version beta<br />==========================<br />- WARNING : rprim not fount in given file, assuming : rprim 1 0 0&nbsp; 0 1 0&nbsp; 0 0 1<br /><br />1 configuration(s) found<br />- WARNING : calculation not completed in the given file -<br /><br />Enter the number of times you wish to replicate the primitive cell<br />(If you only want the primitive cell, enter : 1 1 1)<br /></code></pre></div><br />You just mention the number of time you want the cell specified in your input to be replicated. Then, you should see :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&quot;123_out.xyz&quot; file created successfully</code></pre></div><br />and have a new file in your folder named 123_out.xyz.<br /><br />Finally, you can use jmol to open such a file and visualize your structure in 3D, take pictures of it, etc. Jmol is available there :<br /><a href="http://jmol.sourceforge.net/download/" class="postlink">http://jmol.sourceforge.net/download/</a><br />althought I just installed my version (on a mac) using macports (<a href="http://www.macports.org/" class="postlink">http://www.macports.org/</a>) and it is also easy to use your favorite package manager in linux to install it. <br /><br />Good luck!<br /><br />Jonathan</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1442&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:17:20 GMT -->
+</html>

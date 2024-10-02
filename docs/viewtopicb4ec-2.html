@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=731&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:41:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; TO freqs in BaO</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>TO freqs in BaO</h2>
+		<p><a href="viewtopice1ee.html?f=10&amp;t=731">https://forum.abinit.org/viewtopic.php?f=10&amp;t=731</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>TO freqs in BaO</h3>
+				<div class="date">Posted: <strong>Mon Nov 08, 2010 2:26 pm</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Dear colleagues,<br /><br />we have calculated the phonon dispersions (PD) in BaO. We would like to compare them with experiments. The only exp. data we found are from inelastic thermal-neutron scattering experiments ({\it Springer Handbook of Condensed Matter and Materials Data}, edited by W.~Martienssen, and H.~Warliment, (Springer, 2005)). Here's the comparison<br /><br />mode                                             point             exp        we<br />------------------------------------------------------------------------------<br />$\overline{\nu}_{\textrm{TO}}$  &amp; $\Gamma$  &amp; 144.1  &amp; 101.0<br />$\overline{\nu}_{\textrm{LO}}$  &amp; $\Gamma$  &amp; 434.3  &amp; 402.2<br />$\overline{\nu}_{\textrm{TA}}$  &amp; $L$             &amp; 66.4   &amp;  64.6<br />$\overline{\nu}_{\textrm{LA}}$  &amp; $L$             &amp; 162.8  &amp; 163.8<br />$\overline{\nu}_{\textrm{TO}}$  &amp; $L$            &amp; 219.5  &amp; 236.3<br /><br />There's a pretty large discrepancy for the Gamma modes (although the LO-TO splitting is very close), but we cannot find the source of it. Phonon freqs are converged wrt ecut and ngkpt under 1 cm-1. Pseudos used are Teters &quot;extended norm-conserving&quot; pseudopotentials with O($2s ,2p$) and Ba($5s ,5p ,6s$) levels treated as valence states. O.~Sch\&quot;{u}tt, P.~Pavone, W.~Windl, K.~Karch, and D.~Strauch, Phys. Rev. B {\bf 50}, 3746 (1994) checked these, in the case of SrO, to include enough valence electrons. But an analogy can be drawn between BaO and SrO. Likewise,  we presume that if we hadn't enough valence electrons, then all phonon modes would differ in freqs significantly from the experiments.<br /><br />There is another issue which seemed to us like the reason of this discrepancy. When we do a d/dk perturbation, our calcs do not converge<br /><br />scprqt:  WARNING -<br />  nstep=  300 was not enough SCF cycles to converge;<br />  maximum residual=  1.437E+00 exceeds tolwfr=  1.000E-22<br /><br />There are no other warnings and the calcs finish.<br />Could this be it?<br />We think not, because we did the same type of calcs for SrO (same type of pseudos and the level of convergence). Here we had the same problem with d/dk pert., but all the phonon modes were in a very good agreement with exp. data.<br /><br />Does someone have an idea why do we get so different Gamma freqs? It would be of a great help to us. Input file is bellow.<br /><br />Thank you in advance!<br /><br />Igor Lukacevic<br /><br /><br /># Crystalline BaO - rocksalt<br /># computation of the response to homogeneous<br /># electric field and atomic displacements, at q=0<br /># and phonon dispersions<br /><br />   ndtset   18<br /><br />#Set 1 : ground state self-consistency<br /><br />  getwfk1   0            # Cancel default<br />  kptopt1   1            # Automatic generation of k points, taking<br />                         # into account the symmetry<br />    nqpt1   0            # Cancel default<br />  tolvrs1   1.0d-18      # SCF stopping criterion (modify default)<br />  rfphon1   0            # Cancel default<br /><br />#Q vectors for all datasets<br /><br />#Complete set of symmetry-inequivalent qpt chosen to be commensurate<br /># with kpt mesh so that only one set of GS wave functions is needed.<br />#Generated automatically by running GS calculation with kptopt=1,<br /># nshift=0, shiftk=0 0 0 (to include gamma) and taking output kpt set<br /># file as qpt set. Set nstep=1 so only one iteration runs.<br /><br />     nqpt   1            # One qpt for each dataset (only 0 or 1 allowed)<br />                         # This is the default for all datasets and must<br />                         #  be explicitly turned off for dataset 1.<br /><br />     qpt2   0.00000000E+00  0.00000000E+00  0.00000000E+00<br />     qpt3   0.00000000E+00  0.00000000E+00  0.00000000E+00<br />     qpt4   1.66666667E-01  0.00000000E+00  0.00000000E+00<br />     qpt5   3.33333333E-01  0.00000000E+00  0.00000000E+00<br />     qpt6   5.00000000E-01  0.00000000E+00  0.00000000E+00<br />     qpt7   1.66666667E-01  1.66666667E-01  0.00000000E+00<br />     qpt8   3.33333333E-01  1.66666667E-01  0.00000000E+00<br />     qpt9   5.00000000E-01  1.66666667E-01  0.00000000E+00<br />     qpt10 -3.33333333E-01  1.66666667E-01  0.00000000E+00<br />     qpt11 -1.66666667E-01  1.66666667E-01  0.00000000E+00<br />     qpt12  3.33333333E-01  3.33333333E-01  0.00000000E+00<br />     qpt13  5.00000000E-01  3.33333333E-01  0.00000000E+00<br />     qpt14 -3.33333333E-01  3.33333333E-01  0.00000000E+00<br />     qpt15  5.00000000E-01  5.00000000E-01  0.00000000E+00<br />     qpt16  5.00000000E-01  3.33333333E-01  1.66666667E-01<br />     qpt17 -3.33333333E-01  3.33333333E-01  1.66666667E-01<br />     qpt18 -3.33333333E-01  5.00000000E-01  1.66666667E-01<br /><br />    iscf2   -3         # Need this non-self-consistent option for d/dk<br />  kptopt2   2          # Modify default to use time-reversal symmetry<br />  rfphon2   0          # Cancel default<br />  rfelfd2   2          # Calculate d/dk wave function only<br />  tolvrs2   0.0        # Cancel default for d/dk<br />  tolwfr2   1.0d-22    # Use wave function residual criterion instead<br /><br />#Set 3 : Response function calculation of Q=0 phonons and electric field pert.<br /><br />  getddk3   2          # d/dk wave functions from last dataset<br />  kptopt3   2          # Modify default to use time-reversal symmetry<br />  rfelfd3   3          # Electric-field perturbation response only<br /><br />#Sets 4-18 : Finite-wave-vector phonon calculations (defaults for all datasets)<br /><br />   getwfk   1          # Use GS wave functions from dataset1<br />   kptopt   3          # Need full k-point set for finite-Q response<br />   rfphon   1          # Do phonon response<br />  rfatpol   1 2        # Treat displacements of all atoms<br />    rfdir   1 1 1      # Do all directions (symmetry will be used)<br />   tolvrs   1.0d-8     # This default is active for sets 3-10<br /><br />#######################################################################<br />#Common input variables<br /><br />#Definition of the unit cell - p = 0 GPa<br />acell   3*10.323077978<br />rprim   0.0  0.5  0.5<br />        0.5  0.0  0.5<br />        0.5  0.5  0.0<br /><br />#Definition of the atom types<br />ntypat  2<br />znucl   56 8<br /><br />#Definition of the atoms<br />natom   2<br />typat   1 2<br />xred    0.00  0.00  0.00<br />        0.50  0.50  0.50<br /><br />#Gives the number of band, explicitely (do not take the default)<br />nband   10<br /><br />#Exchange-correlation functional<br />ixc     3<br /><br />#Definition of the planewave basis set<br />ecut    70<br />ecutsm  0.5<br />dilatmx 1.2<br /><br />#Definition of the k-point grid<br />ngkpt   3*6<br />nshiftk 4<br />shiftk  0.5  0.5  0.5<br />        0.5  0.0  0.0<br />        0.0  0.5  0.0<br />        0.0  0.0  0.5<br /><br />#Definition of the SCF procedure<br />nnsclo   10<br />nline    8<br />npulayit 12<br />nstep    300<br />diemac   4<br /><br />timopt   2</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: TO freqs in BaO</h3>
+				<div class="date">Posted: <strong>Fri Nov 12, 2010 9:48 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">I have also checked the level of convergence of the wavefunctions in the 1st dataset. But I think that htey are converged quite nicely:<br /><br />     iter   Etot(hartree)      deltaE(h)  residm     vres2    diffor    maxfor<br /> ETOT  1  -41.442197950961    -4.144E+01 1.012E-06 6.850E+03 0.000E+00 0.000E+00<br /> ETOT  2  -40.597111353778     8.451E-01 2.900E-06 2.493E+04 0.000E+00 0.000E+00<br /> ETOT  3  -41.576363673921    -9.793E-01 4.577E-04 1.252E+03 0.000E+00 0.000E+00<br /> ETOT  4  -41.622226291886    -4.586E-02 2.666E-09 7.709E+01 0.000E+00 0.000E+00<br /> ETOT  5  -41.623720185865    -1.494E-03 4.749E-12 2.492E+01 0.000E+00 0.000E+00<br /> ETOT  6  -41.624548992194    -8.288E-04 2.917E-14 1.751E-02 0.000E+00 0.000E+00<br /> ETOT  7  -41.624549227243    -2.350E-07 1.747E-16 2.265E-03 0.000E+00 0.000E+00<br /> ETOT  8  -41.624549283193    -5.595E-08 1.827E-20 2.888E-05 0.000E+00 0.000E+00<br /> ETOT  9  -41.624549284158    -9.649E-10 3.406E-21 5.613E-08 0.000E+00 0.000E+00<br /> ETOT 10  -41.624549284161    -2.963E-12 8.018E-22 5.495E-11 0.000E+00 0.000E+00<br /> ETOT 11  -41.624549284161     2.345E-13 1.160E-21 6.695E-13 0.000E+00 0.000E+00<br /> ETOT 12  -41.624549284163    -1.911E-12 2.514E-21 4.428E-15 0.000E+00 0.000E+00<br /> ETOT 13  -41.624549284162     8.313E-13 5.103E-22 3.456E-18 0.000E+00 0.000E+00<br /> ETOT 14  -41.624549284161     5.400E-13 1.071E-21 1.001E-22 0.000E+00 0.000E+00<br /><br /> At SCF step   14       vres2   =  1.00E-22 &lt; tolvrs=  1.00E-18 =&gt;converged.<br /><br /><br /><br />I presume that this is not the source of the error? I would appreciate any comments.<br /><br />Thank you!<br /><br />Igor Lukacevic</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: TO freqs in BaO</h3>
+				<div class="date">Posted: <strong>Mon Nov 15, 2010 6:09 pm</strong></div>
+				<div class="author">by <strong>aromero</strong></div>
+				<div class="content">Well.. what works for me is to use occopt and tsmear. Did you check that all eigenvalues are correctly converging?, at least for the cases I have encountered, usually<br />the error source comes from a lousy convergence of one of the eigenvalues... the occopt and tsmear really helps!<br /><br />regards<br /><br />-aldo.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: TO freqs in BaO</h3>
+				<div class="date">Posted: <strong>Wed Nov 17, 2010 7:52 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Dear Aldo,<br /><br />thanks for answering. BaO in rocksalt phase is an insulator, so there no sense in using tsmear. And yes, all the phonon frequencies are converged wrt ecut under 1 cm^-1.<br /><br />Do you have any other suggestions?<br /><br />thnx again<br /><br />Igor</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: TO freqs in BaO</h3>
+				<div class="date">Posted: <strong>Sun Feb 27, 2011 3:09 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">For the ddk convergence, see other posts on the subject. Usually the perturbation is metallizing the system and you could try with metallic occupations and a small temperatures<br /><br />For BaO, we have also had many problems reproducing frequencies. Pseudopotentials and XC are the main issue. Using the ELK code and frozen phonons I got ok results, and some pseudopotentials worked in abinit too - I no longer have the reference files unfortunately<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: TO freqs in BaO</h3>
+				<div class="date">Posted: <strong>Fri Mar 04, 2011 8:58 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content"><blockquote><div><cite>mverstra wrote:</cite>For the ddk convergence, see other posts on the subject. Usually the perturbation is metallizing the system and you could try with metallic occupations and a small temperatures</div></blockquote><br /><br />Very well..thanks! I'll keep this in mind.<br /><br />Well, Philippes' e-mail was quite discouraging. I have an idea, but I have to check some things before blurting myself out on the forum. I'll be in touch.<br /><br />Cheers!<br /><br />Igor</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=731&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:41:44 GMT -->
+</html>

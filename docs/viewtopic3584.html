@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=922&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:27:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; reduce memory</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>reduce memory</h2>
+		<p><a href="viewtopica2ab.html?f=9&amp;t=922">https://forum.abinit.org/viewtopic.php?f=9&amp;t=922</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>reduce memory</h3>
+				<div class="date">Posted: <strong>Tue Mar 01, 2011 11:31 pm</strong></div>
+				<div class="author">by <strong>chen</strong></div>
+				<div class="content">Hi there,<br /><br />I am running ABINIT with 72 carbon atoms with PAW, the cell is defined as:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#============ below are in terms of Angstrom ============<br />acell 6.0&nbsp; 6.0&nbsp; 1.0&nbsp; angstrom<br />rprim<br />&nbsp;1.22800000&nbsp; -2.12695839&nbsp; 0.0<br />&nbsp;1.22800000&nbsp; &nbsp;2.12695839&nbsp; 0.0<br />&nbsp;0.0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;10.0</code></pre></div><br /><br />for the parallelization part, the input is as:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>chkprim 0<br /><br />#===========<br /># relax the position of the Fe atom<br />optcell&nbsp; 9<br />ionmov&nbsp; &nbsp;2<br />ecutsm&nbsp; &nbsp;0.5<br />ntime&nbsp; &nbsp; 50<br />dilatmx&nbsp; 1.2<br /><br />nband&nbsp; &nbsp; 184<br /><br />#=============================<br /># simple parallel setting<br />#wfoptalg&nbsp; 11<br />#nbdblock&nbsp; 45<br /><br />#---------------------------------<br /># parallel<br />paral_kgb 1&nbsp; &nbsp;# parallel activated over kpt, fft and bands, contain spin<br />npkpt&nbsp; &nbsp; 10&nbsp; # CPUs for kpt<br />npband&nbsp; &nbsp; 1&nbsp; &nbsp;# CPUs for bands<br />npfft&nbsp; &nbsp; &nbsp;4&nbsp; &nbsp;# CPUs for fft<br />bandpp&nbsp; &nbsp; 1<br />###wfoptalg&nbsp; 4&nbsp; &nbsp;# Locally Optimal Block Preconditioned Conjugate Gradient (lobpcg) method of Knyazev.<br />wfoptalg&nbsp; 14&nbsp; # Locally Optimal Block Preconditioned Conjugate Gradient (lobpcg) method of Knyazev.<br />nloalg&nbsp; &nbsp; 14&nbsp; # default for NCPP. 14 for PAW<br />fftalg&nbsp; &nbsp; 401<br />intxc&nbsp; &nbsp; &nbsp;0<br />fft_opt_lob&nbsp; 2<br />istwfk&nbsp; &nbsp; 200*1<br /><br />#mkmem&nbsp; &nbsp; &nbsp; &nbsp; 1<br />#mkqmem&nbsp; &nbsp; &nbsp; &nbsp;1<br />#mk1mem&nbsp; &nbsp; &nbsp; &nbsp;1<br /></code></pre></div><br /><br />I am using ecut=400eV and pawecutdg  1600 eV, the required memory is <br />&quot;P This job should need less than                    1909.936 Mbytes of memory.&quot;<br />is there a way to further reduce the memory on each node? I also performed almost the same job with VASP, using almost the same fft meshes:<br /><br />  dimension x,y,z NGX =   128 NGY =  128 NGZ =   90<br />  dimension x,y,z NGXF=   256 NGYF=  256 NGZF=  180<br /><br />VASP needs much less memory:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp; total amount of memory used by VASP on root node 412323. kBytes<br />&nbsp;========================================================================<br /><br />&nbsp; &nbsp; base&nbsp; &nbsp; &nbsp; :&nbsp; &nbsp; 30000. kBytes<br />&nbsp; &nbsp; nonl-proj :&nbsp; &nbsp; 25668. kBytes<br />&nbsp; &nbsp; fftplans&nbsp; :&nbsp; &nbsp; 22548. kBytes<br />&nbsp; &nbsp; grid&nbsp; &nbsp; &nbsp; :&nbsp; &nbsp;236355. kBytes<br />&nbsp; &nbsp; one-center:&nbsp; &nbsp; &nbsp; 279. kBytes<br />&nbsp; &nbsp; wavefun&nbsp; &nbsp;:&nbsp; &nbsp; 97473. kBytes</code></pre></div><br /><br />How do I achieve such a low memory usage in ABINIT? I noticed that if I increase npfft, then the ABINIT runs very slow, since I have to decrease npband or npkpt, Thanks a lot!<br /><br />best<br />Chen</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: reduce memory</h3>
+				<div class="date">Posted: <strong>Sat Mar 05, 2011 11:25 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello,<br /><br />your dilatmx might be lowered. Depends what you want to do.<br /><br />The way to reduce memory is fft parallelization, but as you have seen this is bandwidth critical and fairly slow in abinit. VASP is better for this parallelization (you are using the same number of processors?) and this is how they reduce the memory footprint, but they are also strongly bandwidth dependent...<br /><br />Usually 2Gb/core is available in clusters these days, as a minimum.<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: reduce memory</h3>
+				<div class="date">Posted: <strong>Sun Mar 06, 2011 6:19 pm</strong></div>
+				<div class="author">by <strong>chen</strong></div>
+				<div class="content">Thank you for your reply! <br /><br />I am doing parallel over fft meshes to reduce the memory. Sometimes I found that doing parallel over FFT makes the code faster than doing parallel over the kpoint and spin. This is contradictory to the tutorial, but might be due to the the fact that my system is pretty large and each node uses 4000+ MB memory if I do not do parallel over FFT meshes.<br /><br />best<br />Chen</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=922&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:27:13 GMT -->
+</html>

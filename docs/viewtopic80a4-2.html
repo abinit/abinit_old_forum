@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=280&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] Non-SCF Band Structure Calculations</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] Non-SCF Band Structure Calculations</h2>
+		<p><a href="viewtopicf37b.html?f=9&amp;t=280">https://forum.abinit.org/viewtopic.php?f=9&amp;t=280</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] Non-SCF Band Structure Calculations</h3>
+				<div class="date">Posted: <strong>Wed Apr 28, 2010 6:47 pm</strong></div>
+				<div class="author">by <strong>Mamikon Gulian</strong></div>
+				<div class="content">Hello,<br /><br />I am making non-scf Band Structure calculations which reads a well converged self consistent _DEN file from a previous run (from a separate input file). The program reads the _DEN file and says it is OK for calculation, but it begins its own self consistent loop (even though iscf = -2) and moreover, does not begin as converged as the Density file. If I set nstep = 1, the Band Structure is not converged at all (max. residual squared after first step is 5.477E-01, but the Density was converged to tolwfr = 1.0d-7) .<br /><br />1. If iscf = -2, why is it making SCF loops?<br /><br />2. Why is the residual squared back to 5.477E-01 instead of being as low as it was in the Density file?<br /><br />Could someone please explain how the non-scf run works? <br /><br />Thanks,<br />MG</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Non-SCF Band Structure Calculations</h3>
+				<div class="date">Posted: <strong>Wed Apr 28, 2010 9:39 pm</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hello,<br /><br />Could you provide your input file for the non-SCF band structure calculation as well as with the SCF run for the generation of the density file ? Without these it is difficult to help you.<br /><br />David</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Non-SCF Band Structure Calculations</h3>
+				<div class="date">Posted: <strong>Thu Apr 29, 2010 6:18 am</strong></div>
+				<div class="author">by <strong>Mamikon Gulian</strong></div>
+				<div class="content">David,<br /><br />Thanks for the reply; below are my SCF and non-SCF input files in that order. They are for a CNT. My questions are rather general.<br /><br />SCF:<br />#       DENSITY CALCULATION<br /><br />#       ACCURACY &amp; CONVERGENCE<br /><br />ecut 36          # must be converged<br /><br />ngkpt 1 1 54     # must be converged - Fermi point must be well captured!<br /><br />kptopt 1<br />nshiftk 1<br />shiftk 0 0 0<br /><br />#       SCF PRECONDITIONING<br /><br />#iprcel 45    # Alternative preconditioning to diemac - used if system cannot converge<br />#diemix 4<br />diemac 1.0d6    # Estimate of Dielectric Constant<br /><br />#       UNIT CELL &amp; GEOMETRY<br /><br />acell 12.56511735 12.56511735 2.46297625 angstrom<br /><br />rprim 1 0 0<br />0 1 0<br />0 0 1 <br /><br />ntypat 1<br />znucl 6<br />natom 12<br />typat 12*1<br /><br />xangst<br />etc....<br /><br /><br />#       CALCULATION CHARACTERISTICS<br />#       CORRESPONDING TO A SELF CONSISTENT DEN CALCULATION, WITH THE TOLERANCE CRITERION BEING ON THE WAVE FUNCTION RESIDUAL<br /><br />tolwfr 5.0d-8<br />nstep 2000<br /><br />iscf 7          # Pulay mixing of SCF iterations<br /><br />prtden 1        # print density?<br />prtwf  1        # print wave functions file?<br />prteig 0        # print eigenvalues (band structure)?<br />nbandkss 0      # print Kohn-Sham structure?<br />enunit 1        # 1=print energies in eV, 0=hartree<br /><br />accesswff 1     # use MPI I/0<br /><br />ixc 1     # Must match the PSP type; this must be checked if using a new PSP. <br /><br />istwfk *1  # Do not take advantage of time reversal symmetry (not supported for KSS)<br /><br /><br /><br />Non-SCF: <br />#       EIGENVALUE CALCULATION<br /><br />#       ACCURACY &amp; CONVERGENCE<br /><br />ecut 36          # must be converged<br /><br />ngkpt 1 1 54     # must be converged - Fermi point must be well captured!<br /><br />kptopt 1<br />nshiftk 1<br />shiftk 0 0 0<br /><br />#       SCF PRECONDITIONING<br /><br />#iprcel 45    # Alternative preconditioning to diemac - used if system cannot converge<br />#diemix 4<br />diemac 1.0d6    # Estimate of Dielectric Constant<br /><br />#       UNIT CELL &amp; GEOMETRY<br /><br />acell 12.56511735 12.56511735 2.46297625 angstrom<br /><br />rprim 1 0 0<br />0 1 0<br />0 0 1 <br /><br />ntypat 1<br />znucl 6<br />natom 12<br />typat 12*1<br /><br />xangst<br />etc.....<br /><br />#       CALCULATION CHARACTERISTICS<br />#       CORRESPONDING TO A NON-SCF EIG CALCULATION, WITH THE TOLERANCE CRITERION BEING ON THE WAVE FUNCTION RESIDUAL<br /><br />tolwfr 5.0d-8<br />nstep 10<br /><br />iscf -2          # NON-SCF<br />getden -1        # Therefore, read density specified by *.files<br /><br />prtden 0        # print density?<br />prtwf  0        # print wave functions file?<br />prteig 1        # print eigenvalues (band structure)?<br />nbandkss 0      # print Kohn-Sham structure? (-1 = yes)<br />enunit 1        # 1=print energies in eV, 0=hartree<br /><br />accesswff 1     # use MPI I/0<br /><br />ixc 1     # Must match the PSP type; this must be checked if using a new PSP. <br /><br />istwfk *1  # Do not take advantage of time reversal symmetry (not supported for KSS)</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Non-SCF Band Structure Calculations</h3>
+				<div class="date">Posted: <strong>Thu Apr 29, 2010 2:41 pm</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hello,<br /><br />You want to start from a density file which is created in a previous run (not a previous dataset) so you have to use irdden 1 (read density from file specified in .files) instead of getden -1. I guess this might be the answer to your first question but that's still strange, could you provide the end of your log file (or some parts of it that may be relevant) and your output file ?<br /><br />For your second answer, your density in your first run is converged with a given tolwfr but this criterium is on the wavefunction. If you restart from the density in a non SCF run, the wavefunction you are generating in a non SCF way is not converged after just one iteration with the fixed potential from the density of the SCF run.<br /><br />David</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Non-SCF Band Structure Calculations</h3>
+				<div class="date">Posted: <strong>Thu Apr 29, 2010 6:23 pm</strong></div>
+				<div class="author">by <strong>Mamikon Gulian</strong></div>
+				<div class="content">David,<br /><br />Actually, your second answer answers my first question as well.<br /><br />I didn't know that a non-SCF calculation must iterate for wavefunctions even after a converged SCF density:<br /><br /> scprqt:  WARNING -<br />  nstep=    1 was not enough non-SCF iterations to converge;<br />  maximum residual=  5.477E-01 exceeds tolwfr=  1.000E-07      (from nonscf log file)<br /><br />Many thanks for clearing this up for me.<br /><br />-Mamikon</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Non-SCF Band Structure Calculations</h3>
+				<div class="date">Posted: <strong>Thu Apr 29, 2010 10:34 pm</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hello,<br /><br />That's not the case if you restart from the wavefunction instead of the density and that you specify the same number of bands of course. In fact when you are doing a SCF calculation, at each SCF step, you could do a given number of non-SCF iterations (at fixed potential) and the default behaviour of abinit is to have two non SCF iterations for the two first SCF steps and then only one non-SCF iteration for all the next steps. This is consistent as in a SCF run, the wavefunction is initialized from the previous SCF step so it should not change too much.<br /><br />David</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=280&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:41 GMT -->
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=4331&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 17:37:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; An error occurred while running abinit without root privilege.</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>An error occurred while running abinit without root privilege.</h2>
+		<p><a href="viewtopicd25a.html?f=19&amp;t=4331">https://forum.abinit.org/viewtopic.php?f=19&amp;t=4331</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>An error occurred while running abinit without root privilege.</h3>
+				<div class="date">Posted: <strong>Tue Mar 03, 2020 3:52 am</strong></div>
+				<div class="author">by <strong>poltast</strong></div>
+				<div class="content">Hi, <br>
+As I mentioned on subject, I faced a trouble on my tutorial.<br>
+<br>
+I'm just trying to run the test code (tutorial 1 , molecular hydrogen case) without root privilege and encounter error below in err file.<br>
+<br>
+*** The MPI_Comm_f2c() function was called before MPI_INIT was invoked.<br>
+*** This is disallowed by the MPI standard.<br>
+*** Your MPI job will now abort.<br>
+[localhost.localdomain:06854] Local abort before MPI_INIT completed completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!<br>
+<br>
+<br>
+When I run this code with root privilege, there was no err message in err file and I already passed the running tests using runtests.py code(actually running test codes were done with root  privilege).<br>
+<br>
+I though it was kind of environmental problem related to library and added library paths from abinit directory but it does not work at all. How can I solve this problem?<br>
+<br>
+OS: centos 8.1<br>
+aninit: 8.10.2<br>
+<br>
+Thank you for reading my post!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: An error occurred while running abinit without root privilege.</h3>
+				<div class="date">Posted: <strong>Tue Mar 03, 2020 5:15 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br>
+<br>
+Is it repeatable?<br>
+<br>
+Which MPI package ( MPICH, OpenMPI ) did you use and which version?<br>
+<br>
+Which compiler ?<br>
+<br>
+jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: An error occurred while running abinit without root privilege.</h3>
+				<div class="date">Posted: <strong>Wed Mar 04, 2020 2:39 am</strong></div>
+				<div class="author">by <strong>poltast</strong></div>
+				<div class="content">Thank you for replying to my post,<br>
+<br>
+Yes it is repeatable and I use MPICH 3.3.2.<br>
+<br>
+And if I use mpi run option like "mpirun -n 2 abinit &lt; tbase1_x.files &gt; log 2&gt; err", results are<br>
+<br>
+<br>
+At line 1363 of file ../../../src/55_abiutil/m_dtfil.F90 (unit = 5, file = 'stdin')<br>
+Fortran runtime error: End of file<br>
+<br>
+Error termination. Backtrace:<br>
+*** The MPI_Comm_f2c() function was called before MPI_INIT was invoked.<br>
+*** This is disallowed by the MPI standard.<br>
+*** Your MPI job will now abort.<br>
+[localhost.localdomain:19937] Local abort before MPI_INIT completed completed successfully, but am not able to aggregate error messages, and not able to guarantee that all other processes were killed!<br>
+--------------------------------------------------------------------------<br>
+Primary job  terminated normally, but 1 process returned<br>
+a non-zero exit code. Per user-direction, the job has been aborted.<br>
+--------------------------------------------------------------------------<br>
+#0  0x7f4c58188131 in ???<br>
+#1  0x7f4c58188cd9 in ???<br>
+#2  0x7f4c581894e1 in ???<br>
+#3  0x7f4c5838e77b in ???<br>
+#4  0x7f4c5838ed72 in ???<br>
+#5  0x7f4c5838ba6b in ???<br>
+#6  0x7f4c58390484 in ???<br>
+#7  0x7f4c583912f4 in ???<br>
+#8  0xf72d34 in __m_dtfil_MOD_iofn1<br>
+        at ../../../src/55_abiutil/m_dtfil.F90:1363<br>
+#9  0x406f78 in abinit<br>
+        at ../../../src/98_main/abinit.F90:251<br>
+#10  0x406cae in main<br>
+        at ../../../src/98_main/abinit.F90:94<br>
+--------------------------------------------------------------------------<br>
+mpirun detected that one or more processes exited with non-zero status, thus causing<br>
+the job to be terminated. The first process to do so was:<br>
+<br>
+  Process name: [[40275,1],0]<br>
+  Exit code:    1<br>
+--------------------------------------------------------------------------<br>
+<br>
+<br>
+Because running mpi with root privilege is blocked by policy, I can not test it with root privilege.<br>
+<br>
+Thank you!<br>
+<br>
+poltast<br>
+<br>
+P.S.<br>
+I forgot to mention the compiler.<br>
+Below are details on my build.<br>
+ === Build Information ===<br>
+  Version       : 8.10.2<br>
+  Build target  : x86_64_linux_gnu8.3<br>
+  Build date    : 20200229<br>
+<br>
+ === Compiler Suite ===<br>
+  C compiler       : gnu8.3<br>
+  C++ compiler     : gnu8.3<br>
+  Fortran compiler : gnu8.3<br>
+  CFLAGS           : -m64 -g -O2 -mtune=native -march=native  -fPIC<br>
+  CXXFLAGS         : -m64 -g -O2 -mtune=native -march=native  -fPIC<br>
+  FCFLAGS          : -m64 -g -ffree-line-length-none -fPIC<br>
+  FC_LDFLAGS       :<br>
+<br>
+=== Optimizations ===<br>
+  Debug level        : basic<br>
+  Optimization level : standard<br>
+  Architecture       : unknown_unknown<br>
+<br>
+ === Multicore ===<br>
+  Parallel build : yes<br>
+  Parallel I/O   : yes<br>
+  openMP support : no<br>
+  GPU support    : no<br>
+<br>
+ === Connectors / Fallbacks ===<br>
+  Connectors on : yes<br>
+  Fallbacks on  : yes<br>
+  DFT flavor    : libxc-fallback+atompaw-fallback+bigdft-fallback+wannier90-fallback<br>
+  FFT flavor    : fftw3<br>
+  LINALG flavor : atlas<br>
+  MATH flavor   : none<br>
+  TIMER flavor  : abinit<br>
+  TRIO flavor   : netcdf<br>
+<br>
+ === Experimental features ===<br>
+  Bindings            : @enable_bindings@<br>
+  Exports             : yes<br>
+  GW double-precision : yes</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=4331&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 17:37:58 GMT -->
+</html>

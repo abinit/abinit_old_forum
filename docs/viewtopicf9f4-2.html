@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=352&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:17:52 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; a problem about optimization</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>a problem about optimization</h2>
+		<p><a href="viewtopic102c.html?f=9&amp;t=352">https://forum.abinit.org/viewtopic.php?f=9&amp;t=352</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>a problem about optimization</h3>
+				<div class="date">Posted: <strong>Tue May 25, 2010 10:52 pm</strong></div>
+				<div class="author">by <strong>jiangx3</strong></div>
+				<div class="content">Dear All,<br /><br />I want to optimize a strained graphene, which is expanded in y direction(zigzag direction). While, actually, I have to fix the atoms in y-direction, and atoms can move in y and z direction. I attach the input file here. However, I got BUG as followings:<br /><br /> fxphas : BUG -<br />  The eigenvector number   1 has zero norm.<br />  Action : contact ABINIT group.<br /> <br />It seems that all of the coordinates go to zero.<br /><br />Did anyone have this problem before? Would you please tell me how to optimize such structure? Thanks in advance!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a problem about optimization</h3>
+				<div class="date">Posted: <strong>Tue May 25, 2010 10:55 pm</strong></div>
+				<div class="author">by <strong>jiangx3</strong></div>
+				<div class="content">I am sorry that the attachment is not easy to read. I tried to attach it in .txt form but the system tells me that this form is not allowed.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a problem about optimization</h3>
+				<div class="date">Posted: <strong>Wed May 26, 2010 9:20 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello Jiang,<br /><br />the input file looks more or less ok except:<br />1) you should specify shiftk 0 0 0 as you originally did. The default 0.5 0.5 0.5 is inappropriate for graphene<br />2) your rprim is not precise enough. If you want a 60 degree unit cell you need to give sqrt(3)/2 ~ 0.866 with much more precision (10 digits by default). Also your a and b are not equal. Abinit will never find the correct symmetries this way.<br />3) your ecut is quite low. Even with PAW (which you are not using yet) 12 Ha is very low for carbon. This could be the source of your zero length vector<br /><br />For more analysis of the error you got we need to see the output.<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a problem about optimization</h3>
+				<div class="date">Posted: <strong>Wed May 26, 2010 3:09 pm</strong></div>
+				<div class="author">by <strong>jiangx3</strong></div>
+				<div class="content">Hi Matthieu,<br /><br />Thanks very much! I modify the input variables you pointed out to see if I can get the correct answer.<br />I am doing  strained graphene, which means a or b is expanded or compressed, so a and b are different in this condition.<br />I attach the output file here and could you take a look at that?  Thanks so much!<br /><br /><br />Best regards,<br />Xueping Jiang</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a problem about optimization</h3>
+				<div class="date">Posted: <strong>Wed May 26, 2010 4:51 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello again,<br /><br />* you should probably not be fixing the atomic positions. Leave that to the symmetry and start with reduced coordinates.<br />Further, your positions are not relaxing very quickly, though the stress is very small so something seems wrong.<br />* Again, your ecut is probably too small.<br />* Your optcell may be incorrect - how do you actually want to relax the cell?<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a problem about optimization</h3>
+				<div class="date">Posted: <strong>Thu May 27, 2010 10:37 pm</strong></div>
+				<div class="author">by <strong>jiangx3</strong></div>
+				<div class="content">Dear Matthieu,<br /><br />I took your advice and changed the input variables:<br />1. ecut is changed to be 30<br />2. rprim is more precise<br />But warning says that nstep=50 is not enough for gradient to converge. <br /><br /> fconv : WARNING -<br />  ntime=   50 was not enough Broyd/MD steps to converge gradients:<br />  max grad (force/stress) = 1.2683E-02 &gt; tolmxf= 5.0000E-05 ha/bohr (free atoms)<br /><br />I can see the gradient is far from the set value, and it seems that it would not converge at all.<br /><br /> <br />because for this optimization, I have to fix the positions of atoms in y-direction, I can only relax the atoms in x- and z-directions.  Also, I can optimize the acell.<br /><br />What optcell should I choose? <br /><br />I attach the input file and output file here. Could you take a look at that?  Thanks so much!<br /><br />Best regards,<br />Xueping Jiang</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a problem about optimization</h3>
+				<div class="date">Posted: <strong>Sat Oct 27, 2012 11:14 pm</strong></div>
+				<div class="author">by <strong>riemann</strong></div>
+				<div class="content">Dear Abinit User<br /><br />I want to construct graphene nanoribbon lattice in Abinit for relaxation, But since i am beginer i dont know <br /><br />how i should write down input file for relaxation running.<br /><br />You do favor if You give me any file about it as sample.<br /><br />Sincerely Yours<br /><br />Riemann</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a problem about optimization</h3>
+				<div class="date">Posted: <strong>Sat Dec 22, 2012 1:08 pm</strong></div>
+				<div class="author">by <strong>maryamsajedi</strong></div>
+				<div class="content">Dear all users,<br />I have a difficulty in relaxation of 47 atoms of Si. Below is the input file that I give. #Unit cell definition acell. (xred is in angstrom). How can I modify the input file to run it without any comments , warning or errors and what should I do to lessen the time taken for running relaxation structure?<br />Thank you for your time.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a problem about optimization</h3>
+				<div class="date">Posted: <strong>Sat Dec 22, 2012 1:49 pm</strong></div>
+				<div class="author">by <strong>maxim</strong></div>
+				<div class="content">Dear maryamsajedi!<br /><br />For geom. optim. replace &quot;xred&quot; with &quot;xangst&quot;, set occopt to 1, remove ndtset and jdtset - I can not understand in the input file that will change in your datasets?<br />If you use PAW pseudopotentials, then iscf=17 is correct, otherwise remove it or set it to 7.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a problem about optimization</h3>
+				<div class="date">Posted: <strong>Sat Dec 22, 2012 7:36 pm</strong></div>
+				<div class="author">by <strong>maryamsajedi</strong></div>
+				<div class="content">Dear Maxim,<br />Thank you very much for your help. I took your advice and changed the input variables. By the way, I have choosen 14-Si.nlcc.UPF for pseudopotential.<br />But in output these warnings and comments appeared.<br /><br />WARNING - These should obey zval-nelect_occ=charge to better than  0.10E-10<br />   Action : check input file for occ,wtk, and charge.<br />   Note that wtk is NOT automatically normalized when occopt=2,<br />   but IS automatically normalized otherwise.<br /><br /><br />setmqgrid : COMMENT -<br />  The number of points &quot;mqgrid&quot; in reciprocal space used for the<br />  description of the pseudopotentials has been set automatically<br />  by abinit to :    10804.<br /><br />I attach the input file here. Maybe you can tell me what to do to fix it. Thanks so much!<br /><br />Best regards,<br />Maryam</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a problem about optimization</h3>
+				<div class="date">Posted: <strong>Sat Dec 22, 2012 10:35 pm</strong></div>
+				<div class="author">by <strong>maxim</strong></div>
+				<div class="content">Pls give me your output file. Remove nband - this warning will disappear, but abinit will set it's own nband, which is more than your 120 bands. Run without nband and look at &quot;occ&quot; in output file - then set nband to number of filled bands.<br /><br />Best wishes, Maxim.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a problem about optimization</h3>
+				<div class="date">Posted: <strong>Sun Dec 23, 2012 9:28 am</strong></div>
+				<div class="author">by <strong>maryamsajedi</strong></div>
+				<div class="content">Dear Maxim,<br />I removed nband and ran it, but the same warning occurred, abinit set its own nband to 100. Then, I ran it with nband 100.<br />This is the out put file (log file).<br />Thank you very much indeed for your time.<br />Warm regards,<br />Maryam</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a problem about optimization</h3>
+				<div class="date">Posted: <strong>Sun Dec 23, 2012 10:39 am</strong></div>
+				<div class="author">by <strong>maxim</strong></div>
+				<div class="content">Try another psp (e. g. FHI) - note ecut should be different. You can try PAW psps (<!-- m --><a class="postlink" href="http://www.abinit.org/downloads/PAW2/ATOMICDATA/014-si/index.html">http://www.abinit.org/downloads/PAW2/AT ... index.html</a><!-- m -->) - it could be even better - see examples for Tutorial PAW 1.<br /><br /> Best wishes, Maxim.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a problem about optimization</h3>
+				<div class="date">Posted: <strong>Sun Dec 23, 2012 12:14 pm</strong></div>
+				<div class="author">by <strong>maryamsajedi</strong></div>
+				<div class="content">Dear Maxim,<br />I tried Si_ps.abinit.paw for psp but I have no idea for ixc. The warning did not disapeared. Would you please check the new input file?<br />Thanks a lot.<br />Regards,<br />Maryam</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a problem about optimization</h3>
+				<div class="date">Posted: <strong>Sun Dec 23, 2012 12:14 pm</strong></div>
+				<div class="author">by <strong>maryamsajedi</strong></div>
+				<div class="content">This is the output file.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a problem about optimization</h3>
+				<div class="date">Posted: <strong>Sun Dec 23, 2012 1:26 pm</strong></div>
+				<div class="author">by <strong>maryamsajedi</strong></div>
+				<div class="content">I forgot to say that the code stops with tihis error:<br /> chkpawovlp : ERROR -<br />  PAW SPHERES ARE OVERLAPPING !<br />   Distance between atoms   7 and  33 is  :   1.78461<br />   PAW radius of the sphere around atom   7 is:   1.90454<br />   PAW radius of the sphere around atom  33 is:   1.90454<br />   This leads to a (voluminal) overlap ratio of 34.87 %</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a problem about optimization</h3>
+				<div class="date">Posted: <strong>Sun Dec 23, 2012 1:47 pm</strong></div>
+				<div class="author">by <strong>maxim</strong></div>
+				<div class="content">Have you performed convergence in ecut? Put pawecutdg at least twice bigger than ecut. Remove ixc, occopt and tsmear. Your cell is very big - is it a supercel? If yes, tnan ngkpt should be less dense. Try another ngkpt (e. g. 4 4 4 for 1 unit cell, but if you have e. g. 2x2x2 supercell, then it should be 2 2 2). Then to save CPU time perform convergence in toldfe in forces - if your forces are not converget at even 10^-12, then use tolvrs 10^-22. To solve PAW overlapping problem select psps with small PAW radius (<!-- m --><a class="postlink" href="http://www.abinit.org/downloads/PAW2/ATOMICDATA/014-si/index.html">http://www.abinit.org/downloads/PAW2/AT ... index.html</a><!-- m -->). Plot your structure in e.g. Diamond and check that all interatomic distances are relevant. <br /><br /> Best wishes, Maxim.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a problem about optimization</h3>
+				<div class="date">Posted: <strong>Sun Dec 23, 2012 11:10 pm</strong></div>
+				<div class="author">by <strong>maryamsajedi</strong></div>
+				<div class="content">Dear Maxim,<br />Thank you so much indeed for your help. The warning has vanished as I took your advice. It is now running without any problem. By the way its not a supercell.<br />Regards,<br />Maryam</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a problem about optimization</h3>
+				<div class="date">Posted: <strong>Tue Dec 25, 2012 7:25 am</strong></div>
+				<div class="author">by <strong>maxim</strong></div>
+				<div class="content">I forgot to tell you - are you sure that these shiftk and ngkpt are suitable for your structure? I'm not sure - for proper kpoint grid remove shiftk and ngkpt and set prtkpt 1, and set kptrlen to 60-70, see  <!-- l --><a class="postlink-local" href="viewtopicd613.html?f=8&amp;t=96&amp;p=300&amp;hilit=prtkpt+1+kptrlen#p300">viewtopic.php?f=8&amp;t=96&amp;p=300&amp;hilit=prtkpt+1+kptrlen#p300</a><!-- l --> .<br /><br />Best wishes, Maxim.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=352&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:17:52 GMT -->
+</html>

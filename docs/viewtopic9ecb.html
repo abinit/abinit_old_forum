@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=2621&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:11:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; anaddb input file of Amorphous Material[Solved]</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>anaddb input file of Amorphous Material[Solved]</h2>
+		<p><a href="viewtopic3ab3.html?f=12&amp;t=2621">https://forum.abinit.org/viewtopic.php?f=12&amp;t=2621</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>anaddb input file of Amorphous Material[Solved]</h3>
+				<div class="date">Posted: <strong>Wed Apr 02, 2014 10:59 pm</strong></div>
+				<div class="author">by <strong>uma</strong></div>
+				<div class="content">I am trying to calculate the thermodynamic properties of an amorphous system of 108 atoms. Since my response calculations are done only at Gamma point,I have just 2 DDB files as a result of my response calculations. I am not able to get a working input file for anaddb tool. I need  to know what the thmflg and prtdos should be. Since there are no q vectors other than Gamma, how will I get my Phonon DOS..?(It is usually printed at each q vector and interpolated isn't it?) Or am I missing something..?  I get the following error:<br /><br /><span style="color: #FF0000">--- !ERROR<br />message: |<br />    Informations are missing in the DDB.<br />      In block     3 the following element is missing :<br />      idir1,ipert1,idir2,ipert2=   1   1   1   1<br />      Action : add the required information in the DDB,<br />      or modify your input file.<br />src_file: Subroutine Unknown<br />src_line: 0<br />...<br /><br /><br /> leave_new : decision taken to exit ...<br /> MPI_ERROR_STRING: Unknown error.  Please file a bug report.<br />PSIlogger: Child with rank 0 exited with status 13.<br />application called MPI_Abort(MPI_COMM_WORLD, 13) - process 0</span><br /><br /><span style="color: #FF0080">My anaddb input file </span>:<br /><br /><span style="color: #4000BF">!Flags<br /># dieflaf   2<br /> ifcflag   1<br /> thmflag   1<br /># nlflag    1<br /><br />!Wavevector grid number 1 (coarse grid, from DDB)<br />  brav    1      ! Bravais Lattice : 1-S.C., 2-F.C., 3-B.C., 4-Hex.)<br />  ngqpt   1 1 1<br />  nqshft  1         ! number of q-points in repeated basic q-cell<br />  q1shft  3*0.0<br />  enunit 2<br />!Effective charges<br />  rfmeth   1<br />     asr   1     ! Acoustic Sum Rule. 1 =&gt; imposed asymetrically<br />  chneut   2<br />  slectz   0<br /><br />!Interatomic force constant info<br />  dipdip  1      ! Dipole-dipole interaction treatment<br /><br />!Phonon band structure output for band2eps - See note near end for<br />! dealing with gamma LO-TO splitting issue.<br />   eivec  1<br />   prtdos 1<br /><br />#Wavevector grid number 2<br /><br />   ngrids 12<br />  ng2qpt 24 24 24<br /><br />!Wavevector list number 1 (Reduced coordinates and normalization factor)         <br />  nph1l    2      ! number of phonons in list 1                             <br />  qph1l   0.0  0.0  0.0  1.0<br />            0.0  0.0  0.0  1.0    ! (Gamma Point)<br />!Wavevector list number 2 (Cartesian directions for non-analytic gamma phonons)<br /><br />!The output for this calculation must be cut-and-pasted into the<br />! t59_out.freq file to be used as band2eps input to get proper LO-TO <br />! splitting at gamma.  Note that gamma occurrs twice.<br /><br />  nph2l    1       ! number of directions in list 2<br /><br />  qph2l   1.0  0.0  0.0    0.0<br /># This line added when defaults were changed (v5.3) to keep the previous, old behaviour<br />  symdynmat 0<br /><br /><br /></span><br /><br />Can you guide me to a working anaddb input file?<br /><br />Thanking you,<br />Uma</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: anaddb input file of Amorphous Material</h3>
+				<div class="date">Posted: <strong>Mon May 26, 2014 10:43 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello,<br /><br />using just the Gamma point should be fine to get a DOS (your ngqpt is correctly 1 1 1) however the interpolation to 24x24x24 is useless since your bands are constant. I think that the thermodynamical stuff should work as well, but I would stick to just 1 grid (in principle the DOS is the same for any interpolating grid, so it should converge immediately, but you never know numerically).<br /><br />The error comes from an incomplete DDB file. You should check that you have done the Gamma points phonons for all atoms and directions (rfatpol 1 108 rfdir 1 1 1) - anaddb complains that the perturbation of atom 1 along direction 1 (x) is not present in the DDB file.<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: anaddb input file of Amorphous Material[Solved]</h3>
+				<div class="date">Posted: <strong>Thu Jul 03, 2014 2:27 pm</strong></div>
+				<div class="author">by <strong>uma</strong></div>
+				<div class="content">Thank you Matthieu..!!  It worked..!!<br />Uma</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=2621&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:11:25 GMT -->
+</html>

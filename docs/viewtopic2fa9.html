@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=552&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:41:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Non-linear optics for magnetic system</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Non-linear optics for magnetic system</h2>
+		<p><a href="viewtopic0ac9.html?f=10&amp;t=552">https://forum.abinit.org/viewtopic.php?f=10&amp;t=552</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Non-linear optics for magnetic system&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Tue Aug 24, 2010 3:18 pm</strong></div>
+				<div class="author">by <strong>schumann</strong></div>
+				<div class="content">Hi all,<br /><br />I'm trying to do a nonlinear response calculation for a magnetic insulating system, namely NiO. For this I followed the tutorial and changed some_path/tutorespfn/Input/tnlo_2.in according to my needs. I use abinit-6.2.1.<br /><br />But right after starting with the fifth dataset I get some error, whose source I do not understand. I attach the input file. Output and log file are too big to attach them here. Here are the last lines of them:<br /><br /><br />output:<br /> getshell : finite difference formula of Marzari and Vanderbilt<br />            (see Marzari and Vanderbilt, PRB 56, 12847 (1997), Appendix B)<br /><br />            number of first neighbours  :   2<br />            weight :     1411.3440000<br /><br />            number of second neighbours  :   6<br />            weight :      282.2688000<br /><br /><br />log:<br />...<br />  isppol, ikpt, nband_k=           2         106          16<br />  isppol, ikpt, nband_k=           2         107          16<br />  isppol, ikpt, nband_k=           2         108          16<br />-P-0000  leave_test : synchronization done...<br />kpgio: loop on k-points done in parallel<br />-P-0000<br />-P-0000  leave_new : decision taken to exit ...<br /><br /><br />Of course I can give more information. If you need them, just ask.<br />It would be great if someone could help me.<br /><br />Thanks.<br />Silvia Bahmann</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Non-linear optics for magnetic system</h3>
+				<div class="date">Posted: <strong>Fri Oct 15, 2010 6:33 pm</strong></div>
+				<div class="author">by <strong>Robin</strong></div>
+				<div class="content">Dear Silvia,<br /><br />I had a similar experience not long ago when I calculated the Raman spectra of an antimagnetic system. After some tests, I realized that this part of code (at least for the 3rd order perturbation of Raman spectra) is not well parallelized. When I specify one core for this part, it works. Luckily this part does not need much time to finish.<br /><br />Sincerely,<br />Guangfu Luo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Non-linear optics for magnetic system</h3>
+				<div class="date">Posted: <strong>Fri Oct 15, 2010 8:43 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello - please be careful - I am not certain either of these is coded spin polarized - Fabiana DaPieve was working on the implementation last year. You should check the release notes and documentation carefully. Xavier is the final source to know if this project is in production.<br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=552&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:41:59 GMT -->
+</html>

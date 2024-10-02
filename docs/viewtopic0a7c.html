@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3755&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:55:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; BUG: vdw_xc does not do anything abinit 8.6.1 (and earlier?)</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>BUG: vdw_xc does not do anything abinit 8.6.1 (and earlier?)</h2>
+		<p><a href="viewtopic1f0f.html?f=9&amp;t=3755">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3755</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>BUG: vdw_xc does not do anything abinit 8.6.1 (and earlier?)</h3>
+				<div class="date">Posted: <strong>Wed Dec 27, 2017 11:14 pm</strong></div>
+				<div class="author">by <strong>recohen</strong></div>
+				<div class="content">The vdw test in abinit-8.6.1/tests/vdwxc/t03.in gives the results in abinit-8.6.1/tests/vdwxc/Refs/t03.out , but also the sa,e results if I remove all vdw lines in the input. So:<br /><br /> Unit cell<br />acell 3*10.0 angstrom<br />chkprim 0<br /><br /># Atoms<br />ntypat 1<br />znucl 4<br />natom 2<br />typat 1 1<br /><br /># Positions<br />xcart<br />   -1.5 0.0 0.0<br />    1.5 0.0 0.0<br /><br /># Convergence<br />prtden 0<br />prteig 0<br />prtwf 0<br />ecut  15.0<br />nstep 50<br />toldfe 1.0d-6<br />ixc -102130<br /><br /><br />gives the same results as<br /><br /> Unit cell<br />acell 3*10.0 angstrom<br />chkprim 0<br /><br /># Atoms<br />ntypat 1<br />znucl 4<br />natom 2<br />typat 1 1<br /><br /># Positions<br />xcart<br />   -1.5 0.0 0.0<br />    1.5 0.0 0.0<br /><br /># Convergence<br />prtden 0<br />prteig 0<br />prtwf 0<br />ecut  15.0<br />nstep 50<br />toldfe 1.0d-6<br />ixc -102130<br /><br /># vdW-DF parameters<br />vdw_xc               1<br />vdw_df_zab        -0.8491<br />dw_df_ndpts        10<br />vdw_df_dcut        5.0<br />vdw_df_dratio     10.0<br />vdw_df_dsoft       1.0<br />vdw_df_phisoft    -1.0<br />vdw_df_nqpts        10<br />vdw_df_qcut        5.0<br />vdw_df_qratio     10.0<br />vdw_df_nrpts       128<br />vdw_df_rcut       10.0<br />vdw_df_rsoft       0.0<br />vdw_df_ngpts        -1<br />vdw_df_gcut        5.0<br />vdw_df_acutmin    10.0<br />vdw_df_aratio     10.0<br />vdw_df_damax       1.0<br />vdw_df_damin       1.0e-2<br />vdw_df_nsmooth       3<br />vdw_df_threshold   1.0e-2<br />vdw_df_tolerance   1.0e-13<br />vdw_df_tweaks        0<br />irdvdw               1<br />prtvdw               1<br /><br />both give:<br /><br />ETOT 35  -22.758619402799    -3.303E-07 2.140E-10 7.348E-02<br /><br />ETOT 35  -22.758619402799    -3.303E-07 2.140E-10 7.348E-02</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: BUG: vdw_xc does not do anything abinit 8.6.1 (and earli</h3>
+				<div class="date">Posted: <strong>Sun Mar 11, 2018 11:26 am</strong></div>
+				<div class="author">by <strong>recohen</strong></div>
+				<div class="content">It has been a few months and there has been no response. Someone must know the status of the vdw code in abinit? Thanks!<br />Ron</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: BUG: vdw_xc does not do anything abinit 8.6.1 (and earli</h3>
+				<div class="date">Posted: <strong>Tue Apr 24, 2018 11:32 pm</strong></div>
+				<div class="author">by <strong>cespejo</strong></div>
+				<div class="content">Dear recohen, vdW-DF functionals are not fully operational yet. In the new Abinit version there will be an error message when vdw_xc = 1,2. This will be so until the implementation is  completed and debugged, hopefully in a couple of months. Sorry for the inconvenience.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: BUG: vdw_xc does not do anything abinit 8.6.1 (and earli</h3>
+				<div class="date">Posted: <strong>Wed Jul 25, 2018 10:29 am</strong></div>
+				<div class="author">by <strong>recohen</strong></div>
+				<div class="content">Thank you very much! It has been some months. I do not see a mention in the 8.8.3 release notes. Could you please tell me the status? Thank you!<br /><br />Ron</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3755&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:55:00 GMT -->
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1474&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:36:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Band Structure Energy Shifted by 0.8 eV</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Band Structure Energy Shifted by 0.8 eV</h2>
+		<p><a href="viewtopic9b94.html?f=9&amp;t=1474">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1474</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Band Structure Energy Shifted by 0.8 eV</h3>
+				<div class="date">Posted: <strong>Wed Dec 21, 2011 4:29 pm</strong></div>
+				<div class="author">by <strong>robsimps</strong></div>
+				<div class="content">Dear All,<br />I have performed Band Structure Calculations on Sb2Te3 but although the main features compare well with published data and a castep calculation, the energy of all bands appears to be shifted up by 0.8 eV and I do not understand the reason. I have attached the bandstructure graphs from Castep and from Abinit to this post.<br /><br />My procedure is as follows:<br /><br />-Fully relax the atomic positions and cell geometry.<br />-Enter the relaxed cell structure into a new file for the band structure calculation.<br />-Do a single point energy calculation to generate the wavefunctions.<br />-Get the electron density from the previous calculation and do a non self consistent calculation<br /><br />During the Band Structure calculation I do receive a few warnings regarding the hdr check. Specifcally:<br /><br />-P-0000  hdr_check: WARNING -<br />-P-0000   input nkpt=     190 not equal disk file nkpt=       5<br />-P-0000   symafm:    <br /><br />and<br /><br />-P-0000  hdr_check: WARNING -<br />-P-0000   Restart of self-consistent calculation need translated wavefunctions.<br />-P-0000   Indeed, critical differences between current calculation and<br />-P-0000   restart file have been detected in:<br />-P-0000         * the number, position, or weight of k-points<br />-P-0000         * the format of wavefunctions (istwfk)<br /><br /><br />I would be grateful if somebody could explain where I am making a mistake and how I can resolve the hdr_check warnings. I guess that my problem is related to these warnings.<br /><br />Thanks,<br />Rob<br /><br /><div class="inline-attachment">
+			
+				<dl class="thumbnail">
+			<dt><a href="download/file9f13.jpg?id=485&amp;mode=view"><img src="download/file71d1.jpg?id=485&amp;t=1" class="postimage" alt="Band Structure Calculated using Abinit" title="Abinit_Sb2Te3_042small.jpg (236.87 KiB) Viewed 5884 times" /></a></dt>
+			<dd> Band Structure Calculated using Abinit</dd>		</dl>
+		
+		
+		
+		
+			</div><div class="inline-attachment">
+			
+				<dl class="thumbnail">
+			<dt><a href="download/file9f13.jpg?id=485&amp;mode=view"><img src="download/file71d1.jpg?id=485&amp;t=1" class="postimage" alt="Band Structure Calculated using Abinit" title="Abinit_Sb2Te3_042small.jpg (236.87 KiB) Viewed 5884 times" /></a></dt>
+			<dd> Band Structure Calculated using Abinit</dd>		</dl>
+		
+		
+		
+		
+			</div><br />^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<br />^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<br />I am running:<br /><br />.Version 6.8.1  of ABINIT <br />.(MPI version, prepared for a x86_64_linux_gnu4.4 computer)<br /><br />^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<br />^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<br />My i/p file for relaxing the structure is:<br /><br />ndtset     2 # atom position and geom<br />ionmov     2  # move atoms   <br />optcell1   0<br />optcell2   2<br /><br />getxred  -1<br />getwfk   -1<br /><br />ntime    500       # Maximum number of optimization steps<br />nstep    200<br /><br />dilatmx   1.05     # Maximum scaling allowed for lattice parameters<br />ecutsm 0.5       # Energy CUToff SMearing<br /><br /># Structure<br />spgroup 166                 #Space Group (1=p1)<br />spgaxor 2<br />natom  5<br />natrd  3<br />ntypat 2                    #number of types of Atoms<br />znucl 51 52                 #Z-number of atom types Sb51, Te52<br /><br />typat      1  2  2<br />acell  10.60650792 10.60650792 10.60650792 angstroms<br />angdeg 23.48953218 23.48953218 23.48953218 <br />xred<br />  0.602824  0.602824  0.602824<br />  0.785568  0.785568  0.785568<br />  0         0         0<br /><br />kptrlen 200<br />brvltt -1<br />diemac 12.0<br />ecut  36    #from the convergence study <br />ixc 11 #GGA<br /><br />nband  20<br />nbdbuf 2<br />tolmxf   5.0d-9   <br />toldff   5.0d-10  <br /><br />occopt 3           #    Smearing of Bands<br />tsmear 0.001 Ha    #    Temperature of Smearing, 0.001 Ha = 27.2113845 meV = 315.773 Kelvin <br />prtcif 1<br />prtvol 2<br /><br />^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<br />^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<br />My Input file for calculating the band structure is:<br /><br />ndtset       2<br />ionmov       0 #Single point energy calc<br />optcell       0<br /><br />getxred2    -1<br />getwfk2    -1<br /><br />ecutsm       0.5<br />iscf            7    <br />npulayit     10<br /><br />nstep1       100   <br />nstep2       500<br /><br />prtden 1   getden1 0   getwfk1 0    ! Usual file handling data<br />prtcif 1<br />prtdos 1<br />prtvol 2  <br /><br />#Data common to all datasets<br /><br />###### STRUCTURE ######### <br />spgroup   166                 #Space Group (1=p1)<br />spgaxor   2             #Rhombohedral Lattice 2<br />natom     5<br />natrd     3<br />ntypat    2                    #number of types of Atoms<br />znucl     51 52                 #Z-number of atom types Sb51, Te52<br /><br />typat     1  2  2<br /><br />acell  10.60766 10.60766 10.60766 angstroms<br />angdeg 23.486 23.486 23.486 <br /><br />xred<br /> 0.602828  0.602828  0.602828<br /> 0.785558  0.785558  0.785558<br /> 0         0         0<br /><br />###### K points  #########<br />kptopt1 1<br />kptopt2 -4<br />ngkpt 10 10 10<br />nshiftk 1<br /><br />iscf2 -2<br />ndivk2 10 27 27 27<br />kptbounds2<br />0.0 0.0 0.0 # G point<br />0.5 0.5 0.5 # Z point<br />0.5 0.5 0.0 # F point<br />0.0 0.0 0.0 # G point<br />0.0 0.5 0.0 # L point<br /><br />brvltt -1<br /><br />diemac 12.0<br /> ecut 36<br /> ixc 11<br />#tnons 72*0.0<br /><br />####  Tolerances  #####<br />tolwfr2  1.e-24<br />tolmxf    5.0d-9<br />toldff    5.0d-10<br /><br />#####    BANDS    ######<br />nband        20<br />nbdbuf       2<br />occopt       3           #    Smearing of Bands<br />tsmear       0.001 Ha    #    Temperature of Smearing, 0.001 Ha = 27.2113845 meV = 315.773 Kelvin <br />getden2 -1<br />enunit2 1</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Band Structure Energy Shifted by 0.8 eV</h3>
+				<div class="date">Posted: <strong>Wed Dec 21, 2011 7:41 pm</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hello,<br /><br />I think that you did'nt align your Fermi level to 0 in the bandstructure from abinit, that's all <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":-)" title="Smile" /><br />I guess Castep does align the Fermi level to 0 automatically. Check the Fermi level in the output file or in the eigenvalue file of abinit it should be around 0.8 eV.<br /><br />David</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Band Structure Energy Shifted by 0.8 eV</h3>
+				<div class="date">Posted: <strong>Thu Dec 22, 2011 11:43 am</strong></div>
+				<div class="author">by <strong>robsimps</strong></div>
+				<div class="content">Dear David,<br />It seems you are correct. I checked my output file more carefully and I found the following line.<br /><br />Fermi (or HOMO) energy (hartree) =   0.03156   Average Vxc (hartree)=  -0.30991<br /><br />This equates to 0.86 eV. Do you know if there is an Abinit input parameter that will plot the band's energies relative to the Fermi level? I could bot find such a parameter. <br /><br />Thanks,<br />Rob</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Band Structure Energy Shifted by 0.8 eV</h3>
+				<div class="date">Posted: <strong>Thu Dec 22, 2011 12:11 pm</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Dear robsimps,<br /><br />I do know about any variable which would do smth like that, but you can do it by hand using awk from command line. You just take away the Fermi energy value from each band energy and k-point:<br /><br />awk '{print $1,$2-0.03156,$3-0.03156,$4-0.03156,....,$20-0.03156}' name_of_your_band_file &gt; name_of_your_shifted_band_file<br /><br />And then you plot the band structure from the shifted band file.<br /><br />Hope this helps.<br /><br />Igor L.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Band Structure Energy Shifted by 0.8 eV</h3>
+				<div class="date">Posted: <strong>Thu Dec 22, 2011 12:51 pm</strong></div>
+				<div class="author">by <strong>robsimps</strong></div>
+				<div class="content">Dear Igor. <br />Thank you, I will edit my Awk script to take care of the offset. <br /><br />Rob</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Band Structure Energy Shifted by 0.8 eV</h3>
+				<div class="date">Posted: <strong>Sun Feb 17, 2013 7:11 am</strong></div>
+				<div class="author">by <strong>mina</strong></div>
+				<div class="content">Dear robsimps,<br />i have calculated band structure of Bi2Te3.it is different from other papers,one of my problems is i don't have numbers on the axis of energy(eV) as i see this segments in your band plot.would you please tell me why i don't have this segments in energy axis in my plot?<br />Best regards.<br />Mina.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1474&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:36:06 GMT -->
+</html>

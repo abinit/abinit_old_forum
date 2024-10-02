@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1586&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:54:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Intel mkl library</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Intel mkl library</h2>
+		<p><a href="viewtopic1b15-2.html?f=3&amp;t=1586">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1586</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Intel mkl library</h3>
+				<div class="date">Posted: <strong>Tue Mar 27, 2012 5:45 am</strong></div>
+				<div class="author">by <strong>paulfons</strong></div>
+				<div class="content">I have compiled abinit under opensuse 11.4 using the intel compilers and openmpi without error.  I would like to use the intel mpi libraries I have (they are more efficient when used with Wien2K at least in my experience), but I am unsure how to go about doing so.  The problem stems from the intel naming convention for its mkl libraries.  The &quot;usual&quot; naming mpif90 and mpicc point within the intel mpi system use the gcc compilers.   There are alternative version of the mpi command for intel's mpi wrappers, namely mpiifort and mpiicc.  How can I get abinit to use these wrappers instead of the usual mpif90 wrappers which use the gcc compiler?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Intel mkl library</h3>
+				<div class="date">Posted: <strong>Tue Mar 27, 2012 9:00 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />I have not yet the opportunity to test the version of mph with Intel Composer XE 2011...<br /><br />but, in the &quot;Intel® Math Kernel Library Link Line Advisor&quot;   ( <!-- m --><a class="postlink" href="http://software.intel.com/en-us/articles/intel-mkl-link-line-advisor/">http://software.intel.com/en-us/article ... e-advisor/</a><!-- m -->),<br /><br />you can find all infos needed and among other things,  the compilation option to use with fort to activate the mph<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>-mkl=cluster </code></pre></div><br /><br />you must set the environment with :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>source /opt/intel/bin/compilervars.sh intel64</code></pre></div><br /><br /> to link with the right libraries and  you can even find the mpiexec :<br /><br /><blockquote class="uncited"><div>[beuken@tikal intel]# which mpiexec<br />/opt/intel/composer_xe_2011_sp1.7.256/mpirt/bin/intel64/mpiexec</div></blockquote><br /><br />good luck...<br /><br />regards<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Intel mkl library</h3>
+				<div class="date">Posted: <strong>Wed Mar 28, 2012 4:08 am</strong></div>
+				<div class="author">by <strong>paulfons</strong></div>
+				<div class="content">Thank you for your comments on use of the Intel mpi library.  I am afraid I was a little unclear, I am using the Intel already successfully (in particular with the Wien2K code --  and it appears to be more efficient than openmpi 1.4.3).  I thus know the correct flags (obtained from the linker helper you forwarded).  The problem I am facing is the configure of abinit.  How do I get it to use the ifort and icc compilers with mpi and not the gcc ones -- e.g. if one uses the ./configure --with-mpi-prefix=/opt/intel/impi/4.0.4/ option, abinit will compile with the gcc compilers (it doesn't know to use the mpiifort and mpiicc versions of the wrappers).  Is there a straightforward way to fix this with ./configure options?<br /><br />Thanks,<br />            Paul Fons</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Intel mkl library</h3>
+				<div class="date">Posted: <strong>Wed Mar 28, 2012 4:55 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">From Abinit 6.12.2, you may set --with-mpi-prefix and CC, CXX, FC at the same time. Just set the compilers to the executables you want the MPI wrappers to use. If your MPI installation allows it, which you can easily check by typing: <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>export FC=ifort; mpif90 -show</code></pre></div>, you'll be able to build Abinit with any kind of compiler.<br /><br />This new feature of the build system still lacks robustness, but I'm already using it successfully with the MPI implementation of Bull (I originally implemented this feature for this particular case).</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Intel mkl library</h3>
+				<div class="date">Posted: <strong>Thu Mar 29, 2012 1:16 am</strong></div>
+				<div class="author">by <strong>paulfons</strong></div>
+				<div class="content">Thank you for your post.  I shall give it a try.<br /><br />  Paul</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Intel mkl library compiled</h3>
+				<div class="date">Posted: <strong>Thu Mar 29, 2012 8:56 am</strong></div>
+				<div class="author">by <strong>paulfons</strong></div>
+				<div class="content">I tried the switches as suggested to specify the ifort and icc compilers and abinit 6.12.12 compiled without problems and passed all of the tests I have run so far.  Now if I could get the version for the mac working I would be happy.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1586&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:54:16 GMT -->
+</html>

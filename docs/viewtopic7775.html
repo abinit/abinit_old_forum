@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=266&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:19:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; difference:(nbandkss) and  (ecuteps Vs. ecutwfn)</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>difference:(nbandkss) and  (ecuteps Vs. ecutwfn)</h2>
+		<p><a href="viewtopic81b9.html?f=11&amp;t=266">https://forum.abinit.org/viewtopic.php?f=11&amp;t=266</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>difference:(nbandkss) and  (ecuteps Vs. ecutwfn)</h3>
+				<div class="date">Posted: <strong>Fri Apr 23, 2010 2:29 pm</strong></div>
+				<div class="author">by <strong>yuanxun</strong></div>
+				<div class="content">Dear  all:<br />Could someone give some explaination about the diferences between nbandkss and nband, also between ecuteps and ecutwfn?<br />From papers,it is not so obvious to find some information about the nbandkss except nband which control the empty band,also <br />it is no so easy to find some information about  ecutwfn except ecuteps which controls the dimension of  chi^0_KS.<br />Any idea would be great!<br /><br />Yuanxun</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: difference:(nbandkss) and  (ecuteps Vs. ecutwfn)</h3>
+				<div class="date">Posted: <strong>Mon Apr 26, 2010 10:26 am</strong></div>
+				<div class="author">by <strong>bruneval</strong></div>
+				<div class="content">Dear Yuanxun,<br /><br />nband is the number of bands to be used to calculate chi_0 if optdriver=3 or to calculate \Sigma_c if optdriver=4.<br />nbandkss is the number of bands to be stored in the wavefunction file called KSS file.<br />So that nband is always lower than nbandkss.<br /><br />ecutwfn is the cutoff energy used to truncate the wavefunction expansion in plane-waves. A good policy if your computer is fast enough is to constrain ecutwfn=ecut.<br /><br />regards,<br /><br />Fabien</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: difference:(nbandkss) and  (ecuteps Vs. ecutwfn)</h3>
+				<div class="date">Posted: <strong>Mon Apr 26, 2010 3:27 pm</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hello,<br /><br />One comment to Fabien's answer is that when you construct the KSS file in a ground state calculation (so with optdriver 0 instead of optdriver 3 or 4), the nband parameter is the number of bands you use in your ground state calculations (the states you want to define) and nbandkss is the number of bands you will store in the KSS file. Usually the last unoccupied bands are difficult to converge so you use nbandkss less than nband in this case and you set nbdbuf to the difference of the two.<br /><br />For example, you will use nband 30 with nbdbuf 4 and nbandkss 26 with some tolerance parameter that will be checked only on the first (nband - nbdbuf) bands to generate your KSS file.<br /><br />For the GW calculations, as Fabien said, nband is always less than nbandkss.<br /><br />David</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=266&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:19:47 GMT -->
+</html>

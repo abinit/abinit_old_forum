@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3101&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:48:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; make problems</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>make problems</h2>
+		<p><a href="viewtopicf4cd.html?f=3&amp;t=3101">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3101</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>make problems</h3>
+				<div class="date">Posted: <strong>Tue Sep 15, 2015 11:40 am</strong></div>
+				<div class="author">by <strong>evan</strong></div>
+				<div class="content"><strong class="text-strong">Dear all, <br /><br />When I am compiling the newest version code of abinit 7.10.4, getting the errors followed below,</strong><br /><br />../../src/41_xc_lowlevel/lib41_xc_lowlevel.a(libxc_tools.o): In function `xc_f90_functional_get_name_':<br />/export1/home/maofei/src/abinit-7.10.4/src/41_xc_lowlevel/libxc_tools.c:41: undefined reference to `xc_functional_get_name'<br />../../src/41_xc_lowlevel/lib41_xc_lowlevel.a(libxc_tools.o): In function `xc_f90_functional_get_number_':<br />/export1/home/maofei/src/abinit-7.10.4/src/41_xc_lowlevel/libxc_tools.c:60: undefined reference to `xc_functional_get_number'<br />make[3]: *** [abinit] Error 1<br />make[3]: Leaving directory `/export1/home/maofei/src/abinit-7.10.4/src/98_main'<br />make[2]: *** [all-recursive] Error 1<br />make[2]: Leaving directory `/export1/home/maofei/src/abinit-7.10.4/src'<br />make[1]: *** [all-recursive] Error 1<br />make[1]: Leaving directory `/export1/home/maofei/src/abinit-7.10.4'<br />make: *** [all] Error 2<br /><br /><strong class="text-strong">The fortran compile is intel 13.1, FFTW-3.22. Actually, I have tried with several versions of ifort (ifort 11.1, ifort 15.0), but the same errors are always here. I don’t think this problem has anything to do with the fortran compiler.<br /><br />So, what is cause for the error and how to fix it. Any comment or suggestion is appreciated.<br /><br />Regards<br />Evan<br />USC </strong></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: make problems</h3>
+				<div class="date">Posted: <strong>Tue Sep 15, 2015 8:41 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">the problem is related to the libxc library...<br /><br />are you sure that the libxc is well compiled ?<br /><br />I see that you specified the location of a libxc library :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--with-libxc-incs=-I/export1/home/maofei/opt/lixc-2.02/include <br />--with-libxc-libs=-L/export1/home/maofei/opt/lixc-2.02/lib&nbsp; -lxc<br /></code></pre></div><br /><br />is it compiled with the same version of compiler and with the same options ?!?<br /><br />firstly, try with :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure --prefix=/export1/home/maofei/opt/abinit_v7.10/sopt2 \<br />FC=ifort CC=icc CXX=icpc \<br />--with-linalg-flavor=mkl --with-linalg-libs=-L/export1/home/maofei/intel13/composer_xe_2013.5.192/mkl/lib/intel64 -Wl,--start-group -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group \<br />--with-trio-flavor=netcdf+etsf_io \<br />--with-dft-flavor=libxc</code></pre></div><br /><br />jmb</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3101&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:48:44 GMT -->
+</html>

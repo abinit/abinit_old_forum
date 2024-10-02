@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1761&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:55:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] error install in opensuse 11.3</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] error install in opensuse 11.3</h2>
+		<p><a href="viewtopicb8f8-2.html?f=3&amp;t=1761">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1761</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] error install in opensuse 11.3</h3>
+				<div class="date">Posted: <strong>Thu Jul 19, 2012 1:32 am</strong></div>
+				<div class="author">by <strong>arsyik</strong></div>
+				<div class="content">Dear all<br />i have tried abinit in windows version, it's works fine.<br />now i want try in linux version (opensuse11.3)<br />after make tmp folder and type ../configure<br />i got this error<br /><br />arsyik@linux-cybg:~/abinit/tmp-build&gt; ../configure <br /><br /> ==============================================================================<br /> === Overall startup                                                        ===<br /> ==============================================================================<br /><br />checking build system type... x86_64-unknown-linux-gnu<br />checking host system type... x86_64-unknown-linux-gnu<br />checking target system type... x86_64-unknown-linux-gnu<br />checking for a BSD-compatible install... /usr/bin/install -c<br />checking whether build environment is sane... yes<br />checking for a thread-safe mkdir -p... /bin/mkdir -p<br />checking for gawk... gawk<br />checking whether make sets $(MAKE)... yes<br />checking whether make sets $(MAKE)... (cached) yes<br />checking whether ln -s works... yes<br />checking for a sed that does not truncate output... /usr/bin/sed<br />checking for gawk... (cached) gawk<br />checking for grep that handles long lines and -e... /usr/bin/grep<br />checking for egrep... /usr/bin/grep -E<br />configure: not loading options (no config file available)<br /><br /> ==============================================================================<br /> === Build-system information                                               ===<br /> ==============================================================================<br /><br />configure: ABINIT version 6.12.3<br />configure: M4 010416 - Autoconf 026800 - Automake 011100 - Libtool 020204<br />configure: reporting user interface changes:<br />configure:  * new option --enable-gui is available<br />configure:  * new option --enable-gw-openmp is available<br />configure:  * new option --with-algo-flavor is available<br />configure:  * new option --with-algo-incs is available<br />configure:  * new option --with-algo-libs is available<br />configure:  * --with-fallbacks-tardir removed<br /><br /> ==============================================================================<br /> === Option consistency checking                                            ===<br /> ==============================================================================<br /><br />configure: checking consistency of library-related options<br />configure:  |---&gt; all OK<br />configure: <br />configure: checking consistency of experimental options<br />configure:  |---&gt; all OK<br />configure: <br />configure:  |---&gt; all OK<br />configure: <br />configure: parsing command-line options<br /><br /> ==============================================================================<br /> === Multicore architecture startup                                         ===<br /> ==============================================================================<br /><br />configure: MPI support disabled from command-line<br />configure: GPU support disabled from command-line<br /><br /> ==============================================================================<br /> === Utilities                                                              ===<br /> ==============================================================================<br /><br />checking for sh... /usr/bin/sh<br />checking for mv... /bin/mv<br />checking for perl... /usr/bin/perl<br />checking for rm... /bin/rm<br />checking for patch... patch<br />checking for tar... tar<br /><br /> ==============================================================================<br /> === C support                                                              ===<br /> ==============================================================================<br /><br />checking for gcc... gcc<br />checking whether the C compiler works... yes<br />checking for C compiler default output file name... a.out<br />checking for suffix of executables... <br />checking whether we are cross compiling... no<br />checking for suffix of object files... o<br />checking whether we are using the GNU C compiler... yes<br />checking whether gcc accepts -g... yes<br />checking for gcc option to accept ISO C89... none needed<br />checking for style of include used by make... GNU<br />checking dependency style of gcc... gcc3<br />checking how to run the C preprocessor... /lib/cpp<br />configure: error: in `/home/arsyik/abinit/tmp-build':<br />configure: error: C preprocessor &quot;/lib/cpp&quot; fails sanity check<br />See `config.log' for more details<br /><br />how to fix it? <br />thanks<br /><br />regards<br />arsyik</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: error install in opensuse 11.3</h3>
+				<div class="date">Posted: <strong>Fri Jul 20, 2012 11:06 am</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Looks like your system is lacking basic kernel headers. There should be a package that when installed will bring the missing C header files. Under Debian the packages are called <em class="text-italics">linux-headers</em> and <em class="text-italics">linux-source</em>, but I don't know for SuSE.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: error install in opensuse 11.3</h3>
+				<div class="date">Posted: <strong>Tue Jul 24, 2012 8:35 am</strong></div>
+				<div class="author">by <strong>arsyik</strong></div>
+				<div class="content">Thanks for your reply,<br />Ok. now i'm using another version but still opensuse,<br />and follow command <br />../configure<br />make<br />make install<br /><br />after long time waiting while install<br />and appear this error.<br /><br />make[3]: Entering directory `/home/arsyik/abinit/build/src/95_drive'<br /><strong class="text-strong">make[3]: Nothing to be done for `install-exec-am'.     <br />make[3]: Nothing to be done for `install-data-am'.</strong>  ------&gt;&gt;&gt; Frequently appear<br />make[3]: Leaving directory `/home/arsyik/abinit/build/src/95_drive'<br />make[2]: Leaving directory `/home/arsyik/abinit/build/src/95_drive'<br />Making install in 98_main<br />make[2]: Entering directory `/home/arsyik/abinit/build/src/98_main'<br />.......<br /><br /><br />make[3]: Entering directory `/home/arsyik/abinit/build/src/98_main'<br />test -z &quot;/usr/local/bin&quot; || /bin/mkdir -p &quot;/usr/local/bin&quot;<br />  /usr/bin/install -c abinetcdf abinit aim anaddb band2eps conducti cut3d fftprof kss2wfk lwf mrgddb mrggkk mrgscr newsp optic ujdet macroave '/usr/local/bin'<br />/usr/bin/install: cannot create regular file `/usr/local/bin/abinetcdf': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/abinit': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/aim': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/anaddb': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/band2eps': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/conducti': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/cut3d': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/fftprof': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/kss2wfk': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/lwf': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/mrgddb': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/mrggkk': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/mrgscr': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/newsp': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/optic': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/ujdet': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/macroave': Permission denied<br />make[3]: *** [install-binPROGRAMS] Error 1<br />make[3]: Leaving directory `/home/arsyik/abinit/build/src/98_main'<br />make[2]: *** [install-am] Error 2<br />make[2]: Leaving directory `/home/arsyik/abinit/build/src/98_main'<br />make[1]: *** [install-recursive] Error 1<br />make[1]: Leaving directory `/home/arsyik/abinit/build/src'<br />make: *** [install-recursive] Error 1<br />arsyik@linux-umlz:~/abinit/build&gt; <br /><br />Can anyone help me and explain why?<br /><br />Thanks in advance!<br /><br />arsyik</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: error install in opensuse 11.3</h3>
+				<div class="date">Posted: <strong>Thu Jul 26, 2012 5:31 am</strong></div>
+				<div class="author">by <strong>arsyik</strong></div>
+				<div class="content">I'm sorry, t think my problem is solved, after type sudo make install , and it's successed.<br />now i can run well.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1761&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:55:13 GMT -->
+</html>

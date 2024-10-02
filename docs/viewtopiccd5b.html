@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3426&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:23:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; How do calc magnetization of each orbital for atoms?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>How do calc magnetization of each orbital for atoms?</h2>
+		<p><a href="viewtopicd7e1.html?f=9&amp;t=3426">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3426</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>How do calc magnetization of each orbital for atoms?</h3>
+				<div class="date">Posted: <strong>Tue Nov 15, 2016 6:55 am</strong></div>
+				<div class="author">by <strong>ucsdmavrl</strong></div>
+				<div class="content">Dear Abinit developers and users,<br /><br />I am wondering if there is a param in ABINIT governing the printing of magnetization of each orbital for atoms for a chemical system. For example, for SrFeO3, I would like to know the magnetization is from Fe 3d state, not the s/p orbitals of Fe and s/p orbitals of Sr and O.<br /><br />Could you pls instruct me how to set the params to print the information in ABINIT? <br /><br />Thank you very much,<br />Ben</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How do calc magnetization of each orbital for atoms?&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Tue Nov 15, 2016 11:47 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Ben,<br />If you use DFT+U then you can get the magnetisation of the Fe-d shell you are correcting something as follows in the output:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;---------- LDA+U DATA ---------------------------------------------------<br /><br />&nbsp;====== For Atom&nbsp; &nbsp; &nbsp;1, occupations for correlated orbitals. lpawu =&nbsp; &nbsp;2<br /><br />&nbsp;Atom&nbsp; &nbsp;1. Occ. for lpawu and for spin&nbsp; 1 =&nbsp; &nbsp;4.73580<br />&nbsp;Atom&nbsp; &nbsp;1. Occ. for lpawu and for spin&nbsp; 2 =&nbsp; &nbsp;1.04969<br />&nbsp;=&gt; On atom&nbsp; &nbsp;1,&nbsp; local Mag. for lpawu is&nbsp; &nbsp; &nbsp; &nbsp;-3.686102<br /></code></pre></div><br /><br />Here the magnetisation is -3.686102 for the d-electrons of atom 1 on which I have applied a U correction.<br />In your case I guess you are going to apply a U on the Fe-d, such as you can get the magnetic moment of d only through the DFT+U output as show above in my example.<br />Let me know if this OK with what you wanted.<br />In the future the magnetisation per orbital will printed for each atom but it is on a To Do list...<br /><br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How do calc magnetization of each orbital for atoms?</h3>
+				<div class="date">Posted: <strong>Tue Nov 15, 2016 7:54 pm</strong></div>
+				<div class="author">by <strong>ucsdmavrl</strong></div>
+				<div class="content">Hi Eric,<br /><br />This is exactly what I want. Great thanks for your kind help.<br /><br />Best,<br />Ben</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3426&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:23:55 GMT -->
+</html>

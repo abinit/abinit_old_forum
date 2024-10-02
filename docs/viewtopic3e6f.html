@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2387&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:22:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Configuration error on 7.4.3.</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Configuration error on 7.4.3.</h2>
+		<p><a href="viewtopic36bf.html?f=3&amp;t=2387">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2387</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Configuration error on 7.4.3.</h3>
+				<div class="date">Posted: <strong>Mon Jan 13, 2014 12:42 pm</strong></div>
+				<div class="author">by <strong>schopra1980</strong></div>
+				<div class="content">Dear Sir,<br />I was installing Parallel (SMP) version of ABINIT-7.4.3. I finished the installation with the following error. I am providing the config.log file too. Please help me. I am new to ABINIT.<br /><br /> ==============================================================================<br /> === Multicore architecture support                                         ===<br /> ==============================================================================<br /><br />checking whether to enable OpenMP support... no<br />checking whether to build MPI code... yes<br />checking whether the C compiler supports MPI... no<br />checking whether the C++ compiler supports MPI... no<br />checking whether the Fortran Compiler supports MPI... no<br />checking whether MPI is usable... no<br />configure: error: MPI support is broken - please fix your config parameters and/or MPI installation<br /><br /><br />Sir, I am not pretty much clear about the MPI concept. Please help me. I have i3 processor, 2.2GHz (4 cores), 500GB HDD and 2GB RAM.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configuration error on 7.4.3.</h3>
+				<div class="date">Posted: <strong>Fri Jan 17, 2014 12:23 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Please install MPI (e.g. OpenMPI or MPICH) first, and then use the --with-mpi-prefix=/path/to/mpi/installation to tell the build system where MPI is. If you installed it through a package manager, usually --with-mpi-prefix=/usr will do.<br /><br />For more information, please see the forum rules above which contain a link to a tutorial video.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configuration error on 7.4.3.</h3>
+				<div class="date">Posted: <strong>Tue Jan 28, 2014 8:41 am</strong></div>
+				<div class="author">by <strong>schopra1980</strong></div>
+				<div class="content">Dear Sir,<br />My system had crashed when I Was trying to enable GPU support for ABINIT.. I installed a wrong driver. Now I have started afresh and installing ABINIT 7.6.1. Please find the config.log file and also the MAKE ERROR file. Sir, as per your guidance I successfully passed over the configuration, BUT now facing problems with MAKE.. <br />The following error creeps in:<br /><br /> required = MPI_THREAD_SINGLE<br />                             1<br />Error: Symbol 'mpi_thread_single' at (1) has no IMPLICIT type<br />make[3]: *** [m_xmpi.o] Error 1<br />make[3]: Leaving directory `/usr/local/lib/abinit-7.6.1/src/12_hide_mpi'<br />make[2]: *** [all-recursive] Error 1<br />make[2]: Leaving directory `/usr/local/lib/abinit-7.6.1/src'<br />make[1]: *** [all-recursive] Error 1<br />make[1]: Leaving directory `/usr/local/lib/abinit-7.6.1'<br />make: *** [all] Error 2<br /><br />Sir, I used the following configure command:<br />./configure --enable-mpi --enable-openmp --enable-mpi-fft --enable-mpi-io --enable-mpi-trace --with-mpi-prefix=/usr/lib/mpich<br /><br />I hve installed all &quot;OPENMPI&quot;, MPICH and MPICH2 through synaptic... I am unsure about openmpi version. I tried first with openmpi, but it gave some problems and so I moved onto MPICH. It worked/configured ABINIT very well. But during make gave me the above error.<br />Sir I have a i3 processor with 2.2 GHz, 2GB RAM, 500GB HDD, with 32 bit Linux mint 15. Can I enable 64 bit support on my 32 bit OS? Will it boost the computation speeds keeping in mind my laptop configuration?  Also can I find I-V characteristics of a electrode-sample-electrode system using ABINTI 7.6.1? Sorry for asking this question here. <br />Thanks in advance.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configuration error on 7.4.3.</h3>
+				<div class="date">Posted: <strong>Thu Jan 30, 2014 1:34 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">A 64-bit system is interesting only if you have 4Gb or more of memory. In your case, a 32-bit system is thus fairly enough and is probably not the cause of your problem. Regarding the error you get at build time, the config.log did not give me any useful information to pinpoint the origin. You could retry without the --enable-openmp option, in order to see whether this is a MPI-specific issue or a problem in mixing different kinds of parallelism.<br /><br />As far as GPU is concerned, the current implementation is limited to nVidia cards with Cuda, and is meant for developers with some experience in GPU debugging. In any case, even if you manage to have it working, you will probably not see a big difference over OpenMP / MPI.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configuration error on 7.4.3.</h3>
+				<div class="date">Posted: <strong>Thu Jan 30, 2014 2:18 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content"><blockquote class="uncited"><div>./configure --enable-mpi --enable-openmp --enable-mpi-fft --enable-mpi-io --enable-mpi-trace --with-mpi-prefix=/usr/lib/mpich<br /></div></blockquote><br /><br />Remove --enable-openmp, you need a MPI library that implements the MPI2 specifications if you want to mix MPI and OpenMp<br /><br />@Yann:<br />It seems that in v7.7.1, HAVE_MPI_TRACE is not used anymore! Do you know who introduced this CPP option?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configuration error on 7.4.3.</h3>
+				<div class="date">Posted: <strong>Mon Feb 03, 2014 5:11 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">I introduced the --enable-mpi-trace option upon request from CEA in June 2009. If nobody use it anymore, I'll be happy to remove it.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configuration error on 7.4.3.&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Tue Feb 04, 2014 11:46 am</strong></div>
+				<div class="author">by <strong>schopra1980</strong></div>
+				<div class="content">Dear Pouillon Sir,<br />I apologize for asking same question in two threads. Regarding my question, I am happy to inform you that I have succeeded in compiling the ABINIT-7.6.1 parallel build. <br />The problem seemed to be with the MPICH, OPENMPI installed using the Synaptic manager. I could not get them working. So I finally downloaded the source code of MPICH-3.0.4 from internet and compiled it myself. Then the ABINIT installed very well. Only one trick I did here was that I copied the mpi compiler files to a self made folder &quot;bin&quot; inside /usr/lib/mpich-3.0.4. Then the compilation finished successfully.<br />I would be gratful if you could provide me a PDF file to ABINIT commands or the full manual.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configuration error on 7.4.3.</h3>
+				<div class="date">Posted: <strong>Tue Feb 04, 2014 11:47 am</strong></div>
+				<div class="author">by <strong>schopra1980</strong></div>
+				<div class="content">Dear Pouillon Sir,<br />I apologize for asking same question in two threads. Regarding my question, I am happy to inform you that I have succeeded in compiling the ABINIT-7.6.1 parallel build. <br />The problem seemed to be with the MPICH, OPENMPI installed using the Synaptic manager. I could not get them working. So I finally downloaded the source code of MPICH-3.0.4 from internet and compiled it myself. Then the ABINIT installed very well. Only one trick I did here was that I copied the mpi compiler files to a self made folder &quot;bin&quot; inside /usr/lib/mpich-3.0.4. Then the compilation finished successfully. I am attaching the config.log file.<br />I would be gratful if you could provide me a PDF file to ABINIT commands or the full manual.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configuration error on 7.4.3.</h3>
+				<div class="date">Posted: <strong>Tue Feb 04, 2014 5:38 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">For the manual and more: <!-- m --><a class="postlink" href="http://www.abinit.org/documentation">http://www.abinit.org/documentation</a><!-- m --></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2387&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:22:04 GMT -->
+</html>

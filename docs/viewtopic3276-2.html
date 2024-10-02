@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1463&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:43:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; WFK file cannot be used during phonon calculations</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>WFK file cannot be used during phonon calculations</h2>
+		<p><a href="viewtopic7972.html?f=10&amp;t=1463">https://forum.abinit.org/viewtopic.php?f=10&amp;t=1463</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>WFK file cannot be used during phonon calculations</h3>
+				<div class="date">Posted: <strong>Sat Dec 10, 2011 5:56 am</strong></div>
+				<div class="author">by <strong>vistawanted</strong></div>
+				<div class="content">Dear all:<br />I am new to use Abinit for phonon calculations. However, when I tried the tutorial of tr2_1, it failed at the begining of data set 4 as:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>-inwffil : will read wavefunctions from disk file AlAs.o_DS1_WFK<br />application called MPI_Abort(MPI_COMM_WORLD, 13) - process 3<br />application called MPI_Abort(MPI_COMM_WORLD, 13) - process 1<br />-P-0000<br />-P-0000&nbsp; inwffil: ERROR<br />-P-0000&nbsp; &nbsp;The file AlAs.o_DS1_WFK cannot be used to start the<br />-P-0000&nbsp; &nbsp;present calculation. It was asked that the wavefunctions be accurate, but<br />-P-0000&nbsp; &nbsp;at least one of the k points could not be generated from a symmetrical one.<br />-P-0000&nbsp; &nbsp;dksqmax=&nbsp; &nbsp; 6.662397E-05<br />-P-0000&nbsp; &nbsp;Action: check your wf file and k point input variables<br />-P-0000&nbsp; &nbsp; &nbsp;(e.g. kptopt or shiftk might be wrong in the present dataset or the preparatory one.<br /></code></pre></div><br />The pseudopotential I used is HGH, and the input file has been changed a little for better result:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># Crystalline AlAs : computation of the phonon spectrum<br /><br />&nbsp; &nbsp;ndtset&nbsp; &nbsp;10<br />#Set 1 : ground state self-consistency<br /><br />&nbsp; getwfk1&nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Cancel default<br />&nbsp; kptopt1&nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Automatic generation of k points, taking<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# into account the symmetry<br />&nbsp; &nbsp; nqpt1&nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Cancel default<br />&nbsp; tolvrs1&nbsp; &nbsp;1.0d-18&nbsp; &nbsp; &nbsp; # SCF stopping criterion (modify default)<br />&nbsp; rfphon1&nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Cancel default<br />&nbsp;<br />#Q vectors for all datasets<br /><br />&nbsp; &nbsp; &nbsp;nqpt&nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # One qpt for each dataset (only 0 or 1 allowed)<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# This is the default for all datasets and must<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;#&nbsp; be explicitly turned off for dataset 1.<br /><br />&nbsp; &nbsp; &nbsp;qpt2&nbsp; &nbsp;0.00000000E+00&nbsp; 0.00000000E+00&nbsp; 0.00000000E+00<br />&nbsp; &nbsp; &nbsp;qpt3&nbsp; &nbsp;0.00000000E+00&nbsp; 0.00000000E+00&nbsp; 0.00000000E+00<br />&nbsp; &nbsp; &nbsp;qpt4&nbsp; &nbsp;2.50000000E-01&nbsp; 0.00000000E+00&nbsp; 0.00000000E+00<br />&nbsp; &nbsp; &nbsp;qpt5&nbsp; &nbsp;5.00000000E-01&nbsp; 0.00000000E+00&nbsp; 0.00000000E+00<br />&nbsp; &nbsp; &nbsp;qpt6&nbsp; &nbsp;2.50000000E-01&nbsp; 2.50000000E-01&nbsp; 0.00000000E+00<br />&nbsp; &nbsp; &nbsp;qpt7&nbsp; &nbsp;5.00000000E-01&nbsp; 2.50000000E-01&nbsp; 0.00000000E+00<br />&nbsp; &nbsp; &nbsp;qpt8&nbsp; -2.50000000E-01&nbsp; 2.50000000E-01&nbsp; 0.00000000E+00<br />&nbsp; &nbsp; &nbsp;qpt9&nbsp; &nbsp;5.00000000E-01&nbsp; 5.00000000E-01&nbsp; 0.00000000E+00<br />&nbsp; &nbsp; &nbsp;qpt10 -2.50000000E-01&nbsp; 5.00000000E-01&nbsp; 2.50000000E-01<br /><br />#Set 2 : Response function calculation of d/dk wave function <br /><br />&nbsp; &nbsp; iscf2&nbsp; &nbsp;-3&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# Need this non-self-consistent option for d/dk<br />&nbsp; kptopt2&nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Modify default to use time-reversal symmetry<br />&nbsp; rfphon2&nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Cancel default<br />&nbsp; rfelfd2&nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Calculate d/dk wave function only<br />&nbsp; tolwfr2&nbsp; &nbsp;1.0d-22&nbsp; &nbsp; # Use wave function residual criterion instead<br /><br />#Set 3 : Response function calculation of Q=0 phonons and electric field pert.<br /><br />&nbsp; getddk3&nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # d/dk wave functions from last dataset<br />&nbsp; kptopt3&nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Modify default to use time-reversal symmetry<br />&nbsp; rfelfd3&nbsp; &nbsp;3&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Electric-field perturbation response only<br /><br />#Sets 4-10 : Finite-wave-vector phonon calculations (defaults for all datasets)<br /><br />&nbsp; &nbsp;getwfk&nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Use GS wave functions from dataset1<br />&nbsp; &nbsp;kptopt&nbsp; &nbsp;3&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Need full k-point set for finite-Q response<br />&nbsp; &nbsp;rfphon&nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Do phonon response<br />&nbsp; rfatpol&nbsp; &nbsp;1 2&nbsp; &nbsp; &nbsp; &nbsp; # Treat displacements of all atoms<br />&nbsp; &nbsp; rfdir&nbsp; &nbsp;1 1 1&nbsp; &nbsp; &nbsp; # Do all directions (symmetry will be used)<br />&nbsp; &nbsp;tolvrs&nbsp; &nbsp;1.0d-8&nbsp; &nbsp; &nbsp;# This default is active for sets 3-10<br /><br />#######################################################################<br />#Common input variables<br /><br />#Definition of the unit cell<br />&nbsp; &nbsp; acell&nbsp; &nbsp;3*10.61&nbsp; &nbsp; &nbsp; &nbsp; <br />&nbsp; &nbsp; rprim&nbsp; &nbsp;0.0&nbsp; 0.5&nbsp; 0.5&nbsp; &nbsp; <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.5&nbsp; 0.0&nbsp; 0.5&nbsp; &nbsp; <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.5&nbsp; 0.5&nbsp; 0.0&nbsp; &nbsp;<br /><br />#Definition of the atom types<br />&nbsp; &nbsp;ntypat&nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />&nbsp; &nbsp; znucl&nbsp; &nbsp;13 33&nbsp; &nbsp; &nbsp;<br /><br />#Definition of the atoms<br />&nbsp; &nbsp; natom&nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />&nbsp; &nbsp; typat&nbsp; &nbsp;1 2&nbsp; &nbsp; &nbsp; <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />&nbsp; &nbsp; &nbsp;xred&nbsp; &nbsp;0.0&nbsp; 0.0&nbsp; 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.25 0.25 0.25&nbsp; <br /><br />#Gives the number of band, explicitely (do not take the default)<br />&nbsp; &nbsp; nband&nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br /><br />#Exchange-correlation functional<br /><br />&nbsp; &nbsp; &nbsp; ixc&nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# LDA Teter Pade parametrization<br /><br />#Definition of the planewave basis set<br /><br />&nbsp; &nbsp; &nbsp;ecut&nbsp; &nbsp;15.0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# Maximal kinetic energy cut-off, in Hartree<br /><br />#Definition of the k-point grid<br />&nbsp; &nbsp; ngkpt&nbsp; &nbsp;5&nbsp; 5&nbsp; 5&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />&nbsp; nshiftk&nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Use one copy of grid only (default)<br />&nbsp; &nbsp;shiftk&nbsp; &nbsp;0.0 0.0 0.5&nbsp; &nbsp; # This gives the usual fcc Monkhorst-Pack grid<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0 0.5 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.5 0.0 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.5 0.5 0.5<br /><br />#Definition of the SCF procedure<br />&nbsp; &nbsp; &nbsp;iscf&nbsp; &nbsp;7&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Self-consistent calculation, using algorithm 5<br />&nbsp; &nbsp; nstep&nbsp; &nbsp;100&nbsp; &nbsp; &nbsp; &nbsp; # Maximal number of SCF cycles<br />&nbsp; &nbsp;diemac&nbsp; &nbsp;9.0&nbsp; &nbsp; &nbsp; &nbsp; # Although this is not mandatory, it is worth to<br /><br />&nbsp;optforces 1<br /></code></pre></div><br />The version of Abinit is 6.10.2, compiled by mpif90, which was compiled by ifort 2011. My OS is CentOS 6.0 x86_64, running on AMD phenom II x6 &amp; 16GB platform.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: WFK file cannot be used during phonon calculations</h3>
+				<div class="date">Posted: <strong>Sat Dec 10, 2011 11:41 am</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">I think the problem may be that you have changed ngkpt to 5 5 5 but you did not change qpt accordingly.    abinit at least works best and may even require that the qpt in a phonon calculation be the difference of two kpts in the scf calculation. If you change ngkpt then you should first do a run where you set nshiftk to 1 and shiftk to 0 0 0, to get the list of kpts which are appropriate to use as q pts (this procedure is more fully described in the documentation).</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: WFK file cannot be used during phonon calculations</h3>
+				<div class="date">Posted: <strong>Sun Dec 11, 2011 6:17 am</strong></div>
+				<div class="author">by <strong>vistawanted</strong></div>
+				<div class="content"><blockquote><div><cite>jzwanzig wrote:</cite>I think the problem may be that you have changed ngkpt to 5 5 5 but you did not change qpt accordingly.    abinit at least works best and may even require that the qpt in a phonon calculation be the difference of two kpts in the scf calculation. If you change ngkpt then you should first do a run where you set nshiftk to 1 and shiftk to 0 0 0, to get the list of kpts which are appropriate to use as q pts (this procedure is more fully described in the documentation).</div></blockquote><br />Thank you, Prof. Zwanziger, for your kindly reply.<br />I have tested the problem for several times and finally found such problem were caused by the mismatch between k-points and q-points.<br />Up to now, I think if we wanna calculate phonon at <span style="color: red"> x y z </span> q-mesh, the k-points have to be setted as <span style="color: red">mx ny iz</span> grid, where m, n, and i are integer. And the <span style="color: red"> x y z </span> q-mesh could be obtained through <span style="color: red"> x y z </span> MP-k points calculation.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1463&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:43:16 GMT -->
+</html>

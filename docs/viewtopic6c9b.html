@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3290&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:28:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; The calculation was held when I calculate the elphon</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>The calculation was held when I calculate the elphon</h2>
+		<p><a href="viewtopic0733.html?f=10&amp;t=3290">https://forum.abinit.org/viewtopic.php?f=10&amp;t=3290</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>The calculation was held when I calculate the elphon</h3>
+				<div class="date">Posted: <strong>Tue May 31, 2016 3:12 am</strong></div>
+				<div class="author">by <strong>shaoziji</strong></div>
+				<div class="content">Dear all,<br />I am a beginer of abinit and I met some problems while doing the elphon.<br />I did the electron-phonon calculation and when I run the calculation by anaddb , the log file showed that :<br />================================================================================<br /><br /> Calculation of the interatomic forces<br /><br />-begin at tcpu      0.099  and twall      0.446 sec<br />       Simple Lattice Grid<br /> mkifc9 : will extract the dipole-dipole part,<br /> using ewald9, q0dy3 and nanal9 for every wavevector.<br /><br />and the calculation was held and didn't go on . The input file of the first step I used was telphon_1.in provided by abinit-6.4.2 and the input files of anaddb step above was the below one<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># turn on calculation of the electron-phonon quantities<br />elphflag 1<br /><br />telphint 0 #Technique for ELectron-PHonon INTegration Default:1<br /><br /># Minimalistic kpoint grid - needed for tetrahedron method<br />kptrlatt 24 0 0&nbsp; 0 24 0&nbsp; 0 0 24 #K PoinT Reciprocal LATTice Default:9*0<br /><br />elphsmear 0.01&nbsp; &nbsp;# This input variable is not relevant in the tetrahedron method case<br /><br />mustar 0.1<br />nqpath 6&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;#Number of Q wavevectors defining a PATH Default : 0<br /><br />qpath&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; #Q wavevectors defining a PATH Default : qpath(:,:)=0.0<br /><br />&nbsp;0.0 0.0 0.0&nbsp; &nbsp; &nbsp;#G<br />&nbsp;1/2 1/2 1/2&nbsp; &nbsp; &nbsp;#H<br />&nbsp;0.0 0.0 1/2&nbsp; &nbsp; &nbsp;#N<br />&nbsp;1/4 1/4 1/4&nbsp; &nbsp; &nbsp;#P<br />&nbsp;0.0 0.0 0.0&nbsp; &nbsp; &nbsp;#G<br />&nbsp;0.0 0.0 1/2&nbsp; &nbsp; &nbsp;#N<br />prtdos&nbsp; 1<br />ng2qpt 12 12 12<br />prtnest 1&nbsp; &nbsp; &nbsp; &nbsp; # print the nesting function along the q-path specified by qpath<br /># Minimalistic qpoint grid<br />ngqpt 4 4 4<br />#&nbsp; impose acoustic sum rule in a symmetric way<br />asr 1<br />dipdip 1<br />chneut&nbsp; &nbsp;1<br />#&nbsp; bravais lattice necessary<br />brav 1<br /># qpt grid<br />nqshft 1<br />q1shft 0.0 0.0 0.0<br />#<br />ifcflag 1<br />ifcana 1<br />#&nbsp; ifc for all atoms?<br />natifc 0<br />atifc 1 2 3<br />#&nbsp; print dielectric matrix with freq dependence<br />dieflag 0<br />#&nbsp; print out eigenvectors and symmetrize dyn matrix<br />eivec 4<br />#Wavevector list number 1 (Reduced coordinates and normalization factor)<br />nph1l 26<br />qph1l<br />&nbsp; 0.000000&nbsp; 0.000000&nbsp; 0.000000&nbsp; 1.00<br />&nbsp; 0.100000 -0.100000&nbsp; 0.100000&nbsp; 1.00<br />&nbsp; 0.200000 -0.200000&nbsp; 0.200000&nbsp; 1.00<br />&nbsp; 0.300000 -0.300000&nbsp; 0.300000&nbsp; 1.00<br />&nbsp; 0.400000 -0.400000&nbsp; 0.400000&nbsp; 1.00<br />&nbsp; 0.500000 -0.500000&nbsp; 0.500000&nbsp; 1.00<br />&nbsp; 0.400000 -0.400000&nbsp; 0.500000&nbsp; 1.00<br />&nbsp; 0.300000 -0.300000&nbsp; 0.500000&nbsp; 1.00<br />&nbsp; 0.200000 -0.200000&nbsp; 0.500000&nbsp; 1.00<br />&nbsp; 0.100000 -0.100000&nbsp; 0.500000&nbsp; 1.00<br />&nbsp; 0.000000 -0.000000&nbsp; 0.500000&nbsp; 1.00<br />&nbsp; 0.050000&nbsp; 0.050000&nbsp; 0.450000&nbsp; 1.00<br />&nbsp; 0.100000&nbsp; 0.100000&nbsp; 0.400000&nbsp; 1.00<br />&nbsp; 0.150000&nbsp; 0.150000&nbsp; 0.350000&nbsp; 1.00<br />&nbsp; 0.200000&nbsp; 0.200000&nbsp; 0.300000&nbsp; 1.00<br />&nbsp; 0.250000&nbsp; 0.250000&nbsp; 0.250000&nbsp; 1.00<br />&nbsp; 0.200000&nbsp; 0.200000&nbsp; 0.200000&nbsp; 1.00<br />&nbsp; 0.150000&nbsp; 0.150000&nbsp; 0.150000&nbsp; 1.00<br />&nbsp; 0.100000&nbsp; 0.100000&nbsp; 0.100000&nbsp; 1.00<br />&nbsp; 0.050000&nbsp; 0.050000&nbsp; 0.050000&nbsp; 1.00<br />&nbsp; 0.000000 -0.000000&nbsp; 0.000000&nbsp; 1.00<br />&nbsp; 0.000000 -0.000000&nbsp; 0.100000&nbsp; 1.00<br />&nbsp; 0.000000 -0.000000&nbsp; 0.200000&nbsp; 1.00<br />&nbsp; 0.000000 -0.000000&nbsp; 0.300000&nbsp; 1.00<br />&nbsp; 0.000000 -0.000000&nbsp; 0.400000&nbsp; 1.00<br />&nbsp; 0.000000 -0.000000&nbsp; 0.500000&nbsp; 1.00<br /># This line added when defaults were changed (v5.3) to keep the previous, old behaviour<br />&nbsp; symdynmat 0</code></pre></div><br /><br />Thank you <br />Shao</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3290&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:28:49 GMT -->
+</html>

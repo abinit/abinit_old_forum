@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=1874&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:15:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Error in generating the KSS file: Eigenvalues = *******</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Error in generating the KSS file: Eigenvalues = *******</h2>
+		<p><a href="viewtopicfcd5.html?f=11&amp;t=1874">https://forum.abinit.org/viewtopic.php?f=11&amp;t=1874</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Error in generating the KSS file: Eigenvalues = *******</h3>
+				<div class="date">Posted: <strong>Tue Nov 06, 2012 1:36 pm</strong></div>
+				<div class="author">by <strong>ivasan</strong></div>
+				<div class="content">Dear all,<br /><br />I am trying to generate a KSS file of a large system for subsequent GW calculations (219atoms).  Since the system is quite big and I need to include many empty bands (I am initially trying with 1000), I generate the KSS file in three separated steps:<br /><br />- First I relax my structure in parallel<br />- Second, I generated the WFK file in parallel (I use as input coordinates those obtained in the previous file).<br />- Third, I generated the KSS file from the DEN and WFK files of the previous step.<br /><br />The input files that I used for steps 2 and 3 are attached, wfk.in and kss.in respectively.<br /><br />The problem is that in step 3 the log file contains this information:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>-P-0000<br />-P-0000&nbsp; k-point&nbsp; &nbsp;1<br />&nbsp;Eigenvalues in Hartree for ikpt=&nbsp; &nbsp;1<br />&nbsp; &nbsp;1&nbsp; &nbsp; &nbsp;******* ******* ******* ******* ******* ******* ******* ******* *******<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;******* ******* ******* ******* ******* ******* ******* ******* *******<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;******* ******* ******* ******* ******* ******* ******* ******* *******<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;******* ******* ******* ******* ******* ******* ******* ******* *******<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;******* ******* ******* ******* ******* ******* ******* ******* *******<br /></code></pre></div><br />for all the eigenvalues and all the k-points.<br /><br />And I cannot use the generated KSS for GW calculations for example with yambo.<br /><br />Anyone has any idea about what is going on?<br /><br />Thanks in advance and kind regards,<br /><br />Iván</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Generating the KSS file: Eigenvalues = *******</h3>
+				<div class="date">Posted: <strong>Wed Nov 07, 2012 9:55 am</strong></div>
+				<div class="author">by <strong>ivasan</strong></div>
+				<div class="content">Dear all,<br /><br />Just one more detail about this topic. Once the convergence is reached in the simulation for generating the KSS file, this is the information about the gap of the system that appears in the log file (I cannot attach the log file, it is too big):<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>=== Gap info ===<br />&nbsp; &gt;&gt;&gt;&gt; For spin&nbsp; 1<br />&nbsp; &nbsp;Minimum optical gap =&nbsp; &nbsp;0.0000 &#91;eV&#93;, located at k-point&nbsp; &nbsp; &nbsp; :&nbsp; &nbsp;0.0000&nbsp; 0.0000&nbsp; 0.0000<br />&nbsp; &nbsp;Fundamental gap&nbsp; &nbsp; &nbsp;=&nbsp; &nbsp;0.0000 &#91;eV&#93;, Top of valence bands at :&nbsp; &nbsp;0.0000&nbsp; 0.0000&nbsp; 0.0000<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Bottom of conduction at :&nbsp; &nbsp;0.0000&nbsp; 0.0000&nbsp; 0.0000</code></pre></div><br />As you can see, since the Eigenvalues are not properly evaluated, the gap of the system is 0 eV.<br /><br />Nevertheless, this was the information obtained in the simulation for generating the WFK file (the log file is also too big):<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>=== Gap info ===<br />&nbsp; &gt;&gt;&gt;&gt; For spin&nbsp; 1<br />&nbsp; &nbsp;Minimum optical gap =&nbsp; &nbsp;0.5090 &#91;eV&#93;, located at k-point&nbsp; &nbsp; &nbsp; :&nbsp; &nbsp;0.0000&nbsp; 0.0000&nbsp; 0.0000<br />&nbsp; &nbsp;Fundamental gap&nbsp; &nbsp; &nbsp;=&nbsp; &nbsp;0.4345 &#91;eV&#93;, Top of valence bands at :&nbsp; &nbsp;0.0000&nbsp; 0.0000&nbsp; 0.0000<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Bottom of conduction at :&nbsp; &nbsp;0.5000&nbsp; 0.0000&nbsp; 0.0000</code></pre></div><br /><br />There is something wrong somewhere. Any idea?<br /><br />Kind regards.<br /><br />Iván</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=1874&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:15:44 GMT -->
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=2382&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:02:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Total energy of BiFeO3 for two space groups</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Total energy of BiFeO3 for two space groups</h2>
+		<p><a href="viewtopic9cce.html?f=12&amp;t=2382">https://forum.abinit.org/viewtopic.php?f=12&amp;t=2382</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Total energy of BiFeO3 for two space groups</h3>
+				<div class="date">Posted: <strong>Thu Jan 09, 2014 4:24 pm</strong></div>
+				<div class="author">by <strong>SAIDI</strong></div>
+				<div class="content">Hello,<br />I use lda+u ( U =4 ev) for calculate the total energy of BiFeO3-R3c <br />I'm trying to have a total energy convergence as fonction of ecut, but I have a problem with RHOIJ<br />I have in log file:  <br />(print_ij: WARNING -<br />  The matrix seems to have high value(s) !<br />  (  7 components have a value greater than   10.0).<br />  It can cause instabilities during SCF convergence.<br />  Action: you should check your atomic dataset (psp file)<br />          and look for &quot;high&quot; projector functions...)<br />I don't know how I can to resolve this problem?<br /><br />thank you for your help<br />Best regards.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Total energy of BiFeO3 for two space groups</h3>
+				<div class="date">Posted: <strong>Mon May 26, 2014 10:50 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">This question is much too vague - we need an input and some more log to see what happens - please read the nettiquette. <br /><br />Further, this has nothing to do with post-processing tools. Please post in the appropriate sections.<br /><br />One main possibility is that your PAW datasets are not good or appropriate. Try using them separately for the elemental solids to see if they work well. If one of them gives the same large values of rho_ij, it is probably the culprit, and you need a better dataset. Have you tried the JTH set on the download page of PAW for abinit (link at the top of the page)?<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Total energy of BiFeO3 for two space groups</h3>
+				<div class="date">Posted: <strong>Tue Jul 08, 2014 3:47 pm</strong></div>
+				<div class="author">by <strong>SAIDI</strong></div>
+				<div class="content">Dear professor Verstraete,<br />Thank you for your help, Sorry i was in the process of writing my thesis that's why i don't see your response .<br />Please find attached the input files.<br /><br /><br />Best regards.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Total energy of BiFeO3 for two space groups</h3>
+				<div class="date">Posted: <strong>Wed Jul 09, 2014 4:29 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Saidi,<br /><br />a few questions: <br />- why did you use pawovlp=63% precisely? <br />If you need 63% of overlap between the spheres means the atomic distances in your crystal are probably wrong at some point.<br /><br />- Did you make your own PAW atomic data or did you get them from somewhere?<br /><br />A question not related to the crash:<br />You are using a 40 atoms cell while the unit cell contain 10 atoms, do you really need to run a 40 atoms cell?<br /><br />All the best,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Total energy of BiFeO3 for two space groups</h3>
+				<div class="date">Posted: <strong>Thu Jul 10, 2014 12:21 pm</strong></div>
+				<div class="author">by <strong>SAIDI</strong></div>
+				<div class="content">Dear Eric,<br />Thank you for your kindness<br />The input file is already written since January, I forget why i put precisely pawovlp=63%, normally it must be lower to 5 %.<br />I have the  overlap ratio of 10.83 % of the PAW spheres, and  in the spherical density matrix (augmentation wave occupancies Rhoij)  7 components have a value greater than 10.0. <br />I tried to decrease cutoff radius of paw dataset but the problem is still there.<br /><br />I use 40 atoms cell because the  BFO-R3c phases have the G-type AFM<br />Best regards.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Total energy of BiFeO3 for two space groups</h3>
+				<div class="date">Posted: <strong>Thu Jul 10, 2014 5:01 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content"><blockquote><div><cite>SAIDI wrote:</cite>Dear Eric,<br />Thank you for your kindness<br />The input file is already written since January, I forget why i put precisely pawovlp=63%, normally it must be lower to 5 %.<br />I have the  overlap ratio of 10.83 % of the PAW spheres, and  in the spherical density matrix (augmentation wave occupancies Rhoij)  7 components have a value greater than 10.0. <br />I tried to decrease cutoff radius of paw dataset but the problem is still there.<br /></div></blockquote><br /><br />OK you can put pawovlp to 12% this is still fine, don't worry.<br /><br /><blockquote><div><cite>SAIDI wrote:</cite>I use 40 atoms cell because the  BFO-R3c phases have the G-type AFM<br />Best regards.</div></blockquote><br />Well, the 10 atoms cell can fit the G-type as well but you have to double it along the [111] direction.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Total energy of BiFeO3 for two space groups</h3>
+				<div class="date">Posted: <strong>Fri Jul 11, 2014 6:02 pm</strong></div>
+				<div class="author">by <strong>SAIDI</strong></div>
+				<div class="content">Dear ebousquet, <br />Thank you for your help <br />I'll try to change the number of atoms per unit cell to 10 atoms by unit cell and the pawovlp to 12 % .<br />Best regards.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Total energy of BiFeO3 for two space groups</h3>
+				<div class="date">Posted: <strong>Fri Mar 09, 2018 12:38 am</strong></div>
+				<div class="author">by <strong>cgs12</strong></div>
+				<div class="content">Hi,<br /><br />Thanks for all the posts and replies. I am also interested in performing calculations for rhombohedral phase (R3c) for PZT (PbZrO3/PbTiO3) system. I just want to ask how we can generate the positions of all the ions in a unit cell for this phase? I understand that it is similar, if not identical to the one posted here for BiFeO3 but is there a logical / more intuitive way of doing so?<br /><br />Thanks in advance for your kind attention!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Total energy of BiFeO3 for two space groups</h3>
+				<div class="date">Posted: <strong>Fri Mar 09, 2018 10:23 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear cgs12,<br />PZT can have many different possible unit celles depending on the fraction of Zr and Ti you have and on how you arrange these atoms in the cell. Either you find some papers or thesis, etc that give you the cells and  positions or you have to build them yourself. I'm not aware of a program doing so, usually people do their own stuff. A way to go is to build Cartesian supercells (like 2x2x2, 4x4x4, etc), depending on your needs, and either keeping these supercells in your calculations or reducing to their asymmetric unit cell through a program like FINDSYM from the ISOTROPY suite (<a href="http://stokes.byu.edu/iso/isotropy.php" class="postlink">http://stokes.byu.edu/iso/isotropy.php</a>).<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Total energy of BiFeO3 for two space groups</h3>
+				<div class="date">Posted: <strong>Fri Mar 09, 2018 7:28 pm</strong></div>
+				<div class="author">by <strong>cgs12</strong></div>
+				<div class="content">Dear Eric,<br /><br />Thank you so much for your response.<br /><br />I just want to confirm that when you mention unit cell, you are referring to the usual cubic-like unit cell involving 5 atoms. It is also possible to construct a rhombohedral unit cell which in this case would be a primitive unit cell involving 10 atoms?<br /><br />Best</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Total energy of BiFeO3 for two space groups</h3>
+				<div class="date">Posted: <strong>Tue Mar 13, 2018 8:35 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear cgs12,<br />By unit cell I mean the minimal cell you need to build your crystal from period boundary conditions. If you have P(Zr,Ti)O3 50% Ti and 50% Zr you'll have 10 atoms in the unit cell (two 5-atoms perovskite cell), though several unit cells can be built depending if you order the Zr/Ti along the 100, 110, 111 directions, etc.<br />All the best,<br />Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=2382&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:02:40 GMT -->
+</html>

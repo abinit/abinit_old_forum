@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2336&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:36:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; How to enable libxc with abinit</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>How to enable libxc with abinit</h2>
+		<p><a href="viewtopic3007.html?f=3&amp;t=2336">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2336</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>How to enable libxc with abinit</h3>
+				<div class="date">Posted: <strong>Wed Nov 20, 2013 8:57 am</strong></div>
+				<div class="author">by <strong>natalie</strong></div>
+				<div class="content">Dear Forum,<br />       This is probably a silly question, but I have been unable to &quot;enable&quot; libxc with my abinit compilation.    For example, using the <br />configure options (as reported in the config.log file - missing some quotes)<br />../configure --prefix=/home/natalie/EL6/publiccode/abinit/abinit-7.4.3 --exec-prefix=/home/natalie/EL6/publiccode/abinit/abinit-7.4.3 --enable-mpi --with-mpi-prefix=/rhel6/opt/openmpi/1.6-intel --with-fft-flavor=fftw3-mkl --with-linalg-flavor=mkl --with-dft-flavor=none --with-libxc-incs=-I/home/natalie/EL6/publiccode/libxc/include --with-libxc-libs=-L/home/natalie/EL6/publiccode/libxc/lib -lxc FC=ifort CC=icc CPP=icc -E --no-create --no-recursion<br /><br />the compilation looks normal but, I am unable to use PAW atomic data files which have been created using the libxc functions. Even though the --with-libxc-libs and --with-libxc-incs commands seem to be recognized, the Makefile is not created with links to the libxc lib and include files:<br />lib_libxc_fcflags =<br />lib_libxc_incs =<br />lib_libxc_ldflags =<br />lib_libxc_libs = <br /><br />In this case, the libxc files were already downloaded and compiled in the specified directory and used with atompaw.  If I add the <br />configure option &quot;--enable-libxc&quot; it makes no difference.<br /><br />When I run abinit with a libxc generated dataset, I get the error message:<br />Subroutine Unknown:0:ERROR<br />  LibXC was not linked to this version:<br /> recompile with libxc activated to use ixc &lt; 0<br /><br />Thanks in advance for your suggestions.   Natalie</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to enable libxc with abinit</h3>
+				<div class="date">Posted: <strong>Thu Nov 21, 2013 10:51 am</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Could you attach your config.log?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to enable libxc with abinit</h3>
+				<div class="date">Posted: <strong>Thu Nov 21, 2013 11:24 am</strong></div>
+				<div class="author">by <strong>natalie</strong></div>
+				<div class="content">Dear Yann,<br />      The file is too big apparently.     I tried gzip, but that is not allowed.    Can I extract a part of it that you would<br />like to see?  Perhaps I will email you a link to the file.  THanks for your help.   Natalie</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to enable libxc with abinit&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Thu Nov 21, 2013 12:06 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">I now see where the error is:<br /><em class="text-italics">../configure --prefix=/home/natalie/EL6/publiccode/abinit/abinit-7.4.3 --exec-prefix=/home/natalie/EL6/publiccode/abinit/abinit-7.4.3 --enable-mpi --with-mpi-prefix=/rhel6/opt/openmpi/1.6-intel --with-fft-flavor=fftw3-mkl --with-linalg-flavor=mkl <strong class="text-strong"><span style="color: #FF0000">--with-dft-flavor=none</span></strong> --with-libxc-incs=-I/home/natalie/EL6/publiccode/libxc/include --with-libxc-libs=-L/home/natalie/EL6/publiccode/libxc/lib -lxc FC=ifort CC=icc CPP=icc -E --no-create --no-recursion</em><br /><br />Using <em class="text-italics">&quot;none&quot;</em> tells the build system to ignore all DFT-related options. If you use <em class="text-italics">--with-dft-flavor=&quot;libxc&quot;</em> instead, it will work as expected.<br /><br />I will add a warning in the build system to avoid this kind of surprise in the future.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to enable libxc with abinit</h3>
+				<div class="date">Posted: <strong>Thu Nov 21, 2013 4:14 pm</strong></div>
+				<div class="author">by <strong>natalie</strong></div>
+				<div class="content">Thanks so much!    Somehow I thought that the &quot;flavor&quot; attribute was for loading optional packages.   Apparently the software is <br />smart enough to know if you already have the optional packages???   In any case, it now works great.   Thanks.  Natalie</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to enable libxc with abinit</h3>
+				<div class="date">Posted: <strong>Tue Mar 11, 2014 2:54 pm</strong></div>
+				<div class="author">by <strong>rupesh</strong></div>
+				<div class="content">Hi ,<br /><br /> I have same problem <br />after configuring I got this error <br /><br /><br />checking whether we are using the GNU C compiler... yes<br />checking whether gcc accepts -g... yes<br />checking for gcc option to accept ISO C89... none needed<br />checking for style of include used by make... GNU<br />checking dependency style of gcc... none<br />checking for gfortran... gfortran<br />checking whether we are using the GNU Fortran compiler... yes<br />checking whether gfortran accepts -g... yes<br />checking whether to enable the LINALG fallback... no<br />checking whether to enable the FOX fallback... no<br />checking whether to enable the NETCDF fallback... no<br />checking whether to enable the ETSF_IO fallback... no<br />checking whether to enable the LIBXC fallback... yes<br />checking for a source tarball of LIBXC... no<br />configure: downloading LIBXC - this may take a while<br />configure: downloading LIBXC - this may take a while<br />configure: error: could not download LIBXC fallback tarball<br />    Disable support for LIBXC or download the tarball manually to<br />    /home/rupesh/.abinit/tarballs<br />configure: error: ./configure failed for fallbacks<br /><br /><br />I tried to download the libxc-2.0.2 file in tarballs and tried to configure it but it didnt work.<br /><br />Please please , I am expecting step by step procedure to enable abinit-7.4.3 with libxc .<br />I am attaching config file also, ubuntu.ac</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to enable libxc with abinit</h3>
+				<div class="date">Posted: <strong>Sat Mar 15, 2014 9:37 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />download the libxc-2.0.2.tar.gz file in /home/rupesh/.abinit/tarballs<br /><br />and try with <br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure --with-tardir=/home/rupesh/.abinit/tarballs</code></pre></div><br /><br />jmb</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2336&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:36:58 GMT -->
+</html>

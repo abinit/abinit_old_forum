@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=734&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Configuration error for abinit-6.4.1</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Configuration error for abinit-6.4.1</h2>
+		<p><a href="viewtopicf90d.html?f=3&amp;t=734">https://forum.abinit.org/viewtopic.php?f=3&amp;t=734</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Configuration error for abinit-6.4.1</h3>
+				<div class="date">Posted: <strong>Tue Nov 09, 2010 1:39 am</strong></div>
+				<div class="author">by <strong>sciencemonk</strong></div>
+				<div class="content">Hey guys,<br /><br />I got a problem when trying to configure abinit-6.4.1.<br /><br />Here is my configuration file:<br /><br /><blockquote class="uncited"><div>#!/bin/bash<br /><br /> ../configure --enable-mpi \<br />              --with-mpi-prefix=/lap/openmpi/1.4.3/intel-11.1<br />              --enable-netcdf=&quot;no&quot; \<br />              --enable-bigdft=&quot;no&quot; \<br />              --enable-wannier90=&quot;no&quot;</div></blockquote><br /><br />I followed the build-examples, in which both &quot;--enable-mpi&quot; and &quot;--with-mpi-prefix=...&quot; were set.<br /><br />But I got the message that<br /><br /><blockquote class="uncited"><div> ==============================================================================<br /> === Connector startup                                                      ===<br /> ==============================================================================<br /><br />configure: Initializing MPI support<br />configure: looking for MPI in /lap/openmpi/1.4.3/intel-11.1<br />configure: error: use --with-mpi-prefix or set CC, not both<br /></div></blockquote><br /><br />Any idea for that? I did not set CC or any other compiler.<br /><br />Thanks for attention!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configuration error for abinit-6.4.1</h3>
+				<div class="date">Posted: <strong>Tue Nov 09, 2010 10:33 am</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Automating the configuration of MPI is a very delicate task. I finally decided that the build system should throw an error and give up every time there is a contradiction somewhere. Thus you cannot ask the build system to set the compilers for you, while at the same time setting them manually yourself.<br /><br />Just type &quot;env&quot;, and you'll see that CC is set. It was probably done by your system administrator.<br /><br />You should either not use the --with-mpi-prefix option, or unset CC. Idem with CXX and FC.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configuration error for abinit-6.4.1</h3>
+				<div class="date">Posted: <strong>Wed Nov 10, 2010 7:01 pm</strong></div>
+				<div class="author">by <strong>JEJohns</strong></div>
+				<div class="content">Sciencemonk,<br />    I had a problems compiling abinit-6.4.1 as well, and had to switch from specifying the FC, CC&amp; CXX to the mpi prefix option.  The test.ac file that I used is in the threat Compiling abinit 6.4.2 (though I was compiling 6.4.1) just a few posts back if you want an example file.  You can ignore all the stuff about the linalg not compiling.<br />Cheers,<br />--James</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=734&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:07 GMT -->
+</html>

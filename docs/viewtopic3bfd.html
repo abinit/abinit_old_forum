@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3604&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:06:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Optimization of ZBNNR</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Optimization of ZBNNR</h2>
+		<p><a href="viewtopic809d.html?f=9&amp;t=3604">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3604</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Optimization of ZBNNR</h3>
+				<div class="date">Posted: <strong>Tue May 23, 2017 12:13 pm</strong></div>
+				<div class="author">by <strong>kirans</strong></div>
+				<div class="content">Hi <br />i am facing problem during optimization of ZBNNR with 29 atoms, i was found someone faced same problem they had posted it on forum, in reply suggested use #paral_kgb==1. I had tried, stiil i  found same thing   and input file is<br /># SCF Caluclation data<br /># Cif2cell data<br /># Structural parameters<br />acell     2.49824             2.49824             6.63570     <br /><br />rprim    1.000000000000000   0.000000000000000   0.000000000000000 <br />         0.000000000000000   1.000000000000000   0.000000000000000 <br />         0.000000000000000   0.000000000000000   1.000000000000000 <br /><br />#Definition of the atom types<br />ntypat 2           <br />znucl 5 7       <br /> <br />#Definition of the atoms<br />natom 24           <br />typat 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2             <br />xred              <br />                  <br />         0.500000000000000   0.100000000000000   0.500000000000000 <br />         0.574419000000000   0.211628000000000   0.500000000000000 <br />         0.425581000000000   0.211628000000000   0.500000000000000 <br />         0.425581000000000   0.428682000000000   0.500000000000000 <br />         0.574419000000000   0.428682000000000   0.500000000000000 <br />         0.500000000000000   0.521705000000000   0.500000000000000 <br />         0.425581000000000   0.633333000000000   0.500000000000000 <br />         0.574419000000000   0.633333000000000   0.500000000000000 <br />         0.500000000000000   0.732558000000000   0.500000000000000 <br />         0.500000000000000   0.310853000000000   0.500000000000000 <br />         0.425581000000000   0.844186000000000   0.500000000000000 <br />         0.574419000000000   0.844186000000000   0.500000000000000 <br />         0.574419000000000   0.137209000000000   0.500000000000000 <br />         0.425581000000000   0.137209000000000   0.500000000000000 <br />         0.500000000000000   0.248837000000000   0.500000000000000 <br />         0.574419000000000   0.354264000000000   0.500000000000000 <br />         0.425581000000000   0.354264000000000   0.500000000000000 <br />         0.574419000000000   0.565116000000000   0.500000000000000 <br />         0.425581000000000   0.565116000000000   0.500000000000000 <br />         0.500000000000000   0.670543000000000   0.500000000000000 <br />         0.500000000000000   0.472093000000000   0.500000000000000 <br />         0.574419000000000   0.775969000000000   0.500000000000000 <br />         0.425581000000000   0.775969000000000   0.500000000000000 <br />         0.500000000000000   0.900000000000000   0.500000000000000 <br />      <br />               <br />#common<br /><br />#change ngkpt 4 4 4(SCF) -&gt; 8 8 8 (DOS)<br />ngkpt 4 4 4<br /># Triclinic, Monoclinic, Orthorhobic, Tetragonal,<br /># Trigonal,  Rhombohedral, and Cubic (no F type) case<br /># nshiftk 1 <br /># shift 0.0 0.0 0.0<br />#-----<br />#spgroup  164<br /># Trigonal case<br /># nshiftk  4<br /># shiftk 0.5 0.5 0.5<br />#        0.5 0.0 0.0<br />#        0.0 0.5 0.0<br />#        0.0 0.0 0.5 <br />#-------<br />#spgroup  187,174<br /># Hexagonal case<br /># nshiftk  1<br /># shiftk 0.0 0.0 0.5<br />#paral_kgb==1<br />#optdriver==4<br />#ecut 50.<br />pawecutdg 125.<br />nstep10<br />toldfe 1.0d-6<br />pawovlp -0.5<br /># DOS INPUT<br />#iscf -2 #DOS caluclation<br />##prtdosm<br />#pawprtdos 0#0:TDOS,3:PDOS and PAW_DOS<br />#tolwfr 1.0e-10<br />#dosdeley 0.00100 #Ha<br />##enunit 1<br /> <br />#Number of Data set<br />ndtset  2<br /><br />#Cell optimization<br /><br />#Data set 1<br />optcell1 0<br />ionmov1  2<br />getcell1 0<br />getxred1 0<br />ntime1  10<br />dilatmx1 0.4<br />ecutsm1  0.5<br />tolmxf1  5.00e-005<br /><br />#Data set 2<br />optcell2 0<br />ionmov2  2<br />getcell2 0<br />getxred2 0<br />ntime2  10<br />dilatmx2 0.4<br />ecutsm2  0.5<br />tolmxf2  5.00e-005<br /><br />prtposcar2 1 # Print out VASP.style POSCAR and FORCES for PHON and frophon<br />#See the associated script in ~abinit/extra/post_processing/phondisp2abi.py for <br /># further details on interfacing with PHON, PHONONY,etc....<br />#prtcif2 1# Print out cif file, but...<br />#prtblztrap2 1# Ptint out input file for boltztrap....<br /><br />and i found the following error as it is<br /><br /><br />--- !ERROR<br />src_file: gstate.F90<br />src_line: 549<br />mpi_rank: 0<br />message: |<br />    Number of bands nband= 51 &gt; number of planewaves npw= 10<br />    The number of eigenvectors cannot be greater that the size of the Hamiltonian!<br />    Action: decrease nband or, alternatively, increase ecut<br />...<br /><br />--------------------------------------------------------------------------<br />MPI_ABORT was invoked on rank 0 in communicator MPI_COMM_WORLD <br />with errorcode 14.<br /><br />NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.<br />You may or may not see output from other processes, depending on<br />exactly when Open MPI kills them.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3604&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:06:25 GMT -->
+</html>

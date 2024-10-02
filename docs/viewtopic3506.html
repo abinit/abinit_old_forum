@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=887&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:57:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; how to get bulk modulus by  Birch-Murnaghan equation?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>how to get bulk modulus by  Birch-Murnaghan equation?</h2>
+		<p><a href="viewtopic85de-2.html?f=9&amp;t=887">https://forum.abinit.org/viewtopic.php?f=9&amp;t=887</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>how to get bulk modulus by  Birch-Murnaghan equation?</h3>
+				<div class="date">Posted: <strong>Sat Feb 12, 2011 3:13 am</strong></div>
+				<div class="author">by <strong>lzl8181</strong></div>
+				<div class="content">hello,everyone!<br />     in lectures, i know two methods are often adopted to caculate bulk modulus by  Birch-Murnaghan equation:<br />     one is increasing isotrpic static pressure on the unit cell (Bravais lattice) step by step, then get the relevant energy, finally using Energy-Pressure-type Birch-Murnaghan equation to obtain the bulk modulus.<br />     the other is by changing the &quot;acell' Parameters, get the relevant energy, through Energy-Volume-type Birch-Murnaghan equation to obtain the bulk modulus; to do this, it is  easy to obtain the bulk modulus of cubic cell (Bravais lattice), for the change of &quot;acell&quot; is equal for the three directions; but i don't know how to get bulk modulus of orthogonal, tetragonal, hexagonal, and other types by using this method? can anybody give some detailed guidance? <br />         thanks!<br />      best whishs<br />           lzl</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: how to get bulk modulus by  Birch-Murnaghan equation?</h3>
+				<div class="date">Posted: <strong>Mon Feb 14, 2011 9:47 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">relax your structure using the strtarget input variable, you can then relax in the presence of hydrostatic pressure and get P as a function of ucvol (the unit cell volume) and then you don't need to go through the Eq of state.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: how to get bulk modulus by  Birch-Murnaghan equation?</h3>
+				<div class="date">Posted: <strong>Wed Feb 16, 2011 11:43 am</strong></div>
+				<div class="author">by <strong>lzl8181</strong></div>
+				<div class="content">Dear Pro. Zwanziger<br />   thanks! I see.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: how to get bulk modulus by  Birch-Murnaghan equation?</h3>
+				<div class="date">Posted: <strong>Mon Apr 15, 2013 3:14 pm</strong></div>
+				<div class="author">by <strong>sunnyone</strong></div>
+				<div class="content">Dear lzl8181,<br /><br />      I want to caclulate the bulk module for a cubic zinc Blende crystal structure of the binary compound CdS by methods you entioned , i prefer the second one i.e by increasing the &quot;acell&quot;, i tried firstly through the toturespon (elastic toturial 6) and i got alot of warnings, actually i don't know how to calcuate it so please can you explain for me how i do that step by step and in below is my input file :<br />  <br /><br />Best regards...<br /><br /><br /> <br />   ndtset   12        # Total number of datasets (3*4)<br />   udtset   3  4      # Double loop for k-sample convergence study<br />   <br />   nspden 2<br />   nsppol 2<br />   nspinor 1<br /><br /># Set 1 : Initial self-consistent and lattice optimization run<br /><br />  getwfk?1   0<br />  ionmov?1   2        # Broyden lattice optimization scheme<br />   ntime?1   5        # Maximim lattice optimization steps<br /> optcell?1   1        # Optimize cell volume only<br /> strfact?1   100      # Test convergence of stresses (Hartree/bohr^3) by<br />                      # multiplying by this factor and applying force<br />                      # convergence test<br />  tolmxf?1   1.0e-6   # Convergence limit for forces as above<br />  tolvrs?1   1.0d-18  # Need excellent convergence of GS quantities for RF runs<br /><br /># Set 2 : Additional iteration to print density just at converged acell<br /><br />  prtden?2   1        # Third dataset needs density<br />  tolvrs?2   1.0d-18<br /><br /># Set 3 : Converge unoccupied wave functions<br /><br />  getden?3   -1       # Use density from previout set<br />  tolwfr?3   5.0d-19  # Only wave function convergence can be used with<br />                      # non-self-consistent calculation<br />  tolwfr23   1.0d-30  # This is simply for a reason of portability of automatic tests <br />  nstep23    25        # This is simply for a reason of portability of automatic tests<br />  nstep33    35       # This is simply for a reason of portability of automatic tests<br /><br /># Set 4 : response-function calculations for all needed perturbations<br /><br />  kptopt?4   2        # Time-reversal only for RF calculation<br />    nqpt?4   1<br />     qpt?4   0  0  0  # By symmetry, only need one direction<br />   rfdir?4   1  0  0<br />  rfstrs?4   3        # Need both unaxial and shear strains<br />  tolvrs?4   1.0d-12  # Need reasonable convergence of 1st-order quantities<br /><br />#Common input data<br /><br />#Double loop data passing<br /><br />getcell   -1         # Start from optimized (datasets ?2-?4) or previously<br />                     # optimized (datasets ?1) acell<br /> getwfk   -1         # Use last set of wave functions (except datasets ?1)<br /><br /><br />#Lattice definition<br />  acell   3*10.96     # Starting value<br />dilatmx   1.05       # Allow for optimization<br />  rprim   0.0  0.5  0.5<br />          0.5  0.0  0.5<br />          0.5  0.5  0.0<br /><br />#Definition of the atom types and atoms<br /> ntypat   2 <br />  znucl   48 16<br />  natom   2<br />  typat   1 2<br /><br />#Atomic position<br />   xred   0.0  0.0  0.0<br />          0.25 0.25 0.25<br /><br />#Definition of the plane wave basis set<br />   ecut   20.947118            # Maximum kinetic energy cutoff (Hartree)<br /> ecutsm   0.5            # Smoothing energy needed for lattice parameter<br />                         # optimization.  This will be retained for<br />                         # consistency throughout.<br /><br />#Definition of the k-point grid - loop over 3 k-point densities<br /><br />ngkpt1?   6  6  6          <br />ngkpt2?   8  8  8          <br />ngkpt3?   10 10 10<br /><br />nshiftk   4              # Use one copy of grid only (default)<br /> shiftk   0.0 0.0 0.5    # This gives the usual fcc Monkhorst-Pack grid<br />          0.0 0.5 0.0<br />          0.5 0.0 0.0<br />          0.5 0.5 0.5<br /><br />#Definition of occupation numbers and number of bands<br />  nband 10              # With metallic occup<br /> occopt   4              # Femi-function smearing<br /> tsmear   0.02<br /><br />#Definition of the self-consistency procedure<br />   iscf   5              # Use conjugate-gradient SCF cycle (datasets 1 &amp; 3)<br />  nstep   50             # Maximum number of SCF iterations<br />                         # This might not be enough for the very demanding tolwfr?3 above,<br />                         # but was chosen for portability reasons.<br /># enforce calculation of forces at each SCF step<br /> optforces 1<br /><br /><br />#%%&lt;BEGIN TEST_INFO&gt;<br />#%% [setup]<br />#%% executable = abinit<br />#%% [files]<br />#%% files_to_test = <br />#%%   telast_6.out, tolnlines=  0, tolabs=  0.000e+00, tolrel=  0.000e+00, fld_options = -medium<br />#%% psp_files =  13al.pspnc, 33as.pspnc<br />#%% [paral_info]<br />#%% max_nprocs = 1<br />#%% [extra_info]<br />#%% author = <br />#%% keywords = <br />#%% description = <br />#%%&lt;END TEST_INFO&gt;</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: how to get bulk modulus by  Birch-Murnaghan equation?</h3>
+				<div class="date">Posted: <strong>Mon Aug 26, 2013 12:31 pm</strong></div>
+				<div class="author">by <strong>BAMGBOSE, M. K.</strong></div>
+				<div class="content"><blockquote><div><cite>jzwanzig wrote:</cite>relax your structure using the strtarget input variable, you can then relax in the presence of hydrostatic pressure and get P as a function of ucvol (the unit cell volume) and then you don't need to go through the Eq of state.</div></blockquote><br /><br />Dear Jzwanzig,<br />please help me out. I am working on cubic system and i have the following output<br /><br />&quot;Scale of Primitive Cell (acell) [bohr]<br />8.80000000000000E+00 8.80000000000000E+00 8.80000000000000E+00<br />Real space primitive translations (rprimd) [bohr]<br />0.00000000000000E+00 4.40000000000000E+00 4.40000000000000E+00<br />4.40000000000000E+00 0.00000000000000E+00 4.40000000000000E+00<br />4.40000000000000E+00 4.40000000000000E+00 0.00000000000000E+00<br />Unitary Cell Volume (ucvol) [Bohr^3]= 1.70368000000000E+02<br />Angles (23,13,12)= [degrees]<br />6.00000000000000E+01 6.00000000000000E+01 6.00000000000000E+01<br />Lengths [Bohr]<br />6.22253967444162E+00 6.22253967444162E+00 6.22253967444162E+00<br />Stress tensor in cartesian coordinates (strten) [Ha/bohr^3]<br />-9.31428390291595E-04 0.00000000000000E+00 0.00000000000000E+00<br />0.00000000000000E+00 -9.31428390291594E-04 0.00000000000000E+00<br />0.00000000000000E+00 0.00000000000000E+00 -9.31428390291593E-04<br />Total energy (etotal) [Ha]= -1.18290446959563E+01<br /><br /><br />Cartesian components of stress tensor (hartree/bohr^3)<br />sigma(1 1)= -9.31428390E-04 sigma(3 2)= 0.00000000E+00<br />sigma(2 2)= -9.31428390E-04 sigma(3 1)= 0.00000000E+00<br />sigma(3 3)= -9.31428390E-04 sigma(2 1)= 0.00000000E+00<br /><br />-Cartesian components of stress tensor (GPa) [Pressure= 2.7404E+01 GPa]<br />- sigma(1 1)= -2.74035647E+01 sigma(3 2)= 0.00000000E+00<br />- sigma(2 2)= -2.74035647E+01 sigma(3 1)= 0.00000000E+00<br />- sigma(3 3)= -2.74035647E+01 sigma(2 1)= 0.00000000E+00&quot;<br /><br />I don't know values to pick from this output to calculate bulk modulus and pressure derivative of bulk modulus.<br />Thanks</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: how to get bulk modulus by  Birch-Murnaghan equation?</h3>
+				<div class="date">Posted: <strong>Mon Aug 26, 2013 9:44 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">The unit cell volume is 1.70368E2 bohr^3 (see ucvol) and the pressure is 2.7404E1 GPa (look for the word Pressure).</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=887&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:57:14 GMT -->
+</html>

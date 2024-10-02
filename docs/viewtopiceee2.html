@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3333&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:13:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; MPI_Abort error in Abinit 8.0.8</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>MPI_Abort error in Abinit 8.0.8</h2>
+		<p><a href="viewtopic089c.html?f=9&amp;t=3333">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3333</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>MPI_Abort error in Abinit 8.0.8</h3>
+				<div class="date">Posted: <strong>Thu Jul 28, 2016 10:54 am</strong></div>
+				<div class="author">by <strong>sheng</strong></div>
+				<div class="content">As the title says I encounter MPI_Abort error for one of my calculation of a supercell.<br />The Abinit 8.0.8 I use is compiled with IntelMPI (ifort 15.0) and it passed all of the test suites.<br />The supercell is generated using Phonopy program with the intention to do finite difference calculations. The previous few supercells can be run without any problem.<br /><br />The errors produced are related MPI_Abort, such as<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>application called MPI_Abort(MPI_COMM_WORLD, 13) - process 63<br />application called MPI_Abort(MPI_COMM_WORLD, 13) - process 68<br />application called MPI_Abort(MPI_COMM_WORLD, 13) - process 71<br />application called MPI_Abort(MPI_COMM_WORLD, 13) - process 62<br />application called MPI_Abort(MPI_COMM_WORLD, 13) - process 66<br />application called MPI_Abort(MPI_COMM_WORLD, 13) - process 67<br />application called MPI_Abort(MPI_COMM_WORLD, 13) - process 60<br />application called MPI_Abort(MPI_COMM_WORLD, 13) - process 65<br />application called MPI_Abort(MPI_COMM_WORLD, 13) - process 69<br />application called MPI_Abort(MPI_COMM_WORLD, 13) - process 70<br />application called MPI_Abort(MPI_COMM_WORLD, 13) - process 61<br />INTERNAL ERROR: invalid error code 78ea36 (Ring ids do not match) in MPIR_Allreduce_impl:1262<br />INTERNAL ERROR: invalid error code 58ea36 (Ring ids do not match) in MPIR_Allreduce_impl:1262<br />INTERNAL ERROR: invalid error code 58ea36 (Ring ids do not match) in MPIR_Allreduce_impl:1262<br />INTERNAL ERROR: invalid error code 68ea36 (Ring ids do not match) in MPIR_Allreduce_impl:1262<br />Fatal error in MPI_Allreduce: Other MPI error, error stack:<br />MPI_Allreduce(1421)......: MPI_Allreduce(sbuf=0xf2a2ea0, rbuf=0xf6941c0, count=516706, MPI_DOUBLE_PRECISION, MPI_SUM, comm=0x84000004) failed<br />MPIR_Allreduce_impl(1262): <br /></code></pre></div><br />The errors only appear when I activate KGB parallelization using a certain distribution of processors. For example the distribution cause errors<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>paral_kgb 1&nbsp; &nbsp;npkpt 7 npband 12 npfft 1</code></pre></div><br />but the following processor distribution runs without problem<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>paral_kgb 1&nbsp; &nbsp;npkpt 14 npband 4 npfft 1</code></pre></div><br />All other parameters are still the same.<br /><br />The log file and inout files are attached.<br />Thank you.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MPI_Abort error in Abinit 8.0.8&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Fri Jul 29, 2016 9:51 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Hi,<br /><br />This probably means you have the usual issue with the lobpcg algorithm which is automatically activated with paral_kgb. Changing the processors distribution changes the way the algorithm works and so avoid or produce an error.<br />There is currently no cure available for public abinit, but hopefully soon this will change.<br /><br />Cheers<br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MPI_Abort error in Abinit 8.0.8</h3>
+				<div class="date">Posted: <strong>Fri Jul 29, 2016 10:28 am</strong></div>
+				<div class="author">by <strong>sheng</strong></div>
+				<div class="content">Thanks Jordan for the clarification.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3333&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:13:17 GMT -->
+</html>

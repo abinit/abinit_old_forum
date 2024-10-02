@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2296&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:30:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Execution time and memory with ACLM</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Execution time and memory with ACLM</h2>
+		<p><a href="viewtopicb817.html?f=3&amp;t=2296">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2296</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Execution time and memory with ACLM</h3>
+				<div class="date">Posted: <strong>Thu Oct 03, 2013 6:15 pm</strong></div>
+				<div class="author">by <strong>gryko</strong></div>
+				<div class="content">Hello,<br /><br /> Here are excution times of Abinit compiled with and without ACML library using gfortran and internal FFT.<br /> System: AMD 8350 Vishera 4.0 GHz CPU (8 cores), 32 GB memory.  Input: scf calculation for 34 Si atoms in FCC cell.<br /> Execution times per core (8 cores)<br /><br /> Abinit 7.4.2  compiled with ACML            1861<br /> Abinit 7.4.2  without internal lib             1890<br /> Abinit 7.2.1 - binary from abint site        1883<br /><br /> However, for phon calculations with the same system, Abinit with the ACML library uses over 32 GB memory, <br /> whereas Abinit from the web site or compiled with internal libs uses only ~19 GB.  <br /> <br /> Any suggestions why?  The ACML library supposed to be optimized for AMD processors?<br /><br /> Thank you,<br /> Jan Gryko</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Execution time and memory with ACLM</h3>
+				<div class="date">Posted: <strong>Fri Oct 04, 2013 12:41 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Hi Jan,<br /><br />First of all, if you invest time in optimizing Abinit, I would compile it with FFTW3 - an enhanced FFT lib is probably more efficient than enhanced BLAS/LAPACK<br /><br />Although AMD markets the 8350 as an 8 &quot;cores&quot; CPU (very deceptively IMHO) , it only has 4 compute units i.e. 4 caches and 4 arithmetic units. So it is what I call (and Intel too) a hyperthreaded 4 cores CPU. May I suggest to compare ACML to plain BLAS LAPCK with only 4 parallel threads to avoid overloading. I don't know how you did the test (either several MPI slots with single threaded BLAS/LAPCK or sequential with multithreaded BLAS/LAPACK - the former is the most efficient and will benefit from enhanced libs)<br /><br />I have no clue about the memory footprint discrepancy - ACML is multithreaded but it shouldn't replicate data for this to work.<br />ACML is supposed to be optimized ... I have better results with MKL or openBLAS on AMD CPUs<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Execution time and memory with ACLM</h3>
+				<div class="date">Posted: <strong>Fri Oct 04, 2013 7:50 pm</strong></div>
+				<div class="author">by <strong>gryko</strong></div>
+				<div class="content">Thank you very much for your quick answer.   Here are more tests for two acml libraries: libacml  and libacml_mp  for Vishera 8350:<br /><br /> Abinit linked with libacml  run with mpirun -np 4  or mpirun -np 8 uses 4 or 8 cores, almost 100%<br /> Abinit linked with libacml_mp  runs with mpirun -np 4 using 8 cores at about 70 - 80%.  <br /> Abinit linked with libacml_mp runs with mpirun -np 8, using 8 cores 100%, but the execution time is about 5 - 7 times longer.<br /><br /><br /> Changing the subject - I am trying to link Abinit with fftw3.  I installed fftw3-3.3, all tests reported fine, but when linking with Abinit, several subroutines are missing, for example:<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `__m_fftw3_MOD_cplan_many_dft':<br />/home/gryko/abinit-7.4.2/src/52_fft_mpi_noabirule/m_fftw3.F90:2908: undefined reference to `sfftw_plan_many_dft_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `__m_fftw3_MOD_fftw3_c2c_op_spc':<br />/home/gryko/abinit-7.4.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1802: undefined reference to `sfftw_execute_dft_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `__m_fftw3_MOD_fftw3_execute_dft_spc':<br />/home/gryko/abinit-7.4.2/src/52_fft_mpi_noabirule/m_fftw3.F90:3215: undefined reference to `sfftw_execute_dft_'<br />/home/gryko/abinit-7.4.2/src/52_fft_mpi_noabirule/m_fftw3.F90:3215: undefined reference to `sfftw_execute_dft_'<br />/home/gryko/abinit-7.4.2/src/52_fft_mpi_noabirule/m_fftw3.F90:3215: undefined reference to `sfftw_execute_dft_'<br />/home/gryko/abinit-7.4.2/src/52_fft_mpi_noabirule/m_fftw3.F90:3215: undefined reference to `sfftw_execute_dft_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o):/home/gryko/abinit-7.4.2/src/52_fft_mpi_noabirule/m_fftw3.F90:3215: more undefined references to `sfftw_execute_dft_' follow<br /><br /> Any suggestions why?<br /><br /> Thank you very much in advance,<br /> Jan Gryko</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2296&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:30:26 GMT -->
+</html>

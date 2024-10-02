@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1316&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:55:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; ifort + abinit 6.8.2 = fail</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>ifort + abinit 6.8.2 = fail</h2>
+		<p><a href="viewtopic9630.html?f=3&amp;t=1316">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1316</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>ifort + abinit 6.8.2 = fail</h3>
+				<div class="date">Posted: <strong>Mon Sep 12, 2011 2:52 pm</strong></div>
+				<div class="author">by <strong>roginovicci</strong></div>
+				<div class="content">I'm failed to run abinit compiled with ifort. The vertion of intel compiler:<br />&gt; ifort -V<br />Intel(R) Fortran Compiler for applications running on Intel(R) 64, Version 10.1    Build 20090203 Package ID: l_fc_p_10.1.022<br /><br />when I run abinit I've got the following error:<br />Your architecture is not able to handle 8, 4 or 2-bytes FORTRAN file record markers! <br /> You cannot use ABINIT and MPI/IO.<br />  MPI_ERROR_STRING: Unknown error.  Please file a bug report.<br />application called MPI_Abort(MPI_COMM_WORLD, 13) - process 0<br /><br />abinit compiled with the following script&#058;<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>export MPI_OPTS=&quot;-I/usr/local/mpich2_intel/include&quot;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />export MPI_COMPILE_OPTS=&quot;$MPI_OPTS&quot;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />export MPI_CLIBS=&quot;-L/usr/local/mpich2_intel/lib -lmpich -lrt&quot;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />export MPI_FLIBS=&quot;-L/usr/local/mpich2_intel/lib -lmpich -lfmpich&quot;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />export CXXFLAGS=&quot;${MPI_CLIBS}&quot;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />export CPPFLAGS=&quot;${MPI_CLIBS}&quot;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />export CFLAGS=${MPI_CLIBS}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />export FCFLAGS=&quot;${MPI_CLIBS} -lfmpich&quot;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br /><br />./configure --prefix=$INSTALLDIR --libdir=/usr/lib64 \&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />&nbsp; &nbsp; --with-mpi-prefix=/usr/local/mpich2_intel \&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />&nbsp; &nbsp; --enable-mpi --enable-mpi-io --with-mpi-level=2 <br /><br />make<br /></code></pre></div><br />the version 6.0 was compiled the same way and it works. Since version 6.4 I can't compile and run abinit. Please help! <img class="smilies" src="images/smilies/icon_cry.gif" alt=":cry:" title="Crying or Very Sad" /></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ifort + abinit 6.8.2 = fail</h3>
+				<div class="date">Posted: <strong>Mon Oct 10, 2011 3:59 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hello,<br /><br />the version of mpich2 is 1.4.x ?<br /><br />if yes, perhaps your problem is related of a problem with mpich2 not with abinit<br />then you can read this topic ( <a href="http://trac.mcs.anl.gov/projects/mpich2/changeset/8834" class="postlink">http://trac.mcs.anl.gov/projects/mpich2/changeset/8834</a> ) reproduced here :<br /><br /><blockquote class="uncited"><div>Index: /mpich2/branches/release/mpich2-1.4.x/RELEASE_NOTES<br />===================================================================<br />--- /mpich2/branches/release/mpich2-1.4.x/RELEASE_NOTES	(revision 7509)<br />+++ /mpich2/branches/release/mpich2-1.4.x/RELEASE_NOTES	(revision 8834)<br />@@ -98,2 +98,10 @@<br />  * MPI::ERRORS_RETURN may still throw exceptions in the event of an<br />    error rather than silently returning.<br />+<br />+<br />+### Fortran 90:<br />+<br />+ * MPI-IO routines have been accidentally left out of the Fortran 90<br />+   module. This has been fixed in trunk (and will be reflected in<br />+   mpich2-1.5.x and later releases). It has not been fixed in the<br />+   1.4.x releases to avoid breaking ABI.</div></blockquote><br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ifort + abinit 6.8.2 = fail</h3>
+				<div class="date">Posted: <strong>Wed Oct 26, 2011 11:00 am</strong></div>
+				<div class="author">by <strong>roginovicci</strong></div>
+				<div class="content">No the mpich is 1.2 should I ask to upgrade up to 1.4?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ifort + abinit 6.8.2 = fail</h3>
+				<div class="date">Posted: <strong>Sat Oct 29, 2011 8:07 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hello,<br /><br /><blockquote><div><cite>roginovicci wrote:</cite>No the mpich is 1.2 should I ask to upgrade up to 1.4?</div></blockquote><br /><br />can you try first with the version 1.3.2p1 ?<br /><br />if you want to use the version 1.4.1p1 , see before the thread  :<a href="viewtopic0700.html?f=3&amp;t=1206" class="postlink">http://forum.abinit.org/viewtopic.php?f=3&amp;t=1206</a><br /><br />jmb</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1316&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:55:11 GMT -->
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=490&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:33:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Parallel computation stalls when reading wavefunction</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Parallel computation stalls when reading wavefunction</h2>
+		<p><a href="viewtopic1116.html?f=3&amp;t=490">https://forum.abinit.org/viewtopic.php?f=3&amp;t=490</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Parallel computation stalls when reading wavefunction</h3>
+				<div class="date">Posted: <strong>Tue Jul 13, 2010 11:49 am</strong></div>
+				<div class="author">by <strong>akersch</strong></div>
+				<div class="content">Dear All,<br /><br />I want to perform a multi data set computation (calculation of dielectric constant), but the parallel version of abinit/6.0.3 fails. The input file works well in a serial computation.<br />The failure is a disruption of the computation when the wavefunction has to be re read from file for the second step of the computation. The last message in the *.out file is:<br /><br />      -inwffil : will read wavefunctions from disk file ZrTi_o_DS1_WFK<br /><br />The input file is:<br /># ----------------------- Phonon calculation (incl. preparatory run nband 200 npkpt 2 paral_kgb 1 npband 8 npfft 1 bandpp 1 ndtset  3 # Ground state calculation<br />  kptopt1   <br />  tolvrs1   1.0d-<br />  iscf1     5<br />  prtgeo1   8<br />  istwfk1 1 1<br /># Response Function calculation : d/dk<br />  istwfk2 1 1<br />  rfelfd2   2<br />  rfdir2    1 1 1<br />  nqpt2     1<br />  qpt2      0.0 0.0 0.0 <br /># &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; abinit fails to read here  <br />  getwfk2  -1             <br />  kptopt2   2             <br />  iscf2    -<br />  tolwfr2   1.0d-22<br />  nstep2 25<br /># Response Function calculation : electric field perturbation and phonons<br />  istwfk3 1 1<br />  rfphon3   1<br />  rfelfd3   3<br />  rfdir3   1 1 1<br />    nqpt3   1<br />     qpt3   0.0 0.0 0.<br />  getwfk3   -2<br />  getddk3   -1<br />  kptopt3   2<br />  tolvrs3   1.0d-4<br />    iscf3   5<br />   prtwf3   0<br /> rfatpol3   1  48<br />###########################################################<br />chkprim 0<br />nsym 1<br /># definition of geometry.....<br /><br /><br />Abinit 6.0.3 has been compiled with Intel compiler and configured as below:<br /><br />&gt; X86_64 (-O3):<br />&gt; ../configure --prefix=/lrz/sys/applications/abinit/6.0.3/X86_64<br />&gt; --bindir=/lrz/sys/applications/abinit/6.0.3/X86_64/bin<br />&gt; --enable-64bit-flags --disable-bigdft --disable-etsf-io <br />&gt; --disable-netcdf --disable-wannier90  --with-cc-optflags <br />&gt; --with-fc-ld-optflags --enable-scalapack<br />&gt; --with-scalapack-libs=&quot;-L/lrz/sys/libraries/scalapack/1.8 -lscalapack <br />&gt; -L/lrz/sys/libraries/blacs/lib -lblacsF77init_mpich2_intel101<br />&gt; -lblacs_mpich2_intel101 -lblacsF77init_mpich2_intel101  &quot;<br />&gt; --enable-optim=aggressive --disable-debug CC=mpicc FC=mpif90 <br />&gt; CXX=mpicxx<br /><br />Any idea would be helpful<br /><br />Regards<br /><br />Alfred Kersch</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Parallel computation stalls when reading wavefunction</h3>
+				<div class="date">Posted: <strong>Wed Jul 14, 2010 10:01 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hello Alfred,<br /><br />I see that you use scalapack... it's not yet officially supported...<br /><br />have you running all tests of abinit distribution ? <br /><br />regards<br /><br />jmb</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=490&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:33:12 GMT -->
+</html>

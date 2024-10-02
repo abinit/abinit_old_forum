@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=622&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; job termination: lack of memory. 32bit vs. 64bit problem?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>job termination: lack of memory. 32bit vs. 64bit problem?</h2>
+		<p><a href="viewtopic062f-2.html?f=3&amp;t=622">https://forum.abinit.org/viewtopic.php?f=3&amp;t=622</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>job termination: lack of memory. 32bit vs. 64bit problem?</h3>
+				<div class="date">Posted: <strong>Tue Sep 28, 2010 3:00 pm</strong></div>
+				<div class="author">by <strong>spamrefuse</strong></div>
+				<div class="content">Hi,<br /><br />Abinit 6.2.3 runs on a up-to-date Fedora system<br />(32 bits and with kernel 2.6.32-PAE).<br />The system has 6 GB RAM and 12 GB swap.<br /><br />When I run the abinit job, it terminates because it cannot allocate<br />2779.477 Mb (see below for snippet from the log file).<br /><br />How come this job cannot find 2779.477 MB (= 2.7 GB) ?<br /><br />The 'top' command tells me that 90 % of the swap is not used<br />and 2 GB of RAM is free.<br /><br />Am I facing here the limitation of a 32 bits version of the Linux OS?<br />If I replace the 32 bits OS with its equivalent 64 bits version,<br />would that help?<br /><br />My PC has an Intel Core i7 CPU, which effectively shows as 8 CPUs.<br />Would parallelization with mpi on the localhost do any good to solve<br />this memory problem?<br /><br />Thank you!<br />Rob.<br /><br /><br />Here is the snippet of the log file:<br /><br />[...snip...]<br />=========================================================<br />P This job should need less than 2779.477 Mbytes of memory.<br />Rough estimation (10% accuracy) of disk space for files :<br />WF disk file : -1573.915 Mbytes ; DEN or POT disk file : 9.613 Mbytes.<br />=========================================================<br /><br />Biggest array : f_fftgr(disk), with 9.6128 MBytes.<br />memana : allocated an array of 9.613 Mbytes, for testing purposes.<br /><br />memana : ERROR -<br />Test failed to allocate 2779.477 Mbytes<br />It is not worth to continue<br />Action : modify input variable to fit the available memory.<br />or increase limit on available memory.<br /><br />leave_new : decision taken to exit ...<br />=========================================================</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: job termination: lack of memory. 32bit vs. 64bit problem</h3>
+				<div class="date">Posted: <strong>Thu Sep 30, 2010 12:10 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">You should first be aware that Abinit tends to underestimate memory requirements.<br /><br />With a 32-bits OS, you can use up to 3Gb of memory. Going to 64 bits is interesting only if you have more physical memory.<br /><br />In your case, using MPI will not help, since the resources available will not increase. You will probably need even more memory if you do so.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: job termination: lack of memory. 32bit vs. 64bit problem</h3>
+				<div class="date">Posted: <strong>Mon Oct 11, 2010 11:39 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hard to tell if the memory limitation is real or enforced by the 32 bit stuff. You can upgrade your system and recompile abinit as a 64 bit executable. Running in mpi might actually help if each of the threads is using less memory (can be handled by 32 bits) even though the total will be more (but still less than your 6 Gb).<br /><br />Cheers<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: job termination: lack of memory. 32bit vs. 64bit problem</h3>
+				<div class="date">Posted: <strong>Fri Oct 15, 2010 11:26 am</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">In any case, with a 32-bit Linux, the kernel will only be able to address 3Gb of physical memory at most. It is really worth going to 64-bit when you have more memory.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=622&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:41 GMT -->
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3007&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:21:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Runtime error during LDA+DMFT</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Runtime error during LDA+DMFT</h2>
+		<p><a href="viewtopicd399.html?f=9&amp;t=3007">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3007</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Runtime error during LDA+DMFT</h3>
+				<div class="date">Posted: <strong>Tue May 26, 2015 7:46 pm</strong></div>
+				<div class="author">by <strong>PhilippBa</strong></div>
+				<div class="content">Dear all,<br /><br />i got some serious trouble running LDA+DMFT. The system under investigation is a cobalt atom adsorbed on a copper(001) surface. The code runs properly through the first DMFT loop but ends with a <strong class="text-strong">runtime error at line 513 of file m_oper.F90</strong>.<br /> I obtain the Gtau.dat and it looks quite well but i need the code to finish, to obtain the total energy either.<br /><br />My input:<br /><br /><br /><br /><em class="text-italics">nstep 1         <br />toldfe 1.0d-6     <br />ixc 2                  <br />occopt 3                  <br />tsmear 0.01                 <br /><br />...(atomic data skipped)<br /><br />istwfk *1<br /><br />#LDA+U stuff<br /><br />lpawu -1 2<br />dmatpuopt 1<br />upawu   0.0 4.0 eV # Values for U<br />jpawu    0.0 0.9 eV # Values for J<br />f4of2_sla    0.0  0.625<br /><br /><br /># DMFT stuff<br /><br /><br /><br />usedmft  1<br />dmft_solv 5          # CTQMC<br />dmft_mxsf 1.0        <br />dmftbandi 1        <br />dmftbandf 902        <br />dmft_nwli 10000       <br />dmft_nwlo 200       <br />dmft_tollc 0.000001  <br />dmft_iter 1         <br />dmft_dc 1           <br />dmft_entropy 0      <br />dmft_nlambda 6      <br />dmftqmc_l 100         <br />dmftqmc_n 30000000   <br />dmftqmc_therm 10000  <br />#dmft_t2g 1<br />dmft_rslf 1<br />dmftctqmc_grnns 1    <br /></em><br /><br />After the first (and only) DMFT loop ends, the rest of my output looks like this:<br /><br /><br /><em class="text-italics">== Compute Band Energy terms for DMFT<br /><br />     -----------------------------------------------<br />     --- Energy in DMFT (in Ha)<br />     --- E_bandlda (1)  (Ha.) =   ***************<br />     --- E_banddmft(2)  (Ha.) =   ***************<br />     --- E_hu      (3)  (Ha.) =     3.68714008197<br />     --- E_hu_mig  (4)  (Ha.) =     3.69238083601<br />     --- E_hu_qmc  (4)  (Ha.) =     3.68714008197<br />     --- E_hu_ldau (5)  (Ha.) =     3.78866366961<br />     --- E_dc      (6)  (Ha.) =     3.69855097171<br />     --- edmft=(    3-6)(Ha.) =    -0.01141088975<br />     -----------------------------------------------<br /><br />  == The converged DMFT occupations (integral of the Green function) are  ==<br /><br />   = In the atomic basis<br /><br />   -------&gt; For Correlated Atom  91<br /><br />          -- polarization spin component  1<br />        0.67207   0.00000   0.00000  -0.00000   0.00000<br />        0.00000   0.76316  -0.00000   0.01713   0.00000<br />        0.00000  -0.00000   0.76706   0.00000   0.00000<br />       -0.00000   0.01713   0.00000   0.76316   0.00000<br />        0.00000   0.00000   0.00000   0.00000   0.85377<br /><br />   = In the KS basis<br /><br />   --isppol--   1<br /><br />   - ( in the following only the value for the first k-points are printed)<br /><br />  Writes occupations for k-pt    1and between bands    1 and  902</em><br /><br /><br /><br />This is were the code stops. This example was a supercell with 91 atoms (90 copper and 1 cobalt) and i only need one DMFT loop. The memory can not be the problem, since my error report from our high performance cluster told me, that ~38 GB memory were needed (on a 96 GB node). If i run the code with SrVO3, i got no troubles. So i guess that there are some unsuitable settings in my input file.<br /><br /><br />I realy welcome suggestions!<br /><br />Best regards from germany!<br /><br /><br />EDIT: I use Version 7.10.4</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Runtime error during LDA+DMFT</h3>
+				<div class="date">Posted: <strong>Wed May 27, 2015 9:13 am</strong></div>
+				<div class="author">by <strong>amadon</strong></div>
+				<div class="content">Dear Philipp,<br /><br />First of all, could you give your name and affiliation, thanks a lot !<br /><br />Concerning your calculation, it is just that you use a lot of bands.<br />So a format for a printing need to be changed in the source<br />So you have first to change at line 512 515 and 518  of m_oper.F90 the occurence of 1000 by 2000, recompile<br />and relaunch your calculation. It should run...<br /><br />Best regards.<br />Bernard Amadon<br />CEA<br />France</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Runtime error during LDA+DMFT</h3>
+				<div class="date">Posted: <strong>Wed May 27, 2015 9:47 am</strong></div>
+				<div class="author">by <strong>PhilippBa</strong></div>
+				<div class="content">Thanks a lot! <br />For first test's it worked by commenting out the if statement beginning at line 513. <br /><br />Best regards,</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Runtime error during LDA+DMFT</h3>
+				<div class="date">Posted: <strong>Thu May 28, 2015 4:13 pm</strong></div>
+				<div class="author">by <strong>PhilippBa</strong></div>
+				<div class="content">A new problem occurred and i hope it is ok if post it in this topic!<br /><br />The problem now is, that the difference between the LDA+U density matrix (input WFK) and the density matrix of the diagonalized wavefunction is too large.<br /><br />--- !WARNING<br />message: |<br /><br />    Differences between LDA+U density matrix from INPUT wfk and<br />       Direct calculation of density matrix with psichi from DIAGONALIZED wfk is too large:<br />         0.9369E-01 is larger than  0.1000E-02<br />src_file: m_matlu.F90<br />src_line: 1005<br /><br /><br />If i reduce the system size to 19 atoms (which is just one monolayer of copper with a cobalt adatom) everything works fine. I used this small system to check my input parameters (for the ground state calculation as well as the DMFT). However if i now increase the system to 55 atoms (which are three layers of copper), the warning above appears. The difference in the density matrices results in a wrong occupation of my correlated atom. Since I checked and tested different input values, I really do not see what the mistake is.<br /><br />But the question know: Could it be that for such a large system, the variables in the Fortran code are too short defined? So that maybe not all of the lines (of the input WFK )are read?<br /><br /><br />Best regards,</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Runtime error during LDA+DMFT</h3>
+				<div class="date">Posted: <strong>Fri May 29, 2015 9:22 am</strong></div>
+				<div class="author">by <strong>amadon</strong></div>
+				<div class="content">Dear Philipp<br /><br />If all the following conditions are fulfilled, the problem should (in principle) not appear:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&amp;&nbsp; &nbsp; &nbsp;'&nbsp; &nbsp; -&gt; These two quantities should agree if three conditions are fulfilled',ch10,&amp;<br />&amp;&nbsp; &nbsp; &nbsp;'&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-&nbsp; input wavefunctions come from the same Hamiltonien (e.g LDA/GGA)',ch10,&amp;<br />&amp;&nbsp; &nbsp; &nbsp;'&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-&nbsp; dmatpuopt is equal to 1',ch10,&amp;<br />&amp;&nbsp; &nbsp; &nbsp;'&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-&nbsp; all valence states are in the valence',ch10,&amp;<br />&amp;&nbsp; &nbsp; &nbsp;'&nbsp; &nbsp; (for experts users: it is not compulsary that these conditions are fulfilled)' <br /></code></pre></div><br /><br />I assume you start from an LDA calculation and you restart from LDA to do LDA+DMFT, and that dmatpuopt =1<br />because otherwise your calculation with 19 atoms should have the same problem.<br />So it might be that all valence states are not in the valence ? <br />Did you check that the band 902 is empty in the LDA calculation and that the LDA calculation is converged both as regard  the density residual and the diagonalisation of wavefunctions ?<br />If all these conditions are fulfilled, we have to investigate more : First, could you reproduce the following lines of the output (ie the two density matrices compared). Secondly, how many valence electrons do you have in your Cobalt and Copper pseudopotential ? Thirdly, could you submit an input file that reproduce the problem ?<br /><br />Concerning your question: calculations with 55 atoms are not a problem for ABINIT, and WFK I/O can handle it.<br />Best regards<br />Bernard</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Runtime error during LDA+DMFT</h3>
+				<div class="date">Posted: <strong>Fri May 29, 2015 11:45 am</strong></div>
+				<div class="author">by <strong>PhilippBa</strong></div>
+				<div class="content">Thanks for the fast response!<br /><br />I will give you detailed information about the smallest calculation (19 atoms) that give the same error (I attached the two inputs that reproduces the warning). This is (for testing purposes) faster to handle than the large supercell =)<br /><br />Yes I do start with a LDA calculation, followed by DMFT.<br />The LDA calulation converged in cycle 54:<br /><br /> ETOT 54  -3711.1833953143    -4.912E-07 1.568E-06 1.248E-06<br /><br />Does the last column is the density residual? And how can i check the convergence of the diagonalisation of the wavefunction?<br /><br />In the previous case (with the larger number of atoms), band 902 was empty. In the case now band 250 should be empty, too (i included several empty bands). <br /><br />Here are the two two compared matrices:<br /><br /><br />   LDA+U density matrix from INPUT wfk<br /><br />   -------&gt; For Correlated Atom  19<br /><br />          -- polarization spin component  1<br />        0.50094   0.00000    -0.00000   0.00000     0.00000   0.00000     0.00000   0.00000     0.00000   0.00000<br />       -0.00000   0.00000     0.50121   0.00000     0.00000   0.00000    -0.00000   0.00000    -0.00000   0.00000<br />        0.00000   0.00000     0.00000   0.00000     0.53269   0.00000    -0.00000   0.00000     0.00000   0.00000<br />        0.00000   0.00000    -0.00000   0.00000    -0.00000   0.00000     0.50121   0.00000    -0.00000   0.00000<br />        0.00000   0.00000    -0.00000   0.00000     0.00000   0.00000    -0.00000   0.00000     0.51722   0.00000<br /><br />   Direct calculation of density matrix with psichi from DIAGONALIZED wfk<br /><br />   -------&gt; For Correlated Atom  19<br /><br />          -- polarization spin component  1<br />        0.44068   0.00000     0.00000   0.00578    -0.00000   0.00000    -0.00000  -0.00578     0.00000   0.00000<br />        0.00000  -0.00578     0.41598   0.00000    -0.00000  -0.00277     0.00000   0.00000     0.00000  -0.00235<br />       -0.00000  -0.00000    -0.00000   0.00277     0.49598   0.00000     0.00000  -0.00277     0.00000   0.00000<br />       -0.00000   0.00578     0.00000   0.00000     0.00000   0.00277     0.41598   0.00000     0.00000  -0.00235<br />        0.00000   0.00000     0.00000   0.00235     0.00000   0.00000     0.00000   0.00235     0.48270   0.00000<br /><br /><br />In the PSP of Cobalt are 17 valence electrons and 19 in the case of Copper. I am not sure if I did my inputs correct, since ABINIT and DMFT is totally new for me.<br /><br />Best regards,<br />Philipp<br /><br /><br /><br />EDIT: I used a very high value for nband in this case, but i guess that this is not a problem.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Runtime error during LDA+DMFT</h3>
+				<div class="date">Posted: <strong>Fri May 29, 2015 1:14 pm</strong></div>
+				<div class="author">by <strong>amadon</strong></div>
+				<div class="content">Dear Philipp,<br /><br />I have several remarks.<br />Firstly, as underlined in <a href="http://www.abinit.org/doc/helpfiles/for-v7.10/input_variables/vardev.html#usedmft" class="postlink">http://www.abinit.org/doc/helpfiles/for-v7.10/input_variables/vardev.html#usedmft</a>, the eigenfunctions of KS Hamiltonian<br />has to be precisely computed. It can be checked with the 5th column of your ETOT line that the convergence is not so good  (1.568E-06). It should<br />be better to have it at least below 1.E-10: using nline 5 and nnsclo 5 in both input (lda.in and dmft.in) should improve this. <br />Nevertheless, it should not play such a role in your case.<br />Moreover, your could decrease toldfe (or instead tolvrs) to improve the convergence of the self consistent DFT cycle.<br /><br />Secondly and more importantly, in your input files, <br />the smearing (or temperature) are not the same for the LDA and DMFT calculations: so the density computed in the second dataset from the LDA eigenfunctions will change.<br />So could you try to relaunch the calculation with the same smearing in the two inputs<br />(you just have to change the DMFT.in output with tsmear=0.01 instead of tsmear=0.01 eV).<br /><br />If this not solve the problem: You said in one of your last post that you have a 19 atoms calculation which do not show this Warning. Could you post your relevant input files ?<br /><br />Best regards<br />Bernard</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Runtime error during LDA+DMFT&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Fri May 29, 2015 5:31 pm</strong></div>
+				<div class="author">by <strong>PhilippBa</strong></div>
+				<div class="content">Many thanks for your help and your suggestions!<br /><br />The problem has been solved by using the same smearing in the LDA and DMFT calculation. I will also change my inputs according to your suggestions about the convergence.<br /><br /><br />Best regards,<br />Philipp</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3007&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:21:38 GMT -->
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4039&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:38:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Configuring Abinit 8.10 with NetCDF as default</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Configuring Abinit 8.10 with NetCDF as default</h2>
+		<p><a href="viewtopicc486.html?f=3&amp;t=4039">https://forum.abinit.org/viewtopic.php?f=3&amp;t=4039</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Configuring Abinit 8.10 with NetCDF as default&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Fri Feb 15, 2019 10:38 pm</strong></div>
+				<div class="author">by <strong>rogphys</strong></div>
+				<div class="content">Hello everyone,<br /><br />I have been having some trouble using ABINIT with NetCDF in Linux. I am interested in outputting everything in NetCDF format, either by setting the `enable_netcdf_default=&quot;yes&quot;` in the configuration stage, or by using `iomode 3` in the input file. This is my configuration file:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>enable_fallbacks=&quot;yes&quot;<br />enable_gw-dpc=&quot;yes&quot;<br />enable_macroave=&quot;yes&quot;<br /><br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br /><br />enable_openmp=&quot;yes&quot;<br /><br />with_fft_flavor=fftw3<br />with_fft_incs=&quot;-I/usr/include/&quot;<br />with_fft_libs=&quot;-L/usr/lib/x86_64-linux-gnu/ -lfftw3 -lfftw3f&quot;<br /><br />with_trio_flavor=netcdf<br />with_netcdf_libs=&quot;-L/usr/lib/x86_64-linux-gnu/ -lnetcdf -lnetcdff&quot;<br />with_netcdf_incs=&quot;-I/usr/include/&quot;<br />enable_netcdf_default=&quot;yes&quot;<br /></code></pre></div><br /><br />I configure with this:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>CC=mpicc FC=mpifort CXX=mpicxx ../configure</code></pre></div><br /><br />This compiles successfully, but when I run the tests using MPI, I get this error:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--netcdf-default is on but netcdf library does not support MPI-IO. Aborting now</code></pre></div><br /><br />This has happened to me on various Linux systems using various compilers and libraries. I have tried to alleviate this problem by compiling NetCDF with parallel capabilities by hand and linking to that, but those attempts have been unsuccessful so far.<br /><br />Surely there must be a way to launch ABINIT with MPI parallelism, but with sequential writing of the NetCDF files! Any help would be greatly appreciated.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configuring Abinit 8.10 with NetCDF as default</h3>
+				<div class="date">Posted: <strong>Tue Feb 19, 2019 3:18 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />it seems that the &quot;enable_netcdf_default&quot; option involves netcdf-4 with a parallel hdf5<br />the netcdf package of ubuntu does not seem to support this configuration<br /><br />below the ac file which contains the 4 configurations I tested: <br /><ul>1) netcdf of ubuntu <br />2) compilation of netcdf-4.6 + netcdf-fortran<br />3) compilation of hdf5_serial + netcdf-4.6+ netcdf-fortran<br />4) compilation of hdf5_paral + netcdf-4.6+ netcdf-fortran</ul><br />only &quot;config 4&quot; works with &quot;enable_netcdf_default=&quot;yes&quot;&quot;<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_prefix=&quot;/usr&quot;<br /><br />enable_openmp=&quot;yes&quot;<br /><br />with_fft_flavor=fftw3<br />with_fft_incs=&quot;-I/usr/include/&quot;<br />with_fft_libs=&quot;-L/usr/lib/x86_64-linux-gnu/ -lfftw3 -lfftw3f&quot;<br /><br />####### netcdf package from Ubuntu 18.04<br />#<br />#with_trio_flavor=&quot;netcdf&quot;<br />#with_netcdf_libs=&quot;-L/usr/lib/x86_64-linux-gnu/ -lnetcdf -lnetcdff -lhdf5_serial -lhdf5_serial_hl&quot;<br />#with_netcdf_incs=&quot;-I/usr/include/&quot;<br /><br />####### netcdf-4.6 without hdf5<br />#<br />#with_trio_flavor=&quot;netcdf&quot;<br />#with_netcdf_incs=&quot;-I/usr/local/netcdf-4.6.2_gcc73/include&quot;<br />#with_netcdf_libs=&quot;-L/usr/local/netcdf-4.6.2_gcc73/lib -lnetcdff -lnetcdf&quot;<br /><br />####### netcdf-4.6&nbsp; with hdf5 serial<br />#<br />#with_trio_flavor=&quot;netcdf&quot;<br />#with_netcdf_incs=&quot;-I/usr/local/netcdf-4.6.2_gcc73_s_openmpi/include&quot;<br />#with_netcdf_libs=&quot;-L/usr/local/netcdf-4.6.2_gcc73_s_openmpi/lib -lnetcdff -lnetcdf -L/usr/local/hdf5-1.10.4_gcc73_serial/lib -lhdf5hl_fortran -lhdf5_hl -lhdf5_fortran -lhdf5&nbsp; -lz -ldl&quot;<br /><br />####### netcdf-4.6&nbsp; with hdf5 //<br />#<br />with_trio_flavor=&quot;netcdf&quot;<br />with_netcdf_incs=&quot;-I/usr/local/netcdf-4.6.2_gcc73_openmpi/include&quot;<br />with_netcdf_libs=&quot;-L/usr/local/netcdf-4.6.2_gcc73_openmpi/lib -lnetcdff -lnetcdf -L/usr/local/hdf5-1.10.4_gcc73_paral/lib -lhdf5hl_fortran -lhdf5_hl -lhdf5_fortran -lhdf5&nbsp; -lz -ldl&quot;<br /><br />enable_netcdf_default=&quot;yes&quot;<br /><br />enable_gw_dpc=&quot;yes&quot;<br />enable_macroave=&quot;yes&quot;</code></pre></div><br /><br />regards<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configuring Abinit 8.10 with NetCDF as default</h3>
+				<div class="date">Posted: <strong>Tue Feb 19, 2019 8:33 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">I'm just found that there is a parallel netcdf lib ( libpnetcdf-dev ) : to try...<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configuring Abinit 8.10 with NetCDF as default</h3>
+				<div class="date">Posted: <strong>Wed Feb 20, 2019 6:04 pm</strong></div>
+				<div class="author">by <strong>rogphys</strong></div>
+				<div class="content">Thank you for the suggestions. Is there anyway to simply tell the program to not write the NetCDF files in parallel? That would definitely be the easiest solution...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configuring Abinit 8.10 with NetCDF as default</h3>
+				<div class="date">Posted: <strong>Fri Feb 22, 2019 9:28 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br /><blockquote class="uncited"><div>Is there anyway to simply tell the program to not write the NetCDF files in parallel? </div></blockquote><br />simple answer : no  <img class="smilies" src="images/smilies/icon_neutral.gif" alt=":|" title="Neutral" /> <br /><br />some more details...<br />libpnetcdf-dev : not usable because it's another paradigm<br /><br />ubuntu packages : libnetcdf-dev + libnetcdff-dev + libhdf5-openmpi-dev + libhdf5-mpi-dev : don't work <img class="smilies" src="images/smilies/icon_e_sad.gif" alt=":-(" title="Sad" /><br />ubuntu didn't really compile the parallel support  <img class="smilies" src="images/smilies/icon_rolleyes.gif" alt=":roll:" title="Rolling Eyes" /> <br /><br /><blockquote class="uncited"><div>root@yambo3:~/Workspace/trunk_release-8.10# <strong class="text-strong"><span style="color: #0000FF">nc-config --all</span></strong><br /><br />This netCDF 4.6.0 has been built with the following features:<br /><br />  --cc        -&gt; /usr/bin/cc<br />  --cflags    -&gt; -I/usr/include -I/usr/include/hdf5/serial<br />  --libs      -&gt; -L/usr/lib/x86_64-linux-gnu -L/usr/lib/x86_64-linux-gnu/hdf5/serial -lnetcdf -lhdf5_hl -lhdf5 -lpthread -lsz -lz -ldl -lm -lcurl<br /><br />  --has-c++   -&gt; no<br />  --cxx       -&gt;<br /><br />  --has-c++4  -&gt; no<br />  --cxx4      -&gt;<br /><br />  --has-fortran-&gt; yes<br />  --fc        -&gt; gfortran<br />  --fflags    -&gt; -I/usr/include<br />  --flibs     -&gt; -L/usr/lib -lnetcdff -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -lnetcdf -lnetcdf<br />  --has-f90   -&gt; no<br />  --has-f03   -&gt; yes<br /><br />  --has-dap   -&gt; yes<br />  --has-dap2  -&gt; yes<br />  --has-dap4  -&gt; yes<br />  --has-nc2   -&gt; yes<br />  --has-nc4   -&gt; yes<br />  --has-hdf5  -&gt; yes<br />  --has-hdf4  -&gt; no<br />  --has-logging-&gt; no<br />  --has-pnetcdf-&gt; no<br />  --has-szlib -&gt; no<br />  --has-cdf5 -&gt; no<br /> <span style="color: #FF0000"> --has-parallel-&gt; no</span><br /><br />  --prefix    -&gt; /usr<br />  --includedir-&gt; /usr/include<br />  --libdir    -&gt; /usr/lib/x86_64-linux-gnu<br />  --version   -&gt; netCDF 4.6.0</div></blockquote><br /><br />only the &quot;config 4&quot; in my previous post works ( compilation of hdf5_paral + netcdf-4.6+ netcdf-fortran )<br /><br /><blockquote class="uncited"><div>root@yambo3:/usr/local/hdf5-1.10.4_gcc73_paral/bin# <strong class="text-strong"><span style="color: #0000FF">/usr/local/netcdf-4.6.2_gcc73_openmpi/bin/nc-config --all</span></strong><br /><br />This netCDF 4.6.2 has been built with the following features:<br /><br />  --cc            -&gt; mpicc<br />  --cflags        -&gt; -I/usr/local/netcdf-4.6.2_gcc73_openmpi/include -I/usr/local/hdf5-1.10.4_gcc73_paral/include<br />  --libs          -&gt; -L/usr/local/netcdf-4.6.2_gcc73_openmpi/lib -L/usr/local/hdf5-1.10.4_gcc73_paral/lib -lnetcdf -lhdf5_hl -lhdf5 -lm -ldl -lz<br /><br />  --has-c++       -&gt; no<br />  --cxx           -&gt;<br /><br />  --has-c++4      -&gt; no<br />  --cxx4          -&gt;<br /><br />  --has-fortran   -&gt; yes<br />  --fc            -&gt; gfortran<br />  --fflags        -&gt; -I/usr/include<br />  --flibs         -&gt; -L/usr/lib -lnetcdff -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -lnetcdf -lnetcdf<br />  --has-f90       -&gt; no<br />  --has-f03       -&gt; yes<br /><br />  --has-dap       -&gt; no<br />  --has-dap2      -&gt; no<br />  --has-dap4      -&gt; no<br />  --has-nc2       -&gt; yes<br />  --has-nc4       -&gt; yes<br />  --has-hdf5      -&gt; yes<br />  --has-hdf4      -&gt; no<br />  --has-logging   -&gt; no<br />  --has-pnetcdf   -&gt; no<br />  --has-szlib     -&gt; no<br />  <span style="color: #0000FF">--has-cdf5      -&gt; yes<br />  --has-parallel4 -&gt; yes<br />  --has-parallel  -&gt; yes</span><br /><br />  --prefix        -&gt; /usr/local/netcdf-4.6.2_gcc73_openmpi<br />  --includedir    -&gt; /usr/local/netcdf-4.6.2_gcc73_openmpi/include<br />  --libdir        -&gt; /usr/local/netcdf-4.6.2_gcc73_openmpi/lib<br />  --version       -&gt; netCDF 4.6.2</div></blockquote><br /><br />I removed all installed packages by default (openmpi, hdf5, netcdf, ...) and I recompiled everything (MPICH3 + HDF5 + NetCDF + NetCDF-fortran ...) and then,  everything works ...<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./runtests.py paral mpiio -n 4 -j 2 --no-logo<br />...<br />Suite&nbsp; &nbsp;failed&nbsp; passed&nbsp; succeeded&nbsp; skipped&nbsp; disabled&nbsp; run_etime&nbsp; tot_etime<br />paral&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;9&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;30&nbsp; &nbsp; &nbsp; &nbsp;77&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;797.29&nbsp; &nbsp; &nbsp;805.70<br />...<br />Suite&nbsp; &nbsp;failed&nbsp; passed&nbsp; succeeded&nbsp; skipped&nbsp; disabled&nbsp; run_etime&nbsp; tot_etime<br />mpiio&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;12&nbsp; &nbsp; &nbsp; &nbsp; 4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;262.67&nbsp; &nbsp; &nbsp;282.94<br /></code></pre></div><br /><br />The standard packages of ubuntu are not made for the &quot;simulation&quot; nor to make the HPC !!<br /><br />if you need recipes to compile the different packages (HDF5, NetCDF, NetCDF-fortran, ...), I provide them<br /><br />A+<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configuring Abinit 8.10 with NetCDF as default</h3>
+				<div class="date">Posted: <strong>Sat Feb 23, 2019 4:15 pm</strong></div>
+				<div class="author">by <strong>rogphys</strong></div>
+				<div class="content"><blockquote><div><cite>jbeuken wrote:</cite>The standard packages of ubuntu are not made for the &quot;simulation&quot; nor to make the HPC !!<br /><br />if you need recipes to compile the different packages (HDF5, NetCDF, NetCDF-fortran, ...), I provide them<br /></div></blockquote><br /><br />That would be incredibly useful for me! My final install will be on a small HPC system using the Intel compilers.<br /><br />Many thanks!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configuring Abinit 8.10 with NetCDF as default</h3>
+				<div class="date">Posted: <strong>Mon Mar 04, 2019 5:28 am</strong></div>
+				<div class="author">by <strong>rogphys</strong></div>
+				<div class="content"><blockquote><div><cite>jbeuken wrote:</cite>if you need recipes to compile the different packages (HDF5, NetCDF, NetCDF-fortran, ...), I provide them<br /><br />jmb</div></blockquote><br /><br />I would really appreciate these, if you have the chance. Thanks!</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4039&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:38:07 GMT -->
+</html>

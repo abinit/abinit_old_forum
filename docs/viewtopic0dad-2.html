@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=944&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:42:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Problem in generating monoclinic cells</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Problem in generating monoclinic cells</h2>
+		<p><a href="viewtopic72fc.html?f=9&amp;t=944">https://forum.abinit.org/viewtopic.php?f=9&amp;t=944</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Problem in generating monoclinic cells</h3>
+				<div class="date">Posted: <strong>Tue Mar 08, 2011 9:42 pm</strong></div>
+				<div class="author">by <strong>renyu</strong></div>
+				<div class="content">I am trying to build a monoclinic cell of Ga2O3, with a =12.23, b=3.04, c=5.80, and beta=103.7. From the international tables, this belongs to space group #12, with 5-atoms specified, each of multiplicity 4, which results in a total of 20 atoms in the cell. Here is how I specified the input file:<br /><br />spgroup 12<br />brvltt -1<br /><br />acell   12.23  3.04  5.80 Angstroms   # cell dimensions<br />angdeg  90 103.7 90   # monoclinic cell<br /><br />natom 5    # 5 atoms <br />typat 2*1 3*2         # 2 Ga atoms, and 3 O atoms<br />xred        <br />  0.34  0.00  0.69<br />  0.09  0.00  0.79<br />    0.17  0.00  0.10<br />    0.50  0.00  0.26<br />    0.83  0.00  0.44<br /><br />However I got a runtime error that comes from &quot;symatm.F90&quot;, shown below. Does anyone have a clue of where I might be wrong? Thanks a lot for your help.<br /><br />Renyu<br /><br /><strong class="text-strong">   Trouble finding symmetrically equivalent atoms<br />  Applying inv of symm number  2 to atom number   1  of typat  1<br />  gives tratom= -3.4000E-01  3.4000E-01 -6.9000E-01.<br />  This is further away from every atom in crystal than the allowed tolerance.<br />  The inverse symmetry matrix is  0  1  0<br />                                  1  0  0<br />                                  0  0 -1<br />  and the nonsymmorphic transl. tnons =    0.0000000    0.0000000    0.0000000<br />  The nearest coordinate differs by  3.200E-01 -3.200E-01 -3.800E-01<br />  for indsym(nearest atom)=    1<br />At line 183 of file ../../../src/42_geometry/symatm.F90<br />Fortran runtime error: End of file</strong></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem in generating monoclinic cells</h3>
+				<div class="date">Posted: <strong>Tue Mar 08, 2011 11:22 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Hi Renyu,<br /><br />Similar discussion as in <a href="viewtopicdb36.html?f=8&amp;t=843&amp;start=0" class="postlink">http://forum.abinit.org/viewtopic.php?f=8&amp;t=843&amp;start=0</a> Try brvlatt=0 to avoid conventional/primitive cell gymnastics<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>...<br />acell 12.23 3.04 5.80 angstroms<br />spgroup 12<br />angdeg 90 103.83 90<br />ntypat 2<br />znucl 31 8<br />natom 20<br />natrd 5<br />typat 1 1 2 2 2<br />chkprim 0<br />brvltt 0<br />xred<br />0.34 0.00 0.69<br />0.09 0.00 0.79<br />0.17 0.00 0.10<br />0.50 0.00 0.26<br />0.83 0.00 0.44<br />ecut 8.0<br />kptopt 0<br />nkpt 1<br />nline 1<br />nstep 1<br />toldfe 1.0d-6<br />prtcif 1<br /></code></pre></div><br /><br />Kind regards,<br /><br />Alain<br /><br />P.S. can you show me your complete input? Even if they are errors, it should not crash</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem in generating monoclinic cells</h3>
+				<div class="date">Posted: <strong>Wed Mar 09, 2011 2:29 am</strong></div>
+				<div class="author">by <strong>renyu</strong></div>
+				<div class="content">Hi Alain, <br /><br />Thanks a lot for your reply! Now it works. I also tried brvlatt=-1 and natom=10 and it gives me the primitive cell. So I guess for generating conventional cells we should use brvlatt=0 and natom=&lt;total # atoms in conventional cell&gt; and for primitive cells we should use brvlatt=-1 with natom=&lt;total # atoms in primitive cell&gt;. In both cases, natrd should be exactly the same as the number of entries in xred. Am I right? I also attached the full input file for your reference. <br /><br />You are really helpful. Thanks again for your help. <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /><br /><br />Renyu<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>chksymbreak 0<br /><br />spgroup 12<br />brvltt -1<br /><br />ntypat 2<br />znucl 31 8<br />acell&nbsp; &nbsp;12.23&nbsp; 3.04&nbsp; 5.80 Angstroms<br />angdeg&nbsp; 90 103.7 90<br />natom 5<br />typat 2*1 3*2<br />xred<br />&nbsp; 0.34&nbsp; 0.00&nbsp; 0.69<br />&nbsp; 0.09&nbsp; 0.00&nbsp; 0.79<br />&nbsp; &nbsp; 0.17&nbsp; 0.00&nbsp; 0.10<br />&nbsp; &nbsp; 0.50&nbsp; 0.00&nbsp; 0.26<br />&nbsp; &nbsp; 0.83&nbsp; 0.00&nbsp; 0.44<br /><br />ecut 8.0<br />nstep 100<br />toldfe&nbsp; 1.0d-6<br />diemac 12.0<br />kptopt 0<br />nkpt 1<br /></code></pre></div><br />~<br />~<br />~<br />~</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=944&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:42:48 GMT -->
+</html>

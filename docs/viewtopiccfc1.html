@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=3401&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:28:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; problem with ONCV PS for H</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>problem with ONCV PS for H</h2>
+		<p><a href="viewtopicdce6.html?f=14&amp;t=3401">https://forum.abinit.org/viewtopic.php?f=14&amp;t=3401</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>problem with ONCV PS for H</h3>
+				<div class="date">Posted: <strong>Fri Oct 14, 2016 1:39 pm</strong></div>
+				<div class="author">by <strong>Artem</strong></div>
+				<div class="content">Dear Abinit Users!<br /><br />I have faced with a problem using tabulated atomic ONCVPSP data for Hydrogen from current Pseudo Dojo.<br />Simple optimization run aborts with a message:<br /><br />--- !ERROR<br />src_file: psp8in.F90<br />src_line: 423<br />mpi_rank: 0<br />message: |<br />    Bad integer for item 1 in list input<br /><br />And following service information from the run is listed below:<br /><br />- pspini: atom type   1  psp file is H.psp8<br />- pspatm: opening atomic psp file    H.psp8<br />- H     ONCVPSP  r_core=  1.01  0.71<br />-  1.00000   1.00000    150120                znucl, zion, pspdat<br />    8   11    1    1       300   0.00000      pspcod,pspxc,lmax,lloc,mmax,r2well<br />    2.99000000000000    0.00000000000000    0.00000000000000   rchrg,fchrg,qchrg<br />     nproj     2     0<br />extension_switch     1<br /> DATA TYPE INFORMATION:<br /> REAL:      Data type name: REAL(DP)<br />            Kind value:      8<br />            Precision:      15<br />            Smallest nonnegligible quantity relative to 1:  0.22204460E-15<br />            Smallest positive number:                       0.22250739-307<br />            Largest representable number:                   0.17976931+309<br /> INTEGER:   Data type name: INTEGER(default)<br />            Kind value: 4<br />            Bit size:   32<br />            Largest representable number: 2147483647<br /> LOGICAL:   Data type name: LOGICAL<br />            Kind value: 4<br /> CHARACTER: Data type name: CHARACTER             Kind value: 1<br />  MPI-IO support is OFF<br /><br />Notably, a run on a model with omitted H-atoms (and thus, avoiding H.psp8) goes smooth.<br />What could be wrong with psp8-file for H? And how to fix it?<br /><br />Thanks!<br />Artem</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem with ONCV PS for H</h3>
+				<div class="date">Posted: <strong>Sat Oct 22, 2016 10:19 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">I imagine you are using abinit7.<br />In this case, you have to set the value of extension_switch to 0.<br />Just open the file in an editor and change the line with extension_switch.<br /><br />From the web-site:<br /><br />Version Compatibility<br />The PDv0.2 table is directly compatible with ABINIT version 7.10.5.<br />For previous ABINIT versions, one needs to change the extension_switch in line 6 of the pseudo potential file from 1 to 0.  The tar file contains a script to do this for all pseudo potential files.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=3401&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:28:48 GMT -->
+</html>

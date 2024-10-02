@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4333&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:16:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Calculation parallelization</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Calculation parallelization</h2>
+		<p><a href="viewtopic735e.html?f=9&amp;t=4333">https://forum.abinit.org/viewtopic.php?f=9&amp;t=4333</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Calculation parallelization</h3>
+				<div class="date">Posted: <strong>Sun Mar 08, 2020 4:29 pm</strong></div>
+				<div class="author">by <strong>Vladyslav</strong></div>
+				<div class="content">Dear All,<br>
+<br>
+I am new to Abinit and I am looking for a possibility to properly parallelize my calculations.<br>
+I have 10 cpu cores and use mpirun to parallel it.<br>
+<br>
+My parameters:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>nband 200
+ngkpt 8 8 8
+paral_kgb 1
+npkpt 1
+npfft 1
+npband 10
+nspinor 1 nsppol 2  nspden 2
+</code></pre></div>
+
+When I try to swap values for <strong class="text-strong">npkpt</strong> with values for <strong class="text-strong">npband</strong> I see 30 processes instead of 10 (using htop).<br>
+However, I have read in similar topics of this forum that <strong class="text-strong">npkpt</strong> paralleling has been recognised as the most effective.<br>
+I would like to know, whether my approach is correct, and if not - how to optimize it?<br>
+<br>
+Thank you,<br>
+Vladyslav</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Calculation parallelization</h3>
+				<div class="date">Posted: <strong>Mon Apr 20, 2020 8:41 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Vladyslav,<br>
+Abinit is parallelized over k-point by default such that you don't have to initialized the parallel_kgb variables. The only thing is that to be optimal the total number of k-points should be a factor of the number of CPU.<br>
+Otherwise, with paral_kgb you have to make sure that npband*npkpt is equal to the number of CPU.<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4333&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:16:28 GMT -->
+</html>

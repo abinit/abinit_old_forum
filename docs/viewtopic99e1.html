@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3884&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:41:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; internal compiler error: Segmentation fault during make</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>internal compiler error: Segmentation fault during make</h2>
+		<p><a href="viewtopic5222.html?f=3&amp;t=3884">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3884</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>internal compiler error: Segmentation fault during make</h3>
+				<div class="date">Posted: <strong>Wed Jul 11, 2018 8:57 am</strong></div>
+				<div class="author">by <strong>shiva</strong></div>
+				<div class="content"><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file7d10.php?id=1589">config.log</a></dt>
+			<dd><em>config log file</em></dd>			<dd>(92.02 KiB) Downloaded 347 times</dd>
+		</dl>
+		
+		
+			</div><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file7d10.php?id=1589">config.log</a></dt>
+			<dd><em>config log file</em></dd>			<dd>(92.02 KiB) Downloaded 347 times</dd>
+		</dl>
+		
+		
+			</div>Dear Moderators and users,<br /><br />I am new user of abinit and compiling abinit-8.8.3 on a cluster. I prepared a hostname.ac file and run the configure in the build directory with .ac file as config file. After configuration with no error or warning, I issued make. In this step I am getting &quot;../../../src/41_xc_lowlevel/drivexc.F90:894: internal compiler error: Segmentation fault&quot; error. <br /><br />I am giving the system information and configure details below:<br /><br />OS : CentOS 6.7 <br />uname -a <br />Linux  2.6.32-504.23.4.el6.x86_64 #1 SMP  x86_64 x86_64 x86_64 GNU/Linux<br /><br />ifort (icc) -V : Intel(R) 64, Version 13.0.1.117 Build 20121010<br /><br /><strong class="text-strong">My hostname.ac file:</strong><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>FC=&quot;gfortran&quot;<br />CC=&quot;gcc&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_prefix=&quot;/opt/soft/share/openmpigcc&quot;<br />with_tardir=&quot;/home/shiva/.abinit/tarballs&quot;<br />with_trio_flavor=&quot;netcdf&quot;<br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_libs=&quot;-L/opt/soft/share/intel/composer_xe_2013.1.117/mkl/lib/intel64 -Wl,--start-group&nbsp; -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group&quot; <br />with_linalg_flavor=&quot;mkl&quot;<br />with_linalg_libs=&quot;-L/opt/soft/share/intel/composer_xe_2013.1.117/mkl/lib/intel64 -Wl,--start-group&nbsp; -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group&quot;<br />with_dft_flavor=&quot;atompaw+bigdft+libxc+wannier90&quot; <br />enable_gw_dpc=&quot;yes&quot;<br /></code></pre></div><br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;==============================================================================<br />&nbsp;=== Final remarks&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ===<br />&nbsp;==============================================================================<br /><br /><br />Summary of important options:<br /><br />&nbsp; * C compiler&nbsp; &nbsp; &nbsp; : gnu version 4.4<br />&nbsp; * Fortran compiler: gnu version 4.4<br />&nbsp; * architecture&nbsp; &nbsp; : intel xeon (64 bits)<br /><br />&nbsp; * debugging&nbsp; &nbsp; &nbsp; &nbsp;: basic<br />&nbsp; * optimizations&nbsp; &nbsp;: standard<br /><br />&nbsp; * OpenMP enabled&nbsp; : no (collapse: ignored)<br />&nbsp; * MPI&nbsp; &nbsp; enabled&nbsp; : yes<br />&nbsp; * MPI-IO enabled&nbsp; : yes<br />&nbsp; * GPU&nbsp; &nbsp; enabled&nbsp; : no (flavor: none)<br /><br />&nbsp; * TRIO&nbsp; &nbsp;flavor = netcdf-fallback<br />&nbsp; * TIMER&nbsp; flavor = abinit (libs: ignored)<br />&nbsp; * LINALG flavor = mkl (libs: user-defined)<br />&nbsp; * ALGO&nbsp; &nbsp;flavor = none (libs: ignored)<br />&nbsp; * FFT&nbsp; &nbsp; flavor = fftw3 (libs: user-defined)<br />&nbsp; * MATH&nbsp; &nbsp;flavor = none (libs: ignored)<br />&nbsp; * DFT&nbsp; &nbsp; flavor = libxc-fallback+atompaw-fallback+bigdft-fallback+wannier90-fallback<br /><br /></code></pre></div><br /><br />I have tried configuring with icc and ifort(also with mpif90 and mpicc) in hostname.ac but abinit configure was automatically taking gcc and gfortran 4.4. <br />I have also tried basic abinit compilation with_dft_flavor=&quot;none and got the same error. <br /><br />I have attached config.log.<br /><br />Thank you<br />Shivaprasad <br />IIT Mandi,</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: internal compiler error: Segmentation fault during make&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Fri Jul 13, 2018 6:40 pm</strong></div>
+				<div class="author">by <strong>shiva</strong></div>
+				<div class="content">The error is solved.<br /><br />The error was due to very old gfortran version 4.4.7 in the cluster. Used gfortran-4.8.2 (still it is older) and with abinit lapack + blas libraries was able to compile successfully with suboptimal configuration. Passed all the tests. <br /><br />gfortran-4.8.2 + intel mkl for linear algebra was also successfully compiled in the previous try, in the cluster but all the tests were not passed.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3884&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:41:05 GMT -->
+</html>

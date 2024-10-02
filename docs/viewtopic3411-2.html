@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1070&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:05:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; confused by code in hartre1.F90 (solved)</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>confused by code in hartre1.F90 (solved)</h2>
+		<p><a href="viewtopicc9f8.html?f=19&amp;t=1070">https://forum.abinit.org/viewtopic.php?f=19&amp;t=1070</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>confused by code in hartre1.F90 (solved)&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Wed May 04, 2011 9:55 pm</strong></div>
+				<div class="author">by <strong>ldamewood</strong></div>
+				<div class="content">I'm trying to write a small routine to calculate some energy term and I was using hartre1.F90 (in 6.6.2) as a template. This part is giving me trouble:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;do ii=1,3<br />&nbsp; &nbsp;id(ii)=ngfft(ii)/2+2<br />&nbsp; &nbsp;do ing=1,ngfft(ii)<br />&nbsp; &nbsp; &nbsp;ig=ing-(ing/id(ii))*ngfft(ii)-1<br />&nbsp; &nbsp; &nbsp;gq(ii,ing)=ig+qphon(ii)<br />&nbsp; &nbsp;end do<br />&nbsp;end do<br /></code></pre></div><br /><br />For my calculation, ngfft(:)=36 and for simplicity, qphon(:)=0. The result is <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>gq(1,:)=gq(2,:)=gq(3,:)=<br />&nbsp; &nbsp;-1.8000<br />&nbsp; &nbsp;-2.6000<br />&nbsp; &nbsp;-3.4000<br />&nbsp; &nbsp;-4.2000<br />&nbsp; &nbsp;-5.0000<br />&nbsp; &nbsp;-5.8000<br />&nbsp; &nbsp;-6.6000<br />&nbsp; &nbsp;-7.4000<br />&nbsp; &nbsp;-8.2000<br />&nbsp; &nbsp;-9.0000<br />&nbsp; &nbsp;-9.8000<br />&nbsp; -10.6000<br />&nbsp; -11.4000<br />&nbsp; -12.2000<br />&nbsp; -13.0000<br />&nbsp; -13.8000<br />&nbsp; -14.6000<br />&nbsp; -15.4000<br />&nbsp; -16.2000<br />&nbsp; -17.0000<br />&nbsp; -17.8000<br />&nbsp; -18.6000<br />&nbsp; -19.4000<br />&nbsp; -20.2000<br />&nbsp; -21.0000<br />&nbsp; -21.8000<br />&nbsp; -22.6000<br />&nbsp; -23.4000<br />&nbsp; -24.2000<br />&nbsp; -25.0000<br />&nbsp; -25.8000<br />&nbsp; -26.6000<br />&nbsp; -27.4000<br />&nbsp; -28.2000<br />&nbsp; -29.0000<br />&nbsp; -29.8000<br /></code></pre></div><br /><br />Shouldn't the G vectors be whole numbers; or am I missing something?<br /><br />Thanks!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: confused by code in hartre1.F90</h3>
+				<div class="date">Posted: <strong>Thu May 05, 2011 8:34 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">yes, but<br /><br />1) the gq are G+q, so they will certainly not be integers<br />2) if ngfft is odd it looks like you will get half integer values for id anyway<br /><br />matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: confused by code in hartre1.F90</h3>
+				<div class="date">Posted: <strong>Thu May 05, 2011 6:16 pm</strong></div>
+				<div class="author">by <strong>ldamewood</strong></div>
+				<div class="content">nevermind, I got it. integer math. <img class="smilies" src="images/smilies/icon_razz.gif" alt=":-P" title="Razz" /></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1070&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:05:39 GMT -->
+</html>

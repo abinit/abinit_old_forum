@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1383&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:15:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Face centered orthorhombic how to make input?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Face centered orthorhombic how to make input?</h2>
+		<p><a href="viewtopic04b1.html?f=9&amp;t=1383">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1383</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Face centered orthorhombic how to make input?</h3>
+				<div class="date">Posted: <strong>Wed Oct 26, 2011 11:11 am</strong></div>
+				<div class="author">by <strong>roginovicci</strong></div>
+				<div class="content">I'm trying to set the orthorhombic face centered lattice by using the input as follows:<br /> ntypat 1   <br />   znucl 1   <br />   natom 2 <br />   typat   1 1 <br /><br />   xcart                                                                                                                       <br />     0.0   0.0  0.0<br />      a     0.0  0.0                                                                                          <br />                                                                                                                               <br />   rprim  a  0.000    0.0                                                                                                 <br />          0.000   b/2   -c                                                                                               <br />          0.000   b/2    c                                                                                               <br />   scalecart  3*1   acell 3*1   <br /><br />here a b and c are lattice parameters. But abinit fails with this input. What I am doing wrong?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Face centered orthorhombic how to make input?</h3>
+				<div class="date">Posted: <strong>Wed Oct 26, 2011 11:31 am</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hello,<br /><br />Could you be more specific about how abinit is failing ? Add the end of the log file, output files, ...<br />At first sight, it seems that you put the 2 atoms at the same place (0 0 0 and a 0 0 correspond to the same coordinate)<br /><br />David</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Face centered orthorhombic how to make input?</h3>
+				<div class="date">Posted: <strong>Wed Oct 26, 2011 11:56 am</strong></div>
+				<div class="author">by <strong>roginovicci</strong></div>
+				<div class="content">Thank you David for kind reply! Actually I am using v_sim to visualize the structure. It calls abinit and plots the structure. The error is as follows:<br /><br />chkprimit : ERROR -<br />According to the symmetry finder, the unit cell is<br />  NOT primitive. The multiplicity is  2 .<br />  The use of non-primitive unit cells is allowed<br />  only when the input variable chkprim is 0.<br />  Action : either change your unit cell (rprim or angdeg),<br />  or set chkprim to 0.<br /><br />I'm trying new input set:<br /><br />  ntypat 1<br />   znucl 1 <br />   natom 2<br />   typat   1 1<br />   xcart                                                                                                                       <br />     .000000    .000000   0.0                                                                                                  <br />     0.00000    6.00000   10.0<br /><br /> rprim  8.0  -6.0    0.0                                                                                                     <br />          8.0   6.0   0.0                                                                                                      <br />          0.000   0.0    20.0                                                                                                  <br />   scalecart  3*1   acell 3*1<br /><br />and it fails again. The position  (0.0 6.0 10.0) is not the same place as (0 0 0) as far the c parameter is 20, not 10. Skipping second atom in xcart matrix means to set simple orthorhombic but I need face-centered one, thus I have two molecules(atoms) in primitive cell.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Face centered orthorhombic how to make input?</h3>
+				<div class="date">Posted: <strong>Wed Oct 26, 2011 3:12 pm</strong></div>
+				<div class="author">by <strong>blackburn</strong></div>
+				<div class="content">Hi,<br /><br />You don't need two atoms to define a face-centered orthorhombic (FCO) structure. The variable rprim will define the system as FCO, not the number of atoms. In your case, I think you don't need the second atom. In the last case, it's clear why abinit failed : xcart = a 0 0 is equivalent to 0 0 0 because of the first rprim. I think you should not put a second atom. What does abinit say if you use <br />rprim a 0.000 0.0 <br />0.000 b/2 -c <br />0.000 b/2 c <br />and <br />xcart 0 0 0<br />with only 1 atom?<br /><br />Simon</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Face centered orthorhombic how to make input?</h3>
+				<div class="date">Posted: <strong>Wed Oct 26, 2011 3:38 pm</strong></div>
+				<div class="author">by <strong>roginovicci</strong></div>
+				<div class="content">Dear Simon,<br />It says:<br /> space group Cm m m (# 65); Bravais oC (1-face-center ortho.)<br /><br />but I need #64 C m c a face and base centered, but not body centered #63 C m c m.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Face centered orthorhombic how to make input?</h3>
+				<div class="date">Posted: <strong>Wed Oct 26, 2011 4:12 pm</strong></div>
+				<div class="author">by <strong>roginovicci</strong></div>
+				<div class="content">I guess I'm starting to understand. If the previous mentioned rprim set produces 1-face centered lattice then adding second molecule to primitive cell fills the other face centered positions but also fills the face positions already filled. Thus I should use rprim set which yelds simple ortho cell and only than I can use second molecule in primitive cell. Is this the case?<br /><br />upd: No I was wrong. the current rprim set gives base centered lattice, adding second molecule to the primitive cell can't crossover with the base centered molecules. I'm stack  <img class="smilies" src="images/smilies/icon_e_sad.gif" alt=":(" title="Sad" /></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Face centered orthorhombic how to make input?</h3>
+				<div class="date">Posted: <strong>Wed Oct 26, 2011 4:53 pm</strong></div>
+				<div class="author">by <strong>roginovicci</strong></div>
+				<div class="content">Ok I made the following:<br /><br />ntypat 2<br />znucl 17 80 # the second atom is to indicate by other color in v_sim there the secondatom placed to.<br /><br />natom 2<br />typat  1 2<br /> xcart                                                                                                                       <br />    .000000    .000000   0.0                                                                                                  <br />     0.00000    6.0000   10.0<br /><br />rprim  8.0  -6.0   0.0                                                                                                      <br />          8.0   6.0   0.0                                                                                                       <br />          0.0   0.0 20.0<br /><br />I made a visualisation in V_Sim software of such structure. Hg was marked red and Cl was gray.<br />I see the Cl atoms fills the main positions in cell plus base centered. But Hg are face centered only. No Hg was placed in base center position. The structure seems just fine. But when I skip Hg to Cl atoms as follows:<br /><br />ntypat 1<br />znucl 17 <br />natom 1<br />typat  1 <br /> xcart                                                                                                                       <br />    .000000    .000000   0.0                                                                                                  <br />     0.00000    6.0000   10.0<br /><br />rprim  8.0  -6.0   0.0                                                                                                      <br />          8.0   6.0   0.0                                                                                                       <br />          0.0   0.0 20.0<br />I still getting the above mentioned error. <br />chkprimit : ERROR -<br />  According to the symmetry finder, the unit cell is<br />  NOT primitive. The multiplicity is  2 .<br />  The use of non-primitive unit cells is allowed<br />  only when the input variable chkprim is 0.<br />  Action : either change your unit cell (rprim or angdeg),<br />  or set chkprim to 0.<br /><br />later on...<br />setting xcart                                                                                                                       <br />    .000000    .000000   0.0                                                                                                  <br />     0.00000    6.0000   9.99<br />i.e. shifting second atom from the symmetric position breaks symmetry but works...<br />It's so wierd!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Face centered orthorhombic how to make input?</h3>
+				<div class="date">Posted: <strong>Wed Oct 26, 2011 5:22 pm</strong></div>
+				<div class="author">by <strong>blackburn</strong></div>
+				<div class="content">I think you have to change your last rprim to 0 6 10. It cuts your unit cell volume by half and should yield the same lattice.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Face centered orthorhombic how to make input?</h3>
+				<div class="date">Posted: <strong>Wed Oct 26, 2011 5:24 pm</strong></div>
+				<div class="author">by <strong>roginovicci</strong></div>
+				<div class="content">Thank you, I'll try it. I also gonna try this rprim:<br />a/2 b/2 0<br />0 b/2 c/2<br />a/2 0 c/2<br /><br />Should I?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Face centered orthorhombic how to make input?</h3>
+				<div class="date">Posted: <strong>Thu Oct 27, 2011 5:43 pm</strong></div>
+				<div class="author">by <strong>blackburn</strong></div>
+				<div class="content">Indeed, you should use rprim similar to a FCC system:<br />0 b/2 c/2<br />a/2 0 c/2<br />a/2 b/2 0<br />Keep us posted if it doesn't work.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Face centered orthorhombic how to make input?</h3>
+				<div class="date">Posted: <strong>Mon Oct 31, 2011 11:22 am</strong></div>
+				<div class="author">by <strong>roginovicci</strong></div>
+				<div class="content">blackburn, yes it seems to works like a charm. But the space group abinit founds to be 69 (Fmmm) but I was always thinking it is 64 (Cmca)... Hmmm where was I mistaken?<br />One more question. Did abinit provide the primitive basis set for the reciprocal lattice?<br />Can I use the set found at bilbao server? <br /><!-- m --><a class="postlink" href="http://www.cryst.ehu.es/cgi-bin/cryst/programs/nph-kv-list?gnum=69&amp;fig=fmmmfagr">http://www.cryst.ehu.es/cgi-bin/cryst/p ... g=fmmmfagr</a><!-- m --><br /><br />p.s. Once again. Many thx for your advices!!!</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1383&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:15:48 GMT -->
+</html>

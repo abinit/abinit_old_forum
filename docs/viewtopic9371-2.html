@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3450&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:58:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; SCF convergence problem in vacancy defect modelling</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>SCF convergence problem in vacancy defect modelling</h2>
+		<p><a href="viewtopic940e.html?f=9&amp;t=3450">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3450</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>SCF convergence problem in vacancy defect modelling</h3>
+				<div class="date">Posted: <strong>Thu Dec 08, 2016 12:26 pm</strong></div>
+				<div class="author">by <strong>mmaeda</strong></div>
+				<div class="content">Dear Abinit users and developers,<br /><br />I am modelling a spinel metal oxide system with O vacancy as a cubic supercell (55 atoms) by PAW and GGA+U; but struggling with SCF convergence. Any suggestion to fix the problem?<br /><br />Some input parameters:<br />ecut 500 eV<br />pawecutdg 1600 eV<br />ixc 11<br />occopt 7           <br />diemac 12.0 <br />ionmov 2<br />optcell 1<br />dilatmx 1.05<br />ecutsm 0.5 <br />tsmear 0.01<br />strprecon 0.1<br /><br />Thanks,<br />Maki</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF convergence problem in vacancy defect modelling</h3>
+				<div class="date">Posted: <strong>Mon Dec 12, 2016 11:46 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Maki,<br />How bad is your convergence? Does it succeed to converge up to a given precision and then it is stuck at this precision or is it completely bad from the beginning or does it converge and then starts to diverge, do you have an error/wraning message, etc? An output file will be welcome or at least the &quot;grep ETOT&quot; of it to reply to you.<br />I would already advise you to first relax the internal coordinates by keeping the cell parameters unrelaxed and then relax them once the internal atomic coordinates will be relaxed, that might help the algorithm in finding the minimum.<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF convergence problem in vacancy defect modelling</h3>
+				<div class="date">Posted: <strong>Mon Dec 26, 2016 9:05 am</strong></div>
+				<div class="author">by <strong>mmaeda</strong></div>
+				<div class="content">Hi Eric,<br /><br />Thanks for your advice. I have tried to converge the system with ion position optimization (without cell parameter optimization). But the problem of SCF convergence has not been solved. The fisrt SCF cycle slowly converged, but remained the same order of magnitude in absolute energy change in the system and did not reach the convergence criteria. I tried to use several different iscf parameters to see if SCF converges. But none of them solved the problem, but in some cases SCF actually diverged instead. Any suggestion?<br /><br />Thanks,<br />Maki</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF convergence problem in vacancy defect modelling</h3>
+				<div class="date">Posted: <strong>Tue Dec 27, 2016 9:56 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Dear Maki,<br /><br />Did you try increasing some of these variables: npulayit, nnsclo or nline in combination with iscf 7 or 17?<br /><br />Best regards,<br /><br />Igor</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF convergence problem in vacancy defect modelling</h3>
+				<div class="date">Posted: <strong>Fri Jan 13, 2017 11:45 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Maki,<br />Did you try to simply reduce the mixing parameter diemix?<br />All the best,<br />Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3450&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:58:17 GMT -->
+</html>

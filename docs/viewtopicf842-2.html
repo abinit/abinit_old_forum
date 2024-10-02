@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=2721&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:10:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Response calculations in 2 steps creates problems in DDB's</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Response calculations in 2 steps creates problems in DDB's</h2>
+		<p><a href="viewtopic091c.html?f=12&amp;t=2721">https://forum.abinit.org/viewtopic.php?f=12&amp;t=2721</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Response calculations in 2 steps creates problems in DDB's</h3>
+				<div class="date">Posted: <strong>Fri Jul 04, 2014 3:28 pm</strong></div>
+				<div class="author">by <strong>uma</strong></div>
+				<div class="content">I am working with 108 atoms. I did the response function displacing all atoms in all directions (rfatpol 1 108). Since the job stopped in a few hours after calculating up to 20 atoms, I resubmitted the job with (rfatpol 20 108). I got 2 trf2_1.out files one for each job. Later when I used mrgddb and anaddb tools, I got the error message that information was missing in DDB's regarding my atom 1, x direction. I scanned through the DDB files. DS1_DDB was ok. But the other DDB files had info only from the 20th atom. (i.e the derivatives..). Is there a way to get around this..?<br /><br />I did not come across this problem when I did all the displacements in one job.<br /><br />Uma</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Response calculations in 2 steps creates problems in DDB</h3>
+				<div class="date">Posted: <strong>Fri Jul 18, 2014 11:17 pm</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">Hello<br /><br />Did your first job produce a DDB file? <br /><br />In the second run you specified rfatpol=20 108 so it is normal that in your second DDB (DS2_DDB), you have only the information starting from the 20nd atom.<br /><br />You need to merge the 2 DDB's with mrgddb, then you should have a complete DDB with all atoms.<br /><br />Boris</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Response calculations in 2 steps creates problems in DDB</h3>
+				<div class="date">Posted: <strong>Sat Jul 19, 2014 9:15 am</strong></div>
+				<div class="author">by <strong>uma</strong></div>
+				<div class="content">Dear Boris,<br /><br />Many thanks for your response to my query and initiative to help.<br /><br />I am working on an amorphous system of 108 atoms. The job with trf2_1.in had 2 datasets. Dataset 1 did the SCF calculations. It went through completely producing DS1_DDB. The 2nd dataset involved the displacement of 108 atoms. The job stopped midway through this dataset. So DS2_DDB was not available then. I resubmitted the job with just the 2nd dataset displacing from the 20th atom. I had all the WF function files up to the 19th atom. So the DS2_DDB had information only from the 20th atom. I am never able to run dataset 2 completely in a single job. Wall time is insufficient. When I increase the number of processors, the job takes a very long time and still stops mid-way . I think involving too many processors doesn't really help.. Most of the time they are just communicating among themselves..Do you have a way to suggest to get around this problem..?<br /><br />Thanking you in advance,<br />Uma</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Response calculations in 2 steps creates problems in DDB</h3>
+				<div class="date">Posted: <strong>Wed Jul 23, 2014 9:30 pm</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">Hello Uma<br /><br />I see what you mean. If indeed you cannot run the second dataset completely, you need to split it in more dataset. For supercells, here's what I personally do:<br /><br />- 1st dataset : the ground state<br />- 2nd dataset : I displace only the first ten atoms, using rfatpol2 = 1 10<br />- 3rd dataset : I displace another set of 10 atoms, using rfatpol3 = 11 20<br />etc.<br /><br />Then you can run all your dataset separately using ndtset = 1 and jdtset = X. It will run in &quot;parallel&quot; and each dtset will produce a DDB file that you need to merge with all the others.<br /><br />This works well if you have one q-point (which I believe is your case since you have a 108 atom cell). If you have more qpts, you need to tweak this a little, but the idea is here.<br /><br />Hope this helps<br />Boris<br /><br />EDIT : As for the cpu distrib, what I usually do is that I parallelize on bands only. It works quite well, though I advice you to use the latest abinit version 7.8.x because we have made some major modifications on band parallelisation lately.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Response calculations in 2 steps creates problems in DDB</h3>
+				<div class="date">Posted: <strong>Tue Aug 19, 2014 4:19 pm</strong></div>
+				<div class="author">by <strong>umasubbiah</strong></div>
+				<div class="content">Thanks Boris.. Wonder why it didn't occur to me..<br />Uma</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=2721&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:10:25 GMT -->
+</html>

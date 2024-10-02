@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=696&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:31:52 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; xred +wyckoff</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>xred +wyckoff</h2>
+		<p><a href="viewtopicd86b.html?f=9&amp;t=696">https://forum.abinit.org/viewtopic.php?f=9&amp;t=696</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>xred +wyckoff</h3>
+				<div class="date">Posted: <strong>Wed Oct 27, 2010 1:37 pm</strong></div>
+				<div class="author">by <strong>hamideh</strong></div>
+				<div class="content">hi friends,<br />i usually use xangst in running my jobs but now i have to use xred  .<br />so i have confused...<br />xred act as like as wyckoff position in my vesta software <br />how can i find xred ????<br />i dont know the hamiltonian ....  <img class="smilies" src="images/smilies/icon_question.gif" alt=":?:" title="Question" /> <br />would you please help me &amp; say how can i find xred ??<br />king regards,<br />hamideh</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: xred +wyckoff</h3>
+				<div class="date">Posted: <strong>Fri Oct 29, 2010 2:37 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Any .cif file of a structure gives the atom coordinates in &quot;xred&quot; format, that is, as fractional coordinates in units of the unit cell edge lengths. Crystallographic papers always report the atom positions in this way too.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: xred +wyckoff</h3>
+				<div class="date">Posted: <strong>Sat Oct 30, 2010 12:19 pm</strong></div>
+				<div class="author">by <strong>hamideh</strong></div>
+				<div class="content">hi Professor Zwanziger,<br />i usually use vesta software to simulate my atomic position when i export the data to cif file<br /> it gives me the wyckoff position again .<br />&amp; my wyckoff position is not as same as the xred imean iknow the value of the  xred for my structure (i find it in forum) that it is not as same as my wyckoff position. <img class="smilies" src="images/smilies/icon_question.gif" alt=":?:" title="Question" /> <br />how can i solve my problem ???<br />thanks in advance .<br />hamideh .</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: xred +wyckoff</h3>
+				<div class="date">Posted: <strong>Sat Oct 30, 2010 1:24 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">I don't understand what the problem is that you're having. In a standard .cif file both the xred and the Wyckoff multiplicities are given. For example, for PbB4O7 there is the following section at the bottom:<br /><br />Pb1 Pb2+ 2 a -.0318(2) 0.19835(8) 0 0.0067(7) 1. 0<br />O1 O2- 2 a 0.584(2) 0.765(2) 0 0.004(1) 1. 0<br />O2 O2- 4 b 0.550(1) 0.362(1) 0.1448(5) 0.0052(9) 1. 0<br />O3 O2- 4 b 0.143(1) 0.730(1) -.1361(5) 0.0045(8) 1. 0<br />O4 O2- 4 b 0.150(1) 0.128(1) 0.2805(5) 0.0040(8) 1. 0<br />B1 B3+ 4 b -.025(4) 0.325(1) 0.3776(5) 0.0029(8) 1. 0<br />B2 B3+ 4 b 0.003(2) 0.820(2) 0.2479(5) 0.004(1) 1. 0<br /><br />In the first line you get the atom type (Pb), oxidation state, Wyckoff multiplicity (2 a), the three xred values with uncertainties, and then information about occupations. Note that there are two lead atoms in the unit cell, not only one, and you know this because earlier in the cif file it tells you that there are two formula units in the cell (cell_formula_units_Z 2). So your options at this point are either: 1) let abinit do the work for you, by putting in the xred's for the asymmetric unit as above, together with the space group information (spgroup variable, angdeg variable, and acell) or 2) look up what the Wyckoff symbols mean for this particular space group and multiply out the xred's accordingly. In this case you will enter acell and angdeg or acell and rprim but not spgroup.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: xred +wyckoff</h3>
+				<div class="date">Posted: <strong>Sun Oct 31, 2010 8:11 am</strong></div>
+				<div class="author">by <strong>hamideh</strong></div>
+				<div class="content">dear professor <br /> <img class="smilies" src="images/smilies/icon_exclaim.gif" alt=":!:" title="Exclamation" />  my vesta output is no as same as your out put <br />do U work by vesta software ???<br />is there any abinit test that  takes my xangst &amp; gives me the xred?<br /><br />sincerely<br />hamideh.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=696&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:31:52 GMT -->
+</html>

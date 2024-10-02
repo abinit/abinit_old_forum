@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3593&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:51:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Posdoppler Problems</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Posdoppler Problems</h2>
+		<p><a href="viewtopic26c8-2.html?f=9&amp;t=3593">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3593</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Posdoppler Problems&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Fri May 12, 2017 3:52 pm</strong></div>
+				<div class="author">by <strong>ehecht</strong></div>
+				<div class="content">Hello,<br /><br />Im a Master student at the Technichal University of Munich working on CDBS measurements and their simulation. My main topic is on a new and improved data analysis of two dimensional CDBB spectra alongside with DBS and CDBS measurements on oxide heterostructures.<br />In order to verify my data analysis I would like to compare my results against previous measurements and simulation results of selected bulk materials.<br />For this I chose Al, Au, Cr, Cu, Ni, and Si as all of those has been measured previously by our group. For the simulation I chose to use Abinit. Now I do have some problems in obtaining valid results from the posdoppler module in Abinit and am thus looking for some advice or help in determining the error.<br />I started with the example from the internal test t35 from version 7 of Abinit. First I determined appropriate values for ecut, pawecut and made use oft the optcell mechanism to test my model. Lastly I did some positron calculations with varying posocc in order to get a bulk doppler spectra and positron lifetime.<br />For the paw potentials I chose the ones provided by the web page of Abinit and generated the core wave function files by modifying the output part of the correspondent input files, enclosed in the XML files.<br />The doppler output generated with the post processing script posdopspectra.F90 seem to be quite unreasonable. The raw rho_xxx files start with negative numbers and the overall shape does not match what I expected. Assuming that rho is a probability negative numbers negative values are obviously wrong. Further the information in the doppler_out file isn't any better.<br />The resolution seems not to change with the chosen FWHM and is quite coarse all the time. The convoluted probabilities are also often in the range lower 1e-150 whereas the raw ones are in the order of 1e-9. As to verify my paw input files I choose aluminium where the Abinit Psps for tests provided me with a GGA type PAW pseudopotential. With this Input the results seem to be in much better coincidence with the experimental results. Now I examined my Input files but couldn't identify any significant differences. I further change my input to a GGA from an LDA without any major changes in the results.<br /><br />If you want to take a look at my input and output I uploaded some recent ones here:<br /><!-- m --><a class="postlink" href="https://tumde-my.sharepoint.com/personal/eicke_hecht_tum_de/_layouts/15/guestaccess.aspx?docid=11b52a2acd9c14ed3ba544b459ebdfc0c&amp;authkey=AR2Z7h4ejpA5KYwPnplCTdU">https://tumde-my.sharepoint.com/persona ... YwPnplCTdU</a><!-- m --><br />If you do have further questions I'm happy to answer them.<br /><br />Best regards<br /><br />Eicke Hecht</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Posdoppler Problems</h3>
+				<div class="date">Posted: <strong>Wed May 24, 2017 8:50 pm</strong></div>
+				<div class="author">by <strong>Julia</strong></div>
+				<div class="content">Dear Eicke, <br /><br />From your files it looks like you won't have to change too much to get better results. There are only few details that you should change. <br /><br />In the example file t35 (it is actually just a fast test to see if the code is working properly, that's why it does not give good results) the k point grid is not the optimal one for Doppler calculations. In Abinit, the parameters kptopt 1 and ngkpt 4 4 4 result in a grid taking advantage of the crystal symmetries. In the Doppler calculations we cannot take advantage of the symmetries, so we should use a full grid. It can be achieved by setting for instance: <br /><br />kptopt 0 <br />istwfk *1 <br />nkpt 8 <br />kpt <br />    0 0 0 <br />    0 0 0.5 <br />    0 0.5 0 <br />    0.5 0 0 <br />    0 0.5 0.5 <br />    0.5 0 0.5 <br />    0.5 0.5 0 <br />    0.5 0.5 0.5 <br /><br />This will give you a regular 2x2x2 grid. You can check the results with denser grids. As this is the grid for the momentum space, the denser it is, the more data points you will have in you doppler file. The raw data is then written in the doppler_out file. To generate the rho_xxx file, the raw data is first interpolated on a denser, regular grid, and then convoluted using FWHM chosen by you. If the grid in doppler_out is not correct or dense enough, you will have numerical problems in the interpolation and convolution (the negative values you noticed). <br /><br />Your results for Al look weird first because you had few points in the reciprocal space (k-grid). The second reason is that you chose a very small FWHM, 0.1 mrad, which is much less than your doppler grid spacing. In the Doppler calculations the resolution is given by the k-grid (and corresponds to the spacing in the doppler_out file, raw data). If you use the 2x2x2 grid I proposed above, you will get the spacing of 2.995 mrad in the 001 direction. This is quite low, so you can try denser grids. Then, convolution with experimental FWHM can be done to mimic the experimental resolution (in most experiments I saw it to be equal to 3-5 mrad). The postprocessing tool can be only used to mimic a lower, experimental resolution, but will never give you a higher one. You can only increase the resolution through the choice of the k-point grid in your input file. In the files you send me, you used FWHM=1 mrad in one of the folders and the spectrum looked better already. <br /><br />Another thing you have to be careful about, is the number of valence electrons in the PAW dataset. <br />If you don't have enough functions in the dataset, you will have unphysically large contributions from the annihilation with core electrons. We discussed the problem in this paper (let me know if you have any questions about this problem): <br /><!-- m --><a class="postlink" href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.92.125113">https://journals.aps.org/prb/abstract/1 ... .92.125113</a><!-- m --> <br /><br />In the example for Al, you only had 3 valence electrons and it is not enough to get a converged Doppler spectrum. You can find the inputs  to generate datasets including semicore electrons for most of the elements you are interested in here: <br /><!-- m --><a class="postlink" href="http://users.wfu.edu/natalie/papers/pwpaw/periodictable/oldperiodictable.html">http://users.wfu.edu/natalie/papers/pwp ... table.html</a><!-- m --> <br />and here: <br /><!-- m --><a class="postlink" href="http://users.wfu.edu/natalie/papers/pwpaw/newperiodictable/smallcore2013.html">http://users.wfu.edu/natalie/papers/pwp ... e2013.html</a><!-- m --> <br /><br />I also noticed that you tried to calculate the doppler spectrum with positron&gt;0 (two step calculation). This is not possible, because the code does not have the electronic wavefunction in the memory and cannot calculate the spectra. You always have to use negative positron for Doppler calculations. Two step calculations are only possible for the lifetime, where only densities are needed and they can be read from disk. <br /><br />Best regards, <br />Julia</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3593&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:51:35 GMT -->
+</html>

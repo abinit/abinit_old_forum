@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=1273&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:33:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [anaddb] FYI: plot eigenvalues of IFC matrix</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[anaddb] FYI: plot eigenvalues of IFC matrix</h2>
+		<p><a href="viewtopice921.html?f=12&amp;t=1273">https://forum.abinit.org/viewtopic.php?f=12&amp;t=1273</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[anaddb] FYI: plot eigenvalues of IFC matrix</h3>
+				<div class="date">Posted: <strong>Fri Aug 19, 2011 6:09 pm</strong></div>
+				<div class="author">by <strong>t-nissie</strong></div>
+				<div class="content">Hi,<br /><br />Do you want to plot a dispersion relation of eigenvalues of<br />inter-atomic force constant (IFC) matrix? It may be more<br />useful for discussing distortions of crystals than phonon dispersion.<br />For examples, Fig. 3 in [K. Leung, E. Cockayne, and A. F. Wright, Phys. Rev. B 65,<br />214111 (2002) <!-- m --><a class="postlink" href="http://link.aps.org/doi/10.1103/PhysRevB.65.214111">http://link.aps.org/doi/10.1103/PhysRevB.65.214111</a><!-- m --> ] and<br />Fig. 5 (B) in <!-- m --><a class="postlink" href="http://loto.sourceforge.net/feram/parameters/">http://loto.sourceforge.net/feram/parameters/</a><!-- m --> .<br /><br />Try this patch for abinit-6.8.1/src/72_response/phfrq3.F90,<br />then _B2EPS.freq file will contain the eigenvalues, not phonon frequencies.<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--- phfrq3.F90~ 2011-06-26 09:32:46.000000000 +0900<br />+++ phfrq3.F90&nbsp; 2011-07-06 17:56:52.621968140 +0900<br />@@ -229,7 +229,7 @@<br />&nbsp;!Include the masses in the dynamical matrix<br />&nbsp; do ipert1=1,natom<br />&nbsp; &nbsp; do ipert2=1,natom<br />-&nbsp; &nbsp; &nbsp;fac=1.0_dp/sqrt(amu(typat(ipert1))*amu(typat(ipert2)))/amu_emass<br />+&nbsp; &nbsp; &nbsp;fac=1.0_dp&nbsp; &nbsp;!/sqrt(amu(typat(ipert1))*amu(typat(ipert2)))/amu_emass<br />&nbsp; &nbsp; &nbsp; do idir1=1,3<br />&nbsp; &nbsp; &nbsp; &nbsp; do idir2=1,3<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; i1=idir1+(ipert1-1)*3<br />@@ -239,9 +239,9 @@<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; displ(2*index&nbsp; )=displ(2*index&nbsp; )*fac*nearidentity(idir1,idir2)<br />&nbsp;!&nbsp; &nbsp; &nbsp; &nbsp; This is to break slightly the translation invariance, and make<br />&nbsp;!&nbsp; &nbsp; &nbsp; &nbsp; the automatic tests more portable<br />-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if(ipert1==ipert2 .and. idir1==idir2)then<br />-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;displ(2*index-1)=displ(2*index-1)+break_symm*natom/amu_emass/idir1*0.01_dp<br />-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;end if<br />+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;!if(ipert1==ipert2 .and. idir1==idir2)then<br />+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;!&nbsp; displ(2*index-1)=displ(2*index-1)+break_symm*natom/amu_emass/idir1*0.01_dp<br />+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;!end if<br />&nbsp; &nbsp; &nbsp; &nbsp; end do<br />&nbsp; &nbsp; &nbsp; end do<br />&nbsp; &nbsp; end do<br />@@ -288,15 +288,16 @@<br />&nbsp;<br />&nbsp;!Get the phonon frequencies (negative by convention, if<br />&nbsp;!the eigenvalue of the dynamical matrix is negative)<br />- do imode=1,3*natom<br />-&nbsp; &nbsp;if(eigval(imode)&gt;=1.0d-16)then<br />-&nbsp; &nbsp; &nbsp;phfrq(imode)=sqrt(eigval(imode))<br />-&nbsp; &nbsp;else if(eigval(imode)&gt;=-1.0d-16)then<br />-&nbsp; &nbsp; &nbsp;phfrq(imode)=zero<br />-&nbsp; &nbsp;else<br />-&nbsp; &nbsp; &nbsp;phfrq(imode)=-sqrt(-eigval(imode))<br />-&nbsp; &nbsp;end if<br />- end do<br />+!&nbsp; do imode=1,3*natom<br />+!&nbsp; &nbsp; if(eigval(imode)&gt;=1.0d-16)then<br />+!&nbsp; &nbsp; &nbsp; phfrq(imode)=sqrt(eigval(imode))<br />+!&nbsp; &nbsp; else if(eigval(imode)&gt;=-1.0d-16)then<br />+!&nbsp; &nbsp; &nbsp; phfrq(imode)=zero<br />+!&nbsp; &nbsp; else<br />+!&nbsp; &nbsp; &nbsp; phfrq(imode)=-sqrt(-eigval(imode))<br />+!&nbsp; &nbsp; end if<br />+!&nbsp; end do<br />+phfrq(:)=eigval(:)<br />&nbsp;<br />&nbsp;!Fix the phase of the eigenvectors<br />&nbsp; allocate(dum(2,0))<br /></code></pre></div><br /><br />If you want to use GNUPLOT, Python, Ruby, etc,<br />this patch for abinit-6.8.1/src/77_ddb/sortph.F90 is useful.<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--- sortph.F90~ 2011-06-26 10:13:13.000000000 +0900<br />+++ sortph.F90&nbsp; 2011-07-06 10:56:28.000000000 +0900<br />@@ -134,13 +134,13 @@<br />&nbsp;<br />&nbsp;<br />&nbsp;!Write frequencies in a file<br />- write(fmt_phfrq,'(a,i3,a)') '(', 3*natom, 'd14.6)'<br />+ write(fmt_phfrq,'(a,i3,a)') '(', 3*natom, 'e14.6)'<br />&nbsp; write(ufreq,fmt_phfrq) (phfrqNew(j),j=1,3*natom)<br />&nbsp;<br />&nbsp;!write displacements in a file<br />&nbsp; do imode=1,3*natom<br />&nbsp; &nbsp; do iatom=1,natom<br />-&nbsp; &nbsp; &nbsp;write(udispl,'(d14.6)') &amp;<br />+&nbsp; &nbsp; &nbsp;write(udispl,'(e14.6)') &amp;<br />&nbsp; &nbsp; &nbsp; sqrt(&nbsp; &nbsp; &nbsp; &nbsp;displNew(3*(iatom-1)+1,imode)*&nbsp; &nbsp;&amp;<br />&nbsp;&amp;&nbsp; &nbsp; &nbsp;conjg(displNew(3*(iatom-1)+1,imode)) + &amp;<br />&nbsp;&amp;&nbsp; &nbsp; &nbsp;displNew(3*(iatom-1)+2,imode)*&nbsp; &nbsp;&amp;<br /></code></pre></div><br /><br />Enjoy,</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=1273&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:33:42 GMT -->
+</html>

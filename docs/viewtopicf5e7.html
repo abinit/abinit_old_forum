@@ -1,0 +1,1944 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?p=13065 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:16:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Parallelization and convergence - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopicfddd.html?t=4380">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="4"><a href="viewforum31e6.html?f=4" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Running Abinit</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="9"><a href="viewforumfdc5.html?f=9" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Ground state</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopicd63d.html?f=9&amp;t=4380">Parallelization and convergence</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Total energy, geometry optimization, DFT+U, spin....<br /></div>
+<p>
+	<strong>Moderator:</strong> <a href="memberlista146.html?mode=viewprofile&amp;u=2687" class="username">bguster</a>
+</p>
+
+
+<div class="action-bar bar-top">
+	
+			<a href="postingae3b.html?mode=reply&amp;f=9&amp;t=4380" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic532b.html?f=9&amp;t=4380&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="4380" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			19 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p12982" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile12982">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist2441.html?mode=viewprofile&amp;u=1885" class="username">erichmond</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchcfbc.html?author_id=1885&amp;sr=posts">26</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Dec 23, 2016 12:00 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content12982">
+
+						<h3 class="first"><a href="#p12982">Parallelization and convergence</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingcfc1.html?mode=quote&amp;f=9&amp;p=12982" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic7a1f.html?p=12982#p12982" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist2441.html?mode=viewprofile&amp;u=1885" class="username">erichmond</a></strong> &raquo; </span>Sun Apr 19, 2020 11:48 pm
+			</p>
+			
+			
+			
+			<div class="content">I am trying to get the attached input program to run faster and with greater convergence and without an error,  I tried mpirun which works but only improves the speed by 35% and doesn't improve the convergence.  Also, I tried many combinations and values for npband and bandpp based on the output from  a run with autoparal = 1 but in every case, after 5 iterations, I get the error message<br>
+<br>
+Src_file: m_lobpcg2.F90<br>
+	Src_line:  525<br>
+	Mpi_rank:  0<br>
+	<br>
+Message: I'm so sorry I couldn't make it, I did my best but I failed.  Sorry.  I am gonna suicide.<br>
+<br>
+I attached the error file, logs041720-par21 for your information.<br>
+<br>
+Can you please tell me what I am doing wrong in my attempt to get the program to parallelize.  (The server I am using has 24 cores and 2 threads/core)<br>
+<br>
+About convergence, - another version of the program running on just 1 CPU reaches tolvrs ~1e-10 after about 120 steps, but then oscillates in the 1e-10 and 1e-11 range for the remaining 360 steps.  nstep = 480. The accuracy criterion is set to tolvrs 1e-12.  I was hoping by using a large block size in parallelizing the input file, <div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="download/file4e6a.php?id=1865">input file.docx</a></dt>
+						<dd>(11.94 KiB) Downloaded 351 times</dd>
+		</dl>
+		
+		
+			</div><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="download/file6187.php?id=1866">logs041720-par21.docx</a></dt>
+						<dd>(103.84 KiB) Downloaded 335 times</dd>
+		</dl>
+		
+		
+			</div> I would improve the convergence, but I get the above error instead.<br>
+                              <br>
+Please help!!<br>
+Eliezer</div>
+			
+			
+			
+													<div class="notice">
+					Last edited by <a href="memberlist2441.html?mode=viewprofile&amp;u=1885" class="username">erichmond</a> on Sat Apr 25, 2020 6:29 am, edited 3 times in total.
+									</div>
+			
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p12984" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile12984">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search82c3.html?author_id=682&amp;sr=posts">469</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 19, 2011 11:13 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> University of Liege, Belgium</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content12984">
+
+						<h3 ><a href="#p12984">Re: Parallelization and convergence</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting19b0.html?mode=quote&amp;f=9&amp;p=12984" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic13e3.html?p=12984#p12984" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a></strong> &raquo; </span>Mon Apr 20, 2020 8:02 am
+			</p>
+			
+			
+			
+			<div class="content">Dear Eliezer,<br>
+For the convergence of the SCF you have to play with preconditioning and mixing parameters: see diemix, diemixmag (if magnetic), nline, diemac as a 1st attempt.<br>
+I see you have diemix=1 but it is strongly not advised to put 1! Reduce it should probably help your convergence problem.<br>
+Best wishes,<br>
+Eric</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p12994" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile12994">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist2441.html?mode=viewprofile&amp;u=1885" class="username">erichmond</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchcfbc.html?author_id=1885&amp;sr=posts">26</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Dec 23, 2016 12:00 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content12994">
+
+						<h3 ><a href="#p12994">Re: Parallelization and convergence</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting2b5a.html?mode=quote&amp;f=9&amp;p=12994" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicc0a2.html?p=12994#p12994" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist2441.html?mode=viewprofile&amp;u=1885" class="username">erichmond</a></strong> &raquo; </span>Wed Apr 22, 2020 7:25 am
+			</p>
+			
+			
+			
+			<div class="content">Eric,<br>
+<br>
+Thank you for your response.  <br>
+<br>
+I should mention that these calculations are on a slab of 3 layers of Pd atoms and 7 layers of vacuum.  I am not yet treating the system for its magnetic properties.<br>
+<br>
+My input file already has the following statements<br>
+iprcel 45<br>
+iscf 7<br>
+npulayit 30<br>
+diemac 1e+8<br>
+diemix 1<br>
+nnsclo 3<br>
+nband 48<br>
+nline 6<br>
+optforces 0<br>
+nbdbuf  6<br>
+<br>
+in order to improve the convergence and speed, and it works to a point.  <br>
+<br>
+I will try diemix = 0.5 in a run.  I also included dielng = 0.25.  <br>
+<br>
+But I still have the problem parallelizing my program.  The parallelization is complicated by the error I get.<br>
+<br>
+Eliezer</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p12995" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile12995">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search82c3.html?author_id=682&amp;sr=posts">469</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 19, 2011 11:13 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> University of Liege, Belgium</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content12995">
+
+						<h3 ><a href="#p12995">Re: Parallelization and convergence</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting08b3.html?mode=quote&amp;f=9&amp;p=12995" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic670b.html?p=12995#p12995" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a></strong> &raquo; </span>Wed Apr 22, 2020 9:13 am
+			</p>
+			
+			
+			
+			<div class="content">Dear Eliezer,<br>
+Another problem I did not notice is that the ecut you use is way too small (you start with ecut=6). <br>
+For norm-conserving pseudopotentials from pseudodojo project, the ecut can be between 25 and 50. For PAW it can be between 14 and 30.<br>
+If the ecut is too small, the program can run into troubles to converge the SCF.<br>
+Best wishes,<br>
+Eric</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p13002" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile13002">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist2441.html?mode=viewprofile&amp;u=1885" class="username">erichmond</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchcfbc.html?author_id=1885&amp;sr=posts">26</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Dec 23, 2016 12:00 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content13002">
+
+						<h3 ><a href="#p13002">Re: Parallelization and convergence</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting2330.html?mode=quote&amp;f=9&amp;p=13002" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic7b3e.html?p=13002#p13002" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist2441.html?mode=viewprofile&amp;u=1885" class="username">erichmond</a></strong> &raquo; </span>Wed Apr 22, 2020 11:29 pm
+			</p>
+			
+			
+			
+			<div class="content">Eric,<br>
+The object of my computations is to develop high accuracy workfunctions for transition metals as a function of ecut = 6 - 60, spin, surface relaxation, Fermi energy, and slab thickness.  So far I have only been working with variations as a function of the number of plane waves for Ni and Pd.  When I relaxed a bulk structure as a function of ngkpt, tsmear, and acell ABINIT chose a value of ecut ~ 60.  <br>
+<br>
+Up to this point, I have been using the pseudopotentials from the ONCVPSP-PBE-PDv0.4 library.  Is pseudodojo the same as ONCVPSP-PBE-PDv0.4?  If so, I have a problem -many of my results are unreliable.  So far the computations on the slab for 6 - 40 have converged to tolvrs 1e-12.<br>
+<br>
+The addition of diemix 0.5 and dielng 0.25 did improve the convergence slightly where tolvrs ~ 5e-12 after 240 iterations instead of tolvrs ~ 1e-11, but still not at tolvrs 1e-12.  What other preconditioning variables can I try that I am not already using?<br>
+<br>
+Eliezer<br>
+<br>
+PS:  I computed ETOT for diemix = .2, .4, .6, .8, 1.0 with all the other parameters the same.  For all values of diemix for sufficiently high iterations, ETOT oscillated in the range 3E-12&lt; ETOT &lt; 2e-11 Ha.  For 0.6, 0.8, 1.0 the oscillations started around 40 interactions.  For 0.2 and 0.4, the oscillations occurred around 100 and 60 iterations respectively.</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p13013" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile13013">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search82c3.html?author_id=682&amp;sr=posts">469</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 19, 2011 11:13 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> University of Liege, Belgium</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content13013">
+
+						<h3 ><a href="#p13013">Re: Parallelization and convergence</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting0788.html?mode=quote&amp;f=9&amp;p=13013" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicbe8c.html?p=13013#p13013" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a></strong> &raquo; </span>Tue Apr 28, 2020 8:40 am
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite><a href="memberlist2441.html?mode=viewprofile&amp;u=1885">erichmond</a> wrote: <a href="viewtopic7b3e.html?p=13002#p13002" data-post-id="13002" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><div class="responsive-hide">Wed Apr 22, 2020 11:29 pm</div></cite>
+The object of my computations is to develop high accuracy workfunctions for transition metals as a function of ecut = 6 - 60, spin, surface relaxation, Fermi energy, and slab thickness.  So far I have only been working with variations as a function of the number of plane waves for Ni and Pd.  When I relaxed a bulk structure as a function of ngkpt, tsmear, and acell ABINIT chose a value of ecut ~ 60.  
+</div></blockquote>
+
+What do you mean by "Abinit chose ecut~60"? Do you mean that your convergence tests with ecut give a good resolution on the property you are looking at for ecut=60?<br>
+
+<blockquote><div><cite><a href="memberlist2441.html?mode=viewprofile&amp;u=1885">erichmond</a> wrote: <a href="viewtopic7b3e.html?p=13002#p13002" data-post-id="13002" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><div class="responsive-hide">Wed Apr 22, 2020 11:29 pm</div></cite>
+Up to this point, I have been using the pseudopotentials from the ONCVPSP-PBE-PDv0.4 library.  Is pseudodojo the same as ONCVPSP-PBE-PDv0.4?  If so, I have a problem -many of my results are unreliable.  So far the computations on the slab for 6 - 40 have converged to tolvrs 1e-12.
+</div></blockquote>
+
+Yes, ONCVPSP-PBE-PDv0.4 is the same as what you have on pseudodojo.<br>
+What do you mean unreliable, is it because you cannot go below 1E-12 on the density/potential resolution?<br>
+
+<blockquote><div><cite><a href="memberlist2441.html?mode=viewprofile&amp;u=1885">erichmond</a> wrote: <a href="viewtopic7b3e.html?p=13002#p13002" data-post-id="13002" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><div class="responsive-hide">Wed Apr 22, 2020 11:29 pm</div></cite>
+The addition of diemix 0.5 and dielng 0.25 did improve the convergence slightly where tolvrs ~ 5e-12 after 240 iterations instead of tolvrs ~ 1e-11, but still not at tolvrs 1e-12.  What other preconditioning variables can I try that I am not already using?<br>
+<br>
+Eliezer<br>
+<br>
+PS:  I computed ETOT for diemix = .2, .4, .6, .8, 1.0 with all the other parameters the same.  For all values of diemix for sufficiently high iterations, ETOT oscillated in the range 3E-12&lt; ETOT &lt; 2e-11 Ha.  For 0.6, 0.8, 1.0 the oscillations started around 40 interactions.  For 0.2 and 0.4, the oscillations occurred around 100 and 60 iterations respectively.
+</div></blockquote>
+
+Maybe you are in a more pathological case...? <br>
+OK for diemix, sounds like a too small value just shifts the problem to higher number of SCF.<br>
+You used iprcel 45, did test if this is indeed the best? What about without it?<br>
+You can increase nline to 10 in case, it can be less computer demanding than increasing nnsclo (leave it by default and increase nline first).<br>
+<br>
+<br>
+Another remark, how many CPU are you using because in your input you put npfft 4   npband 24  npkpt 4  bandpp 2, meaning that you want to run on npfft*npband*npkpt=384 CPU times two threads per CPU (bandpp), is it correct?<br>
+<br>
+Best wishes,<br>
+Eric</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p13018" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile13018">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist2441.html?mode=viewprofile&amp;u=1885" class="username">erichmond</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchcfbc.html?author_id=1885&amp;sr=posts">26</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Dec 23, 2016 12:00 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content13018">
+
+						<h3 ><a href="#p13018">Re: Parallelization and convergence</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting393f.html?mode=quote&amp;f=9&amp;p=13018" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicfc8c.html?p=13018#p13018" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist2441.html?mode=viewprofile&amp;u=1885" class="username">erichmond</a></strong> &raquo; </span>Fri May 01, 2020 4:00 am
+			</p>
+			
+			
+			
+			<div class="content">Eric,<br>
+I appreciate your detailed response.  I'll respond item by item.<br>
+<br>
+In the output of  a relaxation run where I varied  ngkpt[ 2 2 2, 4 4 4, 6 6 6, 8 8 8, 10 10 10] and tsmear [.0001 to .0005 by .0001 steps], there appeared, at the beginning of a dataset and right before the pseudopotential description, the following<br>
+            Angles(23, 13, 12)= 90  90  120<br>
+            getcut:  wavevector=  0.0  0.0  0.0   ngfft= 36  36  120<br>
+                          ecut(hartree)=  58.190  =&gt;  boxcut(ratio)- 2.01652<br>
+Normally, here the value of ecut just equals the value I insert in the input file.  This is where I obtained the value of ecut for further computations.  The input value of ecut was 44,  <br>
+<br>
+I jumped to the conclusion that my computations for the 1DM files [ecut = 6, 8, 10, 12, 14, 16, 18, 10, 22, 24 and 52, 52, 56, 58, and 60] were unreliable because I was using the pseudopotential in a forbidden range, and therefore couldn't be relied upon.<br>
+<br>
+I might mention for bulk computations, a unit cell without vacuum, all computations for ecut = 6 - 60 converged, and for slab calculations, 3 atom layers and 7 vacuum layers, with ecut &lt;= 40 all converged to tolvrs = 1e-12,.  So I don't know why slab computations don't converge for ecut = 42-60.<br>
+<br>
+With regard to iprcel = 45, I found that idea in the base Tutorial tbase4_7 where he recommended using this input term over dielng and diemax to precondition the computation when dealing with Al layers and vacuum.  The writeup on iprcel is too brief to give me an intelligent way to vary iprcel.  In that tutorial, the author also suggests using diemac = 3-5 and dielng = 0.2 for the Al-vacuum system.  I tried this latter computation with diemax = 4 and dielng = 0.2 and after 240 iterations the last five iterations of tolvrs gave an average of 1.2 e-11 which is higher than the variations of diemix which was in the range of 7-9 e-12.<br>
+<br>
+ My early computations did not include iprcel,diemix, diemac, npulayit, nline, optforces, nbdbuf, or dielng, and the convergence for some slab runs, which didn't converge to tolvrs = 1 e-12, were orders of magnitude worse.  <br>
+<br>
+I am currently running computations where I vary diemac (1e5 to 1e9 by factors of 10)and nline (4, 5, 6, 7, 8, 9, 10).  Each computation takes ~9s/iteration so the runs are taking days.  The results so far are<br>
+             diemac = 1 e+5    Average of last 5 iterations of tolvrs = 1.28 e-11   Iteration where tolvrs ~e-10 = 85<br>
+             nline = 4     Average of last 5 iterations of tolvrs = 1.15 e-11  Iteration where tolvrs ~e-10 = 40<br>
+The programs for these tests are still running and will take days to complete if not weeks.<br>
+<br>
+The server I am using has 24 CPU's with 2 threads each.  Therefore I made npband = 24 and bandpp = 2 to generate the largest block.  I ran an autoparal run with the following results<br>
+                npband	 6   8   6   6   6<br>
+		     npfft	8    6   6   8   6<br>
+		bandpp	1    1   1   2   2<br>
+where the weights decreased from left too right.  I am not sure where I obtained the values for npfft and npkpt which I used.<br>
+<br>
+Thanks again for your help.<br>
+Eliezer</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p13025" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile13025">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search82c3.html?author_id=682&amp;sr=posts">469</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 19, 2011 11:13 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> University of Liege, Belgium</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content13025">
+
+						<h3 ><a href="#p13025">Re: Parallelization and convergence</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting22b9.html?mode=quote&amp;f=9&amp;p=13025" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic15b3-3.html?p=13025#p13025" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a></strong> &raquo; </span>Tue May 05, 2020 9:36 am
+			</p>
+			
+			
+			
+			<div class="content">Dear Eliezer,<br>
+OK, sounds like it is a bit pathological case (metallic multilayers in vacuum are often harder to converge), thought reaching tolvrs to 1E-12 is not bad at all! Which property are you looking for in this system that needs to go beyond that?<br>
+<br>
+Can you show what a grep ETOT gives in one of your cases that are not OK, such that I can see if it has some strange behavior before?<br>
+<br>
+Otherwise, playing with the different preconditioners/mixing parameters is the way to go...<br>
+The iprcell is not highly described, indeed, but you can find some more technical discussion in the following paper:<br>
+<a href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.78.045126" class="postlink">https://journals.aps.org/prb/abstract/1 ... .78.045126</a><br>
+<br>
+Best wishes,<br>
+Eric</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p13028" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile13028">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist2441.html?mode=viewprofile&amp;u=1885" class="username">erichmond</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchcfbc.html?author_id=1885&amp;sr=posts">26</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Dec 23, 2016 12:00 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content13028">
+
+						<h3 ><a href="#p13028">Re: Parallelization and convergence</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingab72.html?mode=quote&amp;f=9&amp;p=13028" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic3086.html?p=13028#p13028" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist2441.html?mode=viewprofile&amp;u=1885" class="username">erichmond</a></strong> &raquo; </span>Wed May 06, 2020 3:46 am
+			</p>
+			
+			
+			
+			<div class="content">Eric,<br>
+I am sorry to hear that you might think that my problem is pathological, which sounds like a black hole for unsolvable problems.  Nonetheless, I will continue my preconditioning investigations.  <br>
+<br>
+Attached fine the file "PreConditioner parameter evaluation", which gives the results I have found so far.  To give you a frame of reference, the constant parameters for each run are iprcel 45, dielng .25, diemac 1e+8, diemix .5, iscf 7, npulayit 30, nnsclo 3, nline 6, optforces 0, nbdbuf 20, nband 144.  Each table in the attached file has 4 columns: first giving the value of the parameter being tested; second, giving the average and standard deviation of the 236 to 240 iteration values of vres; third the 240th vres value; and last, the iteration where vres first reaches the e-10 range.  I consider the 2nd and 4th columns to be significant because the standard deviation of vres gives some idea of how noisy vres is at the 240th iteration; and, the 4th column gives some idea of how fast that particular run is converging.  Based on these criteria I choose nline 7, diemix 0.6, and diemac 1 e+6.  The experiment trying diemac 4 and dielng 0.2 instead of iprcel 45 gave about the same results as iprcel 45.<br>
+<br>
+I am going to test iprcel for values 0, 25, 35, 45, 55, 65, 145 and dielng 0.2 to 1.0 in steps of ,2.<br>
+<br>
+Also I have attached the ETOT file " ETOTnline042820.out", as you requested, for a test of nline 6 and 7.  For the second dataset 2 (nline 7), the program quit running, for some unknown reason, after 103 iterations.  There were no comments in the log file.<br>
+<br>
+Eliezer</div>
+			
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="download/file3a56.php?id=1867">PreConditioner parameter evaluation.docx</a></dt>
+						<dd>(11.72 KiB) Downloaded 312 times</dd>
+		</dl>
+		
+		
+			</dd>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file9d03.php?id=1868">ETOTnline042820.out</a></dt>
+						<dd>(20.72 KiB) Downloaded 322 times</dd>
+		</dl>
+		
+		
+			</dd>
+									</dl>
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p13029" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile13029">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search82c3.html?author_id=682&amp;sr=posts">469</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 19, 2011 11:13 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> University of Liege, Belgium</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content13029">
+
+						<h3 ><a href="#p13029">Re: Parallelization and convergence</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingfeab.html?mode=quote&amp;f=9&amp;p=13029" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicb862.html?p=13029#p13029" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a></strong> &raquo; </span>Wed May 06, 2020 5:00 pm
+			</p>
+			
+			
+			
+			<div class="content">Dear Eliezer,<br>
+Thank you for your feedback. Regarding the convergence tests of diemac, diemix, etc it looks like nline and diemac does not change anything and diemix=0.8 is the best value. The SCF is quite smooth without bumps such that this is quite good.<br>
+For iprcell, I don't have much experience with it, just one inhomogeneous dielectric system (BaO/BaTiO3 superlattice) which was not converging with most usual parameters (400 SCF to converge) but worked fantastically well with iprcell=41 (10 SCF to converge).<br>
+Now, I come back to my question, do you really need to go below 1E-10 or 1E-11 on tolvrs? When looking at your grep ETOT file, we can see that tolvrs is indeed stuck at 1E-11 but the residual on the energy (first column) is very well converged (1E-10/1E-11) as well as the residual on the wavefunction (second column, 1E-27). So, did you test physical properties you are interested in vs tolvrs, because maybe 1E-11 this is way enough?<br>
+Best wishes,<br>
+Eric</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p13040" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile13040">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist2441.html?mode=viewprofile&amp;u=1885" class="username">erichmond</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchcfbc.html?author_id=1885&amp;sr=posts">26</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Dec 23, 2016 12:00 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content13040">
+
+						<h3 ><a href="#p13040">Re: Parallelization and convergence</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postinga234-2.html?mode=quote&amp;f=9&amp;p=13040" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic13ea.html?p=13040#p13040" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist2441.html?mode=viewprofile&amp;u=1885" class="username">erichmond</a></strong> &raquo; </span>Thu May 14, 2020 1:57 am
+			</p>
+			
+			
+			
+			<div class="content">Eric,<br>
+<br>
+I completed the tests on iprcel and dielng  which are included in an updated version of "PreConditioner parameter evaluation" (attached). Also I put the optimum choices of the preconditioning parameters in a slab run with nstep  = 2000. The results were better (iteration 1996-2000 =&gt;4.72e-12+-2.69e-12, but vres had still not reached 1e-12.  Perhaps 4000 iterations would work, but that seems excessive.<br>
+<br>
+I also included in the "PreConditioner ,,," attachment two plots.  The first plot is one of workfunction vs ecut and the second is a plot of the Fermi energy vs. ecut.  It is obvious for ecut&lt; 25 there is a sharp decrease in the workfunction and Fermi energy.  These results are why I need to know whether these results are Valid for ecut &lt; 25.  If you don't know the answer, could you please point me to someone or some paper that could help.<br>
+<br>
+Lastly, I have not yet, but will try tonight, to compare the workfunction vs potential residual for vres = 10e-9, -10, -11, -12 and -13 for say nstep = 500.  ETOT converges for ecut &lt; 42, so I will set ecut = 38 or 40.<br>
+<br>
+Thank you for your continuing assistance,<br>
+<br>
+Eliezer</div>
+			
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="download/filed970.php?id=1869">PreConditioner parameter evaluation.docx</a></dt>
+						<dd>(27.65 KiB) Downloaded 338 times</dd>
+		</dl>
+		
+		
+			</dd>
+									</dl>
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p13041" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile13041">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search82c3.html?author_id=682&amp;sr=posts">469</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 19, 2011 11:13 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> University of Liege, Belgium</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content13041">
+
+						<h3 ><a href="#p13041">Re: Parallelization and convergence</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting41db.html?mode=quote&amp;f=9&amp;p=13041" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic6e22.html?p=13041#p13041" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a></strong> &raquo; </span>Fri May 15, 2020 11:05 am
+			</p>
+			
+			
+			
+			<div class="content">Dear Eliezer,<br>
+
+<blockquote class="uncited"><div>
+I completed the tests on iprcel and dielng which are included in an updated version of "PreConditioner parameter evaluation" (attached). Also I put the optimum choices of the preconditioning parameters in a slab run with nstep = 2000. The results were better (iteration 1996-2000 =&gt;4.72e-12+-2.69e-12, but vres had still not reached 1e-12. Perhaps 4000 iterations would work, but that seems excessive.
+</div></blockquote>
+more than a few 100 steps is already excessive and a few 1000 sounds not to help a lot here (I mean, the precision gained is not worth the CPU cost).<br>
+
+<blockquote class="uncited"><div>I also included in the "PreConditioner ,,," attachment two plots. The first plot is one of workfunction vs ecut and the second is a plot of the Fermi energy vs. ecut. It is obvious for ecut&lt; 25 there is a sharp decrease in the workfunction and Fermi energy. These results are why I need to know whether these results are Valid for ecut &lt; 25. If you don't know the answer, could you please point me to someone or some paper that could help.
+</div></blockquote>
+
+To help in visualizing your convergence tests, you could plot the residual instead of the total value vs ecut (by residual I mean subtracting all results by the best converged case, i.e. the highest ecut you went)? A log scale on the y axis might be helpful for this convergence test vs ecut.<br>
+You could also make a second plot with [(value(ecut)-value(ecut_max))/value(ecut_max)]*100 vs ecut to have it like a percentage of error so that you can say you have a precision of 1% at ecut=XX, 10% at ecut=YY, etc. This will help you to decide which ecut you have to use at the end.<br>
+The same applies vs tolvrs.<br>
+
+<blockquote class="uncited"><div>
+Lastly, I have not yet, but will try tonight, to compare the workfunction vs potential residual for vres = 10e-9, -10, -11, -12 and -13 for say nstep = 500. ETOT converges for ecut &lt; 42, so I will set ecut = 38 or 40.
+</div></blockquote>
+
+You could test the convergence for tolvrs starting at 1E-05 or 1E-04 and see how it goes every 1E-01.<br>
+
+<blockquote class="uncited"><div>
+ Thank you for your continuing assistance,
+</div></blockquote>
+
+You're welcome <img class="smilies" src="images/smilies/icon_e_smile.gif" width="15" height="17" alt=":-)" title="Smile"><br>
+<br>
+Best wishes,<br>
+Eric</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p13052" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile13052">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist2441.html?mode=viewprofile&amp;u=1885" class="username">erichmond</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchcfbc.html?author_id=1885&amp;sr=posts">26</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Dec 23, 2016 12:00 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content13052">
+
+						<h3 ><a href="#p13052">Re: Parallelization and convergence</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingfa2e.html?mode=quote&amp;f=9&amp;p=13052" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic9089.html?p=13052#p13052" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist2441.html?mode=viewprofile&amp;u=1885" class="username">erichmond</a></strong> &raquo; </span>Wed May 20, 2020 6:24 am
+			</p>
+			
+			
+			
+			<div class="content">Eric,<br>
+<br>
+I finished calculating the workfunction for values of 1d-4 to 1d-13.  The results are at the end of the attached document.  Included is a plot of the difference of the largest value of the workfunction, which occurs at tolvrs = 1d-10, from each of the others.  The work function appears to be independent of the values for tolvrs, unlike the behavior of the workfunction with respect to the number of plane waves.  I will plot the difference and its percentage of ecut vs. WF tomorrow.<br>
+<br>
+Eliezer</div>
+			
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="download/filece4c.php?id=1870">PreConditioner parameter evaluation.docx</a></dt>
+						<dd>(54.07 KiB) Downloaded 289 times</dd>
+		</dl>
+		
+		
+			</dd>
+									</dl>
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p13065" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile13065">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search82c3.html?author_id=682&amp;sr=posts">469</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 19, 2011 11:13 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> University of Liege, Belgium</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content13065">
+
+						<h3 ><a href="#p13065">Re: Parallelization and convergence</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting7797.html?mode=quote&amp;f=9&amp;p=13065" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicf5e7.html?p=13065#p13065" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a></strong> &raquo; </span>Mon May 25, 2020 7:06 am
+			</p>
+			
+			
+			
+			<div class="content">Dear Eliezer,<br>
+OK, we can thus see that you don't need such a strict precision on tolvrs to get correct precision on the property you want to compute (WF here) and asking for more would be CPU time waste. Now you can safely test the convergence w.r.t. ecut and kpt.<br>
+Best wishes,<br>
+Eric</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p13069" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile13069">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist2441.html?mode=viewprofile&amp;u=1885" class="username">erichmond</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchcfbc.html?author_id=1885&amp;sr=posts">26</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Dec 23, 2016 12:00 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content13069">
+
+						<h3 ><a href="#p13069">Re: Parallelization and convergence</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingc9fc.html?mode=quote&amp;f=9&amp;p=13069" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic73ba.html?p=13069#p13069" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist2441.html?mode=viewprofile&amp;u=1885" class="username">erichmond</a></strong> &raquo; </span>Tue May 26, 2020 9:54 am
+			</p>
+			
+			
+			
+			<div class="content">Eric,<br>
+<br>
+I'm sorry that I did not get back to you earlier but I spent the last week recalculating the workfunction of Pd so that there is no systematic error.  The result is shown in Figure 1 of the attachment.<br>
+<br>
+Unfortunately, the workfunction does not monotonically converge to some limit as a function of ecut as the Fermi energy does.  My original goal was to determine this limit.  Taking your suggestion, I plotted in Figure 2 the difference of the value of the workfunction for ecut = 60 from all the other values and plotted the result on a log-linear plot.  You might notice that the values in Figure 2 for ecut = 26 snd 28 are missing because they are negative.  Further, I computed the percent difference of each value of the workfunction from the value at ecut = 60 and plotted it in Figure 3.<br>
+<br>
+The general characteristic in Figures 2 and 3 is that the difference in the workfunction values, as ecut increases, decreases.<br>
+<br>
+Thanks again for your assistance and guidance.<br>
+Eliezer</div>
+			
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="download/file083f.php?id=1878">Plots of the Pd workfunction vs ecut.docx</a></dt>
+						<dd>(41.3 KiB) Downloaded 287 times</dd>
+		</dl>
+		
+		
+			</dd>
+									</dl>
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p13103" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile13103">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search82c3.html?author_id=682&amp;sr=posts">469</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 19, 2011 11:13 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> University of Liege, Belgium</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content13103">
+
+						<h3 ><a href="#p13103">Re: Parallelization and convergence</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingd2c8.html?mode=quote&amp;f=9&amp;p=13103" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic57be.html?p=13103#p13103" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a></strong> &raquo; </span>Thu Jun 04, 2020 3:17 pm
+			</p>
+			
+			
+			
+			<div class="content">Dear Eliezer,<br>
+OK, it sounds like you can get easily an error bar of 1% but going lower is CPU time demanding. At this stage you need to know if 1% precision on the WF is enough for you? If so, ecut=16-20 look good.<br>
+There is something making a noise oscillation but I don't know what can be the origin, which pseupotentials are you using?<br>
+Best wishes,<br>
+Eric<br>
+PS: If you are using PAW, did you make pawecutdg evolving with ecut in your convergence tests?</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p13136" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile13136">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist2441.html?mode=viewprofile&amp;u=1885" class="username">erichmond</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchcfbc.html?author_id=1885&amp;sr=posts">26</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Dec 23, 2016 12:00 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content13136">
+
+						<h3 ><a href="#p13136">Re: Parallelization and convergence</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting2f93.html?mode=quote&amp;f=9&amp;p=13136" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic30af.html?p=13136#p13136" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist2441.html?mode=viewprofile&amp;u=1885" class="username">erichmond</a></strong> &raquo; </span>Tue Jun 09, 2020 8:56 am
+			</p>
+			
+			
+			
+			<div class="content">Eric<br>
+I was hoping to get an accuracy of 0.2% ~ 0.01eV, but this may not be practical.<br>
+<br>
+I am using PBE GGA xc, ixc = 11 and pseudodojo pseudopotentials.  <br>
+<br>
+There is an oscillation in the tolvrs and toldfe values in the output file.  Also, there is an oscillation in the vacuum portion of the 1DM files which decreases with increasing ecut (see the last two graphs in the attachment).  I thought that the vacuum portion should rise to some <em class="text-italics">flat</em> region and then decrease.  <br>
+<br>
+Eliezer</div>
+			
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="download/filed3c1.php?id=1897">Plots of the Pd workfunction vs ecut.docx</a></dt>
+						<dd>(65.56 KiB) Downloaded 281 times</dd>
+		</dl>
+		
+		
+			</dd>
+									</dl>
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p13145" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile13145">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search82c3.html?author_id=682&amp;sr=posts">469</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 19, 2011 11:13 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> University of Liege, Belgium</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content13145">
+
+						<h3 ><a href="#p13145">Re: Parallelization and convergence</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting6cf3.html?mode=quote&amp;f=9&amp;p=13145" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic022f.html?p=13145#p13145" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a></strong> &raquo; </span>Wed Jun 10, 2020 11:49 am
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite><a href="memberlist2441.html?mode=viewprofile&amp;u=1885">erichmond</a> wrote: <a href="viewtopic30af.html?p=13136#p13136" data-post-id="13136" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><div class="responsive-hide">Tue Jun 09, 2020 8:56 am</div></cite>
+I was hoping to get 0.2% ~ 0.1eV accuracy, but this may not be practical.
+</div></blockquote>
+Then, according to your convergence test, you have to use a large enough ecut to reach this precision...<br>
+<br>
+
+<blockquote><div><cite><a href="memberlist2441.html?mode=viewprofile&amp;u=1885">erichmond</a> wrote: <a href="viewtopic30af.html?p=13136#p13136" data-post-id="13136" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><div class="responsive-hide">Tue Jun 09, 2020 8:56 am</div></cite>
+There is an oscillation in the tolvrs and toldfe values in the output file.  Also, there is an oscillation in the vacuum portion of the 1DM files which decreases with increasing ecut.  I thought that the vacuum portion should be flat.  
+</div></blockquote>
+
+Here it will be the limit of my help because I've never calculated work functions...<br>
+Did you see this document that might help you:<br>
+<a href="https://docs.abinit.org/guide/work_function_tutorial.tex" class="postlink">https://docs.abinit.org/guide/work_func ... orial.tex </a><br>
+<br>
+<br>
+Best wishes,<br>
+Eric</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p13151" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile13151">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist2441.html?mode=viewprofile&amp;u=1885" class="username">erichmond</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchcfbc.html?author_id=1885&amp;sr=posts">26</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Dec 23, 2016 12:00 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content13151">
+
+						<h3 ><a href="#p13151">Re: Parallelization and convergence</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting4df0.html?mode=quote&amp;f=9&amp;p=13151" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicf2e3.html?p=13151#p13151" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist2441.html?mode=viewprofile&amp;u=1885" class="username">erichmond</a></strong> &raquo; </span>Fri Jun 12, 2020 2:37 am
+			</p>
+			
+			
+			
+			<div class="content">Eric<br>
+<br>
+Yes.  This was the article along with a Phys Rev B article by Verstraete that allowed me to get started calculating work functions.<br>
+<br>
+Many thanks for all your help and guidance!!<br>
+<br>
+Sayonara<br>
+Eliezer</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="postingae3b.html?mode=reply&amp;f=9&amp;t=4380" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic532b.html?f=9&amp;t=4380&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=9&amp;t=4380">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			19 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforumfdc5.html?f=9" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Ground state”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?p=13065 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:16:18 GMT -->
+</html>

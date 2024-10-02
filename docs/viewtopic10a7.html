@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1645&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:02:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; processor grid layout</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>processor grid layout</h2>
+		<p><a href="viewtopic45a9.html?f=19&amp;t=1645">https://forum.abinit.org/viewtopic.php?f=19&amp;t=1645</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>processor grid layout</h3>
+				<div class="date">Posted: <strong>Sat Apr 28, 2012 1:27 am</strong></div>
+				<div class="author">by <strong>jtv</strong></div>
+				<div class="content">In the routine 51_manage_mpi/initmpi_grid.F90 the array telling mpi how to arrange the processes (mpi_energ%sizecart) is written in Fortran ordering, but I believe the mpi routine (mpi_cart_create) is assuming C ordering. The effect of this is that when using KGB parallelization the FFT processors are not adjacent but rather maximally dispersed. Inverting the arrays in this subroutine (such that spin if the first index and fft is the fourth) seems to show improved speed/scaling.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: processor grid layout</h3>
+				<div class="date">Posted: <strong>Sun Jun 10, 2012 11:46 pm</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">Dear &quot;jtv&quot;,<br /><br />Thanks for the performance report.<br />But, before modifying the source code, we have to check that your tests are sufficiently general.<br />I mean, changing the FFT distribution could have laso an impact on the band distribution.<br />Could you exactly give us an example of input file demonstrating the performance improvment if with change sizecart in initmpi_grid ?<br />Could you also give us more details about the architecture you use (computer type, size of nodes, MPI version, ...) ?<br /><br />Thanks<br /><br />Marc</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1645&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:02:35 GMT -->
+</html>

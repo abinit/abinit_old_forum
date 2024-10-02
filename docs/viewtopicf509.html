@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1741&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:37:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Crash when doing GKK preparation</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Crash when doing GKK preparation</h2>
+		<p><a href="viewtopic2a9c.html?f=10&amp;t=1741">https://forum.abinit.org/viewtopic.php?f=10&amp;t=1741</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Crash when doing GKK preparation</h3>
+				<div class="date">Posted: <strong>Tue Jul 10, 2012 7:57 pm</strong></div>
+				<div class="author">by <strong>eylvisaker</strong></div>
+				<div class="content">I'm running a parallel job using abinit 6.12.3 to calculate electron-phonon properties. The first perturbation ( Perturbation wavevector (in red.coord.)   0.000000  0.000000  0.000000  Perturbation : displacement of atom   1   along direction   1   ) runs fine and computes a 2DEtotal, but the next perturbation crashes with a seg fault. The exact same input files and pseudopotentials works fine with abinit 6.10.3 and 6.6.3. Any idea what I can do to get around this?<br /><br />Here is my input file:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>ndtset 1<br />jdtset 2<br /><br />rfphon2 1<br />rfatpol2 1 4 <br />rfdir2 1 1 1 <br />nqpt2 1<br />qpt2 0.00000000E+00&nbsp; 0.00000000E+00&nbsp; 0.00000000E+00<br />kptopt2 3<br />getwfk2 1<br />prtwf2 0<br /><br />prepgkk 1<br />prtgkk 1<br /><br />tolvrs2 1d-7<br /><br />#Definition of the unit cell<br />acell&nbsp; &nbsp; 1 1 1&nbsp; &nbsp;<br /><br />prtwf 0<br /><br />rprim <br />&nbsp; &nbsp; 3.121447931871114&nbsp; &nbsp; &nbsp; 0.000000000000000&nbsp; &nbsp; &nbsp; 10.757145573417102<br />&nbsp; &nbsp;-1.560723965935557&nbsp; &nbsp; &nbsp; 2.703253205590783&nbsp; &nbsp; &nbsp; 10.757145573417102<br />&nbsp; &nbsp;-1.560723965935557&nbsp; &nbsp; &nbsp;-2.703253205590783&nbsp; &nbsp; &nbsp; 10.757145573417102<br /><br />#Definition of the atom types<br />ntypat 3&nbsp; &nbsp; <br />znucl 29&nbsp; 8&nbsp; 13&nbsp; &nbsp; <br />&nbsp; &nbsp; <br /><br />xcart <br />&nbsp; &nbsp;0.000000000000000&nbsp; &nbsp; &nbsp; 0.000000000000000&nbsp; &nbsp; &nbsp; 0.000000000000000&nbsp; &nbsp;# Cu<br />&nbsp; &nbsp;0.000000000000000&nbsp; &nbsp; &nbsp; 0.000000000000000&nbsp; &nbsp; &nbsp; 3.553085182899669&nbsp; &nbsp;# O <br />&nbsp; &nbsp;0.000000000000000&nbsp; &nbsp; &nbsp; 0.000000000000000&nbsp; &nbsp; &nbsp;-3.553085182899669<br />&nbsp; &nbsp;0.000000000000000&nbsp; &nbsp; &nbsp; 0.000000000000000&nbsp; &nbsp; -16.135718360125654&nbsp; &nbsp;# Al<br /><br /><br />#Definition of the atoms<br />natom 4&nbsp; &nbsp; <br />typat 1 2*2 3&nbsp; &nbsp;<br /><br /><br />#Definition of the planewave basis set <br />ecut 25.0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# Maximal kinetic energy cut-off, in Hartree<br /><br />#Definition of the k-point grid<br />kptopt 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Option for the automatic generation of k points, taking<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # into account the symmetry<br />ngkpt&nbsp; &nbsp;16 16 16&nbsp; # This is a 2x2x2 grid based on the primitive vectors<br />nshiftk 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# of the reciprocal space (that form a BCC lattice !), <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # repeated four times, with different shifts :<br />shiftk 0.5 0.5 0.5 <br /><br />#Definition of occupations<br />occopt&nbsp; 3&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# Metallic occupations<br />tsmear&nbsp; 0.004&nbsp; &nbsp; &nbsp;# Temperature smearing<br /><br />nband 15<br /><br />charge 0.1 <br /><br />#Definition of the SCF procedure<br />nstep 100&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# Maximal number of SCF cycles<br />tolvrs 1.0d-8&nbsp; &nbsp; &nbsp;# Will stop when, twice in a row, the difference<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # between two consecutive evaluations of total energy<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # differ by less than toldfe (in Hartree)<br />diemac 1e6&nbsp; &nbsp; &nbsp; &nbsp; # Although this is not mandatory, it is worth to<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # precondition the SCF cycle. The model dielectric<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # function used as the standard preconditioner<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # is described in the &quot;dielng&quot; input variable section.<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Here, we follow the prescription for bulk silicon.<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; #<br /><br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Crash when doing GKK preparation</h3>
+				<div class="date">Posted: <strong>Sat Nov 17, 2012 11:17 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hi - this is a bug in parallel 6.12 which has been fixed since 6.15 (not released) and will be corrected in the 7.0 version (released soon).<br /><br />In the meanwhile you can neutralize it by replacing:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>call getcgqphase(dtset, timrev, cg,&nbsp; mcg,&nbsp; cgq, mcgq, &amp;<br />&amp;&nbsp; &nbsp; &nbsp;mpi_enreg, nkpt_rbz, npwarr, npwar1, phasecg)</code></pre></div><br /><br />with<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>phasecg(1,:) = one<br />phasecg(2,:) = zero </code></pre></div><br /><br />in file src/95_drive/loper3.F90<br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1741&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:37:26 GMT -->
+</html>

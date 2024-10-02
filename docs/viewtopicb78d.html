@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2409&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:22:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; mkl+scalapack issue</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>mkl+scalapack issue</h2>
+		<p><a href="viewtopic05ee.html?f=3&amp;t=2409">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2409</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>mkl+scalapack issue</h3>
+				<div class="date">Posted: <strong>Thu Jan 30, 2014 11:45 pm</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Dear all,<br /><br />I am experiencing some issue using mkl+scalapack.<br />I compilte the code with -O0 -g -traceback options and with the ifort 14.0.1 compiler. The MKL is the version 11.0.1 and openmpi 1.7.2<br /><br />Everything goes fine except the segfault that occures at the very beginning of the code.<br />The functions stack is<br />abi_linalg_init<br />init_scalapack<br />build_grid_scalapack<br />BLACS_GRIDINIT which is in th MKL library and can not be debugged.<br /><br />I removed the scalapack linal flavor and it works.<br /><br />I am not sure I really need scalapack but it is always good to report errors we find.<br /><br />Best,<br /><br />Jordan<br /><br />EDIT : Scalapack of the MKL library, architecture Marenostrum III at the BSC (Intel Xeon E5-2670). Abinit is my 7.7.1-private, I can try the released 7.6</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: mkl+scalapack issue</h3>
+				<div class="date">Posted: <strong>Tue Feb 04, 2014 5:34 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">As usual: which version of Abinit? Which version of ScaLAPACK? Which architecture? ...<br /><br />A config.log would also be welcome.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: mkl+scalapack issue</h3>
+				<div class="date">Posted: <strong>Tue Feb 04, 2014 6:25 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">I've encountered similar problems with MKL+Scalapack in older versions of Abinit (I guess Jordan is using v7.6 or 7.7.1). <br />I didn't have time to investigate the problem and I decided to disable Scalapack in the GW code.<br />Of course I'm not happy with this solution, and I would prefer to have a suite of unit tests for the Scalapack wrappers. <br />pFunit seems an interesting framework (<!-- m --><a class="postlink" href="http://pfunit.sourceforge.net/">http://pfunit.sourceforge.net/</a><!-- m -->) as it provides supports for MPI and Omp</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: mkl+scalapack issue</h3>
+				<div class="date">Posted: <strong>Tue Feb 04, 2014 6:41 pm</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Yes Matteo.<br />I did almost the same as you -&gt; disable ScaLAPACK in the whole abinit since the segfault arrives at the very beginning of the code....</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: mkl+scalapack issue&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Fri Feb 07, 2014 4:11 pm</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">I finally found out what the problem was.<br />I use openmpi and to use mkl+scalapack, one should link with mkl_blacs_openmpi !<br />Everything works smoothly now.<br /><br />Jordan</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2409&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:22:04 GMT -->
+</html>

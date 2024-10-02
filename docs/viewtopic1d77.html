@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?t=1457 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:54:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>configure error of 6.10 with gfortran+openmpi on fedora - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopic1d77.html?t=1457">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="1"><a href="viewforum58da.html?f=1" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Building ABINIT</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="3"><a href="viewforum4d6b.html?f=3" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Configuring and compiling ABINIT</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopic3805.html?f=3&amp;t=1457">configure error of 6.10 with gfortran+openmpi on fedora</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">option, parallelism,...<br /></div>
+<p>
+	<strong>Moderators:</strong> <a href="memberlist5296.html?mode=viewprofile&amp;u=2740" class="username">fgoudreault</a>, <a href="memberlist7468.html?mode=viewprofile&amp;u=53" class="username">mcote</a>
+</p>
+
+	<div class="rules">
+		<div class="inner">
+
+					<strong>Forum rules</strong><br />
+			Please have a look at ~abinit/doc/config/build-config.ac in the source package for detailed and up-to-date information about the configuration of Abinit 8 builds.<br>
+For a video explanation on how to build Abinit 7.x for Linux, please go to: <a href="http://www.youtube.com/watch?v=DppLQ-KQA68" class="postlink">http://www.youtube.com/watch?v=DppLQ-KQA68</a>.<br>
+<strong class="text-strong">IMPORTANT: when an answer solves your problem, please check the little green V-like button on its upper-right corner to accept it.</strong>
+		
+		</div>
+	</div>
+
+<div class="action-bar bar-top">
+	
+			<a href="postingd692.html?mode=reply&amp;f=3&amp;t=1457" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic46e2.html?f=3&amp;t=1457&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="1457" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			7 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p4516" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile4516">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist43dd.html?mode=viewprofile&amp;u=807" class="username">Zhang Xiaole</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search1504.html?author_id=807&amp;sr=posts">46</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Sep 15, 2011 7:13 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content4516">
+
+						<h3 class="first"><a href="#p4516">configure error of 6.10 with gfortran+openmpi on fedora</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting3f4e.html?mode=quote&amp;f=3&amp;p=4516" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic84da.html?p=4516#p4516" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist43dd.html?mode=viewprofile&amp;u=807" class="username">Zhang Xiaole</a></strong> &raquo; </span>Sun Dec 04, 2011 4:00 pm
+			</p>
+			
+			
+			
+			<div class="content">Hello dear users,<br />        Recently,i was trying to complie abinit 6.10 with gfrotran and openmpi on my computer based on fedroa 15. But some errors come up when the i do the ./configure.<br />my harderware is intel i7 2600.<br />this is my config file<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>prefix=&quot;/home/pariah&quot;<br />enable_64bit_flags=&quot;yes&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi=&quot;yes&quot;<br />with_mpi_prefix=&quot;/usr/lib64/openmpi&quot;</code></pre></div><br />when i type the command ./configure --with-config-file=&quot;fedora.ac&quot;<br />it ending with an error.and this is my output file<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>==============================================================================<br />&nbsp;=== Overall startup&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ===<br />&nbsp;==============================================================================<br /><br />checking build system type... x86_64-unknown-linux-gnu<br />checking host system type... x86_64-unknown-linux-gnu<br />checking target system type... x86_64-unknown-linux-gnu<br />checking for a BSD-compatible install... /usr/bin/install -c<br />checking whether build environment is sane... yes<br />checking for a thread-safe mkdir -p... /bin/mkdir -p<br />checking for gawk... gawk<br />checking whether make sets $(MAKE)... yes<br />checking whether make sets $(MAKE)... (cached) yes<br />checking whether ln -s works... yes<br />checking for a sed that does not truncate output... /bin/sed<br />checking for gawk... (cached) gawk<br />checking for grep that handles long lines and -e... /bin/grep<br />checking for egrep... /bin/grep -E<br />configure: reading options from ./xiaole.ac<br /><br />&nbsp;==============================================================================<br />&nbsp;=== Build-system information&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;===<br />&nbsp;==============================================================================<br /><br />configure: ABINIT version 6.10.1<br />configure: M4 010416 - Autoconf 026800 - Automake 011100 - Libtool 020204<br />configure: reporting user interface changes:<br />configure:&nbsp; * new option --enable-gw-openmp is available<br /><br />&nbsp;==============================================================================<br />&nbsp;=== Option consistency checking&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ===<br />&nbsp;==============================================================================<br /><br />configure: checking consistency of library-related options<br />configure:&nbsp; |---&gt; all OK<br />configure: <br />configure: checking consistency of plug-in options<br />configure:&nbsp; |---&gt; all OK<br />configure: <br />configure: checking consistency of experimental options<br />configure:&nbsp; |---&gt; all OK<br />configure: <br />configure:&nbsp; |---&gt; all OK<br />configure: <br />configure: parsing command-line options<br /><br />&nbsp;==============================================================================<br />&nbsp;=== Connector startup&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ===<br />&nbsp;==============================================================================<br /><br />configure: Initializing MPI support<br />configure: looking for MPI in /usr/lib64/openmpi<br />checking for a MPI C compiler... /usr/lib64/openmpi/bin/mpicc<br />checking for a MPI C++ compiler... /usr/lib64/openmpi/bin/mpicxx<br />checking for a MPI Fortran compiler... /usr/lib64/openmpi/bin/mpif90<br />checking for a MPI runner... /usr/lib64/openmpi/bin/mpirun<br />configure: GPU support disabled from command-line<br /><br />&nbsp;==============================================================================<br />&nbsp;=== Utilities&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ===<br />&nbsp;==============================================================================<br /><br />checking for sh... /bin/sh<br />checking for mv... /bin/mv<br />checking for perl... /usr/bin/perl<br />checking for rm... /bin/rm<br />checking for dvips... no<br />checking for dvipdf... dvipdf<br />checking for latex... no<br />checking for markdown... no<br />checking for patch... patch<br />checking for ps2pdf... ps2pdf<br />checking for tar... tar<br />checking for wget... wget<br />checking for curl... curl<br />configure: using internal version of MarkDown<br /><br />&nbsp;==============================================================================<br />&nbsp;=== C support&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ===<br />&nbsp;==============================================================================<br /><br />checking for gcc... /usr/lib64/openmpi/bin/mpicc<br />checking whether the C compiler works... yes<br />checking for C compiler default output file name... a.out<br />checking for suffix of executables... <br />checking whether we are cross compiling...configure: error: in `/home/pariah/abinit-6.10.1':<br />configure: error: cannot run C compiled programs.<br />If you meant to cross compile, use `--host'.<br />See `config.log' for more details<br /></code></pre></div><br />and this is my log file<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>This file contains any messages produced by compilers while<br />running configure, to aid debugging if configure makes a mistake.<br /><br />It was created by ABINIT configure 6.10.1, which was<br />generated by GNU Autoconf 2.68.&nbsp; Invocation command line was<br /><br />&nbsp; $ ./configure --with-config-file=./xiaole.ac<br /><br />## --------- ##<br />## Platform. ##<br />## --------- ##<br /><br />hostname = Pariah<br />uname -m = x86_64<br />uname -r = 2.6.41.1-1.fc15.x86_64<br />uname -s = Linux<br />uname -v = #1 SMP Fri Nov 11 21:36:28 UTC 2011<br /><br />/usr/bin/uname -p = unknown<br />/bin/uname -X&nbsp; &nbsp; &nbsp;= unknown<br /><br />/bin/arch&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; = x86_64<br />/usr/bin/arch -k&nbsp; &nbsp; &nbsp; &nbsp;= unknown<br />/usr/convex/getsysinfo = unknown<br />/usr/bin/hostinfo&nbsp; &nbsp; &nbsp; = unknown<br />/bin/machine&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;= unknown<br />/usr/bin/oslevel&nbsp; &nbsp; &nbsp; &nbsp;= unknown<br />/bin/universe&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; = unknown<br /><br />PATH: /usr/lib64/qt-3.3/bin<br />PATH: /usr/local/bin<br />PATH: /usr/bin<br />PATH: /bin<br />PATH: /usr/local/sbin<br />PATH: /usr/sbin<br />PATH: /sbin<br />PATH: /home/pariah/bin<br /><br /><br />## ----------- ##<br />## Core tests. ##<br />## ----------- ##<br /><br />configure:3622: checking build system type<br />configure:3636: result: x86_64-unknown-linux-gnu<br />configure:3656: checking host system type<br />configure:3669: result: x86_64-unknown-linux-gnu<br />configure:3689: checking target system type<br />configure:3702: result: x86_64-unknown-linux-gnu<br />configure:3744: checking for a BSD-compatible install<br />configure:3812: result: /usr/bin/install -c<br />configure:3823: checking whether build environment is sane<br />configure:3873: result: yes<br />configure:4014: checking for a thread-safe mkdir -p<br />configure:4053: result: /bin/mkdir -p<br />configure:4066: checking for gawk<br />configure:4082: found /usr/bin/gawk<br />configure:4093: result: gawk<br />configure:4104: checking whether make sets $(MAKE)<br />configure:4126: result: yes<br />configure:4568: checking whether make sets $(MAKE)<br />configure:4590: result: yes<br />configure:4600: checking whether ln -s works<br />configure:4604: result: yes<br />configure:4611: checking for a sed that does not truncate output<br />configure:4675: result: /bin/sed<br />configure:4684: checking for gawk<br />configure:4711: result: gawk<br />configure:4722: checking for grep that handles long lines and -e<br />configure:4780: result: /bin/grep<br />configure:4787: checking for egrep<br />configure:4849: result: /bin/grep -E<br />configure:5801: reading options from ./xiaole.ac<br />configure:7652: ABINIT version 6.10.1<br />configure:7662: M4 010416 - Autoconf 026800 - Automake 011100 - Libtool 020204<br />configure:7673: reporting user interface changes:<br />configure:7728:&nbsp; * new option --enable-gw-openmp is available<br />configure:7965: checking consistency of library-related options<br />configure:8016:&nbsp; |---&gt; all OK<br />configure:8019: <br />configure:8028: checking consistency of plug-in options<br />configure:8041:&nbsp; |---&gt; all OK<br />configure:8044: <br />configure:8053: checking consistency of experimental options<br />configure:8068:&nbsp; |---&gt; all OK<br />configure:8071: <br />configure:8093:&nbsp; |---&gt; all OK<br />configure:8096: <br />configure:8105: parsing command-line options<br />configure:9199: Initializing MPI support<br />configure:9203: looking for MPI in /usr/lib64/openmpi<br />configure:9236: checking for a MPI C compiler<br />configure:9246: result: /usr/lib64/openmpi/bin/mpicc<br />configure:9250: checking for a MPI C++ compiler<br />configure:9263: result: /usr/lib64/openmpi/bin/mpicxx<br />configure:9267: checking for a MPI Fortran compiler<br />configure:9277: result: /usr/lib64/openmpi/bin/mpif90<br />configure:9281: checking for a MPI runner<br />configure:9297: result: /usr/lib64/openmpi/bin/mpirun<br />configure:9647: GPU support disabled from command-line<br />configure:9685: checking for sh<br />configure:9703: found /bin/sh<br />configure:9716: result: /bin/sh<br />configure:9726: checking for mv<br />configure:9744: found /bin/mv<br />configure:9757: result: /bin/mv<br />configure:9767: checking for perl<br />configure:9785: found /usr/bin/perl<br />configure:9798: result: /usr/bin/perl<br />configure:9808: checking for rm<br />configure:9826: found /bin/rm<br />configure:9839: result: /bin/rm<br />configure:9852: checking for dvips<br />configure:9882: result: no<br />configure:9894: checking for dvipdf<br />configure:9910: found /usr/bin/dvipdf<br />configure:9921: result: dvipdf<br />configure:9936: checking for latex<br />configure:9966: result: no<br />configure:9978: checking for markdown<br />configure:10008: result: no<br />configure:10020: checking for patch<br />configure:10036: found /usr/bin/patch<br />configure:10047: result: patch<br />configure:10062: checking for ps2pdf<br />configure:10078: found /usr/bin/ps2pdf<br />configure:10089: result: ps2pdf<br />configure:10104: checking for tar<br />configure:10120: found /bin/tar<br />configure:10131: result: tar<br />configure:10146: checking for wget<br />configure:10162: found /usr/bin/wget<br />configure:10173: result: wget<br />configure:10188: checking for curl<br />configure:10204: found /usr/bin/curl<br />configure:10215: result: curl<br />configure:10229: using internal version of MarkDown<br />configure:10578: checking for gcc<br />configure:10605: result: /usr/lib64/openmpi/bin/mpicc<br />configure:10834: checking for C compiler version<br />configure:10843: /usr/lib64/openmpi/bin/mpicc --version &gt;&amp;5<br />gcc (GCC) 4.6.1 20110908 (Red Hat 4.6.1-9)<br />Copyright (C) 2011 Free Software Foundation, Inc.<br />This is free software; see the source for copying conditions.&nbsp; There is NO<br />warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.<br /><br />configure:10854: $? = 0<br />configure:10843: /usr/lib64/openmpi/bin/mpicc -v &gt;&amp;5<br />Using built-in specs.<br />COLLECT_GCC=/usr/bin/gcc<br />COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-redhat-linux/4.6.1/lto-wrapper<br />Target: x86_64-redhat-linux<br />Configured with: ../configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-bootstrap --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --enable-languages=c,c++,objc,obj-c++,java,fortran,ada,go,lto --enable-plugin --enable-java-awt=gtk --disable-dssi --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-1.5.0.0/jre --enable-libgcj-multifile --enable-java-maintainer-mode --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --disable-libjava-multilib --with-ppl --with-cloog --with-tune=generic --with-arch_32=i686 --build=x86_64-redhat-linux<br />Thread model: posix<br />gcc version 4.6.1 20110908 (Red Hat 4.6.1-9) (GCC) <br />configure:10854: $? = 0<br />configure:10843: /usr/lib64/openmpi/bin/mpicc -V &gt;&amp;5<br />gcc: error: unrecognized option '-V'<br />gcc: fatal error: no input files<br />compilation terminated.<br />configure:10854: $? = 4<br />configure:10843: /usr/lib64/openmpi/bin/mpicc -qversion &gt;&amp;5<br />gcc: error: unrecognized option '-qversion'<br />gcc: fatal error: no input files<br />compilation terminated.<br />configure:10854: $? = 4<br />configure:10874: checking whether the C compiler works<br />configure:10896: /usr/lib64/openmpi/bin/mpicc&nbsp; &nbsp; conftest.c&nbsp; &gt;&amp;5<br />configure:10900: $? = 0<br />configure:10948: result: yes<br />configure:10951: checking for C compiler default output file name<br />configure:10953: result: a.out<br />configure:10959: checking for suffix of executables<br />configure:10966: /usr/lib64/openmpi/bin/mpicc -o conftest&nbsp; &nbsp; conftest.c&nbsp; &gt;&amp;5<br />configure:10970: $? = 0<br />configure:10992: result: <br />configure:11014: checking whether we are cross compiling<br />configure:11022: /usr/lib64/openmpi/bin/mpicc -o conftest&nbsp; &nbsp; conftest.c&nbsp; &gt;&amp;5<br />configure:11026: $? = 0<br />configure:11033: ./conftest<br />./conftest: error while loading shared libraries: libmpi.so.1: cannot open shared object file: No such file or directory<br />configure:11037: $? = 127<br />configure:11044: error: in `/home/pariah/abinit-6.10.1':<br />configure:11046: error: cannot run C compiled programs.<br />If you meant to cross compile, use `--host'.<br />See `config.log' for more details<br /><br />## ---------------- ##<br />## Cache variables. ##<br />## ---------------- ##<br /><br />ac_cv_build=x86_64-unknown-linux-gnu<br />ac_cv_env_ARFLAGS_DEBUG_set=<br />ac_cv_env_ARFLAGS_DEBUG_value=<br />ac_cv_env_ARFLAGS_EXTRA_set=<br />ac_cv_env_ARFLAGS_EXTRA_value=<br />ac_cv_env_ARFLAGS_OPTIM_set=<br />ac_cv_env_ARFLAGS_OPTIM_value=<br />ac_cv_env_CCC_set=<br />ac_cv_env_CCC_value=<br />ac_cv_env_CC_LDFLAGS_DEBUG_set=<br />ac_cv_env_CC_LDFLAGS_DEBUG_value=<br />ac_cv_env_CC_LDFLAGS_OPTIM_set=<br />ac_cv_env_CC_LDFLAGS_OPTIM_value=<br />ac_cv_env_CC_LDFLAGS_set=<br />ac_cv_env_CC_LDFLAGS_value=<br />ac_cv_env_CC_LIBS_DEBUG_set=<br />ac_cv_env_CC_LIBS_DEBUG_value=<br />ac_cv_env_CC_LIBS_OPTIM_set=<br />ac_cv_env_CC_LIBS_OPTIM_value=<br />ac_cv_env_CC_LIBS_set=<br />ac_cv_env_CC_LIBS_value=<br />ac_cv_env_CC_set=<br />ac_cv_env_CC_value=<br />ac_cv_env_CFLAGS_DEBUG_set=<br />ac_cv_env_CFLAGS_DEBUG_value=<br />ac_cv_env_CFLAGS_EXTRA_set=<br />ac_cv_env_CFLAGS_EXTRA_value=<br />ac_cv_env_CFLAGS_OPTIM_set=<br />ac_cv_env_CFLAGS_OPTIM_value=<br />ac_cv_env_CFLAGS_set=<br />ac_cv_env_CFLAGS_value=<br />ac_cv_env_CPPFLAGS_DEBUG_set=<br />ac_cv_env_CPPFLAGS_DEBUG_value=<br />ac_cv_env_CPPFLAGS_EXTRA_set=<br />ac_cv_env_CPPFLAGS_EXTRA_value=<br />ac_cv_env_CPPFLAGS_OPTIM_set=<br />ac_cv_env_CPPFLAGS_OPTIM_value=<br />ac_cv_env_CPPFLAGS_set=<br />ac_cv_env_CPPFLAGS_value=<br />ac_cv_env_CPP_set=<br />ac_cv_env_CPP_value=<br />ac_cv_env_CXXFLAGS_DEBUG_set=<br />ac_cv_env_CXXFLAGS_DEBUG_value=<br />ac_cv_env_CXXFLAGS_EXTRA_set=<br />ac_cv_env_CXXFLAGS_EXTRA_value=<br />ac_cv_env_CXXFLAGS_OPTIM_set=<br />ac_cv_env_CXXFLAGS_OPTIM_value=<br />ac_cv_env_CXXFLAGS_set=<br />ac_cv_env_CXXFLAGS_value=<br />ac_cv_env_CXX_LDFLAGS_DEBUG_set=<br />ac_cv_env_CXX_LDFLAGS_DEBUG_value=<br />ac_cv_env_CXX_LDFLAGS_EXTRA_set=<br />ac_cv_env_CXX_LDFLAGS_EXTRA_value=<br />ac_cv_env_CXX_LDFLAGS_OPTIM_set=<br />ac_cv_env_CXX_LDFLAGS_OPTIM_value=<br />ac_cv_env_CXX_LDFLAGS_set=<br />ac_cv_env_CXX_LDFLAGS_value=<br />ac_cv_env_CXX_LIBS_DEBUG_set=<br />ac_cv_env_CXX_LIBS_DEBUG_value=<br />ac_cv_env_CXX_LIBS_OPTIM_set=<br />ac_cv_env_CXX_LIBS_OPTIM_value=<br />ac_cv_env_CXX_LIBS_set=<br />ac_cv_env_CXX_LIBS_value=<br />ac_cv_env_CXX_set=<br />ac_cv_env_CXX_value=<br />ac_cv_env_FCFLAGS_DEBUG_set=<br />ac_cv_env_FCFLAGS_DEBUG_value=<br />ac_cv_env_FCFLAGS_EXTRA_set=<br />ac_cv_env_FCFLAGS_EXTRA_value=<br />ac_cv_env_FCFLAGS_OPTIM_set=<br />ac_cv_env_FCFLAGS_OPTIM_value=<br />ac_cv_env_FCFLAGS_set=<br />ac_cv_env_FCFLAGS_value=<br />ac_cv_env_FC_LDFLAGS_DEBUG_set=<br />ac_cv_env_FC_LDFLAGS_DEBUG_value=<br />ac_cv_env_FC_LDFLAGS_EXTRA_set=<br />ac_cv_env_FC_LDFLAGS_EXTRA_value=<br />ac_cv_env_FC_LDFLAGS_OPTIM_set=<br />ac_cv_env_FC_LDFLAGS_OPTIM_value=<br />ac_cv_env_FC_LDFLAGS_set=<br />ac_cv_env_FC_LDFLAGS_value=<br />ac_cv_env_FC_LIBS_DEBUG_set=<br />ac_cv_env_FC_LIBS_DEBUG_value=<br />ac_cv_env_FC_LIBS_OPTIM_set=<br />ac_cv_env_FC_LIBS_OPTIM_value=<br />ac_cv_env_FC_LIBS_set=<br />ac_cv_env_FC_LIBS_value=<br />ac_cv_env_FC_set=<br />ac_cv_env_FC_value=<br />ac_cv_env_FPPFLAGS_DEBUG_set=<br />ac_cv_env_FPPFLAGS_DEBUG_value=<br />ac_cv_env_FPPFLAGS_EXTRA_set=<br />ac_cv_env_FPPFLAGS_EXTRA_value=<br />ac_cv_env_FPPFLAGS_OPTIM_set=<br />ac_cv_env_FPPFLAGS_OPTIM_value=<br />ac_cv_env_FPPFLAGS_set=<br />ac_cv_env_FPPFLAGS_value=<br />ac_cv_env_FPP_set=<br />ac_cv_env_FPP_value=<br />ac_cv_env_LDFLAGS_set=<br />ac_cv_env_LDFLAGS_value=<br />ac_cv_env_LIBS_set=<br />ac_cv_env_LIBS_value=<br />ac_cv_env_MPI_RUNNER_set=<br />ac_cv_env_MPI_RUNNER_value=<br />ac_cv_env_SERIAL_RUNNER_set=<br />ac_cv_env_SERIAL_RUNNER_value=<br />ac_cv_env_XPPFLAGS_DEBUG_set=<br />ac_cv_env_XPPFLAGS_DEBUG_value=<br />ac_cv_env_XPPFLAGS_EXTRA_set=<br />ac_cv_env_XPPFLAGS_EXTRA_value=<br />ac_cv_env_XPPFLAGS_OPTIM_set=<br />ac_cv_env_XPPFLAGS_OPTIM_value=<br />ac_cv_env_XPPFLAGS_set=<br />ac_cv_env_XPPFLAGS_value=<br />ac_cv_env_XPP_set=<br />ac_cv_env_XPP_value=<br />ac_cv_env_build_alias_set=<br />ac_cv_env_build_alias_value=<br />ac_cv_env_host_alias_set=<br />ac_cv_env_host_alias_value=<br />ac_cv_env_target_alias_set=<br />ac_cv_env_target_alias_value=<br />ac_cv_host=x86_64-unknown-linux-gnu<br />ac_cv_path_BOURNE_SHELL=/bin/sh<br />ac_cv_path_EGREP='/bin/grep -E'<br />ac_cv_path_GREP=/bin/grep<br />ac_cv_path_MV=/bin/mv<br />ac_cv_path_PERL=/usr/bin/perl<br />ac_cv_path_RM=/bin/rm<br />ac_cv_path_SED=/bin/sed<br />ac_cv_path_install='/usr/bin/install -c'<br />ac_cv_path_mkdir=/bin/mkdir<br />ac_cv_prog_AWK=gawk<br />ac_cv_prog_CURL=curl<br />ac_cv_prog_DVI2PDF=dvipdf<br />ac_cv_prog_PATCH=patch<br />ac_cv_prog_PS2PDF=ps2pdf<br />ac_cv_prog_TAR=tar<br />ac_cv_prog_WGET=wget<br />ac_cv_prog_ac_ct_CC=/usr/lib64/openmpi/bin/mpicc<br />ac_cv_prog_make_make_set=yes<br />ac_cv_target=x86_64-unknown-linux-gnu<br /><br />## ----------------- ##<br />## Output variables. ##<br />## ----------------- ##<br /><br />ABINIT_BINARY_PACKAGE=''<br />ABINIT_TARGET=''<br />ABINIT_VERSION='6.10.1'<br />ABINIT_VERSION_BASE='6.10'<br />ABINIT_VERSION_BUILD='20111203'<br />ABINIT_VERSION_MAJOR='6'<br />ABINIT_VERSION_MICRO='1'<br />ABINIT_VERSION_MINOR='10'<br />ABI_CPPFLAGS=''<br />ACLOCAL='${SHELL} /home/pariah/abinit-6.10.1/config/gnu/missing --run aclocal-1.11'<br />AMDEPBACKSLASH=''<br />AMDEP_FALSE=''<br />AMDEP_TRUE=''<br />AMTAR='${SHELL} /home/pariah/abinit-6.10.1/config/gnu/missing --run tar'<br />AR=''<br />ARFLAGS=''<br />ARFLAGS_64BITS=''<br />ARFLAGS_CMD='rc'<br />ARFLAGS_DEBUG=''<br />ARFLAGS_EXTRA=''<br />ARFLAGS_HINTS=''<br />ARFLAGS_OPTIM=''<br />ATOMPAW_BIN=''<br />AUTOCONF='${SHELL} /home/pariah/abinit-6.10.1/config/gnu/missing --run autoconf'<br />AUTOHEADER='${SHELL} /home/pariah/abinit-6.10.1/config/gnu/missing --run autoheader'<br />AUTOMAKE='${SHELL} /home/pariah/abinit-6.10.1/config/gnu/missing --run automake-1.11'<br />AWK='gawk'<br />BAZAAR=''<br />BOURNE_SHELL='/bin/sh'<br />CC='/usr/lib64/openmpi/bin/mpicc'<br />CCDEPMODE=''<br />CC_LDFLAGS=''<br />CC_LDFLAGS_64BITS=''<br />CC_LDFLAGS_DEBUG=''<br />CC_LDFLAGS_EXTRA=''<br />CC_LDFLAGS_GPU=''<br />CC_LDFLAGS_HINTS=''<br />CC_LDFLAGS_OPTIM=''<br />CC_LIBS=''<br />CC_LIBS_64BITS=''<br />CC_LIBS_DEBUG=''<br />CC_LIBS_EXTRA=''<br />CC_LIBS_GPU=''<br />CC_LIBS_HINTS=''<br />CC_LIBS_OPTIM=''<br />CFGFLAGS_ATOMPAW=''<br />CFGFLAGS_BIGDFT=''<br />CFGFLAGS_ETSF_IO=''<br />CFGFLAGS_FOX=''<br />CFGFLAGS_LIBXC=''<br />CFGFLAGS_LINALG=''<br />CFGFLAGS_NETCDF=''<br />CFGFLAGS_WANNIER90=''<br />CFLAGS=''<br />CFLAGS_64BITS=''<br />CFLAGS_ATOMPAW=''<br />CFLAGS_BIGDFT=''<br />CFLAGS_DEBUG=''<br />CFLAGS_ETSF_IO=''<br />CFLAGS_EXTRA=''<br />CFLAGS_FOX=''<br />CFLAGS_GPU=''<br />CFLAGS_HINTS=''<br />CFLAGS_LIBXC=''<br />CFLAGS_LINALG=''<br />CFLAGS_NETCDF=''<br />CFLAGS_OPTIM=''<br />CFLAGS_WANNIER90=''<br />CPP=''<br />CPPFLAGS=''<br />CPPFLAGS_64BITS=''<br />CPPFLAGS_ATOMPAW=''<br />CPPFLAGS_BIGDFT=''<br />CPPFLAGS_DEBUG=''<br />CPPFLAGS_ETSF_IO=''<br />CPPFLAGS_EXTRA=''<br />CPPFLAGS_FOX=''<br />CPPFLAGS_GPU=''<br />CPPFLAGS_HINTS=''<br />CPPFLAGS_LIBXC=''<br />CPPFLAGS_LINALG=''<br />CPPFLAGS_NETCDF=''<br />CPPFLAGS_OPTIM=''<br />CPPFLAGS_WANNIER90=''<br />CURL='curl'<br />CXX='/usr/lib64/openmpi/bin/mpicxx'<br />CXXDEPMODE=''<br />CXXFLAGS=''<br />CXXFLAGS_64BITS=''<br />CXXFLAGS_ATOMPAW=''<br />CXXFLAGS_BIGDFT=''<br />CXXFLAGS_DEBUG=''<br />CXXFLAGS_ETSF_IO=''<br />CXXFLAGS_EXTRA=''<br />CXXFLAGS_FOX=''<br />CXXFLAGS_GPU=''<br />CXXFLAGS_HINTS=''<br />CXXFLAGS_LIBXC=''<br />CXXFLAGS_LINALG=''<br />CXXFLAGS_NETCDF=''<br />CXXFLAGS_OPTIM=''<br />CXXFLAGS_WANNIER90=''<br />CXX_LDFLAGS=''<br />CXX_LDFLAGS_64BITS=''<br />CXX_LDFLAGS_DEBUG=''<br />CXX_LDFLAGS_EXTRA=''<br />CXX_LDFLAGS_GPU=''<br />CXX_LDFLAGS_HINTS=''<br />CXX_LDFLAGS_OPTIM=''<br />CXX_LIBS=''<br />CXX_LIBS_64BITS=''<br />CXX_LIBS_DEBUG=''<br />CXX_LIBS_EXTRA=''<br />CXX_LIBS_GPU=''<br />CXX_LIBS_HINTS=''<br />CXX_LIBS_OPTIM=''<br />CYGPATH_W='echo'<br />DEFS=''<br />DEPDIR=''<br />DO_BUILD_01_GSL_EXT_FALSE=''<br />DO_BUILD_01_GSL_EXT_TRUE=''<br />DO_BUILD_01_MACROAVNEW_EXT_FALSE=''<br />DO_BUILD_01_MACROAVNEW_EXT_TRUE=''<br />DO_BUILD_02_CLIB_FALSE=''<br />DO_BUILD_02_CLIB_TRUE=''<br />DO_BUILD_15_GPU_TOOLBOX_FALSE=''<br />DO_BUILD_15_GPU_TOOLBOX_TRUE=''<br />DO_BUILD_32_CONTRACT_FALSE=''<br />DO_BUILD_32_CONTRACT_TRUE=''<br />DO_BUILD_51_MANAGE_CUDA_FALSE=''<br />DO_BUILD_51_MANAGE_CUDA_TRUE=''<br />DO_BUILD_ATOMPAW_FALSE=''<br />DO_BUILD_ATOMPAW_TRUE=''<br />DO_BUILD_BIGDFT_FALSE=''<br />DO_BUILD_BIGDFT_TRUE=''<br />DO_BUILD_BINDINGS_FALSE=''<br />DO_BUILD_BINDINGS_TRUE=''<br />DO_BUILD_CCLOCK_FALSE=''<br />DO_BUILD_CCLOCK_TRUE=''<br />DO_BUILD_ETSF_IO_FALSE=''<br />DO_BUILD_ETSF_IO_TRUE=''<br />DO_BUILD_EXPORTS_FALSE=''<br />DO_BUILD_EXPORTS_TRUE=''<br />DO_BUILD_FOX_FALSE=''<br />DO_BUILD_FOX_TRUE=''<br />DO_BUILD_LIBXC_FALSE=''<br />DO_BUILD_LIBXC_TRUE=''<br />DO_BUILD_LINALG_FALSE=''<br />DO_BUILD_LINALG_TRUE=''<br />DO_BUILD_MACROAVE_FALSE=''<br />DO_BUILD_MACROAVE_TRUE=''<br />DO_BUILD_NETCDF_FALSE=''<br />DO_BUILD_NETCDF_TRUE=''<br />DO_BUILD_NIGHTLY_FALSE=''<br />DO_BUILD_NIGHTLY_TRUE=''<br />DO_BUILD_WANNIER90_FALSE=''<br />DO_BUILD_WANNIER90_TRUE=''<br />DO_CHECK_FAST_FALSE=''<br />DO_CHECK_FAST_TRUE=''<br />DO_CHECK_PKG_FALSE=''<br />DO_CHECK_PKG_TRUE=''<br />DO_TEST_ABIRULES_FALSE=''<br />DO_TEST_ABIRULES_TRUE=''<br />DO_TEST_ATOMPAW_FALSE=''<br />DO_TEST_ATOMPAW_TRUE=''<br />DO_TEST_BIGDFT_FALSE=''<br />DO_TEST_BIGDFT_TRUE=''<br />DO_TEST_BUILDSYS_FALSE=''<br />DO_TEST_BUILDSYS_TRUE=''<br />DO_TEST_ETSF_IO_FALSE=''<br />DO_TEST_ETSF_IO_TRUE=''<br />DO_TEST_FOX_FALSE=''<br />DO_TEST_FOX_TRUE=''<br />DO_TEST_GUI_FALSE=''<br />DO_TEST_GUI_TRUE=''<br />DO_TEST_GWDP_FALSE=''<br />DO_TEST_GWDP_TRUE=''<br />DO_TEST_LIBXC_FALSE=''<br />DO_TEST_LIBXC_TRUE=''<br />DO_TEST_MPI_FALSE=''<br />DO_TEST_MPI_TRUE=''<br />DO_TEST_NETCDF_FALSE=''<br />DO_TEST_NETCDF_TRUE=''<br />DO_TEST_VDWXC_FALSE=''<br />DO_TEST_VDWXC_TRUE=''<br />DO_TEST_WANNIER90_FALSE=''<br />DO_TEST_WANNIER90_TRUE=''<br />DVI2PDF='dvipdf'<br />DVI2PS=''<br />ECHO_C=''<br />ECHO_N='-n'<br />ECHO_T=''<br />EGREP='/bin/grep -E'<br />EXEEXT=''<br />F77=''<br />FC='/usr/lib64/openmpi/bin/mpif90'<br />FCFLAGS=''<br />FCFLAGS_64BITS=''<br />FCFLAGS_ATOMPAW=''<br />FCFLAGS_BIGDFT=''<br />FCFLAGS_DEBUG=''<br />FCFLAGS_ETSF_IO=''<br />FCFLAGS_EXTRA=''<br />FCFLAGS_F90=''<br />FCFLAGS_FIXEDFORM=''<br />FCFLAGS_FOX=''<br />FCFLAGS_FREEFORM=''<br />FCFLAGS_HINTS=''<br />FCFLAGS_LIBXC=''<br />FCFLAGS_LINALG=''<br />FCFLAGS_MODDIR=''<br />FCFLAGS_NETCDF=''<br />FCFLAGS_OPTIM=''<br />FCFLAGS_WANNIER90=''<br />FCLIBS=''<br />FCLIBS_ATOMPAW=''<br />FCLIBS_ETSF_IO=''<br />FCLIBS_FOX=''<br />FCLIBS_NETCDF=''<br />FCLIBS_WANNIER90=''<br />FC_LDFLAGS=''<br />FC_LDFLAGS_64BITS=''<br />FC_LDFLAGS_DEBUG=''<br />FC_LDFLAGS_EXTRA=''<br />FC_LDFLAGS_HINTS=''<br />FC_LDFLAGS_OPTIM=''<br />FC_LIBS=''<br />FC_LIBS_64BITS=''<br />FC_LIBS_DEBUG=''<br />FC_LIBS_EXTRA=''<br />FC_LIBS_HINTS=''<br />FC_LIBS_OPTIM=''<br />FC_NOWRAP=''<br />FFLAGS=''<br />FPP=''<br />FPPFLAGS=''<br />FPPFLAGS_ATOMPAW=''<br />FPPFLAGS_BIGDFT=''<br />FPPFLAGS_DEBUG=''<br />FPPFLAGS_ETSF_IO=''<br />FPPFLAGS_EXTRA=''<br />FPPFLAGS_FOX=''<br />FPPFLAGS_HINTS=''<br />FPPFLAGS_LIBXC=''<br />FPPFLAGS_LINALG=''<br />FPPFLAGS_NETCDF=''<br />FPPFLAGS_OPTIM=''<br />FPPFLAGS_WANNIER90=''<br />GRAPHATOM_BIN=''<br />GREP='/bin/grep'<br />GSL_CONFIG=''<br />INSTALL_DATA='${INSTALL} -m 644'<br />INSTALL_PROGRAM='${INSTALL}'<br />INSTALL_SCRIPT='${INSTALL}'<br />INSTALL_STRIP_PROGRAM='$(install_sh) -c -s'<br />LATEX=''<br />LDFLAGS=''<br />LIBOBJS=''<br />LIBS=''<br />LN_S='ln -s'<br />LTLIBOBJS=''<br />LTXFLAGS=''<br />MAKEINFO='${SHELL} /home/pariah/abinit-6.10.1/config/gnu/missing --run makeinfo'<br />MARKDOWN='/usr/bin/perl /home/pariah/abinit-6.10.1/util/developers/markdown.pl'<br />MD5SUM=''<br />MDFLAGS=''<br />MKDIR_P='/bin/mkdir -p'<br />MODEXT=''<br />MPI_RUNNER='/usr/lib64/openmpi/bin/mpirun'<br />MV='/bin/mv'<br />NVCC=''<br />NVCC_CFLAGS=''<br />NVCC_CPPFLAGS=''<br />NVCC_LDFLAGS=''<br />NVCC_LIBS=''<br />OBJEXT=''<br />PACKAGE='abinit'<br />PACKAGE_BUGREPORT='https://bugs.launchpad.net/abinit/'<br />PACKAGE_NAME='ABINIT'<br />PACKAGE_STRING='ABINIT 6.10.1'<br />PACKAGE_TARNAME='abinit'<br />PACKAGE_URL=''<br />PACKAGE_VERSION='6.10.1'<br />PATCH='patch'<br />PATH_SEPARATOR=':'<br />PDFFLAGS=''<br />PERL='/usr/bin/perl'<br />PS2PDF='ps2pdf'<br />PYTHON=''<br />PYTHON_CPPFLAGS=''<br />RANLIB=''<br />RM='/bin/rm'<br />SED='/bin/sed'<br />SERIAL_RUNNER=''<br />SET_MAKE=''<br />SHELL='/bin/sh'<br />STRIP=''<br />TAR='tar'<br />TRUE_CPP=''<br />VERSION='6.10.1'<br />WANNIER90_BIN=''<br />WGET='wget'<br />XPP=''<br />XPPFLAGS=''<br />XPPFLAGS_DEBUG=''<br />XPPFLAGS_EXTRA=''<br />XPPFLAGS_OPTIM=''<br />abi_ac_version='026800'<br />abi_am_version='011100'<br />abi_cc_path=''<br />abi_cc_vendor=''<br />abi_cc_version=''<br />abi_cpp_path=''<br />abi_cpu_64bits='yes'<br />abi_cpu_bits='64'<br />abi_cpu_model='unknown'<br />abi_cpu_platform='unknown'<br />abi_cpu_spec='unknown_unknown'<br />abi_cpu_vendor='unknown'<br />abi_cxx_path=''<br />abi_cxx_vendor=''<br />abi_cxx_version=''<br />abi_fc_path=''<br />abi_fc_vendor=''<br />abi_fc_version=''<br />abi_fc_wrap='no'<br />abi_fpp_path=''<br />abi_lt_version='020204'<br />abi_m4_version='010416'<br />abi_mpi_runner_works=''<br />abi_sys_spec='linux-x86_64'<br />abinit_bindir='/home/pariah/bin'<br />abinit_builddir='/home/pariah/abinit-6.10.1'<br />abinit_chkdir='/home/pariah/share/abinit/tests'<br />abinit_datdir='/home/pariah/share/abinit'<br />abinit_docdir='/home/pariah/doc/abinit'<br />abinit_incdir='/home/pariah/include'<br />abinit_libdir='/home/pariah/lib'<br />abinit_mandir='/home/pariah/share/man'<br />abinit_moddir='/home/pariah/abinit-6.10.1/src/mods'<br />abinit_prefix='/home/pariah'<br />abinit_srcdir='/home/pariah/abinit-6.10.1'<br />abinit_tardir=''<br />ac_ct_CC='/usr/lib64/openmpi/bin/mpicc'<br />ac_ct_CXX=''<br />ac_ct_FC=''<br />am__EXEEXT_FALSE=''<br />am__EXEEXT_TRUE=''<br />am__fastdepCC_FALSE=''<br />am__fastdepCC_TRUE=''<br />am__fastdepCXX_FALSE=''<br />am__fastdepCXX_TRUE=''<br />am__include=''<br />am__isrc=''<br />am__leading_dot='.'<br />am__quote=''<br />am__tar='${AMTAR} chof - &quot;$$tardir&quot;'<br />am__untar='${AMTAR} xf -'<br />atompaw_pkg_name=''<br />atompaw_pkg_string=''<br />bigdft_pkg_name=''<br />bigdft_pkg_string=''<br />bindir='${exec_prefix}/bin'<br />build='x86_64-unknown-linux-gnu'<br />build_alias=''<br />build_atompaw=''<br />build_bigdft=''<br />build_cpu='x86_64'<br />build_etsf_io=''<br />build_fox=''<br />build_libxc=''<br />build_linalg=''<br />build_netcdf=''<br />build_os='linux-gnu'<br />build_vendor='unknown'<br />build_wannier90=''<br />bzr_branch=''<br />bzr_clean=''<br />bzr_revno=''<br />cc_for_timeout=''<br />cc_info_string=''<br />cxx_info_string=''<br />datadir='${datarootdir}'<br />datarootdir='${prefix}/share'<br />docdir='${datarootdir}/doc/${PACKAGE_TARNAME}'<br />dvidir='${docdir}'<br />enable_64bit_flags='yes'<br />enable_bindings='no'<br />enable_bse_unpacked='no'<br />enable_cclock='no'<br />enable_clib='no'<br />enable_config_file='yes'<br />enable_connectors='yes'<br />enable_debug='basic'<br />enable_exports='no'<br />enable_fallbacks='yes'<br />enable_fast_check='no'<br />enable_fc_wrapper='no'<br />enable_gpu='no'<br />enable_gw_cutoff='no'<br />enable_gw_dpc='no'<br />enable_gw_openmp='no'<br />enable_gw_optimal='no'<br />enable_gw_wrapper='no'<br />enable_hints='yes'<br />enable_macroave='yes'<br />enable_maintainer_checks='no'<br />enable_mpi='yes'<br />enable_mpi_io=''<br />enable_mpi_trace='no'<br />enable_optim='standard'<br />enable_pkg_check='no'<br />enable_shared=''<br />enable_smp='no'<br />enable_static=''<br />enable_stdin='yes'<br />enable_test_timeout='no'<br />enable_vdwxc='no'<br />enable_zdot_bugfix='no'<br />etsf_io_pkg_name=''<br />etsf_io_pkg_string=''<br />exec_prefix='NONE'<br />fc_info_string=''<br />fc_mod_incs=''<br />fc_timing=''<br />fcflags_opt_01_gsl_ext=''<br />fcflags_opt_01_interfaces_ext=''<br />fcflags_opt_01_macroavnew_ext=''<br />fcflags_opt_02_clib=''<br />fcflags_opt_10_defs=''<br />fcflags_opt_11_qespresso_ext=''<br />fcflags_opt_12_hide_mpi=''<br />fcflags_opt_14_hidewrite=''<br />fcflags_opt_15_gpu_toolbox=''<br />fcflags_opt_16_hideleave=''<br />fcflags_opt_18_memory_mpi=''<br />fcflags_opt_18_timing=''<br />fcflags_opt_27_toolbox_oop=''<br />fcflags_opt_28_numeric_noabirule=''<br />fcflags_opt_32_contract=''<br />fcflags_opt_32_util=''<br />fcflags_opt_42_geometry=''<br />fcflags_opt_42_nlstrain=''<br />fcflags_opt_42_parser=''<br />fcflags_opt_43_abitypes_defs=''<br />fcflags_opt_43_ptgroups=''<br />fcflags_opt_44_geomoptim=''<br />fcflags_opt_45_psp_parser=''<br />fcflags_opt_47_xml=''<br />fcflags_opt_49_gw_toolbox_oop=''<br />fcflags_opt_51_manage_cuda=''<br />fcflags_opt_51_manage_mpi=''<br />fcflags_opt_52_fft_mpi_noabirule=''<br />fcflags_opt_53_abiutil=''<br />fcflags_opt_53_ffts=''<br />fcflags_opt_53_spacepar=''<br />fcflags_opt_56_mixing=''<br />fcflags_opt_56_recipspace=''<br />fcflags_opt_56_xc=''<br />fcflags_opt_57_iovars=''<br />fcflags_opt_59_io_mpi=''<br />fcflags_opt_61_ionetcdf=''<br />fcflags_opt_62_cg_noabirule=''<br />fcflags_opt_62_iowfdenpot=''<br />fcflags_opt_62_occeig=''<br />fcflags_opt_62_poisson=''<br />fcflags_opt_62_wvl_wfs=''<br />fcflags_opt_63_bader=''<br />fcflags_opt_64_atompaw=''<br />fcflags_opt_65_nonlocal=''<br />fcflags_opt_65_psp=''<br />fcflags_opt_66_paw=''<br />fcflags_opt_66_wfs=''<br />fcflags_opt_67_common=''<br />fcflags_opt_68_dmft=''<br />fcflags_opt_68_recursion=''<br />fcflags_opt_68_rsprc=''<br />fcflags_opt_69_wfdesc=''<br />fcflags_opt_70_gw=''<br />fcflags_opt_71_bse=''<br />fcflags_opt_72_response=''<br />fcflags_opt_77_ddb=''<br />fcflags_opt_77_lwf=''<br />fcflags_opt_77_suscep=''<br />fcflags_opt_79_seqpar_mpi=''<br />fcflags_opt_83_cut3d=''<br />fcflags_opt_93_rdm=''<br />fcflags_opt_95_drive=''<br />fcflags_opt_98_main=''<br />fcflags_opt_atompaw=''<br />fcflags_opt_bigdft=''<br />fcflags_opt_etsf_io=''<br />fcflags_opt_fox=''<br />fcflags_opt_libxc=''<br />fcflags_opt_linalg=''<br />fcflags_opt_netcdf=''<br />fcflags_opt_wannier90=''<br />fox_pkg_name=''<br />fox_pkg_string=''<br />host='x86_64-unknown-linux-gnu'<br />host_alias=''<br />host_cpu='x86_64'<br />host_os='linux-gnu'<br />host_vendor='unknown'<br />htmldir='${docdir}'<br />includedir='${prefix}/include'<br />infodir='${datarootdir}/info'<br />install_sh='${SHELL} /home/pariah/abinit-6.10.1/config/gnu/install-sh'<br />lib_atompaw_bins=''<br />lib_atompaw_incs=''<br />lib_atompaw_libs=''<br />lib_bigdft_incs=''<br />lib_bigdft_libs=''<br />lib_dft_flavor=''<br />lib_etsf_io_incs=''<br />lib_etsf_io_libs=''<br />lib_fft_fcflags=''<br />lib_fft_flavor=''<br />lib_fft_incs=''<br />lib_fft_ldflags=''<br />lib_fft_libs=''<br />lib_fox_incs=''<br />lib_fox_libs=''<br />lib_gpu_fcflags=''<br />lib_gpu_flavor='none'<br />lib_gpu_incs=''<br />lib_gpu_ldflags=''<br />lib_gpu_libs=''<br />lib_libxc_incs=''<br />lib_libxc_libs=''<br />lib_linalg_fcflags=''<br />lib_linalg_flavor=''<br />lib_linalg_incs=''<br />lib_linalg_ldflags=''<br />lib_linalg_libs=''<br />lib_math_fcflags=''<br />lib_math_flavor=''<br />lib_math_incs=''<br />lib_math_ldflags=''<br />lib_math_libs=''<br />lib_mpi_fcflags=''<br />lib_mpi_incs=''<br />lib_mpi_ldflags=''<br />lib_mpi_libs=''<br />lib_netcdf_incs=''<br />lib_netcdf_libs=''<br />lib_timer_fcflags=''<br />lib_timer_flavor=''<br />lib_timer_incs=''<br />lib_timer_ldflags=''<br />lib_timer_libs=''<br />lib_trio_flavor=''<br />lib_wannier90_bins=''<br />lib_wannier90_incs=''<br />lib_wannier90_libs=''<br />libdir='${exec_prefix}/lib'<br />libexecdir='${exec_prefix}/libexec'<br />libxc_pkg_name=''<br />libxc_pkg_string=''<br />linalg_pkg_name='lapack-abinit_6.0'<br />linalg_pkg_string='The 3.2.1 Lapack library (dlamch.f hacked by XG)'<br />localedir='${datarootdir}/locale'<br />localstatedir='${prefix}/var'<br />mandir='${datarootdir}/man'<br />mkdir_p='/bin/mkdir -p'<br />netcdf_pkg_name=''<br />netcdf_pkg_string=''<br />nightly_timeout=''<br />oldincludedir='/usr/include'<br />pdfdir='${docdir}'<br />prefix='/home/pariah'<br />program_transform_name='s,x,x,'<br />psdir='${docdir}'<br />sbindir='${exec_prefix}/sbin'<br />sharedstatedir='${prefix}/com'<br />src_01_gsl_ext_incs='-I$(top_builddir)/src/01_gsl_ext -I$(top_srcdir)/src/01_gsl_ext'<br />src_01_interfaces_ext_incs='-I$(top_builddir)/src/01_interfaces_ext -I$(top_srcdir)/src/01_interfaces_ext'<br />src_01_macroavnew_ext_incs='-I$(top_builddir)/src/01_macroavnew_ext -I$(top_srcdir)/src/01_macroavnew_ext'<br />src_02_clib_incs='-I$(top_builddir)/src/02_clib -I$(top_srcdir)/src/02_clib'<br />src_10_defs_incs='-I$(top_builddir)/src/10_defs -I$(top_srcdir)/src/10_defs'<br />src_11_qespresso_ext_incs='-I$(top_builddir)/src/11_qespresso_ext -I$(top_srcdir)/src/11_qespresso_ext'<br />src_12_hide_mpi_incs='-I$(top_builddir)/src/12_hide_mpi -I$(top_srcdir)/src/12_hide_mpi'<br />src_14_hidewrite_incs='-I$(top_builddir)/src/14_hidewrite -I$(top_srcdir)/src/14_hidewrite'<br />src_15_gpu_toolbox_incs='-I$(top_builddir)/src/15_gpu_toolbox -I$(top_srcdir)/src/15_gpu_toolbox'<br />src_16_hideleave_incs='-I$(top_builddir)/src/16_hideleave -I$(top_srcdir)/src/16_hideleave'<br />src_18_memory_mpi_incs='-I$(top_builddir)/src/18_memory_mpi -I$(top_srcdir)/src/18_memory_mpi'<br />src_18_timing_incs='-I$(top_builddir)/src/18_timing -I$(top_srcdir)/src/18_timing'<br />src_27_toolbox_oop_incs='-I$(top_builddir)/src/27_toolbox_oop -I$(top_srcdir)/src/27_toolbox_oop'<br />src_28_numeric_noabirule_incs='-I$(top_builddir)/src/28_numeric_noabirule -I$(top_srcdir)/src/28_numeric_noabirule'<br />src_32_contract_incs='-I$(top_builddir)/src/32_contract -I$(top_srcdir)/src/32_contract'<br />src_32_util_incs='-I$(top_builddir)/src/32_util -I$(top_srcdir)/src/32_util'<br />src_42_geometry_incs='-I$(top_builddir)/src/42_geometry -I$(top_srcdir)/src/42_geometry'<br />src_42_nlstrain_incs='-I$(top_builddir)/src/42_nlstrain -I$(top_srcdir)/src/42_nlstrain'<br />src_42_parser_incs='-I$(top_builddir)/src/42_parser -I$(top_srcdir)/src/42_parser'<br />src_43_abitypes_defs_incs='-I$(top_builddir)/src/43_abitypes_defs -I$(top_srcdir)/src/43_abitypes_defs'<br />src_43_ptgroups_incs='-I$(top_builddir)/src/43_ptgroups -I$(top_srcdir)/src/43_ptgroups'<br />src_44_geomoptim_incs='-I$(top_builddir)/src/44_geomoptim -I$(top_srcdir)/src/44_geomoptim'<br />src_45_psp_parser_incs='-I$(top_builddir)/src/45_psp_parser -I$(top_srcdir)/src/45_psp_parser'<br />src_47_xml_incs='-I$(top_builddir)/src/47_xml -I$(top_srcdir)/src/47_xml'<br />src_49_gw_toolbox_oop_incs='-I$(top_builddir)/src/49_gw_toolbox_oop -I$(top_srcdir)/src/49_gw_toolbox_oop'<br />src_51_manage_cuda_incs='-I$(top_builddir)/src/51_manage_cuda -I$(top_srcdir)/src/51_manage_cuda'<br />src_51_manage_mpi_incs='-I$(top_builddir)/src/51_manage_mpi -I$(top_srcdir)/src/51_manage_mpi'<br />src_52_fft_mpi_noabirule_incs='-I$(top_builddir)/src/52_fft_mpi_noabirule -I$(top_srcdir)/src/52_fft_mpi_noabirule'<br />src_53_abiutil_incs='-I$(top_builddir)/src/53_abiutil -I$(top_srcdir)/src/53_abiutil'<br />src_53_ffts_incs='-I$(top_builddir)/src/53_ffts -I$(top_srcdir)/src/53_ffts'<br />src_53_spacepar_incs='-I$(top_builddir)/src/53_spacepar -I$(top_srcdir)/src/53_spacepar'<br />src_56_mixing_incs='-I$(top_builddir)/src/56_mixing -I$(top_srcdir)/src/56_mixing'<br />src_56_recipspace_incs='-I$(top_builddir)/src/56_recipspace -I$(top_srcdir)/src/56_recipspace'<br />src_56_xc_incs='-I$(top_builddir)/src/56_xc -I$(top_srcdir)/src/56_xc'<br />src_57_iovars_incs='-I$(top_builddir)/src/57_iovars -I$(top_srcdir)/src/57_iovars'<br />src_59_io_mpi_incs='-I$(top_builddir)/src/59_io_mpi -I$(top_srcdir)/src/59_io_mpi'<br />src_61_ionetcdf_incs='-I$(top_builddir)/src/61_ionetcdf -I$(top_srcdir)/src/61_ionetcdf'<br />src_62_cg_noabirule_incs='-I$(top_builddir)/src/62_cg_noabirule -I$(top_srcdir)/src/62_cg_noabirule'<br />src_62_iowfdenpot_incs='-I$(top_builddir)/src/62_iowfdenpot -I$(top_srcdir)/src/62_iowfdenpot'<br />src_62_occeig_incs='-I$(top_builddir)/src/62_occeig -I$(top_srcdir)/src/62_occeig'<br />src_62_poisson_incs='-I$(top_builddir)/src/62_poisson -I$(top_srcdir)/src/62_poisson'<br />src_62_wvl_wfs_incs='-I$(top_builddir)/src/62_wvl_wfs -I$(top_srcdir)/src/62_wvl_wfs'<br />src_63_bader_incs='-I$(top_builddir)/src/63_bader -I$(top_srcdir)/src/63_bader'<br />src_64_atompaw_incs='-I$(top_builddir)/src/64_atompaw -I$(top_srcdir)/src/64_atompaw'<br />src_65_nonlocal_incs='-I$(top_builddir)/src/65_nonlocal -I$(top_srcdir)/src/65_nonlocal'<br />src_65_psp_incs='-I$(top_builddir)/src/65_psp -I$(top_srcdir)/src/65_psp'<br />src_66_paw_incs='-I$(top_builddir)/src/66_paw -I$(top_srcdir)/src/66_paw'<br />src_66_wfs_incs='-I$(top_builddir)/src/66_wfs -I$(top_srcdir)/src/66_wfs'<br />src_67_common_incs='-I$(top_builddir)/src/67_common -I$(top_srcdir)/src/67_common'<br />src_68_dmft_incs='-I$(top_builddir)/src/68_dmft -I$(top_srcdir)/src/68_dmft'<br />src_68_recursion_incs='-I$(top_builddir)/src/68_recursion -I$(top_srcdir)/src/68_recursion'<br />src_68_rsprc_incs='-I$(top_builddir)/src/68_rsprc -I$(top_srcdir)/src/68_rsprc'<br />src_69_wfdesc_incs='-I$(top_builddir)/src/69_wfdesc -I$(top_srcdir)/src/69_wfdesc'<br />src_70_gw_incs='-I$(top_builddir)/src/70_gw -I$(top_srcdir)/src/70_gw'<br />src_71_bse_incs='-I$(top_builddir)/src/71_bse -I$(top_srcdir)/src/71_bse'<br />src_72_response_incs='-I$(top_builddir)/src/72_response -I$(top_srcdir)/src/72_response'<br />src_77_ddb_incs='-I$(top_builddir)/src/77_ddb -I$(top_srcdir)/src/77_ddb'<br />src_77_lwf_incs='-I$(top_builddir)/src/77_lwf -I$(top_srcdir)/src/77_lwf'<br />src_77_suscep_incs='-I$(top_builddir)/src/77_suscep -I$(top_srcdir)/src/77_suscep'<br />src_79_seqpar_mpi_incs='-I$(top_builddir)/src/79_seqpar_mpi -I$(top_srcdir)/src/79_seqpar_mpi'<br />src_83_cut3d_incs='-I$(top_builddir)/src/83_cut3d -I$(top_srcdir)/src/83_cut3d'<br />src_93_rdm_incs='-I$(top_builddir)/src/93_rdm -I$(top_srcdir)/src/93_rdm'<br />src_95_drive_incs='-I$(top_builddir)/src/95_drive -I$(top_srcdir)/src/95_drive'<br />src_incs_incs='-I$(top_builddir)/src/incs -I$(top_srcdir)/src/incs'<br />src_mods_incs='-I$(top_builddir)/src/mods -I$(top_srcdir)/src/mods'<br />sysconfdir='${prefix}/etc'<br />target='x86_64-unknown-linux-gnu'<br />target_alias=''<br />target_cpu='x86_64'<br />target_os='linux-gnu'<br />target_vendor='unknown'<br />wannier90_pkg_name=''<br />wannier90_pkg_string=''<br />with_atompaw_bins=''<br />with_atompaw_incs=''<br />with_atompaw_libs=''<br />with_bigdft_incs=''<br />with_bigdft_libs=''<br />with_config_file='./xiaole.ac'<br />with_dft_flavor='atompaw+bigdft+libxc+wannier90'<br />with_etsf_io_incs=''<br />with_etsf_io_libs=''<br />with_fallbacks_tardir=''<br />with_fc_vendor=''<br />with_fc_version=''<br />with_fft_flavor='none'<br />with_fft_incs=''<br />with_fft_libs=''<br />with_fox_incs=''<br />with_fox_libs=''<br />with_gnu_ld=''<br />with_gpu_cflags=''<br />with_gpu_cppflags=''<br />with_gpu_flavor='cuda-single'<br />with_gpu_incs=''<br />with_gpu_ldflags=''<br />with_gpu_libs=''<br />with_gpu_prefix=''<br />with_libxc_incs=''<br />with_libxc_libs=''<br />with_linalg_flavor='netlib'<br />with_linalg_incs=''<br />with_linalg_libs=''<br />with_math_flavor='none'<br />with_math_incs=''<br />with_math_libs=''<br />with_mpi_incs=''<br />with_mpi_level=''<br />with_mpi_libs=''<br />with_mpi_prefix='/usr/lib64/openmpi'<br />with_netcdf_incs=''<br />with_netcdf_libs=''<br />with_test_timeout='0'<br />with_timer_flavor='abinit'<br />with_timer_incs=''<br />with_timer_libs=''<br />with_trio_flavor='netcdf+etsf_io'<br />with_wannier90_bins=''<br />with_wannier90_incs=''<br />with_wannier90_libs=''<br /><br />## ----------- ##<br />## confdefs.h. ##<br />## ----------- ##<br /><br />/* confdefs.h */<br />#define PACKAGE_NAME &quot;ABINIT&quot;<br />#define PACKAGE_TARNAME &quot;abinit&quot;<br />#define PACKAGE_VERSION &quot;6.10.1&quot;<br />#define PACKAGE_STRING &quot;ABINIT 6.10.1&quot;<br />#define PACKAGE_BUGREPORT &quot;https://bugs.launchpad.net/abinit/&quot;<br />#define PACKAGE_URL &quot;&quot;<br />#define PACKAGE &quot;abinit&quot;<br />#define VERSION &quot;6.10.1&quot;<br />#define ABINIT_VERSION &quot;6.10.1&quot;<br />#define ABINIT_VERSION_MAJOR &quot;6&quot;<br />#define ABINIT_VERSION_MINOR &quot;10&quot;<br />#define ABINIT_VERSION_MICRO &quot;1&quot;<br />#define ABINIT_VERSION_BUILD &quot;20111203&quot;<br />#define ABINIT_VERSION_BASE &quot;6.10&quot;<br />#define HAVE_OS_LINUX 1<br /><br />configure: exit 1<br /></code></pre></div><br />please help me , thanks in andvance.<br />Best wishes!<br /><br /><br />Xiaole</div>
+			
+			
+			
+									
+									<div id="sig4516" class="signature">Phd student<br />Phys Department<br />Shanghai JiaoTong university, Shanghai, China</div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p4517" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile4517">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlist194b.html?mode=viewprofile&amp;u=69" class="avatar"><img class="avatar" src="download/file2b59.jpg?avatar=69_1334683785.jpg" width="78" height="92" alt="User avatar" /></a>														</div>
+								<a href="memberlist194b.html?mode=viewprofile&amp;u=69" style="color: #33CC00;" class="username-coloured">jbeuken</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search2ddf.html?author_id=69&amp;sr=posts">365</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Aug 18, 2009 9:24 pm</dd>		
+		
+											
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact jbeuken">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact jbeuken</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://www.uclouvain.be/jean-michel.beuken" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content4517">
+
+						<h3 ><a href="#p4517">Re: configure error of 6.10 with gfortran+openmpi on fedroa</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingb8cc-2.html?mode=quote&amp;f=3&amp;p=4517" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic9a2d-2.html?p=4517#p4517" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist194b.html?mode=viewprofile&amp;u=69" style="color: #33CC00;" class="username-coloured">jbeuken</a></strong> &raquo; </span>Sun Dec 04, 2011 10:47 pm
+			</p>
+			
+			
+			
+			<div class="content">Hi,<br /><br />in the config.log, you see that the &quot;libmpi.so.1&quot; library is not found :<br /><blockquote class="uncited"><div>...<br />configure:11026: $? = 0<br />configure:11033: ./conftest<br />./conftest: error while loading shared libraries: libmpi.so.1: cannot open shared object file: No such file or directory<br />configure:11037: $? = 127<br />...<br /></div></blockquote><br /><br />initialize the env variable &quot;LD_LIBRARY_PATH&quot; : <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>export LD_LIBRARY_PATH=/usr/lib64/openmpi/lib:$LD_LIBRARY_PATH</code></pre></div><br /><br />regards<br /><br />jmb</div>
+			
+			
+			
+									
+									<div id="sig4517" class="signature">------<br>
+Jean-Michel Beuken<br>
+Computer Scientist</div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p4556" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile4556">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist43dd.html?mode=viewprofile&amp;u=807" class="username">Zhang Xiaole</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search1504.html?author_id=807&amp;sr=posts">46</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Sep 15, 2011 7:13 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content4556">
+
+						<h3 ><a href="#p4556">Re: configure error of 6.10 with gfortran+openmpi on fedroa</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting9650.html?mode=quote&amp;f=3&amp;p=4556" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicd92e-2.html?p=4556#p4556" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist43dd.html?mode=viewprofile&amp;u=807" class="username">Zhang Xiaole</a></strong> &raquo; </span>Fri Dec 09, 2011 1:54 pm
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>jbeuken wrote:</cite>Hi,<br /><br />in the config.log, you see that the &quot;libmpi.so.1&quot; library is not found :<br /><blockquote class="uncited"><div>...<br />configure:11026: $? = 0<br />configure:11033: ./conftest<br />./conftest: error while loading shared libraries: libmpi.so.1: cannot open shared object file: No such file or directory<br />configure:11037: $? = 127<br />...<br /></div></blockquote><br /><br />initialize the env variable &quot;LD_LIBRARY_PATH&quot; : <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>export LD_LIBRARY_PATH=/usr/lib64/openmpi/lib:$LD_LIBRARY_PATH</code></pre></div><br /><br />regards<br /><br />jmb</div></blockquote><br />Hi jmb<br />    according to your advice, i can ran my compiling process completely, then  i type make mj4 and make install.<br />all the binary programmes generated.But when i test the code , there are someting wrong both in sequence and paralle ran. more specifically,when i type the code<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../../../bin/abinit &lt;tparal_1.files </code></pre></div><br />it end like this<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>MPI_ABORT was invoked on rank 0 in communicator MPI_COMM_WORLD <br />with errorcode 14.<br /><br />NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.<br />You may or may not see output from other processes, depending on<br />exactly when Open MPI kills them.<br /></code></pre></div><br />when i type the code <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;mpirun -np 2 ../../../bin/abinit &lt;tparal_1.files</code></pre></div><br />it end like this<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>MPI_ABORT was invoked on rank 0 in communicator MPI_COMM_WORLD <br />with errorcode 14.<br /><br />NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.<br />You may or may not see output from other processes, depending on<br />exactly when Open MPI kills them.<br />--------------------------------------------------------------------------<br />--------------------------------------------------------------------------<br />mpirun has exited due to process rank 0 with PID 3563 on<br />node Pariah exiting improperly. There are two reasons this could occur:<br /><br />1. this process did not call &quot;init&quot; before exiting, but others in<br />the job did. This can cause a job to hang indefinitely while it waits<br />for all processes to call &quot;init&quot;. By rule, if one process calls &quot;init&quot;,<br />then ALL processes must call &quot;init&quot; prior to termination.<br /><br />2. this process called &quot;init&quot;, but exited without calling &quot;finalize&quot;.<br />By rule, all processes that call &quot;init&quot; MUST call &quot;finalize&quot; prior to<br />exiting or it will be considered an &quot;abnormal termination&quot;<br /><br />This may have caused other processes in the application to be<br />terminated by signals sent by mpirun (as reported here).<br /></code></pre></div><br /><br />is there someting i miss?please guide me.</div>
+			
+			
+			
+									
+									<div id="sig4556" class="signature">Phd student<br />Phys Department<br />Shanghai JiaoTong university, Shanghai, China</div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p4557" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile4557">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistd179.html?mode=viewprofile&amp;u=59" class="username">david.waroquiers</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search4b32.html?author_id=59&amp;sr=posts">138</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Aug 15, 2009 12:45 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content4557">
+
+						<h3 ><a href="#p4557">Re: configure error of 6.10 with gfortran+openmpi on fedroa</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting82de-3.html?mode=quote&amp;f=3&amp;p=4557" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic06e6.html?p=4557#p4557" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistd179.html?mode=viewprofile&amp;u=59" class="username">david.waroquiers</a></strong> &raquo; </span>Fri Dec 09, 2011 4:42 pm
+			</p>
+			
+			
+			
+			<div class="content">Hello,<br /><br />You still need the MPI libraries, did you export LD_LIBRARY_PATH when doing your calculations ?<br />You can add this line in your .bashrc file :<br />export LD_LIBRARY_PATH=/usr/lib64/openmpi/lib:$LD_LIBRARY_PATH<br /><br />It might solve your problem<br /><br />David</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p4569" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile4569">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist43dd.html?mode=viewprofile&amp;u=807" class="username">Zhang Xiaole</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search1504.html?author_id=807&amp;sr=posts">46</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Sep 15, 2011 7:13 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content4569">
+
+						<h3 ><a href="#p4569">Re: configure error of 6.10 with gfortran+openmpi on fedroa</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postinga909.html?mode=quote&amp;f=3&amp;p=4569" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic249d.html?p=4569#p4569" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist43dd.html?mode=viewprofile&amp;u=807" class="username">Zhang Xiaole</a></strong> &raquo; </span>Mon Dec 12, 2011 5:55 pm
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>david.waroquiers wrote:</cite>Hello,<br /><br />You still need the MPI libraries, did you export LD_LIBRARY_PATH when doing your calculations ?<br />You can add this line in your .bashrc file :<br />export LD_LIBRARY_PATH=/usr/lib64/openmpi/lib:$LD_LIBRARY_PATH<br /><br />It might solve your problem<br /><br />David</div></blockquote><br />Hi, David<br />   Thank you for your advice. i have already exported LD_LIBRARY_PATH,but the problem is still. Then i look back to my log file of make, i found there were some Warnings that may be fatal to my compile,so i just picked them up like follow.<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>libtool: compile:&nbsp; /usr/lib64/openmpi/bin/mpif90 -I../libsrc -I. -ffree-form -g -ffree-line-length-none -O2 -mtune=native -march=native -mfpmath=sse -c netcdf.f90 -o netcdf.o<br />netcdf_text_variables.f90:60.93:<br />&nbsp; &nbsp; Included at netcdf.f90:52:<br /><br />numDims&nbsp; ) = (/ 1, (product(localCount(:counter)), counter = 1, numDims - 1) /)<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />Warning: DO loop at (1) will be executed zero times<br />/bin/sh ../libtool --tag=FC&nbsp; &nbsp;--mode=link /usr/lib64/openmpi/bin/mpif90&nbsp; &nbsp; &nbsp; &nbsp; -I../libsrc -I.&nbsp; -ffree-form -g -ffree-line-length-none&nbsp; -O2 -mtune=native -march=native -mfpmath=sse&nbsp; &nbsp; &nbsp; &nbsp; -o libnetcdff90.la&nbsp; typeSizes.lo&nbsp; netcdf.lo&nbsp; <br />libtool: link: ar cru .libs/libnetcdff90.a&nbsp; typeSizes.o netcdf.o</code></pre></div><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>growshrink.f90:89.59:<br /><br />&nbsp; call comb_rot_grow_loc_1(nfl1,nfu1,nfl2,nfu2,nfl3,nfu3,x,w1,ibyz,ibzxx) <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1<br />Warning: Dummy argument 'w1' with INTENT(IN) in variable definition context (actual argument to INTENT = OUT/INOUT) at (1)<br />growshrink.f90:93.60:<br /><br />&nbsp; call comb_rot_grow_loc_2(nfl1,nfu1,nfl2,nfu2,nfl3,nfu3,w1,w2,ibzxx,ibxxyy) <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Warning: Dummy argument 'w2' with INTENT(IN) in variable definition context (actual argument to INTENT = OUT/INOUT) at (1)</code></pre></div><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>tail.f90:324.33:<br /><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; wfd%nseg_c,wfd%nvctr_c,wfd%keyg(1,1),wfd%keyv(1),&amp;<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1<br />Warning: Element of assumed-shaped or pointer array passed to array dummy argument 'keyg_c' at (1)<br />/usr/lib64/openmpi/bin/mpif90 -I. -Imodules -I. -I..&nbsp; -IPSolver -IPSolver/ABINIT-common -ffree-form -g -ffree-line-length-none -O2 -mtune=native -march=native -mfpmath=sse -c -o restart.o&nbsp; restart.f90<br />/usr/lib64/openmpi/bin/mpif90 -I. -Imodules -I. -I..&nbsp; -IPSolver -IPSolver/ABINIT-common -ffree-form -g -ffree-line-length-none -O2 -mtune=native -march=native -mfpmath=sse -c -o geometry.o&nbsp; geometry.f90<br />/usr/lib64/openmpi/bin/mpif90 -I. -Imodules -I. -I..&nbsp; -IPSolver -IPSolver/ABINIT-common -ffree-form -g -ffree-line-length-none -O2 -mtune=native -march=native -mfpmath=sse -c -o davidson.o&nbsp; davidson.f90<br />davidson.f90:150.7:<br /><br />&nbsp; &nbsp; &nbsp; &nbsp;psi(1+nvctrp*norbu),v,msg)<br />&nbsp; &nbsp; &nbsp; &nbsp;1<br />Warning: Element of assumed-shaped or pointer array passed to array dummy argument 'psi' at (1)<br />davidson.f90:296.10:<br /><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; psi(1+nvctrp*norbu),g,msg)<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Warning: Element of assumed-shaped or pointer array passed to array dummy argument 'psi' at (1)<br />davidson.f90:352.43:<br /><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;psi(1+nvctrp*norbu),g,msg)<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1<br />Warning: Element of assumed-shaped or pointer array passed to array dummy argument 'psi' at (1)<br />davidson.f90:537.10:<br /><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; psi(1+nvctrp*norbu),v,msg)<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Warning: Element of assumed-shaped or pointer array passed to array dummy argument 'psi' at (1)<br />/usr/lib64/openmpi/bin/mpif90 -I. -Imodules -I. -I..&nbsp; -IPSolver -IPSolver/ABINIT-common -ffree-form -g -ffree-line-length-none -O2 -mtune=native -march=native -mfpmath=sse -c -o projectors.o&nbsp; `test -f 'init/projectors.f90' || echo './'`init/projectors.f90<br />init/projectors.f90:214.19:<br /><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;nlpspd%nboxp_c(1,1,iat),nlpspd%nboxp_f(1,1,iat),n1,n2,n3,&amp;<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1<br />Warning: Element of assumed-shaped or pointer array passed to array dummy argument 'nboxp_c' at (1)<br />/usr/lib64/openmpi/bin/mpif90 -I. -Imodules -I. -I..&nbsp; -IPSolver -IPSolver/ABINIT-common -ffree-form -g -ffree-line-length-none -O2 -mtune=native -march=native -mfpmath=sse -c -o ionicpot.o&nbsp; `test -f 'init/ionicpot.f90' || echo './'`init/ionicpot.f90<br />/usr/lib64/openmpi/bin/mpif90 -I. -Imodules -I. -I..&nbsp; -IPSolver -IPSolver/ABINIT-common -ffree-form -g -ffree-line-length-none -O2 -mtune=native -march=native -mfpmath=sse -c -o gridmanipulation.o&nbsp; `test -f 'init/gridmanipulation.f90' || echo './'`init/gridmanipulation.f90<br />/usr/lib64/openmpi/bin/mpif90 -I. -Imodules -I. -I..&nbsp; -IPSolver -IPSolver/ABINIT-common -ffree-form -g -ffree-line-length-none -O2 -mtune=native -march=native -mfpmath=sse -c -o gauprod.o&nbsp; `test -f 'init/gauprod.f90' || echo './'`init/gauprod.f90<br />init/gauprod.f90:845.38:<br /><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;call gbasovrlp(A%xp(iexpo),A%psiat(iexpo),B%xp(jexpo),B%<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Warning: Element of assumed-shaped or pointer array passed to array dummy argument 'expo1' at (1)<br />init/gauprod.f90:1422.66:<br /><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; rxyz(1),rxyz(2),rxyz(3),hx,hy,hz,wfd%nseg_c,wfd%nvctr_c,wfd%keyg(1,1)<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Warning: Element of assumed-shaped or pointer array passed to array dummy argument 'keyg_c' at (1)<br />/usr/lib64/openmpi/bin/mpif90 -I. -Imodules -I. -I..&nbsp; -IPSolver -IPSolver/ABINIT-common -ffree-form -g -ffree-line-length-none -O2 -mtune=native -march=native -mfpmath=sse -c -o denspotd.o&nbsp; `test -f 'init/denspotd.f90' || echo './'`init/denspotd.f90<br />/usr/lib64/openmpi/bin/mpif90 -I. -Imodules -I. -I..&nbsp; -IPSolver -IPSolver/ABINIT-common -ffree-form -g -ffree-line-length-none -O2 -mtune=native -march=native -mfpmath=sse -c -o logrid.o&nbsp; `test -f 'init/logrid.f90' || echo './'`init/logrid.f90<br />init/logrid.f90:55.31:<br /><br />&nbsp; call make_ib_inv(logrid_big, ibxy_c,ibzzx_c,ibyyzz_c,0,n1,0,n2,0,n3)<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1<br />Warning: Dummy argument 'ibxy_c' with INTENT(IN) in variable definition context (actual argument to INTENT = OUT/INOUT) at (1)<br />/usr/lib64/openmpi/bin/mpif90 -I. -Imodules -I. -I..&nbsp; -IPSolver -IPSolver/ABINIT-common -ffree-form -g -ffree-line-length-none -O2 -mtune=native -march=native -mfpmath=sse -c -o logrid_per.o&nbsp; `test -f 'init/logrid_per.f90' || echo './'`init/logrid_per.f90<br />/usr/lib64/openmpi/bin/mpif90 -I. -Imodules -I. -I..&nbsp; -IPSolver -IPSolver/ABINIT-common -ffree-form -g -ffree-line-length-none -O2 -mtune=native -march=native -mfpmath=sse -c -o inputguess.o&nbsp; `test -f 'init/inputguess.f90' || echo './'`init/inputguess.f90<br />init/inputguess.f90:112.66:<br /><br />&nbsp; &nbsp; &nbsp; &nbsp; call iguess_generator(iproc,at%nzatom(ity),at%nelpsp(ity),at%psppar(0,0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Warning: Element of assumed-shaped or pointer array passed to array dummy argument 'psppar' at (1)<br />/usr/lib64/openmpi/bin/mpif90 -I. -Imodules -I. -I..&nbsp; -IPSolver -IPSolver/ABINIT-common -ffree-form -g -ffree-line-length-none -O2 -mtune=native -march=native -mfpmath=sse -c -o gautowav.o&nbsp; `test -f 'init/gautowav.f90' || echo './'`init/gautowav.f90<br />init/gautowav.f90:476.19:<br /><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;G%xp(iexpo),G%psiat(iexpo),&amp;<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1<br />Warning: Element of assumed-shaped or pointer array passed to array dummy argument 'xp' at (1)<br />/usr/lib64/openmpi/bin/mpif90 -I. -Imodules -I. -I..&nbsp; -IPSolver -IPSolver/ABINIT-common -ffree-form -g -ffree-line-length-none -O2 -mtune=native -march=native -mfpmath=sse -c -o eleconf.o&nbsp; `test -f 'init/eleconf.f90' || echo './'`init/eleconf.f90<br />/usr/lib64/openmpi/bin/mpif90 -I. -Imodules -I. -I..&nbsp; -IPSolver -IPSolver/ABINIT-common -ffree-form -g -ffree-line-length-none -O2 -mtune=native -march=native -mfpmath=sse -c -o locreg.o&nbsp; `test -f 'init/locreg.f90' || echo './'`init/locreg.f90<br />init/locreg.f90:215.41:<br /><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Glr%wfd%nseg_c,Glr%wfd%nvctr_c,Glr%wfd%keyg(1,1),Glr%wfd%keyv(1),&amp;<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1<br />Warning: Element of assumed-shaped or pointer array passed to array dummy argument 'keyg' at (1)<br />init/locreg.f90:220.10:<br /><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Glr%wfd%keyg(1,Glr%wfd%nseg_c+1),Glr%wfd%keyv(Glr%wfd%nseg_c+1),&amp;<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Warning: Element of assumed-shaped or pointer array passed to array dummy argument 'keyg' at (1)<br />init/locreg.f90:229.41:<br /><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Glr%wfd%nseg_c,Glr%wfd%nvctr_c,Glr%wfd%keyg(1,1),Glr%wfd%keyv(1),&amp;<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1<br />Warning: Element of assumed-shaped or pointer array passed to array dummy argument 'keyg' at (1)<br />init/locreg.f90:235.10:<br /><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Glr%wfd%keyg(1,Glr%wfd%nseg_c+1),Glr%wfd%keyv(Glr%wfd%nseg_c+1),&amp;<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Warning: Element of assumed-shaped or pointer array passed to array dummy argument 'keyg' at (1)<br />init/locreg.f90:502.38:<br /><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;wfdg%nseg_c,wfdg%nvctr_c,wfdg%keyg(1,1),wfdg%keyv(1),&amp;<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Warning: Element of assumed-shaped or pointer array passed to array dummy argument 'keyg' at (1)<br />init/locreg.f90:507.38:<br /><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;wfdg%nseg_f,wfdg%nvctr_f,wfdg%keyg(1,wfdg%nseg_c+1),wfdg%keyv(wfdg<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Warning: Element of assumed-shaped or pointer array passed to array dummy argument 'keyg' at (1)<br />init/locreg.f90:523.32:<br /><br />&nbsp; &nbsp; &nbsp; &nbsp;wfdg%nseg_c,wfdg%nvctr_c,wfdg%keyg(1,1),wfdg%keyv(1),&amp;<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Warning: Element of assumed-shaped or pointer array passed to array dummy argument 'keyg' at (1)<br />init/locreg.f90:528.32:<br /><br />&nbsp; &nbsp; &nbsp; &nbsp;wfdg%nseg_f,wfdg%nvctr_f,wfdg%keyg(1,wfdg%nseg_c+1),wfdg%keyv(wfdg%nseg_<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Warning: Element of assumed-shaped or pointer array passed to array dummy argument 'keyg' at (1)<br />init/locreg.f90:543.32:<br /><br />&nbsp; &nbsp; &nbsp; &nbsp;wfdg%nseg_c,wfdg%nvctr_c,wfdg%keyg(1,1),wfdg%keyv(1),&amp;<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Warning: Element of assumed-shaped or pointer array passed to array dummy argument 'keyg' at (1)<br />init/locreg.f90:548.32:<br /><br />&nbsp; &nbsp; &nbsp; &nbsp;wfdg%nseg_f,wfdg%nvctr_f,wfdg%keyg(1,wfdg%nseg_c+1),wfdg%keyv(wfdg%nseg_<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Warning: Element of assumed-shaped or pointer array passed to array dummy argument 'keyg' at (1)<br />/usr/lib64/openmpi/bin/mpif90 -I. -Imodules -I. -I..&nbsp; -IPSolver -IPSolver/ABINIT-common -ffree-form -g -ffree-line-length-none -O2 -mtune=native -march=native -mfpmath=sse -c -o precond.o&nbsp; `test -f 'wfn_opt/precond.f90' || echo './'`wfn_opt/precond.f90<br />/usr/lib64/openmpi/bin/mpif90 -I. -Imodules -I. -I..&nbsp; -IPSolver -IPSolver/ABINIT-common -ffree-form -g -ffree-line-length-none -O2 -mtune=native -march=native -mfpmath=sse -c -o orthogonality.o&nbsp; `test -f 'wfn_opt/orthogonality.f90' || echo './'`wfn_opt/orthogonality.f90<br />/usr/lib64/openmpi/bin/mpif90 -I. -Imodules -I. -I..&nbsp; -IPSolver -IPSolver/ABINIT-common -ffree-form -g -ffree-line-length-none -O2 -mtune=native -march=native -mfpmath=sse -c -o diis.o&nbsp; `test -f 'wfn_opt/diis.f90' || echo './'`wfn_opt/diis.f90<br />/usr/lib64/openmpi/bin/mpif90 -I. -Imodules -I. -I..&nbsp; -IPSolver -IPSolver/ABINIT-common -ffree-form -g -ffree-line-length-none -O2 -mtune=native -march=native -mfpmath=sse -c -o applyh.o&nbsp; `test -f 'wfn_opt/applyh.f90' || echo './'`wfn_opt/applyh.f90<br />wfn_opt/applyh.f90:952.41:<br /><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;call applyprojector(l,i,at%psppar(0,0,ityp),at%npspcode(ityp),&amp;<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1<br />Warning: Element of assumed-shaped or pointer array passed to array dummy argument 'psppar' at (1)</code></pre></div></div>
+			
+			
+			
+									
+									<div id="sig4569" class="signature">Phd student<br />Phys Department<br />Shanghai JiaoTong university, Shanghai, China</div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p4576" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile4576">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist43dd.html?mode=viewprofile&amp;u=807" class="username">Zhang Xiaole</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search1504.html?author_id=807&amp;sr=posts">46</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Sep 15, 2011 7:13 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content4576">
+
+						<h3 ><a href="#p4576">Re: configure error of 6.10 with gfortran+openmpi on fedroa</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingdc59.html?mode=quote&amp;f=3&amp;p=4576" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic1ed1-3.html?p=4576#p4576" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist43dd.html?mode=viewprofile&amp;u=807" class="username">Zhang Xiaole</a></strong> &raquo; </span>Wed Dec 14, 2011 3:35 pm
+			</p>
+			
+			
+			
+			<div class="content">My promble has been sovled according to the solution of jmb<br />see <!-- l --><a class="postlink-local" href="viewtopicc58b.html?f=2&amp;t=1452">viewtopic.php?f=2&amp;t=1452</a><!-- l --><br />it seem like the version 1.5- openmpi dosnt work well with abinit<br />Thanks a lot <br />promlem sovled</div>
+			
+			
+			
+									
+									<div id="sig4576" class="signature">Phd student<br />Phys Department<br />Shanghai JiaoTong university, Shanghai, China</div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p4727" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile4727">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlist194b.html?mode=viewprofile&amp;u=69" class="avatar"><img class="avatar" src="download/file2b59.jpg?avatar=69_1334683785.jpg" width="78" height="92" alt="User avatar" /></a>														</div>
+								<a href="memberlist194b.html?mode=viewprofile&amp;u=69" style="color: #33CC00;" class="username-coloured">jbeuken</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search2ddf.html?author_id=69&amp;sr=posts">365</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Aug 18, 2009 9:24 pm</dd>		
+		
+											
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact jbeuken">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact jbeuken</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://www.uclouvain.be/jean-michel.beuken" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content4727">
+
+						<h3 ><a href="#p4727">Re: configure error of 6.10 with gfortran+openmpi on fedroa</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting1e99.html?mode=quote&amp;f=3&amp;p=4727" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic6ef8.html?p=4727#p4727" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist194b.html?mode=viewprofile&amp;u=69" style="color: #33CC00;" class="username-coloured">jbeuken</a></strong> &raquo; </span>Thu Jan 26, 2012 5:40 pm
+			</p>
+			
+			
+			
+			<div class="content">Dear Xiaole,<br /><br /><blockquote><div><cite>Zhang Xiaole wrote:</cite>My problem has been sovled according to the solution of jmb<br />see <!-- l --><a class="postlink-local" href="viewtopicc58b.html?f=2&amp;t=1452">viewtopic.php?f=2&amp;t=1452</a><!-- l --><br />it seem like the version 1.5- openmpi doesnt work well with abinit<br />promlem sovled</div></blockquote><br /><br />I finally understood why ABINIT does not work with the &quot;native&quot; fedora openmpi package ( 1.5.4 ) : problem with mpi_io<br />mpi_io is enabled by default in build system of ABINIT<br /><br />then, we must use &quot;--disable-mpi-io&quot; in the configure command<br /><br />regards<br /><br />jmb</div>
+			
+			
+			
+									
+									<div id="sig4727" class="signature">------<br>
+Jean-Michel Beuken<br>
+Computer Scientist</div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="postingd692.html?mode=reply&amp;f=3&amp;t=1457" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic46e2.html?f=3&amp;t=1457&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=3&amp;t=1457">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			7 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforum4d6b.html?f=3" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Configuring and compiling ABINIT”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?t=1457 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:54:43 GMT -->
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4444&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:31:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; 9.0.4: how to build fallbacks automatically?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>9.0.4: how to build fallbacks automatically?</h2>
+		<p><a href="viewtopic89ff.html?f=3&amp;t=4444">https://forum.abinit.org/viewtopic.php?f=3&amp;t=4444</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>9.0.4: how to build fallbacks automatically?</h3>
+				<div class="date">Posted: <strong>Wed Jun 10, 2020 5:20 pm</strong></div>
+				<div class="author">by <strong>sbecuwe</strong></div>
+				<div class="content">Hello<br>
+<br>
+In version 8.x, it was possible to let ABINIT build the required fallbacks.<br>
+How can I achieve the same behavior in version 9.x?<br>
+Adding "--with-fallbacks" and just writing "--with-libxc" (without specifying a LibXC directory) obviously doesn't work, since configure complains at the end.<br>
+<br>
+  +------------------------------------------------------------------+<br>
+  | WARNING : LibXC is not WORKING !                                 |<br>
+  +------------------------------------------------------------------+<br>
+  | Please point the configuration to a working libXC installation   |<br>
+  +------------------------------------------------------------------+<br>
+<br>
+And the option "--with-tardir" as advertised on <a href="https://www.abinit.org/fallbacks" class="postlink">https://www.abinit.org/fallbacks</a> is no longer recognized.<br>
+<br>
+Thanks!<br>
+<br>
+Kind regards<br>
+Stefan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 9.0.4: how to build fallbacks automatically?&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Thu Jun 11, 2020 9:49 pm</strong></div>
+				<div class="author">by <strong>gabriel.antonius</strong></div>
+				<div class="content">Hi,<br>
+In Abinit 9, the fallbacks need to be compiled separately. From the top abinit directory, you would do something like
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>cd fallbacks
+tar -xf abinit-fallbacks-9.0.tar.gz
+cd abinit-fallbacks-9.0.2
+mkdir build
+cd build
+../configure CC=mpicc CXX=mpicxx FC=mpif90 --disable-libpsml   --disable-xmlf90     --disable-wannier90  --disable-atompaw --disable-bigdft
+make
+</code></pre></div>
+
+Depending on your platform, you might need to specify more options to the configure script. For example, I add the options
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code> --prefix=/path/to/abinit/fallbacks/abinit-fallbacks-9.0.2/build/install --with-hdf5=/path/to/abinit/fallbacks/abinit-fallbacks-9.0.2/build/install/hdf5/default/
+ </code></pre></div>
+The first flag ensures that the files are kept in the current directory (rather than system-wide), and the second flag specifies that hdf5 should be taken from the one being compiled and not from the environment (not sure why this is not the default behavior).</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4444&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:31:49 GMT -->
+</html>

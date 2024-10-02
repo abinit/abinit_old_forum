@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3054&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:54:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; the problem from input file</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>the problem from input file</h2>
+		<p><a href="viewtopic3af1-2.html?f=9&amp;t=3054">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3054</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>the problem from input file</h3>
+				<div class="date">Posted: <strong>Tue Jul 14, 2015 1:55 am</strong></div>
+				<div class="author">by <strong>qingping</strong></div>
+				<div class="content">Dear all,<br />My input file is:<br /><br />optcell 2<br />ionmov  3<br />ntime   200<br />dilatmx 1.05<br />natfix  1<br />iatfix  1<br />natfixz 24<br />iatfixz 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25<br />ecutsm  0.5<br /><br />#Definition of the unit cell<br />chkprim 0<br />acell   18.17 18.17 5.401                       <br />rprim   1.0   0.0   0.0                 <br />        0.0   1.0   0.0                <br />        0.0   0.0   1.0                <br /><br />#Definition of the atom types<br />ntypat 3               <br />znucl  47  25  8        <br />                            <br /><br />natom 25                                            <br />typat 1*1<br />      8*2  <br />      16*3                                                  <br /># LDA+U<br />usepawu   2<br />lpawu   -1 2 -1<br />upawu  4.0 0.0 eV<br />jpawu  0.4 0.0 eV<br /><br />xred  0           0           0<br />                             <br />      0.6493      0.8321      0<br />      0.3507      0.1679      0<br />      0.1679      0.6493      0<br />      0.8321      0.3507      0<br />      0.1493      0.3321      0.5<br />      0.8507      0.6679      0.5 <br />      0.6679      0.1493      0.5<br />      0.3321      0.8507      0.5                                                 <br />      <br /><br />      0.1599      0.2075      0<br />      0.8401      0.7925      0<br />      0.7925      0.1599      0<br />      0.2075      0.8401      0<br />      0.6599      0.7075      0.5<br />      0.3401      0.2925      0.5<br />      0.2925      0.6599      0.5<br />      0.7075      0.3401      0.5<br />      0.1311      0.4708      0<br />      0.8689      0.5292      0<br />      0.5292      0.1311      0<br />      0.4708      0.8689      0<br />      0.6311      0.9708      0.5<br />      0.3689      0.0292      0.5<br />      0.0292      0.6311      0.5<br />      0.9708      0.3689      0.5                                          <br /><br /><br />ecut    20.0<br />pawecutdg 40<br /><br />#Definition of the k-point grid<br />kptopt 1        <br />ngkpt 2 2 2      <br /><br />getwfk -1<br /><br />nshiftk 1         <br /><br />shiftk 0.5  0.5  0.5<br />       <br /> <br /><br />#Definition of the SCF procedure<br />nstep 200         <br />toldfe 1.0d-4     <br />diemac 2.0       <br /><br />optforces 1<br /><br />I get the results:<br /><br />There is a problem with the input file : maybe  <br />  a disagreement between the declared dimension of the array,<br />  and the number of data actually provided. <br />  Action : correct your input file !<br /><br /> leave_new : decision taken to exit ...<br /><br />I guess +U have some problem, but I do not know how to solve it. Could you tell me. Thank you.<br /><br />Best wishes,<br /><br />Qingping</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: the problem from input file&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Tue Jul 14, 2015 3:36 am</strong></div>
+				<div class="author">by <strong>qingping</strong></div>
+				<div class="content">I think I solve the problem. Change <br />upawu 4.0 0.0 eV<br />jpawu 0.4 0.0 eV<br /><br />to<br />upawu 0.0 4.0 0.0 eV<br />jpawu 0.0 0.4 0.0 eV</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3054&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:54:34 GMT -->
+</html>

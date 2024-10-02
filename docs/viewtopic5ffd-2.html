@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=59&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:11:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; WFK file has wrong file header?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>WFK file has wrong file header?</h2>
+		<p><a href="viewtopic44e9.html?f=9&amp;t=59">https://forum.abinit.org/viewtopic.php?f=9&amp;t=59</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>WFK file has wrong file header?</h3>
+				<div class="date">Posted: <strong>Mon Feb 15, 2010 8:54 am</strong></div>
+				<div class="author">by <strong>schumann</strong></div>
+				<div class="content">Dear all,<br /><br />I'm trying to run a phonon calculation at Gamma. Since my three-dataset-run (as in the examples) always gets killed with no reasonable error message, I tried to first calculate the WFKs to make my search for the error quicker.<br /><br />Therefore I ran a GS calculation and then wanted to use the WFKs, where I get the following error message. It seems that the restart file has no code version of abinit in it. But I used version 5.8.4 which is the only one I ever had installed.<br /><br />-P-0000           - hdr_check: checking restart file header for consistency -<br />-P-0000<br />-P-0000<br />-P-0000         current calculation                         restart file<br />-P-0000         -------------------                         ------------<br />-P-0000<br />-P-0000   calculation expects a wf_planewave    |  input file contains a wf_planewave<br />-P-0000 . ABINIT  code version 5.8.4                |  ABINIT  code version       <br />-P-0000<br />-P-0000  hdr_check: BUG -<br />-P-0000   input fform=         2 differs from disk file fform=         0.<br />-P-0000<br />-P-0000  leave_new : decision taken to exit ...<br />-P-0000  leave_new : synchronization done...<br />-P-0000  leave_new : exiting...<br /><br />Thanks in advance for your help.<br /><br />Silvia Schumann</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: WFK file has wrong file header?</h3>
+				<div class="date">Posted: <strong>Thu Feb 18, 2010 6:49 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">fform = 0 means there was an error in the reading of the wf file. What is strange is that the beginning of the header is ok. Check the integrity of the file (was it overwritten or something?), and perhaps try to read it with cut3d to test it: ask cut3d to operate on the last band and k-point, in order to make it scan the whole file, and it should show any errors before then...<br /><br />Otherwise we need more information on input file, abinit version, platform etc...<br /><br />Good luck<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: WFK file has wrong file header?</h3>
+				<div class="date">Posted: <strong>Thu Feb 25, 2010 10:39 am</strong></div>
+				<div class="author">by <strong>schumann</strong></div>
+				<div class="content">After it tried cut3d, I had another idea concerning the input WFK I use. Since my fix works, I now would like to know something else.<br /><br />My input file which reads the WFK consists of two datasets and in the first one I use &quot;irdwfk 1&quot; and in the .files ../xyz_i for input files while the WFK itself is named xyz_i_WFK. Obviously the first dataset looks for something else as the input_WFK. If I just use one dataset with the same .files it works. So I think I would have to rename the WFK in xyz_i_DS1_WFK. <br /><br />irdwfk1   1             # Read wavefunctions from file<br /><br />irdwfk2   1             # Read wavefunctions from file<br />getddk2   -1           # Uses as input ddk wfs the output of the dataset 2<br /><br />But what do I do with the irdwfk2, which should expect xyz_i_DS2_WFK in that case?<br /><br />I hope that I have not spread confusion with this post.<br /><br />Silvia</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: WFK file has wrong file header?</h3>
+				<div class="date">Posted: <strong>Fri Feb 26, 2010 12:30 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">In multidataset mode, you usually want to use the get* variables: as you deduced, irdwfk imposes the filename for the current DS, with the input prefix (xyz_i_DS2 for DS2 irdwfk2 1)<br /><br />you should be using<br />getwfk2 1      # read wf from DS 1 _output_<br /><br />irdwfk1 1 will impose reading in from xyz_i_DS1_WFK, which you will have to copy yourself from somewhere else.<br /><br />Matthieu<br /><br /><blockquote><div><cite>schumann wrote:</cite>After it tried cut3d, I had another idea concerning the input WFK I use. Since my fix works, I now would like to know something else.<br /><br />My input file which reads the WFK consists of two datasets and in the first one I use &quot;irdwfk 1&quot; and in the .files ../xyz_i for input files while the WFK itself is named xyz_i_WFK. Obviously the first dataset looks for something else as the input_WFK. If I just use one dataset with the same .files it works. So I think I would have to rename the WFK in xyz_i_DS1_WFK. <br /><br />irdwfk1   1             # Read wavefunctions from file<br /><br />irdwfk2   1             # Read wavefunctions from file<br />getddk2   -1           # Uses as input ddk wfs the output of the dataset 2<br /><br />But what do I do with the irdwfk2, which should expect xyz_i_DS2_WFK in that case?<br /><br />I hope that I have not spread confusion with this post.<br /><br />Silvia</div></blockquote></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=59&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:11:25 GMT -->
+</html>

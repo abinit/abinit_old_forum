@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1565&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:55:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; 6.12.1 make fails with 'ld ... File format not recognized'</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>6.12.1 make fails with 'ld ... File format not recognized'</h2>
+		<p><a href="viewtopic84a9-2.html?f=3&amp;t=1565">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1565</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>6.12.1 make fails with 'ld ... File format not recognized'</h3>
+				<div class="date">Posted: <strong>Fri Mar 09, 2012 2:30 pm</strong></div>
+				<div class="author">by <strong>danieruz</strong></div>
+				<div class="content">Greetings,<br /><br />I'm attempting to build abinit 6.12.1 from source for our cluster. While running make, linking fails with the error I've pasted at the bottom of this post. Here are some useful notes:<br /><br />-we've successfully compiled and used 6.10.2 on the same system and environment<br />-I can successfully compile if I disable mpi<br />-looking at the first libtool line in the output below, I can see that -rpath is being passed as an argument twice, both times with the same path, so perhaps there is a problem in the abinit config file?? <br />-export FC=ifort CC=icc CXX=icpc<br /><br />Can anyone offer insight and or suggestions on how to resolve this?<br /><br />Regards,<br />Daniel<br /><br /><blockquote class="uncited"><div>libtool: link: mpif90 -free -g -extend-source -vec-report0 -noaltparam -nofpscomp -O2 -g -I/afs/hpc2n.umu.se/lap/abinit/6.12.1/src/abinit-6.12.1/abisko-intel/fallbacks/exports/include -rpath /lap/libfftw/3.3.0/lib -rpath /lap/libfftw/3.3.0/lib/openmpi -o atompaw atompaw_prog.o  -L/lap/libfftw/3.3.0/lib -L/lap/libfftw/3.3.0/lib/openmpi ./.libs/libatompaw.a -L/afs/hpc2n.umu.se/lap/abinit/6.12.1/src/abinit-6.12.1/abisko-intel/fallbacks/exports/lib -lmkl_scalapack_lp64 -lmkl_blacs_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core /afs/hpc2n.umu.se/lap/abinit/6.12.1/src/abinit-6.12.1/abisko-intel/fallbacks/exports/lib/libnetcdf.a /lap/openmpi/1.5.4/intel-12.1/lib/libmpi_f90.so /lap/openmpi/1.5.4/intel-12.1/lib/libmpi_f77.so /lap/openmpi/1.5.4/intel-12.1/lib/libmpi.so -ldl -lnsl -lutil /afs/hpc2n.umu.se/lap/abinit/6.12.1/src/abinit-6.12.1/abisko-intel/fallbacks/exports/lib/libxc.a -pthread -rpath /lap/openmpi/1.5.4/intel-12.1/lib -rpath /lap/openmpi/1.5.4/intel-12.1/lib<br />ifort: command line warning #10006: ignoring unknown option '-rpath'<br />ifort: command line warning #10006: ignoring unknown option '-rpath'<br />ifort: command line remark #10010: option '-pthread' is deprecated and will be removed in a future release. See '-help deprecated'<br />ifort: command line warning #10006: ignoring unknown option '-rpath'<br />ifort: command line warning #10006: ignoring unknown option '-rpath'<br />ipo: warning #11010: file format not recognized for /lap/libfftw/3.3.0/lib<br />ipo: warning #11010: file format not recognized for /lap/libfftw/3.3.0/lib/openmpi<br />ipo: warning #11010: file format not recognized for /lap/openmpi/1.5.4/intel-12.1/lib<br />ipo: warning #11010: file format not recognized for /lap/openmpi/1.5.4/intel-12.1/lib<br />ld: /lap/libfftw/3.3.0/lib: No such file: File format not recognized<br />make[6]: *** [atompaw] Error 1<br />make[6]: Leaving directory `/afs/hpc2n.umu.se/lap/abinit/6.12.1/src/abinit-6.12.1/abisko-intel/fallbacks/sources/atompaw-3.0.1.3/src'<br />make[5]: *** [all-recursive] Error 1<br />make[5]: Leaving directory `/afs/hpc2n.umu.se/lap/abinit/6.12.1/src/abinit-6.12.1/abisko-intel/fallbacks/sources/atompaw-3.0.1.3'<br />make[4]: *** [all] Error 2<br />make[4]: Leaving directory `/afs/hpc2n.umu.se/lap/abinit/6.12.1/src/abinit-6.12.1/abisko-intel/fallbacks/sources/atompaw-3.0.1.3'<br />make[3]: *** [stamps/atompaw-build-stamp] Error 2<br />make[3]: Leaving directory `/afs/hpc2n.umu.se/lap/abinit/6.12.1/src/abinit-6.12.1/abisko-intel/fallbacks'<br />make[2]: [all-local] Error 2 (ignored)<br />Checking build of atompaw fallback<br />test -e stamps/atompaw-install-stamp<br />make[2]: *** [all-local] Error 1<br />make[2]: Leaving directory `/afs/hpc2n.umu.se/lap/abinit/6.12.1/src/abinit-6.12.1/abisko-intel/fallbacks'<br />make[1]: *** [multi] Error 2<br />make[1]: Leaving directory `/afs/hpc2n.umu.se/lap/abinit/6.12.1/src/abinit-6.12.1/abisko-intel'<br />make: *** [mj4] Error 2</div></blockquote></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 6.12.1 make fails with 'ld ... File format not recognize</h3>
+				<div class="date">Posted: <strong>Fri Mar 09, 2012 3:03 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">This is an ifort-related problem. For now, just reconfigure Abnit with the following: <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../configure --with-dft-flavor=&quot;bigdft+libxc+wannier90&quot; ...</code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 6.12.1 make fails with 'ld ... File format not recognize</h3>
+				<div class="date">Posted: <strong>Fri Mar 09, 2012 3:06 pm</strong></div>
+				<div class="author">by <strong>danieruz</strong></div>
+				<div class="content">thanks for the quick reply, I'll come back with the result.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 6.12.1 make fails with 'ld ... File format not recognize</h3>
+				<div class="date">Posted: <strong>Fri Mar 09, 2012 3:51 pm</strong></div>
+				<div class="author">by <strong>danieruz</strong></div>
+				<div class="content">Hi,<br /><br />I passed the argument you specified to configure, ran make clean then make mj4 and receive the error below. It looks like it's attempting to use the fallback, but is still dying with the same error.<br /><br />If it's helpful, here is the complete configure call:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure --with-dft-flavor=&quot;bigdft+libxc+wannier90&quot; --prefix=/lap/abinit/6.12.1 --with-math-flavor=gsl --with-linalg-flavor=scalapack+mkl --with-fft-flavor=fftw3 --with-fft-incs=&quot;-I/lap/libfftw/3.3.0/include&quot; --enable-mpi</code></pre></div><br /><br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>libtool: link: ar cru .libs/libwannier90.a&nbsp; constants.o disentangle.o hamiltonian.o io.o kmesh.o overlap.o <br />parameters.o plot.o transport.o utility.o wannierise.o wannier_lib.o<br />libtool: link: ranlib .libs/libwannier90.a<br />libtool: link: ( cd &quot;.libs&quot; &amp;&amp; rm -f &quot;libwannier90.la&quot; &amp;&amp; ln -s &quot;../libwannier90.la&quot; &quot;libwannier90.la&quot; )<br />mpif90 -DHAVE_CONFIG_H -I. -I..&nbsp; &nbsp;-I/afs/hpc2n.umu.se/lap/abinit/6.12.1/src/abinit-6.12.1/abisko-intel/fall<br />backs/exports/include&nbsp; -free -g -extend-source -vec-report0 -noaltparam -nofpscomp&nbsp; -O2 -g -I/afs/hpc2n.umu<br />.se/lap/abinit/6.12.1/src/abinit-6.12.1/abisko-intel/fallbacks/exports/include -c -o wannier_prog.o wannier<br />_prog.F90<br />/bin/bash ../libtool --tag=FC&nbsp; &nbsp;--mode=link mpif90&nbsp; -free -g -extend-source -vec-report0 -noaltparam -nofpscomp&nbsp; -O2 -g -I/afs/hpc2n.umu.se/lap/abinit/6.12.1/src/abinit-6.12.1/abisko-intel/fallbacks/exports/include&nbsp; -L/lap/libfftw/3.3.0/lib -Wl,-rpath,/lap/libfftw/3.3.0/lib -L/lap/libfftw/3.3.0/lib/openmpi -Wl,-rpath,/lap/libfftw/3.3.0/lib/openmpi -o wannier90.x wannier_prog.o libwannier90.la -lmkl_scalapack_lp64&nbsp; -lmkl_blacs_lp64&nbsp; -lmkl_intel_lp64&nbsp; -lmkl_intel_lp64 -lmkl_sequential -lmkl_core&nbsp; &nbsp;-L/afs/hpc2n.umu.se/lap/abinit/6.12.1/src/abinit-6.12.1/abisko-intel/fallbacks/exports/lib -letsf_io_low_level -letsf_io_utils -letsf_io <br />libtool: link: mpif90 -free -g -extend-source -vec-report0 -noaltparam -nofpscomp -O2 -g -I/afs/hpc2n.umu.se/lap/abinit/6.12.1/src/abinit-6.12.1/abisko-intel/fallbacks/exports/include -rpath /lap/libfftw/3.3.0/lib -rpath /lap/libfftw/3.3.0/lib/openmpi -o wannier90.x wannier_prog.o&nbsp; -L/lap/libfftw/3.3.0/lib -L/lap/libfftw/3.3.0/lib/openmpi ./.libs/libwannier90.a -L/afs/hpc2n.umu.se/lap/abinit/6.12.1/src/abinit-6.12.1/abisko-intel/fallbacks/exports/lib -lmkl_scalapack_lp64 -lmkl_blacs_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -letsf_io_low_level -letsf_io_utils -letsf_io<br />ifort: command line warning #10006: ignoring unknown option '-rpath'<br />ifort: command line warning #10006: ignoring unknown option '-rpath'<br />ipo: warning #11010: file format not recognized for /lap/libfftw/3.3.0/lib<br />ipo: warning #11010: file format not recognized for /lap/libfftw/3.3.0/lib/openmpi<br />ld: /lap/libfftw/3.3.0/lib: No such file: File format not recognized<br />make&#91;6&#93;: *** &#91;wannier90.x&#93; Error 1<br />make&#91;6&#93;: Leaving directory `/afs/hpc2n.umu.se/lap/abinit/6.12.1/src/abinit-6.12.1/abisko-intel/fallbacks/sources/wannier90-1.2.0.1/src'<br />make&#91;5&#93;: *** &#91;all-recursive&#93; Error 1<br />make&#91;5&#93;: Leaving directory `/afs/hpc2n.umu.se/lap/abinit/6.12.1/src/abinit-6.12.1/abisko-intel/fallbacks/sources/wannier90-1.2.0.1'<br />make&#91;4&#93;: *** &#91;all&#93; Error 2<br />make&#91;4&#93;: Leaving directory `/afs/hpc2n.umu.se/lap/abinit/6.12.1/src/abinit-6.12.1/abisko-intel/fallbacks/sources/wannier90-1.2.0.1'<br />make&#91;3&#93;: *** &#91;stamps/wannier90-build-stamp&#93; Error 2<br />make&#91;3&#93;: Leaving directory `/afs/hpc2n.umu.se/lap/abinit/6.12.1/src/abinit-6.12.1/abisko-intel/fallbacks'<br />make&#91;2&#93;: &#91;all-local&#93; Error 2 (ignored)<br />Checking build of wannier90 fallback<br />test -e stamps/wannier90-install-stamp<br />make&#91;2&#93;: *** &#91;all-local&#93; Error 1<br />make&#91;2&#93;: Leaving directory `/afs/hpc2n.umu.se/lap/abinit/6.12.1/src/abinit-6.12.1/abisko-intel/fallbacks'<br />make&#91;1&#93;: *** &#91;multi&#93; Error 2<br />make&#91;1&#93;: Leaving directory `/afs/hpc2n.umu.se/lap/abinit/6.12.1/src/abinit-6.12.1/abisko-intel'<br />make: *** &#91;mj4&#93; Error 2</code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 6.12.1 make fails with 'ld ... File format not recognize</h3>
+				<div class="date">Posted: <strong>Fri Mar 09, 2012 5:12 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Then, assuming you'll not use BigDFT nor Wannier functions, just reduce further the option: <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--with-dft-flavor=&quot;libxc&quot;</code></pre></div><br /><br />When I have time, I'll see whether rebuilding the tarball with a more recent version of Libtool fixes the problem.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 6.12.1 make fails with 'ld ... File format not recognize</h3>
+				<div class="date">Posted: <strong>Mon Mar 12, 2012 2:22 pm</strong></div>
+				<div class="author">by <strong>danieruz</strong></div>
+				<div class="content">Hi pouillon,<br />Compiling without bigdft and wannier90 succeeded. I'll let our users know that for the time being, we don't have support for them in 6.12.1. Hopefully they don't need them just now <img class="smilies" src="images/smilies/icon_e_wink.gif" alt=";)" title="Wink" /> <br /><br />Thanks for your help, and if you do find a solution, I would be glad to hear about it.<br /><br />Regards,<br />Daniel</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1565&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:55:43 GMT -->
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=1835&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:14:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Error in BZ sampling factor for GW sigma calculation</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Error in BZ sampling factor for GW sigma calculation</h2>
+		<p><a href="viewtopicb28f.html?f=11&amp;t=1835">https://forum.abinit.org/viewtopic.php?f=11&amp;t=1835</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Error in BZ sampling factor for GW sigma calculation</h3>
+				<div class="date">Posted: <strong>Sun Sep 16, 2012 5:36 pm</strong></div>
+				<div class="author">by <strong>sponce</strong></div>
+				<div class="content">Dear all, <br /><br />While performing a Sigma calculation with abinit 6.15.2 I got the following error message:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Subroutine Unknown:0:ERROR<br />&nbsp;Not able to give unique norm to order vectors<br />You should increase factor (currently, factor is = 70)</code></pre></div><br /><br />This error was raised while computing the 27th (out of 30) qpoints:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp; &nbsp; &nbsp;1)&nbsp; &nbsp; &nbsp;0.00000000E+00&nbsp; 0.00000000E+00&nbsp; 0.00000000E+00&nbsp; &nbsp; &nbsp; &nbsp;0.00694<br />&nbsp; &nbsp; &nbsp;2)&nbsp; &nbsp; &nbsp;1.66666667E-01&nbsp; 0.00000000E+00&nbsp; 0.00000000E+00&nbsp; &nbsp; &nbsp; &nbsp;0.04167<br />&nbsp; &nbsp; &nbsp;3)&nbsp; &nbsp; &nbsp;3.33333333E-01&nbsp; 0.00000000E+00&nbsp; 0.00000000E+00&nbsp; &nbsp; &nbsp; &nbsp;0.04167<br />&nbsp; &nbsp; &nbsp;4)&nbsp; &nbsp; &nbsp;5.00000000E-01&nbsp; 0.00000000E+00&nbsp; 0.00000000E+00&nbsp; &nbsp; &nbsp; &nbsp;0.02083<br />&nbsp; &nbsp; &nbsp;5)&nbsp; &nbsp; &nbsp;1.66666667E-01&nbsp; 1.66666667E-01&nbsp; 0.00000000E+00&nbsp; &nbsp; &nbsp; &nbsp;0.04167<br />&nbsp; &nbsp; &nbsp;6)&nbsp; &nbsp; &nbsp;3.33333333E-01&nbsp; 1.66666667E-01&nbsp; 0.00000000E+00&nbsp; &nbsp; &nbsp; &nbsp;0.04167<br />&nbsp; &nbsp; &nbsp;7)&nbsp; &nbsp; &nbsp;5.00000000E-01&nbsp; 1.66666667E-01&nbsp; 0.00000000E+00&nbsp; &nbsp; &nbsp; &nbsp;0.04167<br />&nbsp; &nbsp; &nbsp;8)&nbsp; &nbsp; &nbsp;3.33333333E-01&nbsp; 3.33333333E-01&nbsp; 0.00000000E+00&nbsp; &nbsp; &nbsp; &nbsp;0.01389<br />&nbsp; &nbsp; &nbsp;9)&nbsp; &nbsp; &nbsp;0.00000000E+00&nbsp; 0.00000000E+00&nbsp; 2.50000000E-01&nbsp; &nbsp; &nbsp; &nbsp;0.01389<br />&nbsp; &nbsp; 10)&nbsp; &nbsp; &nbsp;1.66666667E-01&nbsp; 0.00000000E+00&nbsp; 2.50000000E-01&nbsp; &nbsp; &nbsp; &nbsp;0.04167<br />&nbsp; &nbsp; 11)&nbsp; &nbsp; &nbsp;3.33333333E-01&nbsp; 0.00000000E+00&nbsp; 2.50000000E-01&nbsp; &nbsp; &nbsp; &nbsp;0.04167<br />&nbsp; &nbsp; 12)&nbsp; &nbsp; &nbsp;5.00000000E-01&nbsp; 0.00000000E+00&nbsp; 2.50000000E-01&nbsp; &nbsp; &nbsp; &nbsp;0.04167<br />&nbsp; &nbsp; 13)&nbsp; &nbsp; -3.33333333E-01&nbsp; 0.00000000E+00&nbsp; 2.50000000E-01&nbsp; &nbsp; &nbsp; &nbsp;0.04167<br />&nbsp; &nbsp; 14)&nbsp; &nbsp; -1.66666667E-01&nbsp; 0.00000000E+00&nbsp; 2.50000000E-01&nbsp; &nbsp; &nbsp; &nbsp;0.04167<br />&nbsp; &nbsp; 15)&nbsp; &nbsp; &nbsp;1.66666667E-01&nbsp; 1.66666667E-01&nbsp; 2.50000000E-01&nbsp; &nbsp; &nbsp; &nbsp;0.04167<br />&nbsp; &nbsp; 16)&nbsp; &nbsp; &nbsp;3.33333333E-01&nbsp; 1.66666667E-01&nbsp; 2.50000000E-01&nbsp; &nbsp; &nbsp; &nbsp;0.04167<br />&nbsp; &nbsp; 17)&nbsp; &nbsp; &nbsp;5.00000000E-01&nbsp; 1.66666667E-01&nbsp; 2.50000000E-01&nbsp; &nbsp; &nbsp; &nbsp;0.04167<br />&nbsp; &nbsp; 18)&nbsp; &nbsp; &nbsp;3.33333333E-01&nbsp; 3.33333333E-01&nbsp; 2.50000000E-01&nbsp; &nbsp; &nbsp; &nbsp;0.01389<br />&nbsp; &nbsp; 19)&nbsp; &nbsp; -1.66666667E-01&nbsp; 3.33333333E-01&nbsp; 2.50000000E-01&nbsp; &nbsp; &nbsp; &nbsp;0.04167<br />&nbsp; &nbsp; 20)&nbsp; &nbsp; -3.33333333E-01&nbsp; 5.00000000E-01&nbsp; 2.50000000E-01&nbsp; &nbsp; &nbsp; &nbsp;0.04167<br />&nbsp; &nbsp; 21)&nbsp; &nbsp; -1.66666667E-01&nbsp; 5.00000000E-01&nbsp; 2.50000000E-01&nbsp; &nbsp; &nbsp; &nbsp;0.04167<br />&nbsp; &nbsp; 22)&nbsp; &nbsp; -3.33333333E-01 -3.33333333E-01&nbsp; 2.50000000E-01&nbsp; &nbsp; &nbsp; &nbsp;0.01389<br />&nbsp; &nbsp; 23)&nbsp; &nbsp; &nbsp;0.00000000E+00&nbsp; 0.00000000E+00&nbsp; 5.00000000E-01&nbsp; &nbsp; &nbsp; &nbsp;0.00694<br />&nbsp; &nbsp; 24)&nbsp; &nbsp; &nbsp;1.66666667E-01&nbsp; 0.00000000E+00&nbsp; 5.00000000E-01&nbsp; &nbsp; &nbsp; &nbsp;0.04167<br />&nbsp; &nbsp; 25)&nbsp; &nbsp; &nbsp;3.33333333E-01&nbsp; 0.00000000E+00&nbsp; 5.00000000E-01&nbsp; &nbsp; &nbsp; &nbsp;0.04167<br />&nbsp; &nbsp; 26)&nbsp; &nbsp; &nbsp;5.00000000E-01&nbsp; 0.00000000E+00&nbsp; 5.00000000E-01&nbsp; &nbsp; &nbsp; &nbsp;0.02083<br />&nbsp; &nbsp; 27)&nbsp; &nbsp; &nbsp;1.66666667E-01&nbsp; 1.66666667E-01&nbsp; 5.00000000E-01&nbsp; &nbsp; &nbsp; &nbsp;0.04167<br /><br />&nbsp;Subroutine Unknown:0:ERROR<br />&nbsp;Not able to give unique norm to order vectors<br />You should increase factor (currently, factor is = 70)<br /><br />&nbsp; &nbsp; 28)&nbsp; &nbsp; &nbsp;3.33333333E-01&nbsp; 1.66666667E-01&nbsp; 5.00000000E-01&nbsp; &nbsp; &nbsp; &nbsp;0.04167<br />&nbsp; &nbsp; 29)&nbsp; &nbsp; &nbsp;5.00000000E-01&nbsp; 1.66666667E-01&nbsp; 5.00000000E-01&nbsp; &nbsp; &nbsp; &nbsp;0.04167<br />&nbsp; &nbsp; 30)&nbsp; &nbsp; &nbsp;3.33333333E-01&nbsp; 3.33333333E-01&nbsp; 5.00000000E-01&nbsp; &nbsp; &nbsp; &nbsp;0.01389<br /></code></pre></div><br /><br />The input file used for this calculation is join to this post. <br /><br />I looked at the code and apparently in the routine 56_recipspace/m_bz_mesh.F90:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;! WARNING ! This could not be sufficient if tested k1 - k2 has lower<br />&nbsp;! components than smallestlen. The factor 10 is giving us a security margin.<br />&nbsp;factor = 10*(int(one/smallestlen)+1)</code></pre></div><br /><br />One should raise this &quot;10&quot; factor to &quot;20&quot; ? Also the code is reporting a value for the variable &quot;factor&quot; of 70 in my case while it should be 90.<br />The smallestlen beeing 1/8 the factor should be 10*(8+1) = 90<br /><br />Kind regards, <br /><br />Samuel<br /><br />EDIT: I tested with a factor of  factor = 15*(int(one/smallestlen)+1) but I still have the exact same problem (except that the error indicate a factor value of 105)</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=1835&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:14:42 GMT -->
+</html>

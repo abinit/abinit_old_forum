@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=2632&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:34:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; How to set &quot;sciss&quot; correction on the nonlinear optical ?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>How to set &quot;sciss&quot; correction on the nonlinear optical ?</h2>
+		<p><a href="viewtopic4fff.html?f=10&amp;t=2632">https://forum.abinit.org/viewtopic.php?f=10&amp;t=2632</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>How to set &quot;sciss&quot; correction on the nonlinear optical ?</h3>
+				<div class="date">Posted: <strong>Thu Apr 10, 2014 3:55 pm</strong></div>
+				<div class="author">by <strong>Ruichun xiao</strong></div>
+				<div class="content">I am trying to calculate the static nonlinear optical susceptibility following with &quot;The lesson on static non-linear properties&quot;. The result without &quot;sciss&quot;  doesn't agreement with experiment value well, so I want to use &quot;sciss&quot; correction.<br />     The &quot;sciss&quot;  &quot;typical use is for response to electric field (rfelfd=3), but NOT for d/dk (rfelfd=2) and phonon responses&quot;,so, it is right that rfphon 1 and rfelfd 1 calculations should be done separately when a scissor is used .But in the dataset 4 and 5, rfphon=1 and rfelfd=1 dosen't separate!!!<br />     So how should I set the &quot;sciss&quot; ？ Is the accessory  input file right ?<br />     Thanks in advance！<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># Linear and nonlinear response calculation for AlAs<br /># Perturbations: electric fields &amp; atomic displacements<br /># (M. Veithen, 21.4.2005)<br /><br />#Definition of lattice parameters<br />#********************************<br />&nbsp; &nbsp;acell&nbsp; &nbsp; &nbsp; &nbsp;3*10.53<br />&nbsp; &nbsp;rprim&nbsp; &nbsp; &nbsp; &nbsp;0.0 0.5 0.5<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.5 0.0 0.5<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.5 0.5 0.0<br /><br />#Definition of atomic positions and types<br />#*************************************<br />&nbsp; &nbsp;natom&nbsp; &nbsp; &nbsp; &nbsp;2<br />&nbsp; &nbsp;ntypat&nbsp; &nbsp; &nbsp; 2<br />&nbsp; &nbsp;znucl&nbsp; &nbsp; &nbsp; &nbsp;13 33<br />&nbsp; &nbsp;typat&nbsp; &nbsp; &nbsp; &nbsp;1 2<br />&nbsp; &nbsp;xred&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; 0&nbsp; &nbsp; 0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.25 0.25 0.25<br />&nbsp; &nbsp;ixc&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3<br /><br />#Parameters of the SCF cycles<br />#****************************<br />&nbsp; &nbsp;iscf&nbsp; &nbsp; &nbsp; &nbsp; 5<br />&nbsp; &nbsp;nstep&nbsp; &nbsp; &nbsp; &nbsp;100<br /><br /><br />#Plane wave basis and k-point grid<br />#*********************************<br />&nbsp; &nbsp;ecut&nbsp; &nbsp; &nbsp; &nbsp; 2.8<br />&nbsp; &nbsp;ecutsm&nbsp; &nbsp; &nbsp; 0.5<br />&nbsp; &nbsp;dilatmx&nbsp; &nbsp; &nbsp;1.05<br />&nbsp; &nbsp;ngkpt&nbsp; &nbsp; &nbsp; &nbsp;6 6 6<br />&nbsp; &nbsp;nshiftk&nbsp; &nbsp; &nbsp;4<br />&nbsp; &nbsp;shiftk&nbsp; &nbsp; &nbsp; 0.5 0.5 0.5<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.5 0.0 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0 0.5 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0 0.0 0.5<br /><br />ndtset 7&nbsp; <br /><br />#DATASET1 : scf calculation: GS WF in the BZ<br />#********************************************<br />&nbsp; &nbsp;prtden1&nbsp; &nbsp; 1<br />&nbsp; &nbsp;kptopt1&nbsp; &nbsp; 1<br />&nbsp; &nbsp;toldfe1&nbsp; &nbsp; 1.0d-12<br /><br />#DATASET2 : non scf calculation: GS WF in the whole BZ<br />#*****************************************************<br />&nbsp; &nbsp;getden2&nbsp; &nbsp; 1<br />&nbsp; &nbsp;kptopt2&nbsp; &nbsp; 2<br />&nbsp; &nbsp; &nbsp;iscf2&nbsp; &nbsp;-2<br />&nbsp; &nbsp;getwfk2&nbsp; &nbsp; 1<br />&nbsp; &nbsp;tolwfr2&nbsp; &nbsp; 1.0d-22<br />&nbsp; &nbsp; nband2&nbsp; &nbsp; 4<br /><br /><br />#DATASET3 : ddk on the MP grid of k-points<br />#*****************************************<br />&nbsp; &nbsp;getwfk3&nbsp; &nbsp; 2<br />&nbsp; &nbsp; rfdir3&nbsp; &nbsp; 1 1 1<br />&nbsp; &nbsp;rfelfd3&nbsp; &nbsp; 2<br />&nbsp; &nbsp;tolwfr3&nbsp; &nbsp; 1.0d-22<br />&nbsp; &nbsp; nband3&nbsp; &nbsp; 4<br />&nbsp; &nbsp;kptopt3&nbsp; &nbsp; 2<br /><br />#DATASET4 : ddE on the MP grid of k-points<br />#*****************************************<br />&nbsp; &nbsp;prtden4&nbsp; &nbsp; 1<br />&nbsp; &nbsp;getwfk4&nbsp; &nbsp; 2<br />&nbsp; &nbsp;getddk4&nbsp; &nbsp; 3<br />&nbsp; &nbsp; rfdir4&nbsp; &nbsp; 1 1 1<br />&nbsp; &nbsp;tolvrs4&nbsp; &nbsp; 1.0d-12<br />&nbsp; &nbsp;rfelfd4&nbsp; &nbsp; 3<br />&nbsp; &nbsp; nband4&nbsp; &nbsp; 4<br />&nbsp; &nbsp;kptopt4&nbsp; &nbsp; 2<br />&nbsp; prepanl4&nbsp; &nbsp; 1<br />&nbsp; sciss4&nbsp; &nbsp; &nbsp;0.03384&nbsp; &nbsp;#scissors operator<br />#DATASET5 : phonon&nbsp; calculation<br />#***************************<br />&nbsp; &nbsp;prtden5&nbsp; &nbsp; 1<br />&nbsp; &nbsp;getwfk5&nbsp; &nbsp; 2<br />&nbsp; &nbsp;getddk5&nbsp; &nbsp; 3<br />&nbsp; &nbsp; rfdir5&nbsp; &nbsp; 1 1 1<br />&nbsp; &nbsp;rfphon5&nbsp; &nbsp; 1<br />&nbsp; &nbsp;rfatpol5&nbsp; &nbsp; 1 2<br />&nbsp; &nbsp;tolvrs5&nbsp; &nbsp; 1.0d-12<br />&nbsp; &nbsp; nband5&nbsp; &nbsp; 4<br />&nbsp; &nbsp;kptopt5&nbsp; &nbsp; 2<br />&nbsp; prepanl5&nbsp; &nbsp; 1<br /><br />#DATASET6 : 3DTE calculation e-field<br />#***************************<br />&nbsp; &nbsp;getden6&nbsp; &nbsp; 1<br />&nbsp; get1den6&nbsp; &nbsp; 4<br />&nbsp; &nbsp;getwfk6&nbsp; &nbsp; 2<br />&nbsp; &nbsp;get1wf6&nbsp; &nbsp; 4<br />&nbsp; &nbsp; nband6&nbsp; &nbsp; 4<br />&nbsp; &nbsp;kptopt6&nbsp; &nbsp; 2<br />optdriver6&nbsp; &nbsp; 5<br />&nbsp; rf1elfd6&nbsp; &nbsp; 1<br />&nbsp; &nbsp;rf1dir6&nbsp; &nbsp; 1 1 1<br />&nbsp; &nbsp;rf2elfd6&nbsp; &nbsp; 1<br />&nbsp; &nbsp;rf2dir6&nbsp; &nbsp; 1 1 1<br />&nbsp; &nbsp;rf3elfd6&nbsp; &nbsp; 1<br />&nbsp; &nbsp;rf3dir6&nbsp; &nbsp; 1 1 1<br />&nbsp; &nbsp;sciss6&nbsp; &nbsp; &nbsp;0.03384&nbsp; &nbsp;#scissors operator<br /><br />#DATASET7 : 3DTE calculation phonon<br />#***************************<br />&nbsp; &nbsp;getden7&nbsp; &nbsp; 1<br />&nbsp; get1den7&nbsp; &nbsp; 5<br />&nbsp; &nbsp;getwfk7&nbsp; &nbsp; 2<br />&nbsp; &nbsp;get1wf7&nbsp; &nbsp; 5<br />&nbsp; &nbsp; nband7&nbsp; &nbsp; 4<br />&nbsp; &nbsp;kptopt7&nbsp; &nbsp; 2<br />optdriver7&nbsp; &nbsp; 5<br />&nbsp; rf1phon7&nbsp; &nbsp; 1<br />&nbsp; rf1atpol7&nbsp; &nbsp;1 2<br />&nbsp; rf1dir7&nbsp; &nbsp; 1 1 1<br /><br />nbdbuf 0<br /><br /><br />#%%&lt;BEGIN TEST_INFO&gt;<br />#%% &#91;setup&#93;<br />#%% executable = abinit<br />#%% test_chain = tnlo_2.in, tnlo_3.in, tnlo_4.in, tnlo_5.in<br />#%% &#91;files&#93;<br />#%% files_to_test = <br />#%%&nbsp; &nbsp;tnlo_2.out, tolnlines=&nbsp; 9, tolabs=&nbsp; 6.500e-07, tolrel=&nbsp; 6.000e-05<br />#%% psp_files =&nbsp; 13al.pspnc, 33as.pspnc<br />#%% &#91;paral_info&#93;<br />#%% max_nprocs = 1<br />#%% &#91;extra_info&#93;<br />#%% authors = <br />#%% keywords = NC, DFPT<br />#%% description = <br />#%%&lt;END TEST_INFO&gt;<br /></code></pre></div><br />                                                                                                                                              RC Xiao<br />                                                                                                                        Chinese Academy of Sciences</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to set &quot;sciss&quot; correction on the nonlinear optical ?</h3>
+				<div class="date">Posted: <strong>Fri Apr 11, 2014 11:27 am</strong></div>
+				<div class="author">by <strong>Ruichun xiao</strong></div>
+				<div class="content">When I set a sciss correction in dataset 4 and dataset 5,the nonlinear optical susceptibility value decrease as the reference said . But the still not agree with the experiment value ,this time the value is smaller than the experiment value!<br /> So I don't know what to do!  I need your help!!!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to set &quot;sciss&quot; correction on the nonlinear optical ?</h3>
+				<div class="date">Posted: <strong>Wed Jul 30, 2014 1:33 pm</strong></div>
+				<div class="author">by <strong>hdjani</strong></div>
+				<div class="content">Hi,<br />The scissors correction can lead to a more important discrepancy with the experimental results than without Scissors. As<br />discussed in refs: Phys. Rev. B , 2005, 71, 125107.  and  J. Phys.Chem. C, 2014, 118(25); pp.13514-13524.<br />This is not necessarily unusual since various errors (like the LDA volume underestimate) can also significantly affect the values of dNLO. The amplitude of the dij(NLO)<br />scissors correction can be considered as a rough estimate of the theoretical uncertainty.<br />Cheers<br />H. Djani</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=2632&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:34:29 GMT -->
+</html>

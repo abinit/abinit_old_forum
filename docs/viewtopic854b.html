@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=854&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:02:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [NOT A BUG] berryphase BUG</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[NOT A BUG] berryphase BUG</h2>
+		<p><a href="viewtopic43ae.html?f=10&amp;t=854">https://forum.abinit.org/viewtopic.php?f=10&amp;t=854</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[NOT A BUG] berryphase BUG</h3>
+				<div class="date">Posted: <strong>Sat Jan 22, 2011 12:58 am</strong></div>
+				<div class="author">by <strong>kadants</strong></div>
+				<div class="content">Hi, <br />I am trying to do a finite electric field calculation on system with 2D periodicity (x,y). <br />I create a supercell (large lattice vector along z) and sample the k-space in z-direction with G-point only. <br />The electric field is applied in z-direction, the abinit tries to evalute zero electric field berry phase at <br />some crazy vector  0.00000  0.00000 44.15011 and then crushes. I don't understand why, could <br />you help me out, please<br />***********************************************<br /> Computing the polarization (Berry phase) for reciprocal vector:<br />  0.00000  0.00000********* (in reduced coordinates)<br />  0.00000  0.00000 44.15011 (in cartesian coordinates - atomic units)<br /> Number of strings:     9<br /> Number of k points in string:    1<br /><br /> berryphase_new : BUG -<br />  For k-point #    1,<br />  the determinant of the overlap matrix is found to be 0.<br />  Action : contact ABINIT group.<br /><br />.Delivered    8 WARNINGs and   2 COMMENTs to log file.<br /> leave_new : decision taken to exit ...<br />*******************<br />INPUT file<br />cat &gt; MS2.in &lt;&lt; EOF<br />acell 1.0 1.0 1.0      # <br />rprim  2.95  -5.1095498823281877  0.0<br />       2.95   5.1095498823281877  0.0<br />       0.0 0.0 22.65     # dimension in z<br />                         #                       <br /><br />#Definition of the atom types<br />ntypat 2          # There are two types of atoms<br />znucl 42 16       # The keyword &quot;znucl&quot; refers to the atomic number of the<br />                  # possible type(s) of atom. The pseudopotential(s)<br />                  # mentioned in the &quot;files&quot; file must correspond<br />                  # to the type(s) of atom. Here, the only type is Silicon.<br /><br /><br />#Definition of the atoms<br />natom 6           # There are two atoms<br />typat 2*1         #<br />      4*2         # one As<br />xred              # This keyword indicate that the location of the atoms<br />  0.33333333333333333333 0.66666666666666667 0.25<br />  0.66666666666666666667 0.33333333333333333 0.75<br />  0.33333333333333333333 0.66666666666666667 0.62<br />  0.66666666666666666667 0.33333333333333333 0.12<br />  0.66666666666666666667 0.33333333333333333 0.38<br />  0.33333333333333333333 0.66666666666666667 0.88<br /><br />  <br />#Definition of the planewave basis set<br />ecut  5         # Maximal kinetic energy cut-off, in Hartree<br /><br />#Definition of the k-point grid<br />kptopt 1          # Option for the automatic generation of k points, taking<br />                  # into account the symmetry<br />ngkpt  3 3 1     # <br />nshiftk 1         # of the reciprocal s<br />                  # repeated four times, with different shifts :<br />shiftk 0.0 0.0 0.0<br /><br />#Definition of the SCF procedure<br />nband 26<br />nstep 100         # Maximal number of SCF cycles<br />toldfe 1.0d-6     # Will stop when, twice in a row, the difference<br />                  # between two consecutive evaluations of total energy<br />                  # differ by less than toldfe (in Hartree)<br />diemac 12.0       # Although this is not mandatory, it is worth to<br />                  # precondition the SCF cycle. The model dielectric<br />                  # function used as the standard preconditioner<br />                  # is described in the &quot;dielng&quot; input variable section.<br /><br />ndtset 2 <br />jdtset 11 <br />   21 <br /><br />berryopt11 -1 rfdir11 0 0 1<br /><br />berryopt21 4 efield21 0.0 0.0 0.001 getwfk21 11<br /><br />nbdbuf 0</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: berryphase BUG</h3>
+				<div class="date">Posted: <strong>Sat Jan 22, 2011 12:55 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">This isn't a bug, you are asking the code to work in a way that it's not designed to work. In the calculation you're trying to do, the polarization is evaluated by doing phase integrals along strings of k points in the fundamental directions of the k mesh. The object being integrated is the overlap of wavefunctions at neighboring k points, that is, &lt;u_nk|u_n{k+b}&gt; where b is the increment in k space. For this procedure to be well-founded the k mesh can't be too coarse (or too fine, it turns out, but in practice it's not easy to reach that limit). When you only allow one k point in a given direction then the overlap integrals don't really make sense. You should try the calculation with rfdir 1 1 1 and also with a denser k point mesh in all directions. I'm still not sure this will work because this entire algorithm may not be appropriate for surfaces, someone else will have to comment on that.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: berryphase BUG</h3>
+				<div class="date">Posted: <strong>Mon Jan 24, 2011 1:00 am</strong></div>
+				<div class="author">by <strong>kadants</strong></div>
+				<div class="content">Dear prof. Zwanziger, <br />thank you for your response, is there any way to do finite electric field caclulations for 2D systems?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [NOT A BUG] berryphase BUG</h3>
+				<div class="date">Posted: <strong>Wed Jun 19, 2013 3:01 pm</strong></div>
+				<div class="author">by <strong>orubel</strong></div>
+				<div class="content">I met the same problem when calculating the Berry phase for a graphene oxide sheet (also using 1 k-point, because the supecell was large). Nevertheless, The Berry phase calculations work fine for a single water molecule in a box with 1 k-point only.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=854&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:02:12 GMT -->
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=3363&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:32:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Boltztrap-STOP error in factorization</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Boltztrap-STOP error in factorization</h2>
+		<p><a href="viewtopic7bc9.html?f=14&amp;t=3363">https://forum.abinit.org/viewtopic.php?f=14&amp;t=3363</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Boltztrap-STOP error in factorization</h3>
+				<div class="date">Posted: <strong>Mon Aug 29, 2016 11:34 am</strong></div>
+				<div class="author">by <strong>Janpreet Sidhu</strong></div>
+				<div class="content">Hello<br />Im using Abinit Code for band structure calculations. To calculate transport properties using Boltztrap code, i have printed input files for Boltztrap code using following input in Abinit: <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#defination of k -point grid<br />kptopt1 4<br />ngkpt1 6&nbsp; 6 2<br />prtden1&nbsp; 1<br />toldfe1 5.0d-7<br /><br />#Dataset 2 : <br />prtbltztrp2 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# boltztrap output<br />iscf2&nbsp; &nbsp; -2<br />getden2&nbsp; -1<br />kptopt2&nbsp; 4<br />ngkpt2 12 12 4<br />nband2&nbsp; &nbsp;80<br />tolwfr2&nbsp; 1.0d-12</code></pre></div><br /><br />After this four files have been generated, viz. .ns_energyso, .struct, .def and .intrans. (attached here)<br /><br />when i run Boltztrap code. using<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../../../../src/x_trans BoltzTraP -so</code></pre></div><br />then on terminal display:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;================ BoltzTraP vs 1.2.5 =============<br />STOP error in factorization<br />11.2u 0.0s 0:11.40 98.6% 0+0k 10720+16io 16pf+0w<br /></code></pre></div><br />When i checked .outputtrans file, the calculation stopped at <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;Allocating engre...<br />&nbsp;engre allocated<br />&nbsp;About to enter fite4...<br />fite4 matrix setup:&nbsp; &nbsp; &nbsp;0.192<br />&nbsp;inf =&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1</code></pre></div><br />From file fite4.F90 in src folder of Boltztrap source code, <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp; WRITE(6,'(A,f10.3)') 'fite4 matrix setup:',t2-t1<br />!&nbsp; print*,'xx',SUM(hmat)<br />! LU factorization of hmat matrix, kept in 2 triangular blocks of the matrix<br />&nbsp; CALL DGETRF(bs%nkpt-1,bs%nkpt-1,hmat,bs%nkpt-1,ipiv,inf)<br />!&nbsp; print*,'xx',SUM(hmat)<br />&nbsp; write (6,*) 'inf = ', inf<br />&nbsp; IF(inf/=0) STOP 'error in factorization'</code></pre></div><br />Boltztrap's output file .outputtrans also attached.<br />There is a problem in LU factorization of matrix. In my case, the value <strong class="text-strong">inf</strong> is 1, it means U(1,1) element in Upper matrix (U) is zero. Now further I am unable to solve this problem. <br /><ul>1. How the U(1,1) element can be non-zero?</ul><ul>2. For spin-orbit coupling calculation kptopt = 4 is used. Is it the reason for error?</ul>Boltztrap code itself has no forum, I want to discuss with Abinit developers and users.  If any more information required, please ask.<br /><br />Janpreet Sidhu<br />Panjab University<br />Chandigarh<br />India</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=3363&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:32:05 GMT -->
+</html>

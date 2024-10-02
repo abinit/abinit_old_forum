@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=3368&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:04:30 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Free Energies from ANADDB</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Free Energies from ANADDB</h2>
+		<p><a href="viewtopic0724.html?f=12&amp;t=3368">https://forum.abinit.org/viewtopic.php?f=12&amp;t=3368</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Free Energies from ANADDB&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Thu Sep 01, 2016 10:33 pm</strong></div>
+				<div class="author">by <strong>ckunka</strong></div>
+				<div class="content">I want to calculate free energies of a covalent, periodic system. I see that the anaddb has the &quot;thmlflg,&quot; which provides phonon free energy, phonon internal energy, and phonon entropy:<br /><!-- m --><a class="postlink" href="http://www.abinit.org/doc/helpfiles/for-v8.0/users/anaddb_help.html#thmflag">http://www.abinit.org/doc/helpfiles/for ... ml#thmflag</a><!-- m --><br /><br />I used the tnol_2, tnlo_3, and tnlo_5 templates to calculate Raman susceptibilities and notice that tnlo_5 contains this thmlflg. However, when running with thmlflg = 1, my output does not change, and I don't get an error: <br /><!-- m --><a class="postlink" href="http://www.abinit.org/doc/helpfiles/for-v7.2/tutorial/lesson_nlo.html">http://www.abinit.org/doc/helpfiles/for ... n_nlo.html</a><!-- m --><br /><br />I also see that the second tutorial on response functions mentions free energy in part 6, but I was hoping to use the tnlo_5 method:<br /><!-- m --><a class="postlink" href="http://www.abinit.org/doc/helpfiles/for-v7.10/tutorial/lesson_rf2.html">http://www.abinit.org/doc/helpfiles/for ... n_rf2.html</a><!-- m --><br /><br />Do I need to provide more information in the tnlo_5.in for the thmflg to work?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Free Energies from ANADDB</h3>
+				<div class="date">Posted: <strong>Fri Sep 02, 2016 8:46 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Dear ckunka,<br /><br />Indeed, you cannot obtain thermal properties from this kind of calculation. It calculates only the phonons at the Gamma point, which is not enough. For the thermal properties one need the phonon DOS, and for that one needs to sample the phonons throughout the BZ (as in RF2 tutorial). There is a paper by Lee and Gonze (Ab initio calculation of the thermodynamic properties and atomic temperature factors of SiO2 α-quartz and stishovite, Phys. Rev. B 51, 8610 (1995)) which talks about that.<br /><br />So, if you want the thermal properties, you will have to go 'the hard way'.<br /><br />Best regards,<br /><br />Igor</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=3368&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:04:30 GMT -->
+</html>

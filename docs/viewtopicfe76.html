@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=292&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:35:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; phonon</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>phonon</h2>
+		<p><a href="viewtopic041f.html?f=10&amp;t=292">https://forum.abinit.org/viewtopic.php?f=10&amp;t=292</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>phonon</h3>
+				<div class="date">Posted: <strong>Wed Apr 07, 2010 6:53 am</strong></div>
+				<div class="author">by <strong>bmalvandi</strong></div>
+				<div class="content">hello<br />I want to calculate the phonon for LaCoO3 but not in cubic structure, I want to calculate it in rhombohedral phase<br />but  i don't know how the input variables change?<br />please help me<br />thanks<br /><br />#Response-function calculation, with q=0<br />  rfphon   1            # Will consider phonon-type perturbation<br /> rfatpol   1 2          # All the atoms will be displaced<br />   rfdir   1 1 1        # Along all reduced coordinate axis<br />    nqpt   1            # One wavevector is to be considered<br />     qpt   0 0 0        # This wavevector is q=0 (Gamma)<br />  kptopt   2            # Automatic generation of k points, taking<br />                        # into account the time-reversal symmetry only<br />  tolvrs   1.0d-8       # SCF stopping criterion<br />    iscf   5            # Self-consistent calculation, using algorithm 5<br />  irdwfk   1            # Read the ground-state wavefunctions</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: phonon</h3>
+				<div class="date">Posted: <strong>Thu Apr 29, 2010 5:13 pm</strong></div>
+				<div class="author">by <strong>boudali</strong></div>
+				<div class="content">Does the entry sheet is exact.Il stops before completing the output file.<br />thank you<br /># Crystalline LaAlO3 : computation of the response to homogeneous<br /># electric field and atomic displacements, at q=0<br />#<br /><br />  ndtset  3<br /><br />#Ground state calculation<br />  kptopt1   1             # Automatic generation of k points, taking<br />                          # into account the symmetry<br />  tolvrs1   1.0d-18       # SCF stopping criterion<br />    iscf1   5             # Self-consistent calculation, using algorithm 5<br /><br />#Response Function calculation : d/dk<br />  rfelfd2   2             # Activate the calculation of the d/dk perturbation<br />   rfdir2   1 0 0         # Need to consider the perturbation in the x-direction only<br />                          # This is rather specific, due to the high symmetry of the AlAs crystal<br />                          # In general, just use rfdir 1 1 1<br />                          # In the present version of ABINIT (v4.6), symmetry cannot be used<br />                          # to reduce the number of ddk perturbations<br /><br />    nqpt2   1<br />     qpt2   0.0 0.0 0.0   # This is a calculation at the Gamma point<br /><br />  getwfk2   -1            # Uses as input the output wf of the previous dataset<br /><br />  kptopt2   2             # Automatic generation of k points,<br />                          # using only the time-reversal symmetry to decrease<br />                          # the size of the k point set.<br /><br />    iscf2  -3             # The d/dk perturbation must be treated <br />                          # in a non-self-consistent way<br />  tolwfr2   1.0d-22       # Must use tolwfr for non-self-consistent calculations<br />                          # Here, the value of tolwfr is very low.<br /><br />#Response Function calculation : electric field perturbation and phonons<br />  rfphon3   1             # Activate the calculation of the atomic dispacement perturbations<br /> rfatpol3   1 2           # All the atoms will be displaced<br />  rfelfd3   3             # Activate the calculation of the electric field perturbation<br />   rfdir3   1 1 1         # All directions are selected. However, symmetries will be used to decrease<br />                          # the number of perturbations, so only the x electric field is needed<br />                          # (and this explains why in the second dataset, rfdir was set to 1 0 0).<br /><br />    nqpt3   1<br />     qpt3   0.0 0.0 0.0   # This is a calculation at the Gamma point<br /><br />  getwfk3   -2            # Uses as input wfs the output wfs of the dataset 1<br />  getddk3   -1            # Uses as input ddk wfs the output of the dataset 2<br /><br />  kptopt3   2             # Automatic generation of k points,<br />                          # using only the time-reversal symmetry to decrease<br />                          # the size of the k point set.<br />  tolvrs3   1.0d-8<br />    iscf3   5             # Self-consistent calculation, using algorithm 5<br /><br /><br />#######################################################################<br />#Common input variables<br /><br />#Definition of the unit cell<br /><br />acell     1.0164647896E+01  1.0272740231E+01  1.4435239984E+01 Bohr<br /><br />rprim     1.0000000000E+00  0.0000000000E+00  0.0000000000E+00<br />          0.0000000000E+00  1.0000000000E+00  0.0000000000E+00<br />          0.0000000000E+00  0.0000000000E+00  1.0000000000E+00<br />#Definition of the atom types<br /><br />ntypat  3               # There are two types of atom<br />znucl  57 13  8         # The keyword &quot;znucl&quot; refers to the atomic number of the <br />                       # possible type(s) of atom. The pseudopotential(s) <br />                       # mentioned in the &quot;files&quot; file must correspond<br />                       # to the type(s) of atom. Here, type 1 is the Aluminum,<br />                       # type 2 is the Arsenic.<br /><br />#Definition of the atoms<br /><br />natom  20<br /><br />typat  1 1 1 1 2 2 2 2 3 3 3 3 3 3 3 3 3 3 3 3<br /><br />xred          1.0782632134E-03  2.7532471986E-07  2.5000000000E-01<br />              5.0107826321E-01  4.9999972468E-01 -2.5000000000E-01<br />             -1.0782632134E-03 -2.7532471975E-07  7.5000000000E-01<br />              4.9892173679E-01  5.0000027532E-01  2.5000000000E-01<br />              5.0000000000E-01  5.5511151231E-17  0.0000000000E+00<br />              1.0000000000E+00  5.0000000000E-01  0.0000000000E+00<br />             -5.0000000000E-01  5.5511151231E-17  5.0000000000E-01<br />             -1.3877787808E-17  5.0000000000E-01  5.0000000000E-01<br />              2.4999864940E-01  2.5000215779E-01  2.0158647769E-02<br />              7.4999864940E-01  2.4999784221E-01 -2.0158647769E-02<br />             -2.4999864940E-01 -2.5000215779E-01  5.2015864777E-01<br />              2.5000135060E-01  7.5000215779E-01  4.7984135223E-01<br />             -2.4999864940E-01 -2.5000215779E-01 -2.0158647769E-02<br />              2.5000135060E-01  7.5000215779E-01  2.0158647769E-02<br />              2.4999864940E-01  2.5000215779E-01  4.7984135223E-01<br />              7.4999864940E-01  2.4999784221E-01  5.2015864777E-01<br />              5.3919168635E-01 -1.4814265884E-08  2.5000000000E-01<br />              1.0391916864E+00  5.0000001481E-01 -2.5000000000E-01<br />             -5.3919168635E-01  1.4814265981E-08  7.5000000000E-01<br />             -3.9191686353E-02  4.9999998519E-01  2.5000000000E-01<br /><br />#Gives the number of band, explicitely (do not take the default)<br />nband   67              # For an insulator (if described correctly as an insulator <br />                       # by DFT), there is no need to include conduction bands <br />                       # in response-function calculations<br /><br />#Exchange-correlation functional<br />ixc      23<br /><br />#Definition of the planewave basis set<br />ecut    3.0<br /><br />#Definition of the k-point grid<br />kptrlatt  6  0  0   0  6  0   0  0  4<br /><br />#Definition of the SCF procedure<br /><br />nstep  20<br />diemac 6.0</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=292&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:35:41 GMT -->
+</html>

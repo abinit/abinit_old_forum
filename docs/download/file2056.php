@@ -1,0 +1,23 @@
+trf2_3.ddb.out
+AlAs phonons on 2 4 4 mesh
+18
+trf2_1o_DS3_DDB
+trf2_1o_DS4_DDB
+trf2_1o_DS5_DDB
+trf2_1o_DS6_DDB
+trf2_1o_DS7_DDB
+trf2_1o_DS8_DDB
+trf2_1o_DS9_DDB
+trf2_1o_DS10_DDB
+trf2_1o_DS11_DDB
+trf2_1o_DS12_DDB
+trf2_1o_DS13_DDB
+trf2_1o_DS14_DDB
+trf2_1o_DS15_DDB
+trf2_1o_DS16_DDB
+trf2_1o_DS17_DDB
+trf2_1o_DS18_DDB
+trf2_1o_DS19_DDB
+trf2_1o_DS20_DDB
+
+

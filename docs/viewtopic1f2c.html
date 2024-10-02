@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2130&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:39:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; abinit 7.2.1 with openmpi</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>abinit 7.2.1 with openmpi</h2>
+		<p><a href="viewtopicb552.html?f=3&amp;t=2130">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2130</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>abinit 7.2.1 with openmpi</h3>
+				<div class="date">Posted: <strong>Sat May 11, 2013 2:40 pm</strong></div>
+				<div class="author">by <strong>weitong</strong></div>
+				<div class="content">My OS is CentOS6.4. Openmpi is installed with yum.<br />My installation procedure is following:<br />1. download plugins into ~/.abnint/tarballs<br />2. eneter folder abinit-7.2.1<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>$ ./configure --enable-mpi&nbsp; --with-mpi-prefix=/usr/lib64/openmpi/bin --with-tardir=/home/weitong/.abinit/tarballs/</code></pre></div><br />==============================================================================<br /> === Final remarks                                                          ===<br /> ==============================================================================<br /><br /><br />Summary of important options:<br /><br />  * C compiler      : gnu version 4.4<br />  * Fortran compiler: gnu version 4.4<br />  * architecture    : unknown unknown (64 bits)<br /><br />  * debugging       : basic<br />  * optimizations   : standard<br /><br />  * OpenMP enabled  : no (collapse: ignored)  <span style="color: #FF0000"> // What does it mean here?</span><br />  * MPI    enabled  : yes<br />  * MPI-IO enabled  : no<br />  * GPU    enabled  : no (none)<br /><br />  * TRIO   flavor = netcdf-fallback+etsf_io-fallback<br />  * TIMER  flavor = abinit (libs: ignored)<br />  * LINALG flavor = netlib (libs: auto-detected)<br />  * ALGO   flavor = none (libs: ignored)<br />  * FFT    flavor = none (libs: ignored)<br />  * MATH   flavor = none (libs: ignored)<br />  * DFT    flavor = libxc-fallback+atompaw-fallback+bigdft-fallback+wannier90-fallback<br /><br />Configuration complete.<br />You may now type &quot;make&quot; to build ABINIT.<br />(or, on a SMP machine, &quot;make mj4&quot;, or &quot;make multi multi_nprocs=&lt;n&gt;&quot;)<br /><br />3. then make<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>$ make mj4</code></pre></div><br />included in m_profiling.F90：18 :<br />../../config.h:666: error：#error &quot;HAVE_MPI1 and HAVE_MPI2 are both undefined&quot;<br />m_profiling.F90:275: Error: Can't open included file 'mpif.h'<br />included in interfaces_11_memory_mpi.F90：24 :<br />../../config.h:666: error：#error &quot;HAVE_MPI1 and HAVE_MPI2 are both undefined&quot;<br />make[5]: *** [m_profiling.o] error 1<br />make[5]: *** waiting for unfinished jjob....<br />make[5]: Leaving directory `/home/weitong/downloads/abinit-7.2.1/src/11_memory_mpi'<br />make[4]: *** [all-recursive] error 1<br />make[4]: Leaving directory `/home/weitong/downloads/abinit-7.2.1/src'<br />make[3]: *** [all-recursive] error 1<br />make[3]: Leaving directory `/home/weitong/downloads/abinit-7.2.1'<br />make[2]: *** [all] error 2<br />make[2]: Leaving directory `/home/weitong/downloads/abinit-7.2.1'<br />make[1]: *** [multi] error 2<br />make[1]: Leaving directory `/home/weitong/downloads/abinit-7.2.1'<br />make: *** [mj4] error 2<br /><br /><span style="color: #4040FF">Then I searched &quot;mpif.h&quot;.  it is locates in /usr/include/openmpi-x86_84.</span><br /><br /><span style="color: #FF4000">What is the solution? Thanks</span><br /><br />WT</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 7.2.1 with openmpi</h3>
+				<div class="date">Posted: <strong>Sat May 11, 2013 3:40 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Try with<br /><br /> ./configure  --with-mpi-prefix=/usr/lib64/openmpi/ --with-tardir=/home/weitong/.abinit/tarballs/<br /><br /><blockquote class="uncited"><div>* OpenMP enabled : no (collapse: ignored) // What does it mean here?<br /></div></blockquote><br /><br />It simply means that OpenMP support (threads for shared memory architectures) is not enabled.<br />Note that OpenMP is by no means related to openmpi (MPI) albeit their names are similar.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 7.2.1 with openmpi</h3>
+				<div class="date">Posted: <strong>Sat May 11, 2013 5:06 pm</strong></div>
+				<div class="author">by <strong>weitong</strong></div>
+				<div class="content">After this configure,<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure --with-mpi-prefix=/usr/lib64/openmpi/ --with-tardir=/home/weitong/.abinit/tarballs/</code></pre></div><br />Make can be completed.<br />But configure (without --enable-mpi)  results in<br /><span style="color: #FF0000">  * MPI    enabled  : no</span><br />Is this OK?<br /> <br /><br />Thanks.<br />WT</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 7.2.1 with openmpi</h3>
+				<div class="date">Posted: <strong>Sat May 11, 2013 5:26 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Could you post the log file config.log?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 7.2.1 with openmpi</h3>
+				<div class="date">Posted: <strong>Sat May 11, 2013 6:05 pm</strong></div>
+				<div class="author">by <strong>weitong</strong></div>
+				<div class="content">With this configure (with option &quot;--enable-mpi&quot;), I get the following error.<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>$ ./configure --enable-mpi --with-mpi-prefix=/usr/lib64/openmpi/ --with-tardir=/home/weitong/.abinit/tarballs</code></pre></div><br /><br /><span style="color: #0000FF">checking for gcc... /usr/lib64/openmpi//bin/mpicc<br />checking whether the C compiler works... yes<br />checking for C compiler default output file name... a.out<br />checking for suffix of executables... <br />checking whether we are cross compiling... configure: error: in `/home/weitong/setup/abinit/abinit-7.2.1':<br />configure: error: cannot run C compiled programs.<br />If you meant to cross compile, use `--host'.<br />See `config.log' for more details</span><br /><br /><span style="color: #FF0000">config.log is attached.</span></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 7.2.1 with openmpi</h3>
+				<div class="date">Posted: <strong>Sat May 11, 2013 7:01 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">./conftest: error while loading shared libraries: libmpi.so.1: cannot open shared object file: No such file or directory<br />configure:10822: $? = 127<br /><br />I guess the library is located in  /usr/lib64/openmpi/lib but this directory in not known to the the linker.<br /><br />Try with<br />export LD_LIBRARY_PATH=/usr/lib64/openmpi/lib:$LD_LIBRARY_PATH</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 7.2.1 with openmpi&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Sun May 12, 2013 8:18 am</strong></div>
+				<div class="author">by <strong>weitong</strong></div>
+				<div class="content">I tried. <br />Yes, it does work with <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>export LD_LIBRARY_PATH=/usr/lib64/openmpi/lib:$LD_LIBRARY_PATH</code></pre></div>.  <br /><br />Thanks, gmatteo!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] abinit 7.2.1 with openmpi</h3>
+				<div class="date">Posted: <strong>Sat Jun 15, 2013 8:52 pm</strong></div>
+				<div class="author">by <strong>cengiz</strong></div>
+				<div class="content">hi<br />i have same problem too but<br /> although i enter this code export LD_LIBRARY_PATH=/usr/lib64/openmpi/lib:$LD_LIBRARY_PATH <br />same problem still exist.<br /><br />i am adding config.log file</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2130&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:39:12 GMT -->
+</html>

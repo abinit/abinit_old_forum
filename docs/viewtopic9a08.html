@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2659&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:55:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Ferromagnetic and Berry Phase calculation</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Ferromagnetic and Berry Phase calculation</h2>
+		<p><a href="viewtopic474b.html?f=9&amp;t=2659">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2659</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Ferromagnetic and Berry Phase calculation</h3>
+				<div class="date">Posted: <strong>Fri May 09, 2014 6:41 pm</strong></div>
+				<div class="author">by <strong>jfnossa</strong></div>
+				<div class="content">Hi,<br />I wonder whether or not it is possible to do a berry phase calculation for a ferromagnetic system. <br />I am getting and error that says:<br />&quot;the number of bands is not the same for every k-point&quot;. <br />How can I assure the number of bans is the same for each k-point?<br />Thanks!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Ferromagnetic and Berry Phase calculation</h3>
+				<div class="date">Posted: <strong>Sat May 10, 2014 5:29 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">I suspect it's not the type of spin-order that's a problem here, it's that your system may be metallic. The entire berryphase theory is predicated on the assumption that the system is an insulator, and that you are only treating the occupied bands.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Ferromagnetic and Berry Phase calculation</h3>
+				<div class="date">Posted: <strong>Mon May 12, 2014 4:26 am</strong></div>
+				<div class="author">by <strong>jfnossa</strong></div>
+				<div class="content">Dear jzwanzig,<br />Thank you very much for your replay.<br />My system is not metallic, it is a ferromagnetic insulator. <br />I am working with nsppol=2, I have 317 valence electrons. <br />The calculation does not even start, it crashes when checking the number of bands in initberry.F90 (line 462).<br />I compared dtefieldnband_occ with nband_occ_k and got this:<br />    dtefieldnband_occ: 159<br />    nband_occ_k:158<br />My latest try was that I modified the number of valence electrons in the pseudopotentials to 316 (which is wrong, but i did it just to check if it could solve be the problem,  notice that dtefieldnband_occ+nband_occ_k=317) and it started the calculation.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Ferromagnetic and Berry Phase calculation</h3>
+				<div class="date">Posted: <strong>Tue May 13, 2014 7:49 pm</strong></div>
+				<div class="author">by <strong>jfnossa</strong></div>
+				<div class="content">Dear Professor Zwanziger,<br />The question is whether or not abinit has the capability to do spin polarized Berry's phase.<br />For a ferromagnetic system the up nband will be different from the down nband. <br /><br />Thanks!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Ferromagnetic and Berry Phase calculation</h3>
+				<div class="date">Posted: <strong>Thu May 15, 2014 11:00 am</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Yes, berryopt works for nsppol /= 1 although not for parallel processing.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Ferromagnetic and Berry Phase calculation</h3>
+				<div class="date">Posted: <strong>Mon May 19, 2014 4:42 pm</strong></div>
+				<div class="author">by <strong>recohen</strong></div>
+				<div class="content">I know it works for antiferromagnetic (AFM) with nsppol /= 1 (I think even in parallel) but it doesn’t seem to in a ferromagnetic system. The problem is that nband_up and nband_down are different. It doesn’t seem ABINIT has the facility to deal with this case. Is that correct? If not, how do you set nband_up and nband_down differently. It seems to want a single number.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Ferromagnetic and Berry Phase calculation</h3>
+				<div class="date">Posted: <strong>Mon May 19, 2014 5:21 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Currently the code requires the occupation for a given band to be identical at every k point, so I'm not sure whether it will work for the ferromagnetic insulator case. Have you tried it with nspinor 2 (rather than nsppol 2)?</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2659&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:55:32 GMT -->
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1814&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:58:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Noise in uppermost bands</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Noise in uppermost bands</h2>
+		<p><a href="viewtopicf08a-2.html?f=9&amp;t=1814">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1814</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Noise in uppermost bands</h3>
+				<div class="date">Posted: <strong>Wed Aug 29, 2012 11:09 am</strong></div>
+				<div class="author">by <strong>paulfons</strong></div>
+				<div class="content">Greetings All,<br />  I wish to use spin-orbit coupling for some Berry phase calculations on some complicated structures so I have been becoming familiar with the HGH PS.  I can turn on and off SOC and get a reasonable band structure.  I have done convergence studies on the HGH PS for Ga and As and understand these as well.  I used the rhombohedral primitive cell with 3 valence electrons on Ga and 5 on As for a total of ten electrons/primitive cell.  I used a MP grid for the attached file of 24x24x24 with the face centering shifts (a wastefully large grid) and a ecut of 45 Hartrees (again a little better than needed) and plotted the band structure using 14 bands.  If you look at the attached pdf of the structure, you can see my puzzlement.  The top most (empty) band seems very noisy.  Does anyone have any idea where this comes from or even better how to get rid of it?  I note that turning off the SOC and using the same HGH PS does not suffer from noise in the top most band.  Any ideas.  I have attached my calculation input as well for reference.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Noise in uppermost bands</h3>
+				<div class="date">Posted: <strong>Thu Aug 30, 2012 10:01 am</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hi,<br /><br />Usually the last bands of the calculations are more difficult to converge and you can get such noise in the band structures. By the way, does abinit tell you that you are converged for these bands ? Because I would suspect that the wavefunction residual for these bands is not fulfilling your convergence criterium (tolwfr)<br /><br />What you can do is increase a little bit the number of bands that you want to calculate and not show the last ones. Also, you can specify a &quot;buffer&quot; of band thx to the nbdbuf variable. This buffer of bands will not be used in the convergence check.<br /><br />Try for example with nband2 24 nbdbuf2 2 so that you should have 22 converged bands.<br /><br />David</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Noise in uppermost bands</h3>
+				<div class="date">Posted: <strong>Fri Aug 31, 2012 12:10 am</strong></div>
+				<div class="author">by <strong>paulfons</strong></div>
+				<div class="content">Thank you for your comment David,<br />  To address your question, yes the GaAs SOC calculations converged.  In addition, the calculations were also converged with respect to k and Etot. The SCF convergence criteria was toldfe (results pasted below).  I tried many things including very large k-mesh values as well as large values of Etot as well as trying smearing, but the numerical instability just the topmost band seemed to persist regardless of what I did.<br /><br />&gt;   At SCF step    9, etot is converged : <br />&gt;   for the second time, diff in etot=  5.507E-14 &lt; toldfe=  1.000E-12<br /><br /><br />Another thing that I noticed and I initially thought of including in the first message was that the numerical instability in the top band was not present (for my GaAs case) when I turned off spin-orbit coupling (e.g. nspinor 2 -&gt; nspinor 1).  Any thoughts on this observation?<br /><br /><br />Cheers,<br />           Paul</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Noise in uppermost bands</h3>
+				<div class="date">Posted: <strong>Mon Sep 10, 2012 7:22 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Converging the total energy (toldfe) for the ground state is a pretty mild condition. You might try for the ground state using tolvrs 1.0D-18 for the convergence parameter, and then for the non-self-consistent calculation, use tolwfr 1.0D-20 (anyway, that's how I usually do these things).</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1814&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:58:58 GMT -->
+</html>

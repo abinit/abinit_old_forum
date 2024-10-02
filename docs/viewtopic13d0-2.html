@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=248&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] memory</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] memory</h2>
+		<p><a href="viewtopica71e.html?f=9&amp;t=248">https://forum.abinit.org/viewtopic.php?f=9&amp;t=248</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] memory</h3>
+				<div class="date">Posted: <strong>Tue Apr 13, 2010 2:58 pm</strong></div>
+				<div class="author">by <strong>bmalvandi</strong></div>
+				<div class="content">hello <br />I have an important question about memory<br />I ran lesson 41 for LaCoO3 with this inputs<br /><br /># Crystalline LaCoO3(rhombohedral) : optimization of the lattice parameter<br /># at fixed number of k points and broadening.<br /><br />#Definition of occupation numbers<br />occopt 4<br />tsmear 0.05<br /><br />#Definition of the unit cell<br />acell 3*10.163           # This is equivalent to   7.60 7.60 7.60<br />#rprim  0.0  0.5  0.5   # FCC primitive vectors (to be scaled by acell)<br />#       0.5  0.0  0.5 <br />#       0.5  0.5  0.0<br /><br />#Optimization of the lattice parameters<br />optcell 2<br />ionmov  3<br />ntime  10<br />dilatmx 2.50<br />ecutsm  0.1<br /><br />#Definition of the atom types<br />ntypat 3          # There is only one type of atom<br />znucl 57 27 8     # The keyword &quot;znucl&quot; refers to the atomic number of the <br />                  # possible type(s) of atom. The pseudopotential(s) <br />                  # mentioned in the &quot;files&quot; file must correspond<br />                  # to the type(s) of atom. Here, the only type is Aluminum<br />                         <br /><br />#Definition of the atoms<br />natom 10                        # There are two atoms<br />typat 1 1 2 2 3 3 3 3 3 3       # They both are of type 1, that is, Hydrogen<br />xcart                           # This keyword indicate that the location of the atoms<br />    0.2500  0.2500  0.2500      # will follow, one triplet of number for each atom<br />    0.7500  0.7500  0.7500      # Triplet giving the cartesian coordinates of atom 1, in Bohr<br />    0.0000  0.0000  0.0000      # Triplet giving the cartesian coordinates of atom 2, in Bohr<br />    0.5000  0.5000  0.5000<br />    0.1982  0.3018  0.7500<br />    0.8018  0.6982  0.2500<br />    0.3018  0.7500  0.1982<br />    0.6982  0.2500  0.8018<br />    0.7500  0.1982  0.3018<br />    0.2500  0.8018  0.6982  <br /><br />angdeg   3*60.798  <br />#Definition of the planewave basis set<br />ecut 45.0         # Maximal kinetic energy cut-off, in Hartree<br /><br />#Exchange-correlation functional<br />ixc 1             # LDA Teter Pade parametrization<br /><br />#Definition of the k-point grid<br />kptopt 1          # Option for the automatic generation of k points, taking<br />                  # into account the symmetry<br />ngkpt 2 2 2       #This is a 2x2x2 FCC grid, based on the primitive vectors<br />nshiftk 1         # of the reciprocal space. For a FCC real space lattice,<br />                  # like the present one, it actually corresponds to the<br />                  # so-called 4x4x4 Monkhorst-Pack grid, if the following shifts<br />                  # are used :<br />shiftk 0.5 0.5 0.5<br />#       0.5 0.0 0.0<br />#       0.0 0.5 0.0<br />#       0.0 0.0 0.5<br /><br />#Definition of the SCF procedure<br />nstep 65          # Maximal number of SCF cycles<br />toldfe 1.0d-6     # Will stop when, twice in a row, the difference <br />                  # between two consecutive evaluations of total energy <br />                  # differ by less than toldfe (in Hartree) <br /><br /><br />and the error said <br /><br />maxfor<br /><br /> chkdilatmx: ERROR -<br />  The new primitive vectors rprimd (an evolving quantity)<br />  are too large with respect to the old rprimd and the accompanying dilatmx :<br />  this large change of unit cell parameters is not allowed by the present value of dilatmx.<br />  You need at least dilatmx=    3.991223E+01<br />  Action : increase the input variable dilatmx.<br /><br /> leave_new : decision taken to exit ...<br />1<br /><br />and when I increase the dilatmx the error said <br /><br /> Biggest array : cg(disk), with   1489.5058 MBytes.<br /> memana : allocated an array of   1489.506 Mbytes, for testing purposes.<br /><br /> memana : ERROR -<br />  Test failed to allocate    4678.064 Mbytes<br />  It is not worth to continue<br />  Action : modify input variable to fit the available memory.<br />  or increase limit on available memory.<br /><br /> leave_new : decision taken to exit ...<br />1<br />I don't know what must I do!<br />please help me sooner<br />thanks</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: memory</h3>
+				<div class="date">Posted: <strong>Tue Apr 13, 2010 5:24 pm</strong></div>
+				<div class="author">by <strong>avinashdaga2009</strong></div>
+				<div class="content">There are only five no. of atoms in La Cu O3 so why are u going to use no. of atoms as 10?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: memory</h3>
+				<div class="date">Posted: <strong>Wed Apr 14, 2010 6:57 am</strong></div>
+				<div class="author">by <strong>bmalvandi</strong></div>
+				<div class="content">hello<br />in rhombohedral phsae LaCoO3 has 10 atoms in unit cell<br />thanks</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: memory</h3>
+				<div class="date">Posted: <strong>Wed Apr 14, 2010 10:14 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">1) dilatmx should not be more than 1.1 or so. This is what explodes your memory.<br /><br />2) if the structure is expanding too much and needs such a large dilatmx, the equilibrium is nowhere near your initial guess (experiment?). Check your pseudopotentials on simpler compounds and make sure you have the correct structure (bohr vs angstroem, cell shape etc...)<br /><br />3) If other things, such as ecut or nkpt, are not converged, you may get unphysical equilibria and the cell will not converge to anything near your initial guess. Check convergence on all these too.<br /><br /><br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: memory</h3>
+				<div class="date">Posted: <strong>Wed Apr 14, 2010 1:58 pm</strong></div>
+				<div class="author">by <strong>bmalvandi</strong></div>
+				<div class="content">hello<br />thank you for your help<br />I use .pspnc pseudopotentials for my program, can you help me and say if it's right or no?<br />thanks alot</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=248&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:46 GMT -->
+</html>

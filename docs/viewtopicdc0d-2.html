@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2907&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:42:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; rprim monoclinic</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>rprim monoclinic</h2>
+		<p><a href="viewtopic7f9c.html?f=9&amp;t=2907">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2907</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>rprim monoclinic</h3>
+				<div class="date">Posted: <strong>Thu Jan 22, 2015 12:43 pm</strong></div>
+				<div class="author">by <strong>nouria.aouail</strong></div>
+				<div class="content">what it is the vector primitive of the monoclinical structure?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: rprim monoclinic</h3>
+				<div class="date">Posted: <strong>Mon Jan 26, 2015 8:57 pm</strong></div>
+				<div class="author">by <strong>raul_l</strong></div>
+				<div class="content">One way of defining a monoclinic cell is to use<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>acell a b c<br />angdeg 90 d 90</code></pre></div>with no rprim.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: rprim monoclinic</h3>
+				<div class="date">Posted: <strong>Tue Mar 17, 2015 9:20 am</strong></div>
+				<div class="author">by <strong>nouria.aouail</strong></div>
+				<div class="content">hello,<br />I try to study the properties of TlGaSe2, it crystallizes in the monoclinic structure with base centred ( space group 15)<br />I created an input file, but the problem is that as I SPGroup 15 but it shows me  this error error [ Largest error (above) is so large (0.01) that either input atomic coordinates (xred)<br />    are wrong or space group symmetry data is wrong.<br />    Action : correct your input file.], and when I comente SPGroup it crystallizes in the triclinic default structure.<br /><br />this is my input files <br /><br /><br />chkprim 0<br />#Definition of the k-point grids<br />kptopt 1          <br /><br />nshiftk 4<br />shiftk  0.5 0.5 0.5  <br />        0.5 0.0 0.0<br />        0.0 0.5 0.0<br />        0.0 0.0 0.5<br /><br /><br />ngkpt  6 6 6<br /><br /><br />getwfk -1         <br /><br /><br /><br />#Definition of the unit cell<br />acell 10.8797  10.7975  15.7070 <br />angdeg 90.0 100.47  90.0<br />spgroup 15<br /><br />#Definition of the atom types<br />ntypat 3         <br />znucl 81 31 34            <br />                  <br />                  <br />                 <br />                         <br /><br />#Definition of the atoms<br />natom 9          <br />typat   1 1 2 2 3 3 3 3 3         <br />xred     0.4632 0.1642 0.1078<br />         0.2163 0.0487 0.6158<br />         0.3876 0.1965 0.8378<br />         0.1461 0.0639 0.3391<br />         0.0000 0.9295 0.2500<br />         0.0000 0.4468 0.2500<br />         0.2047 0.4370 0.0695<br />         0.2588 0.1882 0.2508<br />         0.4541 0.3124 0.5732<br /><br />#Definition of the planewave basis set<br />ecut  40.0         <br /><br />#Definition of the SCF procedure<br />nstep 10          <br />toldfe 1.0d-6     <br /><br /><br />diemac 12.0       <br /><br /><br /># add to conserve old &lt; 6.7.2 behavior for calculating forces at each SCF step<br /> optforces 1<br /><br />thank you in advance.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: rprim monoclinic</h3>
+				<div class="date">Posted: <strong>Wed Mar 18, 2015 9:57 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">It might mean that you xred coordinate do not respect the symmetries of the space group.<br />That's probably true since abinit does not fine the correct space group when you don't specify it.<br />I think that if you just give the assymetric positions, abinit will reconstruct the symmetric ones with respect to the symmetries of the spgroup<br /><br />Jordan</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2907&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:42:51 GMT -->
+</html>

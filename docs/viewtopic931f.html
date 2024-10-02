@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2264&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:26:10 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Test failure on ANADDB</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Test failure on ANADDB</h2>
+		<p><a href="viewtopice164-2.html?f=3&amp;t=2264">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2264</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Test failure on ANADDB</h3>
+				<div class="date">Posted: <strong>Thu Aug 29, 2013 4:41 am</strong></div>
+				<div class="author">by <strong>goodwill</strong></div>
+				<div class="content">Hi. I recently installed abinit-7.2.2 and abinit-7.4.1 on our linux cluster with openmpi-1.4.3-intel64-v12.0.4, but I always get the failure message on tests/v2: <br /><br />Case_13            failed<br />Case_18            failed<br />Case_21            failed (too large absolute error : 3.599e-03 , accepted 2.510e-10 ) <br /><br />It seems that these tests have used ANADDB or related subroutines. By the way I have used the following compiling options: <br />CC=&quot;mpicc&quot;<br />CXX=&quot;mpic++&quot;<br />FC=&quot;mpif90&quot;<br />F77=&quot;mpif77&quot;<br />enable_mpi=&quot;yes&quot; <br />enable_mpi_io=&quot;no&quot;<br />with_mpi_level=&quot;2&quot;<br />with_linalg_flavor=&quot;mkl&quot;<br />with_linalg_incs=&quot;-I/opt/intel/composerxe-2011.4.191/include/intel64/lp64&quot;<br />with_linalg_libs=&quot;-L/opt/intel/composerxe-2011.4.191/mkl/lib/intel64 -Wl,--start-group -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group -lpthread&quot;<br />with_dft_flavor=&quot;atompaw+libxc+wannier90&quot;<br />enable_gw_dpc=&quot;yes&quot;<br /><br />I have tried to use the &quot;enable_64bit=yes&quot; but the result is the same. <br /><br />Thank you.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Test failure on ANADDB</h3>
+				<div class="date">Posted: <strong>Thu Aug 29, 2013 1:10 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />with these soft versions :<br /><br />intel 12.1.4 + mkl 10.3<br />openmpi 1.6.4<br /><br />and <br /><br />with this  ac file<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_prefix=&quot;/home/naps/buildbot/openmpi_intel&quot;<br /><br />with_trio_flavor=&quot;etsf_io+netcdf&quot;<br />with_dft_flavor=&quot;atompaw+bigdft+libxc+wannier90&quot;<br /><br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_libs=&quot;-L/usr/local/intel/composerxe/mkl/lib/intel64 -Wl,--start-group&nbsp; -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group&quot;<br />with_linalg_flavor=&quot;mkl&quot;<br />with_linalg_libs=&quot;-L/usr/local/intel/composerxe/mkl/lib/intel64 -Wl,--start-group&nbsp; -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group&quot;<br /><br />enable_clib=&quot;yes&quot;<br />enable_gw_dpc=&quot;yes&quot;</code></pre></div><br /><br />all tests succeed</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2264&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:26:10 GMT -->
+</html>

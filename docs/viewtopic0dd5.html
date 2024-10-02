@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=2594&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:59:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Modification of the paral_kgb behavior</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Modification of the paral_kgb behavior</h2>
+		<p><a href="viewtopic8d33.html?f=19&amp;t=2594">https://forum.abinit.org/viewtopic.php?f=19&amp;t=2594</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Modification of the paral_kgb behavior</h3>
+				<div class="date">Posted: <strong>Fri Mar 28, 2014 2:17 pm</strong></div>
+				<div class="author">by <strong>sponce</strong></div>
+				<div class="content">Dear Developper, <br /><br />I recently realized that paral_kgb was automatically set to 1 if the number of cpu was not a multiple of the total number of k-points. <br /><br />Altought this is in principle a good idea, for the moment the paral_kgb default value is well 0 (deactivated). <br /><br />The problem is that the algorithm is not stable. <br /><br />For example a simple ground-state calculation of diamond fail to converged after 200 steps (scf cycle) with the automatic parallelization on 8 cpu (2 cpu at the fft level and 4 at the kpoint level). With the input variable paral_kgb 0 explicitely set in the abinit input file the calculation converges in 13 steps. The calculation was still far faster altough some cpu were idle (due to a wrong choosing of cpu with number of kpoints). <br /><br />I therefore think that for the moment paral_kgb should <span style="text-decoration: underline">always</span> be 0 by default. At some point, when the implementation will be well tested we should indeed change this to a default value of paral_kgb 1. <br /><br />Do you agree?<br /><br />Best Regards, <br /><br />Samuel</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Modification of the paral_kgb behavior</h3>
+				<div class="date">Posted: <strong>Fri Mar 28, 2014 9:07 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Hi Samuel,<br /><br />I completely agree with you!<br />Ok we know that paral_kgb 0 presents significant limitations in terms of parallelism but, <br />on the other hand, this method is compatible with the most important features of abinit, <br />in particular the post-processing routines that are called at the end of the GS run.<br /><br />Changing the default value when the number of MPI nodes is not efficient makes sense<br />all if all the features of the GS part are compatible with the band-G distribution and I don't <br />think so especially if we consider that the majority of the GS tests validate the band-by-band CG method.<br /><br />Moreover, as pointed out by Samuel, paral_kgb = 1 is not necessarily faster than the old method when<br />both eigensolvers can be applied to the same system.<br />The autoparal feature introduced in Abinit is very useful but, unfortunately, it's hard to predict if <br />the eigenvalue solver will have troubles to converge or if the hardware/network is suited for that<br />particular algorithm.<br /> We can try to optimize the parameters  of the MPI run once the eigensolver has been select<br />but we should let the user select the GS algorithm to be used  <br /><br />A possible solution would be to force the specification of paral_kgb in the input file so that no ambiguity occurs<br />This is the same approach used for other GS variables such as toldfe/tolvrs... so I don't see why we should introduce exceptions.<br /><br />Cheers,<br />Matteo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Modification of the paral_kgb behavior</h3>
+				<div class="date">Posted: <strong>Mon Mar 31, 2014 6:19 pm</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">Hey,<br /><br />This is not so simple as it seems to be.<br /><br />For years, we have been asked to have an &quot;easy-to-use&quot; abinit on paralell systems.<br />In the old days (not so old!), we had a lot of keywords to put in the input file to make abinit run; moreover, it often failed because these keywords where incorrectly set.<br /><br />Now that everything is automatic, a different view appears (more from developpers than from regular users).<br /><br />So, the question is the following:<br />How do we change this situation (ABINITT seems having an undesirable behavior) without falling back into the previous (also undesirable) status ?<br /><br />My proposal:<br />* We introduce a new value of autoparal that completely deactivates the automatic parallelization (should be zero; but it is already assigned); this new option simply will be equivalent to a return in the finddistrproc routine.<br />* We set the default value of autoparal to this new option, in such a way that the automatic parallelization will be deactivated.<br />* If ABINIT is launched on more processors thant nkpt*nsppol, then a WARNING is printed, advicing (strongly) the user to put the autoparal variable.<br /><br />My opinion is that putting &quot;autoparal 1&quot; is a sufficiently simple action that should not make the use of ABINIT too complicated on parallel systems.<br /><br />I can do that in the forthcoming days...<br />What do you think ?<br /><br />Marc<br /><br /><br /><br />BTW: I can show severallexamples where lobpcg converges faster than cgwf; it's system dependent...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Modification of the paral_kgb behavior</h3>
+				<div class="date">Posted: <strong>Mon Mar 31, 2014 10:17 pm</strong></div>
+				<div class="author">by <strong>sponce</strong></div>
+				<div class="content">Dear Marc, <br /><br />Thank you for your reply. <br /><br />If I understand correctly you proposal it seems great! I would made a slight modification to it:<br /><br /><blockquote class="uncited"><div>Marc proposal:<br />* We introduce a new value of autoparal that completely deactivates the automatic parallelization (should be zero; but it is already assigned); this new option simply will be equivalent to a return in the finddistrproc routine.<br />* We set the default value of autoparal to this new option, in such a way that the automatic parallelization will be deactivated.<br />* If ABINIT is launched on more processors thant nkpt*nsppol, then a WARNING is printed, advicing (strongly) the user to put the autoparal variable.</div></blockquote><br /><br />I think that one can introduce a new value of autoparal that completely deactivates the automatic parallelization and it should be zero. The behavior associated to the already assigned 0 value should be changed to the value 1 and the other pushed by one number. <br />I totally agree with the two other propositions  !<br /><br />Samuel.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Modification of the paral_kgb behavior</h3>
+				<div class="date">Posted: <strong>Wed Apr 02, 2014 12:31 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content"><blockquote class="uncited"><div>We introduce a new value of autoparal that completely deactivates the automatic parallelization<br /></div></blockquote><br /><br />Fine with this. On the other hand, I think that it's much more intuitive if autoparal=0 means **no automatic parallelization**.<br />We can change the meaning of the variable in the next major version and we document this change<br /><br />Note however that we haven't solved yet the issue with the definition of paral_kgb. <br />Is autoparal allowed to change the value of paral_kgb at run-time?<br />Is the user expected to specify explicitly the eigensolver he/she wants to use or not?<br /><br />BTW:<br />I would really appreciate if we start to rewrite some portions of the GS/DFPT code using a more flexible API.<br />Passing paral_kgb to a routine just to signal that we may be using FFT-MPI is clearly a design flaw (see fourdp and fourwf)<br />paral_kgb should drive the computation in the high-level routines. *Simple* algorithms that, for some reason, <br />have to deal with the FFT parallelism can easily implement it by using just me_g0, comm_fft and some additional table (distribfft_type).<br />I find very amusing the fact that one finds references to dtset%paral_kgb both in the  DFPT and in the GW code albeit<br />paral_kgb has not meaning in these two contexts!<br />This won't certainly facilitate the implementation of new algorithms and code reusability<br /><br />Cheers,<br />Matteo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Modification of the paral_kgb behavior</h3>
+				<div class="date">Posted: <strong>Thu Apr 03, 2014 4:27 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">+1<br /><br />This is indeed a great idea to break the old habits and design before coding, for once.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=2594&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:59:11 GMT -->
+</html>

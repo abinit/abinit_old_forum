@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=3421&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:57:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Bug in get_kpt_fullbz (8.0.8b)</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Bug in get_kpt_fullbz (8.0.8b)</h2>
+		<p><a href="viewtopic2e3d.html?f=19&amp;t=3421">https://forum.abinit.org/viewtopic.php?f=19&amp;t=3421</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Bug in get_kpt_fullbz (8.0.8b)</h3>
+				<div class="date">Posted: <strong>Tue Nov 08, 2016 12:34 pm</strong></div>
+				<div class="author">by <strong>emurray</strong></div>
+				<div class="content">It looks like there's an issue with the k-point generation that's hit when using several shifted grids with a small angle rhombohedral cell.<br /><br />For example, I get the following<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--- !BUG<br />src_file: get_kpt_fullbz.F90<br />src_line: 163<br />mpi_rank: 0<br />message: |<br />&nbsp; &nbsp; nkpt_fullbz= 32 underestimated&nbsp; nn=29<br />...<br /><br />&nbsp; Action : contact ABINIT group.<br /><br /><br />&nbsp;leave_new: decision taken to exit ...<br /></code></pre></div><br /><br />for the following (unrealistic - made up to generate the error simply) input file<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>kptopt&nbsp; &nbsp;1<br />nshiftk&nbsp; 4<br />shiftk&nbsp; &nbsp;0.5 0.5 0.5<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.5 0.0 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0 0.5 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0 0.0 0.5<br />ngkpt&nbsp; &nbsp; 2 2 2<br /><br />acell&nbsp; &nbsp; 3*8.9<br />angdeg&nbsp; &nbsp;3*30<br /><br />ntypat&nbsp; &nbsp;1<br />znucl&nbsp; &nbsp; 83<br />natom&nbsp; &nbsp; 2<br />typat&nbsp; &nbsp; 1 1<br />xred&nbsp; &nbsp; &nbsp;3*0.0 3*0.47<br /><br />ecut&nbsp; &nbsp; &nbsp;10.0<br />toldfe&nbsp; &nbsp;1.0d-6<br /></code></pre></div></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=3421&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:57:29 GMT -->
+</html>

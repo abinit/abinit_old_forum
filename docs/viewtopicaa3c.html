@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1276&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:39:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; how to set the parallel parameters (paral_kgb,npband etc)?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>how to set the parallel parameters (paral_kgb,npband etc)?</h2>
+		<p><a href="viewtopiccda8.html?f=9&amp;t=1276">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1276</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>how to set the parallel parameters (paral_kgb,npband etc)?</h3>
+				<div class="date">Posted: <strong>Sat Aug 20, 2011 5:06 pm</strong></div>
+				<div class="author">by <strong>hhwj340</strong></div>
+				<div class="content">hi,everyone!<br />i have read all of the topics of parallel setting in this forum,but i am still confused.<br />for gs calculation, abinit can parallel on three levels which are k-point, G-vector and band. <br />The corresponding parameters are npkpt, npfft and npband, respectively.<br /> in order to understand how to sett parameters, i have done several calculations.<br />Experiment 1:<br />                 A small system , with only one atom (Fe) in the primitive cell. in fact, it's the example of spin in abinit official tutorial. <br />i changed the k-point setting, and used  a  bigger one (14*14*14).<br />                   first, i did the calculation with paral_kgb=0,which is default setting by abinit. The Overwall time is 315.2 sec. <br />                   second, i opened parallel on kgb.(npkpt=npfft=1.npband=5). The Overwall time is 644.6 sec.<br />          abinit version is 6.8.1, the computer is small dell workstation with 2 xeon( 8 processors). I had just used 5 processors in experiment 1.<br />Experiment 2:<br />                  a bigger system with 17 atoms( 16 fe and one N),and k-point setting is 2*2*2.<br />                    first, i did the calculation with paral_kgb=0,which is default setting by abinit. The Overwall time is 31122 sec.  <br />                   second, i opened parallel on kgb.(npkpt=npfft=1.npband=8). The Overwall time is 13424 sec.<br />            abinit version is also 6.8.1 and the computer is the same with Exp.1. This time ,used 8 processors.<br />compare Exp. 1 with 2, i get the result : for system with larger k-point grid , it is better to parallel on k-point (which is default of abinit). for system with a lot of atoms, the band is the main factor, it is better to parallel on band.<br />             i also have done several calculations in order to understand  npfft, but  got no idea about it until now .<br />I want to ask following questions.<br />         a. Do i have got the correct result about npkpt and npband setting?<br />         b. Can someone tell me how to tune npfft?<br />         c. For a system, we know the atoms number, the band number and k-point grid., how to tune npkpt, npband and npfft to get the optimal setting?<br /><br />  think you for your time!<br />                                        hhwj</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1276&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:39:34 GMT -->
+</html>

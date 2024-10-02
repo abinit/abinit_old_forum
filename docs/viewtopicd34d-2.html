@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=794&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:53:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; 6.5.1 fails to build after merge</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>6.5.1 fails to build after merge</h2>
+		<p><a href="viewtopicb51b.html?f=3&amp;t=794">https://forum.abinit.org/viewtopic.php?f=3&amp;t=794</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>6.5.1 fails to build after merge</h3>
+				<div class="date">Posted: <strong>Wed Dec 15, 2010 2:12 am</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Hi,<br />I just merged revno 431 of trunk/6.5.1-public into my 6.5.1-private branch, and it now fails to build on both intel and gcc. Specifically, I did:<br /><br />commit my changes, which build and pass tests;<br />run clean-source-tree<br />merge trunk/6.5.1-public<br />run makemake<br />run configure<br />run make<br /><br />fails with <br /><br />/usr/local/openmpi/gcc/bin/mpif90 -m64 -DHAVE_CONFIG_H -I. -I../../../src/12_hide_mpi -I../.. -I../../src/incs -I../../../src/incs   -ffree-form -J/home/jzwanzig/code/abinit/6.5.1-private/tmp-gcc/src/mods -O2 -mtune=native -march=native -mfpmath=sse -m64  -ffree-line-length-none  -c -o m_xmpi.o ../../../src/12_hide_mpi/m_xmpi.F90<br />../../../src/12_hide_mpi/m_xmpi.F90:1840.88:<br /><br />E_CREATE_STRUCT(my_ncol+2,block_length,block_depl,block_type,new_type,ierr)<br />                                                                           1             <br />Error: There is no specific subroutine for the generic 'mpi_type_create_struct' at (1)<br />make[3]: *** [m_xmpi.o] Error 1<br />make[3]: Leaving directory `/home/jzwanzig/code/abinit/6.5.1-private/tmp-gcc/src/12_hide_mpi'<br />make[2]: *** [all-recursive] Error 1<br />make[2]: Leaving directory `/home/jzwanzig/code/abinit/6.5.1-private/tmp-gcc/src'<br />make[1]: *** [all-recursive] Error 1<br />make[1]: Leaving directory `/home/jzwanzig/code/abinit/6.5.1-private/tmp-gcc'<br />make: *** [all] Error 2<br /><br />any suggestions? thanks in advance,<br />Joe<br /><br />p.s. How can this even happen? I know the trunk branch is heavily tested on many platforms...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 6.5.1 fails to build after merge</h3>
+				<div class="date">Posted: <strong>Wed Dec 15, 2010 3:33 am</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">OK, here's what I had to do to get the trunk/6.5.1-public merge to compile:<br /><br />1) in src/12_hide_mpi/m_xmpi.F90, line 1782:<br />old: integer,allocatable :: block_depl(:)<br />new: integer(KIND=MPI_ADDRESS_KIND),allocatable :: block_depl(:) ! this corresponds to the type needed in the call to MPI_TYPE_CREATE_STRUCT<br /><br />2) in src/62_iowfdenpot/m_io_screening.F90, line 1383:<br />old: complex(dpc),allocatable :: bufdc(:,:)<br />new: complex(dpc),allocatable :: bufdc(:,:),bufdc3(:,:,:)<br /><br />later in this file there were calls to bufdc with 3 array indices, and others with two. Why did this code ever compile?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 6.5.1 fails to build after merge</h3>
+				<div class="date">Posted: <strong>Wed Dec 15, 2010 3:26 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">It was probably not compiled on the test farm, due to a few transient inconsistencies. I'm fixing them right now, since I'm getting this problem as well on my 6.5.2 branch.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 6.5.1 fails to build after merge</h3>
+				<div class="date">Posted: <strong>Wed Dec 15, 2010 3:41 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Sorry, it's my fault. <br />I've been working on the MPI-IO part of the code but most of my changes are still in<br />gmatteo-training in which all the compilation errors you are reporting have been solved.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 6.5.1 fails to build after merge</h3>
+				<div class="date">Posted: <strong>Wed Dec 15, 2010 4:11 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">See pouillon/6.5.2-public/435 for a clean fix of both the MPI and GW_DPC issues. Please wait until tomorrow and check the test farm's results before merging.<br /><br />What is more preoccupating is that so much bug-infested and untested code manages to make it through the test farm. In particular, it currently means that the <em class="text-italics">enable_gw_dpc=no</em> option is not tested anymore, despite all the efforts Jean-Michel and I are deploying.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 6.5.1 fails to build after merge</h3>
+				<div class="date">Posted: <strong>Wed Dec 15, 2010 4:44 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">thanks, Yann.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 6.5.1 fails to build after merge</h3>
+				<div class="date">Posted: <strong>Thu Dec 16, 2010 12:17 am</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">After discussing with Matteo, revno 437 provides the actual fix.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 6.5.1 fails to build after merge</h3>
+				<div class="date">Posted: <strong>Thu Dec 16, 2010 6:31 am</strong></div>
+				<div class="author">by <strong>gonze</strong></div>
+				<div class="content">Hi Yann, <br />Unfortunately, pouillon/6.5.2-public/435 did not succeed today... <br />To which branch are your referring with &quot;revno 437&quot; ? I did not see<br />any revno 437 in the test farm this night ... Forgot to push ?<br />Xavier</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 6.5.1 fails to build after merge</h3>
+				<div class="date">Posted: <strong>Fri Dec 17, 2010 3:54 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">No, pushed too late for it to be processed on Wednesday. I knew it anyway.<br /><br />In any case, seeing what happened to revno 437, the support of MPI-IO has now to be declared fully broken until someone fixes it. It might not be much, but I have no time for this. In the meantime, I'll put a lock on it in my branch so that it can safely be merged into trunk. This means that one will have to activate debug mode (--enable-debug &gt; enhanced, see build-config.ac for details) to compile MPI-IO.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 6.5.1 fails to build after merge</h3>
+				<div class="date">Posted: <strong>Fri Dec 17, 2010 4:56 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">The code is stopping in one of the new routines I've added for supporting MPI-IO.<br />I'm going to investigate the problem.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 6.5.1 fails to build after merge&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Sun Jan 09, 2011 1:49 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Update everyone? I still have the problem with mpi_type_create_struct, but it looks like it comes from the fact my (IBM) distribution of MPICH is old and does not have mpi_type_create_struct implemented yet. The latest IBM doc contains it, but the libs have no reference to the symbol, except in one c++ interface, where they state that mpi_type_struct is deprecated and should be replaced by mpi_type_create_struct...<br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=794&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:53:23 GMT -->
+</html>

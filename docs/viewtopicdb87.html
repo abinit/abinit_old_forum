@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=5352&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:05:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Ubuntu 20.04 make process failed</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Ubuntu 20.04 make process failed</h2>
+		<p><a href="viewtopicd5dd.html?f=3&amp;t=5352">https://forum.abinit.org/viewtopic.php?f=3&amp;t=5352</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Ubuntu 20.04 make process failed</h3>
+				<div class="date">Posted: <strong>Wed Mar 24, 2021 1:07 pm</strong></div>
+				<div class="author">by <strong>letscompute</strong></div>
+				<div class="content">Greetings!<br>
+I am trying to compile Abinit on Ubuntu 20.04 with the standard config. <br>
+However, when I try to make the config file it halts and gives me an error:<br>
+<br>
+make[5]: *** No rule to make target 'm_optim_dumper.F90', needed by 'm_optim_dumper.o'.  Stop.<br>
+<br>
+I have read that this can be solved by creating a Python link by executing: <br>
+"ln -s python3 python" in the bin directory.<br>
+<br>
+I have followed the installation instructions written by J. Van Bever (I have attached the document).<br>
+<br>
+Unfortunately, even after the creation of the symbolik link I still get the same error during the make process. <br>
+Would anyone have any idea why is this happening? <br>
+<br>
+I have tried to build it with:<br>
+<br>
+enable_avx_safe_mode="yes"<br>
+with_mpi="/usr"<br>
+enable_mpi_io="yes"<br>
+LINALG_LIBS="-L/usr/lib/ -llapack -lblas"<br>
+with_libxc="yes"<br>
+LIBXC_CPPFLAGS="-I/usr/include"<br>
+LIBXC_FCFLAGS="-I/usr/include"<br>
+with_hdf5="/usr"<br>
+with_netcdf="yes"<br>
+NETCDF_CPPFLAGS="-I/usr/include/"<br>
+NETCDF_FCFLAGS="-I/usr/include/"<br>
+NETCDF_LIBS="-L/usr/lib/x86_64-linux-gnu -L/usr/lib/x86_64-linux-gnu/hdf5/serial -lnetcdf -lhdf5_hl -lhdf5 -lpthread -lsz -lz -ldl -lm -lcurl"<br>
+with_netcdf_fortran="/usr/include"<br>
+NETCDF_FORTRAN_LIBS="-L/usr/lib -lnetcdff -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -lnetcdf -lnetcdf"<br>
+<br>
+Please help <img class="smilies" src="images/smilies/icon_e_sad.gif" width="15" height="17" alt=":(" title="Sad"> <br>
+<br>
+Thank you kindly!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Ubuntu 20.04 make process failed</h3>
+				<div class="date">Posted: <strong>Fri Apr 02, 2021 4:42 pm</strong></div>
+				<div class="author">by <strong>admin</strong></div>
+				<div class="content">Hi,<br>
+<br>
+everything looks good in the config.log...<br>
+can you send the output files of these two cmds :
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../configure --with-config-file=config_file.ac9 &gt;&amp;  output.log
+make &gt;&amp; make.log  </code></pre></div></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=5352&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:05:03 GMT -->
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=1752&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:46:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; xred and kbounds</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>xred and kbounds</h2>
+		<p><a href="viewtopic24df.html?f=14&amp;t=1752">https://forum.abinit.org/viewtopic.php?f=14&amp;t=1752</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>xred and kbounds</h3>
+				<div class="date">Posted: <strong>Sun Jul 15, 2012 12:52 am</strong></div>
+				<div class="author">by <strong>BAMGBOSE, M. K.</strong></div>
+				<div class="content">I am new in crystallography, my major problem now is how to determine xred and kbounds for various systems. Someone can pls explain with this two systems FeO(wustite) and CaB6. Thanks alot in anticipation of your assistance.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: xred and kbounds</h3>
+				<div class="date">Posted: <strong>Sun Jul 15, 2012 2:11 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">For kptbounds you need to see the special symmetry points and paths in the Brillouin zone for the system of interest, see for example the book by Bradley and Cracknell, The Mathematical Theory of Symmetry in Solids, and also the web site <!-- m --><a class="postlink" href="http://www.cryst.ehu.es/">http://www.cryst.ehu.es/</a><!-- m -->, especially the kvec module. For xred you need the crystal structure for your system, usually obtained either from a publication or a .cif file (a good source of which is the non-free database <!-- m --><a class="postlink" href="http://icsd.fiz-karlsruhe.de/">http://icsd.fiz-karlsruhe.de/</a><!-- m -->. Such files give the lattice parameters, space group, and atomic coordinates in xred-type units of the atoms in the asymmetric unit, the rest are computed by symmetry (abinit can do this for you too).</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: xred and kbounds</h3>
+				<div class="date">Posted: <strong>Mon Jul 16, 2012 11:57 am</strong></div>
+				<div class="author">by <strong>BAMGBOSE, M. K.</strong></div>
+				<div class="content">I got to the site <!-- m --><a class="postlink" href="http://www.cryst.ehu.es/and">http://www.cryst.ehu.es/and</a><!-- m --> kpoints for space group 136 which TiO2 space group are listed as follows,<br /> G 0  0  0<br /> Z 0  0 1/2<br /> M 1/2 1/2 0<br /> A 1/2 1/2 1/2<br /> R  0 1/2 1/2<br /> X 0 1/2 0<br />Now from ainit example t14.in, kpoints are arrange as follows<br />kptbounds2  0.5 0.5 0.5  #A<br />            0.0 0.0 0.0  #Gamma<br />            0.5 0.5 0.0  #M<br />            0.5 0.0 0.0  #X<br />            0.0 0.0 0.0  #Gamma<br />            0.0 0.0 0.5  #Z<br />            0.5 0.0 0.5  #R<br />there is different between the two and i dont know the order i have  to follow in arraging my kpoints. Moreover the X points from the website is different from the X in the example. Kindly put me through and bear with me the disturbance am given you. Thanks</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: xred and kbounds</h3>
+				<div class="date">Posted: <strong>Mon Jul 16, 2012 12:50 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">You can use whatever order you like--but the general point is to have the path in k-space be continuously trace-able. The abinit path does that--look at the figure of the Brillouin zone, you can trace a line without lifting your pencil, following the abinit ordering; the web site merely lists the points, without reference to a path.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: xred and kbounds</h3>
+				<div class="date">Posted: <strong>Mon Jul 16, 2012 3:46 pm</strong></div>
+				<div class="author">by <strong>BAMGBOSE, M. K.</strong></div>
+				<div class="content">Prof, thanks alot. You said path should be cotinuously trace-able in k-space, please shed more light or do mean, take for example for space group 136, i can have path like,<br />G  0     0         0<br />Z  0      0        1/2<br />R  0      1/2    1/2<br />A  1/2   1/2   1/2<br />M  1/2   1/2   1/2<br />X   1/2   0       0<br />G   0      0       0<br /> Is this order continuously trace-able.<br />Thanks alot.<br /> -BAMGBOSE, M. K.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: xred and kbounds</h3>
+				<div class="date">Posted: <strong>Mon Jul 16, 2012 5:05 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Just look at the picture of the Brillouin zone on the web site I sent you, and follow along from point to point.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: xred and kbounds</h3>
+				<div class="date">Posted: <strong>Mon Jul 16, 2012 9:47 pm</strong></div>
+				<div class="author">by <strong>BAMGBOSE, M. K.</strong></div>
+				<div class="content">Prof, thank alot for usual understanding. I will feed you back with my band structure result as soon as possible.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: xred and kbounds</h3>
+				<div class="date">Posted: <strong>Tue Jul 17, 2012 8:52 am</strong></div>
+				<div class="author">by <strong>BAMGBOSE, M. K.</strong></div>
+				<div class="content">Igol can u please comment on my input file and the attached band structure plot.<br />############################################################<br /># GS + Band Structure + Fermi Surface calculation for MgB2 <br />############################################################<br /><br />ndtset  3<br /><br />#Dataset 1 : GS calculation<br />kptopt1  1              # Use symmetry and treat only inequivalent points<br />ngkpt1   6 6 6<br />nshiftk1 1<br />shiftk1  0.0 0.0 0.5    # This choice preserves the hexagonal symmetry of the grid,<br />occopt1  1<br />nband1   26<br />prtden1  1<br />tolvrs1  1.0d-18     <br /><br />#Dataset 2 : Band structure calculation<br />iscf2   -2<br />getden2 -1<br />kptopt2 -5<br />tolwfr2  1.0d-12<br />nband2   40<br />ndivk2   60 60 60 60 60 60  #  <br />kptbounds2  0.0 0.0 0.0  #Gamma<br />            0.0 0.0 0.5  #A<br />            0.3 0.3 0.5  #H<br />            0.3 0.3 0.0  #K<br />            0.0 0.0 0.0  #Gamma<br />            0.5 0.0 0.0  #M<br />            0.3 0.3 0.0  #K<br /><br /> enunit2 1<br /><br />#Dataset 3 : Output of the Fermi surface<br />prtfsurf3 1  # To output the FS<br />getwfk3  -1<br />iscf3    -3   # NSCF calculation, occupancies and Fermi level are calculated once convergence is achieved.<br />              # It should give the same FS as a GS calculation provided that the two <br />              # k-meshes are sufficiently dense.<br />getden3   1<br />occopt3   1<br />nband3    40<br />kptopt3   1<br />ngkpt3    8 8 8       # too coarse. 24 24 24 for a reasonable FS <br />shiftk3   0.0 0.0 0.0 # Shifted grids are not supported by Xcrysden.<br />tolwfr3   1.0d-12<br /><br />#COMMON INPUT DATA###########################################################                  <br />#<br />ecut    60<br />ecutsm  0.5<br />nstep   100<br /><br /># MgB2 lattice structure<br />ntypat  2<br />znucl   12 5<br />natom   3<br />typat   1  2 2 <br /><br />#Definition of the unit cell<br />acell   2*5.8421069568E+00  6.5137931664E+00<br /><br />#rprim      1.0000000000E+00  0.0000000000E+00  0.0000000000E+00<br />#          -5.0000000000E-01  8.6602540378E-01  0.0000000000E+00<br />#           0.0000000000E+00  0.0000000000E+00  1.0000000000E+00<br />angdeg  90  90  120<br />spgroup 191<br />brvltt -1<br /># Atomic positions <br />xred       0.00   0.00   0.00  #Mg1<br />           1/3     2/3   1/2   #B2<br />           2/3     1/3   1/2   #B2<br />          <br /><br />ixc    11<br />timopt 2 <br /><br />Thanks for your usuall assistance</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: xred and kbounds</h3>
+				<div class="date">Posted: <strong>Wed Jul 18, 2012 8:30 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">I can only say that it would be the best for you to compare it to MgB2 band structures other people got using DFT and pseudopotentials. That's how you'll check the correctness of your calculation.<br /><br />Igor L.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: xred and kbounds</h3>
+				<div class="date">Posted: <strong>Wed Jul 18, 2012 11:30 am</strong></div>
+				<div class="author">by <strong>BAMGBOSE, M. K.</strong></div>
+				<div class="content">Igol, <br /> Thank alot, but some of their bands crosses Fermi level. I think there should be a correction to this input file from abint guru like u. thank you.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: xred and kbounds</h3>
+				<div class="date">Posted: <strong>Wed Jul 18, 2012 12:24 pm</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">You have a lot of things to think about here. Did you use the same method as they (DFT + pseudopotentials)? If yes, did you use the same type of pseudos and with the same parameters? Did you use the same values of <strong class="text-strong">all</strong> relevant input variables? These all could be the reason for the difference.<br /><br />Igor L.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: xred and kbounds</h3>
+				<div class="date">Posted: <strong>Wed Jul 18, 2012 12:56 pm</strong></div>
+				<div class="author">by <strong>BAMGBOSE, M. K.</strong></div>
+				<div class="content">Igol, <br /> They used abinit, same peudopotential, they use experimeter lattices parameter. the two plot look alike except that my valency band refuse to cross Fermi level. Thanks</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: xred and kbounds</h3>
+				<div class="date">Posted: <strong>Wed Jul 18, 2012 1:26 pm</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Try to reproduce their results by doing everything the same as they. If you succeed, then you know that the BS difference comes from the differences in the input files. If not, then something else you missed is different.<br /><br />Igor L.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: xred and kbounds</h3>
+				<div class="date">Posted: <strong>Wed Jul 18, 2012 3:41 pm</strong></div>
+				<div class="author">by <strong>BAMGBOSE, M. K.</strong></div>
+				<div class="content">Igol thanks, i will get back to you whenever i am through with the calculation</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: xred and kbounds</h3>
+				<div class="date">Posted: <strong>Tue Feb 19, 2013 7:43 pm</strong></div>
+				<div class="author">by <strong>BAMGBOSE, M. K.</strong></div>
+				<div class="content">Dear Igor, <br />  if i dope a system say CaB6, what will be the xred of the doped system. Also if the system is not cubic system how would i determine lattice parameters. CaB6 is cubic if dope it what will be the crystal structure of the doped system.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: xred and kbounds</h3>
+				<div class="date">Posted: <strong>Wed Feb 20, 2013 8:17 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content"><blockquote><div><cite>BAMGBOSE, M. K. wrote:</cite>  if i dope a system say CaB6, what will be the xred of the doped system.</div></blockquote><br /><br />There are several posts on this subject on this very forum. Please, search it. Essentially, you have to build a supercell. If you draw it on the paper, I think you'll find it easy to calculate the xreds.<br /><br /><blockquote><div><cite>BAMGBOSE, M. K. wrote:</cite>Also if the system is not cubic system how would i determine lattice parameters.</div></blockquote><br /><br />Let abinit do it for you. Just turn on the optimization algorithm, and relax. And yes, don't forget to turn off the spgroup variable.<br /><br /><blockquote><div><cite>BAMGBOSE, M. K. wrote:</cite>CaB6 is cubic if dope it what will be the crystal structure of the doped system.</div></blockquote><br /><br />Who knows? Again let abinit do the job for you. Turn off your space group info and let abinit symmetrizer do the job.<br /><br />Igor</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: xred and kbounds</h3>
+				<div class="date">Posted: <strong>Wed Feb 20, 2013 6:40 pm</strong></div>
+				<div class="author">by <strong>BAMGBOSE, M. K.</strong></div>
+				<div class="content">Dear Igor, <br />   Thanks for ur response, but what are the basic input variable to turn on optimization algorithm. <br />  Thanks.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: xred and kbounds</h3>
+				<div class="date">Posted: <strong>Thu Feb 21, 2013 7:30 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Well, you have to go through the tutorial first:<br /><br /><a href="http://www.abinit.org/documentation/helpfiles/for-v7.0/tutorial/lesson_base3.html#34" class="postlink">http://www.abinit.org/documentation/helpfiles/for-v7.0/tutorial/lesson_base3.html#34</a><br /><br /><br />Igor</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: xred and kbounds</h3>
+				<div class="date">Posted: <strong>Thu Feb 21, 2013 6:48 pm</strong></div>
+				<div class="author">by <strong>BAMGBOSE, M. K.</strong></div>
+				<div class="content">Dear Igor,<br /> I hereby attached input file of barium doped CaB6, i have done correction to optimization of lattice parameter according to lesson 3. I still need the input that will determine the crystal structure of doped system CaBaB6. Kindly help me on this and other necessary correction to my input file.<br /> Thanks.<br /> -Bamgbose</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=1752&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:46:45 GMT -->
+</html>

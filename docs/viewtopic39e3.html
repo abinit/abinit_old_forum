@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=271&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Cross Convergence Effects With CNTs</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Cross Convergence Effects With CNTs</h2>
+		<p><a href="viewtopice177.html?f=9&amp;t=271">https://forum.abinit.org/viewtopic.php?f=9&amp;t=271</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Cross Convergence Effects With CNTs</h3>
+				<div class="date">Posted: <strong>Tue Apr 27, 2010 5:09 am</strong></div>
+				<div class="author">by <strong>Mamikon Gulian</strong></div>
+				<div class="content">Hello,<br /><br />I am working on converging unit cell sizes for a CNT (i.e., converging the vacuum volume to approach a &quot;single&quot; CNT system). If anyone has an experience with this, what kind of cross-convergence effects should I expect between the vacuum padding, ecut, and the k-point sampling?<br /><br />Many thanks,<br /><br />Mamikon</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Cross Convergence Effects With CNTs</h3>
+				<div class="date">Posted: <strong>Tue May 04, 2010 4:56 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content"><blockquote><div><cite>Mamikon Gulian wrote:</cite>Hello,<br /><br />I am working on converging unit cell sizes for a CNT (i.e., converging the vacuum volume to approach a &quot;single&quot; CNT system). If anyone has an experience with this, what kind of cross-convergence effects should I expect between the vacuum padding, ecut, and the k-point sampling?<br /><br />Many thanks,<br /><br />Mamikon</div></blockquote><br /><br />Dear Mamikon,<br /><br />1) ecut is basically independent of all the rest. It is essentially influenced only by the pseudopotentials used<br /><br />2) In general the k-point grid is only correlated to the smearing used for metallic systems, which may be your case, but:<br /><br />3) if you have vacuum, strange things can happen:<br />  a) sometimes the dielectric response is described better if you have k-points in the perpendicular direction to the tube (for a perfectly isolated system the bands should be flat). See e.g. <a href="http://dx.doi.org/10.1016/j.cpc.2006.07.018" class="postlink">http://dx.doi.org/10.1016/j.cpc.2006.07.018</a> (preprint <a href="http://arxiv.org/abs/cond-mat/0608215" class="postlink">http://arxiv.org/abs/cond-mat/0608215</a>). In this case there can be a link between vacuum and the number of k-points needed.<br />  b) There can be free-electron-like states in the box. As the box gets bigger, their energy decreases to some asymptotic limit, and their DOS increases. These are unoccupied, but can be quite close to the Fermi level in some cases (graphene for instance). You will never converge these entirely, but they are usually not too important.<br /><br />In practice you can converge the vacuum independently from the rest in most cases.<br /><br />What you have not mentioned is the number of bands: normally higher bands are more delocalized, so nband does not correlate with ecut, but it will correlate with the vacuum. If you need accurate high-lying bands (e.g. for GW or optics) you need a lot of vacuum.<br /><br /><strong class="text-strong">Final word of warning</strong>: you must always consider the physical quantity you are studying, to check for convergence. The total energy converges quite quickly, but that doesn't mean that phonon frequencies or optical properties are converged: usually they need (many) more bands plane waves and k-points.<br /><br />Cheers<br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=271&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:41 GMT -->
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1196&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:05:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Handful of openMP type, syntax violations in AB 6.8.1</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Handful of openMP type, syntax violations in AB 6.8.1</h2>
+		<p><a href="viewtopicd221.html?f=19&amp;t=1196">https://forum.abinit.org/viewtopic.php?f=19&amp;t=1196</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Handful of openMP type, syntax violations in AB 6.8.1</h3>
+				<div class="date">Posted: <strong>Thu Jun 30, 2011 10:32 pm</strong></div>
+				<div class="author">by <strong>WoodDM</strong></div>
+				<div class="content">My compliments to those responsible for 6.8.1!<br /><br />Out of curiosity, I tried building 6.8.1 with gcc 4.5 and its gfortran counterpart [on Mac OS 10.6.8] by using the COMPILER flags<br /><br />CFLAGS_EXTRA=&quot;-fopenmp&quot;<br />FCFLAGS_EXTRA=&quot;-fopenmp&quot;<br /><br />It appears as if only minor errors prevented AB from building, so I bring these to your attention in case OpenMP support via compiler flags becomes a priority.<br />Here's the output of a 'script' command in which I tried a build:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Making all in 52_fft_mpi_noabirule<br />/opt/local/bin/gfortran-mp-4.5 -m64 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs&nbsp; &nbsp;-ffree-form -J/Volumes/Backups/AntbeeHome/dmwood/incoming/abinit-6.8.1/src/mods -O2 -mtune=native -march=native -mfpmath=sse -m64 -g -ffree-line-length-none -Wstrict-aliasing=2 -fopenmp -c -o back.o back.F90<br />back.F90:124.64:<br /><br />!$omp shared(ndat,n1,n2,n3,nd1,nd2,nd3,nd2proc,nd3proc,mpi_enreg%me_fft,mpi_enr<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Error: Syntax error in OpenMP variable list at (1)<br />back.F90:383.18:<br /><br />!$omp end parallel<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Error: Unexpected !$OMP END PARALLEL statement at (1)<br /><br />/opt/local/bin/gfortran-mp-4.5 -m64 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs&nbsp; &nbsp;-ffree-form -J/Volumes/Backups/AntbeeHome/dmwood/incoming/abinit-6.8.1/src/mods -O2 -mtune=native -march=native -mfpmath=sse -m64 -g -ffree-line-length-none -Wstrict-aliasing=2 -fopenmp -c -o forw.o forw.F90<br />forw.F90:137.64:<br /><br />!$omp shared(ndat,n1,n2,n3,nd1,nd2,nd3,nd2proc,nd3proc,mpi_enreg%me_fft,mpi_enr<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Error: Syntax error in OpenMP variable list at (1)<br />forw.F90:312.18:<br /><br />!$omp end parallel<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Error: Unexpected !$OMP END PARALLEL statement at (1)<br /><br />Making all in 53_ffts<br />/opt/local/bin/gfortran-mp-4.5 -m64 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs&nbsp; &nbsp;-ffree-form -J/Volumes/Backups/AntbeeHome/dmwood/incoming/abinit-6.8.1/src/mods -O2 -mtune=native -march=native -mfpmath=sse -m64 -g -ffree-line-length-none -Wstrict-aliasing=2 -fopenmp -c -o fftw3_fourwf.o fftw3_fourwf.F90<br />fftw3_fourwf.F90:435.26:<br /><br />!$&nbsp; &nbsp;call sg_fftrisc(cplex,dum_denpot,fofgin,dum_fofgin,fofr,gbound,gbound,istw<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Error: Symbol 'cplex' at (1) has no IMPLICIT type<br />fftw3_fourwf.F90:435.37:<br /><br />!$&nbsp; &nbsp;call sg_fftrisc(cplex,dum_denpot,fofgin,dum_fofgin,fofr,gbound,gbound,istw<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1<br />Error: Symbol 'dum_denpot' at (1) has no IMPLICIT type<br />fftw3_fourwf.F90:435.55:<br /><br />!$&nbsp; &nbsp;call sg_fftrisc(cplex,dum_denpot,fofgin,dum_fofgin,fofr,gbound,gbound,istw<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1<br />Error: Symbol 'dum_fofgin' at (1) has no IMPLICIT type<br />fftw3_fourwf.F90:435.91:<br /><br />risc(cplex,dum_denpot,fofgin,dum_fofgin,fofr,gbound,gbound,istwf_k,dum_gvec,gve<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />Error: Symbol 'dum_gvec' at (1) has no IMPLICIT type<br />fftw3_fourwf.F90:435.44:<br /><br />!$&nbsp; &nbsp;call sg_fftrisc(cplex,dum_denpot,fofgin,dum_fofgin,fofr,gbound,gbound,istw<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Error: Symbol 'fofgin' at (1) has no IMPLICIT type<br />fftw3_fourwf.F90:435.96:<br /><br />cplex,dum_denpot,fofgin,dum_fofgin,fofr,gbound,gbound,istwf_k,dum_gvec,gvec,&amp;<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />Error: Symbol 'gvec' at (1) has no IMPLICIT type<br />fftw3_fourwf.F90:435.82:<br /><br />ll sg_fftrisc(cplex,dum_denpot,fofgin,dum_fofgin,fofr,gbound,gbound,istwf_k,dum<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp;<br />Error: Symbol 'istwf_k' at (1) has no IMPLICIT type<br />fftw3_fourwf.F90:436.25:<br /><br />!$&amp;&nbsp; &nbsp; mgfft,ngfft,npwwfn,npwwfn,ldx,ldy,ldz,option,weight)<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1<br />Error: Symbol 'npwwfn' at (1) has no IMPLICIT type<br />fftw3_fourwf.F90:436.51:<br /><br />!$&amp;&nbsp; &nbsp; mgfft,ngfft,npwwfn,npwwfn,ldx,ldy,ldz,option,weight)<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1<br />Error: Symbol 'option' at (1) has no IMPLICIT type<br />fftw3_fourwf.F90:436.58:<br /><br />!$&amp;&nbsp; &nbsp; mgfft,ngfft,npwwfn,npwwfn,ldx,ldy,ldz,option,weight)<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Error: Symbol 'weight' at (1) has no IMPLICIT type<br />make&#91;3&#93;: *** &#91;fftw3_fourwf.o&#93; Error 1<br />/opt/local/bin/gfortran-mp-4.5 -m64 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs&nbsp; &nbsp;-ffree-form -J/Volumes/Backups/AntbeeHome/dmwood/incoming/abinit-6.8.1/src/mods -O2 -mtune=native -march=native -mfpmath=sse -m64 -g -ffree-line-length-none -Wstrict-aliasing=2 -fopenmp -c -o sphere_fft.o sphere_fft.F90<br />sphere_fft.F90:111.21:<br /><br />!$OMP END PARALLEL DO<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1<br />Error: Unexpected !$OMP END PARALLEL DO statement at (1)<br />sphere_fft.F90:112.19:<br /><br />&nbsp;cfft(:,:,:,:)=zero<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1<br />Error: Unexpected assignment statement at (1)<br />sphere_fft.F90:113.74:<br /><br />!$OMP PARALLEL DO PRIVATE(i1,i2,i3,idat,ipw) SHARED(cfft,cg,kg_k,ndat,npw)<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Error: Unexpected !$OMP PARALLEL DO statement at (1)<br />sphere_fft.F90:241.21:<br /><br />!$OMP END PARALLEL DO<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1<br />Error: Unexpected !$OMP END PARALLEL DO statement at (1)<br />sphere_fft.F90:242.19:<br /><br />&nbsp;cfft(:,:,:,:)=zero<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1<br />Error: Unexpected assignment statement at (1)<br />sphere_fft.F90:243.74:<br /><br />!$OMP PARALLEL DO PRIVATE(i1,i2,i3,idat,ipw) SHARED(cfft,cg,kg_k,ndat,npw)<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br />Error: Unexpected !$OMP PARALLEL DO statement at (1)</code></pre></div><br /><br />Best wishes!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Handful of openMP type, syntax violations in AB 6.8.1</h3>
+				<div class="date">Posted: <strong>Fri Jul 01, 2011 9:26 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />it's perhaps a good idea, if OpenMPI support is becoming a priority , to have a bot in the testfarm for testing the OpenMPI<br /><br />thanks<br /><br />jmb</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1196&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:05:17 GMT -->
+</html>

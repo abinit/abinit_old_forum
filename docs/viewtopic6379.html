@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=754&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:31:52 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; berry phase-BUG</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>berry phase-BUG</h2>
+		<p><a href="viewtopic13d8.html?f=9&amp;t=754">https://forum.abinit.org/viewtopic.php?f=9&amp;t=754</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>berry phase-BUG</h3>
+				<div class="date">Posted: <strong>Tue Nov 16, 2010 12:53 pm</strong></div>
+				<div class="author">by <strong>mina</strong></div>
+				<div class="content">Hello,<br />i'm calculating polarization of bifeo3 by abinit.when i run my job i have a BUG for my berry phase.i have sent my input file and my bug.<br />please guide me what part of my input is rong?what i have to do with this BUG?<br />thankyou.Best regards.<br />input file:<br />berryopt -1<br />rfdir 1 1 1<br />kptopt 1<br />ngkpt 2 2 2<br />nshiftk 1<br />shiftk 0.5 0.5 0.5<br />ntypat 3<br />znucl 83 26 8<br />nstep 100<br />toldfe 1.0d-10<br />diemac 9.0<br />natom 10<br />natrd 3<br />typat 6*1 6*2 18*3<br />acell 5.58132 5.58132 13.87698<br />angdeg 90 90 120<br />chkprim 0<br />spgroup 161<br />brvltt -1<br />xred 0.000000000 0.000000000 0.000000000<br />     0.000000000 0.000000000 0.221200004<br />     0.442999989 0.012000000 0.954299986<br />ecut 30<br />ixc 1<br />iscf 3 <br /><br />berryphase_new : BUG -<br />  For k-point #    3,<br />  the determinant of the overlap matrix is found to be 0.<br />  Action : contact ABINIT group.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: berry phase-BUG</h3>
+				<div class="date">Posted: <strong>Tue Nov 16, 2010 7:52 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">I'm not sure your kpt grid is consistent with your lattice, I think you should be using shiftk 0 0 1/2 in this case. Use prtkpt 1 to find a list of useable kpt grids.<br /><br />Also, your natom is not consistent with typat: you have natom 10, but define 30 atoms in your typat statement. I take it you are trying to construct the primitive unit cell from the conventional cell (because you have brvltt -1) right?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: berry phase-BUG</h3>
+				<div class="date">Posted: <strong>Sat Nov 20, 2010 7:13 am</strong></div>
+				<div class="author">by <strong>mina</strong></div>
+				<div class="content">Thankyou professor jzwanzig,i think my problem is this i have problem with primitive and conventinal cell.could you please explain them?<br />best regards.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: berry phase-BUG</h3>
+				<div class="date">Posted: <strong>Mon Nov 22, 2010 6:07 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Just review any basic book on crystallography. The idea is this: for some space groups, the unit cell that displays all symmetries (called the conventional unit cell) is bigger than the minimal unit cell; for other space groups, the two cells are the same. If the space group name starts with a P, then the primitive cell coincides with the conventional cell. But for example group 225, Fm-3m, which is face-centered cubic, has a conventional unit cell that is a cube but a smaller primitive cell. You will find simple examples like this in solid state physics texts like Ashcroft and Mermin, for more complicated examples (body centered tetragonal, face centered monoclinic etc) you have to go to a real crystallography book.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=754&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:31:52 GMT -->
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3031&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:34:09 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Hardware question</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Hardware question</h2>
+		<p><a href="viewtopicdcf8.html?f=3&amp;t=3031">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3031</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Hardware question</h3>
+				<div class="date">Posted: <strong>Fri Jun 19, 2015 8:55 am</strong></div>
+				<div class="author">by <strong>amir</strong></div>
+				<div class="content">Hi.<br /><br />I am not sure if here is the right place for asking this question, but I couldn't find any other index more relevant. <br /><br />I'm running my jobs on university's HPC, but the queues are long. I will be working with systems containing 100-200 atoms. My question is if it makes sense to buy a workstation with 6, 10, 12 or more cores. If so, what other specifications shall I take into account? I'd appreciate your suggestions.<br /><br />Thanks,<br />Amir</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Hardware question&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Fri Jun 19, 2015 10:06 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">This is my personal advise.<br /><br />For system with 100-200 atoms with let say ~10 valence electrons, you have between 1000 and 2000 bands in your problem - times 2 if the system is polarized.<br />Then for such a system you'll need between 1 and a few dozen kpt maybe. <br />Let assume you want to parallelize that you will first parallelize over kpt (let say 10 cpus) then bands ( at least 10 cpus again (~100 bands per cpu which is already a lot !) and maybe 2 or 4 for the FFT.<br />You are already at 10*10*2=200 cpus.<br />Of course 1000 cpus would make the calculation even faster.<br />Depending on what application you will run, 100 CPUS can be enough for a ground state calculation, dos,... Bug if you go to DFPT, MD or other stuff that already heavier 1000 cpus is more what you wish to have.<br /><br />So with a workstation with 12 core, even 24 or 48, you will spend time just for one calculation.<br /><br />An other consideration is the memory. with 1000 - 2000 bands and a few kpt, you'll need memory. I would not bet that on a 12 cores machine such a calculation fits in memory (usually 32Go, maybe 64Go)<br />The MPI parallelization will distribute the memory on all the core so each core needs less memory. so with 10 nodes of 12 cores and 32Go each you have 320Go for the calculation with ~2.6Go per core.<br /><br />I've just tried a 720 bands and 26 kpt supercell, it does not fit on my 32Go and 12 cores. and of course any iteration is looooooooooooooooooooooooooooooooooong.<br />On 1560 cpus it takes already severals minutes per SCF steps...<br /><br />I'd better spend time waiting in the queue and have the CPUS+memory that fit you needs. But make sure to tune your parallelization before the &quot;real&quot; calculation. Be sure the input is correct, the number of cpus is ok and so on.<br /><br />Cheers<br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Hardware question</h3>
+				<div class="date">Posted: <strong>Mon Jun 22, 2015 7:10 pm</strong></div>
+				<div class="author">by <strong>amir</strong></div>
+				<div class="content">Thanks Jordan. I was looking for an answer like this to give my some view. If we can get a funding, we will go for nodes. Do you have any recommendation/advice on that?<br /><br />Thanks for your time again <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /><br /><br />Cheers,<br />Amir</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Hardware question</h3>
+				<div class="date">Posted: <strong>Tue Jun 23, 2015 9:11 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">I have never bought myself nodes but I usually prefer nodes with at least 3Go of memory per core (for large calculations) and cpu with large cache L2 memory.<br />For some calculation which need a lot of memory, even if the frequency is lower having a large L2 can increase the speed of the calculation compared to a high frequency CPU and small L2.<br />I would recommend you test on several configuration a typical run you will do and see what's most important.<br />Also for MPI parallelization don't neglect the inter-connexion of the nodes (fast InfiBand network and so on).<br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Hardware question</h3>
+				<div class="date">Posted: <strong>Tue Jun 23, 2015 8:59 pm</strong></div>
+				<div class="author">by <strong>amir</strong></div>
+				<div class="content">Thank you Jordan. I appreciate it.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3031&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:34:09 GMT -->
+</html>

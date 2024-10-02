@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=3502&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:57:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; BUG in Abinit 8.0.8 in abi_xheev.f90 routine</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>BUG in Abinit 8.0.8 in abi_xheev.f90 routine</h2>
+		<p><a href="viewtopicaa82.html?f=19&amp;t=3502">https://forum.abinit.org/viewtopic.php?f=19&amp;t=3502</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>BUG in Abinit 8.0.8 in abi_xheev.f90 routine</h3>
+				<div class="date">Posted: <strong>Fri Feb 03, 2017 9:09 am</strong></div>
+				<div class="author">by <strong>Dominic</strong></div>
+				<div class="content">I have encountered a bug where it expected a complex number but received a double, it is found in abi_xheev.f90<br /><br />abi_xheev.f90<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;<br />...<br />real(dp),target, intent(inout) :: a(lda,*)<br />...<br />&nbsp;call magmaf_zheevd(jobz,uplo,n,a,...)<br />...<br /></code></pre></div><br /><br />as I checked zheevd should receive a complex number in its fourth parameter from the left, but Abinit submits a double data type resulting to an error with the following message:<br /><br />Error Message<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Problem in abi_xheev, info -8<br />Parameter incorrect?</code></pre></div><br /><br />When could we see this corrected?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: BUG in Abinit 8.0.8 in abi_xheev.f90 routine</h3>
+				<div class="date">Posted: <strong>Mon Feb 06, 2017 9:10 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Abinit does not use complex for the most part of the code. <br />We usually have arrays of the shape (2,*) with (1,*) the real part and (2,*) the imaginary part.<br />Fortran does not check the type of the argument for pure subroutine. Therefore abinit arrays can be seen as 1D-complex array or 2D-real arrays in memory.<br />The error -8 means that argument 8 is wrong but as far as I can see it correspond to LWORK which is the dimension of WORK. Probably this temporary array is to small.<br /><br />Could you provide the test case ?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: BUG in Abinit 8.0.8 in abi_xheev.f90 routine Fix</h3>
+				<div class="date">Posted: <strong>Fri Feb 17, 2017 5:53 pm</strong></div>
+				<div class="author">by <strong>Dominic</strong></div>
+				<div class="content">Hi, I found the Culprit and I was able to solve the LWORK parameter problem. <br /><br />What I found out is that abi_xheev.f90 was initiating the wrong LWORK, though the old code did work for some cases, but the way at which it is being set will not always be valid due to some unknown variation. The proper way of setting LWORK was, according to documentation (MAMGA source code)<br />1. let MAGMA survey the amount of WORK to be done by setting LWORK = -1, LWORK = -1 will not proceed with calculations in the routine.<br />2. this will spit out the correct value of LWORK from the first element of WORK.<br />3. then get the value of WORK(1) as the correct LWORK<br /><br />That was the proper way of setting LWORK, but in abi_xheevd, it was different<br /><br />This is how LWORK was being set from the original Abinit code<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>lwork=n**2&nbsp; 33*n</code></pre></div><br /><br />Bug fix:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>!Initiate dummy array here (should not be similar to the arrays and variables used by the original <br />!magmaf_zheevd so as magma will not overwrite the original variables)<br /><br />!LWORK=n**2&nbsp; 33*n<br /><br />!plan for lwork<br />magmaf_zheevd(jobs,uplo,n,a,lda,w,cwork_(1),-1,crwork_(1:lrwork_),lrwork_,ciwork_,liwork,info)<br /><br />!set lwork, this time it should be ircwork since magma overwrites LWORK<br />rcwork = REAL(cwork_(1)) !complex? to real<br />IRCWORK = rcwork_ !real to integer<br /><br />!here goes the original abinit magmaf_zheevd code<br />magmaf_zheevd(***(1:2*IRCWORK),IRCWORK,***) ! LWORK is now IRCWORK, WORK is also being overwritten by the magma survey so its name should be different here.<br /><br /></code></pre></div><br /><br />Fix should also be done on other ABI code implementing the wrong LWORK, after this, things will be running fine and expected for double precision calculations.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=3502&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:57:18 GMT -->
+</html>

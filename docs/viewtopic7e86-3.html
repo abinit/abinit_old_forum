@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=584&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Compilation failure on linux during lebedev_quadrature_cplx</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Compilation failure on linux during lebedev_quadrature_cplx</h2>
+		<p><a href="viewtopic8e56.html?f=3&amp;t=584">https://forum.abinit.org/viewtopic.php?f=3&amp;t=584</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Compilation failure on linux during lebedev_quadrature_cplx</h3>
+				<div class="date">Posted: <strong>Thu Sep 09, 2010 4:57 pm</strong></div>
+				<div class="author">by <strong>rpmuller</strong></div>
+				<div class="content">Just downloaded a new version of abinit-6.2.3. Compiling on a RHE 5.0 Linux system using gfortran 4.1.2 and gcc 4.1.2.<br /><br />I'm getting the following error during compilation:<br /><br />gfortran -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs   -ffree-form -J/home/rmuller/Programs/abinit-6.2.3/src/mods -I/home/rmuller/Programs/abinit-6.2.3/src/mods -O3 -fschedule-insns2 -march=nocona -mmmx -msse -msse2 -msse3 -mfpmath=sse -g   -c -o m_lebedev.o m_lebedev.F90<br />m_lebedev.F90: In function ‘lebedev_quadrature_cplx’:<br />m_lebedev.F90:469: internal compiler error: in modified_type_die, at dwarf2out.c:8495<br />Please submit a full bug report,<br />with preprocessed source if appropriate.<br />See &lt;URL:http://bugzilla.redhat.com/bugzilla&gt; for instructions.<br />make[3]: *** [m_lebedev.o] Error 1<br /><br />Has anyone seen this? Can anyone offer a workaround, such as downgrading to an earlier version of abinit?<br /><br />Thanks in advance,<br /><br />Rick</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compilation failure on linux during lebedev_quadrature_c</h3>
+				<div class="date">Posted: <strong>Thu Sep 09, 2010 5:00 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Upgrading GCC to a newer version is a better solution. You won't be able to build Abinit with GCC 4.1.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compilation failure on linux during lebedev_quadrature_c</h3>
+				<div class="date">Posted: <strong>Thu Sep 09, 2010 5:10 pm</strong></div>
+				<div class="author">by <strong>rpmuller</strong></div>
+				<div class="content">Appears to work with abinit version 6.0.4.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compilation failure on linux during lebedev_quadrature_c</h3>
+				<div class="date">Posted: <strong>Thu Sep 09, 2010 9:21 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Please note that we don't support this old and incomplete version of gfortran, since it is not compatible with our development plans.<br /><br />However, what I can suggest you is to recompile the routine manually without optimization. It may work. No guarantee at all, though.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=584&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:51 GMT -->
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=551&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:53:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Old f90 fails to compile src/27_toolbox_oop/m_iterators.F90</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Old f90 fails to compile src/27_toolbox_oop/m_iterators.F90</h2>
+		<p><a href="viewtopicfb2c.html?f=19&amp;t=551">https://forum.abinit.org/viewtopic.php?f=19&amp;t=551</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Old f90 fails to compile src/27_toolbox_oop/m_iterators.F90</h3>
+				<div class="date">Posted: <strong>Tue Aug 24, 2010 7:43 am</strong></div>
+				<div class="author">by <strong>t-nissie</strong></div>
+				<div class="content">Hi,<br /><br />Old Hitachi f90 compiler for SR11000 fails to<br />compile src/27_toolbox_oop/m_iterators.F90.<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--- ../../../src/27_toolbox_oop/m_iterators.F90 2010-07-18 03:58:57.000000000 +0900<br />+++ ./m_iterators.F90&nbsp; &nbsp;2010-07-26 21:29:21.000000000 +0900<br />@@ -290,7 +290,7 @@<br />&nbsp; do i2=LBOUND(Iter2%slice,DIM=2),UBOUND(Iter2%slice,DIM=2)<br />&nbsp; &nbsp; do i1=LBOUND(Iter2%slice,DIM=1),UBOUND(Iter2%slice,DIM=1)<br />&nbsp; &nbsp; &nbsp; Iter2%slice(i1,i2)%leng=0<br />-&nbsp; &nbsp; &nbsp;Iter2%slice(i1,i2)%indx =&gt; null()<br />+&nbsp; &nbsp; &nbsp;nullify(Iter2%slice(i1,i2)%indx)<br />&nbsp; &nbsp; end do<br />&nbsp; end do<br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Old f90 fails to compile src/27_toolbox_oop/m_iterators.</h3>
+				<div class="date">Posted: <strong>Sat Sep 04, 2010 8:58 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hi,<br /><br />ok, this has been incorporated in 6.2.3 (next production release). Eventually we will have to abandon non-conforming compilers, there are a few other instances of =&gt;null() and it is legal f90!<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Old f90 fails to compile src/27_toolbox_oop/m_iterators.</h3>
+				<div class="date">Posted: <strong>Sun Sep 05, 2010 6:25 am</strong></div>
+				<div class="author">by <strong>gonze</strong></div>
+				<div class="content"><blockquote><div><cite>mverstra wrote:</cite>ok, this has been incorporated in 6.2.3 (next production release)</div></blockquote><br />Unfortunately not : was slightly too late.<br />But has been incorporated in 6.3.1, so will appear in one month or so in 6.4.x<br /><br />Xavier</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=551&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:53:24 GMT -->
+</html>

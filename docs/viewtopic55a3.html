@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1570&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:15:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [FIXED 6.13] tutorial nlo calculations fails.</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[FIXED 6.13] tutorial nlo calculations fails.</h2>
+		<p><a href="viewtopic35bf-2.html?f=10&amp;t=1570">https://forum.abinit.org/viewtopic.php?f=10&amp;t=1570</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[FIXED 6.13] tutorial nlo calculations fails.</h3>
+				<div class="date">Posted: <strong>Sun Mar 18, 2012 8:08 pm</strong></div>
+				<div class="author">by <strong>roginovicci</strong></div>
+				<div class="content">Following &quot;lesson on static non-linear properties&quot; <a href="http://www.abinit.org/documentation/helpfiles/for-v6.8/tutorial/lesson_nlo.html" class="postlink">http://www.abinit.org/documentation/helpfiles/for-v6.8/tutorial/lesson_nlo.html</a> In section Part-0. Ground-state properties of AlAs and general parameters there is a bug while running tnlo_2 calculations.<br />Abinit version 6.8.2, running command:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>mpirun -np 2 abinit &lt; tnlo_2.files</code></pre></div><br /><br />always fails with <br /><em class="text-italics">Fatal error in MPI_Recv: Message truncated, error stack:<br />MPI_Recv(186).....................: MPI_Recv(buf=0x5bf9cf0, count=1824, MPI_DOUBLE_PRECISION, src=0, tag=144, MPI_COMM_WORLD, status=0x26ed590) failed<br />MPIDI_CH3U_Receive_data_found(129): Message from rank 0 and tag 144 truncated; 14784 bytes received but buffer size is 14592<br />rank 1 in job 3  fourier_53886   caused collective abort of all ranks<br />  exit status of rank 1: killed by signal 9 </em><br /><br /> tnlo_2.files is:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>tnlo_2.in<br />tnlo_2.out<br />tnlo_2i<br />tnlo_2o<br />tnlo_2<br />13al.pspnc<br />33as.pspnc<br /></code></pre></div><br /><br />tnlo_2.in is:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># Linear and nonlinear response calculation for AlAs<br /># Perturbations: electric fields &amp; atomic displacements<br /># (M. Veithen, 21.4.2005)<br /><br />#Definition of lattice parameters<br />#********************************<br />&nbsp; &nbsp;acell&nbsp; &nbsp; &nbsp; &nbsp;3*10.53<br />&nbsp; &nbsp;rprim&nbsp; &nbsp; &nbsp; &nbsp;0.0 0.5 0.5<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.5 0.0 0.5<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.5 0.5 0.0<br /><br />#Definition of atomic positions and types<br />#*************************************<br />&nbsp; &nbsp;natom&nbsp; &nbsp; &nbsp; &nbsp;2<br />&nbsp; &nbsp;ntypat&nbsp; &nbsp; &nbsp; 2<br />&nbsp; &nbsp;znucl&nbsp; &nbsp; &nbsp; &nbsp;13 33<br />&nbsp; &nbsp;typat&nbsp; &nbsp; &nbsp; &nbsp;1 2<br />&nbsp; &nbsp;xred&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; 0&nbsp; &nbsp; 0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.25 0.25 0.25<br />&nbsp; &nbsp;ixc&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3<br /><br />#Parameters of the SCF cycles<br />#****************************<br />&nbsp; &nbsp;iscf&nbsp; &nbsp; &nbsp; &nbsp; 5<br />&nbsp; &nbsp;nstep&nbsp; &nbsp; &nbsp; &nbsp;100<br /><br /><br />#Plane wave basis and k-point grid<br />#*********************************<br />&nbsp; &nbsp;ecut&nbsp; &nbsp; &nbsp; &nbsp; 2.8<br />&nbsp; &nbsp;ecutsm&nbsp; &nbsp; &nbsp; 0.5<br />&nbsp; &nbsp;dilatmx&nbsp; &nbsp; &nbsp;1.05<br />&nbsp; &nbsp;ngkpt&nbsp; &nbsp; &nbsp; &nbsp;6 6 6<br />&nbsp; &nbsp;nshiftk&nbsp; &nbsp; &nbsp;4<br />&nbsp; &nbsp;shiftk&nbsp; &nbsp; &nbsp; 0.5 0.5 0.5<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.5 0.0 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0 0.5 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0 0.0 0.5<br /><br />ndtset 5&nbsp; &nbsp; &nbsp;jdtset 1 2 3 4 5<br />#DATASET1 : scf calculation: GS WF in the BZ<br />#********************************************<br />&nbsp; &nbsp;prtden1&nbsp; &nbsp; 1<br />&nbsp; &nbsp;kptopt1&nbsp; &nbsp; 1<br />&nbsp; &nbsp;toldfe1&nbsp; &nbsp; 1.0d-12<br /><br />#DATASET2 : non scf calculation: GS WF in the whole BZ<br />#*****************************************************<br />&nbsp; &nbsp;getden2&nbsp; &nbsp; 1<br />&nbsp; &nbsp;kptopt2&nbsp; &nbsp; 2<br />&nbsp; &nbsp; &nbsp;iscf2&nbsp; &nbsp;-2<br />&nbsp; &nbsp;getwfk2&nbsp; &nbsp; 1<br />&nbsp; &nbsp;tolwfr2&nbsp; &nbsp; 1.0d-22<br />&nbsp; &nbsp; nband2&nbsp; &nbsp; 4<br /><br />&nbsp; &nbsp;<br />#DATASET3 : ddk on the MP grid of k-points<br />#*****************************************<br />&nbsp; &nbsp;getwfk3&nbsp; &nbsp; 2<br />&nbsp; &nbsp; rfdir3&nbsp; &nbsp; 1 1 1<br />&nbsp; &nbsp;rfelfd3&nbsp; &nbsp; 2<br />&nbsp; &nbsp;tolwfr3&nbsp; &nbsp; 1.0d-22<br />&nbsp; &nbsp; nband3&nbsp; &nbsp; 4<br />&nbsp; &nbsp;kptopt3&nbsp; &nbsp; 2<br /><br />#DATASET4 : ddE on the MP grid of k-points<br />#*****************************************<br />&nbsp; &nbsp;prtden4&nbsp; &nbsp; 1<br />&nbsp; &nbsp;getwfk4&nbsp; &nbsp; 2<br />&nbsp; &nbsp;getddk4&nbsp; &nbsp; 3<br />&nbsp; &nbsp; rfdir4&nbsp; &nbsp; 1 1 1<br />&nbsp; &nbsp;rfphon4&nbsp; &nbsp; 1<br />&nbsp; rfatpol4&nbsp; &nbsp; 1 2<br />&nbsp; &nbsp;tolvrs4&nbsp; &nbsp; 1.0d-12<br />&nbsp; &nbsp;rfelfd4&nbsp; &nbsp; 3<br />&nbsp; &nbsp; nband4&nbsp; &nbsp; 4<br />&nbsp; &nbsp;kptopt4&nbsp; &nbsp; 2<br />&nbsp; prepanl4&nbsp; &nbsp; 1<br />#DATASET5 : 3DTE calculation<br />#***************************<br />&nbsp; &nbsp;getden5&nbsp; &nbsp; 1<br />&nbsp; get1den5&nbsp; &nbsp; 4<br />&nbsp; &nbsp;getwfk5&nbsp; &nbsp; 2<br />&nbsp; &nbsp;get1wf5&nbsp; &nbsp; 4<br />&nbsp; &nbsp; nband5&nbsp; &nbsp; 4<br />&nbsp; &nbsp;kptopt5&nbsp; &nbsp; 2<br />optdriver5&nbsp; &nbsp; 5<br />&nbsp; rf1elfd5&nbsp; &nbsp; 1<br />&nbsp; rf1phon5&nbsp; &nbsp; 1<br />&nbsp;rf1atpol5&nbsp; &nbsp; 1 2<br />&nbsp; &nbsp;rf1dir5&nbsp; &nbsp; 1 1 1<br />&nbsp; rf2elfd5&nbsp; &nbsp; 1<br />&nbsp; &nbsp;rf2dir5&nbsp; &nbsp; 1 1 1<br />&nbsp; rf3elfd5&nbsp; &nbsp; 1<br />&nbsp; &nbsp;rf3dir5&nbsp; &nbsp; 1 1 1<br /><br />nbdbuf 0<br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [BUG] tutorial nlo calculations fails.</h3>
+				<div class="date">Posted: <strong>Mon Apr 02, 2012 10:30 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">see <!-- l --><a class="postlink-local" href="viewtopicf7d1.html?f=10&amp;t=1530">viewtopic.php?f=10&amp;t=1530</a><!-- l --></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1570&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:15:48 GMT -->
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=689&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; abinit 6.4.1 + etsfio 1.0.3?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>abinit 6.4.1 + etsfio 1.0.3?</h2>
+		<p><a href="viewtopic695d.html?f=3&amp;t=689">https://forum.abinit.org/viewtopic.php?f=3&amp;t=689</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>abinit 6.4.1 + etsfio 1.0.3?</h3>
+				<div class="date">Posted: <strong>Mon Oct 25, 2010 10:32 pm</strong></div>
+				<div class="author">by <strong>sbecuwe</strong></div>
+				<div class="content">Hello,<br /><br />I'm trying to install Abinit 6.4.1 together with ETSFIO 1.0.3. (Intel 11.1 compilers) It seems there's a problem.  The referenced files no longer exist in ETSFIO 1.0.3, but did exist in previous versions.<br /><br />mpiifort -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs -I/apps/ETSFIO/1.0.3-ictce-3.2.1.015.u1/include/intel -I/apps/netCDF/4.0.1-ictce-3.2.1.015.u1/include   -free -module /tmp/ABINIT/6.4.1/ictce-3.2.1.015.u1-mpi/ictce-3.2.1.015.u1-mpi/abinit-6.4.1/src/mods -O3 -xHost -g -extend-source -vec-report0 -noaltparam -nofpscomp  -c -o pawmkaewf.o pawmkaewf.F90<br />pawmkaewf.F90(102): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [ETSF_IO_FILE]<br /> use etsf_io_file,     only : etsf_io_file_merge<br />-----^<br />pawmkaewf.F90(893): error #6406: Conflicting attributes or multiple declaration of name.   [ETSF_IO_FILE_MERGE]<br />     call etsf_io_file_merge(out_file,merge_files,lstat,Error)<br />----------^<br />pawmkaewf.F90(102): error #6580: Name in only-list does not exist.   [ETSF_IO_FILE_MERGE]<br /> use etsf_io_file,     only : etsf_io_file_merge<br />------------------------------^<br />compilation aborted for pawmkaewf.F90 (code 1)<br />make[2]: *** [pawmkaewf.o] Error 1<br /><br /><br />Regards<br /><br />Stefan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 6.4.1 + etsfio 1.0.3?</h3>
+				<div class="date">Posted: <strong>Tue Oct 26, 2010 9:25 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Dear Stefan,<br /><br />thanks for reporting the problem. It has been solved in 642.<br />For the time being one can simply remove the call to etsf_io_file_merge <br />as well as the statement: &quot;use etsf_io_file, only etsf_io_file_merge&quot;<br /><br />The merge tool is only needed for the parallel execution but, in version 642, <br />pawmkaewf cannot be run in parallel hence etsf_io_file_merge won't never be called.<br /><br />Matteo</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=689&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:35 GMT -->
+</html>

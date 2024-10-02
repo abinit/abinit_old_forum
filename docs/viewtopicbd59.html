@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2106&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:43:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; NetCDF on Mac OS</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>NetCDF on Mac OS</h2>
+		<p><a href="viewtopicd084-2.html?f=3&amp;t=2106">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2106</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>NetCDF on Mac OS</h3>
+				<div class="date">Posted: <strong>Tue Apr 30, 2013 9:59 pm</strong></div>
+				<div class="author">by <strong>gabriel.antonius</strong></div>
+				<div class="content">Dear all,<br />Compiling abinit with netcdf on Mac OS has always been troublesome for me.<br />With abinit-7.2.2, whether I try to use the fallback or the one from macport, I get the following error:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp; &nbsp;Error: Function 'ncfile_create' at (1) has no IMPLICIT type<br /></code></pre></div><br /><br />So it seems the header file is unuseable, despite its acceptance from the 'configure' script.<br /><br />My configuration file is:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp; &nbsp;enable_mpi=&quot;yes&quot;<br />&nbsp; &nbsp;with_mpi_prefix=&quot;/opt/local/lib/openmpi&quot;<br />&nbsp; &nbsp;enable_mpi_io=&quot;no&quot;<br /><br />&nbsp; &nbsp;with_fft_flavor=&quot;none&quot;<br />&nbsp; &nbsp;with_linalg_flavor=&quot;none&quot;<br />&nbsp; &nbsp;with_trio_flavor=&quot;netcdf&quot;<br /><br />&nbsp; &nbsp;with_dft_flavor=&quot;libxc&quot;<br />&nbsp; &nbsp;enable_gw_dpc=&quot;yes&quot;<br />&nbsp; &nbsp;enable_64bit_flags=&quot;yes&quot;<br /></code></pre></div><br /><br />To use the netcdf from macport, I add the line<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp; &nbsp;with_netcdf_incs=&quot;-I/opt/local/include&quot;<br />&nbsp; &nbsp;with_netcdf_libs=&quot;-L/opt/local/lib -lnetcdf -lnetcdff -lnetcdf_c++&quot;<br /></code></pre></div><br /><br />and I use the ports:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp; &nbsp;netcdf @4.2.1.1_1+dap+netcdf4<br />&nbsp; &nbsp;netcdf-fortran @4.2_5+gcc45<br />&nbsp; &nbsp;netcdf-cxx @4.2_1<br /></code></pre></div><br /><br />My compilers are:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp; &nbsp;port:<br />&nbsp; &nbsp;&nbsp; &nbsp;openmpi @1.6.3_0+gcc45<br /><br />&nbsp; &nbsp;openmpif90:<br />&nbsp; &nbsp;&nbsp; &nbsp;GNU Fortran (MacPorts gcc45 4.5.4_6) 4.5.4<br /><br />&nbsp; &nbsp;openmpicc and openmpicxx:<br />&nbsp; &nbsp;&nbsp; &nbsp;Apple clang version 4.1 (tags/Apple/clang-421.11.66) (based on LLVM 3.1svn)<br />&nbsp; &nbsp;&nbsp; &nbsp;Target: x86_64-apple-darwin12.2.0<br />&nbsp; &nbsp;&nbsp; &nbsp;Thread model: posix<br /></code></pre></div><br /><br />My hardware is:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;&nbsp; &nbsp;Model: MacBookPro6,2<br />&nbsp; &nbsp;Processor: Intel Core i7<br /></code></pre></div><br /><br />Does anyone have recipe to compile with netcdf on mac?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: NetCDF on Mac OS&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Wed May 01, 2013 1:37 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Hi Gabriel,<br /><br />I think the problem is due to the fact that you are not enabling ETSF-IO<br />try with this patch:<br /><br />=== modified file 'src/95_drive/outscfcv.F90'<br />--- src/95_drive/outscfcv.F90	2013-04-13 10:47:41 +0000<br />+++ src/95_drive/outscfcv.F90	2013-04-30 23:30:22 +0000<br />@@ -1021,7 +1021,7 @@<br /> !  TODO should be addeded to dtfil_init1<br />    fname = strcat(dtfil%filnam_ds(4),&quot;_GSR&quot;)<br /> !  fname = &quot;hello_crystal&quot;<br />-#ifdef HAVE_TRIO_NETCDF<br />+#ifdef HAVE_TRIO_ETSF_IO<br />    NCF_CHECK(ncfile_create(ncf,fname,NF90_CLOBBER),&quot;Opening file&quot;)<br />    call crystal_ncwrite(Crystal,ncf%ncid)<br />    call bands_ncwrite(Bands,ncf%ncid)<br /> <br /><br />Note, however, that many of the routines that write netcdf files rely on the <br />ETSF-IO library. Hence one should always enable both ETSF-IO and NETCDF. <br /><br /><br />Hope it helps,<br />Matteo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: NetCDF on Mac OS</h3>
+				<div class="date">Posted: <strong>Wed May 01, 2013 4:27 pm</strong></div>
+				<div class="author">by <strong>gabriel.antonius</strong></div>
+				<div class="content">Yep! Adding the line<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>with_trio_flavor=&quot;netcdf+etsf_io&quot;</code></pre></div><br />did the trick.<br />Indeed, that was the default and I should have relied on that.<br />Many thanks!</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2106&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:43:06 GMT -->
+</html>

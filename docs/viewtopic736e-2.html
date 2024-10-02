@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=968&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:43:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; ibm sequential compilation</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>ibm sequential compilation</h2>
+		<p><a href="viewtopicf803-2.html?f=3&amp;t=968">https://forum.abinit.org/viewtopic.php?f=3&amp;t=968</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>ibm sequential compilation</h3>
+				<div class="date">Posted: <strong>Sat Mar 19, 2011 6:37 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello,<br /><br />ibm compiler triggers the following in config.h:<br /><br /># The IBM Fortran compiler crashes if the mpi module is included<br /># more than once<br />if test &quot;${abi_fc_vendor}&quot; = &quot;ibm&quot;; then<br />  { $as_echo &quot;$as_me:$LINENO: activating MPI workaround for the IBM Fortran compiler&quot; &gt;&amp;5<br />$as_echo &quot;$as_me: activating MPI workaround for the IBM Fortran compiler&quot; &gt;&amp;6;}<br /><br />cat &gt;&gt;confdefs.h &lt;&lt;\_ACEOF<br />#define HAVE_MPI_INCLUDED_ONCE 1<br />_ACEOF<br />  <br />fi<br /><br />but this makes the compilation fail later on for the sequential build, which checks that the correct cpp tricks have been used, and fails if HAVE_MPI is false and HAVE_MPI_INCLUDED_ONCE is true... The IBM patch above should be conditional to MPI being used at all, of course.<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ibm sequential compilation&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Mon Mar 21, 2011 11:28 am</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Fixed in pouillon/6.6.2-public/566.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=968&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:43:03 GMT -->
+</html>

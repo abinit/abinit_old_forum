@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4495&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:15:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Segmentation fault - invalid memory reference error in abinit-8.10.3 when running ground state calculation</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Segmentation fault - invalid memory reference error in abinit-8.10.3 when running ground state calculation</h2>
+		<p><a href="viewtopiccf54.html?f=9&amp;t=4495">https://forum.abinit.org/viewtopic.php?f=9&amp;t=4495</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Segmentation fault - invalid memory reference error in abinit-8.10.3 when running ground state calculation&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Sat Aug 08, 2020 8:08 pm</strong></div>
+				<div class="author">by <strong>shivaprasad</strong></div>
+				<div class="content">Dear abinit users and developers,<br>
+<br>
+I have configured and compiled abinit -8.10.3 in a HPC-cluster running Cent OS 7. Abinit is configured with below configuration file. I am using Intel parallel_studio_xe_2019 update 4 cluster edition.<br>
+n199.ac:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>FC="mpif90"
+CC="mpicc"
+CXX="mpicxx"
+enable_mpi="yes"
+enable_openmp="yes"
+enable_mpi-io="yes"
+with_tardir="/home/shiva/.abinit/tarballs"
+enable_fallbacks="yes"
+with_trio_flavor="netcdf"
+with_fft_flavor="fftw3"
+with_linalg_flavor="mkl" 
+with_dft_flavor="libxc" 
+</code></pre></div>
+The netcdf version 4.1.1 is and libxc version 3.0.0  are used.<br>
+<br>
+The abinit program was configured and compiled without any error message. But, when I try to run the Si  calculation I am getting "Program received signal SIGSEGV: Segmentation fault - invalid memory reference" error and the program stops.  The err file shows the below message:<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>libi40iw-i40iw_vmapped_qp: failed to pin memory for SQ
+libi40iw-i40iw_ucreate_qp: failed to map QP
+libi40iw-i40iw_vmapped_qp: failed to pin memory for SQ
+libi40iw-i40iw_ucreate_qp: failed to map QP
+libi40iw-i40iw_vmapped_qp: failed to pin memory for SQ
+libi40iw-i40iw_ucreate_qp: failed to map QP
+libi40iw-i40iw_vmapped_qp: failed to pin memory for SQ
+libi40iw-i40iw_ucreate_qp: failed to map QP
+libi40iw-i40iw_vmapped_qp: failed to pin memory for SQ
+libi40iw-i40iw_ucreate_qp: failed to map QP
+libi40iw-i40iw_vmapped_qp: failed to pin memory for SQ
+libi40iw-i40iw_ucreate_qp: failed to map QP
+libi40iw-i40iw_vmapped_qp: failed to pin memory for SQ
+libi40iw-i40iw_ucreate_qp: failed to map QP
+libi40iw-i40iw_vmapped_qp: failed to pin memory for SQ
+libi40iw-i40iw_ucreate_qp: failed to map QP
+
+Program received signal SIGSEGV: Segmentation fault - invalid memory reference.
+
+Backtrace for this error:
+
+Program received signal SIGSEGV: Segmentation fault - invalid memory reference.
+
+Backtrace for this error:
+#0  0x2B44CA4C5697
+#1  0x2B44CA4C5CDE
+#2  0x2B44CC83B3AF
+#3  0x2B455CE4AB76
+#0  0x2B7104E85697
+#4  0x2B44C61EF7A2
+#1  0x2B7104E85CDE
+#5  0x2B44C4051DC5#2  0x2B71071FB3AF
+
+#3  0x2B719780AB76
+#4  0x2B7100BAF7A2
+#5  0x2B70FEA11DC5
+
+Program received signal SIGSEGV: Segmentation fault - invalid memory reference.
+
+Backtrace for this error:
+
+Program received signal SIGSEGV: Segmentation fault - invalid memory reference.
+
+Backtrace for this error:
+#0  0x2B51FEC3C697
+#1  0x2B51FEC3CCDE
+#2  0x2B5200FB23AF
+#3  0x2B52915C1B76
+#4  0x2B51FA9667A2
+#5  0x2B51F87C8DC5
+#0  0x2B0B7F1E5697
+#1  0x2B0B7F1E5CDE
+#2  0x2B0B8155B3AF
+#3  0x2B0C11B6AB76
+#4  0x2B0B7AF0F7A2
+#5  0x2B0B78D71DC5
+#6  0x1192FC1 in __m_cgtools_MOD_cg_zdotc at m_cgtools.F90:728
+#6  0x1192FC1 in __m_cgtools_MOD_cg_zdotc at m_cgtools.F90:728
+#7  0x1193170 in __m_cgtools_MOD_dotprod_g at m_cgtools.F90:1364
+#7  0x1193170 in __m_cgtools_MOD_dotprod_g at m_cgtools.F90:1364
+#8  0xAA4FF3 in __m_cgwf_MOD_cgwf at m_cgwf.F90:499
+#8  0xAA4FF3 in __m_cgwf_MOD_cgwf at m_cgwf.F90:499
+#9  0x598482 in __m_vtowfk_MOD_vtowfk at m_vtowfk.F90:408
+#9  0x598482 in __m_vtowfk_MOD_vtowfk at m_vtowfk.F90:408
+#6  0x1192FC1 in __m_cgtools_MOD_cg_zdotc at m_cgtools.F90:728
+#7  0x1193170 in __m_cgtools_MOD_dotprod_g at m_cgtools.F90:1364
+#6  0x1192FC1 in __m_cgtools_MOD_cg_zdotc at m_cgtools.F90:728
+#7  0x1193170 in __m_cgtools_MOD_dotprod_g at m_cgtools.F90:1364
+#10  0x57D7B6 in __m_vtorho_MOD_vtorho at m_vtorho.F90:943
+#10  0x57D7B6 in __m_vtorho_MOD_vtorho at m_vtorho.F90:943
+#8  0xAA4FF3 in __m_cgwf_MOD_cgwf at m_cgwf.F90:499
+#8  0xAA4FF3 in __m_cgwf_MOD_cgwf at m_cgwf.F90:499
+#9  0x598482 in __m_vtowfk_MOD_vtowfk at m_vtowfk.F90:408
+#9  0x598482 in __m_vtowfk_MOD_vtowfk at m_vtowfk.F90:408
+#11  0x5475C4 in __m_scfcv_core_MOD_scfcv_core at m_scfcv_core.F90:1536
+#10  0x57D7B6 in __m_vtorho_MOD_vtorho at m_vtorho.F90:943
+#11  0x5475C4 in __m_scfcv_core_MOD_scfcv_core at m_scfcv_core.F90:1536
+#12  0x53B3D4 in __m_scfcv_MOD_scfcv_scfcv at m_scfcv.F90:746
+#10  0x57D7B6 in __m_vtorho_MOD_vtorho at m_vtorho.F90:943
+#12  0x53B3D4 in __m_scfcv_MOD_scfcv_scfcv at m_scfcv.F90:746
+#11  0x5475C4 in __m_scfcv_core_MOD_scfcv_core at m_scfcv_core.F90:1536
+#13  0x52B453 in __m_gstate_MOD_gstate at m_gstate.F90:1331
+#11  0x5475C4 in __m_scfcv_core_MOD_scfcv_core at m_scfcv_core.F90:1536
+#12  0x53B3D4 in __m_scfcv_MOD_scfcv_scfcv at m_scfcv.F90:746
+#14  0x428A09 in __m_gstateimg_MOD_gstateimg at m_gstateimg.F90:566
+#13  0x52B453 in __m_gstate_MOD_gstate at m_gstate.F90:1331
+#12  0x53B3D4 in __m_scfcv_MOD_scfcv_scfcv at m_scfcv.F90:746
+#15  0x417682 in __m_driver_MOD_driver at m_driver.F90:705 (discriminator 2)
+#14  0x428A09 in __m_gstateimg_MOD_gstateimg at m_gstateimg.F90:566
+#13  0x52B453 in __m_gstate_MOD_gstate at m_gstate.F90:1331
+#16  0x40C2EE in MAIN__ at abinit.F90:444
+#13  0x52B453 in __m_gstate_MOD_gstate at m_gstate.F90:1331
+#15  0x417682 in __m_driver_MOD_driver at m_driver.F90:705 (discriminator 2)
+#14  0x428A09 in __m_gstateimg_MOD_gstateimg at m_gstateimg.F90:566
+#16  0x40C2EE in MAIN__ at abinit.F90:444
+#14  0x428A09 in __m_gstateimg_MOD_gstateimg at m_gstateimg.F90:566
+#15  0x417682 in __m_driver_MOD_driver at m_driver.F90:705 (discriminator 2)
+#15  0x417682 in __m_driver_MOD_driver at m_driver.F90:705 (discriminator 2)
+#16  0x40C2EE in MAIN__ at abinit.F90:444
+#16  0x40C2EE in MAIN__ at abinit.F90:444</code></pre></div>
+
+<br>
+<br>
+<br>
+<br>
+I am attaching the input file, output file and config.log  file.<br>
+<br>
+Please, suggest me the solution for this problem.<br>
+<br>
+Thank you<br>
+Shivaprasad<br>
+PhD student<br>
+IIT Mandi, India.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault - invalid memory reference error in abinit-8.10.3 when running ground state calculation</h3>
+				<div class="date">Posted: <strong>Wed Aug 12, 2020 4:02 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Shivaprasad,<br>
+Your config.log looks a bit messy with several things that sound to be mixed-up (declared version and really detected version of the compilers, etc).<br>
+Could you follow what is described in this post:<br>
+<a href="viewtopic204e.html?f=3&amp;t=4463" class="postlink">viewtopic.php?f=3&amp;t=4463</a><br>
+<br>
+Sounds like mpiicc, mpiifort, etc should be used and not what you declared in your config file.<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault - invalid memory reference error in abinit-8.10.3 when running ground state calculation</h3>
+				<div class="date">Posted: <strong>Wed Aug 12, 2020 10:29 pm</strong></div>
+				<div class="author">by <strong>shivaprasad</strong></div>
+				<div class="content">Dear Eric,<br>
+<br>
+Thank you for going through the config.log file and for the link. I used the configuration option given in the link. <br>
+At first, I got the error while running configure saying unable to link fftw (not exactly remember the error, some thing like this)which I think for using the <em class="text-italics">with_fft_flavor="dfti"</em>.<br>
+<br>
+So, I  modified it to <em class="text-italics">with_fft_flavor="fftw3"</em> and used an additional option <em class="text-italics">with_dft_flavor="libxc"</em> since I wanted to use libxc. This time configuration and compilation is successful. Thank you very much for the suggestion.<br>
+<br>
+Now, I tested with the same silicon input file. Calculation is running faster and converged also. But, the abinit program is writing the below lines in the err file:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>libi40iw-i40iw_vmapped_qp: failed to pin memory for SQ
+libi40iw-i40iw_ucreate_qp: failed to map QP
+libi40iw-i40iw_vmapped_qp: failed to pin memory for SQ
+libi40iw-i40iw_ucreate_qp: failed to map QP
+libi40iw-i40iw_vmapped_qp: failed to pin memory for SQ
+libi40iw-i40iw_ucreate_qp: failed to map QP
+libi40iw-i40iw_vmapped_qp: failed to pin memory for SQ
+libi40iw-i40iw_ucreate_qp: failed to map QP
+libi40iw-i40iw_vmapped_qp: failed to pin memory for SQ
+libi40iw-i40iw_ucreate_qp: failed to map QP
+libi40iw-i40iw_vmapped_qp: failed to pin memory for SQ
+libi40iw-i40iw_ucreate_qp: failed to map QP
+libi40iw-i40iw_vmapped_qp: failed to pin memory for SQ
+libi40iw-i40iw_ucreate_qp: failed to map QP
+libi40iw-i40iw_vmapped_qp: failed to pin memory for SQ
+libi40iw-i40iw_ucreate_qp: failed to map QP</code></pre></div>
+
+I could not figure out what this message is. Is it acceptable?<br>
+<br>
+Also, running <em class="text-italics">make check</em> produced many errors. I am once again attaching the new config.log file for reference.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault - invalid memory reference error in abinit-8.10.3 when running ground state calculation</h3>
+				<div class="date">Posted: <strong>Wed Aug 19, 2020 10:26 am</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br>
+<br>
+concerning the config.log, I didn't see anything serious.<br>
+most of the errors are expected: the configure tests the existence of a series of libraries, tools, system features...<br>
+<br>
+concerning <br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make check
+</code></pre></div>
+which kind of errors ?<br>
+<br>
+concerning the errors<br>
+
+<blockquote class="uncited"><div><strong class="text-strong">libi40iw</strong>-i40iw_vmapped_qp: failed to pin memory for SQ<br>
+libi40iw-i40iw_ucreate_qp: failed to map QP
+</div></blockquote>
+
+it's a network problem : driver, configuration,...<br>
+
+<blockquote class="uncited"><div><strong class="text-strong">i40iw Linux* Driver</strong> for Intel(R) Ethernet Connection X722<br>
+Intel® Ethernet Network Adapter X722</div></blockquote>
+
+contact sysadmin...  <img class="smilies" src="images/smilies/icon_e_wink.gif" width="15" height="17" alt=";)" title="Wink"> <br>
+<br>
+jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault - invalid memory reference error in abinit-8.10.3 when running ground state calculation</h3>
+				<div class="date">Posted: <strong>Thu Aug 20, 2020 7:26 am</strong></div>
+				<div class="author">by <strong>shivaprasad</strong></div>
+				<div class="content">Dear jbeuken,<br>
+<br>
+Thank you for going through config.log file and the suggestion related to <em class="text-italics">libi40iw-i40iw_vmapped_qp: failed to pin memory for SQ</em> error. I will try to inform the system admin. I hope that this will not affect the numerical results of calculation?<br>
+<br>
+Concerning <em class="text-italics">make check</em>, I was getting below errors related to number of <em class="text-italics">/fast_t*</em> test directories:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make  check-local
+make[3]: Entering directory `/users/home/shiva/tools/abinit-8.10.3/build/tests'
+[ -f "runtests.py" ] &amp;&amp; ./runtests.py fast -o1 --no-colors --no-logo || ../../tests/runtests.py fast -o1 --no-colors --no-logo --with-pickle=0
+Running on n199.cluster.iitmandi.ac.in -- system Linux -- ncpus 40 -- Python 2.7.5 -- runtests.py-0.6.0
+Regenerating database...
+Test_suite directory already exists. Files will be removed
+Running 26 test(s) with MPI_nprocs=1, OMP_nthreads=1, py_nthreads=1...
+[TIP] runtests.py is using 1 CPUs but your architecture has 40 CPUs
+You may want to use python threads to speed up the execution
+Use `runtests -jNUM` to run with NUM threads
+Command   /users/home/shiva/tools/abinit-8.10.3/build/src/98_main/abinit &lt; /users/home/shiva/tools/abinit-8.10.3/build/tests/Test_suite/fast_t00/t00.stdin &gt; /users/home/shiva/tools/abinit-8.10.3/build/tests/Test_suite/fast_t00/t00.stdout 2&gt; /users/home/shiva/tools/abinit-8.10.3/build/tests/Test_suite/fast_t00/t00.stderr
+ returned exit_code: 24
+
+[fast][t00][np=1]: fldiff.pl fatal error:
+Unable to open input file /users/home/shiva/tools/abinit-8.10.3/build/tests/Test_suite/fast_t00/t00.out [file=t00.out]
+[fast][t00][np=1]Test was not expected to fail but subprocesses returned 24
+forrtl: severe (24): end-of-file during read, unit 5, file /proc/39910/fd/0
+Image              PC                Routine            Line        Source             
+libifcoremt.so.5   00002B0346BDF7B6  for__io_return        Unknown  Unknown
+libifcoremt.so.5   00002B0346C1DC70  for_read_seq_fmt      Unknown  Unknown
+abinit             00000000019408B9  Unknown               Unknown  Unknown
+abinit             00000000004096B4  Unknown               Unknown  Unknown
+abinit             0000000000409382  Unknown               Unknown  Unknown
+libc-2.17.so       00002B0349109555  __libc_start_main     Unknown  Unknown
+abinit             0000000000409289  Unknown               Unknown  Unknown</code></pre></div>
+
+<br>
+And also, related to <em class="text-italics">t*.out</em> files
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>/bin/sh: line 0: cd: sources/lapack-abinit_6.10: No such file or directory
+make[2]: [check-local] Error 1 (ignored)
+/bin/sh: line 0: cd: sources/netcdf-4.1.1: No such file or directory
+make[2]: [check-local] Error 1 (ignored)
+/bin/sh: line 0: cd: sources/atompaw-4.0.1.0: No such file or directory
+make[2]: [check-local] Error 1 (ignored)
+/bin/sh: line 0: cd: sources/wannier90-2.0.1.1: No such file or directory
+make[2]: [check-local] Error 1 (ignored)
+/bin/sh: line 0: cd: sources/etsf_io-1.0.4: No such file or directory
+make[2]: [check-local] Error 1 (ignored)
+/bin/sh: line 0: cd: sources/bigdft-1.7.1.25: No such file or directory
+make[2]: [check-local] Error 1 (ignored)
+/users/home/shiva/tools/abinit-8.10.3/tests/pymods/testsuite.py:3344: UserWarning: exception while adding /users/home/shiva/tools/abinit-8.10.3/build/tests/Test_suite/fast_t00/t00.out to tarball:
+[Errno 2] No such file or directory: '/users/home/shiva/tools/abinit-8.10.3/build/tests/Test_suite/fast_t00/t00.out'</code></pre></div>
+
+<br>
+Thank you once again,<br>
+Shivaprasad.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault - invalid memory reference error in abinit-8.10.3 when running ground state calculation</h3>
+				<div class="date">Posted: <strong>Wed Aug 26, 2020 12:39 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br>
+
+<blockquote class="uncited"><div>make  check-local<br>
+make[3]: Entering directory `/users/home/shiva/tools/abinit-8.10.3/build/tests'<br>
+[ -f "runtests.py" ] &amp;&amp; ./runtests.py fast -o1 --no-colors --no-logo || ../../tests/runtests.py fast -o1 --no-colors --no-logo --with-pickle=0<br>
+...<br>
+[fast][t00][np=1]: fldiff.pl fatal error:<br>
+Unable to open input file /users/home/shiva/tools/abinit-8.10.3/build/tests/Test_suite/fast_t00/t00.out [file=t00.out]<br>
+[fast][t00][np=1]Test was not expected to fail but subprocesses returned 24<br>
+forrtl: severe (24): end-of-file during read, unit 5, file /proc/39910/fd/0<br>
+Image              PC                Routine            Line        Source             <br>
+libifcoremt.so.5   00002B0346BDF7B6  for__io_return        Unknown  Unknown<br>
+libifcoremt.so.5   00002B0346C1DC70  for_read_seq_fmt      Unknown  Unknown<br>
+abinit             00000000019408B9  Unknown               Unknown  Unknown<br>
+abinit             00000000004096B4  Unknown               Unknown  Unknown<br>
+abinit             0000000000409382  Unknown               Unknown  Unknown<br>
+libc-2.17.so       00002B0349109555  __libc_start_main     Unknown  Unknown<br>
+abinit             0000000000409289  Unknown               Unknown  Unknown</div></blockquote>
+
+This is obviously not normal!<br>
+<br>
+what is the output of these cmds:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>cd /users/home/shiva/tools/abinit-8.10.3/build
+ldd src/98_main/abinit
+src/98_main/abinit -b
+</code></pre></div>
+jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault - invalid memory reference error in abinit-8.10.3 when running ground state calculation</h3>
+				<div class="date">Posted: <strong>Thu Aug 27, 2020 10:51 am</strong></div>
+				<div class="author">by <strong>shivaprasad</strong></div>
+				<div class="content">Dear Jbeuken,<br>
+<br>
+Below I am pasting the output of the commands:<br>
+<br>
+1.<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>cd /users/home/shiva/tools/abinit-8.10.3/build
+ldd src/98_main/abinit</code></pre></div>
+
+<blockquote class="uncited"><div>[	linux-vdso.so.1 =&gt;  (0x00007ffd90b2e000)<br>
+	libfftw3.so.3 =&gt; /lib64/libfftw3.so.3 (0x00002b7b5b849000)<br>
+	libmkl_intel_lp64.so =&gt; /home/shiva/intel/compilers_and_libraries_2019.4.243/linux/mkl/lib/intel64_lin/libmkl_intel_lp64.so (0x00002b7b5bbce000)<br>
+	libmkl_sequential.so =&gt; /home/shiva/intel/compilers_and_libraries_2019.4.243/linux/mkl/lib/intel64_lin/libmkl_sequential.so (0x00002b7b5c746000)<br>
+	libmkl_core.so =&gt; /home/shiva/intel/compilers_and_libraries_2019.4.243/linux/mkl/lib/intel64_lin/libmkl_core.so (0x00002b7b5dcdf000)<br>
+	libpthread.so.0 =&gt; /lib64/libpthread.so.0 (0x00002b7b61fb4000)<br>
+	libm.so.6 =&gt; /lib64/libm.so.6 (0x00002b7b621d0000)<br>
+	librt.so.1 =&gt; /lib64/librt.so.1 (0x00002b7b624d2000)<br>
+	libmpifort.so.12 =&gt; /home/shiva/intel/compilers_and_libraries_2019.4.243/linux/mpi/intel64/lib/libmpifort.so.12 (0x00002b7b626da000)<br>
+	libmpi.so.12 =&gt; /home/shiva/intel/compilers_and_libraries_2019.4.243/linux/mpi/intel64/lib/release/libmpi.so.12 (0x00002b7b62a99000)<br>
+	libdl.so.2 =&gt; /lib64/libdl.so.2 (0x00002b7b6398b000)<br>
+	libifport.so.5 =&gt; /home/shiva/intel/compilers_and_libraries_2019.4.243/linux/compiler/lib/intel64_lin/libifport.so.5 (0x00002b7b63b8f000)<br>
+	libifcoremt.so.5 =&gt; /home/shiva/intel/compilers_and_libraries_2019.4.243/linux/compiler/lib/intel64_lin/libifcoremt.so.5 (0x00002b7b63dbd000)<br>
+	libimf.so =&gt; /home/shiva/intel/compilers_and_libraries_2019.4.243/linux/compiler/lib/intel64_lin/libimf.so (0x00002b7b64152000)<br>
+	libsvml.so =&gt; /home/shiva/intel/compilers_and_libraries_2019.4.243/linux/compiler/lib/intel64_lin/libsvml.so (0x00002b7b646f2000)<br>
+	libirc.so =&gt; /home/shiva/intel/compilers_and_libraries_2019.4.243/linux/compiler/lib/intel64_lin/libirc.so (0x00002b7b66096000)<br>
+	libc.so.6 =&gt; /lib64/libc.so.6 (0x00002b7b66308000)<br>
+	/lib64/ld-linux-x86-64.so.2 (0x00002b7b5b625000)<br>
+	libgcc_s.so.1 =&gt; /lib64/libgcc_s.so.1 (0x00002b7b666d6000)<br>
+	libfabric.so.1 =&gt; /home/shiva/intel/compilers_and_libraries_2019.4.243/linux/mpi/intel64/libfabric/lib/libfabric.so.1 (0x00002b7b668ec000)<br>
+	libintlc.so.5 =&gt; /home/shiva/intel/compilers_and_libraries_2019.4.243/linux/compiler/lib/intel64_lin/libintlc.so.5 (0x00002b7b66b24000)/quote]<br>
+<br>
+2. <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>src/98_main/abinit -b</code></pre></div>
+<blockquote class="uncited"><div> DATA TYPE INFORMATION: <br>
+ REAL:      Data type name: REAL(DP) <br>
+            Kind value:      8<br>
+            Precision:      15<br>
+            Smallest nonnegligible quantity relative to 1:  0.22204460E-15<br>
+            Smallest positive number:                       0.22250739-307<br>
+            Largest representable number:                   0.17976931+309<br>
+ INTEGER:   Data type name: INTEGER(default) <br>
+            Kind value: 4<br>
+            Bit size:   32<br>
+            Largest representable number: 2147483647<br>
+ LOGICAL:   Data type name: LOGICAL <br>
+            Kind value: 4<br>
+ CHARACTER: Data type name: CHARACTER             Kind value: 1<br>
+  ==== Using MPI-2 specifications ==== <br>
+  MPI-IO support is ON<br>
+  xmpi_tag_ub ................   1073741823<br>
+  xmpi_bsize_ch ..............            1<br>
+  xmpi_bsize_int .............            4<br>
+  xmpi_bsize_sp ..............            4<br>
+  xmpi_bsize_dp ..............            8<br>
+  xmpi_bsize_spc .............            8<br>
+  xmpi_bsize_dpc .............           16<br>
+  xmpio_bsize_frm ............            4<br>
+  xmpi_address_kind ..........            8<br>
+  xmpi_offset_kind ...........            8<br>
+  MPI_WTICK ..................   4.166667057021160E-010<br>
+<br>
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
+ CPP options activated during the build:<br>
+<br>
+                  CC_INTEL                   CXX_GNU                  FC_INTEL<br>
+ <br>
+ HAVE_FC_ALLOCATABLE_DT...             HAVE_FC_ASYNC  HAVE_FC_COMMAND_ARGUMENT<br>
+ <br>
+      HAVE_FC_COMMAND_LINE        HAVE_FC_CONTIGUOUS           HAVE_FC_CPUTIME<br>
+ <br>
+              HAVE_FC_EXIT             HAVE_FC_FLUSH             HAVE_FC_GAMMA<br>
+ <br>
+   HAVE_FC_IEEE_EXCEPTIONS             HAVE_FC_IOMSG     HAVE_FC_ISO_C_BINDING<br>
+ <br>
+  HAVE_FC_ISO_FORTRAN_2008        HAVE_FC_LONG_LINES        HAVE_FC_MOVE_ALLOC<br>
+ <br>
+           HAVE_FC_PRIVATE         HAVE_FC_PROTECTED         HAVE_FC_STREAM_IO<br>
+ <br>
+                  HAVE_FFT            HAVE_FFT_FFTW3              HAVE_FFT_MPI<br>
+ <br>
+           HAVE_FFT_SERIAL               HAVE_GW_DPC        HAVE_LIBPAW_ABINIT<br>
+ <br>
+      HAVE_LIBTETRA_ABINIT                HAVE_LIBXC               HAVE_LINALG<br>
+ <br>
+        HAVE_LINALG_SERIAL                  HAVE_MPI                 HAVE_MPI2<br>
+ <br>
+       HAVE_MPI_IALLREDUCE        HAVE_MPI_IALLTOALL       HAVE_MPI_IALLTOALLV<br>
+ <br>
+        HAVE_MPI_INTEGER16               HAVE_MPI_IO HAVE_MPI_TYPE_CREATE_S...<br>
+ <br>
+                HAVE_NUMPY             HAVE_OS_LINUX         HAVE_TIMER_ABINIT<br>
+ <br>
+              USE_MACROAVE                                                      <br>
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
+<br>
+ <br>
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
+ <br>
+ === Build Information === <br>
+  Version       : 8.10.3<br>
+  Build target  : x86_64_linux_intel19.0<br>
+  Build date    : 20200812<br>
+ <br>
+ === Compiler Suite === <br>
+  C compiler       : intel19.0<br>
+  C++ compiler     : gnu19.0<br>
+  Fortran compiler : intel19.0<br>
+  CFLAGS           :  -g -O3 -vec-report0<br>
+  CXXFLAGS         : -m64 -g -O3 -mtune=native -march=native<br>
+  FCFLAGS          :  -g -extend-source -vec-report0 -noaltparam -nofpscomp<br>
+  FC_LDFLAGS       :    -static-intel -static-libgcc<br>
+ <br>
+ === Optimizations === <br>
+  Debug level        : basic<br>
+  Optimization level : aggressive<br>
+  Architecture       : intel_xeon<br>
+ <br>
+ === Multicore === <br>
+  Parallel build : yes<br>
+  Parallel I/O   : yes<br>
+  openMP support : no<br>
+  GPU support    : no<br>
+ <br>
+ === Connectors / Fallbacks === <br>
+  Connectors on : yes<br>
+  Fallbacks on  : yes<br>
+  DFT flavor    : libxc-fallback<br>
+  FFT flavor    : fftw3<br>
+  LINALG flavor : mkl<br>
+  MATH flavor   : none<br>
+  TIMER flavor  : abinit<br>
+  TRIO flavor   : none<br>
+ <br>
+ === Experimental features === <br>
+  Bindings            : @enable_bindings@<br>
+  Exports             : no<br>
+  GW double-precision : yes<br>
+ <br>
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
+ <br>
+<br>
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>
+ Default optimizations:<br>
+   -O3 -xHOST<br>
+<br>
+<br>
+ Optimizations for 43_ptgroups:<br>
+   -O0<br>
+<br>
+<br>
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+</div></blockquote>
+
+What is the error that is occurring? Am I doing any mistake in compiling ?<br>
+<br>
+Thank you,<br>
+Shivaprasad.</div></blockquote></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault - invalid memory reference error in abinit-8.10.3 when running ground state calculation</h3>
+				<div class="date">Posted: <strong>Tue Sep 08, 2020 10:11 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Avoid mixing FFTW3 with MKL as MKL provides wrappers for fftw3 calling the intel DFTI FFT library.<br>
+This means that the linker will receive multiple definitions for the same procedure and<br>
+results are unpredictable!<br>
+Either use MKL for linalg and fft or FFTW3 with e.g. openblas for linalg.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault - invalid memory reference error in abinit-8.10.3 when running ground state calculation</h3>
+				<div class="date">Posted: <strong>Thu Sep 24, 2020 6:15 am</strong></div>
+				<div class="author">by <strong>shivaprasad</strong></div>
+				<div class="content">Thank you gmatteo for your suggestion. I will try with the options you have told and check.<br>
+<br>
+Thank you,<br>
+Shivaprasad</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4495&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:15:41 GMT -->
+</html>

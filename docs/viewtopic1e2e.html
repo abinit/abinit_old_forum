@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=3553&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 16:23:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; &quot;ug for (band, ik_ibz, spin): not stored in memory&quot; ?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>&quot;ug for (band, ik_ibz, spin): not stored in memory&quot; ?</h2>
+		<p><a href="viewtopicfbbf.html?f=11&amp;t=3553">https://forum.abinit.org/viewtopic.php?f=11&amp;t=3553</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>&quot;ug for (band, ik_ibz, spin): not stored in memory&quot; ?</h3>
+				<div class="date">Posted: <strong>Mon Apr 03, 2017 7:20 am</strong></div>
+				<div class="author">by <strong>pipidog</strong></div>
+				<div class="content">Hello all, <br /><br />I'm running cRPA calculation. If the SCF ground state is non-magnetic (nspinor=1, nspden=1, nsppol=1), everything is fine. <br />However, when I use spin-polarized (nspinor=1, nspden=2, nsppol=2) calculation, I always got error message:<br /><br />ug for (band, ik_ibz, spin): 11 1 2 is not stored in memory!<br /><br />looks like a MPI problem. If I use a serial run, the problem is gone. <br /><br />Any suggestion about how to solve the problem? <br /><br />Thanks!<br />pipidog</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: &quot;ug for (band, ik_ibz, spin): not stored in memory&quot; ?</h3>
+				<div class="date">Posted: <strong>Wed Apr 05, 2017 2:33 pm</strong></div>
+				<div class="author">by <strong>amadon</strong></div>
+				<div class="content">Hello,<br /><br />Please post your complete input file and precise the version of ABINIT you are using.<br /><br />Best regards<br />Bernard</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: &quot;ug for (band, ik_ibz, spin): not stored in memory&quot; ?</h3>
+				<div class="date">Posted: <strong>Wed Apr 05, 2017 9:34 pm</strong></div>
+				<div class="author">by <strong>pipidog</strong></div>
+				<div class="content">Hello Bernard, <br /><br />To reproduce the error is easy (abinit 8.2.2). <br />Just add the following input variables in the tutorial file tucrpa_2.in (example of SrVO3):<br />nspinor 1<br />nspden 2<br />nsppol 2<br />spinat<br />0 0 0<br />0 0 0<br />0 0 0<br />0 0 0<br />0 0 0<br /><br />Apparently it won't change anything of the but just allow spin up and down to polarize (although the magnetic <br />moments remain 0 here !).  Then in the cRPA calculation (dataset 4 in the tutorial file, optdriver 4) will always <br />report error:<br /><br /><blockquote class="uncited"><div>--- !ERROR<br />src_file: m_wfd.F90<br />src_line: 1785<br />mpi_rank: 8<br />message: |<br />    ug for (band, ik_ibz, spin): 21 5 1  is not stored in memory!<br />...<br /></div></blockquote><br /><br />I also tested other systems and the problem is the same.  nspden=2 and nsppol=2 will always trigger error like this. <br />However, serial calculation (i.e. only use single cpu) works fine. So I believe it a MPI issue. Any suggestion?<br /><br />Shu-Ting Pi<br />UC Davis</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: &quot;ug for (band, ik_ibz, spin): not stored in memory&quot; ?</h3>
+				<div class="date">Posted: <strong>Wed Apr 26, 2017 9:38 am</strong></div>
+				<div class="author">by <strong>amadon</strong></div>
+				<div class="content">Dear Shu-Ting,<br /><br />It is indeed a reported bug, I will be corrected in the next version.<br />Thanks a lot for outlining it !<br />Best regards<br />Bernard</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: &quot;ug for (band, ik_ibz, spin): not stored in memory&quot; ?</h3>
+				<div class="date">Posted: <strong>Wed Nov 04, 2020 9:08 pm</strong></div>
+				<div class="author">by <strong>andyamygto</strong></div>
+				<div class="content">Dear Users,<br>
+<br>
+I also met this problem in 9.2.1 version.<br>
+Is this still an issue?<br>
+<br>
+Regards,<br>
+Andy</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=3553&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 16:23:31 GMT -->
+</html>

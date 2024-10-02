@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2899&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:18:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; libxc error</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>libxc error</h2>
+		<p><a href="viewtopic6197.html?f=3&amp;t=2899">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2899</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>libxc error</h3>
+				<div class="date">Posted: <strong>Sun Jan 11, 2015 9:58 am</strong></div>
+				<div class="author">by <strong>ahd_dz</strong></div>
+				<div class="content">hello<br />every one<br />i'm newbie in abinit and i have this error one i try to use a PAW <br />the code tel me <br />!ERROR<br />message: |<br />    Cannot use LibXC functional because ABINIT is not compiled with LibXC !<br />src_file: m_pawpsp.F90<br />src_line: 4740<br />...<br />i attached my log file</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: libxc error</h3>
+				<div class="date">Posted: <strong>Sun Jan 11, 2015 2:11 pm</strong></div>
+				<div class="author">by <strong>raul_l</strong></div>
+				<div class="content">You should recompile with LibXC support. The simplest solution is to add the <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--with-dft-flavor=libxc</code></pre></div> flag to configure. However, it is recommended to take some time and familiarize yourself with all the options using ./configure --help and also having a look at doc/build-config.ac. Note that you currently don't have MPI support so no parallel runs.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: libxc error</h3>
+				<div class="date">Posted: <strong>Sun Jan 11, 2015 4:37 pm</strong></div>
+				<div class="author">by <strong>ahd_dz</strong></div>
+				<div class="content">hello<br />thank you for your quick response<br />i have used this command and i get the same problem</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: libxc error</h3>
+				<div class="date">Posted: <strong>Mon Jan 12, 2015 12:07 am</strong></div>
+				<div class="author">by <strong>raul_l</strong></div>
+				<div class="content">My config.log contains the same error messages as yours but everything works for me. How far do you get? Does it compile successfully and can you run abinit? I think something goes wrong during configuration (the preprocessor macro HAVE_DFT_LIBXC seems to remain undefined), but from just the config.log I can't see what's wrong.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: libxc error</h3>
+				<div class="date">Posted: <strong>Tue Jan 13, 2015 10:52 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Hi,<br /><br />After configuring, type<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make clean<br /></code></pre></div><br /><br />to be sure you recompile everything when typing<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make</code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: libxc error</h3>
+				<div class="date">Posted: <strong>Sat Mar 28, 2015 7:31 am</strong></div>
+				<div class="author">by <strong>sudipta</strong></div>
+				<div class="content">In my configuration file I got HAVE LIBXC 1 but when I want to use any xml input file for atomic data like (Ir, Te) it is giving error that libxc is not compiled. <br />Please help me either to solve these issue or telling me from where I can get paw data in other format for Ir or Te.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: libxc error</h3>
+				<div class="date">Posted: <strong>Sun Mar 29, 2015 12:09 pm</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">If you want to use XML PAW atomic datafile, then you need to enable the XML support inside abinit :<br />Add --with-trio-flavor=&quot;fox&quot; to your configure command line</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: libxc error</h3>
+				<div class="date">Posted: <strong>Wed Apr 01, 2015 11:28 am</strong></div>
+				<div class="author">by <strong>sudipta</strong></div>
+				<div class="content">Even after doing that also I am getting<br /><br />--- !ERROR<br />message: |<br />    Cannot use LibXC functional because ABINIT is not compiled with LibXC !<br />src_file: m_pawpsp.F90<br />src_line: 4712<br />...<br /><br /><br />while in config file <br /><br />HAVE_DFT_LIBXC 1<br /><br />please help</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: libxc error</h3>
+				<div class="date">Posted: <strong>Wed Apr 01, 2015 5:10 pm</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">I'm confused.<br /><br />What version do you use ?<br />Can you try with the last one you can find on  abinit.org ?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: libxc error</h3>
+				<div class="date">Posted: <strong>Thu Apr 09, 2015 7:36 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">In other words, could you try with Abinit 7.10.4, and if the problem persists, attach your config.log?</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2899&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:18:01 GMT -->
+</html>

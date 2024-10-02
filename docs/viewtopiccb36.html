@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1526&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:54:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Bug report: OpenMP in Abinit 6.10.2</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Bug report: OpenMP in Abinit 6.10.2</h2>
+		<p><a href="viewtopice4d4-2.html?f=3&amp;t=1526">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1526</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Bug report: OpenMP in Abinit 6.10.2</h3>
+				<div class="date">Posted: <strong>Thu Feb 09, 2012 11:12 am</strong></div>
+				<div class="author">by <strong>kaneod</strong></div>
+				<div class="content">Hi all,<br /><br />There are a few issues with OpenMP use in Abinit 6.10.2 (I haven't checked 6.12.1 yet - hard to keep up with the releases!). It was difficult to figure out what was going on until I switched to ifort (12.1) which has better OpenMP error reporting. The issues I've found so far are:<br /><br />1. In sphere_fft.F90, the two regions of code starting at lines 102 and 232 have OMP directives enclosing commented-out code - the OMP directives need a further comment character in order to deactivate them otherwise they make the compiler think there is an empty parallel region.<br /><br />2. In back.F90 (52_fft_mpi_noabirule), there are examples of invalid variable lists on OMP directives - the current generation of compilers (at least GCC 4.6, Intel 12.1) don't accept subobjects like my_type%some_variable in OMP directives as far as I can tell.<br /><br />I tried to fill out a bug report form as per the &quot;how to help the Abinit Developers&quot; page but the link is broken...<br /><br />Regards,<br /><br />Kane</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Bug report: OpenMP in Abinit 6.10.2</h3>
+				<div class="date">Posted: <strong>Thu Feb 09, 2012 12:05 pm</strong></div>
+				<div class="author">by <strong>kaneod</strong></div>
+				<div class="content">More issues:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>spectral.F90(466): error #6404: This name does not have a type, and must have an explicit type.&nbsp; &nbsp;&#91;PRTVOL&#93;<br />!$OMP PARALLEL SHARED(sf_chi0,chi0,kkweight,my_wl,my_wr,npwe,nomega,local_std_out,prtvol) &amp;<br />----------------------------------------------------------------------------------^<br />spectral.F90(466): error #7656: Subobjects are not allowed in this OpenMP* clause; a named variable must be specified.&nbsp; &nbsp;&#91;PRTVOL&#93;<br />!$OMP PARALLEL SHARED(sf_chi0,chi0,kkweight,my_wl,my_wr,npwe,nomega,local_std_out,prtvol) &amp;<br />----------------------------------------------------------------------------------^<br />spectral.F90(602): error #6404: This name does not have a type, and must have an explicit type.&nbsp; &nbsp;&#91;PRTVOL&#93;<br />!$OMP&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;my_wl,my_wr,npwe,nomega,local_std_out,prtvol) &amp;<br />------------------------------------------------------------^<br />spectral.F90(602): error #7656: Subobjects are not allowed in this OpenMP* clause; a named variable must be specified.&nbsp; &nbsp;&#91;PRTVOL&#93;<br />!$OMP&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;my_wl,my_wr,npwe,nomega,local_std_out,prtvol) &amp;<br />------------------------------------------------------------^</code></pre></div><br /><br />Since the prtvol variable is apparently not used at all (supposedly commented out) I got around this by removing the prtvol variables from the OMP directives and adding more comment characters to the segments of code &quot;added by MS&quot; starting at lines 466 and 602.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Bug report: OpenMP in Abinit 6.10.2</h3>
+				<div class="date">Posted: <strong>Fri Feb 10, 2012 8:44 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">hi, <br /><br />there are a lot of problems with 6.10 and OpenMP<br />but try with 6.12.1 and with this config file :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>FC = ifort<br />CC = icc<br />CXX = icpc<br />enable_gw_dpc = yes<br />enable_mpi = no<br />with_dft_flavor = atompaw+bigdft+libxc+wannier90<br />with_fft_flavor = fftw3<br />with_fft_libs = -L/opt/intel/composerxe/mkl/lib/intel64 -Wl,--start-group&nbsp; -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -Wl,--end-group<br />with_linalg_flavor = mkl<br />with_linalg_libs = -L/opt/intel/composerxe/mkl/lib/intel64 -Wl,--start-group&nbsp; -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -Wl,--end-group<br />FC_LDFLAGS_EXTRA = -openmp<br />FCFLAGS_EXTRA = -openmp<br />enable_smp = yes</code></pre></div><br /><br />the 6.12.2 will be better with OpenMP...<br /><br />have fun..<br /><br />jmb</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1526&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:54:38 GMT -->
+</html>

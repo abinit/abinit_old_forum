@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2112&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:15:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; job submission on HPC</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>job submission on HPC</h2>
+		<p><a href="viewtopica9a9.html?f=3&amp;t=2112">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2112</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>job submission on HPC</h3>
+				<div class="date">Posted: <strong>Thu May 02, 2013 6:26 am</strong></div>
+				<div class="author">by <strong>Janpreet Sidhu</strong></div>
+				<div class="content">Hi<br /> I have installed abinit in parallel on hpc. And it works good  in interactive run . But when i try to submit job using &quot;qsub&quot; i got error.<br /> I make  abinit.sh file for qsub.<br />abinit.sh :<br /><br />#!/bin/bash<br />#$ -cwd -V<br />#$ -pe mpich 1<br />/home/gurinder/mpich-install/bin/mpirun -n 16 ../../abinit/abinit-7.0.5/src/98_main/abinit &lt; tgst.files &gt;&amp; tbasepar_1.log<br /><br />And then in log file:<br /><br />../../abinit/abinit-7.0.5/src/98_main/abinit: error while loading shared libraries: liblapack.so.3: cannot open shared object file: No such file or directory<br />../../abinit/abinit-7.0.5/src/98_main/abinit: error while loading shared libraries: liblapack.so.3: cannot open shared object file: No such file or directory<br />../../abinit/abinit-7.0.5/src/98_main/abinit: error while loading shared libraries: liblapack.so.3: cannot open shared object file: No such file or directory<br />../../abinit/abinit-7.0.5/src/98_main/abinit: error while loading shared libraries: liblapack.so.3: cannot open shared object file: No such file or directory<br />../../abinit/abinit-7.0.5/src/98_main/abinit: error while loading shared libraries: liblapack.so.3: cannot open shared object file: No such file or directory<br />../../abinit/abinit-7.0.5/src/98_main/abinit: error while loading shared libraries: liblapack.so.3: cannot open shared object file: No such file or directory<br />../../abinit/abinit-7.0.5/src/98_main/abinit: error while loading shared libraries: liblapack.so.3: cannot open shared object file: No such file or directory<br />../../abinit/abinit-7.0.5/src/98_main/abinit: error while loading shared libraries: liblapack.so.3: cannot open shared object file: No such file or directory<br />../../abinit/abinit-7.0.5/src/98_main/abinit: error while loading shared libraries: liblapack.so.3: cannot open shared object file: No such file or directory<br />../../abinit/abinit-7.0.5/src/98_main/abinit: error while loading shared libraries: liblapack.so.3: cannot open shared object file: No such file or directory<br />../../abinit/abinit-7.0.5/src/98_main/abinit: error while loading shared libraries: liblapack.so.3: cannot open shared object file: No such file or directory<br />../../abinit/abinit-7.0.5/src/98_main/abinit: error while loading shared libraries: liblapack.so.3: cannot open shared object file: No such file or directory<br />../../abinit/abinit-7.0.5/src/98_main/abinit: error while loading shared libraries: liblapack.so.3: cannot open shared object file: No such file or directory<br />../../abinit/abinit-7.0.5/src/98_main/abinit: error while loading shared libraries: liblapack.so.3: cannot open shared object file: No such file or directory<br />../../abinit/abinit-7.0.5/src/98_main/abinit: error while loading shared libraries: liblapack.so.3: cannot open shared object file: No such file or directory<br />../../abinit/abinit-7.0.5/src/98_main/abinit: error while loading shared libraries: liblapack.so.3: cannot open shared object file: No such file or directory<br /><br />===================================================================================<br />=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES<br />=   EXIT CODE: 127<br />=   CLEANING UP REMAINING PROCESSES<br />=   YOU CAN IGNORE THE BELOW CLEANUP MESSAGES<br />===================================================================================<br /><br />Please help <br />Janpreet</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: job submission on HPC&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Thu May 02, 2013 10:26 am</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">You need to configure LD_LIBRARY_PATH to point to the libraries you built Abinit with, e.g.:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>export LD_LIBRARY_PATH=&quot;/path/to/lapack/lib:$LD_LIBRARY_PATH&quot;</code></pre></div><br />You'll have to do it for each library your cluster complains about.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2112&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:15:50 GMT -->
+</html>

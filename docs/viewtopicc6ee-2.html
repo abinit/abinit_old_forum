@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=2307&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:45:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; etsf_io runtime error in 7.4.2</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>etsf_io runtime error in 7.4.2</h2>
+		<p><a href="viewtopic797b.html?f=14&amp;t=2307">https://forum.abinit.org/viewtopic.php?f=14&amp;t=2307</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>etsf_io runtime error in 7.4.2</h3>
+				<div class="date">Posted: <strong>Fri Oct 18, 2013 2:48 pm</strong></div>
+				<div class="author">by <strong>carsten.fortmann</strong></div>
+				<div class="content">SUMMARY:<br />============<br />I get <br /> <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;ioarr.F90:386:ERROR<br />&nbsp;Bad value for accessfil3 on write<br />&nbsp;ioarr.F90:386:ERROR<br />&nbsp;Bad value for accessfil3 on write<br /></code></pre></div><br />when running abinit V7.4.2 with accesswff 3 and istwfk *1 set in the input file, etsf-io and etsf-io-fallback+netcdf-fallback are enabled at configure time.<br /><br /><br />DESCRIPTION:<br />=================<br />If this has been asked before, please point me to the post.<br /><br />Anyway, here's the problem:<br /><br />In all my calculations, I use <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>accesswff 3<br />istwfk *1<br /></code></pre></div><br /> to read and write from/to etsf-netcdf files.<br /><br />Among others, I have the following configure flags set:<br /> <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--enable-etsf-io --with-trio-flavor=&quot;netcdf-fallback+etsf_io-fallback&quot; <br /></code></pre></div><br /> <br />This used to work fine until I upgraded from abinit7.0.5 to abinit7.4.2 (yes, I skipped 7.2.x).<br /><br />Now, when running attached input file, I get<br /> <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;ioarr.F90:386:ERROR<br />&nbsp;Bad value for accessfil3 on write<br />&nbsp;ioarr.F90:386:ERROR<br />&nbsp;Bad value for accessfil3 on write<br /></code></pre></div><br /><br />Looking at and debugging the relevant code (ioarr.F90), the problem seems to be that control does not reach the code within the <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#ifdef HAVE_TRIO_ETSF_IO ... #endif</code></pre></div> directives (line 349 ff.). <br /><br />Hence, I also went into config.h (in the top level abinit directory) and inserted  <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#define HAVE_TRIO_ETSF_IO 1<br />#define HAVE_TRIO_NETCDF_IO 1<br /></code></pre></div><br />Same problem after recompiling.<br /><br />The only forum thread I found which sounds remotely similar to my issue is <a href="viewtopic6c7e.html?f=19&amp;t=2300&amp;p=7294&amp;hilit=etsf#p7294" class="postlink">http://forum.abinit.org/viewtopic.php?f=19&amp;t=2300&amp;p=7294&amp;hilit=etsf#p7294</a>. I applied the suggested patch, after which I get a compile time error.<br /><br />But, interestingly, in that thread:<br /><blockquote class="uncited"><div>There were 1 or 2 other errors in the same file, and probably tons of others in abinit, which confuses netcdf with etsf-io. Usually this is not a problem: etsf-io implies netcdf, and there are almost no bits of code using netcdf without etsf-io...<br /></div></blockquote><br />What are the other errors? <br />Have I come across an un&quot;Usual&quot; case?<br /><br />Somewhere in the back of my head, I remember very vaguely having read sth. like &quot;Support for accesswff 3 might cease  in future versions&quot; but I can't tell where I read or heard that. <br /><br />What can I do? Thanks in advance for any helpful comments.<br /><br />Carsten</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: etsf_io runtime error in 7.4.2&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Wed Oct 23, 2013 10:53 am</strong></div>
+				<div class="author">by <strong>carsten.fortmann</strong></div>
+				<div class="content">SOLUTION (well, fix):<br />====================<br /><br />I patched config.h in the top level abinit directory (after running ./configure and before running make):<br />Changed<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>554c554,555<br />/* #undef HAVE_TRIO_ETSF_IO */<br /></code></pre></div><br />to<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#define HAVE_TRIO_ETSF_IO 1<br />#define HAVE_ETSF_IO 1<br /></code></pre></div><br />and<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>/* #undef HAVE_TRIO_NETCDF */<br /></code></pre></div><br />to<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#define HAVE_TRIO_NETCDF 1<br />#define HAVE_NETCDF 1<br /></code></pre></div></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=2307&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:45:12 GMT -->
+</html>

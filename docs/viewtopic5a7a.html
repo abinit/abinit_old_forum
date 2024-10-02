@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1333&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:55:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [solved] Abinit 6.8.2 - make tests_paral</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[solved] Abinit 6.8.2 - make tests_paral</h2>
+		<p><a href="viewtopicc96b.html?f=3&amp;t=1333">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1333</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[solved] Abinit 6.8.2 - make tests_paral</h3>
+				<div class="date">Posted: <strong>Thu Sep 22, 2011 10:15 am</strong></div>
+				<div class="author">by <strong>nandaloo</strong></div>
+				<div class="content">Hi,<br /><br />I'm running Ubuntu 10.04 64bit with ABINIT 6.8.2 and enabled OpenMPI 1.4.1-2 as well as CUDA 4.0.<br />The output of <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../configure</code></pre></div> says MPI and CUDA are enabled. I successfully built it as well and run the following test without any problems.<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;make tests_acc4 </code></pre></div><br />However, when I try<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;make tests_paral paral_host=&lt;my_machine_name&gt; paral_mode=seqpar </code></pre></div><br />I get an error. Is that call available for &quot;normal&quot; users like me?<br />&quot;Normal&quot; since I came to believe that this is for the &quot;ABINIT test farm&quot; only: <a href="http://ftp.abinit.org/ws11/beuken.pdf" class="postlink">http://ftp.abinit.org/ws11/beuken.pdf</a><br />Aparently only certain machine_names are accepted, however when I specify one of them, it looks for some files at the wrong place...<br /><br />If that's not possible, what is the easiest why to test if MPI and CUDA are working properly?<br />I believed that there must be something, since executing the test suite for sequential abinit is just amazingly easy!<br /><br />Thank you a lot for reading this,<br />Philipp</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit 6.8.2 - make tests_paral</h3>
+				<div class="date">Posted: <strong>Thu Sep 22, 2011 10:59 am</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">please have a look at this thread: <a href="viewtopicbd69.html?f=3&amp;t=1266&amp;p=4012&amp;hilit=gpu" class="postlink">http://forum.abinit.org/viewtopic.php?f=3&amp;t=1266&amp;p=4012&amp;hilit=gpu</a><br /><br />To be able to run parallel tests on your machine, you might have to edit the ~abinit/tests/Scripts/run-parallel-tests.pl script.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit 6.8.2 - make tests_paral</h3>
+				<div class="date">Posted: <strong>Fri Oct 07, 2011 6:37 am</strong></div>
+				<div class="author">by <strong>nandaloo</strong></div>
+				<div class="content">Thank you for the link!<br /><br />I was able to make it work, with some changes in 'run-parallel-tests.pl' as follows:<br /><br />Adding my machine name to &quot;@MachList&quot; and adding this section <br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>...<br />elsif ($MACH eq 'ubuntu') {<br />&nbsp; # see question part for an explanation on this<br />&nbsp; $MPICH = 2;<br />&nbsp; # this enables OPENMPI<br />&nbsp; $OPENMPI = 1;<br />&nbsp; # set path to binary for MPI (the binary is at &quot;/usr/bin/mpirun&quot; - that's why we set the path to &quot;/usr/bin&quot;<br />&nbsp; $MPICH_DIR = &quot;/usr/bin&quot;;<br />&nbsp; # give run command (?)<br />&nbsp; $MPIRUN_NP = &quot;$MPICH_DIR/mpirun -np&quot;;<br />&nbsp; # disables test case number 10 - we do that because most of the configurations do it<br />&nbsp; $CASE10 = 0;<br />&nbsp; &nbsp; }<br />...<br /></code></pre></div><br /><br />in the corresponding if-else structure, I could successfully run the full parallel test suite issuing this:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make tests_paral paral_host=ubuntu paral_mode=seqpar</code></pre></div><br /><br />Since I can see some (low, but it's there) load on the GPU for some test cases and occasionally high load on more than one CPU I believe it works as it should.<br /><br />Regards<br />Philipp</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1333&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:55:33 GMT -->
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1616&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:02:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [fixed] Bug: Build on OSX (all recent version of Abinit)</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[fixed] Bug: Build on OSX (all recent version of Abinit)</h2>
+		<p><a href="viewtopicccd8.html?f=19&amp;t=1616">https://forum.abinit.org/viewtopic.php?f=19&amp;t=1616</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[fixed] Bug: Build on OSX (all recent version of Abinit)</h3>
+				<div class="date">Posted: <strong>Mon Apr 16, 2012 5:24 am</strong></div>
+				<div class="author">by <strong>kaneod</strong></div>
+				<div class="content">Hi, <br /><br />As noted in another thread (<a href="viewtopicc9ea-2.html?f=17&amp;t=1609" class="postlink">http://forum.abinit.org/viewtopic.php?f=17&amp;t=1609</a>), there is a build bug in all recent versions of Abinit. The m4 macro AX_PROG_MKDIR_P from util_fixes in both the fallbacks subtree and the tests subtree incorrectly tries to assign MKDIR_P a prefix of &quot;fallbacks_srcdir&quot;, which isn't set anywhere. This is still a problem in 6.12.3.<br /><br />The incorrect assignment leads to build failures if fallbacks are required and a fail during installation of the tests.<br /><br />The quick workaround for users is simply to change fallbacks_srcdir to srcdir in every instance in the configure files in each subdirectory (it appears to be a relic variable).<br /><br /> The proper fix for developers is to update the AX_PROG_MKDIR_P macro. Just changing fallbacks_srcdir to srcdir might work here but I don't know if this breaks something on autoreconf (or whatever process is used by the abinit devs to generate the configure.ac files and so on).<br /><br />Is there a higher purpose to the existence of the fallbacks_srcdir variable?<br /><br />Kane</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Bug: Build on OSX (all recent version of Abinit)</h3>
+				<div class="date">Posted: <strong>Tue Apr 17, 2012 5:46 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Thanks for reporting this problem. I'll fix it ASAP.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Bug: Build on OSX (all recent version of Abinit)</h3>
+				<div class="date">Posted: <strong>Tue Apr 24, 2012 10:22 am</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Here is a patch against Abinit 6.12.3, for those who would need it.<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>=== modified file 'fallbacks/config/m4/util-fixes.m4'<br />--- fallbacks/config/m4/util-fixes.m4&nbsp; &nbsp;2011-02-05 14:31:22 +0000<br />+++ fallbacks/config/m4/util-fixes.m4&nbsp; &nbsp;2012-04-24 08:14:41 +0000<br />@@ -19,7 +19,7 @@<br />&nbsp; &nbsp;ax_tmp_mkdir_p=`echo &quot;${MKDIR_P}&quot; | awk '{print &#91;$&#93;1}'`<br />&nbsp; &nbsp;if test &quot;${ax_tmp_mkdir_p}&quot; = &quot;config/gnu/install-sh&quot;; then<br />&nbsp; &nbsp; &nbsp;AC_MSG_NOTICE(&#91;fixing wrong path to mkdir replacement&#93;)<br />-&nbsp; &nbsp; MKDIR_P=&quot;${fallbacks_srcdir}/${MKDIR_P}&quot;<br />+&nbsp; &nbsp; MKDIR_P=&quot;${ac_abs_top_srcdir}/${MKDIR_P}&quot;<br />&nbsp; &nbsp;fi<br />&nbsp; &nbsp;unset ax_tmp_mkdir_p<br />&nbsp;&#93;) # AX_PROG_MKDIR_P<br /><br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Bug: Build on OSX (all recent version of Abinit)</h3>
+				<div class="date">Posted: <strong>Thu Apr 26, 2012 4:55 am</strong></div>
+				<div class="author">by <strong>kaneod</strong></div>
+				<div class="content">Hi Yann,<br /><br />You'll need to apply that patch against tests/config/m4/util-fixes.m4 as well. It has the same problem.<br /><br />Kane</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Bug: Build on OSX (all recent version of Abinit)</h3>
+				<div class="date">Posted: <strong>Thu Apr 26, 2012 12:29 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">You're just plain right. Same in doc/ as well.<br /><br />Here is the full patch:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>=== modified file 'doc/config/m4/util-fixes.m4'<br />--- doc/config/m4/util-fixes.m4&nbsp; &nbsp;2011-08-02 17:01:38 +0000<br />+++ doc/config/m4/util-fixes.m4&nbsp; &nbsp;2012-04-26 10:01:20 +0000<br />@@ -19,7 +19,7 @@<br />&nbsp; &nbsp;ax_tmp_mkdir_p=`echo &quot;${MKDIR_P}&quot; | awk '{print &#91;$&#93;1}'`<br />&nbsp; &nbsp;if test &quot;${ax_tmp_mkdir_p}&quot; = &quot;config/gnu/install-sh&quot;; then<br />&nbsp; &nbsp; &nbsp;AC_MSG_NOTICE(&#91;fixing wrong path to mkdir replacement&#93;)<br />-&nbsp; &nbsp; MKDIR_P=&quot;${fallbacks_srcdir}/${MKDIR_P}&quot;<br />+&nbsp; &nbsp; MKDIR_P=&quot;${ac_abs_top_srcdir}/${MKDIR_P}&quot;<br />&nbsp; &nbsp;fi<br />&nbsp; &nbsp;unset ax_tmp_mkdir_p<br />&nbsp;&#93;) # AX_PROG_MKDIR_P<br /><br />=== modified file 'fallbacks/config/m4/util-fixes.m4'<br />--- fallbacks/config/m4/util-fixes.m4&nbsp; &nbsp;2011-02-05 14:31:22 +0000<br />+++ fallbacks/config/m4/util-fixes.m4&nbsp; &nbsp;2012-04-26 10:25:10 +0000<br />@@ -19,7 +19,7 @@<br />&nbsp; &nbsp;ax_tmp_mkdir_p=`echo &quot;${MKDIR_P}&quot; | awk '{print &#91;$&#93;1}'`<br />&nbsp; &nbsp;if test &quot;${ax_tmp_mkdir_p}&quot; = &quot;config/gnu/install-sh&quot;; then<br />&nbsp; &nbsp; &nbsp;AC_MSG_NOTICE(&#91;fixing wrong path to mkdir replacement&#93;)<br />-&nbsp; &nbsp; MKDIR_P=&quot;${fallbacks_srcdir}/${MKDIR_P}&quot;<br />+&nbsp; &nbsp; MKDIR_P=&quot;${ac_abs_top_srcdir}/${MKDIR_P}&quot;<br />&nbsp; &nbsp;fi<br />&nbsp; &nbsp;unset ax_tmp_mkdir_p<br />&nbsp;&#93;) # AX_PROG_MKDIR_P<br /><br />=== modified file 'tests/config/m4/util-fixes.m4'<br />--- tests/config/m4/util-fixes.m4&nbsp; &nbsp;2011-10-29 23:01:07 +0000<br />+++ tests/config/m4/util-fixes.m4&nbsp; &nbsp;2012-04-26 10:01:37 +0000<br />@@ -19,7 +19,7 @@<br />&nbsp; &nbsp;ax_tmp_mkdir_p=`echo &quot;${MKDIR_P}&quot; | awk '{print &#91;$&#93;1}'`<br />&nbsp; &nbsp;if test &quot;${ax_tmp_mkdir_p}&quot; = &quot;config/gnu/install-sh&quot;; then<br />&nbsp; &nbsp; &nbsp;AC_MSG_NOTICE(&#91;fixing wrong path to mkdir replacement&#93;)<br />-&nbsp; &nbsp; MKDIR_P=&quot;${fallbacks_srcdir}/${MKDIR_P}&quot;<br />+&nbsp; &nbsp; MKDIR_P=&quot;${ac_abs_top_srcdir}/${MKDIR_P}&quot;<br />&nbsp; &nbsp;fi<br />&nbsp; &nbsp;unset ax_tmp_mkdir_p<br />&nbsp;&#93;) # AX_PROG_MKDIR_P<br /><br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [fixed] Bug: Build on OSX (all recent version of Abinit)</h3>
+				<div class="date">Posted: <strong>Tue May 01, 2012 1:40 am</strong></div>
+				<div class="author">by <strong>kaneod</strong></div>
+				<div class="content">Ah it's in ./tests as well.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [fixed] Bug: Build on OSX (all recent version of Abinit)</h3>
+				<div class="date">Posted: <strong>Wed May 02, 2012 10:52 am</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Yes, this is included in the full patch above. Just scroll down the text to see it.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1616&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:02:35 GMT -->
+</html>

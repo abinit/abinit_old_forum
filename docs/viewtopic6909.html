@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3657&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:52:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; NETCDF files produced by anaddb</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>NETCDF files produced by anaddb</h2>
+		<p><a href="viewtopic967c-2.html?f=10&amp;t=3657">https://forum.abinit.org/viewtopic.php?f=10&amp;t=3657</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>NETCDF files produced by anaddb</h3>
+				<div class="date">Posted: <strong>Tue Aug 08, 2017 3:31 pm</strong></div>
+				<div class="author">by <strong>NPike</strong></div>
+				<div class="content">Hello all,<br /><br />I am currently using version 8.5.1 of ANADDB and want to try to use the NetCDF files to visualize my data with ABIPY.  However, opening the NetCDF file in ABIPY results in an error message.  When I was looking into this, I discovered that my NetCDF files produced by ANADDB are structured, but the information in almost every array (?) within the NetCDF file is a very large negative number.  <br /><br />For instance, I have a NetCDF file that I tried to open with the following python code snippet (note that NetCDF files can not be attached (I assume because they are too big?).  I can email it to anyone who wants it)<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>from netCDF4 import Dataset<br /><br />nc_file = 'mos2_PHBST.nc'<br />fh = Dataset(nc_file,mode='r')<br />fh.variables&#91;'atom_species'&#93;&#91;:&#93;<br /></code></pre></div><br /><br />The result of this code is...<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>array(&#91;-2147483647, -2147483647, -2147483647, ..., -2147483647,<br />&nbsp; &nbsp; &nbsp; &nbsp;-2147483647, -2147483647&#93;, dtype=int32)<br /></code></pre></div><br />Is there something compiled wrong with ANADDB that causes the netcdf file to be filled with negative numbers?  Or, is it something within ANADDB itself?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: NETCDF files produced by anaddb</h3>
+				<div class="date">Posted: <strong>Wed Aug 09, 2017 10:37 am</strong></div>
+				<div class="author">by <strong>NPike</strong></div>
+				<div class="content">Hello again,<br /><br />The problem I posted previously turns out to be a little larger than I thought...<br /><br />It turns out that during the construction of the NetCDF files is incorrect as some data is simply missing, and<br />consequently being read as a large negative number by ABIPY.<br /><br />During an anaddb calculation, several NetCDF files are produced depending on the type of calculation one<br /> is running.  It appears that by default a file is produced called &quot;anaddb.nc&quot;<br /> in 98_main/anaddb.F90 which creates a NetCDF file with some general data from the DDB calculations.<br /><br />A second NetCDF file is produced which ends in &quot;_PHBST.nc&quot; which contains the band structure information.<br />(This is the file needed by ABIPY to produces the band structure). This file is produced in 77_ddb/m_phonons.F90<br />in two places(?).  One of which is in the subroutine called ifc_mkphbs. In any case, when the NetCDF file is written it<br />appears that several pieces of information are missing from the files. What I have discovered thus far is...<br /><br />In the &quot;_PHBST.nc&quot; file the following items are incomplete and filled with underscores:<br />atom_species<br />reduced_sym_matricies<br />space_group<br />symafm<br /><br />In the &quot;anaddb.nc&quot; file, the same items are missing. They might also be missing in the third NetCDF file produced by anaddb.<br /><br />When I was looking at the NetCDF files produced by during a ground state calculation the files appeared complete  <img class="smilies" src="images/smilies/icon_e_biggrin.gif" alt=":D" title="Very Happy" /> <br /><br />For now, I can fix my files by simply modifying the NetCDF file using the information from the &quot;_GSR.nc&quot; file.  Also,<br /> why are there three NetCDF files produced by anaddb?<br /><br />~Best</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: NETCDF files produced by anaddb</h3>
+				<div class="date">Posted: <strong>Wed Aug 16, 2017 11:53 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">PS: we have tried looking through the source code for inconsistencies. <br /><br />The calls to crystal_ncwrite looks ok, but some of the integer arrays are being miswritten from within anaddb (they are fine written out in the fortran on the fly) to netcdf. The type looks ok (int32 checked with the fortran kind). And there are 1 or 2 additional integer arrays which are printed correctly (atomic_numbers valence_charges...) but they are short. space_group is a strange type of its own, but seems to suffer the same fate. <br /><br />The same happens for all 3 .nc files written from anaddb.F90. Dimensions and variable defs are ok, but the put of the int arrays fails.<br /><br />Matthieu and Nick</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3657&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:52:13 GMT -->
+</html>

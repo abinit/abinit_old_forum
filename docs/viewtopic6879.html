@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=2467&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:59:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; density and Real Spherical Harmonics</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>density and Real Spherical Harmonics</h2>
+		<p><a href="viewtopic61e4.html?f=19&amp;t=2467">https://forum.abinit.org/viewtopic.php?f=19&amp;t=2467</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>density and Real Spherical Harmonics</h3>
+				<div class="date">Posted: <strong>Sun Mar 02, 2014 3:37 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear all,<br /><br />I would like to link a Elk routine that is computing the multipole decomposition of the density on the basis of real spherical harmonics (inside the spheres).<br />However I have difficulties to figure out what we have in Abinit exactly.<br />It sounds to me that things are made on the basis of imaginary spherical harmonics (like the DOS), am I right?<br />I see that real spherical harmonics are used only for dmatpawu?<br /><br />This is just to be sure that nothing is done in this sense before starting coding anything.<br /><br />Thanks and all the best,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: density and Real Spherical Harmonics</h3>
+				<div class="date">Posted: <strong>Mon Mar 03, 2014 1:46 pm</strong></div>
+				<div class="author">by <strong>amadon</strong></div>
+				<div class="content">Dear Eric,<br /><br />The real spherical harmonics are used in DFT+U and also to compute<br />fatbands (pawfatbnd) or partial dos (with prtdosm=2).<br />See in particular the comments at the end of subroutine partial_dos_fractions_paw.<br />More generally,  the PAW part of ABINIT uses real spherical harmonics and some moments<br />of the densities are thus computed in pawdensities.F90.<br /><br />Best regards<br />Bernard Amadon<br />CEA</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: density and Real Spherical Harmonics</h3>
+				<div class="date">Posted: <strong>Mon Mar 10, 2014 5:43 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Bernard,<br /><br />Thanks for the reply.<br />I had a look on pawdensities.F90, but, to clarify, when you say that some moments of the density are plotted, does it mean that for each spin channel and each atom, you have the l and m decomposition of the density over the real spherical harmonic basis?<br /><br />Best regards,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: density and Real Spherical Harmonics</h3>
+				<div class="date">Posted: <strong>Fri Mar 14, 2014 10:14 am</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">Eric,<br /><br />I don't exactly understand your need.<br />Within PAW, treating the density can be subtle, as you know.<br /><br />1- Do you want the AE density (could be if you want to link an elk routine) ?<br />If yes, this is complicated because this density is never used by abinit; it can be output via the denfgr routine.<br />It is then given on a regular FFT grid sized with pawecutdg (that has to be extremely fine to reproduce the nodes).<br />At the stage, there is no Ylm decomposition and you have code it by yourself.<br /><br />2- Do you want the PS density (norm-compensated) ?<br />It is divided in 3 parts:<br />rho_PS(r)=rho_PS_plane_wave(r) -rho_PS_onsite(r)+ rho_AE_onsite(r)<br />The 2 last parts are computed in pawdensities (as explained by Bernard), respectively named rho1 and trho1.<br />They are expressed with their (REAL) spherical harmonics moments:<br />rho_lm(r)=Intg[rho(r).S_lm(r).dr], S_lm being the real spherical harmonics.<br />You can print these 2 variable rho1 and trho1 to look at them.<br />The last part of the density is the plane-wave part.<br />Again, it is expressed on a FFT grid (defined by pawecutdg) and there no reference to spherical harmonics.<br /><br />If you are sure that your density is located inside the PAW augmentation regions, you can make the assumption that:<br />rho_PS(r)=rho_AE_onsite(r)<br />and things become much more easy.<br />But this assumption is only true for localized orbitals of course...<br /><br />Marc</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: density and Real Spherical Harmonics&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Sat Mar 22, 2014 8:47 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Marc,<br /><br />Thanks for the details, this is what I'm asking for and indeed the AE part would be the best to link with Elk.<br />So I'll have to code for this part...<br />The PS density can be a good approximation anyway, I'll try with that and see what I'm getting.<br /><br />Thanks a lot,<br />Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=2467&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:59:11 GMT -->
+</html>

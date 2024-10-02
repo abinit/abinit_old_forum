@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1668&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:20:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] compilation error w/ gfortran 4.5 and openmpi-1.4.4</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] compilation error w/ gfortran 4.5 and openmpi-1.4.4</h2>
+		<p><a href="viewtopic77c7.html?f=3&amp;t=1668">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1668</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] compilation error w/ gfortran 4.5 and openmpi-1.4.4</h3>
+				<div class="date">Posted: <strong>Wed May 09, 2012 11:28 pm</strong></div>
+				<div class="author">by <strong>makhyoun</strong></div>
+				<div class="content">Dear All: I encounter the following errors during the make command and I appreciate any help.<br /><br />system PC linux suse-11.3 64bit<br />mpi : openmpi-1.4.4<br />F-compiler gfortran 4.5 <br />abinit-6.12.3<br /> ./configure --prefix=$A --enable-mpi --enable-64bit-flags <br />The Makefile was edited to include the required libs of mpi and the include files. <br /><br />gfortran -m64 -ffree-form -J/home/mohamed/abinit-6.12.3/src/mods -O2 -mtune=native -march=native -mfpmath=sse -m64 -g -ffree-line-length-none -Wstrict-aliasing=2   -m64 -g -ffree-line-length-none -Wstrict-aliasing=2    -o abinetcdf abinetcdf-abinetcdf.o  ../../src/13_memory_mpi/lib13_memory_mpi.a ../../src/12_hide_mpi/lib12_hide_mpi.a ../../src/10_defs/lib10_defs.a -L/home/mohamed/abinit-6.12.3/fallbacks/exports/lib -lnetcdf -L/usr/lib64/gcc/x86_64-suse-linux/4.5 -L/usr/lib64/gcc/x86_64-suse-linux/4.5/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-suse-linux/4.5/../../../../x86_64-suse-linux/lib -L/usr/lib64/gcc/x86_64-suse-linux/4.5/../../.. -lgfortran -lm -L/usr/lib64/gcc/x86_64-suse-linux/4.5 -L/usr/lib64/gcc/x86_64-suse-linux/4.5/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-suse-linux/4.5/../../../../x86_64-suse-linux/lib -L/usr/lib64/gcc/x86_64-suse-linux/4.5/../../.. -lgfortran -lm <br />../../src/12_hide_mpi/lib12_hide_mpi.a(m_xmpi.o): In function `__m_xmpi_MOD_xmpio_create_fsubarray_4d':<br />/home/mohamed/abinit-6.12.3/src/12_hide_mpi/m_xmpi.F90:2365: undefined reference to `mpi_type_size_'<br />/home/mohamed/abinit-6.12.3/src/12_hide_mpi/m_xmpi.F90:2381: undefined reference to `mpi_type_contiguous_'<br />/home/mohamed/abinit-6.12.3/src/12_hide_mpi/m_xmpi.F90:2383: undefined reference to `mpi_type_hvector_'<br />/home/mohamed/abinit-6.12.3/src/12_hide_mpi/m_xmpi.F90:2385: undefined reference to `mpi_type_hvector_'<br />/home/mohamed/abinit-6.12.3/src/12_hide_mpi/m_xmpi.F90:2387: undefined reference to `mpi_type_hvector_'<br />/home/mohamed/abinit-6.12.3/src/12_hide_mpi/m_xmpi.F90:2389: undefined reference to `mpi_type_commit_'<br />../../src/12_hide_mpi/lib12_hide_mpi.a(m_xmpi.o): In function `__m_xmpi_MOD_xmpio_create_fsubarray_3d':<br />/home/mohamed/abinit-6.12.3/src/12_hide_mpi/m_xmpi.F90:2281: undefined reference to `mpi_type_size_'<br />/home/mohamed/abinit-6.12.3/src/12_hide_mpi/m_xmpi.F90:2295: undefined reference to `mpi_type_contiguous_'<br />/home/mohamed/abinit-6.12.3/src/12_hide_mpi/m_xmpi.F90:2297: undefined reference to `mpi_type_hvector_'<br />/home/mohamed/abinit-6.12.3/src/12_hide_mpi/m_xmpi.F90:2299: undefined reference to `mpi_type_hvector_'<br />/home/mohamed/abinit-6.12.3/src/12_hide_mpi/m_xmpi.F90:2301: undefined reference to `mpi_type_commit_'<br />../../src/12_hide_mpi/lib12_hide_mpi.a(m_xmpi.o): In function `__m_xmpi_MOD_xmpio_create_fsubarray_2d':<br />/home/mohamed/abinit-6.12.3/src/12_hide_mpi/m_xmpi.F90:2196: undefined reference to `mpi_type_size_'<br />/home/mohamed/abinit-6.12.3/src/12_hide_mpi/m_xmpi.F90:2212: undefined reference to `mpi_type_contiguous_'<br />/home/mohamed/abinit-6.12.3/src/12_hide_mpi/m_xmpi.F90:2214: undefined reference to `mpi_type_hvector_'<br />/home/mohamed/abinit-6.12.3/src/12_hide_mpi/m_xmpi.F90:2216: undefined reference to `mpi_type_commit_'<br />../../src/12_hide_mpi/lib12_hide_mpi.a(m_xmpi.o): In function `__m_xmpi_MOD_xsum_mpi_log3d':<br />/home/mohamed/abinit-6.12.3/src/12_hide_mpi/xsum_mpi.F90:2905: undefined reference to `mpi_allreduce_'<br />../../src/12_hide_mpi/lib12_hide_mpi.a(m_xmpi.o): In function `__m_xmpi_MOD_xsum_mpi_log2d':<br />/home/mohamed/abinit-6.12.3/src/12_hide_mpi/xsum_mpi.F90:2828: undefined reference to `mpi_allreduce_'<br />../../src/12_hide_mpi/lib12_hide_mpi.a(m_xmpi.o): In function `__m_xmpi_MOD_xsum_mpi_log1d':<br />/home/mohamed/abinit-6.12.3/src/12_hide_mpi/xsum_mpi.F90:2750: undefined reference to `mpi_allreduce_'<br />../../src/12_hide_mpi/lib12_hide_mpi.a(m_xmpi.o): In function `__m_xmpi_MOD_xsum_mpi_c6cplx':<br />/home/mohamed/abinit-6.12.3/src/12_hide_mpi/xsum_mpi.F90:2661: undefined reference to `mpi_comm_size_'<br />/home/mohamed/abinit-6.12.3/src/12_hide_mpi/xsum_mpi.F90:2673: undefined reference to `mpi_allreduce_'<br />../../src/12_hide_mpi/lib12_hide_mpi.a(m_xmpi.o): In function `__m_xmpi_MOD_xsum_mpi_c5cplx':<br />/home/mohamed/abinit-6.12.3/src/12_hide_mpi/xsum_mpi.F90:2578: undefined reference to `mpi_comm_size_'<br />/home/mohamed/abinit-6.12.3/src/12_hide_mpi/xsum_mpi.F90:2589: undefined reference to `mpi_allreduce_'<br />../../src/12_hide_mpi/lib12_hide_mpi.a(m_xmpi.o): In function `__m_xmpi_MOD_xsum_mpi_c4cplx':<br />/home/mohamed/abinit-6.12.3/src/12_hide_mpi/xsum_mpi.F90:2496: undefined reference to `mpi_comm_size_'<br />/home/mohamed/abinit-6.12.3/src/12_hide_mpi/xsum_mpi.F90:2507: undefined reference to `mpi_allreduce_'<br />../../src/12_hide_mpi/lib12_hide_mpi.a(m_xmpi.o): In function `__m_xmpi_MOD_xsum_mpi_c3cplx':<br /><br />.............and many more errors.<br /><br />Best Regard<br />Mohamed Makhyoun<br /><br />Faculty of Science<br />Alexandria Egypt</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: compilation error with gfortran 4.5 and openmpi-1.4.4</h3>
+				<div class="date">Posted: <strong>Thu May 10, 2012 1:12 am</strong></div>
+				<div class="author">by <strong>kaneod</strong></div>
+				<div class="content">Hi Mohamed, <br /><br />You are going about compilation the wrong way - look at the forum banner in red at the top of this page. If you want to compile with respect to MPI, you should use the mpif90, mpicc, mpicxx wrappers provided by your MPI distribution. The compilation step you posted above the error messages shows you aren't really linking against MPI and are in fact using gfortran directly.<br /><br />To properly link against MPI you need to set FC=&quot;mpif90&quot; and so on in the hostname.ac file as mentioned in the doc/config/build-config.ac prototype.<br /><br />Kane</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>compilation error with gfortran 4.5 and openmpi-1.4.4</h3>
+				<div class="date">Posted: <strong>Thu May 10, 2012 3:04 pm</strong></div>
+				<div class="author">by <strong>makhyoun</strong></div>
+				<div class="content">Dear Dr. Kane O' Donnell, Dear All<br /><br />Thank you very much. I followed your suggestions and the problem solved.<br /><br />Best Wishes<br /><br />Mohamed Makhyoun</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1668&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:20:14 GMT -->
+</html>

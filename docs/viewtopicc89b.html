@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2012&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:18:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; MPI_ERR_NO_SUCH_FILE: no such file or directory</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>MPI_ERR_NO_SUCH_FILE: no such file or directory</h2>
+		<p><a href="viewtopic7f3a.html?f=3&amp;t=2012">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2012</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>MPI_ERR_NO_SUCH_FILE: no such file or directory</h3>
+				<div class="date">Posted: <strong>Thu Feb 21, 2013 6:21 am</strong></div>
+				<div class="author">by <strong>sidiq</strong></div>
+				<div class="content">Hi,<br /><br />I'm trying to relax zinc in bulk on an 11 node cluster. I have included the input file (zn.in). After it relaxes, I am given the error<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;----iterations are completed or convergence reached----<br /><br />-P-0000&nbsp; wffopen.F90:165:WffOpen<br />-P-0000 MPI_ERR_IO: input/output error<br />-P-0000<br />-P-0000&nbsp; leave_new : decision taken to exit ...</code></pre></div><br /><br />as shown in the log file (log.in) which I've included. I am also given the MPI error<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--------------------------------------------------------------------------<br />MPI_ABORT was invoked on rank 9 in communicator MPI_COMM_WORLD <br />with errorcode 14.<br /><br />NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.<br />You may or may not see output from other processes, depending on<br />exactly when Open MPI kills them.<br />--------------------------------------------------------------------------<br />--------------------------------------------------------------------------<br />mpirun has exited due to process rank 10 with PID 9336 on<br />node XXX.XXX.XXX.XXX exiting improperly. There are two reasons this could occur:<br /><br />1. this process did not call &quot;init&quot; before exiting, but others in<br />the job did. This can cause a job to hang indefinitely while it waits<br />for all processes to call &quot;init&quot;. By rule, if one process calls &quot;init&quot;,<br />then ALL processes must call &quot;init&quot; prior to termination.<br /><br />2. this process called &quot;init&quot;, but exited without calling &quot;finalize&quot;.<br />By rule, all processes that call &quot;init&quot; MUST call &quot;finalize&quot; prior to<br />exiting or it will be considered an &quot;abnormal termination&quot;<br /><br />This may have caused other processes in the application to be<br />terminated by signals sent by mpirun (as reported here).<br />--------------------------------------------------------------------------<br />&#91;azzaruh:03046&#93; 10 more processes have sent help message help-mpi-api.txt / mpi-abort<br />&#91;azzaruh:03046&#93; Set MCA parameter &quot;orte_base_help_aggregate&quot; to 0 to see all help / error messages</code></pre></div><br /><br />I've also discovered that in every node, there is the error as shown in the LOG file <br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>-P-0009&nbsp; wffopen.F90:165:WffOpen<br />-P-0009 MPI_ERR_NO_SUCH_FILE: no such file or directory<br />-P-0009<br />-P-0009&nbsp; leave_new : decision taken to exit ...</code></pre></div><br /><br />I've included the log file from one of the nodes (t4x_LOG_0009.in). Unfortunately, I've found out that I do have the file wffopen.F90 in abinit-6.12.3/src/59_io_mpi/wffopen.F90. So, I would appreciate any comment or help. Thanks.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MPI_ERR_NO_SUCH_FILE: no such file or directory&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Thu Feb 21, 2013 12:03 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">In fact, the error message means that a particular node hasn't find a wavefunction file it needs.<br />Abinit parallelization is not a blackbox. First of all, I see in your input file that you only selected parallelization over k points. No need to complicate things, keep the default value of paral_kgb=0, remove the npXXX variables) and adjust the number of processors assigned to a relevant value. I would highly suggest to choose a divisor of the number of k points - 24 here at the first glance - so try mpirun -n 4 ... or mpirun -n 8 ... but 11 is odd.<br />And if you want to play with parallelization on bands or on ffts, let abinit give you some clues about the right combination by adding paral_kgb=-8 in you input file as explained in the tutorials.<br /><br />btw ntime=1000 ... are you sure?<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MPI_ERR_NO_SUCH_FILE: no such file or directory</h3>
+				<div class="date">Posted: <strong>Mon Feb 25, 2013 12:45 pm</strong></div>
+				<div class="author">by <strong>sidiq</strong></div>
+				<div class="content">Hi Alain,<br /><br />You were right. I changed paral_kgb=0 and chose the number of nodes as a factor of the k-points and everthing works great. I have to admit that i exited the parallel tutorial after i thought that paral_kgb=-n will recommend the parallel variables for you in the same way that prtkpt 1 will recommend k-point variables for you. But I guess there's always something around the corner.. <br /><br />Thanks for the help..</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2012&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:18:31 GMT -->
+</html>

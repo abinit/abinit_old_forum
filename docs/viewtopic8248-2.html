@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3892&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:59:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; missmatch in npw and mpw</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>missmatch in npw and mpw</h2>
+		<p><a href="viewtopicfd16.html?f=9&amp;t=3892">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3892</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>missmatch in npw and mpw</h3>
+				<div class="date">Posted: <strong>Mon Jul 23, 2018 8:15 pm</strong></div>
+				<div class="author">by <strong>ianabinit</strong></div>
+				<div class="content">Hi everyone,<br /><br />I am currently running a single k-point calculation using abinit to compare the result with my own code. Since I want to compare the number of bases used in the abinit and my approach, and my calculation is only a single k-point calculation, I take mpw number in the ouput file as the number of basis functions being used in abinit. However, then I found in the ouput file, there are two npw, one is consistent with mpw, the other is npw (full set), which is two times larger than npw.<br /><br /> wfconv:   160 bands initialized randomly with npw=623757, for ikpt=     1<br />_setup2: Arith. and geom. avg. npw (full set) are 1247513.000 1247513.000<br /><br />I think this is in the same case as in this page <br /><!-- m --><a class="postlink" href="http://estest.ucdavis.edu/exist/estest/www/xql/stdout.xql?uuid=0c2558cf-8a49-45bc-937f-6b4c20a3dfed&amp;fname=Benzene.out">http://estest.ucdavis.edu/exist/estest/ ... enzene.out</a><!-- m --><br /><br />Could anyone kindly help me with the questions<br />a. why would the latter npw (full set) is 2 times greater than mpw?<br />b. which one should I refer to as the reference number of basis functions used in abinit?<br /><br />Thanks a lot in advance for you guys kind help.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: missmatch in npw and mpw</h3>
+				<div class="date">Posted: <strong>Thu Jul 26, 2018 11:02 am</strong></div>
+				<div class="author">by <strong>Annelinde</strong></div>
+				<div class="content">Hi,<br /><br />Did you parallelise this calculation? If I multiply the smallest npw with the number of cores I use, I got roughly the value of npw (full set). Did you parallelise this calculation over 2 cores?<br /><br />In that case I think you'd need to take into account the full set value.<br /><br />with kind regards,<br /><br />Annelinde</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: missmatch in npw and mpw</h3>
+				<div class="date">Posted: <strong>Sat Jul 28, 2018 8:26 pm</strong></div>
+				<div class="author">by <strong>ianabinit</strong></div>
+				<div class="content">Thanks for your reply, I did parallelize the code, but I am definitely sure I was parallelizing the code over much more than 2 processors. And I checked the code which computing mpw and npw locating at<br /><br />ABINIT_DIR/src/56_recipspace/getmpw.F90<br />ABINIT_DIR/src/52_fft_mpi_noabirule/m_fftcore.F90<br /><br />The formulae used to compute the npw/mpw seems to be (2*ecut)**(3/2) * ucvol / (6*pi**2), which is identical to the 1247513 result. But In the .out file, mpw and npw are shown to be 623757, which is just half. I'm not sure if I misunderstood anything or there is a bug in calculating npw/mpw when doing gamma point calculation.<br /><br />I appreciate a lot if anyone could help me with this.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3892&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:59:41 GMT -->
+</html>

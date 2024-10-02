@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=3715&p=11243 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 14:18:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>BUG abinit crashes for paral_kgb=1 - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopic98cb.html?t=3715">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="5"><a href="viewforume774.html?f=5" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Developing Abinit</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="19"><a href="viewforum218b.html?f=19" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Improving ABINIT</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopicc276.html?f=19&amp;t=3715">BUG abinit crashes for paral_kgb=1</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Documentation, Web site and code modifications<br /></div>
+<p>
+	<strong>Moderators:</strong> <a href="memberlist4183.html?mode=viewprofile&amp;u=1676" class="username">baguetl</a>, <a href="memberlistccd1.html?mode=viewprofile&amp;u=2257" class="username">routerov</a>
+</p>
+
+
+<div class="action-bar bar-top">
+	
+			<a href="postingaaac.html?mode=reply&amp;f=19&amp;t=3715" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic45ab.html?f=19&amp;t=3715&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="3715" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			3 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p11241" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11241">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist25b1.html?mode=viewprofile&amp;u=1177" class="username">recohen</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchaf31.html?author_id=1177&amp;sr=posts">36</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 30, 2013 10:48 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11241">
+
+						<h3 class="first"><a href="#p11241">BUG abinit crashes for paral_kgb=1</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingaead.html?mode=quote&amp;f=19&amp;p=11241" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic5fbb.html?p=11241#p11241" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist25b1.html?mode=viewprofile&amp;u=1177" class="username">recohen</a></strong> &raquo; </span>Fri Nov 10, 2017 11:30 am
+			</p>
+			
+			
+			
+			<div class="content">This job runs OK with only k-point parallelization, but crashes for all sets of other parallelization I have tried. I used <br />autoparal 1<br />paral_kgb 1<br />max_ncpus=128<br />to find recommended sets of parameters, and they all crash for the latest version 8.6.1 as well as earlier versions. <br />This is with the latest Intel compilers and mkl (2018)<br />as well as earlier versions of intel.<br /> <br />A sample traceback from:<br />autoparal 0 <br />paral_kgb 1<br />#max_ncpus=128<br />npband 4<br />bandpp 1<br />npkpt 32<br />npfft 1<br />gives<br />getcut: wavevector=  0.0000  0.0000  0.0000  ngfft=  80 120  90<br />         ecut(hartree)=     50.000   =&gt; boxcut(ratio)=   1.96423<br /> <br /> ITER STEP NUMBER     1<br /> vtorho : nnsclo_now=2, note that nnsclo,dbl_nnsclo,istep=0 0 1<br /> You should try to get npband*bandpp=   96<br /> For information matrix size is    58376<br /><br />[48] ERROR: LOCAL:EXIT:SIGNAL: fatal error<br />[48] ERROR:    Fatal signal 11 (SIGSEGV) raised.<br />[48] ERROR:    Signal was encountered at:<br />[48] ERROR:       &lt;&lt;no file/line information found&gt;&gt;<br />[48] ERROR:    After leaving:<br />[48] ERROR:       mpi_alltoallv_(*sendbuf=0x2b3f5b191b00, *sendcounts=0x2b3f4ecc9aa0, *sdispls=0x2b3f4ecc9a80, sendtype=MPI_DOUBLE_PRECISION, *recvbuf=0x2b3f5ab4d4c0, *recvcounts=0x2b3f4ecc9a20, *rdispls=0x2b3f4ecc9a40, recvtype=MPI_DOUBLE_PRECISION, comm=0xffffffffc4000003 CART_SUB CART_CREATE COMM_WORLD  [48:51], *ierr=0x7ffc076ebbb0-&gt;MPI_SUCCESS)<br /><br />[51] ERROR: LOCAL:EXIT:SIGNAL: fatal error<br />[51] ERROR:    Fatal signal 11 (SIGSEGV) raised.<br />[51] ERROR:    Signal was encountered at:<br />[51] ERROR:       __kmp_external__ZN3rml8internal5Block16freePublicObjectEPNS0_10FreeObjectE (/mnt/beegfs/bin/abinit)<br />[51] ERROR:       &lt;&lt;1 stack level with no information&gt;&gt;<br />[51] ERROR:       __kmp_external_scalable_free (/mnt/beegfs/bin/abinit)<br />[51] ERROR:       for_deallocate (/mnt/beegfs/intel/compilers_and_libraries_2018.0.128/linux/compiler/lib/intel64_lin/libifcoremt.so.5)<br />[51] ERROR:       for_dealloc_all_nocheck (/mnt/beegfs/intel/compilers_and_libraries_2018.0.:<br />128/linux/compiler/lib/intel64_lin/libifcoremt.so.5)<br />[51] ERROR:       m_lobpcgwf_mp_getghc_gsc_ (/mnt/beegfs/bin/abinit)<br />[51] ERROR:       m_lobpcg2_mp_lobpcg_run_ (/mnt/beegfs/bin/abinit)<br />[51] ERROR:       m_lobpcgwf_mp_lobpcgwf2_ (/mnt/beegfs/bin/abinit)<br />[51] ERROR:    After leaving:<br />[51] ERROR:       mpi_alltoallv_(*sendbuf=0x2b8630f75b00, *sendcounts=0x2b86247ddaa0, *sdispls=0x2b86247dda80, sendtype=MPI_DOUBLE_PRECISION, *recvbuf=0x2b8630932000, *recvcounts=0x2b86247dda20, *rdispls=0x2b86247dda40, recvtype=MPI_DOUBLE_PRECISION, comm=0xffffffffc4000003 CART_SUB CART_CREATE COMM_WORLD  [48:51], *ierr=0x7fffd4965bb0-&gt;MPI_SUCCESS)<br /><br />[63] ERROR: LOCAL:EXIT:SIGNAL: fatal error<br />[63] ERROR:    Fatal signal 11 (SIGSEGV) raised.<br />[63] ERROR:    Signal was encountered at:<br />[63] ERROR:       __kmp_external__ZN3rml8internal5Block16freePublicObjectEPNS0_10FreeObjectE (/mnt/beegfs/bin/abinit)<br />[63] ERROR:       &lt;&lt;1 stack level with no information&gt;&gt;<br />[63] ERROR:       __kmp_external_scalable_free (/mnt/beegfs/bin/abinit)<br />[63] ERROR:       for_deallocate (/mnt/beegfs/intel/compilers_and_libraries_2018.0.128/linux/compiler/lib/intel64_lin/libifcoremt.so.5)<br />[63] ERROR:       for_dealloc_all_nocheck (/mnt/beegfs/intel/compilers_and_libraries_2018.0.128/linux/compiler/lib/intel64_lin/libifcoremt.so.5)<br />[63] ERROR:       m_lobpcgwf_mp_getghc_gsc_ (/mnt/beegfs/bin/abinit)<br />[63] ERROR:       m_lobpcg2_mp_lobpcg_run_ (/mnt/beegfs/bin/abinit)<br />[63] ERROR:       m_lobpcgwf_mp_lobpcgwf2_ (/mnt/beegfs/bin/abinit)<br />[63] ERROR:    After leaving:<br />[63] ERROR:       mpi_alltoallv_(*sendbuf=0x2ab417862100, *sendcounts=0x2ab40b555aa0, *sdispls=0x2ab40b555a80, sendtype=MPI_DOUBLE_PRECISION, *recvbuf=0x2ab417224100, *recvcounts=0x2ab40b555a20, *rdispls=0x2ab40b555a40, recvtype=MPI_DOUBLE_PRECISION, comm=0xffffffffc4000003 C:<br />RT_SUB CART_CREATE COMM_WORLD  [60:63], *ierr=0x7ffd685fbd30-&gt;MPI_SUCCESS)<br />[0] WARNING: starting premature shutdown<br /><br />[112] ERROR: LOCAL:EXIT:SIGNAL: fatal error<br />[112] ERROR:    Fatal signal 11 (SIGSEGV) raised.<br />[112] ERROR:    Signal was encountered at:<br />[112] ERROR:       __kmp_external__ZN3rml8internal5Block16freePublicObjectEPNS0_10FreeObjectE (/mnt/beegfs/bin/abinit)<br />[112] ERROR:       &lt;&lt;1 stack level with no information&gt;&gt;<br />[112] ERROR:       __kmp_external_scalable_free (/mnt/beegfs/bin/abinit)<br />[112] ERROR:       for_deallocate (/mnt/beegfs/intel/compilers_and_libraries_2018.0.128/linux/compiler/lib/intel64_lin/libifcoremt.so.5)<br />[112] ERROR:       for_dealloc_all_nocheck (/mnt/beegfs/intel/compilers_and_libraries_2018.0.128/linux/compiler/lib/intel64_lin/libifcoremt.so.5)<br />[112] ERROR:       m_lobpcgwf_mp_getghc_gsc_ (/mnt/beegfs/bin/abinit)<br />[112] ERROR:       m_lobpcg2_mp_lobpcg_run_ (/mnt/beegfs/bin/abinit)<br />[112] ERROR:       m_lobpcgwf_mp_lobpcgwf2_ (/mnt/beegfs/bin/abinit)<br />[112] ERROR:    After leaving:<br />[112] ERROR:       mpi_alltoallv_(*sendbuf=0x2b2ab24f0100, *sendcounts=0x2b2aa5ee9aa0, *sdispls=0x2b2aa5ee9a80, sendtype=MPI_DOUBLE_PRECISION, *recvbuf=0x2b2ab1eb2100, *recvcounts=0x2b2aa5ee9a20, *rdispls=0x2b2aa5ee9a40, recvtype=MPI_DOUBLE_PRECISION, comm=0xffffffffc4000003 CART_SUB CART_CREATE COMM_WORLD  [112:115], *ierr=0x7ffca337fab0-&gt;MPI_SUCCESS)</div>
+			
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file1b7c.php?id=1486">F10C20H10Fe2.in</a></dt>
+						<dd>(3.27 KiB) Downloaded 533 times</dd>
+		</dl>
+		
+		
+			</dd>
+									</dl>
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p11242" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11242">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist25b1.html?mode=viewprofile&amp;u=1177" class="username">recohen</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchaf31.html?author_id=1177&amp;sr=posts">36</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 30, 2013 10:48 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11242">
+
+						<h3 ><a href="#p11242">Re: BUG abinit crashes for paral_kgb=1 *SOLVED*</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting5677.html?mode=quote&amp;f=19&amp;p=11242" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic23ae.html?p=11242#p11242" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist25b1.html?mode=viewprofile&amp;u=1177" class="username">recohen</a></strong> &raquo; </span>Sat Nov 11, 2017 6:48 pm
+			</p>
+			
+			
+			
+			<div class="content">I recompiled everything with no openmp and it works fine now!</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p11243" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11243">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist25b1.html?mode=viewprofile&amp;u=1177" class="username">recohen</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchaf31.html?author_id=1177&amp;sr=posts">36</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 30, 2013 10:48 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11243">
+
+						<h3 ><a href="#p11243">Re: BUG abinit crashes for paral_kgb=1 (*Not Solved*)</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting619d.html?mode=quote&amp;f=19&amp;p=11243" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic40d7.html?p=11243#p11243" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist25b1.html?mode=viewprofile&amp;u=1177" class="username">recohen</a></strong> &raquo; </span>Sun Nov 12, 2017 10:15 am
+			</p>
+			
+			
+			
+			<div class="content">I spoke too soon. The self-consistency normally runs with paral_kgb 1 (that even occasionally dies) , but the berry's phase parts (data sets 3 and 4)<br />always crash with allocation problems with paral_kgp 1 . I tried many different sets of processors, autoparal, and manual setting of parallelization parameters.<br />It seems to be dying in m_fftcore/kpgsph , but it is hard to get a good traceback as memory is corrupted.<br />Example errors:<br />1] ERROR: LOCAL:EXIT:SIGNAL: fatal error<br />[1] ERROR:    Fatal signal 11 (SIGSEGV) raised.<br />[1] ERROR:    Signal was encountered at:<br />[1] ERROR:       m_fftcore_mp_kpgsph_ (/mnt/beegfs/bin/abinit)<br />[1] ERROR:    After leaving:<br />[1] ERROR:       mpi_comm_rank_(comm=MPI_COMM_WORLD, *rank=0x7ffece8cf6c0-&gt;1, *ierr=0x7ffece8cf6c4-&gt;MPI_SUCCESS)<br /><br />IO operation completed. cpu_time:       0.1 [s], walltime:       0.1 [s]<br />  initberry: for direction 1, nkstr =   4, nstr =     16<br />  initberry: for direction 2, nkstr =   4, nstr =     16<br />  initberry: for direction 3, nkstr =   4, nstr =     16<br />*** Error in `/mnt/beegfs/bin/abinit': malloc(): smallbin double linked list corrupted: 0x000000000c553f10 ***<br />*** Error in `/mnt/beegfs/bin/abinit': malloc(): smallbin double linked list corrupted: 0x000000000d24bb60 ***<br /><br /><br /> IO operation completed. cpu_time:       0.0 [s], walltime:       0.1 [s]<br />  initberry: for direction 1, nkstr =   4, nstr =     16<br />  initberry: for direction 2, nkstr =   4, nstr =     16<br />  initberry: for direction 3, nkstr =   4, nstr =     16<br /> Relative gap for number of plane waves between process (%):  0.24<br /> Relative gap for number of plane waves between process (%):  0.26<br /> Relative gap for number of plane waves between process (%):  0.16<br /> Relative gap for number of plane waves between process (%):  0.16<br />*** Error in `/mnt/beegfs/bin/abinit': malloc(): memory corruption: 0x000000000d32cba0 ***<br />Fatal error in MPI_Allreduce: Unknown error class, error stack:<br />MPI_Allreduce(1552)...................: MPI_Allreduce(sbuf=MPI_IN_PLACE, rbuf=0xd2a91a0, count=9216, MPI_INTEGER, MPI_SUM, MPI_COMM_WORLD) failed<br />MPIR_Allreduce_impl(1393).............: fail failed<br />MPIR_Allreduce_intra(975).............: fail failed<br />MPIDU_Complete_posted_with_error(1710): Process failed<br />MPIR_Allreduce_intra(1040)............: fail failed<br />MPIC_Sendrecv(576)....................: fail failed<br />MPIDI_CH3_EagerContigIsend(677).......: failure occurred while attempting to send an eager message<br />MPIDI_CH3_iSendv(37)..................: Communication error with rank 9<br />Fatal error in MPI_Allreduce: Unknown error class, error stack:<br />MPI_Allreduce(1552)...................: MPI_Allreduce(sbuf=MPI_IN_PLACE, rbuf=0xc37a900, count=9216, MPI_INTEGER, MPI_SUM, MPI_COMM_WORLD) failed<br />MPIR_Allreduce_impl(1393).............: fail failed<br />MPIR_Allreduce_intra(975).............: fail failed<br />MPIDU_Complete_posted_with_error(1710): Process failed<br />MPIR_Allreduce_intra(1040)............: fail failed<br />MPIC_Sendrecv(576)....................: fail failed<br />:</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="postingaaac.html?mode=reply&amp;f=19&amp;t=3715" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic45ab.html?f=19&amp;t=3715&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=19&amp;t=3715">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			3 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforum218b.html?f=19" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Improving ABINIT”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=3715&p=11243 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 14:18:37 GMT -->
+</html>

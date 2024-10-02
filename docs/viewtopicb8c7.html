@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=4085&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:43:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; eph calcualtion of hexagonal graphene</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>eph calcualtion of hexagonal graphene</h2>
+		<p><a href="viewtopic0566.html?f=10&amp;t=4085">https://forum.abinit.org/viewtopic.php?f=10&amp;t=4085</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>eph calcualtion of hexagonal graphene</h3>
+				<div class="date">Posted: <strong>Mon Apr 01, 2019 2:55 pm</strong></div>
+				<div class="author">by <strong>Aiswarya Samal</strong></div>
+				<div class="content">Dear all<br />         I am trying to calculate the thermal conductivity of monolayer graphene following the tutorial. I got the solution for q-points.Now while running the anaddb code I am getting errors like this.--- !ERROR<br />src_file: read_gkk.F90<br />src_line: 666<br />mpi_rank: 0<br />message: |<br />    gkk element    6     1     1     1 was not found by symmetry operations  on the irreducible perturbations and qpoints given<br />There may be a mistake in choosing qpath natifc and atifc.Kindly suggest me how to choose these values.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: eph calcualtion of hexagonal graphene</h3>
+				<div class="date">Posted: <strong>Mon Apr 01, 2019 4:24 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">It runs for me... <br /><br />Check that <br />* all of the GKK files are there and complete, then <br />* that they are included in the merge for mrggkk, and that <br />* you do _not_ include the GKK files from the DDK (following?) in the main GKK file with the epc matrix elements. These files should be listed (just the names) in a separate file which comes last in the anaddb input list (&quot;files file&quot;)</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: eph calcualtion of hexagonal graphene</h3>
+				<div class="date">Posted: <strong>Wed Apr 03, 2019 1:13 pm</strong></div>
+				<div class="author">by <strong>Aiswarya Samal</strong></div>
+				<div class="content">Dear Mverstra<br />                Thanks a lot for your suggestion .It really works. I got the thermal conductivity output files for Cu ,Si bulk and monolayer graphene. But the strange thing is that I am getting same output thermal conductivity for these three materials.Kindly check these input files .I am getting the teph_6.out_ep_WTH output file like this for Cu ,Si and graphene .<br />   0.3000000000D+01    0.0000000000D+00    0.1797693135+309    0.0000000000D+00    0.1797693135+309<br />    0.5000000000D+01    0.0000000000D+00    0.1797693135+309    0.0000000000D+00    0.1797693135+309<br />    0.7000000000D+01    0.0000000000D+00    0.1797693135+309    0.0000000000D+00    0.1797693135+309<br />    0.9000000000D+01    0.0000000000D+00    0.1797693135+309    0.0000000000D+00    0.1797693135+309<br />    0.1100000000D+02    0.0000000000D+00    0.1797693135+309    0.0000000000D+00    0.1797693135+309<br />    0.1300000000D+02    0.0000000000D+00    0.1797693135+309    0.0000000000D+00    0.1797693135+309<br />    0.1500000000D+02    0.0000000000D+00    0.1797693135+309    0.0000000000D+00    0.1797693135+309<br />    0.1700000000D+02    0.0000000000D+00    0.1797693135+309    0.0000000000D+00    0.1797693135+309<br />    0.1900000000D+02    0.0000000000D+00    0.1797693135+309    0.0000000000D+00    0.1797693135+309<br />    0.2100000000D+02    0.0000000000D+00    0.1797693135+309    0.0000000000D+00    0.1797693135+309</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: eph calcualtion of hexagonal graphene</h3>
+				<div class="date">Posted: <strong>Thu Dec 26, 2019 10:53 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello again (been a while),<br>
+<br>
+1) I hope you are looking for the electronic part of kappa, that is all the epc and anaddb will get you<br>
+2) for Si, there is a gap, so nothing will come out, idem for undoped graphene as the DOS is 0<br>
+3) your files are identical but contain huge numbers 1.e309! This seems a bit random. It could be because it does not find any DOS, but we have done Cu in the past and it works for the resistivity (I don't have the electronic kappa on hand, unfortunately)<br>
+4) your k and q grids are _way_ underconverged. This may also explain why the code is not finding any points near the Fermi level. For metals just getting phonons will require 16-20 k-points per side and 4x4x4 or better 8x8x8 q. Getting good epc quantities integrated will require even more.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=4085&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:43:47 GMT -->
+</html>

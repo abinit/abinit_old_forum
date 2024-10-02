@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2904&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:59:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; How to nonlinear calculation?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>How to nonlinear calculation?</h2>
+		<p><a href="viewtopic17bc.html?f=9&amp;t=2904">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2904</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>How to nonlinear calculation?</h3>
+				<div class="date">Posted: <strong>Mon Jan 19, 2015 11:32 am</strong></div>
+				<div class="author">by <strong>nayoung</strong></div>
+				<div class="content">Dear all,<br />Hello, I'm trying to calculate the Non-linear calculation so that I studied its tutorial and now I use tnlo_2.in abinit.<br />But I have an ERROR<br /><br /><strong class="text-strong">My ERROR:</strong><br /><em class="text-italics">Subroutine Unknown:0:ERROR<br />   In a non-metallic case (occopt&lt;3), for a RF calculation, <br />  if the eigenvalues are degenerate, the occupation numbers must also be degenerate.<br /></em><br />so I added input value '<em class="text-italics">occopt=2</em>' in my database set2<br />But it doesn't work.<br />Would you please guide me?<br /><br /><strong class="text-strong">My input file</strong>:<br /># Linear and nonlinear response calculation for BaTiO3<br /><br />#Definition of lattice parameters<br />#********************************<br />   acell       3*10.00<br />   rprim            3.9900000095000001    0.0000000000000000    0.0000000000000000<br />     0.0000000000000000    3.9900000095000001    0.0000000000000000<br />     0.0000000000000000    0.0000000000000000    3.9900000095000001<br /><br />#Definition of atomic positions and types<br />#*************************************<br />   natom       5<br />   ntypat      3<br />   znucl       56 8 22<br />   typat       1 2 2 2 3<br />   xred           0.0000000000000000  0.0000000000000000  0.0000000000000000<br />   0.0000000000000000  0.5000000000000000  0.5000000000000000<br />   0.5000000000000000  0.0000000000000000  0.5000000000000000<br />   0.5000000000000000  0.5000000000000000  0.0000000000000000<br />   0.5000000000000000  0.5000000000000000  0.5000000000000000<br />   ixc         11<br /><br />#Parameters of the SCF cycles<br />#****************************<br />   iscf        7<br />   nstep       200<br /><br />#Plane wave basis and k-point grid<br />#*********************************<br />   ecut        500 eV<br />   ecutsm      0.5<br />   dilatmx     1.05<br />   ngkpt       4 4 4<br />#   nshiftk     4<br />#   shiftk      0.5 0.5 0.5<br />               0.5 0.0 0.0<br />               0.0 0.5 0.0<br />               0.0 0.0 0.5<br /><br />ndtset 5     jdtset 1 2 3 4 5<br /><br />#DATASET1 : scf calculation: GS WF in the BZ<br />#********************************************<br />   prtden1    1<br />   kptopt1    1<br />   toldfe1    1.0d-12<br /><br />#DATASET2 : non scf calculation: GS WF in the whole BZ<br />#*****************************************************<br />   getden2    1<br />   kptopt2    2<br />     iscf2   -2<br />   getwfk2    1<br />   tolwfr2    1.0d-20<br />    nband2    30<br />   occopt2    2<br /><br />#DATASET3 : ddk on the MP grid of k-points<br />#*****************************************<br />   getwfk3    2<br />    rfdir3    1 1 1<br />   rfelfd3    2<br />   tolwfr3    1.0d-20<br />    nband3    30<br />   kptopt3    2<br /><br /><br />#DATASET4 : ddE on the MP grid of k-points<br />#*****************************************<br />   prtden4    1<br />   getwfk4    2<br />   getddk4    3<br />    rfdir4    1 1 1<br />   rfphon4    1<br />  rfatpol4    1 2<br />   tolvrs4    1.0d-12<br />   rfelfd4    3<br />    nband4    30<br />   kptopt4    2<br />  prepanl4    1<br /><br />#DATASET5 : 3DTE calculation<br />#***************************<br />   getden5    1<br />  get1den5    4<br />   getwfk5    2<br />   get1wf5    4<br />    nband5    30<br />   kptopt5    2<br />optdriver5    5<br />  rf1elfd5    1<br />  rf1phon5    1<br /> rf1atpol5    1 10<br />   rf1dir5    1 1 1<br />  rf2elfd5    1<br />   rf2dir5    1 1 1<br />  rf3elfd5    1<br />   rf3dir5    1 1 1<br /><br />nbdbuf 4<br /><br /><strong class="text-strong">My ERROR:</strong><br /> <em class="text-italics">Subroutine Unknown:0:ERROR<br />   There is a problem with the input file : maybe  <br />  a disagreement between the declared dimension of the array,<br />  and the number of data actually provided. <br />  Action : correct your input file !</em><br /><br /><strong class="text-strong">How can i revise my input file?</strong><br />Best regards.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to nonlinear calculation?&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Tue Jan 20, 2015 1:56 pm</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Hi!<br /><br />Try putting nbdbuf to 0.<br /><br />Igor</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to nonlinear calculation?</h3>
+				<div class="date">Posted: <strong>Fri Oct 05, 2018 7:18 am</strong></div>
+				<div class="author">by <strong>wangxy</strong></div>
+				<div class="content">In non-linear calculation， the nband should be equal to the number of valence band. I want to know how to confirm the value?</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2904&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:59:40 GMT -->
+</html>

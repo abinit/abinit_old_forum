@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4414&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:16:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Phase transition under pressure?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Phase transition under pressure?</h2>
+		<p><a href="viewtopic0ea2.html?f=9&amp;t=4414">https://forum.abinit.org/viewtopic.php?f=9&amp;t=4414</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Phase transition under pressure?</h3>
+				<div class="date">Posted: <strong>Mon May 25, 2020 12:12 pm</strong></div>
+				<div class="author">by <strong>new_986</strong></div>
+				<div class="content">Dear all<br>
+I am trying to calculate phase transition of CsSnBr3 from pm-3m cubic to p4/mbm tetragonal under pressure<br>
+the cubic contains 5 atoms per unit cell while tetragonal contains 10 atoms per unit cell<br>
+I have varied lattice parameters of the unit cell of both and calculated energy then I have calculated enthalpy (E+pv)<br>
+When I plot between P at x-axis and enthalpy at y-axis, the graph of both phases should cross each other at a certain pressure (transition pressure) BUT they don't<br>
+When I plot between volume at x-axis and total energy at y-axis, the graph of both CROSS each other at a certain pressure<br>
+I have some questions please:<br>
+ 1. Can anybody explain to me what is happening?<br>
+2. I have considered z value of tetragonal = 2, because it contains 10 atoms twice more than number of atoms of tetragonal (10). I want tot know if this is correct??<br>
+3. I have used eV,GPa and A^3 units for energy, pressure and unit cell volume to calculate enthalpy, Is this correct?<br>
+<br>
+Thanks in advance<br>
+<br>
+Nawzad</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Phase transition under pressure?</h3>
+				<div class="date">Posted: <strong>Thu Jun 04, 2020 4:03 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Nawzad,<br>
+If you constrain the cell with acell, then you compute the internal energy at constrained strain and not at hydrostatic pressure. This is important mostly when the system is not cubic since the constrain along a,b and c will not represent the same pressure. I guess this can be your problem.<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Phase transition under pressure?</h3>
+				<div class="date">Posted: <strong>Sun Jun 07, 2020 11:51 am</strong></div>
+				<div class="author">by <strong>new_986</strong></div>
+				<div class="content">Dear Eric<br>
+When i was varying lattice parameters of the non-cubic phase, i was varying in somehow to keep a/c ratio constant..<br>
+I have tried optimization at hydrostatic pressures also, The non-cubic phase was turning to almost the cubic one, means it gives me nearly the same results...<br>
+<br>
+Regards<br>
+<br>
+Nawzad</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Phase transition under pressure?</h3>
+				<div class="date">Posted: <strong>Mon Jun 08, 2020 9:27 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Nawzad,<br>
+In your case, I would check the phonon dispersions of the cubic 5 atom cell at different pressure to check whether you have an instability or not. If no instability is present, it will mean that the cubic phase is indeed stable in your calculation. If an instability appears (reported as negative frequencies in Abinit) then the eigenvector of the unstable phonon will give you the distortions that allow to lower the energy of the crystal.<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Phase transition under pressure?</h3>
+				<div class="date">Posted: <strong>Thu Jun 11, 2020 12:13 pm</strong></div>
+				<div class="author">by <strong>new_986</strong></div>
+				<div class="content">Dear Eric<br>
+<br>
+check that<br>
+Thanks for your help always<br>
+<br>
+Best regards <br>
+<br>
+Nawzad</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4414&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:16:18 GMT -->
+</html>

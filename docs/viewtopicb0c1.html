@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=853&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:23:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Abnormal echoes of acell</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Abnormal echoes of acell</h2>
+		<p><a href="viewtopice8cd.html?f=9&amp;t=853">https://forum.abinit.org/viewtopic.php?f=9&amp;t=853</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Abnormal echoes of acell</h3>
+				<div class="date">Posted: <strong>Fri Jan 21, 2011 5:09 pm</strong></div>
+				<div class="author">by <strong>jingjing_lzu</strong></div>
+				<div class="content">I use abinit to caculate the total energy of Y2O3. After the code running, I get a abnormal echoes of acell: 1.0 1.0 1.0 Bohr.<br />Following is the detail of input file:<br />acell 3*20.048<br />spgroup 206<br />angdeg 3*90<br />ntypat 2<br />znucl 39 8<br />natom 40<br />typat 1 1 2<br />natrd 3<br />brvltt -1<br />xred 0.25 0.25 0.25<br />     0.4675 0.0 0.25<br />     0.1087 0.3478 0.1194<br />ecut  8.0<br />kptopt 1<br />ngkpt 4 4 4<br />nshiftk 2<br />shiftk  0.25 0.25 0.25<br />        -0.25 -0.25 -0.25<br />nstep 10<br />toldfe 1.0d-6<br />diemac 12.0<br />I don't know where is the cause of this error in my input file. Can somebody help me out please?<br />jingjing_lzu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abnormal echoes of acell</h3>
+				<div class="date">Posted: <strong>Fri Jan 21, 2011 9:41 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">For body-centered cells like space group 206, abinit uses rprim to hold more of the structure data than it does for other cells. If you look in your output at both acell and rprim, you'll find that acell*rprim will give the proper primitive cell.<br /><br />By the way your ecut of 8.0 looks very small, have you checked convergence on it? What kind of pseudopotentials are you using?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abnormal echoes of acell</h3>
+				<div class="date">Posted: <strong>Sat Jan 22, 2011 3:21 pm</strong></div>
+				<div class="author">by <strong>jingjing_lzu</strong></div>
+				<div class="content">Dear jzwanzig, thanks for your post!<br />Maybe the ecut is not suitable, I'll check it.<br />jingjing_lzu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=853&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:23:17 GMT -->
+</html>

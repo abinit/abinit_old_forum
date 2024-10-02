@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=231&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 20:54:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Our G0W0 results are obviously underestimated</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Our G0W0 results are obviously underestimated</h2>
+		<p><a href="viewtopice37a.html?f=11&amp;t=231">https://forum.abinit.org/viewtopic.php?f=11&amp;t=231</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Our G0W0 results are obviously underestimated</h3>
+				<div class="date">Posted: <strong>Mon Apr 12, 2010 9:06 am</strong></div>
+				<div class="author">by <strong>chinaye</strong></div>
+				<div class="content">Dear all,<br />        we performed G0W0 calculations starting form a PBE KS system for cubic ZnS. The direct band gaps are 2.00 (PBE), 2.77 (ppa), and 3.33 (cohsex) eV. Our G0W0 results are obviously underestimated with respect to other G0W0 ones reported in the literatures. For instance, the ppa G0W0 result is around 3.5 eV. We increased the density of the k-mesh and the number of the energy bands. However, the underestimate becomes even large. The same underestimate was found in the case of cubic ZnSe. Should we start our G0W0 calcultions from PBE+U KS systems? The following is the input file we used to carry out the G0W0 calculation. It will be appreciated very much if someone gives us some instructions. Thank you, very much.<br /><br />input file<br />ndtset      3<br /><br /># Definition of parameters for the calculation of the KSS file<br />nbandkss1   -1         # Number of bands in KSS file (-1 means the maximum possible)<br />nband1      75         # Number of (occ and empty) bands to be computed<br />kssform1    3 <br />istwfk1     47*1<br /><br /># Calculation of the screening (epsilon^-1 matrix)<br />optdriver2  3        # Screening calculation<br />getkss2     1       # Obtain KSS file from previous dataset<br />nband2      70       # Bands to be used in the screening calculation<br />npweps2    169 <br />npwwfn2    169<br />#ppmfrq2    16.7 eV  # Imaginary frequency where to calculate the screening<br />gwcalctyp2 = 9<br />#gwcomp2 1<br />#gwencomp2 1.0<br /><br /># Calculation of the Self-Energy matrix elements (GW corrections) <br />optdriver3  4        # Self-Energy calculation<br />getkss3     1       # Obtain KSS file from dataset 1<br />getscr3     2       # Obtain SCR file from previous dataset<br />gwcalctyp3 = 8 <br />nband3   70          # Bands to be used in the Self-Energy calculation<br />npwsigx3    169 <br />npwwfn3     169 <br />#gwcomp3 1<br />#gwencomp3 1.0<br /><br /># Data common to the three different datasets<br /><br /># Definition of the unit cell: fcc<br />acell 3*1  Angstrom<br />                       <br />rprim  -0.000000000000002       2.702649999999999       2.702650000000001<br />        2.702649999999999      -0.000000000000001       2.702650000000001<br />        2.702649999999999       2.702650000000000       0.000000000000001<br /><br /># Definition of the atom types<br />ntypat 2        <br />znucl 16 30      <br />                         <br /># Definition of the atoms<br />natom 2             <br />typat 1 2<br />xred               <br />  0.25   0.25   0.25<br />  0.00   0.00   0.00<br /><br /># Definition of the k-point grid<br />kptopt  1            # Option for the automatic generation of k points,<br />nkpt    47  <br />ngkpt  10 10 10     <br /><br />nshiftk 1<br />shiftk  0.0 0.0 0.0  # These shifts will be the same for all grids<br />istwfk  47*1         # This is mandatory in all the GW steps.<br /><br /># Use only symmorphic operations<br />symmorphi 0<br /><br />ecut 35.0          <br /># Definition of the SCF procedure<br />nstep   10000       <br />ixc 11<br />toldfe  1.0d-8   <br />diemac  12.0      <br /><br />#Common to all model GW calculations<br />     nkptgw     1<br />      kptgw     <br />              0.00000000E+00  0.00000000E+00  0.00000000E+00<br />       bdgw   <br />              9 10<br /><br /># This line added when defaults were changed (v5.3) to keep the previous, old behaviour<br />  iscf 5</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Our G0W0 results are obviously underestimated</h3>
+				<div class="date">Posted: <strong>Mon Apr 12, 2010 9:25 am</strong></div>
+				<div class="author">by <strong>bruneval</strong></div>
+				<div class="content">Does your pseudopotential for Zn consider 3s and 3p electrons as valence ? This is of the utmost importance for the final result.<br /><br />It has been published several times that G0W0 for ZnO, ZnS, and ZnSe underestimates quite much the experimental band gap. You may turn to self-consistent GW to improve the agreement.<br /><br />Good luck.<br /><br />Fabien</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=231&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 20:54:33 GMT -->
+</html>

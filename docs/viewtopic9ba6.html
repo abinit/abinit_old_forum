@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1139&hilit=fftw3&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:55:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] segmentation fault</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] segmentation fault</h2>
+		<p><a href="viewtopicd8b1.html?f=3&amp;t=1139">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1139</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] segmentation fault</h3>
+				<div class="date">Posted: <strong>Sun Jun 05, 2011 10:11 am</strong></div>
+				<div class="author">by <strong>hhwj340</strong></div>
+				<div class="content">Hi,Can someone help me?!<br /> Our group recently buy a parallel computer, which has 18 nodes with 216 cores(except the management node,node 19).This machine is<br />the product of Dawning Company of China. It uses intel cpu,xeon x5660,2.8GHz. <br />  I have compiled abinit6.6.3 sucesefully on this meachine. The configure option is:<br />   <span style="color: #FF4040">./configure --enable-mpi-io --enable-mpi --with-mpi-prefix=&quot;/public/soft/mpi/openmpi/1.4.2/icc.ifort/&quot; --enable-64bit-flags --with-fft-flavor=&quot;<span class="posthilit">fftw3</span>&quot; <br />               --with-fft-incs=&quot;-I/public/libs/<span class="posthilit">fftw3</span>.2.3/include/&quot; --with-fft-libs=&quot;-L/public/libs/<span class="posthilit">fftw3</span>.2.3/lib -lfftw3&quot;</span><br />when i use the abinit to compute my first job. it works very well,and very fast.<br />   But when I use abinit to compute another job,it doesn't work. I don't think there are any problems in my input files. Because i have computed it on a <br /> small worksattion,DEll T5400( Xeon, 8 cores and 8 G memory).it works,and very slowly.<br />  On the paralell mechine,i always got the fault sented by the PBS,somthing like :<br /><span style="color: #FF0040">--------------------------------------------------------------------------<br />mpirun noticed that process rank 28 with PID 14477 on node node6 exited on signal 11 (Segmentation fault).<br />--------------------------------------------------------------------------</span><br />I had wrote a very short fortran programm to test &quot;malloc&quot;,it could eat 1.5GB memory,and never sented a &quot;segmentation fault&quot;. in fact, the memory the <br />job needs is very small compared with the total memory of each node,24GB.<br />I don't know how to deal with this problem. <img class="smilies" src="images/smilies/icon_cry.gif" alt=":cry:" title="Crying or Very Sad" /> <br />ps: the system is suse.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: segmentation fault</h3>
+				<div class="date">Posted: <strong>Sun Jun 05, 2011 9:08 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Your segfault is insufficient data to tell you what is wrong. You could also check the actual memory usage with &quot;top&quot; while abinit runs - it could be using too much RAM. Try a small run with lower ecut or nband - if it runs fine there are good chances you are running out of memory. Remember each core uses the amount of memory announced in the log.<br /><br />Otherwise, look around for other error messages and files. Run abinit in parallel without re-directing output to a log file. Same thing for a batch job: inside the batch file use<br /><br />mpirun ... abinit &lt; files<br /><br />instead of the same with &gt; log on the end. This might leave you some additional lines of error messages so you can see what is wrong.<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: segmentation fault</h3>
+				<div class="date">Posted: <strong>Mon Jun 06, 2011 4:36 am</strong></div>
+				<div class="author">by <strong>hhwj340</strong></div>
+				<div class="content">Dear Matthieu,<br />        according to your suggestion, i try again. The information of my job is:the cell has 43 atoms,and the band is 201.<br />first ,i use ecut = 50.0 and it really need larger memory. howerver, even change ecut to 1.0,it  still stop.<br />check  logfile, i get:<br /><span style="color: #FF4040">================================================================================<br /> Values of the parameters that define the memory need for DATASET  1.<br />   intxc =         0  ionmov =         2    iscf =         5 xclevel =         2<br />  lmnmax =         4   lnmax =         4   mband =       201  mffmem =         1<br />P  mgfft =        24   mkmem =         9 mpssoang=         4     mpw =       163<br />  mqgrid =      3001   natom =        43    nfft =      3456    nkpt =       108<br />  nloalg =         4  nspden =         1 nspinor =         1  nsppol =         1<br />    nsym =         2  n1xccc =         0  ntypat =         2  occopt =         3<br />================================================================================<br />P This job should need less than                      31.932 Mbytes of memory.<br />  Rough estimation (10% accuracy) of disk space for files :<br />  WF disk file :     53.994 Mbytes ; DEN or POT disk file :      0.028 Mbytes.</span></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: segmentation fault</h3>
+				<div class="date">Posted: <strong>Mon Jun 06, 2011 4:39 am</strong></div>
+				<div class="author">by <strong>hhwj340</strong></div>
+				<div class="content">tthe build information is :<br /> <span style="color: #FF4000">++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /><br /> === Build Information ===<br />  Version       : 6.6.3<br />  Build target  : x86_64_linux_intel11.1<br />  Build date    : 20110602<br /><br /> === Compiler Suite ===<br />  C compiler       : gnu4.1<br />  CFLAGS           : -m64 -g -O2<br />  C++ compiler     : gnu4.1<br />  CXXFLAGS         : -m64 -g -O2<br />  Fortran compiler : intel11.1<br />  FCFLAGS          :  -g -extend-source -vec-report0 -noaltparam -nofpscomp<br />  FC_LDFLAGS       :    -static-intel -static-libgcc<br /><br /> === Optimizations ===<br />  Debug level        : basic<br />  Optimization level : standard<br />  Architecture       : intel_xeon<br /><br /> === MPI ===<br />  Parallel build : yes<br />  Parallel I/O   : yes<br />  Time tracing   : no<br />  GPU support    : no<br /><br /> === Connectors / Fallbacks ===<br />  Connectors on : yes<br />  Fallbacks on  : yes<br />  DFT flavor    : libxc-fallback+atompaw-fallback+bigdft-fallback+wannier90-fallback<br />  FFT flavor    : none<br />  LINALG flavor : netlib-fallback<br />  MATH flavor   : none<br />  TIMER flavor  : abinit<br />  TRIO flavor   : netcdf-fallback+etsf_io-fallback<br /><br /> === Experimental features ===<br />  Bindings            : no<br />  Exports             : no<br />  GW double-precision : no<br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /><br /></span></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: segmentation fault</h3>
+				<div class="date">Posted: <strong>Mon Jun 06, 2011 4:41 am</strong></div>
+				<div class="author">by <strong>hhwj340</strong></div>
+				<div class="content"><span style="color: #FF4000"> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /><br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /> Default optimizations:<br />   -O3 -xHost<br /><br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /><br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /> CPP options activated during the build:<br /><br />                    CC_GNU                   CXX_GNU                  FC_INTEL<br /><br />          HAVE_DFT_ATOMPAW           HAVE_DFT_BIGDFT            HAVE_DFT_LIBXC<br /><br />        HAVE_DFT_WANNIER90 HAVE_FC_ALLOCATABLE_DT...             HAVE_FC_ETIME<br /><br />              HAVE_FC_EXIT             HAVE_FC_FLUSH            HAVE_FC_GETENV<br /><br />            HAVE_FC_GETPID     HAVE_FC_ISO_C_BINDING              HAVE_FC_NULL<br /><br />                  HAVE_MPI                 HAVE_MPI2               HAVE_MPI_IO<br /><br />             HAVE_OS_LINUX              HAVE_STDIO_H                HAVE_TIMER<br /><br />         HAVE_TIMER_ABINIT            HAVE_TIMER_MPI         HAVE_TIMER_SERIAL<br /><br />         HAVE_TRIO_ETSF_IO          HAVE_TRIO_NETCDF              USE_MACROAVE<br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /></span></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: segmentation fault</h3>
+				<div class="date">Posted: <strong>Mon Jun 06, 2011 4:48 am</strong></div>
+				<div class="author">by <strong>hhwj340</strong></div>
+				<div class="content">The first job which i have successfully compute has 4 atoms/cell ,and the band is 60.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: segmentation fault</h3>
+				<div class="date">Posted: <strong>Tue Jun 07, 2011 3:58 pm</strong></div>
+				<div class="author">by <strong>hhwj340</strong></div>
+				<div class="content">I compile a sequential  abinit with --enable-mpi=no.<br />and  found that the  sequential abinit can computer the job 2 successfully.<br />when i use parallel version abinit to do sequential calculation( don't use mpirun), i find the calculation wiil stop at the first iteration.<br />But  for job 1, there is  no problem.,all of the abinit version can clculate successfully.<br />PS:<br /> my system:<br />     SuSe linux Enterprise 11.0; intel ifort 11.1,icc 11.0,intel MKL;openmpi 1.4.2;<br /> The architecture of the computer is cluster( 1 master node and 18 compute node with 2*Xeon 5560, 2.8GHz,12 cores,24 GB RAM);infiniband;<br />jobs:<br />  job 1: <span style="color: #FF4040">12 atoms,nband=60</span>,ngkpt(8,8,14),ecut=50.0.<br />  job 2:<span style="color: #FF4040"> 43 atoms,nband=201</span>,ngkpt(8,8,6),ecut=5.0(ecut is small,just for test).<br />I really don't understand what's going on.<br /><span style="color: #0040FF">help!!</span></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: segmentation fault</h3>
+				<div class="date">Posted: <strong>Wed Jun 08, 2011 9:51 am</strong></div>
+				<div class="author">by <strong>hhwj340</strong></div>
+				<div class="content">Ha ha!<br />i have solved the problem!<br />configuration option add &quot;FCFLAGS=&quot;-heap-arrays 64&quot; !</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1139&hilit=fftw3&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:55:53 GMT -->
+</html>

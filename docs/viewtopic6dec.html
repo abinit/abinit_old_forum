@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=319&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:25:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Input file for optic</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Input file for optic</h2>
+		<p><a href="viewtopic530d.html?f=9&amp;t=319">https://forum.abinit.org/viewtopic.php?f=9&amp;t=319</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Input file for optic</h3>
+				<div class="date">Posted: <strong>Sun May 16, 2010 5:05 pm</strong></div>
+				<div class="author">by <strong>yaser</strong></div>
+				<div class="content">Hi Everyone,<br /><br />I am calculating the linear and non-linear optics. I use the input variables as :<br />........................................................................................<br /><br />0.01          ! Value of the *smearing factor*, in Hartree<br />0.010   1     ! frequency *step* and *maximum* frequency (Ha)<br />0.000         ! *Scissor* shift if needed, in Hartree<br />0.001         ! *Tolerance* on closeness of singularities (in Hartree)<br />3             ! *Number of components* of linear optic tensor to be computed<br />11 33 23      ! Linear *coefficients* to be computed (x=1, y=2, z=3)<br />2             ! Number of components of nonlinear optic tensor to be computed<br />123 222       ! Non-linear coefficients to be computed<br />.........................................................................................<br />I draw the linear and non-linear optics, but they aren't good and haven't agreement with other works.<br />Could anybody help me to find the reason. I have used the toptic_1.in as :<br />.....................................................................<br /> ndtset 6<br />#First dataset : SC run with kpoints in the IBZ<br />   iscf1   3<br />  nband1   24     <br />  nstep1   250   <br /> kptopt1   1<br /> nbdbuf1   0<br /> prtden1   1   getden1 0   getwfk1 0    ! Usual file handling data<br /><br />#Second dataset : NSC run with large number of bands, and points in the IBZ<br />    iscf2   -2  <br />   nband2   200  ! This number of bands might be too low for non-linear optics and real part of linear optics<br />   nstep2   250<br />  kptopt2   1<br />  getwfk2   1   getden2 1   ! Usual file handling data<br /><br />#Third dataset : NSC run with large number of bands, and points in the the full BZ<br />    iscf3   -2  <br />   nband3   200  ! This number of bands might be too low for non-linear optics and real part of linear optics <br />   nstep3   250<br />  kptopt3   3<br />  getwfk3   2   getden3 1   ! Usual file handling data<br />#Fourth dataset : ddk response function along axis 1<br />   iscf4    -3<br />  nband4    200   ! This number of bands might be too low for non-linear optics and real part of linear optics<br />  nstep4    1  nline4  0<br /> kptopt4    3<br />   nqpt4  1  qpt4  0.0d0 0.0d0 0.0d0 <br />  rfdir4  1 0 0<br /> rfelfd4  2<br /> getwfk4  3<br />#Fifth dataset : ddk response function along axis 2<br />   iscf5    -3<br />  nband5    200   ! This number of bands might be too low for non-linear optics and real part of linear optics<br />  nstep5    1  nline5  0<br /> kptopt5    3<br />   nqpt5  1  qpt5  0.0d0 0.0d0 0.0d0<br />  rfdir5  0 1 0<br /> rfelfd5  2<br /> getwfk5  3<br />#Sixth dataset : ddk response function along axis 3<br />   iscf6 -3<br />  nband6 200   ! This number of bands might be too low for non-linear optics and real part of linear optics<br />  nstep6  1  nline6  0<br /> kptopt6  3<br />   nqpt6  1  qpt6  0.0d0 0.0d0 0.0d0<br />  rfdir6  0 0 1<br /> rfelfd6  2<br /> getwfk6  3<br />#Data common to all datasets<br /> nshiftk                1<br /> shiftk                 0.5 0.5 0.5 <br /> ngkpt  4  4  4        ! This is much too low : should be at least 24x24x24<br />acell        10.938662993   10.938662993    10.938662993 <br />angdeg       3*56.654541304   <br />ntypat       2          <br />znucl        49 8           <br />natom        10 <br />spgroup      167                                       # There are two atoms<br />spgaxor     2<br />typat       1 1 1 1 2 2 2 2 2 2        # They both are of type 1, that is, Silicon.<br />xred              # Reduced coordinate of atoms<br />0.35770000 0.35770000 0.35770000<br />0.64230000 0.64230000 0.64230000<br />...<br />...<br />...<br /><br />#Definition of the planewave basis set<br />ecut          21                               # Maximal kinetic energy cut-off, in Hartree<br /><br /><br /> <br /> amu    114.820000  15.9994000<br /> diemac 10.0<br /><br /> iscf 3<br /> ixc 3<br /> nbdbuf 2<br /> <br /> tnons               0.0000000  0.0000000  0.0000000     0.0000000  0.0000000  0.0000000<br />                     0.0000000  0.0000000  0.0000000     0.5000000  0.5000000  0.5000000<br />                     0.5000000  0.5000000  0.5000000     0.5000000  0.5000000  0.5000000<br />                    -0.0000000 -0.0000000 -0.0000000    -0.0000000 -0.0000000 -0.0000000<br />                    -0.0000000 -0.0000000 -0.0000000     0.5000000  0.5000000  0.5000000<br />                     0.5000000  0.5000000  0.5000000     0.5000000  0.5000000  0.5000000<br /> tolwfr  1.e-20<br />......................................................................<br /> Thank you.<br />Asadi.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=319&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:25:40 GMT -->
+</html>

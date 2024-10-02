@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3720&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:51:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; DFPT + PAW LDA</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>DFPT + PAW LDA</h2>
+		<p><a href="viewtopiccdff-2.html?f=10&amp;t=3720">https://forum.abinit.org/viewtopic.php?f=10&amp;t=3720</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>DFPT + PAW LDA</h3>
+				<div class="date">Posted: <strong>Sun Nov 19, 2017 11:11 pm</strong></div>
+				<div class="author">by <strong>tomasz.w</strong></div>
+				<div class="content">Dear Abinit Users,<br /><br />I'm trying to do DFPT calculation of the effect of an homogeneous electric field basing on trf1_5.in file and using LDA PAW's in Abinit 8.4.4. At the 3rd dataset I get the following line in the log (change the name of the file log.in to log.tar.gz):<br /><br />--- !BUG<br />src_file: m_pawxc.F90<br />src_line: 4494<br />mpi_rank: 0<br />message: |<br />    nkxc must be 1 or 3 (not OK for GGA)!<br /><br />Does that mean that this calculation cannot be performed using GGA nor LDA PAW's?<br /><br />Thanks,<br />Tomasz</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT + PAW LDA</h3>
+				<div class="date">Posted: <strong>Fri Nov 24, 2017 10:01 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hi -<br /><br />preliminary analysis : gga is not the problem, you are all LDA. In your case nkxc should be 1: it's the size of the xc kernel used in the DFPT. It seems to be complaining when calculating the ddE derivative. Note also that you have some NaN just above during the calculation, so something has gone wrong or not converged well, already from step 2 of dtset 3. It's a bit weird that it is printing the magnetizations magn(x,y,z) for the RHOIJ - this is probably correct and a consequence of spin orbit coupling. In principle nspden = 1 and there is no magnetization anywhere.<br /><br />Also your ddk did not converge at all for the last bands. Try adding some unoccupied bands (6-10) and setting nbdbuf at least 2. To improve convergence you can also add a few more empty bands and use a metallic smearing occopt 7 tsmear 1.e-4 (yes, even for an insulator, it works really well).<br /><br />Need to check your convergence in detail before worrying about the later datasets</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT + PAW LDA</h3>
+				<div class="date">Posted: <strong>Mon Nov 27, 2017 11:19 pm</strong></div>
+				<div class="author">by <strong>tomasz.w</strong></div>
+				<div class="content">Dear Matthieu,<br /><br />Thank you for response.<br />I followed your advices, setting even higher number of unoccupied bands and nbdbuf. Moreover, I used higher ecut, pawecutdg and denser k grid (the same as for structure relaxation, which was repeated using tolmxf 1.d-10). Now all the steps are converged and there are no NaNs. The bug regarding nkxc still remains, however. I'm attaching input, output and log.<br /><br />Thanks, <br />Tomasz</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT + PAW LDA</h3>
+				<div class="date">Posted: <strong>Tue Nov 28, 2017 11:10 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hi again,<br /><br />Indeed, these were 2 different issues. I have pared down your input to the following, to run it quickly, but still get errors related to complex potentials (cplex=1), and the dimensionality of the vxc1 and kxc1. I have forwarded this to the corresponding developers. There is a bug, and it's some interference between nspinor 2 and the electric field perturbation.<br /><br />cheers<br /><br />Matthieu<br /><br /><br />======================================================<br /><br /># HfS2 bulk PAWLDA SO <br /><br />ndtset 1<br />jdtset 3<br /><br />pawspnorb 1<br />#vdw_xc 6<br />#pawxcdev 1<br /><br />#Response Function calculation : d/dk<br />  rfelfd2   2             # Activate the calculation of the d/dk perturbation<br />   rfdir2   1 1 1         # Need to consider the perturbation in the x-direction only<br />                          # This is rather specific, due to the high symmetry of the AlAs crystal<br />                          # In general, just use rfdir 1 1 1<br />                          # In the present version of ABINIT (v4.6), symmetry cannot be used<br />                          # to reduce the number of ddk perturbations<br /><br />    nqpt2   1<br />     qpt2   0.0 0.0 0.0   # This is a calculation at the Gamma point<br /><br />  getwfk2   1            # Uses as input the output wf of the previous dataset<br /><br />  kptopt2   3             # Automatic generation of k points,<br />                          # using only the time-reversal symmetry to decrease<br />                          # the size of the k point set.<br /><br />    iscf2  -3             # The d/dk perturbation must be treated <br />                          # in a non-self-consistent way<br />  tolwfr2   1.0d-22       # Must use tolwfr for non-self-consistent calculations<br />                          # Here, the value of tolwfr is very low.<br /><br />#Response Function calculation : electric field perturbation and phonons<br />  rfphon3   1             # Activate the calculation of the atomic dispacement perturbations<br /> rfatpol3   1 3           # All the atoms will be displaced<br />  rfelfd3   3             # Activate the calculation of the electric field perturbation<br />   rfdir3   1 1 1         # All directions are selected. However, symmetries will be used to decrease<br />                          # the number of perturbations, so only the x electric field is needed<br />                          # (and this explains why in the second dataset, rfdir was set to 1 0 0).<br /><br />    nqpt3   1<br />     qpt3   0.0 0.0 0.0   # This is a calculation at the Gamma point<br /><br />  getwfk3   1           # Uses as input wfs the output wfs of the dataset 1<br />  getddk3   2            # Uses as input ddk wfs the output of the dataset 2<br /><br />  kptopt3   3             # Automatic generation of k points,<br />                          # using only the time-reversal symmetry to decrease<br />                          # the size of the k point set.<br />  tolvrs3   1.0d-18<br /><br /><br /># initial structure---------------------------------------------------------<br /><br />acell  6.7199072919E+00  6.7199072919E+00  1.0728322452E+01<br />angdeg 90 90 120<br /><br />rprim<br />1.0  0.0  0.0<br />-0.5 0.8660254037844386467637231707  0.0<br />0.0 0.0 1.0<br /><br />ntypat 2          <br />znucl 72 16           <br />                  <br />natom 3<br />#spgroup 164<br />#natrd 2          <br />typat 1 2 2<br /><br />             xred     -1.4459833242E-30 -3.4127342373E-30  2.3962857020E-18<br />                       6.6666666667E-01  3.3333333333E-01  2.5406340613E-01<br />                       3.3333333333E-01  6.6666666667E-01  7.4593659387E-01<br />#natfix 3<br />#iatfix 1 2 3<br /> <br /># base and k points---------------------------------------------------------<br /><br />ecut 3.0<br />pawecutdg 7.0<br />ecutsm 0.5 <br />dilatmx 1.05   <br />kptopt 4          <br />ngkpt 2 2 2 #12 12 6 <br />nshiftk 1         <br />shiftk      0.0 0.0 0.5<br /><br /># electronic relaxation-----------------------------------------------------<br /><br />nstep 20<br />#toldfe 1.0d-6     <br />toldfe 1.0d-12  <br />tolmxf 1.0d-10  <br />diemac 12 <br /> <br />#ntime 200   <br />#ionmov 2 <br />#optcell 2           # 2 - pelna relaksacja, 9 - nie zmienia acell_z    <br />======================================================</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT + PAW LDA</h3>
+				<div class="date">Posted: <strong>Wed Nov 29, 2017 3:10 pm</strong></div>
+				<div class="author">by <strong>tomasz.w</strong></div>
+				<div class="content">Dear Matthieu,<br /><br />Thank you again. <br />I ran the calculations with pawspnorb 0 and they succeeded without any warnings. However, I obtained wrong phonon frequencies at Gamma (comparing to finite differences calculations), especially three negavite values:<br /><br />Phonon wavevector (reduced coordinates) :  0.00000  0.00000  0.00000<br /> Phonon energies in Hartree :<br />  -1.281802E-03 -1.281802E-03 -4.350209E-05  1.400192E-03  1.450970E-03<br />   1.450970E-03  1.516384E-03  1.780480E-03  1.780480E-03<br /> Phonon frequencies in cm-1    :<br />- -2.813229E+02 -2.813229E+02 -9.547604E+00  3.073067E+02  3.184510E+02<br />-  3.184510E+02  3.328078E+02  3.907701E+02  3.907701E+02<br /><br />I obtained similar results for HGH and NCPP psp from Abinit table. Structures were relaxed using tolmxf 1.d-10. First question is: how to manage with it, second: can I trust the values of dielectric tensor and effective charges in this situation?<br /><br />Thanks,<br />Tomasz</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT + PAW LDA</h3>
+				<div class="date">Posted: <strong>Tue Apr 17, 2018 9:53 pm</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">Hi<br /><br />DFPT with PAW+spin orbit is kind of tricky and is probably glitchy at this moment. It has not been extensively tested yet.<br /><br />Without spin orbit, however, you should obtain the same result with DFPT as with small displacements.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT + PAW LDA</h3>
+				<div class="date">Posted: <strong>Wed Apr 18, 2018 9:42 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">As of today, DFPT+SOC is not yet working in PAW, we are working on it right now and hope to fix it this year. So far only LDA will be working.<br />Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3720&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:51:47 GMT -->
+</html>

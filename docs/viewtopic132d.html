@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1373&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:17:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; spin-orbit calculation</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>spin-orbit calculation</h2>
+		<p><a href="viewtopice825.html?f=9&amp;t=1373">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1373</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>spin-orbit calculation</h3>
+				<div class="date">Posted: <strong>Fri Oct 14, 2011 1:11 am</strong></div>
+				<div class="author">by <strong>bahaar</strong></div>
+				<div class="content">Hi<br />I want calculate band structure with and without spin-orbit for my compound. Should i use for each kpoint a seprate calculation? <br />I ask this question becuse when i add the nspinor=2, istwfk=1 and intxc=1 to ordinary input bandstructure(it has 40 kpoint in diffrent direction) code stop and this erroe be appeared: an error occured reading data for keyword '' ISTWFK&quot;. but it work well for just one  kpoint in input.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: spin-orbit calculation</h3>
+				<div class="date">Posted: <strong>Sun Oct 16, 2011 8:35 pm</strong></div>
+				<div class="author">by <strong>jolafc</strong></div>
+				<div class="content">Hi, <br /><br />Your error comes from the fact that istwfk must be an array of the same length as your number of k-points (as mentioned in the help for that keyword : <a href="http://www.abinit.org/documentation/helpfiles/for-v6.8/input_variables/vardev.html#istwfk" class="postlink">http://www.abinit.org/documentation/helpfiles/for-v6.8/input_variables/vardev.html#istwfk</a>). Therefore, you should use in your calculation (assuming you have 40 irreducible k-points) :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>istwfk 40*1</code></pre></div><br /><br />Good luck,<br /><br />Jonathan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: spin-orbit calculation</h3>
+				<div class="date">Posted: <strong>Thu Oct 20, 2011 6:13 am</strong></div>
+				<div class="author">by <strong>bahaar</strong></div>
+				<div class="content">Hi<br />Yes. It now running.Thanks very much <img class="smilies" src="images/smilies/icon_razz.gif" alt=":P" title="Razz" /> .</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: spin-orbit calculation</h3>
+				<div class="date">Posted: <strong>Mon Dec 10, 2012 2:29 pm</strong></div>
+				<div class="author">by <strong>mina</strong></div>
+				<div class="content">Hi bahaar,<br />i saw your topiv as spin -orbit calculation and i have to calculate band structure with spin orbit. i used input variables for band structure and nspinor=2 and so_psp to calculate spin orbit too.would you please guide me which variables i need for spin orbit?<br />Best regards.<br />Mina.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: spin-orbit calculation</h3>
+				<div class="date">Posted: <strong>Fri Dec 14, 2012 4:13 pm</strong></div>
+				<div class="author">by <strong>bahaar</strong></div>
+				<div class="content">Hi mina.<br />For spin-orbit calculation, I use normal bandstructure command plus these new ones:<br />ndtset=3 instead ndtset=2.<br />and <br />iscf2    -2<br />iscf3    -2<br />getden2  -1<br />getden3  -2<br />I also use from these command for calculation of bandstructure:<br /><br />kptopt2  ..<br />kptopt3  the same<br />nband2   ..<br />nband3   twice<br />ndivsm2  ..<br />ndivsm3  the same<br /><br />nspinor3 2<br />kptbounds2 ….<br />kptbounds3 the same<br /><br />enunit2  1<br />enunit3  1<br /><br />I use hgh psudopotentials and for so_psp  I use default value of it, I mean did not enter value for it. you can for more information about it read the  ABINIT, ground-state calculation variables:so psp<br />and It is not necessary use paw.  <br />Good luck.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: spin-orbit calculation</h3>
+				<div class="date">Posted: <strong>Sat Dec 15, 2012 6:02 am</strong></div>
+				<div class="author">by <strong>mina</strong></div>
+				<div class="content">Hi bahaar,<br />Thank you very much.<br />Best regards.<br />Mina.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: spin-orbit calculation</h3>
+				<div class="date">Posted: <strong>Sat Dec 22, 2012 9:19 am</strong></div>
+				<div class="author">by <strong>mina</strong></div>
+				<div class="content">Dear bahaar,<br />i used your guide and i used this input file to calculate band structure with spin -orbit coupling but when i plot my band structure it is not correct.<br />would you please look at my input file and help me which part is incorrect?<br />input file:<br />ndtset 3<br />kptopt1 1<br />nshiftk1 1<br />shiftk1 0.5 0.5 0.5<br />ngkpt1 4 4 4<br />prtden1 1<br />toldfe1 1.0d-6<br />iscf2 -2<br />getden2 -1<br />kptopt2 -3<br />nband2 10<br />ndivk2 10 12 17<br />kptbounds2 0.5 0.0 0.0<br />           0.0 0.0 0.0<br />           0.0 0.5 0.5<br />           1.0 1.0 1.0<br />tolwfr2    1.0d-12<br />enunit2    1<br />iscf3     -2<br />getden3    -2<br />kptopt3 -3<br />nband3    20<br />ndivk3   10 12 17<br />nspinor3  2<br />kptbounds3 0.5 0.0 0.0<br />           0.0 0.0 0.0<br />           0.0 0.5 0.5<br />           1.0 1.0 1.0<br />tolwfr3   1.0d-12<br />enunit3   1<br />acell 10.45 10.45 10.45 angstrom<br />angdeg 24.13 24.13 24.13<br />ntypat 2<br />znucl 83 52<br />natom 5<br />typat 1 1 2 2 2<br />natrd 3<br />spgroup 166<br />spgaxor 2<br />brvltt -1<br />xred   0.399 0.399 0.399<br />       0.000 0.000 0.000<br />       0.792 0.792 0.792<br />ecut 8<br />nstep 30<br />diemac 2<br />Best regards.<br />Mina.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1373&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:17:20 GMT -->
+</html>

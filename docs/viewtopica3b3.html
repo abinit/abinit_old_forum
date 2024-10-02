@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4002&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 17:46:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Relaxations diverge near minimum for systems with 30+ atoms</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Relaxations diverge near minimum for systems with 30+ atoms</h2>
+		<p><a href="viewtopicee57.html?f=9&amp;t=4002">https://forum.abinit.org/viewtopic.php?f=9&amp;t=4002</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Relaxations diverge near minimum for systems with 30+ atoms</h3>
+				<div class="date">Posted: <strong>Fri Jan 04, 2019 7:32 pm</strong></div>
+				<div class="author">by <strong>aliwho</strong></div>
+				<div class="content">Hello,<br /><br />I am working on relaxing some structures for phonon calculations. The first few iterations of the relaxations work as expected (energies and forces decreasing with each step), but eventually, rather the converging, the structures tend to explode and the energy skyrockets.<br />Has anyone experienced this, and are there any straightforward solutions?<br />I have used the same input file for smaller structures (5 atom unit cells, for example) with no problems, but when the number of atoms increases above some point, the relaxations don't seem to want to converge.<br /><br />Here's a copy of an input file which is yielding these results:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#Definition of lattice parameters<br />#********************************<br />acell&nbsp; &nbsp; 7.25654831700000E+00&nbsp; 7.25654831700000E+00&nbsp; 59.85153084<br />#Definition atomic positions and types<br />#*************************************<br />autoparal 1<br />#paral_kgb 0<br /><br />ntypat 4<br />znucl 8 56 38 22&nbsp; &nbsp;# O Ba Sr Ti, resp.<br /><br />natom 40<br />typat 24*1 4*2 4*3 8*4&nbsp; &nbsp;#&nbsp; 3*O Ba Sr Ti<br /><br />xred<br />&nbsp; 5.00087541357545E-01&nbsp; 2.14633372526376E-04 -7.46735128155745E-05<br />&nbsp; 2.14633372526376E-04&nbsp; 5.00087541357545E-01 -7.46735128155745E-05<br />&nbsp; 5.00044688983175E-01&nbsp; 5.00044688983175E-01&nbsp; 5.97952522743837E-02<br />&nbsp; 5.00001094706433E-01&nbsp; 5.60322961643697E-06&nbsp; 1.21088837578999E-01<br />&nbsp; 5.60322961643697E-06&nbsp; 5.00001094706433E-01&nbsp; 1.21088837578999E-01<br />&nbsp; 5.00003502477752E-01&nbsp; 5.00003502477752E-01&nbsp; 1.81600304538899E-01<br />&nbsp; 5.00001036610509E-01&nbsp; 2.08086542004534E-06&nbsp; 2.42559566159457E-01<br />&nbsp; 2.08086542004535E-06&nbsp; 5.00001036610509E-01&nbsp; 2.42559566159457E-01<br />&nbsp; 5.00008483670634E-01&nbsp; 5.00008483670634E-01&nbsp; 3.03189020862497E-01<br />&nbsp; 5.00008328829892E-01&nbsp; 2.36348719240361E-05&nbsp; 3.64084796363000E-01<br />&nbsp; 2.36348719240361E-05&nbsp; 5.00008328829892E-01&nbsp; 3.64084796363000E-01<br />&nbsp; 5.00234577444169E-01&nbsp; 5.00234577444169E-01&nbsp; 4.25831842182860E-01<br />&nbsp; 5.02028496658046E-01&nbsp; 1.75209586724716E-03&nbsp; 4.88191423057621E-01<br />&nbsp; 1.75209586724716E-03&nbsp; 5.02028496658046E-01&nbsp; 4.88191423057621E-01<br />&nbsp; 5.01960150800529E-01&nbsp; 5.01960150800529E-01&nbsp; 5.52026463192058E-01<br />&nbsp; 5.02005928702603E-01&nbsp; 1.99825077359706E-03&nbsp; 6.14382582111844E-01<br />&nbsp; 1.99825077359706E-03&nbsp; 5.02005928702603E-01&nbsp; 6.14382582111844E-01<br />&nbsp; 5.01999941169098E-01&nbsp; 5.01999941169098E-01&nbsp; 6.77906382313048E-01<br />&nbsp; 5.02004779481058E-01&nbsp; 2.00136138187207E-03&nbsp; 7.42465038343483E-01<br />&nbsp; 2.00136138187207E-03&nbsp; 5.02004779481058E-01&nbsp; 7.42465038343483E-01<br />&nbsp; 5.01998620005522E-01&nbsp; 5.01998620005522E-01&nbsp; 8.06187575503565E-01<br />&nbsp; 5.01989837689835E-01&nbsp; 1.98638778704002E-03&nbsp; 8.70983026748717E-01<br />&nbsp; 1.98638778704002E-03&nbsp; 5.01989837689835E-01&nbsp; 8.70983026748717E-01<br />&nbsp; 5.01790857522287E-01&nbsp; 5.01790857522287E-01&nbsp; 9.34475754314373E-01<br />&nbsp; 1.98944981369487E-03&nbsp; 1.98944981369487E-03&nbsp; 5.53811128671388E-01<br />&nbsp; 1.99937484749006E-03&nbsp; 1.99937484749006E-03&nbsp; 6.79835713342948E-01<br />&nbsp; 1.99918039454326E-03&nbsp; 1.99918039454326E-03&nbsp; 8.08171706180889E-01<br />&nbsp; 1.69335827236728E-03&nbsp; 1.69335827236728E-03&nbsp; 9.36855390347336E-01<br />&nbsp; 6.34313393378159E-06&nbsp; 6.34313393378159E-06&nbsp; 6.15582751578484E-02<br />&nbsp; 1.01232587480401E-06&nbsp; 1.01232587480401E-06&nbsp; 1.83136477703920E-01<br />&nbsp; 1.02177293817475E-06&nbsp; 1.02177293817475E-06&nbsp; 3.04609788500644E-01<br />&nbsp; 1.48818204568999E-04&nbsp; 1.48818204568999E-04&nbsp; 4.26347043404420E-01<br />&nbsp; 5.00215546313640E-01&nbsp; 5.00215546313640E-01&nbsp; 1.31142261565501E-03<br />&nbsp; 4.99999083606990E-01&nbsp; 4.99999083606990E-01&nbsp; 1.23125207245481E-01<br />&nbsp; 4.99999860659742E-01&nbsp; 4.99999860659742E-01&nbsp; 2.44668194477996E-01<br />&nbsp; 4.99998427084385E-01&nbsp; 4.99998427084385E-01&nbsp; 3.66725611926493E-01<br />&nbsp; 5.01851231279732E-01&nbsp; 5.01851231279732E-01&nbsp; 4.91244546601817E-01<br />&nbsp; 5.01987712530747E-01&nbsp; 5.01987712530747E-01&nbsp; 6.17187644881765E-01<br />&nbsp; 5.01988404968349E-01&nbsp; 5.01988404968349E-01&nbsp; 7.45319646562142E-01<br />&nbsp; 5.01969261541422E-01&nbsp; 5.01969261541422E-01&nbsp; 8.73712315146007E-01<br /><br />#Parameters1 of1 the SCF cycles<br />#****************************<br />&nbsp; &nbsp;iscf&nbsp; &nbsp; &nbsp; &nbsp; 7<br />&nbsp; &nbsp;nstep&nbsp; &nbsp; &nbsp; &nbsp;200<br /><br />#Plane wave basis and k-point grid<br />#*********************************<br />&nbsp; &nbsp;ecut&nbsp; &nbsp; &nbsp; &nbsp; 50<br />&nbsp; &nbsp;ecutsm&nbsp; &nbsp; &nbsp; 0.5<br />&nbsp; &nbsp;ngkpt&nbsp; &nbsp; &nbsp; &nbsp;10 10 1<br />&nbsp; &nbsp;nshiftk&nbsp; &nbsp; &nbsp;1<br />&nbsp; &nbsp;shiftk&nbsp; &nbsp; &nbsp; 0 0 0.5<br /><br />ndtset 2&nbsp; &nbsp; &nbsp;jdtset 1 6<br /><br /><br />#DATASET1 : scf calculation: GS WF in the BZ<br />#********************************************<br />&nbsp; &nbsp;prtden1&nbsp; &nbsp; 1<br />&nbsp; &nbsp;kptopt1&nbsp; &nbsp; 1<br />&nbsp; &nbsp;toldfe1&nbsp; &nbsp; 1.0d-12<br /><br />#DATASET6 : Ionic relaxation<br /><br />optcell6 0<br />ionmov6 2<br />toldff6 2.0d-7<br />getxred6 -1<br />getcell6 -1<br />ntime6 200<br />dilatmx6 1.05<br />tolmxf6 2.0d-6<br /><br /></code></pre></div><br /><br />Thanks!<br />-Ali</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4002&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 17:46:51 GMT -->
+</html>

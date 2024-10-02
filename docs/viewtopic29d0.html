@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=964&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:33:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Missing a DDB for the anaddb [SOLVED]</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Missing a DDB for the anaddb [SOLVED]</h2>
+		<p><a href="viewtopic322e.html?f=12&amp;t=964">https://forum.abinit.org/viewtopic.php?f=12&amp;t=964</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Missing a DDB for the anaddb [SOLVED]</h3>
+				<div class="date">Posted: <strong>Thu Mar 17, 2011 8:26 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Dear colleagues,<br /><br />I have encountered a problem while trying to analyse the DDB from the RF calc. of N doped rutile TIO2.<br /><br />First I have calc. pure rutile TiO2 using ngkpt 5 5 10. Everything went nice. PD are good compared to experiments. Then I introduced a 50% doping by changing one O atom with N. I excluded the symmetries from the input. The rest of the file is the same as for the pure TiO2. Abinit version and the cluster are also the same. RF calc. for the doped TiO2 finishes without a problem. But, upon starting anaddb, I get the message<br /><br /> symdm9 : ERROR -<br />  Informations are missing in the DDB.<br />  The dynamical matrix number     9 cannot be built,<br />  since no blok with wavevector   -4.000000E-01    2.000000E-01    0.000000E+00<br />  has been found.<br />  Action : add the required block in the DDB, or modify your input file.<br /><br />Since everything, except the symmetry of the crystal, is the same (for pure TiO2 it's P4_2/m n m (#136); Bravais tP (primitive tetrag.), and for doped TiO2 I get Pm m 2 (# 25); Bravais oP (primitive ortho.)), I presume that this is the reason why this happens. But how can I overcome this error and proceed to obtain the PDs? I'm sending all my files bellow for reference.<br /><br />Thank you all in advance!<br /><br />Igor Lukacevic</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Missing a DDB for the anaddb</h3>
+				<div class="date">Posted: <strong>Mon Mar 21, 2011 12:55 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hi Igor,<br /><br />perhaps you did not adapt the qpts for the phonon calculation to the lowered symmetry. This usually means you need more qpts and anaddb can not find the specific one it mentions, which is in the ngqpt grid you gave but not in the DDB file...<br /><br />To get the q grid irred points, as usual you can run a fictitious gs job with the same cell and the ngkpt equal to the ngqpt you want (shiftk 0 0 0), then read of the irred k.<br /><br />ciao!<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Missing a DDB for the anaddb</h3>
+				<div class="date">Posted: <strong>Mon Mar 21, 2011 8:04 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Hi Matthieu,<br /><br />In the meantime of your response, I figured out the same reason (which is my error). I was just kind of hoping that there is some sinister way in which one could circumvent this issue, using only anaddb options, and not needing to repeat the rf calculations.<br /><br />Thanks!<br /><br />Igor</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Missing a DDB for the anaddb</h3>
+				<div class="date">Posted: <strong>Tue Jun 14, 2011 8:23 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">I have an update on this problem.<br /><br />I have made an additional calc, which gave me the q-points for the cell with lower symmetry (#25). Then, I ran a RF calc, to get the DDBs. But again, when I started the anaddb, I got the same message<br /><br /> symdm9 : ERROR -<br />  Informations are missing in the DDB.<br />  The dynamical matrix number     6 cannot be built,<br />  since no blok with wavevector   -3.333333E-01    3.333333E-01    0.000000E+00<br />  has been found.<br />  Action : add the required blok in the DDB, or modify your input file.<br /><br /><br />How can this be, if I, in the RF calc, used the q-points corresponding to the orthorhombic (#25) cell?<br /><br />Igor</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Missing a DDB for the anaddb</h3>
+				<div class="date">Posted: <strong>Thu Jul 14, 2011 2:04 pm</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">I apologize sincerely. I missed a minus sign in front of the q-points.<br /><br />Maybe this subject could be deleted from the forum.<br /><br />Igor L.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=964&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:33:42 GMT -->
+</html>

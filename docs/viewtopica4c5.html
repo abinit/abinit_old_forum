@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=790&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:41:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED]Non-linear response calculation stops without log...</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED]Non-linear response calculation stops without log...</h2>
+		<p><a href="viewtopice58f-2.html?f=10&amp;t=790">https://forum.abinit.org/viewtopic.php?f=10&amp;t=790</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED]Non-linear response calculation stops without log...</h3>
+				<div class="date">Posted: <strong>Wed Dec 08, 2010 10:45 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Dear colleagues,<br /><br />I'm trying to calculate the Raman spectra of rutile TiO2. Strain part of the perturbation finished without problems, however, the calc. stops for the non-linear perturbation when starting the 5th dataset (in all previous datasets calc. converged nicely). There is no message at the end of the log file, except:<br /><br />MPI process terminated unexpectedly<br />Exit code -5 signaled from node007.srce.cro-ngi.hr<br />Killing remote processes...DONE<br /><br />.out says nothing, also, just stops during the reading of the t11o_DS4_1WF22 from the disc. Cluster .err file says:<br /><br />cannot stat `t11o_DS5_DDB': No such file or directory<br /><br />while cluster log file says:<br /><br />012 (151437.000.000) 12/07 14:58:34 Job was held.<br />        Globus error 155: the job manager could not stage out a file<br />        Code 2 Subcode 155<br /><br />I contacted first the cluster admin, who replied that it is an abinits' error, sending me the log:<br /><br />/var/log/messages.2:Nov 22 00:43:35 node007 kernel: abinip[25838]: <br />segfault at 00002aaeaa9d96e8 rip 00000000004e2f39 rsp 00007fff5fefd290 <br />error 4<br />/var/log/messages.2:Nov 22 00:43:35 node007 kernel: abinip[25836]: <br />segfault at 0000000011046000 rip 0000000000e2f268 rsp 00007fff40aa0cf8 <br />error 4<br />/var/log/messages.2:Nov 22 00:43:35 node007 kernel: abinip[25837]: <br />segfault at 0000000018c9b000 rip 00000000004e2dee rsp 00007fff40cb4840 <br />error 4<br />/var/log/messages.2:Nov 22 14:14:13 node003 kernel: abinip[11272]: <br />segfault at 000000000cfbc000 rip 00000000004e2dee rsp 00007fff01edc480 <br />error 4<br />/var/log/messages.2:Nov 22 14:14:13 node003 kernel: abinip[11271]: <br />segfault at 00000000168a3000 rip 00000000004e2dee rsp 00007fff97b028d0 <br />error 4<br />/var/log/messages.2:Nov 22 14:14:13 node003 kernel: abinip[11270]: <br />segfault at 0000000013ba8000 rip 00000000004e2dee rsp 00007fff5e1458e0 <br />error 4<br />/var/log/messages.2:Nov 25 03:05:41 node003 kernel: abinip[29518]: <br />segfault at 000000000f5f7000 rip 00000000004e2dee rsp 00007fff0b85a0f0 <br />error 4<br />/var/log/messages.2:Nov 25 03:05:41 node003 kernel: abinip[29519]: <br />segfault at 000000000c245000 rip 00000000004e2dee rsp 00007fff3f13e2b0 <br />error 4<br />/var/log/messages.2:Nov 25 03:05:41 node003 kernel: abinip[29520]: <br />segfault at 0000000029425000 rip 00000000004e2dee rsp 00007fff2c90d660 <br />error 4<br />/var/log/messages.3:Nov 19 17:09:11 node007 kernel: abinip[10886]: <br />segfault at 00002aafbcce3dd8 rip 00000000004e2f39 rsp 00007fff0f560290 <br />error 4<br /><br /><br />Has anyone encountered the similar problem? I would like to know where is the problem within abinit. I would appreciate any help. My input file is bellow.<br />I'm using abinit 5.8.4 on a Linux cluster.<br /><br />Thank You in advance!<br /><br />Igor Lukacevic<br /><br /><br /><br /># Linear and nonlinear response calculation for TiO2 - rutile<br /># Perturbations: electric fields &amp; atomic displacements<br /><br />#Definition of lattice parameters<br />#********************************<br />   acell       2*8.5577462433E+00  5.5134124864E+00<br />   angdeg      90  90  90<br />   spgroup     136<br />   brvltt     -1<br /><br />#Definition of atomic positions and types<br />#****************************************<br />   natom       6<br />   natrd       3<br />   ntypat      3<br />   typat       1  2  2<br />   znucl       22  8  8<br />   xred        0.00   0.00   0.00<br />               0.3033485499  0.3033485499  0.00<br />               0.8033485499  0.1966514501  0.50<br />   ixc         3<br /><br />#Parameters of the SCF cycles<br />#****************************<br />   iscf        5<br />   nstep       100<br /><br />#Plane wave basis and k-point grid<br />#*********************************<br />   ecut        50<br />   ecutsm      0.5<br />   dilatmx     1.2<br />   ngkpt       5 5 10<br />   nshiftk     1<br />   shiftk      0.5  0.5  0.5<br /><br />#Perturbation datasets<br />#*********************<br />   ndtset      5<br />   jdtset      1 2 3 4 5<br /><br />#DATASET1 : scf calculation: GS WF in the BZ<br />#*******************************************<br />   prtden1    1<br />   kptopt1    1<br />   tolvrs1    1.0d-18<br /><br />#DATASET2 : non-scf calculation: GS WF in the whole BZ<br />#*****************************************************<br />   getden2    1<br />   kptopt2    2<br />     iscf2   -2<br />   getwfk2    1<br />   tolwfr2    1.0d-22<br />    nband2    24<br /><br />#DATASET3 : d/dk on the MP grid of k-points<br />#******************************************<br />   getwfk3    2<br />    rfdir3    1 1 1<br />   rfelfd3    2<br />   tolwfr3    1.0d-22<br />    nband3    24<br />   kptopt3    2<br /><br />#DATASET4 : d/dE on the MP grid of k-points<br />#******************************************<br />   prtden4    1<br />   getwfk4    2<br />   getddk4    3<br />    rfdir4    1 1 1<br />   rfphon4    1<br />  rfatpol4    1 6<br />   tolvrs4    1.0d-12<br />   rfelfd4    3<br />    nband4    24<br />   kptopt4    2<br />  prepanl4    1<br /><br />#DATASET5 : 3DTE calculation<br />#***************************<br />   getden5    1<br />  get1den5    4<br />   getwfk5    2<br />   get1wf5    4<br />    nband5    24<br />   kptopt5    2<br />optdriver5    5<br />  rf1elfd5    1<br />  rf1phon5    1<br /> rf1atpol5    1 6<br />   rf1dir5    1 1 1<br />  rf2elfd5    1<br />   rf2dir5    1 1 1<br />  rf3elfd5    1<br />   rf3dir5    1 1 1<br /><br />nbdbuf 0<br /><br />timopt  2</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>[SOLVED]Re: Non-linear response calculation stops without lo</h3>
+				<div class="date">Posted: <strong>Sat Jan 22, 2011 5:30 pm</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Dear all,<br /><br />after all, it appears that it has been a cluster issue. The calcs are running fine now.<br /><br />Cheers!<br /><br />Igor Lukacevic</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=790&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:41:54 GMT -->
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1171&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:04:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Splitting at the Gamma Point in NaH</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Splitting at the Gamma Point in NaH</h2>
+		<p><a href="viewtopic77c6.html?f=10&amp;t=1171">https://forum.abinit.org/viewtopic.php?f=10&amp;t=1171</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Splitting at the Gamma Point in NaH</h3>
+				<div class="date">Posted: <strong>Mon Jun 20, 2011 11:34 pm</strong></div>
+				<div class="author">by <strong>Redorb</strong></div>
+				<div class="content">Hello,<br /><br />I have been doing some calculations on a system of NaH but I am having problems getting the LO-TO splitting that is typical of a polar system like this. This system has been studied before and it is known to have an LO-TO splitting at the gamma point if the effective charges are included in the calculation (Ke and Tanaka PRB 71 024117 (2005)). <br /><br />I have ran calculations before on other system and been able to get LO-TO splitting, for instance on ZnTe (a simple zinc-blende structure) and the tutorial structure AlAs.<br /><br />Here is my input file for the calculation of the DDB files (Sorry about the size):<br /><br /><br />****************************************************************************************************************<br />****************************************************************************************************************<br /># Crystalline NaH : computation of the phonon spectrum<br /><br />   ndtset   10<br />#Set 1 : ground state self-consistency<br /><br />  getwfk1   0            # Cancel default<br />#  kptopt1   1            # Automatic generation of k points, taking<br />                         # into account the symmetry<br />    nqpt1   0            # Cancel default<br />  tolvrs1   1.0d-21      # SCF stopping criterion (modify default)<br />  rfphon1   0            # Cancel default<br />  prtwf1    1<br /><br />#Q vectors for all datasets<br /><br />#Complete set of symmetry-inequivalent qpt chosen to be commensurate<br /># with kpt mesh so that only one set of GS wave functions is needed.<br />#Generated automatically by running GS calculation with kptopt=1,<br /># nshift=0, shiftk=0 0 0 (to include gamma) and taking output kpt set<br /># file as qpt set. Set nstep=1 so only one iteration runs.<br /><br />     nqpt   1            # One qpt for each dataset (only 0 or 1 allowed)<br />                         # This is the default for all datasets and must<br />                         #  be explicitly turned off for dataset 1.<br />                         #<br />qpt2   0.00000000E+00  0.00000000E+00  0.00000000E+00<br />qpt3   0.00000000E+00  0.00000000E+00  0.00000000E+00<br />qpt4   2.50000000E-01  0.00000000E+00  0.00000000E+00<br />qpt5   5.00000000E-01  0.00000000E+00  0.00000000E+00<br />qpt6   2.50000000E-01  2.50000000E-01  0.00000000E+00<br />qpt7   5.00000000E-01  2.50000000E-01  0.00000000E+00<br />qpt8  -2.50000000E-01  2.50000000E-01  0.00000000E+00<br />qpt9   5.00000000E-01  5.00000000E-01  0.00000000E+00<br />qpt10 -2.50000000E-01  5.00000000E-01  2.50000000E-01<br /><br />                  #nqpt 3-nkpt+2 are copied from make_qpt from kpt in<br />                  #the make_qpt.out file.<br />                  #insert nqpt 2 = gamma because it is the electrical part <br />                  #of the phonon around the gamma point. Think forces<br />                  #due to charges moving<br /><br />#Set 2 : Response function calculation of d/dk wave function <br /><br />    iscf2   -3         # Need this non-self-consistent option for d/dk<br />#  kptopt2   2          # Modify default to use time-reversal symmetry<br />  rfphon2   0          # Cancel default<br />  rfelfd2   2          # Calculate d/dk wave function only<br />  tolwfr2   1.0d-25    # Use wave function residual criterion instead<br /><br />  prtwf2    1<br /><br />#Set 3 : Response function calculation of Q=0 phonons and electric field pert.<br /><br />  getddk3   2          # d/dk wave functions from last dataset<br />#  kptopt3   2          # Modify default to use time-reversal symmetry<br />  rfelfd3   3          # Electric-field perturbation response only<br /><br />#Sets 4-11 : Finite-wave-vector phonon calculations (defaults for all datasets)<br /><br />   getwfk   1          # Use GS wave functions from dataset1<br />   kptopt   3          # Need full k-point set for finite-Q response<br />   rfphon   1          # Do phonon response<br />  rfatpol   1 2        # Treat displacements of all atoms<br />    rfdir   1 1 1      # Do all directions (symmetry will be used)<br />   tolvrs   1.0d-11    # This default is active for sets 3-10<br /><br />   prtden   0<br />   prtwf    0<br /><br />#######################################################################<br />#Common input variables<br /><br />#Definition of the unit cell<br />acell    6.4410481435E+00  6.4410481435E+00  6.4410481435E+00 Bohr<br /><br />            rprim    7.0710678119E-01  7.0710678119E-01  0.0000000000E+00<br />                     0.0000000000E+00  7.0710678119E-01  7.0710678119E-01<br />                     7.0710678119E-01  0.0000000000E+00  7.0710678119E-01<br /><br />             xred    5.0000000000E-01  5.0000000000E-01  5.0000000000E-01<br />                     0.0000000000E+00  0.0000000000E+00  0.0000000000E+00<br /><br />#Definition of the atom types<br />   ntypat   2         # There are two types of atom<br />    znucl 1    11     # The keyword &quot;znucl&quot; refers to the atomic number of the <br />                      # possible type(s) of atom. The pseudopotential(s) <br />                      # mentioned in the &quot;files&quot; file must correspond<br />                      # to the type(s) of atom. Here, type 1 is the Aluminum,<br />                      # type 2 is the Arsenic.<br /><br />#Definition of the atoms<br />    natom   2         # There are two atoms<br />    typat 1 2         # The first is of type 1 (Al), the second is of type 2 (As).<br /><br />#Gives the number of band, explicitely (do not take the default)<br />    nband   10<br /><br />#Definition of the planewave basis set<br /><br />     ecut   40 Ha         # Maximal kinetic energy cut-off, in Hartree<br /><br />#Definition of the k-point grid #DEFINED BY findk DIRECTORY<br />ngkpt 8 8 8<br /><br />nshiftk 1<br /><br />shiftk 3*0.0<br /><br />#Definition of the SCF procedure<br />#     iscf   7          # Self-consistent calculation, using algorithm 5<br />    nstep  3000         # Maximal number of SCF cycles<br />   diemac  12.0        # Although this is not mandatory, it is worth to<br />                       # precondition the SCF cycle. The model dielectric<br />                       # function used as the standard preconditioner<br />                       # is described in the &quot;dielng&quot; input variable section.<br /><br />  occopt   7<br />  tsmear  0.01 eV<br /><br />*********************************************************************************************<br />****************************************************************************************************************<br /><br />I merge the DDB's out of this run using:  mrgddb &lt; merge.in<br /><br />***************************************************************************<br />****************************************************************************************************************<br />merge.ddb.out<br />NaH phonons on 4 4 4 mesh<br />8<br />./phonstat/phonstato_DS3_DDB<br />./phonstat/phonstato_DS4_DDB<br />./phonstat/phonstato_DS5_DDB<br />./phonstat/phonstato_DS6_DDB<br />./phonstat/phonstato_DS7_DDB<br />./phonstat/phonstato_DS8_DDB<br />./phonstat/phonstato_DS9_DDB<br />./phonstat/phonstato_DS10_DDB<br />**************************************************************************<br />****************************************************************************************************************<br /><br />Then I run a phonon band-structure calculation using anaddb on the merge.ddb.out calculated above.<br /><br />where the input file for the anaddb calculation on the merged DDB is:<br /><br />****************************************************************************************************************<br />*****************************************************************************************************************<br />!Input file for the anaddb code. Analysis of the NaH DDB<br /><br />!Flags<br /> ifcflag   1     ! Interatomic force constant flag<br /><br />!Wavevector grid number 1 (coarse grid, from DDB)<br />  brav    1      ! Bravais Lattice : 1-S.C., 2-F.C., 3-B.C., 4-Hex.)<br />  ngqpt   4  4  4   ! Monkhorst-Pack indices<br />  nqshft  1         ! number of q-points in repeated basic q-cell<br />  q1shft  3*0.0<br /><br />!Effective charges<br />     asr   1     ! Acoustic Sum Rule. 1 =&gt; imposed asymetrically<br />  chneut   1     ! Charge neutrality requirement for effective charges.<br /><br />!Interatomic force constant info<br />  dipdip  1      ! Dipole-dipole interaction treatment<br /><br />!Phonon band structure output for band2eps - See note near end for<br />! dealing with gamma LO-TO splitting issue.<br />   eivec  4<br /><br /># This line added when defaults were changed (v5.3) to keep the previous, old behaviour<br />  symdynmat 1<br /><br />!Wavevector list number 2 (Cartesian directions for non-analytic gamma phonons)<br /><br />!The output for this calculation must be cut-and-pasted into the<br />! t59_out.freq file to be used as band2eps input to get proper LO-TO<br />! splitting at gamma.  Note that gamma occurrs twice.<br /><br />  nph2l    1       ! number of directions in list 2<br /><br />  qph2l   1.0  0.0  0.0    0.0<br /><br />!Wavevector list number 1 (Reduced coordinates and normalization factor)<br />  nph1l  1001      ! number of phonons in list 1<br /><br />  qph1l<br />  0.5000  0.5000  0.5000  1.0<br />  0.4975  0.4975  0.4975  1.0<br />  0.4950  0.4950  0.4950  1.0<br />  0.4925  0.4925  0.4925  1.0<br />  0.4900  0.4900  0.4900  1.0<br />.<br />.<br />.<br />*****************************************************************************************<br />*****************************************************************************************<br /><br />From what I can tell I am not doing anything that would not give me a correct LO-TO splitting at Gamma. But unfortunately I get none. All of my calculations are converged in the initial run that calculates the DDB's (there are 0 WARNING's and 0 COMMENT's in the log file). <br /><br />However, when I look at the output of this run that generates the original DDB's I get the following which tells me there is a clear splitting seen around the Gamma point.<br />-----------------------------------------------------------------------------------------------------------------------------------------------------------<br />  Phonon wavevector (reduced coordinates) :  0.00000  0.00000  0.00000<br /> Phonon energies in Hartree :<br />   2.711776E-05  2.712757E-05  2.716443E-05  2.174407E-03  2.174407E-03<br />   2.174407E-03<br /> Phonon frequencies in cm-1    :<br />-  5.951661E+00  5.953813E+00  5.961904E+00  4.772271E+02  4.772271E+02<br />-  4.772271E+02<br /><br />  Phonon at Gamma, with non-analyticity in the<br />  direction (cartesian coordinates)  1.00000  0.00000  0.00000<br /> Phonon energies in Hartree :<br />   2.711783E-05  2.712938E-05  2.716541E-05  2.174407E-03  2.174407E-03<br />   4.041351E-03<br /> Phonon frequencies in cm-1    :<br />-  5.951675E+00  5.954210E+00  5.962119E+00  4.772271E+02  4.772271E+02<br />-  8.869739E+02<br /><br />  Phonon at Gamma, with non-analyticity in the<br />  direction (cartesian coordinates)  0.00000  1.00000  0.00000<br /> Phonon energies in Hartree :<br />   2.711850E-05  2.712851E-05  2.716561E-05  2.174407E-03  2.174407E-03<br />   4.041351E-03<br /> Phonon frequencies in cm-1    :<br />-  5.951823E+00  5.954019E+00  5.962163E+00  4.772271E+02  4.772271E+02<br />-  8.869741E+02<br /><br />  Phonon at Gamma, with non-analyticity in the<br />  direction (cartesian coordinates)  0.00000  0.00000  1.00000<br /> Phonon energies in Hartree :<br />   2.711965E-05  2.712771E-05  2.716525E-05  2.174407E-03  2.174407E-03<br />   4.041350E-03<br /> Phonon frequencies in cm-1    :<br />-  5.952075E+00  5.953845E+00  5.962084E+00  4.772271E+02  4.772271E+02<br />-  8.869739E+02<br />---------------------------------------------------------------------------------------------------------------------------------------------------------<br /><br />However, at the end of the day when I am looking at the output of anaddb where it has analyzed the merged DDB. I get: <br />-------------------------------------------------------------------------------------------------------------------------------------------------------<br />  Phonon at Gamma, with non-analyticity in the<br />  direction (cartesian coordinates)  1.00000  0.00000  0.00000<br /> Phonon energies in Hartree :<br />   0.000000E+00  0.000000E+00  0.000000E+00  2.173016E-03  2.173016E-03<br />   2.173017E-03<br /> Phonon frequencies in cm-1    :<br />-  0.000000E+00  0.000000E+00  0.000000E+00  4.769218E+02  4.769219E+02<br />-  4.769222E+02<br />-------------------------------------------------------------------------------------------------------------------------<br /><br />Which clearly tells me that anaddb does not see any phonon splitting (which is what I see in my plot, attached). <div class="inline-attachment">
+			
+				<dl class="thumbnail">
+			<dt><a href="download/file0868.gif?id=388&amp;mode=view"><img src="download/file0877.gif?id=388&amp;t=1" class="postimage" alt="NaH-disp444.gif" title="NaH-disp444.gif (9.48 KiB) Viewed 4330 times" /></a></dt>
+					</dl>
+		
+		
+		
+		
+			</div><br /><br /><br />I've attached my abinit input file and my anaddb input file for viewing. <div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/filebc80.php?id=389">phonstat.in</a></dt>
+			<dd><em>abinit phonon ddb calculation input file</em></dd>			<dd>(4.84 KiB) Downloaded 317 times</dd>
+		</dl>
+		
+		
+			</div> and <div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file5461.php?id=390">phonb1-1.in</a></dt>
+			<dd><em>anaddb phonon band-structure calculation input file</em></dd>			<dd>(31.66 KiB) Downloaded 306 times</dd>
+		</dl>
+		
+		
+			</div><br /><br />I simply do not understand why my final answer out of anaddb does not have LO-TO splitting at the Gamma point. I would greatly appreciate any advice on this!<br /><br />Thank you!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Splitting at the Gamma Point in NaH</h3>
+				<div class="date">Posted: <strong>Mon Jun 27, 2011 12:29 am</strong></div>
+				<div class="author">by <strong>aromero</strong></div>
+				<div class="content">Gamma is an independent calculation where you get directly the LO/TO splitting. You hacve to activate your d/dk calculation and then the response to the electric field<br />and you should be able to get the LO/TO... with no problem.<br /><br />regards<br /><br />-aldo.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Splitting at the Gamma Point in NaH</h3>
+				<div class="date">Posted: <strong>Mon Jun 27, 2011 9:50 pm</strong></div>
+				<div class="author">by <strong>Redorb</strong></div>
+				<div class="content">Hello,<br /><br />After playing with the multiple flags in my input files for both the anaddb and abinit calculations I have found that changing occopt from 7 to 1 gives the correct LO/TO splitting at the gamma point. This seems strange to me. Is anaddb assuming I have a metal simply because I use occopt 7 instead of 1? Most of my calculations converge faster if occopt is set to 7 (gaussian smearing) than if it is set to 1 (assumed semi-conductor (all occupations automatically stop at the top of the valence band)). <br /><br />Oh well, at least I figured it out. I hope this helps other people who have this same problem in the future.<br /><br />@ aldo. Hello and thank you for replying, it is appreciated. You are correct that the calculations of the phonon's at the gamma point are a seperate calculation from those that are not at the gamma point, and that the d/dk calculation must first be ran at the gamma point. However, both calculations, at the gamma point and those off the gamma point, can use the same initial self consistent calculation's wavefunctions (if they are set up correctly), which is what I have done here.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Splitting at the Gamma Point in NaH</h3>
+				<div class="date">Posted: <strong>Mon Apr 02, 2012 6:24 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">[quote=&quot;Redorb&quot;]This seems strange to me. Is anaddb assuming I have a metal simply because I use occopt 7 instead of 1? [\quote]<br />yes - this is no longer the case in the next version of abinit - now if you ask for the dielectric stuff and if the perturbations wrt E-field are present things are calculated. Normally if you have metallic occupation there is no dielectric response.<br /><br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1171&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:04:03 GMT -->
+</html>

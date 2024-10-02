@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=951&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:49:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Zn PAW datasets</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Zn PAW datasets</h2>
+		<p><a href="viewtopic750c.html?f=14&amp;t=951">https://forum.abinit.org/viewtopic.php?f=14&amp;t=951</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Zn PAW datasets</h3>
+				<div class="date">Posted: <strong>Thu Mar 10, 2011 3:50 am</strong></div>
+				<div class="author">by <strong>Tiger</strong></div>
+				<div class="content">hello<br />Can you give me some advice about Zn pseudopotential generation?<br />Zn: 1s2 2s2 2p6 3s2 3p6 3d10 4s2<br />4s2 as valence<br />I have used different datasets . But the result is always not good.<br />This is one of my input files:<br />Zn  30     <br />LDA-PW scalarrelativistic loggrid 2100<br />4 3 3 0 0                    <br />4 0 2<br />0 0 0                         <br />c                     <br />c                  <br />c                      <br />v                     <br />c                    <br />c                    <br />c                    <br />0                    <br />2.3             <br />y                    <br />3.0<br />n <br />Vanderbilt          <br />1 0  ultrasoft      <br />2.0                     <br />2.3                 <br />2                     <br />default<br />0</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Zn PAW datasets</h3>
+				<div class="date">Posted: <strong>Thu Mar 10, 2011 10:41 am</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Hello Tiger,<br /><br />just a few ideas...<br />1. no need to have such a large grid - your pseudo will be dog slow. Start with 1200-1500, try to go down to 600-900.<br />2. if you look at the orbital energies, you'll find that if 4s is valence, 3d should be valence too.<br />3. maximum l for basis and projector functions should be 2<br />4. add at least one s projector, two p projectors,  one d projector - more if you need accuracy<br /><br />So I would start playing with <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Zn 30<br />LDA-PW scalarrelativistic loggrid 1200<br />4 3 3 0 0<br />0 0 0<br />c<br />c<br />c<br />v<br />c<br />c<br />v<br />2<br />2.3<br />y<br />1.<br />n<br />y<br />2.<br />y<br />3.<br />n<br />y<br />4.<br />n<br />vanderbilt<br />3 0.0 ultrasoft<br />2.25<br />2.25<br />2.25<br />2.25<br />2.25<br />2.25<br />0</code></pre></div><br /><br />or similarly (by adding an empty 4p valence, rearranging the projectors and reducing rpaw)<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Zn 30<br />LDA-PW scalarrelativistic loggrid 1200<br />4 4 3 0 0<br />4 1 0<br />0 0 0<br />c<br />c<br />c<br />v<br />c<br />c<br />v<br />v<br />2<br />2.0<br />y<br />1.<br />n<br />y<br />2.<br />n<br />y<br />3.<br />n<br />vanderbilt<br />3 0.0 ultrasoft<br />1.95<br />1.95<br />1.95<br />1.95<br />1.95<br />1.95<br />0</code></pre></div><br /><br />This is untested, unfinished, un ... all what you can think about. Look at the valence electrons energies comparison in the &quot;Zn&quot; file when changing parameters. Plot the wfn files to spot large (&gt;15) coefficients and cranky waves. Plot logderiv files to spot ghosts; adjust reference energies for unbound states and matching radii.<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Zn PAW datasets</h3>
+				<div class="date">Posted: <strong>Fri Mar 11, 2011 8:08 am</strong></div>
+				<div class="author">by <strong>Tiger</strong></div>
+				<div class="content">Dear Alain_Jacques<br />Thanks for your good advice.<br />It works.<br />I will try to test it and finish it .<br /><br /><br />Kind regards<br /><br />Tiger</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Zn PAW datasets</h3>
+				<div class="date">Posted: <strong>Fri Aug 19, 2011 5:03 pm</strong></div>
+				<div class="author">by <strong>zchen10</strong></div>
+				<div class="content">Hi, <br />    I found Zn atomic data file Zn.gga.atompaw and Zn.lda.atompaw under PAW atomic data (ABINIT table) recently.<br />However, after downloading I got a HTML file insteated of a atompaw file. I downloaded Ce.gga.atompaw<br />before. There is no trouble.<br /><br /><br />Regards<br /><br />Zhifan Chen<br />Clark Atlanta University<br />USA</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=951&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:49:32 GMT -->
+</html>

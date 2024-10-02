@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3573&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:21:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Difference in autoparal 1 vs autoparal 0+paral_kgb 0</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Difference in autoparal 1 vs autoparal 0+paral_kgb 0</h2>
+		<p><a href="viewtopic6673.html?f=9&amp;t=3573">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3573</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Difference in autoparal 1 vs autoparal 0+paral_kgb 0</h3>
+				<div class="date">Posted: <strong>Tue Apr 25, 2017 6:57 am</strong></div>
+				<div class="author">by <strong>cennanaradipa</strong></div>
+				<div class="content">Hello everyone,<br /><br />I'm currently trying to find the EELS and Dielectric function of La2CuO4 (LCO). The input file is below:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>ndtset 3<br />autoparal 1<br />#paral_kgb 0<br /><br /># Structural&nbsp; Parameters<br />ntypat&nbsp; &nbsp; &nbsp;3<br />znucl&nbsp; &nbsp; &nbsp; 57 29 8<br />natom&nbsp; &nbsp; &nbsp; 14<br />typat&nbsp; &nbsp; &nbsp; 1 1 1 1 2 2 3 3 3 3 3 3 3 3<br />acell&nbsp; &nbsp; &nbsp; 3*3.808 Angstrom<br />chkprim&nbsp; &nbsp; 0<br />rprim<br />&nbsp; 1.0&nbsp; 0.000&nbsp; 0.000<br />&nbsp; 0.000&nbsp; 1.0&nbsp; 0.000<br />&nbsp; 0.000&nbsp; 0.000&nbsp; 3.45851<br />xred 0.500000 0.500000 0.138998<br />&nbsp; 0.000000 0.000000 0.361002<br />&nbsp; 0.000000 0.000000 0.638998<br />&nbsp; 0.500000 0.500000 0.861002<br />&nbsp; 0.000000 0.000000 0.000000<br />&nbsp; 0.500000 0.500000 0.500000<br />&nbsp; 0.500000 0.500000 0.313883<br />&nbsp; 0.000000 0.000000 0.186117<br />&nbsp; 0.000000 0.500000 0.000000<br />&nbsp; 0.500000 0.000000 0.000000<br />&nbsp; 0.000000 0.000000 0.813883<br />&nbsp; 0.500000 0.500000 0.686117<br />&nbsp; 0.500000 0.000000 0.500000<br />&nbsp; 0.000000 0.500000 0.500000<br /><br /># Spins on atoms<br />spinat 0.0&nbsp; 0.0 -1.0<br />0.0&nbsp; 0.0 -1.0<br />0.0&nbsp; 0.0 -1.0<br />0.0&nbsp; 0.0 -1.0<br />0.0&nbsp; 0.0&nbsp; 1.0<br />0.0&nbsp; 0.0&nbsp; 1.0<br />0.0&nbsp; 0.0&nbsp; 0.0<br />0.0&nbsp; 0.0&nbsp; 0.0<br />0.0&nbsp; 0.0&nbsp; 0.0<br />0.0&nbsp; 0.0&nbsp; 0.0<br />0.0&nbsp; 0.0&nbsp; 0.0<br />0.0&nbsp; 0.0&nbsp; 0.0<br />0.0&nbsp; 0.0&nbsp; 0.0<br />0.0&nbsp; 0.0&nbsp; 0.0<br />nspinor 1<br />nsppol&nbsp; 2<br />nspden&nbsp; 2<br /><br /># Kpoint grid, XC,&nbsp; and smearing<br />ixc&nbsp; &nbsp; -101130<br />occopt&nbsp; 3<br />diemac&nbsp; 13<br />tsmear&nbsp; 0.005<br /><br /># Parallelization hacks <br />#npfft&nbsp; &nbsp;1<br />#npkpt&nbsp; &nbsp;2<br />#npband&nbsp; 144<br /><br /># Convergence parameters<br />nstep&nbsp; &nbsp; &nbsp; 200<br />ecut&nbsp; &nbsp; &nbsp; &nbsp;20<br />ecutsm&nbsp; &nbsp; &nbsp;0.5<br />pawecutdg&nbsp; 50<br />pawovlp&nbsp; &nbsp; 10<br /><br /># GGA-PBE + U (1=FLL, 2=AMF)<br />usepawu&nbsp; &nbsp; 1<br />lpawu&nbsp; &nbsp; &nbsp; -1 2 -1<br />upawu&nbsp; &nbsp; &nbsp; 0.0 8.8 0.0 eV<br />jpawu&nbsp; &nbsp; &nbsp; 0.0 1.2 0.0 eV<br /><br /># K-points<br />ngkpt&nbsp; &nbsp; &nbsp; 8 8 8<br />nshiftk&nbsp; &nbsp; 1<br />shiftk&nbsp; &nbsp; &nbsp;0.5 0.5 0.5<br /><br />### DATASETS ###<br /># Ground State <br />&nbsp; &nbsp;iscf1&nbsp; &nbsp; 17<br />&nbsp;tolvrs1&nbsp; &nbsp; 1.d-6<br />&nbsp;kptopt1&nbsp; &nbsp; 1<br />#prtcif1&nbsp; &nbsp; 1<br />&nbsp;prtden1&nbsp; &nbsp; 1<br /><br /># DOS <br />&nbsp; iscf2&nbsp; &nbsp;-3<br />getden2&nbsp; &nbsp; 1<br />&nbsp;nband2&nbsp; &nbsp; 90<br />prtdos2&nbsp; &nbsp; 2<br />tolwfr2&nbsp; &nbsp; 1.0d-10<br /><br /># Band structure <br />&nbsp; &nbsp; &nbsp;iscf3&nbsp; &nbsp; -2<br />&nbsp; &nbsp;kptopt3&nbsp; &nbsp; -4<br />&nbsp; &nbsp;getden3&nbsp; &nbsp; &nbsp;1<br />&nbsp; &nbsp; nband3&nbsp; &nbsp; &nbsp;90<br />&nbsp; &nbsp;ndivsm3&nbsp; &nbsp; &nbsp;20<br />&nbsp; &nbsp;enunit3&nbsp; &nbsp; &nbsp;1<br />&nbsp; &nbsp;tolwfr3&nbsp; &nbsp; &nbsp;1.0d-10<br />kptbounds3<br />&nbsp; 0.0&nbsp; 0.0&nbsp; 0.0 # Gamma <br />&nbsp; 0.0&nbsp; 0.5&nbsp; 0.0 # X<br />&nbsp; 0.5&nbsp; 0.5&nbsp; 0.0 # M<br />&nbsp; 0.0&nbsp; 0.0&nbsp; 0.5 # Z<br />&nbsp; 0.0&nbsp; 0.0&nbsp; 0.0 # Gamma<br /></code></pre></div><br /><br />I was using 8.0.8 at first, but I found discrepancies when using autoparal 1 and autoparal 0 with paral_kgb 0. I initially ran into an error when running with autoparal 1, but then realized the kpoints are different from each dataset. I applied paral_kgb 0, and it works without changing the position of the kpoints in the dataset. Then, I moved the kpoints information to apply to all datasets and autoparal 1 works fine.<br /><br />The things is that the results between autoparal 0 and autoparal 1 is vastly different. Here are thes results for the screening calculation:<br /><br /><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="download/filec72f.php?id=1401">autoparal1vs0.pdf</a></dt>
+			<dd><em>EELS and Dielectric Function</em></dd>			<dd>(224.26 KiB) Downloaded 197 times</dd>
+		</dl>
+		
+		
+			</div><br /><br />I varied the ecuteps and ecutwfn in autoparal 0 in previous calculations, but it only changes the intensity of the peaks (i.e. not drastic). When using autoparal 1, I get a huge difference in both imaginary and real part of the dielectric function, with additional peaks appearing in EELS.<br /><br />Analysing the band structure, I also get this for autoparal 1:<br /><br /><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="download/file5203.php?id=1400">bands_dos_autoparal1.pdf</a></dt>
+			<dd><em>Autoparal 1</em></dd>			<dd>(116.11 KiB) Downloaded 222 times</dd>
+		</dl>
+		
+		
+			</div><br /><br />and this for autoparal 0 + paral_kgb 0:<br /><br /><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><span class="imageset icon_topic_attach"></span> <a class="postlink" href="download/filed1a2.php?id=1399">full_bands_dos_autoparal0kgb0.pdf</a></dt>
+			<dd><em>Autoparal 0 + paral_kgb 0</em></dd>			<dd>(112.92 KiB) Downloaded 213 times</dd>
+		</dl>
+		
+		
+			</div><br /><br />The Fermi energy was different as well (0.22788 Ha for autoparal 1, 0.24696 Ha for autoparal 0). I was wondering:<br /><br /><ul><li>Is this a bug in ABINIT 8.0.8? I have tried 7.10 and the results are the same. Exact same Fermi energy, but I haven't checked the results on the dielectric and EELS function. I assume it's the same</li><li>Does this have to do with the structure/DFT+U incorporated in the calculation? I tried to print the CIF file, and it matches the i4mmm structure of LCO from materials.org</li><li>The autoparal 0 and paral_kgb 0 looks a bit more realistic. Should this be the preferred results?</li></ul><br />Any help is appreciated. Thank you<br /><br />Sincerely,<br />Cenna</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3573&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:21:24 GMT -->
+</html>

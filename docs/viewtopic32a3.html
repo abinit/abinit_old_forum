@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3748&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:47:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Non-collinear magnetism and symmetries</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Non-collinear magnetism and symmetries</h2>
+		<p><a href="viewtopic2bff.html?f=9&amp;t=3748">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3748</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Non-collinear magnetism and symmetries</h3>
+				<div class="date">Posted: <strong>Thu Dec 14, 2017 4:19 pm</strong></div>
+				<div class="author">by <strong>mleitner</strong></div>
+				<div class="content">Hello, <br />I tried to compute about the simplest conceivable non-collinear antiferromagnetic system, i.e. fcc Mn. The parameter file is added below. However, it dies with the complaint &quot;out of memory in cg&quot;, which I can understand, given that it tried to allocate 7 GB of memory. The problem lies in the fact that it determined the space group to be P1, that is, no symmetry whatsoever, and thus wants to compute 1728 k-points. I would say that the space group should be at least P-4 3 m (#215), needing only 84 k-points, and actually it should even be a primitive unit cell when the orientation of the spinor is transformed along with the positions. <br />So is there some switch I have overlooked so that abinit recognizes the correct symmetry and thus is able to treat this problem, or is this a bug in the symmetry finder, or is this a kludge because the handling of symmetric non-collinearities is not implemented?<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#Definition of occupation numbers<br />occopt 4<br />tsmear 0.005<br /><br />#Definition of the unit cell<br />acell 3*6.765<br />rprim&nbsp; 1 0 0&nbsp; &nbsp;# FCC primitive vectors (to be scaled by acell)<br />&nbsp; &nbsp; &nbsp; &nbsp;0 1 0 <br />&nbsp; &nbsp; &nbsp; &nbsp;0 0 1<br /><br />#Definition of the atom types<br />ntypat 1<br />znucl 25<br /><br />#Definition of the planewave basis set<br />ecut&nbsp; 25&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# Maximal kinetic energy cut-off, in Hartree<br />pawecutdg 50.<br /><br />#Exchange-correlation functional<br />ixc 11&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# GGA PBE<br /><br />#Definition of the k-point grid<br />shiftk 0. 0. 0.<br />kptrlatt<br />&nbsp; &nbsp; 12 0 0<br />&nbsp; &nbsp; 0 12 0<br />&nbsp; &nbsp; 0 0 12<br /><br />#Definition of the SCF procedure<br />iscf 17<br />nstep 50&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Maximal number of SCF cycles<br />tolvrs 1e-12 <br /><br />natom 4<br />typat 1 1 1 1<br /><br />xred<br />&nbsp;-0.25 -0.25 -0.25<br />&nbsp;0.25 0.25 -0.25<br />&nbsp;0.25 -0.25 0.25<br />&nbsp;-0.25 0.25 0.25<br />&nbsp;<br />spinat&nbsp; &nbsp;0.5 0.5 0.5<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-0.5 -0.5 0.5<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-0.5 0.5 -0.5<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.5 -0.5 -0.5<br />nsppol&nbsp; &nbsp;1<br />nspden&nbsp; &nbsp;4<br />nspinor&nbsp; 2<br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Non-collinear magnetism and symmetries</h3>
+				<div class="date">Posted: <strong>Wed Dec 20, 2017 10:56 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear mleitner,<br />The symmetry routine is not yet ready for non-collinear magnetism... Sorry about that, we should add a warning in the code.<br />Although, if the GGA gave you problems of convergence, try also LDA. You might also have to reduce the diemix and diemixmag flags to improve convergence too.<br />We are working right now on the non-collinear par of Abinit to make it more efficient.<br />Check also if you really need a 12x12x12 kpoint grid for this supercell. I've tested the anisotropy of Fe-BCC and found that it was converged at 0.01 micro eV with a grid of 14x14x14 in the small FM unit cell, thought Mn is different...<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3748&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:47:34 GMT -->
+</html>

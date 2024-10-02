@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=5189&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:32:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; 9.2.1 scf error: Attempting to invert real(8) 3x3 array</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>9.2.1 scf error: Attempting to invert real(8) 3x3 array</h2>
+		<p><a href="viewtopic898a.html?f=9&amp;t=5189">https://forum.abinit.org/viewtopic.php?f=9&amp;t=5189</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>9.2.1 scf error: Attempting to invert real(8) 3x3 array</h3>
+				<div class="date">Posted: <strong>Sat Oct 10, 2020 9:57 am</strong></div>
+				<div class="author">by <strong>Gang Tang</strong></div>
+				<div class="content">Hi Abinit users,<br>
+I try to perform a scf (ionmov=2;optcell=2;ntime=1) using abinit 9.2.1 but it crashes when it try to invert the array. The following message is given:<br>
+<br>
+--------------------------<br>
+--- !BUG<br>
+src_file: m_symtk.F90<br>
+src_line: 233<br>
+mpi_rank: 0<br>
+message: |<br>
+    Attempting to invert real(8) 3x3 array<br>
+        0.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00<br>
+       ==&gt; determinant=  0.00000000E+00 is zero.<br>
+...<br>
+--------------------------<br>
+<br>
+The corrreponding run.abi input file is
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#---------------- cell and system ----------------
+natom         40
+
+ntypat        3
+
+# Species     
+#             Sr  Ti  O   
+znucl         
+              38  22  8   
+
+typat         
+              1   2   3   3   3   1   2   3   3   3   
+              1   2   3   3   3   1   2   3   3   3   
+              1   2   3   3   3   1   2   3   3   3   
+              1   2   3   3   3   1   2   3   3   3   
+
+acell         1.00000000000000e+00   1.00000000000000e+00   1.00000000000000e+00
+
+rprim         
+              1.46862679921000e+01   0.00000000000000e+00   3.45014581000000e-02
+              3.45900653000000e-02   1.46861780640000e+01  -3.45030548000000e-02
+              0.00000000000000e+00   0.00000000000000e+00   1.46863111825000e+01
+
+
+xred          
+             -0.00000000000000e+00   0.00000000000000e+00   0.00000000000000e+00
+              2.50000000000000e-01   2.50000000000000e-01   2.50000000000000e-01
+              2.63361000000000e-01   0.00000000000000e+00   2.63364000000000e-01
+              2.36646000000000e-01   2.36635000000000e-01   0.00000000000000e+00
+              0.00000000000000e+00   2.36638000000000e-01   2.63354000000000e-01
+              0.00000000000000e+00   0.00000000000000e+00   5.00000000000000e-01
+              2.50000000000000e-01   2.50000000000000e-01   7.50000000000000e-01
+              2.36639000000000e-01   0.00000000000000e+00   7.36636000000000e-01
+              2.63354000000000e-01   2.63365000000000e-01   5.00000000000000e-01
+             -0.00000000000000e+00   2.63362000000000e-01   7.36646000000000e-01
+              0.00000000000000e+00   5.00000000000000e-01  -0.00000000000000e+00
+              2.50000000000000e-01   7.50000000000000e-01   2.50000000000000e-01
+              2.36639000000000e-01   5.00000000000000e-01   2.36636000000000e-01
+              2.63354000000000e-01   7.63365000000000e-01   0.00000000000000e+00
+             -0.00000000000000e+00   7.63362000000000e-01   2.36646000000000e-01
+             -0.00000000000000e+00   5.00000000000000e-01   5.00000000000000e-01
+              2.50000000000000e-01   7.50000000000000e-01   7.50000000000000e-01
+              2.63361000000000e-01   5.00000000000000e-01   7.63364000000000e-01
+              2.36646000000000e-01   7.36635000000000e-01   5.00000000000000e-01
+              0.00000000000000e+00   7.36638000000000e-01   7.63354000000000e-01
+              5.00000000000000e-01   0.00000000000000e+00  -0.00000000000000e+00
+              7.50000000000000e-01   2.50000000000000e-01   2.50000000000000e-01
+              7.36639000000000e-01   0.00000000000000e+00   2.36636000000000e-01
+              7.63354000000000e-01   2.63365000000000e-01   0.00000000000000e+00
+              5.00000000000000e-01   2.63362000000000e-01   2.36646000000000e-01
+              5.00000000000000e-01   0.00000000000000e+00   5.00000000000000e-01
+              7.50000000000000e-01   2.50000000000000e-01   7.50000000000000e-01
+              7.63361000000000e-01   0.00000000000000e+00   7.63364000000000e-01
+              7.36646000000000e-01   2.36635000000000e-01   5.00000000000000e-01
+              5.00000000000000e-01   2.36638000000000e-01   7.63354000000000e-01
+              5.00000000000000e-01   5.00000000000000e-01   0.00000000000000e+00
+              7.50000000000000e-01   7.50000000000000e-01   2.50000000000000e-01
+              7.63361000000000e-01   5.00000000000000e-01   2.63364000000000e-01
+              7.36646000000000e-01   7.36635000000000e-01   0.00000000000000e+00
+              5.00000000000000e-01   7.36638000000000e-01   2.63354000000000e-01
+              5.00000000000000e-01   5.00000000000000e-01   5.00000000000000e-01
+              7.50000000000000e-01   7.50000000000000e-01   7.50000000000000e-01
+              7.36639000000000e-01   5.00000000000000e-01   7.36636000000000e-01
+              7.63354000000000e-01   7.63365000000000e-01   5.00000000000000e-01
+              5.00000000000000e-01   7.63362000000000e-01   7.36646000000000e-01
+
+#------------ electronic ground state ------------
+kptopt 1
+ngkpt 4 4 4
+nshiftk 1
+shiftk 0.0 0.0 0.0
+ecut 30.0
+#pawecutdg 30.0
+nstep 50
+tolrff 0.01
+#toldfe 1.0d-7
+chkprim 0.0
+#occopt 3  tsmear 0.0001
+nband 165
+diemac 12.0
+#nsppol 2
+#spinat
+#0 0 1
+#0 0 1
+
+### XC 
+#ixc 11
+
+#------------ structural optimization ------------
+optcell 2
+ionmov 2
+tolmxf 1.0d-06
+ntime 1
+
+ecutsm 0.5
+dilatmx 1.1
+
+#-------------- pseudopotentials --------------
+pp_dirpath "/home/ulg/phythema/gtang/workdir/abinit/pseudo"
+pseudos "Sr.psp8, Ti.psp8, O.psp8"
+
+#-------------- parallelization ---------------
+#autoparal 1
+#max_ncpus 24
+paral_kgb 1
+#npband 1
+#bandpp 1
+npfft 4
+npkpt 12
+
+#------------ options for printing ------------
+prtden 0 #otherwise _DEN file printed at each Broyden step
+prteig 0
+prtwf 0
+</code></pre></div>
+
+Could someone help me indicating some way to proceed?<br>
+Best wishes!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 9.2.1 scf error: Attempting to invert real(8) 3x3 array</h3>
+				<div class="date">Posted: <strong>Tue Oct 13, 2020 3:59 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Gang,<br>
+Strange indeed, could it be because you put "chkprim 0.0" instead of "chkprim 0"?<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 9.2.1 scf error: Attempting to invert real(8) 3x3 array</h3>
+				<div class="date">Posted: <strong>Tue Oct 13, 2020 9:48 pm</strong></div>
+				<div class="author">by <strong>Gang Tang</strong></div>
+				<div class="content">Thank you for your reply.<br>
+<br>
+I have tried to change "chkprim 0.0" to "<strong class="text-strong">chkprim 0</strong>" but it still fails. So <strong class="text-strong">I guess this error is related to the atomic position (xred) or lattice constant (rprim)</strong> in the input file. Because I have prepared a lot of structures (the only difference is the <strong class="text-strong">xred</strong> and <strong class="text-strong">rprim</strong> keywords in the input file), some structures can run successfully, but some have the above errors.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 9.2.1 scf error: Attempting to invert real(8) 3x3 array</h3>
+				<div class="date">Posted: <strong>Wed Oct 14, 2020 2:44 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Gang,<br>
+I made a test on my local machine and it was strangely crashing when reading chkprim, but it is not the problem...<br>
+<br>
+Now it sounds like the rprim you use is indeed the problem, how did you generate it?<br>
+It looks like that your rprim does not respect some symmetry of the system, if I invert the two first diagonal terms like that:<br>
+1.46861780640000e+01   0.00000000000000e+00   3.45014581000000e-02<br>
+3.45900653000000e-02   1.46862679921000e+01  -3.45030548000000e-02<br>
+0.00000000000000e+00   0.00000000000000e+00   1.46863111825000e+01<br>
+Then it goes through...<br>
+<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 9.2.1 scf error: Attempting to invert real(8) 3x3 array</h3>
+				<div class="date">Posted: <strong>Wed Oct 14, 2020 9:40 pm</strong></div>
+				<div class="author">by <strong>Gang Tang</strong></div>
+				<div class="content">I use qAgate <a href="https://github.com/piti-diablotin/qAgate" class="postlink">https://github.com/piti-diablotin/qAgate</a> software to generate these structures (trainingset used in Multibinit).  If I switch the abinit 9.2.1 to 8.10,  then the problem can be resolved. So I think this issue is only related to this latest version.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 9.2.1 scf error: Attempting to invert real(8) 3x3 array</h3>
+				<div class="date">Posted: <strong>Fri Oct 16, 2020 7:03 pm</strong></div>
+				<div class="author">by <strong>gonze</strong></div>
+				<div class="content">Dear Gang Tang,<br>
+The problem was that the symmetrization of lattice, occuring when the symmetries are not respected<br>
+at the level of 10e-8, was not working with non-primitive unit cells (those for which chkprim 0 is required).<br>
+The fix was easy. The ABINIT run with your system is working with this fix.<br>
+This bug fix has been implemented in v9.2.2, that should be available at the end of this month.<br>
+By the way, it was working with v8.10 because in this older version, the default value for the recognition of symmetries was much more stringent (default tolsym was 1.0e-8), now it is tolsym 1.0e-5, so that more symmetries are recognized by v9.2.2, even if slightly inaccurate). It seems that qAgate does not generate very accurate lattice vectors - or  perhaps qAgate generates slightly distorted geometry on purpose ? Then v9.2 resymmetrizes the unit cell ...</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=5189&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:32:04 GMT -->
+</html>

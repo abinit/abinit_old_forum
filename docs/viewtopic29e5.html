@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1038&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:42:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Initial ecut value</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Initial ecut value</h2>
+		<p><a href="viewtopic0270.html?f=9&amp;t=1038">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1038</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Initial ecut value</h3>
+				<div class="date">Posted: <strong>Tue Apr 19, 2011 1:30 pm</strong></div>
+				<div class="author">by <strong>Amal Giri</strong></div>
+				<div class="content">Respected All,<br />Can anybody tell me how initially ecut value in the input file is determined?<br />with best regards</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Initial ecut value</h3>
+				<div class="date">Posted: <strong>Wed Apr 20, 2011 9:02 am</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hello,<br /><br />You have to make a convergence study for this. The cutoff energy needed for one pseudopotential can vary a lot depending on the cutoff radius, the number of valence electrons, ...<br /><br />If you are working with silicon, usually values around 12 Ha are enough. For transition metals, you can have cutoff energies up to 80-100 Ha. If your pseudopotential includes semicore states, ecut can also increase more....<br /><br />In brief, test your pseudopotential with increasing ecut and when it does not change the property anymore, you have your converged parameter.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Initial ecut value</h3>
+				<div class="date">Posted: <strong>Wed Apr 20, 2011 9:26 am</strong></div>
+				<div class="author">by <strong>Amal Giri</strong></div>
+				<div class="content">Hello<br />David,<br /><br />Thank you for your suggetion . <br />I am going to work with cu.  Could you tell me how the convergance studied, I mean what will be the input file for that study. <br /> Another thing that you have told about the no change of property after the test with increasing ecut but I can not understand what properties will remain unchanged?<br /><br />thanks</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Initial ecut value</h3>
+				<div class="date">Posted: <strong>Wed Apr 20, 2011 11:56 am</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Dear Amal,<br /><br />What David is thinking about is a study of the dependence of the total energy of a bulk Cu on values of ecut. May I suggest to read the tutorial 2 part 2.x at <a href="http://www.abinit.org/documentation/helpfiles/for-v6.6/tutorial/lesson_2.html" class="postlink">http://www.abinit.org/documentation/helpfiles/for-v6.6/tutorial/lesson_2.html</a> and PAW2 tutorial part at <a href="http://www.abinit.org/documentation/helpfiles/for-v6.6/tutorial/lesson_paw2.html#7" class="postlink">http://www.abinit.org/documentation/helpfiles/for-v6.6/tutorial/lesson_paw2.html#7</a>; the purpose of the latter is PAW pseudo testing, not exactly your case, but the ecut methodology is exactly the same for NC pseudos and the Ni case study similar to Cu<br />So look on <a href="http://www.crystallography.net/" class="postlink">http://www.crystallography.net</a> for a suitable Cu entry, adapt the PAW2 Ni input file - quite easy, it's a metal too - by removing PAW specific entries and plot delta(etotal) vs. ecut. Look for an ecut value for which etotal variations are below 1mHa. If you have wacky total energies for any reasonable ecut values, tune other parameters that also affect convergence as k-point grid.<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1038&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:42:48 GMT -->
+</html>

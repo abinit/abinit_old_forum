@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=956&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:13:52 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Abinit kpoint grid generation and kptrlen</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Abinit kpoint grid generation and kptrlen</h2>
+		<p><a href="viewtopicfa7e.html?f=9&amp;t=956">https://forum.abinit.org/viewtopic.php?f=9&amp;t=956</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Abinit kpoint grid generation and kptrlen</h3>
+				<div class="date">Posted: <strong>Sat Mar 12, 2011 12:20 am</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">Dear all,<br /><br />For curiosity purpose, I tried to use the abinit kpoint grid generation, the one that is performed when neither ngkpt or kprtlatt are defined. And I think I don't understand how it works and what Iit is supposed to do.<br /><br />My trial system is an hexagonal lattice and my convergence tests lead me to choose a 11x11x9 kpoint grid (it's a metal). With this mesh, there are 80 kpoints in the BZ and kptrlen=8.29595466E+01, which is HUGE compare to what abinit can find with its grids.  Below is abinit's opinion about kpoint grids for my system:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;List of best grids, ordered by nkpt.<br />&nbsp; (stop at a value of kptrlen 20% larger than the target value).<br />&nbsp; (the merit factor will tend to one or two in 3 dimensions)<br />&nbsp; (and to one, two or four in 2 dimensions)<br /><br />&nbsp; &nbsp; nkpt&nbsp; &nbsp;kptrlen&nbsp; &nbsp; grid#&nbsp; merit_factor<br />&nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; 1.3063E+01&nbsp; &nbsp; 13&nbsp; &nbsp; &nbsp; 0.2022<br />&nbsp; &nbsp; &nbsp;2&nbsp; &nbsp; 1.5084E+01&nbsp; &nbsp; &nbsp;3&nbsp; &nbsp; &nbsp; 0.1557<br />&nbsp; &nbsp; &nbsp;3&nbsp; &nbsp; 2.6125E+01&nbsp; &nbsp; 15&nbsp; &nbsp; &nbsp; 0.5393<br />&nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; 2.6370E+01&nbsp; &nbsp; &nbsp;5&nbsp; &nbsp; &nbsp; 0.4159<br />&nbsp; &nbsp; &nbsp;8&nbsp; &nbsp; 3.0167E+01&nbsp; &nbsp; &nbsp;6&nbsp; &nbsp; &nbsp; 0.3114<br />&nbsp; &nbsp; 10&nbsp; &nbsp; 3.7709E+01&nbsp; &nbsp; &nbsp;7&nbsp; &nbsp; &nbsp; 0.4865<br /><br />&nbsp;For target kptrlen=&nbsp; &nbsp; 3.0000E+01, the selected grid is number&nbsp; &nbsp; &nbsp;6,<br />&nbsp; &nbsp; &nbsp;giving kptrlen=&nbsp; &nbsp; 3.0167E+01 with nkpt=&nbsp; &nbsp; &nbsp;8<br /></code></pre></div><br /><br />What do these results mean? The lowest kptrlen is obtained with a very (very) coarse grid with only 1 kpoint. This is definitely not the best grid... Even the best rated grid has only 3 kpoints.<br /><br />I don't understand what we are supposed to get from these data.<br /><br />Thank you for your insight<br /><br />Boris</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit kpoint grid generation and kptrlen</h3>
+				<div class="date">Posted: <strong>Mon Mar 14, 2011 2:58 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">kprtlen is the inverse of the shortest kpt length, so more is better precision.<br /><br />The grid it is recommending has 8 k-points (1st column) and is numbered 6 in the order in which abinit generated the set of grids to test. <br /><br />This is the first which satisfies your request that kptrlen &gt;= 3<br /><br />M.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=956&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:13:52 GMT -->
+</html>

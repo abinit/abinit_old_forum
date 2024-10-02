@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2883&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:42:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; mkl13+mvapich2 1.8.1 segmentation fault</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>mkl13+mvapich2 1.8.1 segmentation fault</h2>
+		<p><a href="viewtopicb923.html?f=3&amp;t=2883">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2883</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>mkl13+mvapich2 1.8.1 segmentation fault</h3>
+				<div class="date">Posted: <strong>Wed Dec 10, 2014 9:09 am</strong></div>
+				<div class="author">by <strong>samuel.fux</strong></div>
+				<div class="content">Hi, <br /><br />I tried to compile abinit 7.8.1 with intel 13.1.1 (+mkl) and openmpi 1.6.5. When running a serial job it works, when running in parallel I sometimes get a segmentation fault. Then I switched to abinit 7.10.1 -&gt; same problem. Switching from openmpi 1.6.5 to mvapich2 1.8.1 -&gt; same problem.<br /><br />Configuration for intel 13.1.1 and mvapich2 1.8.1 (with increased log level):<br /><br />./configure CC=mpicc CXX=mpicxx FCFLAGS_EXTRA=&quot;-g -O0 -check all -traceback&quot; --prefix=/cluster/apps/abinit/test7.10.1/x86_64 --enable-debug=naughty --enable-openmp --with-wannier90-bins=/cluster/apps/abinit/test7.10.1/wannier90 --with-wannier90-libs=&quot;-L/cluster/apps/abinit/test7.10.1/wannier90 -lwannier&quot; --enable-64bit-flags --enable-mpi --enable-fast-check --enable-mpi-io --with-mpi-prefix=&quot;$MPI_ROOT&quot; --with-fft-flavor=&quot;fftw3-mpi&quot; --with-fft-incs=&quot;-I/cluster/apps/mvapich2/1.8.1/x86_64/intel_13.1.1/include&quot; --with-fft-libs=&quot;-L/cluster/apps/mvapich2/1.8.1/x86_64/intel_13.1.1/lib64 -lfftw3 -lfftw3_mpi&quot; --with-dft-flavor=&quot;wannier90&quot; --with-timer-flavor=&quot;abinit&quot; --with-linalg-flavor=&quot;mkl+scalapack&quot; --with-linalg-incs=&quot;-I/$MKLROOT/include&quot; --with-linalg-libs=&quot;-L$MKLROOT/lib/intel64 -lmkl_intel_lp64 -lmkl_scalapack_lp64 -lmkl_blacs_intelmpi_lp64 -lmkl_sequential -lmkl_core&quot; --enable-optim CFLAGS_OPTIM=&quot;-O1&quot; CXXFLAGS_OPTIM=&quot;-O1&quot; FCFLAGS_OPTIM=&quot;-O1&quot;<br /><br />Compilation never gave any error. Any idea what the problem could be ?<br /><br />Logs from the failed run, starting with the part where mpi is started:<br /><br /> mpi_setup@mpi_setup.F90:111 &gt;&gt;&gt;&gt;&gt; ENTER<br /><br /> initmpi_seq@initmpi_seq.F90:65 &gt;&gt;&gt;&gt;&gt; ENTER<br /><br /> initmpi_seq@initmpi_seq.F90:129 &gt;&gt;&gt;&gt;&gt; EXIT<br /><br /> initmpi_img@initmpi_img.F90:85 &gt;&gt;&gt;&gt;&gt; ENTER<br /><br /> initmpi_img@initmpi_img.F90:348 &gt;&gt;&gt;&gt;&gt; EXIT<br /><br /> initmpi_seq@initmpi_seq.F90:65 &gt;&gt;&gt;&gt;&gt; ENTER<br /><br /> initmpi_seq@initmpi_seq.F90:129 &gt;&gt;&gt;&gt;&gt; EXIT<br /><br /> finddistrproc@finddistrproc.F90:144 &gt;&gt;&gt;&gt;&gt; ENTER<br /><br /> kpgcount@m_fftcore.F90:3717 &gt;&gt;&gt;&gt;&gt; ENTER<br /><br /> kpgcount@m_fftcore.F90:3763 &gt;&gt;&gt;&gt;&gt; EXIT<br /><br /> getmpw sequential formula gave:    70247<br /><br /> Computing all possible proc distrib for this input with nproc less than 4<br />     npimage|       npkpt|    npspinor|       npfft|      npband|     bandpp |       nproc|      weight|<br />   1 -&gt;    1|   1 -&gt;    4|   1 -&gt;    1|   1 -&gt;    4|   1 -&gt;    4|   1 -&gt;   12|   2 -&gt;    4|   1 -&gt;    4|<br />           1|           4|           1|           1|           1|           1|           4|       3.91 |<br />           1|           2|           1|           2|           1|           1|           4|       3.55 |<br />           1|           2|           1|           1|           2|           1|           4|       3.55 |<br />           1|           1|           1|           4|           1|           1|           4|       3.31 |<br />           1|           1|           1|           2|           2|           1|           4|       3.31 |<br /><br /> Values below have been tested with respect to Linear Algebra performance;<br /> Weights below are corrected according:<br />   npimage|     npkpt|  npspinor|     npfft|    npband|   bandpp |     nproc|    weight|new weight|<br /> compute_kgb_indicator@compute_kgb_indicator.F90:95 &gt;&gt;&gt;&gt;&gt; ENTER<br /><br />compute_kgb_indicator : (bpp,npb,npf) =   1  1  2<br /> init_scalapack@m_slk.F90:401 &gt;&gt;&gt;&gt;&gt; ENTER<br /><br /> build_grid_scalapack@m_slk.F90:266 &gt;&gt;&gt;&gt;&gt; ENTER<br /><br /> build_grid_scalapack@m_slk.F90:283 &gt;&gt;&gt;&gt;&gt; EXIT<br /><br /> build_processor_scalapack@m_slk.F90:331 &gt;&gt;&gt;&gt;&gt; ENTER<br /><br /> build_processor_scalapack@m_slk.F90:353 &gt;&gt;&gt;&gt;&gt; EXIT<br /><br /> init_scalapack@m_slk.F90:410 &gt;&gt;&gt;&gt;&gt; EXIT<br /><br /> init_matrix_scalapack@m_slk.F90:514 &gt;&gt;&gt;&gt;&gt; ENTER<br /><br /> init_matrix_scalapack@m_slk.F90:574 &gt;&gt;&gt;&gt;&gt; EXIT<br /><br /> init_matrix_scalapack@m_slk.F90:514 &gt;&gt;&gt;&gt;&gt; ENTER<br /><br /> init_matrix_scalapack@m_slk.F90:574 &gt;&gt;&gt;&gt;&gt; EXIT<br /><br /> init_matrix_scalapack@m_slk.F90:514 &gt;&gt;&gt;&gt;&gt; ENTER<br /><br /> init_matrix_scalapack@m_slk.F90:574 &gt;&gt;&gt;&gt;&gt; EXIT<br /><br /><strong class="text-strong">Boundary Run-Time Check Failure for variable 'm_slk_mp_compute_generalized_eigen_problem_$RWORK_TMP'</strong><br /><br /><strong class="text-strong">Boundary Run-Time Check Failure for variable 'm_slk_mp_compute_generalized_eigen_problem_$RWORK_TMP'</strong><br /><br />forrtl: error (76): Abort trap signal<br />Image              PC                Routine            Line        Source<br />libc.so.6          00002AC271DFE625  Unknown               Unknown  Unknown<br />libc.so.6          00002AC271DFFE05  Unknown               Unknown  Unknown<br />libirc.so          00002AC271B89D2F  Unknown               Unknown  Unknown<br />abinit             000000000F9FF976  m_slk_mp_compute_        2714  m_slk.F90<br />abinit             000000000FA05FC6  m_slk_mp_compute_        2977  m_slk.F90<br />abinit             000000000F77AB42  m_abi_linalg_mp_a         122  abi_xhegv.f90<br />abinit             000000000F77C248  m_abi_linalg_mp_a         221  abi_xhegv.f90<br />abinit             00000000098F8EDE  compute_kgb_indic         209  compute_kgb_indicator.F90<br />abinit             000000000963E2E1  finddistrproc_            793  finddistrproc.F90<br />abinit             0000000008FD072C  mpi_setup_                213  mpi_setup.F90<br />abinit             000000000041043D  MAIN__                    330  abinit.F90<br />abinit             000000000040D38C  Unknown               Unknown  Unknown<br />libc.so.6          00002AC271DEAD5D  Unknown               Unknown  Unknown<br />abinit             000000000040D289  Unknown               Unknown  Unknown<br />forrtl: error (76): Abort trap signal<br />Image              PC                Routine            Line        Source<br />libc.so.6          00002B3E3F78A625  Unknown               Unknown  Unknown<br />libc.so.6          00002B3E3F78BE05  Unknown               Unknown  Unknown<br />libirc.so          00002B3E3F515D2F  Unknown               Unknown  Unknown<br />abinit             000000000F9FF976  m_slk_mp_compute_        2714  m_slk.F90<br />abinit             000000000FA05FC6  m_slk_mp_compute_        2977  m_slk.F90<br />abinit             000000000F77AB42  m_abi_linalg_mp_a         122  abi_xhegv.f90<br />abinit             000000000F77C248  m_abi_linalg_mp_a         221  abi_xhegv.f90<br />abinit             00000000098F8EDE  compute_kgb_indic         209  compute_kgb_indicator.F90<br />abinit             000000000963E2E1  finddistrproc_            793  finddistrproc.F90<br />abinit             0000000008FD072C  mpi_setup_                213  mpi_setup.F90<br />abinit             000000000041043D  MAIN__                    330  abinit.F90<br />abinit             000000000040D38C  Unknown               Unknown  Unknown<br />libc.so.6          00002B3E3F776D5D  Unknown               Unknown  Unknown<br />abinit             000000000040D289  Unknown               Unknown  Unknown<br /><br />=====================================================================================<br />=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES<br />=   EXIT CODE: 6<br />=   CLEANING UP REMAINING PROCESSES<br />=   YOU CAN IGNORE THE BELOW CLEANUP MESSAGES<br />=====================================================================================<br />APPLICATION TERMINATED WITH THE EXIT STRING: Aborted (signal 6)</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: mkl13+mvapich2 1.8.1 segmentation fault</h3>
+				<div class="date">Posted: <strong>Wed Dec 10, 2014 5:13 pm</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">If I were you I would try with much less options.<br />-&gt; remove wannier90<br />-&gt; remove fft3-mpi and use fft3 from MKL instead<br />-&gt; remove openmp<br />-&gt; try without scalapack, just MKL<br /><br />Once you got something working, add one by one the above features if you need them.<br /><br />Cheers,<br /><br />Jordan</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2883&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:42:54 GMT -->
+</html>

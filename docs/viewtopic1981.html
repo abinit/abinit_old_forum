@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4424&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:15:52 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; out of memory</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>out of memory</h2>
+		<p><a href="viewtopic73b5.html?f=9&amp;t=4424">https://forum.abinit.org/viewtopic.php?f=9&amp;t=4424</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>out of memory</h3>
+				<div class="date">Posted: <strong>Fri May 29, 2020 6:59 am</strong></div>
+				<div class="author">by <strong>suman</strong></div>
+				<div class="content">Hello abinit users,<br>
+<br>
+I was trying to dope monolayer  GeSe with Sulphur atoms, relax it. I have 100 atoms.<br>
+But, I got an error saying<br>
+<br>
+ <br>
+--- !ERROR<br>
+src_file: m_gstate.F90<br>
+src_line: 716<br>
+mpi_rank: 28<br>
+message: |<br>
+    out of memory in cg<br>
+...<br>
+ <br>
+I believe this error is due to the account of  more number of atoms than ABINIT permits.<br>
+<br>
+Could you please let me know how many atoms ABINIT allow for relax?<br>
+<br>
+Thank you</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: out of memory</h3>
+				<div class="date">Posted: <strong>Thu Jun 04, 2020 3:57 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Suman<br>
+Abinit has almost no limit on the number of atoms, 100 is clearly not a problem.<br>
+Could it be that your computer does not have enough RAM memory for this calculation?<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: out of memory</h3>
+				<div class="date">Posted: <strong>Sun Jun 07, 2020 6:11 pm</strong></div>
+				<div class="author">by <strong>suman</strong></div>
+				<div class="content">Dear Ebousquet,<br>
+<br>
+Thank you for the reply. I have sent the job of relaxing 100 atoms for 10.5 hours  for a given 512 cores in supercomputer and waiting for the result.<br>
+<br>
+Cheers,<br>
+Suman</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: out of memory</h3>
+				<div class="date">Posted: <strong>Wed Jun 10, 2020 4:23 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Well, it's difficult to suggest how to address the problem without looking at your input file.<br>
+I hope you are using paral_kgb = 1 with band/fft/kpoint parallelism because the default eigensolver (conjugate gradient, paral_kgb=0) can only distribute memory in k-space</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: out of memory</h3>
+				<div class="date">Posted: <strong>Sat Jun 27, 2020 12:02 am</strong></div>
+				<div class="author">by <strong>suman</strong></div>
+				<div class="content">Thank you for the reply.<br>
+<br>
+Sorry for not uploading the input file.<br>
+<br>
+My previous run didn't work out.<br>
+<br>
+I have attached input, log and submit file.<br>
+<br>
+Could you please suggest me what's the issue in input file?<br>
+<br>
+Thank you</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: out of memory</h3>
+				<div class="date">Posted: <strong>Mon Jul 06, 2020 2:31 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Suman,<br>
+A general comment: you use a grid of k-point of 1x8x8 and your cell parameters a, b and c are 28 ,37 and 40 respectively.<br>
+This does not make sense becauase the k-point length is inversely proportional to the cell length such that having 1 kpoint for 28 Bohr and 8 for 37 and 40 is inconsistent in this respect. How did you chose these values of k-points?<br>
+regarding the memory, I would propose to test this instead of the automatic one (you can increase nband if you need more analysis of the electronic structure later):
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>nband 512
+npkpt 32
+npband 16
+npfft.  1
+</code></pre></div>
+which is using only MPI or, using more MPI+OpenMP:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>nband 512
+npkpt 32
+npband 512
+bandpp 16
+</code></pre></div>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4424&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:15:52 GMT -->
+</html>

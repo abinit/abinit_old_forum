@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=5358&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 14:31:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Comparing pwscf and Abinit MPI SCF calculations</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Comparing pwscf and Abinit MPI SCF calculations</h2>
+		<p><a href="viewtopic78dd.html?f=9&amp;t=5358">https://forum.abinit.org/viewtopic.php?f=9&amp;t=5358</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Comparing pwscf and Abinit MPI SCF calculations</h3>
+				<div class="date">Posted: <strong>Tue Mar 30, 2021 5:59 pm</strong></div>
+				<div class="author">by <strong>yatest</strong></div>
+				<div class="content">Hi,<br>
+<br>
+I want to compare the energies and forces found by using a non-local pseudopotential and a local pseudopotential. The non-local pseudopotential calculation was performed in pwscf (Quantum Espresso) using a UPF norm-conserving pseudopotential; however, due to the limitations on pseudopotential format in pwscf, I need to use Abinit for the local pseudopotential calculation.<br>
+<br>
+Bear in mind I am new to Abinit, so there may be something obvious I have missed, but the Abinit convergence seems far far slower. I have attached both input and output files (note that the Abinit calculation ran out of time so is incomplete and is in fact the "log" file), to hopefully shed some light on what is going on.<br>
+<br>
+The system is a 108 atom Al cell which has been equilibrated at 100 kK using MD. Therefore, I would also like to perform the "ground-state" (perhaps "thermal equilibrium state" is a more accurate term) minimisation at an electron temperature of 100 kK (= 0.6334 Ry = 0.3167 Ha) with Fermi-Dirac smearing. This is the reason for the large (4500) number of bands.<br>
+<br>
+pwscf seems reasonably simple to run in parallel; it automatically detected the number of available cores and parallelised accordingly. Abinit is a bit more complicated, but I have used the autoparal to hopefully find the best allocation of resources. This is where I believe the biggest bottleneck is probably found. <br>
+<br>
+Each calculation was given 12 hrs with 16GB per core and 40 cores. pwscf predicted it would need 367GB of RAM, whereas Abinit predicts it only needs 1GB of memory, which implies either I don't understand how to read the Abinit log file, or it is not making use of the available memory fully. Abinit also used all 12 hrs and didn't complete, compared to pwscf completing the calculation in ~5 hrs.<br>
+<br>
+I've tried to keep all other parameters (e.g. ecut, etol, nkpt, etc.) as similar between the two runs as possible to minimise any other differences, and I am not convinced that the local pseudopotential could cause such a slow down in comparison to the non-local pseudopotential. I am, however, going to do another identical run but with a non-local pseudopotential in Abinit to check this.<br>
+<br>
+Any ideas on what I am doing incorrectly or could change would be much appreciated.<br>
+<br>
+Thanks.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=5358&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 14:31:06 GMT -->
+</html>

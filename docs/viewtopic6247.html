@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=272&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] Structural Optimisation and BFGS</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] Structural Optimisation and BFGS</h2>
+		<p><a href="viewtopic7197.html?f=9&amp;t=272">https://forum.abinit.org/viewtopic.php?f=9&amp;t=272</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] Structural Optimisation and BFGS</h3>
+				<div class="date">Posted: <strong>Tue Apr 27, 2010 5:27 am</strong></div>
+				<div class="author">by <strong>e.ross1</strong></div>
+				<div class="content">Hello,<br /><br />when using ionmov=3, optcell=1 (Broyden-Fletcher-Goldfarb-Shanno minimization) on Copper with the pseudopotential 29-Cu.LDA.fhi the following error occurs in multiple Broyden iterations<br /><br />&quot; findmin : WARNING -<br />  The 2nd degree equation has no positive root (choice=4).<br /><br /> findmin : COMMENT -<br />  Will continue, since the new total energy is lower<br />  than the old. Take a larger step in the same direction.<br />   line minimization, algorithm   4&quot;<br /><br />The code continues to run, but the length never converges oscillating between about 5 and 9 Bohr (around the experimental value ~6.6).<br /><br />Using a different pseduopotential .pspnc, I did not come accross this error. Using Gold instead of copper I found that this warning would occur for both pseudopotentials but after a few iterations it would disappear and the cell volume would converge.<br /><br />Any idea why?<br /><br />I enlcose my full input<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>occopt 4<br />tsmear 0.01<br /><br />acell 3*6.6&nbsp; &nbsp; &nbsp; &nbsp;<br />rprim&nbsp; 0.0&nbsp; 0.5&nbsp; 0.5&nbsp; &nbsp;<br />&nbsp; &nbsp; &nbsp; &nbsp;0.5&nbsp; 0.0&nbsp; 0.5 <br />&nbsp; &nbsp; &nbsp; &nbsp;0.5&nbsp; 0.5&nbsp; 0.0<br /><br />optcell 1<br />ionmov&nbsp; 2<br />ntime&nbsp; 20<br />dilatmx 3<br />ecutsm .5<br /><br />ntypat 1&nbsp; &nbsp; &nbsp; &nbsp;<br />znucl 29&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />natom 1&nbsp; &nbsp; &nbsp; &nbsp;<br />typat 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />xred&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />&nbsp; &nbsp;0.0&nbsp; 0.0&nbsp; 0.0&nbsp; &nbsp; <br /><br />ecut&nbsp; 10.0<br /><br />ngkpt 4 4 4&nbsp; &nbsp;<br />nshiftk 4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />shiftk 0.5 0.5 0.5<br />&nbsp; &nbsp; &nbsp; &nbsp;0.5 0.0 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp;0.0 0.5 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp;0.0 0.0 0.5<br /><br />nstep 25&nbsp; &nbsp; &nbsp;<br />toldfe 1.0d-6 <br /></code></pre></div><br />(Note the parameters ecut, ngkpt and tsmear have not been converged; this is just an initial test)<br /><br />Cheers.<br /><br />P.S.<br />Actually using ionmov=2 seems to resolve the issue. However, I am still interested in why it occurs.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Structural Optimisation and BFGS</h3>
+				<div class="date">Posted: <strong>Thu Apr 29, 2010 5:28 am</strong></div>
+				<div class="author">by <strong>e.ross1</strong></div>
+				<div class="content">It appears the main cause of the problem is that I was too far from the minimum; when I improved the convergence parameters there wasn't a problem.<br /><br />Cheers.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Structural Optimisation and BFGS [SOLVED]</h3>
+				<div class="date">Posted: <strong>Tue May 04, 2010 12:17 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Indeed: the Broyden depends in some sense on being in the right basin of attraction. If you reach a region where the potential energy surface is convex the Broyden will explode your structure (well, very rarely).<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] Structural Optimisation and BFGS</h3>
+				<div class="date">Posted: <strong>Wed May 12, 2010 5:47 pm</strong></div>
+				<div class="author">by <strong>yaser</strong></div>
+				<div class="content">Hi Dear Matthieu,<br />I have faced with this error.<br />Give me  more explaination about the solotion of it ,please.<br />Thank you.<br />Asadi.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=272&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:39 GMT -->
+</html>

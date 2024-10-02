@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1206&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:54:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; abinit 6.8.1 + gfortran + mpich2 = no compile</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>abinit 6.8.1 + gfortran + mpich2 = no compile</h2>
+		<p><a href="viewtopic0700.html?f=3&amp;t=1206">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1206</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>abinit 6.8.1 + gfortran + mpich2 = no compile</h3>
+				<div class="date">Posted: <strong>Thu Jul 07, 2011 10:57 pm</strong></div>
+				<div class="author">by <strong>l0rd_hex</strong></div>
+				<div class="content">Hi abiniters, <br /><br />I'm having an issue compiling abinit 6.8.1 in parallel, I was able to compile it with no issues in serial.<br /><br />I've cleaned the directory, and running configure like so:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure --enable-mpi --with-mpi-prefix=/usr </code></pre></div><br /><br />I'm getting positive results regarding MPI from the configure log:<br /><br />checking whether the C compiler supports MPI... yes<br />checking whether the C++ compiler supports MPI... yes<br />checking whether the Fortran Compiler supports MPI... yes<br />checking whether MPI is usable... yes<br />configure: enabling MPI I/O support<br />checking whether to build MPI code... yes<br />checking whether to build MPI I/O code... yes<br /><br />when I run <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make mj4</code></pre></div> or just <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make</code></pre></div><br /><br />It eventually fails with this error:<br /><br />Making all in 12_hide_mpi<br />make[3]: Entering directory `/home/XXX/Download/abinit-6.8.1/src/12_hide_mpi'<br />/usr/bin/mpif90 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs   -ffree-form -J/home/XXX/Download/abinit-6.8.1/src/mods -O2 -mtune=native -march=native -mfpmath=sse -g -ffree-line-length-none  -c -o m_xmpi.o m_xmpi.F90<br />m_xmpi.F90:2193.28:<br /><br /> call MPI_Type_hvector(ny,1,stride_x,column_type,plane_type,mpi_err)<br />                           1<br />Error: Type mismatch in argument 'v2' at (1); passed INTEGER(4) to INTEGER(8)<br />m_xmpi.F90:2195.28:<br /><br /> call MPI_Type_hvector(nz,1,ldy*stride_x,plane_type,vol_type,mpi_err)<br />                           1<br />Error: Type mismatch in argument 'v2' at (1); passed INTEGER(4) to INTEGER(8)<br />m_xmpi.F90:2197.28:<br /><br /> call MPI_Type_hvector(na,1,ldz*ldy*stride_x,vol_type,new_type,mpi_err)<br />                           1<br />Error: Type mismatch in argument 'v2' at (1); passed INTEGER(4) to INTEGER(8)<br />m_xmpi.F90:2113.28:<br /><br /> call MPI_Type_hvector(ny,1,stride_x,column_type,plane_type,mpi_err)<br />                           1<br />Error: Type mismatch in argument 'v2' at (1); passed INTEGER(4) to INTEGER(8)<br />m_xmpi.F90:2115.28:<br /><br /> call MPI_Type_hvector(nz,1,ldy*stride_x,plane_type,new_type,mpi_err)<br />                           1<br />Error: Type mismatch in argument 'v2' at (1); passed INTEGER(4) to INTEGER(8)<br />m_xmpi.F90:2036.28:<br /><br /> call MPI_Type_hvector(ny,1,stride_x,column_type,new_type,mpi_err)<br />                           1<br />Error: Type mismatch in argument 'v2' at (1); passed INTEGER(4) to INTEGER(8)<br />make[3]: *** [m_xmpi.o] Error 1<br />make[3]: Leaving directory `/home/XXX/Download/abinit-6.8.1/src/12_hide_mpi'<br />make[2]: *** [all-recursive] Error 1<br />make[2]: Leaving directory `/home/XXX/Download/abinit-6.8.1/src'<br />make[1]: *** [all-recursive] Error 1<br />make[1]: Leaving directory `/home/XXX/Download/abinit-6.8.1'<br />make: *** [all] Error 2<br /><br />I'm not too sure what the problem is, I was wondering maybe if it was a 32-bit vs 64-bit problem (just because of the integer size mismatch). <br /><br />Has anyone seen this or can offer some advice?<br /><br />The machine is an Intel Xeon 64-bit install of Fedora 10 (yes, I know it's out of date but I'm hoping that's not the issue) with 16 GB of RAM.<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>uname -a = Linux XXX 2.6.27.41-170.2.117.fc10.x86_64 #1 SMP Thu Dec 10 10:36:29 EST 2009 x86_64 x86_64 x86_64 GNU/Linux</code></pre></div><br /><br />EDIT: I forgot to mention, that I also tried it with  --enable-64bit-flags in the configure settings, no dice.<br /><br />Thanks for taking the time to read, <br /><br />John</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 6.8.1 + gfortran + mpich2 = no compile</h3>
+				<div class="date">Posted: <strong>Thu Jul 07, 2011 11:53 pm</strong></div>
+				<div class="author">by <strong>l0rd_hex</strong></div>
+				<div class="content">Hmm, I've got it compiled with --with-mpi-level=1 this should work for now.<br /><br /><br />Thanks, <br />John</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 6.8.1 + gfortran + mpich2 = no compile</h3>
+				<div class="date">Posted: <strong>Fri Jul 08, 2011 10:32 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi John,<br /><br />I just encountered the same problem (not yet understood) with the development version 6.9.1 of abinit,  mpich2 1.4.0  and  gcc 4.6.1   <img class="smilies" src="images/smilies/icon_e_sad.gif" alt=":(" title="Sad" /> <br /><br />it still works with version 6.9.1, mpich2 1.3.1  and gcc 4.5.3  !<br /><br />What versions of mpich2 and gcc are you using ?<br /><br />regards<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 6.8.1 + gfortran + mpich2 = no compile</h3>
+				<div class="date">Posted: <strong>Fri Jul 08, 2011 11:13 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">it compiles with 6.9.1, mpich2  <strong class="text-strong">1.3.2p1</strong>  and gcc 4.6.1    <img class="smilies" src="images/smilies/icon_cool.gif" alt="8-)" title="Cool" /> <br /><br />there is something in mpich2 1.4.0...<br /><br />to follow...<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 6.8.1 + gfortran + mpich2 = no compile</h3>
+				<div class="date">Posted: <strong>Sun Jul 10, 2011 9:10 am</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />the explaination :<br /><br /><blockquote class="uncited"><div>mpich2-1.4's explicitly defines MPI_Type_hvector in fortran90 module<br />as follows:<br /><br />       SUBROUTINE MPI_TYPE_HVECTOR(v0,v1,v2,v3,v4,ierror)<br />       USE MPI_CONSTANTS,ONLY:MPI_ADDRESS_KIND<br />       INTEGER v0, v1<br />       INTEGER(KIND=MPI_ADDRESS_KIND) v2<br />       INTEGER v3, v4<br />       INTEGER ierror<br />       END SUBROUTINE MPI_TYPE_HVECTOR<br /><br />While in mpich2-1.3.2p1, there isn't explicit prototype<br />for MPI_Type_hvector in fortran90 module.<br /></div></blockquote><br /><br />there were some updates to f90 &quot;mpi&quot; module ( if we use &quot;use mpi&quot; ) in 1.4 which probably do a better job of catching these errors.<br /><br />it's the reason why, with &quot; --with-mpi-level=1&quot; , it works...<br /><br />now, until abinit's developpers solve the problem, we can use the mpich2 1.3.2p1 version<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 6.8.1 + gfortran + mpich2 = no compile</h3>
+				<div class="date">Posted: <strong>Wed Jul 27, 2011 6:38 pm</strong></div>
+				<div class="author">by <strong>Steven Miller</strong></div>
+				<div class="content">If you look at this page:<br /><br /><!-- m --><a class="postlink" href="http://www.mpi-forum.org/docs/mpi22-report/node327.htm#Node327">http://www.mpi-forum.org/docs/mpi22-rep ... tm#Node327</a><!-- m --><br /><br />It appears that the MPICH2-1.4 implementation is in error. The third parameter (stride) should be INTEGER, not INTEGER(KIND=MPI_ADDRESS_TYPE) as it is prototyped in the 1.4 version of MPICH2. This subroutine (MPI_TYPE_HVECTOR) is a legacy MPI-1 function which is deprecated in MPI-2, precisely because of this issue. The third parameter is defined differently for Fortran than for C or C++. I believe that the abinit code correctly uses the function according to the MPI standard.<br /><br />However, the problem is easy enough to fix. I have a patch that corrects the prototype generation code in mpich2. I'm currently running abinit 6.8.1 with mpich2-1.4 using this modification and so far it seems fine. It patches the mpich2-1.4/src/binding/f90/buildiface script. I'd attach it, but the forum won't let me.  <img class="smilies" src="images/smilies/icon_e_sad.gif" alt=":(" title="Sad" />  But here is the text:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>diff -ur mpich2-1.4.1p1/src/binding/f90/buildiface ../mpipatch/mpich2-1.4.1p1/src/binding/f90/buildiface<br />--- mpich2-1.4.1p1/src/binding/f90/buildiface&nbsp; &nbsp;2011-08-05 12:59:41.000000000 -0400<br />+++ ../mpipatch/mpich2-1.4.1p1/src/binding/f90/buildiface&nbsp; &nbsp;2011-10-11 13:28:20.298986134 -0400<br />@@ -117,9 +117,13 @@<br />&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 'Type_hindexed-3' =&gt; 'int&#91;&#93;',<br />&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 'Type_indexed-2' =&gt; 'int&#91;&#93;',<br />&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 'Type_indexed-3' =&gt; 'int&#91;&#93;',<br />+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 'Type_hvector-3' =&gt; 'int',<br />&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 'Type_struct-2' =&gt; 'int&#91;&#93;',<br />&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 'Type_struct-3' =&gt; 'int&#91;&#93;',<br />&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 'Type_struct-4' =&gt; 'MPI_Datatype&#91;&#93;',<br />+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 'Type_extent-2' =&gt; 'int',<br />+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 'Type_lb-2' =&gt; 'int',<br />+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 'Type_ub-2' =&gt; 'int',<br />&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 'Waitall-2' =&gt; 'MPI_Request&#91;&#93;',<br />&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 'Waitall-3' =&gt; 'MPI_Status&#91;&#93;',<br />&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 'Waitany-2' =&gt; 'MPI_Request&#91;&#93;',<br />diff -ur mpich2-1.4.1p1/src/binding/f90/mpi_base.f90.in ../mpipatch/mpich2-1.4.1p1/src/binding/f90/mpi_base.f90.in<br />--- mpich2-1.4.1p1/src/binding/f90/mpi_base.f90.in&nbsp; &nbsp;2011-09-01 14:53:13.000000000 -0400<br />+++ ../mpipatch/mpich2-1.4.1p1/src/binding/f90/mpi_base.f90.in&nbsp; &nbsp;2011-10-11 13:28:27.970862078 -0400<br />@@ -15,9 +15,7 @@<br />&nbsp; &nbsp; &nbsp; &nbsp; END SUBROUTINE MPI_COMM_FREE_KEYVAL<br />&nbsp;<br />&nbsp; &nbsp; &nbsp; &nbsp; SUBROUTINE MPI_TYPE_EXTENT(v0,v1,ierror)<br />-&nbsp; &nbsp; &nbsp; &nbsp;USE MPI_CONSTANTS,ONLY:MPI_ADDRESS_KIND<br />-&nbsp; &nbsp; &nbsp; &nbsp;INTEGER v0<br />-&nbsp; &nbsp; &nbsp; &nbsp;INTEGER(KIND=MPI_ADDRESS_KIND) v1<br />+&nbsp; &nbsp; &nbsp; &nbsp;INTEGER v0, v1<br />&nbsp; &nbsp; &nbsp; &nbsp; INTEGER ierror<br />&nbsp; &nbsp; &nbsp; &nbsp; END SUBROUTINE MPI_TYPE_EXTENT<br />&nbsp;<br />@@ -114,9 +112,7 @@<br />&nbsp; &nbsp; &nbsp; &nbsp; END SUBROUTINE MPI_OP_COMMUTATIVE<br />&nbsp;<br />&nbsp; &nbsp; &nbsp; &nbsp; SUBROUTINE MPI_TYPE_LB(v0,v1,ierror)<br />-&nbsp; &nbsp; &nbsp; &nbsp;USE MPI_CONSTANTS,ONLY:MPI_ADDRESS_KIND<br />-&nbsp; &nbsp; &nbsp; &nbsp;INTEGER v0<br />-&nbsp; &nbsp; &nbsp; &nbsp;INTEGER(KIND=MPI_ADDRESS_KIND) v1<br />+&nbsp; &nbsp; &nbsp; &nbsp;INTEGER v0, v1<br />&nbsp; &nbsp; &nbsp; &nbsp; INTEGER ierror<br />&nbsp; &nbsp; &nbsp; &nbsp; END SUBROUTINE MPI_TYPE_LB<br />&nbsp;<br />@@ -562,9 +558,7 @@<br />&nbsp; &nbsp; &nbsp; &nbsp; END SUBROUTINE MPI_TYPE_CREATE_RESIZED<br />&nbsp;<br />&nbsp; &nbsp; &nbsp; &nbsp; SUBROUTINE MPI_TYPE_UB(v0,v1,ierror)<br />-&nbsp; &nbsp; &nbsp; &nbsp;USE MPI_CONSTANTS,ONLY:MPI_ADDRESS_KIND<br />-&nbsp; &nbsp; &nbsp; &nbsp;INTEGER v0<br />-&nbsp; &nbsp; &nbsp; &nbsp;INTEGER(KIND=MPI_ADDRESS_KIND) v1<br />+&nbsp; &nbsp; &nbsp; &nbsp;INTEGER v0, v1<br />&nbsp; &nbsp; &nbsp; &nbsp; INTEGER ierror<br />&nbsp; &nbsp; &nbsp; &nbsp; END SUBROUTINE MPI_TYPE_UB<br />&nbsp;<br />@@ -822,10 +816,7 @@<br />&nbsp; &nbsp; &nbsp; &nbsp; END SUBROUTINE MPI_GET_VERSION<br />&nbsp;<br />&nbsp; &nbsp; &nbsp; &nbsp; SUBROUTINE MPI_TYPE_HVECTOR(v0,v1,v2,v3,v4,ierror)<br />-&nbsp; &nbsp; &nbsp; &nbsp;USE MPI_CONSTANTS,ONLY:MPI_ADDRESS_KIND<br />-&nbsp; &nbsp; &nbsp; &nbsp;INTEGER v0, v1<br />-&nbsp; &nbsp; &nbsp; &nbsp;INTEGER(KIND=MPI_ADDRESS_KIND) v2<br />-&nbsp; &nbsp; &nbsp; &nbsp;INTEGER v3, v4<br />+&nbsp; &nbsp; &nbsp; &nbsp;INTEGER v0, v1, v2, v3, v4<br />&nbsp; &nbsp; &nbsp; &nbsp; INTEGER ierror<br />&nbsp; &nbsp; &nbsp; &nbsp; END SUBROUTINE MPI_TYPE_HVECTOR<br /></code></pre></div><br /><br />I'm going to try to submit this to the mpich2 devs, but in the meantime, this patch seems to work.<br /><br />UPDATE: (11 OCT 2011)<br />I updated the patch in the above code block. There were some things missing. See post below. Also, I tested with the newer mpich2-1.4.1p1 release, and it seems to work, but should work with any 1.4.x release. Let's hope they include it in 1.5.x!<br /><br />Cut and paste the patch into a file (patchfile.txt) and then apply within the mpich2-1.4.x/ directory using<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>patch -p1 &lt;patchfile.txt<br /></code></pre></div><br /><br />Please let me know if you have any problems with it.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 6.8.1 + gfortran + mpich2 = no compile</h3>
+				<div class="date">Posted: <strong>Mon Oct 10, 2011 3:44 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi Steven,<br /><br />sorry for this long delay of in my reaction...<br /><br /><blockquote><div><cite>Steven Miller wrote:</cite><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--- src/binding/f90/buildiface&nbsp; &nbsp;2011-03-20 15:37:51.000000000 -0400<br />+++ ../../mpich2-1.4/src/binding/f90/buildiface&nbsp; &nbsp;2011-07-25 19:12:52.529963846 -0400<br />@@ -189,6 +189,7 @@<br />&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 'Op_commutative-2' =&gt; 'bool',<br />&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 'File_set_atomicity-2' =&gt; 'bool',<br />&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 'File_get_atomicity-2' =&gt; 'bool',<br />+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 'Type_hvector-3' =&gt; 'int',<br />&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;);<br />&nbsp;<br />&nbsp;# Some routines must be skipped (custom code is provided for them)<br /></code></pre></div><br /><br />I'm going to try to submit this to the mpich2 devs, but in the meantime, this patch seems to work.</div></blockquote><br /><br />but, I don't known how you succeeded to compile with this patch but for me, it doesn't work...<br /><br />with the version mpich2 1.4.1p1 , it doesn't yet work... because the patch was not included...<br /><br />but with the svn version, everything works  <img class="smilies" src="images/smilies/icon_cool.gif" alt="8-)" title="Cool" /><br /><br />we can see in trac that , your patch was been integrated  but it was not enough :<br /><br /><a href="http://trac.mcs.anl.gov/projects/mpich2/changeset/8809/mpich2/trunk/src/binding/f90/buildiface#file0" class="postlink">http://trac.mcs.anl.gov/projects/mpich2/changeset/8809/mpich2/trunk/src/binding/f90/buildiface#file0</a><br /><br /><a href="http://trac.mcs.anl.gov/projects/mpich2/log/mpich2/trunk/src/binding/f90/buildiface?rev=9009" class="postlink">http://trac.mcs.anl.gov/projects/mpich2/log/mpich2/trunk/src/binding/f90/buildiface?rev=9009</a><br /><br /><br />we must wait for 1.5.x version...<br /><br />regards<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 6.8.1 + gfortran + mpich2 = no compile</h3>
+				<div class="date">Posted: <strong>Tue Oct 11, 2011 9:26 pm</strong></div>
+				<div class="author">by <strong>Steven Miller</strong></div>
+				<div class="content">Hey Jean-Michel,<br /><br />I forgot to mention in my earlier post: if you use the version of the patch I originally posted, you need to run the patched version of the &quot;src/binding/f90/buildiface&quot; script before running the &quot;./configure&quot; script. It generates some input files for the configure script, which configure uses to generate some of the header files. Ordinarily, this is something that is already done by the developers prior to releasing the source package (I mistakenly thought it was invoked during the configure script). I apologize for the omission.<br /><br />I went ahead and updated my original post so that all files needed to be patched are patched. With this version of the patch, users do not need to re-run &quot;buildiface&quot; (but it won't hurt either). Also, as you mentioned, the trac website shows an expanded patch file over what I posted. Those additions are meant to address several other functions that were buggy in the mpich2-1.4.x releases (MPI_Type_extent, MPI_Type_lb and MPI_Type_ub), but ABINIT does not currently use these functions and was not affected by those bugs. Only MPI_Type_hvector was causing ABINIT problems, and that was the only one I addressed in the patch I originally posted.<br /><br />But, I went ahead and included those other bug fixes in the updated patch (perhaps it will help other programs besides ABINIT). And further, I tested it with the current version, mpich2-1.4.1p1, and it seems to compile ABINIT 6.8.1 just fine. It should work with any of the 1.4.x versions. Give it a try and let me know if there's any further issues.<br /><br />I see, as you mention, they fixed it in SVN, but while we wait for the next major release, users can hopefully continue to use the production 1.4.x releases with this patch.<br /><br />-Steve</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1206&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:54:55 GMT -->
+</html>

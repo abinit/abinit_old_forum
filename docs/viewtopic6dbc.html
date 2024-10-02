@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1907&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:23:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Band structure of magnetic metal systems</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Band structure of magnetic metal systems</h2>
+		<p><a href="viewtopicb723-3.html?f=9&amp;t=1907">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1907</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Band structure of magnetic metal systems</h3>
+				<div class="date">Posted: <strong>Wed Dec 05, 2012 10:13 am</strong></div>
+				<div class="author">by <strong>azriel</strong></div>
+				<div class="content">Hi. <br /><br /><br />I'm trying to calculate the band structure of magnetic metal system, which is one-dimensional linear atomic chain of Fe.<br /><br />Simple convergence test works very well, but the problem is that it does not work if I added some input parameters for band structure calculation.<br /><br /><br />Here's my original ( works very well ) input file.<br /><br /><br />#K-point parameters<br />kptopt 1<br />nshiftk 1<br />shiftk 0.0 0.0 0.0<br />ngkpt 4 4 200<br /><br />#Spin<br /> spinat   0.0 0.0 4.0<br /> nsppol   2<br /><br />#Rather standard input for a bcc metal <br />   iscf   5<br /> #tolvrs   1.0d-10<br />  acell   20 20 4.32<br />   ecut   18.0<br />  natom   1<br />  nband   8<br /><br />  nstep   50<br /> ntypat   1<br /> occopt   3<br />  rprim    1.0  0.0  0.0<br />           0.0  1.0  0.0<br />           0.0  0.0  1.0<br /> tsmear   0.01<br />  typat   1<br /> xred   0.0  0.0  0.0<br />  znucl   26<br /> prtden 1<br /> toldfe 1.0d-10<br /># add to conserve old &lt; 6.7.2 behavior for calculating forces at each SCF step<br /> optforces 1<br /><br /><br />Because I'm not familiar with abinit package, I refered the input file of tutorial for spin, which is on bcc Fe.<br /><br />Anyway, but, when I added some lines to calculate the band structure as below<br /><br /><br />ndtset 2<br /><br />#Dataset 1: Self-consistent calculation<br /><br />kptopt1 1<br />iscf1 5<br />nshiftk1 1<br />shiftk1 0.0 0.0 0.0<br />nband1 8<br />ngkpt1 5 5 50<br />prtden1 1<br />toldfe1 1.0d-10<br /><br />#Dataset 2: Band structure calculation<br /><br />iscf2 -2<br />getden2 -1<br />kptopt2 -3<br />nband2 8<br />ndivk2 50<br />kptbounds2 0.0 0.0 0.0<br />           0.0 0.0 0.5<br /><br />tolwfr2 1.0d-12<br />enunit2 1<br /><br />#Spin<br /> spinat   0.0 0.0 4.0<br /> nsppol   2<br /><br /> tolvrs   1.0d-10<br />  acell   20 20 4.32<br />   ecut   18.0<br />  natom   1<br />#  nband   8<br /><br />  nstep   100<br /> ntypat   1<br /> occopt   3<br />  rprim    1.0  0.0  0.0<br />           0.0  1.0  0.0<br />           0.0  0.0  1.0<br /> tsmear   0.01<br />  typat   1<br /> xred   0.0  0.0  0.0<br />  znucl   26<br /><br />optforces 1<br /><br /><br />==============================================================<br /><br />The log says that 'some' input parameters are not correct, but I can not figure them out.<br /><br />Can anyone figure out what's the problem in my input file..?<br /><br /><br />Thanks.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Band structure of magnetic metal systems</h3>
+				<div class="date">Posted: <strong>Fri Dec 07, 2012 2:18 pm</strong></div>
+				<div class="author">by <strong>blackburn</strong></div>
+				<div class="content">kptopt2 should be -1 as you are doing calculation on 1 segment. <br /><br />Without testing it (and without coffee), I can't see anything else wrong (well... ngkpt 4 4 200 seems excessive and ecut seems low but it's your call). <br /><br />Simon</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1907&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:23:43 GMT -->
+</html>

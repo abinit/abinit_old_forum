@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=799&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:49:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Compatibility of libXC, abinit, and atompaw</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Compatibility of libXC, abinit, and atompaw</h2>
+		<p><a href="viewtopic74d1.html?f=14&amp;t=799">https://forum.abinit.org/viewtopic.php?f=14&amp;t=799</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Compatibility of libXC, abinit, and atompaw</h3>
+				<div class="date">Posted: <strong>Fri Dec 17, 2010 8:15 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Hi,<br />I'm unclear as to the interoperation of libXC, abinit, and atompaw. I have built abinit 6.5.2 with the libXC plug-in, and have also built the new atompaw with libxc support. Using atompaw I successfully generated PAW sets for Si and O using PBE and PBEsol, but abinit won't run them. For example, with PBE, ixc gets set to -101130, but then the code stops with <br /><br /><br />drivexc : ERROR -<br />At least one of the functionals is a GGA or a MGGA,<br />but not all the necessary arrays are present.<br />ixc=-101130  nvxcdgr=     0  ngr2=     1<br />-P-0000<br />-P-0000  leave_new : decision taken to exit ...<br /><br />Is PAW within abinit simply not yet compatible with the range of libXC inputs, even though atompaw can make them?<br /><br />thanks,<br />Joe</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compatibility of libXC, abinit, and atompaw</h3>
+				<div class="date">Posted: <strong>Mon Dec 20, 2010 3:35 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">OK, I *think* I fixed the bug...<br /><br />in size_dvxc.F90, line 90, the if statement included a test for ixc &lt; 0, this was overriding the next test for ixc &lt; 0; I removed the first of these tests and let the second test handle the ixc &lt; 0 case. pbe and pbesol seem to work now, hope all else is still ok...more updates as warranted...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compatibility of libXC, abinit, and atompaw</h3>
+				<div class="date">Posted: <strong>Wed Dec 22, 2010 10:49 am</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hi Joe,<br /><br />I think that MetaGGA is not yet compatible with PAW because the calculation of the kinetic energy density is not yet implemented in this case (it is in norm conserving).<br /><br />David</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compatibility of libXC, abinit, and atompaw</h3>
+				<div class="date">Posted: <strong>Wed Dec 22, 2010 12:32 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Thanks, David--that is also the case in atompaw, where it explicit that only LDA and GGA XC models are allowed. The fix I made in size_dvxc (and uploaded to my 6.4.3-public branch) seems to be what was needed.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compatibility of libXC, abinit, and atompaw</h3>
+				<div class="date">Posted: <strong>Mon Jan 03, 2011 10:43 am</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">Hi Joe,<br /><br />Thanks for the bug correction.<br />This must have been introduced recently; libXC and PAW worked some months ago...<br />We should provide an automatic test for libXC+PAW.<br /><br />Marc</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compatibility of libXC, abinit, and atompaw</h3>
+				<div class="date">Posted: <strong>Mon Jan 03, 2011 2:08 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Hi Marc,<br />I can provide a test no problem. By the way have you ever tried atompaw with the AM05 XC?<br /><br />Joe</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compatibility of libXC, abinit, and atompaw</h3>
+				<div class="date">Posted: <strong>Mon Jan 03, 2011 3:12 pm</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">Not yet.<br />Vacation time ended this morning...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compatibility of libXC, abinit, and atompaw</h3>
+				<div class="date">Posted: <strong>Thu Jun 09, 2011 11:33 pm</strong></div>
+				<div class="author">by <strong>ider</strong></div>
+				<div class="content">Hello, abinit team,<br /><br />I want to use a PAW data generated with a XC functional from the Libxc library. But I get the message <br /><br /> <em class="text-italics">pawxcm.F90:199:WARNING<br />   Note that no xc is applied (ixc=0)</em><br /><br />I found that the internal variable <em class="text-italics">xclevel</em> is set to 0 instead of 1 during the calculation. And according <em class="text-italics">invars2.F90</em>,  xc level is 1 only for <span style="color: #FF0000"><em class="text-italics">1&lt; ixc &lt; 30</em></span> or <span style="color: #FF0000"><em class="text-italics">30 &lt; ixc &lt; 39</em></span>. But for Libxc I need a negative ixc. Why is <em class="text-italics">xclevel = 0 </em>for Libxc functionals ? <br /><br />And most of the over 4000 WARNINGs contain this message. <br /><br />Thanks in advance!<br /><br />Ider</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compatibility of libXC, abinit, and atompaw</h3>
+				<div class="date">Posted: <strong>Fri Jun 10, 2011 1:03 pm</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">This bug has been corrected.<br />It is specific to LDA (you can use GGA with libXC).<br /><br />To be released before the end of the month (v6.8)...</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=799&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:49:35 GMT -->
+</html>

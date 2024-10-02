@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=756&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:41:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Failure in abinit 6.4.1 including gpu code</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Failure in abinit 6.4.1 including gpu code</h2>
+		<p><a href="viewtopic0801.html?f=3&amp;t=756">https://forum.abinit.org/viewtopic.php?f=3&amp;t=756</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Failure in abinit 6.4.1 including gpu code</h3>
+				<div class="date">Posted: <strong>Tue Nov 16, 2010 6:42 pm</strong></div>
+				<div class="author">by <strong>tsunetomo</strong></div>
+				<div class="content">After the configuration step:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure --enable-gpu --with-gpu-prefix=/usr/local/cuda</code></pre></div><br />and the subsequent<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make</code></pre></div><br /><br />the compilation process stops with error:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&#91;omissis&#93;/abinit-6.4.1/src/68_recursion/first_rec.F90:234: undefined reference to `xsum_mpi_'<br />&#91;omissis&#93;/abinit-6.4.1/src/68_recursion/first_rec.F90:235: undefined reference to `xsum_mpi_'<br />collect2: ld returned 1 exit status<br />make&#91;3&#93;: *** &#91;abinit&#93; Errore 1<br /></code></pre></div><br /><br />A different run with a plain configuration, i.e. <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure</code></pre></div> results into a successful build.<br /><br />CPU: Intel(R) Core(TM)2 Duo CPU T7500<br />OS: Linux Ubuntu 10.10, GCC 4.4.5<br />GNU ld (GNU Binutils for Ubuntu) 2.20.51-system.20100908<br />Cuda compilation tools, release 3.2, V0.2.1221</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Failure in abinit 6.4.1 compilation including gpu code</h3>
+				<div class="date">Posted: <strong>Tue Nov 16, 2010 8:31 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">GPU support is still under active development. You should thus expect a few bumps on the road to such calculations.<br /><br />At present, --enable-gpu requires --enable-mpi, but the options have not been bound to one another yet. I'll fix it for 6.4.2.<br /><br />Thank you for reporting this problem.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Failure in abinit 6.4.1 compilation including gpu code</h3>
+				<div class="date">Posted: <strong>Tue Nov 16, 2010 8:37 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">It's my fault. I've forgotten to add  &quot;use m_xmpi&quot; <br />in the preamble of 68_recursion/first_rec.F90 .<br /><br />Fixed in v642</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Failure in abinit 6.4.1 compilation including gpu code</h3>
+				<div class="date">Posted: <strong>Wed Nov 17, 2010 9:24 am</strong></div>
+				<div class="author">by <strong>tsunetomo</strong></div>
+				<div class="content">What is the recommended way to obtain an up-to-date (6.4.*) functional MPI+GPU build of abinit?<br />Should I checkout the source from a public branch of a developer?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Failure in abinit 6.4.1 compilation including gpu code</h3>
+				<div class="date">Posted: <strong>Wed Nov 17, 2010 1:22 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">If you do what Matteo says, it should already work with 6.4.1.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Failure in abinit 6.4.1 compilation including gpu code</h3>
+				<div class="date">Posted: <strong>Wed Nov 17, 2010 6:33 pm</strong></div>
+				<div class="author">by <strong>tsunetomo</strong></div>
+				<div class="content">Thanks, that worked fine.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=756&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:41:12 GMT -->
+</html>

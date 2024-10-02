@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=126&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 17:56:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; the vibration direction of atom</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>the vibration direction of atom</h2>
+		<p><a href="viewtopicbbc0.html?f=10&amp;t=126">https://forum.abinit.org/viewtopic.php?f=10&amp;t=126</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>the vibration direction of atom</h3>
+				<div class="date">Posted: <strong>Tue Mar 16, 2010 12:19 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content"><blockquote class="uncited"><div>Hello Everyone,<br /><br />After a phonon calculation at q point how could I obtain the vibration<br />direction of each atom from the phonon eigendisplacements?<br />i.e: I know the eigendisplacements of M point and H point.<br />M point<br /> Eigendisplacements<br /> (will be given, for each mode : in cartesian coordinates<br />  for each atom the real part of the displacement vector,<br />  then the imaginary part of the displacement vector)<br /> Mode number    1   Energy   -1.376462E-04<br /> Attention : low frequency mode.<br />  (Could be unstable or acoustic mode)<br />;  1  8.85077623E-04 -1.53299946E-03  0.00000000E+00<br />;     0.00000000E+00  0.00000000E+00  0.00000000E+00<br />;  2  8.85074741E-04 -1.53299468E-03  0.00000000E+00<br />;     0.00000000E+00  0.00000000E+00  0.00000000E+00<br />;  3  9.25741287E-04 -1.60343070E-03  0.00000000E+00<br />;     0.00000000E+00  0.00000000E+00  0.00000000E+00<br />;  4  9.25744259E-04 -1.60343595E-03  0.00000000E+00<br />;     0.00000000E+00  0.00000000E+00  0.00000000E+00<br />H point<br /> Eigendisplacements<br /> (will be given, for each mode : in cartesian coordinates<br />  for each atom the real part of the displacement vector,<br />  then the imaginary part of the displacement vector)<br /> Mode number    1   Energy   -1.712882E-04<br /> Attention : low frequency mode.<br />  (Could be unstable or acoustic mode)<br />;  1  4.95643631E-05  7.10123124E-04 -2.67003155E-04<br />;    -7.10123281E-04  4.95640911E-05  9.69330867E-04<br />;  2 -3.57461204E-04 -9.84627462E-05  1.92564773E-03<br />;    -9.84632730E-05  3.57461134E-04  1.34403819E-04<br />;  3  5.49285047E-05  7.86977730E-04 -2.83291654E-04<br />;    -7.86977167E-04  5.49283645E-05  1.02846494E-03<br />;  4 -3.96147876E-04 -1.09119309E-04  2.04312204E-03<br />;    -1.09119475E-04  3.96148148E-04  1.42603120E-04<br />How can i get the  vibration direction of each atom from the<br />eigendisplacements.<br />1,2 is O<br />3,4 is Zn<br /><br /><br />thanks and regards,<br />bin chen<br /></div></blockquote><br /><br />Hello Chen,<br /><br />the vibrations of the atoms are given precisely by the eigendisplacements: these are in cartesian coordinates, in atomic units (bohr), and give the displacements of each atom (the 1,2,3,4 in the first column after the semicolon is the atom number). These vectors are complex in general for q/=0.<br /><br />To get the actual displacement in direction alpha of atom kappa in a cell at lattice vector R, you need to take the real part of the eigendisplacements times the Bloch factor exp(i q.R) which gives an additional phase:<br /><br />\delta x_{\kappa,R,\alpha} = (R+x_\kappa^{(0)})_\alpha + Re(eigendisplacement_{\kappa,\alpha} * exp(i q \cdot R) )<br /><br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=126&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 17:56:58 GMT -->
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=234&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Carbon Dimer Using Wavelets</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Carbon Dimer Using Wavelets</h2>
+		<p><a href="viewtopic4586-2.html?f=9&amp;t=234">https://forum.abinit.org/viewtopic.php?f=9&amp;t=234</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Carbon Dimer Using Wavelets</h3>
+				<div class="date">Posted: <strong>Mon Apr 12, 2010 7:11 pm</strong></div>
+				<div class="author">by <strong>asmartins</strong></div>
+				<div class="content">Dear all,<br /><br />I'm trying to do a calculation of a C-C dimer (just two carbon atoms) using wavelets. I generated the input file (in attach) and when I run the calculations the following message appears:<br /><br />&quot; STOP nl1: projector region outside cell&quot;<br /><br />I tried to modify ACELL,  in order to generate a big supercell, or change the pseudopotential, but it didn't work!<br /><br />Do you have some suggestion?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Carbon Dimer Using Wavelets</h3>
+				<div class="date">Posted: <strong>Tue Apr 27, 2010 3:33 pm</strong></div>
+				<div class="author">by <strong>dcaliste</strong></div>
+				<div class="content">There is an issue with the spatial expansion of the basis set. The projectors for your carbon atoms expand further than the cell. I suggest to decrease the size of the projectors expansion: decrease wvl_cpmult and wvl_fpmult to 8 for instance.<br /><br />Some points about the wavelet implementation:<br /><blockquote class="uncited"><div>#Definition of occupation numbers<br />occopt 1<br />tsmear 0.004<br />#Options to improve the convergence<br />diemac 5.5  <br />nband  4  <br /></div></blockquote><br />The wavelet code is made for gap systems. So the occupancy will be set with 2 for all bands (no spin case) anyway. The number of bands is also computed automatically and additional bands are not possible.<br /><br /><blockquote class="uncited"><div>#Definition of the k-point grid<br />kptopt 1          # Option for the automatic generation of k points, taking<br />                  # into account the symmetry<br />ngkpt 2 2 1     <br />nshiftk 1        <br />shiftk 0.5  0.5  0.0<br /></div></blockquote><br />The k point implemntation is not currently available inside ABINIT + BigDFT. By the way, it is not useful for isolated systems.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=234&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:41 GMT -->
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1342&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:53:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; an error about the number of atom?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>an error about the number of atom?</h2>
+		<p><a href="viewtopic2107-2.html?f=9&amp;t=1342">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1342</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>an error about the number of atom?</h3>
+				<div class="date">Posted: <strong>Mon Sep 26, 2011 7:24 pm</strong></div>
+				<div class="author">by <strong>mina</strong></div>
+				<div class="content">Hello,<br />i am computing born effective charge by berry phase polarization.i use spgroup 161 and spgaxor 2 for rhombohedral FeTiO3 with two unit of FeTiO3 in unit cell (10 atoms) but i have an error.wolud you please guide me?<br />my input file:<br />ndtset 3<br />jdtset 1 2 3<br />xred1 0.000000000 0.000000000 0.000000000<br />     <br />      0.231000006 0.231000006 0.231000006<br />     0.398999989 0.541000009 0.945999980<br />xred2 0.010000000 0.000000000 0.000000000<br />     <br />      0.231000006 0.231000006 0.231000006<br />     <br />      0.398999989 0.541000009 0.945999980<br />     <br />xred3 -0.010000000 0.000000000 0.000000000<br />     <br />     0.231000006 0.231000006 0.231000006<br />     <br />      0.398999989 0.541000009 0.945999980<br />     <br />acell 3*6.20 angstrom<br />angdeg 60.180 60.180 60.180<br />spgroup 161<br />spgaxor 2<br />natrd 3<br />natom 10<br />ntypat 3<br />znucl 26 22 8<br />typat 1 2 3<br />ixc 1<br />iscf 7<br />nstep 100<br />ecut 35<br />ecutsm 0.5<br />dilatmx 1.05<br />ngkpt 6 6 6<br />nshiftk 1<br />shiftk 0.5 0.5 0.5<br />toldfe 1.0d-12<br />berryopt -1<br />rfdir 1 1 1<br />diemac 2.5<br />nbdbuf 0<br />usepawu 1<br />lpawu 2 -1 -1<br />upawu 4.0 0.0 0.0 ev<br />jpawu 1.0 0.0 0.0 ev<br />   my ERROR:<br /> fillcell : ERROR -<br />  The number of atoms obtained from symmetries,  14<br />  is greater than the input number of atoms, natom=     10<br />  This is not allowed.<br />  Action : modify natom or the symmetry data in the input file.<br />Best regards.<br />Mina.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: an error about the number of atom?</h3>
+				<div class="date">Posted: <strong>Mon Sep 26, 2011 7:29 pm</strong></div>
+				<div class="author">by <strong>mina</strong></div>
+				<div class="content">Hello,<br />i am sorry, i have written typat in correct an it is typat= 1 1 2 2 3 3 3 3 3 3. but i have that error again.Thank you for your attention.<br />Mina.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: an error about the number of atom?</h3>
+				<div class="date">Posted: <strong>Sat Nov 19, 2011 10:35 pm</strong></div>
+				<div class="author">by <strong>leon</strong></div>
+				<div class="content">Hello Mina, <br />It seems I got the same troubles, but<br /><br /><blockquote><div><cite>mina wrote:</cite>Hello,<br />i am sorry, i have written typat in correct an it is typat= 1 1 2 2 3 3 3 3 3 3. but i have that error again.Thank you for your attention.<br />Mina.</div></blockquote><br /><br />I think that <em class="text-italics">typat</em> should be consistent with <em class="text-italics">xred</em> and <em class="text-italics">natrd</em>, so the first were more correct.<br /><!-- l --><a class="postlink-local" href="viewtopic4085-2.html?f=8&amp;t=843&amp;p=2583&amp;hilit=fillcell#p2583">viewtopic.php?f=8&amp;t=843&amp;p=2583&amp;hilit=fillcell#p2583</a><!-- l --><br /><br />Best wishes,<br />Leon</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: an error about the number of atom?</h3>
+				<div class="date">Posted: <strong>Sun Mar 04, 2012 10:21 am</strong></div>
+				<div class="author">by <strong>Shiyun</strong></div>
+				<div class="content">[code][/code]<br />Dear mima,<br /><br />Last time when I deal with V2O5, I also countered this kind of problem. I solved this problem by changing the sequence of x, y, z in the xred and acell (e.g. the first I used the sequence of x, y, z , and then I changed to x, z, y and problem solved.). I don't know why but you may have a try. I'm not sure whether this will solve your problem or not<br /><br />good luck<br /><br />Shiyun</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1342&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:53:43 GMT -->
+</html>

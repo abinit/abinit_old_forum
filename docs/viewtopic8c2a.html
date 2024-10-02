@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3216&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:32:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; difference in calculated pressure</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>difference in calculated pressure</h2>
+		<p><a href="viewtopic2598.html?f=9&amp;t=3216">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3216</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>difference in calculated pressure</h3>
+				<div class="date">Posted: <strong>Mon Feb 29, 2016 6:26 pm</strong></div>
+				<div class="author">by <strong>vernieri</strong></div>
+				<div class="content">Hi,<br /><br />I have performed a cell relaxation for Al2O3 using this input:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#------------------------------------------------------------------------------<br /><br />&nbsp;ndtset&nbsp; &nbsp; &nbsp; &nbsp;2 <br /><br />&nbsp;ecutsm&nbsp; &nbsp; &nbsp; &nbsp;0.5<br /><br /># Set 1: Internal coordinate optimization<br />&nbsp;<br />&nbsp;optcell1&nbsp; &nbsp; &nbsp;0<br /><br />&nbsp;ionmov1&nbsp; &nbsp; &nbsp; 2<br /><br />&nbsp;ntime1&nbsp; &nbsp; &nbsp; &nbsp;20<br />&nbsp;tolmxf1&nbsp; &nbsp; &nbsp; 1.0e-8<br /><br /># Set 2: Lattice parameter relaxation (re-optimization of internal coordinates)<br /><br />&nbsp;optcell2&nbsp; &nbsp; &nbsp;2<br /><br />&nbsp;dilatmx2&nbsp; &nbsp; &nbsp;1.05<br /><br />&nbsp;getxred2&nbsp; &nbsp; -1<br />&nbsp;getwfk2&nbsp; &nbsp; &nbsp;-1<br /><br />&nbsp;ionmov2&nbsp; &nbsp; &nbsp; 2<br /><br />&nbsp;ntime2&nbsp; &nbsp; &nbsp; &nbsp;30<br /><br />&nbsp;tolmxf2&nbsp; &nbsp; &nbsp; 1.0e-8<br /><br />&nbsp;strfact2&nbsp; &nbsp; &nbsp;100<br /><br />#------------------------------------------------------------------------------<br /><br />&nbsp;spgroup&nbsp; &nbsp; &nbsp; 167<br /><br />&nbsp;spgaxor&nbsp; &nbsp; &nbsp; 1<br />&nbsp;chkprim&nbsp; &nbsp; &nbsp; 0<br /><br />&nbsp;acell&nbsp; &nbsp; &nbsp; &nbsp; 9.0953 9.0953 24.8140<br />&nbsp;angdeg&nbsp; &nbsp; &nbsp; &nbsp;90.0 90.0 120.0<br /><br />&nbsp;xred&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0000 0.000 0.3531&nbsp; &nbsp; # Al Wyckoff 12c<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.3079 0.000 0.2500&nbsp; &nbsp; # O&nbsp; Wyckoff 18e<br /><br />&nbsp;natom&nbsp; &nbsp; &nbsp; &nbsp; 30<br />&nbsp;ntypat&nbsp; &nbsp; &nbsp; &nbsp;2<br />&nbsp;typat&nbsp; &nbsp; &nbsp; &nbsp; 1 2<br />&nbsp;natrd&nbsp; &nbsp; &nbsp; &nbsp; 2<br />&nbsp;znucl&nbsp; &nbsp; &nbsp; &nbsp; 13.000 8.000<br /><br />#------------------------------------------------------------------------------<br /><br />&nbsp;ecut&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;15.0 <br /><br />&nbsp;kptopt&nbsp; &nbsp; &nbsp; &nbsp;1<br /><br />&nbsp;ngkpt&nbsp; &nbsp; &nbsp; &nbsp; 2 2 2<br /><br />&nbsp;nshiftk&nbsp; &nbsp; &nbsp; 1<br />&nbsp;shiftk&nbsp; &nbsp; &nbsp; &nbsp;0.0 0.0 0.5 <br /><br />&nbsp;nband&nbsp; &nbsp; &nbsp; &nbsp; 80<br /><br />&nbsp;iscf&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;7<br /><br />&nbsp;ixc&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1<br /><br />&nbsp;nstep&nbsp; &nbsp; &nbsp; &nbsp; 50<br /><br />&nbsp;tolvrs&nbsp; &nbsp; &nbsp; &nbsp;1.0d-20</code></pre></div><br /><br />Everything went ok (log file attached) and the calculated pressure was -1.4400E-06 GPa. Then I used the calculated values of xred and acell in this input:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#------------------------------------------------------------------------------<br /><br />&nbsp;spgroup&nbsp; &nbsp; &nbsp; &nbsp;167<br /><br />&nbsp;spgaxor&nbsp; &nbsp; &nbsp; &nbsp;1<br /><br />&nbsp;chkprim&nbsp; &nbsp; &nbsp; &nbsp;0<br /><br /># acell and xred from relaxation calculation<br /><br />&nbsp;acell&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;9.0720144729E+00&nbsp; 9.0720144729E+00&nbsp; 2.5563220796E+01<br />&nbsp;angdeg&nbsp; &nbsp; &nbsp; &nbsp; 90.0 90.0 120.0<br /><br />&nbsp;xred&nbsp; 0.000000000000&nbsp; &nbsp; &nbsp; 0.000000000000&nbsp; &nbsp; &nbsp; 0.350431636407<br />&nbsp; &nbsp; &nbsp; &nbsp;0.312973999448&nbsp; &nbsp; &nbsp; 0.000000000000&nbsp; &nbsp; &nbsp; 0.250000000000<br />&nbsp; &nbsp; &nbsp; &nbsp;0.687026000552&nbsp; &nbsp; &nbsp; 0.687026000552&nbsp; &nbsp; &nbsp; 0.250000000000<br />&nbsp; &nbsp; &nbsp; &nbsp;0.000000000000&nbsp; &nbsp; &nbsp; 0.000000000000&nbsp; &nbsp; &nbsp; 0.850431636407<br />&nbsp; &nbsp; &nbsp; &nbsp;0.000000000000&nbsp; &nbsp; &nbsp; 0.687026000552&nbsp; &nbsp; &nbsp; 0.750000000000<br />&nbsp; &nbsp; &nbsp; &nbsp;0.000000000000&nbsp; &nbsp; &nbsp; 0.312973999448&nbsp; &nbsp; &nbsp; 0.250000000000<br />&nbsp; &nbsp; &nbsp; &nbsp;0.687026000552&nbsp; &nbsp; &nbsp; 0.000000000000&nbsp; &nbsp; &nbsp; 0.750000000000<br />&nbsp; &nbsp; &nbsp; &nbsp;0.312973999448&nbsp; &nbsp; &nbsp; 0.312973999448&nbsp; &nbsp; &nbsp; 0.750000000000<br />&nbsp; &nbsp; &nbsp; &nbsp;0.000000000000&nbsp; &nbsp; &nbsp; 0.000000000000&nbsp; &nbsp; &nbsp; 0.649568363593<br />&nbsp; &nbsp; &nbsp; &nbsp;0.000000000000&nbsp; &nbsp; &nbsp; 0.000000000000&nbsp; &nbsp; &nbsp; 0.149568363593<br />&nbsp; &nbsp; &nbsp; &nbsp;0.666666666667&nbsp; &nbsp; &nbsp; 0.333333333333&nbsp; &nbsp; &nbsp; 0.683764969741<br />&nbsp; &nbsp; &nbsp; &nbsp;0.979640666114&nbsp; &nbsp; &nbsp; 0.333333333333&nbsp; &nbsp; &nbsp; 0.583333333333<br />&nbsp; &nbsp; &nbsp; &nbsp;0.353692667219&nbsp; &nbsp; &nbsp; 0.020359333886&nbsp; &nbsp; &nbsp; 0.583333333333<br />&nbsp; &nbsp; &nbsp; &nbsp;0.666666666667&nbsp; &nbsp; &nbsp; 0.333333333333&nbsp; &nbsp; &nbsp; 0.183764969741<br />&nbsp; &nbsp; &nbsp; &nbsp;0.666666666667&nbsp; &nbsp; &nbsp; 0.020359333886&nbsp; &nbsp; &nbsp; 0.083333333333<br />&nbsp; &nbsp; &nbsp; &nbsp;0.666666666667&nbsp; &nbsp; &nbsp; 0.646307332781&nbsp; &nbsp; &nbsp; 0.583333333333<br />&nbsp; &nbsp; &nbsp; &nbsp;0.353692667219&nbsp; &nbsp; &nbsp; 0.333333333333&nbsp; &nbsp; &nbsp; 0.083333333333<br />&nbsp; &nbsp; &nbsp; &nbsp;0.979640666114&nbsp; &nbsp; &nbsp; 0.646307332781&nbsp; &nbsp; &nbsp; 0.083333333333<br />&nbsp; &nbsp; &nbsp; &nbsp;0.666666666667&nbsp; &nbsp; &nbsp; 0.333333333333&nbsp; &nbsp; &nbsp; 0.982901696926<br />&nbsp; &nbsp; &nbsp; &nbsp;0.666666666667&nbsp; &nbsp; &nbsp; 0.333333333333&nbsp; &nbsp; &nbsp; 0.482901696926<br />&nbsp; &nbsp; &nbsp; &nbsp;0.333333333333&nbsp; &nbsp; &nbsp; 0.666666666667&nbsp; &nbsp; &nbsp; 0.017098303074<br />&nbsp; &nbsp; &nbsp; &nbsp;0.646307332781&nbsp; &nbsp; &nbsp; 0.666666666667&nbsp; &nbsp; &nbsp; 0.916666666667<br />&nbsp; &nbsp; &nbsp; &nbsp;0.020359333886&nbsp; &nbsp; &nbsp; 0.353692667219&nbsp; &nbsp; &nbsp; 0.916666666667<br />&nbsp; &nbsp; &nbsp; &nbsp;0.333333333333&nbsp; &nbsp; &nbsp; 0.666666666667&nbsp; &nbsp; &nbsp; 0.517098303074<br />&nbsp; &nbsp; &nbsp; &nbsp;0.333333333333&nbsp; &nbsp; &nbsp; 0.353692667219&nbsp; &nbsp; &nbsp; 0.416666666667<br />&nbsp; &nbsp; &nbsp; &nbsp;0.333333333333&nbsp; &nbsp; &nbsp; 0.979640666114&nbsp; &nbsp; &nbsp; 0.916666666667<br />&nbsp; &nbsp; &nbsp; &nbsp;0.020359333886&nbsp; &nbsp; &nbsp; 0.666666666667&nbsp; &nbsp; &nbsp; 0.416666666667<br />&nbsp; &nbsp; &nbsp; &nbsp;0.646307332781&nbsp; &nbsp; &nbsp; 0.979640666114&nbsp; &nbsp; &nbsp; 0.416666666667<br />&nbsp; &nbsp; &nbsp; &nbsp;0.333333333333&nbsp; &nbsp; &nbsp; 0.666666666667&nbsp; &nbsp; &nbsp; 0.316235030259<br />&nbsp; &nbsp; &nbsp; &nbsp;0.333333333333&nbsp; &nbsp; &nbsp; 0.666666666667&nbsp; &nbsp; &nbsp; 0.816235030259<br /><br />&nbsp;natom&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;30<br />&nbsp;ntypat&nbsp; &nbsp; &nbsp; &nbsp; 2<br /><br />&nbsp;typat&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; 2&nbsp; 2&nbsp; 1&nbsp; 2&nbsp; 2&nbsp; 2&nbsp; 2&nbsp; 1&nbsp; 1&nbsp; 1&nbsp; 2&nbsp; 2&nbsp; 1&nbsp; 2&nbsp; 2&nbsp; 2&nbsp; 2&nbsp; 1&nbsp; 1<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; 2&nbsp; 2&nbsp; 1&nbsp; 2&nbsp; 2&nbsp; 2&nbsp; 2&nbsp; 1&nbsp; 1<br /><br />&nbsp;znucl&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;13.000 8.000<br /><br />&nbsp;ecut&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 15.0<br /><br />&nbsp;kptopt&nbsp; &nbsp; &nbsp; &nbsp; 1<br /><br />&nbsp;ngkpt&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2 2 2<br /><br />&nbsp;nshiftk&nbsp; &nbsp; &nbsp; &nbsp;1<br />&nbsp;shiftk&nbsp; &nbsp; &nbsp; &nbsp; 0.0 0.0 0.5<br /><br />&nbsp;nband&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;80<br /><br />&nbsp;iscf&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 7<br />&nbsp;<br />&nbsp;ixc&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1<br /><br />&nbsp;nstep&nbsp; &nbsp; &nbsp; &nbsp; 50<br /><br />&nbsp;toldfe&nbsp; &nbsp; &nbsp; &nbsp;1.0d-18</code></pre></div><br /><br />But this time I got a very high pressure: -2.1723E+02 GPa (log file attached). Any idea of what have I done wrong? I used the pseudopotential files for Al and O from the abinit website.<br /><br />thanks,<br /><br />Marcio</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: difference in calculated pressure</h3>
+				<div class="date">Posted: <strong>Tue Mar 01, 2016 7:35 pm</strong></div>
+				<div class="author">by <strong>vernieri</strong></div>
+				<div class="content">I think I got it: ecutsm and dilatmx were missing in the second input file. Now I have:<br /><br />P obtained in optimization: -1.4402E-6 GPa; P obtained with the SCF: -1.3885E-6 GPa.<br /><br />I would appreciate if someone could confirm if this is correct.<br /><br />thanks,<br /><br />Marcio</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: difference in calculated pressure</h3>
+				<div class="date">Posted: <strong>Thu Mar 03, 2016 12:22 am</strong></div>
+				<div class="author">by <strong>dmteter</strong></div>
+				<div class="content">Hi Marcio,<br /><br />A kinetic energy cutoff of 15 Hartree is too low for the Troullier &amp; Martins NC oxygen pseudopotential.<br /><br />May I suggest using the new Optimized Norm-Conserving Vanderbilt pseudopotentials (ONCV) that are available on the ABINIT site? A kinetic energy cutoff of 60 Hartree is sufficient for most ground state calculations, although you may wish to increase the cutoff to 70-80 Hartree for highly converged response function calculations.  Also, I believe that your k-point grid is not sufficient to achieve reasonable convergence for this system.<br /><br />Best Regards,<br />David</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: difference in calculated pressure</h3>
+				<div class="date">Posted: <strong>Thu Mar 03, 2016 9:40 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">To answer the question, yes you need to have the same ecutsm in relaxation and gs calculation. Check also that the FFT grid the same (ngfft)</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: difference in calculated pressure</h3>
+				<div class="date">Posted: <strong>Tue Mar 29, 2016 7:52 pm</strong></div>
+				<div class="author">by <strong>vernieri</strong></div>
+				<div class="content">Dear David and Jordan,<br /><br />Thanks.<br /><br />best,<br /><br />Marcio</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3216&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:32:50 GMT -->
+</html>

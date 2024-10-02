@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3167&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:37:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Install Abinit on Redhat HPC</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Install Abinit on Redhat HPC</h2>
+		<p><a href="viewtopic2bc9.html?f=3&amp;t=3167">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3167</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Install Abinit on Redhat HPC</h3>
+				<div class="date">Posted: <strong>Sun Dec 20, 2015 11:37 am</strong></div>
+				<div class="author">by <strong>Redmaz</strong></div>
+				<div class="content">Salam for All,<br />I have a IBM Platform HPC 4.1.1.1 with OS RHEL 6.4 and PMPI module.<br />I want install Abinit on it, i us those command :<br />            $ scl enable devtoolset-2 bash         #for load gcc 4.8<br />            $ module load PMPI                         # for load MPI<br />            $ ../configure --enable-mpi --with-mpi-prefix=/opt/ibm/platform_mpi/    <br />            $ make mj4<br />I have thise erreur:<br /><br />mpi_type_frm=MPI_INTEGER16<br />                               1<br />Error: Symbol 'mpi_integer16' at (1) has no IMPLICIT type<br />make[5]: *** [m_xmpi.o] Error 1<br /><br />Can you help me to please.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Install Abinit on Redhat HPC&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Sat Jan 09, 2016 2:07 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Your MPI library does not support MPI_INTEGER16.<br />To make abinit compile:<br /><br />1) Open the config.h file in your editor and remove the line:<br />   #define FC_INT_QUAD 1 <br /><br />2) make clean<br />3) make -j4</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Install Abinit on Redhat HPC</h3>
+				<div class="date">Posted: <strong>Tue Jan 12, 2016 7:07 pm</strong></div>
+				<div class="author">by <strong>Redmaz</strong></div>
+				<div class="content">thanks for your help.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3167&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:37:29 GMT -->
+</html>

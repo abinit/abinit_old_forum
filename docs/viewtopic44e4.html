@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1481&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:59:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; help to correct input file</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>help to correct input file</h2>
+		<p><a href="viewtopic3a4b-2.html?f=9&amp;t=1481">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1481</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>help to correct input file</h3>
+				<div class="date">Posted: <strong>Fri Dec 30, 2011 11:46 am</strong></div>
+				<div class="author">by <strong>ziedhosni</strong></div>
+				<div class="content">Hello friends,<br />I try to optimize the cell of fluorapatite. But I am not able to detect the errors in my configuration. So would you help me. I put the input and the log.<br />thanks</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: help to correct input file</h3>
+				<div class="date">Posted: <strong>Fri Dec 30, 2011 1:14 pm</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hello,<br /><br />The typat variable is wrong :<br /><br />typat 1*10 2*6 3*24 4*2 should be :<br />typat 10*1 6*2 24*3 2*4<br /><br />David</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: help to correct input file</h3>
+				<div class="date">Posted: <strong>Fri Dec 30, 2011 7:45 pm</strong></div>
+				<div class="author">by <strong>ziedhosni</strong></div>
+				<div class="content">Thank you very much mr david.<br />I have already corrected this error and 3 more. But I am blocked by another message:<br /><br />symatm.F90:212:ERROR<br />   Largest error (above) is so large (0.01) that either input atomic coordinates (xred)<br />  are wrong or space group symmetry data is wrong.<br />  Action : correct your input file.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: help to correct input file</h3>
+				<div class="date">Posted: <strong>Sun Jan 01, 2012 10:13 pm</strong></div>
+				<div class="author">by <strong>jolafc</strong></div>
+				<div class="content">Hi,<br /><br />There is also 2 errors with acell :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>acell 9.430723*2 6.917214&nbsp; &nbsp; Angstr</code></pre></div><br />should be :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>acell 2*9.430723 6.917214&nbsp; &nbsp; angstrom</code></pre></div><br />Given your error message, you probably have corrected already 9.430723*2 into 2*9.430723, but writing Angstr instead of angstrom will cause the code to fail to recognise the units and it will therefore suppose you're using bohr instead. That would likely cause an error such as the one you have. <br /><br />For further advice, it would be helpful that you repost the most recent version of your input and the corresponding .log, so that we can more precisely troubleshoot the problem. <br /><br />Jonathan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: help to correct input file</h3>
+				<div class="date">Posted: <strong>Tue Jan 03, 2012 12:04 am</strong></div>
+				<div class="author">by <strong>ziedhosni</strong></div>
+				<div class="content">hello,<br />I used the following parameters:<br />brvltt -1<br />spgroup 176<br />rprim 9.43072300 0.00000000 0.00000000  -4.71536150 8.16724569 0.00000000  0.00000000 0.00000000 6.91721400 angstrom<br /><br />so, the program stops after some seconde and i have in output &quot;chkorthsy: ERROR -<br />  The symmetry operation number    2 does not preserve<br />  vector lengths and angles.<br />  The value of the residual is  8.8476E-10.<br />  Action : modify rprim, acell and/or symrel so that<br />   vector lengths and angles are preserved.<br />   Beware, the tolerance on symmetry operations is very small.&quot;<br /><br />then I removed <br />brvltt -1<br />spgroup 176<br />I receive:<br />&quot;duming stacktrace..&quot;and the program stops<br />so, i removed comletely these lines<br />it gives me this output and log.<br />Sincerely I want to put them as the experiment gave it to me (from CIF file) because it is nearest to the reality when i put more parameters.<br />Please he me (i use abinit-6.2.3_core2) in windows 7 i5 4gram</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: help to correct input file</h3>
+				<div class="date">Posted: <strong>Tue Jan 03, 2012 8:29 am</strong></div>
+				<div class="author">by <strong>ziedhosni</strong></div>
+				<div class="content">log file is here:<br /><!-- m --><a class="postlink" href="http://textuploader.com/?p=6&amp;id=BhlFo">http://textuploader.com/?p=6&amp;id=BhlFo</a><!-- m --></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: help to correct input file</h3>
+				<div class="date">Posted: <strong>Tue Jan 03, 2012 10:18 pm</strong></div>
+				<div class="author">by <strong>jolafc</strong></div>
+				<div class="content">Hi,<br /><br />What abinit complains about is that the numbers in your rprim aren't precisely enough respecting the symmetries of your space group (spgroup 172). You need to put more significant digits so that the first and second vectors in rprim have the same norm. Four your given values, we have :<br /><br />9.43072300 - sqrt(-4.71536150^2 + 8.16724569^2) = 0.00000000351103<br /><br />Abinit whants the number to be precise up to 16 significant digits. So, recalculate your second vector more precisely and it will be OK. You can alternatively just use <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>acell 9.430723 9.430723 6.917214<br />angdeg 90 90 30<br /></code></pre></div><br />(dropping rprim altogether) and you will avoid that kind of problems. <br /><br />Same thing for the atomic coordinates (xred) : you only give 4 significant digits. This will quite surely make abinit crash. Give 16 digits that respect the symmetry group for each atomic coordinate, to be safe. <br /><br /> By the way, what kind of calculation are you trying to run? I ask because I see in your imput file :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>kpt 2 2 3</code></pre></div><br />which is needed only if you want to run the calculation at a specific k-point in the Brillouin zone and, without kptopt 0, is not even read by the code anyways. If you want to run a calculation with many k-point (to do a ground state calculation), use something like<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>kptopt 1<br />ngkpt 2 2 3<br />nshiftk 1<br />shiftk 0.0 0.0 0.5<br /></code></pre></div><br />and do a convergence study on ngkpt (as you do on ecut, for instance), as described in tutorial 3 (see <a href="http://www.abinit.org/documentation/helpfiles/for-v6.10/tutorial/lesson_3.html" class="postlink">http://www.abinit.org/documentation/helpfiles/for-v6.10/tutorial/lesson_3.html</a>). <br /><br /> Good luck,<br /><br />Jonathan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: help to correct input file</h3>
+				<div class="date">Posted: <strong>Tue Jan 03, 2012 10:58 pm</strong></div>
+				<div class="author">by <strong>ziedhosni</strong></div>
+				<div class="content">Thank you very much Jonathan.<br /><br />I corrected my input according to your advice. Only I want to know how can I enhance my xred cordinate because I have already taken hose values from experimental data (CIF file XDR)<br /> <br />Zied</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: help to correct input file</h3>
+				<div class="date">Posted: <strong>Wed Jan 04, 2012 10:30 am</strong></div>
+				<div class="author">by <strong>nleconte</strong></div>
+				<div class="content">It is ok to use the experimental data as a starting point for your relaxation, but in the end, your simulated data may be different from experiment, depending on the approximations you're using. And here, we're even only talking about significant numbers, which is even many orders of smaller lower than what you will get as agreement between experiment and simulation. So, just follow jolafc's advice, and use <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>acell 9.430723 9.430723 6.917214<br />angdeg 90 90 30<br /></code></pre></div><br /> to be sure to have the right starting symmetries. Or, recalculate your second vector as to have its norm equal to the first one up to 16 significant digits.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: help to correct input file</h3>
+				<div class="date">Posted: <strong>Wed Jan 04, 2012 9:11 pm</strong></div>
+				<div class="author">by <strong>ziedhosni</strong></div>
+				<div class="content">Hello everybody,<br />I think you did not understand me. I am obliged to use the experimental coordinates because I have not another ones. And the abinit accepts only the &quot;perfect&quot; positions to fit space group symmetries. So, have anyone some ideas how to correct the atoms positions to be accepted by the program. I hope I am more understrood.<br />Zied</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: help to correct input file</h3>
+				<div class="date">Posted: <strong>Thu Jan 05, 2012 9:06 am</strong></div>
+				<div class="author">by <strong>nleconte</strong></div>
+				<div class="content">Maybe I still misunderstand you, let's try again <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /><br /><br />The experimental positions you have are <em class="text-italics">almost perfectly</em> symmetric. But ABINIT needs <em class="text-italics">perfectly</em> symmetric positions. So, just make them perfect by hand (using one of both techniques mentioned before). This is no problem, since, after a structural relaxation using LDA, GGA etc, the position of the atoms will change to have the lowest <em class="text-italics">simulated</em> energy configuration. This configuration will, if the the approximations implied by the simulation are sufficient, be very close to your original <em class="text-italics">experimental</em> configuration. If you don't do such relaxation and keep the experimental positions of the atoms <em class="text-italics">as is</em>, you may end up having huge forces on the atoms which is no good working base for future simulations.<br /><br />I hope this clears things up, otherwise, I still didn't understand your issue...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: help to correct input file</h3>
+				<div class="date">Posted: <strong>Thu Jan 05, 2012 9:47 pm</strong></div>
+				<div class="author">by <strong>ziedhosni</strong></div>
+				<div class="content">Hi again, <img class="smilies" src="images/smilies/icon_e_biggrin.gif" alt=":D" title="Very Happy" /> <br />Sorry for disturbing you again. <img class="smilies" src="images/smilies/icon_redface.gif" alt=":oops:" title="Embarrassed" /> <br /> I send you in this link the experimental parameters as shown by Diamond program. It mentions some atoms of the system:<br /><!-- m --><a class="postlink" href="http://hpics.li/a964e91">http://hpics.li/a964e91</a><!-- m --><br />I understand for example that it show the position of 2 positions of calcium the 10 calcium of the cell and it conclude the other positions by symmetry. <br />So, I erased what I put in xred (all the 42 atomes positions) and I put only the &quot;necessairy&quot; positions and I put space group:<br />I give the link for input.<br /><br />Do you think it is correct what I do. If it is that, should I mention in natom 42 atoms or only the 7 without counting the atomes deduced by translations.<br />I give also the errors in the log file:<br /> &quot;<br />symatm : WARNING -<br />  Trouble finding symmetrically equivalent atoms<br />  Applying inv of symm number 12 to atom number   5  of typat  3<br />  gives tratom= -1.2530E-01 -5.8700E-01  2.5000E-01.<br />  This is further away from every atom in crystal than the allowed tolerance.<br />  The inverse symmetry matrix is -1 -1  0<br />                                  1  0  0<br />                                  0  0 -1<br />  and the nonsymmorphic transl. tnons =   -0.0000000   -0.0000000    0.5000000<br />  The nearest coordinate differs by  2.877E-01 -4.870E-02  0.000E+00<br />  for indsym(nearest atom)=    5<br /><br /> symatm : WARNING -<br />  Trouble finding symmetrically equivalent atoms<br />  Applying inv of symm number 12 to atom number   6  of typat  3<br />  gives tratom= -8.7200E-02 -3.4940E-01  4.2010E-01.<br />  This is further away from every atom in crystal than the allowed tolerance.<br />  The inverse symmetry matrix is -1 -1  0<br />                                  1  0  0<br />                                  0  0 -1<br />  and the nonsymmorphic transl. tnons =   -0.0000000   -0.0000000    0.5000000<br />  The nearest coordinate differs by  3.258E-01  1.889E-01  1.701E-01<br />  for indsym(nearest atom)=    5<br /><br /> symatm : WARNING -<br />  Trouble finding symmetrically equivalent atoms<br />  Applying inv of symm number 12 to atom number   7  of typat  4<br />  gives tratom=  3.0815E-33  3.0815E-33  2.4988E-01.<br />  This is further away from every atom in crystal than the allowed tolerance.<br />  The inverse symmetry matrix is -1 -1  0<br />                                  1  0  0<br />                                  0  0 -1<br />  and the nonsymmorphic transl. tnons =   -0.0000000   -0.0000000    0.5000000<br />  The nearest coordinate differs by  6.163E-33  3.081E-33 -2.400E-04<br />  for indsym(nearest atom)=    7<br /> symatm: atom number    1 is reached starting at atom<br />   1  2  1  2  1  2  1  1  1  1  1  1<br /> symatm: atom number    2 is reached starting at atom<br />   2  2  2  1  1  2  1  1  2  2  2  2<br /> symatm: atom number    3 is reached starting at atom<br />   3  3  3  3  3  3  3  3  3  3  3  3<br /> symatm: atom number    4 is reached starting at atom<br />   4  6  4  5  5  6  5  5  6  4  6  4<br /> symatm: atom number    5 is reached starting at atom<br />   5  6  5  4  5  4  4  5  4  5  6  5<br /> symatm: atom number    6 is reached starting at atom<br />   6  4  5  5  6  4  5  5  6  6  6  5<br /> symatm: atom number    7 is reached starting at atom<br />   7  7  7  7  7  7  7  7  7  7  7  7<br /> symatm: maximum (delta t)=   5.00000E-01 is larger than tol=  1.0000E-08<br /><br /> symatm : ERROR -<br />  Largest error (above) is so large (0.01) that either input  atomic coordinates (xred)<br />  are wrong or space group symmetry data is wrong.<br />  Action : correct your input file.<br /><br /> leave_new : decision taken to exit ...&quot;<br /><br /><br />thank you<br /><br />zied</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: help to correct input file</h3>
+				<div class="date">Posted: <strong>Mon Jan 09, 2012 8:08 pm</strong></div>
+				<div class="author">by <strong>jolafc</strong></div>
+				<div class="content">Hi,<br /><br />For abinit to generate all the atomic coordinates in the primitive cell from the irreducible set, you need to put <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>natom 44<br />natrd 7<br /></code></pre></div><br /><br />and not <br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>natom 7</code></pre></div><br /><br />Now, I realize you have only 42 atoms in your cell. Only, abinit finds 44 from your 7 positions and spacce group 176. I also see only 42 atoms when checking a 3D representation of the 44 atoms abinit generated from your 7 experimental positions. That means there are 2 aotms among the 44 that are found 2 times. You need to find which and adjust the position of the atom they were generated from so that abinit understant that it is at a more symmetric positions than he thought. <br /><br />So, change your input file, run it with abinit (with a low cutoff, for instance 54eV, since the result is unimportant, you just want abinit to generate the symmetrized coordinates), find the 2 coordinates that appear 2 times, find which of the 7 irreducibles cooridnates generated these and correct it. <br /><br />Good luck,<br /><br />Jonathan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: help to correct input file</h3>
+				<div class="date">Posted: <strong>Sat Jan 14, 2012 8:15 pm</strong></div>
+				<div class="author">by <strong>ziedhosni</strong></div>
+				<div class="content">Hello friends,<br />I liked to use 44 atoms as you said in natom but abinit stop with error related to inability to find 2 extra atom by symmetry. In addition, I do not know the types of the extra atomes. So, I put 42.<br /><br />Next, I emplyed the irreductible set of atoms =7 from cif file and I specified typat 10*1 6*2 24*3 2*4. The calculation finished without warnings. when I used typat 2*1 1*2 3*3 1*4 to be coherent with irreductible atom set. the calculation finished with this warning:<br /><br />mkdenpos : WARNING -<br />  Density went &lt; 0 at       336 points<br />  and was set to  1.00E-14.  Lowest was  -0.12E-01.<br />  Likely due to too low boxcut or too low ecut for pseudopotential core charge.<br /><br />So, which of typat should I use next time. And is it normal that calculation finishes in some seconds.????<br />After, I tried optcell 1 and ionmov 3 with the both previous choices. I had no warnings but I found that in output after some seconds:<br />Components of total free energy (in Hartree) :<br /><br />    Kinetic energy  =  0.00000000000000E+00<br />    Hartree energy  =  0.00000000000000E+00<br />    XC energy       =  0.00000000000000E+00<br />    Ewald energy    =  0.00000000000000E+00<br />    PspCore energy  =  0.00000000000000E+00<br />    Loc. psp. energy=  0.00000000000000E+00<br />    NL   psp  energy=  0.00000000000000E+00<br />    &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; Etotal=  0.00000000000000E+00<br /><br /> Other information on the energy :<br />    Total energy(eV)=  0.00000000000000E+00 ; Band energy (Ha)=   0.0000000000E+00<br /><br /> Is this normal.<br />Thank you.<br /><br />input:<br /># Crystalline fluorapatite<br /><br /># Definition of the unit cell: hexagonal<br />acell 9.430723 9.430723 6.917214 angstrom<br />angdeg 90.0 90.0 120.0<br />ntypat 4<br />spgroup 176<br />brvltt -1<br />znucl 20 15 8 9   # Ca P O F<br />natom 42<br />natrd 7<br />typat 2*1 1*2 3*3 1*4<br />xred<br />1/3 2/3 0.0063<br />0.0193 0.2533 1/4<br />0.4068 0.3705 1/4<br />0.3080 0.4924 1/4<br />0.587 0.4617 1/4<br />0.3494 0.2622 0.0799<br />1.0000 0.0000 0.0000<br />ecut 54 eV<br />kptopt 1<br />ngkpt 2 2 3<br />nshiftk 1<br />shiftk 0.0 0.0 0.5<br />nstep 1000<br />optforces 1<br />toldfe 1.0d-5 eV</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: help to correct input file</h3>
+				<div class="date">Posted: <strong>Tue Jan 17, 2012 6:05 pm</strong></div>
+				<div class="author">by <strong>ziedhosni</strong></div>
+				<div class="content">please help me!!!!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: help to correct input file</h3>
+				<div class="date">Posted: <strong>Tue Jan 17, 2012 9:50 pm</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hello,<br /><br />Your ecut is incredibly low ... 54 eV is ... 2 Hartrees. Even for silicon, you should use an ecut of minimum 8 Hartrees, depending on the property you aim to look for. I would start by increasing the ecut to 30 Hartrees or so (you have oxygen so its at east this cutoff energy). You should then make a convergence study (try with ecut 30, ecut 35, ecut 40 .... until the properties you are looking for do not change anymore within some tolerance ... You can check also with a very high ecut : convergence study from 30 to 60 by step of 5 and then one calculation with ecut 100 for example). Note that if you omit the &quot;eV&quot; in the ecut definition, the default units is Hartrees (1 Hartree ~ 27.211 eV).<br /><br />You might do the basic tutorial lessons before doing complex systems ... : <a href="http://www.abinit.org/documentation/helpfiles/for-v6.10/tutorial/welcome.html" class="postlink">http://www.abinit.org/documentation/helpfiles/for-v6.10/tutorial/welcome.html</a> =&gt; lesson 1, 2, 3 and 4, you will learn many things that you do not need to ask here. And these do not take more than 1 or 2 hours each.<br /><br />I hope it helps!<br /><br />David</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: help to correct input file</h3>
+				<div class="date">Posted: <strong>Tue Jan 17, 2012 10:58 pm</strong></div>
+				<div class="author">by <strong>ziedhosni</strong></div>
+				<div class="content">Excuse me!! But I think you have not understand me another time.<br />I have read the 4 lessons more than 5 times carefully. And I know exactely how it is important a convergence study by increasing ecut. And i know the relation between hartree and eV. This is the chemistry and not abinit <img class="smilies" src="images/smilies/icon_e_wink.gif" alt=";)" title="Wink" /> .<br />I chose 54 eV to test the programme. Only when I use ionmov 2 and optcell 1 the programme gives:<br />Kinetic energy = 0.00000000000000E+00<br />Hartree energy = 0.00000000000000E+00<br />XC energy = 0.00000000000000E+00<br />Ewald energy = 0.00000000000000E+00<br />PspCore energy = 0.00000000000000E+00<br />Loc. psp. energy= 0.00000000000000E+00<br />NL psp energy= 0.00000000000000E+00<br />&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; Etotal= 0.00000000000000E+00<br /><br />Other information on the energy :<br />Total energy(eV)= 0.00000000000000E+00 ; Band energy (Ha)= 0.0000000000E+00<br /><br /><br /><br />I have tied to add ionmov 2 and optcell 1 to t11.in in lesson 1 to see. the same problem with H2. <img class="smilies" src="images/smilies/icon_e_surprised.gif" alt=":o" title="Surprised" />  <img class="smilies" src="images/smilies/icon_e_surprised.gif" alt=":o" title="Surprised" />  <img class="smilies" src="images/smilies/icon_question.gif" alt=":?:" title="Question" /> <br />When I do a ground state calculation. It is Ok but in the moment I add ionmov/=0 it gives me those 00000000....<br />I do not understand why. Normally, the programme shoould be able to calculate the enrgy after cell optimization. <img class="smilies" src="images/smilies/icon_idea.gif" alt=":idea:" title="Idea" /> <br />I hope i am not making you bored with my &quot;stupid&quot; questions of someone who wants to have results without spending time reading help file as you see.<br />Be sure that if I am posting a question that mean I read all the forum subjects and I did not find my aim.<br />thank you for your comprehension <img class="smilies" src="images/smilies/icon_rolleyes.gif" alt=":roll:" title="Rolling Eyes" /></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: help to correct input file</h3>
+				<div class="date">Posted: <strong>Sun Jan 22, 2012 5:57 pm</strong></div>
+				<div class="author">by <strong>ziedhosni</strong></div>
+				<div class="content">I am blocked in my calculation and I did not found anybody to help me to resolve my problem. Please guide me even with flashpoint ... <img class="smilies" src="images/smilies/icon_e_sad.gif" alt=":(" title="Sad" /></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: help to correct input file</h3>
+				<div class="date">Posted: <strong>Wed Aug 01, 2018 7:30 pm</strong></div>
+				<div class="author">by <strong>nparikh102</strong></div>
+				<div class="content">Were you able to fix your issue? If so, can you please share final version of your .in file? I am a 10th grader.  I need fluorapatite file to interact with TiO2 file. With my skill level I am able to create TiO2 .in file. fluorapatite for now is beyond me. Would appreciate if you can share its file. Thank you.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1481&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:59:01 GMT -->
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3461&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:19:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; mpirun abinit I/O stream error</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>mpirun abinit I/O stream error</h2>
+		<p><a href="viewtopicfee0.html?f=3&amp;t=3461">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3461</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>mpirun abinit I/O stream error</h3>
+				<div class="date">Posted: <strong>Sat Dec 17, 2016 11:34 pm</strong></div>
+				<div class="author">by <strong>jennydaman</strong></div>
+				<div class="content">Hi, I'm really struggling with the compilation of abinit, more than 30 hours of effort and nothing works... <br /><br />On this machine, I used the configuration file below:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>MPI_RUNNER=mpirun<br />CC=mpicc<br />FC=mpif90<br />enable_64bit_flags=&quot;yes&quot;<br /><br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_level=&quot;2&quot;<br /><br />with_netcdf_incs=&quot;-I/usr/local/include&quot;<br />with_netcdf_libs=&quot;-L/usr/local/lib -lnetcdf -lnetcdff&quot;<br /><br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_incs=&quot;-I/usr/include/&quot;<br />with_fft_libs=&quot;-L/usr/lib64/ -lfftw3 -lfftw3f&quot;<br /><br />with_dft_flavor=&quot;atompaw+bigdft+libxc+wannier90&quot;<br /><br />enable_gw_dpc=&quot;yes&quot;</code></pre></div><br /><br />All of my software has been updated (compilers, openmpi...)<br /><br />I think abinit runs fine sequentially. However, when I run <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./runtests.py paral -n 2 -j 2</code></pre></div><br />Every test fails. <br />If I try running abinit myself with mpirun, it instantly crashes. It seems as if the abinit threads are all trying to start at the same time, and the I/O streams are not set up properly.<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>$ mpirun -np 4 abinit<br />&nbsp; ABINIT 8.0.8<br />&nbsp; <br />&nbsp; Give name for formatted input file: <br />&nbsp; ABINIT 8.0.8<br />&nbsp; <br />&nbsp; Give name for formatted input file: <br />At line 182 of file iofn1.F90 (unit = 5, file = 'stdin')<br />Fortran runtime error: End of file<br /><br />Error termination. Backtrace:<br />&nbsp; ABINIT 8.0.8<br />&nbsp; <br />&nbsp; Give name for formatted input file: <br />At line 182 of file iofn1.F90 (unit = 5, file = 'stdin')<br />Fortran runtime error: End of file<br /><br />Error termination. Backtrace:<br />&nbsp; ABINIT 8.0.8<br />&nbsp; <br />&nbsp; Give name for formatted input file: <br />At line 182 of file iofn1.F90 (unit = 5, file = 'stdin')<br />Fortran runtime error: End of file<br /><br />Error termination. Backtrace:<br />#0&nbsp; 0x7fd0b137c4ed in ???<br />#1&nbsp; 0x7fd0b137d55d in ???<br />#2&nbsp; 0x7fd0b137ddca in ???<br />#3&nbsp; 0x7fd0b157ae6b in ???<br />#4&nbsp; 0x7fd0b157b723 in ???<br />#5&nbsp; 0x7fd0b1572ae1 in ???<br />#6&nbsp; 0x7fd0b1578e74 in ???<br />#7&nbsp; 0x42efd6 in iofn1_<br />&nbsp; &nbsp;at /home/jennings_zhang/abinit-8.0.8/src/95_drive/iofn1.F90:182<br />#8&nbsp; 0x409c8f in abinit<br />&nbsp; &nbsp;at /home/jennings_zhang/abinit-8.0.8/src/98_main/abinit.F90:252<br />#9&nbsp; 0x4099ee in main<br />&nbsp; &nbsp;at /home/jennings_zhang/abinit-8.0.8/src/98_main/abinit.F90:94<br />-------------------------------------------------------<br />Primary job&nbsp; terminated normally, but 1 process returned<br />a non-zero exit code.. Per user-direction, the job has been aborted.<br />-------------------------------------------------------<br />--------------------------------------------------------------------------<br />mpirun detected that one or more processes exited with non-zero status, thus causing<br />the job to be terminated. The first process to do so was:<br /><br />&nbsp; Process name: &#91;&#91;30190,1&#93;,3&#93;<br />&nbsp; Exit code:&nbsp; &nbsp; 2<br />--------------------------------------------------------------------------<br /></code></pre></div><br /><br />How can I stop the separate abinit threads from using the output from each other as their inputs?<br /><br />Thank you for your time.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: mpirun abinit I/O stream error</h3>
+				<div class="date">Posted: <strong>Mon Mar 06, 2017 10:05 am</strong></div>
+				<div class="author">by <strong>delaveau</strong></div>
+				<div class="content">You probably compile without MPI. May be you make a mistake in the compile order you give ( orthographic error .. ect ..). The  built system then takes the default for compiling<br /><br />if you made a directory build under the abinit root, and you have your config file ./my_config.ac under this directory<br />You must do :<br />cd build<br />../configure --with-config-file=&quot;./my_config.ac&quot;<br />otherwise a default is taken</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: mpirun abinit I/O stream error</h3>
+				<div class="date">Posted: <strong>Tue Mar 07, 2017 10:18 am</strong></div>
+				<div class="author">by <strong>delaveau</strong></div>
+				<div class="content">It seem that your executable is sequential <br />You may have done a spelling mistake when you do your configure.<br />If this is the case, the configure doen't find your configuration file and do a default configuration.<br />To see if the configuration is done properly. You may have a look to config.log file or config.h file in the rrot directory of build.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3461&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:19:18 GMT -->
+</html>

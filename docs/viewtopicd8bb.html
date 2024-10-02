@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=3425&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:28:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; decrease cutoff radius of PAW dataset</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>decrease cutoff radius of PAW dataset</h2>
+		<p><a href="viewtopicb759.html?f=14&amp;t=3425">https://forum.abinit.org/viewtopic.php?f=14&amp;t=3425</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>decrease cutoff radius of PAW dataset</h3>
+				<div class="date">Posted: <strong>Mon Nov 14, 2016 11:04 pm</strong></div>
+				<div class="author">by <strong>dyu</strong></div>
+				<div class="content">When I run abinit-8.0.8, I got the following error.<br />-- !ERROR<br />src_file: chkpawovlp.F90<br />src_line: 184<br />mpi_rank: 0<br />message: |<br />    Action: 1- decrease cutoff radius of PAW dataset<br />          OR  2- ajust &quot;pawovlp&quot; input variable to allow overlap (risky)[/i][/u]<br /><br />In the middle of output file (see below), it shows the distance between atom 4 (H)and 6 (C) is 2.08 bohr (about 1.1 angstrom).<br />Therefor the PAW radius of sphere is too large.<br /><br />My question is the C and H distance is supposed to be around 1.1 angstrom.<br />Why in PAW data sets (downloaded from website), the PAW radius of sphere is such large that it causes the overlap?<br />I thought the PAW data sets I downloaded is supposed to be good to apply for many systems.<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />FFT (fine) grid used in SCF cycle:<br /><br /> getcut: wavevector=  0.0000  0.0000  0.0000  ngfft= 100 100 240<br />         ecut(hartree)=     30.000   =&gt; boxcut(ratio)=   2.04449<br /><br /> chkpawovlp : ERROR -<br />  PAW SPHERES ARE OVERLAPPING !<br />   Distance between atoms   4 and   6 is  :   2.08018<br />   PAW radius of the sphere around atom   4 is:   0.89889<br />   PAW radius of the sphere around atom   6 is:   1.50737<br />   This leads to a (voluminal) overlap ratio of  5.82 %<br /><br />  COMPENSATION DENSITIES ARE OVERLAPPING !!!!<br />   Distance between atoms   8 and   9 is  :   2.39499<br />   Compensation radius around atom   8 is:   1.30053<br />   Compensation radius around atom   9 is:   1.20231<br />   This leads to a (voluminal) overlap ratio of  0.31 %<br />  THIS IS DANGEROUS !, as PAW formalism assume non-overlapping compensation densities.<br /> DATA TYPE INFORMATION:<br /> REAL:      Data type name: REAL(DP)<br />            Kind value:      8<br />            Precision:      15<br />            Smallest nonnegligible quantity relative to 1:  0.22204460E-15<br />            Smallest positive number:                       0.22250739-307<br />            Largest representable number:                   0.17976931+309<br /> INTEGER:   Data type name: INTEGER(default)<br />            Kind value: 4<br />            Bit size:   32<br />            Largest representable number: 2147483647<br /> LOGICAL:   Data type name: LOGICAL<br />            Kind value: 4<br /> CHARACTER: Data type name: CHARACTER             Kind value: 1</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: decrease cutoff radius of PAW dataset&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Tue Nov 15, 2016 11:33 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Dyu,<br />You can increase pawovlp to 10-15%, this is often quite fine too, though always be critic with what you obtain at the end if you go with very large overlaps.<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=3425&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:28:33 GMT -->
+</html>

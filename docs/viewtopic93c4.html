@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2211&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:13:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; SCF convergence problem when turning on SO</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>SCF convergence problem when turning on SO</h2>
+		<p><a href="viewtopic138d.html?f=9&amp;t=2211">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2211</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>SCF convergence problem when turning on SO</h3>
+				<div class="date">Posted: <strong>Thu Jul 04, 2013 4:15 pm</strong></div>
+				<div class="author">by <strong>nleconte</strong></div>
+				<div class="content">Dear fellow abinit users,<br /><br />I have some problem converging my system when turning on SOC. <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>nspinor 2 <br />nsppol 1 <br />nspden 4 <br /></code></pre></div><br />Same system without spin orbit (and without magnetization) converges well after 45 SCF steps.<br />I tried using less aggressive mixing <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>iscf 2</code></pre></div> but it does not help at all.<br /><br />I'm working on graphene, functionalized by one bismuth atom. For 1x1, 2x2 supercells, SOC was converging well. Convergence becomes problematic for 3x3 and 4x4.<br /><br />Here a snippet showing this bad convergence for the 3x3 structure. The bismuth atom is put in hollow position (in the center of one of the hexagons).<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>ETOT 78&nbsp; -108.36971397562&nbsp; &nbsp; &nbsp;1.229E-07 7.293E-06 1.517E-03<br />&nbsp;ETOT 79&nbsp; -108.36971412100&nbsp; &nbsp; -1.454E-07 1.830E-06 1.211E-03<br />&nbsp;ETOT 80&nbsp; -108.36971441771&nbsp; &nbsp; -2.967E-07 4.302E-06 1.373E-03<br />&nbsp;ETOT 81&nbsp; -108.36971474276&nbsp; &nbsp; -3.251E-07 1.922E-06 1.810E-03<br />&nbsp;ETOT 82&nbsp; -108.36971479842&nbsp; &nbsp; -5.566E-08 2.246E-06 2.311E-03<br />&nbsp;ETOT 83&nbsp; -108.36971502070&nbsp; &nbsp; -2.223E-07 2.534E-06 2.437E-03<br />&nbsp;ETOT 84&nbsp; -108.36971517879&nbsp; &nbsp; -1.581E-07 2.454E-06 2.778E-03<br />&nbsp;ETOT 85&nbsp; -108.36971531625&nbsp; &nbsp; -1.375E-07 1.917E-06 3.043E-03<br />&nbsp;ETOT 86&nbsp; -108.36971460745&nbsp; &nbsp; &nbsp;7.088E-07 6.833E-06 3.169E-03<br />&nbsp;ETOT 87&nbsp; -108.36971451298&nbsp; &nbsp; &nbsp;9.447E-08 5.123E-06 2.202E-03<br />&nbsp;ETOT 88&nbsp; -108.36971488635&nbsp; &nbsp; -3.734E-07 1.607E-06 2.016E-03<br />&nbsp;ETOT 89&nbsp; -108.36971512531&nbsp; &nbsp; -2.390E-07 1.896E-06 2.531E-03<br />&nbsp;ETOT 90&nbsp; -108.36971454005&nbsp; &nbsp; &nbsp;5.853E-07 3.063E-06 2.906E-03<br />&nbsp;ETOT 91&nbsp; -108.36971476049&nbsp; &nbsp; -2.204E-07 6.769E-06 2.019E-03<br />&nbsp;ETOT 92&nbsp; -108.36971456241&nbsp; &nbsp; &nbsp;1.981E-07 6.922E-07 2.345E-03<br />&nbsp;ETOT 93&nbsp; -108.36971499378&nbsp; &nbsp; -4.314E-07 7.248E-07 2.047E-03<br />&nbsp;ETOT 94&nbsp; -108.36971587731&nbsp; &nbsp; -8.835E-07 7.380E-07 2.730E-03<br />&nbsp;ETOT 95&nbsp; -108.36971621829&nbsp; &nbsp; -3.410E-07 1.184E-05 4.097E-03<br />&nbsp;ETOT 96&nbsp; -108.36971605240&nbsp; &nbsp; &nbsp;1.659E-07 1.445E-06 4.656E-03<br />&nbsp;ETOT 97&nbsp; -108.36971673903&nbsp; &nbsp; -6.866E-07 8.590E-06 4.520E-03<br />&nbsp;ETOT 98&nbsp; -108.36971686158&nbsp; &nbsp; -1.225E-07 4.936E-06 5.568E-03<br />&nbsp;ETOT 99&nbsp; -108.36971678556&nbsp; &nbsp; &nbsp;7.601E-08 3.341E-06 5.800E-03<br />&nbsp;ETOT100&nbsp; -108.36971613084&nbsp; &nbsp; &nbsp;6.547E-07 2.127E-06 5.760E-03<br /><br />&nbsp;Cartesian components of stress tensor (hartree/bohr^3)<br />&nbsp; sigma(1 1)=&nbsp; 6.02777436E-06&nbsp; sigma(3 2)= -5.80367797E-09<br />&nbsp; sigma(2 2)= -4.46793977E-06&nbsp; sigma(3 1)= -3.43297689E-09<br />&nbsp; sigma(3 3)= -1.35271592E-07&nbsp; sigma(2 1)=&nbsp; 9.09231053E-06<br /><br /><br />&nbsp;scprqt:&nbsp; WARNING -<br />&nbsp; nstep=&nbsp; 100 was not enough SCF cycles to converge;<br />&nbsp; potential residual=&nbsp; 5.760E-03 exceeds tolvrs=&nbsp; 1.000E-14<br /></code></pre></div><br /><br />Any advice?<br /><br />Thanks in advance!<br />Nicolas</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF convergence problem when turning on SO</h3>
+				<div class="date">Posted: <strong>Thu Jul 11, 2013 9:42 am</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">Hi Nicolas<br /><br />You might have a better convergence by tuning the KGB 3-level parallelization. By experience, convergence is significantly better when NPBAND = NBAND. If you can't have this because you are limited in the number of cpus, try setting NPBAND x BANDPP = NBAND.<br /><br />I have actinide-based systems that converge only when I have this kind of setings.<br /><br />Good luck<br />Boris</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF convergence problem when turning on SO</h3>
+				<div class="date">Posted: <strong>Thu Jul 11, 2013 2:37 pm</strong></div>
+				<div class="author">by <strong>nleconte</strong></div>
+				<div class="content">Dear Boris,<br /><br />Thanks for your answer, I will play with this a bit. Here is what I had before.<br />I have 120 bands and am working on a cluster with 12 procs per node. So, using KGB parallization, I set the following variables.<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;paral_kgb 1<br />&nbsp;npkpt 4<br />&nbsp;npspinor 1<br />&nbsp;npband 12<br />&nbsp;bandpp 2<br />&nbsp;npfft 1<br />&nbsp;wfoptalg 14<br />&nbsp;nloalg 4<br />&nbsp;fftalg 401<br />&nbsp;iprcch 4<br />&nbsp;intxc 0<br />&nbsp;istwfk *1<br />&nbsp;fft_opt_lob 2<br /></code></pre></div><br />As band pararallisation is most efficient when on the same node, I used the following restrictions in my submission script<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#SBATCH --ntasks=48<br />#SBATCH --ntasks-per-node=12<br /></code></pre></div><br />to make sure each node was assigned to one k point only.<br /><br />bandpp should be 1 or 2, so this restricts quite a lot on how I could follow your advice.<br /><br />Any comment?<br /><br />In the meanwhile, I've got a new calculation running with iscf 2 and smaller diemax (0.3), instead of default value of 1. I was told maybe this could help too...<br /><br />Keep you posted.<br /><br />Nicolas</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF convergence problem when turning on SO</h3>
+				<div class="date">Posted: <strong>Fri Jul 12, 2013 8:47 am</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">Yes, diemix can indeed significantly improve the convergence.<br /><br />As for your parallelization, what is the maximum number of cpus you can use? Also, why do you have to restric bandpp to 1 or 2?<br /><br />With 120 bands, I would try something like npband = 60, bandpp = 2, npkpt = 1. If you can use more cpus, you could increase npfft to 4 for instance, and if you can use even more cpus, increase npkpt.<br /><br />Boris</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2211&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:13:04 GMT -->
+</html>

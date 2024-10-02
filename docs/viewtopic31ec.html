@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4482&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:31:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Configure Error: Parallel version -  removed option --enable-mpi</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Configure Error: Parallel version -  removed option --enable-mpi</h2>
+		<p><a href="viewtopic8ca4.html?f=3&amp;t=4482">https://forum.abinit.org/viewtopic.php?f=3&amp;t=4482</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Configure Error: Parallel version -  removed option --enable-mpi&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Sun Jul 19, 2020 8:34 pm</strong></div>
+				<div class="author">by <strong>getsruthil</strong></div>
+				<div class="content">I have been trying to install <span style="color:#0040FF">abinit-9.0.4</span> on my <span style="color:#0040FF">Ubuntu 20.04 </span>PC for <span style="color:#0040FF">parallel</span> execution. For the same, I have followed the instructions given in the video <a href="http://www.youtube.com/watch?v=DppLQ-KQA68" class="postlink">http://www.youtube.com/watch?v=DppLQ-KQA68</a>. The options for configuring was given in an input file given below.<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>prefix="/usr/local"
+enable_mpi="yes"
+enable_mpi_io="yes"
+with_mpi_prefix="/usr"
+with_trio_flavor="netcdf+etsf_io"
+with_netcdf_incs="-I/usr/include"
+#with_netcdf_libs="-L/usr/lib -lnetcdf -lnetcdff"
+with_netcdf_libs="-L/usr/lib/x86_64-linux-gnu -lnetcdf -lnetcdff"
+with_fft_flavor="fftw3"
+with_fft_incs="-I/usr/include/"
+with_fft_libs="-L/usr/lib/x86-64-linux-gnu/ -lfftw3 -lfftw3f"
+with_linalg_flavor="atlas"
+with_linalg_libs="-L/usr/lib/x86_64-linux-gnu -llapack -lf77blas -lcblas -latlas"
+#with_dft_flavor="atompaw+libxc"
+with_dft_flavor="atompaw+bigdft+libxc+wannier90"
+enable_gw_dpc="yes"
+</code></pre></div>
+
+All the paths given in the config file have been checked for its correctness. Unfortunately, the configuration failed throwing an error 
+<blockquote class="uncited"><div>* removed option --enable-mpi. &gt;&gt;&gt; use --with-mpi instead. error: removed option --enable-mpi has been used</div></blockquote>.<br>
+<br>
+I have been struggling to get it fixed by digging the threads in the forum, but to no avail. Any help on this would be appreciated. [Attachment: Config.log]</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configure Error: Parallel version -  removed option --enable-mpi</h3>
+				<div class="date">Posted: <strong>Mon Jul 20, 2020 10:56 am</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi, <br>
+<br>
+the youtube video is very old and not applicable with abinit 9..x version<br>
+<br>
+As an attachment, a beta version of a document explaining <br>
+the instatllation on Ubuntu 19 but which is adapted for Ubuntu 20.<br>
+<br>
+jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configure Error: Parallel version -  removed option --enable-mpi</h3>
+				<div class="date">Posted: <strong>Wed Jul 29, 2020 10:43 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Here is a possible example of installation of Abinit on Ubuntu 20 (it might not be the most optimized one but it works fine):<br>
+<br>
+Installation of compilers/libraries:<br>
+- Compilers:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>sudo apt install -y g++ gfortran </code></pre></div>
+
+- MPI:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>sudo apt install -y openmpi-bin libopenmpi-dev</code></pre></div>
+
+- Mathematical libraries (not sure how optimize they are):
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>sudo apt install -y libblas-dev liblapack-dev </code></pre></div>
+This can be added if used:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>sudo apt install  fftw3-dev libscalapack-mpi-dev</code></pre></div>
+
+- Mandatory Libxc, hdf5, netcdf (if you install with apt, each time there will have an update of these libraries, you might have to re-install Abinit for proper version linking... Otherwise follows what Jean-Michel mentioned with the fallbacks):
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>sudo apt install -y libxc-dev libnetcdff-dev</code></pre></div>
+
+- Depending on your need you can complete with:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>sudo apt install build-essential</code></pre></div>
+
+Then once this is installed I could compile Abinit 9.x with the following config.ac9:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>enable_avx_safe_mode="yes"
+with_mpi="/usr"
+enable_mpi_io="yes"
+LINALG_LIBS="-L/usr/lib/ -llapack -lblas"
+with_libxc="yes"
+LIBXC_CPPFLAGS="-I/usr/include"
+LIBXC_FCFLAGS="-I/usr/include"
+with_hdf5="/usr"
+with_netcdf="yes"
+NETCDF_CPPFLAGS="-I/usr/include/"
+NETCDF_FCFLAGS="-I/usr/include/"
+NETCDF_LIBS="-L/usr/lib/x86_64-linux-gnu -L/usr/lib/x86_64-linux-gnu/hdf5/serial -lnetcdf -lhdf5_hl -lhdf5 -lpthread -lsz -lz -ldl -lm -lcurl"
+with_netcdf_fortran="/usr/include"
+NETCDF_FORTRAN_LIBS="-L/usr/lib -lnetcdff -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -lnetcdf -lnetcdf"
+</code></pre></div>
+
+Jean-Michel, do you have comments on this minimal set for installing on Ubuntu such that we can maybe converge to a stable example? We could check how to make netcdf in parallel?<br>
+<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configure Error: Parallel version -  removed option --enable-mpi</h3>
+				<div class="date">Posted: <strong>Fri Jul 31, 2020 9:45 pm</strong></div>
+				<div class="author">by <strong>getsruthil</strong></div>
+				<div class="content">Thank you for all the responses. <br>
+With all the initial set ups and the minimal configure script the configuration went really well. Log is attached herewith for your reference. <br>
+<br>
+I am trying to install abinit 9.x parallel version in an ubuntu 20.04 with 6 cores (12 threads). To do this i have applied the command make -j6 (as prompted at the end of compilation). However, it did not succeeded while throwing the following error: 
+<blockquote class="uncited"><div>
+make[5]: *** No rule to make target 'm_optim_dumper.F90', needed by 'm_optim_dumper.o'.  Stop.<br>
+make[5]: *** Waiting for unfinished jobs....<br>
+../../../../../shared/common/src/14_hidewrite/m_io_tools.F90<img alt=":1095:" class="emoji smilies" draggable="false" src="http://twemoji.maxcdn.com/2/svg/1095.svg">0:<br>
+<br>
+ 1095 |    iomsg = trim(msg)//ch10//"Runtime error message: "//trim(iomsg)
+</div></blockquote> <br>
+<br>
+<br>
+I am not able figure out what does this error. Any help would be appreciated.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configure Error: Parallel version -  removed option --enable-mpi</h3>
+				<div class="date">Posted: <strong>Mon Aug 03, 2020 10:27 am</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br>
+<br>
+I noticed that during the minimum ( or standard ) installation of Ubuntu 19 or 20, the python cmd is not "defined".<br>
+python3 is installed by default, but the link "python" to "python3" is not made .<br>
+However, during configure, a python script is executed with :<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#!/usr/bin/env python</code></pre></div>
+
+one way to solve the problem is to make a symbolic link <br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>cd /usr/bin
+ln -s python3 python</code></pre></div>
+
+same workaround with python2</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configure Error: Parallel version -  removed option --enable-mpi</h3>
+				<div class="date">Posted: <strong>Mon Aug 03, 2020 11:46 am</strong></div>
+				<div class="author">by <strong>getsruthil</strong></div>
+				<div class="content">Thank you very much dear moderators. <br>
+Your suggestions and fixes helped me to install abinit parallel version in my Ubuntu 20.04 pc with the setup given in the installation guide.  <img class="smilies" src="images/smilies/icon_cool.gif" width="15" height="17" alt="8-)" title="Cool">  <img class="smilies" src="images/smilies/icon_e_biggrin.gif" width="15" height="17" alt=":D" title="Very Happy">  <img class="smilies" src="images/smilies/icon_e_smile.gif" width="15" height="17" alt=":)" title="Smile"></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configure Error: Parallel version -  removed option --enable-mpi</h3>
+				<div class="date">Posted: <strong>Sun Oct 18, 2020 11:08 am</strong></div>
+				<div class="author">by <strong>dprai</strong></div>
+				<div class="content">Dear Abinit users <br>
+<br>
+I alos encountered this error while installing abinit9.2.1<br>
+<br>
+================================<br>
+codvsn = ABINIT_VERSION<br>
+                        1<br>
+Error: Symbol ‘abinit_version’ at (1) has no IMPLICIT type<br>
+Makefile<img alt=":1281:" class="emoji smilies" draggable="false" src="http://twemoji.maxcdn.com/2/svg/1281.svg"> recipe for target 'm_sigtk.o' failed<br>
+make[3]: *** [m_sigtk.o] Error 1<br>
+make[3]: *** Waiting for unfinished jobs....<br>
+make[3]: Leaving directory '/home/dprai/Software-Installed/ABINIT/abinit-9.2.1/src/67_common'<br>
+Makefile<img alt=":1228:" class="emoji smilies" draggable="false" src="http://twemoji.maxcdn.com/2/svg/1228.svg"> recipe for target 'all-recursive' failed<br>
+make[2]: *** [all-recursive] Error 1<br>
+make[2]: Leaving directory '/home/dprai/Software-Installed/ABINIT/abinit-9.2.1/src'<br>
+Makefile<img alt=":1444:" class="emoji smilies" draggable="false" src="http://twemoji.maxcdn.com/2/svg/1444.svg"> recipe for target 'all-recursive' failed<br>
+make[1]: *** [all-recursive] Error 1<br>
+make[1]: Leaving directory '/home/dprai/Software-Installed/ABINIT/abinit-9.2.1'<br>
+=========================<br>
+This is my configuration settings<br>
+./configure <br>
+with_mpi="/usr"<br>
+enable_mpi_io="yes"<br>
+LINALG_LIBS="-L/usr/lib/ -llapack -lblas"<br>
+with_libxc="yes"<br>
+LIBXC_CPPFLAGS="-I/usr/include"<br>
+LIBXC_FCFLAGS="-I/usr/include"<br>
+with_hdf5="/usr"<br>
+with_netcdf="yes"<br>
+NETCDF_CPPFLAGS="-I/usr/include/"<br>
+NETCDF_FCFLAGS="-I/usr/include/"<br>
+NETCDF_LIBS="-L/usr/lib/x86_64-linux-gnu -L/usr/lib/x86_64-linux-gnu/hdf5/serial -lnetcdf -lhdf5_hl -lhdf5 -lpthread -lsz -lz -ldl -lm -lcurl"<br>
+with_netcdf_fortran="/usr/include"<br>
+NETCDF_FORTRAN_LIBS="-L/usr/lib -lnetcdff -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -lnetcdf -lnetcdf"<br>
+with_libpsml="/usr/local"<br>
+with_xmlf90="/usr/local"<br>
+with_libxml2="yes"<br>
+with_wannier90="yes"<br>
+WANNIER90_LIBS="-L/home/dprai/Software-Installed/wannier90-3.1.0  -lwannier"<br>
+<br>
+Please kindly help me in solving this problem.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configure Error: Parallel version -  removed option --enable-mpi</h3>
+				<div class="date">Posted: <strong>Sun Oct 18, 2020 8:54 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br>
+need more infos...<br>
+<br>
+the output of ./configure<br>
+<br>
+jmb</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4482&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:31:03 GMT -->
+</html>

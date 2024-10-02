@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1656&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:30:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; optimal lattice parameter GaAs</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>optimal lattice parameter GaAs</h2>
+		<p><a href="viewtopica268.html?f=9&amp;t=1656">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1656</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>optimal lattice parameter GaAs</h3>
+				<div class="date">Posted: <strong>Fri May 04, 2012 8:41 am</strong></div>
+				<div class="author">by <strong>temok</strong></div>
+				<div class="content">Dear members of this forum,<br /><br />Tutorial t34 shows how to obtain the optimal lattice parameter for silicon,<br />using molecular dynamics algorithms,<br /><a href="http://www.abinit.org/documentation/helpfiles/for-v6.10/tutorial/lesson_3.html#34" class="postlink">http://www.abinit.org/documentation/helpfiles/for-v6.10/tutorial/lesson_3.html#34</a>.<br />Such example uses a pspnc pseudopotential for Si.<br /><br />In the same spirit and using the same kind of pseudopotentials (pspnc) for Ga and As,<br />I tried to obtain the optimal lattice parameter for GaAs. My result was:<br /><br />10.680 Bohr, room temperature;<br />10.526 Bohr, LDA, in literature;<br /><span style="color: #FF0000">10.298 Bohr, my result.</span><br /><br />Then I repeated the calculation using a simpler method, calculating the total energy for different values of acell, <br />in order to find the acell that gives the minimum value of total energy. I got the same result, 10.298 Bohrs.<br /><br />Finally I plotted the bandstructure and most features for the valence bands are well reproduced, <br />but the first conduction band has a serious problem: it shows <span style="color: #FF0000">GaAs</span> as an <span style="color: #FF0000">indirect</span> band gap material.<br />The plot is attached in this post.<br /><br />(If I plot the bandstructure using the usual value of acell=10.60 the plot  is in good agreement)<br /><br />From this I think I did a mistake in the relaxation of the lattice parameter.<br /><br />The input file I used for GaAs  is almost the same as tutorial t34 for Silicon, except by <br />acell, ntypat, znucl, natom, and typat. <br /><br />Should I have added any other modification to the input file due to the fact that<br />GaAs has a significant spin orbit coupling, as compared to Si?<br /><br />The input file is shown below<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#&nbsp; Crystalline GaAs : computation of the optimal lattice parameter<br /># Based on tutorial t34 for silicon<br /><br />ndtset 4<br /><br />#Optimization of the lattice parameters<br />optcell 1<br />ionmov&nbsp; 3<br />ntime&nbsp; 10<br />dilatmx 1.05<br />ecutsm&nbsp; 0.5<br /><br />#Definition of the k-point grids<br />kptopt 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Option for the automatic generation of k points, taking<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # into account the symmetry<br />nshiftk 4<br />shiftk&nbsp; 0.5 0.5 0.5&nbsp; # These shifts will be the same for all grids<br />&nbsp; &nbsp; &nbsp; &nbsp; 0.5 0.0 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; 0.0 0.5 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; 0.0 0.0 0.5<br /><br />ngkpt1&nbsp; 2 2 2&nbsp; <br />ngkpt2&nbsp; 4 4 4 <br />ngkpt3&nbsp; 6 6 6&nbsp; #&nbsp; Optimal grid<br />ngkpt4&nbsp; 8 8 8&nbsp; <br /><br />getwfk -1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# This is to speed up the calculation, by restarting<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # from previous wavefunctions, transferred from the old <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # to the new k-points.<br /><br /><br /><br />#Definition of the unit cell<br />#acell 3*10.18&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Silicon<br />&nbsp;acell 3*10.60&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # GaAs<br /><br />rprim&nbsp; 0.0&nbsp; 0.5&nbsp; 0.5&nbsp; &nbsp;# FCC primitive vectors (to be scaled by acell)<br />&nbsp; &nbsp; &nbsp; &nbsp;0.5&nbsp; 0.0&nbsp; 0.5&nbsp; &nbsp;<br />&nbsp; &nbsp; &nbsp; &nbsp;0.5&nbsp; 0.5&nbsp; 0.0<br /><br />#Definition of the atom types<br />ntypat 2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # There are two types&nbsp; of atom<br />znucl 31&nbsp; 33&nbsp; &nbsp; &nbsp; # The keyword &quot;znucl&quot; refers to the atomic number of the <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # possible type(s) of atom. The pseudopotential(s) <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # mentioned in the &quot;files&quot; file must correspond<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # to the type(s) of atom. Here, the only type is Silicon.<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br /><br />#Definition of the atoms<br />natom 2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# There are two atoms<br />typat 1 2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# One atom is Ga, the other is As<br />xred&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # This keyword indicate that the location of the atoms<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # will follow, one triplet of number for each atom<br />&nbsp; &nbsp;0.0&nbsp; 0.0&nbsp; 0.0&nbsp; # Triplet giving the REDUCED coordinate of atom 1.<br />&nbsp; &nbsp;1/4&nbsp; 1/4&nbsp; 1/4&nbsp; # Triplet giving the REDUCED coordinate of atom 2.<br /><br />#Definition of the planewave basis set<br />ecut 30.0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# Maximal kinetic energy cut-off, in Hartree<br /><br />#Definition of the SCF procedure<br />nstep 10&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Maximal number of SCF cycles<br />toldfe 1.0d-10&nbsp; &nbsp; &nbsp;# Will stop when, twice in a row, the difference <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # between two consecutive evaluations of total energy <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # differ by less than toldfe (in Hartree) <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # This value is way too large for most realistic studies of materials<br />diemac 12.0&nbsp; &nbsp; &nbsp; &nbsp;# Although this is not mandatory, it is worth to<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # precondition the SCF cycle. The model dielectric<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # function used as the standard preconditioner<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # is described in the &quot;dielng&quot; input variable section.<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Here, we follow the prescription for bulk silicon.<br /></code></pre></div><br /><br />Thanks,<br />Temok</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: optimal lattice parameter GaAs</h3>
+				<div class="date">Posted: <strong>Thu Jul 05, 2012 7:25 pm</strong></div>
+				<div class="author">by <strong>ljludwig</strong></div>
+				<div class="content">Hello, first of all, as to the optimal lattice parameter, it is OK to use experimental value, as long as <br /><br />&quot;fcart&quot; and &quot;stress&quot; (which are in the .out file)are low enough. <br /><br />Then, isn't the tutorial said that a 8x8x8 may not be enough? The toldfe is a little too high- you can use tolvrs= 1.0d-20, such low value.<br /><br />The energy cutoff should be tested, too, with suitable selection of iscf as well as ixc. <br /><br />As to GaAs, the final result is obtained based on LS coupling, it will also contribute.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: optimal lattice parameter GaAs</h3>
+				<div class="date">Posted: <strong>Sat Jul 27, 2013 1:38 pm</strong></div>
+				<div class="author">by <strong>Adam85</strong></div>
+				<div class="content">Hi Temoc,<br />I am interested in obtaining the lattice constant for GaAs (zincblende structure) based in Tutorial 3.<br />Please what is your latest findings (i.e. latest input file) regarding this issue?<br />Thank you so much...<br />Adam</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: optimal lattice parameter GaAs</h3>
+				<div class="date">Posted: <strong>Mon Jan 19, 2015 12:49 pm</strong></div>
+				<div class="author">by <strong>terrysharpe</strong></div>
+				<div class="content">Those graphs are beautiful, this is my first time using abinit. Im trying to extract the data to replicate your plot, would you be kind enough to share your code, I'm having a few troubles. Thanks!<br /><br />Terry</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: optimal lattice parameter GaAs</h3>
+				<div class="date">Posted: <strong>Tue Jan 20, 2015 4:08 pm</strong></div>
+				<div class="author">by <strong>the_doctor</strong></div>
+				<div class="content">I'm on to you<br /><br /><!-- m --><a class="postlink" href="http://www2.le.ac.uk/offices/ld/resources/study/plagiarism-tutorial">http://www2.le.ac.uk/offices/ld/resourc ... m-tutorial</a><!-- m --><br /><br />MR</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1656&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:30:35 GMT -->
+</html>

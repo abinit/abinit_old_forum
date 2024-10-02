@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3328&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:13:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Restarting from the same WFN didn't got the same energy</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Restarting from the same WFN didn't got the same energy</h2>
+		<p><a href="viewtopic2309.html?f=9&amp;t=3328">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3328</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Restarting from the same WFN didn't got the same energy</h3>
+				<div class="date">Posted: <strong>Tue Jul 19, 2016 6:54 am</strong></div>
+				<div class="author">by <strong>Vladimir</strong></div>
+				<div class="content">I'm in trouble to optimize geometry of AgN3 (silver azide).<br /><br />Using different PP (LDA FHI, GGA FHI, HGH NC, GGA PBE) I optimized the geometry with (optcell=1 or optcell=2), but when <strong class="text-strong">I restart optimization from optimized acell and WFN</strong> (with irdwfk 1 keyword) I've got different energy from previously optimized ( higher one) and optimization process continued again to the previously optimized geometry.<br /><br />graph demonstrate relationship between the x-dim of AgN3 unit cell and iteration number for first and second run.<br /><br />the PP <!-- m --><a class="postlink" href="http://www.abinit.org/downloads/psp-links/lda_fhi">http://www.abinit.org/downloads/psp-links/lda_fhi</a><!-- m --><br /><br />the input:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># AgN3 : geometry optimization<br />#<br /><br /># Definition of the unit cell<br />acell&nbsp; 5.600 5.980 5.998 angstrom<br />spgroup 72<br />rprim&nbsp; 1.0&nbsp; 0.0&nbsp; 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp;0.0&nbsp; 1.0&nbsp; 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp;0.0&nbsp; 0.0&nbsp; 1.0<br />chkprim 0<br /><br /># Definition of the atom types<br />ntypat 2<br />znucl&nbsp; 7 47<br /><br /># Definition of the atoms<br />natom 16&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# There are 16 atoms<br />typat 4*2 12*1<br />xred&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # This keyword indicate that the location of the atoms<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # will follow, one triplet of number for each atom<br />&nbsp; &nbsp;0.0&nbsp; 0.0&nbsp; 1/4&nbsp; # Note the use of fractions (remember the limited.<br />&nbsp; &nbsp;1/2&nbsp; 1/2&nbsp; 1/4&nbsp; # interpreter capabilities of ABINIT)<br />&nbsp; &nbsp;0.0&nbsp; 0.0&nbsp; 3/4&nbsp; # Note the use of fractions (remember the limited.<br />&nbsp; &nbsp;1/2&nbsp; 1/2&nbsp; 3/4&nbsp; # interpreter capabilities of ABINIT)<br />&nbsp; &nbsp;0.3422&nbsp; &nbsp;0.1327&nbsp; &nbsp;0.0&nbsp; # 1-st N3 group (N1)<br />&nbsp; &nbsp;1/2&nbsp; &nbsp; &nbsp; 0.0&nbsp; &nbsp; &nbsp; 0.0&nbsp; # 1-st N3 group (N2)<br />&nbsp; &nbsp;0.6578&nbsp; -0.1327&nbsp; &nbsp;0.0&nbsp; # 1-st N3 group (N3)<br />&nbsp; &nbsp;0.1578&nbsp; &nbsp;0.6327&nbsp; &nbsp;0.0&nbsp; # 2-nd N3 group (N1)<br />&nbsp; &nbsp;0.0&nbsp; &nbsp; &nbsp; 1/2&nbsp; &nbsp; &nbsp; 0.0&nbsp; # 2-nd N3 group (N2)<br />&nbsp; -0.1578&nbsp; &nbsp;0.3663&nbsp; &nbsp;0.0&nbsp; # 2-nd N3 group (N3)<br />&nbsp; &nbsp;0.1578&nbsp; &nbsp;0.3663&nbsp; &nbsp;1/2&nbsp; # 3-rd N3 group (N1)<br />&nbsp; &nbsp;0.0&nbsp; &nbsp; &nbsp; 1/2&nbsp; &nbsp; &nbsp; 1/2&nbsp; # 3-rd N3 group (N2)<br />&nbsp; -0.1578&nbsp; &nbsp;0.6327&nbsp; &nbsp;1/2&nbsp; # 3-rd N3 group (N3)<br />&nbsp; &nbsp;0.6578&nbsp; &nbsp;0.1327&nbsp; &nbsp;1/2&nbsp; # 4-th N3 group (N1)<br />&nbsp; &nbsp;1/2&nbsp; &nbsp; &nbsp; 0.0&nbsp; &nbsp; &nbsp; 1/2&nbsp; # 4-th N3 group (N2)<br />&nbsp; &nbsp;0.3422&nbsp; -0.1327&nbsp; &nbsp;1/2&nbsp; # 4-th N3 group (N3)<br /><br /># Definition of the planewave basis set<br />ecut 20.0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# Maximal kinetic energy cut-off, in Hartree<br /><br /># Definition of the k-point grid<br />kptopt 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Option for the automatic generation of k points, taking<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # into account the symmetry<br />ngkpt 1 1 1&nbsp; &nbsp; &nbsp; &nbsp;# This is a 1x1x1 grid based on the primitive vectors<br />nshiftk 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# of the reciprocal space (that form a BCC lattice !),<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # repeated four times, with different shifts :<br />shiftk 0.0 0.0 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # In cartesian coordinates, this grid is simple cubic, and<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # actually corresponds to the<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # so-called 4x4x4 Monkhorst-Pack grid<br /><br /># Definition of the SCF procedure<br />nstep 30&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Maximal number of SCF cycles<br />toldfe 1.0d-10&nbsp; &nbsp; # Will stop when, twice in a row, the difference.<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # between two consecutive evaluations of total energy.<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # differ by less than toldfe (in Hartree).<br />diemac 3.0&nbsp; &nbsp; &nbsp; &nbsp; # Although this is not mandatory, it is worth to<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # precondition the SCF cycle. The model dielectric<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # function used as the standard preconditioner<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # is described in the &quot;dielng&quot; input variable section.<br />prtden 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # No output of electron density<br /><br /># add to conserve old &lt; 6.7.2 behavior for calculating forces at each SCF step<br /># optforces 1<br />optcell 1<br />ntime&nbsp; &nbsp;30<br />dilatmx 1.2<br />ecutsm&nbsp; 0.5<br />ionmov&nbsp; 2</code></pre></div><br />how to avoid this behavior?<br />Best.<br />Vladimir.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Restarting from the same WFN didn't got the same energy</h3>
+				<div class="date">Posted: <strong>Tue Jul 19, 2016 9:10 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">If you restart form the wave functions only, you don't restart from the optimized geometry.<br />To do so, you have to copy the last geometry (positions and lattice parameters) and paste it in you input file.<br /><br />If you have abinit with netcdf, you should have a _HIST.nc file that contains all the steps. Using restartxf -1 or -2 would restart the full optimization from the lowest energy geometry or the last step.<br /><br />Cheers</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Restarting from the same WFN didn't got the same energy</h3>
+				<div class="date">Posted: <strong>Tue Jul 19, 2016 10:49 am</strong></div>
+				<div class="author">by <strong>Vladimir</strong></div>
+				<div class="content">I'am restarting from optimized geometry and WFN, the graph demonstrate it.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Restarting from the same WFN didn't got the same energy</h3>
+				<div class="date">Posted: <strong>Mon Jul 25, 2016 9:02 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Hi,<br /><br />Ok sorry,<br /><br />Could you check that in your first run, your fft grids (ngfft) at the end of the first run and at the beginning of the second are the same ?<br />If not, add the corresponding first ngfft in your second run.<br />Also, I see that you converge the energy (toldfe), you should try to converge the density (tolvrs) instead (or at least check that it is well converged).<br />what is you criteria for the relaxation ? I can't find tolmxf in your input file.<br /><br />Cheers<br /><br />Jordan<br /><br />PS:Writing  Hello and thanks has never burnt any keyboard <img class="smilies" src="images/smilies/icon_e_wink.gif" alt=";)" title="Wink" /></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Restarting from the same WFN didn't got the same energy</h3>
+				<div class="date">Posted: <strong>Tue Jul 26, 2016 8:39 am</strong></div>
+				<div class="author">by <strong>Vladimir</strong></div>
+				<div class="content">Hello Jordan.<br /><br />Thanks for the advice.<br /><br />1. criteria for the relaxation is default tolmxf= 5.0000E-05<br />2. ngfft is  90 90 90 and   ngfftdg  is  120 125 125 in both run.<br /><br />I think that I have faced a bad SCF convergence.<br />In both cases at first, we find a false SCF minimum, and then the real one.<br /><br />Whether it is possible in this case affect the SCF convergence?<br /><br />Best, Vladimir.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Restarting from the same WFN didn't got the same energy</h3>
+				<div class="date">Posted: <strong>Thu Jul 28, 2016 9:35 am</strong></div>
+				<div class="author">by <strong>Vladimir</strong></div>
+				<div class="content">To start with a new geometry is necessary not only to copy new acell but also new xred.<br /><br />thanks to Jordan  for helpful discussions<br /><br />how to add [SOLVED] to the subj?</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3328&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:13:17 GMT -->
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1215&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:53:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; SCF convergence problem in parallel run of a molecule</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>SCF convergence problem in parallel run of a molecule</h2>
+		<p><a href="viewtopic494d-2.html?f=9&amp;t=1215">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1215</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>SCF convergence problem in parallel run of a molecule</h3>
+				<div class="date">Posted: <strong>Wed Jul 13, 2011 7:24 pm</strong></div>
+				<div class="author">by <strong>golden</strong></div>
+				<div class="content">Dear Abinit users,<br />  <br />    I am trying to optimize a molecule using the abinit code, so far I couldn't get it to converge the SCF in the first optimization step using 200 SCF cycles. I was runing the calculation parallel on 4 procs. <br /><br />   I would like to know what am I doing wrong in the input file? Does it need some key words that I am missing? Following is the input file that I have been using to optimize the geometry..<br /><br /># optimize the geometry / interatomic distance<br /># optimizing after finding the optimal ecut as 20.0 and <br /># acell to be 8 8 8 angstroms from ecut-test and acell-test runs<br /><br />ionmov  3              # Use the modified Broyden algorithm<br />ntime   20             # Maximum number of Broyden &quot;timesteps&quot;<br />tolmxf  5.0d-3         # Stopping criterion for the geometry optimization : when <br />                       # the residual forces are less than tolmxf, the Broyden <br />                       # algorithm can stop<br />#nsym=1  #nosymmetry<br /><br />#starting value of the<br />#atomic coordinates<br />[  xangst  ]<br /><br />toldff  5.0d-4         # Will stop the SCF cycle when, twice in a row, <br />                       # the difference between two consecutive evaluations of<br />                       # forces differ by less than toldff (in Hartree/Bohr)<br />#toldfe  1.0d-6<br />#------------------------------------------------------------------------------<br />#Definition of the unit cell<br />acell 20  20  20  angstroms  # The keyword &quot;acell&quot; refers to theI<br /># lengths of the primitive vectors (in Bohr)<br />#rprim 1 0 0  0 1 0  0 0 1 # This line, defining orthogonal primitive vectors,<br /># is commented, because it is precisely the default value of rprim<br />#Definition of the atom types<br /><br />ntypat 4   #2 types of atom<br />znucl 79 16 6 1 <br />#Au S C H<br /><br />#Definition of the atoms<br />natom 115        # There are 115  atoms<br /><br />typat 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 <br />2 2 2 2 3 4 4 3 4 4 3 4 4 3 4 4 3 4 4 3 4 4 3 4 4 3 4 4 3 4 4 3 4 4 3 4 4 3 4 4 <br />3 4 4 3 4 4 3 4 4 3 4 4 3 4 4 3 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 <br /><br />#Definition of the planewave basis set<br />ecut 20.0     # Maximal kinetic energy cut-off, in Hartree<br /><br />#Definition of the k-point grid<br />#kptopt 1          # Enter the k points manually <br />#nshiftk 1<br />#shiftk 0.5 0.5 0.5<br />#nkpt 1            # Only one k point is needed for isolated system,<br />#                  # taken by default to be 0.0 0.0 0.0<br /><br />#ngkpt 2 2 2<br />#Chksymbreak 0<br /><br />#Definition of the SCF procedure<br />nstep 200 # Maximal number of SCF cycles<br />#toldfe is no more defined, as toldff is used above...<br />diemac 2.0<br /><br />----<br /> In the above another question that Arieses is , I want to treat it as a single molecule, but if used the keyword nkpt=1 the calculation halts. To my knowledge I must use nkpt=1 but the program does not allow me to use it.<br /><br /> I would also like to know is there any additional keywords that I need to use when running it on parallel ?<br />Thanks.<br /><br /><br />Neranjan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF convergence problem in parallel run of a molecule</h3>
+				<div class="date">Posted: <strong>Wed Jul 13, 2011 7:37 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Try with:<br /><br />kptopt 0<br />nkpt 1<br />kpt 0.0 0.0 0.0<br /><br />Also, have you successfully optimized a simpler molecule, just as a test case? For example, N2 or something like that? It would help you get the kpt related variables correct, before moving on to a big system.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF convergence problem in parallel run of a molecule</h3>
+				<div class="date">Posted: <strong>Thu Jul 14, 2011 6:55 pm</strong></div>
+				<div class="author">by <strong>golden</strong></div>
+				<div class="content">Thank you very much Sir, I was able to run my calculation successfully using the given keywords.  I really appreciate the help given. <br />Thanks</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF convergence problem in parallel run of a molecule</h3>
+				<div class="date">Posted: <strong>Thu Sep 22, 2011 11:39 pm</strong></div>
+				<div class="author">by <strong>jtalla</strong></div>
+				<div class="content">Hello,<br /><br /> I am using the following grid (3 x 3 x5) how to calculate the number of kpoints? as I am always getting following warning: <br />&quot;  distrb2: WARNING <br />  nkpt*nsppol (   68) is not a multiple of nproc_kpt (   16)  The k-point parallelisation is not efficient.&quot; <br /><br />how to avoid this warning?<br /><br />One more question please, I have the follwing message: <br />&quot;-P-0000   Wavefunctions not converged for nnsclo,ikpt=   50    1 max resid=  2.77067E-27 starting lobpcg, with nblockbd,mpi_enreg%nproc_band          96           1<br />WARNING in zpotrf, info=  1&quot;<br />I am assuming that the SCF iterations (50) is not enough and I should increase that number to get the energy converged! Is that correct? if so what do you suggest?<br /><br /><br />warm regards,</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1215&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:53:43 GMT -->
+</html>

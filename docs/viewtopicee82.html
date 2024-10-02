@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2256&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:13:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; getng.F90:431:BUG contact ABINIT group</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>getng.F90:431:BUG contact ABINIT group</h2>
+		<p><a href="viewtopicf9c9.html?f=9&amp;t=2256">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2256</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>getng.F90:431:BUG contact ABINIT group</h3>
+				<div class="date">Posted: <strong>Fri Aug 23, 2013 7:24 pm</strong></div>
+				<div class="author">by <strong>tam</strong></div>
+				<div class="content">Hello,<br /><br />We are trying to compile abinit in parallel for a class, but we are not very familiar with abinit ourselves.<br /><br />The serial version works fine, but in parallel we get:<br /><br /> getng.F90:431:BUG<br />   The second dimension of the FFT grid, ngfft(2), should be  a multiple of the number of processors for the FFT, nproc_fft.  However, ngfft(2)=   20 and nproc_fft=    3<br />  Action : contact ABINIT group.<br /><br />Across 12 nodes, we get files dx_LOG_0001 through 0011 (not 0012, if this makes any difference) and dx_status_P-0001 through 0011.<br /><br />The input file (below) is the same one that was used last year in class on abinit 5.7.3 in parallel on 4 nodes, 1 core each.<br />Is there anything about the input file that we should change for version 7.2.2?<br /><br />Thank you,<br />Tam<br />-----------------------------------------------------------------------------------------<br /># Crystalline silicon : computation of the total energy<br /># Convergence with respect to the number of k points.<br /><br />ndtset 4<br />#Definition of the k-point grids<br />kptopt 1          # Option for the automatic generation of k points, taking<br />                  # into account the symmetry<br />nshiftk 4<br />shiftk  0.5 0.5 0.5  # These shifts will be the same for all grids<br />        0.5 0.0 0.0<br />        0.0 0.5 0.0<br />        0.0 0.0 0.5<br /><br />ngkpt1  2 2 2     # Definition of the different grids<br />ngkpt2  4 4 4<br />ngkpt3  6 6 6<br />ngkpt4  8 8 8<br /><br />getwfk -1         # This is to speed up the calculation, by restarting<br />                  # from previous wavefunctions, transferred from the old<br />                  # to the new k-points.<br /><br /><br /><br />#Definition of the unit cell<br />acell 3*10.18          # This is equivalent to   10.18 10.18 10.18<br />rprim  0.0  0.5  0.5   # FCC primitive vectors (to be scaled by acell)<br />       0.5  0.0  0.5<br />       0.5  0.5  0.0<br /><br />#Definition of the atom types<br />ntypat 1          # There is only one type of atom<br />znucl 14          # The keyword &quot;znucl&quot; refers to the atomic number of the<br />                  # possible type(s) of atom. The pseudopotential(s)<br />                  # mentioned in the &quot;files&quot; file must correspond<br />                  # to the type(s) of atom. Here, the only type is Silicon.<br /><br /><br />#Definition of the atoms<br />natom 2           # There are two atoms<br />typat 1 1         # They both are of type 1, that is, Silicon.<br />xred              # This keyword indicate that the location of the atoms<br />                  # will follow, one triplet of number for each atom<br />   0.0  0.0  0.0  # Triplet giving the REDUCED coordinate of atom 1.<br />   1/4  1/4  1/4  # Triplet giving the REDUCED coordinate of atom 2.<br /><br />#Definition of the planewave basis set<br />ecut  8.0         # Maximal kinetic energy cut-off, in Hartree<br /><br />#Definition of the SCF procedure<br />nstep 10          # Maximal number of SCF cycles<br />toldfe 1.0d-6     # Will stop when, twice in a row, the difference<br />                  # between two consecutive evaluations of total energy<br />                  # differ by less than toldfe (in Hartree)<br />diemac 12.0       # Although this is not mandatory, it is worth to<br />                  # precondition the SCF cycle. The model dielectric<br />                  # function used as the standard preconditioner<br />                  # is described in the &quot;dielng&quot; input variable section.<br />                  # Here, we follow the prescription for bulk silicon.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: getng.F90:431:BUG contact ABINIT group</h3>
+				<div class="date">Posted: <strong>Mon Aug 26, 2013 3:23 pm</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">Hello Tam<br /><br />It's probably because abinit has automatically taken care of the parallelization parameters and has set NPFFT to 3, which is not a multiple of NGFFT(2)=20. In abinit 5.x, abinit would parallelize only on kpoints, while the 7.2.2 version activates the 3-level parallelization scheme by default. You have several options: <br /><br />1. Change the number of cores you're running abinit with, hoping for a chance that you'll get a distribution that works<br />2. Configure yourself the parallelization parameters by setting NPFFT, NPKPT, and NPBAND &quot;by hand&quot;, using for instance NPFFT=1.<br />3. Disable paral_kgb by setting paral_kgb=0. You'll then parallelize on kpoints only, which will avoid any issue with the number of cpus dedicated to the FFT grid.<br /><br />If I were you, I'd use option 3 first. If you have a large system (lot of bands, few kpoints) then go with option 2 and set NPFFT=1, NPKPT = NSPPOL, and NPBAND = multiple of NBANDS.<br /><br />Hope this helps<br />Boris</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: getng.F90:431:BUG contact ABINIT group</h3>
+				<div class="date">Posted: <strong>Mon Aug 26, 2013 4:56 pm</strong></div>
+				<div class="author">by <strong>tam</strong></div>
+				<div class="content">Hello Boris,<br /><br />Thank you very much! Option 3 worked perfectly, and we will forward this information to the class so the students are informed about 1&amp;2 as well.<br /><br />Thanks again,<br />Tam</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: getng.F90:431:BUG contact ABINIT group</h3>
+				<div class="date">Posted: <strong>Tue Aug 27, 2013 3:36 pm</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">Great!<br /><br />You should mark the problem as solved. It should be available somewhere in your first post.<br /><br />Boris</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2256&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:13:01 GMT -->
+</html>

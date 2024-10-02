@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4116&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:37:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; compile using 64 bits integers</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>compile using 64 bits integers</h2>
+		<p><a href="viewtopic8eed.html?f=3&amp;t=4116">https://forum.abinit.org/viewtopic.php?f=3&amp;t=4116</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>compile using 64 bits integers</h3>
+				<div class="date">Posted: <strong>Mon May 27, 2019 5:01 pm</strong></div>
+				<div class="author">by <strong>bmary</strong></div>
+				<div class="content">Hy<br /><br />I'm admin of a computing cluster. A user had this error with a &quot;big&quot; job (366 atomes).<br />&gt; my_nspinor: 1, mpw: 200091, mband: 1708, mkmem: 11, nsppol: 1<br />&gt; Note: Compiling with large int (int64) requires a full software stack (MPI/FFTW/BLAS...) compiled in int64 mode<br /><br />It appears that this message comes from `m_gstate.f90`:<br />&gt; 696 &amp;     &quot;Default integer is not wide enough to store the size of the wavefunction array (mcg).&quot;,ch10,&amp;<br />&gt; 697 &amp;     &quot;This usually happens when paral_kgb == 0 and there are not enough procs to distribute kpts and spins&quot;,ch10,&amp;<br />&gt; 698 &amp;     &quot;Action: if paral_kgb == 0, use nprocs = nkpt * nsppol to reduce the memory per node.&quot;,ch10,&amp;<br />&gt; 699 &amp;     &quot;If this does not solve the problem, use paral_kgb 1 with nprocs &gt; nkpt * nsppol and use npfft/npband/npspinor&quot;,ch10,&amp;<br />&gt; 700 &amp;     &quot;to decrease the memory requirements. Consider also OpenMP threads.&quot;<br /><br />So, I'm not sure compiling using int64 is the solution. May be more MPI instances is the solution ? <br />I mean, the problem may be an out of memory one ?<br /><br />Whatever, I tryed to compile abinit 8.10.2, forcing int64. Following is what I tryed and/or noticed so far:<br />* An opened topic on the subject, but with (possible ?) solution in private gitlab &gt; <!-- l --><a class="postlink-local" href="viewtopic3726.html?f=3&amp;t=3607">viewtopic.php?f=3&amp;t=3607</a><!-- l --><br /><br />EDIT : I don't have access to this gitlab, I don't know if a solution was found.<br /><br />* Dedicated 64bits arguments are not viewed by `configure` (ie CPPFLAGS_64BITS, CFLAGS_64BITS, CXXFLAGS_64BITS, and FCFLAGS_64BITS, as mentioned in `abinit/doc/build/config-template.ac`). I used FCFLAGS (and C/C++ equivalents) argument to transmit compile flags (see what follows).<br />* I'm using intel compilers. Using `-i8` compile flag is recommended by intel documentation. But compilation fails for `12_hide_mpi/m_xmpi.F90`. Functions `xmpi_max_int0d_i4b` and `xmpi_max_int0d_i8b` are declared ambigus. From what I understand, -i8 force compiler to use int64 all the time. So `xmpi_max_int0d_i4b` and `xmpi_max_int0d_i8b` are both viewed as 64bits version. Should I disable one of those ? The existence of these two versions tells me the int64 compilation is may not needed again.<br />* Compiling using only `-ilp64` compile flag (partial ILP64 support says mpiifort doc) returns data type errors.<br />* Same with `-no_ilp64 -i8` (as mentioned in mpiifort doc).<br /><br />Any help about my user's original error, or int64 compilation would be appreciated.<br />Thanks,<br />Baptiste</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: compile using 64 bits integers</h3>
+				<div class="date">Posted: <strong>Fri May 31, 2019 11:15 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content"><blockquote class="uncited"><div>So, I'm not sure compiling using int64 is the solution. May be more MPI instances is the solution ? <br />I mean, the problem may be an out of memory one ?<br /></div></blockquote><br /><br />Right, compiling with int64 is not the recommended solution.<br />The calculation is relatively large but some dimensions scale with the number of MPI processes <br />provided the correct algorithm is used.<br /><br />First of all, 11 kpoints (mkmem 11) for a system with 366 atoms looks weird to me.<br /><br /><blockquote class="uncited"><div>&gt; my_nspinor: 1, mpw: 200091, mband: 1708, mkmem: 11, nsppol: 1<br /></div></blockquote><br /><br />Calculations with large systems are usually done with one k-point (Gamma-only) in which one can use symmetry tricks <br />to halve the number of G-vectors. Hence using Gamma-only sampling allows one to decrease the memory requirement of an <br />hypothetical sequential job by a factor ~22 <br /><br />Secondly, I hope the user is using the paral_kgb = 1 solver because the default algorithm (paral_kgb = 0) has limited scalability.<br />paral_kgb 1 can distribute the memory over several levels thanks to the  npfft, npband, npkpt input variables that define<br /> the number of MPI processes for the different levels.<br /><br />I would suggest the user to experiment a bit with these parameters following the discussion available <br />in this tutorial: <!-- m --><a class="postlink" href="https://docs.abinit.org/tutorial/paral_gspw/">https://docs.abinit.org/tutorial/paral_gspw/</a><!-- m --><br />If the problem persists, I would suggest that he/she shares the input file on the forum so that we have a better understanding <br />of the kind of calculation that is being performed.<br /><br />Matteo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: compile using 64 bits integers</h3>
+				<div class="date">Posted: <strong>Mon Jun 03, 2019 11:10 am</strong></div>
+				<div class="author">by <strong>bmary</strong></div>
+				<div class="content">Hy,<br />I have forwarded these recommendations to the user, I will keep you informed of any progress.<br />Many thanks,<br />Baptiste</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4116&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:37:29 GMT -->
+</html>

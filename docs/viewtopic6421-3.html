@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3072&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:01:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; PAW slab convergence issue</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>PAW slab convergence issue</h2>
+		<p><a href="viewtopic3005.html?f=9&amp;t=3072">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3072</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>PAW slab convergence issue</h3>
+				<div class="date">Posted: <strong>Tue Aug 11, 2015 5:53 am</strong></div>
+				<div class="author">by <strong>sheng</strong></div>
+				<div class="content">I am having difficulties trying to converge a ten unit cell slab plus two unit cell vacuum using JTH PAW potentials.<br />Below is my input file (I omit atomic position for brevity):<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code><br />ndtset 1<br /><br />#Definition of the structural parameters<br />#************************************<br /><br />acell 3.994 3.994 48.432 angstrom<br /><br />rprim 1.0 0.0 0.0<br />&nbsp; &nbsp; &nbsp; 0.0 1.0 0.0<br />&nbsp; &nbsp; &nbsp; 0.0 0.0 1.0<br /><br />natom&nbsp; 50<br />ntypat 3<br />znucl&nbsp; 56 22 8<br />typat<br />1 2 3 3 3<br />1 2 3 3 3<br />1 2 3 3 3<br />1 2 3 3 3<br />1 2 3 3 3<br />1 2 3 3 3<br />1 2 3 3 3<br />1 2 3 3 3<br />1 2 3 3 3<br />1 2 3 3 3<br /><br />#Parallelization<br />#****************<br />&nbsp; &nbsp;paral_kgb 1&nbsp; &nbsp;npkpt 3 npband 6 npfft 1 bandpp 2<br /><br />#Definition of the SCF procedure<br />#*******************************<br />&nbsp; &nbsp;nstep 1000<br />&nbsp; &nbsp;iscf 17<br />&nbsp; &nbsp;iprcel 45<br />#&nbsp; &nbsp;diemac 200000<br />&nbsp; &nbsp;diecut 3.0<br />&nbsp; &nbsp;diemix 0.6<br />&nbsp; &nbsp;nband 216<br /><br />#&nbsp; &nbsp;nsppol 2<br /><br />#&nbsp; occopt 7<br />#&nbsp; tsmear 0.04 eV<br /><br /><br />&nbsp; &nbsp;prtwf 0<br />&nbsp; &nbsp;prtden 0<br /><br />#Definition of the plane wave basis set<br />#**************************************<br />&nbsp; &nbsp;ecut: 30 ecut+ 2<br />&nbsp; &nbsp;pawecutdg 60<br />&nbsp; &nbsp;ngkpt 4 4 1<br />&nbsp; &nbsp;toldfe 1.0d-10<br />#&nbsp; &nbsp;usexcnhat 1<br /></code></pre></div><br /><br />I am having iprcel=0 before and I cannot reach convergence after adjusting ngkpt, occopt, tsmear and iscf (13 or 17). The difference in energy will reach at most 10^-5 and then oscillate around that value.<br /><br />iprcel=45 is even worse. The scf is always restarted with this error: &quot;Lobpcgwf: restart performed&quot;.<br /><br />I have not try the nline variable yet.<br />Is there any advice on how to converge a slab calculation?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: PAW slab convergence issue</h3>
+				<div class="date">Posted: <strong>Tue Aug 18, 2015 11:10 am</strong></div>
+				<div class="author">by <strong>sheng</strong></div>
+				<div class="content">I have managed to converge using iprcel=0 and smearing without band parallelization, although it takes about 140 iterations to complete which takes me about 10 hours to reach tolvrs 1d-10.<br /><br />Extrapolation preconditioning (iprcel &gt; 0) remains troublesome, where the potential residual nres remained at order of 10^+2 throughout about 40 iterations. I tried iprcel 45, 49, 145, 149 with diecut of default and 1.0. Diemix is set at 0.4<br /><br />I gave a few questions:<br /><br />i) Is tphysel play an important in my calculation involving structural relaxation and calculating spontaneous polarization? I have read the relevant paper which include its effect on atomic displacement and wish to reconfirm its significance.<br /><br />ii) I have gausian smearing with tsmear 0.0015 and also tsmear 0.04. The value 0.04 is better at convergence as expected. However smearing in my case is merely for easier convergence and my material is a dielectric. What is the usual range of tsmear value for easier convergence for insulator? For metal the recommended value is from 0.01 to 0.04 Ha, which I assume is not suitable for insulator.<br /><br />iii) Due to the long scf iteration times needed, I still wish to perform extrapolation preconditioning (iprcel &gt; 0). Any advice for me on how to modify my input file?</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3072&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:01:49 GMT -->
+</html>

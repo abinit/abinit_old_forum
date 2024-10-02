@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3430&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:52:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; MPI support broken error while configuring abinit-7.8.2.</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>MPI support broken error while configuring abinit-7.8.2.</h2>
+		<p><a href="viewtopic87a2.html?f=3&amp;t=3430">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3430</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>MPI support broken error while configuring abinit-7.8.2.</h3>
+				<div class="date">Posted: <strong>Wed Nov 16, 2016 6:31 pm</strong></div>
+				<div class="author">by <strong>manik</strong></div>
+				<div class="content">Dear all<br /><br />I am trying to install abinit-7.8.2 in a cluster environment.<br /><br />While configuring it, the following error is coming:<br /><br />checking whether to enable OpenMP support... no<br />checking whether to build MPI code... yes<br />checking whether the C compiler supports MPI... no<br />checking whether the C++ compiler supports MPI... no<br />checking whether the Fortran Compiler supports MPI... yes<br />checking whether MPI is usable... no<br />configure: error: MPI support is broken - please fix your config parameters and/or MPI installation.<br /><br />My .ac file looks like this:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>prefix=&quot;/usr/local&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_prefix=&quot;/opt/openmpi&quot;<br />#FC=&quot;/opt/openmpi/bin/mpif90&quot;<br />#CC=&quot;/opt/openmpi/bin/mpicc&quot;<br />#CXX=&quot;/opt/openmpi/bin/mpic++&quot;<br />with_trio_flavor=&quot;netcdf+etsf_io&quot;<br />with_netcdf_incs=&quot;-I/usr/include&quot;<br />with_netcdf_libs=&quot;-L/usr/lib -lnetcdf -lnetcdff&quot;<br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_incs=&quot;-I/usr/include/&quot;<br />with_fft_libs=&quot;-L/usr/lib/x86-64-linux-gnu/ -lfftw3 -lfftw3f&quot;<br />with_linalg_flavor=&quot;atlas&quot;<br />with_linalg_libs=&quot;-L/usr/lib64 -llapack -lf77blas -lcblas -latlas&quot;<br />#with_dft_flavor=&quot;atompaw+libxc&quot;<br />with_dft_flavor=&quot;atompaw+bigdft+libxc+wannier90&quot; </code></pre></div><br /><br />Also the config.log file is attached here:<br /><br /><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/fileab69.php?id=1336">config.log</a></dt>
+			<dd><em>log file</em></dd>			<dd>(162.24 KiB) Downloaded 615 times</dd>
+		</dl>
+		
+		
+			</div><br /><br />Please help!!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MPI support broken error while configuring abinit-7.8.2.</h3>
+				<div class="date">Posted: <strong>Thu Nov 17, 2016 8:04 am</strong></div>
+				<div class="author">by <strong>manik</strong></div>
+				<div class="content">Can anybody help me.?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MPI support broken error while configuring abinit-7.8.2.</h3>
+				<div class="date">Posted: <strong>Thu Nov 24, 2016 12:15 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">You are using a prehistoric 4.1 version of GCC. Please upgrade your compilers to at least version 4.8.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MPI support broken error while configuring abinit-7.8.2.</h3>
+				<div class="date">Posted: <strong>Fri Nov 25, 2016 9:08 am</strong></div>
+				<div class="author">by <strong>manik</strong></div>
+				<div class="content">Thank you pouillon for your reply. I will try upgrading the compilers.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3430&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:52:35 GMT -->
+</html>

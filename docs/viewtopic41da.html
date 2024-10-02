@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3778&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:30:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Bug? Trying to use B3LYP</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Bug? Trying to use B3LYP</h2>
+		<p><a href="viewtopic5f4d.html?f=9&amp;t=3778">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3778</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Bug? Trying to use B3LYP</h3>
+				<div class="date">Posted: <strong>Mon Feb 12, 2018 10:10 pm</strong></div>
+				<div class="author">by <strong>horsfielda</strong></div>
+				<div class="content">I have compiled abinit with libxc. When I try to run the calculation with B3LYP<br /><br />ixc -402<br /><br />and no symmetry<br /><br />nsym 1<br />symrel 1 0 0 0 1 0 0 0 1 <br />tnons 0 0 0<br /><br />the run stops almost immediately and I get the following output:<br /><br /><blockquote class="uncited"><div>symlatt : the Bravais lattice is aP (primitive triclinic)<br /> symspgr : spgroup=   1  P1   (=C1^1)<br /> ingeo : angdeg(1:3)=   90.00000000   90.00000000  119.99998843<br />At line 1332 of file invars2.F90<br />Fortran runtime error: Expected INTEGER for item 3 in formatted transfer, got CHARACTER<br />(a,i8,i5)<br />      ^<br /><br />Error termination. Backtrace:<br />At line 1332 of file invars2.F90<br />Fortran runtime error: Expected INTEGER for item 3 in formatted transfer, got CHARACTER<br />(a,i8,i5)<br />      ^<br /><br />Error termination. Backtrace:<br /> invars2: take the default value of fband=  5.00000000E-01</div></blockquote><br /><br />Is this a bug? Or am I doing something wrong?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Bug? Trying to use B3LYP</h3>
+				<div class="date">Posted: <strong>Mon Feb 19, 2018 11:10 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Andrew,<br />Sounds like it is looking for a number at some place in the input but found a character instead.<br />Could you show us your input file in case you don't see the trouble?<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Bug? Trying to use B3LYP</h3>
+				<div class="date">Posted: <strong>Mon May 28, 2018 9:25 pm</strong></div>
+				<div class="author">by <strong>cespejo</strong></div>
+				<div class="content">Hello Andrew and Eric, I'm just getting the same behaviour. I know that for hybrid functionals like B3LYP one needs to run a GGA calculation previous to the B3LYP, here is my input file:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># Ethanol6-Water<br />#########################################################<br /><br />ndtset 2 <br /><br />#########################################################<br /># First dataset: SCF<br />#########################################################<br />&nbsp;nstep 200<br />&nbsp;toldfe 1.0e-12 <br />&nbsp;kptopt 0&nbsp; &nbsp; &nbsp; &nbsp; # 3ption for the automatic generation of k points<br />&nbsp;nkpt&nbsp; &nbsp;1<br />&nbsp;kpt&nbsp; 0.0 0.0 0.0<br />&nbsp;prtden 1&nbsp; <br />&nbsp;nband 88<br />&nbsp;iscf1 17<br />&nbsp;iscf2 2<br />#########################################################<br /># Data common to all datasets<br />#########################################################<br />#Definition of the unit cell<br />acell 16 16 16&nbsp; angstr<br />rprim&nbsp; 1.0&nbsp; 0.0&nbsp; 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp;0.0&nbsp; 1.0&nbsp; 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp;0.0&nbsp; 0.0&nbsp; 1.0<br />chksymbreak 0<br />chkprim 0<br />#Definition of the atom types <br />ntypat 3<br />znucl 1 6 8&nbsp; &nbsp; &nbsp;<br />#Definition of the atoms<br />natom 57<br />typat <br />3 1 2 2 1 1 1 1 1 3 1 2 2 1 1 1 1 1 3 1 2 1 1 2 1 1 1 3 1 2 2 1 1 1 1 1 3 1 1 3 1 2 2 1 1 1 1 1 3 2 2 1 1 1 1 1 1<br />xangst<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2.36900&nbsp; &nbsp; &nbsp; &nbsp;-1.30200&nbsp; &nbsp; &nbsp; &nbsp;-1.19900<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1.47600&nbsp; &nbsp; &nbsp; &nbsp;-1.03100&nbsp; &nbsp; &nbsp; &nbsp;-1.54700<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3.37100&nbsp; &nbsp; &nbsp; &nbsp;-0.48100&nbsp; &nbsp; &nbsp; &nbsp;-1.80600<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 4.73200&nbsp; &nbsp; &nbsp; &nbsp;-0.88200&nbsp; &nbsp; &nbsp; &nbsp;-1.25900<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 5.52100&nbsp; &nbsp; &nbsp; &nbsp;-0.27200&nbsp; &nbsp; &nbsp; &nbsp;-1.71400<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 4.93700&nbsp; &nbsp; &nbsp; &nbsp;-1.93600&nbsp; &nbsp; &nbsp; &nbsp;-1.47800<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 4.77100&nbsp; &nbsp; &nbsp; &nbsp;-0.74500&nbsp; &nbsp; &nbsp; &nbsp;-0.17300<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3.16800&nbsp; &nbsp; &nbsp; &nbsp; 0.57900&nbsp; &nbsp; &nbsp; &nbsp;-1.59000<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3.33900&nbsp; &nbsp; &nbsp; &nbsp;-0.61100&nbsp; &nbsp; &nbsp; &nbsp;-2.89600<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-4.82000&nbsp; &nbsp; &nbsp; &nbsp;-0.22000&nbsp; &nbsp; &nbsp; &nbsp; 0.74900<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-4.94800&nbsp; &nbsp; &nbsp; &nbsp; 0.49800&nbsp; &nbsp; &nbsp; &nbsp; 1.38800<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-4.02000&nbsp; &nbsp; &nbsp; &nbsp;-1.25200&nbsp; &nbsp; &nbsp; &nbsp; 1.36200<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-2.77600&nbsp; &nbsp; &nbsp; &nbsp;-0.70000&nbsp; &nbsp; &nbsp; &nbsp; 2.04100<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-2.17300&nbsp; &nbsp; &nbsp; &nbsp;-1.52200&nbsp; &nbsp; &nbsp; &nbsp; 2.44700<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-2.16200&nbsp; &nbsp; &nbsp; &nbsp;-0.12700&nbsp; &nbsp; &nbsp; &nbsp; 1.33900<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-3.04400&nbsp; &nbsp; &nbsp; &nbsp;-0.04700&nbsp; &nbsp; &nbsp; &nbsp; 2.88300<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-3.75400&nbsp; &nbsp; &nbsp; &nbsp;-1.92100&nbsp; &nbsp; &nbsp; &nbsp; 0.53900<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-4.64500&nbsp; &nbsp; &nbsp; &nbsp;-1.81600&nbsp; &nbsp; &nbsp; &nbsp; 2.06800<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2.19400&nbsp; &nbsp; &nbsp; &nbsp;-0.97700&nbsp; &nbsp; &nbsp; &nbsp; 1.47600<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2.29700&nbsp; &nbsp; &nbsp; &nbsp;-1.13300&nbsp; &nbsp; &nbsp; &nbsp; 0.49900<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1.23500&nbsp; &nbsp; &nbsp; &nbsp;-1.91300&nbsp; &nbsp; &nbsp; &nbsp; 1.98000<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.26200&nbsp; &nbsp; &nbsp; &nbsp;-1.74400&nbsp; &nbsp; &nbsp; &nbsp; 1.49700<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1.12200&nbsp; &nbsp; &nbsp; &nbsp;-1.68500&nbsp; &nbsp; &nbsp; &nbsp; 3.04500<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1.68400&nbsp; &nbsp; &nbsp; &nbsp;-3.35600&nbsp; &nbsp; &nbsp; &nbsp; 1.77900<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2.64100&nbsp; &nbsp; &nbsp; &nbsp;-3.53500&nbsp; &nbsp; &nbsp; &nbsp; 2.28100<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.93900&nbsp; &nbsp; &nbsp; &nbsp;-4.05000&nbsp; &nbsp; &nbsp; &nbsp; 2.18800<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1.80900&nbsp; &nbsp; &nbsp; &nbsp;-3.57600&nbsp; &nbsp; &nbsp; &nbsp; 0.71300<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1.28700&nbsp; &nbsp; &nbsp; &nbsp; 1.55300&nbsp; &nbsp; &nbsp; &nbsp; 1.63200<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1.64600&nbsp; &nbsp; &nbsp; &nbsp; 0.62500&nbsp; &nbsp; &nbsp; &nbsp; 1.62500<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2.32000&nbsp; &nbsp; &nbsp; &nbsp; 2.45100&nbsp; &nbsp; &nbsp; &nbsp; 1.22200<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1.90800&nbsp; &nbsp; &nbsp; &nbsp; 3.87100&nbsp; &nbsp; &nbsp; &nbsp; 1.57200<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2.67600&nbsp; &nbsp; &nbsp; &nbsp; 4.58500&nbsp; &nbsp; &nbsp; &nbsp; 1.25100<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.96700&nbsp; &nbsp; &nbsp; &nbsp; 4.13700&nbsp; &nbsp; &nbsp; &nbsp; 1.07700<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1.76400&nbsp; &nbsp; &nbsp; &nbsp; 3.97300&nbsp; &nbsp; &nbsp; &nbsp; 2.65300<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3.25700&nbsp; &nbsp; &nbsp; &nbsp; 2.18800&nbsp; &nbsp; &nbsp; &nbsp; 1.73200<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2.49200&nbsp; &nbsp; &nbsp; &nbsp; 2.35600&nbsp; &nbsp; &nbsp; &nbsp; 0.13800<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-3.89400&nbsp; &nbsp; &nbsp; &nbsp; 0.58400&nbsp; &nbsp; &nbsp; &nbsp;-1.77100<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-4.65200&nbsp; &nbsp; &nbsp; &nbsp; 0.55900&nbsp; &nbsp; &nbsp; &nbsp;-2.37300<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-4.24500&nbsp; &nbsp; &nbsp; &nbsp; 0.31600&nbsp; &nbsp; &nbsp; &nbsp;-0.89300<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-0.82400&nbsp; &nbsp; &nbsp; &nbsp; 1.22400&nbsp; &nbsp; &nbsp; &nbsp;-0.03900<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-0.06300&nbsp; &nbsp; &nbsp; &nbsp; 1.41100&nbsp; &nbsp; &nbsp; &nbsp; 0.57000<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-1.38000&nbsp; &nbsp; &nbsp; &nbsp; 2.45700&nbsp; &nbsp; &nbsp; &nbsp;-0.51700<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-0.49500&nbsp; &nbsp; &nbsp; &nbsp; 3.12200&nbsp; &nbsp; &nbsp; &nbsp;-1.56800<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.48900&nbsp; &nbsp; &nbsp; &nbsp; 3.37900&nbsp; &nbsp; &nbsp; &nbsp;-1.15900<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-0.96400&nbsp; &nbsp; &nbsp; &nbsp; 4.04700&nbsp; &nbsp; &nbsp; &nbsp;-1.92900<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-0.34800&nbsp; &nbsp; &nbsp; &nbsp; 2.45300&nbsp; &nbsp; &nbsp; &nbsp;-2.42200<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-1.54400&nbsp; &nbsp; &nbsp; &nbsp; 3.13100&nbsp; &nbsp; &nbsp; &nbsp; 0.33600<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-2.35000&nbsp; &nbsp; &nbsp; &nbsp; 2.19700&nbsp; &nbsp; &nbsp; &nbsp;-0.94700<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-0.03500&nbsp; &nbsp; &nbsp; &nbsp;-0.44800&nbsp; &nbsp; &nbsp; &nbsp;-2.01400<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-1.08300&nbsp; &nbsp; &nbsp; &nbsp;-1.39000&nbsp; &nbsp; &nbsp; &nbsp;-2.28300<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-1.17600&nbsp; &nbsp; &nbsp; &nbsp;-2.46800&nbsp; &nbsp; &nbsp; &nbsp;-1.20700<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-0.34000&nbsp; &nbsp; &nbsp; &nbsp; 0.17100&nbsp; &nbsp; &nbsp; &nbsp;-1.30100<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-0.23200&nbsp; &nbsp; &nbsp; &nbsp;-3.02000&nbsp; &nbsp; &nbsp; &nbsp;-1.11800<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-1.40300&nbsp; &nbsp; &nbsp; &nbsp;-2.01900&nbsp; &nbsp; &nbsp; &nbsp;-0.23400<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-1.97200&nbsp; &nbsp; &nbsp; &nbsp;-3.18400&nbsp; &nbsp; &nbsp; &nbsp;-1.44800<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-0.84400&nbsp; &nbsp; &nbsp; &nbsp;-1.83800&nbsp; &nbsp; &nbsp; &nbsp;-3.25400<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-2.03300&nbsp; &nbsp; &nbsp; &nbsp;-0.85100&nbsp; &nbsp; &nbsp; &nbsp;-2.37200<br /><br />#Definition of the planewave basis set<br />ecut 20 Ha<br />ecutsm 0.5 Ha&nbsp; &nbsp;# <br />enunit 1<br />ixc1 14<br />ixc2 -402&nbsp; <br />wfoptalg 4<br />getden -1<br />diemac 1.5<br />diemix 0.5<br />autoparal1 2<br />paral_kgb2 0<br /></code></pre></div>  <br /><br />These are the lines of invars2.F90 related to the error:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;if (dtset%ixc&lt;0) then&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ! libXC: metaGGA and hybrid functionals<br />&nbsp; &nbsp;dtset%xclevel=1<br />&nbsp; &nbsp;do isiz=1,2<br />&nbsp; &nbsp; &nbsp;if (isiz==1) ii=-dtset%ixc/1000<br />&nbsp; &nbsp; &nbsp;if (isiz==2) ii=-dtset%ixc-ii*1000<br />&nbsp; &nbsp; &nbsp;jj=libxc_functionals_family_from_id(ii)<br />&nbsp; &nbsp; &nbsp;if (jj==XC_FAMILY_GGA&nbsp; &nbsp; .or.jj==XC_FAMILY_MGGA) dtset%xclevel=2<br />&nbsp; &nbsp; &nbsp;if (jj==XC_FAMILY_HYB_GGA.or.jj==XC_FAMILY_HYB_MGGA) then<br />&nbsp; &nbsp; &nbsp; &nbsp;dtset%xclevel=2 ; dtset%usefock=1<br />&nbsp; &nbsp; &nbsp; &nbsp;if (.not.libxc_functionals_gga_from_hybrid(hybrid_id=ii)) then<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;write(message, '(a,i8,i5)' )&amp;<br />&amp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'ixc=',dtset%ixc,' (libXC hybrid functional) is presently not allowed with',ch10,&amp;<br />&amp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'Norm-Conserving PseudoPotentials.',ch10,&amp;<br />&amp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'Action: try another hybrid functional or use PAW.'<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;MSG_ERROR(message)<br />&nbsp; &nbsp; &nbsp; &nbsp;end if<br />&nbsp; &nbsp; &nbsp;end if<br />&nbsp; &nbsp;end do<br />&nbsp;end if<br /></code></pre></div><br /><br />However this error message is not displayed...Thanks in advance!<br /><br />Cheers,<br /><br />Camilo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Bug? Trying to use B3LYP</h3>
+				<div class="date">Posted: <strong>Wed Jun 06, 2018 6:37 pm</strong></div>
+				<div class="author">by <strong>cespejo</strong></div>
+				<div class="content">Hi, well it seems that support for hybrid functionals was active only with PAWs, however in the last version of Abinit hybrid functionals now work with NC pseudos. <br />Plase check these tests: libxc[68-74]<br />Cheers,<br /><br />Camilo.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3778&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:30:35 GMT -->
+</html>

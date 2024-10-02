@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3697&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:06:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Relaxation problem</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Relaxation problem</h2>
+		<p><a href="viewtopic1649.html?f=9&amp;t=3697">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3697</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Relaxation problem</h3>
+				<div class="date">Posted: <strong>Wed Oct 11, 2017 3:18 pm</strong></div>
+				<div class="author">by <strong>CHILL</strong></div>
+				<div class="content">This is maybe a stupid question, but anyway. I relaxed a structure, so the output is:<br /><br /><br /><strong class="text-strong">acell</strong>      5.6536178713E+00  5.6536178713E+00  3.5015770549E+01 Bohr<br /><strong class="text-strong">etota</strong>l     -6.5707157781E+01<br /><strong class="text-strong">fcart</strong>      0.0000000000E+00  0.0000000000E+00 -3.5967159592E-06<br />                       0.0000000000E+00  0.0000000000E+00  4.8345461423E-06<br />                       0.0000000000E+00  0.0000000000E+00  8.6940498475E-07<br />                       0.0000000000E+00  0.0000000000E+00 -2.1072351678E-06<br /><strong class="text-strong">strten</strong>      1.9025208509E-08  1.9025200579E-08  1.4137761027E-07<br />                       0.0000000000E+00  0.0000000000E+00  0.0000000000E+00<br /><strong class="text-strong">xcart</strong>     -8.1632957222E-21 -3.7079117888E-21 -4.3466537136E-02<br />                       2.8268089356E+00 -1.6320588999E+00  3.3543295591E+00<br />                       2.8268089356E+00  1.6320588999E+00  3.4355039260E+00<br />                       2.8268089356E+00  1.6320588999E+00 -1.9573247089E+00<br /><br /><br />Then I proceeded to calculation of Band structure. To the input file I just copied relaxed output above. I used all the general parameters as in relaxation.<br />But output file of the Band calculation gives me different energy, forces and strain, while all the material geometry stays the same (xcart, acell).<br /><br /><br /><strong class="text-strong">etotal</strong>     -6.5707171472E+01<br /><strong class="text-strong">fcart</strong>      0.0000000000E+00  0.0000000000E+00 -3.0722155786E-04<br />                       0.0000000000E+00  0.0000000000E+00  2.6852582422E-04<br />                       0.0000000000E+00  0.0000000000E+00  2.6263546629E-04<br />                       0.0000000000E+00  0.0000000000E+00 -2.2393973266E-04<br /><strong class="text-strong">strten</strong>     -1.8029036033E-07 -1.8029036424E-07  1.9155627909E-06<br />                       0.0000000000E+00  0.0000000000E+00  0.0000000000E+00<br /><br /><br />This structure clearly is not relaxed anymore and I don't understand why.<br />How to preserve relaxation results in further calculations?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Relaxation problem</h3>
+				<div class="date">Posted: <strong>Tue Oct 24, 2017 2:55 pm</strong></div>
+				<div class="author">by <strong>NPike</strong></div>
+				<div class="content">Hello CHILL,<br /><br />Looking at the information you provided I believe that your relaxation calculation went well.  Your cartesian forces and strain tensor look well relaxed.<br /><br />For your bandstructure calculation, I assume that you increased the density of your k-mesh from your relaxation calculation (or at least you should have).  This increase in the k-mesh density is possibly responsible for the differences in your forces (which are still small) and a slight increase in your strain tensor (which is still great). <br /><br />To tell if things are really changing in your calculation you can use the total energy which you provided.  As the difference between your relaxation energy and band structure energy are very small this tells me that your calculation is well converged (changes in the total energy on the order of 1E-4 are normal.) <br /><br />From what I see here, you are well on your way to getting the band structure of a nicely relaxed compound.<br /><br />Congratulations!</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3697&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:06:03 GMT -->
+</html>

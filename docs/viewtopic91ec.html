@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1692&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:51:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Fortran could not compile .f90 files during 'make'</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Fortran could not compile .f90 files during 'make'</h2>
+		<p><a href="viewtopic48fc.html?f=3&amp;t=1692">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1692</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Fortran could not compile .f90 files during 'make'</h3>
+				<div class="date">Posted: <strong>Mon Jun 11, 2012 9:52 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Dear all,<br /><br />after successfully configuring abinit, an error occurred during the 'make' procedure:<br /><br />checking whether we are using the GNU Fortran compiler... no<br />checking whether gfortran accepts -g... yes<br />checking whether we are using the GNU Fortran compiler... (cached) no<br />checking whether gfortran accepts -g... (cached) yes<br />checking if libtool supports shared libraries... yes<br />checking whether to build shared libraries... no<br />checking whether to build static libraries... yes<br />libtool.m4: error: problem compiling FC test program<br />checking for gfortran option to produce PIC... <br />checking if gfortran static flag  works... no<br />checking if gfortran supports -c -o file.o... no<br />checking if gfortran supports -c -o file.o... (cached) no<br />checking whether the gfortran linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes<br />checking dynamic linker characteristics... GNU/Linux ld.so<br />checking how to hardcode library paths into programs... immediate<br />checking for Fortran flag to compile .f90 files... unknown<br />configure: error: Fortran could not compile .f90 files<br />make[3]: *** [stamps/libxc-config-stamp] Error 1<br />make[3]: Leaving directory `/home/igor/abinit-6.13.1/fallbacks'<br />make[2]: [all-local] Error 2 (ignored)<br />Checking build of libxc fallback<br />test -e stamps/libxc-install-stamp<br />make[2]: *** [all-local] Error 1<br />make[2]: Leaving directory `/home/igor/abinit-6.13.1/fallbacks'<br />make[1]: *** [all-recursive] Error 1<br />make[1]: Leaving directory `/home/igor/abinit-6.13.1'<br />make: *** [all] Error 2<br />[igor@nelson01 abinit-6.13.1]$<br /><br />Can anyone help me and explain why this happens and possibly to solve this?<br /><br />Thank you in advance!<br /><br />Yours,<br /><br />Igor Lukacevic</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Fortran could not compile .f90 files during 'make'</h3>
+				<div class="date">Posted: <strong>Mon Jun 11, 2012 12:47 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">look at ~abinit/&lt;your_build_dir&gt;/fallbacks/sources/libxc-&lt;version&gt;/config.log for details about the failure.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Fortran could not compile .f90 files during 'make'</h3>
+				<div class="date">Posted: <strong>Tue Jun 12, 2012 9:18 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Dear Yann,<br /><br />thanks for the tip. The config.log file contains many errors of the kind:<br /><br />conftest.f:0: error: bad value (native) for -march= switch<br />conftest.f90:0: error: bad value (native) for -march= switch<br />conftest.f90:0: error: bad value (native) for -mtune= switch<br />conftest.c:11:28: error: ac_nonexistent.h: No such file or directory<br />configure:15036: error: Fortran could not compile .f90 files<br /><br /><br />appearing on many places. But I don't understand why they are there or what they mean. I'll try to google something, but a further help would be most appreciated.<br /><br />Igor L.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Fortran could not compile .f90 files during 'make'</h3>
+				<div class="date">Posted: <strong>Tue Jun 12, 2012 12:29 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Which compilers and versions are you using?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Fortran could not compile .f90 files during 'make'</h3>
+				<div class="date">Posted: <strong>Tue Jun 12, 2012 1:22 pm</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">I didn't specify anything in the configure command, so abinit chose automatically:<br /><br />configure:12056: checking for Fortran compiler version<br />configure:12065: gfortran --version &gt;&amp;5<br />GNU Fortran (GCC) 4.1.2 20080704 (Red Hat 4.1.2-44)<br /><br />configure:3504: checking for C compiler version<br />configure:3513: gcc --version &gt;&amp;5<br />gcc (GCC) 4.1.2 20080704 (Red Hat 4.1.2-44)<br /><br />this is written in the log file you told me to look at.<br /><br />Igor</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Fortran could not compile .f90 files during 'make'</h3>
+				<div class="date">Posted: <strong>Tue Jun 12, 2012 8:03 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi Igor,<br /><br />the very old gcc 4.1.2 is anymore supported for abinit...<br /><br />at least, upgrade to  4.4.x<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Fortran could not compile .f90 files during 'make'</h3>
+				<div class="date">Posted: <strong>Wed Jun 13, 2012 8:15 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Dear Jean-Michel,<br /><br />thanks for the answer. I will see what can be done about it.<br /><br />Best regards,<br /><br />Igor L.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Fortran could not compile .f90 files during 'make'</h3>
+				<div class="date">Posted: <strong>Wed Jun 13, 2012 8:43 pm</strong></div>
+				<div class="author">by <strong>Mascha</strong></div>
+				<div class="content">Hi,<br /><br />I have to handle with the same error massage at the building process of the netcdf fallback. (For the fallbacks lapack and libxc the building process seems to went well.)<br />You can see in the config.log file the following:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>ABINIT WRAPPER END (exit code 249)<br />configure:6548: $? = 249<br />configure:6537: /home/maust/abinit-6.12.3/config/wrappers/wrap-fc -qversion &gt;&amp;5<br />ABINIT WRAPPER BEGIN<br />xlf -q64 -qversion<br />IBM XL Fortran Advanced Edition for Linux, V11.1<br />Version: 11.01.0000.0004<br />ABINIT WRAPPER END (exit code 0)<br />configure:6548: $? = 0<br />configure:6557: checking whether we are using the GNU Fortran 77 compiler<br />configure:6570: /home/maust/abinit-6.12.3/config/wrappers/wrap-fc -c -qsuffix=cpp=F:f=f -qfixed -q64&nbsp; -qzerosize&nbsp; -O3 -qmaxmem=65536 -qspill=2000 -qarch=auto -qtune=auto -qcache=auto -qstrict -qsuppress=1520-022:1520-031 -DNDEBUG -DIBMR2Fortran -g -WF,-DIBMR2Fortran,-DNDEBUG -I/home/maust/abinit-6.12.3/fallbacks/exports/include conftest.F &gt;&amp;5<br />ABINIT WRAPPER BEGIN<br />cpp -P -traditional-cpp&nbsp; -DNDEBUG -DIBMR2Fortran -DIBMR2Fortran -DNDEBUG&nbsp; -I/home/maust/abinit-6.12.3/fallbacks/exports/include conftest.F &gt; conftest_cpp.f<br />xlf -q64&nbsp; -c -qsuffix=cpp=F:f=f -qfixed -q64 -qzerosize -O3 -qmaxmem=65536 -qspill=2000 -qarch=auto -qtune=auto -qcache=auto -qstrict -qsuppress=1520-022:1520-031 -DNDEBUG -DIBMR2Fortran -g&nbsp; -I/home/maust/abinit-6.12.3/fallbacks/exports/include conftest_cpp.f<br />ABINIT WRAPPER END (exit code 40)<br />xlf: 1501-210 (S) command option NDEBUG contains an incorrect subargument<br />configure:6570: $? = 40<br />configure: failed program was:<br />|&nbsp; &nbsp; &nbsp; &nbsp;program main<br />| #ifndef __GNUC__<br />|&nbsp; &nbsp; &nbsp; &nbsp; choke me<br />| #endif<br />| <br />|&nbsp; &nbsp; &nbsp; &nbsp;end<br />configure:6579: result: no<br />configure:6585: checking whether /home/maust/abinit-6.12.3/config/wrappers/wrap-fc accepts -g<br />configure:6596: /home/maust/abinit-6.12.3/config/wrappers/wrap-fc -c -g conftest.f &gt;&amp;5<br />ABINIT WRAPPER BEGIN<br />xlf -q64 -c -g conftest.f<br />ABINIT WRAPPER END (exit code 0)<br />** main&nbsp; &nbsp;=== End of Compilation 1 ===<br />1501-510&nbsp; Compilation successful for file conftest.f.<br />configure:6596: $? = 0<br />configure:6604: result: yes<br />configure:6650: setting up Fortran 90<br />configure:6669: checking for Fortran flag to compile .f90 files<br />configure:6685: /home/maust/abinit-6.12.3/config/wrappers/wrap-fc -c -qsuffix=cpp=F90:f=f90 -qfree=f90 -q64&nbsp; -qzerosize&nbsp; -O3 -qmaxmem=65536 -qspill=2000 -qarch=auto -qtune=auto -qcache=auto -qstrict -qsuppress=1520-022:1520-031 -DNDEBUG -DIBMR2Fortran -g -WF,-DIBMR2Fortran,-DNDEBUG -I/home/maust/abinit-6.12.3/fallbacks/exports/include&nbsp; conftest.f90 &gt;&amp;5<br />ABINIT WRAPPER BEGIN<br />xlf -q64 -c -qsuffix=cpp=F90:f=f90 -qfree=f90 -q64 -qzerosize -O3 -qmaxmem=65536 -qspill=2000 -qarch=auto -qtune=auto -qcache=auto -qstrict -qsuppress=1520-022:1520-031 -DNDEBUG -DIBMR2Fortran -g -WF,-DIBMR2Fortran,-DNDEBUG -I/home/maust/abinit-6.12.3/fallbacks/exports/include conftest.f90<br />ABINIT WRAPPER END (exit code 40)<br />xlf: 1501-210 (S) command option NDEBUG contains an incorrect subargument<br />configure:6685: $? = 40<br />configure: failed program was:<br />|&nbsp; &nbsp; &nbsp; &nbsp;program main<br />| <br />|&nbsp; &nbsp; &nbsp; &nbsp;end<br />configure:6685: /home/maust/abinit-6.12.3/config/wrappers/wrap-fc -c -qsuffix=cpp=F90:f=f90 -qfree=f90 -q64&nbsp; -qzerosize&nbsp; -O3 -qmaxmem=65536 -qspill=2000 -qarch=auto -qtune=auto -qcache=auto -qstrict -qsuppress=1520-022:1520-031 -DNDEBUG -DIBMR2Fortran -g -WF,-DIBMR2Fortran,-DNDEBUG -I/home/maust/abinit-6.12.3/fallbacks/exports/include -qsuffix=f=f90 conftest.f90 &gt;&amp;5<br />ABINIT WRAPPER BEGIN<br />xlf -q64 -c -qsuffix=cpp=F90:f=f90 -qfree=f90 -q64 -qzerosize -O3 -qmaxmem=65536 -qspill=2000 -qarch=auto -qtune=auto -qcache=auto -qstrict -qsuppress=1520-022:1520-031 -DNDEBUG -DIBMR2Fortran -g -WF,-DIBMR2Fortran,-DNDEBUG -I/home/maust/abinit-6.12.3/fallbacks/exports/include -qsuffix=f=f90 conftest.f90<br />ABINIT WRAPPER END (exit code 40)<br />xlf: 1501-210 (S) command option NDEBUG contains an incorrect subargument<br />configure:6685: $? = 40<br />configure: failed program was:<br />|&nbsp; &nbsp; &nbsp; &nbsp;program main<br />| <br />|&nbsp; &nbsp; &nbsp; &nbsp;end<br />configure:6685: /home/maust/abinit-6.12.3/config/wrappers/wrap-fc -c -qsuffix=cpp=F90:f=f90 -qfree=f90 -q64&nbsp; -qzerosize&nbsp; -O3 -qmaxmem=65536 -qspill=2000 -qarch=auto -qtune=auto -qcache=auto -qstrict -qsuppress=1520-022:1520-031 -DNDEBUG -DIBMR2Fortran -g -WF,-DIBMR2Fortran,-DNDEBUG -I/home/maust/abinit-6.12.3/fallbacks/exports/include -Tf conftest.f90 &gt;&amp;5<br />ABINIT WRAPPER BEGIN<br />xlf -q64 -c -qsuffix=cpp=F90:f=f90 -qfree=f90 -q64 -qzerosize -O3 -qmaxmem=65536 -qspill=2000 -qarch=auto -qtune=auto -qcache=auto -qstrict -qsuppress=1520-022:1520-031 -DNDEBUG -DIBMR2Fortran -g -WF,-DIBMR2Fortran,-DNDEBUG -I/home/maust/abinit-6.12.3/fallbacks/exports/include -Tf conftest.f90<br />ABINIT WRAPPER END (exit code 40)<br />xlf: 1501-210 (S) command option NDEBUG contains an incorrect subargument<br />configure:6685: $? = 40<br />configure: failed program was:<br />|&nbsp; &nbsp; &nbsp; &nbsp;program main<br />| <br />|&nbsp; &nbsp; &nbsp; &nbsp;end<br />configure:6694: result: unknown<br />configure:6697: error: Fortran could not compile .f90 files</code></pre></div><br /><br />I use the compiler: IBM XL Fortran Advanced Edition for Linux, V11.1<br /><br />Can someone please tell me, what can I do?<br /><br />Regards<br /><br />Maria</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Fortran could not compile .f90 files during 'make'</h3>
+				<div class="date">Posted: <strong>Thu Jun 14, 2012 4:04 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Try setting FPP to a standard C preprocessor (best one: GNU cpp) when configuring Abinit.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Fortran could not compile .f90 files during 'make'</h3>
+				<div class="date">Posted: <strong>Tue Jun 26, 2012 10:51 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Dear all,<br /><br />it's been fixed, after switching to ifort and lowering the optimization to -O2.<br /><br />Thanks again to Yan and JMB!<br /><br />Best regards,<br /><br />Igor L.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] Fortran could not compile .f90 files during 'ma</h3>
+				<div class="date">Posted: <strong>Mon Jun 03, 2013 11:13 am</strong></div>
+				<div class="author">by <strong>hnf191</strong></div>
+				<div class="content">Hi,<br />I have also this problem with the error :<br /><blockquote class="uncited"><div><blockquote class="uncited"><div>libtool.m4: error: problem compiling FC test program<br />checking for gfortran option to produce PIC... <br />checking if gfortran static flag  works... no<br />checking if gfortran supports -c -o file.o... no<br />checking if gfortran supports -c -o file.o... (cached) no<br />checking whether the gfortran linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes<br />checking dynamic linker characteristics... (cached) GNU/Linux ld.so<br />checking how to hardcode library paths into programs... immediate<br />checking for Fortran flag to compile .f90 files... unknown<br />configure: error: Fortran could not compile .f90 files</div></blockquote></div></blockquote><br /><br /><br />when I run make after successful run of ./configure<br /><br />need help on it</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Fortran could not compile .f90 files during 'make'</h3>
+				<div class="date">Posted: <strong>Mon Jun 03, 2013 11:27 am</strong></div>
+				<div class="author">by <strong>hnf191</strong></div>
+				<div class="content"><blockquote><div><cite>pouillon wrote:</cite>Try setting FPP to a standard C preprocessor (best one: GNU cpp) when configuring Abinit.</div></blockquote><br /><br /><br />How it should be done?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] Fortran could not compile .f90 files during 'ma</h3>
+				<div class="date">Posted: <strong>Mon Jun 03, 2013 8:22 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">E.g.: <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../configure &#91;your options&#93; FPP=/usr/bin/cpp</code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] Fortran could not compile .f90 files during 'ma</h3>
+				<div class="date">Posted: <strong>Wed Jun 05, 2013 10:58 am</strong></div>
+				<div class="author">by <strong>hnf191</strong></div>
+				<div class="content"><blockquote><div><cite>pouillon wrote:</cite>E.g.: <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../configure &#91;your options&#93; FPP=/usr/bin/cpp</code></pre></div></div></blockquote><br /><br /><br />Thanks</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] Fortran could not compile .f90 files during 'ma</h3>
+				<div class="date">Posted: <strong>Wed Jun 05, 2013 11:01 am</strong></div>
+				<div class="author">by <strong>hnf191</strong></div>
+				<div class="content">Is there any command to run abinit in a smp machine with several cores without parallel configuration?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] Fortran could not compile .f90 files during 'ma</h3>
+				<div class="date">Posted: <strong>Wed Jun 05, 2013 12:53 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi<br /><br /><blockquote class="uncited"><div>Is there any command to run abinit in a smp machine with several cores without parallel configuration?</div></blockquote><br /><br />yes, you can use OpenMP<br /><br />this is a example of .ac file with gfortran 4.6  :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>enable_mpi = no<br />enable_mpi_io = no<br />with_dft_flavor = none<br />FC_LDFLAGS_EXTRA = -fopenmp<br />FCFLAGS_EXTRA = -fopenmp<br />enable_openmp = yes</code></pre></div><br /><br />regards<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] Fortran could not compile .f90 files during 'ma</h3>
+				<div class="date">Posted: <strong>Wed Jun 05, 2013 1:17 pm</strong></div>
+				<div class="author">by <strong>hnf191</strong></div>
+				<div class="content"><blockquote><div><cite>jbeuken wrote:</cite>Hi<br /><br /><blockquote class="uncited"><div>Is there any command to run abinit in a smp machine with several cores without parallel configuration?</div></blockquote><br /><br />yes, you can use OpenMP<br /><br />this is a example of .ac file with gfortran 4.6  :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>enable_mpi = no<br />enable_mpi_io = no<br />with_dft_flavor = none<br />FC_LDFLAGS_EXTRA = -fopenmp<br />FCFLAGS_EXTRA = -fopenmp<br />enable_openmp = yes</code></pre></div><br /><br />regards<br /><br />jmb</div></blockquote><br /><br /><br /><br />Thanks.<br />But I meant something like <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>abinit -x number of cores &lt;file.files&gt;</code></pre></div> for ruining abinit. I heard there exists but I couldn't find it</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] Fortran could not compile .f90 files during 'ma</h3>
+				<div class="date">Posted: <strong>Thu Jun 06, 2013 1:16 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">As a Fortran program, Abinit doesn't accept command-line arguments (I know it's possible, but it's not so well and widely supported by the compilers).<br /><br />You can however wrap it within a <em class="text-italics">run_abinit.sh</em> shell script that accepts command-line arguments. Here is an example:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#!/bin/sh<br />#<br /># To run abinit, type: ./run_abinit.sh #_of_threads abinit_control_file, e.g. ./run_abinit.sh 8 ab.files<br />#<br /><br />OMP_NUM_THREADS=$1<br />export OMP_NUM_THREADS<br /><br />/path/to/abinit &lt;$2<br />exit $?<br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] Fortran could not compile .f90 files during 'ma&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Tue Jun 25, 2013 11:19 am</strong></div>
+				<div class="author">by <strong>hnf191</strong></div>
+				<div class="content"><blockquote><div><cite>pouillon wrote:</cite>As a Fortran program, Abinit doesn't accept command-line arguments (I know it's possible, but it's not so well and widely supported by the compilers).<br /><br />You can however wrap it within a <em class="text-italics">run_abinit.sh</em> shell script that accepts command-line arguments. Here is an example:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#!/bin/sh<br />#<br /># To run abinit, type: ./run_abinit.sh #_of_threads abinit_control_file, e.g. ./run_abinit.sh 8 ab.files<br />#<br /><br />OMP_NUM_THREADS=$1<br />export OMP_NUM_THREADS<br /><br />/path/to/abinit &lt;$2<br />exit $?<br /></code></pre></div></div></blockquote><br /><br />thanks</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Fortran could not compile .f90 files during 'make'</h3>
+				<div class="date">Posted: <strong>Mon Feb 16, 2015 4:30 pm</strong></div>
+				<div class="author">by <strong>mdigennaro</strong></div>
+				<div class="content">Hi all,<br /><br />I keep having the same error:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>checking for Fortran flag to compile .f90 files... none<br />configure: error: cannot run /bin/bash config/config.sub<br /></code></pre></div><br /><br />I used this configure.ac file:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>prefix=&quot;/usr/local&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />enable_openmp = yes<br />with_mpi_prefix=&quot;/usr&quot;<br />with_netcdf_incs=&quot;-I/usr/include&quot;<br />with_netcdf_libs=&quot;-L/usr/lib64 -lnetcdf -lnetcdff&quot;<br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_incs=&quot;-I/usr/include/&quot;<br />with_fft_libs=&quot;-L/usr/lib -lfftw3 -lfftw3f&quot;<br />with_linalg_flavor=&quot;atlas&quot;<br />with_linalg_libs=&quot;-L/usr/lib64 -llapack -lf77blas -lcblas -latlas&quot;<br />with_dft_flavor=&quot;atompaw+bigdft+libxc+wannier90&quot;<br />enable_gw_dpc=&quot;yes&quot;<br />enable_maintainer_checks=&quot;no&quot;<br /><br />FC=mpif90<br />CXX=mpicc<br />CC=&quot;mpicc -m64&quot;<br /><br />FC_LDFLAGS_EXTRA = -fopenmp<br />FCFLAGS_EXTRA = -fopenmp<br /></code></pre></div><br /><br />I also used &quot; --enable-optim=aggressive&quot; and &quot;FPP=/usr/bin/cp&quot; at the configuration stage but nothing.<br /><br />I am using  gcc version 4.8.2 (Ubuntu 4.8.2-19ubuntu1) <br /><br />*Note: I need 7.5.3 version since some features have disappeared since then<br /><br />thanks in advance</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Fortran could not compile .f90 files during 'make'</h3>
+				<div class="date">Posted: <strong>Mon Feb 16, 2015 8:24 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content"><blockquote class="uncited"><div>I also used &quot; --enable-optim=aggressive&quot; and &quot;FPP=/usr/bin/cp&quot; at the configuration stage but nothing.<br /></div></blockquote><br /><br />perhaps a typo in your FPP  <img class="smilies" src="images/smilies/icon_rolleyes.gif" alt=":roll:" title="Rolling Eyes" /> <br /><br />try with :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>FPP=/usr/bin/cpp</code></pre></div></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1692&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:51:35 GMT -->
+</html>

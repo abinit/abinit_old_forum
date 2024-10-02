@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3158&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:43:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; make test_* abinit already in path</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>make test_* abinit already in path</h2>
+		<p><a href="viewtopic075c.html?f=3&amp;t=3158">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3158</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>make test_* abinit already in path</h3>
+				<div class="date">Posted: <strong>Sat Nov 28, 2015 12:40 am</strong></div>
+				<div class="author">by <strong>zeroth</strong></div>
+				<div class="content">Problem, <br />You have abinit in your path PATH=$HOME/bin:./<br />and abinit in $HOME/bin. Note that the current directory path is after bin.<br />Running<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make test_*</code></pre></div><br />will do these things:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>cp $(top_builddir)/src/98_main/abinit $(top_srcdir)/tests/built-in/Input/abinit &amp;&amp; cd $(top_srcdir)/tests/built-in/Input &amp;&amp; abinit &lt; testin_fast.files &gt;&amp; testin_fast.stdout &amp;&amp; cat testin_fast_tmp_STATUS &amp;&amp; rm abinit<br />...<br /></code></pre></div><br />which will execute abinit from path, and not the one recently copied.<br /><br />Solution, prepend a <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./</code></pre></div> to the abinit call like this<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>cp $(top_builddir)/src/98_main/abinit $(top_srcdir)/tests/built-in/Input/abinit &amp;&amp; cd $(top_srcdir)/tests/built-in/Input &amp;&amp; ./abinit &lt; testin_fast.files &gt;&amp; testin_fast.stdout &amp;&amp; cat testin_fast_tmp_STATUS &amp;&amp; rm abinit</code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: make test_* abinit already in path&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Mon Nov 30, 2015 8:02 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">1) It is usually not recommanded to have &quot;.&quot; in the path since you may have conflict with other search directories.<br />2) You use the old fashion test farm which is not upgraded anymore but migrated to the new test farm. So if you want to avoid the problem you mentioned, use the new test farm.<br />Let assume you have ~abinit and you compile abinit in ~abinit/build then go for intance to ~abinit/build/tests and run <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../../tests/runtests.py<br /></code></pre></div><br />or more generally<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>~abinit/tests/runtests.py<br /></code></pre></div><br />You can specify keyword with -k or familly test like fast tutorials .... <br />Don't hesitate to read the help description with '-h' <br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: make test_* abinit already in path</h3>
+				<div class="date">Posted: <strong>Mon Nov 30, 2015 9:06 am</strong></div>
+				<div class="author">by <strong>zeroth</strong></div>
+				<div class="content"><blockquote><div><cite>Jordan wrote:</cite>1) It is usually not recommanded to have &quot;.&quot; in the path since you may have conflict with other search directories.</div></blockquote><br />I agree, it was however the only way I could successfully run the tests. <img class="smilies" src="images/smilies/icon_e_wink.gif" alt=";)" title="Wink" /> <br /><blockquote><div><cite>Jordan wrote:</cite>2) You use the old fashion test farm which is not upgraded anymore but migrated to the new test farm. So if you want to avoid the problem you mentioned, use the new test farm.<br />Let assume you have ~abinit and you compile abinit in ~abinit/build then go for intance to ~abinit/build/tests and run <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../../tests/runtests.py<br /></code></pre></div><br />or more generally<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>~abinit/tests/runtests.py<br /></code></pre></div><br />You can specify keyword with -k or familly test like fast tutorials .... <br />Don't hesitate to read the help description with '-h' </div></blockquote><br />Ok, I have changed to the new test farm.<br /><br />There however, are a few errors:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&#91;atompaw&#93;&#91;t02&#93;&#91;np=1&#93;Test was not expected to fail but subrocesses returned 14<br /><br />--- !ERROR<br />message: |<br />&nbsp; &nbsp; Fortran open returned iostat 2 while opening: ....compile/abinit-7.10.5/tests/Psps_for_tests/C.LDA-PW-paw.abinit<br />&nbsp; &nbsp; , IOMSG: Cannot open file '....compile/abinit-7.10.5/tests/Psps_for_tests/C.LDA-PW-paw.abinit': No such file or directory<br />src_file: inpspheads.F90<br />src_line: 118<br />...<br /><br />#0&nbsp; 0x2AF89FFC8C07<br />#1&nbsp; 0x2323374 in __m_errors_MOD_msg_hndl at m_errors.F90:910<br />#2&nbsp; 0x18E6524 in inpspheads_ at inpspheads.F90:118<br />#3&nbsp; 0x17AA7B9 in __m_ab7_invars_MOD_ab7_invars_load at m_ab7_invars_f90.F90:679<br />#4&nbsp; 0x4193AF in abinit at abinit.F90:310<br /><br />Command&nbsp; mpirun -np 1&nbsp; &nbsp;&lt; ....compile/abinit-7.10.5/build-tmp/tests/Test_suite/atompaw_t03-t04/t03.stdin &gt; ...compile/abinit-7.10.5/build-tmp/tests/Test_suite/atompaw_t03-t04/t03.stdout 2&gt; ....compile/abinit-7.10.5/build-tmp/tests/Test_suite/atompaw_t03-t04/t03.stderr<br />&nbsp;returned exit_code: 1<br /></code></pre></div><br />fails as C.LDA-PW-paw.abinit does not exist in the specified pseudo folder, perhaps it is missing in the distribution?<br /><br />Same thing for t04 with pseudo: Ni.GGA-PBE-paw.abinit<br /><br />Thanks.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: make test_* abinit already in path</h3>
+				<div class="date">Posted: <strong>Tue Dec 01, 2015 8:27 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">I don't know if it is normal or not but you can download some - maybe different - other paw atomic data <a href="http://www.abinit.org/downloads/PAW2" class="postlink">here</a><br /><br />Cheers</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: make test_* abinit already in path</h3>
+				<div class="date">Posted: <strong>Tue Dec 01, 2015 8:45 am</strong></div>
+				<div class="author">by <strong>zeroth</strong></div>
+				<div class="content">While I know that you can download PAWs, I think the intent was to ship it with build system, otherwise a test does not make sense (taking a wrong pseudo will give &quot;erroneous&quot; results)</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: make test_* abinit already in path</h3>
+				<div class="date">Posted: <strong>Wed Dec 02, 2015 9:44 am</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">Hi,<br /><br />You cannot launch the atompaw#02 automatic test alone.<br />It has to be chained with the test atompaw#01 because the latter is suppposed to generate the pseudopotential file.<br /><br />So, instead, launch:<br />~abinit/tests/runtests.py atompaw[01:02}<br /><br />(see &quot;test_chain = t01.in, t02.in&quot; in atompaw/Input/t01.in and atompaw/Input/t02.in)<br /><br />Marc</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: make test_* abinit already in path</h3>
+				<div class="date">Posted: <strong>Wed Dec 02, 2015 9:57 am</strong></div>
+				<div class="author">by <strong>zeroth</strong></div>
+				<div class="content">Thanks Marc,<br /><br />I called it like this:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../../tests/runtests.py --loglevel=INFO -v -v -n 2 --pedantic atompaw etsf_io libxc wannier90</code></pre></div><br />that should enable all tests right? <br /><em class="text-italics">And</em> call them in correct order? <br />If not I think the test API is slightly confusing <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /><br /><br />My assumption was that it runs them all sequentially, and those that can be runned with MPI procs will use <em class="text-italics">-n 2</em>.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: make test_* abinit already in path</h3>
+				<div class="date">Posted: <strong>Sun Dec 06, 2015 2:09 pm</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">Hi,<br /><br />I tried to reproduce your problem:<br />- official abinit v7.10.5<br />- ../../tests/runtests.py --loglevel=INFO -v -v -n 2 --pedantic atompaw<br /><br />...and everything went fine.<br />(except some errors in logging due to my python version)</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: make test_* abinit already in path</h3>
+				<div class="date">Posted: <strong>Sun Dec 06, 2015 9:06 pm</strong></div>
+				<div class="author">by <strong>zeroth</strong></div>
+				<div class="content">Ok, weird. <br />Well, until I figure out why, I will close this issue.<br /><br />Thanks for help.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3158&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:43:45 GMT -->
+</html>

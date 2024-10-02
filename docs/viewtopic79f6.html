@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2252&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:27:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Projected DOS not normalized</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Projected DOS not normalized</h2>
+		<p><a href="viewtopic4766.html?f=9&amp;t=2252">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2252</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Projected DOS not normalized</h3>
+				<div class="date">Posted: <strong>Tue Aug 20, 2013 4:23 pm</strong></div>
+				<div class="author">by <strong>Apophis</strong></div>
+				<div class="content">Hello,<br /><br />i am trying to calculate the projected DOS for Ni3C using PAW. While getting the compete DOS worked fine, the projections are wrong. For one, the integrated DOS at the Fermi energy is a multiple of the number available electrons, for all atoms. Also the DOS for the spin up and down channels have magnitudes while the form of the plot is roughly the same with no shift in energy (There is also not magnetization showing in the full DOS, so that part may be correct). The sum of the integrated spin down LDOSs roughly at the Fermi energy over all atoms alone roughly resembles the total number of electrons in the cell. The same sum for spin up is a multiple of that.<br /><br />Stderr contains a lot o messages of the type<br /><blockquote class="uncited"><div> dens_in_sph : this state is not normalized : norm= 1.00699<br /> dens_in_sph : this state is not normalized in real space : norm= 1.00699<br /> dens_in_sph : this state is not normalized : norm= 0.84502<br /> dens_in_sph : this state is not normalized in real space : norm= 0.84502<br /></div></blockquote><br /><br />Here is my input file:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>acell 8.68823391483284E+00&nbsp; 8.68823391473050E+00&nbsp; 9.60347684124753E+00<br />rprim<br />&nbsp; 1.0 -4.38964554255e-29 -8.43617061338e-57<br />&nbsp; -0.500000000002 0.866025403783 1.0184651346e-27<br />&nbsp; 0.452348355634 0.261163444886 0.852745343119<br />ntypat 2<br />znucl&nbsp; 28 6<br />natom 8<br />typat<br />&nbsp;2 2 6*1<br />xred<br />&nbsp;-3.94426681151606E-18 -2.32635776975131E-17&nbsp; 7.71373150378205E-19<br />&nbsp;-1.31961253500590E-17&nbsp; 5.00000000000000E-01&nbsp; 5.00000000000000E-01<br />&nbsp; 1.70593337472857E-01&nbsp; 2.50000000000000E-01&nbsp; 2.50000000000000E-01<br />&nbsp; 5.00000000000000E-01&nbsp; 9.20593337472857E-01&nbsp; 2.50000000000000E-01<br />&nbsp; 1.70593337472857E-01&nbsp; 4.20593337472857E-01&nbsp; 7.50000000000000E-01<br />&nbsp; 8.29406662527143E-01&nbsp; 5.79406662527143E-01&nbsp; 2.50000000000000E-01<br />&nbsp; 5.00000000000000E-01&nbsp; 7.94066625271432E-02&nbsp; 7.50000000000000E-01<br />&nbsp; 8.29406662527143E-01&nbsp; 7.50000000000000E-01&nbsp; 7.50000000000000E-01<br /><br />&nbsp; chkprim 1<br /><br />&nbsp; toldff 1e-11<br /><br />&nbsp; &nbsp;ecut&nbsp; &nbsp;36.0<br />&nbsp; &nbsp;pawecutdg 52<br />&nbsp; &nbsp;ecutsm .05<br /><br />&nbsp; &nbsp;occopt 3 #fermi<br />&nbsp; &nbsp;tsmear 1e-3<br />&nbsp; &nbsp;nband 44<br /><br />ngkpt&nbsp; &nbsp;3*12<br /><br />nshiftk&nbsp; &nbsp;1 # unshifted grid to make for results to be comparable with those of<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # strained cell<br />&nbsp;shiftk&nbsp; &nbsp;0 0 0<br /><br />&nbsp; nstep&nbsp; &nbsp;100<br /># enforce calculation of forces at each SCF step<br />&nbsp;optforces 1<br /><br />prtwf 0<br />prtdos 3<br />natsph 8<br />iatsph 1 2 3 4 5 6 7 8<br />prtden 1<br /><br />nsppol 2<br />spinat<br />&nbsp; &nbsp;0 0 0<br />&nbsp; &nbsp;0 0 0<br />&nbsp; &nbsp;0 0 2<br />&nbsp; &nbsp;0 0 2<br />&nbsp; &nbsp;0 0 2<br />&nbsp; &nbsp;0 0 2<br />&nbsp; &nbsp;0 0 2<br />&nbsp; &nbsp;0 0 2<br /></code></pre></div><br /><br />I also tried pawprtdos=1/2. The on site contribution is tiny, which may not be surprising for a maetalic substance. The main contribution comes from the plane wave part, which shows the same caractersitics as described above.<br /><br />I would be thankful for some suggestions.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Projected DOS not normalized</h3>
+				<div class="date">Posted: <strong>Fri Sep 06, 2013 5:25 pm</strong></div>
+				<div class="author">by <strong>michel.roger</strong></div>
+				<div class="content">I am a beginner in abinit. <br />I have the same normalisation problem of the projected DOS on Co sites in Na0.5CoO2, with<br />prtdos=3<br />pawprtdos=1  or pawprtdos=0<br /><br />Coming back to the test program tpaw1_4.in in section 4 of the PAW1 tutorial<br />The projected DOS is correct after running the program sequentially.<br /><br />When running the same program in parallel, using n processor, the results are roughly (but not exactly) multiplied by the number n of processors.<br /><br />However I do obtain the correct results with  <br />prtdos=3<br />pawprtdos=2<br /><br />I am  suspecting some bug in the parallel code?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Projected DOS not normalized</h3>
+				<div class="date">Posted: <strong>Tue Jul 07, 2015 3:58 pm</strong></div>
+				<div class="author">by <strong>ksmirnov</strong></div>
+				<div class="content">Indeed. The weird result is that the plane-waves contribution to DOS is multiplied by the number of processors in PAW calculations (tested on the tpaw1_4 exercise of the PAW1 tutorial).</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2252&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:27:13 GMT -->
+</html>

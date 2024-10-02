@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1082&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:13:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [RESOLVED] installation ABINIT 6.6.3: disable bigDFT</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[RESOLVED] installation ABINIT 6.6.3: disable bigDFT</h2>
+		<p><a href="viewtopic822f-2.html?f=3&amp;t=1082">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1082</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[RESOLVED] installation ABINIT 6.6.3: disable bigDFT</h3>
+				<div class="date">Posted: <strong>Wed May 11, 2011 12:02 pm</strong></div>
+				<div class="author">by <strong>davt</strong></div>
+				<div class="content">Dear all,<br />I´m trying to install the last version of Abinit on a linux machine, openSuse distro.<br /><br />when I run the configure file it punch out this warning:<br />&quot;<br />configure: using tarball repository /usr/users/davide/.abinit/tarballs<br />configure: WARNING: no 'patch' command available<br />configure: error: please install patch or disable BigDFT<br />&quot;<br /><br />but checking inside the configure file this should be already disable:<br />&quot;<br />davide@olymp:~/Downloads/abinit-6.6.3&gt; grep &quot;enable_bigdft&quot; configure<br />  if test &quot;${enable_bigdft}&quot; != &quot;&quot;; then<br />enable_bigdft=&quot;no&quot;<br />  if test &quot;${enable_bigdft}&quot; = &quot;yes&quot;; then<br />    if test &quot;${enable_bigdft}&quot; = &quot;yes&quot;; then<br />          enable_bigdft=&quot;no&quot;<br />    enable_bigdft=&quot;no&quot;<br />  { $as_echo &quot;$as_me:${as_lineno-$LINENO}: result: ${enable_bigdft}&quot; &gt;&amp;5<br />$as_echo &quot;${enable_bigdft}&quot; &gt;&amp;6; }<br />&quot;<br /><br />So I´m confused  <img class="smilies" src="images/smilies/icon_question.gif" alt=":?:" title="Question" />  <img class="smilies" src="images/smilies/icon_e_confused.gif" alt=":?" title="Confused" />  <br /><br />any suggestion?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: installation ABINIT 6.6.3: disable bigDFT</h3>
+				<div class="date">Posted: <strong>Wed May 11, 2011 5:33 pm</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">Hi<br /><br />You can disable BigDFT using the configure command line :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../configure --enable-mpi --with-dft-flavor=none</code></pre></div><br /><br />But this will also disable all other plugins.<br /><br />So if you want to remove only BigDFT, you need to specify the plugins you want to install, for instance :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../configure --enable-mpi --with-dft-flavor=atompaw</code></pre></div><br /><br />Boris</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: installation ABINIT 6.6.3: disable bigDFT</h3>
+				<div class="date">Posted: <strong>Wed May 11, 2011 5:57 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Or install patch if you want to be able to use BigDFT.<br /><br />If you're using Ubuntu Linux, this is as simple as:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>sudo apt-get install patch</code></pre></div></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1082&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:13:49 GMT -->
+</html>

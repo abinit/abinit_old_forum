@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2662&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:03:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Wfn coeff in the ETSF WFK</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Wfn coeff in the ETSF WFK</h2>
+		<p><a href="viewtopic78bc.html?f=9&amp;t=2662">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2662</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Wfn coeff in the ETSF WFK</h3>
+				<div class="date">Posted: <strong>Mon May 12, 2014 5:55 am</strong></div>
+				<div class="author">by <strong>temok</strong></div>
+				<div class="content">Dear members of the Abinit Forum,<br /><br />I have a question about the array on which the wavefunction coefficients are stored in the ETSF file format of the WFK.<br /><br />I understand that<br />1) Within ABINIT this coefficients are stored in the cg array;<br />while within the ETSF WFK (NetCDF) file they are stored in the <br />   file.variable['coefficients_of_wavefunctions']<br /><br />2) the number of planewaves for a given coefficient cg_nk(G) depends on the k-point in question, according to <br />|k + G_i |^2  &lt; ecut<br /><br />3) The cg array has a number of dimensions, and the dimension along the axis corresponding to the planewaves is 'mpw', refering to the Maximum number of PlaneWaves.<br /><br />I noticed that, for a given state (sigma, n, k),  the leftover elements of the planewave dimension in cg are set to large real numbers, like 1e+36;<br />also that the reduced coordinates for those leftover coefficients are set in turn to large integer numbers, like 2147483647.<br /><br />For example:<br />the last real elements of cg for a given (sigma, n, k) state are<br />cg ([  ...., -1.607e-05,  -2.741e-04,   <span style="color: #FF0000">9.969e+36,   9.969e+36</span> ])<br />where in this case npw_k  =  mpw - 2<br /><br />while  for the reduced coordinates,<br />   f.variables['reduced_coordinates_of_plane_waves'],<br />the tail of a planewave array for a specific state looks like<br /><br />([     [          0,           0,           0],<br />        .... , <br />       [         -2,          -1,          -1],<br />       [         -1,          -1,          -1],<br />       <span style="color: #FF0000">[-2147483647, -2147483647, -2147483647],<br />       [-2147483647, -2147483647, -2147483647]  </span> )<br /><br />Question:<br />Were these 'infinity' values set as a safety measure, as oppose to zeores, so that reading my mistake more items than the expected for a given kpoint lead to a noticeable wrong result?<br /><br />With regards,<br />Temok</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2662&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:03:46 GMT -->
+</html>

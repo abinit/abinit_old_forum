@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2771&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:32:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; error messages in optimisation run.</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>error messages in optimisation run.</h2>
+		<p><a href="viewtopic1eb5.html?f=9&amp;t=2771">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2771</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>error messages in optimisation run.</h3>
+				<div class="date">Posted: <strong>Sun Aug 24, 2014 11:46 pm</strong></div>
+				<div class="author">by <strong>umasubbiah</strong></div>
+				<div class="content">I am trying to optimise the ions for a 108 atom amorphous system. I am using the input file given in test case 81 in the package. For  most of the higher pressures, the code runs smoothly.. with energy converged, but with large forces (&gt; tolmxf 5Ha/Bohr). The stress conditions however seem to show isotropic pressure. Are these total energy values and pressure true ground state values..? 1. Can I use the rprim and xred to continue with linear response calculations?<br /><br />2. When I increase the scaling factor to reduce the pressure, close to ambient conditions, with increased dilatmx and nband and nstep,(with the same ecut as the higher pressures) I get the following error messages.. and the code stopped with 3 out of 10 (ntime=10)  iterations for ionic optimisation. <br /><br />What should I change to do the calculations at the lower pressures?<br /><br /><span style="color: #FF0000"> !WARNING<br />message: |<br />    Problem in abi_xheev, info=   7<br />src_file: Subroutine Unknown<br />src_line: 0<br />...<br /><br /><br />--- !WARNING<br />message: |<br />    abi_xpotrf, info=1<br />src_file: Subroutine Unknown<br />src_line: 0</span><br />...<br /><br />Can you kindly guide me on how to proceed?<br /><br />Sincerely,<br />Uma</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: error messages in optimisation run.</h3>
+				<div class="date">Posted: <strong>Tue Aug 26, 2014 6:58 pm</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">I am not gonna help you much but you should try to restart you relaxation using the last coordinates (xred or xcart) and the last lattice parameters (acell) from the log file. Just replace your values in you input file by those one.<br />Run the calculation again.<br />I expect that you should be able to run again a few time iteration and that the code will fail with the same error message.<br /><br />I have quite the same issue with the error message<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--- !ERROR<br />message: |<br />&nbsp; &nbsp; abi_xpotrf, info=11<br />src_file: abi_xorthonormalize.f90<br />src_line: 106<br />...<br /></code></pre></div><br />and I can restart the calculation every time for a new run of about 5 or 7 time iterations.<br /><br />What linear algebra do you use ? What compiler ? <br /><br />Cheers<br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: error messages in optimisation run.</h3>
+				<div class="date">Posted: <strong>Fri Aug 29, 2014 4:52 pm</strong></div>
+				<div class="author">by <strong>umasubbiah</strong></div>
+				<div class="content">Thank you Jordan..<br />I did not compile the current version of ABINIT. I am using a cluster where the administrators had already done it. I shall try a few things and post my observations on this thread.<br />Uma</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: error messages in optimisation run.</h3>
+				<div class="date">Posted: <strong>Sun Jan 10, 2016 9:28 pm</strong></div>
+				<div class="author">by <strong>amir</strong></div>
+				<div class="content">I have the same problem when I use toldff or tolrff  as stopping criterion, but when I use toldfe it works fine. I also realized that if I use toldff in optimizing a unit cell it does not converge, but when I use toldfe it works fine. However, in the description of toldff it says &quot;This is to be used when trying to equilibrate a structure to its lowest energy configuration (ionmov=2), or in case of molecular dynamics (ionmov=1) &quot;. In the tutorial input files, when optimizing the cell, toldfe is used. Can you explain how I should choose my stopping criteria? Thanks.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: error messages in optimisation run.</h3>
+				<div class="date">Posted: <strong>Wed Jan 13, 2016 11:31 pm</strong></div>
+				<div class="author">by <strong>amir</strong></div>
+				<div class="content">I have the answer to a part of my question, why toldff can't be used in optimizing the unit cell. Under the description optcell it says: if all the reduced coordinates of atoms are fixed by symmetry, one cannot use toldff to stop the SCF cycle. (Suggestion : use toldfe with a small value, like 1.0d-10)</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: error messages in optimisation run.</h3>
+				<div class="date">Posted: <strong>Tue Jan 19, 2016 2:16 pm</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">It hard to answer the question but as a starting reflexion, for general purpose converge the density, then if you are interested in the energy only, consider using toldfe.<br />In the case of structural optimization, you just want the forces and streses to be as minimal as possible so use toldff or tolrdf to converge the forces/stress.<br /><br />Usually converging the density is stricter than converging on the energy. <br />If you keep the same value for toldfe and toldff, then in the first case you converge the energy to let say 1e-10Ha. In the later you converge the forces to 1e-10Ha/Bohr which is really really small for the forces. Then the SCF cycles needs many more iterations to converge and lobpcg becomes unstable.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2771&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:32:56 GMT -->
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3638&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:49:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Abinit tutorial issues - convergence</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Abinit tutorial issues - convergence</h2>
+		<p><a href="viewtopic06f8.html?f=9&amp;t=3638">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3638</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Abinit tutorial issues - convergence</h3>
+				<div class="date">Posted: <strong>Mon Jun 26, 2017 9:24 pm</strong></div>
+				<div class="author">by <strong>abinit_angela</strong></div>
+				<div class="content">Hello all!<br /><br />Please forgive me, I have just begun using Abinit and I am having some issues. (If this question is better suited in another category, please let me know!)<br /><br />I have been following Abinit's first tutorial for new users, involving getting the energetics (among other things) of an H2 molecule. This tutorial can be found at <!-- m --><a class="postlink" href="http://www.abinit.org/doc/helpfiles/for-v8.4/tutorial/lesson_base1.html">http://www.abinit.org/doc/helpfiles/for ... base1.html</a><!-- m -->.<br /><br />I don't encounter any issues until it becomes time to run the code. Upon executing Abinit, I have two major problems : <br /><br />1. I do not see all the output files in my working directory - the most I see is the log file and the .out (output) file. <br /><br />2. The job, which should converge in seconds, does indeed converge. However, the code does not stop running until I stop it. <br /><br />All files can be found in Abinit's package folder in the directory tests/tutorial/Input. To skip to where my issue is, please see section 1.1d of the tutorial. I apologize, many of the files' extensions are not supported for upload.<br /><br />My submission script (abinit.sub) for the job is based off of the script I have for CP2K jobs in order to submit the job to computing nodes, which utilize SLURM to manage jobs; this file can be found pasted below. The Abinit version installed would be Abinit 7.10.4. <br /><br />People I work with have suggested that it is something wrong with Abinit itself or the data used, as the issues occur whether the job is submitted on my university's computing nodes or login nodes.<br /><br />Is Abinit a code that must be stopped by the user, or is some communication between Abinit and the computer occuring? <br /><br />Thank you so much for any help! If you need my log files or anything, please let me know.<br /><br />Angela<br /><br />abinit.sub, submission script&#058; <br />&quot;#!/bin/env bash<br />#SBATCH --job-name=ab_tbase1_x<br />#SBATCH --output=vn.out<br />#SBATCH --nodes=2<br />#SBATCH --ntasks-per-node=28<br />#SBATCH --time=0-01:00:00<br />#SBATCH --cluster=mpi<br /><br />module purge<br />module load openmpi/2.0.2<br />module load abinit-epg/7.10.4<br /><br /><br />ulimit -s unlimited<br />ulimit -l unlimited<br /><br />mpirun -np $SLURM_NTASKS abinit &lt;tbase1_x.files&gt;&amp; log&quot;</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit tutorial issues - convergence</h3>
+				<div class="date">Posted: <strong>Mon Oct 30, 2017 7:49 am</strong></div>
+				<div class="author">by <strong>TriSugiono</strong></div>
+				<div class="content">can u post the input files log files and x.files</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3638&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:49:39 GMT -->
+</html>

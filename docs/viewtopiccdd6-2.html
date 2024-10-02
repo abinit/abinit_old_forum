@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1068&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:05:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Obsolete comments on ddk calculation in toptic_3.in?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Obsolete comments on ddk calculation in toptic_3.in?</h2>
+		<p><a href="viewtopic7e38.html?f=19&amp;t=1068">https://forum.abinit.org/viewtopic.php?f=19&amp;t=1068</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Obsolete comments on ddk calculation in toptic_3.in?</h3>
+				<div class="date">Posted: <strong>Wed May 04, 2011 1:51 pm</strong></div>
+				<div class="author">by <strong>Robin</strong></div>
+				<div class="content">Dear Developers,<br /><br />Comments in toptic_3.in indicate that only Time-reversal symmetry can be used in a ddk response calculation. However, after doing several tests by using Abinit-6.2.2 I found these comments to be obsolete: using kptopt=1 will not cause a program abortion and it gives nearly the same result as kptopt=2 when the k-point sampling is dense enough.<br /><br />Considering the tutorials are the main resource for new users to teach themselves and whether or not to employ the full symmetry means huge differences in a real calculation, could you please update them?<br /><br />Sincerely,<br />Guangfu Luo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Obsolete comments on ddk calculation in toptic_3.in?</h3>
+				<div class="date">Posted: <strong>Thu May 05, 2011 8:32 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello Guangfu,<br /><br />good that you checked. Could you be more precise on your test case, and quantify, please? In some cases you may get a reasonable answer even if things are formally wrong. To my knowledge no one has actually implemented this.<br /><br />matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Obsolete comments on ddk calculation in toptic_3.in?</h3>
+				<div class="date">Posted: <strong>Fri May 06, 2011 5:11 am</strong></div>
+				<div class="author">by <strong>Robin</strong></div>
+				<div class="content">Dear Matthieu,<br /><br />I did my tests this way to toptic_3.in. First, I increase ecut to 4 (just in case). Then I compare the final results (optical spectra) between kptopt=1 and kptopt=2 with different ngkpt (4x4x4, 24x24x24, and 36x36x36).<br /><br />The tests show that different kptopt options display major spectrum differences in the low energy region, which decrease with increasing k-point sampling. For your convenience, all the test files and the comparison graph are attached.<br /><br />Two additional things: (1) when kptopt=1 is specified for all datasets, kptopt is not printed in the *out file (but the *1WF file size is much smaller). (2) It seems that CASTEP can use the full symmetry in this kind of calculation.<br /><br />Sincerely,<br />Guangfu Luo<div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/fileaf9f.php?id=355">test-files-for-toptic_3.tar.bz2.in</a></dt>
+			<dd><em>remove suffix .in</em></dd>			<dd>(165.09 KiB) Downloaded 384 times</dd>
+		</dl>
+		
+		
+			</div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Obsolete comments on ddk calculation in toptic_3.in?</h3>
+				<div class="date">Posted: <strong>Fri May 06, 2011 12:29 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Before worrying too much about kptopt I would check carefully the ecut convergence. There is no way that ecut = 4 is high enough to be converged for any pseudopotential. We use values that low in the tutorials just so the calculations run really fast, but for real work you have to do a full convergence study of the pseudopotentials you are using.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Obsolete comments on ddk calculation in toptic_3.in?</h3>
+				<div class="date">Posted: <strong>Thu May 12, 2011 5:47 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hi Joe and Robin,<br /><br />Ecut convergence is not needed, the point here is to see whether kptopt 1 is actually admitted and works fine for ddk calculations. In theory it is possible, but we don't know if it has been coded. It looks like in this case it works, but I am wary - the real way to go is to check the code, or at very least to try many types of symmetry - it is possible that cases with more or less symmetrical unit cells will fail...<br /><br />ciao<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Obsolete comments on ddk calculation in toptic_3.in?</h3>
+				<div class="date">Posted: <strong>Mon May 16, 2011 12:20 pm</strong></div>
+				<div class="author">by <strong>Robin</strong></div>
+				<div class="content">Dear Matthieu,<br /><br />   Actually, I tried a different system with hexagonal symmetry and also got consistent result with that from CASTEP (the intensity however differs by a constant).<br /><br />Sincerely,<br />Guangfu Luo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Obsolete comments on ddk calculation in toptic_3.in?</h3>
+				<div class="date">Posted: <strong>Wed May 25, 2011 4:34 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">well, that constant could be due to the incomplete k-points: have you also compared kptopt 1 and 3 for the hexagonal case?</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1068&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:05:29 GMT -->
+</html>

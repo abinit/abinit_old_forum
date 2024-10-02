@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1174&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:09:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; band structure of Graphene</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>band structure of Graphene</h2>
+		<p><a href="viewtopic9255.html?f=9&amp;t=1174">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1174</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>band structure of Graphene</h3>
+				<div class="date">Posted: <strong>Tue Jun 21, 2011 10:18 pm</strong></div>
+				<div class="author">by <strong>cherrywbtc</strong></div>
+				<div class="content">HI, I just started to learn abinit, I am quite new. Now I am trying to generate the band structure of Graphene. I got the eigenenergies, but when I plotted, It doesn't look good. Can anybody tell me what's wrong with the input? For the psudopotential file, I used 6c.pspnc file in the Psps_for_tests folder. Here is my input file:<br /># Graphene<br />#<br /># Computation of the band structure.<br /># First, a SCF density computation, then a non-SCF band structure calculation.<br /><br />ndtset 2<br /><br />#Dataset 1 : usual self-consistent calculation<br />kptopt1 1          # Option for the automatic generation of k points,<br />                   # taking into account the symmetry<br />nshiftk1 1<br />shiftk1  0.5 0.5 0.5  # These shifts will be the same for all grids<br />         <br />ngkpt1  10 10 1  <br />prtden1  1         # Print the density, for use by dataset 2<br />toldfe1  1.0d-6    # This value is way too large for most realistic studies of materials<br /><br />#Dataset 2 : the band structure<br />iscf2    -2<br />getden2  -1<br />kptopt2  -3<br />nband2   8<br />ndivk2   20 20 20 20 20 20      # by 6 points.<br />kptbounds2  0.5  0.0  0.0 # M point<br />            0.0  0.0  0.0 # Gamma point<br />            1/3  1/3  0.0 # K point<br />            0.5  0.0  0.0 # M point<br />            1/2  0.0  1/2 # L point <br />            0.0  0.0  1/2 # A point<br />tolwfr2  1.0d-12<br />enunit2  1             # Will output the eigenenergies in eV <br /><br /><br />#Definition of the unit cell<br />acell 3*1             <br />rprim  4.025116356  -1.808156919  0.0   <br />       4.025116356   1.808156919  0.0   <br />       0.0  0.0  10.0<br /><br />#Definition of the atom types<br />ntypat 1          # There is only one type of atom<br />znucl  6          ## The keyword &quot;znucl&quot; refers to the atomic number of the <br />                  # possible type(s) of atom. The pseudopotential(s) <br />                  # mentioned in the &quot;files&quot; file must correspond<br />                  # to the type(s) of atom. Here, the only type is Silicon.<br />                         <br /><br />#Definition of the atoms<br />natom 2           # There are two atoms<br />typat 1 1         # They both are of type 1, that is, C.<br />xangst            # # This keyword indicate that the location of the atoms<br />                  # will follow, one triplet of number for each atom<br />   1.42  0.0  0.0  # Triplet giving the REDUCED coordinate of atom 1.<br />   2.84  0.0  0.0  # Triplet giving the REDUCED coordinate of atom 2.<br /><br />#Definition of the planewave basis set<br />ecut 8.0         # Maximal kinetic energy cut-off, in Hartree<br /><br />#Definition of the SCF procedure<br />nstep 10          # Maximal number of SCF cycles<br />diemac 12.0</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1174&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:09:04 GMT -->
+</html>

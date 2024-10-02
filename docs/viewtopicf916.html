@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=985&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:44:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; about local PBE0</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>about local PBE0</h2>
+		<p><a href="viewtopic2ddb.html?f=9&amp;t=985">https://forum.abinit.org/viewtopic.php?f=9&amp;t=985</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>about local PBE0</h3>
+				<div class="date">Posted: <strong>Sun Mar 27, 2011 1:43 pm</strong></div>
+				<div class="author">by <strong>hicpalm</strong></div>
+				<div class="content">Hi,<br />In the abinit implementation of the local PBE0 the exact exchange may only be considered for the 'd' or 'f'  orbitals.<br />my question is about the atomic datasets where there is no electrons occupaying d orbitals. <br />For example, if we take any element of the first or the second column and we keep the possible d-electrons in the core (these electrons may need to be treated as semi core electrons but just for the example we keep them in the core) so that we have no electrons occupaying any d-orbital in the free atom. In addition, in the atomic dataset we add one empty d-bound state and possibly one or more unbound d-states. In this way, in a free atom calculation the d-bound state would remain empty but in a solid it will (possibly or probably) be occupied. <br /><br />Question : is it &quot;correct&quot; to use the local PBE0 with such a dataset for the d-orbitals ?<br /><br />thank you for your comments and corrections.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: about local PBE0</h3>
+				<div class="date">Posted: <strong>Tue Mar 29, 2011 7:06 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Based on your hypothetical description you have created a PAW dataset with d orbitals in the valence space (for example, calcium with 1s, 2s, 2p core, and 3s, 3p, 4s, 4d valence). The initial valence occupancy is 3s2, 3p6, 4s2, 4d0. You can use PBE0 on this configuration on the d orbitals. However, in most materials, the d orbitals will be little if any occupied, so it probably won't make much difference.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: about local PBE0</h3>
+				<div class="date">Posted: <strong>Tue Mar 29, 2011 7:28 pm</strong></div>
+				<div class="author">by <strong>hicpalm</strong></div>
+				<div class="content">thank you professor,<br /><br />that was just the configuration I tested (Ca :is 3s2, 3p6, 4s2, 3d0) with fcc sturcture. I was surprised to see that Both acell, bulk modulus and cohesive energy are better than PBE and closer to experiment.<br />so I was checking if it was correct what I am doing !<br /><br />thank you professor.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: about local PBE0</h3>
+				<div class="date">Posted: <strong>Wed Mar 30, 2011 3:07 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Hi,<br />yes, the d orbitals of calcium are nominally empty but low-lying, therefore, PBE0 locally on the d-orbitals, which stabilizes them and drops them further compared to PBE, is probably correcting (fortuitously) for errors in PBE and yielding a better description than PBE itself.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: about local PBE0</h3>
+				<div class="date">Posted: <strong>Wed Mar 30, 2011 3:32 pm</strong></div>
+				<div class="author">by <strong>hicpalm</strong></div>
+				<div class="content">Hello professor,<br /><br /><blockquote class="uncited"><div>PBE0 locally on the d-orbitals, which stabilizes them and drops them further compared to PBE<br /></div></blockquote><br /><br />what's the physical process behind &quot;stabilizes&quot; and &quot;drop them further&quot; when we include a part of the exact exchange.<br /><br />thanks</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: about local PBE0</h3>
+				<div class="date">Posted: <strong>Wed Mar 30, 2011 3:40 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">The exchange hole is long range, so including more of it (through exact exchange) has a orbital-stabilizing effect. (My explanations are crude because I don't understand this area of DFT in too much detail). Additionally, in the PBE model, which is of course not exact, there is approximate cancellation of the self-interaction error, which is fairly accurate for many systems but not for all, and when it fails often it can be improved through PBE0. Note that the portion of exact exchange to use is (based on atomic perturbation theory) 0.25; however, this is an adjustable parameter (perhaps unfortunately) so you can tune the amount of exact exchange to use on a specific system.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: about local PBE0</h3>
+				<div class="date">Posted: <strong>Wed Mar 30, 2011 3:45 pm</strong></div>
+				<div class="author">by <strong>hicpalm</strong></div>
+				<div class="content">many thanks.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: about local PBE0</h3>
+				<div class="date">Posted: <strong>Thu Apr 21, 2011 6:48 pm</strong></div>
+				<div class="author">by <strong>hicpalm</strong></div>
+				<div class="content">Hi,<br />I tried to calculate the cohesive energy for Ge with local PBE0 and exchmix=0.22.<br />with resepect to polarized  free Germanium atom the result seems an order of magnitude greater than the expected value. I obtain Ec=50 eV.<br /><br />is it the normal behavior of local PBE0 or there is some thing wrong with my calculations.<br />thank you for your comments/corrections.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: about local PBE0</h3>
+				<div class="date">Posted: <strong>Thu Apr 21, 2011 7:11 pm</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">Hi<br /><br />With a cohesive energy of 50 eV, I suspect there is something wrong in your calculation. It might sound stupid but did you divide the Ge (crystal) total energy by the number of atoms in the cell (or mutiply the total energy of atomic Ge by the number of atoms in the Ge crystal).<br /><br />Boris</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: about local PBE0</h3>
+				<div class="date">Posted: <strong>Thu Apr 21, 2011 8:18 pm</strong></div>
+				<div class="author">by <strong>hicpalm</strong></div>
+				<div class="content">Hi boris,<br /><br /><blockquote class="uncited"><div>did you divide the Ge (crystal) total energy by the number of atoms in the cell (or mutiply the total energy of atomic Ge by the number of atoms in the Ge crystal).<br /></div></blockquote><br /><br />This is not the case. with my dataset each atom brings about 95 Ha which would give a much greater difference in the cohesive energy if the error is of that kind.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: about local PBE0</h3>
+				<div class="date">Posted: <strong>Fri Apr 22, 2011 7:41 pm</strong></div>
+				<div class="author">by <strong>hicpalm</strong></div>
+				<div class="content">Hi,<br />I think the problem is in the spin polarized case with local PBE0.<br />here is what I obtain with PBE:<br /><br /> Ec  (eV) =   3.73        (with respect to Ge spin polarized atom)<br /> Ec  (eV) =   4.42        (with respect to Ge unpolarized atom) <br /><br />and with local PBE0:<br /><br />Ec  (eV) =   50.06  ???     (with respect to Ge spin polarized atom)<br />Ec  (eV) =    4.72           (with respect to Ge unpolarized atom) <br /><br />and here is  polarization of the germanium atom:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp; nsppol&nbsp; &nbsp;2&nbsp; &nbsp; <br />&nbsp; spinat&nbsp; &nbsp;0.0 0.0 2.0&nbsp; &nbsp;<br /></code></pre></div><br /><br />thank you for attention.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=985&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:44:39 GMT -->
+</html>

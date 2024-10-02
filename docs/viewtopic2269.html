@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4419&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:31:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; NetCDF Fortran is not WORKING in 9.0.4</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>NetCDF Fortran is not WORKING in 9.0.4</h2>
+		<p><a href="viewtopic951f.html?f=3&amp;t=4419">https://forum.abinit.org/viewtopic.php?f=3&amp;t=4419</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>NetCDF Fortran is not WORKING in 9.0.4</h3>
+				<div class="date">Posted: <strong>Wed May 27, 2020 6:07 pm</strong></div>
+				<div class="author">by <strong>kila</strong></div>
+				<div class="content">My netCDF Fortran is built by <strong class="text-strong">build-abinit-fallbacks.sh</strong> and I set it's dir by:<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure --with-libxc=/home/kila/abinit-9.0.4/fallbacks/install_fb/gnu/9.3/libxc/4.2.3 --with-hdf5=/home/kila/abinit-9.0.4/fallbacks/install_fb/gnu/9.3/hdf5/1.10.6 --with-netcdf=/home/kila/abinit-9.0.4/fallbacks/install_fb/gnu/9.3/netcdf4/4.6.3 --with-netcdf-fortran=/home/kila/abinit-9.0.4/fallbacks/install_fb/gnu/9.3/netcdf4_fortran/4.5.2 --with-linalg=/home/kila/abinit-9.0.4/fallbacks/install_fb/gnu/9.3/linalg/abinit_6.10</code></pre></div>
+
+One can see that <strong class="text-strong">--with-netcdf-fortran</strong> is set to fallbacks directory. And <strong class="text-strong">libnetcdff.a, libnetcdff.la</strong> are indeed seen in that dir. <br>
+<br>
+By when I use <strong class="text-strong">./configure</strong> there is an error:<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>WARNING : NetCDF Fortran is not WORKING !
+Please point the config to a working NetCDFF installation
+</code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: NetCDF Fortran is not WORKING in 9.0.4</h3>
+				<div class="date">Posted: <strong>Sun May 31, 2020 4:10 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br>
+need infos like  config.log...<br>
+but, perhaps, a problem of depencies ( missing libs )<br>
+<br>
+job</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: NetCDF Fortran is not WORKING in 9.0.4</h3>
+				<div class="date">Posted: <strong>Thu Aug 20, 2020 4:31 am</strong></div>
+				<div class="author">by <strong>Beta_Wong</strong></div>
+				<div class="content"><blockquote><div><cite><a href="memberlist194b.html?mode=viewprofile&amp;u=69">jbeuken</a> wrote: <a href="viewtopicbf00.html?p=13095#p13095" data-post-id="13095" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><div class="responsive-hide">Sun May 31, 2020 4:10 pm</div></cite>
+Hi,<br>
+need infos like  config.log...<br>
+but, perhaps, a problem of depencies ( missing libs )<br>
+<br>
+job
+</div></blockquote>
+
+I have the same erro with kila's,this is how I ./configure:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../configure --with-mpi=/public1/soft/mpich/3.1.4 --with-linalg=/public1/soft/intel/2018/compilers_and_libraries_2018.2.199/linux/mkl --with-hdf5=/public1/home/sc30842/tarballs/hdf5-install --with-libxc=/public1/soft/libxc/4.0.5-icc18 --with-netcdf=/public1/home/sc30842/tarballs/netcdf-install --with-netcdf-fortran=/public1/home/sc30842/tarballs/netcdf-install --prefix=/public1/home/sc30842/abinit-install CC=mpiicc CXX=mpiicpc FC=mpiifort F77=mpiifort</code></pre></div>
+the attachment is my config.log. Any help on this would be appreciated.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: NetCDF Fortran is not WORKING in 9.0.4</h3>
+				<div class="date">Posted: <strong>Thu Aug 20, 2020 3:51 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br>
+<br>
+your configure command reformatted for readability <img class="smilies" src="images/smilies/icon_e_wink.gif" width="15" height="17" alt=";-)" title="Wink"><br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>CC=mpiicc CXX=mpiicpc FC=mpiifort F77=mpiifort \
+../configure \
+--with-mpi=/public1/soft/mpich/3.1.4 \
+--with-linalg=/public1/soft/intel/2018/compilers_and_libraries_2018.2.199/linux/mkl \
+--with-hdf5=/public1/home/sc30842/tarballs/hdf5-install \
+--with-libxc=/public1/soft/libxc/4.0.5-icc18 \
+--with-netcdf=/public1/home/sc30842/tarballs/netcdf-install \
+--with-netcdf-fortran=/public1/home/sc30842/tarballs/netcdf-install \
+--prefix=/public1/home/sc30842/abinit-install
+</code></pre></div>
+
+I don't understand why you initialize "--with-mpi" with MPICH 3.1.4 <br>
+when you manifestly have the "Intel® MPI Library" ( FC=mpiifort ) ?<br>
+<br>
+To be sure,  pls, the outputs of  these cmds :<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>mpifort --version
+mpifort -show
+mpiifort -V
+mpiifort -show</code></pre></div>
+
+concerning netcdf-fortran,  can you show the outputs of these cmds :<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>nc-config --all
+nf-config --all
+ls /public1/home/sc30842/tarballs/netcdf-install/lib</code></pre></div>
+
+<br>
+can you try with this config.ac file  
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>FC="mpiifort"
+CC="mpiicc"
+CXX="mpiicpc"
+
+with_mpi="yes"
+enable_mpi_io="yes"
+
+with_linalg_flavor="mkl"
+LINALG_CPPFLAGS="-I${MKLROOT}/include"
+LINALG_FCFLAGS="-I${MKLROOT}/include"
+LINALG_LIBS="-L${MKLROOT}/lib/intel64 -Wl,--start-group  -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group"
+
+with_fft_flavor="dfti"
+
+with_libxc="/public1/soft/libxc/4.0.5-icc18"
+with_hdf5="/public1/home/sc30842/tarballs/hdf5-install "
+with_netcdf="/public1/home/sc30842/tarballs/netcdf-install"
+with_netcdf_fortran="/public1/home/sc30842/tarballs/netcdf-install"</code></pre></div>
+
+and  execute this command ?<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure --with-config-file="./config.ac"</code></pre></div></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4419&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:31:23 GMT -->
+</html>

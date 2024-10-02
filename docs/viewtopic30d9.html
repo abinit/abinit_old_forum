@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=345&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:54:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; acell/xred in WFK file after relaxation run</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>acell/xred in WFK file after relaxation run</h2>
+		<p><a href="viewtopic4b9c.html?f=9&amp;t=345">https://forum.abinit.org/viewtopic.php?f=9&amp;t=345</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>acell/xred in WFK file after relaxation run</h3>
+				<div class="date">Posted: <strong>Sun May 23, 2010 4:12 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello,<br /><br />it appears that the WFK file written at the end of a relaxation run (ionmov 2 optcell 2) contains the _initial_ geometrical parameters (acell xred), before the relaxation, instead of the final values. This should be corrected, I think, as the wavefunction coefficients which are written pertain to the relaxed structure. This probably means there is no test on the final structure saved in the WFK file, e.g. using the cut3d analysis of the WFK after a relaxation.<br /><br />However, for practical purposes, abinit will accept the WFK file anyway, and the calculation should be correct if the acell in the new input file is updated.<br /><br />Any experience/comments?<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: acell/xred in WFK file after relaxation run</h3>
+				<div class="date">Posted: <strong>Sun May 23, 2010 5:32 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">From the KNOW_PROBLEM file:<br /><br />P51.22 (MGiantomassi060627)<br />The new value of rprimd is not stored in _WFK file .<br />So, restart cannot benefit from modifications of acell.<br />See his mail of June 27, 2006. See also P8.<br /><br />Very old problem that has not been fixed yet!<br />Xavier told me that he tried to update the unit cell parameters <br />after the structural relaxation but some tests failed. <br />One should dig into the code as well as into the automatic tests to understand the reason!<br /><br />Ciao</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: acell/xred in WFK file after relaxation run</h3>
+				<div class="date">Posted: <strong>Sun May 23, 2010 7:32 pm</strong></div>
+				<div class="author">by <strong>gonze</strong></div>
+				<div class="content">Dear Matthieu and Matteo,<br /><br />Interestingly, Guillermo pointed this problem to me a few days ago, because he has been<br />rewriting whole sections of the ionmov/=0 part of ABINIT. It is in the pile of things that<br />he will be looking at, during the next weeks (months ?)... <br /><br />Best,<br />X.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=345&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:54:07 GMT -->
+</html>

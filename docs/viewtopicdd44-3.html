@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=3235&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:32:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Error occurs in 7.10.5, when using fftw3.3.4 and cuda 7.5</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Error occurs in 7.10.5, when using fftw3.3.4 and cuda 7.5</h2>
+		<p><a href="viewtopic3cc1.html?f=14&amp;t=3235">https://forum.abinit.org/viewtopic.php?f=14&amp;t=3235</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Error occurs in 7.10.5, when using fftw3.3.4 and cuda 7.5</h3>
+				<div class="date">Posted: <strong>Wed Mar 23, 2016 2:36 pm</strong></div>
+				<div class="author">by <strong>kinsang</strong></div>
+				<div class="content">Hi, everyone.<br />    I am a new user to abinit.<br />    I successfully compiled abinit with fftw3.3.4 and cuda 7.5, as well as MPI support.<br />    When I ran the test in abinit7-10-5/tests/tutoparal/Input/tdfpt_01.files, an error occured as follows.<br /><br /><strong class="text-strong">configure.ac:</strong><br /># configure file<br />FC=mpiifort<br />CC=mpiicc<br />CXX=mpiicpc<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br /># enable_gpu=&quot;yes&quot;<br /># with_gpu_flavor=&quot;cuda-double&quot;<br /># with_gpu_prefix=&quot;/usr/local/cuda-7.5&quot;<br />enable_debug=&quot;no&quot;<br />enable_optim=&quot;yes&quot;<br />enable_hints=&quot;yes&quot;<br />FCFLAGS_OPTIM=&quot;-xHost -w -O2&quot;<br />CFLAGS_OPTIM=&quot;-xHost -w -O2&quot;<br />CFLAGS=&quot;-O2 -xHost&quot;<br /><br />enable_fallbacks=&quot;no&quot;<br /><br /># linalg<br />with_linalg_flavor=&quot;mkl&quot;<br />with_linalg_incs=&quot;-I/opt/intel/ICC2016/mkl/include&quot;<br />with_linalg_libs=&quot;-L/opt/intel/ICC2016/mkl/lib/intel64 -lmkl_intel_lp64 -lmkl_core -lmkl_sequential&quot;<br /><br /># fftw<br />with_fft_flavor=&quot;fftw3-threads&quot;<br />with_fft_incs=&quot;-I/home/kinsang/INSTALL/intel/fftw334/include&quot;<br />with_fft_libs=&quot;-L/home/kinsang/INSTALL/intel/fftw334/lib -lfftw3f_threads&quot;<br /><strong class="text-strong"><br />Input variables:</strong><br />#   FCC Al; 10 special points<br /><br />#timopt -1<br /><br /> acell 3*7.56<br /> densty 1.2<br /> ecut 10<br /><br /> enunit 2  <br /><br /> localrdwf 1<br /> ngkpt 8 8 8 <br /> nshiftk 4<br /> shiftk 0.5 0.5 0.5<br />        0.5 0.0 0.0<br />        0.0 0.5 0.0<br />        0.0 0.0 0.5<br /><br /> natom  1 nband 5<br /> nline 3  nstep 20<br /> ntypat  1<br /> occopt  4  prtden 1   prtvol 10<br /> rprim   0 .5 .5  .5 0 .5  .5 .5 0<br /> timopt 2<br /> tnons   72*0.0d0<br /> tolvrs 1.0d-18<br /> typat  1  <br /> xred  0.0 0.0 0.0<br /> znucl 13.0<br /><br /># This line added when defaults were changed (v5.3) to keep the previous, old behaviour<br />  iscf 5<br /># add to conserve old &lt; 6.7.2 behavior for calculating forces at each SCF step<br /> optforces 1<br /><br /><strong class="text-strong">Log: --- !ERROR</strong><br />message: |<br />    Checking consistency of input data against itself gave 1 inconsistencies.<br />src_file: chkinp.F90<br />src_line: 3000<br />...<br /> leave_new : decision taken to exit ...<br /><br />More logs are enclosed. <br />Pleased help me, thank you!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Error occurs in 7.10.5, when using fftw3.3.4 and cuda 7.&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Fri Mar 25, 2016 8:50 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">As far as I remember, there is a small bug in the FFT initialization.<br />If you have a GPU version of abinit, you should not make any FFT on CPU since it is far more efficient on GPU therefore you should not use fftw3.<br />If you compile abinit without fftw3 and with cuda it should work.<br />Try to set fftalg to 112 before recompiling.<br /><br />This bug is actually not meaningfull. There is just a line where the check is badly done. it should not stop.... Sorry for the inconvenience.<br /><br />Cheers<br /><br />PS : Be carefull. you use intel16 and cuda7 which has not been tested (and actually is not even supported). In addition, the GPU version has not been updated for a while.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Error occurs in 7.10.5, when using fftw3.3.4 and cuda 7.</h3>
+				<div class="date">Posted: <strong>Fri Mar 25, 2016 2:12 pm</strong></div>
+				<div class="author">by <strong>kinsang</strong></div>
+				<div class="content"><blockquote><div><cite>Jordan wrote:</cite>As far as I remember, there is a small bug in the FFT initialization.<br />If you have a GPU version of abinit, you should not make any FFT on CPU since it is far more efficient on GPU therefore you should not use fftw3.<br />If you compile abinit without fftw3 and with cuda it should work.<br />Try to set fftalg to 112 before recompiling.<br /><br />This bug is actually not meaningfull. There is just a line where the check is badly done. it should not stop.... Sorry for the inconvenience.<br /><br />Cheers<br /><br />PS : Be carefull. you use intel16 and cuda7 which has not been tested (and actually is not even supported). In addition, the GPU version has not been updated for a while.</div></blockquote><br /><br />Thank you, Jordan.<br />I removed fftw3 and it works. I did not know about &quot;fftalg&quot; before what's its effect?<br />And I still wonder how to choose the libraries to make abinit run fast.<br />As you know, I disable fallbacks, and now link intel mkl and magma, how to make better configuration.<br />I would appreciate if you could give me your email, thanks again.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Error occurs in 7.10.5, when using fftw3.3.4 and cuda 7.</h3>
+				<div class="date">Posted: <strong>Tue Apr 05, 2016 11:07 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Hi.<br /><br />Using external optimized libraries is the way to go.<br />Therefore using magma/plasma and MKL is probably one of the best things you can do on an intel CPU and nvidia GPU.<br /><br />fftalg just change the library used to perform a FFT. abinit can use fftw3, mkl, built-in FFT, ...the result should not depend on this variable, just the speed of the calculation.<br /><br />Cheers<br /><br />Jordan</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=3235&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:32:49 GMT -->
+</html>

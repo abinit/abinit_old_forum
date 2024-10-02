@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=3137&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:33:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Problems with tutorial 1</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Problems with tutorial 1</h2>
+		<p><a href="viewtopic3879.html?f=14&amp;t=3137">https://forum.abinit.org/viewtopic.php?f=14&amp;t=3137</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Problems with tutorial 1</h3>
+				<div class="date">Posted: <strong>Sun Nov 01, 2015 2:09 pm</strong></div>
+				<div class="author">by <strong>maths</strong></div>
+				<div class="content">Hello, plz. don`t hit me, but I don't know where I should open this trad.<br />I have Problems with tutorial 1.2, where I should vary the distance from 1..2 bohr. Hence vary xcart. I don't know if I already made a mistake in filenames or storage past. <br />I crated a new Work1_2 in Work and copied the files: tbase1_x.files, tbase1_2.in and tbase1_2.out. Then I chanced the filenames in tbase1_x.files. And I tried to implement an arithmetic series like described for ecut:  ndtset 6 ecut: 10 ecut+ 5 so for cat I estimated maybe<br />ndtset   20<br />xcart:    -0.5 0.0 0.0     0.5 0.0 0.0   xcart+ 0.025<br />I know this must be wrong but I have no idea how to do??<br />thx<br />maths</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problems with tutorial 1</h3>
+				<div class="date">Posted: <strong>Mon Nov 02, 2015 9:18 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Hi!<br /><br />It's a good idea how to change the distance between the atoms. But you to modify it a little. You lack the increase in 'y' and 'z' coordinates (xcart+). So, what you need is<br /><br />xcart: -0.5 0.0 0.0 0.5 0.0 0.0 <br />xcart+ 0.025 0.0 0.0<br /><br />But even this way you wouldn't obtain what you wanted, since this will only translate your molecule. This is because 'xcart+' affects both atomic positions included in 'xcart'. The simplest way is to specify the coordinates explicitly for each wanted distance<br /><br />xcart1 -0.5 0.0 0.0 0.5 0.0 0.0<br />xcart2 -0.55 0.0 0.0 0.55 0.0 0.0<br />xcart3 -0.6 0.0 0.0 0.6 0.0 0.0<br />....<br /><br />Hope this helps.<br /><br />Best regards,<br /><br />Igor L.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problems with tutorial 1&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Tue Nov 03, 2015 2:27 pm</strong></div>
+				<div class="author">by <strong>maths</strong></div>
+				<div class="content">I didn't saw the in files in the tutorial directory. The solution is already implemented in the file there. <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>ndtset 21&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# 21 datasets<br />xcart:&nbsp; -0.5&nbsp; &nbsp;0.0 0.0&nbsp; # The starting values of the<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.5&nbsp; &nbsp;0.0 0.0&nbsp; # atomic coordinates<br />xcart+&nbsp; -0.025 0.0 0.0&nbsp; # The increment of xcart from one dataset to the other<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.025 0.0 0.0&nbsp; #</code></pre></div><br />thx lg</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=3137&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:33:00 GMT -->
+</html>

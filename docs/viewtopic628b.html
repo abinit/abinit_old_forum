@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=1254&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:19:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; PAW+GW calculation problem</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>PAW+GW calculation problem</h2>
+		<p><a href="viewtopicbc99.html?f=11&amp;t=1254">https://forum.abinit.org/viewtopic.php?f=11&amp;t=1254</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>PAW+GW calculation problem</h3>
+				<div class="date">Posted: <strong>Wed Aug 10, 2011 9:33 pm</strong></div>
+				<div class="author">by <strong>peter</strong></div>
+				<div class="content">Hi,<br />I am doing GW+PAW calculation for Ag, but the quasiparticle corrections of d bands are wrong,<br />Anybody know if GW+PAW is suitable for noble metal calculations?<br />Thanks<br /><br />The following is my input file<br />#######################################################################################<br />#gwpara  2<br /># Definition of parameters for the calculation of the KSS file<br />nbandkss1   -1         # Number of bands in KSS file (-1 means the maximum possible)<br />nband1      80         # Number of (occ and empty) bands to be computed<br />kssform1    3<br /><br /># Calculation of the screening (epsilon^-1 matrix)<br />optdriver2  3        # Screening calculation<br />gwcalctyp    2<br />getkss2     -1       # Obtain KSS file from previous dataset<br />nband2      80       # Bands to be used in the screening calculation<br />ecutwfn2    30<br />ecuteps2    10<br />symchi2     1<br />awtr2       1       # Note : the default awtr 1 is better<br />nfreqim2      4<br />nfreqre2     10<br />freqremax2    1.<br /><br /># data 3 Parameters for the GW calculation<br />optdriver3    4<br />getkss3     1<br />getscr3     2<br />nband3       80<br />ecutsigx3    65<br />ecutwfn3     30<br />gwcalctyp3   2    # contour integral<br />symsigma3   1<br />nkptgw3       1<br />kptgw3<br />      0.000000    0.000000    0.000000<br />#      0.500000    0.500000    0.000000<br />bdgw3<br />             1 13<br /><br /># Closure-trick<br />gwcomp     1                # Switching on the closure trick<br />gwencomp   2<br /><br />use_slk 1<br /># Data common to the three different datasets<br />#Definition of occupation numbers<br />occopt 7<br />tsmear 0.001  #for d band 0.01 should be ok, for Al is 0.04 Ha<br /><br /><br /><br /># Definition of the unit cell: fcc<br />acell  3*7.73        # This is equivalent to   10.217 10.217 10.217<br />rprim  0.0  0.5  0.5   # FCC primitive vectors (to be scaled by acell)<br />       0.5  0.0  0.5<br />       0.5  0.5  0.0<br /><br /># Definition of the atom types<br />ntypat  1         # There is only one type of atom<br />znucl 47           # The keyword &quot;znucl&quot; refers to the atomic number of the <br />                  # possible type(s) of atom. The pseudopotential(s) <br />                  # mentioned in the &quot;files&quot; file must correspond<br />                  # to the type(s) of atom. Here, the only type is Silicon.<br />                         <br /># Definition of the atoms<br />natom 1           # There are two atoms<br />typat 1         # They both are of type 1, that is, Silicon.<br />xred              # Reduced coordinate of atoms<br />      0.0  0.0  0.0<br /><br /># Definition of the k-point grid<br />#nkpt    10<br />ngkpt   10 10 10<br />nshiftk     1       <br />shiftk      0.  0.  0.<br />#nshiftk 4<br />#shiftk  0.5 0.5 0.5  # These shifts will be the same for all grids<br />#        0.5 0.0 0.0<br />#        0.0 0.5 0.0<br />#        0.0 0.0 0.5<br />istwfk  *1         # This is mandatory in all the GW steps.<br /><br /># Use only symmorphic operations<br />#symmorphi 0<br /><br /># Definition of the planewave basis set (at convergence 16 Rydberg 8 Hartree)<br />ecut 35.0          # Maximal kinetic energy cut-off, in Hartree<br />pawecutdg   140.0   # paw ecutoff<br />pawmixdg 1<br /><br /><br /># Definition of the SCF procedure<br />nstep   50        # Maximal number of SCF cycles<br />toldfe  1.0d-6    # Will stop when this tolerance is achieved on total energy<br />                  # precondition the SCF cycle. The model dielectric<br />                  # function used as the standard preconditioner<br />                  # is described in the &quot;dielng&quot; input variable section.<br />                  # Here, we follow the prescription for bulk silicon.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: PAW+GW calculation problem</h3>
+				<div class="date">Posted: <strong>Thu Aug 11, 2011 11:37 am</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hello,<br /><br />You might need to increase the number of bands in the screening and sigma calculation, did you check the convergence against these ? Also the number of frequencies you use might not be enough. That might be why your quasiparticle corrections are wrong. There is also the possibility that one-shot GW is not enough in which case you might need to switch to quasiparticle self-consistent GW but first try to check the number of bands and frequencies.<br /><br />David</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=1254&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:19:54 GMT -->
+</html>

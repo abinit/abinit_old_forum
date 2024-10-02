@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=4193&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:25:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; DFPT phonon with soc problem:rhoijim must be allocated!</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>DFPT phonon with soc problem:rhoijim must be allocated!</h2>
+		<p><a href="viewtopic2f4e.html?f=14&amp;t=4193">https://forum.abinit.org/viewtopic.php?f=14&amp;t=4193</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>2</strong></div>
+					<div class="post">
+				<h3>DFPT phonon with soc problem:rhoijim must be allocated!</h3>
+				<div class="date">Posted: <strong>Tue Jul 30, 2019 10:33 am</strong></div>
+				<div class="author">by <strong>onion2440</strong></div>
+				<div class="content">Hi everyone,<br />I want to calculate the phonon dispersion of Nb with spin orbit coupling. The Psp is GBRV. However, when abinit 8.10.3 calculate the q point : qpt2 0.00000000000000D+00  0.00000000000000D+00  0.00000000000000D+00, the abinit crashed and give me the informations below:<br /><br />--- !BUG<br />src_file: m_paw_occupancies.F90<br />src_line: 693<br />mpi_rank: 8<br />message: |<br />    pawrhoij(:)%rhoijim must be allocated!<br />...<br /><br />anyone can help me?<br /><br />Best <br />yang</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT phonon with soc problem:rhoijim must be allocated!</h3>
+				<div class="date">Posted: <strong>Wed Jul 31, 2019 3:04 am</strong></div>
+				<div class="author">by <strong>onion2440</strong></div>
+				<div class="content">I changed Psp to hgh, and the problems solved.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT phonon with soc problem:rhoijim must be allocated!</h3>
+				<div class="date">Posted: <strong>Wed Jul 31, 2019 5:38 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Yang,<br />Are you using GGA or LDA in your calculation with PAW potential?<br />Otherwise, shifting to HGH norm-conserving means that the ecut must be much larger than for PAW. If it is for production I would advise you to use the pseudodojo norm-conserving potentials:<br /><a href="http://www.pseudo-dojo.org/" class="postlink">http://www.pseudo-dojo.org</a><br />In &quot;type&quot; when you have FR means fully relativistic with SOC included.<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT phonon with soc problem:rhoijim must be allocated!</h3>
+				<div class="date">Posted: <strong>Fri Aug 02, 2019 2:41 pm</strong></div>
+				<div class="author">by <strong>onion2440</strong></div>
+				<div class="content"><blockquote><div><cite>ebousquet wrote:</cite>Dear Yang,<br />Are you using GGA or LDA in your calculation with PAW potential?<br />Otherwise, shifting to HGH norm-conserving means that the ecut must be much larger than for PAW. If it is for production I would advise you to use the pseudodojo norm-conserving potentials:<br /><a href="http://www.pseudo-dojo.org/" class="postlink">http://www.pseudo-dojo.org</a><br />In &quot;type&quot; when you have FR means fully relativistic with SOC included.<br />Best wishes,<br />Eric</div></blockquote><br /><br />Dear Eric,<br />I'm using LDA with PAW potential, since it seems DFPT method only support LDA PAW now.<br />Thank you for your suggestion, I will change to NC potetial.<br /><br />Best,<br />yang</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT phonon with soc problem:rhoijim must be allocated!</h3>
+				<div class="date">Posted: <strong>Mon Aug 05, 2019 10:20 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Yang,<br />DFPT works for both NC and PAW (if using the latest version) the only special requirement is to use pawxcdev=0 if you want to use PAW+GGA DFPT.<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT phonon with soc problem:rhoijim must be allocated!</h3>
+				<div class="date">Posted: <strong>Thu Aug 08, 2019 5:42 am</strong></div>
+				<div class="author">by <strong>onion2440</strong></div>
+				<div class="content"><blockquote><div><cite>ebousquet wrote:</cite>Dear Yang,<br />DFPT works for both NC and PAW (if using the latest version) the only special requirement is to use pawxcdev=0 if you want to use PAW+GGA DFPT.<br />Best wishes,<br />Eric</div></blockquote><br /><br />Dear Eric,<br />    I'm confusing with the special requirement of set pawxcdev=0 when we use PAW+GGA DFPT. <br />    The document said (<!-- m --><a class="postlink" href="https://docs.abinit.org/variables/paw/#pawxcdev">https://docs.abinit.org/variables/paw/#pawxcdev</a><!-- m -->):<br />    Be careful: GGA requires pawxcdev &gt; 0<br /><br />    Is there any special case here?<br /><br />Best wishes,<br />Yang</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT phonon with soc problem:rhoijim must be allocated!</h3>
+				<div class="date">Posted: <strong>Thu Aug 08, 2019 9:21 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content"><blockquote><div><cite>onion2440 wrote:</cite><blockquote><div><cite>ebousquet wrote:</cite>Dear Yang,<br />    I'm confusing with the special requirement of set pawxcdev=0 when we use PAW+GGA DFPT. <br />    The document said (<!-- m --><a class="postlink" href="https://docs.abinit.org/variables/paw/#pawxcdev">https://docs.abinit.org/variables/paw/#pawxcdev</a><!-- m -->):<br />    Be careful: GGA requires pawxcdev &gt; 0<br /></div></blockquote></div></blockquote><br />Hum, strange, it should be pawxcdev=0 to do DFPT+PAW+GGA...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT phonon with soc problem:rhoijim must be allocated!</h3>
+				<div class="date">Posted: <strong>Fri Aug 09, 2019 11:40 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">I confirm that it should be pawxcdev=0! It'll be corrected, thanks for reporting it.<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT phonon with soc problem:rhoijim must be allocated!</h3>
+				<div class="date">Posted: <strong>Mon Oct 07, 2019 3:17 pm</strong></div>
+				<div class="author">by <strong>Hola</strong></div>
+				<div class="content">Hello Eric,<br /><br />I want to do a DFPT calculation with a PAW pseudopotential (for calculating phonon spectra).<br />With the latest version of abinit (8.10.3), I should mentionne in the input file<br />pawxcdev 0, otherwise the calculation crash.<br /><br />With an older version of abinit (8.8.3), installed in a supercomputer, the calculation is running<br />well, whatever I mentionne pawxcdev 0 or pawxcdev 1, in my input file. Is it normal ?<br /><br />Yours sincerely,</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT phonon with soc problem:rhoijim must be allocated!</h3>
+				<div class="date">Posted: <strong>Sun Oct 20, 2019 8:44 pm</strong></div>
+				<div class="author">by <strong>NPike</strong></div>
+				<div class="content">Hello Hola,<br /><br />As we release new versions of ABINIT it is possible that the requirements on input variables change.  The various help menus and variable documentation always corresponds to the most recent release of ABINIT. <br /><br />-Nick</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT phonon with soc problem:rhoijim must be allocated!</h3>
+				<div class="date">Posted: <strong>Tue Nov 26, 2019 4:49 pm</strong></div>
+				<div class="author">by <strong>andyamygto</strong></div>
+				<div class="content">Hello Yang,<br>
+<br>
+I met the same problem when i doing the FULL DFPT calculation with PAW-PP<br>
+I wonder if anyone have an idea how to fix this problem without change the PP-file(since i want to do the DFT+U+DFPT,so i need to use the PAW-PP for my calculation)<br>
+<br>
+Best wishes,<br>
+Andy</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT phonon with soc problem:rhoijim must be allocated!</h3>
+				<div class="date">Posted: <strong>Wed Dec 04, 2019 3:11 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Andy,<br>
+What is the error message you get?<br>
+With DFP+U there were a small bug in the code and it was frozen in the 8.10.3. This has been solved since a while but not sure if this is fixed in 8.10.3...<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT phonon with soc problem:rhoijim must be allocated!</h3>
+				<div class="date">Posted: <strong>Sun Dec 08, 2019 1:52 pm</strong></div>
+				<div class="author">by <strong>andyamygto</strong></div>
+				<div class="content">Dear Eric,<br>
+Here is the WARNING massage i got<br>
+<br>
+pawio_print_ij: WARNING -<br>
+  The matrix seems to have high value(s) !<br>
+  ( 64 components have a value greater than   50.0).<br>
+  It can cause instabilities during SCF convergence.<br>
+  Action: you should check your atomic dataset (psp file)<br>
+          and look for "high" projector functions...<br>
+<br>
+I haven't apply the Hubbard U for my calculation yet.<br>
+So I think the problem is cause by the FULL DFPT + PAW<br>
+Since it cause the divergence in my 2DEtotal during the perturbation,so i just quit the job for now<br>
+and change to the NC-PP.<br>
+<br>
+Best wishes,<br>
+Andy</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT phonon with soc problem:rhoijim must be allocated!</h3>
+				<div class="date">Posted: <strong>Fri Dec 20, 2019 10:28 am</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">Dear all,<br>
+<br>
+Some comments...<br>
+* DFPT+PAW+U is not guaranteed, especially in 8.10.3.<br>
+This is an on-going development... that will be better in v9.0 (january).<br>
+<br>
+* The warning "The matrix seems to have high value!" is just a warning. It means -- as explained -- that the PAW datasets is a bit hard to converge because abinit has difficulties toorthogonalize projectors for your particular system.<br>
+Universal atomic datatsets do not exists although we are doing our best to build as transferable as possible datasets.<br>
+And, if the dataset is from GBRV table, this is another story.<br>
+Anyway, as soon as your calculation converges, you don't have to worry about this warning.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT phonon with soc problem:rhoijim must be allocated!</h3>
+				<div class="date">Posted: <strong>Fri Dec 20, 2019 6:36 pm</strong></div>
+				<div class="author">by <strong>andyamygto</strong></div>
+				<div class="content"><blockquote><div><cite><a href="memberlist913b.html?mode=viewprofile&amp;u=55">torrent</a> wrote: <a href="viewtopic7bfc.html?p=12714#p12714" data-post-id="12714" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><div class="responsive-hide">Fri Dec 20, 2019 10:28 am</div></cite>
+Dear all,<br>
+<br>
+Some comments...<br>
+* DFPT+PAW+U is not guaranteed, especially in 8.10.3.<br>
+This is an on-going development... that will be better in v9.0 (january).<br>
+<br>
+* The warning "The matrix seems to have high value!" is just a warning. It means -- as explained -- that the PAW datasets is a bit hard to converge because abinit has difficulties toorthogonalize projectors for your particular system.<br>
+Universal atomic datatsets do not exists although we are doing our best to build as transferable as possible datasets.<br>
+And, if the dataset is from GBRV table, this is another story.<br>
+Anyway, as soon as your calculation converges, you don't have to worry about this warning.
+</div></blockquote>
+
+Dear torrent<br>
+<br>
+Thanks a lot for the comment.<br>
+I wonder is there any way to deal with the divergence total energy (2DEtotal) in perturbation without changing the PAW to NCPP?<br>
+I try both the general Atomic dataset and the one from GBRV table . They both leads to the weird divergence during the perturbation. (2DEtotal up to 10^30 Hatree)<br>
+BTW, I am looking forward the v9.0. You guys are doing amazing job!<br>
+<br>
+Regards,<br>
+Andy</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT phonon with soc problem:rhoijim must be allocated!</h3>
+				<div class="date">Posted: <strong>Sat Jan 18, 2020 4:01 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Andy,<br>
+Regarding the divergence of the SCF, it can be specific for each case. The first thing would be to play with the mixing parameters (diemix, diemixmag if magnetism, nline, etc) see if reducing them could improve the situation.<br>
+Bets wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT phonon with soc problem:rhoijim must be allocated!</h3>
+				<div class="date">Posted: <strong>Sun Feb 02, 2020 10:45 am</strong></div>
+				<div class="author">by <strong>andyamygto</strong></div>
+				<div class="content">Dear Eric,<br>
+<br>
+Thanks for the advise , i was trying to tune the mixing parameters and see the results.<br>
+It doesn't seems to be better while doing perturbation. I will keep trying on this.<br>
+<br>
+BTW, I was wonder is there any tip for setting these kind of parameters?<br>
+<br>
+Regards,<br>
+Andy</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT phonon with soc problem:rhoijim must be allocated!</h3>
+				<div class="date">Posted: <strong>Sun Feb 09, 2020 12:09 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Andy,<br>
+How to tune mixing parameter is something coming from experience but in general the best to have them as large as possible such that you reduce them step by step to see when this can improve your case.<br>
+By the way, at this stage it'll be hard to help you without knowing which system are you running on, I've made several tests of DFPT+PAW (with and without U) and most of them go smoothly without much tuning mixing. Is your system converging well during ground state or relaxation?<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT phonon with soc problem:rhoijim must be allocated!</h3>
+				<div class="date">Posted: <strong>Sun Feb 09, 2020 12:54 pm</strong></div>
+				<div class="author">by <strong>andyamygto</strong></div>
+				<div class="content">Dear Eric,<br>
+Thanks for the reply.<br>
+Sorry, I was busy from another project recently so i haven't do many tests, but there is still some progress and will be take on later.<br>
+The system i am running is a monolayer CrI3 ,  my system is well converge during ground state and relaxation. <br>
+The only thing might cause the problem is that for the monolayer CrI3, the ground state energy with AFM and FM state is extreme close( 0.001 Ha difference). <br>
+But there's another topic i was trying to solve is that i cannot do the FM calculation in the FULL DFPT<br>
+<a href="viewtopic1812.html?p=12726#p12726" class="postlink">viewtopic.php?p=12726#p12726</a><br>
+<br>
+I don't know if that cause the problem or not.<br>
+I will try to do more test about mixing parameter.<br>
+<br>
+Regards,<br>
+Andy</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT phonon with soc problem:rhoijim must be allocated!</h3>
+				<div class="date">Posted: <strong>Tue Feb 11, 2020 3:17 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content"><blockquote><div><cite><a href="memberlista4a6.html?mode=viewprofile&amp;u=2610">andyamygto</a> wrote: <a href="viewtopic77b1.html?p=12808#p12808" data-post-id="12808" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><div class="responsive-hide">Sun Feb 09, 2020 12:54 pm</div></cite>
+The only thing might cause the problem is that for the monolayer CrI3, the ground state energy with AFM and FM state is extreme close( 0.001 Ha difference). 
+</div></blockquote>
+Yes this can be a problem, when you are close to phase transitions, the energy landscape flattens and things have tendency to diverge... diemix and diemixmag could do the job here, but they might need to be small and requiring more SCF... You can also increase nline to 10 or 12 to help.<br>
+<br>
+For the FM, you could switch to metallic occupation (and putting a small tsemar if insulating) as stated in the post you mention, did you try it?<br>
+<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT phonon with soc problem:rhoijim must be allocated!</h3>
+				<div class="date">Posted: <strong>Tue Feb 11, 2020 4:29 am</strong></div>
+				<div class="author">by <strong>andyamygto</strong></div>
+				<div class="content"><blockquote><div><cite><a href="memberlist58ee.html?mode=viewprofile&amp;u=682">ebousquet</a> wrote: <a href="viewtopic8ba6.html?p=12809#p12809" data-post-id="12809" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><div class="responsive-hide">Tue Feb 11, 2020 3:17 am</div></cite>
+For the FM, you could switch to metallic occupation (and putting a small tsemar if insulating) as stated in the post you mention, did you try it?
+</div></blockquote>
+
+Yes i have tried this way at first. but seems like the code won't let me do the calculation.<br>
+It's sending the ERROR message:<br>
+<br>
+chkint_prt: ERROR -<br>
+Context: the value of the variable usepead is 0.<br>
+Context: the value of the variable optdriver is 5.<br>
+The value of the input variable occopt is 4, while it must be<br>
+equal to 1<br>
+Action: you should change one of the input variables occopt,<br>
+usepead or optdriver.<br>
+<br>
+So i tried the spinmagntarget later on, but both way i can't get the calculation down. Did i miss something?<br>
+I will try the diemix and diemixmag etc... first. Hope i can get a good result.<br>
+<br>
+Regards,<br>
+Andy</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT phonon with soc problem:rhoijim must be allocated!</h3>
+				<div class="date">Posted: <strong>Sat Feb 15, 2020 8:23 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content"><blockquote><div><cite><a href="memberlista4a6.html?mode=viewprofile&amp;u=2610">andyamygto</a> wrote: <a href="viewtopic7876.html?p=12810#p12810" data-post-id="12810" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><div class="responsive-hide">Tue Feb 11, 2020 4:29 am</div></cite>
+chkint_prt: ERROR -<br>
+Context: the value of the variable usepead is 0.<br>
+Context: the value of the variable optdriver is 5.<br>
+The value of the input variable occopt is 4, while it must be<br>
+equal to 1<br>
+Action: you should change one of the input variables occopt,<br>
+usepead or optdriver.
+</div></blockquote>
+Hummm, looks strange in my case it is running without problem with the 8.10.3. Sounds like there are flags that might be conflicting in your case. Do you mind to show your input?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT phonon with soc problem:rhoijim must be allocated!</h3>
+				<div class="date">Posted: <strong>Tue Feb 18, 2020 1:00 pm</strong></div>
+				<div class="author">by <strong>andyamygto</strong></div>
+				<div class="content"><blockquote><div><cite><a href="memberlist58ee.html?mode=viewprofile&amp;u=682">ebousquet</a> wrote: <a href="viewtopicd01a.html?p=12813#p12813" data-post-id="12813" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><div class="responsive-hide">Sat Feb 15, 2020 8:23 pm</div></cite>
+Hummm, looks strange in my case it is running without problem with the 8.10.3. Sounds like there are flags that might be conflicting in your case. Do you mind to show your input?
+</div></blockquote>
+
+Hi, here is my input.<br>
+I am running this job in abinit 8.10.3<br>
+I was using LDA psp8 for the calculation, but I think the psedopotential will not effect this error.<br>
+<br>
+regards,<br>
+Andy</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT phonon with soc problem:rhoijim must be allocated!</h3>
+				<div class="date">Posted: <strong>Thu Feb 20, 2020 2:59 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Andy,<br>
+OK, I see that you are doing more than the phonons since in your input you also calculate the non-linear responses. I guess up to dataset #4 things are running but you get the crash at one of the following dataset, could you confirm this and tell me at which dataset you have the error message?<br>
+Not sure if the non-linear response is implemented with SOC, I'm going to ask to the dev of this part.<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFPT phonon with soc problem:rhoijim must be allocated!</h3>
+				<div class="date">Posted: <strong>Fri Feb 21, 2020 1:22 pm</strong></div>
+				<div class="author">by <strong>andyamygto</strong></div>
+				<div class="content">Dear Eric,<br>
+<br>
+Yes I got the error message for dataset 5,6,7 which is the non-linear response part.<br>
+<br>
+I have done a lot research and seems like the DFPT doesn't support the SOC.<br>
+But for my calculation, I haven't turn on the SOC yet (nspinor).<br>
+I just want to do the ferromagnetic calculation with DFPT but it won't work.<br>
+It should be able to do only the spin polarized calculations without the SOC, right?(Since I was getting all the information from the tutorial. please correct me if I am wrong.)<br>
+<br>
+I would appreciate it if you can give me more information. <br>
+<br>
+Best wishes,<br>
+Andy</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>2</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=4193&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:25:54 GMT -->
+</html>

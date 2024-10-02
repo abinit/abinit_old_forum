@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1987&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:05:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; How to compile V_sim with abinit plugin-in?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>How to compile V_sim with abinit plugin-in?</h2>
+		<p><a href="viewtopic32b9.html?f=3&amp;t=1987">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1987</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>How to compile V_sim with abinit plugin-in?</h3>
+				<div class="date">Posted: <strong>Wed Feb 06, 2013 3:41 pm</strong></div>
+				<div class="author">by <strong>Zhang Xiaole</strong></div>
+				<div class="content">Dear users,<br />i have some troubles during installtion V_sim with abinit-6.12.3.<br />The procedure i used as following<br />firstly, i compile abinit with --with-trio-flavor=none --enable-bindings prefix=DIR, the installtion works well.<br />then, i compile V_sim with --with-openbabel --with-xsf --with-abinit=DIr --with-netcdf-include=DIR --with-netcdf-libdir=DIR --with-libxc=DIR --with-etsf-io-include=DIR --with-etsf-io-libdir=DIR, DIR represent the dictory of these code respectively.<br />at last, i get the following warning:<br />configure: WARNING: ABINIT support has been disabled since ETSF_IO is not available.<br />i think the netcdf, libxc and estf-io have been installed appropriately.<br />i also attach my config.log file.<br />Any suggestions will be appreciate~<br /><br /><br /><br />Zhang</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to compile V_sim with abinit plugin-in?&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Wed Feb 06, 2013 6:38 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Hi Zhang,<br /><br />Reading your confg.log file ...<blockquote class="uncited"><div>configure:26653: gfortran -o conftest -g -O2 -I/home/xiaole/ABINIT/abinit-7.0.5/fallbacks/sources/etsf_io-1.0.4/include/gcc  -L/home/xiaole/ABINIT/abinit-7.0.5/fallbacks/sources/etsf_io-1.0.4/lib  conftest.f90  -letsf_io -lnetcdff  &gt;&amp;5<br />/usr/bin/ld: cannot find -lnetcdff<br />collect2: error: ld returned 1 exit status<br />configure:26653: $? = 1<br />configure: failed program was:<br />| <br />| program main<br />|   use etsf_io<br /></div></blockquote><br /><br />etsf-io detection failed ... at least because linking with netcdf is wrong: netcdff is only the fortran interface, correct linking needs the reference to the main library i.e. -lnetcdf, and the -L path is missing. So you have to tell configure to link netcdf with -lnetcdf (because abinit fallback netcdf has a combined library, no need to call the netcdff interface) and probably append the path to LD_LIBRARY_PATH environment variable.<br /><br />Kind regards,<br /><br />Alain'</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to compile V_sim with abinit plugin-in?</h3>
+				<div class="date">Posted: <strong>Fri Feb 15, 2013 5:48 am</strong></div>
+				<div class="author">by <strong>Zhang Xiaole</strong></div>
+				<div class="content">Dear Alain，<br />Thank you , i will have a try</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1987&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:05:45 GMT -->
+</html>

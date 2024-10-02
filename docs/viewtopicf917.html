@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2694&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:22:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Scf cycle in non-collinear magnetic system</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Scf cycle in non-collinear magnetic system</h2>
+		<p><a href="viewtopic0f0e.html?f=9&amp;t=2694">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2694</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Scf cycle in non-collinear magnetic system</h3>
+				<div class="date">Posted: <strong>Wed Jun 11, 2014 2:49 pm</strong></div>
+				<div class="author">by <strong>sponce</strong></div>
+				<div class="content">Dear all, <br /><br />I'm trying to converge a ground state scf cycle of a ferromagnetic compounds (containing half-filled Eu 4f electrons) taking into account SO coupling in PAW.<br /><br />It's not converging:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;ETOT&nbsp; 250&nbsp; -932.41424563692&nbsp; &nbsp; &nbsp;7.682E-01 3.847E-02 4.368E+02<br />&nbsp;ETOT&nbsp; 251&nbsp; -936.95319587233&nbsp; &nbsp; -4.539E+00 8.552E-02 5.962E+02<br />&nbsp;ETOT&nbsp; 252&nbsp; -940.18025543856&nbsp; &nbsp; -3.227E+00 3.904E+00 3.913E+02<br />&nbsp;ETOT&nbsp; 253&nbsp; -926.51020300340&nbsp; &nbsp; &nbsp;1.367E+01 2.602E-01 9.431E+01<br />&nbsp;ETOT&nbsp; 254&nbsp; -926.75519625814&nbsp; &nbsp; -2.450E-01 2.661E-02 8.302E+01<br />&nbsp;ETOT&nbsp; 255&nbsp; -932.57849535648&nbsp; &nbsp; -5.823E+00 2.628E-01 3.813E+02<br />&nbsp;ETOT&nbsp; 256&nbsp; -926.55239654446&nbsp; &nbsp; &nbsp;6.026E+00 1.684E-01 6.018E+01<br />&nbsp;ETOT&nbsp; 257&nbsp; -931.20513213756&nbsp; &nbsp; -4.653E+00 2.538E-01 2.740E+02</code></pre></div> <br /><br />Here are the relevant input variables:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>nline 20<br />kptopt&nbsp; &nbsp; 4&nbsp; &nbsp; &nbsp; &nbsp;<br />ngkpt&nbsp; &nbsp; &nbsp;4 4 4<br />nshiftk&nbsp; &nbsp;1<br />shiftk&nbsp; &nbsp; 0 0 1/2<br />tolvrs1&nbsp; &nbsp; 1.0d-16<br />nstep1&nbsp; &nbsp; &nbsp;1000<br />diemac1&nbsp; &nbsp; 4.0<br />iscf&nbsp; &nbsp; &nbsp; 17<br />nbdbuf&nbsp; &nbsp; 22<br />nband&nbsp; &nbsp; &nbsp;*224<br />ntypat 5<br />znucl 63.0 56.0 14.0 8.0 7.0<br />usepawu&nbsp; &nbsp;1<br />lpawu&nbsp; &nbsp; 3&nbsp; -1&nbsp; -1&nbsp; -1&nbsp; &nbsp;-1<br />upawu&nbsp; &nbsp;7.5 0.0 0.0 0.0 0.0&nbsp; &nbsp;eV<br />jpawu&nbsp; &nbsp;0.6 0.0 0.0 0.0 0.0&nbsp; &nbsp;eV<br />nsppol 1<br />nspden 4&nbsp; &nbsp;# Non Colinear Magnetism<br />nspinor 2&nbsp; # Non Colinear Magnetism<br />pawspnorb 1 # Spin-orbit coupling<br />spinat 0 0 7 66*0 # Impose magnetism<br />diemix 0.6<br />pawecutdg 60<br />ecut&nbsp; 30<br />ecutsm&nbsp; 0.5<br />ixc 11<br />paral_kgb 0<br /></code></pre></div><br /><br />I have try the following (does not work)<br /> - Change nline (from 4 to 20)<br /> - use dmatpawu :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>dmatpuopt 2<br />usedmatpu&nbsp; -3 # IMPOSE DENSITY MATRIX IN THE FIRST 10 STEPS<br />dmatpawu&nbsp; 1.0 0.0 0.0 0.0 0.0 0.0 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0 1.0 0.0 0.0 0.0 0.0 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0 0.0 1.0 0.0 0.0 0.0 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0 0.0 0.0 1.0 0.0 0.0 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0 0.0 0.0 0.0 1.0 0.0 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0 0.0 0.0 0.0 0.0 1.0 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0 0.0 0.0 0.0 0.0 0.0 1.0<br /><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0 0.0 0.0 0.0 0.0 0.0 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0 0.0 0.0 0.0 0.0 0.0 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0 0.0 0.0 0.0 0.0 0.0 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0 0.0 0.0 0.0 0.0 0.0 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0 0.0 0.0 0.0 0.0 0.0 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0 0.0 0.0 0.0 0.0 0.0 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0 0.0 0.0 0.0 0.0 0.0 0.0<br /></code></pre></div><br /> - Use diemixmag -4 (I also tried -2)<br /><br />Does anyone have any ideas how what could be wrong?<br /><br />Thank you <br /><br />Samuel.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2694&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:22:05 GMT -->
+</html>

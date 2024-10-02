@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=937&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:55:30 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [RESOLVED] Writing problems in abinit outputs</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[RESOLVED] Writing problems in abinit outputs</h2>
+		<p><a href="viewtopica06f-2.html?f=9&amp;t=937">https://forum.abinit.org/viewtopic.php?f=9&amp;t=937</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[RESOLVED] Writing problems in abinit outputs</h3>
+				<div class="date">Posted: <strong>Sun Mar 06, 2011 7:05 pm</strong></div>
+				<div class="author">by <strong>acastanedam</strong></div>
+				<div class="content">Hello, I have tried to use ABINIT to relax some semiconductor heterostructures; to this end I've used an input file like:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>optcell 2<br />kptopt 1<br />ionmov 2<br />toldfe 1e-7<br />nstep 20<br />ntime 20<br />ecut 8.0<br />ecutsm 0.5<br />dilatmx 1.05<br />rprim -5.613368688 5.613368688 -11.226737376 -11.226737376 -5.613368688 -5.613368688 5.613368688 5.613368688 11.226737376<br />ntypat 3<br />natom 6<br />znucl 13 33 31<br />typat 3 2 1 2 1 2<br />acell 3*1<br />xred<br />&nbsp; &nbsp;1.000000000 1.000000000 1.000000000<br />&nbsp; &nbsp;0.750000000 0.500000000 0.250000000<br />&nbsp; &nbsp;0.666666667 0.666666667 1.000000000<br />&nbsp; &nbsp;0.416666667 0.166666667 0.250000000<br />&nbsp; &nbsp;0.333333333 0.333333333 1.000000000<br />&nbsp; &nbsp;0.083333333 0.833333333 0.250000000<br /><br /></code></pre></div><br />With Abinit6.4.3 (and upper versions) runs well, but then, it hangs on after write some density file:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>... <br />ioarr: writing density data<br />ioarr: file name is abo_TIM1_DEN<br />ioarr: data written to disk file abo_TIM1_DEN<br />...<br /></code></pre></div><br />With Abinit6.2.2 runs well, but then, it stops after write some density file:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>ioarr: writing density data<br />ioarr: file name is abo_TIM2_DEN<br />ioarr: data written to disk file abo_TIM2_DEN<br />forrtl: severe (153): allocatable array or pointer is not allocated<br /></code></pre></div><br />I am working with intel linux-compilers and openmpi (compiled with these same), intel MKL libraries in a 64-bit architecture:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>... ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br />&nbsp;<br />&nbsp;=== Build Information === <br />&nbsp; Version&nbsp; &nbsp; &nbsp; &nbsp;: 6.4.3<br />&nbsp; Build target&nbsp; : x86_64_linux_intel12.0<br />&nbsp; Build date&nbsp; &nbsp; : 20110210<br />&nbsp;<br />&nbsp;=== Compiler Suite === <br />&nbsp; C compiler&nbsp; &nbsp; &nbsp; &nbsp;: intel12.0<br />&nbsp; CFLAGS&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:&nbsp; -g&nbsp; -vec-report0<br />&nbsp; C++ compiler&nbsp; &nbsp; &nbsp;: intel12.0<br />&nbsp; CXXFLAGS&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:&nbsp; -g&nbsp; -vec-report0<br />&nbsp; Fortran compiler : intel12.0<br />&nbsp; FCFLAGS&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; :&nbsp; -g -extend-source -vec-report0 -noaltparam -nofpscomp<br />&nbsp; FC_LDFLAGS&nbsp; &nbsp; &nbsp; &nbsp;:&nbsp; &nbsp; -static-intel -static-libgcc<br />&nbsp;<br />&nbsp;=== Optimizations === <br />&nbsp; Debug level&nbsp; &nbsp; &nbsp; &nbsp; : basic<br />&nbsp; Optimization level : yes<br />&nbsp; Architecture&nbsp; &nbsp; &nbsp; &nbsp;: intel_core2<br />&nbsp;<br />&nbsp;=== MPI === <br />&nbsp; Parallel build : yes<br />&nbsp; Parallel I/O&nbsp; &nbsp;: yes<br />&nbsp;<br />&nbsp;=== Linear algebra === <br />&nbsp; Library flavor : @linalg_flavor@<br />&nbsp; Use ScaLAPACK&nbsp; : yes<br />&nbsp;<br />&nbsp;=== Plug-ins === <br />&nbsp; BigDFT&nbsp; &nbsp; : yes<br />&nbsp; ETSF I/O&nbsp; : yes<br />&nbsp; LibXC&nbsp; &nbsp; &nbsp;: yes<br />&nbsp; FoX&nbsp; &nbsp; &nbsp; &nbsp;: no<br />&nbsp; NetCDF&nbsp; &nbsp; : yes<br />&nbsp; Wannier90 : yes<br />&nbsp;<br />&nbsp;=== Experimental features === <br />&nbsp; Bindings&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : no<br />&nbsp; Exports&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: no<br />&nbsp; GW double-precision : no<br />&nbsp; Macroave build&nbsp; &nbsp; &nbsp; : yes<br />&nbsp;<br />&nbsp;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br />...<br /></code></pre></div><br />I must say,  I've tried specific optimizations (like -O3 -xHost) or even disable them, disable 64 bit flag, disable mpi-io, as well as other modifications, without any success. On the other hand, when the calculations only involve to find total energies, it seems there are not problems.<br />Maybe, it is problem with mpi-io of the openmpi, but I am not sure. In fact, I have read in this forum some issue related to &quot; allocatable array or pointer is not allocated&quot; (<!-- l --><a class="postlink-local" href="viewtopice24d.html?f=19&amp;t=15&amp;start=0&amp;hilit=allocatable+array">viewtopic.php?f=19&amp;t=15&amp;start=0&amp;hilit=allocatable+array</a><!-- l -->), but I can see in there a possible solution.<br />I really appreciate if someone(s) can help me.<br /><br />Best regards<br /><br />Arcesio Castañeda M.<br />Bogotá<br />Colombia</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Writing problems in abinit outputs</h3>
+				<div class="date">Posted: <strong>Thu Mar 10, 2011 10:42 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Hello Arcesio,<br /><br />Without debugging the code with the help of your input parameters I cannot be 100% certain but It's probably a problem with Intel Fortran. Abinit uses zero sized arrays and Intel Fortran doesn't support it although it's perfectly allowed according to 90 standard. Would it be possible to recompile with gfortran or test with one of the binaries provided at <a href="http://www.etsf.eu/resources/software/etsf_software_repository" class="postlink">http://www.etsf.eu/resources/software/etsf_software_repository</a>.<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Writing problems in abinit outputs</h3>
+				<div class="date">Posted: <strong>Mon Mar 14, 2011 2:55 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello,<br /><br />I found no error with ifort 11.0 with abinit 6.7.1-devel or 6.4.0<br /><br />Try gfortran or a 6.6 binary from the web site...<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Writing problems in abinit outputs</h3>
+				<div class="date">Posted: <strong>Thu Mar 17, 2011 12:28 pm</strong></div>
+				<div class="author">by <strong>acastanedam</strong></div>
+				<div class="content">Hello Matthieu and Alain<br /><br />I have recompiled with gfortran and openmpi and it works. On the other hand, also I've recompiled 6.6.1 version  and the last intel compilers update and it also works in Fedora 14; the intriguing point is the same compilation does not work in Fedora 13. I will be check if I have made a mistake.<br />Thank you very much for you answers.<br /><br />Arcesio C.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Writing problems in abinit outputs</h3>
+				<div class="date">Posted: <strong>Sun Mar 27, 2011 7:09 pm</strong></div>
+				<div class="author">by <strong>acastanedam</strong></div>
+				<div class="content">Hello<br /><br />I made a mistake. It seems, it is an issue related with the Intel compilers. I've compiled the last stable Abinit version (6.6.1), even with optimizations, and there was no any problem, provided version 11.1 of intel compilers were used, with higher versions, however, the problems still persist.<br /><br />Arcesio</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=937&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:55:30 GMT -->
+</html>

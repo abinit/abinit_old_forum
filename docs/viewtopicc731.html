@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3535&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:52:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; optic</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>optic</h2>
+		<p><a href="viewtopic07a0.html?f=10&amp;t=3535">https://forum.abinit.org/viewtopic.php?f=10&amp;t=3535</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>optic</h3>
+				<div class="date">Posted: <strong>Fri Mar 10, 2017 5:29 am</strong></div>
+				<div class="author">by <strong>aria</strong></div>
+				<div class="content">Hello every one,<br />When I want to calculate the linear and non-linear optical properties by:<br />ngkpt  24  24  24 <br />nband1 10<br />nband2,3,4,5,6 50<br />ecut 50<br />I reach the following error:<br />Error: overflow of mcg integer for size of the full wf. Recompile with large int or reduce system size.<br />Thanks a lot for your help and time.<br />Asadi Yaser</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: optic</h3>
+				<div class="date">Posted: <strong>Mon Mar 13, 2017 10:15 am</strong></div>
+				<div class="author">by <strong>delaveau</strong></div>
+				<div class="content">You have to put CFLAGS , CXXFLAGS, FCFLAGS to the size of integer you want.<br /><br />If you use gfortran<br />-fdefault-integer-8<br />if you use ifort <br />-i8<br /><br />The option of your compiler can be know with :<br />man gfortran or gfortran --help<br />man ifort or ifort --help<br /><br />To know if under your mpif90, mpicc ect is ifort, gfortran or any other compiler do<br /><br />mpif90 --help for instance<br /><br />Hope it will help</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: optic</h3>
+				<div class="date">Posted: <strong>Mon Mar 13, 2017 1:20 pm</strong></div>
+				<div class="author">by <strong>delaveau</strong></div>
+				<div class="content">Hello,<br />It means that the maximum integer defined is not sufficient for your case.<br />You can set option to the  compiler to increase the maximum integer.<br />You have first to know which compiler are under mpif90 (gfortran , ifort ...), mpicc (gcc, icc..).<br />For that mpif90 --help , mpicc --help might give you an answer.<br />Each compiler gfortran, ifort , ... has an option to stare the  size of integer ( which stare the maximum integer).<br />For instance :<br />ifort -i8 : set default KIND of integer and logical variables to 8 ( defaut is 4 not enought)<br />gfortran -fdefault-integer-8 : Set the default integer and logical types to an 8 byte wide type ( default is 4)<br />The option of compilers can be seen by man ifort, man gfortran or ifort--help, gfortran --help<br />To stare these options to compile abinit <br />use in the configure the options CFLAGS, FCFLAGS ou CXXFLAGS</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: optic&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Thu Jun 29, 2017 7:49 pm</strong></div>
+				<div class="author">by <strong>aria</strong></div>
+				<div class="content">Hi Dear delaveau, thank you very much.<br />Best regards.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3535&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:52:35 GMT -->
+</html>

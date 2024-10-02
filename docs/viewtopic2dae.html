@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2325&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:13:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Zero Band Gap for semiconductor</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Zero Band Gap for semiconductor</h2>
+		<p><a href="viewtopic206f.html?f=9&amp;t=2325">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2325</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Zero Band Gap for semiconductor</h3>
+				<div class="date">Posted: <strong>Sat Nov 09, 2013 9:43 pm</strong></div>
+				<div class="author">by <strong>anveeksh</strong></div>
+				<div class="content">Hello all,<br /><br />I got a 0eV band gap for Co3O4 which is a semiconductor. The literature has 1.96 eV using DFT. Whatever underestimation DFT does, it should show some kind of band gap for semiconducting oxides. Is my path for calculation of band structure wrong or is there any wrong with my input? Please help. Thanks<br /><br />I have minimized the energy and used optimized structure for my calculation.<br /><br />#Band Structure Calculation<br /># Co3O4<br /><br />ndtset 2<br /><br />#Dataset 1: Self-Consistent Density Calculation<br />kptrlatt1   5   -5    5     -5    5    5     -5   -5    5<br />kpt1                  -1.00000000E-01 -2.00000000E-01  0.00000000E+00<br />                      -1.00000000E-01 -4.00000000E-01  0.00000000E+00<br />                      -2.00000000E-01 -3.00000000E-01  0.00000000E+00<br />                      -1.00000000E-01 -3.00000000E-01  1.00000000E-01<br />                      -1.00000000E-01  4.00000000E-01  0.00000000E+00<br />                      -2.00000000E-01  5.00000000E-01  0.00000000E+00<br />                      -1.00000000E-01  5.00000000E-01  1.00000000E-01<br />                      -3.00000000E-01 -4.00000000E-01  0.00000000E+00<br />                      -2.00000000E-01 -4.00000000E-01  1.00000000E-01<br />                      -1.00000000E-01 -4.00000000E-01  2.00000000E-01<br />                      -1.00000000E-01  2.00000000E-01  0.00000000E+00<br />                      -2.00000000E-01  3.00000000E-01  0.00000000E+00<br />                      -3.00000000E-01  4.00000000E-01  0.00000000E+00<br />                      -4.00000000E-01  5.00000000E-01  0.00000000E+00<br />                      -3.00000000E-01  5.00000000E-01  1.00000000E-01<br />                      -2.00000000E-01  5.00000000E-01  2.00000000E-01<br />                      -1.00000000E-01  0.00000000E+00  0.00000000E+00<br />                      -3.00000000E-01  0.00000000E+00  0.00000000E+00<br />                       5.00000000E-01  0.00000000E+00  0.00000000E+00<br /><br />kptrlen1  7.63647721E+01<br />ngfft1    96 96 96<br />nkpt1     19<br />optforces1   1<br />shiftk1   5.00000000E-01  5.00000000E-01  5.00000000E-01<br />tolmxf1   5.0d-9<br />toldff1   5.0d-10<br /><br />#Dataset2: Band Structure Calculation<br />iscf2    -2       #non-self consistent calculation, read densigh from previous calculation<br />getden2  -1<br />kptopt2 -5          # Enter the k points manually <br />nband2  100<br />ndivsm2 10<br />kptbounds2  <br />            0.0  0.0  0.0 # Gamma point<br />            0.375  0.375  0.75 # K point<br />            0.5  0.5  0.5 # L point<br />            0.625  0.25  0.625 # U point<br />            0.5  0.25  0.75 # U point<br />            0.5  0.25  0.5 # U point<br />tolwfr2  1.0d-12<br />enunit2  1<br />ngfft2   96 96 96<br /><br />ixc 11<br />nstep 200<br />nband 100<br /><br />wtk            0.04800    0.04800    0.04800    0.09600    0.04800    0.04800<br />               0.04800    0.04800    0.09600    0.09600    0.04800    0.04800<br />               0.04800    0.04800    0.09600    0.04800    0.01600    0.01600<br />               0.00800<br />ecut 80<br />pawecutdg 150<br />diemac  3<br />ecutsm 0.5<br /><br />#Spin<br />nsppol        2<br />nspden        2<br />nspinor       1<br />spinat        0.0 0.0 0.0<br />              0.0 0.0 4.0<br />              0.0 0.0 0.0<br />              0.0 0.0 0.0<br />              0.0 0.0 0.0<br />              0.0 0.0 0.0<br />              0.0 0.0 0.0<br />              0.0 0.0 4.0<br />              0.0 0.0 0.0<br />              0.0 0.0 0.0<br />              0.0 0.0 0.0<br />              0.0 0.0 0.0<br />              0.0 0.0 0.0<br />              0.0 0.0 0.0<br /><br />#Definition of the unit cell<br />acell    1.0953162321E+01  1.0953162321E+01  1.0953162321E+01 Bohr<br /><br />rprim   -4.0463729910E-18  7.0710678119E-01  7.0710678119E-01<br />         7.0710678119E-01 -2.4039657124E-18  7.0710678119E-01<br />         7.0710678119E-01  7.0710678119E-01 -7.2715423427E-18<br />#Definition of the atom types<br />ntypat 2          # There is only one type of atom<br />znucl 27 8         # The keyword &quot;znucl&quot; refers to the atomic number of the <br /><br />#Definition of the atoms<br />natom    14<br />typat      1  1  2  1  2  1  2  1  2  2  1  2  2  2<br />xred                   6.2500000000E-01  6.2500000000E-01  6.2500000000E-01<br />                       7.6363558336E-17  7.6363767562E-17  1.5963052158E-16<br />                       3.8647520629E-01  3.8647520629E-01  3.8647520629E-01<br />                       6.2500000000E-01  6.2500000000E-01  1.2500000000E-01<br />                       3.8647520629E-01  3.8647520629E-01  8.4057438113E-01<br />                       6.2500000000E-01  1.2500000000E-01  6.2500000000E-01<br />                       3.8647520629E-01  8.4057438113E-01  3.8647520629E-01<br />                       2.5000000000E-01  2.5000000000E-01  2.5000000000E-01<br />                       8.6352479371E-01  8.6352479371E-01  4.0942561887E-01<br />                       8.6352479371E-01  8.6352479371E-01  8.6352479371E-01<br />                       1.2500000000E-01  6.2500000000E-01  6.2500000000E-01<br />                       8.4057438113E-01  3.8647520629E-01  3.8647520629E-01<br />                       4.0942561887E-01  8.6352479371E-01  8.6352479371E-01<br />                       8.6352479371E-01  4.0942561887E-01  8.6352479371E-01</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Zero Band Gap for semiconductor</h3>
+				<div class="date">Posted: <strong>Tue Nov 19, 2013 8:13 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Hi!<br /><br />1] Is your ground-state scf wave-function converged? Is your structure relaxed?<br /><br />2] Did you try other types of pseudopotentials?<br /><br />Igor</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Zero Band Gap for semiconductor</h3>
+				<div class="date">Posted: <strong>Wed Nov 20, 2013 9:39 am</strong></div>
+				<div class="author">by <strong>anveeksh</strong></div>
+				<div class="content">Hi ilukacevic,<br /><br />Yes, my structure is relaxed. I performed an optcell 2 calculation to get a relaxed structure. I then took those parameters and gave them as input in my first dataset (SCF). And second dataset is Non-SCF to calculate the band structure.<br /><br />I tried PAW (generated by abinit) and Norm-conserving Troullier Martins (from online source) psp's till now. Do you think I need to try different psp's? Also, the literature did a spin polarized calculation, also which I tried but in vain.<br /><br />Please help<br /><br />Thanks<br />Anveeksh</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Zero Band Gap for semiconductor</h3>
+				<div class="date">Posted: <strong>Wed Nov 20, 2013 9:51 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Yes, try other pseudos. Maybe you need to include more electrons into your calculations, like semicore electrons of Co.<br /><br />What do you mean &quot;in vain&quot;? You got the same erroneous results with spin included or your spin calculation failed?<br /><br />Igor</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Zero Band Gap for semiconductor</h3>
+				<div class="date">Posted: <strong>Wed Nov 20, 2013 6:00 pm</strong></div>
+				<div class="author">by <strong>anveeksh</strong></div>
+				<div class="content">In vain in the sense, I could not see any band gap when I plotted using AbinitBandStructureMaker.py.<br />Ok. I will try with different psuedo potential files.<br /><br />I just noticed that when I am trying to plot the BS of the dataset that calculated density of states (iscf = -3) using the AbinitBandStructureMaker.py script there is a band gap of 0.2eV. But when I did the same for (iscf = -2) there is no band gap. <br /><br />1) How to plot Density of states? Is there any tool (python scripting sort of stuff) in abinit?<br />2) Is the gap I observed in the case of Density of states the correct band gap?<br />3) So, the input file I am using for band structure calculation correct?<br /><br />Thanks<br />Anveeksh</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Zero Band Gap for semiconductor</h3>
+				<div class="date">Posted: <strong>Thu Nov 21, 2013 8:20 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Hi!<br /><br />1] Personally, I use xmgrace to plot almost any data not just DOS. It is most customizable. I don't know of any tool to plot DOS. I think that's because it's just too simple.<br /><br />2] Yes, as a theoretical result. You could compare it with an experiment, although one is never advised to do that. You should compare your result with other theoretical results.<br /><br />3] It seems correct to me.<br /><br />Igor</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2325&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:13:55 GMT -->
+</html>

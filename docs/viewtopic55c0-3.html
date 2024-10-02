@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=825&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:17:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; problem in installing abinit-6.4.2</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>problem in installing abinit-6.4.2</h2>
+		<p><a href="viewtopic1a2c.html?f=3&amp;t=825">https://forum.abinit.org/viewtopic.php?f=3&amp;t=825</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>problem in installing abinit-6.4.2</h3>
+				<div class="date">Posted: <strong>Sat Jan 01, 2011 4:53 pm</strong></div>
+				<div class="author">by <strong>whyyzf5725</strong></div>
+				<div class="content">Dear,<br />    I meet the following problems in installing abinit-6.4.2, I need your help urgently.<br />make[1]: Entering directory `/home/why/abinit/abinit-6.4.2'<br />Making all in prereqs<br />make[2]: Entering directory `/home/why/abinit/abinit-6.4.2/prereqs'<br />make[3]: Entering directory `/home/why/abinit/abinit-6.4.2/prereqs'<br />make[3]: Nothing to be done for `all-am'.<br />make[3]: Leaving directory `/home/why/abinit/abinit-6.4.2/prereqs'<br />make[2]: Leaving directory `/home/why/abinit/abinit-6.4.2/prereqs'<br />Making all in plugins<br />make[2]: Entering directory `/home/why/abinit/abinit-6.4.2/plugins'<br />make[3]: Entering directory `/home/why/abinit/abinit-6.4.2/plugins'<br />make[3]: Nothing to be done for `all-am'.<br />make[3]: Leaving directory `/home/why/abinit/abinit-6.4.2/plugins'<br />make[2]: Leaving directory `/home/why/abinit/abinit-6.4.2/plugins'<br />Making all in src<br />make[2]: Entering directory `/home/why/abinit/abinit-6.4.2/src'<br />Making all in incs<br />make[3]: Entering directory `/home/why/abinit/abinit-6.4.2/src/incs'<br />There is no buildable file here<br />make[3]: Leaving directory `/home/why/abinit/abinit-6.4.2/src/incs'<br />Making all in mods<br />make[3]: Entering directory `/home/why/abinit/abinit-6.4.2/src/mods'<br />There is no buildable file here<br />make[3]: Leaving directory `/home/why/abinit/abinit-6.4.2/src/mods'<br />Making all in 01_interfaces_ext<br />make[3]: Entering directory `/home/why/abinit/abinit-6.4.2/src/01_interfaces_ext'<br />gfortran -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs    -ffree-form -J/home/why/abinit/abinit-6.4.2/src/mods -I/home/why/abinit/abinit-6.4.2/src/mods -O2 -mtune=native -march=native -mfpmath=sse -g   -c -o interfaces_bigdft.o interfaces_bigdft.F90<br />interfaces_bigdft.F90:0: error: bad value (native) for -march= switch<br />interfaces_bigdft.F90:0: error: bad value (native) for -mtune= switch<br />interfaces_bigdft.F90:0: warning: SSE instruction set disabled, using 387 arithmetics<br />make[3]: *** [interfaces_bigdft.o] error 1<br />make[3]: Leaving directory `/home/why/abinit/abinit-6.4.2/src/01_interfaces_ext'<br />make[2]: *** [all-recursive] error 1<br />make[2]: Leaving directory `/home/why/abinit/abinit-6.4.2/src'<br />make[1]: *** [all-recursive] error 1<br />make[1]: Leaving directory `/home/why/abinit/abinit-6.4.2'<br />make: *** [all] error 2</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem in installing abinit-6.4.2</h3>
+				<div class="date">Posted: <strong>Sat Jan 01, 2011 6:50 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Try to force the compiler version using the --with-fc-version=4.2 option of configure. Should work.<br /><br />What does &quot;gfortran --version&quot; report?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem in installing abinit-6.4.2</h3>
+				<div class="date">Posted: <strong>Sat Jan 01, 2011 7:15 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Dear Anonymous  <img class="smilies" src="images/smilies/icon_e_confused.gif" alt=":?" title="Confused" /> <br />if your gfortran compiler doesn't understand the march=native option, it is probably quite old and not supported. Anyway you may try to go further by cleaning up the build first (make clean) and reconfigure by appending FCFLAGS=&quot;-O2&quot; CFLAGS=&quot;-O2&quot; CXXFLAGS=&quot;-O2&quot; to the end of your configure line. More info about your processor and compilers version would be welcomed.<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem in installing abinit-6.4.2</h3>
+				<div class="date">Posted: <strong>Fri Apr 29, 2011 6:38 am</strong></div>
+				<div class="author">by <strong>whyyzf5725</strong></div>
+				<div class="content">Thank you for your help. I try to complier the programm using your suggestions  but the errors still exist, my complier is l-fc-p-9.0.021. I want to know if there are other methods to solve this problem.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem in installing abinit-6.4.2</h3>
+				<div class="date">Posted: <strong>Fri Apr 29, 2011 6:29 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">The 9.0 version of ifort is extremely old, and not supported anymore by Abinit.<br /><br />The easiest would probably be to install the latest version of ifort, but you may try the following options of configure:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--with-fc-vendor=&quot;intel&quot; --with-fc-version=&quot;9.0&quot;</code></pre></div><br />and set FCFLAGS manually.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=825&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:17:20 GMT -->
+</html>

@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?p=9362 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:17:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>gcc on a Macbook:  living with an AVX-enabled processor - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopic91ac.html?t=3041">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="1"><a href="viewforum58da.html?f=1" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Building ABINIT</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="3"><a href="viewforum4d6b.html?f=3" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Configuring and compiling ABINIT</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopicc0a3.html?f=3&amp;t=3041">gcc on a Macbook:  living with an AVX-enabled processor</a>&nbsp;
+<a href="viewtopic02b6.html?f=3&amp;t=3041&amp;p=9396#p9396" style="color: #006600;">
+	[SOLVED]
+</a>
+</h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">option, parallelism,...<br /></div>
+<p>
+	<strong>Moderators:</strong> <a href="memberlist5296.html?mode=viewprofile&amp;u=2740" class="username">fgoudreault</a>, <a href="memberlist7468.html?mode=viewprofile&amp;u=53" class="username">mcote</a>
+</p>
+
+	<div class="rules">
+		<div class="inner">
+
+					<strong>Forum rules</strong><br />
+			Please have a look at ~abinit/doc/config/build-config.ac in the source package for detailed and up-to-date information about the configuration of Abinit 8 builds.<br>
+For a video explanation on how to build Abinit 7.x for Linux, please go to: <a href="http://www.youtube.com/watch?v=DppLQ-KQA68" class="postlink">http://www.youtube.com/watch?v=DppLQ-KQA68</a>.<br>
+<strong class="text-strong">IMPORTANT: when an answer solves your problem, please check the little green V-like button on its upper-right corner to accept it.</strong>
+		
+		</div>
+	</div>
+
+<div class="action-bar bar-top">
+	
+			<a href="posting4cb5-2.html?mode=reply&amp;f=3&amp;t=3041" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic67a8.html?f=3&amp;t=3041&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="3041" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			10 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p9351" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile9351">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistc65c.html?mode=viewprofile&amp;u=314" class="username">gabriel.antonius</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search68b9.html?author_id=314&amp;sr=posts">58</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon May 03, 2010 10:34 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content9351">
+
+						<h3 class="first"><a href="#p9351">gcc on a Macbook:  living with an AVX-enabled processor</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting5345.html?mode=quote&amp;f=3&amp;p=9351" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic6aa9.html?p=9351#p9351" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistc65c.html?mode=viewprofile&amp;u=314" class="username">gabriel.antonius</a></strong> &raquo; </span>Thu Jul 02, 2015 1:46 am
+			</p>
+			
+			
+			
+			<div class="content">Dear all, <br /><br />This issue has been discussed here and there on the forum, but I find no satisfactory answer to the problem.<br /><br />Upon compiling Abinit (libxc+netcdf) with gcc-4.9 and openmpi on a Macbook Pro (Intel Core i7 processor), the build fails with a series of errors like <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>/var/folders/_0/7xntnmw90qzd28wc1b3hxz140000gn/T//cc19FSRv.s:67932:no such instruction: `vmovss %xmm0, 8(%rsp)'</code></pre></div><br />This kind of error is traced back to the assembler, which does not supports AVX instructions,  and is incompatible with the processor in this respect.<br /><br />It was suggested to use gcc of MacPorts (instead of Homebrew), but that does not solve the problem. Other suggestions out there were to use specific compilation flags, such as ‘-Wa,-q’ or ‘-msse4.2’, which give several warnings like <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>/opt/local/bin/ranlib: file: lib41_xc_lowlevel.a(interfaces_41_xc_lowlevel.o) has no symbols</code></pre></div> and result in a compiled code that fails to run.<br /><br />Does anyone have a solution?</div>
+			
+			
+			
+									
+									<div id="sig9351" class="signature">Gabriel Antonius<br>
+<em class="text-italics">Université du Québec à Trois-Rivières</em></div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p9355" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile9355">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlist981e.html?mode=viewprofile&amp;u=71" class="avatar"><img class="avatar" src="download/fileb0c3.png?avatar=g8_1366628657.png" width="64" height="64" alt="User avatar" /></a>														</div>
+								<a href="memberlist981e.html?mode=viewprofile&amp;u=71" style="color: #6633FF;" class="username-coloured">pouillon</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search42e4.html?author_id=71&amp;sr=posts">651</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Aug 19, 2009 10:08 am</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Spain</dd>
+												
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact pouillon">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact pouillon</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="https://www.materialsevolution.es/" title="Website">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																																																<a href="skype:ypouillon80?userinfo" title="Skype" class="last-cell">
+										<span class="contact-icon phpbb_skype-icon">Skype</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content9355">
+
+						<h3 ><a href="#p9355">Re: gcc on a Macbook:  living with an AVX-enabled processor</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting1f7c-2.html?mode=quote&amp;f=3&amp;p=9355" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic8ac3.html?p=9355#p9355" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist981e.html?mode=viewprofile&amp;u=71" style="color: #6633FF;" class="username-coloured">pouillon</a></strong> &raquo; </span>Thu Jul 02, 2015 7:54 pm
+			</p>
+			
+			
+			
+			<div class="content">The problem is definitely with the Macports/Homebrew/whatever versions of GCC, not with Abinit.<br /><br /><blockquote><div><cite>Macports forums users wrote:</cite>... after some search, the Apple assembler cannot handle AVX instructions, which is why it fails. Clang seems to be the only compiler able to deal with these instructions. The attached Portfile version should compile in all cases, by disabling avx for gcc compilers, but at the cost of performance, and adding a clang version which hopefully could compile avx instructions. I couldn't test it though, as my processor is too old to support these instructions ...</div></blockquote><br /><br />In summary:<br /><ul>  <li>use Clang if your processors support AVX;</li>  <li>disable AVX instructions when compiling with GCC if your processors don't support AVX.</li></ul></div>
+			
+			
+			
+									
+									<div id="sig9355" class="signature">Yann Pouillon<br /><em class="text-italics">Simune Atomistics<br />Donostia-San Sebastián, Spain</em></div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p9357" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile9357">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistc65c.html?mode=viewprofile&amp;u=314" class="username">gabriel.antonius</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search68b9.html?author_id=314&amp;sr=posts">58</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon May 03, 2010 10:34 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content9357">
+
+						<h3 ><a href="#p9357">Re: gcc on a Macbook:  living with an AVX-enabled processor</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting3b6e.html?mode=quote&amp;f=3&amp;p=9357" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic3088.html?p=9357#p9357" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistc65c.html?mode=viewprofile&amp;u=314" class="username">gabriel.antonius</a></strong> &raquo; </span>Fri Jul 03, 2015 2:39 am
+			</p>
+			
+			
+			
+			<div class="content">Indeed, the problem lies with the gcc versions I'm able to get on my Mac. However, all the methods I have found elsewhere to circumvent this problem seem not to work with Abinit...<br /><br />As for the solutions you propose,<br /><br /><span style="text-decoration: underline">Using Clang compilers</span><br />The clang gcc compilers provided by Apple do not include gfortran, so the problem of finding a good fortran compiler remains. As an alternative I have tried apple-gcc42  and llvm-gcc28, but neither fortran compiler get past the configure step, giving me: <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Fortran compiler does not provide iso_c_binding module. Use a more recent version or a different compiler</code></pre></div><br />The phase space of compilers being very large, I would be happy to know of a working version of gcc.<br /><br /><span style="text-decoration: underline">Disabling AVX instructions</span><br />This seems to be the most sensible option, and I have been looking for a way to do this. I think this is the purpose of the compilation flags mentioned above, but those do not work for me. If anyone has some knowledge on that, please share it!</div>
+			
+			
+			
+									
+									<div id="sig9357" class="signature">Gabriel Antonius<br>
+<em class="text-italics">Université du Québec à Trois-Rivières</em></div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p9361" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile9361">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlist194b.html?mode=viewprofile&amp;u=69" class="avatar"><img class="avatar" src="download/file2b59.jpg?avatar=69_1334683785.jpg" width="78" height="92" alt="User avatar" /></a>														</div>
+								<a href="memberlist194b.html?mode=viewprofile&amp;u=69" style="color: #33CC00;" class="username-coloured">jbeuken</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search2ddf.html?author_id=69&amp;sr=posts">365</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Aug 18, 2009 9:24 pm</dd>		
+		
+											
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact jbeuken">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact jbeuken</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://www.uclouvain.be/jean-michel.beuken" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content9361">
+
+						<h3 ><a href="#p9361">Re: gcc on a Macbook:  living with an AVX-enabled processor</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting068e.html?mode=quote&amp;f=3&amp;p=9361" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicd4d9.html?p=9361#p9361" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist194b.html?mode=viewprofile&amp;u=69" style="color: #33CC00;" class="username-coloured">jbeuken</a></strong> &raquo; </span>Fri Jul 03, 2015 11:10 pm
+			</p>
+			
+			
+			
+			<div class="content">Hello Gabi,<br /><br />I have new servers for the test farm with new Haswell processors : Xeon(R) CPU E5-2670 v3 @ 2.30GHz<br /><br />I have also a MacPro under Yosemite with cpu with AVX capability<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>sysctl -n machdep.cpu.brand_string<br />Intel(R) Xeon(R) CPU E5-2697 v2 @ 2.70GHz<br />&nbsp;</code></pre></div><br />some experiences/ascertainments :<br /><br />1) a bot under CentOS 6.6 with gcc 5.1 ( I have compiled ),<br />and with the standard packages (  specially binutils 2.22) , I had as many messages as you had … ( with &quot;-O2 -mtune=native -march=native&quot; )<br /><br />I must install the latest version of binutils == 2.24 ( which contains as and ld commands ) to resolve the problem<br />( then, gcc 5.1 generated assembler codes compatible with avx  but the &quot;standard&quot; binutils can not resolve it ! )<br /><br />2)  with MacPorts, I have installed these packages :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;port installed | grep active | egrep&nbsp; &quot;gcc49|netcdf|hdf5|fft|binutils&quot;<br />&nbsp; atlas @3.10.2_1+gcc49 (active)<br />&nbsp; binutils @2.24_0 (active)<br />&nbsp; etsf_io @1.0.4_2+gcc49 (active)<br />&nbsp; fftw-3 @3.3.4_1+gfortran (active)<br />&nbsp; fftw-3-single @3.3.4_1+gfortran (active)<br />&nbsp; gcc49 @4.9.2_1 (active)<br />&nbsp; hdf5 @1.8.14_0+cxx+gcc49 (active)<br />&nbsp; netcdf @4.3.3.1_0+dap+gcc49+netcdf4 (active)<br />&nbsp; netcdf-fortran @4.4.2_0+gcc49 (active)<br />&nbsp; openmpi-gcc49 @1.7.5_3+fortran (active)</code></pre></div><br /><br />If I compile ABINIT with &quot;FCFLAGS = -O2 -g&quot; , everything is OK ! ( compilation and tests )<br />if I compile ABINIT with FCFLAGS=&quot;-O2 -g  -mtune=native -march=native&quot; , same problems with compilation<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>/var/folders/17/r4jwx8ls2vqc8vc851ww5hjh0000gr/T//ccBMqjw7.s:17:no such instruction: `vmovsd 8(%rdi), %xmm5'<br />…<br /></code></pre></div><br /><br />then , it seems that the 'as' command from MacPorts ( binutils 2.24) doesn't resolve the assembler code specific to avx instructions !?!<br /><br />to be continued,<br /><br />cheers</div>
+			
+			
+			
+									
+									<div id="sig9361" class="signature">------<br>
+Jean-Michel Beuken<br>
+Computer Scientist</div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p9362" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile9362">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlist194b.html?mode=viewprofile&amp;u=69" class="avatar"><img class="avatar" src="download/file2b59.jpg?avatar=69_1334683785.jpg" width="78" height="92" alt="User avatar" /></a>														</div>
+								<a href="memberlist194b.html?mode=viewprofile&amp;u=69" style="color: #33CC00;" class="username-coloured">jbeuken</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search2ddf.html?author_id=69&amp;sr=posts">365</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Aug 18, 2009 9:24 pm</dd>		
+		
+											
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact jbeuken">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact jbeuken</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://www.uclouvain.be/jean-michel.beuken" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content9362">
+
+						<h3 ><a href="#p9362">Re: gcc on a Macbook:  living with an AVX-enabled processor</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingd909.html?mode=quote&amp;f=3&amp;p=9362" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicef27.html?p=9362#p9362" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist194b.html?mode=viewprofile&amp;u=69" style="color: #33CC00;" class="username-coloured">jbeuken</a></strong> &raquo; </span>Fri Jul 03, 2015 11:24 pm
+			</p>
+			
+			
+			
+			<div class="content">some additional informations...<br /><br /><!-- m --><a class="postlink" href="http://comments.gmane.org/gmane.os.apple.macports.user/34339">http://comments.gmane.org/gmane.os.appl ... user/34339</a><!-- m --><br /><!-- m --><a class="postlink" href="https://trac.macports.org/ticket/37846">https://trac.macports.org/ticket/37846</a><!-- m --><br /><br />jmb</div>
+			
+			
+			
+									
+									<div id="sig9362" class="signature">------<br>
+Jean-Michel Beuken<br>
+Computer Scientist</div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p9379" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile9379">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistc65c.html?mode=viewprofile&amp;u=314" class="username">gabriel.antonius</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search68b9.html?author_id=314&amp;sr=posts">58</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon May 03, 2010 10:34 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content9379">
+
+						<h3 ><a href="#p9379">Re: gcc on a Macbook:  living with an AVX-enabled processor</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting6020.html?mode=quote&amp;f=3&amp;p=9379" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic266a.html?p=9379#p9379" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistc65c.html?mode=viewprofile&amp;u=314" class="username">gabriel.antonius</a></strong> &raquo; </span>Wed Jul 08, 2015 6:47 am
+			</p>
+			
+			
+			
+			<div class="content">Hi Jean-Mi,<br /><br />1) Concerning the use of binutils, the defaut version (2.24) installed by MacPorts does not contain as nor ld. Can you force the installation of these components? The same goes for Homebrew’s binutil (2.25). Rumour has it that these can not be built on Darwin. My own attempts to build as and ld break my compilers to fare-thee-well !<br /><br />2) Using &quot;FCFLAGS = -O2 -g&quot; and building all fallbacks results in segfaults for most of the tests:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Suite&nbsp; &nbsp;failed&nbsp; passed&nbsp; succeeded&nbsp; skipped&nbsp; disabled&nbsp; run_etime&nbsp; tot_etime<br />v1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 52&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;24&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; 63.60&nbsp; &nbsp; &nbsp; 65.93</code></pre></div><br /><br />3) Using &quot;FCFLAGS = -O2 -g&quot; and building only libxc, while relying on Homebew versions of lapack, fftw, hd5, netcdf, etsf_io,<br />    create several ‘no symbols’ warnings and ends with<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Undefined symbols for architecture x86_64:<br />&nbsp; &quot;_xc_f90_family_from_id_&quot;, referenced from:<br />&nbsp; &nbsp; &nbsp; ___libxc_functionals_MOD_libxc_functionals_init in lib41_xc_lowlevel.a(m_libxc_functionals.o)<br />&nbsp; &nbsp; &nbsp; _invars2_ in lib57_iovars.a(invars2.o)<br />&nbsp; &quot;_xc_f90_func_end_&quot;, referenced from:<br />&nbsp; &nbsp; &nbsp; ___libxc_functionals_MOD_libxc_functionals_end in lib41_xc_lowlevel.a(m_libxc_functionals.o)<br />&nbsp; &quot;_xc_f90_func_init_&quot;, referenced from:<br />&nbsp; &nbsp; &nbsp; ___libxc_functionals_MOD_libxc_functionals_init in lib41_xc_lowlevel.a(m_libxc_functionals.o)<br />&nbsp; &quot;_xc_f90_gga_exc_vxc_&quot;, referenced from:<br />&nbsp; &nbsp; &nbsp; ___libxc_functionals_MOD_libxc_functionals_getvxc in lib41_xc_lowlevel.a(m_libxc_functionals.o)<br />&nbsp; &quot;_xc_f90_gga_fxc_&quot;, referenced from:<br />&nbsp; &nbsp; &nbsp; ___libxc_functionals_MOD_libxc_functionals_getvxc in lib41_xc_lowlevel.a(m_libxc_functionals.o)<br />&nbsp; &quot;_xc_f90_gga_vxc_&quot;, referenced from:<br />&nbsp; &nbsp; &nbsp; ___libxc_functionals_MOD_libxc_functionals_getvxc in lib41_xc_lowlevel.a(m_libxc_functionals.o)<br />&nbsp; &quot;_xc_f90_info_flags_&quot;, referenced from:<br />&nbsp; &nbsp; &nbsp; ___libxc_functionals_MOD_libxc_functionals_getvxc in lib41_xc_lowlevel.a(m_libxc_functionals.o)<br />&nbsp; &nbsp; &nbsp; ___libxc_functionals_MOD_libxc_functionals_init in lib41_xc_lowlevel.a(m_libxc_functionals.o)<br />&nbsp; &quot;_xc_f90_info_kind_&quot;, referenced from:<br />&nbsp; &nbsp; &nbsp; ___libxc_functionals_MOD_libxc_functionals_getvxc in lib41_xc_lowlevel.a(m_libxc_functionals.o)<br />&nbsp; &quot;_xc_f90_info_name_&quot;, referenced from:<br />&nbsp; &nbsp; &nbsp; ___libxc_functionals_MOD_libxc_functionals_fullname in lib41_xc_lowlevel.a(m_libxc_functionals.o)<br />&nbsp; &nbsp; &nbsp; ___libxc_functionals_MOD_libxc_functionals_init in lib41_xc_lowlevel.a(m_libxc_functionals.o)<br />&nbsp; &quot;_xc_f90_info_refs_&quot;, referenced from:<br />&nbsp; &nbsp; &nbsp; ___libxc_functionals_MOD_libxc_functionals_init in lib41_xc_lowlevel.a(m_libxc_functionals.o)<br />&nbsp; &quot;_xc_f90_lda_c_xalpha_set_par_&quot;, referenced from:<br />&nbsp; &nbsp; &nbsp; ___libxc_functionals_MOD_libxc_functionals_init in lib41_xc_lowlevel.a(m_libxc_functionals.o)<br />&nbsp; &quot;_xc_f90_lda_exc_vxc_&quot;, referenced from:<br />&nbsp; &nbsp; &nbsp; ___libxc_functionals_MOD_libxc_functionals_getvxc in lib41_xc_lowlevel.a(m_libxc_functionals.o)<br />&nbsp; &quot;_xc_f90_lda_fxc_&quot;, referenced from:<br />&nbsp; &nbsp; &nbsp; ___libxc_functionals_MOD_libxc_functionals_getvxc in lib41_xc_lowlevel.a(m_libxc_functionals.o)<br />&nbsp; &quot;_xc_f90_lda_kxc_&quot;, referenced from:<br />&nbsp; &nbsp; &nbsp; ___libxc_functionals_MOD_libxc_functionals_getvxc in lib41_xc_lowlevel.a(m_libxc_functionals.o)<br />&nbsp; &quot;_xc_f90_lda_vxc_&quot;, referenced from:<br />&nbsp; &nbsp; &nbsp; ___libxc_functionals_MOD_libxc_functionals_getvxc in lib41_xc_lowlevel.a(m_libxc_functionals.o)<br />&nbsp; &quot;_xc_f90_mgga_exc_vxc_&quot;, referenced from:<br />&nbsp; &nbsp; &nbsp; ___libxc_functionals_MOD_libxc_functionals_getvxc in lib41_xc_lowlevel.a(m_libxc_functionals.o)<br />&nbsp; &quot;_xc_f90_mgga_vxc_&quot;, referenced from:<br />&nbsp; &nbsp; &nbsp; ___libxc_functionals_MOD_libxc_functionals_getvxc in lib41_xc_lowlevel.a(m_libxc_functionals.o)<br />&nbsp; &quot;_xc_f90_mgga_x_tb09_set_par_&quot;, referenced from:<br />&nbsp; &nbsp; &nbsp; ___libxc_functionals_MOD_libxc_functionals_getvxc in lib41_xc_lowlevel.a(m_libxc_functionals.o)<br />ld: symbol(s) not found for architecture x86_64<br /></code></pre></div><br />Maybe that last point could be worked around. After all, the initial problem with AVX instructions seems to pop up during the compilation of the fallbacks.</div>
+			
+			
+			
+									
+									<div id="sig9379" class="signature">Gabriel Antonius<br>
+<em class="text-italics">Université du Québec à Trois-Rivières</em></div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p9386" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile9386">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlist981e.html?mode=viewprofile&amp;u=71" class="avatar"><img class="avatar" src="download/fileb0c3.png?avatar=g8_1366628657.png" width="64" height="64" alt="User avatar" /></a>														</div>
+								<a href="memberlist981e.html?mode=viewprofile&amp;u=71" style="color: #6633FF;" class="username-coloured">pouillon</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search42e4.html?author_id=71&amp;sr=posts">651</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Aug 19, 2009 10:08 am</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Spain</dd>
+												
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact pouillon">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact pouillon</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="https://www.materialsevolution.es/" title="Website">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																																																<a href="skype:ypouillon80?userinfo" title="Skype" class="last-cell">
+										<span class="contact-icon phpbb_skype-icon">Skype</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content9386">
+
+						<h3 ><a href="#p9386">Re: gcc on a Macbook:  living with an AVX-enabled processor</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting7c55.html?mode=quote&amp;f=3&amp;p=9386" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicbe48.html?p=9386#p9386" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist981e.html?mode=viewprofile&amp;u=71" style="color: #6633FF;" class="username-coloured">pouillon</a></strong> &raquo; </span>Wed Jul 08, 2015 7:06 pm
+			</p>
+			
+			
+			
+			<div class="content">1) You likely have problems at link-time due to calls to the wrong version of ld. Things are a bit messy on MacOSX regarding the use of ld and ld64. The following links may give you useful information to further understand the issue:<br />      * <!-- m --><a class="postlink" href="https://developer.apple.com/library/mac/documentation/Darwin/Conceptual/64bitPorting/building/building.html">https://developer.apple.com/library/mac ... lding.html</a><!-- m --><br />      * <!-- m --><a class="postlink" href="http://stackoverflow.com/questions/15666547/how-to-build-a-cross-compiler-for-i386-apple-darwin-target-from-x86-64-apple-dar">http://stackoverflow.com/questions/1566 ... -apple-dar</a><!-- m --><br /><br />2) The unresolved symbols you get might come from LibXC being compiled in 32 bits while you expect 64 bits.</div>
+			
+			
+			
+									
+									<div id="sig9386" class="signature">Yann Pouillon<br /><em class="text-italics">Simune Atomistics<br />Donostia-San Sebastián, Spain</em></div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p9396" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile9396">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistc65c.html?mode=viewprofile&amp;u=314" class="username">gabriel.antonius</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search68b9.html?author_id=314&amp;sr=posts">58</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon May 03, 2010 10:34 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content9396">
+
+						<h3 ><a href="#p9396">Re: gcc on a Macbook:  living with an AVX-enabled processor&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting291a.html?mode=quote&amp;f=3&amp;p=9396" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicac1f.html?p=9396#p9396" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistc65c.html?mode=viewprofile&amp;u=314" class="username">gabriel.antonius</a></strong> &raquo; </span>Fri Jul 10, 2015 10:33 pm
+			</p>
+			
+			
+			
+			<div class="content">So I finally managed to solve all the various problems (because platform-specific questions means that we are dealing with several problems at once). Here are my instructions to build abinit on a macbook with gcc: <br /><br /><strong class="text-strong">1) Specify “FCFLAGS=‘-O2 -g’</strong> . This is to avoid having -march=native in the flags, which cause the AVX instructions to be used and makes the assembler lose its mind.<br /><br /><strong class="text-strong">2) Build netcdf, etsf_io and libxc altogether</strong>, because that’s just the way it is. And one should not forget to specify the cpp, and also make a symbolic link named “cpp” because libxc wants a cpp actually named “cpp”…<br /><br /><strong class="text-strong">3) Specify with_linalg_flavor='netlib-fallback'</strong>, because otherwise the build system decides to build nothing for linalg, creating an empty linalg library if lapack cannot be found. That is really a weird behaviour from the build system. It would be nice to have a warning in those cases.<br /><br />Thanks a lot Yan and Jean-Michel for helping me figure this out   <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /></div>
+			
+			
+			
+									
+									<div id="sig9396" class="signature">Gabriel Antonius<br>
+<em class="text-italics">Université du Québec à Trois-Rivières</em></div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p9399" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile9399">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlist194b.html?mode=viewprofile&amp;u=69" class="avatar"><img class="avatar" src="download/file2b59.jpg?avatar=69_1334683785.jpg" width="78" height="92" alt="User avatar" /></a>														</div>
+								<a href="memberlist194b.html?mode=viewprofile&amp;u=69" style="color: #33CC00;" class="username-coloured">jbeuken</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search2ddf.html?author_id=69&amp;sr=posts">365</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Aug 18, 2009 9:24 pm</dd>		
+		
+											
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact jbeuken">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact jbeuken</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://www.uclouvain.be/jean-michel.beuken" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content9399">
+
+						<h3 ><a href="#p9399">Re: gcc on a Macbook:  living with an AVX-enabled processor</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting389c.html?mode=quote&amp;f=3&amp;p=9399" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic0707.html?p=9399#p9399" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist194b.html?mode=viewprofile&amp;u=69" style="color: #33CC00;" class="username-coloured">jbeuken</a></strong> &raquo; </span>Sat Jul 11, 2015 8:19 pm
+			</p>
+			
+			
+			
+			<div class="content">Hello Gabi,<br /><br />with MacPorts under Yosemite and with AVX-enabled processor, I confirm that <br />with this .ac file, it works…. :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>CFLAGS=&quot;-O2 -g&quot;<br />CXXFLAGS=&quot;-O2 -g&quot;<br />FCFLAGS=&quot;-O2 -g -ffree-line-length-none&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_prefix=&quot;/opt/local&quot;<br />with_trio_flavor=&quot;netcdf+etsf_io&quot;<br />with_etsf_io_incs=&quot;-I/opt/local/include/gcc&quot;<br />with_netcdf_incs=&quot;-I/opt/local/include&quot;<br />with_netcdf_libs=&quot;-L/opt/local/lib -lnetcdf -lnetcdff&quot;<br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_libs=&quot;-L/opt/local/lib -lfftw3 -lfftw3f&quot;<br />with_linalg_flavor=&quot;atlas&quot;<br />with_linalg_incs=&quot;-I/opt/local/include&quot;<br />with_linalg_libs=&quot;-L/opt/local/lib -llapack -lf77blas -lcblas -latlas&quot;<br />with_dft_flavor=&quot;libxc&quot;<br />enable_clib=&quot;yes&quot;<br />enable_memory_profiling=&quot;no&quot;<br />enable_openmp=&quot;no&quot;<br />enable_maintainer_checks=&quot;no&quot;<br /></code></pre></div><br /><br />then , I use the ports ( <a href="postingfad3.html?mode=reply&amp;f=2&amp;t=3041#pr9361" class="postlink">my previous post</a>)  : <strong class="text-strong"><em class="text-italics"><span style="text-decoration: underline">etsf_io, atlas, netcdf</span></em></strong> but, <span style="text-decoration: underline">not</span> libxc…<br /><br />Can you confirm that this recipe is working for you ?<br /><br />thanks<br /><br />jmb</div>
+			
+			
+			
+									
+									<div id="sig9399" class="signature">------<br>
+Jean-Michel Beuken<br>
+Computer Scientist</div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p9400" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile9400">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistc65c.html?mode=viewprofile&amp;u=314" class="username">gabriel.antonius</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search68b9.html?author_id=314&amp;sr=posts">58</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon May 03, 2010 10:34 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content9400">
+
+						<h3 ><a href="#p9400">Re: gcc on a Macbook:  living with an AVX-enabled processor</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postinga5a3.html?mode=quote&amp;f=3&amp;p=9400" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopica776.html?p=9400#p9400" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistc65c.html?mode=viewprofile&amp;u=314" class="username">gabriel.antonius</a></strong> &raquo; </span>Mon Jul 13, 2015 7:07 pm
+			</p>
+			
+			
+			
+			<div class="content">That recipe doesn't work for me. I get the same Undefined symbols errors as mentioned above.<br /><br />I used a fresh installation of the following package with homebrew:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>gcc: stable 5.1.0 (bottled)<br />open-mpi: stable 1.8.4 (bottled)<br />fftw: stable 3.3.4 (bottled)<br />homebrew/dupes/lapack: stable 3.5.0 (bottled)<br />homebrew/science/hdf5: stable 1.8.14 (bottled)<br />homebrew/science/netcdf: stable 4.3.3.1 (bottled)<br />homebrew/science/etsf_io: stable 1.0.4 (bottled)</code></pre></div><br /><br />And my .ac file looks like this<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_prefix=&quot;/usr/local&quot;<br />FCFLAGS=&quot; -O2 -g -ffree-line-length-none&quot;<br />CFLAGS=&quot;&nbsp; -O2 -g &quot;<br />CCFLAGS=&quot; -O2 -g &quot;<br />CXXFLAGS=&quot;-O2 -g &quot;<br /><br />with_dft_flavor=&quot;libxc&quot;<br />with_trio_flavor=&quot;etsf_io+netcdf&quot;<br /><br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_incs=&quot;-I/usr/local/include/&quot;<br />with_fft_libs=&quot;-L/usr/local/lib/ -lfftw3.3 -lfftw3f.3 -lfftw3l.3&quot;<br /><br />with_linalg_flavor=&quot;custom&quot;<br />with_linalg_incs=&quot;-I/usr/local/Cellar/lapack/3.5.0/include/&quot;<br />with_linalg_libs=&quot;-L/usr/local/Cellar/lapack/3.5.0/lib/ -lblas -llapack&quot;<br /><br />with_netcdf_incs=&quot;-I/usr/local/include&quot;<br />with_netcdf_libs=&quot;-L/usr/local/lib -lnetcdf -lnetcdff &quot;<br /><br />with_etsf_io_incs=&quot;-I/usr/local/Cellar/etsf_io/1.0.4_2/include/&quot;<br />with_etsf_io_libs=&quot;-L/usr/local/Cellar/etsf_io/1.0.4_2/lib/ -letsf_io -letsf_io_low_level -letsf_io_utils&quot;<br /><br />enable_clib=&quot;yes&quot;<br />enable_memory_profiling=&quot;no&quot;<br />enable_openmp=&quot;no&quot;<br />enable_maintainer_checks=&quot;no&quot;<br />enable_gw_dpc=&quot;yes&quot;<br />enable_64bit_flags=&quot;yes&quot;<br /></code></pre></div><br /><br />I tried both with and without enable_64bit_flags, and I get the same result. Yan suggested that it might be caused by libxc being compiled in with 32bits but I see a &quot;-m64&quot; flag in the compilation of libxc.<br /><br />I conclude that netcdf and/or etsf_io were not compiled in the same way as libxc...</div>
+			
+			
+			
+									
+									<div id="sig9400" class="signature">Gabriel Antonius<br>
+<em class="text-italics">Université du Québec à Trois-Rivières</em></div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="posting4cb5-2.html?mode=reply&amp;f=3&amp;t=3041" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic67a8.html?f=3&amp;t=3041&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=3&amp;t=3041">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			10 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforum4d6b.html?f=3" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Configuring and compiling ABINIT”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?p=9362 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:17:44 GMT -->
+</html>

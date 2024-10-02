@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1261&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:05:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED]Probable bug in the ddk calculation or optic analysi</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED]Probable bug in the ddk calculation or optic analysi</h2>
+		<p><a href="viewtopic7faa.html?f=10&amp;t=1261">https://forum.abinit.org/viewtopic.php?f=10&amp;t=1261</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED]Probable bug in the ddk calculation or optic analysi</h3>
+				<div class="date">Posted: <strong>Sun Aug 14, 2011 11:53 am</strong></div>
+				<div class="author">by <strong>Robin</strong></div>
+				<div class="content">Dear developers,<br /><br />As I mentioned earlier (<!-- l --><a class="postlink-local" href="viewtopice264-2.html?f=10&amp;t=1153">viewtopic.php?f=10&amp;t=1153</a><!-- l -->), I found that ABINIT (both 6.2.2 and 6.8.1) gives wrong linear optical spectrum in several 1D systems by using the usual procedures. Here I elaborate this issue with a simple example of carbon chain.<br /><br />The known procedures to get linear optical spectrum are as follows: (1) SCF calculation to get the electron density of ground state; (2) NSCF calculation to get wavefunction with denser k-point grid and more empty bands; (3) ddk calculation to get the derivatives of wavefunction with respect to k, and then using optic program to get the dielectric function.<br /><br />In the case of carbon chain system, I find that the (2)-step must be SCF to get correct optical results, which are confirmed by calculations of YAMBO and CASTEP. To simplify the explanation, I did the following tests: (a) generate the KSS by using ABINIT, which also outputs WFK; (b) calculate the ddk and spectrum by using both ABINIT and YAMBO. I find that YAMBO gives correct spectrum whether the (a)-step is NSCF or SCF, while ABINIT give wrong result when the (a)-step is NSCF. This clearly shows that there must be some problem. Test files and comparison graph are attached for your confirmation.<br /><br />An interesting phenomenon possibly indicates the cause: only 1 SCF step in (a) is enough for ABINIT to get correct result, though I also tried 1000 steps! Maybe the ddk calculation or optic analysis does get correct information from a NSCF wavefunction. <br /><br />Because this ddk calculation and optic analysis are relevant to several other RF calculations, like IR and Raman, this issue really matters. I am looking forward to detail analyses from you.<br /><br />Sincerely,<br />Guangfu Luo<br /><br /><br />P.S. I checked the file-header of the NSCF and SCF WFK and did find differences: in the NSCF WFK, there are 2 fully occupied bands (4 electrons) according to “occ”, while in the SCF WFK, there are 3 fully occupied bands (6 electrons). The unit cell contains only 1 carbon atom.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Probable bug in the ddk calculation</h3>
+				<div class="date">Posted: <strong>Sun Aug 14, 2011 12:36 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">I'm not sure I understand your post fully. You suggest that you think that there is a problem in the ddk calculation, but as I read your post your tests involve how you determine the GS wavefunctions (SCF followed by NSCF, or SCF followed by a second SCF run). Concerning the DDK calculation itself, the equation being solved is a Sternheimer equation in which self-consistency is not an issue (right hand side is a constant, thus the calculation is inherently &quot;non-self-consistent&quot;). The DDK output has been checked quite thoroughly in both the norm-conserving and PAW cases against finite difference calculations. You can repeat these checks for your system, see test V3/test_09 for an example of how to do it.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Probable bug in the ddk calculation</h3>
+				<div class="date">Posted: <strong>Sun Aug 14, 2011 5:04 pm</strong></div>
+				<div class="author">by <strong>Robin</strong></div>
+				<div class="content">Dear Prof. Zwanziger,<br /><br />Thanks for your reply. Actually, I followed the same procedures to do ddk calculation as the tutorials, and did get correct results for many systems. But in the 1D chain systems, I happened to notice that the usual procedure gave wrong results, which are confirmed by other programs. So I did lots of tests to locate the cause. Finally, after comparing the calculations by using YAMBO and ABINIT (since Yambo can use the wavefunction from ABINIT), I find that the ddk calculation probably does not get correct information from a NSCF (but SCF) wavefunction, at least in my case.<br /><br />If you like, you can calculate the imaginary part of the dielectric function of the 1D carbon chain system in your own way. The structure is extremely simple: a carbon atom in the center of 10 x 10 x 1.2801 (angstrom) box. <br /> <br />Sincerely,<br />Guangfu Luo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Probable bug in the ddk calculation</h3>
+				<div class="date">Posted: <strong>Sun Aug 14, 2011 5:40 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Yes,  but did you do a finite difference check of the DDK output?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Probable bug in the ddk calculation or optic analysis</h3>
+				<div class="date">Posted: <strong>Mon Aug 15, 2011 4:13 am</strong></div>
+				<div class="author">by <strong>Robin</strong></div>
+				<div class="content">Dear Prof. Zwanziger,<br /><br />Thanks for your suggestion. But it is embarrassing that I do not know how to easily do a finite difference check on the ddk of wavefunction. <br /><br />However, I did another test and find that the problem could be in the final optic analysis code rather than the ddk calculation. Since in optic analysis step, using ddk-from-NSCF-WFK and the SCF-WFK can also get the correct result.  <br /><br />Sincerely,<br />Guangfu Luo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED]Probable bug in the ddk calculation or optic ana</h3>
+				<div class="date">Posted: <strong>Fri Sep 02, 2011 3:42 am</strong></div>
+				<div class="author">by <strong>Robin</strong></div>
+				<div class="content">Dear All,<br /><br />I disscussed the problem with Matthieu in another post, and as him pointed out, the occupations in SCF and NSCF WFK are different. After switching iscf=-2 to iscf=-3 (the later initializes occ and wtk), I got correct optical spectra.<br /><br />The cause could be the incorrect band filling in the WFK from iscf=-2, which subsequently causes incorrect electron transition in the optic analysis.<br /><br />Sincerely,<br />Guangfu Luo</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1261&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:05:43 GMT -->
+</html>

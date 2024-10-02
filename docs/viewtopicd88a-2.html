@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=694&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:20:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; 2D Surface Icutcoul  post m_coulombian.F90 fix</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>2D Surface Icutcoul  post m_coulombian.F90 fix</h2>
+		<p><a href="viewtopicd178.html?f=11&amp;t=694">https://forum.abinit.org/viewtopic.php?f=11&amp;t=694</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>2D Surface Icutcoul  post m_coulombian.F90 fix</h3>
+				<div class="date">Posted: <strong>Wed Oct 27, 2010 12:47 am</strong></div>
+				<div class="author">by <strong>JEJohns</strong></div>
+				<div class="content">Hello, <br />   I'm working on computing some quasiparticle calculations for a 2D system, and was running through the convergence tests with respect to ecutwfn and wanted to truncate the coulomb expansion perpendicular to my surface.  So I used <br />icutcoul 2<br />vcutgeo 1 1 0<br />rcut 9.5  <br /><br />I'm currently using version 6.2.2, so I made the change in m_coulombian.F90, changing test  to check in lines 373 to 379 as suggested, recompiled, and I'm still getting an error.  The error I'm getting is<br /><br />-6.759E-06  1.1707E-05 9.9208E-06<br />Found q-points with non-zero components along non-periodic direction<br />This is not allowed, see notes in cutoff_surface.F90<br />ACTION : Modify the q-point sampling<br /><br />But my Q-mesh for the screening and kpt grid are 0 in the kz direction.  I've attached the log file and input file.  Thanks for any suggestions.<br />--James</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 2D Surface Icutcoul  post m_coulombian.F90 fix</h3>
+				<div class="date">Posted: <strong>Wed Oct 27, 2010 11:20 am</strong></div>
+				<div class="author">by <strong>Robin</strong></div>
+				<div class="content">Dear James,<br /><br />You can set the following parameters: <br /><br /> gw_nqlwl  1<br />  gw_qlwl   0.00001 0.00001 0.00000 <br /><br />Sincerely,<br />Guangfu Luo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 2D Surface Icutcoul  post m_coulombian.F90 fix</h3>
+				<div class="date">Posted: <strong>Tue Nov 09, 2010 8:30 pm</strong></div>
+				<div class="author">by <strong>JEJohns</strong></div>
+				<div class="content">Sorry I didn't post anything earlier.  But this definitely fixed my problem.  Thank you<br />--James</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=694&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:20:36 GMT -->
+</html>

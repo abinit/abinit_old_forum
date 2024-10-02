@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1238&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:11:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Problem in Response function calculation - 1</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Problem in Response function calculation - 1</h2>
+		<p><a href="viewtopic875c.html?f=10&amp;t=1238">https://forum.abinit.org/viewtopic.php?f=10&amp;t=1238</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Problem in Response function calculation - 1</h3>
+				<div class="date">Posted: <strong>Wed Jul 27, 2011 7:22 am</strong></div>
+				<div class="author">by <strong>kanagaraj</strong></div>
+				<div class="content">Dear All,<br /><br />I am new to Abinit. I am trying to calculate the response function calculation1  for CuCl2 system. I modified the tutorial input file trf1_5.in based on my system. But i encountered with some problem like this: <br /><br />Initialisation of the first-order wave-functions :<br />  ireadwf=   0<br /> wfconv :    20 bands set=0 with npw=     23, for ikpt=   1<br /> wfconv :    20 bands set=0 with npw=     18, for ikpt=   2<br /> wfconv :    20 bands set=0 with npw=     21, for ikpt=   3<br /> wfconv :    20 bands set=0 with npw=     24, for ikpt=   4<br /> wfconv :    20 bands set=0 with npw=     19, for ikpt=   5<br /> wfconv :    20 bands set=0 with npw=     20, for ikpt=   6<br /> wfconv :    20 bands set=0 with npw=     22, for ikpt=   7<br /> wfconv :    20 bands set=0 with npw=     21, for ikpt=   8<br /> wfconv :    20 bands set=0 with npw=     19, for ikpt=   9<br /> wfconv :    20 bands set=0 with npw=     18, for ikpt=  10<br /> wfconv :    20 bands set=0 with npw=     20, for ikpt=  11<br /> wfconv :    20 bands set=0 with npw=     18, for ikpt=  12<br /> wfconv :    20 bands set=0 with npw=     24, for ikpt=  13<br /> wfconv :    20 bands set=0 with npw=     19, for ikpt=  14<br /> wfconv :    20 bands set=0 with npw=     19, for ikpt=  15<br /> wfconv :    20 bands set=0 with npw=     23, for ikpt=  16<br /> wfconv :    20 bands set=0 with npw=     22, for ikpt=  17<br /> wfconv :    20 bands set=0 with npw=     20, for ikpt=  18<br /> wfconv :    20 bands set=0 with npw=     22, for ikpt=  19<br /> wfconv :    20 bands set=0 with npw=     24, for ikpt=  20<br /> wfconv :    20 bands set=0 with npw=     20, for ikpt=  21<br />At line 158 of file hdr_skip.F90 (unit = 15, file = 'CuCl2-RF1o_DS2_1WF12')<br />Fortran runtime error: End of file<br /> wfconv :    20 bands set=0 with npw=     20, for ikpt=  22<br /> wfconv :    20 bands set=0 with npw=     23, for ikpt=  23<br /> wfconv :    20 bands set=0 with npw=     22, for ikpt=  24<br /> wfconv :    20 bands set=0 with npw=     20, for ikpt=  25<br /> wfconv :    20 bands set=0 with npw=     21, for ikpt=  26<br /> wfconv :    20 bands set=0 with npw=     20, for ikpt=  27<br /> wfconv :    20 bands set=0 with npw=     20, for ikpt=  28<br /> wfconv :    20 bands set=0 with npw=     24, for ikpt=  29<br /> wfconv :    20 bands set=0 with npw=     20, for ikpt=  30<br /> wfconv :    20 bands set=0 with npw=     20, for ikpt=  31<br /> wfconv :    20 bands set=0 with npw=     22, for ikpt=  32<br /><br /> loper3 about to open unit  12 for file=CuCl2-RF1_1WF2<br />-loper3 : read the ddk wavefunctions from file: CuCl2-RF1o_DS2_1WF12<br /><br /> getcut: wavevector=  0.0000  0.0000  0.0000  ngfft=   8   8  12<br />         ecut(hartree)=      1.000   =&gt; boxcut(ratio)=   2.09221<br /> scfcv3, nstep=          20<br /><br />My Input file :<br />nbdbuf 2<br /> ndtset  3<br /> mkmem 0<br />#Ground state calculation<br />  kptopt1   1             <br />   tolvrs1   1.0d-12      <br />    iscf1   5            <br />#Response Function calculation : d/dk<br />  rfelfd2   2             <br />   rfdir2   1 0 0          <br />    nqpt2   1<br />   qpt2   0.0 0.0 0.0   <br />  getwfk2   -1            <br />  kptopt2   2             <br />    iscf2  -3              <br />  tolwfr2   1.0d-14        <br /><br />#Response Function calculation : electric field perturbation and phonons<br /> rfphon3   1              <br /> rfatpol3   1 3           <br /> rfelfd3   3             <br /> rfdir3   1 1 1          <br /> nqpt3   1<br />  qpt3   0.0 0.0 0.0   # This is a calculation at the Gamma point<br /> getwfk3   -2            <br />  getddk3   -1            <br /> kptopt3   2              <br />    tolvrs3   1.0d-8<br />    iscf3   5            <br />#######################################################################<br />#Common input variables<br /><br />#Definition of the unit cell<br />acell 6.8973 3.2961 6.8160 angstrom <br />angdeg 90 122.239 90 <br /><br />#Definition of the atom types<br />ntypat 2                <br />znucl 29 17            <br /> #Definition of the atoms<br />natom 3                <br />typat 1 2                <br />brvltt -1<br />natrd 2<br />xred      0.0     0.0  0.0<br />          0.0065  0.5  0.2365<br /> nband  20               <br /> #Exchange-correlation functional<br />ixc 11             <br />#Definition of the planewave basis set<br /> ecut    1.0            <br />#Definition of the k-point grid<br /> ngkpt 4 4 4<br /> nshiftk  1<br /> shiftk  0.5 0.5 0.5<br /><br />#Definition of the SCF procedure<br />nstep 20                <br />diemac 9.0             <br />     <br />Please anyone can give me the  solution for this problem. <br /><br />Thanks a lot.<br /><br />C.Kanagaraj<br />Research Scholar <br />NIT-Trichy<br />India</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1238&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:11:08 GMT -->
+</html>

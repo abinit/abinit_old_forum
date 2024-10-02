@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=2226&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:22:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [Solved] Electric field perturbation in RF with PAW psp</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[Solved] Electric field perturbation in RF with PAW psp</h2>
+		<p><a href="viewtopic7586.html?f=10&amp;t=2226">https://forum.abinit.org/viewtopic.php?f=10&amp;t=2226</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[Solved] Electric field perturbation in RF with PAW psp</h3>
+				<div class="date">Posted: <strong>Mon Jul 29, 2013 4:30 pm</strong></div>
+				<div class="author">by <strong>sponce</strong></div>
+				<div class="content">Dear all, <br /><br />I'm trying to compute the dielectric constant of a material by using DFPT. I did that calculation in 3 steps:<br />1)  GS self-consistent calculation on the val. band<br />2) ddk calculation with <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>rfelfd2&nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp;<br />&nbsp; &nbsp;rfdir2&nbsp; &nbsp;1 1 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />&nbsp; &nbsp; nqpt2&nbsp; &nbsp;1<br />&nbsp; &nbsp; &nbsp;qpt2&nbsp; &nbsp;0.0 0.0 0.0&nbsp; &nbsp;<br />&nbsp; getwfk2&nbsp; &nbsp;1&nbsp; &nbsp; &nbsp;<br />&nbsp; kptopt2&nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />&nbsp; &nbsp; iscf2&nbsp; -3&nbsp; &nbsp; &nbsp; &nbsp; <br />&nbsp; tolwfr2&nbsp; &nbsp;1.0d-22</code></pre></div><br />3) Electric field perturbation<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp; rfphon3&nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />&nbsp;rfatpol3&nbsp; &nbsp;1 22&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />&nbsp; rfelfd3&nbsp; &nbsp;3&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />&nbsp; &nbsp;rfdir3&nbsp; &nbsp;1 1 1&nbsp; &nbsp; <br />&nbsp; &nbsp; nqpt3&nbsp; &nbsp;1<br />&nbsp; &nbsp; &nbsp;qpt3&nbsp; &nbsp;0.0 0.0 0.0&nbsp; &nbsp;<br />&nbsp; getwfk3&nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp;<br />&nbsp; getddk3&nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp; <br />&nbsp; kptopt3&nbsp; &nbsp;2 <br />&nbsp; tolvrs3&nbsp; &nbsp;1.0d-18<br />&nbsp; &nbsp; iscf3&nbsp; 7</code></pre></div><br /><br />Everything went smoothly until dataset 3 were I get a Seg. Fault. <br /><br />With gdb I've backtrace it to 66_paw/pawdijfr.F90 ligne 177 (version 7.4.1 of abinit)<br />The issue is that itypat=pawfgrtab(iatom)%itypat gives me the value &quot;175626256&quot; when prinited.<br />Obviously this is a random value because the itypat variable is not defined. <br /><br />I have also found out that the routine that was calling this routine at that time was 72_response/dyfnl3.F90.<br />At the ligne 309 the variable &quot;pawfgrtab_tmp&quot; is allocated BUT never initialized or copy in any way and then passed to the routine &quot;pawdijfr&quot; 4 lignes later.<br /><br />I do not see any ways for the variable  itypat in the pawfgrtab_type data type to have any value and therefore it seems normal that it seg. fault.<br /><br />Am I missing something? Is there a problem with my input variables? I have attached my full input file.<br /><br />Thank you for your help, <br /><br />Regards, <br /><br />Samuel</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [Solved] Electric field perturbation in RF with PAW psp</h3>
+				<div class="date">Posted: <strong>Tue Jul 30, 2013 11:36 am</strong></div>
+				<div class="author">by <strong>sponce</strong></div>
+				<div class="content">The problem was that the pawfgrtab_tmp was not initialized in src/72_response/dyfnl3.F90.<br /><br />I have made the changes and it work. I have commited my changes in sponce/7.4.1-private rev 456.<br /><br />Have a good day!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [Solved] Electric field perturbation in RF with PAW psp</h3>
+				<div class="date">Posted: <strong>Fri Aug 30, 2013 4:12 am</strong></div>
+				<div class="author">by <strong>suvas</strong></div>
+				<div class="content">Hi Sponse,<br /><br />You said PAW had problem and you solved the issue. I have a problem with negative frequency.  I got five negative frequency in both abinit 7.2.1 and 7.4.1 version. My convergence criteria and structural optimization are rahter strict. I just wanted to ask you, is there any problem in subroutine  src/72_response/dyfnl3.F90. I would be so greatful if you could reply me soon. that would largely help spending time to calculate phonon frequency with PAW+LDA.<br /><br />Thanks !<br /><br />Suvas</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [Solved] Electric field perturbation in RF with PAW psp</h3>
+				<div class="date">Posted: <strong>Fri Aug 30, 2013 11:08 am</strong></div>
+				<div class="author">by <strong>sponce</strong></div>
+				<div class="content">Dear Suvas, <br /><br />This is not the same issue. You might consider opening a topic about it. <br /><br />Be sure to include your input files as well as any relevant data's. <br /><br />Phonon computed in PAW+LDA should theoretically work but it might still be a bit unstable. Without more info I cannot help you any further.<br /><br />Regards, <br /><br />Samuel</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [Solved] Electric field perturbation in RF with PAW psp</h3>
+				<div class="date">Posted: <strong>Fri Aug 30, 2013 12:31 pm</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">Hi Samuel<br /><br />Did you check the results of your DFPT calculation related to response under an electric field?<br /><br />It seemed to me that it was not available at the moment.<br /><br />Boris</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=2226&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:22:24 GMT -->
+</html>

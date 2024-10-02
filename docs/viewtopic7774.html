@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=5264&p=14294 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 13:27:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Supercell with Europium impurity : Convergence problem - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopice53b.html?t=5264">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="4"><a href="viewforum31e6.html?f=4" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Running Abinit</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="9"><a href="viewforumfdc5.html?f=9" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Ground state</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopic789d.html?f=9&amp;t=5264">Supercell with Europium impurity : Convergence problem</a>&nbsp;
+<a href="viewtopic3107.html?f=9&amp;t=5264&amp;p=14277#p14277" style="color: #006600;">
+	[SOLVED]
+</a>
+</h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Total energy, geometry optimization, DFT+U, spin....<br /></div>
+<p>
+	<strong>Moderator:</strong> <a href="memberlista146.html?mode=viewprofile&amp;u=2687" class="username">bguster</a>
+</p>
+
+
+<div class="action-bar bar-top">
+	
+			<a href="posting7c96.html?mode=reply&amp;f=9&amp;t=5264" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopica7d7.html?f=9&amp;t=5264&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="5264" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			2 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p14277" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile14277">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist5447.html?mode=viewprofile&amp;u=2902" class="username">jbouquiaux</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search737f.html?author_id=2902&amp;sr=posts">2</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Aug 31, 2020 3:21 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content14277">
+
+						<h3 class="first"><a href="#p14277">Supercell with Europium impurity : Convergence problem&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingdb5f.html?mode=quote&amp;f=9&amp;p=14277" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic86ad.html?p=14277#p14277" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist5447.html?mode=viewprofile&amp;u=2902" class="username">jbouquiaux</a></strong> &raquo; </span>Mon Jan 18, 2021 11:08 am
+			</p>
+			
+			
+			
+			<div class="content">Dear Abinit users,<br>
+<br>
+I am dealing with a doped supercell system (Sr[Li2Al2O2N2] where one Sr atom is replaced by Eu atom). I treat it using GGA-PBE and PAW+U on 4f states of Eu. Those 4f states are localized and located in the band gap. <br>
+<br>
+From previous computations with rather small supercell sizes, it appeared that the property that I need is hard to converge with respect to the distance between Eu images along c-axis. This is why I am looking for increasing the supercell size only along this c-axis. <br>
+<br>
+With "small" supercell, from 54 (1x1x3) to 144 atoms (1x1x8), SCF cycles converge. The number of steps required to obtain SCF convergence increases with the supercell size (and therefore the Eu-Eu distance). It takes around 50 steps for 54 atoms (without help) and 100-150 steps for 144 atoms (with the help of nline=6, nnsclo =2, tolrde=0.001). <br>
+<br>
+But here is my problem: with a 216 atoms supercell (1x1x12), I never succeeded to obtain convergence. I attach a typical input file and the related output. <br>
+<br>
+Here are the input parameters I already tried to tune without success: <br>
+- increasing the k-points density (from one to 8 k-points)<br>
+- increasing ecut up to 45 Ha<br>
+- decreasing diemix (0.8, 0.6, 0.4)<br>
+- increasing nline (up to 15) and increasing nnsclo (up to 4)<br>
+<br>
+In each case, the SCF cycle starts to converge during a few dozen of steps (the convergence of these steps improves especially when increasing nline) but then it starts diverging and it never stabilizes as can be seen in the output attached.
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>     iter   Etot(hartree)      deltaE(h)  residm     nres2    diffor    maxfor
+ ETOT  1  -2559.1858774541    -2.559E+03 5.407E-07 4.153E+03 3.789E+00 3.789E+00
+ ETOT  2  -2665.5907405032    -1.064E+02 2.347E-07 2.554E+04 4.784E+00 9.944E-01
+ ETOT  3  -5172.4502902935    -2.507E+03 1.813E-03 8.728E+04 2.950E+00 3.043E+00
+ ETOT  4  -2954.4527677927     2.218E+03 5.870E-07 3.285E+04 3.904E+00 1.454E+00
+ ETOT  5  -2713.2064613295     2.412E+02 4.890E-07 1.879E+04 1.353E+00 7.001E-01
+ ETOT  6  -2594.6850567304     1.185E+02 3.655E-08 8.048E+03 1.014E+00 3.140E-01
+ ETOT  7  -2584.4804851793     1.020E+01 1.824E-06 8.292E+03 3.326E-01 2.258E-01
+ ETOT  8  -2571.4035516666     1.308E+01 6.945E-09 5.488E+03 3.241E-01 1.929E-01
+ ETOT  9  -2543.4688664001     2.793E+01 2.076E-09 9.583E+02 2.431E-01 7.863E-02
+ ETOT 10  -2751.9181227293    -2.084E+02 5.180E-05 2.957E+04 6.568E-01 6.290E-01
+ ETOT 11  -2829.0589438146    -7.714E+01 5.299E-08 3.635E+04 1.766E+00 1.363E+00
+ ETOT 12  -2572.1695476902     2.569E+02 2.246E-07 8.819E+03 1.597E+00 4.111E-01
+ ETOT 13  -2609.5407521394    -3.737E+01 7.304E-07 1.684E+04 3.686E-01 5.396E-01
+ ETOT 14  -2632.0929092042    -2.255E+01 3.803E-07 1.862E+04 4.049E-01 5.741E-01
+ ETOT 15  -2654.7546906833    -2.266E+01 9.001E-09 1.880E+04 3.116E-01 4.929E-01
+ ETOT 16  -2583.1252916852     7.163E+01 2.275E-08 1.122E+04 3.102E-01 5.249E-01
+ ETOT 17  -2842.7548183094    -2.596E+02 1.209E-07 3.462E+04 7.128E-01 7.216E-01
+ ETOT 18  -3358.1430785262    -5.154E+02 1.798E-04 5.078E+04 7.112E+05 7.112E+05
+ ETOT 19  -4054.4991717184    -6.964E+02 5.994E-05 9.163E+04 7.116E+05 2.718E+04
+ ETOT 20  -2649.9525640974     1.405E+03 3.447E-06 1.983E+04 2.718E+04 9.666E-01
+ ETOT 21  -4027.0801399053    -1.377E+03 3.385E-05 8.646E+04 2.483E+00 2.268E+00
+ ETOT 22  -3430.8508720718     5.962E+02 2.077E-04 6.033E+04 1.916E+00 2.102E+00
+ ETOT 23  -3751.0958226289    -3.202E+02 4.037E-05 6.176E+04 2.700E+00 2.592E+00
+ ETOT 24  -3681.5626676015     6.953E+01 8.603E-06 6.092E+04 1.937E+00 2.586E+00
+ ETOT 25  -5199.9703999524    -1.518E+03 2.172E-04 8.447E+04 5.535E+00 4.871E+00
+ ETOT 26  -3381.9883258386     1.818E+03 5.117E-06 6.323E+04 8.375E+05 8.375E+05
+ ETOT 27  -10978.488188589    -7.596E+03 1.629E-02 1.610E+05 7.470E+05 2.443E+05
+ ETOT 28  -4869.6765511203     6.109E+03 2.161E-03 8.626E+04 9.173E+05 9.181E+05
+ ETOT 29  -9126.6741376169    -4.257E+03 1.247E-02 1.511E+05 9.116E+05 7.047E+05
+ ETOT 30  -7893.9581529911     1.233E+03 8.796E-03 1.384E+05 7.047E+05 8.549E+00
+</code></pre></div>
+
+Notice that the system is not yet relaxed. My initial structure guess comes from a relaxed 1x1x6 that I simply double along c-axis. I look for a DEN file that I will use as an input density for future structural relaxation.<br>
+<br>
+Notice also that an undoped supercell with the same size converges nicely in a few dozen steps. It really seems that the issue comes from Eu states and that the distance between Eu images is important. <br>
+<br>
+My questions are : <br>
+- Where does this convergence issue come from? I guess it is related to the 4f localized states located in the band gap ... Can someone give hints about that? <br>
+- Indeed, do you have any ideas of what I could try to obtain convergence? <br>
+<br>
+Best,<br>
+<br>
+Julien</div>
+			
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file82ed.php?id=2031">relax.in</a></dt>
+						<dd>(15.86 KiB) Downloaded 475 times</dd>
+		</dl>
+		
+		
+			</dd>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file6269.php?id=2032">relax.out</a></dt>
+						<dd>(142.72 KiB) Downloaded 444 times</dd>
+		</dl>
+		
+		
+			</dd>
+									</dl>
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p14294" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile14294">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist5447.html?mode=viewprofile&amp;u=2902" class="username">jbouquiaux</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search737f.html?author_id=2902&amp;sr=posts">2</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Aug 31, 2020 3:21 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content14294">
+
+						<h3 ><a href="#p14294">Re: Supercell with Europium impurity : Convergence problem</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingfe02.html?mode=quote&amp;f=9&amp;p=14294" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicee45.html?p=14294#p14294" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist5447.html?mode=viewprofile&amp;u=2902" class="username">jbouquiaux</a></strong> &raquo; </span>Mon Jan 25, 2021 8:49 am
+			</p>
+			
+			
+			
+			<div class="content">Dear all, <br>
+<br>
+Problem solved, the trick was to increase diemac! For instance with diemac = 50, nline = 8, nnsclo = 2 : <br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>     iter   Etot(hartree)      deltaE(h)  residm     nres2    diffor    maxfor
+ ETOT  1  -2559.4433619243    -2.559E+03 2.318E-04 1.514E+04 3.752E+00 3.752E+00
+ ETOT  2  -2577.7352330102    -1.829E+01 7.285E-06 2.796E+04 3.971E+00 2.186E-01
+ ETOT  3  -2541.9664166628     3.577E+01 1.219E-04 2.482E+03 2.737E-01 5.520E-02
+ ETOT  4  -2545.9346486689    -3.968E+00 7.206E-07 6.770E+03 1.732E-01 1.180E-01
+ ETOT  5  -2539.5177238032     6.417E+00 6.203E-05 2.001E+03 8.306E+02 8.306E+02
+ ETOT  6  -2538.7342334705     7.835E-01 1.777E-07 4.369E+02 8.341E+02 4.067E+02
+ ETOT  7  -2539.0874871872    -3.533E-01 4.045E-08 4.514E+02 5.904E+02 3.232E+02
+ ETOT  8  -2539.2940959752    -2.066E-01 4.597E-07 4.645E+02 5.197E+02 2.379E+02
+ ETOT  9  -2542.4525080546    -3.158E+00 1.949E-06 4.210E+03 2.379E+02 1.314E-01
+ ETOT 10  -2540.0025427067     2.450E+00 5.084E-06 1.094E+02 1.367E-01 3.002E-02
+ ETOT 11  -2540.0134523119    -1.091E-02 2.962E-06 1.394E+02 1.110E+03 1.110E+03
+ ETOT 12  -2539.9724664606     4.099E-02 2.690E-06 6.628E+01 1.109E+03 7.627E+01
+ ETOT 13  -2539.9732831162    -8.167E-04 1.759E-06 6.831E+01 7.627E+01 1.675E-02
+ ETOT 14  -2539.8611001930     1.122E-01 1.550E-05 1.842E+01 5.989E-03 1.338E-02
+ ETOT 15  -2539.8391221815     2.198E-02 9.165E-07 1.175E+01 1.204E-03 1.238E-02
+ ETOT 16  -2539.8288893003     1.023E-02 5.400E-07 8.152E+00 1.190E-03 1.120E-02
+ ETOT 17  -2539.8233574200     5.532E-03 6.319E-07 5.803E+00 1.563E-03 9.639E-03
+ ETOT 18  -2539.8055918408     1.777E-02 1.342E-06 4.053E-01 5.386E-03 7.515E-03
+ ETOT 19  -2539.8040049656     1.587E-03 2.004E-06 2.592E-01 8.657E-04 6.744E-03
+ ETOT 20  -2539.8019254877     2.079E-03 7.759E-06 1.266E-01 1.082E-03 5.898E-03
+ ETOT 21  -2539.8012077807     7.177E-04 4.153E-07 9.220E-02 4.110E-04 5.510E-03
+ ETOT 22  -2539.7999196845     1.288E-03 5.597E-07 4.983E-02 7.671E-04 4.767E-03
+ ETOT 23  -2539.7989466564     9.730E-04 3.400E-07 2.895E-02 6.514E-04 4.149E-03
+ ETOT 24  -2539.7984090528     5.376E-04 3.366E-07 2.323E-02 3.897E-04 3.772E-03
+ ETOT 25  -2539.7976384810     7.706E-04 3.823E-08 1.564E-02 6.543E-04 3.151E-03
+ ETOT 26  -2539.7968463819     7.921E-04 3.316E-07 8.851E-03 8.427E-04 2.334E-03
+ ETOT 27  -2539.7961983331     6.480E-04 7.870E-08 3.460E-03 1.047E-03 1.347E-03
+ ETOT 28  -2539.7960370398     1.613E-04 8.535E-09 1.975E-03 4.508E-04 1.120E-03
+ ETOT 29  -2539.7959570903     7.995E-05 5.378E-09 1.120E-03 3.653E-04 1.102E-03
+ ETOT 30  -2539.7959303835     2.671E-05 1.927E-09 7.172E-04 2.226E-04 1.092E-03
+ ETOT 31  -2539.7959215903     8.793E-06 6.380E-10 5.084E-04 1.359E-04 1.084E-03
+ ETOT 32  -2539.7959187054     2.885E-06 3.863E-10 3.706E-04 9.798E-05 1.078E-03
+ ETOT 33  -2539.7959184142     2.913E-07 6.182E-11 3.228E-04 3.408E-05 1.076E-03
+ ETOT 34  -2539.7959184872    -7.307E-08 1.996E-11 2.889E-04 2.003E-05 1.074E-03
+ ETOT 35  -2539.7959188747    -3.874E-07 6.370E-11 2.325E-04 3.540E-05 1.072E-03
+ ETOT 36  -2539.7959191038    -2.292E-07 4.039E-12 2.135E-04 5.412E-06 1.071E-03
+ ETOT 37  -2539.7959195034    -3.995E-07 2.588E-12 1.815E-04 8.335E-06 1.070E-03
+ ETOT 38  -2539.7959200423    -5.390E-07 9.811E-12 1.408E-04 1.027E-05 1.069E-03
+ ETOT 39  -2539.7959203873    -3.449E-07 2.405E-12 1.145E-04 5.424E-06 1.069E-03
+ ETOT 40  -2539.7959206806    -2.933E-07 2.033E-12 9.080E-05 4.560E-06 1.069E-03
+ ETOT 41  -2539.7959210275    -3.469E-07 1.673E-12 6.181E-05 5.585E-06 1.069E-03
+ ETOT 42  -2539.7959212491    -2.216E-07 4.734E-13 4.039E-05 2.835E-06 1.069E-03
+ ETOT 43  -2539.7959213645    -1.154E-07 8.503E-13 2.829E-05 3.944E-06 1.070E-03
+</code></pre></div>
+
+Julien</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="posting7c96.html?mode=reply&amp;f=9&amp;t=5264" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopica7d7.html?f=9&amp;t=5264&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=9&amp;t=5264">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			2 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforumfdc5.html?f=9" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Ground state”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=5264&p=14294 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 13:27:59 GMT -->
+</html>

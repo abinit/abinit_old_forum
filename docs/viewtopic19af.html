@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3391&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:13:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Configuration's effect on optimization</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Configuration's effect on optimization</h2>
+		<p><a href="viewtopic428a.html?f=3&amp;t=3391">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3391</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Configuration's effect on optimization&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Thu Oct 06, 2016 5:07 pm</strong></div>
+				<div class="author">by <strong>cpromao</strong></div>
+				<div class="content">I have two builds of 8.0.8, one on a local machine and one on a HPC cluster. When performing structural optimization using ionmov = 2, sometimes the local build is able to complete the optimization normally but the cluster build shows worsening SCF convergence with each MD step and then crashes. I've attached my input file for BPO4, which exhibits this problem.<br /><br />The important configuration options for the local build are as follows:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp; * C compiler&nbsp; &nbsp; &nbsp; : gnu version 5.4<br />&nbsp; * Fortran compiler: gnu version 5.4<br />&nbsp; * architecture&nbsp; &nbsp; : intel xeon (64 bits)<br /><br />&nbsp; * debugging&nbsp; &nbsp; &nbsp; &nbsp;: basic<br />&nbsp; * optimizations&nbsp; &nbsp;: standard<br /><br />&nbsp; * OpenMP enabled&nbsp; : no (collapse: ignored)<br />&nbsp; * MPI&nbsp; &nbsp; enabled&nbsp; : yes<br />&nbsp; * MPI-IO enabled&nbsp; : yes<br />&nbsp; * GPU&nbsp; &nbsp; enabled&nbsp; : no (flavor: none)<br /><br />&nbsp; * TRIO&nbsp; &nbsp;flavor = none<br />&nbsp; * TIMER&nbsp; flavor = abinit (libs: ignored)<br />&nbsp; * LINALG flavor = custom (libs: user-defined)<br />&nbsp; * ALGO&nbsp; &nbsp;flavor = none (libs: ignored)<br />&nbsp; * FFT&nbsp; &nbsp; flavor = none (libs: ignored)<br />&nbsp; * MATH&nbsp; &nbsp;flavor = none (libs: ignored)<br />&nbsp; * DFT&nbsp; &nbsp; flavor = none<br /></code></pre></div><br /><br />while those for the cluster build are:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp; * C compiler&nbsp; &nbsp; &nbsp; : intel version 16.0<br />&nbsp; * Fortran compiler: intel version 16.0<br />&nbsp; * architecture&nbsp; &nbsp; : intel xeon (64 bits)<br /><br />&nbsp; * debugging&nbsp; &nbsp; &nbsp; &nbsp;: basic<br />&nbsp; * optimizations&nbsp; &nbsp;: standard<br /><br />&nbsp; * OpenMP enabled&nbsp; : no (collapse: ignored)<br />&nbsp; * MPI&nbsp; &nbsp; enabled&nbsp; : yes<br />&nbsp; * MPI-IO enabled&nbsp; : yes<br />&nbsp; * GPU&nbsp; &nbsp; enabled&nbsp; : no (flavor: none)<br /><br />&nbsp; * TRIO&nbsp; &nbsp;flavor = netcdf<br />&nbsp; * TIMER&nbsp; flavor = abinit (libs: ignored)<br />&nbsp; * LINALG flavor = mkl (libs: user-defined)<br />&nbsp; * ALGO&nbsp; &nbsp;flavor = none (libs: ignored)<br />&nbsp; * FFT&nbsp; &nbsp; flavor = fftw3 (libs: user-defined)<br />&nbsp; * MATH&nbsp; &nbsp;flavor = gsl (libs: user-defined)<br />&nbsp; * DFT&nbsp; &nbsp; flavor = libxc+atompaw</code></pre></div><br /><br />If anyone has an idea as to which aspect of the build could be causing this problem it would be greatly appreciated.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configuration's effect on optimization</h3>
+				<div class="date">Posted: <strong>Thu Oct 13, 2016 8:24 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Hi,<br /><br />Depending on the CPU you have on your localcomputer and on you cluster, this could be due to a vectorization issue with intel16.<br />Could you try to build abinit with the --enable-avx-safe-mode on your cluster and try again.<br /><br />Also could you check if the energies and forces are the same the moment the simulations diverge. Or at least identify what physical parameter starts diverging.<br /><br />Cheers</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configuration's effect on optimization</h3>
+				<div class="date">Posted: <strong>Mon Oct 17, 2016 12:36 pm</strong></div>
+				<div class="author">by <strong>cpromao</strong></div>
+				<div class="content">Hi Jordan,<br /><br />Using --enable-avx-safe-mode seems to have solved the problem - thanks!<br /><br />There is a small difference between energies and forces from the start of the calculation; this persists for 6 MD steps at which point the forces begin to diverge.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3391&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:13:08 GMT -->
+</html>

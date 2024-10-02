@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=807&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:31:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; How to turn off Monkhost-Pack grid</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>How to turn off Monkhost-Pack grid</h2>
+		<p><a href="viewtopice52a-2.html?f=9&amp;t=807">https://forum.abinit.org/viewtopic.php?f=9&amp;t=807</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>How to turn off Monkhost-Pack grid</h3>
+				<div class="date">Posted: <strong>Tue Dec 21, 2010 7:56 pm</strong></div>
+				<div class="author">by <strong>xiaoqiao</strong></div>
+				<div class="content">Hello!<br /><br />I am using ABINIT for electronic band structure calculation now. As Abinit is using Monkhost-Pack grid (M-P grid) method, which saves much time. But I want to get a full calculation of electronic band structure only considering high symmetry without considering those special k-points. In that case, can I set the value of some parameter(for instance, kptopt...) to turn off the M-P grid (special k-points)? Or where can I turn off the M-P grid for special k-point selection in the code? <br /><br />Thanks in advance.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to turn off Monkhost-Pack grid</h3>
+				<div class="date">Posted: <strong>Tue Dec 21, 2010 10:06 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">If you use kptopt 0, you then input nkpt, kpt, kptnrm, and wtk to specify exactly the k points you want (see the input variable documentation). However, are you sure this is really what you want to do? It might be better to run a GS calc on a grid, so you have an accurate computation of the density and wavefunctions, and then compute properties (nonselfconsistently for example) at certain k points using that input.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to turn off Monkhost-Pack grid</h3>
+				<div class="date">Posted: <strong>Wed Dec 22, 2010 7:56 pm</strong></div>
+				<div class="author">by <strong>xiaoqiao</strong></div>
+				<div class="content"><blockquote><div><cite>jzwanzig wrote:</cite>If you use kptopt 0, you then input nkpt, kpt, kptnrm, and wtk to specify exactly the k points you want (see the input variable documentation). However, are you sure this is really what you want to do? It might be better to run a GS calc on a grid, so you have an accurate computation of the density and wavefunctions, and then compute properties (nonselfconsistently for example) at certain k points using that input.</div></blockquote><br />Professor, thank you for your reply!<br />I want to calculate scf electronic band structure  only with high-symmetry points. According to tutorial 3, si band structure is calculated first by a scf density calc which is based on M-P grid, followed by a non-scf band structure calc using the accurate density from first step. So I want to know if the computed band structure result can be considered as a scf iteration result without M-P grid, although the density is arrived using M-P grid. Or the non-scf band structure calc is also based on M-P grid?  In this case, I need to turn off the M-P grid. Thanks.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=807&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:31:51 GMT -->
+</html>

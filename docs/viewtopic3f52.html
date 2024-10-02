@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3637&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:49:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; problem with abinit 8.4.2</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>problem with abinit 8.4.2</h2>
+		<p><a href="viewtopic10db-2.html?f=9&amp;t=3637">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3637</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>problem with abinit 8.4.2</h3>
+				<div class="date">Posted: <strong>Fri Jun 23, 2017 11:29 am</strong></div>
+				<div class="author">by <strong>rbeddiaf</strong></div>
+				<div class="content">dear abinit users :<br />Iam ussing abinit 8.4.2 when I run the calculation it is stopped and I have this error message<br /><br />--- !ERROR<br />src_file: m_abihist.F90<br />src_line: 2013<br />mpi_rank: 0<br />message: |<br />get the id for vel_cell - NetCDF library returned: NetCDF: Variable not found<br /><br />input:<br /><br />optcell 0<br />ionmov 2<br />ntime 100<br />Chksymbreak 0<br />optforces 1<br />optstress 1<br />acell 17.7319688549 17.7319688549 12.8277949625 <br />ntypat 2<br />znucl 68 14 <br />natom 16 <br />typat 1 1 2 1 1 2 1 1 2 1 1 2 1 2 1 2 <br /><br />rprim 1.0000000000E+00 0.0000000000E+00 0.0000000000E+00<br />-5.0000000000E-01 8.6602540378E-01 0.0000000000E+00<br />6.1232339957E-17 1.0605752387E-16 1.0000000000E+00<br /><br />xred 2.44447180851518E-01 0.00000000000000E+00 2.50000000000000E-01<br />3.33333333333333E-01 6.66666666666667E-01 2.28075921927867E-49<br />6.00453597708801E-01 2.25875452601147E-21 2.50000000000000E-01<br />2.44447180851518E-01 2.44447180851518E-01 7.50000000000000E-01<br />6.66666666666667E-01 3.33333333333333E-01 5.00000000000000E-01<br />6.00453597708801E-01 6.00453597708801E-01 7.50000000000000E-01<br />0.00000000000000E+00 2.44447180851518E-01 2.50000000000000E-01<br />6.66666666666667E-01 3.33333333333333E-01 2.28075921927867E-49<br />-9.03501810404587E-21 6.00453597708801E-01 2.50000000000000E-01<br />7.55552819148482E-01 0.00000000000000E+00 7.50000000000000E-01<br />3.33333333333333E-01 6.66666666666667E-01 5.00000000000000E-01<br />3.99546402291199E-01 0.00000000000000E+00 7.50000000000000E-01<br />7.55552819148482E-01 7.55552819148482E-01 2.50000000000000E-01<br />3.99546402291199E-01 3.99546402291199E-01 2.50000000000000E-01<br />0.00000000000000E+00 7.55552819148482E-01 7.50000000000000E-01<br />0.00000000000000E+00 3.99546402291199E-01 7.50000000000000E-01<br /><br />ecut 300 eV <br />pawecutdg 40 <br />occopt 4<br />tsmear 0.1 eV<br />kptopt 1 <br />kptrlen 140<br />nstep 200 <br />toldff 2.00000000E-05<br />tolmxf 1.5000000E-04</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem with abinit 8.4.2</h3>
+				<div class="date">Posted: <strong>Tue Sep 19, 2017 4:51 pm</strong></div>
+				<div class="author">by <strong>anhhv</strong></div>
+				<div class="content">Hi, <br /><br />I am wondering that the file ./abstuff/to_HIST.nc already existed before you ran your relaxation. If this was generated before, abinit would try to read some data from there. Could you try to delete it and rerun again your calculation?<br /><br />For me, I am using abinit 8.4.3. After installing, I test it with a simple relaxation that was done before by abinit 8.0.2 and I get the same error like yours. I guess that the reading from the existed .nc file caused the error because of the change of file heading in the later version of ABINIT.<br /><br />Best, Anh.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3637&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:49:16 GMT -->
+</html>

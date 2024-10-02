@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3799&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:47:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Can ABINIT run one-dimensional material calculations?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Can ABINIT run one-dimensional material calculations?</h2>
+		<p><a href="viewtopic8e5b.html?f=9&amp;t=3799">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3799</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Can ABINIT run one-dimensional material calculations?</h3>
+				<div class="date">Posted: <strong>Sat Mar 17, 2018 2:10 am</strong></div>
+				<div class="author">by <strong>gfcjyb</strong></div>
+				<div class="content">I want to calculate the GW band gap for a one-dimensional material so I used (for example) 5.0 in the acell. After running it, the program told me:<br /><br />message: |<br />    There is a problem with the input file : maybe  <br />    a disagreement between the declared dimension of the array,<br />    and the number of data actually provided. <br />    Action: correct your input file, and especially the keywork ACELL<br /><br />Then I thought I need to provide 5.0 0.0 0.0 for acell, so I changed my input file, then the program told me &quot;the second dimension should be something larger than zero&quot;, as if the program can only take three-dimensional material calculations.<br /><br />So, can ABINIT run one-dimensional matgerial calculations? If so, how will I do with acell and rprim?<br /><br />Thank you so much for your time and answer!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Can ABINIT run one-dimensional material calculations?&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Sat Mar 17, 2018 8:11 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear gfcjyb,<br />Abinit is using periodic boundary conditions such as you have to declare a cell length for the three directions. This means you have to put vacuum in the directions that are not supposed to be periodic to separate the periodic images. Suppose a 1D wire put along x, you have to put the right cell parameter of your system along x and add about 10 Angstrom vacuum on the top of the thickness of your wire along y and z directions. 10 Angstrom is often good, though it is recommended to check how the properties of your system converge with the size of the vacuum, you need to be sure not to have spurious interactions between the periodic images.<br />Hope this can help,<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Can ABINIT run one-dimensional material calculations?</h3>
+				<div class="date">Posted: <strong>Mon Mar 19, 2018 10:19 pm</strong></div>
+				<div class="author">by <strong>gfcjyb</strong></div>
+				<div class="content"><blockquote><div><cite>ebousquet wrote:</cite>Dear gfcjyb,<br />Abinit is using periodic boundary conditions such as you have to declare a cell length for the three directions. This means you have to put vacuum in the directions that are not supposed to be periodic to separate the periodic images. Suppose a 1D wire put along x, you have to put the right cell parameter of your system along x and add about 10 Angstrom vacuum on the top of the thickness of your wire along y and z directions. 10 Angstrom is often good, though it is recommended to check how the properties of your system converge with the size of the vacuum, you need to be sure not to have spurious interactions between the periodic images.<br />Hope this can help,<br />Best wishes,<br />Eric</div></blockquote><br /><br />Problem solved. Thank you so much!</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3799&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:47:33 GMT -->
+</html>

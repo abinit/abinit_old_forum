@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=15&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:06:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; un-allocation of variables</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>un-allocation of variables</h2>
+		<p><a href="viewtopicd24e.html?f=19&amp;t=15">https://forum.abinit.org/viewtopic.php?f=19&amp;t=15</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>un-allocation of variables</h3>
+				<div class="date">Posted: <strong>Fri Dec 04, 2009 11:41 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello bazaareers,<br /><br />I am using ifort 11 on abinit 6 (same things happened with 5.9).<br />If you activate bounds checking with -C _all_ of the tests fail, because a large number of arrays are passed without being allocated. What we do is:<br /><br />--------------------------------------------------------<br />real(dp), allocatable :: truc(:,:)<br /><br />&lt;we do not allocate truc because it will not be used&gt;<br /><br />call sub(truc)<br />--------------------------------------------------------<br /><br />and then:<br /><br />--------------------------------------------------------<br />subroutine sub(truc)<br />real(dp) :: truc(0,0)<br />--------------------------------------------------------<br /><br />In principle this does not create an error because truc should never be accessed, but in practice it is quite ugly, and the ifort -C detects it. I think it has an assertion that, in subroutine sub, truc's dimensions are really the ones declared (whereas actually it is unallocated).<br /><br />I get errors like:<br />forrtl: severe (408): fort: (8): Attempt to fetch from allocatable variable TRUC when it is not allocated<br /><br />If I allocate truc to size 0, everything is fine. If I just declare real(dp) :: truc(:,:) in sub, it still fails - ifort is still checking for dimensions of a real array.<br /><br />Could we think about getting rid of this practice? If an object is not allocated and then passed, it should be in a datastructure someplace. The declaration line in the subroutine is rigorously false, ifort sees that, and this practice is also very error prone. I am not advocating allocating these arrays, as this would take up space, but either use a structure of some type, with an associated module, or eventually a pointer (don't like this much in fortran).<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: un-allocation of variables</h3>
+				<div class="date">Posted: <strong>Fri Dec 04, 2009 1:49 pm</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">Hi,<br /><br />I already made this observation with ifort in debug mode.<br />One day, I decided to change all my unallocated pawxxx by pawxxx(0)...<br />but after a while, I found that I need several days (weeks) to do that. So, I stopped.<br /><br />Marc</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: un-allocation of variables</h3>
+				<div class="date">Posted: <strong>Fri Dec 04, 2009 9:18 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content"><blockquote><div><cite>mverstra wrote:</cite>Could we think about getting rid of this practice? If an object is not allocated and then passed, it should be in a datastructure someplace. The declaration line in the subroutine is rigorously false, ifort sees that, and this practice is also very error prone. I am not advocating allocating these arrays, as this would take up space, but either use a structure of some type, with an associated module<br /></div></blockquote><br /><br />The idea sounds good but I don't think it can be used anywhere in the code. Some interfaces<br />can be rewritten such that we pass objects instead of arrays or scalars (e.g mkffnl, nonlop in which <br />we might pass Psps%). On the other hand. fixing the problem anywhere in the code <br />will require huge changes. <br />Besides ifort with your debugging option will always complain if one compiles and links <br />against the internal linalg as the &quot;not referenced&quot; trick is commonly used in lapack.<br /><br />Could you provide a list of the routines causing the error at run-time or is it huge?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: un-allocation of variables</h3>
+				<div class="date">Posted: <strong>Fri Dec 04, 2009 9:39 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content"><blockquote class="uncited"><div>The idea sounds good but I don't think it can be used anywhere in the code. Some interfaces<br />can be rewritten such that we pass objects instead of arrays or scalars (e.g mkffnl, nonlop in which <br />we might pass Psps%). On the other hand. fixing the problem anywhere in the code <br />will require huge changes. <br />Besides ifort with your debugging option will always complain if one compiles and links <br />against the internal linalg as the &quot;not referenced&quot; trick is commonly used in lapack.<br /><br />Could you provide a list of the routines causing the error at run-time or is it huge?</div></blockquote><br /><br />It is probably huge, but to make matters worse I only get the first instance: the code exits and tells you which array is guilty (not even which subroutine - ifort sucks for this, and my idb crashes). Then you have to fix that array to make it go on to the next one! That would take forever to identify (I have 3-4 arrays). It would probably be quicker to go top down and look 1) for usepaw, 2) for other similar cases, then trace arrays up to see if they are allocated or not. If I have time I will try to get a more complete list. Is allocation to 0 size acceptable, do you think?<br /><br />For the lapack thing, I don't think it will be a problem: what one does is not &quot;not allocate&quot; but pass a reference to an array slice or something. I believe that if you pass an unallocated array to lapack it will be an error...<br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=15&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:06:27 GMT -->
+</html>

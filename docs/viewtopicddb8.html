@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1530&p=4916 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:09:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>[FIXED 6.13] nlo calculations fails when using &gt; 1proc - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopic7a52-2.html?t=1530">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="4"><a href="viewforum31e6.html?f=4" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Running Abinit</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="10"><a href="viewforum15ca.html?f=10" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Response calculations</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopicf7d1.html?f=10&amp;t=1530">[FIXED 6.13] nlo calculations fails when using &gt; 1proc</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Phonons, DFPT, electron-phonon, electric-field response, mechanical response…<br /></div>
+<p>
+	<strong>Moderators:</strong> <a href="memberlist32d1.html?mode=viewprofile&amp;u=72" class="username">mverstra</a>, <a href="memberlistce31.html?mode=viewprofile&amp;u=2727" class="username">joaocarloscabreu</a>
+</p>
+
+
+<div class="action-bar bar-top">
+	
+			<a href="posting0910.html?mode=reply&amp;f=10&amp;t=1530" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic927c-2.html?f=10&amp;t=1530&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="1530" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			5 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p4787" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile4787">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist3c3b.html?mode=viewprofile&amp;u=549" class="username">roginovicci</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searche23d.html?author_id=549&amp;sr=posts">75</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Dec 02, 2010 10:36 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content4787">
+
+						<h3 class="first"><a href="#p4787">[FIXED 6.13] nlo calculations fails when using &gt; 1proc</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting24df.html?mode=quote&amp;f=10&amp;p=4787" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopica27b-2.html?p=4787#p4787" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist3c3b.html?mode=viewprofile&amp;u=549" class="username">roginovicci</a></strong> &raquo; </span>Mon Feb 13, 2012 11:33 am
+			</p>
+			
+			
+			
+			<div class="content">Hello. I'm trying to calculate raman spectra in GaN/AlN superlattice but my calculations always fails when I perfom calculation of Raman tensor using more than one processor. My input file is as follows:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp; &nbsp;acell&nbsp; &nbsp; 5.9403442780E+00&nbsp; 5.9403442780E+00&nbsp; 3.8115227793E+01<br />&nbsp; &nbsp;angdeg 90.000&nbsp; 90.000 120.000<br />#&nbsp; &nbsp;spgroup 156<br />rprim sqrt(0.75)&nbsp; 0.5&nbsp; 0.0&nbsp; &nbsp;#hexagonal primitive vectors must be<br />&nbsp; &nbsp; &nbsp;-sqrt(0.75)&nbsp; 0.5&nbsp; 0.0&nbsp; &nbsp;#specified with high accuracy to be<br />&nbsp; &nbsp; &nbsp; 0.0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0&nbsp; 1.0&nbsp; &nbsp;#sure that the symmetry is recognized and preserved in the optimization process<br /><br /># Definition of the atom<br />&nbsp; &nbsp;ntypat 3&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# Two types of atoms<br />&nbsp; &nbsp;znucl 31 7 13&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# Ga and N atomic numbers of the <br />&nbsp; &nbsp;natom 16&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # There are 16 atoms in a cell<br />&nbsp; &nbsp;typat 1 2 1 2 1 2 1 2 3 2 3 2 3 2 3 2&nbsp; &nbsp; &nbsp; # Type 1 is Ga, type 2 is N 3 is Al<br /><br />xred&nbsp; &nbsp; 3.3333333330E-01&nbsp; 6.6666666670E-01&nbsp; 0.0000000000E+00<br />3.3333333330E-01&nbsp; 6.6666666670E-01&nbsp; 9.5005079702E-02<br />6.6666666663E-01&nbsp; 3.3333333337E-01&nbsp; 1.2500000000E-01<br />6.6666666663E-01&nbsp; 3.3333333337E-01&nbsp; 2.2006995754E-01<br />3.3333333330E-01&nbsp; 6.6666666670E-01&nbsp; 2.5000000000E-01<br />3.3333333330E-01&nbsp; 6.6666666670E-01&nbsp; 3.4509756564E-01<br />6.6666666663E-01&nbsp; 3.3333333337E-01&nbsp; 3.7500000000E-01<br />6.6666666663E-01&nbsp; 3.3333333337E-01&nbsp; 4.7280325129E-01<br />3.3333333330E-01&nbsp; 6.6666666670E-01&nbsp; 5.0000000000E-01<br />3.3333333330E-01&nbsp; 6.6666666670E-01&nbsp; 5.9506147890E-01<br />6.6666666663E-01&nbsp; 3.3333333337E-01&nbsp; 6.2500000000E-01<br />6.6666666663E-01&nbsp; 3.3333333337E-01&nbsp; 7.2003534357E-01<br />3.3333333330E-01&nbsp; 6.6666666670E-01&nbsp; 7.5000000000E-01<br />3.3333333330E-01&nbsp; 6.6666666670E-01&nbsp; 8.4502086796E-01<br />6.6666666663E-01&nbsp; 3.3333333337E-01&nbsp; 8.7500000000E-01<br />6.6666666663E-01&nbsp; 3.3333333337E-01&nbsp; 9.6721208507E-01<br /><br /><br /><br />## Definition of XC functional and planewave basis set<br />&nbsp; &nbsp;ixc&nbsp; &nbsp; &nbsp; &nbsp;7&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Teter XC functional<br />&nbsp; &nbsp;ecut&nbsp; &nbsp; &nbsp; 30&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Kinetic energy cut-off (in Ha)<br />&nbsp; &nbsp;ecutsm&nbsp; &nbsp; 0.5<br />&nbsp; &nbsp;dilatmx&nbsp; &nbsp;1.05<br /># Definition of the k-point grid<br />&nbsp; &nbsp;kptopt&nbsp; &nbsp; 1<br />&nbsp; &nbsp;ngkpt&nbsp; &nbsp; &nbsp;5 5 4<br />&nbsp; &nbsp;nshiftk&nbsp; &nbsp;1<br />&nbsp; &nbsp;shiftk&nbsp; &nbsp; 0.0 0.0 0.5<br /><br /># Parameters of the SCF cycles<br />&nbsp; &nbsp;iscf&nbsp; &nbsp; &nbsp; 7&nbsp; &nbsp; &nbsp; # Pulay mixing (default for norm-conserving PSP)<br />&nbsp; &nbsp;nstep&nbsp; &nbsp; &nbsp;100&nbsp; &nbsp; # Modify default<br /># --------------------------<br /># Structural optimization (atomic positions in cell)<br />#&nbsp; &nbsp;ionmov 2<br />&nbsp; &nbsp;ntime 100<br />&nbsp; &nbsp;tolvrs 1.0d-15<br />&nbsp; &nbsp;tolmxf 1.0d-6<br />&nbsp; &nbsp;diemac 9.0<br />#<br /># Optimization of cell parameters<br /># change acell only<br />#&nbsp; &nbsp;optcell 2<br /># opcell 2 - to change acell and xred<br /># --------------------------<br /><br />################################################################################<br /># LINEAR AND NON-LINEAR RESPONSE CALCULATION<br />################################################################################<br /><br />ndtset 5&nbsp; &nbsp; &nbsp;jdtset 1 2 3 4 5<br /><br /># 1: SCF calculation: GS WF in the BZ<br />#-------------------------------------<br />&nbsp; &nbsp;prtden1&nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Print electronic density<br />&nbsp; &nbsp;kptopt1&nbsp; &nbsp; 1<br />&nbsp; &nbsp;toldfe1&nbsp; &nbsp; 1.0d-12<br /><br /># 2: non SCF calculation: GS WF in the whole BZ<br />#----------------------------------------------<br />&nbsp; &nbsp;getden2&nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Get density from set 1<br />&nbsp; &nbsp;kptopt2&nbsp; &nbsp; 2<br />&nbsp; &nbsp;iscf2&nbsp; &nbsp; &nbsp;-2<br />&nbsp; &nbsp;getwfk2&nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Get WF from set 1<br />&nbsp; &nbsp;tolwfr2&nbsp; &nbsp; 1.0d-22&nbsp; &nbsp; &nbsp; &nbsp; # Use WF criterion since iscf &lt; 0<br />&nbsp; &nbsp;nband2&nbsp; &nbsp; &nbsp;52&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# Explicit number of valence bands<br /><br /># 3: ddk on the MP grid of k-points<br />#----------------------------------<br />&nbsp; &nbsp;getwfk3&nbsp; &nbsp; 2<br />&nbsp; &nbsp;kptopt3&nbsp; &nbsp; 2<br />&nbsp; &nbsp;rfdir3&nbsp; &nbsp; &nbsp;1 1 1<br />&nbsp; &nbsp;rfelfd3&nbsp; &nbsp; 2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Derivative of GS WF with respect to k<br />&nbsp; &nbsp;tolwfr3&nbsp; &nbsp; 1.0d-22<br />&nbsp; &nbsp;nband3&nbsp; &nbsp; &nbsp;52<br /><br /># 4: ddE on the MP grid of k-points<br />#-----------------------------------<br />&nbsp; &nbsp;getwfk4&nbsp; &nbsp; 2<br />&nbsp; &nbsp;getddk4&nbsp; &nbsp; 3&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Get derivatives from set 3<br />&nbsp; &nbsp;kptopt4&nbsp; &nbsp; 2<br />&nbsp; &nbsp;prtden4&nbsp; &nbsp; 1<br />&nbsp; &nbsp;rfdir4&nbsp; &nbsp; &nbsp;1 1 1<br />&nbsp; &nbsp;rfphon4&nbsp; &nbsp; 1<br />&nbsp; &nbsp;rfatpol4&nbsp; &nbsp;1 16<br />&nbsp; &nbsp;rfelfd4&nbsp; &nbsp; 3&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Generate of the 1st-order response using ddk of 3<br />&nbsp; &nbsp;tolvrs4&nbsp; &nbsp; 1.0d-12<br />&nbsp; &nbsp;nband4&nbsp; &nbsp; &nbsp;52<br />&nbsp; &nbsp;prepanl4&nbsp; &nbsp;1<br /><br /># 5: 3DTE calculation<br />#--------------------<br />&nbsp; &nbsp;getden5&nbsp; &nbsp; &nbsp;1<br />&nbsp; &nbsp;get1den5&nbsp; &nbsp; 4<br />&nbsp; &nbsp;getwfk5&nbsp; &nbsp; &nbsp;2<br />&nbsp; &nbsp;get1wf5&nbsp; &nbsp; &nbsp;4<br />&nbsp; &nbsp;kptopt5&nbsp; &nbsp; &nbsp;2<br />&nbsp; &nbsp;optdriver5&nbsp; 5<br />&nbsp; &nbsp;rf1elfd5&nbsp; &nbsp; 1<br />&nbsp; &nbsp;rf1phon5&nbsp; &nbsp; 1<br />&nbsp; &nbsp;rf1atpol5&nbsp; &nbsp;1 16<br />&nbsp; &nbsp;rf1dir5&nbsp; &nbsp; &nbsp;1 1 1<br />&nbsp; &nbsp;rf2elfd5&nbsp; &nbsp; 1<br />&nbsp; &nbsp;rf2dir5&nbsp; &nbsp; &nbsp;1 1 1<br />&nbsp; &nbsp;rf3elfd5&nbsp; &nbsp; 1<br />&nbsp; &nbsp;rf3dir5&nbsp; &nbsp; &nbsp;1 1 1<br />&nbsp; &nbsp;nband5&nbsp; &nbsp; &nbsp; 52<br />nbdbuf 0<br /></code></pre></div><br /><br />Everything goes clean till 5th task 3DTE calculation.<br />The error is as follows:<br /><br />ioarr: data read from disk file ganaln_nloo_DS4_DEN52                                                                         <br />                                                                                                                               <br /> <em class="text-italics">mv_3dte : finite difference expression of the k-point derivative                                                              <br />           is performed using the PEAD formulation of the third-order energy                                                   <br />           (see Nunes and Gonze PRB 63, 155107 (2001) Eq. 102)                                                                 <br />                                                                                                                               <br />rank 0 in job 9  v371_46979   caused collective abort of all ranks                                                             <br />  exit status of rank 0: return code 1 <br /><br />Fatal error in MPI_Recv: Message truncated, error stack:                                                                       <br />MPI_Recv(186): MPI_Recv(buf=0xaadc1a0, count=3319680, MPI_DOUBLE_PRECISION, src=1, tag=26, MPI_COMM_WORLD, status=0x2768630) fa<br />iled                                                                                                                           <br />do_cts(509)..: Message truncated; 26589888 bytes received but buffer size is 26557440  <br /></em><br />Is it a bug?<br />Is it possible to split input file into two ones to calculate tasks 1-4 and 5 separately?</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p4807" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile4807">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist3c3b.html?mode=viewprofile&amp;u=549" class="username">roginovicci</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searche23d.html?author_id=549&amp;sr=posts">75</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Dec 02, 2010 10:36 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content4807">
+
+						<h3 ><a href="#p4807">Re: nlo calculations fails when using more than one processo</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting4c75-2.html?mode=quote&amp;f=10&amp;p=4807" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic79f3-2.html?p=4807#p4807" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist3c3b.html?mode=viewprofile&amp;u=549" class="username">roginovicci</a></strong> &raquo; </span>Fri Feb 17, 2012 9:25 pm
+			</p>
+			
+			
+			
+			<div class="content">I've got tested nlo calculations using NaNO2 structure with openmpi as mpi call library. And it still fails. Its defenetly a bug. How could I report it?<br />The openmpi message is:<br />/opt/openmpi/bin/mpirun --hostfile /opt/openmpi/hostfile -np 4 /work/builds/abinit/opt/abinit/bin/abinit &lt; nano2_nlo.files &gt; log   <br />[main:29894] *** An error occurred in MPI_Recv<br />[main:29894] *** on communicator MPI_COMM_WORLD<br />[main:29894] *** MPI_ERR_TRUNCATE: message truncated<br />[main:29894] *** MPI_ERRORS_ARE_FATAL (your MPI job will now abort)<br />--------------------------------------------------------------------------<br />mpirun has exited due to process rank 1 with PID 29894 on<br />node main exiting without calling &quot;finalize&quot;. This may<br />have caused other processes in the application to be<br />terminated by signals sent by mpirun (as reported here).<br />--------------------------------------------------------------------------<br /><br />log file fails with:<br /> ioarr: data read from disk file nano2_nloo_DS4_DEN16<br /><br /> mv_3dte : finite difference expression of the k-point derivative<br />           is performed using the PEAD formulation of the third-order energy<br />           (see Nunes and Gonze PRB 63, 155107 (2001) Eq. 102)</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p4916" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile4916">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist0ac0.html?mode=viewprofile&amp;u=178" class="username">hdjani</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search11e9.html?author_id=178&amp;sr=posts">4</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Feb 22, 2010 3:40 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content4916">
+
+						<h3 ><a href="#p4916">Re: nlo calculations fails when using more than one processo</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting71aa.html?mode=quote&amp;f=10&amp;p=4916" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic939b-2.html?p=4916#p4916" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist0ac0.html?mode=viewprofile&amp;u=178" class="username">hdjani</a></strong> &raquo; </span>Mon Mar 19, 2012 12:25 pm
+			</p>
+			
+			
+			
+			<div class="content">Hi,<br />Yes, there is a bug for calculating 3DTE in parallel in  the last version  ABINIT 6.12.1. It will be fixed for sure  in the next version. However, old version like abinit-6.2.3 works well for 3dte in parallel.<br />Cheers<br />Hania Djani<br /><br />Universite de Liège<br />Institut de Physique, Bat. B5, 3/7<br />Allée du 6 aout, 17<br />B- 4000 Sart Tilman, Liège<br />Belgium<br /><br /><!-- e --><a href="mailto:hdjani@ulg.ac.be">hdjani@ulg.ac.be</a><!-- e --></div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p4917" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile4917">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist3c3b.html?mode=viewprofile&amp;u=549" class="username">roginovicci</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searche23d.html?author_id=549&amp;sr=posts">75</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Dec 02, 2010 10:36 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content4917">
+
+						<h3 ><a href="#p4917">Re: nlo calculations fails when using more than one processo</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting15fd-2.html?mode=quote&amp;f=10&amp;p=4917" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic7ce8.html?p=4917#p4917" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist3c3b.html?mode=viewprofile&amp;u=549" class="username">roginovicci</a></strong> &raquo; </span>Mon Mar 19, 2012 2:13 pm
+			</p>
+			
+			
+			
+			<div class="content">God bless you, Hania Djani!<br />I was awaiting for your answer 1 month. This is your firs post and it's really important for me! Thank you so much!<br /><br />May I ask you a question? It's not that easy task for me to install abinit 6.2 due to technical problems I'll be trying to solve this week. Whilst I would like to know Is it possible to split nlo caltulations. I.e. calculate ground state and ddk and dde simultaneously  witin one task (using tnlo1.in file for exaple) and later calculate 3dte (using tnlo2.in file for exaple) using output of previous task (output of task tnlo1.in).</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p5014" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5014">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist0ac0.html?mode=viewprofile&amp;u=178" class="username">hdjani</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search11e9.html?author_id=178&amp;sr=posts">4</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Feb 22, 2010 3:40 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5014">
+
+						<h3 ><a href="#p5014">Re: [FIXED 6.13] nlo calculations fails when using &gt; 1proc</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting977f.html?mode=quote&amp;f=10&amp;p=5014" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic91cb.html?p=5014#p5014" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist0ac0.html?mode=viewprofile&amp;u=178" class="username">hdjani</a></strong> &raquo; </span>Thu Apr 05, 2012 9:50 am
+			</p>
+			
+			
+			
+			<div class="content">Hi,<br />Yes of course you can split the calculations. you should have the ground state with its WFK and DEN, the ddk and ddE with its 1WF and 1DEN and phonons with 1WF and 1DEN. when you run 3dte, you should read : WFK and DEN of the ground state + 1WF and 1DEN of ddE +  1WF and 1DEN of phonons.<br />cheers<br />Hania Djani</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="posting0910.html?mode=reply&amp;f=10&amp;t=1530" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic927c-2.html?f=10&amp;t=1530&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=10&amp;t=1530">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			5 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforum15ca.html?f=10" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Response calculations”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1530&p=4916 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:09:49 GMT -->
+</html>

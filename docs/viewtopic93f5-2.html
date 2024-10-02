@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3420&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:32:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; matr3inv.F90 bug in abinit 8.0.8b</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>matr3inv.F90 bug in abinit 8.0.8b</h2>
+		<p><a href="viewtopic81c6.html?f=9&amp;t=3420">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3420</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>matr3inv.F90 bug in abinit 8.0.8b</h3>
+				<div class="date">Posted: <strong>Fri Nov 04, 2016 1:13 am</strong></div>
+				<div class="author">by <strong>fcannini</strong></div>
+				<div class="content">Hi there,<br /><br />A user is facing a bug with the attached input. The simulation crashes ~ 1h after started.<br />I've compiled abinit 8.0.8b with the following components:<br /><br /><blockquote class="uncited"><div>FC = gfortran 4.8.2<br />BLAS/LAPACK = openblas 0.2.18<br />FFT = fftw 3.3.4<br />MPI = openmpi 1.8.8<br />HDF5 = 1.8.17<br />NETCDF-C = 4.4.1<br />NETCDF-F = 4.4.4<br /></div></blockquote><br /><br />Here's the './configure' line:<br /><blockquote class="uncited"><div>--enable-mpi --enable-openmp --enable-optim=safe --enable-stdin --with-fft-flavor=fftw3 --with-linalg-flavor=goto --with-trio-flavor=&quot;netcdf+etsf_io&quot; --disable-gpu<br /></div></blockquote><br /><br />This is the error message.<br /><blockquote class="uncited"><div>--- !BUG<br />src_file: matr3inv.F90<br />src_line: 84<br />mpi_rank: 7<br />message: |<br />    Attempting to invert real(8) 3x3 array<br />              Infinity             NaN             NaN             NaN        Infinity             NaN             NaN             NaN        Infinity<br />       ==&gt; determinant=             NaN is zero.<br /></div></blockquote><br /><br /><br />I've found other instances of similar problems, but no solution so far.<br /><br /><br />TIA,<br />Fabricio</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3420&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:32:40 GMT -->
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1742&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:30:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; nbdbuf:  a problem using this variable w/ an insulator?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>nbdbuf:  a problem using this variable w/ an insulator?</h2>
+		<p><a href="viewtopicdfe5.html?f=10&amp;t=1742">https://forum.abinit.org/viewtopic.php?f=10&amp;t=1742</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>nbdbuf:  a problem using this variable w/ an insulator?</h3>
+				<div class="date">Posted: <strong>Tue Jul 10, 2012 10:44 pm</strong></div>
+				<div class="author">by <strong>brehmj</strong></div>
+				<div class="content">I have an insulator, PbTiO3.    I set it up two ways:  in a cubic fashion and a tetragonal fashion.  I have pseudopotential in which there are 14 val. electrons for Pb, 12 for Ti, and 6 for O.  So, in my 5 atom unit cell I have 44 electrons.   since this is an insulator, I need 22 bands.<br />Ok, so far.   <br /><br />So, playing around with the phonon codes from the tutorials,<br />I run a phonon calc. in 4 ways:<br /><br />1.  With nband 22<br />2.  With nband 24<br />3.  With no nband specified.<br />4.  With nband 24  AND nbdbuf 4.<br /><br />The first 3 ways give similar results with phonons at gamma in the 10E2 cm-1 range.<br /><br />But the 4th way gives me results in the 10E3 range -- too high by a factor of 10.<br /><br />What could be going on?    <br /><br />Thanks,<br /><br />John B.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: nbdbuf:  a problem using this variable w/ an insulator?</h3>
+				<div class="date">Posted: <strong>Wed Jul 11, 2012 11:38 am</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">I think what could be going on is that you are using nbdbuf in a situation where it should remain at its default, namely zero--in the nband 24 case with nbdbuf 4,  you are treating 4 bands as &quot;fixed&quot; during the computations but they should not be, 2 of them are the top two valence bands. The documentation for nbdbuf indicates that it is of use in certain situations involving metaillic systems or finite electric fields, which are not your case, and that the defaults are changed automatically for those cases. In your system it should be left at its default, namely zero.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: nbdbuf:  a problem using this variable w/ an insulator?</h3>
+				<div class="date">Posted: <strong>Fri Sep 14, 2012 2:19 pm</strong></div>
+				<div class="author">by <strong>maxim</strong></div>
+				<div class="content">Please help!<br /><br />I perform a geometry optimization of KNO3 with the purpose of subsequent RF calculation. Could you tell me which option of occopt should I put (it is an insulator)? And should I also specify the nband variable? Or maybe additionally use nbdbuf.<br />Here is my input:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#gamma-KNO3<br /><br />ndtset 8 #REMOVE if it's not necessary<br />#getwfk -1 #this is not possible since printing wfk file not allowed<br />prtden 0 #to reduce output size<br />prtwf 0 #to reduce output size<br />prteig 0 #to reduce output size<br /><br />#Parameters<br />nstep&nbsp; 1000<br />ecut 60<br />toldfe1 1.0d-5<br />toldfe2 1.0d-9<br />toldfe3 1.0d-10<br />toldfe4 1.0d-11<br />toldfe5 1.0d-12<br />toldfe6 1.0d-13<br />toldfe7 1.0d-14<br />toldfe8 1.0d-18<br /><br />#Definition of occupation numbers<br />occopt 1<br /><br />#Variables needed for geometry optim. - this<br />#will be retained for consistency throughout<br />dilatmx 1.01<br />ecutsm&nbsp; 0.5<br /><br />#chkprim 0 #mozno tak delatj, PC perestaet rugatsa<br />nsym 1 #break the symmetries<br />natom 15<br />ntypat 3<br />typat 1 1 1 2 2 2 3 3 3 3 3 3 3 3 3<br />znucl 19 7 8<br />xred 0.0000000000 0.0000000000 0.0000000000<br />0.6666666667 0.3333333333 0.3333333333<br />0.3333333333 0.6666666667 0.6666666667<br />0.0000000000 0.0000000000 0.4050000000<br />0.3333333333 0.6666666667 0.0716700000<br />0.6666666667 0.3333333333 0.7383300000<br />0.0713500000 0.5356400000 0.1006700000<br />0.4643600000 0.5356400000 0.1006700000<br />0.4643600000 0.9286500000 0.1006700000<br />0.1309800000 0.2620200000 0.4340000000<br />0.1309800000 0.8690200000 0.4340000000<br />0.7379800000 0.8690200000 0.4340000000<br />0.4046600000 0.2023300000 0.7673300000<br />0.7976700000 0.2023300000 0.7673300000<br />0.7976700000 0.5953400000 0.7673300000<br /><br />rprim 1.0000000000E+00 0.0000000000E+00 0.0000000000E+00 #obtained from<br />-5.0000000000E-01 8.6602540378E-01 0.0000000000E+00 #output of input file<br />0.0000000000E+00&nbsp; 0.0000000000E+00&nbsp; 1.0000000000E+00 #with angdeg<br />#scalecart 10.3689272478 10.3689272478 17.3023324004 #see descr. of rprim<br />acell 10.3689272478 10.3689272478 17.3023324004 #see descr. of rprim<br /><br />#Kpoint Grid<br />#prtkpt 1<br />#kptrlen 40<br />kptopt 1<br />nshiftk 1<br />shiftk 0.0 0.0 0.5<br />ngkpt 6 6 6<br /><br />#uncomment this only for paw psp test as jzwanzig said you in forum:<br />#it will show you if you are getting occupations and or D_ij's that are too <br />#big for the code to work well<br />#pawprtvol -3<br /><br />diemac 4.0<br /><br />#Berry phase calculation of the polarization<br />#berryopt -1<br />#rfdir 1 1 1 #as jzwanzig said in forum: always use rfdir 1 1 1,<br />#not e.g. 0 0 1... It will calculate polarization in all three cartesian<br />#directions. The computational overhead of doing this is negligible<br />#symmorphi 0<br /></code></pre></div><br /><br />thanks for any help,<br />Maxim.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: nbdbuf:  a problem using this variable w/ an insulator?</h3>
+				<div class="date">Posted: <strong>Fri Sep 14, 2012 2:26 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">I would use occopt 1, so all bands are filled with two electrons; and set nband explicitly to the number of filled bands (so no empty bands in the calculation). Don't set nbdbuf, leave it at its default.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: nbdbuf:  a problem using this variable w/ an insulator?</h3>
+				<div class="date">Posted: <strong>Fri Sep 14, 2012 6:56 pm</strong></div>
+				<div class="author">by <strong>maxim</strong></div>
+				<div class="content">Thank you very much, you saved me a lot of effort!<br /><br />And in order to understand for the future - empty bands should be turned off to save computer time? And the more conductuing system is, the more empty bands and nbdbuf should be included?<br /><br />Best regards,<br />Maxim</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: nbdbuf:  a problem using this variable w/ an insulator?</h3>
+				<div class="date">Posted: <strong>Mon Sep 17, 2012 8:47 am</strong></div>
+				<div class="author">by <strong>maxim</strong></div>
+				<div class="content">Thank you very much for all!<br /><br />I forgot to clarify my question - after the geometry optimization I'm going to investigate finite electric field calculations, polarization, as in tutorial &quot;lesson on polarization and finite electric field&quot;. So how I understand from the description of the nbdbuf variable, the value of this variable should be set? And leave occopt 1, and increase nband value above the number of filled bands?<br /><br />Thank you again</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: nbdbuf:  a problem using this variable w/ an insulator?</h3>
+				<div class="date">Posted: <strong>Tue Sep 18, 2012 6:11 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">For finite electric fields, nband should be set to exactly the number of filled bands, and nbdbuf should not be set (it will default to zero).</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: nbdbuf:  a problem using this variable w/ an insulator?</h3>
+				<div class="date">Posted: <strong>Thu Sep 20, 2012 1:36 pm</strong></div>
+				<div class="author">by <strong>maxim</strong></div>
+				<div class="content">Thank you very much for your time and quick response!<br /><br />Best regards,<br />Maxim</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1742&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:30:33 GMT -->
+</html>

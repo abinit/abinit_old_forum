@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3909&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:59:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Parameters about parallelism</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Parameters about parallelism</h2>
+		<p><a href="viewtopicd5c6.html?f=9&amp;t=3909">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3909</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Parameters about parallelism</h3>
+				<div class="date">Posted: <strong>Thu Aug 16, 2018 5:32 pm</strong></div>
+				<div class="author">by <strong>Abinit</strong></div>
+				<div class="content">Dear Abinit users,<br /><br />I am doing calculations on big systems, so parallel calculations should be employed.<br /><br />In tutorial I found several parameters related to the parallelization. If I don't care about the efficiency, I could just set autoparal=1. However, with paral_kgb=1 and autoparal=0, I could divided the number of processors on different levels, which are controled by npfft, npkpt, npspinor, npband, and bandpp. In order to set these parameters, several constrains should be considered:<br />    1). npkpt*npfft*npband*npspinor=nproc;<br /><br />    2). nband should be a multiple of npband*bandpp;<br /><br />    3). bandpp should be either 1 or a multiple of 2.<br /><br />The system is unpolarized, so npspinor could be kept 1.<br /><br />Despite of these constrains, the degree of freedom of setting these parameters is still large. I wonder if there is other constrains I overlooked and if there is a usual way to set these parameters and choose proper number of processors to gain a good efficiency for the calculation. <br /><br />For an example, the default number of band to be calculated is nband=497, and the maximum processors of each calculation node is 28, with total k points 32 respect to a 10*10*1 k point mesh. Could anyone please tell me how I should choose the parallel parameters: npkpt, npfft, npband, and bandpp?<br /><br />Any hint for this will be welcome. <br /><br />Best regards<br />Zhishuo Huang</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Parameters about parallelism</h3>
+				<div class="date">Posted: <strong>Wed Sep 12, 2018 11:51 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Zhishuo Huang<br />Did you see this post I made some time ago about parallel parameters:<br /><a href="viewtopicaeb9.html?f=8&amp;t=3837" class="postlink">https://forum.abinit.org/viewtopic.php?f=8&amp;t=3837</a><br />Let me know if this not enough for you.<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3909&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:59:40 GMT -->
+</html>

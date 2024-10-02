@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=5342&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 16:50:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Using set_fermie_to_vbm()</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Using set_fermie_to_vbm()</h2>
+		<p><a href="viewtopicc734-2.html?f=12&amp;t=5342">https://forum.abinit.org/viewtopic.php?f=12&amp;t=5342</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Using set_fermie_to_vbm()</h3>
+				<div class="date">Posted: <strong>Thu Mar 04, 2021 2:31 pm</strong></div>
+				<div class="author">by <strong>newindft</strong></div>
+				<div class="content">Hi!<br>
+<br>
+I am trying to obtain a band structure plot for the system I am investigating. The band I obtain from Abinit is in good agreement with the literature, however the Fermi energy in not at the VBM. When I run abiopen.py with my GSR file, it gives a tip to use set_fermie_to_vbm() if my system in a non-magnetic semiconductor (that's exactly what it is and what I would want). However I am having difficulties trying to use it with Abinit. <br>
+Would anyone have any pointers on how to use it? I have tried to go through Abinit documentation, however no luck there. <br>
+I would be very grateful for any help.<br>
+<br>
+Thank you kindly!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Using set_fermie_to_vbm()</h3>
+				<div class="date">Posted: <strong>Tue Mar 16, 2021 12:36 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content"><blockquote class="uncited"><div>
+ However I am having difficulties trying to use it with Abinit.
+</div></blockquote>
+
+set_fermie_to_vbm is an AbiPy function that  recomputes the Fermi energy by finding the highest occupied state in the KS energies stored in the GSR.nc file.<br>
+<br>
+In the case of NSCF calculations, indeed, the Fermi energy reported in the GSR file comes from the GS calculation that produced the input DEN file.<br>
+If the K-mesh used in the GS part does not contain the VBM, the fermi energy in the GSR will be smaller than the "true" VBM obtained from the band structure computed along the high-symmetry k-path.<br>
+Typical example: you have a semiconductor with the VBM at Gamma but the GS calculation is done with a shifted k-mesh.<br>
+<br>
+In AbiPy v0.9,  set_fermie_to_vbm is always invoked when you try to plot the bands with `abiopen.py GSRFILE -e`.<br>
+<br>
+If you don't want to install the new AbiPy version, you can always realign the Fermi energy by calling set_fermie_to_vbm explicitly inside the ipython shell.<br>
+Example:<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>$ abiopen.py out_GSR.nc
+
+Python 3.9.2 | packaged by conda-forge | (default, Feb 21 2021, 05:02:20)
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.21.0 -- An enhanced Interactive Python. Type '?' for help.
+
+The Abinit file object is associated to the `abifile` python variable.
+Use `abifile.&lt;TAB&gt;` to list available methods.
+Use e.g. `abifile.plot?` to access docstring and `abifile.plot??` to visualize source.
+Use `print(abifile)` to print the object.
+
+In [1]: abifile.ebands.set_fermie_to_vbm()
+Out[1]: array(5.59831302) eV
+
+In [2]: %matplotlib
+Using matplotlib backend: MacOSX
+
+In [3]: abifile.ebands.plot()
+</code></pre></div></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=5342&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 16:50:28 GMT -->
+</html>

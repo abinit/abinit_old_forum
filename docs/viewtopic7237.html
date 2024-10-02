@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?p=5804 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:07:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>mpiio segfault band/k-point/FFT parallelization - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopic02a6.html?t=375">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="4"><a href="viewforum31e6.html?f=4" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Running Abinit</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="9"><a href="viewforumfdc5.html?f=9" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Ground state</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopic9316-2.html?f=9&amp;t=375">mpiio segfault band/k-point/FFT parallelization</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Total energy, geometry optimization, DFT+U, spin....<br /></div>
+<p>
+	<strong>Moderator:</strong> <a href="memberlista146.html?mode=viewprofile&amp;u=2687" class="username">bguster</a>
+</p>
+
+
+<div class="action-bar bar-top">
+	
+			<a href="posting1e64.html?mode=reply&amp;f=9&amp;t=375" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopice4d2.html?f=9&amp;t=375&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="375" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			11 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p1096" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile1096">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist8622.html?mode=viewprofile&amp;u=352" class="username">anurag</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search3c1a.html?author_id=352&amp;sr=posts">3</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu May 20, 2010 4:52 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content1096">
+
+						<h3 class="first"><a href="#p1096">mpiio segfault band/k-point/FFT parallelization</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingcc32.html?mode=quote&amp;f=9&amp;p=1096" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic52a0-2.html?p=1096#p1096" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist8622.html?mode=viewprofile&amp;u=352" class="username">anurag</a></strong> &raquo; </span>Mon May 31, 2010 6:02 am
+			</p>
+			
+			
+			
+			<div class="content">Hello Everyone,<br /><br />I am running a constrained LDA calculation (manually specifying occupation numbers) for a 128 atom supercell.  Since the convergence with k-point parallelization is quite slow I would like to take advantage of band/k-point/FFT parallelization.  So I used the following input variables in my input file<br /><br />#parallelization variables<br />paral_kgb 1<br />wfoptalg=4<br />nloalg=4<br />fftalg=401<br />intxc=0<br />fft_opt_lob=2<br /><br />npkpt 4<br />npband 9<br />npfft 2<br />bandpp 2<br />#accesswff 1 1 1 1<br />istwfk 1 1 1 1<br /><br />I found that since I compiled the code with enable_mpi option accesswff is automatically set to 1 even if I comment it out.  (configure options are listed below)  The code seem to do doing well as far as electronic convergence is concerned (toldfe is set to 1e-6) as shown below<br />......<br /> ETOT 38  -1560.2634967021    -1.744E-02 2.442E-05 5.902E+02 8.009E-03 2.116E-02<br /> ETOT 39  -1560.2728614790    -9.365E-03 1.369E-05 8.446E+00 1.519E-02 2.355E-02<br /> ETOT 40  -1560.2710868467     1.775E-03 2.177E-05 1.455E+02 8.362E-03 2.002E-02<br /> ETOT 41  -1560.2735058946    -2.419E-03 1.241E-05 5.197E+00 5.002E-03 2.201E-02<br /> ETOT 42  -1560.2735661510    -6.026E-05 1.888E-05 2.061E+00 2.548E-03 2.093E-02<br /> ETOT 43  -1560.2732355317     3.306E-04 8.588E-06 1.796E+01 3.270E-03 2.138E-02<br /> ETOT 44  -1560.2736186433    -3.831E-04 9.703E-06 8.753E-01 2.021E-03 2.112E-02<br /> ETOT 45  -1560.2736311134    -1.247E-05 8.009E-06 1.148E-01 3.549E-04 2.147E-02<br /> ETOT 46  -1560.2736317200    -6.065E-07 1.044E-05 2.272E-02 2.073E-04 2.141E-02<br /> ETOT 47  -1560.2736323600    -6.400E-07 8.383E-06 9.248E-03 1.722E-04 2.149E-02<br /><br /><strong class="text-strong">but soon after it crashes when it attempts to write the WFK file<br /></strong>*********************************<br /> At SCF step   47, etot is converged : <br />  for the second time, diff in etot=  6.400E-07 &lt; toldfe=  1.000E-06<br />  forstrnps : usepaw=           0<br />forstrnps: loop on k-points and spins done in parallel<br />-P-0000  leave_test : synchronization done...<br />  strhar : before mpi_comm, harstr=  1.072006351610150E-002<br />  9.865018747734584E-003  9.871758113503866E-003  1.198027124816839E-007<br />  1.494415344832276E-007  7.404431448065469E-004<br />  strhar : after mpi_comm, harstr=  1.887503908462354E-002<br />  1.887500817960579E-002  1.658736148652544E-002  1.388586001033960E-007<br />  1.243844495641594E-007 -6.792742386575647E-008<br />  strhar : ehart,ucvol=   232.336116098840        26865.6696106559     <br /><br /> Cartesian components of stress tensor (hartree/bohr^3)<br />  sigma(1 1)= -3.13906187E-04  sigma(3 2)= -1.47617615E-08<br />  sigma(2 2)= -3.13907380E-04  sigma(3 1)= -3.67408460E-09<br />  sigma(3 3)= -3.49901037E-04  sigma(2 1)=  5.10828585E-09<br /> <br /> ioarr: writing density data<br /> ioarr: file name is 4exciteo_DEN<br /><br /> m_wffile.F90:272:COMMENT<br />   MPI/IO accessing FORTRAN file header: detected record mark length= 4<br /> ioarr: data written to disk file 4exciteo_DEN<br />-P-0000  leave_test : synchronization done...<br />================================================================================<br /><br /> ----iterations are completed or convergence reached----<br /><br /> outwf  : write wavefunction to file 4exciteo_WFK<br />-P-0000  leave_test : synchronization done...<br /><br /> m_wffile.F90:272:COMMENT<br />   MPI/IO accessing FORTRAN file header: detected record mark length= 4<br />***********************************************************************************************<br /><br /><strong class="text-strong">portion of the log file at the beginning is listed below<br /></strong><br />************** portion of output from log file *************************************<br /><br /> ==== FFT mesh ====<br />  FFT mesh divisions ........................   216  216  240<br />  Augmented FFT divisions ...................   217  217  240<br />  FFT algorithm .............................   401<br />  FFT cache size ............................    16<br />  FFT parallelization level .................     1<br />  Number of processors in my FFT group ......     2<br />  Index of me in my FFT group ...............     0<br />  No of xy planes in R space treated by me ..   108<br />  No of xy planes in G space treated by me ..   120<br />  MPI communicator for FFT ..................     0<br />  Value of ngfft(15:18) .....................     0    0    0    0<br /> getmpw: optimal value of mpw=   33137<br />  getdim_nloc : enter<br />  pspheads(1)%nproj(0:3)=           0           1           1           1<br /><br /> getdim_nloc : deduce lmnmax  =  15, lnmax  =   3,<br />                      lmnmaxso=  15, lnmaxso=   3.<br /> memory : analysis of memory needs<br />================================================================================<br /> Values of the parameters that define the memory need of the present run<br />   intxc =         0  ionmov =         0    iscf =         7 xclevel =         1<br />  lmnmax =         3   lnmax =         3   mband =       450  mffmem =         1<br />P  mgfft =       240   mkmem =         1 mpssoang=         4     mpw =     33137<br />  mqgrid =      3001   natom =       128    nfft =   5598720    nkpt =         4<br />  nloalg =         4  nspden =         1 nspinor =         1  nsppol =         1<br />    nsym =         1  n1xccc =      2501  ntypat =         3  occopt =         0<br />================================================================================<br />P This job should need less than                    1841.517 Mbytes of memory.<br />  Rough estimation (10% accuracy) of disk space for files :<br />  WF disk file :   1820.272 Mbytes ; DEN or POT disk file :     42.717 Mbytes.<br />================================================================================<br />******************************************************<br /><br /><strong class="text-strong">I have access to three different clusters with different file systems (raid1, bluearc-fc and lusterfs) and I see the same problem everywhere.   Another observation is that if the estimated WF file is &lt; 1GB then MPI I/O works fine (similar parallelization variables work) and the code is able to write the WFK properly.<br /><br />I even tried to set accesswff to 0 (but still using paral_kgb 1) which successfully completes the calculation but the WFK file is not apparently complete since cut3d gives an error.</strong><br /><br />can someone please suggest ways to solve this issue ?    I can post the input file if that will help (I am using TM pseudos).<br /><br />thank you.<br /><br />Anurag<br /><br /><br />I am running ABINIT 6.0.4 compiled on a linux cluster with Intel 10.0 fortran compiler.  Build information is listed below.  ABINIT was configured as follows:<br /><br />  $ ./configure --prefix=/global/home/users/achaudhry --enable-mpi-fft=yes --enable-mpi-io=yes --enable-fttw=yes --enable-64bit-flags=yes FC=mpif90 F77=mpif90 --enable-scalapack CC=mpicc CXX=mpiCC --with-mpi-runner=/global/software/centos-5.x86_64/modules/openmpi/1.4.1-intel/bin/mpirun --with-mpi-level=2 CC_LIBS=-lmpi CXX_LIBS=-lmpi++ -lmpi --with-fc-vendor=intel --with-linalg-includes=-I/global/software/centos-5.x86_64/modules/mkl/10.0.4.023/include --with-linalg-libs=-L/global/software/centos-5.x86_64/modules/mkl/10.0.4.023/lib/em64t -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_intel_solver_lp64 -lmkl_lapack -lmkl_core -lguide -lpthread --with-scalapack-libs=-L/global/software/centos-5.x86_64/modules/mkl/10.0.4.023/lib/em64t -lmkl_scalapack_lp64 -lmkl_blacs_openmpi_lp64 -lmkl_lapack -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_lapack -lmkl_core -liomp5 -lpthread --disable-wannier90<br /><br /><br /> === Build Information ===<br />  Version       : 6.0.4<br />  Build target  : x86_64_linux_intel0.0<br />  Build date    : 20100520<br /><br /> === Compiler Suite ===<br />  C compiler       : intel10.1<br />  CFLAGS           : -I/global/software/centos-5.x86_64/modules/openmpi/1.3.3-intel/include<br />  C++ compiler     : intel10.1<br />  CXXFLAGS         :  -g  -O2 -vec-report0<br />  Fortran compiler : intel0.0<br />  FCFLAGS          :   -g  -extend-source -vec-report0<br />  FC_LDFLAGS       :     -static-libgcc -static-intel<br /><br /> === Optimizations ===<br />  Debug level        : yes<br />  Optimization level : standard<br />  Architecture       : intel_xeon<br /><br /> === MPI ===<br />  Parallel build : yes<br />  Parallel I/O   : yes<br /><br /> === Linear algebra ===<br />  Library type  : external<br />  Use ScaLAPACK : yes<br /><br /> === Plug-ins ===<br />  BigDFT    : yes<br />  ETSF I/O  : yes<br />  LibXC     : yes<br />  FoX       : no<br />  NetCDF    : yes<br />  Wannier90 : no<br /><br /> === Experimental features ===<br />  Bindings            : no<br />  Error handlers      : no<br />  Exports             : no<br />  GW double-precision : no<br />  Macroave build      : yes<br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /> CPP options activated during the build:<br /><br />                  CC_INTEL                 CXX_INTEL                  FC_INTEL<br /><br />              HAVE_FC_EXIT             HAVE_FC_FLUSH HAVE_FC_GET_ENVIRONMEN...<br /><br />        HAVE_FC_LONG_LINES              HAVE_FC_NULL                  HAVE_MPI<br /><br />                 HAVE_MPI2               HAVE_MPI_IO            HAVE_SCALAPACK<br /><br />              HAVE_STDIO_H              USE_MACROAVE</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p1110" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile1110">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist32d1.html?mode=viewprofile&amp;u=72" class="username">mverstra</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search1bef.html?author_id=72&amp;sr=posts">655</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Aug 19, 2009 12:01 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content1110">
+
+						<h3 ><a href="#p1110">Re: mpiio segfault band/k-point/FFT parallelization</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingb9c3.html?mode=quote&amp;f=9&amp;p=1110" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicc3cc.html?p=1110#p1110" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist32d1.html?mode=viewprofile&amp;u=72" class="username">mverstra</a></strong> &raquo; </span>Tue Jun 01, 2010 2:05 pm
+			</p>
+			
+			
+			
+			<div class="content">Hi, this is the same problem as <!-- l --><a class="postlink-local" href="viewtopic49d2.html?f=9&amp;t=356">viewtopic.php?f=9&amp;t=356</a><!-- l --> , but you have precious additional information that it crashes on many other platforms and file systems. I have tried openmpi 1.4.2, with no improvement, as well as the latest development version 6.1.2 of abinit.<br /><br />Some things we could try:<br /><br />* remove optimization during compilation<br /><br />* find precise file size which starts abinit crashing (probably an mpi problem actually)<br /><br />* it could be that with PAW it does not crash. This would be an important addition.<br /><br />* I thought it might be an allocation of too much memory for the buffer arrays, but that's not what the code complains about, and it crashes far inside openmpi <br /><br />If you have any more hints or information, please share it here!<br /><br />Matthieu</div>
+			
+			
+			
+									
+									<div id="sig1110" class="signature">Matthieu Verstraete<br />University of Liege, Belgium</div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p1111" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile1111">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist8622.html?mode=viewprofile&amp;u=352" class="username">anurag</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search3c1a.html?author_id=352&amp;sr=posts">3</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu May 20, 2010 4:52 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content1111">
+
+						<h3 ><a href="#p1111">Re: mpiio segfault band/k-point/FFT parallelization</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingea40-3.html?mode=quote&amp;f=9&amp;p=1111" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic5ece-2.html?p=1111#p1111" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist8622.html?mode=viewprofile&amp;u=352" class="username">anurag</a></strong> &raquo; </span>Tue Jun 01, 2010 4:35 pm
+			</p>
+			
+			
+			
+			<div class="content">Hello,<br /><br />I have some experience with the points you mentioned.<br /><br />&gt;&gt;&gt;&gt; find precise file size which starts abinit crashing (probably an mpi problem actually)<br /><br />ABINIT prints out approx. size of the WF file in the log file (I do not know how that is estimated).  I found that for estimated file sizes &lt; 1GB MPI I/O works fine.  I have successfully done calculations for few systems with WFK file ~900MB.  Unfortunately, I do not have precise numbers.<br /><br />&gt;&gt;&gt; it could be that with PAW it does not crash. This would be an important addition.<br /><br />The same problem persists even with PAW pseudopotentials.  I have even tested for spin polarised and unpolarised case.  Every single time its the same issue with MPI I/O.<br /><br />I had posted another thread which seems to have been lost.  Anyway, I will restate it again without hopefully annoying people.<br /><br />Since the _DEN file is typically much smaller than the _WFK file, paral_kgb option is always successful in writing it (with mpi i/o).  Is there a possibility to restart the calculation with this density file and run a non-SCF calculation to print out the WF file running with regular k-point parallelization (paral_kgb 0).  Even when the WF file is big (&gt; 1GB) I have seen that the code is able to write it properly when just k-point parallelism is employed.<br /><br />I do not know how to restart such a calculation in ABINIT.  I attempted to run a 2 dataset calculation (first is a SCF with paral_kgb 1 to print out _DEN file and second is a non-SCF calculation with paral_kgb 0 to print out the WF file) but ran into a strange error.<br />ABINIT complained that ndtset should be non-zero when I did specify it to be ndtset 2.<br /><br />Any helpful comments are welcome.<br /><br />thanks,<br />Anurag</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p4809" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile4809">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistaf78.html?mode=viewprofile&amp;u=209" class="username">kaneod</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search66ac.html?author_id=209&amp;sr=posts">42</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Mar 10, 2010 11:47 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content4809">
+
+						<h3 ><a href="#p4809">Re: mpiio segfault band/k-point/FFT parallelization</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting1706.html?mode=quote&amp;f=9&amp;p=4809" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic041a.html?p=4809#p4809" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistaf78.html?mode=viewprofile&amp;u=209" class="username">kaneod</a></strong> &raquo; </span>Mon Feb 20, 2012 5:43 am
+			</p>
+			
+			
+			
+			<div class="content">Hi all,<br /><br />This is an old thread but I should point out the WFK writing issue still holds in 6.12.1...I have been getting hangs exactly like this and setting prtwf=0 stops it, although for multi dataset runs it is annoying because you can't daisy chain the wavefunctions from one set to the next. My system is a 90-atom molecule using the PAW method.<br /><br />I'm on Abinit 6.12.1 using gfortran 4.6.2 and linked against mvapich2 1.8, fftw3 and openblas, intel x86_64 and infiniband.</div>
+			
+			
+			
+									
+									<div id="sig4809" class="signature">Dr Kane O'Donnell<br />Postdoctoral Research Fellow<br />Australian Synchrotron</div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p5775" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5775">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist53cc.html?mode=viewprofile&amp;u=278" class="username">nleconte</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search9de0.html?author_id=278&amp;sr=posts">9</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Apr 17, 2010 6:52 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5775">
+
+						<h3 ><a href="#p5775">Re: mpiio segfault band/k-point/FFT parallelization</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting7c34.html?mode=quote&amp;f=9&amp;p=5775" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic30cc-2.html?p=5775#p5775" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist53cc.html?mode=viewprofile&amp;u=278" class="username">nleconte</a></strong> &raquo; </span>Tue Sep 25, 2012 2:43 pm
+			</p>
+			
+			
+			
+			<div class="content">Old thread indeed, but just got the same problem with 6.12.1...</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p5787" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5787">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistaf78.html?mode=viewprofile&amp;u=209" class="username">kaneod</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search66ac.html?author_id=209&amp;sr=posts">42</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Mar 10, 2010 11:47 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5787">
+
+						<h3 ><a href="#p5787">Re: mpiio segfault band/k-point/FFT parallelization</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting992f.html?mode=quote&amp;f=9&amp;p=5787" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicd795.html?p=5787#p5787" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistaf78.html?mode=viewprofile&amp;u=209" class="username">kaneod</a></strong> &raquo; </span>Fri Sep 28, 2012 7:23 am
+			</p>
+			
+			
+			
+			<div class="content">It still happens in 6.12.3. As I've said in another thread, it's hard to show exactly what is going on because the hangs/crashes only happen on certain systems and might be separate phenomena. We have a patched version of 6.12.3 here that seems to avoid the problem but we're not sure why it works yet (!!!) so progress has been slow making a public version we trust. Working on it!</div>
+			
+			
+			
+									
+									<div id="sig5787" class="signature">Dr Kane O'Donnell<br />Postdoctoral Research Fellow<br />Australian Synchrotron</div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p5804" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5804">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlista92f.html?mode=viewprofile&amp;u=705" class="username">delaveau</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchfdcd.html?author_id=705&amp;sr=posts">17</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue May 10, 2011 3:27 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5804">
+
+						<h3 ><a href="#p5804">Re: mpiio segfault band/k-point/FFT parallelization</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting4924-2.html?mode=quote&amp;f=9&amp;p=5804" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic7237.html?p=5804#p5804" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlista92f.html?mode=viewprofile&amp;u=705" class="username">delaveau</a></strong> &raquo; </span>Wed Oct 03, 2012 9:28 am
+			</p>
+			
+			
+			
+			<div class="content">A way to minimize the memory needed to write WF file in case of MPI_IO is in<br />wffreadwrite_mpio.F90 to decrease MAXBAND=500  ( number of band write in one shot in WF file).<br />The celerity of written is link to the number of band written in one shot.<br />put MAXBAND to a lower value  and compile again then try again<br /><br />M. Delaveau</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p5805" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5805">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlista92f.html?mode=viewprofile&amp;u=705" class="username">delaveau</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchfdcd.html?author_id=705&amp;sr=posts">17</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue May 10, 2011 3:27 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5805">
+
+						<h3 ><a href="#p5805">Re: mpiio segfault band/k-point/FFT parallelization</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting1e91-2.html?mode=quote&amp;f=9&amp;p=5805" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic9fc5.html?p=5805#p5805" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlista92f.html?mode=viewprofile&amp;u=705" class="username">delaveau</a></strong> &raquo; </span>Wed Oct 03, 2012 9:48 am
+			</p>
+			
+			
+			
+			<div class="content">A way of decreasing memory needed for writing WF is to decrease MAXBAND in rwwf.F90 . then compile again.<br />MAXBAND is the number of band written in one shot in WF.<br />It's value is important for the celerity of writting.<br /><br />Muriel Delaveau</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p5807" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5807">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlista92f.html?mode=viewprofile&amp;u=705" class="username">delaveau</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchfdcd.html?author_id=705&amp;sr=posts">17</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue May 10, 2011 3:27 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5807">
+
+						<h3 ><a href="#p5807">Re: mpiio segfault band/k-point/FFT parallelization</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting527d.html?mode=quote&amp;f=9&amp;p=5807" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic3378.html?p=5807#p5807" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlista92f.html?mode=viewprofile&amp;u=705" class="username">delaveau</a></strong> &raquo; </span>Fri Oct 05, 2012 10:02 am
+			</p>
+			
+			
+			
+			<div class="content">The crash migth be because of memory use in rwwf.F90 . For performance reason, the writting order  is made  MAXBAND by MAXBAND.  and is set arbitarly to 500.<br />You can decrease this value to decrease the memory used.<br />Hoping it will help<br /><br />Muriel Delaveau</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p5808" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5808">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlista92f.html?mode=viewprofile&amp;u=705" class="username">delaveau</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchfdcd.html?author_id=705&amp;sr=posts">17</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue May 10, 2011 3:27 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5808">
+
+						<h3 ><a href="#p5808">Re: mpiio segfault band/k-point/FFT parallelization</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingc238-2.html?mode=quote&amp;f=9&amp;p=5808" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic483a-2.html?p=5808#p5808" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlista92f.html?mode=viewprofile&amp;u=705" class="username">delaveau</a></strong> &raquo; </span>Fri Oct 05, 2012 10:22 am
+			</p>
+			
+			
+			
+			<div class="content">A possible cause for crash of big case is the size of the message to be written or read at the same time.<br />The size of the message is parameted in WffReadWrite_mpio.F90  by MAXBAND=500<br /> the size of the message could be decrease by decreasing MAXBAND.<br />MAXBAND=500 has been choseen for performance reason because it minimize the number of disk acces<br /><br />I hope it will help<br /><br />Muriel Delaveau</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p5811" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5811">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlista92f.html?mode=viewprofile&amp;u=705" class="username">delaveau</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchfdcd.html?author_id=705&amp;sr=posts">17</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue May 10, 2011 3:27 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5811">
+
+						<h3 ><a href="#p5811">Re: mpiio segfault band/k-point/FFT parallelization</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting28d2.html?mode=quote&amp;f=9&amp;p=5811" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic4674.html?p=5811#p5811" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlista92f.html?mode=viewprofile&amp;u=705" class="username">delaveau</a></strong> &raquo; </span>Fri Oct 05, 2012 2:58 pm
+			</p>
+			
+			
+			
+			<div class="content">A possible cause for crash of big case is the size of the message to be written or read at the same time.<br /><br />The size of the message is parameted in WffReadWrite_mpio.F90 by MAXBANd=500 <br />It could be decrease by decreasing MAXBAND .<br />I hope it could help<br /><br />Muriel Delaveau</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="posting1e64.html?mode=reply&amp;f=9&amp;t=375" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopice4d2.html?f=9&amp;t=375&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=9&amp;t=375">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			11 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforumfdc5.html?f=9" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Ground state”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?p=5804 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:07:18 GMT -->
+</html>

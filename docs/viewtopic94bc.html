@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?p=2737 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:20:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Error of GW+wannier90 of PbTiO3 - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopicf061.html?t=871">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="4"><a href="viewforum31e6.html?f=4" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Running Abinit</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="11"><a href="viewforum8a83.html?f=11" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Many-body perturbation theory</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopic7f16.html?f=11&amp;t=871">Error of GW+wannier90 of PbTiO3</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">GW, Bethe-Salpeter …<br /></div>
+<p>
+	<strong>Moderators:</strong> <a href="memberlist6e5f.html?mode=viewprofile&amp;u=3041" class="username">maryam.azizi</a>, <a href="memberlist5d8f.html?mode=viewprofile&amp;u=66" class="username">bruneval</a>
+</p>
+
+
+<div class="action-bar bar-top">
+	
+			<a href="posting9a5f.html?mode=reply&amp;f=11&amp;t=871" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic2739.html?f=11&amp;t=871&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="871" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			8 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p2699" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile2699">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist0973.html?mode=viewprofile&amp;u=171" class="username">Mutta</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search958d.html?author_id=171&amp;sr=posts">69</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Feb 19, 2010 11:33 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content2699">
+
+						<h3 class="first"><a href="#p2699">Error of GW+wannier90 of PbTiO3</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postinga760.html?mode=quote&amp;f=11&amp;p=2699" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicd80c.html?p=2699#p2699" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist0973.html?mode=viewprofile&amp;u=171" class="username">Mutta</a></strong> &raquo; </span>Thu Feb 03, 2011 12:45 pm
+			</p>
+			
+			
+			
+			<div class="content">Dear all<br />when I tried wannier90 as see input below<br /># Calculation of the quasiparticle Wannier functions<br />irdden     1         # Point to the gs density<br />irdwfk     1         # Must point to lda wavefunction file completely<br />irdqps     1         # point to the converged QPS file from the QPSCGW run,<br />kptopt     3         # Must use full-zone k mesh for wannier90<br />istwfk     216*1<br />iscf      -2<br />nstep      0         # Irreducible-zone wavefunctions will be transformed<br />                     #  using symmetry operations to fill the full zone,<br />                     #  and must not be modified (for consistency with GW)<br />tolwfr     1.0d-8    # Dummy, but necessary<br />nband      400       # Must be consistent with nband in quasiparticle GW above<br />prtwant     3        # Flag for wannier90 interface with quaisparticles<br />w90iniprj   2        # Flag to use hydrogenic or gaussian orbital initial<br />                     #  projectors (to be specified in *.win file)<br />w90prtunk   0        # Flag for producing UNK files necessary for plotting<br />                     #  (suppressed here by 0 value)<br /><br />I have a problem of warning message below<br />energy: COMMENT -<br />  New density rho(r) made from input wfs<br /><br /> mlwfovlp_qp: WARNING<br />  The input *_WFK file of LDA wavefunctions to be  converted<br />  to GW quasiparticle wavefunctions MUST have been written in<br />  the run that produced the GW *_KSS file using kssform 3,<br />  the ONLY value of kssform permitted for GW Wannier functions.<br />  Otherwise, the *_QPS file needed here will be inconsistent,<br />  and the output quasiparticle wavefunctions will be garbage.<br />  No internal check that can verify this is presently possible.<br /><br /><br /> listkk : BUG -<br />  The minimum square of dk has negative norm: dksqmn=   -1.000000E+00<br />  Action : contact ABINIT group.<br /><br />.Delivered    3 WARNINGs and   1 COMMENTs to log file.<br /><br /> leave_new : decision taken to exit ...<br /><br />please suggestion <br />Abdulmutta</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p2737" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile2737">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist72df.html?mode=viewprofile&amp;u=117" class="username">thanusit</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search19db.html?author_id=117&amp;sr=posts">70</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jan 14, 2010 4:20 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content2737">
+
+						<h3 ><a href="#p2737">Re: Error of GW+wannier90 of PbTiO3</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting5de7-2.html?mode=quote&amp;f=11&amp;p=2737" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic94bc.html?p=2737#p2737" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist72df.html?mode=viewprofile&amp;u=117" class="username">thanusit</a></strong> &raquo; </span>Wed Feb 09, 2011 12:00 pm
+			</p>
+			
+			
+			
+			<div class="content">Dear Mutta<br /><br />Can you attach the complete &quot;log&quot; and the *_w90.wout files.?<br />Anyway, It may be easier to see what went wrong if I could have your input files to run on my machine.<br /><br />Kind regards,<br />Thanusit</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p2742" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile2742">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist0973.html?mode=viewprofile&amp;u=171" class="username">Mutta</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search958d.html?author_id=171&amp;sr=posts">69</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Feb 19, 2010 11:33 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content2742">
+
+						<h3 ><a href="#p2742">Re: Error of GW+wannier90 of PbTiO3</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting043b.html?mode=quote&amp;f=11&amp;p=2742" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopiccb4a.html?p=2742#p2742" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist0973.html?mode=viewprofile&amp;u=171" class="username">Mutta</a></strong> &raquo; </span>Thu Feb 10, 2011 4:38 am
+			</p>
+			
+			
+			
+			<div class="content">Dear Thanusit<br />I attach my input files of step1&amp;2 and step3<br />but did not attach my pseudopotential because when I add files forum shown the extension is not allowed<br />below for wannier90.win, I do not have wannier90.wout<br />It is so longer<br />! PbTiO3 - drh<br /><br />!comment out for second run<br /> postproc_setup = .true.<br /> num_iter = 100<br /><br />!comment out for first run<br />!restart = plot<br />!restart = wannierise<br /><br />!optional for first run<br />!wannier_plot = .true.<br />!wannier_plot_supercell = 3<br /> bands_plot = .true.<br /><br />begin kpoint_path<br />G 0.00000  0.00000 0.0000 X 0.50000  0.00000 0.0000<br />X 0.50000  0.00000 0.0000 M 0.50000  0.50000 0.0000<br />M 0.50000  0.50000 0.0000 R 0.50000  0.50000 0.0000 <br />R 0.50000  0.50000 0.5000 G 0.00000  0.00000 0.0000<br />end kpoint_path<br /><br />wvfn_formatted = .false.<br /><br />num_wann = 20<br />num_bands = 40<br />exclude_bands = 24-400<br /><br />begin projections<br />!site:ang_mtm:zaxis:xaxis:radial:zona:box-size<br /><br /> f=0.125,0.125,0.125 : l=0, mr=1 : r=4, zona= 0.5<br /> f=0.625,0.125,0.125 : l=0, mr=1 : r=4, zona= 0.5<br /> f=0.125,0.625,0.125 : l=0, mr=1 : r=4, zona= 0.5<br /> f=0.125,0.125,0.625 : l=0, mr=1 : r=4, zona= 0.5<br /><br />end projections<br /><br />mp_grid = 6  6  6<br /><br />begin unit_cell_cart<br />   0.0000000000E+00  0.0000000000E+00  0.0000000000E+00<br />   3.6590150000E+00  3.6590150000E+00  4.3454665559E+00<br />   3.6590150000E+00  3.6590150000E+00  1.0008831463E+00<br />   0.0000000000E+00  3.6590150000E+00  5.0590278769E+00<br />   3.6590150000E+00  0.0000000000E+00  5.0590278769E+00<br />end unit_cell_cart<br /><br />begin atoms_frac<br />Pb  0.0000000000E+00  0.0000000000E+00  0.0000000000E+00<br />Ti  5.0000000000E-01  5.0000000000E-01  5.3930972737E-01<br />O   5.0000000000E-01  5.0000000000E-01  1.2421819610E-01<br />O   0.0000000000E+00  5.0000000000E-01  6.2786881684E-01<br />O   5.0000000000E-01  0.0000000000E+00  6.2786881684E-01<br />end atoms_frac<br /><br />begin kpoints<br />                     0.00000000E+00  0.00000000E+00  0.00000000E+00<br />                     1.66666667E-01  0.00000000E+00  0.00000000E+00<br />                     3.33333333E-01  0.00000000E+00  0.00000000E+00<br />                     5.00000000E-01  0.00000000E+00  0.00000000E+00<br />                    -3.33333333E-01  0.00000000E+00  0.00000000E+00<br />                    -1.66666667E-01  0.00000000E+00  0.00000000E+00<br />                     0.00000000E+00  1.66666667E-01  0.00000000E+00<br />                     1.66666667E-01  1.66666667E-01  0.00000000E+00<br />                     3.33333333E-01  1.66666667E-01  0.00000000E+00<br />                     5.00000000E-01  1.66666667E-01  0.00000000E+00<br />                    -3.33333333E-01  1.66666667E-01  0.00000000E+00<br />                    -1.66666667E-01  1.66666667E-01  0.00000000E+00<br />                     0.00000000E+00  3.33333333E-01  0.00000000E+00<br />                     1.66666667E-01  3.33333333E-01  0.00000000E+00<br />                     3.33333333E-01  3.33333333E-01  0.00000000E+00<br />                     5.00000000E-01  3.33333333E-01  0.00000000E+00<br />                    -3.33333333E-01  3.33333333E-01  0.00000000E+00<br />                    -1.66666667E-01  3.33333333E-01  0.00000000E+00<br />                     0.00000000E+00  5.00000000E-01  0.00000000E+00<br />                     1.66666667E-01  5.00000000E-01  0.00000000E+00<br />                     3.33333333E-01  5.00000000E-01  0.00000000E+00<br />                     5.00000000E-01  5.00000000E-01  0.00000000E+00<br />                    -3.33333333E-01  5.00000000E-01  0.00000000E+00<br />                    -1.66666667E-01  5.00000000E-01  0.00000000E+00<br />                     0.00000000E+00 -3.33333333E-01  0.00000000E+00<br />                     1.66666667E-01 -3.33333333E-01  0.00000000E+00<br />                     3.33333333E-01 -3.33333333E-01  0.00000000E+00<br />                     5.00000000E-01 -3.33333333E-01  0.00000000E+00<br />                    -3.33333333E-01 -3.33333333E-01  0.00000000E+00<br />                    -1.66666667E-01 -3.33333333E-01  0.00000000E+00<br />                     0.00000000E+00 -1.66666667E-01  0.00000000E+00<br />                     1.66666667E-01 -1.66666667E-01  0.00000000E+00<br />                     3.33333333E-01 -1.66666667E-01  0.00000000E+00<br />                     5.00000000E-01 -1.66666667E-01  0.00000000E+00<br />                    -3.33333333E-01 -1.66666667E-01  0.00000000E+00<br />                    -1.66666667E-01 -1.66666667E-01  0.00000000E+00<br />                     0.00000000E+00  0.00000000E+00  1.66666667E-01<br />                     1.66666667E-01  0.00000000E+00  1.66666667E-01<br />                     3.33333333E-01  0.00000000E+00  1.66666667E-01<br />                     5.00000000E-01  0.00000000E+00  1.66666667E-01<br />                    -3.33333333E-01  0.00000000E+00  1.66666667E-01<br />                    -1.66666667E-01  0.00000000E+00  1.66666667E-01<br />                     0.00000000E+00  1.66666667E-01  1.66666667E-01<br />                     1.66666667E-01  1.66666667E-01  1.66666667E-01<br />                     3.33333333E-01  1.66666667E-01  1.66666667E-01<br />                     5.00000000E-01  1.66666667E-01  1.66666667E-01<br />                    -3.33333333E-01  1.66666667E-01  1.66666667E-01<br />                    -1.66666667E-01  1.66666667E-01  1.66666667E-01<br />                     0.00000000E+00  3.33333333E-01  1.66666667E-01<br />                     1.66666667E-01  3.33333333E-01  1.66666667E-01<br />                     3.33333333E-01  3.33333333E-01  1.66666667E-01<br />                     5.00000000E-01  3.33333333E-01  1.66666667E-01<br />                    -3.33333333E-01  3.33333333E-01  1.66666667E-01<br />                    -1.66666667E-01  3.33333333E-01  1.66666667E-01<br />                     0.00000000E+00  5.00000000E-01  1.66666667E-01<br />                     1.66666667E-01  5.00000000E-01  1.66666667E-01<br />                     3.33333333E-01  5.00000000E-01  1.66666667E-01<br />                     5.00000000E-01  5.00000000E-01  1.66666667E-01<br />                    -3.33333333E-01  5.00000000E-01  1.66666667E-01<br />                    -1.66666667E-01  5.00000000E-01  1.66666667E-01<br />                     0.00000000E+00 -3.33333333E-01  1.66666667E-01<br />                     1.66666667E-01 -3.33333333E-01  1.66666667E-01<br />                     3.33333333E-01 -3.33333333E-01  1.66666667E-01<br />                     5.00000000E-01 -3.33333333E-01  1.66666667E-01<br />                    -3.33333333E-01 -3.33333333E-01  1.66666667E-01<br />                    -1.66666667E-01 -3.33333333E-01  1.66666667E-01<br />                     0.00000000E+00 -1.66666667E-01  1.66666667E-01<br />                     1.66666667E-01 -1.66666667E-01  1.66666667E-01<br />                     3.33333333E-01 -1.66666667E-01  1.66666667E-01<br />                     5.00000000E-01 -1.66666667E-01  1.66666667E-01<br />                    -3.33333333E-01 -1.66666667E-01  1.66666667E-01<br />                    -1.66666667E-01 -1.66666667E-01  1.66666667E-01<br />                     0.00000000E+00  0.00000000E+00  3.33333333E-01<br />                     1.66666667E-01  0.00000000E+00  3.33333333E-01<br />                     3.33333333E-01  0.00000000E+00  3.33333333E-01<br />                     5.00000000E-01  0.00000000E+00  3.33333333E-01<br />                    -3.33333333E-01  0.00000000E+00  3.33333333E-01<br />                    -1.66666667E-01  0.00000000E+00  3.33333333E-01<br />                     0.00000000E+00  1.66666667E-01  3.33333333E-01<br />                     1.66666667E-01  1.66666667E-01  3.33333333E-01<br />                     3.33333333E-01  1.66666667E-01  3.33333333E-01<br />                     5.00000000E-01  1.66666667E-01  3.33333333E-01<br />                    -3.33333333E-01  1.66666667E-01  3.33333333E-01<br />                    -1.66666667E-01  1.66666667E-01  3.33333333E-01<br />                     0.00000000E+00  3.33333333E-01  3.33333333E-01<br />                     1.66666667E-01  3.33333333E-01  3.33333333E-01<br />                     3.33333333E-01  3.33333333E-01  3.33333333E-01<br />                     5.00000000E-01  3.33333333E-01  3.33333333E-01<br />                    -3.33333333E-01  3.33333333E-01  3.33333333E-01<br />                    -1.66666667E-01  3.33333333E-01  3.33333333E-01<br />                     0.00000000E+00  5.00000000E-01  3.33333333E-01<br />                     1.66666667E-01  5.00000000E-01  3.33333333E-01<br />                     3.33333333E-01  5.00000000E-01  3.33333333E-01<br />                     5.00000000E-01  5.00000000E-01  3.33333333E-01<br />                    -3.33333333E-01  5.00000000E-01  3.33333333E-01<br />                    -1.66666667E-01  5.00000000E-01  3.33333333E-01<br />                     0.00000000E+00 -3.33333333E-01  3.33333333E-01<br />                     1.66666667E-01 -3.33333333E-01  3.33333333E-01<br />                     3.33333333E-01 -3.33333333E-01  3.33333333E-01<br />                     5.00000000E-01 -3.33333333E-01  3.33333333E-01<br />                    -3.33333333E-01 -3.33333333E-01  3.33333333E-01<br />                    -1.66666667E-01 -3.33333333E-01  3.33333333E-01<br />                     0.00000000E+00 -1.66666667E-01  3.33333333E-01<br />                     1.66666667E-01 -1.66666667E-01  3.33333333E-01<br />                     3.33333333E-01 -1.66666667E-01  3.33333333E-01<br />                     5.00000000E-01 -1.66666667E-01  3.33333333E-01<br />                    -3.33333333E-01 -1.66666667E-01  3.33333333E-01<br />                    -1.66666667E-01 -1.66666667E-01  3.33333333E-01<br />                     0.00000000E+00  0.00000000E+00  5.00000000E-01<br />                     1.66666667E-01  0.00000000E+00  5.00000000E-01<br />                     3.33333333E-01  0.00000000E+00  5.00000000E-01<br />                     5.00000000E-01  0.00000000E+00  5.00000000E-01<br />                    -3.33333333E-01  0.00000000E+00  5.00000000E-01<br />                    -1.66666667E-01  0.00000000E+00  5.00000000E-01<br />                     0.00000000E+00  1.66666667E-01  5.00000000E-01<br />                     1.66666667E-01  1.66666667E-01  5.00000000E-01<br />                     3.33333333E-01  1.66666667E-01  5.00000000E-01<br />                     5.00000000E-01  1.66666667E-01  5.00000000E-01<br />                    -3.33333333E-01  1.66666667E-01  5.00000000E-01<br />                    -1.66666667E-01  1.66666667E-01  5.00000000E-01<br />                     0.00000000E+00  3.33333333E-01  5.00000000E-01<br />                     1.66666667E-01  3.33333333E-01  5.00000000E-01<br />                     3.33333333E-01  3.33333333E-01  5.00000000E-01<br />                     5.00000000E-01  3.33333333E-01  5.00000000E-01<br />                    -3.33333333E-01  3.33333333E-01  5.00000000E-01<br />                    -1.66666667E-01  3.33333333E-01  5.00000000E-01<br />                     0.00000000E+00  5.00000000E-01  5.00000000E-01<br />                     1.66666667E-01  5.00000000E-01  5.00000000E-01<br />                     3.33333333E-01  5.00000000E-01  5.00000000E-01<br />                     5.00000000E-01  5.00000000E-01  5.00000000E-01<br />                    -3.33333333E-01  5.00000000E-01  5.00000000E-01<br />                    -1.66666667E-01  5.00000000E-01  5.00000000E-01<br />                     0.00000000E+00 -3.33333333E-01  5.00000000E-01<br />                     1.66666667E-01 -3.33333333E-01  5.00000000E-01<br />                     3.33333333E-01 -3.33333333E-01  5.00000000E-01<br />                     5.00000000E-01 -3.33333333E-01  5.00000000E-01<br />                    -3.33333333E-01 -3.33333333E-01  5.00000000E-01<br />                    -1.66666667E-01 -3.33333333E-01  5.00000000E-01<br />                     0.00000000E+00 -1.66666667E-01  5.00000000E-01<br />                     1.66666667E-01 -1.66666667E-01  5.00000000E-01<br />                     3.33333333E-01 -1.66666667E-01  5.00000000E-01<br />                     5.00000000E-01 -1.66666667E-01  5.00000000E-01<br />                    -3.33333333E-01 -1.66666667E-01  5.00000000E-01<br />                    -1.66666667E-01 -1.66666667E-01  5.00000000E-01<br />                     0.00000000E+00  0.00000000E+00 -3.33333333E-01<br />                     1.66666667E-01  0.00000000E+00 -3.33333333E-01<br />                     3.33333333E-01  0.00000000E+00 -3.33333333E-01<br />                     5.00000000E-01  0.00000000E+00 -3.33333333E-01<br />                    -3.33333333E-01  0.00000000E+00 -3.33333333E-01<br />                    -1.66666667E-01  0.00000000E+00 -3.33333333E-01<br />                     0.00000000E+00  1.66666667E-01 -3.33333333E-01<br />                     1.66666667E-01  1.66666667E-01 -3.33333333E-01<br />                     3.33333333E-01  1.66666667E-01 -3.33333333E-01<br />                     5.00000000E-01  1.66666667E-01 -3.33333333E-01<br />                    -3.33333333E-01  1.66666667E-01 -3.33333333E-01<br />                    -1.66666667E-01  1.66666667E-01 -3.33333333E-01<br />                     0.00000000E+00  3.33333333E-01 -3.33333333E-01<br />                     1.66666667E-01  3.33333333E-01 -3.33333333E-01<br />                     3.33333333E-01  3.33333333E-01 -3.33333333E-01<br />                     5.00000000E-01  3.33333333E-01 -3.33333333E-01<br />                    -3.33333333E-01  3.33333333E-01 -3.33333333E-01<br />                    -1.66666667E-01  3.33333333E-01 -3.33333333E-01<br />                     0.00000000E+00  5.00000000E-01 -3.33333333E-01<br />                     1.66666667E-01  5.00000000E-01 -3.33333333E-01<br />                     3.33333333E-01  5.00000000E-01 -3.33333333E-01<br />                     5.00000000E-01  5.00000000E-01 -3.33333333E-01<br />                    -3.33333333E-01  5.00000000E-01 -3.33333333E-01<br />                    -1.66666667E-01  5.00000000E-01 -3.33333333E-01<br />                     0.00000000E+00 -3.33333333E-01 -3.33333333E-01<br />                     1.66666667E-01 -3.33333333E-01 -3.33333333E-01<br />                     3.33333333E-01 -3.33333333E-01 -3.33333333E-01<br />                     5.00000000E-01 -3.33333333E-01 -3.33333333E-01<br />                    -3.33333333E-01 -3.33333333E-01 -3.33333333E-01<br />                    -1.66666667E-01 -3.33333333E-01 -3.33333333E-01<br />                     0.00000000E+00 -1.66666667E-01 -3.33333333E-01<br />                     1.66666667E-01 -1.66666667E-01 -3.33333333E-01<br />                     3.33333333E-01 -1.66666667E-01 -3.33333333E-01<br />                     5.00000000E-01 -1.66666667E-01 -3.33333333E-01<br />                    -3.33333333E-01 -1.66666667E-01 -3.33333333E-01<br />                    -1.66666667E-01 -1.66666667E-01 -3.33333333E-01<br />                     0.00000000E+00  0.00000000E+00 -1.66666667E-01<br />                     1.66666667E-01  0.00000000E+00 -1.66666667E-01<br />                     3.33333333E-01  0.00000000E+00 -1.66666667E-01<br />                     5.00000000E-01  0.00000000E+00 -1.66666667E-01<br />                    -3.33333333E-01  0.00000000E+00 -1.66666667E-01<br />                    -1.66666667E-01  0.00000000E+00 -1.66666667E-01<br />                     0.00000000E+00  1.66666667E-01 -1.66666667E-01<br />                     1.66666667E-01  1.66666667E-01 -1.66666667E-01<br />                     3.33333333E-01  1.66666667E-01 -1.66666667E-01<br />                     5.00000000E-01  1.66666667E-01 -1.66666667E-01<br />                    -3.33333333E-01  1.66666667E-01 -1.66666667E-01<br />                    -1.66666667E-01  1.66666667E-01 -1.66666667E-01<br />                     0.00000000E+00  3.33333333E-01 -1.66666667E-01<br />                     1.66666667E-01  3.33333333E-01 -1.66666667E-01<br />                     3.33333333E-01  3.33333333E-01 -1.66666667E-01<br />                     5.00000000E-01  3.33333333E-01 -1.66666667E-01<br />                    -3.33333333E-01  3.33333333E-01 -1.66666667E-01<br />                    -1.66666667E-01  3.33333333E-01 -1.66666667E-01<br />                     0.00000000E+00  5.00000000E-01 -1.66666667E-01<br />                     1.66666667E-01  5.00000000E-01 -1.66666667E-01<br />                     3.33333333E-01  5.00000000E-01 -1.66666667E-01<br />                     5.00000000E-01  5.00000000E-01 -1.66666667E-01<br />                    -3.33333333E-01  5.00000000E-01 -1.66666667E-01<br />                    -1.66666667E-01  5.00000000E-01 -1.66666667E-01<br />                     0.00000000E+00 -3.33333333E-01 -1.66666667E-01<br />                     1.66666667E-01 -3.33333333E-01 -1.66666667E-01<br />                     3.33333333E-01 -3.33333333E-01 -1.66666667E-01<br />                     5.00000000E-01 -3.33333333E-01 -1.66666667E-01<br />                    -3.33333333E-01 -3.33333333E-01 -1.66666667E-01<br />                    -1.66666667E-01 -3.33333333E-01 -1.66666667E-01<br />                     0.00000000E+00 -1.66666667E-01 -1.66666667E-01<br />                     1.66666667E-01 -1.66666667E-01 -1.66666667E-01<br />                     3.33333333E-01 -1.66666667E-01 -1.66666667E-01<br />                     5.00000000E-01 -1.66666667E-01 -1.66666667E-01<br />                    -3.33333333E-01 -1.66666667E-01 -1.66666667E-01<br />                    -1.66666667E-01 -1.66666667E-01 -1.66666667E-01<br />end kpoints<br /><br /><br />help me<br />Abdulmutta</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p2753" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile2753">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist0973.html?mode=viewprofile&amp;u=171" class="username">Mutta</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search958d.html?author_id=171&amp;sr=posts">69</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Feb 19, 2010 11:33 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content2753">
+
+						<h3 ><a href="#p2753">Re: Error of GW+wannier90 of PbTiO3</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting4d28.html?mode=quote&amp;f=11&amp;p=2753" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic9178.html?p=2753#p2753" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist0973.html?mode=viewprofile&amp;u=171" class="username">Mutta</a></strong> &raquo; </span>Mon Feb 14, 2011 2:22 pm
+			</p>
+			
+			
+			
+			<div class="content">Dear Thanusit<br /><br />Did you get my input files ?<br /><br /><br />Abdulmutta</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p2773" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile2773">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist72df.html?mode=viewprofile&amp;u=117" class="username">thanusit</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search19db.html?author_id=117&amp;sr=posts">70</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jan 14, 2010 4:20 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content2773">
+
+						<h3 ><a href="#p2773">Re: Error of GW+wannier90 of PbTiO3</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingaa0b.html?mode=quote&amp;f=11&amp;p=2773" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic630a.html?p=2773#p2773" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist72df.html?mode=viewprofile&amp;u=117" class="username">thanusit</a></strong> &raquo; </span>Thu Feb 17, 2011 5:39 am
+			</p>
+			
+			
+			
+			<div class="content">Dear Mutta<br /><br />I've got your input files. Can you give me the names of the psp files used.<br /><br />Kind regards,<br />Thanusit</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p2776" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile2776">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist0973.html?mode=viewprofile&amp;u=171" class="username">Mutta</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search958d.html?author_id=171&amp;sr=posts">69</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Feb 19, 2010 11:33 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content2776">
+
+						<h3 ><a href="#p2776">Re: Error of GW+wannier90 of PbTiO3</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingebe7.html?mode=quote&amp;f=11&amp;p=2776" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic65fd.html?p=2776#p2776" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist0973.html?mode=viewprofile&amp;u=171" class="username">Mutta</a></strong> &raquo; </span>Thu Feb 17, 2011 7:36 am
+			</p>
+			
+			
+			
+			<div class="content">Dear Thanusit<br />For my psp files was GGA-WC (Wu and Cohen), I am so sorry I cannot attach files<br />because it is not upload files, this files so large<br />Can I sent to you by other mail ? for psp files<br />please told me  <br /><br /><br />Best.<br />Abdulmutta</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p2778" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile2778">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist72df.html?mode=viewprofile&amp;u=117" class="username">thanusit</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search19db.html?author_id=117&amp;sr=posts">70</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jan 14, 2010 4:20 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content2778">
+
+						<h3 ><a href="#p2778">Re: Error of GW+wannier90 of PbTiO3</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting123a.html?mode=quote&amp;f=11&amp;p=2778" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicdbd1-2.html?p=2778#p2778" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist72df.html?mode=viewprofile&amp;u=117" class="username">thanusit</a></strong> &raquo; </span>Thu Feb 17, 2011 7:54 am
+			</p>
+			
+			
+			
+			<div class="content">Dear Mutta<br /><br />I'll try to download them from the forum. It will also help if you could send them via e-mail to <!-- e --><a href="mailto:thanusit@kku.ac.th">thanusit@kku.ac.th</a><!-- e -->.<br /><br />kind regards,<br />Thanusit</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p2782" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile2782">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist72df.html?mode=viewprofile&amp;u=117" class="username">thanusit</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search19db.html?author_id=117&amp;sr=posts">70</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jan 14, 2010 4:20 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content2782">
+
+						<h3 ><a href="#p2782">Re: Error of GW+wannier90 of PbTiO3</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting13f6.html?mode=quote&amp;f=11&amp;p=2782" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicfa1b.html?p=2782#p2782" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist72df.html?mode=viewprofile&amp;u=117" class="username">thanusit</a></strong> &raquo; </span>Thu Feb 17, 2011 12:52 pm
+			</p>
+			
+			
+			
+			<div class="content">Dear Mutta<br /><br />I just tried running your inputs after considerable changes were made. Good news is that the runs finished without errors. <br />I used the version 6.4.1 of abinit and the psp files were 82pb.pspnc, 8o.pspnc, 22ti.pspnc. Please see the attached input files. I think these should be a good start for you. Here are the brief details of what was done.<br /><br />For ground state and qpscgw calculations, band_step1_2.in,<br />1. In order to save time, the calculations were performed at smaller ecut of 12, nbandkss of 50, nbands for G and W of 50. For the same reason, the qpscgw was also shorten to only two iterations (ndtset was set to 6). So please be aware that the results are poorly converged.<br />2. In dataset6,  &quot;npweps3    27&quot; was replaced with &quot;npwsigx4     27&quot; because it is npwsigx that is needed in the sigma calculation. This seem to be the only mistake in your original input file &quot;band_step1&amp;2.in&quot;.<br />3. &quot;bdgw&quot; was set to &quot;1 30&quot; for all kptgw. No obvious reason for this, but I just to make sure that all the bands to be used in the wannier interpolation are gw corrected. <br />4. The generation of alchemical pseudoatoms was disable. (I don't have experience with this feature).<br />5. The gwpara 2 was introduced.<br /><br />For wannier90 run for band interpolation, band_step3.in, a number of major mistakes were corrected.<br />1. The following lines were added to the input file &quot;nband_step3.in&quot; because they are still needed.  The missing of these lines was probably the cause of errors you encountered.<br /><br />----------------------------------------------------------------------------------------------<br />    #Common to all model GW calculations<br />      rhoqpmix   1.0  <br />      nkptgw     40<br />      kptgw     <br />          0.00000000E+00  0.00000000E+00  0.00000000E+00<br />          1.66666667E-01  0.00000000E+00  0.00000000E+00<br />           .....<br />      bdgw<br />          1 30<br />          1 30<br />           .......<br />-------------------------------------------------------------------------------------------------<br /> 2. In the wannier90 input files *o_w90.win&quot; the  initial projections and the unit cell primitive vectors were incorrectly given in you original file. These are properly assigned as follows. Note that the initial projections may not be the best choices, though. The Cartesian primitive vectors were grasped from dataset1 of the ground state calculation, and multiplied by  0.529 A/Bohr to convert to Angstrom.<br />----------------------------------------------------------------------<br />begin projections<br />!site:ang_mtm:zaxis:xaxis:radial:zona:box-size<br />random<br />O:p<br />end projections<br />----------------------------------------------------------------------<br />begin unit_cell_cart<br />3.87123787 0.00000000 0.00000000<br />0.00000000 3.87123787 0.00000000<br />0.00000000 0.00000000 4.26239634<br />end unit_cell_cart<br />-------------------------------------------------------------------------<br /> <br />3. Lastly, the coordinate of R point in the 3rd line of the kpoint_path block was adjust to R 0.50000 0.50000 0.5000. I guessed the original value of R 0.50000 0.50000 0.0000 was due to typing error. (I may be wrong!!)<br /><br />To keep this post not too lengthy, (I'm afraid it's already been), please study the rest of the changes from the attached input files.<br /><br />Hope this helps.<br /><br />kind regards,<br />Thanusit.</div>
+			
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/filed5b4-2.php?id=278">band_step1_2_test.in</a></dt>
+						<dd>(6.04 KiB) Downloaded 322 times</dd>
+		</dl>
+		
+		
+			</dd>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/fileb567.php?id=279">band_step3.in</a></dt>
+						<dd>(4.71 KiB) Downloaded 326 times</dd>
+		</dl>
+		
+		
+			</dd>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file12dd.php?id=280">band_step3o_w90.in</a></dt>
+			<dd><em>Wannier90 input file. Don't forget to change its extension to .win</em></dd>			<dd>(11.27 KiB) Downloaded 334 times</dd>
+		</dl>
+		
+		
+			</dd>
+									</dl>
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="posting9a5f.html?mode=reply&amp;f=11&amp;t=871" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic2739.html?f=11&amp;t=871&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=11&amp;t=871">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			8 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforum8a83.html?f=11" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Many-body perturbation theory”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?p=2737 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:20:36 GMT -->
+</html>
