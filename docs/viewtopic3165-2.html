@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1524&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:50:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; frequencies at Gamma point of beta_SiC</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>frequencies at Gamma point of beta_SiC</h2>
+		<p><a href="viewtopic3d40.html?f=10&amp;t=1524">https://forum.abinit.org/viewtopic.php?f=10&amp;t=1524</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>frequencies at Gamma point of beta_SiC</h3>
+				<div class="date">Posted: <strong>Wed Feb 08, 2012 8:44 pm</strong></div>
+				<div class="author">by <strong>nbod</strong></div>
+				<div class="content">I have been going through tutorespn tutorials and simply trying to compute frequencies at Gamma point of b-SiC. If anyone has done it successfully could you please share the wisdom. RF2 tutorial fails to produce the out file with frequencies and it is too complicated. I get lost in changing the variables and still not getting flawless calculations. <br /><br />Thank you! <br /><br />N</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: frequencies at Gamma point of beta_SiC</h3>
+				<div class="date">Posted: <strong>Fri Feb 10, 2012 8:10 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Dear nbod,<br /><br />it is very hard to guess where the problem is, without your input and output files. You should at least attach them. <br /><br />Also, you could put an effort to read through the rest of the forum. I think there are many similar (solved) problem there. If you don't find any, you could search through the old mailing list (available on the abinit web site). I'm almost certain that you'll find your answers there.<br />Furthermore, if you lack some theory, please, regard first the references mentioned in the RF tutorial. And read the netiquette.<br /><br />I hope that this will set you up on the right path.<br /><br />Cheers!<br /><br />Igor L.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: frequencies at Gamma point of beta_SiC</h3>
+				<div class="date">Posted: <strong>Tue Feb 28, 2012 8:04 pm</strong></div>
+				<div class="author">by <strong>nbod</strong></div>
+				<div class="content">Dear Igor, thank you for your reply. Since then i have been able get phonon dispersion curve for b-SiC. Now I am trying some other structures - cryt-SiO2. After generating DDB files and combining them together, the following step of computing interatomic force constants gives me the following error: <br />symdm9 : ERROR -<br />  Informations are missing in the DDB.<br />  The dynamical matrix number    22 cannot be built,<br />  since no blok with wavevector    2.500000E-01    2.500000E-01    2.500000E-01<br />  has been found.<br />  Action : add the required blok in the DDB, or modify your input file.<br /><br />I assume I need to change my very first input file trf2_1.in? or trf2_4.in?  <br /><br />here is my trf2_1.in input file: <br />#Sets 4-10 : Finite-wave-vector phonon calculations (defaults for all datasets)<br /><br />   getwfk   1          # Use GS wave functions from dataset1<br />   kptopt   3          # Need full k-point set for finite-Q response<br />   rfphon   1          # Do phonon response<br />  rfatpol   1 2        # Treat displacements of all atoms<br />    rfdir   1 1 1      # Do all directions (symmetry will be used)<br />   tolvrs   1.0d-8     # This default is active for sets 3-10<br /><br />#######################################################################<br />#Common input variables<br /><br />#Definition of the unit cell<br />    acell   7.135 7.135 7.135 angstrom<br />    angdeg  90 90 90<br />    chkprim 0<br />    #rprim<br />           # 0.0  0.5  0.5   # In lessons 1 and 2, these primitive vectors<br />           # 0.5  0.0  0.5   # (to be scaled by acell) were 1 0 0  0 1 0  0 0 1<br />           # 0.5  0.5  0.0   # that is, the default.<br /><br />#Definition of the atom types<br />   ntypat   2         # There are two types of atom<br />    znucl   14 8     # The keyword &quot;znucl&quot; refers to the atomic number of the<br />                      # possible type(s) of atom. The pseudopotential(s)<br />                      # mentioned in the &quot;files&quot; file must correspond<br />                      # to the type(s) of atom. Here, type 1 is the Aluminum,<br />                      # type 2 is the Arsenic.<br /><br />#Definition of the atoms<br />    natom   2         # There are two atoms<br />    typat   1 2       # The first is of type 1 (Al), the second is of type 2 (As).<br /><br />     xred<br />0.000 0.000 0.000<br />0.125 0.125 0.125<br /><br /><br />#Gives the number of band, explicitely (do not take the default)<br />   #nband   4<br /><br />#Exchange-correlation functional<br /><br />      ixc   1             # LDA Teter Pade parametrization<br /><br />#Definition of the planewave basis set <br />         <br />     ecut   12.0           # Maximal kinetic energy cut-off, in Hartree<br />         <br />#Definition of the k-point grid<br />    ngkpt   4  4  4          <br />  nshiftk   4              # Use one copy of grid only (default)<br />   shiftk   0.0 0.0 0.5    # This gives the usual fcc Monkhorst-Pack grid<br />            0.0 0.5 0.0 <br />            0.5 0.0 0.0<br />            0.5 0.5 0.5 <br />    <br />#Definition of the SCF procedure<br />     iscf   5          # Self-consistent calculation, using algorithm 5<br />    nstep   25         # Maximal number of SCF cycles<br />   diemac   9.0        # Although this is not mandatory, it is worth to<br />                       # precondition the SCF cycle. The model dielectric<br />                       # function used as the standard preconditioner<br />                       # is described in the &quot;dielng&quot; input variable section.<br />                       # The dielectric constant of AlAs is smaller that the one of Si (=12).<br /><br />thank you!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: frequencies at Gamma point of beta_SiC</h3>
+				<div class="date">Posted: <strong>Tue Feb 28, 2012 9:31 pm</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Dear nbod,<br /><br />yes, you should change your trf2_1.in file. Heh, but the important stuff is in the first 3 datasets, which you haven't pasted into your post. Specifically, the list of q-points to be used in the rf calculation. There are really a lot of posts here on the forum about the same problem. Here's one, for example<br /><br /><!-- l --><a class="postlink-local" href="viewtopic4c2a.html?f=10&amp;t=1220">viewtopic.php?f=10&amp;t=1220</a><!-- l --><br /><br />On the other hand, did you go through the tutorial? Check the trf2_2.in.<br /><br />Igor</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1524&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:50:28 GMT -->
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=112&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:11:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Total Magnetization</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Total Magnetization</h2>
+		<p><a href="viewtopic1d26.html?f=9&amp;t=112">https://forum.abinit.org/viewtopic.php?f=9&amp;t=112</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Total Magnetization</h3>
+				<div class="date">Posted: <strong>Sat Mar 06, 2010 12:55 pm</strong></div>
+				<div class="author">by <strong>asmartins</strong></div>
+				<div class="content">Hellow everybody,<br /><br />I'm interested to get the total magnetization of 3d transition metal dimers adsorbed on surfaces. Starting from a relaxed configuration I did just a SCF calculation (without moving the ions), but ABINIT does not comput the total magnetization for the spin polarized option. I restart the calculation (moving the ions) using ionmov = 2 and even in this case, up to now, the program does not compute the total magnetization. Is it possible to get it after the run? For example, using the cut3d post-processing tool and the generated density file is it possible? Thank you very much,<br /><br />Adriano de Souza Martins</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Total Magnetization</h3>
+				<div class="date">Posted: <strong>Sat Mar 06, 2010 6:24 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Ola' Adriano!<br /><br />Have you set spinat to a non-zero value? If so, and nsppol = 2, you <strong class="text-strong">will</strong> calculate the magnetization (search for mag* in the log).<br /><br />Note that with PAW it is not printed on the ETOT .... lines, but only towards the end of the SCF cycle. For PAW you may also want to add prtdensph <a href="http://www.abinit.org/documentation/helpfiles/for-v6.0/input_variables/vargs.html#prtdensph" class="postlink">http://www.abinit.org/documentation/helpfiles/for-v6.0/input_variables/vargs.html#prtdensph</a> 1 to get more detail.<br /><br />ciao<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Total Magnetization</h3>
+				<div class="date">Posted: <strong>Sat Mar 06, 2010 9:06 pm</strong></div>
+				<div class="author">by <strong>asmartins</strong></div>
+				<div class="content">Hi Mathieu!<br /><br />Thank for your reply! Cheers,<br /><br />Adriano</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Total Magnetization</h3>
+				<div class="date">Posted: <strong>Sun Mar 07, 2010 2:22 am</strong></div>
+				<div class="author">by <strong>asmartins</strong></div>
+				<div class="content">Olá Matthieu,<br /><br />I was waiting for the calculations that I have submited to finish: the TOTAL magnatization is not given! Yes, I used nsspol = 2 option and I assigned Spinat = 1 to the two transition metal atoms (Co) and zero to all others. The program gives the maximun and the minimum value of the magnetization only.<br /><br />Thank you again! Ciao ragazzo,<br /><br />Adriano<br /><br /><br />The PRTDENSPH option works only to PAW calculations.<br /><br /><blockquote><div><cite>mverstra wrote:</cite>Ola' Adriano!<br /><br />Have you set spinat to a non-zero value? If so, and nsppol = 2, you <strong class="text-strong">will</strong> calculate the magnetization (search for mag* in the log).<br /><br />Note that with PAW it is not printed on the ETOT .... lines, but only towards the end of the SCF cycle. For PAW you may also want to add prtdensph <a href="http://www.abinit.org/documentation/helpfiles/for-v6.0/input_variables/vargs.html#prtdensph" class="postlink">http://www.abinit.org/documentation/helpfiles/for-v6.0/input_variables/vargs.html#prtdensph</a> 1 to get more detail.<br /><br />ciao<br /><br />Matthieu</div></blockquote></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Total Magnetization</h3>
+				<div class="date">Posted: <strong>Sun Mar 07, 2010 10:17 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">For NC pseudopotentials, (see test 83 of v2/ in tests/v2/Refs/t83.out) or for PAW (v4/08) you should get lines like<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;Magnetisation (Bohr magneton)=&nbsp; 4.27337486E-01<br />&nbsp;Total spin up =&nbsp; 5.21366874E+00&nbsp; &nbsp;Total spin down =&nbsp; 4.78633126E+00<br /></code></pre></div><br /><br />which is what you want, right? Otherwise we'd need to see the output file. It could be that this is in output but not log...<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Total Magnetization</h3>
+				<div class="date">Posted: <strong>Sun Mar 07, 2010 12:26 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">PS: you need to be sure that occopt &gt;=3 and tsmear is set. If you leave semiconductor occupations, both spin channels are occupied the same way and you get 0 magnetization: indeed the magnetization is not even calculated, as you don't need to find the Fermi level. With metallic occopt the system has a common Ef and the 2 spin channels are shifted such that one is more filled than the other.<br /><br />The only case you would want to do this in is for and AFM semiconductor, but even then I would recommend metallic occopt so you are sure you get a reasonable ground state and are not missing a metallic state by forcing semiconducor occupations (and you get a calculation of the magnetic moments, as you have noticed).</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Total Magnetization</h3>
+				<div class="date">Posted: <strong>Mon Mar 08, 2010 1:21 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content"><blockquote class="uncited"><div>&gt; Thanks for the help! In fact, I'd like to enforce the AFM option, in order<br />&gt; to comparing with the FM results. However, when I use nsym = 0 and keeping<br />&gt; nspol = 1, the program generates an error:<br />&gt;<br />&gt; -----------<br />&gt;  chkinp: ERROR -<br />&gt;  When nsppol==1 and nspden==2, at least one of the symmetry operations<br />&gt;  must be anti-ferromagnetic (symafm=-1), in order to deduce the spin-down<br />&gt;  density  from the spin-up density. However, it is observed that none of the<br />&gt; symmetry operations is anti-ferromagnetic.<br />&gt;  Action : Check the atomic positions, the input variables spinat, symrel,<br />&gt; tnons, symafm. In case your system is not antiferromagnetic (it might be<br />&gt; ferrimagnetic ...), you must use nsppol=2 with nspden=2 (the latter being<br />&gt; the default when nsppol=2).<br />&gt; ------------</div></blockquote><br /><br />Hi again Adriano:<br /><br />in order to use the afm symmetries and the nsppol 1 nspden 2 you need to have a (spatial) symmetry operation that relates the 2 spin equivalent states (up+down vs. down+up). Abinit then uses that symmetry to reconstruct the other wavefunction when it is needed. In your case you have no such symmetry, and you probably will not get exact AFM order, because one of the Co will be slightly closer to the surface, or adsorbed on a different site, whatever. If you do think the geometry is exactly symmetrical then you may need more precision in the positions for abinit to see the symmetry (or increase tolsym if you are using 6.0, but this is an ugly solution).<br /><br />In your case you have to do the explicit nsppol=2 calculation, and hope that the AFM is the ground state,  if that is what you are looking for. It may be that FM and AFM are both metastable, and then the initial value of spinat will determine which will be found after the SCF cycles. In a plane wave basis it is not as easy to impose a local magnetic moment as it is for localized basis sets.<br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=112&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:11:20 GMT -->
+</html>

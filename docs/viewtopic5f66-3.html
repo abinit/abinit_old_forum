@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2838&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:18:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Configure error compiling ABINIT 7.8.2 in ubuntu 14.04.1</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Configure error compiling ABINIT 7.8.2 in ubuntu 14.04.1</h2>
+		<p><a href="viewtopica616.html?f=3&amp;t=2838">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2838</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Configure error compiling ABINIT 7.8.2 in ubuntu 14.04.1&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Mon Oct 27, 2014 6:47 am</strong></div>
+				<div class="author">by <strong>amir</strong></div>
+				<div class="content">Hi,<br /><br />I am trying to compile ABINIT 7.8.2 in ubuntu 14.04.1 but get an error when I am doing step 4 in &quot;Recipe to compile abinit 7.8.2 on UBUNTU 14.04 (64bits)&quot;. The error is: <br /><br />configure: error: removed option --enable-gui-build has been used<br /><br />I am new in both ABINIT and linux. Could you please help me with this? Thanks alot.<br />Amir</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configure error compiling ABINIT 7.8.2 in ubuntu 14.04.1</h3>
+				<div class="date">Posted: <strong>Mon Oct 27, 2014 10:29 am</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">The Abinit GUI is now a stand-alone project and is not built anymore within Abinit. The corresponding option of configure has thus been removed. Just don't use it and configure should succeed.<br /><br />If it still complains about missing components afterwards, you can install the nanoscale-physics-dev metapackage:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>sudo apt-get install nanoscale-physics-dev</code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configure error compiling ABINIT 7.8.2 in ubuntu 14.04.1</h3>
+				<div class="date">Posted: <strong>Mon Oct 27, 2014 4:58 pm</strong></div>
+				<div class="author">by <strong>amir</strong></div>
+				<div class="content">Thanks Yann, but how can I stop using that? <br /><br />I tried &quot;sudo apt-get install nanoscale-physics-dev&quot; but it did not work, I had a quick search and used &quot;sudo apt-get install science-nanoscale-physics-dev&quot; and that worked. Is it what I needed to install? Thanks.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configure error compiling ABINIT 7.8.2 in ubuntu 14.04.1</h3>
+				<div class="date">Posted: <strong>Mon Nov 03, 2014 6:46 pm</strong></div>
+				<div class="author">by <strong>amir</strong></div>
+				<div class="content">It would be great if you give me a hint where I should look for an answer or what I should search. Thanks.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configure error compiling ABINIT 7.8.2 in ubuntu 14.04.1</h3>
+				<div class="date">Posted: <strong>Tue Nov 04, 2014 9:34 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">I don't know about the GUI but the option --enable-gui-build does not exist anymore in the build system.<br />Make sure you don't use it during the configuration process.<br /><br />We have provided a &quot;how to&quot; to build abinit 7.8.2 on Ubuntu 14.04.1. The procedure works on a fresh and not so fresh installation. <br />Please check <a href="viewtopic6860.html?f=2&amp;t=2807" class="postlink">this topic</a> and follow the procedure.<br /><br />If you still have troubles, please provide as much information (configuration process with all you options) as you can so other people than Yann can also try to help you.<br /><br /><br />Cheers,<br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configure error compiling ABINIT 7.8.2 in ubuntu 14.04.1</h3>
+				<div class="date">Posted: <strong>Tue Nov 04, 2014 9:58 am</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Dear amir,<br /><br />I remove the  <blockquote class="uncited"><div>enable_gui_build=&quot;no&quot;</div></blockquote><br />in ubuntu.ac  ( step 3 in &quot;<a href="viewtopic6860.html?f=2&amp;t=2807" class="postlink">Recipe to compile abinit 7.8.2 on UBUNTU 14.04 (64bits)</a>&quot;  )<br /><br />Now, the recipe should work ...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configure error compiling ABINIT 7.8.2 in ubuntu 14.04.1</h3>
+				<div class="date">Posted: <strong>Mon Nov 10, 2014 5:24 am</strong></div>
+				<div class="author">by <strong>amir</strong></div>
+				<div class="content">Dear all,<br /><br />Thanks for your help. But I still have some problems.<br /><br />I decided to delete &quot;enable_test_timeout=&quot;yes&quot;&quot; from unbuntu.ac, because I had an error saying: &quot;configure: error: removed option --enable_test_timeout has been used&quot;<br /><br />Afterwards the configuration got completed without any errors, however, when I ran the make command I got this error:<br /><br />use etsf_io_low_level<br />      1<br />Fatal Error: Cannot read module file 'etsf_io_low_level.mod' opened at (1), because it was created by a different version of GNU Fortran<br /><br />Please let me know how I can fix this. Thanks alot.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configure error compiling ABINIT 7.8.2 in ubuntu 14.04.1</h3>
+				<div class="date">Posted: <strong>Mon Nov 10, 2014 2:18 pm</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">You may have installed the ETSF_IO package from the repository which version is not compiled with the default compiler of ubuntu 14.04<br /><br />Please try <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>sudo apt-get remove etsf-io libetsf-io-dev<br /></code></pre></div><br /><br />And then, reconfigure as before. You should be noticed at the end of the process that abinit will use etsf_io-fallback.<br /><br />Good luck.<br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Configure error compiling ABINIT 7.8.2 in ubuntu 14.04.1</h3>
+				<div class="date">Posted: <strong>Tue Nov 11, 2014 5:26 am</strong></div>
+				<div class="author">by <strong>amir</strong></div>
+				<div class="content">Dear Jordan, Yann, jbeuken,<br /><br />Thank you very much. I could finally do it! Thanks for your help. I appreciate it. You will see more questions from me from now on!  <img class="smilies" src="images/smilies/icon_e_biggrin.gif" alt=":D" title="Very Happy" /></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2838&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:18:13 GMT -->
+</html>

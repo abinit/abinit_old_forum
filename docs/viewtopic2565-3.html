@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1618&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:58:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] Build Error - ABINIT 6.12.2</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] Build Error - ABINIT 6.12.2</h2>
+		<p><a href="viewtopicc6bb.html?f=3&amp;t=1618">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1618</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] Build Error - ABINIT 6.12.2</h3>
+				<div class="date">Posted: <strong>Tue Apr 17, 2012 5:17 pm</strong></div>
+				<div class="author">by <strong>kscho</strong></div>
+				<div class="content">While building ABINIT 6.12.2 using Intel compiler version 12 and SGI MPT (MPI library), I came across this error:<br /><br />configure: === libXC library OK for use<br />configure: === generating the src/libxc_names.in file<br />checking whether linear algebra libraries work... no<br />configure: error: no working linear algebra libraries have been found<br />make[3]: *** [stamps/atompaw-config-stamp] Error 1<br />make[3]: Leaving directory `/nas/store/cho/CSM/ABINIT/abinit-6.12.2/fallbacks'<br />make[2]: [all-local] Error 2 (ignored)<br />Checking build of atompaw fallback<br />test -e stamps/atompaw-install-stamp<br />make[2]: *** [all-local] Error 1<br />make[2]: Leaving directory `/nas/store/cho/CSM/ABINIT/abinit-6.12.2/fallbacks'<br /><br />I was trying to use Intel MKL BLAS as you can see from my configure command below:<br /><br />configure \<br />--enable-mpi \<br />--with-mpi-level=2 \<br />--with-mpi-includes=&quot;-I/sw/sdev/mpt-x86_64/2.06-ga/include&quot; \<br />--with-mpi-libs=&quot;-L/sw/sdev/mpt-x86_64/2.06-ga/lib -lmpi&quot; \<br />FC=ifort \<br />FCFLAGS=&quot;-O3 -xAVX -ip -I/sw/sdev/mpt-x86_64/2.06-ga/include&quot; \<br />FC_LDFLAGS=&quot;-L/sw/sdev/intel/composer_xe_2011_sp1.9.293/mkl/lib/intel64 -lmkl_intel_lp64  -lmkl_core -lmkl_sequential -lmkl_blas95_lp64 -lmkl_lapack95_lp64 -lmkl_intel_lp64 -lmkl_blacs_sgimpt_lp64 -lmkl_scalapack_lp64&quot; \<br />FC_LIBS=&quot;-L/sw/sdev/intel/composer_xe_2011_sp1.9.293/mkl/lib/intel64 -lmkl_intel_lp64  -lmkl_core -lmkl_sequential -lmkl_blas95_lp64 -lmkl_lapack95_lp64 -lmkl_intel_lp64 -lmkl_blacs_sgimpt_lp64 -lmkl_scalapack_lp64&quot; \<br />CC=icc \<br />CXX=icpc \<br />CFLAGS=&quot;-O3 -xAVX -I/sw/sdev/mpt-x86_64/2.06-ga/include&quot; \<br />CC_LDFLAGS=&quot;-L/sw/sdev/intel/composer_xe_2011_sp1.9.293/mkl/lib/intel64 -lmkl_intel_lp64  -lmkl_core -lmkl_sequential -lmkl_blas95_lp64 -lmkl_lapack95_lp64 -lmkl_intel_lp64 -lmkl_blacs_sgimpt_lp64 -lmkl_scalapack_lp64&quot; \<br />CC_LIBS=&quot;-L/sw/sdev/intel/composer_xe_2011_sp1.9.293/mkl/lib/intel64 -lmkl_intel_lp64  -lmkl_core -lmkl_sequential -lmkl_blas95_lp64 -lmkl_lapack95_lp64 -lmkl_intel_lp64 -lmkl_blacs_sgimpt_lp64 -lmkl_scalapack_lp64&quot;<br /><br />Any idea as what went wrong here?<br /><br />Thanks in advance<br /><br />Kah-Song Cho<br /><!-- e --><a href="mailto:cho@sgi.com">cho@sgi.com</a><!-- e --></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Build Error - ABINIT 6.12.2</h3>
+				<div class="date">Posted: <strong>Tue Apr 17, 2012 5:29 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Look for the last occurence of 'failed' in /path/to/your/abinit/builddir/fallbacks/sources/atompaw-.../config.log. It will likely give you a hint about what's going wrong with your linear algebra libraries.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Build Error - ABINIT 6.12.2</h3>
+				<div class="date">Posted: <strong>Tue Apr 17, 2012 5:37 pm</strong></div>
+				<div class="author">by <strong>kscho</strong></div>
+				<div class="content">These are the messages spat out from make:<br /><br />checking whether linear algebra libraries work... no<br />configure: error: no working linear algebra libraries have been found<br />make[3]: *** [stamps/atompaw-config-stamp] Error 1<br />make[3]: Leaving directory `/nas/store/cho/CSM/ABINIT/abinit-6.12.2/fallbacks'<br />make[2]: [all-local] Error 2 (ignored)<br />Checking build of atompaw fallback<br />test -e stamps/atompaw-install-stamp<br />make[2]: *** [all-local] Error 1<br />make[2]: Leaving directory `/nas/store/cho/CSM/ABINIT/abinit-6.12.2/fallbacks'<br />make[1]: *** [all-recursive] Error 1<br />make[1]: Leaving directory `/nas/store/cho/CSM/ABINIT/abinit-6.12.2'<br />make: *** [all] Error 2<br /><br />Does this mean it needs a linear algebra library like netlib?  I tried to instruct it to use -lmkl_blas95_lp64 for BLAS using FC_LDFLAGS but apparently it's not successful.<br /><br />Kah-Song Cho</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Build Error - ABINIT 6.12.2</h3>
+				<div class="date">Posted: <strong>Tue Apr 17, 2012 5:51 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">You'll find all information you need about linear algebra and MKL in ~abinit/doc/config/build-config.ac, as shown in this forum's rules. In particular, you'll find there a link to the MKL link line advisor, which is necessary to find out which libraries you should specify to be able to build any code depending on linear algebra libraries against MKL.<br /><br />You should put the resulting libraries into --with-linalg-libs.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Build Error - ABINIT 6.12.2</h3>
+				<div class="date">Posted: <strong>Tue Apr 17, 2012 6:27 pm</strong></div>
+				<div class="author">by <strong>kscho</strong></div>
+				<div class="content">Sorry for my ignorance, this is my very first time using ABINIT.  Am I supposed to do the following?<br /><br />--with-linalg-libs=&quot;-L/sw/sdev/intel/composer_xe_2011_sp1.9.293/mkl/lib/intel64 -lmkl_blas95_lp64&quot;<br /><br />If yes, I still got the same error.<br /><br />Thanks for your quick reply!<br /><br />Kah-Song Cho</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Build Error - ABINIT 6.12.2</h3>
+				<div class="date">Posted: <strong>Tue Apr 17, 2012 6:33 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Did you go to the MKL link line advisor?<br /><br /><!-- m --><a class="postlink" href="http://software.intel.com/en-us/articles/intel-mkl-link-line-advisor/">http://software.intel.com/en-us/article ... e-advisor/</a><!-- m --></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Build Error - ABINIT 6.12.2</h3>
+				<div class="date">Posted: <strong>Tue Apr 17, 2012 6:51 pm</strong></div>
+				<div class="author">by <strong>kscho</strong></div>
+				<div class="content">I did but I didn't put down all the libraries (only blas, lapack, and scalapack) since I thought only linear algebra libraries are needed. Now I've included the entire suite and it seems like it's going further now.  Thanks for your suggestions!<br /><br />Kah-Song Cho</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Build Error - ABINIT 6.12.2</h3>
+				<div class="date">Posted: <strong>Tue Apr 17, 2012 7:16 pm</strong></div>
+				<div class="author">by <strong>kscho</strong></div>
+				<div class="content">By including the following linear algebra libraries advisor has indeed resolved my build problem:<br /><br />--with-linalg-libs=&quot;-L/sw/sdev/intel/composer_xe_2011_sp1.9.293/mkl/lib/intel64 -lmkl_scalapack_lp64 -lmkl_cdft_core -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lmkl_blacs_intelmpi_lp64 -lpthread -lm&quot; \<br /><br />Here are the checks for linear algebra libraries from make:<br /><br />checking whether linear algebra libraries work... yes<br />configure: setting linear algebra flavor to 'custom'<br />checking whether linear algebra libraries work... yes<br /><br />Thanks again!</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1618&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:58:21 GMT -->
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1282&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:48:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; problem of occ and  occopt variables</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>problem of occ and  occopt variables</h2>
+		<p><a href="viewtopicf14e.html?f=9&amp;t=1282">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1282</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>problem of occ and  occopt variables</h3>
+				<div class="date">Posted: <strong>Wed Aug 24, 2011 4:04 am</strong></div>
+				<div class="author">by <strong>Paul</strong></div>
+				<div class="content">Hi，<br />I want to calculate the bond energy, followed the tutorial, I should set the variables of occ occopt and nband. I have set that :<br />nsppol 2<br />occopt 2<br />nband 4 4<br />ntypat 1<br />znucl 7<br />typat 1 1<br />kptopt 0<br />nkpt 1<br />but I donot know how to set the occ and wtk, and I have read the basic input variables lst and description in the help files, however<br />I donot understand very well. I am a new in abinit, can someone explain to me how to set these parameters? Thanks a lot!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem of occ and  occopt variables</h3>
+				<div class="date">Posted: <strong>Wed Aug 24, 2011 8:51 am</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hello,<br /><br />The wtk is the weight of each k-point. In your case, you only have the gamma point and the weight is 1. Note that in case of solids with more k-points, you can use the automatic generation of k-point sets with kptopt 1 and the ngkpt/kptrlatt and nshiftk+shiftk variables.<br /><br />The occ variable is the occupation of each band at each k-point. This depends on your system of course. For hydrogen for example the molecular H2 has 2 electrons and you will have the occ like this (with your nband 4 4) :<br />occ 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0<br /><br />... meaning that the first band of the first k-point for spin down is occupied with one electron, the next three are empty and the same applies for spin up. Note also that the occupancies (occ) can also be set automatically by abinit using occopt 1 for a semiconductor and occopt 3 to occopt 7 for a metallic system.<br /><br />Hopes it helps,<br /><br />David</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem of occ and  occopt variables</h3>
+				<div class="date">Posted: <strong>Wed Aug 24, 2011 10:34 am</strong></div>
+				<div class="author">by <strong>Paul</strong></div>
+				<div class="content">Dear David :<br />I have read your reply, and I  change the input file, but it also has problems. This is my whole input file and on the bottom are some of my understanding. I hope you can correct me the wrong place. Thanks.<br />ixc -101130<br />ndtset 2 <br />acell 35 35 35<br />ecut 31<br /><br />natom1 2<br />ionmov1 2<br />optcell1 0<br />ntime1 50<br />tolmxf1 5.0d-4<br />xcart1 -0.5 0.0 0.0<br />       0.5 0.0 0.0<br />toldff1 5.0d-5<br />nband1 7 <br /><br />natom2 1<br />nsppol2 2<br />occopt2 2<br /><span style="color: #FF0000">nband2 4 4<br />occ2 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0</span><br />toldfe2 1.0d-6<br />xcart2 0.0 0.0 0.0<br />spinat2 0.0 0.0 1.0<br />wtk2 1<br /><br />rprim 1 0 0<br />      0 1 0  <br />      0 0 1<br /><br />ntypat 1<br />znucl 7<br />typat 1 1<br />kptopt 0<br />nkpt 1<br />nstep 100<br />diemac 2.0<br /> <br />In the second date set,  the number of electrons is 7, the k-point is just one , the number of  bands of the k-point for spin up is the first number 4, and for the spin down bands is the second number 4. <br />The bands for spin up is occupied with four electrons, and it is 1.0 1.0 1.0 1.0 , for spin down the bands is occupied with three electrons and the last one is empty. And spin-up electrons with spin-down electrons  should be equal to  the total number of electrons  7. <br />Above, it is my understand. But after running ,it has a error:<br /> <span style="color: #FF0000">ERROR - These must obey zval-nelect_occ=charge to better than 0.10E-07<br /> This is not the case.<br />   Action : check input file for occ,wtk, and charge.<br />   Note that wtk is NOT automatically normalized when occopt=2,<br />   but IS automatically normalized otherwise.</span><br /><br />Please give guidance, thanks~</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1282&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:48:58 GMT -->
+</html>

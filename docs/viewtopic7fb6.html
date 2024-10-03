@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3819&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:06:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Unable to reproduce magnetic moment for YbN</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Unable to reproduce magnetic moment for YbN</h2>
+		<p><a href="viewtopicc8e4.html?f=9&amp;t=3819">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3819</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Unable to reproduce magnetic moment for YbN</h3>
+				<div class="date">Posted: <strong>Thu Apr 12, 2018 6:27 am</strong></div>
+				<div class="author">by <strong>fhssn1</strong></div>
+				<div class="content">I'm trying to reproduce the results of one REN (YbN) out of the many REN (rare-earth nitrides) that the following paper has published:<br /><br />Topsakal, Wentzcovich - Accurate projected augmented wave (PAW) datasets for rare-earth elements (RE = La–Lu)<br /><br />I'm using their PAW dataset, with GGA-PBE for Yb, while I'm using JTH-GGA-PBE PAW dataset for N. I've set nsppol to 2. For spinat I'm not sure what to use but I've tried various options like:<br /><br />0.0 0.0 4.0<br />0.0 0.0 -4.0<br /><br />and so on. I have done convergence studies and the lattice parameter matches that in the paper.<br /><br />Here is the problem. The magnetic moment in the main calculation turns out to be much smaller than their published value: 8e-5 (mine) vs 0.14 (published). (The units used are either Bohr-magneton-per-cell, uB-per-cell or just Bohr-magneton (uB), but I haven't been able to tell which. The paper uses uB-per-cell in the caption of one figure, but then simply uses Bohr-magneton uB in the table in the supplement. By uB, I mean mu-sub-B).<br /><br />As a result, the spin-up and spin-down DoS plots look identical. Whereas the paper shows the up and down plots to be different enough to be noticeable.<br /><br />The input file is as follows. Kindly let me know what I'm doing wrong (I had not problem going through the spin tutorial but when I run my own system, I'm unable to get a reasonable value of magnetic moment).<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>kptopt 1<br />nshiftk 4<br />shiftk<br />&nbsp; &nbsp; 0.5 0.5 0.5<br />&nbsp; &nbsp; 0.5 0.0 0.0<br />&nbsp; &nbsp; 0.0 0.5 0.0<br />&nbsp; &nbsp; 0.0 0.0 0.5<br /><br />ngkpt&nbsp; 6 6 6<br />toldfe 1.0e-9<br /><br />occopt 3<br />tsmear 0.01<br /><br />#nsym 0<br />#chkprim 0<br />pawovlp -1<br />prteig 0<br />prtden 1<br />prtcif 0<br />usexcnhat -1<br />#chksymbreak 0<br />paral_kgb 0<br /><br /># Structural parameters<br />ntypat&nbsp; &nbsp;2<br />znucl&nbsp; &nbsp; 70 7<br />natom&nbsp; &nbsp; 2<br /><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; acell&nbsp; &nbsp; &nbsp; 6.4463871158E+00&nbsp; 6.4463871158E+00&nbsp; 6.4463871158E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; rprim&nbsp; &nbsp; &nbsp; 0.0000000000E+00&nbsp; 7.0710678119E-01&nbsp; 7.0710678119E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;7.0710678119E-01&nbsp; 0.0000000000E+00&nbsp; 7.0710678119E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;7.0710678119E-01&nbsp; 7.0710678119E-01&nbsp; 0.0000000000E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; typat&nbsp; &nbsp; &nbsp; 1&nbsp; 2<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;xangst&nbsp; &nbsp; &nbsp; 0.0000000000E+00&nbsp; 0.0000000000E+00&nbsp; 0.0000000000E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2.4121400262E+00&nbsp; 2.4121400262E+00&nbsp; 2.4121400262E+00<br /><br />nband 40<br />nsppol 2<br />spinat<br />&nbsp; &nbsp; 0.0 0.0 4.0<br />&nbsp; &nbsp; 0.0 0.0 -4.0<br /><br />#Definition of the planewave basis set<br />ecut 20.0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# Maximal kinetic energy cut-off, in Hartree<br />pawecutdg 40<br /><br />#Definition of the SCF procedure<br />nstep 100&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Maximal number of SCF cycles<br />ixc -101130<br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Unable to reproduce magnetic moment for YbN</h3>
+				<div class="date">Posted: <strong>Thu Apr 12, 2018 6:30 am</strong></div>
+				<div class="author">by <strong>fhssn1</strong></div>
+				<div class="content">Just to add, this is the VLab PAW RE datasets paper, which is also recommended on this forum by the ABINIT team. (<a href="http://www.vlab.msi.umn.edu/resources/repaw/index.shtml" class="postlink">http://www.vlab.msi.umn.edu/resources/repaw/index.shtml</a>)<br /><br />So is it possible any members of the ABINIT team have already run and verified at least part of that paper, and if yes, are they willing to share their input file?<br /><br />Or does anyone know if the authors of the paper are easily reachable (someone from the ABINIT team might be in touch with them) and I could get an abinit input file from them.<br /><br />Any help highly appreciated. Thanks.<br /><br />edit: I emailed the address listed on the VLab website but I got an address not found error.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Unable to reproduce magnetic moment for YbN</h3>
+				<div class="date">Posted: <strong>Tue Apr 17, 2018 10:57 am</strong></div>
+				<div class="author">by <strong>fhssn1</strong></div>
+				<div class="content">Ok, after a lot of trial and error, I've been able to do a calculation that can at least give 'Total magnetization (exact up - dn)' that is not in the 1e-5 range, but higher. This is as a result of discovering two keywords magconon and magcon_lambda, which have absolutely no mention in the tutorial on spin.<br /><br />I have used magconon as 1, with various values of magcon_lambda (from 1e-5, all the way up to the default of 1e-2).<br /><br />For 1e-5, I get a total magnetic moment of around 0.2x, <br />For 1e-4, I get 0.5x<br />For 1e-3, I get 0.8x<br /><br />and so on (the exact values might be off). Point being, there is no way to know which is the correct value. I'm not having convergence issues for a small k-point grid (ngkpt 2 2 2) for any of these magcon_lambda values. And I know my system's magnetic moment beforehand (0.14 uB-per-cell based on PAW dataset that I'm using, 0.22 uB-per-cell based on an AE calculation, as referenced in the supplementary pdf of the Topsakal, Wentzcovitch paper). By carefully choosing the value of magcon_lambda, I can reproduce either 0.14 or 0.22, or any other value I like. Conclusion: This result is probably nonsense.<br /><br />Kindly advise on how to go about doing a proper magnetic moment calculation for my system, how to know if this is collinear magnetism, or non-collinear, what combination of parameters have to be used, what additional convergence studies have to be carried out (beyond k-point, ecut, relaxation studies).<br /><br />I have three more questions pending in this Ground State section of this forum, and for more than a week there haven't been any answers (in addition to two question unanswered for probably almost a month).</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Unable to reproduce magnetic moment for YbN</h3>
+				<div class="date">Posted: <strong>Wed Apr 18, 2018 10:00 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear fhssn1,<br />Easter vacation period slowed down the activities on the forum...<br />I would advise to start your calculation with a much higher spinat, don't hesitate to put 10 or more, the problem is that at the beginning of the SCF the noise is so large that the magnetisation is fluctuating a lot. I don't advise you to use constrained magnetic moment for these calculations, you should get the right ground state without constraints otherwise, as you mention, hard to tell which value is correct, though you could plot the total energy versus the moment amplitude to find the minimum.<br />We are working right now on the magnetic part of Abinit (mostly the non-collinear+SOC) and once this will be done we will update the tuto on spins that has not been updated since a long while...<br />The rare-earth with f-electrons will be tricky once away from Gd/Eu and you have to make your own experience. Reproducing the Wentzcovich results is a very good point. In the paper there is also an email address, right? Otherwise try to find it on the University website.<br />I would also remark that the moment is very small and this could be very sensitive to convergence parameters, test how it goes by increasing ecut and k-points.<br />All the best,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Unable to reproduce magnetic moment for YbN</h3>
+				<div class="date">Posted: <strong>Wed Apr 18, 2018 10:36 pm</strong></div>
+				<div class="author">by <strong>fhssn1</strong></div>
+				<div class="content">Thanks so much Eric for the quick responses today. I will take your advice into account.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Unable to reproduce magnetic moment for YbN</h3>
+				<div class="date">Posted: <strong>Thu Apr 19, 2018 7:25 am</strong></div>
+				<div class="author">by <strong>fhssn1</strong></div>
+				<div class="content">I have done ndtset studies for both unconstrainted (spinat ranging from [0,0,1.0] going up to [0,0,12.0]) as well as constrained (magconon_lambda  at 1e-5, 1e4, 1e-3, 1e-2, etc, at fixed spinat [0,0,4]). I'm unable to reach any conclusions:<br /><br />- I am using spinat for Yb and N like this: [0,0,value], [0,0,-value]. At [0,0,5] and beyond I started receiving a warning that atom type 2 (Nitrogen) has spinat value higher than zion(ia) (I don't know what that is). So I stopped increasing Nitrogen's spinat past [0,0,-5].<br /><br />- I am using nstep of 100 and toldfe of 1e-10, I'm using very low ngkpt (2, 2, 2) but I have tried (4, 4, 4) too but it doesn't improve the trends while taking way longer in computational time.<br /><br />- For an initial ndtset of 6 values [0,0,1] up to [0,0,6], the magnetization (the line 'Total magnetization (exact up - down)' in log file) started increasing beyond 1e-5 uB so this was good, but after [0,0,4] it would run for all 100 SCF iterations and report convergence failure.<br /><br />- In the second run I went from [0,0,4.0] up to [0,0,6.0] in steps of [0,0,0.2] and that's when I found out about the zion(ia) warning. So I pinned Nitrogen spinat at [0,0,-4.8] and increased Yb spinat only. But now magnetization would decrease back to 1e-5 order range even with SCF convergence, past let's say [0,0,4.4]<br /><br />- So I started looking at the range [0,0,4.0] to [0,0,4.4], but now I have to ask myself, am I trying to &quot;maximize&quot; the value of Total magnetization. If yes, then I should see some kind of &quot;trend&quot; like an inverse parabolic relationship between spinat value (x-axis) and magnetic moment value (y-axis), but that's not the case, there's a bit of randomness to it, plus some unpredictability to when it converges within 100 iterations and when it fails.<br /><br />- All said above is for unconstrained. For constrained, SCF converges for magcon_lambda of 1e-5, 1e-4, and 1e-3, and fails for 1e-2 and above (this is for spinat fixed at Yb:[0,0,4], N:[0,0,-4]). Well, can we get a trend from the 3 converged datapoints? The total energy keeps decreasing going from 1e-5 to 1e-3, while the magnetic moment (this time using the 'Magnetization (Bohr magneton' line in log file) is 0.026, 0.21, 0.61. But 0.61 is already 3 times higher than the reported 0.14 or 0.22, so it doesn't look like total-energy-vs-magnetic-moment estimation is going to help.<br /><br />As for the f-electron problem, that's going to be an issue for all REN systems in Topsakal-Wentzcovich paper. And if I have to do something more reliable first (i.e., some known magnetic system that doesn't have f-electrons), could you point me to a known non-f-electron system for which I could do unconstrained magnetic moment calculation and the result matches (or is close to) a known value (whether ab initio or empirical)?<br /><br />I appreciate your response. (In the meantime, I'll keep trying to get in touch with Topsakal, also maybe I should try GdN instead of YbN which is a much smaller magnetic moment, 0.14 uB compared to GdN's 7 uB).</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Unable to reproduce magnetic moment for YbN</h3>
+				<div class="date">Posted: <strong>Thu Apr 19, 2018 8:29 am</strong></div>
+				<div class="author">by <strong>fhssn1</strong></div>
+				<div class="content">To elaborate further, I think the randomness may have been due to using too little k-points (ngkpt 2 2 2). I ran it again with ngktp 6 6 6 and the magnetization goes even lower. The values so far are as follows:<br /><br /> Magnetization (Bohr magneton)=  5.29398019E-08<br /> Magnetization (Bohr magneton)=  2.28816879E-06<br /> Magnetization (Bohr magneton)=  6.90091637E-06<br /> Magnetization (Bohr magneton)=  6.83527776E-06<br /> Magnetization (Bohr magneton)=  1.17640749E-07<br /><br />These are for Yb:[0,0,z], N:[0,0,-z] with z values of 4.62, 4.64, 4.66, 4.68, 4.70.<br /><br />As you can see, magnetization increases to 6.9e-6 uB then starts going down again. So I'm not sure what to make of this.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Unable to reproduce magnetic moment for YbN</h3>
+				<div class="date">Posted: <strong>Thu Apr 19, 2018 9:28 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear fhssn1,<br />I think the problem here is regarding physics of magnetism. What gives magnetism is when you have partially filed electronic states and so in YbN only Yb is magnetic (and whatever RE nitrites). Why do you want to initialize a magnetic moment on N? This will clearly not help the SCF to converge, thought the program should ends up to the ground state.<br />Another point is that you are considering the ferromagnetic states, while antiferromagnetic phase might be the ground state (I don't remember it, but please check in the literature). To what I see, in the ferromagnetic configuration you obtain a magnetic moment that is zero.<br />At this level, I think you are right to train with a simpler system, you could do it with FeO or MnO, which have the same crystallographic symmetry as rare earth nitrites and where you can find much more literature.<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Unable to reproduce magnetic moment for YbN</h3>
+				<div class="date">Posted: <strong>Thu Apr 19, 2018 9:36 am</strong></div>
+				<div class="author">by <strong>fhssn1</strong></div>
+				<div class="content">I increased ngkpt to 8 8 8, nstep to 200, ecut is 20.0, pawecutdg 40.0. And used very high values for z component of Yb's spinat (from 10 to 32). And following are the results (spinat vs magnetic-moments):<br /><br />1.0000000000E+01 1.75317468E+00<br />1.2000000000E+01 2.33364378E-06<br />1.4000000000E+01 5.18211156E-07<br />1.6000000000E+01 9.06064415E-08<br />1.8000000000E+01 3.40028130E-06<br />2.0000000000E+01 5.01829896E-01<br />2.4000000000E+01 3.72375927E+00<br />2.8000000000E+01 5.36824214E-06<br />3.2000000000E+01 2.94426838E-06<br /><br />the rows for which magnetic moment is not too low (e.g., first row, and sixth, seventh rows) are because of SCF convergence failure. Otherwise we can see that the computation is unable to raise the magnetic moment to a significant enough level to be close to 0.14 or 0.22 uB reference values. Furthermore, there is no trend that could be inferred from the low values.<br /><br />The email address of Dr. Topsakal in the paper and VLab website gives a could-not-reach error return. I'm trying to see if there is any other way to contact Dr. Topsakal.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Unable to reproduce magnetic moment for YbN</h3>
+				<div class="date">Posted: <strong>Thu Apr 19, 2018 9:40 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">In view of the smallness of the magnetic moment, ecut=20 might be too low for this complicated case. You are playing with difficult system, Yb3+ is 4f13, which is not an easy guy...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Unable to reproduce magnetic moment for YbN</h3>
+				<div class="date">Posted: <strong>Thu Apr 19, 2018 9:42 am</strong></div>
+				<div class="author">by <strong>fhssn1</strong></div>
+				<div class="content">Eric, thanks for your two responses. Between FeO, MnO, higher ecut, and turning N spinat off, I think I have a handful of direction to try. I will work on it and see if I get more updates.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Unable to reproduce magnetic moment for YbN</h3>
+				<div class="date">Posted: <strong>Sat Apr 21, 2018 11:03 pm</strong></div>
+				<div class="author">by <strong>fhssn1</strong></div>
+				<div class="content">Eric, I just realized I missed a line in PAW paper that mentioned that the calculations were carried out using '+U' formalism (I originally thought +U was used only to generate U fitting values but not for non-AE result validation against AE).<br /><br />I hope this turns out to be a key point and fixes my result (after I use +U myself). I've been putting off use of '+U' because I haven't been through the tutorial yet. But it looks like I need it now.<br /><br />I will keep you updated. Thanks.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Unable to reproduce magnetic moment for YbN</h3>
+				<div class="date">Posted: <strong>Sun Apr 22, 2018 12:54 am</strong></div>
+				<div class="author">by <strong>fhssn1</strong></div>
+				<div class="content">Eric, I have good news. I conducted a '+U' run with the U value reported in the paper and, with a few other changes in the input file (increase of ecut from 20 Ha to 25 Ha and pawecutdg from 40 Ha to 60 Ha, setting N spinat to zero), I was able to get a magnetic moment of 0.183 uB, which is between the reported non-AE (0.14) and AE (0.22) values.<br /><br />Though I used a J value as 10% of U (U: 3.0 eV, J: 0.3 eV) but the paper says it didn't consider J (meaning probably they used J: 0 eV) which would require further investigation and extend the scope of the paper.<br /><br />In addition, they reported U values for both f shells, and d shells. I realized we can only specify one of f or d using lpawu. Is it possible to use both U_f and U_d in one calculation in ABINIT?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Unable to reproduce magnetic moment for YbN</h3>
+				<div class="date">Posted: <strong>Sun Apr 22, 2018 2:11 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Great, this is a very good news  <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /> <br />The problem with DFT+U is that you have to check how the different properties change with the U/J parameters, usually the ones reproducing the experiments are the one to use...<br />It is not (yet) possible to apply a different U for two different orbitals of the same atom in Abinit, but correcting the f is already quite good for the rare earths, thought it can understood to apply one on the d too (or to use hybrid functionals).<br />All the best,<br />Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3819&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:06:03 GMT -->
+</html>

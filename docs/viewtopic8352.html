@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=1843&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:28:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; gz2.py error</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>gz2.py error</h2>
+		<p><a href="viewtopic34c5.html?f=12&amp;t=1843">https://forum.abinit.org/viewtopic.php?f=12&amp;t=1843</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>gz2.py error</h3>
+				<div class="date">Posted: <strong>Tue Sep 25, 2012 1:58 pm</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Dear all,<br /><br />I'm going through the spin tutorial using 6.12.1 version. However, when I issue a python gz2.py command to analize the magnetization around the atoms in antiferromagnetic Fe, it comes out with an error:<br /><br />igor@igor-desktop:~/Science/DFT/Calculations/Fe/antiferro$ python gz2.py<br />Number of atoms =  2<br />Atomic coordinates<br />[['0.000000E+00', '0.000000E+00', '0.000000E+00'], ['1.650000E+00', '-1.650000E+00', '3.300000E+00']]<br />number of integration points: 32<br />Treating  atom # 0<br />Traceback (most recent call last):<br />  File &quot;gz2.py&quot;, line 58, in &lt;module&gt;<br />    integral.append(sum/npts_integral)<br />ZeroDivisionError: integer division or modulo by zero<br /><br /><br />By looking at the script, I cannot find why would npts_integral be zero. Can someone help me with this issue.<br /><br />Thank you in advance.<br /><br />Yours,<br />Igor Lukacevic</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: gz2.py error</h3>
+				<div class="date">Posted: <strong>Fri Sep 28, 2012 12:19 pm</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">Idear Igor,<br /><br />Try the file below instead.<br />This one will replace gz2.py in the next version of ABINIT.<br />(eventually adapt CUT3D string).<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#!/usr/bin/env python<br /><br />import os,string,sys,math<br /><br />#CUT3D=&quot;../../../../src/98_main/cut3d&quot;<br />CUT3D=&quot;cut3d&quot;<br /><br /><br />#First find the coordinates of atoms<br />f=open('first_round','w')<br />f.write(&quot;tspin_2o_DEN\n&quot;)<br />f.write(&quot;1\n3\n0\n0\n&quot;)<br />f.close()<br />start_atomic=0<br />atomic_positions=&#91;&#93;<br />for line in os.popen(CUT3D+&quot;&lt; first_round&quot;).readlines():<br />&nbsp; &nbsp; &nbsp; &nbsp; if(start_atomic==1):<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(len(line)&lt;3):<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; start_atomic=0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; break<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; coord=string.split(line)&#91;1:&#93;<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; atomic_positions.append(coord)<br />&nbsp; &nbsp; &nbsp; &nbsp; if(string.find(line,&quot;Atomic positions&quot;)&gt;0):<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; start_atomic=1<br />print &quot;Number of atoms = &quot;, len(atomic_positions)<br />print &quot;Atomic coordinates&quot;<br />print atomic_positions<br />num_atoms=len(atomic_positions)<br /><br />#Define cube<br />cube_side=3.3<br />cube_step=0.1<br />radius=cube_side/2.0<br />npts=int(cube_side/cube_step)<br />print &quot;number of integration points:&quot;,npts<br /><br />#Loop on atoms<br />g=open('data','w')<br />integral=&#91;&#93;<br />for iatom in range(num_atoms):<br />&nbsp; &nbsp; &nbsp; &nbsp; npts_integral=0<br />&nbsp; &nbsp; &nbsp; &nbsp; sum=0<br /><br />&nbsp; &nbsp; &nbsp; &nbsp; #Build input file for cut3d<br />&nbsp; &nbsp; &nbsp; &nbsp; f=open('sphere','w')<br />&nbsp; &nbsp; &nbsp; &nbsp; f.write(&quot;tspin_2o_DEN\n&quot;)<br />&nbsp; &nbsp; &nbsp; &nbsp; f.write(&quot;1\n3\n1\n1\n&quot;)<br />&nbsp; &nbsp; &nbsp; &nbsp; f.write(&quot;0.0 0.0 0.0\n&quot;)<br />&nbsp; &nbsp; &nbsp; &nbsp; x0=string.atof(atomic_positions&#91;iatom&#93;&#91;0&#93;)-cube_side/2.0<br />&nbsp; &nbsp; &nbsp; &nbsp; y0=string.atof(atomic_positions&#91;iatom&#93;&#91;1&#93;)-cube_side/2.0<br />&nbsp; &nbsp; &nbsp; &nbsp; z0=string.atof(atomic_positions&#91;iatom&#93;&#91;2&#93;)-cube_side/2.0<br />&nbsp; &nbsp; &nbsp; &nbsp; print &quot;Treating&nbsp; atom #&quot;,iatom<br />&nbsp; &nbsp; &nbsp; &nbsp; for i in range(npts):<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for j in range(npts):<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for k in range(npts):<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; #print i,j,k<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; x=x0+i*cube_step<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; y=y0+j*cube_step<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; z=z0+k*cube_step<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; #if((x-x0)**2+(y-y0)**2+(z-z0)**2&lt;radius**2):<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; f.write('1'+&quot;\n&quot;+'1'+'\n'+'1'+'\n')<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; f.write(`x`+' '+`y`+' '+`z`+'\n')<br />&nbsp; &nbsp; &nbsp; &nbsp; f.write('0\n')<br />&nbsp; &nbsp; &nbsp; &nbsp; f.close()<br /><br />&nbsp; &nbsp; &nbsp; &nbsp; #Execute cut3d<br />&nbsp; &nbsp; &nbsp; &nbsp; for line in os.popen(CUT3D+&quot;&lt; sphere&quot;).readlines():<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if string.find(line,&quot;Spin difference&quot;)!=-1:<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; npts_integral=npts_integral+1<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; g.write(string.split(line)&#91;4&#93;+'\n')<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; sum=sum+string.atof(string.split(line)&#91;4&#93;)<br />&nbsp; &nbsp; &nbsp; &nbsp; integral.append(sum/npts_integral)<br /><br />#Compute magnetic moment<br />vol=4.*math.pi*radius**3/4.<br />vol=cube_side**3<br />for iatom in range(num_atoms):<br />&nbsp; &nbsp; &nbsp; &nbsp; print &quot;For atom&quot;,iatom,&quot;magnetic moment&quot;,integral&#91;iatom&#93;*vol<br /></code></pre></div></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=1843&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:28:14 GMT -->
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1351&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:34:10 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; DOS calculation in PAW+U antiferromanetic case</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>DOS calculation in PAW+U antiferromanetic case</h2>
+		<p><a href="viewtopic9528.html?f=9&amp;t=1351">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1351</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>DOS calculation in PAW+U antiferromanetic case</h3>
+				<div class="date">Posted: <strong>Sat Oct 01, 2011 2:09 pm</strong></div>
+				<div class="author">by <strong>hanju</strong></div>
+				<div class="content">Dear users.<br /><br />I'm a beginner for first principle calculation and abinit.<br />I'm trying to calculate the electronic structure of hexagonal YMnO3.<br />I prepared PAW data sets for Y, Mn, and O using atompaw package, <br />and the grounded state calculation results were good agree with the references<br />(cell size, atomic position, bandgap, magnetization, band structure,...).<br /><br />However, in the DOSs calculation, I met some problems.<br />I hoped to calculate m-resolved density of states of Mn 3d for spin-up and down. <br />So I changed parameters : nsppol to 2 and wrote prtdos 3, prtdosm 1.<br />My result was:<br /><br /><div class="inline-attachment">
+			
+				<dl class="thumbnail">
+			<dt><a href="download/file1c6f.gif?id=445&amp;mode=view"><img src="download/filef7dc.gif?id=445&amp;t=1" class="postimage" alt="cal.gif" title="cal.gif (10.34 KiB) Viewed 2030 times" /></a></dt>
+					</dl>
+		
+		
+		
+		
+			</div><br /><br />and the reference:<br /><br /><div class="inline-attachment">
+			
+				<dl class="thumbnail">
+			<dt><a href="download/file5d45.gif?id=443&amp;mode=view"><img src="download/file61fb.gif?id=443&amp;t=1" class="postimage" alt="mn.gif" title="mn.gif (10.88 KiB) Viewed 2031 times" /></a></dt>
+					</dl>
+		
+		
+		
+		
+			</div><br /><br />ref:Nature Materials 3, 164 - 170 (2004) <br /><!-- m --><a class="postlink" href="http://www.nature.com/nmat/journal/v3/n3/full/nmat1080.html">http://www.nature.com/nmat/journal/v3/n ... t1080.html</a><!-- m --><br /><br /><br />For the up-spin state, it looks similar to the reference: <br />dxz,yz, dxy,x^2-y^2 doublets locates below the fermi leve, and dz^2 singlet above ~1eV from the fermi leve. <br />But for the down state, the reference and my result is quite different:<br />in my result, the DOSs of up and down were same except for the range near 4ev.<br />And the value of DOS were too large (above 400) compared to reference (2~3)<br />How to solve this problem? Is this problem originated from my PAW data sets?<br />Please help me <img class="smilies" src="images/smilies/icon_e_sad.gif" alt=":(" title="Sad" /> <br /><br />My input file and paw input file were<br /><br />iscf 17<br />tolvrs 1.0d-10<br />kptopt 1          <br />ngkpt  4 4 4<br />nshiftk 1<br />shiftk  0.0 0.0 0.0<br />prtdos 3<br />prtdosm 1 <br />enunit 1<br />#Spin<br />nsppol 2<br />nspden 2<br />nspinor 1<br />spinat 0 0 0<br />       0 0 0<br />       0 0 3<br />       0 0 -3<br />       0 0 0<br />       0 0 0<br />       0 0 0<br />       0 0 0<br />       0 0 0<br />       0 0 0<br />nstep  3000<br />ecut 15<br />pawecutdg 30<br />natom 10<br />ntypat 3<br />znucl 39 25 8<br />typat 1 1 2 2 3 3 3 3 3 3<br />angdeg <br />90 90 120<br />acell     <br />6.8602016086E+00  6.8602016086E+00  2.1611255195E+01 Bohr<br />xred      <br />-1.2766932425E-16 -6.8681497753E-16 -1.4981797821E-17<br />-1.2766932425E-16 -6.8681497753E-16  5.0000000000E-01<br />3.3333333333E-01  6.6666666667E-01  2.5000000000E-01<br />6.6666666667E-01  3.3333333333E-01  7.5000000000E-01<br />-1.2766932425E-16 -6.8681497753E-16  2.5000000000E-01<br />-1.2766932425E-16 -6.8681497753E-16  7.5000000000E-01<br />3.3333333333E-01  6.6666666667E-01  8.3935675655E-02<br />3.3333333333E-01  6.6666666667E-01  4.1606432434E-01<br />6.6666666667E-01  3.3333333333E-01  5.8393567566E-01<br />6.6666666667E-01  3.3333333333E-01  9.1606432434E-01<br /># LDA+U<br />usepawu   1<br />lpawu  -1 2 -1<br />upawu  0.0 8.0 0.0 eV<br />jpawu  0.0 0.88 0.0 eV<br /><br />usedmatpu 5<br />dmatpawu<br />1.00000    0.00000    0.00000    0.00000    0.00000<br />0.00000    1.00000    0.00000    0.00000    0.00000<br />0.00000    0.00000    1.00000    0.00000    0.00000<br />0.00000    0.00000    0.00000    1.00000    0.00000<br />0.00000    0.00000    0.00000    0.00000    1.00000<br /><br />0.00000    0.00000    0.00000    0.00000    0.00000<br />0.00000    0.00000    0.00000    0.00000    0.00000<br />0.00000    0.00000    0.00000    0.00000    0.00000<br />0.00000    0.00000    0.00000    0.00000    0.00000<br />0.00000    0.00000    0.00000    0.00000    0.00000<br /><br />0.00000    0.00000    0.00000    0.00000    0.00000<br />0.00000    0.00000    0.00000    0.00000    0.00000<br />0.00000    0.00000    0.00000    0.00000    0.00000<br />0.00000    0.00000    0.00000    0.00000    0.00000<br />0.00000    0.00000    0.00000    0.00000    0.00000<br /><br />1.00000    0.00000    0.00000    0.00000    0.00000<br />0.00000    1.00000    0.00000    0.00000    0.00000<br />0.00000    0.00000    1.00000    0.00000    0.00000<br />0.00000    0.00000    0.00000    1.00000    0.00000<br />0.00000    0.00000    0.00000    0.00000    1.00000<br /><br /><br />&lt;MN&gt;<br /><br />Mn 25                    <br />GGA-PBE loggrid 2001   <br />4 4 3 0 0 0                           <br />3 2 6<br />4 0 1                                   <br />4 1 0                                 <br />0 0 0                                 <br />c                                          <br />c                                     <br />v                                     <br />v                                     <br />c                                     <br />v                                     <br />v                                     <br />v                                     <br />2                                     <br />1.9 1.24 1.9 1.9                      <br />n                                     <br />n                                     <br />y                                     <br />2                                     <br />n                                     <br />custom polynom2 8 10                  <br />3 0 ultrasoft !troulliermartins       <br />1.9                                   <br />1.9                                   <br />1.9                                   <br />1.9                                   <br />1.9                                   <br />1.9                                   <br />2                                     <br />usexcnhat                             <br />0                                     <br /><br />&lt;Y&gt;<br /><br />Y 39<br />GGA-PBE loggrid 2001<br />5 5 4 0 0 0<br />4 2 1<br />5 0 2<br />5 1 0<br />0 0 0<br />c<br />c<br />c<br />v<br />v<br />c<br />c<br />v<br />v<br />c<br />v<br />2<br />2.0<br />n<br />n<br />y<br />3<br />n<br />custom polynom2 8 10<br />3 0 ultrasoft<br />2.0<br />2.0<br />2.0<br />2.0<br />2.0<br />2.0<br />2<br />usexcnhat<br />0<br /><br /><br />&lt;O&gt;<br /><br />O 8<br />GGA-PBE loggrid 1201<br />2 2 0 0 0 0<br />2 1 4<br />0 0 0<br />c<br />v<br />v<br />1<br />1.45<br />y<br />-0.676<br />n<br />y<br />-1.742<br />n<br />custom polynom2 8 10 <br />2 0 ultrasoft<br />1.45<br />1.45<br />1.45<br />1.45<br />1<br />2 1 4<br />0 0 0<br />2<br />usexcnhat <br />0</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1351&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:34:10 GMT -->
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3976&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:09:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Input File for a Ferromagnetism system</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Input File for a Ferromagnetism system</h2>
+		<p><a href="viewtopicae65.html?f=9&amp;t=3976">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3976</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Input File for a Ferromagnetism system</h3>
+				<div class="date">Posted: <strong>Wed Nov 28, 2018 9:18 am</strong></div>
+				<div class="author">by <strong>Najmeh</strong></div>
+				<div class="content">Hi Dear<br /><br />I want to optimize a Ferromagnetism system. My input file is attached. It is around 2 weeks I run it with - np 32 but there is no answering.<br />Is my input file correct? <br /><br />Other question:<br />Do the spin polarization and the LDA+U needed for the optimize?<br />I mean, can I optimize the ferromagnetism system without considering spin and +U in the input file?<br /><br />Best regards,<br />Najmeh</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Input File for a Ferromagnetism system</h3>
+				<div class="date">Posted: <strong>Wed Dec 05, 2018 10:17 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Najmeh,<br />In your case with Gd-f electrons, it is probably impossible to run without a +U.<br />Your input looks OK, what a &quot;grep ETOT&quot; on your output gives to see the SCF behavior?<br />It might be a convergence problem and thus some diemix, diemixmag, nilne, etc might be helpfull to converge the calculation.<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Input File for a Ferromagnetism system</h3>
+				<div class="date">Posted: <strong>Sun Dec 23, 2018 1:30 pm</strong></div>
+				<div class="author">by <strong>Najmeh</strong></div>
+				<div class="content">Dear Eric<br />Thanks a lot for your kindly attention,<br />According to your suggestion, I added diemix, diemixmag in my input file.<br />My input and output files are attached. I have a convergence problem yet, and I do not know what can I do.<br />I would appreciate it if you please help me. <br /><br />Best wishes,<br />Najmeh</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Input File for a Ferromagnetism system</h3>
+				<div class="date">Posted: <strong>Sun Jan 27, 2019 10:41 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Najmeh,<br />I do not understand, your input file does not correspond to your output file (much more atoms in the output than the input).<br />Regarding diemixmag, use rather positive value and a bit smaller than diemix. Start with a larger magnetic moment on spinat (10 instead of 7 to enforce high spin configuration, in your output the low spin is picked up at the end) and increase the nline to 10. If this is not enough use nnsclo=-4 or -5 (only allowed in the latest version of Abinit. Otherwise you can put positive values but this will increase a lot the time for one SCF, thought convergence will be better...).<br />Rare-earth with f in the valence are always tricky, let us know if this improves the convergence (it should).<br />Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3976&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:09:38 GMT -->
+</html>

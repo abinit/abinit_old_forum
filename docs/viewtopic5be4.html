@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3915&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:40:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; tests of ABINIT 8.8.2 with CUDA almost fails.</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>tests of ABINIT 8.8.2 with CUDA almost fails.</h2>
+		<p><a href="viewtopic1f7b.html?f=3&amp;t=3915">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3915</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>tests of ABINIT 8.8.2 with CUDA almost fails.</h3>
+				<div class="date">Posted: <strong>Tue Sep 04, 2018 6:31 am</strong></div>
+				<div class="author">by <strong>ssutoh</strong></div>
+				<div class="content">tests of ABINIT with CUDA almost fails.<br /><br />Hi everybody.<br /><br />All of the tests of ABINIT 8.8.2 have passed,<br />but the tests of ABINIT with CUDA almost fails.<br /><br />The following shows how to build and test execute.<br /><br />(1) build<br /><blockquote class="uncited"><div># cat build.ac<br />FC=mpiifort<br />CC=mpiicc<br />CXX=mpiicpc<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />enable_gpu=&quot;yes&quot;<br />with_gpu_flavor=&quot;cuda-double&quot;<br />with_gpu_prefix=&quot;/usr/local/cuda-9.0&quot;<br /># ./configure --with-config-file=&quot;./build.ac&quot;<br /># make</div></blockquote><br /><br />Information on my GPU card and compiler is as follows.<br /><br /><blockquote class="uncited"><div># deviceQuery<br />・・・<br />Device 0: &quot;Tesla V100-PCIE-16GB&quot;<br />CUDA Driver Version / Runtime Version          9.0 / 9.0<br />CUDA Capability Major/Minor version number:    7.0<br />・・・<br /><br /># mpiifort --version<br />ifort (IFORT) 17.0.4 20170411<br /><br /># mpiicc --version<br />icc (ICC) 17.0.4 20170411<br /><br /># mpiicpc --version<br />icpc (ICC) 17.0.4 20170411<br /></div></blockquote><br /><br />(2) test_fast<br /><blockquote class="uncited"><div># make test_fast<br />・・・<br />==&gt; The run finished cleanly.<br />Moreover, comparison of the total energy, and other (few) relevant quantities with reference values has been successful.<br />This does not mean that no problem is present, however.<br />Please run the complete set of ABINIT tests to gain a better confidence in your installation.<br />・・・<br /></div></blockquote><br /><br />(3) tests<br /><blockquote class="uncited"><div># python runtests.py<br />・・・<br />[fast][t00][np=1]: succeeded [file=t00.out]<br />[fast][t01][np=1]: succeeded [file=t01.out]<br />[fast][t02][np=1]: succeeded [file=t02.out]<br />[fast][t04][np=1]: failed: erroneous lines 8 &gt; 0 [file=t04.out]<br />No YAML Error found in [fast][t04][np=1]<br />[fast][t03][np=1]: failed: erroneous lines 8 &gt; 0 [file=t03.out]<br />No YAML Error found in [fast][t03][np=1]<br />[fast][t17][np=1]: failed: erroneous lines 40 &gt; 0 [file=t17.out]<br />No YAML Error found in [fast][t17][np=1]<br />・・・<br /></div></blockquote><br /><br />(4) tests gpu<br /><blockquote class="uncited"><div># python runtests.py gpu -j4<br />...<br />Summary: failed=5, succeeded=0, passed=0, skipped=2, disabled=0<br />...<br /></div></blockquote><br /><br />I get lots of tests failures.<br />Especially the fatal thing is that all gpu tests have failed and none of the successful gpu tests succeeded.<br />If there are any other particular points, please point them out.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: tests of ABINIT 8.8.2 with CUDA almost fails.&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Wed Nov 21, 2018 8:53 am</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">sorry, but Abinit8 with CUDA 9 is not yet full supported...<br />we know that there are still some problems...<br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: tests of ABINIT 8.8.2 with CUDA almost fails.</h3>
+				<div class="date">Posted: <strong>Wed Dec 05, 2018 9:09 am</strong></div>
+				<div class="author">by <strong>ssutoh</strong></div>
+				<div class="content"><blockquote><div><cite>jbeuken wrote:</cite>sorry, but Abinit8 with CUDA 9 is not yet full supported...<br />we know that there are still some problems...<br />jmb</div></blockquote><br /><br />Thank you for your answer.<br />Since I understood the situation, I will close this inquiry.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3915&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:40:50 GMT -->
+</html>

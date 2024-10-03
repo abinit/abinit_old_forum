@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=638&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Compilation on IBM AIX Power6 (@Garching)</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Compilation on IBM AIX Power6 (@Garching)</h2>
+		<p><a href="viewtopic3eee-2.html?f=3&amp;t=638">https://forum.abinit.org/viewtopic.php?f=3&amp;t=638</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Compilation on IBM AIX Power6 (@Garching)</h3>
+				<div class="date">Posted: <strong>Tue Oct 05, 2010 4:26 pm</strong></div>
+				<div class="author">by <strong>bob</strong></div>
+				<div class="content">Hi people,<br /><br />did any one of you manage to successfully compile abinit on a IBM AIX 6.1 system using IBMs xlf compiler?<br /><br />Cheers,<br />Bjoern</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compilation on IBM AIX Power6 (@Garching)</h3>
+				<div class="date">Posted: <strong>Tue Oct 05, 2010 7:03 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />yes... (working with abinit 6.2.3 and soon with 6.4.1 )<br /><br /><br />on a Power6 ( OpenPower 510 AIX 6.1 ) with these options for configure :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>CPP=&quot;/usr/lpp/xlf/bin/cpp&quot;<br />CC=&quot;/usr/lpp/ppe.poe/bin/mpcc_r&quot;<br />CFLAGS=&quot;-qlanglvl=stdc99 -O3 -q64 -qspill=2000 -qarch=pwr6 -qtune=auto -qcache=auto -qstrict -qsuppress=1520-031:1520-003&quot;<br />CXX=&quot;/usr/lpp/ppe.poe/bin/mpCC_r&quot;<br />FC=&quot;/usr/lpp/ppe.poe/bin/mpxlf90_r&quot;<br />FCFLAGS=&quot;-O3 -q64 -lxlopt -bmaxdata:2000000000 -qarch=pwr6 -qtune=auto -qstrict -qsuppress=1520-031:1520-003 -qmaxmem=-1 -qcache=auto&quot;<br />enable_fc_wrapper=&quot;no&quot;<br />fcflags_opt_63_bader=&quot;-O3 -q64 -bmaxdata:2000000000 -qarch=pwr6 -qtune=auto -qstrict -qsuppress=1520-031:1520-003 -qmaxmem=-1 -qcache=auto&quot;<br />AR=&quot;ar&quot;<br />ARFLAGS_EXTRA=&quot;-X64&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;no&quot;<br />enable_64bit_flags=&quot;yes&quot;<br />enable_optim=&quot;yes&quot;<br />MPI_RUNNER=&quot;/usr/lpp/ppe.poe/bin/poe&quot;<br />enable_linalg=&quot;no&quot;<br />with_netcdf_includes=&quot;-I/usr/local/netcdf/include&quot;<br />with_netcdf_libs=&quot;-L/usr/local/netcdf/lib -lnetcdf&quot;<br />enable_gw_dpc=&quot;yes&quot;<br />enable_all_plugins=&quot;yes&quot;<br />enable_maintainer_checks=&quot;no&quot;<br />enable_test_timeout=&quot;yes&quot;<br />with_fc_vendor=&quot;ibm&quot;<br />with_fc_version=&quot;12.1&quot;<br /></code></pre></div><br /><br />regards<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compilation on IBM AIX Power6 (@Garching)</h3>
+				<div class="date">Posted: <strong>Wed Oct 06, 2010 8:49 am</strong></div>
+				<div class="author">by <strong>bob</strong></div>
+				<div class="content">Thanks for your reply. Unfortunately, configure stops with <br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;==============================================================================<br />&nbsp;=== C support&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ===<br />&nbsp;==============================================================================<br /><br />checking for gcc... /usr/lpp/ppe.poe/bin/mpcc_r<br />checking for C compiler default output file name... a.out<br />checking whether the C compiler works... configure: error: in `/u/bob/abinit-6.2.3':<br />configure: error: cannot run C compiled programs.<br /></code></pre></div><br />Any idea what I am doing wrong?<br /><br />Bjoern</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compilation on IBM AIX Power6 (@Garching)</h3>
+				<div class="date">Posted: <strong>Wed Oct 06, 2010 2:02 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Look for the last &quot;failed&quot; in config.log and check what configure is complaining about.<br /><br />If it is a question of missing libraries, adjust your LD_LIBRARY_PATH to include /usr/lpp/lpp.poe/lib or similar. Supposing you use bash:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>export LD_LIBRARY_PATH=&quot;/usr/lpp/lpp.poe/lib:$LD_LIBRARY_PATH&quot;<br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compilation on IBM AIX Power6 (@Garching)</h3>
+				<div class="date">Posted: <strong>Fri Oct 08, 2010 10:51 am</strong></div>
+				<div class="author">by <strong>bob</strong></div>
+				<div class="content">OK, that error was down to a missing hostfile for the poe environment...<br /><br />Now, configure runs but after building LAPACK, make stops with <br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>LAPACK for ABINIT has been built.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />LAPACK for ABINIT has been built.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />&nbsp; &nbsp; &nbsp; &nbsp; touch build-stamp&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />lapack-abinit_6.0 has been built.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />&nbsp; &nbsp; &nbsp; &nbsp; config/gnu/install-sh -c -d -m 755 tmp/lib&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />/usr/bin/sh: config/gnu/install-sh:&nbsp; not found.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </code></pre></div><br /><br />The weird thing is: when I run  config/gnu/install-sh -c -d -m 755 tmp/lib  from the command line, it work, just not during make... any ideas?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compilation on IBM AIX Power6 (@Garching)</h3>
+				<div class="date">Posted: <strong>Fri Oct 08, 2010 8:10 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hello,<br /><br />it's a &quot;classic&quot; problem...<br /><br />This is a problem related to the mkdir command, which behaves non-standardly on your system aka not GNU.<br /><br />before running configure, you may try with:<br /><br />export MKDIR_P=&quot;mkdir -p&quot;<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compilation on IBM AIX Power6 (@Garching)</h3>
+				<div class="date">Posted: <strong>Sun Oct 10, 2010 3:11 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">This problem should now be fixed in 6.4.1.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=638&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:41 GMT -->
+</html>

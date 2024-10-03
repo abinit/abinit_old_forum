@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3287&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:57:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; ABINIT 8.0.6+PAW+Strain Perturbations</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>ABINIT 8.0.6+PAW+Strain Perturbations</h2>
+		<p><a href="viewtopic9990-2.html?f=10&amp;t=3287">https://forum.abinit.org/viewtopic.php?f=10&amp;t=3287</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>ABINIT 8.0.6+PAW+Strain Perturbations</h3>
+				<div class="date">Posted: <strong>Wed May 25, 2016 10:36 pm</strong></div>
+				<div class="author">by <strong>dmteter</strong></div>
+				<div class="content">Hi,<br /><br />First of all, many thanks for all of the effort in creating ABINIT 8.0.6 and making it available for download. I compiled a parallel version of ABINIT 8.0.6 for OSX and both the ground state and response function calculations (strain perturbation/elastic tensor) work fine for the ONCV_PBE pseudopotentials and for JTH_LDA PAW. However, when I try and perform response function calculations (strain perturbation/elastic tensor) for the JTH_PBE PAW, I get the following error:<br /><br />--- !ERROR<br />src_file: m_pawxc.F90<br />src_line: 4800<br />mpi_rank: 0<br />message: |<br />    GGA is not implemented!<br />...<br /><br />Does calculation of elastic tensor in ABINIT 8.0.6 not work for PAW/GGA? <br /><br />Thanks,<br />David</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ABINIT 8.0.6+PAW+Strain Perturbations&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Thu May 26, 2016 10:37 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Hi,<br /><br />Indeed, Response function and PAW only works for LDA at the moment. Some people are still working to include GGA in PAW+DFPT<br /><br />Cheers<br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ABINIT 8.0.6+PAW+Strain Perturbations</h3>
+				<div class="date">Posted: <strong>Thu May 26, 2016 3:44 pm</strong></div>
+				<div class="author">by <strong>dmteter</strong></div>
+				<div class="content">Thank you.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ABINIT 8.0.6+PAW+Strain Perturbations</h3>
+				<div class="date">Posted: <strong>Wed Nov 23, 2016 10:38 pm</strong></div>
+				<div class="author">by <strong>sabrygad</strong></div>
+				<div class="content">Hi;<br /><br />Was wondering if the DFPT response function (elastic constants, at least) are now available using GGA-PBE&amp;PAW in the latest ABINIT 8.0.8?<br /><br />Thanks;<br />Sabry</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ABINIT 8.0.6+PAW+Strain Perturbations</h3>
+				<div class="date">Posted: <strong>Thu Nov 24, 2016 3:37 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Sabry,<br />I'm sorry but GGA and DFPT is not yet there for PAW.<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ABINIT 8.0.6+PAW+Strain Perturbations</h3>
+				<div class="date">Posted: <strong>Sat Nov 26, 2016 12:18 am</strong></div>
+				<div class="author">by <strong>sabrygad</strong></div>
+				<div class="content">Hi Eric;<br /><br />Thanks for your reply. So, only LDA is available so far  <img class="smilies" src="images/smilies/icon_e_sad.gif" alt=":(" title="Sad" /> ...  However, is DFPT+GGA available with non-PAW pseudopotentials (NC and US)? <br /><br />I am new user, so was wondering where can one find this info? Looking at &quot;List of features&quot; for the 8th version I am using, I could not find info about GGA+DFPT+PAW. So, may be I should look somewhere else?<br /><br />Thanks so much;<br />Sabry</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ABINIT 8.0.6+PAW+Strain Perturbations</h3>
+				<div class="date">Posted: <strong>Mon Nov 28, 2016 11:31 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Hi Sabry,<br />You can do DFPT+GGA in norm conserving, no problem.<br />For the list of features, you can find them in the Abinit papers (see for example <a href="http://www.abinit.org/doc/helpfiles/for-v7.10/users/acknowledgments.html" class="postlink">http://www.abinit.org/doc/helpfiles/for-v7.10/users/acknowledgments.html</a>) and in the release notes (from 7.10 to 8.0 for example: <a href="http://www.abinit.org/doc/helpfiles/for-v8.0/release_notes/release_notes.html" class="postlink">http://www.abinit.org/doc/helpfiles/for-v8.0/release_notes/release_notes.html</a>) where it is said that GGA+DFPT+PAW is under construction. You can find some summary information in <a href="http://www.abinit.org/about/what-is-abinit" class="postlink">http://www.abinit.org/about/what-is-abinit</a>.<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3287&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:57:19 GMT -->
+</html>

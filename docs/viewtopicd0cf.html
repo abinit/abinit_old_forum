@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=641&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:05:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Charge Density Waves with Abinit. Possible?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Charge Density Waves with Abinit. Possible?</h2>
+		<p><a href="viewtopic551d-2.html?f=9&amp;t=641">https://forum.abinit.org/viewtopic.php?f=9&amp;t=641</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Charge Density Waves with Abinit. Possible?</h3>
+				<div class="date">Posted: <strong>Thu Oct 07, 2010 10:29 am</strong></div>
+				<div class="author">by <strong>spamrefuse</strong></div>
+				<div class="content">Hi,<br /><br />I'm asked to calculate Charge Density Waves (CDW) with Abinit.<br /><br />I kind of understand the very basics of this phenomenon: in conductors<br />a small rearrangement of the ions will lower the total energy by creating<br />a small bandgap at the fermi energy.<br /><br />Can somebody help me find the important parameters to do this with Abinit?<br /><br />I think one only needs a supercell with dimensions approximately ~ 1/kf<br />(with kf = wavevector k at fermi level) and let the ions relax. The lowest<br />energy should then exist when the ions arrange themselves such that<br />the new arrangement has a lattice constant which creates a gap at the<br />fermi level.<br /><br />Is it then possible to find the CDW simply by doing an ionic relaxation in a<br />large enough supercell?<br /><br />Or is my thinking too simplistic?<br /><br />Thank you!<br /><br />Rob.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Charge Density Waves with Abinit. Possible?</h3>
+				<div class="date">Posted: <strong>Mon Oct 11, 2010 12:24 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">The simplest way to see charge density waves is to do a phonon calculation with the appropriate phonon q, and finding an unstable mode. If you want to do a frozen CDW, it's possible too, and you'll have to get a supercell corresponding to q (as you suggest), with appropriate displaced atoms, and see what comes out. If your q is incommensurate, this may be impossible!<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Charge Density Waves with Abinit. Possible?</h3>
+				<div class="date">Posted: <strong>Wed Oct 13, 2010 2:39 pm</strong></div>
+				<div class="author">by <strong>spamrefuse</strong></div>
+				<div class="content">Thanks for the explanation.<br />Whether it is commensurate or not will then also depend on how large size of a<br />supercell I can choose, doesn't it? There is always a supercell (however large enough)<br />which has the periodicity of both the original structure and the new CDW structure.....right?<br /><br />In case I can do a 'frozen CDW', should I then find this by letting the ions relax?<br />Will the mimimum energy procedure easily rearrange the ions such that for a metal<br />a gap is created right at the fermi energy?<br />If yes, I may need to switch off Abinit's use of symmetry, since that may prevent<br />Abinit to find the CDW arrangement?<br /><br />I just wonder if somebody has experience with this. I kind of understand the basics<br />how a CDW comes to existence and what (basic) effects it has.....but don't see<br />clearly how a DFT can be used to deal with this.<br /><br />Rob.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Charge Density Waves with Abinit. Possible?</h3>
+				<div class="date">Posted: <strong>Sat Oct 16, 2010 11:46 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content"><blockquote><div><cite>spamrefuse wrote:</cite>Thanks for the explanation.<br />Whether it is commensurate or not will then also depend on how large size of a<br />supercell I can choose, doesn't it? There is always a supercell (however large enough)<br />which has the periodicity of both the original structure and the new CDW structure.....right?<br /></div></blockquote><br />if q is not commensurate (q*a/2 pi is not a rational fraction) there is no supercell large enough.<br /><br /><blockquote class="uncited"><div>In case I can do a 'frozen CDW', should I then find this by letting the ions relax?<br />Will the mimimum energy procedure easily rearrange the ions such that for a metal<br />a gap is created right at the fermi energy?<br />If yes, I may need to switch off Abinit's use of symmetry, since that may prevent<br />Abinit to find the CDW arrangement?<br /></div></blockquote><br />yes. The easiest is to displace a few atoms, but of course this biases the direction of the relaxation. If you have the phonons, as I suggested in the last post, you know which displacements will go soft and you can try each of them to see which gives you the lowest energy result.<br /><br /><blockquote class="uncited"><div>I just wonder if somebody has experience with this. I kind of understand the basics<br />how a CDW comes to existence and what (basic) effects it has.....but don't see<br />clearly how a DFT can be used to deal with this.<br /><br />Rob.</div></blockquote><br />never done it this way - some things must exist in the literature, though<br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=641&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:05:16 GMT -->
+</html>

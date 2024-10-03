@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=2678&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 20:38:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; SCGW using optdriver8 in abinti-7.6.4 not allowed</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>SCGW using optdriver8 in abinti-7.6.4 not allowed</h2>
+		<p><a href="viewtopicfe4a-2.html?f=11&amp;t=2678">https://forum.abinit.org/viewtopic.php?f=11&amp;t=2678</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>SCGW using optdriver8 in abinti-7.6.4 not allowed&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Fri May 30, 2014 5:27 am</strong></div>
+				<div class="author">by <strong>thanusit</strong></div>
+				<div class="content">Dear all<br /><br />I tried to perform self-consistent gw (scgw) calculation using optdriver:8 under abinit-7.6.4 (please see input.in file for details).  I got the error message that the optdriver:8 is not allowed, as shown below (please see log-1.in for the full log details).<br /><br />--- !ERROR<br />message: |<br />    Unknown value for the variable optdriver: 8<br />    This is not allowed. <br />    Action : modify optdriver in the input file.<br />src_file: driver.F90<br />src_line: 684<br />...<br /><br />I wonder if the optdriver:8 has been actually disable in abinit-7.6.4 (it is usable in abinit-7.4.1) or if I am doing something wrong. If the former case is true, can we still and how to perform scgw in abinit? I did tried using option optdriver:4 together with gwcalctyp:20, but it din't work and gave lots of  Signal: Segmentation fault errors, as shown in the attached log-2.in.<br /><br />All suggestions are greatly appreciated.<br /><br />Best regards,<br />Thanusit<br />     <br /><br />Technical info:<br /><br />- The abinit-7.6.4 was built on Rocks_clusters-6.1.1, having an intel-corei7 pc with 8 GB of RAM as a frontend and one intel-corei7 and two intel-corei5 pcs, each with 32 GB of RAM, as compute nodes. The build configuration is as follow:<br />&gt;&gt;&gt;<br />#enable_fallbacks=&quot;no&quot;<br />enable_exports=&quot;yes&quot;<br />enable_pkg_check=&quot;yes&quot;<br />enable_64bit_flags=&quot;yes&quot;<br />enable_gw_dpc=&quot;yes&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />enable_clib=&quot;yes&quot;<br />with_mpi_prefix=&quot;/opt/openmpi&quot;<br />with_trio_flavor=&quot;netcdf+etsf_io+fox&quot;<br />with_netcdf_incs=&quot;-I/usr/include -I/usr/lib64/gfortran/modules&quot;<br />with_netcdf_libs=&quot;-L/usr/lib64 -lnetcdf -lnetcdff&quot;<br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_incs=&quot;-I/usr/include&quot;<br />with_fft_libs=&quot;-L/usr/lib64 -lfftw3 -lfftw3f&quot;<br />with_linalg_flavor=&quot;atlas&quot;<br />with_linalg_incs=&quot;-I/usr/include&quot;<br />with_linalg_libs=&quot;-L/usr/lib64/atlas -llapack -lf77blas -lcblas -latlas&quot;<br />with_algo_flavor=&quot;levmar&quot;<br />with_algo_incs=&quot;-I/usr/include&quot;<br />with_algo_libs=&quot;-L/usr/lib64 -llevmar&quot;<br />with_math_flavor=&quot;gsl&quot;<br />with_math_incs=&quot;-I/usr/include&quot;<br />with_math_libs=&quot;-L/usr/lib64 -lgsl -lgslcblas -lm&quot;<br />with_dft_flavor=&quot;atompaw+bigdft+libxc+wannier90&quot;<br />&lt;&lt;&lt;<br /><br />- The script used to submit the job is as follow:<br /><br />#!/bin/sh<br />#$ -N Ga4P3Ti_GW_ngkpt444_ecut16<br />#$ -l h_rt=240:00:00<br />#$ -cwd<br />#$ -S /bin/sh<br />#$ -R y<br />#$ -pe orte  16<br /><br />#Enable abinit-7.6.4<br />export PATH=/home/thanusit/apps/gcc-4.4.7/abinit/7.6.4/bin:$PATH<br />export LD_LIBRARY_PATH=/home/thanusit/apps/gcc-4.4.7/abinit/7.6.4/lib:$LD_LIBRARY_PATH<br /><br />#Sigma calculation (scqpgw)<br />cd ../Ga4P3Ti_lda_gw_band-5_sigma_qpscgw<br />ln -s ../Ga4P3Ti_lda_gw_band-2_wfk/Ga4P3Ti_lda_gw_band-2o_WFK Ga4P3Ti_lda_gw_band-5i_WFK<br />ln -s ../Ga4P3Ti_lda_gw_band-3_scr/Ga4P3Ti_lda_gw_band-3o_SCR Ga4P3Ti_lda_gw_band-5i_SCR<br />mpirun -n \$NSLOTS  abinit&lt;Ga4P3Ti_lda_gw_band-5.files&gt;&amp; Ga4P3Ti_lda_gw_band-5.log</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCGW using optdriver8 in abinti-7.6.4 not allowed</h3>
+				<div class="date">Posted: <strong>Sun Jun 22, 2014 12:43 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">optdriver 8 has been removed in abinit 7.6. The code was difficult to maintain and besides <br />one can easy implement this kind of algorithm through some kind of driver written <br />in a high-level language such as python <br />Sorry for that</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCGW using optdriver8 in abinti-7.6.4 not allowed</h3>
+				<div class="date">Posted: <strong>Tue Jul 15, 2014 12:17 pm</strong></div>
+				<div class="author">by <strong>thanusit</strong></div>
+				<div class="content">Thank you for the notice.<br /><br />Best regards,<br />Thanusit.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=2678&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 20:38:02 GMT -->
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1347&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:26:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; qph1l phonon dispersion anaddb</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>qph1l phonon dispersion anaddb</h2>
+		<p><a href="viewtopica05e-2.html?f=10&amp;t=1347">https://forum.abinit.org/viewtopic.php?f=10&amp;t=1347</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>qph1l phonon dispersion anaddb</h3>
+				<div class="date">Posted: <strong>Thu Sep 29, 2011 11:10 pm</strong></div>
+				<div class="author">by <strong>irm20</strong></div>
+				<div class="content">Hi, <br />I am quiet new with ABINIT, and I am having some troubles using the anaddb code. I am wondering how/from where i can get or generate the list of nph1l wavevectors, at which the phonon frequencies will be interpolated. I have all the _DDBs for each qpt, that, as the tutorial does, I picked the same as the points of the kgrid I used for the GS run. Then, when i need the qph1 for anaddb, i am a bit lost,.. where are they from? <br />Thanks for your attention,<br /><br />Valentina</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: qph1l phonon dispersion anaddb</h3>
+				<div class="date">Posted: <strong>Fri Sep 30, 2011 7:48 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Dear Valentina,<br /><br />The thing is that you have to adequately represent the dispersions (PD) throughout the BZ.<br /><br />If you have some other PDs (from experiments or previous theoretical work) and you want to compare yours to theirs, it would be nice to follow their paths through the BZ. So, just take their high symmetry points and divide the line between each two points into 20 or 40 parts (depending how smooth curves you want). And then enter all these points into the qph1l list.<br />You can use the awk command to generate a list of points between a finite q-point and 0. Make a d.dat file which contains only one zero. Then execute<br /><br />awk '{ for (i=1; i&lt;=40; i++) {s=0.3333; k=0.0083325*i; s=s-k+$1; printf(&quot; %g&quot;, s); printf(&quot;\n&quot;) }  }' d.dat &gt; d1.dat<br /><br />In d1.dat you'll have all the points between 0.3333 and 0, with an interval of 0.0083325. There are probably better (and nicer) ways to do this, but this one's the one I use.<br /><br />If you don't have any PDs to compare to, you'll have to think of your own path around and/or through the &quot;octant&quot; of your BZ.<br /><br />Hope this helps.<br /><br />Cheers!<br /><br />Igor L.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: qph1l phonon dispersion anaddb</h3>
+				<div class="date">Posted: <strong>Mon Oct 03, 2011 7:26 pm</strong></div>
+				<div class="author">by <strong>irm20</strong></div>
+				<div class="content">Thank you very much Igor, this is really helpful!<br />Regards, <br />Valentina</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1347&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:26:13 GMT -->
+</html>

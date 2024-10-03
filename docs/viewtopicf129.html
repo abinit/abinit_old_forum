@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2720&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:21:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; BUG? in PAW-U ground state properties for CoO system</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>BUG? in PAW-U ground state properties for CoO system</h2>
+		<p><a href="viewtopicf49c.html?f=9&amp;t=2720">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2720</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>BUG? in PAW-U ground state properties for CoO system</h3>
+				<div class="date">Posted: <strong>Mon Jun 30, 2014 4:26 pm</strong></div>
+				<div class="author">by <strong>stuartbogatko</strong></div>
+				<div class="content">Hello,<br /><br />We are expecting that the attached two input files (output also attached) should be producing the same results.<br /><br />These are PAW+U ground state calculations on the CoO system.<br /><br />The main differences in the input files being <br /><br />nsppol  2<br />nspden  2<br />nspinor 1<br /><br />in CoO-1.in<br /><br />nsppol 1<br />nspden 4<br />nspinor 2<br /><br />in CoO-2.in<br /><br />However, this is not the case and we are getting differences in for example<br /><br />local Mag. for lpawu is       -2.313323<br /><br />&quot;Double-counting&quot; decomposition of free energy:<br />    Band energy     =  1.37791802945430E+00<br />    Ewald energy    = -4.08825008896774E+01<br />    PspCore energy  =  1.68654710609047E+00<br />    Dble-C XC-energy= -6.08096103324206E+00<br />    Spherical terms = -2.16679310918535E+00<br />    &gt;&gt;&gt;&gt;&gt; Internal E= -4.60657898965600E+01<br /><br />compared to:<br /><br />local Mag. z is     0.27728302E+01<br /><br />&quot;Double-counting&quot; decomposition of free energy:<br />    Band energy     =  1.16400359314166E+00<br />    Ewald energy    = -4.08825008896774E+01<br />    PspCore energy  =  1.68654710609047E+00<br />    Dble-C XC-energy= -5.98554183028169E+00<br />    Spherical terms = -2.11812398454607E+00<br />    &gt;&gt;&gt;&gt;&gt; Internal E= -4.61356160052730E+01<br /><br />Any insights are highly appreciated.<br /><br />Kind regards,<br /><br />Stuart</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: BUG? in PAW-U ground state properties for CoO system</h3>
+				<div class="date">Posted: <strong>Tue Jul 01, 2014 1:21 pm</strong></div>
+				<div class="author">by <strong>recohen</strong></div>
+				<div class="content">I have verified that this is a problem with LDA+U. If you run with no U there are consistent results. However there is a minor strange result in the total moment (see below).<br /><br />Moment:<br />nspinor 1<br />Magnetization (spin up - spin down) [el/Bohr^3]<br />,     Maximum=    5.7170E-01  at reduced coord.    0.0000    0.0000    0.0000<br />,     Minimum=   -5.2696E-04  at reduced coord.    0.2600    0.2400    0.2400<br />,  Integrated=    3.0871E+00<br /> <br />ETOT  -46.225484439923  <br /><br />Spinor:<br />nspinor 2<br />x component of magnetization [el/Bohr^3]<br />,     Maximum=    1.4190E-05  at reduced coord.    0.5000    0.5000    0.4200<br />,     Minimum=   -1.4190E-05  at reduced coord.    0.5800    0.4200    0.5000<br />,  Integrated=    0.0000E+00<br /> y component of magnetization [el/Bohr^3]<br />,     Maximum=    1.4190E-05  at reduced coord.    0.5000    0.4200    0.5000<br />,     Minimum=   -1.4190E-05  at reduced coord.    0.5800    0.5000    0.4200<br />,  Integrated=    0.0000E+00<br /> z component of magnetization [el/Bohr^3]<br />,     Maximum=    5.7174E-01  at reduced coord.    0.0000    0.0000    0.0000<br />,     Minimum=   -5.1812E-04  at reduced coord.    0.2600    0.2400    0.2400<br />,  Integrated=    3.0878E+00<br /> Magnetization (absolute value) [el/Bohr^3]<br />,     Maximum=    5.7174E-01  at reduced coord.    0.0000    0.0000    0.0000<br />,     Minimum=    1.0940E-06  at reduced coord.    0.0800    0.4600    0.2600<br />,  Integrated=    3.1023E+00<br /> <br /> ETOT 50  -46.225479510083    -1.770E-07 3.739E-05 8.886E-07<br /><br />Note I expected to see the total Magnetization equal to z in the spinor case, since the x and y components are zero.<br /><br />With DFT+U, the spinor and moment codes converge to different magnetizations and very different total energies.<br /><br />Ron Cohen</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: BUG? in PAW-U ground state properties for CoO system</h3>
+				<div class="date">Posted: <strong>Fri Jul 04, 2014 11:13 am</strong></div>
+				<div class="author">by <strong>amadon</strong></div>
+				<div class="content">Hello,<br /><br />The problem might come from two different double countings.<br />For collinear calculation, in the Full Localized version, the double counting in ABINIT is the usual form (Eq. 4 of<br />Phys. Rev. B 52, R5467(R)). This depends on the spin dependent number of electrons for correlated orbitals.<br /><br />The important point is that with spin orbit coupling (which requires non collinear calculation nspinor=4), the spin projection is not a good<br />quantum number and thus the Double Counting of Eq 4 of Phys. Rev. B 52, R5467(R) is ill defined, this is why we use the double counting of Eq. 4 of Phys. Rev. B 72, 024458.<br />This does not depends in the spin dependent number of electrons but only on the total number of correlated electrons.<br />And the same double counting is used for non collinear calculation without spin orbit coupling.<br />[A more general version is currently under test but not yet in production (Eq 14 of Phys. Rev. B 80, 035121)]<br /><br />Do you encounter the same problem with J=0 ? The difference in Double Counting should not play a role.<br /><br />Best regards<br />Bernard</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: BUG? in PAW-U ground state properties for CoO system</h3>
+				<div class="date">Posted: <strong>Wed Jul 09, 2014 4:28 pm</strong></div>
+				<div class="author">by <strong>recohen</strong></div>
+				<div class="content">Thank you! There are a number of things to say about this. First, and to the main point, the results are much closer with J=0, but still not identical. One thing is that the moment calculation converges right away, but the spinor one does not converge with the same setup except spinor even after 1000 iterations with J=0. However, the residual is small. The total energy is very close, but the moments are somewhat different. I still also don't understand the difference between the total moment and the z moment when x and y are zero. So for the spinor calculation I get:<br /><br /> x component of magnetization [el/Bohr^3]<br />,     Maximum=    4.3580E-06  at reduced coord.    0.5000    0.6042    0.4583<br />,Next maximum=    4.3293E-06  at reduced coord.    0.4792    0.6042    0.4583<br />,     Minimum=   -4.3580E-06  at reduced coord.    0.4375    0.4583    0.6042<br />,Next minimum=   -4.3293E-06  at reduced coord.    0.4583    0.4583    0.6042<br />,  Integrated=    0.0000E+00<br /> y component of magnetization [el/Bohr^3]<br />,     Maximum=    4.3580E-06  at reduced coord.    0.3958    0.5625    0.5000<br />,Next maximum=    4.3293E-06  at reduced coord.    0.3958    0.5417    0.5208<br />,     Minimum=   -4.3580E-06  at reduced coord.    0.5417    0.5000    0.5625<br />,Next minimum=   -4.3293E-06  at reduced coord.    0.5417    0.5208    0.5417<br />,  Integrated=    0.0000E+00<br /> z component of magnetization [el/Bohr^3]<br />,     Maximum=    5.0754E-01  at reduced coord.    0.0000    0.0000    0.0000<br />,Next maximum=    5.0051E-01  at reduced coord.    0.9792    0.0000    0.0208<br />,     Minimum=   -7.2011E-04  at reduced coord.    0.3542    0.9167    0.3750<br />,Next minimum=   -7.2011E-04  at reduced coord.    0.0833    0.6458    0.6458<br />,  Integrated=    2.4625E+00<br /> Magnetization (absolute value) [el/Bohr^3]<br />,     Maximum=    5.0754E-01  at reduced coord.    0.0000    0.0000    0.0000<br />,Next maximum=    5.0051E-01  at reduced coord.    0.9792    0.0000    0.0208<br />,     Minimum=    7.5272E-07  at reduced coord.    0.5000    0.6667    0.0208<br />,Next minimum=    7.5272E-07  at reduced coord.    0.9792    0.5000    0.1875<br />,  Integrated=    2.5040E+00<br /><br />&quot;Double-counting&quot; decomposition of free energy:<br />    Band energy     =  1.30145376189153E+00<br />    Ewald energy    = -4.08825008896774E+01<br />    PspCore energy  =  1.68654710609047E+00<br />    Dble-C XC-energy= -6.07438056904629E+00<br />    Spherical terms = -2.08161874740942E+00<br />    &gt;&gt;&gt;&gt;&gt; Internal E= -4.60504993381511E+01<br /><br />    -kT*entropy     = -1.12246516135029E-01<br />    &gt;&gt;&gt;&gt; Etotal (DC)= -4.61627458542861E+01<br /><br />  &gt;Total energy in eV           = -1.25614325787490E+03<br />  &gt;Total DC energy in eV        = -1.25615219747260E+03<br />--------------------------------------------------------------------------------<br /> =&gt; On atom   1, for  lpawu, local Mag. x is     0.00000000E+00<br />                             local Mag. y is     0.00000000E+00<br />                             local Mag. z is     0.24423820E+01<br />                             norm of Mag. is     0.24423820E+01<br />Note that the paw decomposition is different that the total.   <br /><br />and for the moment case:<br />Magnetization (spin up - spin down) [el/Bohr^3]<br />,     Maximum=    5.0291E-01  at reduced coord.    0.0000    0.0000    0.0000<br />,Next maximum=    4.9584E-01  at reduced coord.    0.0000    0.0208    0.9792<br />,     Minimum=   -7.6092E-04  at reduced coord.    0.2500    0.2500    0.2500<br />,Next minimum=   -7.6092E-04  at reduced coord.    0.7500    0.7500    0.7500<br />,  Integrated=    2.4300E+00<br />  &quot;Double-counting&quot; decomposition of free energy:<br />    Band energy     =  1.30994367394859E+00<br />    Ewald energy    = -4.08825008896774E+01<br />    PspCore energy  =  1.68654710609047E+00<br />    Dble-C XC-energy= -6.08103834215973E+00<br />    Spherical terms = -2.08205541014642E+00<br />    &gt;&gt;&gt;&gt;&gt; Internal E= -4.60491038619445E+01<br /><br />    -kT*entropy     = -1.13427694686086E-01<br />    &gt;&gt;&gt;&gt; Etotal (DC)= -4.61625315566306E+01<br /><br />  &gt;Total energy in eV           = -1.25614639276743E+03<br />  &gt;Total DC energy in eV        = -1.25614636613684E+03<br /><br />I also am not sure what the kT*entropy term is. <br /><br />Another concern is the way the LDA+U calculation is done with J. When we do DFT/DMFT computations with Kristjan Haule's code, we use DFT with no spin functional and let the J take care of the Hund's coupling. When you do LSDA and then LDA+U with J the double counting correction is not so good, and results are less reliable. This has been known in the many body community many years. Is there a way to turn the spin part of the functional in PBE GGA, for example, and use only J for the Hund's coupling, with the normal spin-independent double counting?<br /><br />So in summary, there are still two issues: (1) minor inconsistency with spinor and moment runs, with spinor run ask showing poor convergence and inconsistency between total moment and z moment and (2) the spin polarized case with LDA+U and J&lt;&gt;0, even in the moment code.<br /><br />Thank you!<br /><br />Ron</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: BUG? in PAW-U ground state properties for CoO system</h3>
+				<div class="date">Posted: <strong>Fri Jul 11, 2014 4:12 pm</strong></div>
+				<div class="author">by <strong>amadon</strong></div>
+				<div class="content">(1) Concerning the inconsistency. It seems that you did not give the number of KS bands in the input file. ABINIT choose automatically a given number of bands but this automatic choice is too low for transition metals (only 9 and 18 bands for the collinear and non collinear calculations): the last bands are in practice not empty, it reveals the problem. So I recommend 20 bands for the collinear calculation  and 40 for the non collinear calculation (you have to double the number of bands in this case). I did run a  quick calculation (with low cutoff and k-point) and the difference between collinear and non collinear total energies is about 3.10-7 Ha (provided you increase tolvrs).  However, I think a perfect exact agreement between total energies is not expected in this case because for non collinear  calculation, the exchange correlation potential has a supplementary term (see Eq 34 of  Phys. Rev. B 62, 11556). It could be checked that this difference in total energies do not come from the Hubbard term by comparing two identical *magnetic* calculations (collinear and non collinear) without Hubbard corrections (ie LSDA). <br /><br />(With a good number of bands, the convergence should improve)<br /><br />(2) The idea of doing a spin polarized LDA+U calculation with no exchange splitting in the LDA functional is interesting. If you have some, I would be interested by references on this. As DFT+DMFT can describe correlation without magnetism, the LDA exchange splitting do not play a role, without having to  suppress it explicitly. In fact it is not the case for LDA+U, so the code should be modified to do this kind of calculations.<br />However, this is not currently available in ABINIT. The current implementation is basically the usual one (LSDA+ U).<br /><br />Best regards</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: BUG? in PAW-U ground state properties for CoO system</h3>
+				<div class="date">Posted: <strong>Fri Jul 11, 2014 4:25 pm</strong></div>
+				<div class="author">by <strong>recohen</strong></div>
+				<div class="content">Thank you so much! The project this is for is to do calculations for applied electric fields with LDA+U, which works with spinors but not moments, and then one has to fix the number of bands. However, this is just a test case, which turns out metallic, and I agree the bands is an issue. I had understood that the default configuration was for ABINIT to add extra bands, but I see it doesn't or doesn't add enough. Thank you so much for your help.<br /><br />There are many paper on LDA+U+J and DMFT with only LDA (not LSDA)--basically all the papers with authors Savrasov, Haule, Georges, etc. I will have to hunt for a paper that explicitly explains this issue from the many body perspective. I will look.<br /><br />Thank you again,<br /><br />Ron</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2720&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:21:38 GMT -->
+</html>

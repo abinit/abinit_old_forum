@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3321&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:52:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Issue Regarding Parallel Installation of Abinit 8.0.7</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Issue Regarding Parallel Installation of Abinit 8.0.7</h2>
+		<p><a href="viewtopic7772.html?f=3&amp;t=3321">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3321</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Issue Regarding Parallel Installation of Abinit 8.0.7</h3>
+				<div class="date">Posted: <strong>Tue Jul 12, 2016 8:06 am</strong></div>
+				<div class="author">by <strong>Esha</strong></div>
+				<div class="content">Hi. I have followed this video to install Abinit-8.0.7: <!-- m --><a class="postlink" href="http://www.youtube.com/watch?v=DppLQ-KQA68">http://www.youtube.com/watch?v=DppLQ-KQA68</a><!-- m --><br /><br />My sponce.ac file is as follows<br /><br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_prefix=&quot;/usr&quot;<br />with_trio_flavor=&quot;netcdf+etsf_io&quot;<br />with_netcdf_incs=&quot;-I/usr/include&quot;<br />with_netcdf_libs=&quot;-L/usr/lib -lnetcdf -lnetcdff&quot;<br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_incs=&quot;-I/usr/include/&quot;<br />with_fft_libs=&quot;-L/usr/lib/x86_64-linux-gnu/ -lfftw3 -lfftw3f&quot;<br />with_linalg_flavor=&quot;atlas&quot;<br />with_linalg_libs=&quot;-L/usr/lib -llapack -lf77blas -lcblas -latlas&quot;<br />with_dft_flavor=&quot;atompaw+libxc&quot;<br />#with_dft_flavor=&quot;atompaw+bigdft+libxc+wannier90&quot;<br />enable_gw_dpc=&quot;yes&quot;<br />with_mpi_level=&quot;2&quot;<br />FC=&quot;/usr/bin/mpif90&quot;<br />CC=&quot;/usr/bin/mpicc&quot;<br />CXX=&quot;/usr/bin/mpic++&quot;<br /><br />I then configure abinit using command from inside build folder<br />../configure --with-config-file=&quot;./sponce.ac&quot;<br /><br />it ran succesfully then I make abinit using command<br />make multi multi_nprocs=8<br /><br />then <br />sudo make install<br /><br />then I submit the job using command<br /> mpirun -np 8 /usr/local/bin/abinit &lt; BaO-trf2-1.files &gt;&amp; RUN.log<br /><br />The job doesnt run at all. It gave me signal 7 bus error<br /><br />I tried again with minimum no of cores<br /> mpirun -np 2 /usr/local/bin/abinit &lt; BaO-trf2-1.files &gt;&amp; RUN.log<br /><br />It ran a little bit and then again the same error<br /><br />I make it again using command<br />make multi multi_nprocs=10<br />sudo make install<br /><br />Now it is running with command<br /> mpirun -np 4 /usr/local/bin/abinit &lt; BaO-trf2-1.files &gt;&amp; RUN.log<br />but taking too long. It seems not running on parallel cores<br /><br />Inside log file I noticed one issue<br /><br />--- !WARNING<br />src_file: m_nctk.F90<br />src_line: 539<br />message: |<br />    The netcdf library does not support parallel IO, see message above<br />    Abinit won't be able to produce files in parallel e.g. when paral_kgb==1 is used.<br />    Action: install a netcdf4+HDF5 library with MPI-IO support.<br /><br />Is it the reason? or anything else?<br />How to resolve the issue? Any help will be appreciated.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Issue Regarding Parallel Installation of Abinit 8.0.7</h3>
+				<div class="date">Posted: <strong>Tue Jul 19, 2016 9:04 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Hi,<br /><br />The compilation should not depend on the number of cores you use to compile abinit. make or make mj4 or whatever should result in the same executable.<br /><br />The last warning you have seems to be related to the fact that you link with netcdf but maybe not with the hdf5 version of netcdf. (the tutorial you follow is a little bit old but nevermind)<br /><br />Can you at least provide the error message you have instead of just signal 7 bus error ? Can you run any other job with mpi ? Try to be more specific.<br /><br />Cheers</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Issue Regarding Parallel Installation of Abinit 8.0.7</h3>
+				<div class="date">Posted: <strong>Wed Jul 20, 2016 8:28 am</strong></div>
+				<div class="author">by <strong>Esha</strong></div>
+				<div class="content">Hi,<br /><br />Thanks for your response, the complete error message in log file is<br /><br />Program received signal SIGBUS: Access to an undefined portion of a memory object.<br /><br />Backtrace for this error:<br />#0  0x7FCE9356B777<br />#1  0x7FCE9356BD7E<br />#2  0x7FCE92A89CAF<br />#3  0x7FCE8458233A<br />#4  0x7FCE916584E8<br />#5  0x7FCE91658807<br />#6  0x7FCE8457FB53<br />#7  0x7FCE84FCD75C<br />#8  0x7FCE853D8F1A<br />#9  0x7FCE9166FB54<br />#10  0x7FCE9168665F<br />#11  0x7FCE938930F7<br />#12  0x12B33CA in __m_xmpi_MOD_xmpi_init at m_xmpi.F90:601<br />#13  0x40F9BE in abinit at abinit.F90:215<br />--------------------------------------------------------------------------<br />mpirun noticed that process rank 0 with PID 13645 on node hachemi exited on signal 7 (Bus error).<br />--------------------------------------------------------------------------</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Issue Regarding Parallel Installation of Abinit 8.0.7</h3>
+				<div class="date">Posted: <strong>Tue Aug 23, 2016 1:00 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">This is a problem with your MPI installation, not with Abinit. Please consult their documentation / forums / mailing lists and/or re-install MPI.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Issue Regarding Parallel Installation of Abinit 8.0.7</h3>
+				<div class="date">Posted: <strong>Mon Oct 03, 2016 2:39 pm</strong></div>
+				<div class="author">by <strong>marco.digennaro</strong></div>
+				<div class="content">Hi guys,<br />I actually have the same problem. Even though parallelism is there (cpu time different for different mpi runs), I get these two warning messages:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;--- !WARNING<br />src_file: m_nctk.F90<br />src_line: 526<br />message: |<br />&nbsp; &nbsp; &nbsp;Strange, netcdf seems to support MPI-IO but: NetCDF: Not a valid ID<br />&nbsp;...<br />&nbsp;<br />&nbsp;--- !WARNING<br />&nbsp;src_file: m_nctk.F90<br />&nbsp;src_line: 539<br />&nbsp;message: |<br />&nbsp; &nbsp; &nbsp;The netcdf library does not support parallel IO, see message above<br />&nbsp; &nbsp; &nbsp;Abinit won't be able to produce files in parallel e.g. when paral_kgb==1 is used.<br />&nbsp; &nbsp; &nbsp;Action: install a netcdf4+HDF5 library with MPI-IO support.<br />&nbsp;...<br /></code></pre></div><br /><br />I re-installed netcdf and hdf5 within anaconda, and re-installed abinit8 right after, but the problem is still there.<br />I also tried to modify the line `` with-trio-flavor=&quot;netcdf+etsf_io&quot; `` in the .ac file and noticed that in the end the configuration does not care if you set netcdf, or netcdf+whatever, since TRIO flavor is set to None. You have to type it by hand after configure to get it correctly.<br />This looks a bit suspicious to me.<br /><br />cheers</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Issue Regarding Parallel Installation of Abinit 8.0.7</h3>
+				<div class="date">Posted: <strong>Tue Oct 04, 2016 9:35 am</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi Marco,<br /><br /><blockquote class="uncited"><div>I also tried to modify the line `` <strong class="text-strong">with-trio-flavor</strong>=&quot;netcdf+etsf_io&quot; `` in the .ac file and noticed that in the end the configuration does not care if you set netcdf, or netcdf+whatever, since TRIO flavor is set to None. You have to type it by hand after configure to get it correctly.<br /></div></blockquote><br /><br />I don't know if a typo when you write your post but it's <br /><br />with_trio_flavor   not   with-trio-flavor<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Issue Regarding Parallel Installation of Abinit 8.0.7</h3>
+				<div class="date">Posted: <strong>Tue Oct 04, 2016 3:23 pm</strong></div>
+				<div class="author">by <strong>marco.digennaro</strong></div>
+				<div class="content">Thanks Jean Michel,<br /><br />that is absolutely right. But the warning regarding netcdf is still there.<br /><br />BR</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3321&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:52:45 GMT -->
+</html>

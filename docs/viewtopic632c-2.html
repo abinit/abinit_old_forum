@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=585&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:20:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; ZnTe calculations</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>ZnTe calculations</h2>
+		<p><a href="viewtopic7b01.html?f=11&amp;t=585">https://forum.abinit.org/viewtopic.php?f=11&amp;t=585</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>ZnTe calculations</h3>
+				<div class="date">Posted: <strong>Thu Sep 09, 2010 4:58 pm</strong></div>
+				<div class="author">by <strong>Newlife1982</strong></div>
+				<div class="content">Hi all,<br /><br />I am calculating the band gap of bulk ZnTe (8 atoms). But calculations always failed with warning that memory is not enough. In fact, I use severs with 8 or 12 cores. I think it should be fine. <br /><br />It would be nice if you could give me some suggestions. Thank you in advance.<br /><br />The following is the input file:<br /><br />optdriver    3<br />gwcalctyp    28<br />nband       200<br />ecuteps     17.0<br />ecutwfn     17.0<br /><br />awtr        0       # Note : the default awtr 1 is better<br /><br />#Definition of occupation numbers<br />occopt 1<br /><br />#Definition of the unit cell<br />acell 3*11.529<br /><br />rprim  1.0  0.0  0.0   # FCC primitive vectors (to be scaled by acell)<br />       0.0  1.0  0.0<br />       0.0  0.0  1.0<br />chkprim 0<br />#Definition of the atom types<br />ntypat 2<br />znucl 30 52<br /><br />#Definition of the atoms<br />natom 8<br />typat 1 1 1 1 2 2 2 2<br />xred  0.0000000000000000   0.0000000000000000   0.0000000000000000<br />      0.0000000000000000   0.5000000000000000   0.5000000000000000<br />      0.5000000000000000   0.0000000000000000   0.5000000000000000<br />      0.5000000000000000   0.5000000000000000   0.0000000000000000<br />      0.2500000000000000   0.2500000000000000   0.2500000000000000<br />     -0.2500000000000000  -0.2500000000000000   0.2500000000000000<br />     -0.2500000000000000   0.2500000000000000  -0.2500000000000000<br />      0.2500000000000000  -0.2500000000000000  -0.2500000000000000<br /><br /><br />#Definition of the planewave basis set<br />ecut  20.0<br /><br />#Definition of the k-point grid<br />ngkpt        12 12 12<br />nshiftk      1<br />shiftk       0.  0.  0.<br />istwfk      84*1<br /><br />#Definition of the SCF procedure<br />nstep       50<br />toldfe      1.0d-8<br /><br />prtvol     5<br />enunit     1</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ZnTe calculations</h3>
+				<div class="date">Posted: <strong>Thu Sep 16, 2010 4:36 am</strong></div>
+				<div class="author">by <strong>Robin</strong></div>
+				<div class="content">You can try to set gwmem=0.<br /><br />Your input file looks strange to me (no getkss for example). Did you check the examples in the built-in test files?<br /><br />Sincerely,<br />Guangfu Luo</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=585&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:20:36 GMT -->
+</html>

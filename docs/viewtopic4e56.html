@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1182&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:46:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; FFT Parallelization not working with 6.6.3 + ifort</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>FFT Parallelization not working with 6.6.3 + ifort</h2>
+		<p><a href="viewtopicc065.html?f=3&amp;t=1182">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1182</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>FFT Parallelization not working with 6.6.3 + ifort</h3>
+				<div class="date">Posted: <strong>Fri Jun 24, 2011 5:49 pm</strong></div>
+				<div class="author">by <strong>wolf.aarons</strong></div>
+				<div class="content">Hi everyone-<br /><br />I am having a lot of trouble compiling abinit 6.6.3 for fft parallelization and need help! I am using ifort 11.1.075 (the updated version) and I can't get fft parallelization working. I have large jobs (supercell calculations) that I need to run with limited memory, so I'm thinking I need to split the fft work over more processors. <strong class="text-strong">If I have any other options, aside from using fft parallelization, please let me know!</strong><br /><br />My compilation has no problems with k-point parallelizing, but using npband seems to break it. I have tried many things including updating fortran, using mkl, and adding a fortran heap-arrays flag, based on the suggestions in these posts (<!-- l --><a class="postlink-local" href="viewtopic9a29-2.html?f=2&amp;t=655">viewtopic.php?f=2&amp;t=655</a><!-- l -->, <!-- l --><a class="postlink-local" href="viewtopic6b6c-2.html?f=2&amp;t=1000">viewtopic.php?f=2&amp;t=1000</a><!-- l -->, <!-- l --><a class="postlink-local" href="viewtopic276a-2.html?f=3&amp;t=1139&amp;p=3665&amp;hilit=fftw3#p3665">viewtopic.php?f=3&amp;t=1139&amp;p=3665&amp;hilit=fftw3#p3665</a><!-- l -->). I have also tried using ethernet rather than myrinet, the standard on our cluster. Nothing has worked and I am feeling quite desperate.<br /><br />Here is the most recent configuration command I have used:<br />../configure --enable-64bit-flags --enable-mpi --enable-mpi-io --with-linalg-flavor=mkl --with-linalg-incs=&quot;-I/share/apps/intel/Compiler/11.1/075/mkl/include&quot; --with-linalg-libs=&quot;-L/share/apps/intel/Compiler/11.1/075/mkl/lib/em64t -lmkl_intel_lp64 -lmkl_blacs_lp64 -lmkl_intel_thread -lmkl_core -liomp5 -lpthread  -lmkl_blas95_lp64 -lmkl_lapack&quot; --with-mpi-prefix=/share/apps/openmpi-intel11.1.075/ FCFLAGS=&quot;-heap-arrays 64&quot;<br /><br />When running with npband &gt; 1, the code always stops on the first or second iteration, though the error can differ depending on the config setup. The config above gives this error:<br />ITER STEP NUMBER     1<br /> vtorho : nnsclo_now=  2, note that nnsclo,dbl_nnsclo,istep=  0 0  1<br /> starting lobpcg, with nblockbd,mpi_enreg%nproc_band          45           6<br />forrtl: severe (174): SIGSEGV, segmentation fault occurred<br />Image              PC                Routine            Line        Source             <br />abinip-6.6.3-i11.  0000000000DDC908  Unknown               Unknown  Unknown<br />abinip-6.6.3-i11.  000000000067CD6A  Unknown               Unknown  Unknown<br />abinip-6.6.3-i11.  00000000006149C6  Unknown               Unknown  Unknown<br />abinip-6.6.3-i11.  00000000005FAA33  Unknown               Unknown  Unknown<br /><br />If anyone can help me I would greatly appreciate it! Thanks in advance.<br /><br />Best,<br />Aaron Wolf</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: FFT Parallelization not working with 6.6.3 + ifort</h3>
+				<div class="date">Posted: <strong>Mon Jun 27, 2011 11:31 am</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">It might just be that you try to allocate more memory than there is on your system. And Abinit tends to underestimate the total amount of memroy needed.<br /><br />Try to decrease the values of the input parameters and check whether it keeps on crashing.<br /><br />Another way could be to change the nodes / cpu-per-node ratio, in order to give more memory to each processor.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: FFT Parallelization not working with 6.6.3 + ifort</h3>
+				<div class="date">Posted: <strong>Tue Jun 28, 2011 2:33 am</strong></div>
+				<div class="author">by <strong>wolf.aarons</strong></div>
+				<div class="content">Based on Yann's suggestions,  I performed the same tests but with twice the memory allocated.To do this, I halved the cpu-per-node ratio to double the memory available to each processor. These runs were allocated over twice the estimated memory requirement given by abinit! (how innacurate are those estimates?) Unfortunately, this still resulted in an error, however the errors were different depending on the value of npband and bandpp. I ran the same input file ( see attatched) with only those values changed. <br /><br />for the larger run:   npband 4     bandpp 1<br />for the smaller run:   npband 2    bandpp 2<br /><br />Below I have pasted the end of the failed log files from these two runs. I really appreciate help anyone can give me!<br /><br />Best,<br />Aaron Wolf<br /><br />==========  Larger Run error =============<br />ITER STEP NUMBER     1<br /> vtorho : nnsclo_now=  2, note that nnsclo,dbl_nnsclo,istep=  0 0  1<br /> starting lobpcg, with nblockbd,mpi_enreg%nproc_band         135           4<br />*** glibc detected *** /home/awolf/bin/abinip-6.6.3-i11.1-mkl-R2: double free or corruption (!prev): 0x00002aac8a771ea0 ***<br />======= Backtrace: =========<br />/lib64/libc.so.6[0x3d11a722ef]<br />/lib64/libc.so.6(cfree+0x4b)[0x3d11a7273b]<br />/share/apps//openmpi-intel11.1.075/lib/openmpi/mca_coll_tuned.so[0x2b4327820ae6]<br />/share/apps//openmpi-intel11.1.075/lib/openmpi/mca_coll_tuned.so[0x2b432781c709]<br />/share/apps/openmpi-intel11.1.075/lib/libmpi.so.0(MPI_Allreduce+0x76)[0x2b43220f0796]<br />/share/apps/openmpi-intel11.1.075/lib/libmpi_f77.so.0(MPI_ALLREDUCE+0xc5)[0x2b4321e91725]<br />/home/awolf/bin/abinip-6.6.3-i11.1-mkl-R2(m_xmpi_mp_xsum_mpi_dp4d_+0x344)[0x15d1754]<br />and more junk like this...<br /><br />============= Smaller Run Error ============<br />ITER STEP NUMBER     1<br /> vtorho : nnsclo_now=  2, note that nnsclo,dbl_nnsclo,istep=  0 0  1<br /> starting lobpcg, with nblockbd,mpi_enreg%nproc_band         135           2<br />-P-0000  leave_test : synchronization done...<br /> vtorho: loop on k-points and spins done in parallel<br />-P-0000  leave_test : synchronization done...<br /><br /> *********** RHOIJ (atom   1) **********<br />   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000 ...<br />   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000 ...<br />   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000 ...<br />   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000 ...<br />   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000 ...<br />   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000 ...<br />   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000 ...<br />   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000 ...<br />   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000 ...<br />   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000 ...<br />   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000 ...<br />   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000 ...<br />   ...  only 12  components have been written...<br /><br /> *********** RHOIJ (atom 160) **********<br />   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000<br />   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000<br />   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000<br />   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000<br />   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000<br />   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000<br />   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000<br />   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000<br /> <br /> Total charge density [el/Bohr^3]<br />,     Maximum=  NaN           at reduced coord.    0.0000    0.0000    0.0000<br />,     Minimum=  NaN           at reduced coord.    0.0000    0.0000    0.0000<br /> ETOT  1                   NaN NaN       6.138E-02 NaN       NaN       NaN<br /> scprqt: &lt;Vxc&gt;= -5.2556931E-01 hartree<br /><br />Simple mixing update:<br />  residual square of the potential : NaN<br /><br /> ******  TOTAL Dij    in Ha (atom      1) *****<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN ...<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN ...<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN ...<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN ...<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN ...<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN ...<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN ...<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN ...<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN ...<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN ...<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN ...<br />       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN ...<br />   ...  only 12  components have been written...<br /><br /> ITER STEP NUMBER     2<br /> vtorho : nnsclo_now=  2, note that nnsclo,dbl_nnsclo,istep=  0 0  2<br /> starting lobpcg, with nblockbd,mpi_enreg%nproc_band         135           2<br /><br /> m_eigen.F90:294:WARNING<br />  Problem in xev, info=   3<br />WARNING in zpotrf, info=  1<br /><br /> m_eigen.F90:383:WARNING<br />  Problem in xgv, info=   7<br />WARNING in zpotrf, info=  1<br />WARNING in zpotrf, info=  1<br /><br /> m_eigen.F90:294:WARNING<br />  Problem in xev, info=  11<br /> condition number of the Gram matrix= NaN                    <br /> Lobpcgwf: restart performed<br /><br /> m_eigen.F90:383:WARNING<br />  Problem in xgv, info=   7<br />WARNING in zpotrf, info=  1<br />WARNING in zpotrf, info=  1<br /><br />Then this repeats forever...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: FFT Parallelization not working with 6.6.3 + ifort</h3>
+				<div class="date">Posted: <strong>Wed Jun 29, 2011 5:24 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content"><blockquote class="uncited"><div>*** glibc detected *** /home/awolf/bin/abinip-6.6.3-i11.1-mkl-R2: double free or corruption (!prev): 0x00002aac8a771ea0 ***</div></blockquote><br />This likely means that there is a memory leak or that the amount of memory you need is really huge.<br /><br />Seeing the NaNs in the output of Dij, I would say that there might be a problem related to PAW, but I can't be more precise with the data you provided.<br /><br />Please remember as well that some versions of MKL are hosting some peculiar bugs. You might find useful information in the backtrace, leading you to a MKL call, for instance.<br /><br />One way to determine whether it comes from MKL would be to recompile Abinit with FFTW3 and the internal linear algebra libraries. If your calculation proceeds, it will mean that MKL is the culprit.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1182&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:46:40 GMT -->
+</html>

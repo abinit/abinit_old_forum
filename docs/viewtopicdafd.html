@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2645&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:20:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Segmentation fault wannier 90 abinit 7.6.3</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Segmentation fault wannier 90 abinit 7.6.3</h2>
+		<p><a href="viewtopicc43b.html?f=3&amp;t=2645">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2645</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Segmentation fault wannier 90 abinit 7.6.3&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Wed Apr 23, 2014 6:00 pm</strong></div>
+				<div class="author">by <strong>lorenzodona</strong></div>
+				<div class="content">Dear Abinit developers and users:<br />I compiled abinit 7.6.3 with this configuration setup:<br /> ./configure --enable-mpi=yes  --with-mpi-prefix=/opt/local FCFLAGS_OPTIM=&quot;-g -O3 -Wl,-search_paths_first&quot; CXXFLAGS=&quot;-g -O3 -Wl,-search_paths_first&quot; --enable-zdot-bugfix=yes --enable-optim=safe -with-mpi-level=1 --enable-mpi-io=yes -with-dft-flavor=&quot;atompaw+bigdft+libxc+wannier90&quot;<br />like abinit 7.6.2 and found no error when I run wannier 90 in abinit 7.6.2<br /> but in version 7.6.3 i found this error in wannier 90:<br /> Status file, reporting on built-in test libxc<br /><br /> ==&gt; The run finished cleanly.<br />     Moreover, comparison of the total energy, and other (few) relevant quantities with reference values has been successful.<br />     This does not mean that no problem is present, however. <br />     Please run the complete set of ABINIT tests to gain a better confidence in your installation.<br /><br />echo &quot;Running built-in test in_wannier90&quot;<br />Running built-in test in_wannier90<br />timeout=&quot;0&quot; perl ./Scripts/run-basic-tests.pl built-in in_wannier90 /Users/lorenzodona/Documents/abinit-7.6.3/tests<br /><br />Program received signal SIGSEGV: Segmentation fault - invalid memory reference.<br /><br />Backtrace for this error:<br />#0  0x11209b70d<br />#1  0x11209bc1b<br />#2  0x7fff945815a9<br />#3  0x7fff8b05f03a<br />#4  0x10da05321<br />#5  0x10da0f2d1<br />#6  0x10d0cec5f<br />#7  0x10cbf9c48<br />#8  0x10cc188fc<br />#9  0x10cc23d11<br />#10  0x10cc24447<br />#11  0x10cbc4ff3<br />#12  0x10cbcc371<br />#13  0x10cbb061e<br />#14  0x10cb97548<br />#15  0x10ddc87ce<br />sh: line 1: 59895 Segmentation fault: 11  ../../../src/98_main/abinit &lt; testin_wannier90.files &gt; testin_wannier90.log<br /><br /> Status file, with repetition rate  49, status number    10<br /><br />  Level abinit         : call macroin2 <br /><br /> Status file, with repetition rate  49, status number    10<br /><br />  Level abinit         : call macroin2 <br /><br /> Status file, with repetition rate  49, status number    10<br /><br />  Level abinit         : call macroin2 <br /><br /> Status file, with repetition rate  49, status number    10<br /><br />  Level abinit         : call macroin2 <br /><br /> Status file, with repetition rate  49, status number    10<br /><br />  Level abinit         : call macroin2 <br /><br /> Status file, with repetition rate  49, status number    10<br /><br />  Level abinit         : call macroin2 <br /><br /> Status file, with repetition rate  49, status number    10<br /><br />  Level abinit         : call macroin2 <br /><br /> Status file, with repetition rate  49, status number    10<br /><br />  Level abinit         : call macroin2 <br /><br /> Status file, with repetition rate  49, status number    10<br /><br />  Level abinit         : call macroin2 <br /><br /> Status file, with repetition rate  49, status number    10<br /><br />  Level abinit         : call macroin2 <br /><br /> Status file, with repetition rate  49, status number    10<br /><br />  Level abinit         : call macroin2 <br /><br />and also when i run:<br />untests.py wannier90 i found a lots of errors like this:<br />[wannier90][t03] fldiff.pl fatal error:<br />The diff analysis cannot be done : the number of lines to be analysed differ.<br />File /Users/lorenzodona/Documents/abinit-7.6.3/tests/wannier90/Refs/t03.out: 2382 lines, 131 ignored<br />File /Users/lorenzodona/Documents/abinit-7.6.3/tests/Test_suite/wannier90_t03/t03.out: 2381 lines, 131 ignored<br /><br />Please can you help me to solve this problem?<br />thank again for your patience with me.<br />Dearly lorenzo<br />thanks again:</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault wannier 90 abinit 7.6.3</h3>
+				<div class="date">Posted: <strong>Fri Apr 25, 2014 11:25 am</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Which compiler and version are you using?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault wannier 90 abinit 7.6.3</h3>
+				<div class="date">Posted: <strong>Fri Apr 25, 2014 7:57 pm</strong></div>
+				<div class="author">by <strong>lorenzodona</strong></div>
+				<div class="content">Dear pouillon thanks really to help me i use to compile abinit gcc 4.8.2<br />GNU Fortran (GCC) version 4.8.2 (x86_64-apple-darwin13)<br />I added the config file</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault wannier 90 abinit 7.6.3</h3>
+				<div class="date">Posted: <strong>Mon Apr 28, 2014 11:15 am</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Could you rebuild Abinit after putting the following in your config file and let us know if it changes something?<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>fcflags_opt_67_common=&quot;-O2&quot;<br />fcflags_opt_77_lwf=&quot;-O2&quot;<br />fcflags_opt_wannier90=&quot;-O2&quot;<br /></code></pre></div><br /><br />If not, could you try with &quot;-O1&quot; and with &quot;-O0&quot; as well?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault wannier 90 abinit 7.6.3</h3>
+				<div class="date">Posted: <strong>Mon Apr 28, 2014 2:59 pm</strong></div>
+				<div class="author">by <strong>lorenzodona</strong></div>
+				<div class="content">Dear pouillon thanks really to help me but it doesn't work with every value of flags -O2 -O1 and -O0<br />thanks again</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault wannier 90 abinit 7.6.3</h3>
+				<div class="date">Posted: <strong>Tue May 06, 2014 6:58 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">To be fully sure: could you build after configuring with the following options?<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--enable-optim=&quot;no&quot; --enable-debug=&quot;enhanced&quot;</code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault wannier 90 abinit 7.6.3</h3>
+				<div class="date">Posted: <strong>Wed May 07, 2014 1:03 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">I have the feeling that the problem is due to VECLIB (Apple's version of BLAS and LAPACK).<br /><br />Could you run wannier.x in the GNU debugger gdb:<br /><br /># To start the debugger:<br />$ gdb path_to_abinit<br /><br /># To start the applications:<br />gdb_prompt&gt; run &lt; testin_wannier90.files <br /><br />... SEGMENTATION FAULT ...<br /># Use the backtrace command to get the list of calls and post the output.<br />gdb_prompt&gt; backtrace <br /><br /><br />You may want to reduce the optimization level (-O3 --&gt; -O2) to get more useful and reliable information from gdb.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault wannier 90 abinit 7.6.3</h3>
+				<div class="date">Posted: <strong>Wed May 28, 2014 10:36 am</strong></div>
+				<div class="author">by <strong>lorenzodona</strong></div>
+				<div class="content">Thanks to everyone and excuse me for my delay but I have a lot of things to study<br />Dearly lorenzo I solved also the problem with export the wannier90 bin dir and wannier90 compiled by myself..<br />thanks thanks a lot.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2645&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:20:24 GMT -->
+</html>

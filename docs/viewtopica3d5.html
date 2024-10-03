@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=50&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:39:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [solved] Failure to Optimize Nanotube Interwall Distance</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[solved] Failure to Optimize Nanotube Interwall Distance</h2>
+		<p><a href="viewtopic3bb2.html?f=9&amp;t=50">https://forum.abinit.org/viewtopic.php?f=9&amp;t=50</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[solved] Failure to Optimize Nanotube Interwall Distance</h3>
+				<div class="date">Posted: <strong>Sat Feb 06, 2010 6:25 am</strong></div>
+				<div class="author">by <strong>MGulian</strong></div>
+				<div class="content">Hi,<br /><br />Working with nanotubes I've come across strange problems when trying optimize the interwall distance between the tubes. In my case they are (3,3)'s in a hexagonal arrangement (cross section of the unit cell is a parallelogram, and each corner of the parallelogram contains about a quarter of a nanotube).<br /><br />1. For some interwall distances, even in 500 datasets the calculation fails to converge while for others it converges nicely within 50.<br />2. As I decrease the interwall distances over a wide range (2.4 to 3.4 A), the energy just decreases, from -71.12 to below -71.13 while according to the literature it should have a minimum between 3 and 3.2 A. <br /><br />Can someone offer a suggestion? I'll post my input file below.<br /><br />Thanks in Advance,<br /><br />MG<br /><br /># Number of Data Sets<br /><br />ndtset 5<br /><br /># Definition of the unit cell<br /><br />acell: 6.4 6.4 2.463 angstrom<br />acell+ 0.1 0.1 0.0 angstrom<br /><br />rprim 1 0 0<br /><br />0.5 sqrt(0.75) 0.0<br /><br />0 0 1<br /><br /># Definition of the atom types<br /><br />ntypat 1<br /><br />znucl 6 <br /><br />ixc 1<br /><br /># Definition of the atoms<br /><br />natom 12<br /><br />typat *1<br /><br />xangst<br /><br />  1.3082219e+000 -1.5590782e+000  0.0000000e+000<br />  2.0043123e+000 -3.5341431e-001  0.0000000e+000<br />  2.0043123e+000  3.5341435e-001  1.2305009e+000<br />  1.3082219e+000  1.5590782e+000  1.2305009e+000<br />  6.9609033e-001  1.9124925e+000  0.0000000e+000<br /> -6.9609038e-001  1.9124925e+000  0.0000000e+000<br /> -1.3082220e+000  1.5590782e+000  1.2305009e+000<br /> -2.0043123e+000  3.5341431e-001  1.2305009e+000<br /> -2.0043123e+000 -3.5341436e-001  0.0000000e+000<br /> -1.3082219e+000 -1.5590782e+000  0.0000000e+000<br /> -6.9609033e-001 -1.9124925e+000  1.2305009e+000<br />  6.9609037e-001 -1.9124925e+000  1.2305009e+000<br /><br /> <br /><br /># Definition of the planewave basis set<br /><br />ecut 22 <br /><br /># Definition of the SCF procedure<br /><br />nstep 500<br /><br />toldfe 1.0e-12<br /><br />diemac 12.0<br /><br /># Usual self-consistent calculation<br /><br />kptopt 1<br />shiftk 0 0 0<br />ngkpt 4 4 4<br /><br />prtden 1</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Failure to Optimize Nanotube Interwall Distance</h3>
+				<div class="date">Posted: <strong>Sat Feb 06, 2010 9:41 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content"><blockquote><div><cite>MGulian wrote:</cite>Hi,<br /><br />Working with nanotubes I've come across strange problems when trying optimize the interwall distance between the tubes. In my case they are (3,3)'s in a hexagonal arrangement (cross section of the unit cell is a parallelogram, and each corner of the parallelogram contains about a quarter of a nanotube).<br /><br />1. For some interwall distances, even in 500 datasets the calculation fails to converge while for others it converges nicely within 50.<br />2. As I decrease the interwall distances over a wide range (2.4 to 3.4 A), the energy just decreases, from -71.12 to below -71.13 while according to the literature it should have a minimum between 3 and 3.2 A. <br /></div></blockquote><br /><br />Hello Gulian,<br /><br />The most important point you did not include in your post: are you using LDA or GGA pseudopotentials (the ixc 1 in the input is correct)? If you check the literature on graphite/CNT you'll see that GGA does not bind graphene planes or CNT. LDA does, at roughly the correct 3.5A, although for reasons that are not completely correct (compensation of &quot;covalent-like&quot; overbinding for the VdW binding which is completely absent).<br /><br />a few points:<br />1) 22Ha is a bit low for carbon - depends on your pseudopotential<br /><br />2) (3,3) tubes are very small and very curved - they will be quite reactive a priori, and these things are only synthesized in zeolites, they are never freestanding or in bundles. This may explain why they bind instead of sitting at a nice 3 Angstr<br /><br />3) I don't know what you mean by &quot;in 500 datasets&quot;. You mean SCF steps, or geometry relaxation steps? If it's scf, you might use iprcel 45<br /><br />4) the kpoints along the tube axis are probably insufficient<br /><br />5) check that &quot;angstrom&quot; is correctly interpreted by abinit (and that acell in bohr are correct in your input). I always use &quot;Angstr&quot;, but I know some combinations are not read correctly.<br /><br />Matthieu<br /><br /><blockquote class="uncited"><div>Can someone offer a suggestion? I'll post my input file below.<br /><br />Thanks in Advance,<br /><br />MG<br /><br /># Number of Data Sets<br /><br />ndtset 5<br /><br /># Definition of the unit cell<br /><br />acell: 6.4 6.4 6.4 angstrom<br />acell+ 0.1 0.1 0.1 angstrom<br /><br />rprim 1 0 0<br /><br />0.5 sqrt(0.75) 0.0<br /><br />0 0 1<br /><br /># Definition of the atom types<br /><br />ntypat 1<br /><br />znucl 6 <br /><br />ixc 1<br /><br /># Definition of the atoms<br /><br />natom 12<br /><br />typat *1<br /><br />xangst<br /><br />  1.3082219e+000 -1.5590782e+000  0.0000000e+000<br />  2.0043123e+000 -3.5341431e-001  0.0000000e+000<br />  2.0043123e+000  3.5341435e-001  1.2305009e+000<br />  1.3082219e+000  1.5590782e+000  1.2305009e+000<br />  6.9609033e-001  1.9124925e+000  0.0000000e+000<br /> -6.9609038e-001  1.9124925e+000  0.0000000e+000<br /> -1.3082220e+000  1.5590782e+000  1.2305009e+000<br /> -2.0043123e+000  3.5341431e-001  1.2305009e+000<br /> -2.0043123e+000 -3.5341436e-001  0.0000000e+000<br /> -1.3082219e+000 -1.5590782e+000  0.0000000e+000<br /> -6.9609033e-001 -1.9124925e+000  1.2305009e+000<br />  6.9609037e-001 -1.9124925e+000  1.2305009e+000<br /><br /> <br /><br /># Definition of the planewave basis set<br /><br />ecut 22 <br /><br /># Definition of the SCF procedure<br /><br />nstep 500<br /><br />toldfe 1.0e-12<br /><br />diemac 12.0<br /><br /># Usual self-consistent calculation<br /><br />kptopt 1<br />shiftk 0 0 0<br />ngkpt 4 4 4<br /><br />prtden 1</div></blockquote></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Failure to Optimize Nanotube Interwall Distance</h3>
+				<div class="date">Posted: <strong>Fri Feb 12, 2010 3:31 am</strong></div>
+				<div class="author">by <strong>Mamikon Gulian</strong></div>
+				<div class="content">Dear Matthieu,<br /><br />Thanks for your reply. I apologize it took me so long to acknowledge it, but we've had 1 meter of snow here in D.C (power issues...).<br /><br />I did mean SFC cycles, not datasets, and I am using a norm-conserving PSP of the Troullier-Martins type (.pspnc) I appreciate for your notifications about the cutoff energy and the iprcel parameter, and I hope that they will improve my modeling.<br /><br />Regarding the K-Point sampling, if I understood correctly, you meant that the k-points are sufficient in the <em class="text-italics">b</em>-x and <em class="text-italics">b</em>-y directions, but not in the<em class="text-italics"> b</em>-z direction (so that I should have 4x4x16, say, instead of 4x4x4). Actually, I was wondering whether the k-point grid should be of the form 1x1xN for a nanotube, as other scientists have told me. Is there an essential difference between these two approaches, at least for relaxation?<br /><br />Thanks for sharing with me your expertise,<br /><br />Mamikon</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Failure to Optimize Nanotube Interwall Distance</h3>
+				<div class="date">Posted: <strong>Sat Feb 13, 2010 1:17 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">If you are simulating a bundle, there will be some band dispersion in the perpendicular direction, so you do need to converge ngkpt in all directions. What is certain is that the tube direction will need a denser sampling.<br /><br />For the rest (ecut...) you need to do your own convergence, and don't trust published results, even if they claim to use the same pseudopotential (that's personal experience there).<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Failure to Optimize Nanotube Interwall Distance</h3>
+				<div class="date">Posted: <strong>Mon Feb 15, 2010 1:24 am</strong></div>
+				<div class="author">by <strong>Mamikon Gulian</strong></div>
+				<div class="content">Using &quot;iprcel 45&quot; fixed the SCF convergence issues, and it turns out that the major problem was just a mix-up on my part of PSP file names... With better k-point sampling (and the correct PSP file), as you suggested, it relaxes to the value in the literature.<br /><br />Thanks for the help and your recent advice,<br />Mamikon</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=50&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:39:01 GMT -->
+</html>

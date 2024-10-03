@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2101&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:32:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Time waste computing KSS?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Time waste computing KSS?</h2>
+		<p><a href="viewtopicd0ef.html?f=9&amp;t=2101">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2101</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Time waste computing KSS?</h3>
+				<div class="date">Posted: <strong>Thu Apr 25, 2013 4:20 pm</strong></div>
+				<div class="author">by <strong>lorenzo.sponza</strong></div>
+				<div class="content">Hallo to everybody,<br /><br />I have some question on how the KSS is computed in version 6.12.<br />Actually the reason I am asking it is that I tried to compute the KSS on a system with fairly low parameters <br />npwkss    = 600<br />nbandkss =  100<br />nkpt = 1156<br />I thought it would have been very fast, but even when running on 1184 processors, <br />the calculation lasted more than 20h.<br />Indeed after 20h, the wall clock time was over and in the log was stopped here:<br /><blockquote class="uncited"><div>Writing out eigenvalues/vectors for ikpt=505<br /> Occupation numbers for ikpt=505<br /> 505      2.0000  2.0000  2.0000  2.0000  0.0000  0.0000  0.0000  0.0000  0.0000<br />          0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000<br />          0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000<br />          0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000<br />          0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000<br />          0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000<br />          0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000<br />          0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000<br />          0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000<br />          0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000<br />          0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000<br />          0.0000<br /></div></blockquote><br />So my question is, how it is possible that it took so much time?<br />The writing of the file is made during the diagonalisation, or the KSS file is written only at the end of the calculation?<br />I hope my question is well formulated, otherwise I can add more elements to understand my point.<br /><br />Thanks.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Time waste computing KSS?</h3>
+				<div class="date">Posted: <strong>Sat Apr 27, 2013 6:11 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Hi Lorenzo,<br /><br /><blockquote class="uncited"><div>So my question is, how it is possible that it took so much time?<br /></div></blockquote><br /><br />Because the code that implements the output of the KSS file is highly inefficient,  in particular<br />when the run is done with so many processors.  Performing IO with many processors is not trivial <br />and outkss still uses Fortran-IO to write the results plus point-to-point MPI communications to <br />send the data to master. The inefficiency quickly increases with the number of MPI node and this <br />is what you are experiencing.<br /><br />This is the reason why massively parallel calculations should always use MPI-IO for reading/writing <br />the wavefunctions.<br />Note that the new version of the GW code can read WFK files (instead of KSS files), as a consequence<br />one can use MPI-IO to reduce the bottleneck due to IO.<br /><br />You can use the following trick if you need a KSS file for performing calculations with DP, EXC or other codes.<br /><br />1) Produce a WFK file with the GS part of abinit (no kssform)<br />2) run a second calculation that reads the WFK file and produces the KSS file (nstep=0, kssform=3, small number of MPI processors to avoid the IO issue)<br /><br />Hope it helps,<br />Ciao</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Time waste computing KSS?</h3>
+				<div class="date">Posted: <strong>Mon Apr 29, 2013 10:14 am</strong></div>
+				<div class="author">by <strong>lorenzo.sponza</strong></div>
+				<div class="content">Thanks a lot gmatteo, <br />especially for the hint!</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2101&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:32:29 GMT -->
+</html>

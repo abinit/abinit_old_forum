@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2685&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:51:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [Solved] band structure of Si nanowire input file error</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[Solved] band structure of Si nanowire input file error</h2>
+		<p><a href="viewtopic205c-2.html?f=9&amp;t=2685">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2685</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[Solved] band structure of Si nanowire input file error&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Sun Jun 08, 2014 9:54 pm</strong></div>
+				<div class="author">by <strong>ctwombly</strong></div>
+				<div class="content">Hi all,<br /><br />I am calculating the band structure of a silicon nanowire and with my input file I have the following error:<br /><br />inarray.F90.192:ERROR<br /> There is a problem with the input file : maybe a disagreement between the declared dimension of the array,<br />Action : correct your input file !<br /><br />I can run the file successfully if I set ndtset to 1, but gives me an error if I try to include the second step to output the band structure<br /><br />Thanks for the help in advance.<br />Chris<br /><br />My input file:<br /><br />ndtset 2<br /><br />kptopt1 1  <br />nshiftk1 1                  <br />chkprim1 0<br />shiftk1 0.0 0.0 0.0<br />chksymbreak1 0<br />ngkpt1 4 4 24<br />prtden1 1<br />toldfe1 1.0d-6<br /><br />iscf2    -2<br />getden2  -1<br />kptopt2  -3<br />chksymbreak2 0<br />chkprim2 0<br />nband2 91<br />ndivk2 100<br />kptbounds2 0.0  0.0  0.0<br />           0.0  0.0  1.0<br />tolwfr2  1.0d-16<br />enunit2  1 <br />prtbltztrp2 1<br /> <br /><br />#optimized cell characteristics<br />ixc 11 #GGA pf Perdew, Berke, and Ernzerhof<br />diemac 12.0<br />ecut 18<br />nstep 200<br />optforces 1<br />#cell definition<br /><br />acell 25 25 17.772949<br />rprim 1.0 0.0 0.0<br />      0.0 1.0 0.0<br />      0.0 0.0 1.0<br />natom 68 <br />ntypat 2<br />znucl 1 14<br />typat 2 2 2 2 2 2 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2<br />xcart<br />9.7130860  18.091335  13.329712<br />13.340974  11.807648  13.329712<br />16.968862  5.5239620  13.329712<br />6.0851980  11.807648  13.329712<br />9.7130860  5.5239620  13.329712<br />2.4573100  5.5239620  13.329712<br />16.968862  16.571886  12.792506<br />19.280869  12.567372  12.792506<br />2.4573100  16.571886  12.792506<br />0.1453030  12.567372  12.792506<br />12.025093  0.0000000  12.792506<br />7.4010790  0.0000000  12.792506<br />7.4010790  19.426172  12.385839<br />16.968862  2.8542860  12.385839<br />19.280869  6.8588000  12.385839<br />12.025093  19.426172  12.385839<br />2.4573100  2.8542860  12.385839<br />0.1453030  6.8588000  12.385839<br />16.968862  13.902210  11.848633<br />9.7130860  13.902210  11.848633<br />13.340974  7.6185240  11.848633<br />2.4573100  13.902210  11.848633<br />6.0851980  7.6185240  11.848633<br />9.7130860  1.3348370  11.848633<br />16.968862  13.902210  7.405395<br />9.7130860  13.902210  7.405395<br />13.340974  7.6185240  7.405395<br />2.4573100  13.902210  7.405395<br />6.0851980  7.6185240  7.405395<br />9.7130860  1.3348370  7.405395<br />3.7731910  2.0945620  6.868189<br />0.1453030  8.3782480  6.868189<br />6.0851980  18.666448  6.868189<br />13.340974  18.666448  6.868189<br />15.652981  2.0945620  6.868189<br />19.280869  8.3782480  6.868189<br />9.7130860  -1.334838  6.461523<br />0.1453030  15.237048  6.461523<br />19.280869  15.237048  6.461523<br />6.0851980  15.996772  5.924316<br />9.7130860  9.7130860  5.924316<br />16.968862  9.7130860  5.924316<br />13.340974  3.4294000  5.924316<br />13.340974  15.996772  5.924316<br />2.4573100  9.7130860  5.924316<br />6.0851980  3.4294000  5.924316<br />13.340974  3.4294000  1.481079<br />13.340974  15.996772  1.481079<br />9.7130860  9.7130860  1.481079<br />2.4573100  9.7130860  1.481079<br />6.0851980  15.996772  1.481079<br />6.0851980  3.4294000  1.481079<br />16.968862  9.7130860  1.481079<br />9.7130860  20.761010  0.943873<br />19.280869  4.1891240  0.943873<br />0.1453030  4.1891240  0.943873<br />13.340974  0.7597240  0.537206<br />0.1453030  11.047924  0.537206<br />3.7731910  17.331610  0.537206<br />6.0851980  0.7597240  0.537206<br />19.280869  11.047924  0.537206<br />15.652981  17.331610  0.537206<br />13.340974  11.807648  0<br />2.4573100  5.5239620  0<br />9.7130860  5.5239620  0<br />9.7130860  18.091335  0<br />6.0851980  11.807648  0<br />16.968862  5.523962    0</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: band structure of Si nanowire input file error</h3>
+				<div class="date">Posted: <strong>Sun Jun 08, 2014 10:46 pm</strong></div>
+				<div class="author">by <strong>raul_l</strong></div>
+				<div class="content">You should use <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>kptopt2&nbsp; -1</code></pre></div> if you are calculating only one BZ segment from 0,0,0 to 0,0,1. The value -3 assumes three segments, i.e. kptbounds2 should be followed by 4 k-points.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: band structure of Si nanowire input file error</h3>
+				<div class="date">Posted: <strong>Sun Jun 08, 2014 11:22 pm</strong></div>
+				<div class="author">by <strong>ctwombly</strong></div>
+				<div class="content">That solves it, thanks so much for the help!<br />Chris <img class="smilies" src="images/smilies/icon_e_biggrin.gif" alt=":D" title="Very Happy" /></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2685&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:51:19 GMT -->
+</html>

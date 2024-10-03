@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=2205&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:46:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; warnings related to PAW psps for Ti and C</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>warnings related to PAW psps for Ti and C</h2>
+		<p><a href="viewtopicc792.html?f=14&amp;t=2205">https://forum.abinit.org/viewtopic.php?f=14&amp;t=2205</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>warnings related to PAW psps for Ti and C</h3>
+				<div class="date">Posted: <strong>Tue Jun 25, 2013 3:29 pm</strong></div>
+				<div class="author">by <strong>emette</strong></div>
+				<div class="content">Dear ABINIT users,<br /><br />Now I'm trying to calculate lattice parameter of TiC, using PAW method. I could get a good value of lattice parameter compered with references.<br />However, a pair of following warning message alway appears for every dataset. One is for Ti and another for C.<br /><br />////////////////////////<br />        psp7in: WARNING -<br />                Valence density is not given with enough points<br />                in psp file. Some charge estimations will be coarse.<br />////////////////////////<br /><br />Are these WARNINGs harmful? If they are, how can I deal with it?<br />The psp files I'm using were downloaded from following URL. (from PAW atomic data table in ABINIT web site) <br /><br />        <!-- m --><a class="postlink" href="http://www.abinit.org/downloads/PAW2/TABLES/MAIN/022-ti/Ti-GGA-uspp">http://www.abinit.org/downloads/PAW2/TA ... i-GGA-uspp</a><!-- m --><br />        <!-- m --><a class="postlink" href="http://www.abinit.org/downloads/PAW2/TABLES/MAIN/006-c/C-GGA-uspp">http://www.abinit.org/downloads/PAW2/TA ... C-GGA-uspp</a><!-- m --><br /><br />Here is my input variables..<br />#########################<br />acell  3*8.1616216460 <br />rprim   0.0  0.5  0.5<br />           0.5  0.0  0.5<br />           0.5  0.5  0.0<br />ntypat   2<br />znucl    22 6<br />natom   2<br />typat    1 2<br />xred     0.0  0.0  0.0  # Ti<br />           0.5  0.5  0.5  # C<br />ecut      25<br />pawecutdg  50<br />occopt      4<br />tsmear     0.05<br />nband      18<br />nbdbuf      2<br />kptopt      1<br />ngkpt   10 10 10<br />nshiftk  4<br />shiftk   0.5  0.5  0.5<br />           0.5  0.0  0.0<br />           0.0  0.5  0.0<br />           0.0  0.0  0.5<br />nstep   500<br />toldfe  1.0d-10<br />optcell 1<br />ionmov  2<br />ecutsm  0.5<br />dilatmx 1.05<br />tolmxf  1.0d-6<br />strfact 100<br />ntime   500<br />#########################<br /><br />If you need any additional information, I'll post it immediately.<br />Thanks in advance!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: warnings related to PAW psps for Ti and C</h3>
+				<div class="date">Posted: <strong>Fri Jul 19, 2013 10:33 am</strong></div>
+				<div class="author">by <strong>rangel</strong></div>
+				<div class="content">Hi, <br />This error comes directly from reading of the atomic data file.<br />It means that the pseudo-potential (atomic-data) file was not created with a large number of points and that there should be some error related to this.<br />The only thing that can be done is to regenerate the pseudo-potential file using a denser grid of points.<br />But it may be that this is good enough for your particular needs.<br />You could estimate test the pseudo-potential in simple systems. It is always adviced to do so.<br /><br />Best wishes, <br />Tonatiuh Rangel</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=2205&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:46:21 GMT -->
+</html>

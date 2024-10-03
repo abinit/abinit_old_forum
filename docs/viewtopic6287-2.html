@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4145&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:21:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Structure optimisation stops</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Structure optimisation stops</h2>
+		<p><a href="viewtopic3e4b.html?f=9&amp;t=4145">https://forum.abinit.org/viewtopic.php?f=9&amp;t=4145</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Structure optimisation stops</h3>
+				<div class="date">Posted: <strong>Sun Jul 07, 2019 11:45 am</strong></div>
+				<div class="author">by <strong>wojtek</strong></div>
+				<div class="content">Dear All,<br /><br />I try to calculate an energy of Ti2N with one Ti atom substituted by Mo. The calculation suddenly stops during structure optimization (without that works well). For this calculation I used PAW downloaded from Abinit website. The toldff was set to 4e-5 to make the calculation faster, not to get the real value.<br />I'm attaching log and input files. I will be very thankful if someone can point where I make a mistake. Thank you.<br /><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file248b.php?id=1739">Ti2N.in</a></dt>
+						<dd>(2.44 KiB) Downloaded 236 times</dd>
+		</dl>
+		
+		
+			</div><br /><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file4250.php?id=1740">log1.log</a></dt>
+						<dd>(123.6 KiB) Downloaded 220 times</dd>
+		</dl>
+		
+		
+			</div> - the log file was ziped. It was too big (more than 1 MB)<br /><br />cheers<br />wojtek</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Structure optimisation stops</h3>
+				<div class="date">Posted: <strong>Fri Jul 12, 2019 4:18 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear wojtek,<br />I could not open your log file.<br />Could you post the error message you got?<br />Otherwise, looking at your input, I think there are some odd things there, let me explain. You are adding an impurity Mo atom that has 2 extra electron w.r.t. Ti, meaning that your system is probably metallic and/or magnetic while you did not put flags for that (occopt &gt;=3 for metallic occupation) and nothing for letting possibility for magnetism (nspden=2, nsppol=2). This means that there is strong chance that your calculation goes junky... <br />You might also have to play with mixing and SCF parameters if the default ones are not OK (diemix, nline, etc).<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Structure optimisation stops</h3>
+				<div class="date">Posted: <strong>Sun Jul 14, 2019 7:30 am</strong></div>
+				<div class="author">by <strong>wojtek</strong></div>
+				<div class="content">Dear Eric,<br /><br />thank you very much for your answer. I used the occopt flag before; however, somehow I deleted it when I've tried a different combination of instructions. Following your suggestion I've tried the calculation with the flags nspden=2, nsppol=2 (and occopt=3) but the result was the same: calculation stopped. I'm attaching the log file (I've cut 90% if it leaving beginning and end).<br />The calculation always went well without structural optimization - the log file shows no warnings (I'm not talking about a sense of results). When the structural optimization is added to an input file, the calculation simple stops without any error and without finishing. Thank you for the help.<br /><br />cheers<br />wojtek<br /><br /><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file5cb3.php?id=1741">14_7.log</a></dt>
+						<dd>(76.42 KiB) Downloaded 229 times</dd>
+		</dl>
+		
+		
+			</div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Structure optimisation stops&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Wed Aug 14, 2019 8:19 am</strong></div>
+				<div class="author">by <strong>wojtek</strong></div>
+				<div class="content">Reinstalation of Abinit from ports solved the problem.<br /><br />wojtek</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4145&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:21:23 GMT -->
+</html>

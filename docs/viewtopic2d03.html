@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=85&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:11:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; paral_kgb and KSS file</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>paral_kgb and KSS file</h2>
+		<p><a href="viewtopic3e10.html?f=9&amp;t=85">https://forum.abinit.org/viewtopic.php?f=9&amp;t=85</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>paral_kgb and KSS file</h3>
+				<div class="date">Posted: <strong>Wed Feb 24, 2010 5:29 pm</strong></div>
+				<div class="author">by <strong>alsaidi</strong></div>
+				<div class="content">Hello-<br /><br />The code fails to write out the KSS file when using the paral_kg =1.  The error message is,<br /><br /> m_io_kss.F90:1435:ERROR<br />  Unsupported value for accesswff: 1<br /><br />This the build information:<br /><br /> === Build Information === <br />  Version       : 6.0.1<br />  Build target  : x86_64_linux_intel11.1<br />  Build date    : 20100220<br /> <br /> === Compiler Suite === <br />  C compiler       : gnu<br />  CFLAGS           :  -g  -O2 -march=opteron<br />  C++ compiler     : gnu4.3<br />  CXXFLAGS         :  -g  -O2 -march=opteron<br />  Fortran compiler : intel11.1<br />  FCFLAGS          :  -g  -extend-source -vec-report0<br />  FC_LDFLAGS       :     -i-static -static-libcxa<br /> <br /> === Optimizations === <br />  Debug level        : yes<br />  Optimization level : standard<br />  Architecture       : amd_opteron<br /> <br /> === MPI === <br />  Parallel build : yes<br />  Parallel I/O   : yes<br /> <br /> === Linear algebra === <br />  Library type  : abinit<br />  Use ScaLAPACK : yes<br /> <br /> === Plug-ins === <br />  BigDFT    : yes<br />  ETSF I/O  : yes<br />  LibXC     : no<br />  FoX       : no<br />  NetCDF    : yes<br />  Wannier90 : yes<br /> <br /> === Experimental features === <br />  Bindings            : no<br />  Error handlers      : no<br />  Exports             : no<br />  GW double-precision : no<br />  Macroave build      : yes<br /><br />==========================<br />I am testing it using a simile N2 in a box case. Input file is,<br /><br />paral_kgb 1 <br /><br /># Definition of parameters for the calculation of the KSS file<br />nbandkss  -1        # Number of bands in KSS file (-1 means the maximum possible)<br />nband      8        # Number of (occ and empty) bands to be computed<br />#istwfk     10*1<br /><br />#<br />acell 15.2   15.3  18.3   <br /><br /># Definition of the atom types<br />ntypat  1      <br />znucl 7       <br />  <br />natom 2           # There are two atoms<br />typat  1 1        # They both are of type 1, that is, Silicon.<br />xangst             # Reduced coordinate of atoms<br />      0.0  0.0  0.0<br />      0.0 0.0  1.4 <br /><br />ngkpt 1 1 1 <br />nkpt    1<br />kpt 0 0 0 <br />nshiftk 1 <br />shiftk 0 0 0 <br /><br />istwfk  10*1      <br /><br />symmorphi 0<br /><br />ecut 25.0       <br /><br />nstep   2     <br />toldfe  1.0d-6    <br />diemac  12.0     <br />#kssform 1<br />#accesswff 3<br /><br />========================================<br /><br />Tried several choices for accesswff  but none worked.<br /><br />Thank you in advance for any suggestions. <br /><br />Wissam  Al-Saidi<br />Univ of Pittsburgh</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: paral_kgb and KSS file</h3>
+				<div class="date">Posted: <strong>Thu Mar 04, 2010 9:41 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Dear Wissam,<br /><br />At present one cannot generate the KSS file when the calculation <br />is performed with the band-fft parallelization. <br />For the time being one has to resort to the following procedure:<br /><br />1) GS + NSCF calculation with paral_kb = 1 and MPI-IO <br />   Note that MPI-IO is mandatory in order to have a complete<br />   WFK file at the end of the run. Besides the NSCF run should <br />   include all the states you are going to use in the GW part (both <br />   empty and occupied). <br /><br />2) Run the KSS generation in a completely separate input file <br />   with paral_kgb=0 and kssform=3, and ask the code to read the previously <br />   generated WFK file via getwfk or irdwfk.<br />   Remember that one should use the same value for nband as that used in the NSCF run of point 1<br />   otherwise some of the bands stored in the WFK file won't be read.<br />   nstep can be safely set to 0 for this run since the input WFK file is already well converged.<br />   With this trick the code will skip the NSCF cycle and <br />   it will immediately convert the WFK file into the KSS file<br /><br />BTW: Avoid the use of toldfe to stop the GS calculation when high energy empty states are included. <br />     See the discussion at<br /><br />    <!-- l --><a class="postlink-local" href="viewtopicaed6.html?f=11&amp;t=68">viewtopic.php?f=11&amp;t=68</a><!-- l --><br /><br />Best regards<br />Matteo Giantomassi</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: paral_kgb and KSS file</h3>
+				<div class="date">Posted: <strong>Sun Mar 14, 2010 3:26 am</strong></div>
+				<div class="author">by <strong>alsaidi</strong></div>
+				<div class="content">Dear Matteo, <br /><br />Thank you very much for your help. <br /><br />Best, Wissam</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=85&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:11:20 GMT -->
+</html>

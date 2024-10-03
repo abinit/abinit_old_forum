@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3124&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:48:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; installation problems on mac</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>installation problems on mac</h2>
+		<p><a href="viewtopic207f.html?f=3&amp;t=3124">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3124</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>installation problems on mac&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Wed Oct 14, 2015 4:22 pm</strong></div>
+				<div class="author">by <strong>maths</strong></div>
+				<div class="content">Hello,<br />I try to install abinit on my mac for two days without success  <img class="smilies" src="images/smilies/icon_e_surprised.gif" alt=":o" title="Surprised" />. I can easily ./configure. After its done --You may now type &quot;make&quot; to build ABINIT.-- appears, but if I type make. the following ERROR massage appears:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>/Applications/Xcode.app/Contents/Developer/usr/bin/make&nbsp; all-recursive<br />Making all in fallbacks<br />/Applications/Xcode.app/Contents/Developer/usr/bin/make fox<br />The build of fox has been disabled<br />touch: stamps/fox-install-stamp: No such file or directory<br />make&#91;3&#93;: *** &#91;fox&#93; Error 1<br />make&#91;2&#93;: &#91;all-local&#93; Error 2 (ignored)<br />Checking build of fox fallback<br />test -e stamps/fox-install-stamp<br />make&#91;2&#93;: *** &#91;all-local&#93; Error 1<br />make&#91;1&#93;: *** &#91;all-recursive&#93; Error 1<br />make: *** &#91;all&#93; Error 2</code></pre></div><br /><br />now i don't know what to do. I am unfortunately not 100% familiar to the terminal commands (I just know a few basics). So pleas help me but speak an easy language <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" />. <br />lg matt</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: installation problems on mac</h3>
+				<div class="date">Posted: <strong>Wed Oct 14, 2015 10:07 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />did you read the content of the README.MacOSX  file found in the root of source tree of 7.10.4 version ? <br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: installation problems on mac</h3>
+				<div class="date">Posted: <strong>Thu Oct 15, 2015 3:43 pm</strong></div>
+				<div class="author">by <strong>maths</strong></div>
+				<div class="content">Hi, <br />I can not fined a README.MacOSX file in abinit-7.10.4!?<br />I followed the  instruction on the web page. I tried also to create a tmp directory and ../configure and then it installed I think, but make test_fast didn`t work <br />then I deleted it and cofigurate it new and now I am again not able to install it via make.<br />matt</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: installation problems on mac</h3>
+				<div class="date">Posted: <strong>Thu Oct 15, 2015 5:58 pm</strong></div>
+				<div class="author">by <strong>maths</strong></div>
+				<div class="content">New status!<br />I again installed de fortran g77 compiler.<br />I dragged the abinit-xxx directory into Applications.<br />Via terminal I (created a temp) mkdir temp, where I plugged in ../configure. After it was done,  I typed make and it showed:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>==============================================================================<br />make&#91;2&#93;: Nothing to be done for `install-exec-am'.<br />make&#91;2&#93;: Nothing to be done for `install-data-am'.<br />Making install in tests<br />==============================================================================<br />Use the script&nbsp; runtests.py&nbsp; for a flexible use of the test suite.<br />To get help, issue&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;./runtests.py --help | more<br /><br />To run the new test suite inside a tmp directory (e.g. ~abinit/tmp/tests) :<br />../../tests/runtests.py<br />this will create a directory tmp/tests/Test_suite<br />Useful option when using manually the test suite : &quot;-t0&quot;<br />&nbsp; &nbsp;(which disable the timeout routine)<br /><br />Keywords to use with the make command for test directory (automated sets of tests) :<br /><br />check_local&nbsp; &nbsp; Standard set of tests, used on the test farm slaves<br />tests_abirules Launch the abirules tests<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(Warning : for some of the tests, the file make.log<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; must be present in the top directory. This means one has<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; to compile with the command&nbsp; &nbsp;make &gt; make.log 2&gt;&amp;1 )<br />tests_buildsys Launch the buildsys tests<br />tests_in&nbsp; &nbsp; &nbsp; &nbsp;Launch several small tests (3 mandatory ones, for basic <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;capabilities of ABINIT, and 4 optional, to test<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;bigdft, etsf_io, libxc, wannier90, if they are installed)<br /><br />One should check whether the following keywords still work :<br />benchabinit<br />tests_bench&nbsp; &nbsp; Test accuracy+cpu for benchmarks (with a report)<br />tests_speed&nbsp; &nbsp; Test cpu for benchmarks (quick, with a report)<br /><br />To add a new test, see <br />http://www.abinit.org/developers/dev-environment/buildbot/howto-add-a-new-test-in-the-test-suite<br /><br />==============================================================================<br />make&#91;3&#93;: Nothing to be done for `install-exec-am'.</code></pre></div><br /> <br />Then I also did make install.<br />Finally i tried this make test_fast in /Applications/abinit-7.10.4/tmp/src/98_main. But:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make: *** No rule to make target `test_fast'.&nbsp; Stop.</code></pre></div><br />what to do???  <img class="smilies" src="images/smilies/icon_cry.gif" alt=":cry:" title="Crying or Very Sad" /> <br /><br />PS:<br />I also tried it with home-brew.  Explained hier <!-- m --><a class="postlink" href="https://wiki.abinit.org/doku.php?id=tips:howto_macosx">https://wiki.abinit.org/doku.php?id=tips:howto_macosx</a><!-- m -->. I took nearly 1h. The problem is it created a /usr/local/Cellar/abinit/7.10.4_1 but no 98_main or anything where I can work ... i don't really know what it did?<br />greets matt</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: installation problems on mac</h3>
+				<div class="date">Posted: <strong>Thu Oct 15, 2015 8:01 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Argh ! <br /><br />you are right ! it is in version 7.10.5 ( not published )  <img class="smilies" src="images/smilies/icon_e_sad.gif" alt=":(" title="Sad" /><br />find a version of README.MacOSX attached...<br /><br /><blockquote class="uncited"><div>I again installed de fortran g77 compiler.</div></blockquote><br /><br /> <img class="smilies" src="images/smilies/icon_eek.gif" alt=":shock:" title="Shocked" />  I don't understand   <img class="smilies" src="images/smilies/icon_rolleyes.gif" alt=":roll:" title="Rolling Eyes" /> <br />we use, at minimum, Fortran 95 and part of Fortran 2003<br />Fortran 77 can no longer compile ABINIT…   <img class="smilies" src="images/smilies/icon_e_wink.gif" alt=";)" title="Wink" /> <br /><br />Sorry,<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: installation problems on mac</h3>
+				<div class="date">Posted: <strong>Thu Oct 15, 2015 8:35 pm</strong></div>
+				<div class="author">by <strong>maths</strong></div>
+				<div class="content">Hi,<br />I Found the same in web see link above! I tried it with homebrew but I can't find main directory ....as mentioned <img class="smilies" src="images/smilies/icon_e_sad.gif" alt=":(" title="Sad" /><br />It's frustrating me arrr <br />Bg lg</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: installation problems on mac</h3>
+				<div class="date">Posted: <strong>Fri Oct 16, 2015 9:13 pm</strong></div>
+				<div class="author">by <strong>maths</strong></div>
+				<div class="content">I tried it know with option 3- COMPILING ABINIT BY YOURSELF under MacOSX:<br /><br />There I fail at the point <br />* Create a working directory:<br />    cd abinit_src_dir<br />    mkdir build &amp;&amp; cd build<br />where schuld I type in cd abinit_src_dir (such a directory does not exist!!??)<br />argh!<br /><br />plz help!<br />mthx</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: installation problems on mac</h3>
+				<div class="date">Posted: <strong>Mon Oct 19, 2015 6:21 pm</strong></div>
+				<div class="author">by <strong>maths</strong></div>
+				<div class="content">If I understand the README right, i have to type:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>user:~$ tar -xzf Downloads/abinit-7.10.5.tar<br />user:~$ cd abinit-7.10.5/<br />user:~$ mkdir build &amp;&amp; cd build<br />user:~$ ../configure FC=gfortran CC=clang FCFLAGS_EXTRA=&quot;-ffree-line-length-none&quot;<br />user:~$ make mj4 </code></pre></div><br /><br />also tried it with simple make<br />result is an error (gfortran works... I tested it with a small program):<br />(scroll down)<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>/Applications/Xcode.app/Contents/Developer/usr/bin/make&nbsp; all-recursive<br />Making all in fallbacks<br />/Applications/Xcode.app/Contents/Developer/usr/bin/make fox<br />The build of fox has been disabled<br />Checking build of fox fallback<br />test -e stamps/fox-install-stamp<br />/Applications/Xcode.app/Contents/Developer/usr/bin/make libxc<br />The build of libxc has been disabled<br />Checking build of libxc fallback<br />test -e stamps/libxc-install-stamp<br />/Applications/Xcode.app/Contents/Developer/usr/bin/make linalg<br />The build of linalg has been disabled<br />Checking build of linalg fallback<br />test -e stamps/linalg-install-stamp<br />/Applications/Xcode.app/Contents/Developer/usr/bin/make netcdf<br />The build of netcdf has been disabled<br />Checking build of netcdf fallback<br />test -e stamps/netcdf-install-stamp<br />/Applications/Xcode.app/Contents/Developer/usr/bin/make atompaw<br />The build of atompaw has been disabled<br />Checking build of atompaw fallback<br />test -e stamps/atompaw-install-stamp<br />/Applications/Xcode.app/Contents/Developer/usr/bin/make etsf_io<br />The build of etsf_io has been disabled<br />Checking build of etsf_io fallback<br />test -e stamps/etsf_io-install-stamp<br />/Applications/Xcode.app/Contents/Developer/usr/bin/make wannier90<br />The build of wannier90 has been disabled<br />Checking build of wannier90 fallback<br />test -e stamps/wannier90-install-stamp<br />/Applications/Xcode.app/Contents/Developer/usr/bin/make bigdft<br />The build of bigdft has been disabled<br />Checking build of bigdft fallback<br />test -e stamps/bigdft-install-stamp<br />Making all in src<br />Making all in incs<br />There is no buildable file here<br />Making all in mods<br />There is no buildable file here<br />Making all in 01_linalg_ext<br />gfortran -DHAVE_CONFIG_H -I. -I../../../src/01_linalg_ext -I../..&nbsp; -I../../src/incs -I../../../src/incs -I/Volumes/Macintosh HD/Benutzer/matthiaskehrer/abinit-7.10.5/build/fallbacks/exports/include&nbsp; &nbsp;-ffree-form -J/Volumes/Macintosh HD/Benutzer/matthiaskehrer/abinit-7.10.5/build/src/mods -O2 -mtune=native -march=native -g -ffree-line-length-none -ffree-line-length-none&nbsp; -c -o m_linalg_interfaces.o ../../../src/01_linalg_ext/m_linalg_interfaces.F90<br />gfortran: error: HD/Benutzer/matthiaskehrer/abinit-7.10.5/build/fallbacks/exports/include: No such file or directory<br />gfortran: error: HD/Benutzer/matthiaskehrer/abinit-7.10.5/build/src/mods: No such file or directory<br />make&#91;3&#93;: *** &#91;m_linalg_interfaces.o&#93; Error 1<br />make&#91;2&#93;: *** &#91;all-recursive&#93; Error 1<br />make&#91;1&#93;: *** &#91;all-recursive&#93; Error 1<br />make: *** &#91;all&#93; Error </code></pre></div>2<br /><br />plz help me!<br />thx very much<br />maths</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: installation problems on mac</h3>
+				<div class="date">Posted: <strong>Tue Oct 20, 2015 9:04 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Your problem  is probably the space you have between &quot;Macintosh&quot; and &quot;HD&quot;.<br />When you have something like<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>-I/Volumes/Macintosh HD/Benutzer/matthiaskehrer/abinit-7.10.5/build/fallbacks/exports/include<br /></code></pre></div><br />it is really understood as two different entities because of the space<br />In your configuration step you should try to enforce the name using Macintosh\ HD (note the \) or by using double quotes.<br /><br />Or you can change your mount point from /Volumes/Macintosh HD to /Volumes/Macintosh_HD<br /><br />Or you can just compile the code somewhere else to avoid this issue.<br /><br />Cheers<br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: installation problems on mac</h3>
+				<div class="date">Posted: <strong>Tue Oct 20, 2015 3:23 pm</strong></div>
+				<div class="author">by <strong>maths</strong></div>
+				<div class="content">I entered abinit now threw /Benutzer/matthiaskehrer/abinit/abinit-7.10.5<br />There is no space in the path. make looked good but make test_fast failed again in /Benutzer/matthiaskehrer/abinit/abinit-7.10.5/src/98_main (seems  there is no such file/directory)<br />Result of matthiaskehrer:tests$ ./runtests.py <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Suite&nbsp; &nbsp; &nbsp; &nbsp; failed&nbsp; passed&nbsp; succeeded&nbsp; skipped&nbsp; disabled&nbsp; run_etime&nbsp; tot_etime<br />atompaw&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; 2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0.00&nbsp; &nbsp; &nbsp; &nbsp;0.02<br />bigdft&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;22&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0.00&nbsp; &nbsp; &nbsp; &nbsp;0.01<br />built-in&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; 4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;4.17&nbsp; &nbsp; &nbsp; &nbsp;4.19<br />etsf_io&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; 7&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0.00&nbsp; &nbsp; &nbsp; &nbsp;0.00<br />fast&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 8&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; 22.88&nbsp; &nbsp; &nbsp; 23.97<br />fox&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; 2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0.00&nbsp; &nbsp; &nbsp; &nbsp;0.00<br />gpu&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; 4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0.00&nbsp; &nbsp; &nbsp; &nbsp;0.00<br />libxc&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;21&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0.00&nbsp; &nbsp; &nbsp; &nbsp;0.01<br />mpiio&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;14&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0.00&nbsp; &nbsp; &nbsp; &nbsp;0.01<br />paral&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 20&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp;69&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; 43.10&nbsp; &nbsp; &nbsp; 43.88<br />seq&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 19&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; 38.39&nbsp; &nbsp; &nbsp; 38.95<br />tutoparal&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; 2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0.00&nbsp; &nbsp; &nbsp; &nbsp;0.00<br />tutoplugs&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; 4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0.00&nbsp; &nbsp; &nbsp; &nbsp;0.00<br />tutorespfn&nbsp; &nbsp; &nbsp; &nbsp;23&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; 63.68&nbsp; &nbsp; &nbsp; 65.15<br />tutorial&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;36&nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;11&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;117.23&nbsp; &nbsp; &nbsp;119.67<br />unitary&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;17&nbsp; &nbsp; &nbsp; &nbsp;17&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; 53.83&nbsp; &nbsp; &nbsp; 54.37<br />v1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;52&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;24&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;125.68&nbsp; &nbsp; &nbsp;131.50<br />v2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;40&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;39&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;183.15&nbsp; &nbsp; &nbsp;189.93<br />v3&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;55&nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;24&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;237.44&nbsp; &nbsp; &nbsp;248.33<br />v4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;44&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;18&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;170.28&nbsp; &nbsp; &nbsp;177.90<br />v5&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;56&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;18&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;222.98&nbsp; &nbsp; &nbsp;229.36<br />v6&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;48&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;12&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;167.27&nbsp; &nbsp; &nbsp;172.48<br />v67mbpt&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 18&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; 38.35&nbsp; &nbsp; &nbsp; 40.13<br />v7&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;32&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;103.66&nbsp; &nbsp; &nbsp;107.44<br />vdwxc&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0.00&nbsp; &nbsp; &nbsp; &nbsp;0.00<br />wannier90&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; 7&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0.00&nbsp; &nbsp; &nbsp; &nbsp;0.00</code></pre></div><br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>/bin/sh: line 1: 49250 Segmentation fault: 11&nbsp; /Benutzer/matthiaskehrer/abinit/abinit-7.10.5/build/src/98_main/abinit &lt; /Benutzer/matthiaskehrer/abinit/abinit-7.10.5/build/tests/Test_suite/v7_t67/t67.stdin &gt; /Benutzer/matthiaskehrer/abinit/abinit-7.10.5/build/tests/Test_suite/v7_t67/t67.stdout 2&gt; /Benutzer/matthiaskehrer/abinit/abinit-7.10.5/build/tests/Test_suite/v7_t67/t67.stderr<br />Command&nbsp; &nbsp;/Benutzer/matthiaskehrer/abinit/abinit-7.10.5/build/src/98_main/abinit &lt; /Benutzer/matthiaskehrer/abinit/abinit-7.10.5/build/tests/Test_suite/v7_t67/t67.stdin &gt; /Benutzer/matthiaskehrer/abinit/abinit-7.10.5/build/tests/Test_suite/v7_t67/t67.stdout 2&gt; /Benutzer/matthiaskehrer/abinit/abinit-7.10.5/build/tests/Test_suite/v7_t67/t67.stderr<br />&nbsp;returned exit_code: 139<br /><br />&#91;v7&#93;&#91;t67&#93;&#91;np=1&#93;: fldiff.pl fatal error:<br />The diff analysis cannot be done: the number of lines to be analysed differ.<br />File /Benutzer/matthiaskehrer/abinit/abinit-7.10.5/tests/v7/Refs/t67.out: 287 lines, 36 ignored<br />File /Benutzer/matthiaskehrer/abinit/abinit-7.10.5/build/tests/Test_suite/v7_t67/t67.out: 286 lines, 36 ignored<br />&#91;v7&#93;&#91;t67&#93;&#91;np=1&#93;Test was not expected to fail but subrocesses returned 139<br /><br />Program received signal SIGSEGV: Segmentation fault - invalid memory reference.<br /><br />Backtrace for this error:<br />#0&nbsp; 0x10fee7092<br />#1&nbsp; 0x10fee63b0<br />#2&nbsp; 0x7fff8d2f1529<br />#3&nbsp; 0x7fff80fc6b8e<br />#4&nbsp; 0x10beedcd2<br />#5&nbsp; 0x10beedf2c<br />#6&nbsp; 0x10b69a1db<br />#7&nbsp; 0x10b32df56<br />#8&nbsp; 0x10b338460<br />#9&nbsp; 0x10b2e40af<br />#10&nbsp; 0x10b2d2550<br />#11&nbsp; 0x10b24123f<br />#12&nbsp; 0x10b246bc3<br />#13&nbsp; 0x10b22a7e4<br />#14&nbsp; 0x10b21369c<br />#15&nbsp; 0x10bf37dbe</code></pre></div><br /> <img class="smilies" src="images/smilies/icon_e_sad.gif" alt=":(" title="Sad" /> <br />thx for the help!<br />maths</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: installation problems on mac</h3>
+				<div class="date">Posted: <strong>Thu Oct 22, 2015 8:55 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Thas's already a progress.<br /><br />What I could suggest, is configure abinit with <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../configure FC=gfortran CC=clang FCFLAGS_EXTRA=&quot;-ffree-line-length-none -fbacktrace&quot;<br />make distclean<br />make mj4<br /></code></pre></div><br /><br />The -fbacktrace should add the subroutine, line and file in which the segfault occures.<br />Some tests seem to passed so it should not be a big thing.<br /><br />You can also check if it comes from some special features of you cpu like avx/avx2 but disabling the optimizationss (--enable-optim=no)<br />See ../configure --help for compilation options.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: installation problems on mac</h3>
+				<div class="date">Posted: <strong>Thu Oct 22, 2015 6:37 pm</strong></div>
+				<div class="author">by <strong>maths</strong></div>
+				<div class="content">Thx for your answer!<br />But it didn't work:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>matthiaskehrer:build$ make mj4<br />make: *** No rule to make target `mj4'.&nbsp; Stop.</code></pre></div><br />after <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>matthiaskehrer:abinit-7.10.5$ cd build/<br />matthiaskehrer:build$ ../configure FC=gfortran CC=clang FCFLAGS_EXTRA=&quot;-ffree-li<br />make distclean<br />make mj4</code></pre></div><br /><br />I didn't really get your other advice?<br />greets</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: installation problems on mac</h3>
+				<div class="date">Posted: <strong>Fri Oct 23, 2015 12:39 pm</strong></div>
+				<div class="author">by <strong>maths</strong></div>
+				<div class="content">It works!! I tried in once more like before (following the README and avoid path Macintosh HD) and in works know.<br />thx very much for the help and sry for my disqualification <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /><br />BR maths</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3124&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:48:44 GMT -->
+</html>

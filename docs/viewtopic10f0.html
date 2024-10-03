@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=513&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:20:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; No GW result</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>No GW result</h2>
+		<p><a href="viewtopic26ee.html?f=11&amp;t=513">https://forum.abinit.org/viewtopic.php?f=11&amp;t=513</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>No GW result</h3>
+				<div class="date">Posted: <strong>Tue Jul 27, 2010 6:15 pm</strong></div>
+				<div class="author">by <strong>Newlife1982</strong></div>
+				<div class="content">Dear All,<br /><br />I calculate band gap of Si crystal. When I use some high K-point, for example 12*12*12, I can not get any band-gap value with GW correction. But the calculation seems to be successful. Where is the problem? It would be very nice if someone could give me some suggestion. Thank you in advance.<br /><br />Regards,<br /><br />Wang</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: No GW result</h3>
+				<div class="date">Posted: <strong>Wed Jul 28, 2010 12:28 pm</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hello,<br /><br />Without your input file and part of the out or log file, it is difficult to help you. Have you checked that the k-points for which you ask the gw correction are contained in your high k-point mesh ? I guess so because otherwise abinit would complain but well.<br /><br />If you post your input file (at least), we might help you more.<br /><br />David</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: No GW result</h3>
+				<div class="date">Posted: <strong>Wed Jul 28, 2010 2:31 pm</strong></div>
+				<div class="author">by <strong>Newlife1982</strong></div>
+				<div class="content">The following is the input file:<br /><br />optdriver    4<br />nband       100<br />ecutsigx    17<br />ecutwfn     17<br /><br />gwcalctyp   28<br /><br />nkptgw       8<br />kptgw       <br />             0.00000000E+00  0.00000000E+00  0.00000000E+00<br />              2.50000000E-01  0.00000000E+00  0.00000000E+00<br />              5.00000000E-01  0.00000000E+00  0.00000000E+00<br />              2.50000000E-01  2.50000000E-01  0.00000000E+00<br />              5.00000000E-01  2.50000000E-01  0.00000000E+00<br />             -2.50000000E-01  2.50000000E-01  0.00000000E+00<br />              5.00000000E-01  5.00000000E-01  0.00000000E+00<br />             -2.50000000E-01  5.00000000E-01  2.50000000E-01<br />bdgw<br />             1 30<br />             1 30<br />             1 30<br />             1 30<br />             1 30<br />             1 30<br />             1 30<br />             1 30<br /><br />#Definition of occupation numbers<br />occopt 1<br />#tsmear 0.01<br /><br />#Definition of the unit cell<br />acell 3*10.259<br /><br />rprim  0.0  0.5  0.5   # FCC primitive vectors (to be scaled by acell)<br />       0.5  0.0  0.5<br />       0.5  0.5  0.0<br /><br />#Definition of the atom types<br />ntypat 1<br />znucl 14<br /><br />#Definition of the atoms<br />natom 2<br />typat 1 1<br />xred  0.0  0.0  0.0<br />      0.25 1.25 0.25<br />#Definition of the planewave basis set<br />ecut  20.0<br /><br />#Definition of the k-point grid<br />ngkpt         12 12 12<br />nshiftk       1<br />shiftk        0.  0.  0.<br />istwfk        72*1<br /><br />#Definition of the SCF procedure<br />nstep 50<br />toldfe 1.0d-10<br /><br />prtvol     5<br />enunit     1<br /><br />The kptgw is wrong? I am the freshman about GW calculation. Please help me to check it. Thank you!<br /><br />Regards,<br /><br />Wang</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: No GW result</h3>
+				<div class="date">Posted: <strong>Fri Jul 30, 2010 1:00 pm</strong></div>
+				<div class="author">by <strong>bruneval</strong></div>
+				<div class="content">1) David asked you for your log file...<br />2) Your k-points are over-over-converged.<br /><br />Fabien</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: No GW result</h3>
+				<div class="date">Posted: <strong>Fri Jul 30, 2010 4:09 pm</strong></div>
+				<div class="author">by <strong>Newlife1982</strong></div>
+				<div class="content">Thank you for your response.<br /><br />1)Attached please find the output file.<br />2)Generally, K-points with 12*12*12 is used in literature. So, How should | choose  K-points? Only depending on the converged test?<br /><br /><br />Wang</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=513&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:20:40 GMT -->
+</html>

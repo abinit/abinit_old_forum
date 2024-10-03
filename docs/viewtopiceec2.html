@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1097&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:44:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Make Error 2 netcdf</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Make Error 2 netcdf</h2>
+		<p><a href="viewtopic8c9c-2.html?f=3&amp;t=1097">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1097</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Make Error 2 netcdf</h3>
+				<div class="date">Posted: <strong>Mon May 16, 2011 10:51 pm</strong></div>
+				<div class="author">by <strong>ykipouros</strong></div>
+				<div class="content">Hello all,<br /><br />I've been trying to install abinit on a 6core, AMD, Ubuntu 11.04 64 bit machine, but have run in to a few problems. Luckily there are some very helpful posts on this forum that have helped me quite a bit so far, but I've finally run into an error I can't really seem to get by, despite the fact it seems like it's pretty common.<br /><br />I've downloaded all the plugins, and placed them in ~/.abinit/tarballs.<br /><br />To configure, I used the command:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>export LD_LIBRARY_PATH=/opt/openmpi-1.4.3/lib<br />./configure --prefix=/opt/abinit-6.6.3 --enable-mpi=yes --with-mpi-prefix=/opt/openmpi-1.4.3</code></pre></div><br /><br />Which produces this log file: <!-- m --><a class="postlink" href="http://myweb.dal.ca/yn843798/config.log">http://myweb.dal.ca/yn843798/config.log</a><!-- m --><br /><br />Then I did:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>sudo su<br />make -j6</code></pre></div><br /><br />and get<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>configure: finding C compiler<br />checking whether the C compiler works... yes<br />checking for C compiler default output file name... a.out<br />checking for suffix of executables... <br />checking whether we are cross compiling... configure: error: in `/home/xxxx/Downloads/abinit-6.6.3/plugins/netcdf/netcdf-4.1.1':<br />configure: error: cannot run C compiled programs.<br />If you meant to cross compile, use `--host'.<br />See `config.log' for more details.<br />make&#91;4&#93;: *** &#91;configure-stamp&#93; Error 1<br />make&#91;4&#93;: Leaving directory `/home/xxxx/Downloads/abinit-6.6.3/plugins/netcdf'<br />make&#91;3&#93;: *** &#91;package-ready&#93; Error 2<br />make&#91;3&#93;: Leaving directory `/home/xxxx/Downloads/abinit-6.6.3/plugins/netcdf'<br />make&#91;2&#93;: *** &#91;all-recursive&#93; Error 1<br />make&#91;2&#93;: Leaving directory `/home/xxxx/Downloads/abinit-6.6.3/plugins'<br />make&#91;1&#93;: *** &#91;all-recursive&#93; Error 1<br />make&#91;1&#93;: Leaving directory `/home/xxxx/Downloads/abinit-6.6.3'<br />make: *** &#91;all&#93; Error 2<br /></code></pre></div><br /><br />I'd prefer not to disable any plugins, unless they are not difficult to install later if/when I need them.<br /><br />Thanks in advance for your help!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Make Error 2 netcdf</h3>
+				<div class="date">Posted: <strong>Thu May 19, 2011 10:11 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">The build of NetCDF does not allow for a parallel make. To circumvent this, you can use the following command instead:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make multi multi_nprocs=6</code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Make Error 2 netcdf</h3>
+				<div class="date">Posted: <strong>Fri May 20, 2011 10:11 pm</strong></div>
+				<div class="author">by <strong>ykipouros</strong></div>
+				<div class="content">Thanks, works perfectly now.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1097&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:44:48 GMT -->
+</html>

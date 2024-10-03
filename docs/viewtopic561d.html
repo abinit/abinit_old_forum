@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3829&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:41:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; 1 processor is faster than 8 processor?!!!!!!!</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>1 processor is faster than 8 processor?!!!!!!!</h2>
+		<p><a href="viewtopicbed5.html?f=3&amp;t=3829">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3829</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>1 processor is faster than 8 processor?!!!!!!!</h3>
+				<div class="date">Posted: <strong>Sun Apr 29, 2018 2:00 pm</strong></div>
+				<div class="author">by <strong>new_986</strong></div>
+				<div class="content">Hi everybody<br />I have installed abinit in parallel on my computer which have the following environment:<br />cpu<br />          description: CPU<br />          product: Intel(R) Core(TM) i7-4790 CPU @ 3.60GHz<br />          bus info: cpu@0<br />          version: Intel(R) Core(TM) i7-4790 CPU @ 3.60GHz<br />          8 processor<br />          16 GB RAM<br />and the log file is attached <br /><br />The problem is when I run abinit with one processor is faster than when i run it with 8 processor!!!!!<br />any help ??<br /><br />Thanks <br /><br />Nawzad</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 1 processor is faster than 8 processor?!!!!!!!</h3>
+				<div class="date">Posted: <strong>Sun Apr 29, 2018 8:03 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Nawzad,<br />You have enabled OpenMP in the configure flags (--enable-openmp). Did you submit your calculation using MPI only, both MPI/OpenMP or only OpenMP?<br />Check also what is your OMP_NUM_THREADS value on your machine, because if it is not 1 and that your running only MPI, you will find that 1 CPU is faster...<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 1 processor is faster than 8 processor?!!!!!!!</h3>
+				<div class="date">Posted: <strong>Sun Apr 29, 2018 11:30 pm</strong></div>
+				<div class="author">by <strong>new_986</strong></div>
+				<div class="content"><blockquote><div><cite>ebousquet wrote:</cite>Dear Nawzad,<br />You have enabled OpenMP in the configure flags (--enable-openmp). Did you submit your calculation using MPI only, both MPI/OpenMP or only OpenMP?<br />Check also what is your OMP_NUM_THREADS value on your machine, because if it is not 1 and that your running only MPI, you will find that 1 CPU is faster...<br />Best wishes,<br />Eric</div></blockquote><br /><br /><br />Hi Eric<br />I use  mpirun -np 8 abinit&lt;xxxxx.files to run abinit<br />and I don't know how to check OMP_NUM_THREADS on my machine <img class="smilies" src="images/smilies/icon_e_confused.gif" alt=":?" title="Confused" /> <br /><br />regards<br />Nawzad</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 1 processor is faster than 8 processor?!!!!!!!</h3>
+				<div class="date">Posted: <strong>Mon Apr 30, 2018 12:21 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">You can get it from the command line:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>echo $OMP_NUM_THREADS</code></pre></div><br /><br />You can tune its value as follows:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>export OMP_NUM_THREADS=1</code></pre></div><br />Here you put it to 1, meaning no OpenMP threads will be used.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 1 processor is faster than 8 processor?!!!!!!!</h3>
+				<div class="date">Posted: <strong>Mon Apr 30, 2018 9:00 pm</strong></div>
+				<div class="author">by <strong>new_986</strong></div>
+				<div class="content">Dear Eric<br /><br />I did that but still same problem I have<br />I believe i have did configure not correct<br />with such environment, can you give me an idea about configuring?<br /><br />Thanks<br /><br />Nawzad</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 1 processor is faster than 8 processor?!!!!!!!</h3>
+				<div class="date">Posted: <strong>Wed May 02, 2018 2:38 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Nawzad,<br />To be sure, can you recompile Abinit without OpenMP, i.e. removing the --enable-openmp flag in your configure run?<br />If it is still there, this means there is another problem somewhere else I don't see from a quick look.<br />Lets see without --enable-openmp what this gives.<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 1 processor is faster than 8 processor?!!!!!!!</h3>
+				<div class="date">Posted: <strong>Wed May 02, 2018 2:48 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">I indeed went too quickly to your config.log, actually the origin of the problem is more simple, if I'm right you didn't activate mpi parallelism (enable_mpi)? At the end of a configure run you have a small summary where you can check what has been activated or not (MPI, OpenMP, etc), please check it before going further. <br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 1 processor is faster than 8 processor?!!!!!!!</h3>
+				<div class="date">Posted: <strong>Wed May 02, 2018 11:54 pm</strong></div>
+				<div class="author">by <strong>new_986</strong></div>
+				<div class="content">Dear Eric<br /><br />Without enable openmpi? you meam not parallelism? if you mean that, it works with running command ( abinit &lt;xx.files&gt;) but very slow because my computer is not powerful   <br />I have reinstalled again and confgured using the following command <br />./configure FC=mpifort CC=mpicc  --enable-openmp<br /> I have enabled openmpi, still same problem I have<br />I have attached my input file also maybe there is something wrong about it ?<br />there is a funny thing happening with me, even when i run it with more number of processors what i have it, abinit still works, is that possible ?!!! <br /><br />regards<br />Nawzad</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: 1 processor is faster than 8 processor?!!!!!!!</h3>
+				<div class="date">Posted: <strong>Thu May 03, 2018 12:59 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Nawzad,<br />Be careful OpenMP and Open-MPI are not the same thing, please google them to make sure you understand the difference otherwise it'll be hard to communicate on this problem. <br />OpenMP use threading parallelism and I think this is your problem because you run your calculation as if it is with MPI parallelism but you don't enable it in the compilation, you enabled only OpenMP. So my advise is that don't enable OpenMP and enable MPI instead, that will fix your problem.<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3829&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:41:15 GMT -->
+</html>

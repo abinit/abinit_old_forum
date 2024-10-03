@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4201&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:33:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Failing make check</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Failing make check</h2>
+		<p><a href="viewtopic7646.html?f=3&amp;t=4201">https://forum.abinit.org/viewtopic.php?f=3&amp;t=4201</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Failing make check</h3>
+				<div class="date">Posted: <strong>Tue Aug 06, 2019 9:16 pm</strong></div>
+				<div class="author">by <strong>wcardoen</strong></div>
+				<div class="content">Hello,<br /><br />I compiled abinit 8.10.3 successfully using the following command:<br />../../../srcdir/abinit/8.10.3/configure --prefix=/uufs/chpc.utah.edu/sys/installdir/abinit/8.10.3 \<br />            --enable-gpu --enable-mpi  \<br />            --enable-openmp --enable-stdin --enable-xml CPP=&quot;gcc -E&quot; CXXCPP=&quot;g++ -E&quot; \<br />            --with-gpu-prefix=/uufs/chpc.utah.edu/sys/installdir/cuda/10.1.168 --with-linalg-flavor=&quot;netlib+magma&quot; \<br />            --with-fft-flavor=fftw3-mkl --with-fft-libs=&quot;-lmkl_intel_ilp64 -lmkl_intel_thread -lmkl_core &quot;<br />make  - j 24<br />make install<br /><br />When I invoke make check I get the following type of error:<br />make  check-local<br />make[3]: Entering directory `/uufs/chpc.utah.edu/sys/builddir/abinit/8.10.3/tests'<br />[ -f &quot;runtests.py&quot; ] &amp;&amp; ./runtests.py fast -o1 --no-colors --no-logo || ../../../../srcdir/abinit/8.10.3/tests/runtests.py fast -o1 --no-colors --no-logo --with-pickle=0<br />Running on notch004 -- system Linux -- ncpus 64 -- Python 2.7.5 -- runtests.py-0.6.0<br />Regenerating database...<br />Test_suite directory already exists. Files will be removed<br />Running 26 test(s) with MPI_nprocs=1, OMP_nthreads=1, py_nthreads=1...<br />[TIP] runtests.py is using 1 CPUs but your architecture has 64 CPUs<br />You may want to use python threads to speed up the execution<br />Use `runtests -jNUM` to run with NUM threads<br />Command   /uufs/chpc.utah.edu/sys/builddir/abinit/8.10.3/src/98_main/abinit &lt; /uufs/chpc.utah.edu/sys/builddir/abinit/8.10.3/tests/Test_suite/fast_t00/t00.stdin &gt; /uufs/chpc.utah.edu/sys/builddir/abinit/8.10.3/tests/Test_suite/fast_t00/t00.stdout 2&gt; /uufs/chpc.utah.edu/sys/builddir/abinit/8.10.3/tests/Test_suite/fast_t00/t00.stderr<br /> returned exit_code: 24<br /><br />[fast][t00][np=1]: fldiff.pl fatal error:<br />Unable to open input file /uufs/chpc.utah.edu/sys/builddir/abinit/8.10.3/tests/Test_suite/fast_t00/t00.out [file=t00.out]<br />[fast][t00][np=1]Test was not expected to fail but subprocesses returned 24<br />forrtl: severe (24): end-of-file during read, unit 5, file /proc/247195/fd/0<br />Image              PC                Routine            Line        Source<br />abinit             0000000008BB30F6  Unknown               Unknown  Unknown<br />abinit             0000000008BE0B00  Unknown               Unknown  Unknown<br />abinit             00000000062BD1C7  Unknown               Unknown  Unknown<br />abinit             000000000040F915  Unknown               Unknown  Unknown<br />abinit             000000000040F492  Unknown               Unknown  Unknown<br />libc-2.17.so       00002AD64B00E3D5  __libc_start_main     Unknown  Unknown<br />abinit             000000000040F399  Unknown               Unknown  Unknown<br /><br />No YAML Error found in [fast][t00][np=1]<br />Command   /uufs/chpc.utah.edu/sys/builddir/abinit/8.10.3/src/98_main/abinit &lt; /uufs/chpc.utah.edu/sys/builddir/abinit/8.10.3/tests/Test_suite/fast_t01/t01.stdin &gt; /uufs/chpc.utah.edu/sys/builddir/abinit/8.10.3/tests/Test_suite/fast_t01/t01.stdout 2&gt; /uufs/chpc.utah.edu/sys/builddir/abinit/8.10.3/tests/Test_suite/fast_t01/t01.stderr<br /> returned exit_code: 24<br /><br />From the error message I infer that the code crashes because It can't read a file.<br />Any suggestions?<br /><br />Thanks,<br /><br />Wim</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Failing make check</h3>
+				<div class="date">Posted: <strong>Fri Aug 09, 2019 11:39 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Wim,<br />And if you go in the test folder and run the python script yourself, does it works (./runtests.py ; please look at the different options by typing ./runtests.py -h)<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4201&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:33:36 GMT -->
+</html>

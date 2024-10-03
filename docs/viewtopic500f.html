@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1605 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>SCF run crashed when writing WFK: how to use the DEN file? - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopic7d7d.html?t=1605">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="4"><a href="viewforum31e6.html?f=4" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Running Abinit</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="9"><a href="viewforumfdc5.html?f=9" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Ground state</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopic500f.html?f=9&amp;t=1605">SCF run crashed when writing WFK: how to use the DEN file?</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Total energy, geometry optimization, DFT+U, spin....<br /></div>
+<p>
+	<strong>Moderator:</strong> <a href="memberlista146.html?mode=viewprofile&amp;u=2687" class="username">bguster</a>
+</p>
+
+
+<div class="action-bar bar-top">
+	
+			<a href="postingef1f.html?mode=reply&amp;f=9&amp;t=1605" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic59fd.html?f=9&amp;t=1605&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="1605" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			6 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p5015" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5015">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist9287.html?mode=viewprofile&amp;u=285" class="username">elena.mol</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search3d74.html?author_id=285&amp;sr=posts">17</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Apr 21, 2010 1:05 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5015">
+
+						<h3 class="first"><a href="#p5015">SCF run crashed when writing WFK: how to use the DEN file?</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting2069.html?mode=quote&amp;f=9&amp;p=5015" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicbd08.html?p=5015#p5015" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist9287.html?mode=viewprofile&amp;u=285" class="username">elena.mol</a></strong> &raquo; </span>Thu Apr 05, 2012 5:26 pm
+			</p>
+			
+			
+			
+			<div class="content">Dear all, <br />is there a way to obtain a WFK file from a DEN file generated by a SCF abinit calculation which has crashed at convergence, after writing the DEN, but before being able to write a complete WFK?  ...without having to restart the calculation from scratch, of course.<br /><br />This question is due to some problems I'm finding in SCF runs for “big” systems: in particular, i'm considering a molecule (175 atoms), using 1 kpoint, 540 bands, and a cubic cell of 64000 A^3. Everything works fine up to ecut=11 Ha., but with ecut=16 Ha. the SCF run crashes at the end, precisely when trying to write the WFK file (after having written a correct DEN file). <br />I suspect these problems might be due to some disk space issue, since for smaller systems, but with the same cutoff and the same “pathology”, in same cases I succeeded in avoiding the crash by running the job on a disk with larger free space. I noticed there are other topics in this forum related to problems/crashes in writing WFK files, but it's not clear to me if the matter has been solved yet. <br /><br />I'm using abinit-6.10.3 and, if needed, I can provide input files etc, but for the moment I would just like to make clear (maybe it's very trivial) if i can “find a shortcut” by obtaining the WFK file from the DEN one.   ...although maybe the problem would appear again, if it's due to lack of disk space *only* at the moment of writing the WFK?...<br /><br /><br />Many thanks in advance<br />cheers<br />Elena<br /><br />Elena Molteni<br />Department of Physics<br />University of Milan<br />via Celoria, 16 <br />I-20133, Milan, Italy<br />and European Theoretical Spectroscopy Facility (ETSF) <br /><!-- m --><a class="postlink" href="http://www.etsf.eu/">http://www.etsf.eu</a><!-- m --></div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p5039" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5039">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistaf78.html?mode=viewprofile&amp;u=209" class="username">kaneod</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search66ac.html?author_id=209&amp;sr=posts">42</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Mar 10, 2010 11:47 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5039">
+
+						<h3 ><a href="#p5039">Re: SCF run crashed when writing WFK: how to use the DEN fil</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting8f75.html?mode=quote&amp;f=9&amp;p=5039" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic965f.html?p=5039#p5039" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistaf78.html?mode=viewprofile&amp;u=209" class="username">kaneod</a></strong> &raquo; </span>Wed Apr 11, 2012 3:28 am
+			</p>
+			
+			
+			
+			<div class="content">Hi Elena,<br /><br />If you only need the WFK file from the final density (no other properties) you can just restart the calculation with iscf -3 and use tolwfr (instead of tolvrs/toldfe) with a suitably small number to make sure the KS orbitals are converged. Note that you may need to comment out other parts of your input file (anything related to structural optimization, for example). You'll also need to make sure the final density from the crashed calculation is available as an input file in the form in_DEN where &quot;in&quot; is the prefix given in the third line of your ab.files file. <br /><br />The WFK file crashing issue(s) are not resolved as far as I'm aware but the reports are very scattered with different versions of abinit, types of crash/hang and usage so I imagine we are going to have to live with them for the time being until someone can isolate the issue. I'm working on it here but we haven't got any answers yet. If the problem is isolated to the WFK write not the disk space you might get close to what you want using pawprtwf. This needs to be done completely in serial (no kpt or kgb parallelization) and bear in mind you get the AE wavefunctions, not the pseudoized ones. Also: a warning, the AE_WFK files are gigantic - I routinely have files more than 50GB in size for large molecules.</div>
+			
+			
+			
+									
+									<div id="sig5039" class="signature">Dr Kane O'Donnell<br />Postdoctoral Research Fellow<br />Australian Synchrotron</div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p5173" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5173">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlistbd9e.html?mode=viewprofile&amp;u=677" class="avatar"><img class="avatar" src="download/file9095.jpg?avatar=677_1376048665.jpg" width="83" height="92" alt="User avatar" /></a>														</div>
+								<a href="memberlistbd9e.html?mode=viewprofile&amp;u=677" class="username">sponce</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search1632.html?author_id=677&amp;sr=posts">60</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Apr 16, 2011 9:44 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5173">
+
+						<h3 ><a href="#p5173">Re: SCF run crashed when writing WFK: how to use the DEN fil</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting8fd7.html?mode=quote&amp;f=9&amp;p=5173" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic64fd.html?p=5173#p5173" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistbd9e.html?mode=viewprofile&amp;u=677" class="username">sponce</a></strong> &raquo; </span>Sun May 06, 2012 3:56 pm
+			</p>
+			
+			
+			
+			<div class="content">Dear Elena,<br /><br />I do actually think that I have a similar problem. For a system of 23 atoms with 4x4x4 MP k-pt grid and with ecut 20Ha I got the following bug report in my log file for a simple ground state calculation:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;<br />-P-0000&nbsp; leave_test : synchronization done...<br />================================================================================<br /><br />&nbsp;----iterations are completed or convergence reached----<br /><br />&nbsp;outwf&nbsp; : write wavefunction to file ecuto_DS1_WFK<br />-P-0000&nbsp; leave_test : synchronization done...<br /><br />m_wffile.F90:279:COMMENT<br />&nbsp; &nbsp;MPI/IO accessing FORTRAN file header: detected record mark length=4<br />File locking failed in ADIOI_Set_lock(fd 17,cmd F_SETLKW/7,type F_WRLCK/1,whence 0) with return value FFFFFFFF and errno 26.<br />If the file system is NFS, you need to use NFS version 3, ensure that the lockd daemon is running on all the machines, and mount the directory with the 'noac' option (no attribute caching).<br />File locking failed in ADIOI_Set_lock(fd 18,cmd F_SETLKW/7,type F_WRLCK/1,whence 0) with return value FFFFFFFF and errno 26.<br />If the file system is NFS, you need to use NFS version 3, ensure that the lockd daemon is running on all the machines, and mount the directory with the 'noac' option (no attribute caching).<br />ADIOI_Set_lock:: Function not implemented<br />ADIOI_Set_lock:offset 83466, length 27648<br />File locking failed in ADIOI_Set_lock(fd 17,cmd F_SETLKW/7,type F_WRLCK/1,whence 0) with return value FFFFFFFF and errno 26.<br />If the file system is NFS, you need to use NFS version 3, ensure that the lockd daemon is running on all the machines, and mount the directory with the 'noac' option (no attribute caching).<br />ADIOI_Set_lock:: Function not implemented<br />ADIOI_Set_lock:offset 138762, length 27648<br />File locking failed in ADIOI_Set_lock(fd 18,cmd F_SETLKW/7,type F_WRLCK/1,whence 0) with return value FFFFFFFF and errno 26.<br />If the file system is NFS, you need to use NFS version 3, ensure that the lockd daemon is running on all the machines, and mount the directory with the 'noac' option (no attribute caching).<br />ADIOI_Set_lock:: Function not implemented<br />ADIOI_Set_lock:offset 166410, length 27660<br />ADIOI_Set_lock:: Function not implemented<br />ADIOI_Set_lock:offset 111114, length 27648<br />--------------------------------------------------------------------------<br />MPI_ABORT was invoked on rank 0 in communicator MPI_COMM_WORLD<br />with errorcode 1.<br /><br />NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.<br />You may or may not see output from other processes, depending on<br />exactly when Open MPI kills them.<br />--------------------------------------------------------------------------<br /></code></pre></div><br /><br />It systematically crashes just after the writing of the WFK file. I'm using abinit-6.12.3.<br /><br />Cheers!<br /><br />Samuel.</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p5523" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5523">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlista92f.html?mode=viewprofile&amp;u=705" class="username">delaveau</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchfdcd.html?author_id=705&amp;sr=posts">17</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue May 10, 2011 3:27 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5523">
+
+						<h3 ><a href="#p5523">Re: SCF run crashed when writing WFK: how to use the DEN fil</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting8edf.html?mode=quote&amp;f=9&amp;p=5523" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicb13f-3.html?p=5523#p5523" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlista92f.html?mode=viewprofile&amp;u=705" class="username">delaveau</a></strong> &raquo; </span>Wed Aug 01, 2012 11:04 am
+			</p>
+			
+			
+			
+			<div class="content">When WFK file crashes for big case. It migth be because the buffer to be write at the same times is to big.<br />A way of decreasing the size of the buffer is in WffReadWrite_mpio.F90 to put MAXBAND to a lower value.<br />Actually, it's put at 500 meaning that a msg of at most 500*taille of one band is written at the same time.<br />A value of 500 has been taken to reduce the number of disk access (very time consuming)<br /><br />Muriel Delaveau</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p5524" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5524">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlista92f.html?mode=viewprofile&amp;u=705" class="username">delaveau</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchfdcd.html?author_id=705&amp;sr=posts">17</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue May 10, 2011 3:27 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5524">
+
+						<h3 ><a href="#p5524">Re: SCF run crashed when writing WFK: how to use the DEN fil</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting6f4c.html?mode=quote&amp;f=9&amp;p=5524" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicfac4.html?p=5524#p5524" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlista92f.html?mode=viewprofile&amp;u=705" class="username">delaveau</a></strong> &raquo; </span>Wed Aug 01, 2012 11:31 am
+			</p>
+			
+			
+			
+			<div class="content">A possible reason for having crash in case of big system when writing file WFK is the size of message to be written at the same time.<br />this size is fixed by  MAXBAND=500 in WffReadWrite_mpio.F90 . It means that a message of 500*size of one band ( sie of cg for one band) is on memory.<br />This to minimize the number of disk access who can be very expansive in time.<br />So a way to avoid this reason of crash is to decrease MAXBAND.<br /><br />I hope it could help<br />Muriel Delaveau</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p5527" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5527">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlista92f.html?mode=viewprofile&amp;u=705" class="username">delaveau</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchfdcd.html?author_id=705&amp;sr=posts">17</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue May 10, 2011 3:27 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5527">
+
+						<h3 ><a href="#p5527">Re: SCF run crashed when writing WFK: how to use the DEN fil</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting80eb.html?mode=quote&amp;f=9&amp;p=5527" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopica409.html?p=5527#p5527" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlista92f.html?mode=viewprofile&amp;u=705" class="username">delaveau</a></strong> &raquo; </span>Wed Aug 01, 2012 3:06 pm
+			</p>
+			
+			
+			
+			<div class="content">A possible cause for crash of big case is the size of the message to be written or read at the same time.<br />The size of the message is parameted in WffReadWrite_mpio.F90  by MAXBAND=500<br />The way the written is done is hide under mpi-io implementation.<br />but the size of the message could be decrease by decreasing MAXBAND.<br />MAXBAND=500 has been choseen for performance reason because it minimize the number of disk acces<br /><br />So a way for not having the crash is to lowest the size of the message by putting for instance MAXBAND=30<br /><br />I hope it will help<br />Muriel Delaveau</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="postingef1f.html?mode=reply&amp;f=9&amp;t=1605" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic59fd.html?f=9&amp;t=1605&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=9&amp;t=1605">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			6 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforumfdc5.html?f=9" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Ground state”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1605 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:20:12 GMT -->
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=610&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:03:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] fixsym: ERROR</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] fixsym: ERROR</h2>
+		<p><a href="viewtopica0e1.html?f=9&amp;t=610">https://forum.abinit.org/viewtopic.php?f=9&amp;t=610</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] fixsym: ERROR</h3>
+				<div class="date">Posted: <strong>Fri Sep 24, 2010 10:28 am</strong></div>
+				<div class="author">by <strong>arras</strong></div>
+				<div class="content">Hi all,<br />  I want to optimize the 2D close packed phase of X-phenyl-dicarbonitril, without relaxing the molecules, but just their relative positions. Thus I have only one molecule in the box, and I use optcell 9, while fixing all atoms with iatfix. However, my atomic coordinates are perfectly symetric along x, y and z (sym Pmmm in a rectangular box), which should not be a pb, but I get the following error :<br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br />.Version 6.2.1  of ABINIT<br />.(sequential version, prepared for a i686_linux_gnu4.4 computer)<br /><br />[...]<br /> Symmetries : space group P2/m (# 10); Bravais mP (primitive monocl.)<br />[...]<br /><br /> fixsym: ERROR -<br />  Atom number     34 is symmetrically equivalent to atom number     33,<br />  but according to iatfix, iatfixx, iatfixy and iatfixz, they<br />  are not fixed along the same directions, which is forbidden.<br />  Action : modify either the symmetry or iatfix(x,y,z) and resubmit.<br /><br /> leave_new : decision taken to exit ...<br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /><br /><br />Which I don't understand since all the coordinates of all the atoms are fixed...<br />The only way to make the conputation continue is to artificialy break the symmetry, by manually changing a digit in the coordinates... I'm wondering if this is really intended...<br /><br />Thanks for your comments...<br /><br />Emmanuel</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: fixsym: ERROR</h3>
+				<div class="date">Posted: <strong>Sat Sep 25, 2010 3:46 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">you inverted natfix and iatfix. The rest looks ok.<br /><br />tell us if this works - I think no one has tried optcell with all atoms fixed before!<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: fixsym: ERROR</h3>
+				<div class="date">Posted: <strong>Fri Oct 01, 2010 10:28 am</strong></div>
+				<div class="author">by <strong>arras</strong></div>
+				<div class="content">Stupid of me...<br />Thanks for pointing it out !<br /><br />As for the results, it works just fine, except that the xcart at the end are not identical to the xcart at the beginning in the output file. But I'd say it's because of a change in lattice definition.<br />It's also pretty fast too !<br /><br />Best regards,<br /><br />Emmanuel</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=610&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:03:50 GMT -->
+</html>

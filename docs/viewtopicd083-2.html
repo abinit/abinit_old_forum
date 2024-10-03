@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3815&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:42:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; istwfk variable</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>istwfk variable</h2>
+		<p><a href="viewtopic2a0b.html?f=9&amp;t=3815">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3815</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>istwfk variable</h3>
+				<div class="date">Posted: <strong>Sat Apr 07, 2018 5:08 pm</strong></div>
+				<div class="author">by <strong>Alexander89</strong></div>
+				<div class="content">Hi all,<br /><br />I am using wannier90 with abinit (prtwant 2) and I am getting some errors that I don't know how to fix. What I am doing is to run one of the examples abinit has, but adding spin orbit coupling (with hgh pseudopotential).<br />When I run this example without SOC everything goes well.<br /><br />I think one of the problems is the variable istwfk. How can I set properly this variable?<br />These are the errors I am getting in the log file:<br /><br />--- !WARNING<br />src_file: m_hdr.F90<br />src_line: 4020<br />message: |<br />    input nkpt=8 not equal disk file nkpt=3<br />...<br /><br /> !WARNING<br />src_file: m_hdr.F90<br />src_line: 4549<br />message: |<br />    Restart of self-consistent calculation need translated wavefunctions.<br />...<br /><br />  Indeed, critical differences between current calculation and<br />  restart file have been detected in:<br />        * the number, position, or weight of k-points<br />        * the format of wavefunctions (istwfk)<br /><br />mlwfovlp:  you should give k-point in the full brillouin zone <br />   with explicit k-points (or kptopt=3) and istwfk 1<br /><br />Program received signal SIGABRT: Process abort signal.<br /><br />Backtrace for this error:<br />#0  0x7f72b47ffed7 in ???<br />#1  0x7f72b47ff10d in ???<br />#2  0x7f72b3f327ef in ???<br />#3  0x7f72b3f3277f in ???<br />#4  0x7f72b3f34379 in ???<br />#5  0x7f72b3f7608f in ???<br />#6  0x7f72b3f7fc39 in ???<br />#7  0x7f72b3f83d2b in ???<br />#8  0x5648099c2e30 in mlwfovlp_</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: istwfk variable</h3>
+				<div class="date">Posted: <strong>Wed Apr 18, 2018 10:18 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Alexander,<br />Could you test by setting istwfk*1?<br />Best wishes,<br />Eric<br />PS: In the future I would advise you to use the pseudos from pseudodojo table:<br /><!-- m --><a class="postlink" href="http://www.pseudo-dojo.org/">http://www.pseudo-dojo.org/</a><!-- m --><br />There is no selection with SOC, but it is easy to generate, I have several of them with SOC already, just ask if you need. They are more optimized and need a lower cutoff than the HGH.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3815&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:42:11 GMT -->
+</html>

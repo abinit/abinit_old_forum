@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4289&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:20:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; elastic constant (HELP) ZnO B3</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>elastic constant (HELP) ZnO B3</h2>
+		<p><a href="viewtopicc668.html?f=9&amp;t=4289">https://forum.abinit.org/viewtopic.php?f=9&amp;t=4289</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>elastic constant (HELP) ZnO B3</h3>
+				<div class="date">Posted: <strong>Thu Jan 02, 2020 10:02 am</strong></div>
+				<div class="author">by <strong>houssem</strong></div>
+				<div class="content">i want to calculate elastic constant for a semiconductor compound what is the good way for this reason. I tried through elastic tutorial (Tutorespon) for calculating elastic constant of Aluminium metal, but i didn't get a good result, so any one have another method?<br>
+i have the structure parameter after optimation :<br>
+#Common input variables<br>
+<br>
+#Definition of the unit cell<br>
+    acell   3*4.6295 angstrom         # This is equivalent to   10.61 10.61 10.61<br>
+    rprim   0.0  0.5  0.5   # In tutorials 1 and 2, these primitive vectors <br>
+            0.5  0.0  0.5   # (to be scaled by acell) were 1 0 0  0 1 0  0 0 1 <br>
+            0.5  0.5  0.0   # that is, the default.<br>
+<br>
+#Definition of the atom types<br>
+   ntypat   2         # There are two types of atom<br>
+    znucl   30 8     # The keyword "znucl" refers to the atomic number of the <br>
+                      # possible type(s) of atom. The pseudopotential(s) <br>
+                      # mentioned in the "files" file must correspond<br>
+                      # to the type(s) of atom. Here, type 1 is the Aluminum,<br>
+                      # type 2 is the Arsenic.<br>
+<br>
+#Definition of the atoms<br>
+    natom   2         # There are two atoms<br>
+    typat   1 2       # The first is of type 1 (Al), the second is of type 2 (As).<br>
+                       <br>
+     xred   0.0  0.0  0.0<br>
+            0.25 0.25 0.25  <br>
+<br>
+#Gives the number of band, explicitely (do not take the default)<br>
+    nband   10        <br>
+<br>
+#Exchange-correlation functional<br>
+<br>
+      ixc   11             # LDA Teter Pade parametrization<br>
+<br>
+#Definition of the planewave basis set<br>
+<br>
+     ecut   40           # Maximal kinetic energy cut-off, in Hartree<br>
+<br>
+#Definition of the k-point grid<br>
+    ngkpt   4  4  4          <br>
+  nshiftk   4              # Use one copy of grid only (default)<br>
+   shiftk   0.0 0.0 0.5    # This gives the usual fcc Monkhorst-Pack grid<br>
+            0.0 0.5 0.0<br>
+            0.5 0.0 0.0<br>
+            0.5 0.5 0.5<br>
+So, can any one give me the input file final to calculate  elastic constant</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: elastic constant (HELP) ZnO B3</h3>
+				<div class="date">Posted: <strong>Fri Jan 10, 2020 6:06 pm</strong></div>
+				<div class="author">by <strong>NPike</strong></div>
+				<div class="content">Hello houssem,<br>
+<br>
+Since you already relaxed your structure, you should start your calculation using the input file "telastic_2.in" in the tutorial. <br>
+<br>
+Once you replace the system dependent variables (rprim, acell, etc. ) the input file will work for the first step of the calculation.  As I am sure you noticed in the tutorial <a href="https://docs.abinit.org/tutorial/elastic/index.html" class="postlink">https://docs.abinit.org/tutorial/elastic/index.html</a> there are multiple steps to this calculation.<br>
+<br>
+-Nick</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4289&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:20:50 GMT -->
+</html>

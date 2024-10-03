@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=311&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:33:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] How to make static executable of abinit 6.0.3 ?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] How to make static executable of abinit 6.0.3 ?</h2>
+		<p><a href="viewtopic0a4b.html?f=3&amp;t=311">https://forum.abinit.org/viewtopic.php?f=3&amp;t=311</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] How to make static executable of abinit 6.0.3 ?</h3>
+				<div class="date">Posted: <strong>Thu May 13, 2010 3:36 pm</strong></div>
+				<div class="author">by <strong>spamrefuse</strong></div>
+				<div class="content">Hi,<br /><br />In the days of version 5.X, I used to produce a static executable, as follows:<br /><br />$ setenv LDFLAGS &quot;-static&quot;<br />$ ./configure --disable-etsf_io --disable-libxc --disable-netcdf --disable-bigdft --disable-wannier90<br />$ make<br /># make install<br /><br />But with 6.0.3, the configure ends with error:<br /><br /> =================================<br /> === C support<br /> =================================<br /><br />checking for gcc... gcc<br />checking for C compiler default output file name... <br />configure: error: in `/home/myhome/Desktop/Research/Abinit/Software/abinit-6.0.3':<br />configure: error: C compiler cannot create executables<br />See `config.log' for more details.<br /><br /><br />The config.log file doesn't tell me much. Its last line is:<br /><br />   configure: exit 77<br /><br />Can somebody tell me how to get the static executable with 6.0.3?<br /><br />Thank  you!<br /><br />Rob.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to make static executable of abinit 6.0.3 ?</h3>
+				<div class="date">Posted: <strong>Mon May 17, 2010 8:26 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">The config.log file <strong class="text-strong">does</strong> tell much about the failure, but you'll not find it at the end of the file. You should look for the last occurrence of <em class="text-italics">&quot;failed program was&quot;</em> instead.<br /><br />Please note that not only Abinit has evolved since the time of 5.x. GCC has changed as well, and you might need to use different options. What about &quot;-static-libgcc&quot; instead of &quot;-static&quot;? Depending on your architecture, the correct option may also be &quot;-Bstatic&quot;. On Mac, a static build might be very difficult to achieve, if achievable at all. Sometimes, it is necessary to use the &quot;-Wl,...&quot; option to pass arguments to the linker.<br /><br />In any case, the contents of config.log will let you know what happened.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to make static executable of abinit 6.0.3 ?</h3>
+				<div class="date">Posted: <strong>Tue May 18, 2010 2:49 am</strong></div>
+				<div class="author">by <strong>spamrefuse</strong></div>
+				<div class="content">Thank you for your reply.<br /><br />My system is Fedora/Linux and I managed to get the static executable as follows:<br /><br />1) install the glibc-static package for the  /usr/lib/libc.a  library.<br /><br />2) set the LDFLAGS environment variable, like this:<br />   setenv LDFLAGS &quot;-static `gcc -print-file-name=libgfortran.a` `gcc -print-file-name=libgcc.a` `gcc -print-file-name=libc.a`&quot;<br /><br />  (use the property of gcc -print-file-name=library to get the full path to the static libraries)<br /><br />3) finally run the usual configure and make stuff.<br /><br />Rob.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to make static executable of abinit 6.0.3 ?</h3>
+				<div class="date">Posted: <strong>Wed Jul 21, 2010 2:48 pm</strong></div>
+				<div class="author">by <strong>spamrefuse</strong></div>
+				<div class="content">Hi,<br /><br />This does not seem to work anymore with 6.2.1.<br /><br />I use the same configure options, but with 6.2.1 it produces<br />the usual dynamically linked abinit executable.<br /><br />Has the procedure changed from 6.0.3 to 6.2.1 ?<br /><br />Thanks,<br />Rob.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=311&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:33:12 GMT -->
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=528&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Compiling abinit-6.2.1 on NEC SX-9</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Compiling abinit-6.2.1 on NEC SX-9</h2>
+		<p><a href="viewtopic1723.html?f=3&amp;t=528">https://forum.abinit.org/viewtopic.php?f=3&amp;t=528</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Compiling abinit-6.2.1 on NEC SX-9</h3>
+				<div class="date">Posted: <strong>Mon Aug 09, 2010 9:26 am</strong></div>
+				<div class="author">by <strong>goodwill</strong></div>
+				<div class="content">Hi, all. <br /><br />  I have to compile ABINIT-6.2.1 on NEC SX-9, a  vector<br />supercomputer. Because the machine type of the frond end and<br />the computing nodes are totally different,  I was suggested <br />by the system engineer to run the configure script first<br />on the computing node, generating Makefile and<br />then manually modify Makefile for cross-compiling on the <br />frond end.  However, there are so many Makefile files<br />in the sub-directories, and I wonder if there is a way<br />to automatically update Makefile (on options like FC, CC)<br />in sub-directories with manually modified Makefile in the<br />top directory. Could you please give me some advice on <br />this point?<br /><br />By the way, in order to run configure on computing nodes <br />of SX-9, I have downloaded the latest version of <br />config/gnu/config.sub, config.guess, and added the following <br />sentences as suggested by the system engineer: <br /><br />       SX-9:SUPER-UX:*:*)<br />        echo sx9-nec-superux${UNAME_RELEASE}<br />        exit ;;<br /><br />Any comments are appreciated. <br /><br />Thanks.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling abinit-6.2.1 on NEC SX-9</h3>
+				<div class="date">Posted: <strong>Fri Sep 03, 2010 4:45 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">The easiest way would probably be to submit a job to compile Abinit. You may even benefit from the use of several processors by running &quot;make multi multi_nprocs=&lt;nprocs&gt;&quot;, where &lt;nprocs&gt; is the number of processors you reserved for the job.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling abinit-6.2.1 on NEC SX-9</h3>
+				<div class="date">Posted: <strong>Tue Sep 14, 2010 10:02 am</strong></div>
+				<div class="author">by <strong>goodwill</strong></div>
+				<div class="content">Thank you for your suggestion. I have tested it. However, it was shown to be not feasible to compile the source on the computing nodes, because the system is a cross compiling system. Necessary supports for the compiling are only availabe in the front end.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling abinit-6.2.1 on NEC SX-9</h3>
+				<div class="date">Posted: <strong>Wed Sep 15, 2010 2:38 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">If you can only cross-compile, then you should follow the instructions of your system administrator. To override variables set in the Makefile, you may specify them on the command line, e.g.:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make CC=gcc FC=gfortran-4.5 ...var=value ...<br /></code></pre></div></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=528&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:51 GMT -->
+</html>

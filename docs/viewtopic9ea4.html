@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2639&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:03:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Recipe to compile abinit 7.6.3 on UBUNTU 13.04 (64bits)</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Recipe to compile abinit 7.6.3 on UBUNTU 13.04 (64bits)</h2>
+		<p><a href="viewtopic7efd.html?f=3&amp;t=2639">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2639</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Recipe to compile abinit 7.6.3 on UBUNTU 13.04 (64bits)</h3>
+				<div class="date">Posted: <strong>Tue Apr 15, 2014 11:07 pm</strong></div>
+				<div class="author">by <strong>admin</strong></div>
+				<div class="content">Recipe for a  x86-64 / ubuntu 13.04 (64bits) / abinit 7.6.3  :<br /><br />from a fresh install :<br /><br />1) installation of theses packages  :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>sudo apt-get -y install gcc g++ gfortran<br />sudo apt-get -y install patch<br /><br />sudo apt-get -y install libetsf-io-dev<br />sudo apt-get -y install libnetcdf-dev<br /><br />sudo apt-get -y install libfftw3-dev<br /><br />sudo apt-get -y install libatlas-base-dev&nbsp; libatlas3gf-base<br />sudo apt-get -y install liblapack3gf liblapack-dev<br />sudo apt-get -y install libblas3gf libblas-dev<br /><br />sudo apt-get -y install openmpi-bin openmpi-common libopenmpi-dev</code></pre></div><br /><br />2) download of abinit sources ( <!-- m --><a class="postlink" href="http://www.abinit.org/">http://www.abinit.org</a><!-- m --> )<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>cd /tmp<br />wget http://ftp.abinit.org/abinit-7.6.3.tar.gz<br />tar xzf abinit-7.6.3.tar.gz<br />cd abinit-7.6.3</code></pre></div><br /><br />3) create a   &quot;ubuntu.ac&quot;   file :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>prefix=&quot;/usr/local&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_prefix=&quot;/usr&quot;<br />with_trio_flavor=&quot;netcdf+etsf_io&quot;<br />with_netcdf_incs=&quot;-I/usr/include&quot;<br />with_netcdf_libs=&quot;-L/usr/lib -lnetcdf -lnetcdff&quot;<br />with_etsf_io_incs=&quot;-I/usr/include&quot;<br />with_etsf_io_libs=&quot;-L/usr/lib -letsf_io_low_level -letsf_io_utils -letsf_io&quot;<br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_incs=&quot;-I/usr/include/&quot;<br />with_fft_libs=&quot;-L/usr/lib/x86-64-linux-gnu/ -lfftw3 -lfftw3f&quot;<br />with_linalg_flavor=&quot;atlas&quot;<br />with_linalg_libs=&quot;-L/usr/lib64 -llapack -lf77blas -lcblas -latlas&quot;<br />with_dft_flavor=&quot;atompaw+libxc&quot;<br />#with_dft_flavor=&quot;atompaw+bigdft+libxc+wannier90&quot;<br />enable_gw_dpc=&quot;yes&quot;<br />enable_maintainer_checks=&quot;no&quot;<br />enable_test_timeout=&quot;yes&quot;<br />enable_gui_build=&quot;no&quot;</code></pre></div><br /><br />4)  make abinit<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;./configure --with-config-file=&quot;./ubuntu.ac&quot;<br />make mj4</code></pre></div><br /><br />5) make sequential tests ( 4 cores )<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>cd tests<br />./runtests.py -j 4 fast<br />Regenerating database...<br />Saving database to file /root/WorkSpace/abinit-7.6.3/tests/test_suite.cpkl<br />Running ntests = 26, MPI_nprocs = 1, py_nthreads = 4...<br />&#91;fast&#93;&#91;t01&#93; succeeded<br />...<br />&#91;fast&#93;&#91;t29&#93; succeeded<br />Test suite completed in 16.05 s (average time for test = 4.00 s, stdev = 3.92 s)<br />failed: 0, succeeded: 10, passed: 1, skipped: 0, disabled: 0<br />&#91;fast&#93;&#91;t27-t28-t29&#93; has run_etime 13.20 s<br />Suite&nbsp; &nbsp;failed&nbsp; passed&nbsp; succeeded&nbsp; skipped&nbsp; disabled&nbsp; run_etime&nbsp; tot_etime<br />fast&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;10&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; 44.02&nbsp; &nbsp; &nbsp; 46.05<br /></code></pre></div><br /><br />6) make parallel tests<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./runtests.py paral -n 2 -j 2<br />Test_suite directory already exists! Old files will be removed<br />Running ntests = 93, MPI_nprocs = 2, py_nthreads =2…<br />…<br />&#91;paral&#93;&#91;t53_MPI1&#93;: Skipped<br />&#91;paral&#93;&#91;t02_MPI2&#93; succeeded<br />&#91;paral&#93;&#91;t51_MPI4&#93;: Skipped<br />&#91;paral&#93;&#91;t53_MPI10&#93;: Skipped<br />&#91;paral&#93;&#91;t54_MPI1&#93;: Skipped<br />&#91;paral&#93;&#91;t01_MPI2&#93; succeeded<br />…<br />&#91;paral&#93;&#91;t55_MPI1&#93;: Skipped<br />&#91;paral&#93;&#91;t51_MPI2&#93; succeeded<br />&#91;paral&#93;&#91;t03_MPI2&#93; succeeded<br />&#91;paral&#93;&#91;t55_MPI4&#93;: Skipped<br />…<br />&#91;paral&#93;&#91;t92_MPI10&#93;: Skipped<br />&#91;paral&#93;&#91;t53_MPI2&#93; passed: absolute error 3e-07 &lt; 2e-06, relative error 3.345e-08 &lt; 2e-07<br />&#91;paral&#93;&#91;t07_MPI2&#93; succeeded<br />&#91;paral&#93;&#91;t75_MPI2&#93; passed: absolute error 4.477e-10 &lt; 0.0011, relative error 4.961e-09 &lt; 1.1<br />&#91;paral&#93;&#91;t73_MPI2&#93; passed: absolute error 1.944e-07 &lt; 0.004, relative error 1.705e-07 &lt; 0.095<br />&#91;paral&#93;&#91;t76_MPI2&#93; succeeded<br />…<br />Suite&nbsp; &nbsp;failed&nbsp; passed&nbsp; succeeded&nbsp; skipped&nbsp; disabled&nbsp; run_etime&nbsp; tot_etime<br />paral&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;5&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;15&nbsp; &nbsp; &nbsp; &nbsp;65&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;815.67&nbsp; &nbsp; &nbsp;829.03<br /></code></pre></div><br /><br />7) install abinit<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make install</code></pre></div><br /><br />abinit &amp;  binaries are in &quot;/usr/local/bin&quot; folder  ( you can change the destination folder with 'prefix=' option)</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2639&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:03:15 GMT -->
+</html>

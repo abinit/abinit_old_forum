@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2337&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:54:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Trying to calculate DOS for Ce4O8</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Trying to calculate DOS for Ce4O8</h2>
+		<p><a href="viewtopic1e74.html?f=9&amp;t=2337">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2337</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Trying to calculate DOS for Ce4O8</h3>
+				<div class="date">Posted: <strong>Thu Nov 21, 2013 6:56 pm</strong></div>
+				<div class="author">by <strong>DrMcTaco</strong></div>
+				<div class="content">I have finished working through the initial 4 tutorials, read the tutorial on PAW DOS calculations, and read the prtdos variable info. And I cannot seem to recreate the DOS.<br /><br />I am getting a bit confused with the prtdos variable. It indicates I need to make a self consistent then a non consistent calculation to get DOS, but the PAW1 tutorial only does 1.<br /><br />This is the input file i have thus far<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#Cerium Oxide<br />ndtset&nbsp; &nbsp; &nbsp;2<br />getwfk&nbsp; &nbsp; -1<br />nshiftk&nbsp; &nbsp;1<br />shiftk&nbsp; &nbsp; 0.0 0.0 0.0<br />kptopt&nbsp; &nbsp; 1<br />ngkpt&nbsp; &nbsp; &nbsp;4 4 4<br /><br />acell&nbsp; &nbsp; &nbsp;3*1<br />rprim&nbsp; &nbsp; &nbsp;5.4647030829999999&nbsp; &nbsp; 0.0000000000000000&nbsp; &nbsp; 0.0000000000000000<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0000000000000000&nbsp; &nbsp; 5.4647030829999999&nbsp; &nbsp; 0.0000000000000000<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0000000000000000&nbsp; &nbsp; 0.0000000000000000&nbsp; &nbsp; 5.4647030829999999<br /><br />ionmov&nbsp; &nbsp; 0<br />ntime&nbsp; &nbsp; &nbsp;50<br />dilatmx&nbsp; &nbsp;1.05<br />ecut&nbsp; &nbsp; &nbsp; 520 eV<br /><br />ntypat&nbsp; &nbsp; 2<br />znucl&nbsp; &nbsp; &nbsp;58 8<br /><br />natom&nbsp; &nbsp; &nbsp;12<br />typat&nbsp; &nbsp; &nbsp;4*1 8*2<br />xred&nbsp; &nbsp; &nbsp; 0.0000000000000000&nbsp; 0.0000000000000000&nbsp; 0.0000000000000000<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0000000000000000&nbsp; 0.4999999700000000&nbsp; 0.4999999700000000<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.4999999700000000&nbsp; 0.0000000000000000&nbsp; 0.4999999700000000<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.4999999700000000&nbsp; 0.4999999700000000&nbsp; 0.0000000000000000<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.2499999850000000&nbsp; 0.2499999850000000&nbsp; 0.2499999850000000<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.7499999400000000&nbsp; 0.7499999400000000&nbsp; 0.7499999400000000<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.7499999400000000&nbsp; 0.7499999400000000&nbsp; 0.2499999850000000<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.2499999850000000&nbsp; 0.2499999850000000&nbsp; 0.7499999400000000<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.7499999400000000&nbsp; 0.2499999850000000&nbsp; 0.2499999850000000<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.7499999400000000&nbsp; 0.2499999850000000&nbsp; 0.7499999400000000<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.2499999850000000&nbsp; 0.7499999400000000&nbsp; 0.2499999850000000<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.2499999850000000&nbsp; 0.7499999400000000&nbsp; 0.7499999400000000<br /><br />ixc&nbsp; &nbsp; &nbsp; &nbsp;1<br /><br />nstep&nbsp; &nbsp; &nbsp;50<br />tolwfr&nbsp; &nbsp; 1.0d-12<br />optforces 2<br />diemac&nbsp; &nbsp; 12<br />occopt&nbsp; &nbsp; 7<br />optstress 1<br />nbdbuf&nbsp; &nbsp; 2<br />prtdos&nbsp; &nbsp; 1</code></pre></div><br /><br />I appreciate any help you all could provide.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Trying to calculate DOS for Ce4O8</h3>
+				<div class="date">Posted: <strong>Mon Oct 22, 2018 7:06 pm</strong></div>
+				<div class="author">by <strong>shalom</strong></div>
+				<div class="content">Me too ...<br />I tried to trace the DOS folder as in the PAW1 tutorial ... but I get really nothing but what was plotted in this tutorial.<br />Help me please ...<br />Shalom</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2337&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:54:59 GMT -->
+</html>

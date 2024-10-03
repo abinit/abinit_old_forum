@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4054&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:37:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Make error</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Make error</h2>
+		<p><a href="viewtopica1d3.html?f=3&amp;t=4054">https://forum.abinit.org/viewtopic.php?f=3&amp;t=4054</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Make error</h3>
+				<div class="date">Posted: <strong>Fri Mar 01, 2019 7:12 am</strong></div>
+				<div class="author">by <strong>Zenith</strong></div>
+				<div class="content">Hi everyone,<br />I'm installing Abinit 8.8.4 on a small cluster. I success in configuring it but not for the compilation. The last lines i had are: <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>............................<br />checking for a thread-safe mkdir -p... /bin/mkdir -p<br />checking for gawk... gawk<br />checking whether make sets $(MAKE)... yes<br />checking whether make supports nested variables... yes<br />checking for a sed that does not truncate output... /bin/sed<br />checking for gcc... /usr/mpi/intel/openmpi-1.8.1-qlc//bin/mpicc<br />checking whether the C compiler works... yes<br />checking for C compiler default output file name... a.out<br />checking for suffix of executables...<br />checking whether we are cross compiling... configure: error: in `/users/zenith/Abinit/abinit-8.8.4/build/fallbacks/sources/bigdft-1.7.1.25':<br />configure: error: cannot run C compiled programs.<br />If you meant to cross compile, use `--host'.<br />See `config.log' for more details<br />make&#91;2&#93;: *** &#91;stamps/bigdft-config-stamp&#93; Error 1<br />make&#91;2&#93;: Leaving directory `/users/zenith/Abinit/abinit-8.8.4/build/fallbacks'<br />make&#91;1&#93;: &#91;all-local&#93; Error 2 (ignored)<br />Checking build of bigdft fallback<br />test -e stamps/bigdft-install-stamp<br />make&#91;1&#93;: *** &#91;all-local&#93; Error 1<br />make&#91;1&#93;: Leaving directory `/users/zenith/Abinit/abinit-8.8.4/build/fallbacks'<br />make: *** &#91;multi&#93; Error 2<br /></code></pre></div><br /><br />where is the problem?<br /><br />Best regards,</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Make error</h3>
+				<div class="date">Posted: <strong>Fri Mar 01, 2019 10:57 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Zenith ,<br />What did you set for your configure (in a configure file *.ac or directly in command line)?<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Make error</h3>
+				<div class="date">Posted: <strong>Fri Mar 01, 2019 2:37 pm</strong></div>
+				<div class="author">by <strong>Zenith</strong></div>
+				<div class="content">Thank u for your response, dear ebousquet.<br />My .ac file is:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#<br />prefix=&quot;/users/zenith/Abinit&quot;<br /><br /># MPI/OpenMP<br />with_mpi_prefix=&quot;/usr/mpi/intel/openmpi-1.8.1-qlc/&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br /><br />#enable_openmp=&quot;yes&quot;<br />#enable_64bit_flags=&quot;yes&quot;<br /><br /># BLAS/LAPACK <br />with_linalg_flavor=&quot;mkl&quot;<br />#with_linalg_libs=&quot;-L/apps/intel_2017/compilers_and_libraries_2017.0.098/linux/mkl/lib/intel6/ -lmkl_intel_lp64 -lmkl_core -lmkl_sequential -lpthread -lm -ldl&quot;<br />with_fft_libs=&quot;-L/apps/intel_2017/compilers_and_libraries_2017.0.098/linux/mkl/lib/intel64 -Wl,--start-group&nbsp; -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group -lpthread -lm -ldl&quot;<br /><br /># FFTW3 <br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_incs='-I/apps/intel_2017/compilers_and_libraries_2017.0.098/linux/mkl/include'<br />with_fft_libs=&quot;-L/apps/intel_2017/compilers_and_libraries_2017.0.098/linux/mkl/lib/intel64 -Wl,--start-group&nbsp; -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group -lpthread -lm -ldl&quot;<br /><br />with_dft_flavor=&quot;atompaw+libxc+wannier90+bigdft&quot;<br />with_trio_flavor=&quot;netcdf&quot;&nbsp; &nbsp; <br />with_netcdf_incs=&quot;-I/users/zenith/local/intel17/include &quot;<br />with_netcdf_libs=&quot;-L/users/zenith/local/intel17/lib -lnetcdf -lnetcdff -lhdf5_fortran -lhdf5_hl -lhdf5&quot;<br />#<br />enable_gw_dpc=&quot;yes&quot;</code></pre></div> <br /><br />On posting my .ac file, i think i find my problem. it's on letting two different lines of <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>with_dft_flavor=</code></pre></div>. <img class="smilies" src="images/smilies/icon_redface.gif" alt=":oops:" title="Embarrassed" /> <br /><br />But, please, I still have other questions here:<br />1- I don't understand why &quot;LAPACK for Abinit&quot; is downloaded from Fallbacks when i'm choosing to use MKL librairies from my machine ?!!<br />2- i'm confued about enabling or not of openmp and 64bit_flags. I have some E5-2670v2 Intel CPUs, in my cluster.<br />3- In my configuration, i used Intel compilers and libs +openmpi. In the same cluster we have as mpi: intel-mpi, openmpi, mvapich and mvapich2. Please, which one is the most suitable for my case ?<br /><br />Excuse me for asking all these questions. I'm physicist and have just begin in this domain.<br />Best regards,</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Make error</h3>
+				<div class="date">Posted: <strong>Fri Mar 08, 2019 3:51 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Zenith,<br /><br />First of all, your compilation crashes for the bigdft, are you really going to use it? (idem for wannier90 and atompaw, don't put them if you are not going to use them).<br /><br />For the mkl, in your .ac file, if I'm correct, you have commented the line where you specify the path for mkl (your have #with_linalg_libs=...) so  I guess this is why it is trying to download it? Another small comment is that you define 2 times the path for fftlib (with_fft_libs=).<br /><br />Otherwise you can enable the 64 bit flag and you can enable openmp, it just depends if you are going to thread or not, the CPU you mention has many threads:<br /><a href="https://ark.intel.com/content/www/us/en/ark/products/75275/intel-xeon-processor-e5-2670-v2-25m-cache-2-50-ghz.html" class="postlink">https://ark.intel.com/content/www/us/en/ark/products/75275/intel-xeon-processor-e5-2670-v2-25m-cache-2-50-ghz.html</a><br /><br />I know that open-mpi and intel-mpi are OK, you just have to compare the two on one test on your machine to see which one is the faster.<br /><br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Make error</h3>
+				<div class="date">Posted: <strong>Tue Mar 12, 2019 10:10 am</strong></div>
+				<div class="author">by <strong>Zenith</strong></div>
+				<div class="content">Dear Eric,<br />Thank you for the response.<br />As you said the problem is in the the compilation of BigDFT, wich is ,unfortanately, what i think i will use from the FallBacks: It concerns the wavelets.<br />I recompile Abinit  with the corrections you suggest on .ac; i had the same error. <br />From the beginning of the BigDFT compilation, i had:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>.<br />Checking build of etsf_io fallback<br />test -e stamps/etsf_io-install-stamp<br />make bigdft<br />make&#91;3&#93;: Entering directory `/users/zenith/abinit/abinit-8.8.4/build/fallbacks'<br />cd sources &amp;&amp; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gzip -cd /users/zenith/.abinit/tarballs/bigdft-1.7.1.25.tar.gz | tar xf -<br />No patch to apply<br />cd sources/bigdft-1.7.1.25 &amp;&amp; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; CPP=&quot;/usr/mpi/intel/openmpi-1.8.1-qlc//bin/mpicc -E&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; CPPFLAGS=&quot; &quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; CC=&quot;/usr/mpi/intel/openmpi-1.8.1-qlc//bin/mpicc&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; CFLAGS=&quot;-g -O2&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; CXX=&quot;/usr/mpi/intel/openmpi-1.8.1-qlc//bin/mpicxx&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; CXXFLAGS=&quot;&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; FCCPP=&quot;cpp -P -std=c99&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; F77=&quot;/usr/mpi/intel/openmpi-1.8.1-qlc//bin/mpif90&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; FFLAGS=&quot;-fixed -g&nbsp; &nbsp; -O3 -g -O2 &quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; F90=&quot;/usr/mpi/intel/openmpi-1.8.1-qlc//bin/mpif90&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; F90FLAGS=&quot;-free -g&nbsp; &nbsp; -O3 -g -O2 &quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; FC=&quot;/usr/mpi/intel/openmpi-1.8.1-qlc//bin/mpif90&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; FCFLAGS=&quot;-free -g&nbsp; &nbsp; -O3 -g -O2 &quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; LDFLAGS=&quot; &quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; LIBS=&quot; -L/apps/intel_2017/compilers_and_libraries_2017.0.098/linux/mkl/lib/intel64 -Wl,--start-group&nbsp; -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group -lpthread -lm -ldl -L/users/zenith/local/intel17/lib -lnetcdf -lnetcdff -lhdf5_fortran -lhdf5_hl -lhdf5&nbsp; -L/users/zenith/abinit/abinit-8.8.4/build/fallbacks/exports/lib -lxcf90 -lxc&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; AR=&quot;ar&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ARFLAGS=&quot;rc&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; RANLIB=&quot;ranlib&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ac_fc_srcext=&quot;F90&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /bin/sh ./configure \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; --prefix=&quot;/users/zenith/abinit/abinit-8.8.4/build/fallbacks/exports&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; --bindir=&quot;/users/zenith/abinit/abinit-8.8.4/build/fallbacks/exports/bin&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; --libdir=&quot;/users/zenith/abinit/abinit-8.8.4/build/fallbacks/exports/lib&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; --program-suffix=&quot;-abinit&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; --disable-binaries --disable-bindings --enable-libbigdft --without-archives --with-moduledir=&quot;/users/zenith/abinit/abinit-8.8.4/build/fallbacks/exports/include&quot; --enable-internal-libyaml --disable-shared --disable-internal-libxc --with-libxc-incs=&quot;-I/users/zenith/abinit/abinit-8.8.4/build/fallbacks/exports/include&quot; --with-libxc-libs=&quot;-L/users/zenith/abinit/abinit-8.8.4/build/fallbacks/exports/lib -lxcf90 -lxc&quot; --program-suffix='-abinit'<br />checking for a BSD-compatible install... /usr/bin/install -c<br />checking whether build environment is sane... yes<br />checking for a thread-safe mkdir -p... /bin/mkdir -p<br />checking for gawk... gawk<br />checking whether make sets $(MAKE)... yes<br />checking whether make supports nested variables... yes<br />checking for a sed that does not truncate output... /bin/sed<br />checking for gcc... /usr/mpi/intel/openmpi-1.8.1-qlc//bin/mpicc<br />checking whether the C compiler works... yes<br />checking for C compiler default output file name... a.out<br />checking for suffix of executables...<br />checking whether we are cross compiling... configure: error: in `/users/zenith/abinit/abinit-8.8.4/build/fallbacks/sources/bigdft-1.7.1.25':<br />configure: error: cannot run C compiled programs.<br />If you meant to cross compile, use `--host'.<br />See `config.log' for more details<br />make&#91;3&#93;: *** &#91;stamps/bigdft-config-stamp&#93; Error 1<br />make&#91;3&#93;: Leaving directory `/users/zenith/abinit/abinit-8.8.4/build/fallbacks'<br />make&#91;2&#93;: &#91;all-local&#93; Error 2 (ignored)<br />Checking build of bigdft fallback<br />test -e stamps/bigdft-install-stamp<br />make&#91;2&#93;: *** &#91;all-local&#93; Error 1<br />make&#91;2&#93;: Leaving directory `/users/zenith/abinit/abinit-8.8.4/build/fallbacks'<br />make&#91;1&#93;: *** &#91;multi&#93; Error 2<br />make&#91;1&#93;: Leaving directory `/users/zenith/abinit/abinit-8.8.4/build'<br />make: *** &#91;mj4&#93; Error 2<br />.</code></pre></div> <br /><br />What does mean &quot;No patch to apply&quot;?  If it's looking for patch sofware, it's installed:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>zenith@master build&#93;$ rpm -q patch<br />patch-2.6-6.el6.x86_64</code></pre></div><br /><br />Best Regards,</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4054&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:37:58 GMT -->
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1537&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:04:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; The GW tutorial : addressing cross-convergence</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>The GW tutorial : addressing cross-convergence</h2>
+		<p><a href="viewtopicce85-2.html?f=19&amp;t=1537">https://forum.abinit.org/viewtopic.php?f=19&amp;t=1537</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>The GW tutorial : addressing cross-convergence</h3>
+				<div class="date">Posted: <strong>Wed Feb 15, 2012 2:55 pm</strong></div>
+				<div class="author">by <strong>gabriel.antonius</strong></div>
+				<div class="content">Dear all,<br /><br />There is some issue with the GW tutorial I would like to discuss. Although it does a good job at showing all the parameters of a GW calculation, it says nothing about the interdependence of these parameters during a convergence study. It might be worth mentioning that ecuteps, nband in sigma and nband in screening must be crossed-converged. I've come with the following procedure to ensure reliability of the converged parameters. <br /><br /><br />1) Produce a KSS file with high ecut (30 Ha) and number of bands (800).<br />	Note that for such a high number of bands, one should carefully look at the warnings <br />	to make sure the wave functions were converged.<br /><br />2) Produce a SCR file with moderately high ecuteps (10 Ha) and number of bands (500),<br />	keeping ecutwfn = ecut<br /><br />3) 	3.1) (optional) Make a convergence study on ecutsigx.<br />		Note that this parameter does not depend on ecuteps or any parameter <br />		used in the screening.<br /><br />	3.2) Make a convergence study on ecutwfn with a high number of band (600),<br />		If the maximum value of ecutwfn  you can pick (the ecut used in the kss) <br />		turns out to be under-converged, go back to step 1), raising ecut..<br /><br />4) Make a convergence study on nband used in sigma. <br />	If nband in the kss turns out to be under converged, go back to step 1, raising nband.<br />	If nband used at step 3.2 was under converged, go back to step 3.2, raising nband.<br /><br />5) Make a convergence study on ecuteps.<br />	If ecuteps used at step 4 was under converged, go back to step 4, using a screening <br />	file with sufficient ecuteps.<br /><br />6) Make a convergence study on nband used in the screening.<br />	If nband in the screening used at step 4 was under converged, go back to step 4, <br />	using a screening file with sufficient nband.<br />	It will probably be smaller than nband used in sigma<br /><br />7) (optional) Make a convergence study on ecutwfn used in the screening.<br />	It will most probably be smaller than ecutwfn used in sigma.<br /><br />8) Make a convergence study on the k-point grid used throughout the GW procedure.<br />	This parameter is quite independent of the rest.<br /><br /><br />Note : If you are not using a plasmon-pole model, you must also do a convergence study on<br />	  the number of frequencies used, which has some interdependence with the <br />	  number of band used in the screening and ecuteps.<br /><br /><br />So the idea here was to start with high parameters in order to converge down the calculation,<br />and avoid having to reiterate the procedure. <br />Are these starting parameter too heavy for common systems? <br />Let me know what you think.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1537&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:04:56 GMT -->
+</html>

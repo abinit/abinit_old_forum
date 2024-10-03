@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=2940&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 20:59:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Full relaxation under non-null electric field</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Full relaxation under non-null electric field</h2>
+		<p><a href="viewtopic8912.html?f=10&amp;t=2940">https://forum.abinit.org/viewtopic.php?f=10&amp;t=2940</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Full relaxation under non-null electric field</h3>
+				<div class="date">Posted: <strong>Tue Mar 10, 2015 10:13 am</strong></div>
+				<div class="author">by <strong>antonio</strong></div>
+				<div class="content">Dear all,<br /><br />I am trying to fully optimize a simple tetragonal cell with a non-null electric field applied. I started using a small field; I see that, despite ionmov=2, only the cell parameters are changed, because of the tolerance on the forces. Then I incrementally increased the field restarting from the last geometry and wavefunction but, for a particular value of the field, each relaxation step has higher and higher forces and energies:<br /><br />grep fcart rlx_out<br /> Cartesian forces (fcart) [Ha/bohr]; max,rms= 2.75210E-03 9.94192E-04 (free atoms)<br /> Cartesian forces (fcart) [Ha/bohr]; max,rms= 2.90881E-03 1.04364E-03 (free atoms)<br /> Cartesian forces (fcart) [Ha/bohr]; max,rms= 3.09318E-03 1.10311E-03 (free atoms)<br /> Cartesian forces (fcart) [Ha/bohr]; max,rms= 3.19493E-03 1.13673E-03 (free atoms)<br /> Cartesian forces (fcart) [Ha/bohr]; max,rms= 2.03107E-03 7.32846E-04 (free atoms)<br /> Cartesian forces (fcart) [Ha/bohr]; max,rms= 2.68780E-03 9.63519E-04 (free atoms)<br /> Cartesian forces (fcart) [Ha/bohr]; max,rms= 1.77305E-02 5.34135E-03 (free atoms)<br /> Cartesian forces (fcart) [Ha/bohr]; max,rms= 8.63297E-01 2.58375E-01 (free atoms)<br /> Cartesian forces (fcart) [Ha/bohr]; max,rms= 2.87584E+00 8.58629E-01 (free atoms)<br /> Cartesian forces (fcart) [Ha/bohr]; max,rms= 1.17594E+00 4.11415E-01 (free atoms)<br /><br />grep etotal rlx_out<br /> Total energy (etotal) [Ha]= -1.31135948305738E+02<br /> Total energy (etotal) [Ha]= -1.31136059824999E+02<br /> Total energy (etotal) [Ha]= -1.31136120515053E+02<br /> Total energy (etotal) [Ha]= -1.31136153859566E+02<br /> Total energy (etotal) [Ha]= -1.31136188050108E+02<br /> Total energy (etotal) [Ha]= -1.31136304780015E+02<br /> Total energy (etotal) [Ha]= -1.31120166560307E+02<br /> Total energy (etotal) [Ha]= -1.31046695186849E+02<br /> Total energy (etotal) [Ha]= -1.31093204690302E+02<br /> Total energy (etotal) [Ha]= -1.30958327915038E+02<br /><br />then it stops with the following error:<br />   <br />--- !BUG       <br />message: |<br />    For k-point #   57,<br />      the determinant of the overlap matrix is found to be 0.                                                         <br />src_file: berryphase_new.F90                                                                                          <br />src_line: 934  <br />...<br />   <br /> <br /> leave_new : decision taken to exit ...  <br /><br /><br />Here is the input with the last restart, where I supplied the restart geometry by hand in the input:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#Definition of lattice parameters<br />#********************************<br />#Lattice parameters<br />&nbsp; &nbsp; acell&nbsp; &nbsp; &nbsp; 1.0 1.0 1.0 Bohr<br />&nbsp; &nbsp; rprim<br />7.4348813581E+00&nbsp; 0.0000000000E+00&nbsp; 0.0000000000E+00<br />0.0000000000E+00&nbsp; 7.4348813581E+00&nbsp; 0.0000000000E+00<br />0.0000000000E+00&nbsp; 0.0000000000E+00&nbsp; 7.4348813581E+00<br /><br /><br />#Definition of atomic positions and types<br />#*************************************<br />&nbsp; &nbsp;spgroup&nbsp; &nbsp; &nbsp;1<br />&nbsp; &nbsp;brvltt&nbsp; &nbsp; &nbsp; -1<br />&nbsp; &nbsp;nsym&nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp;tolsym&nbsp; &nbsp; &nbsp; 1.0e-4<br />&nbsp; &nbsp;chkprim&nbsp; &nbsp; &nbsp;0<br />&nbsp; &nbsp;spgaxor&nbsp; &nbsp; &nbsp;1<br />&nbsp; &nbsp;natom&nbsp; &nbsp; &nbsp; &nbsp;5<br />&nbsp; &nbsp;ntypat&nbsp; &nbsp; &nbsp; 3<br />#&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Ba Ti O<br />&nbsp; &nbsp;znucl&nbsp; &nbsp; &nbsp; &nbsp;56 22 8<br />&nbsp; &nbsp;typat&nbsp; &nbsp; &nbsp; &nbsp;1 2 3 3 3<br /><br /># Starting xred<br />&nbsp; &nbsp;xred&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.000000000&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.000000000&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.000000000<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.500000000&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.500000000&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.500000000<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.000000000&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.500000000&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.500000000<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.500000000&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.000000000&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.500000000<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.500000000&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.500000000&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.000000000<br />#Parameters of the SCF cycles<br />#****************************<br />&nbsp; &nbsp; iscf&nbsp; &nbsp; &nbsp; &nbsp;4<br />&nbsp; &nbsp;nstep&nbsp; &nbsp; &nbsp; &nbsp;400<br />&nbsp; toldfe&nbsp; &nbsp; &nbsp; &nbsp;1.0d-12<br /><br />#Plane wave basis and k-point grid<br />#*********************************<br />&nbsp; &nbsp;ecut&nbsp; &nbsp; &nbsp; &nbsp; 800 eV<br />&nbsp; &nbsp;ecutsm&nbsp; &nbsp; &nbsp; 0.5<br />&nbsp; &nbsp;dilatmx&nbsp; &nbsp; &nbsp;1.20<br />&nbsp; &nbsp;ngkpt&nbsp; &nbsp; &nbsp; &nbsp;13 13 13<br /><br />ndtset 1&nbsp; &nbsp;jdtset&nbsp; 3<br /><br />#DATASET1 : scf calculation: GS WF in the BZ<br />#********************************************<br />&nbsp; &nbsp;prtden1&nbsp; &nbsp; 1 <br />&nbsp; &nbsp;kptopt1&nbsp; &nbsp; 2 <br />&nbsp; &nbsp;toldfe1&nbsp; &nbsp; 1.0d-12<br /><br />#DATASET2 : Berry phase calculation<br />#***************************************************<br />&nbsp; &nbsp; rfdir2&nbsp; &nbsp; &nbsp; 1 1 1<br />&nbsp;berryopt2&nbsp; &nbsp; &nbsp; -1<br />&nbsp; &nbsp;kptopt2&nbsp; &nbsp; &nbsp; 1<br />&nbsp; &nbsp;nbdbuf2&nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />&nbsp; &nbsp;getwfk2&nbsp; &nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />&nbsp; &nbsp;getden2&nbsp; &nbsp; &nbsp; 1<br />&nbsp; &nbsp; nband2&nbsp; &nbsp; &nbsp; 20<br /><br />#DATASET3 : ion+cell optimization<br />#*****************************************************<br />#&nbsp; &nbsp; getwfk3&nbsp; &nbsp;-1 <br />#&nbsp; &nbsp; getden3&nbsp; &nbsp;-1<br />&nbsp; &nbsp; irdwfk3&nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />&nbsp; &nbsp; kptopt3&nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />&nbsp; &nbsp; ionmov3&nbsp; &nbsp;2<br />&nbsp; &nbsp;optcell3&nbsp; &nbsp;1<br />&nbsp; &nbsp; &nbsp;ntime3&nbsp; &nbsp;200<br />&nbsp; &nbsp; tolmxf3&nbsp; &nbsp;5.0d-6<br />&nbsp; berryopt3&nbsp; &nbsp;14<br />&nbsp;red_efieldbar3 0.0 0.0 0.003<br />&nbsp; &nbsp; &nbsp;nband3&nbsp; &nbsp;20<br />&nbsp; &nbsp; nbdbuf3&nbsp; &nbsp;0<br /></code></pre></div><br /><br />I also tried to alternate the relaxation of only the cell parameters then only atomic positions but, apparently, abinit stops because I cannot set optcell=1 and ionmov=0.<br /><br />Thanks a lot in advance for your help<br /><br />Antonio</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=2940&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 20:59:04 GMT -->
+</html>

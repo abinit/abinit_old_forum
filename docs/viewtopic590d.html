@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=2339&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:59:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Testing Abinit with MPI - runtests.py: structure of mpi.cfg</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Testing Abinit with MPI - runtests.py: structure of mpi.cfg</h2>
+		<p><a href="viewtopic8f86.html?f=19&amp;t=2339">https://forum.abinit.org/viewtopic.php?f=19&amp;t=2339</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Testing Abinit with MPI - runtests.py: structure of mpi.cfg</h3>
+				<div class="date">Posted: <strong>Fri Nov 22, 2013 9:06 am</strong></div>
+				<div class="author">by <strong>hsatzger</strong></div>
+				<div class="content">Hi,<br /><br />I managed to compile abinit 7.4.3 on SLES11.1 and want to run the test suite through LoadLeveler for an IBM machine (x86, Intel SandyBridge EP).<br />However, I cannot find the documentation on how to set up the '<em class="text-italics">mpi.cfg</em>' file.<br />The script <em class="text-italics">runtests.py</em> tells me to use<br />  <em class="text-italics">runtests.py paral -n4 -c mpi.cfg</em><br />and in the directory <em class="text-italics">~abinit-7.4.3/tests/doc/howto</em> I found the file '<em class="text-italics">testsuite_howto.rst</em>'<br />However, in this file I find this<br /><br /><blockquote class="uncited"><div>    runtests.py -n 2 -c mpi.cfg<br /><br />    $ cat mpi.cfg<br /><br />        [mpi]<br />          mpi_prefix = /usr/local/openmpi-gcc47/<br />          mpirun_np = %(mpi_prefix)s/bin/mpirun -np<br /><br />mpirun_np is the string with the path to the mpirunner, followed by any additional option you may want<br />to use. The option used to specifing the number of MPI nodes must be added at the end of the string.<br /><br />.. tip::<br />    For more examples, consult the configuration files in abinit/tests/mpi_cfg.<br /></div></blockquote><br /><br />Unfortunately, the file <em class="text-italics">abinit/tests/mpi_cf</em> does not exist.<br /><br />Any help is greatly appreciated!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Testing Abinit with MPI - runtests.py: structure of mpi.</h3>
+				<div class="date">Posted: <strong>Thu Dec 05, 2013 11:57 am</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">hi,<br /><br /><blockquote class="uncited"><div>Unfortunately, the file abinit/tests/mpi_cf does not exist.</div></blockquote><br /><br />~abinit/tests/mpi_cfg/ is a folder then :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>ls&nbsp; ~abinit/tests/mpi_cfgs/<br />gmac-mpich2.cfg&nbsp; testf-gcc43.cfg&nbsp; testf-gcc44.cfg&nbsp; testf-gcc47.cfg&nbsp; woopy-gcc451.cfg</code></pre></div><br />there are some examples with MPICH or OpenMPI<br /><br />but concerning the LoadLeveler, I have not experience… <img class="smilies" src="images/smilies/icon_e_sad.gif" alt=":(" title="Sad" /> <br /><br />In our test farm, we have an IBM under AIX 6.1 ( Power 6 ) + xlf , <br />and we use this mpi.cfg<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&#91;mpi&#93;<br />poe = /usr/lpp/ppe.poe/bin/poe<br />poe_args = -hostfile /usr/local/etc/host.list</code></pre></div><br />and the command to start a test  with 4 procs  is :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./runtests.py paral&#91;1&#93; -t 0 -n 4 -c mpi.cfg</code></pre></div><br />the command generated is :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>/usr/lpp/ppe.poe/bin/poe&nbsp; ~abinit/src/98_main/abinit -hostfile /usr/local/etc/host.list&nbsp; -procs 4&nbsp; &lt; ~abinit/tests/Test_suite/paral_t01_MPI4/t01_MPI4.stdin &gt; ~abinit/tests/Test_suite/paral_t01_MPI4/t01_MPI4.stdout 2&gt; ~abinit/tests/Test_suite/paral_t01_MPI4/t01_MPI4.stderr</code></pre></div><br /><br />I hope it will help...<br /><br />jmb</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=2339&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:59:11 GMT -->
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=224&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:34:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] MPI problem when running 'make'</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] MPI problem when running 'make'</h2>
+		<p><a href="viewtopic2b00.html?f=3&amp;t=224">https://forum.abinit.org/viewtopic.php?f=3&amp;t=224</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] MPI problem when running 'make'</h3>
+				<div class="date">Posted: <strong>Wed Apr 07, 2010 12:37 am</strong></div>
+				<div class="author">by <strong>asorini</strong></div>
+				<div class="content">Hi forum,<br /><br /> I'm trying to compile the parallel version of abinit-6.0.3 with OpenMPI on my group's computing cluster. I have previously been able to compile 5.8 and 5.7 versions of abinit, but 6.0 fails to compile when I run make.<br /><br />For this failed attempt at compiling I first configured using:<br /><br />$ ./configure CC=mpicc CXX=mpicxx FC=mpif90 --enable-mpi=yes --disable-all-plugins --enable-mpi-io<br /><br />and configure runs without any problems (I've attached config.log).<br /><br />Then I use:<br /><br />$ make<br /><br />which runs for a while and then fails in ./src/12_hide_mpi when it chokes on some MPI_RECV and MPI_SEND for 5d arrays in xexch_mpi.F90 (lines 507 and 510). Below I've pasted some of the output from make:<br /><br />Making all in 12_hide_mpi<br />make[3]: Entering directory `/afs/slac.stanford.edu/package/ABINIT/abinit-6.0.3/src/12_hide_mpi'<br />mpif90 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs   -free -module /afs/slac.stanford.edu/package/ABINIT/abinit-6.0.3/src/mods -O2 -g  -extend-source -vec-report0  -c -o xallgather_mpi.o xallgather_mpi.F90<br />mpif90 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs   -free -module /afs/slac.stanford.edu/package/ABINIT/abinit-6.0.3/src/mods -O2 -g  -extend-source -vec-report0  -c -o xallgatherv_mpi.o xallgatherv_mpi.F90<br />mpif90 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs   -free -module /afs/slac.stanford.edu/package/ABINIT/abinit-6.0.3/src/mods -O2 -g  -extend-source -vec-report0  -c -o xalltoallv_mpi.o xalltoallv_mpi.F90<br />mpif90 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs   -free -module /afs/slac.stanford.edu/package/ABINIT/abinit-6.0.3/src/mods -O2 -g  -extend-source -vec-report0  -c -o xalltoall_mpi.o xalltoall_mpi.F90<br />mpif90 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs   -free -module /afs/slac.stanford.edu/package/ABINIT/abinit-6.0.3/src/mods -O2 -g  -extend-source -vec-report0  -c -o xbarrier_mpi.o xbarrier_mpi.F90<br />mpif90 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs   -free -module /afs/slac.stanford.edu/package/ABINIT/abinit-6.0.3/src/mods -O2 -g  -extend-source -vec-report0  -c -o xcast_mpi.o xcast_mpi.F90<br />mpif90 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs   -free -module /afs/slac.stanford.edu/package/ABINIT/abinit-6.0.3/src/mods -O2 -g  -extend-source -vec-report0  -c -o xcomm_rank.o xcomm_rank.F90<br />mpif90 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs   -free -module /afs/slac.stanford.edu/package/ABINIT/abinit-6.0.3/src/mods -O2 -g  -extend-source -vec-report0  -c -o xcomm_size.o xcomm_size.F90<br />mpif90 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs   -free -module /afs/slac.stanford.edu/package/ABINIT/abinit-6.0.3/src/mods -O2 -g  -extend-source -vec-report0  -c -o xerror_string.o xerror_string.F90<br />mpif90 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs   -free -module /afs/slac.stanford.edu/package/ABINIT/abinit-6.0.3/src/mods -O2 -g  -extend-source -vec-report0  -c -o xexch_mpi.o xexch_mpi.F90<br />xexch_mpi.F90(507): error #6285: There is no matching specific subroutine for this generic subroutine call.   [MPI_RECV]<br />  call MPI_RECV(vrecv,n1*n2*n3*n4*n5,MPI_DOUBLE_PRECISION,sender,etiq,spaceComm,statux,ier)<br />-------^<br />xexch_mpi.F90(510): error #6285: There is no matching specific subroutine for this generic subroutine call.   [MPI_SEND]<br />  call MPI_SEND(vsend,n1*n2*n3*n4*n5,MPI_DOUBLE_PRECISION,recever,etiq,spaceComm,ier)<br />-------^<br />compilation aborted for xexch_mpi.F90 (code 1)<br />make[3]: *** [xexch_mpi.o] Error 1<br />make[3]: Leaving directory `/afs/slac.stanford.edu/package/ABINIT/abinit-6.0.3/src/12_hide_mpi'<br />make[2]: *** [all-recursive] Error 1<br />make[2]: Leaving directory `/afs/slac.stanford.edu/package/ABINIT/abinit-6.0.3/src'<br />make[1]: *** [all-recursive] Error 1<br />make[1]: Leaving directory `/afs/slac.stanford.edu/package/ABINIT/abinit-6.0.3'<br />make: *** [all] Error 2<br /><br /><br />I would greatly appreciate any help/ideas from the Abinit gurus of the forum. Thanks in advance. Cheers,<br /><br />Adam</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MPI problem when running 'make'</h3>
+				<div class="date">Posted: <strong>Wed Apr 07, 2010 4:45 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Could you try the following?<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure --with-mpi-prefix=&quot;/afs/slac.stanford.edu/package/OpenMPI&quot; --enable-mpi=yes --disable-all-plugins --enable-mpi-io<br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MPI problem when running 'make'</h3>
+				<div class="date">Posted: <strong>Thu Apr 08, 2010 6:15 am</strong></div>
+				<div class="author">by <strong>nicheal</strong></div>
+				<div class="content">I'm in the same predicament with <em class="text-italics">OPENMPI1.33</em>, Intel fortran 11.1.046</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MPI problem when running 'make'</h3>
+				<div class="date">Posted: <strong>Thu Apr 08, 2010 9:40 am</strong></div>
+				<div class="author">by <strong>asorini</strong></div>
+				<div class="content">Hi,<br /><br />Thanks for getting back to me so quickly. I tried running configure with the flags you suggested, but I get the exact same error when I run make. Any other suggestions? Cheers,<br />Adam</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MPI problem when running 'make'</h3>
+				<div class="date">Posted: <strong>Thu Apr 08, 2010 12:59 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Then the problem comes from the MPI implementation you're using. It might be related to the way it has been compiled.<br /><br />You should ask your system administrator.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MPI problem when running 'make'</h3>
+				<div class="date">Posted: <strong>Thu Apr 08, 2010 10:16 pm</strong></div>
+				<div class="author">by <strong>asorini</strong></div>
+				<div class="content">Thanks very much for your help. I'll talk to the system admin. Cheers,<br />Adam</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MPI problem when running 'make'</h3>
+				<div class="date">Posted: <strong>Fri Apr 09, 2010 10:29 am</strong></div>
+				<div class="author">by <strong>nicheal</strong></div>
+				<div class="content">I uninstall the OPENMPI1.3.2, and update to openmpi 1.3.3. Then No error with Openmpi 1.3.3! You can try the new version!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] MPI problem when running 'make'</h3>
+				<div class="date">Posted: <strong>Mon Apr 12, 2010 6:57 pm</strong></div>
+				<div class="author">by <strong>asorini</strong></div>
+				<div class="content">Thanks very much for the advice.  Cheers, Adam</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] MPI problem when running 'make'</h3>
+				<div class="date">Posted: <strong>Tue Apr 20, 2010 12:19 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">see also <!-- l --><a class="postlink-local" href="viewtopic8709.html?f=9&amp;t=242">viewtopic.php?f=9&amp;t=242</a><!-- l --></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=224&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:34:00 GMT -->
+</html>

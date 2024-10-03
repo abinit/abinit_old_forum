@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=2245&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:10:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; cut3d: WFK analysis</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>cut3d: WFK analysis</h2>
+		<p><a href="viewtopic7c7d.html?f=12&amp;t=2245">https://forum.abinit.org/viewtopic.php?f=12&amp;t=2245</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>cut3d: WFK analysis</h3>
+				<div class="date">Posted: <strong>Mon Aug 12, 2013 1:59 pm</strong></div>
+				<div class="author">by <strong>herman</strong></div>
+				<div class="content">Dear All,<br /><br />I used to analyse large *_WFK files (up to ~100 GB). It is often necessary for me to go through a large set of k-points and large set of bands. The &quot;cut3d&quot; script, however, enables to make an analysis for a single k-point and band at a time. Even if scripted, loading huge WFK file at every point is terribly time consuming. I was wondering if it is possible to iterate over all needed k-points and bands within cut3d without executing the program every time and loading WFK just for a single analysis? Maybe there's something I'm missing. Anyway - I would kindly appreciate a suggestion.<br /><br />Best regards,<br />Michal H.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: cut3d: WFK analysis</h3>
+				<div class="date">Posted: <strong>Wed Nov 27, 2013 5:14 am</strong></div>
+				<div class="author">by <strong>ljludwig</strong></div>
+				<div class="content">I'm having the same problems, too!!! This is somewhat inconvenient since I presume we need the real space information and visualization...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: cut3d: WFK analysis</h3>
+				<div class="date">Posted: <strong>Tue May 27, 2014 12:27 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">There is an outer loop check in cut3d, at the end of the analysis of a wf, which allows you to stay in the program with the wf loaded. If you do not change kpt spin etc... it tries to be clever and reuse what it can (all bands are stored in memory), but it often has to re-read the file to get to the data you want.<br /><br />If you have some specific task you need to do over all bands or all k you might consider hacking the cut3d + wffile.F90 subroutines to make them do the looping you want. If you want to output things (visualization etc...) I hope for your sake you don't need all bands and k, otherwise it will create several hundred GB...<br /><br />Your post needs to be more precise on what you want to analyze / extract...<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: cut3d: WFK analysis</h3>
+				<div class="date">Posted: <strong>Tue Aug 19, 2014 2:45 pm</strong></div>
+				<div class="author">by <strong>herman</strong></div>
+				<div class="content"><blockquote><div><cite>mverstra wrote:</cite>There is an outer loop check in cut3d, at the end of the analysis of a wf, which allows you to stay in the program with the wf loaded. If you do not change kpt spin etc... it tries to be clever and reuse what it can (all bands are stored in memory), but it often has to re-read the file to get to the data you want.<br /><br />If you have some specific task you need to do over all bands or all k you might consider hacking the cut3d + wffile.F90 subroutines to make them do the looping you want. If you want to output things (visualization etc...) I hope for your sake you don't need all bands and k, otherwise it will create several hundred GB...<br /><br />Your post needs to be more precise on what you want to analyze / extract...<br /><br />Matthieu</div></blockquote><br /><br />Dear Matthieu,<br /><br />Thank you for your reply - I do the job by splitting it into sets of bands and distributing them to somewhat stronger cluster machines. What I extract from the WFK file are the 3D indexed real and imaginary data for about 20 thousand points uniquely described by their k-point and energy. Indeed - it sometimes takes ~1 TB of disk space and more, but I do need those raw numbers for further post-processing. What helps a lot to reduce intensive disk I/O is loading a WFK file into a RAM disk and reading it from there using a shell script. Anyway - it seems to work just fine now.<br /><br />I do appreciate your suggestion - I'll try to dig into the cut3d / wffile.F90 to improve my current solution.<br /><br />Best regards,<br />Michal</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=2245&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:10:48 GMT -->
+</html>

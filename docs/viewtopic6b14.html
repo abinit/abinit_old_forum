@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=374&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:25:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; mpi i/o for large WF files</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>mpi i/o for large WF files</h2>
+		<p><a href="viewtopic1f2e.html?f=9&amp;t=374">https://forum.abinit.org/viewtopic.php?f=9&amp;t=374</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>mpi i/o for large WF files</h3>
+				<div class="date">Posted: <strong>Tue Jun 01, 2010 1:48 am</strong></div>
+				<div class="author">by <strong>anurag</strong></div>
+				<div class="content">Hello,<br /><br />This is related to a previous post on the forum  (<!-- l --><a class="postlink-local" href="viewtopic49d2.html?f=9&amp;t=356">viewtopic.php?f=9&amp;t=356</a><!-- l -->).  I have similar experience and would appreciate if anyone can suggest a solution.<br /><br />I have a large supercell with 128 atoms and the problems arises when the code starts to write the WF file.  I am using paral_kgb option to speed up the calculation which is painfully slow otherwise.  The code is able to write the _DEN file (with MPI I/O) however it fails to write the WF file.    Details of compilation are mentioned below.<br /><br />I was thinking if its possible to run the calculation in two steps : 1st step is the usual SCF calculation using band/k-point/FFT parallelization (paral_kgb =1, ...) and just write the _DEN file and then run a second non-SCF calculation (using the density from the previous step) with just k-point parallelization to write the WF file.  <br /><br />The code works well with k-point parallelization and can write decently big WF files without any problem.  So my intention is to circumvent the MPI I/O problem by resorting to use regular FORTRAN routines.  However since simple k-point parallelization would take a long time to converge the electronic steps I thought of this idea.  This may seem strange so please let me know if there is a caveat to this idea.<br /><br />I tried to run this two step calculation (setting ndtset 2) but unfortunately when code encounters the following in the input file<br /><br />#parallelization variables<br />paral_kgb1 1<br />wfoptalg1=4<br />nloalg1=4<br />fftalg1=401<br />intxc1=0<br />fft_opt_lob1=2<br /><br />npkpt1 4           &lt;------------- problem is reported for this variable<br />npband1 9<br />npfft1 2<br />bandpp1 2<br />#accesswff 1 1 1 1<br />istwfk1 1 1 1 1<br /><br />I get an error which says ...<br /><br /> intagm : ERROR -<br />  In the input file, there is an occurence of the<br />  keyword &quot;npkpt&quot;, appended with the digit &quot;1&quot;.<br />  This is forbidden when ndtset==0 .<br />  Action : remove this occurence, or change ndtset.<br /><br />I don't know how to solve the source of this error.  Any help is very much appreciated.<br /><br />I can post the input file if that can help.<br /><br />best regards,<br />Anurag<br /><br />I am running ABINIT 6.0.4 compiled on a linux cluster with Intel 10.0 fortran compiler and open mpi 1.4.1. ABINIT was configured as follows:<br /><br />$ ./configure --prefix=/global/home/users/achaudhry --enable-mpi-fft=yes --enable-mpi-io=yes --enable-fttw=yes --enable-64bit-flags=yes FC=mpif90 F77=mpif90 --enable-scalapack CC=mpicc CXX=mpiCC --with-mpi-runner=/global/software/centos-5.x86_64/modules/openmpi/1.4.1-intel/bin/mpirun --with-mpi-level=2 CC_LIBS=-lmpi CXX_LIBS=-lmpi++ -lmpi --with-fc-vendor=intel --with-linalg-includes=-I/global/software/centos-5.x86_64/modules/mkl/10.0.4.023/include --with-linalg-libs=-L/global/software/centos-5.x86_64/modules/mkl/10.0.4.023/lib/em64t -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_intel_solver_lp64 -lmkl_lapack -lmkl_core -lguide -lpthread --with-scalapack-libs=-L/global/software/centos-5.x86_64/modules/mkl/10.0.4.023/lib/em64t -lmkl_scalapack_lp64 -lmkl_blacs_openmpi_lp64 -lmkl_lapack -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_lapack -lmkl_core -liomp5 -lpthread --disable-wannier90</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=374&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:25:19 GMT -->
+</html>

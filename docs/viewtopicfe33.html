@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1341&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:34:10 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; getshell bug</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>getshell bug</h2>
+		<p><a href="viewtopic032b.html?f=9&amp;t=1341">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1341</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>getshell bug</h3>
+				<div class="date">Posted: <strong>Mon Sep 26, 2011 1:55 pm</strong></div>
+				<div class="author">by <strong>Magniff</strong></div>
+				<div class="content">Hello, dear friends;<br /><br />I am trying to calculate phonon spectra in gamma and get an raman tensor of GaAs nanowire<br />so firstly i performed an optimization of structure, and final structure seemed fine;<br />then i took code from the tnlo tutor and modified for my task<br /><br />#Definition of lattice parameters<br />#********************************<br />acell 5.6007908586E+01 5.6007908586E+01 1.1687805517E+01 Bohr<br />angdeg 90 90 120<br /><br />#Definition of atomic positions and types<br />#*************************************<br />natom 26<br />ntypat 2<br />znucl 31 33<br />typat 13*1 13*2<br />xred -7.6297721833E-02 5.5943772638E-02 3.3370497385E-02<br />-1.2350671975E-01 -1.1745006994E-19 5.1184393954E-01<br />-1.1405779709E-19 -1.2350671975E-01 5.1184393954E-01<br />5.5943772638E-02 -7.6297721833E-02 3.3370497385E-02<br />-5.5943772638E-02 -1.3224149447E-01 3.3370497385E-02<br />7.7499695668E-02 7.3974262431E-21 4.6085279228E-01<br />1.3224149447E-01 7.6297721833E-02 3.3370497385E-02<br />-7.7499695668E-02 -7.7499695668E-02 4.6085279228E-01<br />-5.4721472991E-21 -6.6267429878E-21 -2.0359674357E-02<br />-1.3224149447E-01 -5.5943772638E-02 3.3370497385E-02<br />1.2350671975E-01 1.2350671975E-01 5.1184393954E-01<br />1.0172189524E-22 7.7499695668E-02 4.6085279228E-01<br />7.6297721833E-02 1.3224149447E-01 3.3370497385E-02<br />-2.8842535829E-20 7.5807656861E-02 -1.5072351369E-01<br />-4.5758822308E-21 -5.7309111317E-21 3.6006177809E-01<br />-7.5807656861E-02 -7.5807656861E-02 -1.5072351369E-01<br />-7.4380598507E-02 8.4121006247E-02 3.7979888285E-01<br />1.5385150137E-01 1.5385150137E-01 -1.3741267985E-01<br />1.5850160475E-01 7.4380598507E-02 3.7979888285E-01<br />7.5807656861E-02 -6.7972215814E-20 -1.5072351369E-01<br />-1.5385150137E-01 6.3594600879E-20 -1.3741267985E-01<br />-8.4121006247E-02 -1.5850160475E-01 3.7979888285E-01<br />-1.5850160475E-01 -8.4121006247E-02 3.7979888285E-01<br />7.4380598507E-02 1.5850160475E-01 3.7979888285E-01<br />8.4121006247E-02 -7.4380598507E-02 3.7979888285E-01<br />3.4038586622E-20 -1.5385150137E-01 -1.3741267985E-01<br />ixc 7<br /><br />#Parameters of the SCF cycles<br />#****************************<br />iscf 7<br />nstep 150<br /><br />#Plane wave basis and k-point grid<br />#*********************************<br />ecut 5<br />ecutsm 0.5<br />dilatmx 1.05<br />ngkpt 2 2 2<br />nshiftk 1<br />shiftk 0 0 0.5<br /><br />ndtset 5 jdtset 1 2 3 4 5<br /><br />#DATASET1 : scf calculation: GS WF in the BZ<br />#********************************************<br />prtden1 1<br />kptopt1 1<br />toldfe1 1.0d-12<br /><br />#DATASET2 : non scf calculation: GS WF in the whole BZ<br />#*****************************************************<br />getden2 1<br />kptopt2 2<br />iscf2 -2<br />getwfk2 1<br />tolwfr2 1.0d-22<br />nband2 52<br /><br /><br />#DATASET3 : ddk on the MP grid of k-points<br />#*****************************************<br />getwfk3 2<br />rfdir3 1 1 1<br />rfelfd3 2<br />tolwfr3 1.0d-22<br />nband3 52<br />kptopt3 2<br /><br />#DATASET4 : ddE on the MP grid of k-points<br />#*****************************************<br />prtden4 1<br />getwfk4 2<br />getddk4 3<br />rfdir4 1 1 1<br />rfphon4 1<br />rfatpol4 1 26<br />tolvrs4 1.0d-12<br />rfelfd4 3<br />nband4 52<br />kptopt4 2<br />prepanl4 1<br /><br />#DATASET5 : 3DTE calculation<br />#***************************<br />getden5 1<br />get1den5 4<br />getwfk5 2<br />get1wf5 4<br />nband5 52<br />kptopt5 2<br />optdriver5 5<br />rf1elfd5 1<br />rf1phon5 1<br />rf1atpol5 1 26<br />rf1dir5 1 1 1<br />rf2elfd5 1<br />rf2dir5 1 1 1<br />rf3elfd5 1<br />rf3dir5 1 1 1<br /><br />nbdbuf 0<br /><br />and while running on cluster (4 cores for 4 kpoints for test) it stops in ds5:<br /><br /><br /><span style="color: #FF0000">getshell: BUG -<br />The number of points in shell number 3 is not the same for each k-point.<br />Action : contact ABINIT group.</span><br /><br />what does it mean? is there any obvious mistake in input above?<br />i would be very grateful for any help;<br /><br />let the force be with you;</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1341&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:34:10 GMT -->
+</html>

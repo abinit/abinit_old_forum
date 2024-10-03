@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1519&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:15:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; paral_rf variable</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>paral_rf variable</h2>
+		<p><a href="viewtopica762.html?f=9&amp;t=1519">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1519</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>paral_rf variable</h3>
+				<div class="date">Posted: <strong>Thu Feb 02, 2012 3:28 pm</strong></div>
+				<div class="author">by <strong>roginovicci</strong></div>
+				<div class="content">I have a problem during nlo calculations. There is a couple of separate tasks wich looks as follows:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>################################################################################<br /># LINEAR AND NON-LINEAR RESPONSE CALCULATION<br />################################################################################<br /><br />ndtset 5&nbsp; &nbsp; &nbsp;jdtset 1 2 3 4 5<br /><br /># 1: SCF calculation: GS WF in the BZ<br />#-------------------------------------<br />&nbsp; &nbsp;prtden1&nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Print electronic density<br />&nbsp; &nbsp;kptopt1&nbsp; &nbsp; 1<br />&nbsp; &nbsp;toldfe1&nbsp; &nbsp; 1.0d-12<br /><br /># 2: non SCF calculation: GS WF in the whole BZ<br />#----------------------------------------------<br />&nbsp; &nbsp;getden2&nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Get density from set 1<br />&nbsp; &nbsp;kptopt2&nbsp; &nbsp; 2<br />&nbsp; &nbsp;iscf2&nbsp; &nbsp; &nbsp;-2<br />&nbsp; &nbsp;getwfk2&nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Get WF from set 1<br />&nbsp; &nbsp;tolwfr2&nbsp; &nbsp; 1.0d-22&nbsp; &nbsp; &nbsp; &nbsp; # Use WF criterion since iscf &lt; 0<br />&nbsp; &nbsp;nband2&nbsp; &nbsp; &nbsp;52&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# Explicit number of valence bands<br /><br /># 3: ddk on the MP grid of k-points<br />#----------------------------------<br />&nbsp; &nbsp;getwfk3&nbsp; &nbsp; 2<br />&nbsp; &nbsp;kptopt3&nbsp; &nbsp; 2<br />&nbsp; &nbsp;rfdir3&nbsp; &nbsp; &nbsp;1 1 1<br />&nbsp; &nbsp;rfelfd3&nbsp; &nbsp; 2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Derivative of GS WF with respect to k<br />&nbsp; &nbsp;tolwfr3&nbsp; &nbsp; 1.0d-22<br />&nbsp; &nbsp;nband3&nbsp; &nbsp; &nbsp;52<br /># 4: ddE on the MP grid of k-points<br />#-----------------------------------<br />&nbsp; &nbsp;getwfk4&nbsp; &nbsp; 2<br />&nbsp; &nbsp;getddk4&nbsp; &nbsp; 3&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Get derivatives from set 3<br />&nbsp; &nbsp;kptopt4&nbsp; &nbsp; 2<br />&nbsp; &nbsp;prtden4&nbsp; &nbsp; 1<br />&nbsp; &nbsp;rfdir4&nbsp; &nbsp; &nbsp;1 1 1<br />&nbsp; &nbsp;rfphon4&nbsp; &nbsp; 1<br />&nbsp; &nbsp;rfatpol4&nbsp; &nbsp;1 16<br />&nbsp; &nbsp;rfelfd4&nbsp; &nbsp; 3&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Generate of the 1st-order response using ddk of 3<br />&nbsp; &nbsp;tolvrs4&nbsp; &nbsp; 1.0d-12<br />&nbsp; &nbsp;nband4&nbsp; &nbsp; &nbsp;52<br />&nbsp; &nbsp;prepanl4&nbsp; &nbsp;1<br /><br /># 5: 3DTE calculation<br />#--------------------<br />&nbsp; &nbsp;getden5&nbsp; &nbsp; &nbsp;1<br />&nbsp; &nbsp;get1den5&nbsp; &nbsp; 4<br />&nbsp; &nbsp;getwfk5&nbsp; &nbsp; &nbsp;2<br />&nbsp; &nbsp;get1wf5&nbsp; &nbsp; &nbsp;4<br />&nbsp; &nbsp;kptopt5&nbsp; &nbsp; &nbsp;2<br />&nbsp; &nbsp;optdriver5&nbsp; 5<br />&nbsp; &nbsp;rf1elfd5&nbsp; &nbsp; 1<br />&nbsp; &nbsp;rf1phon5&nbsp; &nbsp; 1<br />&nbsp; &nbsp;rf1atpol5&nbsp; &nbsp;1 16<br />&nbsp; &nbsp;rf1dir5&nbsp; &nbsp; &nbsp;1 1 1<br />&nbsp; &nbsp;rf2elfd5&nbsp; &nbsp; 1<br />&nbsp; &nbsp;rf2dir5&nbsp; &nbsp; &nbsp;1 1 1<br />&nbsp; &nbsp;rf3elfd5&nbsp; &nbsp; 1<br />&nbsp; &nbsp;rf3dir5&nbsp; &nbsp; &nbsp;1 1 1<br />&nbsp; &nbsp;nband5&nbsp; &nbsp; &nbsp; 52<br /></code></pre></div><br />The last one always fails when I use more than 1 processors. It says something like can't read wave function file. But it Success when I use only one processor. The question is how can I prepair input file to force calculation of last task only using one processor. Is it paral_rf variable helpful?</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1519&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:15:48 GMT -->
+</html>

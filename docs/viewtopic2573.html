@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=917&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:52:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; finite electric field calculation</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>finite electric field calculation</h2>
+		<p><a href="viewtopic790d.html?f=9&amp;t=917">https://forum.abinit.org/viewtopic.php?f=9&amp;t=917</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>finite electric field calculation</h3>
+				<div class="date">Posted: <strong>Mon Feb 28, 2011 7:31 pm</strong></div>
+				<div class="author">by <strong>amorpho</strong></div>
+				<div class="content">Hi, <br />I am trying to simulate a finite electric field  in a silicon crystal, but my input script does not work correctly. Can anybody help me please?<br /><br /><span style="font-size: 150%; line-height: 116%;"><strong class="text-strong">Input file:</strong></span><br />##############<br />berryopt 4<br />rfdir 1 1 1<br />efield 0.0001 0.0001 0.0001<br />optcell 0<br />ionmov 2<br />ntime 50<br />prtden 1<br /><br />iscf 5<br />nstep 100<br />nband 860<br />nbdbuf 0<br />#nsym 1   #No operation de simetria<br />chkprim 0 # No checa Primitiva<br /><br />#215 atomos de silicio y 1 de boro <br />tolmxf 5.0d-5<br />toldff 5.0d-6<br /><br />acell 16.2921 16.2921 16.2921 angstrom<br />angdeg 90 90 90<br />ecut 10.0<br />ecutsm 0.5  <br />ntypat 2<br />znucl 14 5 <br /><br />natom 216<br />typat 1 1 1 1 1 1 1 2 208*1 <br />kptopt 0<br />nkpt 1<br /><br />  <br />xangst   0.000000000    0.000000000    5.430700000 <br />            ...... ......<br />##########<br /><strong class="text-strong"><span style="font-size: 150%; line-height: 116%;"> . err file</span></strong><br />Exited with exit code 1<br />srun: Terminating job<br />########<br /><strong class="text-strong"><span style="font-size: 150%; line-height: 116%;">log file</span></strong><br /><br />no ERROR but the job does not run<br /><br /><span style="font-size: 150%; line-height: 116%;"><span style="color: #0000BF">Thank you for your help</span></span></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: finite electric field calculation</h3>
+				<div class="date">Posted: <strong>Tue Mar 01, 2011 11:57 am</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">One problem for sure is that you have only a single k point: the berryopt -1 and +4 options work by computing integrals of phases along paths in k space, therefore they need an array of k points to work (not just a single point). Secondly, your system is massively huge by DFT standards, are you sure your computer is big enough to handle it?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: finite electric field calculation</h3>
+				<div class="date">Posted: <strong>Thu Mar 03, 2011 7:39 pm</strong></div>
+				<div class="author">by <strong>amorpho</strong></div>
+				<div class="content">Thank you for your message, but I still with problems with my script. I tryed differents scripts and I post here the one which run more time, but at least this script do not work well. The memory is not a problem for me. <br /><br /><strong class="text-strong">Input</strong><br />berryopt 4<br />rfdir 1 1 1<br />efield 0.0001 0.0001 0.0001<br />optcell 0<br />ionmov 2<br />ntime 50<br />prtden 1<br /><br />iscf 5<br />nstep 100<br />fband 0.125<br />nbdbuf 0<br />#nsym 1   #No operation de simetria<br />chkprim 0 # No checa Primitiva<br /><br />#215 atomos de silicio y 1 de boro <br />#tolmxf 5.0d-5<br />#toldff 5.0d-6<br /><br />acell 16.2921 16.2921 16.2921 angstrom<br />angdeg 90 90 90<br />ecut 10.0<br />ecutsm 0.5  <br />ntypat 2<br />znucl 14 5 <br /><br />natom 216<br />typat 1 1 1 1 1 1 1 2 208*1 <br />ngkpt 6 6 6<br />   nshiftk 4<br />   shiftk 0.5 0.5 0.5<br />          0.5 0.0 0.0<br />          0.0 0.5 0.0<br />          0.0 0.0 0.5<br />toldfe 1.0d-12<br />xangst   0.000000000    0.000000000    5.430700000 <br /><br /><strong class="text-strong">ERROR message at log </strong><br /><br />initberry: ERROR - <br />  In a finite electric field calculation, nband must be equal <br />  to the number of valence bands.<br /><br /><strong class="text-strong">Comment</strong><br />In this script I did not put the number of valence bands (nband) because, I read at the abinit webpage that if I do not known nband I can use fband. However,<br />in others scripts that I have generated I put directly the nband, and nkpt values calculated by abinit and the ERROR message at the log file is the following:<br />nkpt*nsppol is not a multiple of nproc_kpt. Theoretically my system have 432 valence bands.<br /><br /><strong class="text-strong">Thank you very much for your comments</strong></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: finite electric field calculation</h3>
+				<div class="date">Posted: <strong>Fri Mar 04, 2011 1:45 am</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">The berryopt -1 and 4 options require that nband = the number of valence bands, that is, no unfilled bands are allowed. Other features of abinit allow for unfilled bands, but not berryopt. As for the nproc error, you simply have to do what it says, use nproc as a multiple of nkpt and the other paramters.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: finite electric field calculation</h3>
+				<div class="date">Posted: <strong>Tue Mar 15, 2011 7:56 pm</strong></div>
+				<div class="author">by <strong>amorpho</strong></div>
+				<div class="content">Thank you for your comments Dr. Zwanziger<br /><br />I finally succed to simulate a polarization (berryopt=-1) in a silicon crystal, not yet with a finite electic field (berryopt=4). <br />The system of my interest is a silicon crystal type P (with 1 boron atom and 215 silicon atoms). The valence bands can not be totally filled so, what<br /> feature of abinit should  I use to simulate a finite electric field?.<br /><br />Thank you for your help</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: finite electric field calculation</h3>
+				<div class="date">Posted: <strong>Wed Mar 16, 2011 11:26 am</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">As far as I know, the only way to do finite electric fields in abinit is via the berry phase treatment, and that requires filled bands and only filled bands. Maybe someone else as other ideas?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: finite electric field calculation</h3>
+				<div class="date">Posted: <strong>Sun Jan 22, 2012 3:57 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello,<br /><br />if you are applying an electric field, you should formally have an insulating system. If you want to do transport in a doped Si system, you will be wanting the linear response of the system to an infinitesimal electric field (see the conducti tool).<br /><br />You might also try the _DEVELOPMENT_ variable <!-- m --><a class="postlink" href="http://www.abinit.org/documentation/helpfiles/for-v6.10/input_variables/vardev.html#vprtrb">http://www.abinit.org/documentation/hel ... tml#vprtrb</a><!-- m --> and add a kind of sine wave, but this is probably further from what you want.<br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=917&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:52:03 GMT -->
+</html>

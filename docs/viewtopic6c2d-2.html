@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2624&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:27:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Inconsistent results for parallel calculations</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Inconsistent results for parallel calculations</h2>
+		<p><a href="viewtopicc833.html?f=9&amp;t=2624">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2624</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Inconsistent results for parallel calculations</h3>
+				<div class="date">Posted: <strong>Sun Apr 06, 2014 4:02 pm</strong></div>
+				<div class="author">by <strong>Rishøj</strong></div>
+				<div class="content">Hi everyone.<br /><br />I have some difficulties with Abinit running in parallel. All my calculations seem to take more SCF cycles, when I run the job in parallel - and some jobs even fail to converge! Sometimes, when I do structural relaxation, the job will fail to converge at some specific time step when the job is run in parallel, but will finish without problems when run in serial (or more specifically, one MPI core).<br /><br />I only seem to see the problem for 2D materials. I have never encountered the problem for bulk materials. I have not tried 1D materials or molecules.<br /><br />The problem occurs in may different scenarios, but here's an input file that generates the error for me<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># Monolayer hcp Fe<br /><br /># Output quantities<br />prtwf 0<br />prtdos 0<br />prtden 1<br /><br /><br />#spin related quantities<br />&nbsp;spinat&nbsp; &nbsp;0.0 0.0 2.0<br />&nbsp;nsppol&nbsp; &nbsp;2<br />&nbsp;nband&nbsp; &nbsp;14<br /><br /><br /># Convergence stuff<br />&nbsp;tolvrs&nbsp; &nbsp;1.0d-10<br />&nbsp;ecut&nbsp; &nbsp;20.0<br />&nbsp;pawecutdg 40.<br />&nbsp; &nbsp;ngkpt&nbsp; &nbsp;2*15 1<br />nshiftk&nbsp; &nbsp;1<br />&nbsp;shiftk&nbsp; &nbsp;0.0 0.0 0.0<br />&nbsp;nstep&nbsp; &nbsp;200<br />&nbsp;occopt&nbsp; &nbsp;3<br />&nbsp;tsmear&nbsp; &nbsp;0.01<br />&nbsp;<br /># Pseudo related<br />#iscf&nbsp; &nbsp;17<br />ixc 1<br /><br />#Geometry<br />&nbsp; acell 2*2.46 20 angstrom<br />rprim&nbsp; sqrt(3/4)&nbsp; 0.5&nbsp; 0<br />&nbsp; &nbsp; &nbsp; &nbsp;sqrt(3/4)&nbsp; -0.5&nbsp; 0&nbsp; <br />&nbsp; &nbsp; &nbsp; &nbsp;0.0&nbsp; 0.0&nbsp; -1<br />&nbsp; natom&nbsp; &nbsp;1<br />&nbsp;ntypat&nbsp; &nbsp;1<br />&nbsp; typat&nbsp; &nbsp;1<br />&nbsp; &nbsp;xred&nbsp; &nbsp;0.0&nbsp; 0.0&nbsp; 0.0<br />&nbsp;znucl&nbsp; &nbsp; 26<br /></code></pre></div><br /><br />When I run this input file, it converges in 65 SCF cycles when I run it on a single core, but fail to converge in 200 SCF cycles on both 2 and 4 cores.<br /><br /><br /><br />I use Abinit 7.6.2 with OpemMPI and I have tried several things to solve the problem, including:<br /><ul><li>Trying with another Abinit version (/.4.3)</li><li>Compiling with either Intel Fortran or Gnu Fortran compilers (both Abinit and MPI)</li><li>Compiling with either MKL or the netlib-fallback library.</li><li>Compiling with or without FFTW3.</li><li>Trying with another computer.</li><li>Trying with both OpenMPI and MPICH2</li></ul><br /><br />The upload system on this site does not allow for me to include all of the test files, so I have uploaded them to my own website. I have included my input-file, my files-file and the pseudo I used for the calculations, including the log file for all three runs (1, 2 and 4 cores).<br /><a href="http://ricehigh.dk/problem_example.zip" class="postlink">http://ricehigh.dk/problem_example.zip</a><br /><br /><br /><strong class="text-strong">Can anyone help me on how to proceed?</strong></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Inconsistent results for parallel calculations</h3>
+				<div class="date">Posted: <strong>Sun Apr 06, 2014 10:58 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">It may be due to numerical instabilities that are amplified when you increase the number of processors<br /><br />The log files contains several warnings about negative densities <br /><br />--- !WARNING<br />message: |<br />    Density went too small (lower than xc_denpos) at     82023 points<br />    and was set to xc_denpos=  1.00E-14.  Lowest was  -0.11E-06.<br />    Likely due to too low boxcut or too low ecut for pseudopotential core charge.<br />src_file: mkdenpos.F90<br />src_line: 176<br />...<br /><br />Can you try to:<br /><br />1) Increase pawecutdg and ecut<br />2) Test other PAW pseudopotentials<br />3) Test other values of iprcell (see <!-- m --><a class="postlink" href="http://www.abinit.org/documentation/helpfiles/for-v7.4/input_variables/vargs.html#iprcel">http://www.abinit.org/documentation/hel ... tml#iprcel</a><!-- m -->)<br />      to see if one can accelerate the SCF cycle in the sequential case</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Inconsistent results for parallel calculations</h3>
+				<div class="date">Posted: <strong>Mon Apr 07, 2014 10:33 am</strong></div>
+				<div class="author">by <strong>Rishøj</strong></div>
+				<div class="content">Thanks for the input gmatteo,<br /><br />I have just tried tried with larger ecut and pawecutdg (ecut=30 and pawecutdg=80), without significant changes in convergence (62 SCF cycles compared to 65).<br /><br />I have also tried with other pseudos (for instance the JTH GGA pseudo).<br /><br />And finally, if I try setting iprcel to a nonzero value (I have tried 25, 35, and 45), I get the following error:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--- !ERROR<br />message: |<br />&nbsp; &nbsp; The distribfft passed was already allocated for fine grid<br />src_file: m_distribfft.F90<br />src_line: 219</code></pre></div><br /><br />Furthermore, I have a larger calculation that I have tried running on a colleagues computer, where it runs in parallel without problems, while it fails to converge on mine. (He uses Abinit 6.x with MPICH2).<br /><br />Do you have any other suggestions in regards to solving my problem?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Inconsistent results for parallel calculations</h3>
+				<div class="date">Posted: <strong>Mon Apr 07, 2014 6:01 pm</strong></div>
+				<div class="author">by <strong>Rishøj</strong></div>
+				<div class="content">I fact, if I run the exact same input file on the University's cluster, I get no problems at all with 4 cores. - also with abinit 7.6.2 and openmpi.<br /><br />I wonder if there is a problem with my computer or with some installed package..?<br /><br />How do I find out what causes the error?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Inconsistent results for parallel calculations&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Fri Apr 25, 2014 10:39 am</strong></div>
+				<div class="author">by <strong>Rishøj</strong></div>
+				<div class="content">I have just recompiled Abinit with the gfortran compiler and now it seems to work.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Inconsistent results for parallel calculations</h3>
+				<div class="date">Posted: <strong>Fri May 09, 2014 11:32 pm</strong></div>
+				<div class="author">by <strong>ldamewood</strong></div>
+				<div class="content">I don't know if this is the same issue you were having, but if you were using the intel compiler, I found setting <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>FC=&quot;mpiifort -fp-model strict&quot;</code></pre></div> in abinit fixed my numeric instabilities when using &gt;4 mpi processes. I described my struggles in this post: <!-- l --><a class="postlink-local" href="viewtopica814-2.html?f=2&amp;t=2651">viewtopic.php?f=2&amp;t=2651</a><!-- l --></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2624&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:27:13 GMT -->
+</html>

@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3946&p=11868 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:24:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>large SCF iteration time: wrong paralellism parameters? - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopic1558-2.html?t=3946">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="4"><a href="viewforum31e6.html?f=4" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Running Abinit</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="9"><a href="viewforumfdc5.html?f=9" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Ground state</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopic0d5c-2.html?f=9&amp;t=3946">large SCF iteration time: wrong paralellism parameters?</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Total energy, geometry optimization, DFT+U, spin....<br /></div>
+<p>
+	<strong>Moderator:</strong> <a href="memberlista146.html?mode=viewprofile&amp;u=2687" class="username">bguster</a>
+</p>
+
+
+<div class="action-bar bar-top">
+	
+			<a href="posting1cec.html?mode=reply&amp;f=9&amp;t=3946" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopica836.html?f=9&amp;t=3946&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="3946" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			4 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p11849" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11849">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist94ba.html?mode=viewprofile&amp;u=1835" class="username">Artem</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search2786.html?author_id=1835&amp;sr=posts">4</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Oct 14, 2016 1:17 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11849">
+
+						<h3 class="first"><a href="#p11849">large SCF iteration time: wrong paralellism parameters?</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting8e34.html?mode=quote&amp;f=9&amp;p=11849" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicfd39.html?p=11849#p11849" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist94ba.html?mode=viewprofile&amp;u=1835" class="username">Artem</a></strong> &raquo; </span>Wed Oct 17, 2018 6:07 pm
+			</p>
+			
+			
+			
+			<div class="content">Hello Everybody!<br /><br />I'm trying to understand why my calculations are so prohibitively slow: 1 SCF iteration takes time to over in hours(!!!).<br />The task is running on 8-processor node, so initially I have used autoparal=1 switched on, however it did help. My system<br />is small molecule semiconductor with precisely enough determined unit cell dimensiones and fractionaly coordinates. Albeit,<br />the input does not look like require somethin special a/o sophisticated, I've failed to spot a problem.<br />Could anybody give me a hint?<br />Posting here *.in and *.log -files.<br /><br />Thank you a lot!<br /><br />Artem</div>
+			
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file6bb9.php?id=1620">aba1206171ht.cell.in</a></dt>
+						<dd>(1.16 KiB) Downloaded 272 times</dd>
+		</dl>
+		
+		
+			</dd>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file7931.php?id=1621">aba1206171ht.cell.log</a></dt>
+						<dd>(54.74 KiB) Downloaded 264 times</dd>
+		</dl>
+		
+		
+			</dd>
+									</dl>
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p11855" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11855">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist94ba.html?mode=viewprofile&amp;u=1835" class="username">Artem</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search2786.html?author_id=1835&amp;sr=posts">4</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Oct 14, 2016 1:17 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11855">
+
+						<h3 ><a href="#p11855">Re: large SCF iteration time: wrong paralellism parameters?</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting0de1-2.html?mode=quote&amp;f=9&amp;p=11855" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic0a56-2.html?p=11855#p11855" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist94ba.html?mode=viewprofile&amp;u=1835" class="username">Artem</a></strong> &raquo; </span>Thu Oct 18, 2018 9:35 am
+			</p>
+			
+			
+			
+			<div class="content">There is some update on my recent post: overnight run afforded 5 SCF iterations, each took from 2-4 hrs.  <img class="smilies" src="images/smilies/icon_eek.gif" alt=":shock:" title="Shocked" /> <br /><br />---SELF-CONSISTENT-FIELD CONVERGENCE--------------------------------------------<br /> <br /> getcut: wavevector=  0.0000  0.0000  0.0000  ngfft= 120 144  72<br />         ecut(hartree)=     30.000   =&gt; boxcut(ratio)=   1.93937<br /> <br /> ITER STEP NUMBER     1<br /> vtorho : nnsclo_now=2, note that nnsclo,dbl_nnsclo,istep=0 0 1<br /> You should try to get npband*bandpp=  187<br /> For information matrix size is    23207<br /> You should try to get npband*bandpp=  187<br /> For information matrix size is    23207<br /> Total charge density [el/Bohr^3]<br />      Maximum=    7.0619E-01  at reduced coord.    0.1000    0.3542    0.0694<br />      Minimum=    9.4752E-04  at reduced coord.    0.9167    0.2639    0.0139<br />   Integrated=    3.5200E+02<br /> Computing residual forces using atomic densities taken from pseudos<br /> ETOT  1  -784.93628822884    -7.849E+02 4.731E-02 9.820E+04 5.831E-02 5.831E-02<br /> scprqt: &lt;Vxc&gt;= -2.9298416E-01 hartree<br /> <br />Simple mixing update:<br />  residual square of the potential :   5133.81532302710<br /> scfcv: previous iteration took 04:28:25<br /> <br /> ITER STEP NUMBER     2<br /> vtorho : nnsclo_now=2, note that nnsclo,dbl_nnsclo,istep=0 0 2<br /> You should try to get npband*bandpp=  187<br /> For information matrix size is    23207<br /> You should try to get npband*bandpp=  187<br /> For information matrix size is    23207<br /> Total charge density [el/Bohr^3]<br />      Maximum=    1.0772E+00  at reduced coord.    0.5250    0.4444    0.0139<br />      Minimum=    5.8361E-04  at reduced coord.    0.9083    0.2569    0.0139<br />   Integrated=    3.5200E+02<br /> Computing residual forces using atomic densities taken from pseudos<br /> ETOT  2  -801.70546693136    -1.677E+01 1.667E-03 8.875E+03 8.716E-02 3.699E-02<br /> scprqt: &lt;Vxc&gt;= -2.9415491E-01 hartree<br /> <br /> Pulay update with  1 previous iterations:<br /> mixing of old trial potential : alpha(m:m-4)=  0.596      0.404<br /> scfcv: previous iteration took 04:12:56<br /> <br /> ITER STEP NUMBER     3<br /> vtorho : nnsclo_now=1, note that nnsclo,dbl_nnsclo,istep=0 0 3<br /> You should try to get npband*bandpp=  187<br /> For information matrix size is    23207<br /> Total charge density [el/Bohr^3]<br />      Maximum=    9.7525E-01  at reduced coord.    0.5250    0.4444    0.0139<br />      Minimum=    5.7451E-04  at reduced coord.    0.9083    0.2569    0.0139<br />   Integrated=    3.5200E+02<br /> Computing residual forces using atomic densities taken from pseudos<br /> ETOT  3  -803.38493624133    -1.679E+00 1.614E-03 7.399E+02 4.884E-02 1.395E-02<br /> scprqt: &lt;Vxc&gt;= -2.9369712E-01 hartree<br /> <br /> Pulay update with  2 previous iterations:<br /> mixing of old trial potential : alpha(m:m-4)=   1.05     -0.139      0.897E-01<br /> scfcv: previous iteration took 02:24:59<br /> <br /> ITER STEP NUMBER     4<br /> vtorho : nnsclo_now=1, note that nnsclo,dbl_nnsclo,istep=0 0 4<br /> You should try to get npband*bandpp=  187<br /> For information matrix size is    23207<br /> Total charge density [el/Bohr^3]<br />      Maximum=    9.4423E-01  at reduced coord.    0.5250    0.4444    0.0139<br />      Minimum=    5.6409E-04  at reduced coord.    0.9083    0.2639    0.0139<br />   Integrated=    3.5200E+02<br /> Computing residual forces using atomic densities taken from pseudos<br /> ETOT  4  -803.54951945341    -1.646E-01 8.921E-05 2.413E+02 2.565E-02 1.388E-02<br /> scprqt: &lt;Vxc&gt;= -2.9423160E-01 hartree<br /> <br /> Pulay update with  3 previous iterations:<br /> mixing of old trial potential : alpha(m:m-4)=  0.662      0.519     -0.190      0.903E-02<br /> scfcv: previous iteration took 02:23:58<br /> <br /> ITER STEP NUMBER     5<br /> vtorho : nnsclo_now=1, note that nnsclo,dbl_nnsclo,istep=0 0 5<br /> You should try to get npband*bandpp=  187<br /> For information matrix size is    23207<br /><br />I want to stick to ABINIT code for use it frequently, but with that speed it is amost impossible.<br />I'm puzzled. Please help me anyone knows what is going on.<br /><br />Thanx a lot!<br />Artem</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p11865" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11865">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist2651.html?mode=viewprofile&amp;u=166" class="username">Boris</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search4e55.html?author_id=166&amp;sr=posts">128</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Feb 16, 2010 10:13 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> France</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11865">
+
+						<h3 ><a href="#p11865">Re: large SCF iteration time: wrong paralellism parameters?</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingba21.html?mode=quote&amp;f=9&amp;p=11865" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic0c48.html?p=11865#p11865" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist2651.html?mode=viewprofile&amp;u=166" class="username">Boris</a></strong> &raquo; </span>Wed Oct 24, 2018 2:57 pm
+			</p>
+			
+			
+			
+			<div class="content">Hi, <br /><br />From what I understand you're running a 84 atom molecule on 8 cpus, this is going to be hard, though I agree 5 hours is a &quot;little&quot; too long...<br /><br />One advice regarding parallelisation: never trust autoparal. It set npfft 4 although the new minimization algorithm in abinit doesn't work when npfft is larger than 1.<br />You have 2 kpts, 187 bands. Below is the parameters I would use for parallelisation:<br />npkpt 1<br />npfft 1<br />npband 8<br />bandpp 24<br /><br />I would then increase nbands to 192, so that 8*24=192.</div>
+			
+			
+			
+									
+									<div id="sig11865" class="signature">----------------------------------------------------------<br />Boris Dorado<br />Atomic Energy Commission<br />France<br />----------------------------------------------------------</div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p11868" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11868">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist94ba.html?mode=viewprofile&amp;u=1835" class="username">Artem</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search2786.html?author_id=1835&amp;sr=posts">4</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Oct 14, 2016 1:17 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11868">
+
+						<h3 ><a href="#p11868">Re: large SCF iteration time: wrong paralellism parameters?</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting7b34.html?mode=quote&amp;f=9&amp;p=11868" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic0e68.html?p=11868#p11868" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist94ba.html?mode=viewprofile&amp;u=1835" class="username">Artem</a></strong> &raquo; </span>Fri Oct 26, 2018 10:14 am
+			</p>
+			
+			
+			
+			<div class="content">Dear Boris,<br /><br />Thank you very much for your reply. I gave a try to subsitute autoparal=1 with manual setting and increased number<br />of empty bands instead of default 5% of total VB by recomended 192 to keept it even, but it yielded worse results:<br /><br />BINIT 8.6.1<br />  <br />  Give name for formatted input file: <br />aba1206171ht.cell.in<br />  Give name for formatted output file:<br />aba1206171ht.cell.out<br />  Give root name for generic input files:<br />aba1206171ht.cell_i<br />  Give root name for generic output files:<br />aba1206171ht.cell_o<br />  Give root name for generic temporary files:<br />/scratch/sgg/malta.181753.0/aba1206171ht.cell_tmp<br /> <br />--- !COMMENT<br />src_file: isfile.F90<br />src_line: 109<br />message: |<br />    Output file aba1206171ht.cell.out<br />     already exists.<br />...<br /> <br /> <br />--- !COMMENT<br />src_file: isfile.F90<br />src_line: 133<br />message: |<br />    Renaming old aba1206171ht.cell.out to aba1206171ht.cell.out0002<br />...<br /> <br /><br />.Version 8.6.1 of ABINIT <br />.(MPI version, prepared for a x86_64_linux_intel15.0 computer) <br /><br />.Copyright (C) 1998-2017 ABINIT group . <br /> ABINIT comes with ABSOLUTELY NO WARRANTY.<br /> It is free software, and you are welcome to redistribute it<br /> under certain conditions (GNU General Public License,<br /> see ~abinit/COPYING or <!-- m --><a class="postlink" href="http://www.gnu.org/copyleft/gpl.txt">http://www.gnu.org/copyleft/gpl.txt</a><!-- m -->).<br /><br /> ABINIT is a project of the Universite Catholique de Louvain,<br /> Corning Inc. and other collaborators, see ~abinit/doc/developers/contributors.txt .<br /> Please read ~abinit/doc/users/acknowledgments.html for suggested<br /> acknowledgments of the ABINIT effort.<br /> For more information, see <!-- m --><a class="postlink" href="https://www.abinit.org/">https://www.abinit.org</a><!-- m --> .<br /><br />.Starting date : Thu 25 Oct 2018.<br />- ( at 17h20 )<br />  <br /> <br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /> <br /> === Build Information === <br />  Version       : 8.6.1<br />  Build target  : x86_64_linux_intel15.0<br />  Build date    : 20171123<br /> <br /> === Compiler Suite === <br />  C compiler       : gnu4.8<br />  C++ compiler     : gnu4.8<br />  Fortran compiler : intel15.0<br />  CFLAGS           : -O3 -m64<br />  CXXFLAGS         : -O3 -m64<br />  FCFLAGS          : -O3 -m64<br />  FC_LDFLAGS       :    -static-intel -static-libgcc<br /> <br /> === Optimizations === <br />  Debug level        : basic<br />  Optimization level : standard<br />  Architecture       : intel_xeon<br /> <br /> === Multicore === <br />  Parallel build : yes<br />  Parallel I/O   : auto<br />  openMP support : no<br />  GPU support    : no<br /> <br /> === Connectors / Fallbacks === <br />  Connectors on : yes<br />  Fallbacks on  : yes<br />  DFT flavor    : none<br />  FFT flavor    : fftw3<br />  LINALG flavor : mkl<br />  MATH flavor   : none<br />  TIMER flavor  : abinit<br />  TRIO flavor   : none<br /> <br /> === Experimental features === <br />  Bindings            : @enable_bindings@<br />  Exports             : no<br />  GW double-precision : no<br /> <br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /> <br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /> Default optimizations:<br />   --- None ---<br /><br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /><br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /> CPP options activated during the build:<br /><br />                    CC_GNU                   CXX_GNU                  FC_INTEL<br /> <br /> HAVE_FC_ALLOCATABLE_DT...             HAVE_FC_ASYNC  HAVE_FC_COMMAND_ARGUMENT<br /> <br />      HAVE_FC_COMMAND_LINE        HAVE_FC_CONTIGUOUS           HAVE_FC_CPUTIME<br /> <br />             HAVE_FC_ETIME              HAVE_FC_EXIT             HAVE_FC_FLUSH<br /> <br />             HAVE_FC_GAMMA            HAVE_FC_GETENV            HAVE_FC_GETPID<br /> <br />   HAVE_FC_IEEE_EXCEPTIONS             HAVE_FC_IOMSG     HAVE_FC_ISO_C_BINDING<br /> <br />  HAVE_FC_ISO_FORTRAN_2008        HAVE_FC_LONG_LINES        HAVE_FC_MOVE_ALLOC<br /> <br />           HAVE_FC_PRIVATE         HAVE_FC_PROTECTED         HAVE_FC_STREAM_IO<br /> <br />            HAVE_FC_SYSTEM                  HAVE_FFT            HAVE_FFT_FFTW3<br /> <br />              HAVE_FFT_MPI           HAVE_FFT_SERIAL        HAVE_LIBPAW_ABINIT<br /> <br />      HAVE_LIBTETRA_ABINIT               HAVE_LINALG        HAVE_LINALG_SERIAL<br /> <br />                  HAVE_MPI                 HAVE_MPI2       HAVE_MPI_IALLREDUCE<br /> <br />        HAVE_MPI_IALLTOALL       HAVE_MPI_IALLTOALLV        HAVE_MPI_INTEGER16<br /> <br />               HAVE_MPI_IO HAVE_MPI_TYPE_CREATE_S...                HAVE_NUMPY<br /> <br />             HAVE_OS_LINUX         HAVE_TIMER_ABINIT              USE_MACROAVE<br /> <br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /><br />- input  file    -&gt; aba1206171ht.cell.in<br />- output file    -&gt; aba1206171ht.cell.out<br />- root for input  files -&gt; aba1206171ht.cell_i<br />- root for output files -&gt; aba1206171ht.cell_o<br /> <br />-instrng: 42 lines of input have been read from file aba1206171ht.cell.in<br /> <br /><br /> Please give name of formatted atomic psp file<br /> iofn2 : for atom type 1, psp file is H.psp8<br /><br /> Please give name of formatted atomic psp file<br /> iofn2 : for atom type 2, psp file is C.psp8<br /><br /> Please give name of formatted atomic psp file<br /> iofn2 : for atom type 3, psp file is N.psp8<br /><br /> Please give name of formatted atomic psp file<br /> iofn2 : for atom type 4, psp file is I.psp8<br /><br /> Please give name of formatted atomic psp file<br /> iofn2 : for atom type 5, psp file is Bi.psp8<br />  read the values zionpsp=  1.0 , pspcod=   8 , lmax=   1<br />  read the values zionpsp=  4.0 , pspcod=   8 , lmax=   1<br />  read the values zionpsp=  5.0 , pspcod=   8 , lmax=   1<br />  read the values zionpsp=  7.0 , pspcod=   8 , lmax=   2<br />  read the values zionpsp= 15.0 , pspcod=   8 , lmax=   2<br /> <br /> inpspheads: deduce mpsang = 3, n1xccc = 2501.<br /> invars1 : treat image number: 1<br /> <br /> symlatt : the Bravais lattice is oP (primitive orthorhombic)<br />  xred   is defined in input file<br /> ingeo : takes atomic coordinates from input array xred<br />  Describe the different generators (index,symrel,tnons,symafm)<br />  1    1  0  0  0  1  0  0  0  1    0.00E+00    0.00E+00    0.00E+00  1<br />  2   -1  0  0  0 -1  0  0  0  1    5.00E-01    5.00E-01    5.00E-01  1<br />  3   -1  0  0  0  1  0  0  0 -1    0.00E+00    0.00E+00    5.00E-01  1<br />  4    1  0  0  0 -1  0  0  0 -1    5.00E-01    5.00E-01    0.00E+00  1<br />  the choosen orientation corresponds to: abc; the proper one<br /> <br /> symlatt : the Bravais lattice is oP (primitive orthorhombic)<br /> <br /> symlatt : the Bravais lattice is oP (primitive orthorhombic)<br />  symspgr: 56 or 60<br /> symspgr : spgroup=  60  Pb c n   (=D2h^14)<br /> ingeo : angdeg(1:3)=   90.00000000   90.00000000   90.00000000<br /> chkneu : initialized the occupation numbers for occopt=    1, spin-unpolarized or antiferromagnetic case :<br />  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00<br />  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00<br />  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00<br />  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00<br />  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00<br />  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00<br />  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00<br />  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00<br />  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00<br />  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00<br />  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00<br />  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00<br />  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00<br />  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00<br />  2.00  2.00  2.00  2.00  2.00  2.00  2.00  2.00  0.00  0.00  0.00  0.00<br />  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00<br />npfft, npband, npspinor and npkpt:     1    1    1    8<br /> <br />--- !WARNING<br />src_file: distrb2.F90<br />src_line: 107<br />message: |<br />    nproc_kpt=8 &gt;= nkpt=2* nsppol=1<br />    The number of processors is larger than nkpt*nsppol. This is a waste.<br />...<br /> <br />mpi_setup: mkmem  undefined in the input file.Use default mkmem  = nkpt<br /> mpi_setup: With nkpt_me=1 and mkmem  = 2, ground state wf handled in core.<br /> Resetting mkmem  to nkpt_me to save memory space.<br />mpi_setup: mkqmem undefined in the input file.Use default mkqmem = nkpt<br /> mpi_setup: With nkpt_me=1 and mkqmem = 2, ground state wf handled in core.<br /> Resetting mkqmem to nkpt_me to save memory space.<br />mpi_setup: mk1mem undefined in the input file.Use default mk1mem = nkpt<br /> mpi_setup: With nkpt_me=1 and mk1mem = 2, ground state wf handled in core.<br /> Resetting mk1mem to nkpt_me to save memory space.<br /> <br />--- !WARNING<br />src_file: mpi_setup.F90<br />src_line: 659<br />message: |<br />    Your number of spins*k-points (=2) will not distribute correctly<br />    with the current number of processors (=8).<br />    You will leave some empty.<br />    YOU ARE STRONGLY ADVICED TO ACTIVATE AUTOMATIC PARALLELIZATION!<br />    PUT &quot;AUTOPARAL=1&quot; IN THE INPUT FILE.<br />...<br /> <br /> For input ecut=  3.307500E+01 best grid ngfft=     120     144      72<br />       max ecut=  2.820875E+01<br /> <br /> ==== FFT mesh ====<br />  FFT mesh divisions ........................   120  144   72<br />  Augmented FFT divisions ...................   121  145   72<br />  FFT algorithm .............................   312<br />  FFT cache size ............................    16<br /> getmpw: optimal value of mpw= 92837<br /> <br /> Symmetries : space group Pb c n (# 60); Bravais oP (primitive ortho.)<br /> <br /> getdim_nloc : deduce lmnmax  =  18, lnmax  =   6,<br />                      lmnmaxso=  18, lnmaxso=   6.<br />memory : analysis of memory needs<br />================================================================================<br /> Values of the parameters that define the memory need of the present run<br />     intxc =       0    ionmov =       2      iscf =       7    lmnmax =       6<br />     lnmax =       6     mgfft =     144  mpssoang =       3    mqgrid =    7797<br />     natom =      84  nloc_mem =       1    nspden =       1   nspinor =       1<br />    nsppol =       1      nsym =       8    n1xccc =    2501    ntypat =       5<br />    occopt =       1   xclevel =       2<br />-    mband =         192        mffmem =           1         mkmem =           1<br />       mpw =       92837          nfft =     1244160          nkpt =           2<br />================================================================================<br />P This job should need less than                     692.890 Mbytes of memory.<br />  Rough estimation (10% accuracy) of disk space for files :<br />_ WF disk file :    543.969 Mbytes ; DEN or POT disk file :      9.494 Mbytes.<br />================================================================================<br /> <br /> Biggest array : cg(disk), with    271.9854 MBytes.<br /> memana : allocated an array of    271.985 Mbytes, for testing purposes.<br /> memana: allocated     692.890Mbytes, for testing purposes. <br /> The job will continue.<br />--------------------------------------------------------------------------------<br />------------- Echo of variables that govern the present computation ------------<br />--------------------------------------------------------------------------------<br />-<br />- outvars: echo of selected default values                                      <br />-   iomode0 =  0 , fftalg0 =312 , wfoptalg0 =  0<br />-<br />- outvars: echo of global parameters not present in the input file              <br />-  max_nthreads =    0<br />-<br /> -outvars: echo values of preprocessed input variables --------<br />         accuracy           2<br />            acell      2.3192419856E+01  3.0114486681E+01  1.4624401570E+01 Bohr<br />              amu      1.00794000E+00  1.20110000E+01  1.40067400E+01<br />                       1.26904470E+02  2.08980370E+02<br />           bandpp          24<br />        boxcutmin      1.80000000E+00<br />          dilatmx      1.05000000E+00<br />             ecut      3.00000000E+01 Hartree<br />           ecutsm      5.00000000E-01 Hartree<br />-          fftalg         312<br />           ionmov           2<br />              ixc          11<br />              kpt      2.50000000E-01  2.50000000E-01  1.25000000E-01<br />                       2.50000000E-01  2.50000000E-01  3.75000000E-01<br />         kptrlatt        2    0    0      0    2    0      0    0    4<br />          kptrlen      4.63848397E+01<br />P           mkmem           1<br />            natom          84<br />            nband         192<br />            ngfft         120     144      72<br />             nkpt           2<br />-          npband           8<br />             nsym           8<br />           ntypat           5<br />              occ      2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />                       2.000000  2.000000  0.000000  0.000000  0.000000  0.000000<br />                       0.000000  0.000000  0.000000  0.000000  0.000000  0.000000<br />                       0.000000  0.000000  0.000000  0.000000  0.000000  0.000000<br />          optcell           1<br />        optforces           1<br />        pawecutdg      3.00000000E+01 Hartree<br />           prtden           0<br />        prtebands           2<br />           prteig           0<br />           shiftk      5.00000000E-01  5.00000000E-01  5.00000000E-01<br />          spgroup          60<br />           symrel      1  0  0   0  1  0   0  0  1      -1  0  0   0 -1  0   0  0  1<br />                      -1  0  0   0  1  0   0  0 -1       1  0  0   0 -1  0   0  0 -1<br />                      -1  0  0   0 -1  0   0  0 -1       1  0  0   0  1  0   0  0 -1<br />                       1  0  0   0 -1  0   0  0  1      -1  0  0   0  1  0   0  0  1<br />            tnons      0.0000000  0.0000000  0.0000000     0.5000000  0.5000000  0.5000000<br />                       0.0000000  0.0000000  0.5000000     0.5000000  0.5000000  0.0000000<br />                       0.0000000  0.0000000  0.0000000     0.5000000  0.5000000  0.5000000<br />                       0.0000000  0.0000000  0.5000000     0.5000000  0.5000000  0.0000000<br />           tolmxf      5.00000000E-04<br />           tolvrs      1.00000000E-05<br />            typat      5  4  4  3  1  2  1  2  2  1  2  1  5  4  4  3  1  2  1  2<br />                       2  1  2  1  4  4  3  1  2  1  2  2  1  4  4  3  1  2  1  2<br />                       2  1  5  4  4  3  1  2  1  2  2  1  2  1  5  4  4  3  1  2<br />                       1  2  2  1  2  1  4  4  3  1  2  1  2  2  1  4  4  3  1  2<br />                       1  2  2  1<br />              wtk        0.50000    0.50000<br />           xangst      6.1364500000E+00  6.7791318600E+00  5.8041750000E+00<br />                       7.8067916900E+00  6.6739549200E+00  3.1984873700E+00<br />                       8.1762059800E+00  4.9050700200E+00  6.9634622200E+00<br />                       1.1281249680E+01  5.7863252900E+00  5.3599621400E+00<br />                       1.0396373590E+01  5.4261739500E+00  5.0062944100E+00<br />                       1.1632254620E+01  9.4834540900E+00  5.5131923600E+00<br />                       1.1145020490E+01  1.0436420910E+01  5.3057898400E+00<br />                       1.1629800040E+01  7.1201601200E+00  5.5162879200E+00<br />                       0.0000000000E+00  5.0102469600E+00  5.8041750000E+00<br />                       0.0000000000E+00  3.9250121700E+00  5.8041750000E+00<br />                       1.0960926990E+01  8.3041974900E+00  5.2113752600E+00<br />                       9.9717312500E+00  8.3026039000E+00  4.7586496100E+00<br />                       0.0000000000E+00  1.1888181400E+00  1.9347250000E+00<br />                       1.0602558310E+01  1.2939950800E+00  7.0679373700E+00<br />                       1.0233144020E+01  3.0628799800E+00  3.0940122200E+00<br />                       7.1281003200E+00  2.1816247100E+00  1.4905121400E+00<br />                       8.0129764100E+00  2.5417760500E+00  1.1368444100E+00<br />                       6.7770953800E+00  1.4420395910E+01  1.6437423600E+00<br />                       7.2643295100E+00  1.3467429090E+01  1.4363398400E+00<br />                       6.7795499600E+00  8.4778988000E-01  1.6468379200E+00<br />                       6.1364500000E+00  2.9577030400E+00  1.9347250000E+00<br />                       6.1364500000E+00  4.0429378300E+00  1.9347250000E+00<br />                       7.4484230100E+00  1.5599652510E+01  1.3419252600E+00<br />                       8.4376187500E+00  1.5601246100E+01  8.8919961000E-01<br />                       4.4661083100E+00  6.6739549200E+00  6.7096263000E-01<br />                       4.0966940200E+00  4.9050700200E+00  4.6448877800E+00<br />                       9.9165032000E-01  5.7863252900E+00  6.2483878600E+00<br />                       1.8765264100E+00  5.4261739500E+00  6.6020555900E+00<br />                       6.4064538000E-01  9.4834540900E+00  6.0951576400E+00<br />                       1.1278795100E+00  1.0436420910E+01  6.3025601600E+00<br />                       6.4309996000E-01  7.1201601200E+00  6.0920620800E+00<br />                       1.3119730100E+00  8.3041974900E+00  6.3969747400E+00<br />                       2.3011687500E+00  8.3026039000E+00  6.8497003900E+00<br />                       1.6703416900E+00  1.2939950800E+00  4.5404126300E+00<br />                       2.0397559800E+00  3.0628799800E+00  7.7543778000E-01<br />                       5.1447996800E+00  2.1816247100E+00  2.3789378600E+00<br />                       4.2599235900E+00  2.5417760500E+00  2.7326055900E+00<br />                       5.4958046200E+00  1.4420395910E+01  2.2257076400E+00<br />                       5.0085704900E+00  1.3467429090E+01  2.4331101600E+00<br />                       5.4933500400E+00  8.4778988000E-01  2.2226120800E+00<br />                       4.8244769900E+00  1.5599652510E+01  2.5275247400E+00<br />                       3.8352812500E+00  1.5601246100E+01  2.9802503900E+00<br />                       6.1364500000E+00  9.1567681400E+00  1.9347250000E+00<br />                       4.4661083100E+00  9.2619450800E+00  4.5404126300E+00<br />                       4.0966940200E+00  1.1030829980E+01  7.7543778000E-01<br />                       9.9165032000E-01  1.0149574710E+01  2.3789378600E+00<br />                       1.8765264100E+00  1.0509726050E+01  2.7326055900E+00<br />                       6.4064538000E-01  6.4524459100E+00  2.2257076400E+00<br />                       1.1278795100E+00  5.4994790900E+00  2.4331101600E+00<br />                       6.4309996000E-01  8.8157398800E+00  2.2226120800E+00<br />                       0.0000000000E+00  1.0925653040E+01  1.9347250000E+00<br />                       0.0000000000E+00  1.2010887830E+01  1.9347250000E+00<br />                       1.3119730100E+00  7.6317025100E+00  2.5275247400E+00<br />                       2.3011687500E+00  7.6332961000E+00  2.9802503900E+00<br />                       0.0000000000E+00  1.4747081860E+01  5.8041750000E+00<br />                       1.6703416900E+00  1.4641904920E+01  6.7096263000E-01<br />                       2.0397559800E+00  1.2873020020E+01  4.6448877800E+00<br />                       5.1447996800E+00  1.3754275290E+01  6.2483878600E+00<br />                       4.2599235900E+00  1.3394123950E+01  6.6020555900E+00<br />                       5.4958046200E+00  1.5155040900E+00  6.0951576400E+00<br />                       5.0085704900E+00  2.4684709100E+00  6.3025601600E+00<br />                       5.4933500400E+00  1.5088110120E+01  6.0920620800E+00<br />                       6.1364500000E+00  1.2978196960E+01  5.8041750000E+00<br />                       6.1364500000E+00  1.1892962170E+01  5.8041750000E+00<br />                       4.8244769900E+00  3.3624749000E-01  6.3969747400E+00<br />                       3.8352812500E+00  3.3465390000E-01  6.8497003900E+00<br />                       7.8067916900E+00  9.2619450800E+00  7.0679373700E+00<br />                       8.1762059800E+00  1.1030829980E+01  3.0940122200E+00<br />                       1.1281249680E+01  1.0149574710E+01  1.4905121400E+00<br />                       1.0396373590E+01  1.0509726050E+01  1.1368444100E+00<br />                       1.1632254620E+01  6.4524459100E+00  1.6437423600E+00<br />                       1.1145020490E+01  5.4994790900E+00  1.4363398400E+00<br />                       1.1629800040E+01  8.8157398800E+00  1.6468379200E+00<br />                       1.0960926990E+01  7.6317025100E+00  1.3419252600E+00<br />                       9.9717312500E+00  7.6332961000E+00  8.8919961000E-01<br />                       1.0602558310E+01  1.4641904920E+01  3.1984873700E+00<br />                       1.0233144020E+01  1.2873020020E+01  6.9634622200E+00<br />                       7.1281003200E+00  1.3754275290E+01  5.3599621400E+00<br />                       8.0129764100E+00  1.3394123950E+01  5.0062944100E+00<br />                       6.7770953800E+00  1.5155040900E+00  5.5131923600E+00<br />                       7.2643295100E+00  2.4684709100E+00  5.3057898400E+00<br />                       6.7795499600E+00  1.5088110120E+01  5.5162879200E+00<br />                       7.4484230100E+00  3.3624749000E-01  5.2113752600E+00<br />                       8.4376187500E+00  3.3465390000E-01  4.7586496100E+00<br />            xcart      1.1596209928E+01  1.2810702634E+01  1.0968301177E+01<br />                       1.4752698271E+01  1.2611947022E+01  6.0442651688E+00<br />                       1.5450790108E+01  9.2692390004E+00  1.3159036532E+01<br />                       2.1318472332E+01  1.0934570114E+01  1.0128860527E+01<br />                       1.9646298860E+01  1.0253982715E+01  9.4605253755E+00<br />                       2.1981775540E+01  1.7921131024E+01  1.0418423678E+01<br />                       2.1061036471E+01  1.9721977327E+01  1.0026489716E+01<br />                       2.1977137056E+01  1.3455152649E+01  1.0424273439E+01<br />                       0.0000000000E+00  9.4679946125E+00  1.0968301177E+01<br />                       0.0000000000E+00  7.4171980695E+00  1.0968301177E+01<br />                       2.0713150174E+01  1.5692659009E+01  9.8480720171E+00<br />                       1.8843841133E+01  1.5689647561E+01  8.9925445253E+00<br />                       0.0000000000E+00  2.2465407064E+00  3.6561003924E+00<br />                       2.0035931514E+01  2.4452963185E+00  1.3356465954E+01<br />                       1.9337839676E+01  5.7880043401E+00  5.8468357476E+00<br />                       1.3470157453E+01  4.1226732266E+00  2.8166597423E+00<br />                       1.5142330924E+01  4.8032606256E+00  2.1483245906E+00<br />                       1.2806854245E+01  2.7250598998E+01  3.1062228934E+00<br />                       1.3727593313E+01  2.5449752694E+01  2.7142889314E+00<br />                       1.2811492729E+01  1.6020906914E+00  3.1120726541E+00<br />                       1.1596209928E+01  5.5892487280E+00  3.6561003924E+00<br />                       1.1596209928E+01  7.6400452710E+00  3.6561003924E+00<br />                       1.4075479611E+01  2.9479071012E+01  2.5358712322E+00<br />                       1.5944788651E+01  2.9482082461E+01  1.6803437404E+00<br />                       8.4397215857E+00  1.2611947022E+01  1.2679356161E+00<br />                       7.7416297480E+00  9.2692390004E+00  8.7775658222E+00<br />                       1.8739475244E+00  1.0934570114E+01  1.1807741827E+01<br />                       3.5461209960E+00  1.0253982715E+01  1.2476076979E+01<br />                       1.2106443165E+00  1.7921131024E+01  1.1518178676E+01<br />                       2.1313833848E+00  1.9721977327E+01  1.1910112638E+01<br />                       1.2152828005E+00  1.3455152649E+01  1.1512328916E+01<br />                       2.4792696826E+00  1.5692659009E+01  1.2088530338E+01<br />                       4.3485787231E+00  1.5689647561E+01  1.2944057829E+01<br />                       3.1564883424E+00  2.4452963185E+00  8.5801364010E+00<br />                       3.8545801801E+00  5.7880043401E+00  1.4653650373E+00<br />                       9.7222624038E+00  4.1226732266E+00  4.4955410426E+00<br />                       8.0500889321E+00  4.8032606256E+00  5.1638761943E+00<br />                       1.0385565612E+01  2.7250598998E+01  4.2059778915E+00<br />                       9.4648265434E+00  2.5449752694E+01  4.5979118535E+00<br />                       1.0380927128E+01  1.6020906914E+00  4.2001281308E+00<br />                       9.1169402455E+00  2.9479071012E+01  4.7763295527E+00<br />                       7.2476312051E+00  2.9482082461E+01  5.6318570445E+00<br />                       1.1596209928E+01  1.7303784047E+01  3.6561003924E+00<br />                       8.4397215857E+00  1.7502539659E+01  8.5801364010E+00<br />                       7.7416297480E+00  2.0845247681E+01  1.4653650373E+00<br />                       1.8739475244E+00  1.9179916567E+01  4.4955410426E+00<br />                       3.5461209960E+00  1.9860503966E+01  5.1638761943E+00<br />                       1.2106443165E+00  1.2193355657E+01  4.2059778915E+00<br />                       2.1313833848E+00  1.0392509354E+01  4.5979118535E+00<br />                       1.2152828005E+00  1.6659334032E+01  4.2001281308E+00<br />                       0.0000000000E+00  2.0646492069E+01  3.6561003924E+00<br />                       0.0000000000E+00  2.2697288612E+01  3.6561003924E+00<br />                       2.4792696826E+00  1.4421827672E+01  4.7763295527E+00<br />                       4.3485787231E+00  1.4424839120E+01  5.6318570445E+00<br />                       0.0000000000E+00  2.7867945975E+01  1.0968301177E+01<br />                       3.1564883424E+00  2.7669190363E+01  1.2679356161E+00<br />                       3.8545801801E+00  2.4326482341E+01  8.7775658222E+00<br />                       9.7222624038E+00  2.5991813454E+01  1.1807741827E+01<br />                       8.0500889321E+00  2.5311226055E+01  1.2476076979E+01<br />                       1.0385565612E+01  2.8638876834E+00  1.1518178676E+01<br />                       9.4648265434E+00  4.6647339869E+00  1.1910112638E+01<br />                       1.0380927128E+01  2.8512395990E+01  1.1512328916E+01<br />                       1.1596209928E+01  2.4525237953E+01  1.0968301177E+01<br />                       1.1596209928E+01  2.2474441410E+01  1.0968301177E+01<br />                       9.1169402455E+00  6.3541566897E-01  1.2088530338E+01<br />                       7.2476312051E+00  6.3240422030E-01  1.2944057829E+01<br />                       1.4752698271E+01  1.7502539659E+01  1.3356465954E+01<br />                       1.5450790108E+01  2.0845247681E+01  5.8468357476E+00<br />                       2.1318472332E+01  1.9179916567E+01  2.8166597423E+00<br />                       1.9646298860E+01  1.9860503966E+01  2.1483245906E+00<br />                       2.1981775540E+01  1.2193355657E+01  3.1062228934E+00<br />                       2.1061036471E+01  1.0392509354E+01  2.7142889314E+00<br />                       2.1977137056E+01  1.6659334032E+01  3.1120726541E+00<br />                       2.0713150174E+01  1.4421827672E+01  2.5358712322E+00<br />                       1.8843841133E+01  1.4424839120E+01  1.6803437404E+00<br />                       2.0035931514E+01  2.7669190363E+01  6.0442651688E+00<br />                       1.9337839676E+01  2.4326482341E+01  1.3159036532E+01<br />                       1.3470157453E+01  2.5991813454E+01  1.0128860527E+01<br />                       1.5142330924E+01  2.5311226055E+01  9.4605253755E+00<br />                       1.2806854245E+01  2.8638876834E+00  1.0418423678E+01<br />                       1.3727593313E+01  4.6647339869E+00  1.0026489716E+01<br />                       1.2811492729E+01  2.8512395990E+01  1.0424273439E+01<br />                       1.4075479611E+01  6.3541566897E-01  9.8480720171E+00<br />                       1.5944788651E+01  6.3240422030E-01  8.9925445253E+00<br />             xred      5.0000000000E-01  4.2540000000E-01  7.5000000000E-01<br />                       6.3610000000E-01  4.1880000000E-01  4.1330000000E-01<br />                       6.6620000000E-01  3.0780000000E-01  8.9980000000E-01<br />                       9.1920000000E-01  3.6310000000E-01  6.9260000000E-01<br />                       8.4710000000E-01  3.4050000000E-01  6.4690000000E-01<br />                       9.4780000000E-01  5.9510000000E-01  7.1240000000E-01<br />                       9.0810000000E-01  6.5490000000E-01  6.8560000000E-01<br />                       9.4760000000E-01  4.4680000000E-01  7.1280000000E-01<br />                       0.0000000000E+00  3.1440000000E-01  7.5000000000E-01<br />                       0.0000000000E+00  2.4630000000E-01  7.5000000000E-01<br />                       8.9310000000E-01  5.2110000000E-01  6.7340000000E-01<br />                       8.1250000000E-01  5.2100000000E-01  6.1490000000E-01<br />                       0.0000000000E+00  7.4600000000E-02  2.5000000000E-01<br />                       8.6390000000E-01  8.1200000000E-02  9.1330000000E-01<br />                       8.3380000000E-01  1.9220000000E-01  3.9980000000E-01<br />                       5.8080000000E-01  1.3690000000E-01  1.9260000000E-01<br />                       6.5290000000E-01  1.5950000000E-01  1.4690000000E-01<br />                       5.5220000000E-01  9.0490000000E-01  2.1240000000E-01<br />                       5.9190000000E-01  8.4510000000E-01  1.8560000000E-01<br />                       5.5240000000E-01  5.3200000000E-02  2.1280000000E-01<br />                       5.0000000000E-01  1.8560000000E-01  2.5000000000E-01<br />                       5.0000000000E-01  2.5370000000E-01  2.5000000000E-01<br />                       6.0690000000E-01  9.7890000000E-01  1.7340000000E-01<br />                       6.8750000000E-01  9.7900000000E-01  1.1490000000E-01<br />                       3.6390000000E-01  4.1880000000E-01  8.6700000000E-02<br />                       3.3380000000E-01  3.0780000000E-01  6.0020000000E-01<br />                       8.0800000000E-02  3.6310000000E-01  8.0740000000E-01<br />                       1.5290000000E-01  3.4050000000E-01  8.5310000000E-01<br />                       5.2200000000E-02  5.9510000000E-01  7.8760000000E-01<br />                       9.1900000000E-02  6.5490000000E-01  8.1440000000E-01<br />                       5.2400000000E-02  4.4680000000E-01  7.8720000000E-01<br />                       1.0690000000E-01  5.2110000000E-01  8.2660000000E-01<br />                       1.8750000000E-01  5.2100000000E-01  8.8510000000E-01<br />                       1.3610000000E-01  8.1200000000E-02  5.8670000000E-01<br />                       1.6620000000E-01  1.9220000000E-01  1.0020000000E-01<br />                       4.1920000000E-01  1.3690000000E-01  3.0740000000E-01<br />                       3.4710000000E-01  1.5950000000E-01  3.5310000000E-01<br />                       4.4780000000E-01  9.0490000000E-01  2.8760000000E-01<br />                       4.0810000000E-01  8.4510000000E-01  3.1440000000E-01<br />                       4.4760000000E-01  5.3200000000E-02  2.8720000000E-01<br />                       3.9310000000E-01  9.7890000000E-01  3.2660000000E-01<br />                       3.1250000000E-01  9.7900000000E-01  3.8510000000E-01<br />                       5.0000000000E-01  5.7460000000E-01  2.5000000000E-01<br />                       3.6390000000E-01  5.8120000000E-01  5.8670000000E-01<br />                       3.3380000000E-01  6.9220000000E-01  1.0020000000E-01<br />                       8.0800000000E-02  6.3690000000E-01  3.0740000000E-01<br />                       1.5290000000E-01  6.5950000000E-01  3.5310000000E-01<br />                       5.2200000000E-02  4.0490000000E-01  2.8760000000E-01<br />                       9.1900000000E-02  3.4510000000E-01  3.1440000000E-01<br />                       5.2400000000E-02  5.5320000000E-01  2.8720000000E-01<br />                       0.0000000000E+00  6.8560000000E-01  2.5000000000E-01<br />                       0.0000000000E+00  7.5370000000E-01  2.5000000000E-01<br />                       1.0690000000E-01  4.7890000000E-01  3.2660000000E-01<br />                       1.8750000000E-01  4.7900000000E-01  3.8510000000E-01<br />                       0.0000000000E+00  9.2540000000E-01  7.5000000000E-01<br />                       1.3610000000E-01  9.1880000000E-01  8.6700000000E-02<br />                       1.6620000000E-01  8.0780000000E-01  6.0020000000E-01<br />                       4.1920000000E-01  8.6310000000E-01  8.0740000000E-01<br />                       3.4710000000E-01  8.4050000000E-01  8.5310000000E-01<br />                       4.4780000000E-01  9.5100000000E-02  7.8760000000E-01<br />                       4.0810000000E-01  1.5490000000E-01  8.1440000000E-01<br />                       4.4760000000E-01  9.4680000000E-01  7.8720000000E-01<br />                       5.0000000000E-01  8.1440000000E-01  7.5000000000E-01<br />                       5.0000000000E-01  7.4630000000E-01  7.5000000000E-01<br />                       3.9310000000E-01  2.1100000000E-02  8.2660000000E-01<br />                       3.1250000000E-01  2.1000000000E-02  8.8510000000E-01<br />                       6.3610000000E-01  5.8120000000E-01  9.1330000000E-01<br />                       6.6620000000E-01  6.9220000000E-01  3.9980000000E-01<br />                       9.1920000000E-01  6.3690000000E-01  1.9260000000E-01<br />                       8.4710000000E-01  6.5950000000E-01  1.4690000000E-01<br />                       9.4780000000E-01  4.0490000000E-01  2.1240000000E-01<br />                       9.0810000000E-01  3.4510000000E-01  1.8560000000E-01<br />                       9.4760000000E-01  5.5320000000E-01  2.1280000000E-01<br />                       8.9310000000E-01  4.7890000000E-01  1.7340000000E-01<br />                       8.1250000000E-01  4.7900000000E-01  1.1490000000E-01<br />                       8.6390000000E-01  9.1880000000E-01  4.1330000000E-01<br />                       8.3380000000E-01  8.0780000000E-01  8.9980000000E-01<br />                       5.8080000000E-01  8.6310000000E-01  6.9260000000E-01<br />                       6.5290000000E-01  8.4050000000E-01  6.4690000000E-01<br />                       5.5220000000E-01  9.5100000000E-02  7.1240000000E-01<br />                       5.9190000000E-01  1.5490000000E-01  6.8560000000E-01<br />                       5.5240000000E-01  9.4680000000E-01  7.1280000000E-01<br />                       6.0690000000E-01  2.1100000000E-02  6.7340000000E-01<br />                       6.8750000000E-01  2.1000000000E-02  6.1490000000E-01<br />            znucl        1.00000    6.00000    7.00000   53.00000   83.00000<br /> <br />================================================================================<br /> <br /> chkinp: Checking input parameters for consistency.<br /> DATA TYPE INFORMATION: <br /> REAL:      Data type name: REAL(DP) <br />            Kind value:      8<br />            Precision:      15<br />            Smallest nonnegligible quantity relative to 1:  0.22204460E-15<br />            Smallest positive number:                       0.22250739-307<br />            Largest representable number:                   0.17976931+309<br /> INTEGER:   Data type name: INTEGER(default) <br />            Kind value: 4<br />            Bit size:   32<br />            Largest representable number: 2147483647<br /> LOGICAL:   Data type name: LOGICAL <br />            Kind value: 4<br /> CHARACTER: Data type name: CHARACTER             Kind value: 1<br /><br />  ==== OpenMP parallelism is OFF ====<br /> <br />  ==== Using MPI-2 specifications ==== <br />  MPI-IO support is ON<br />  xmpi_tag_ub ................   2147483647<br />  xmpi_bsize_ch ..............            1<br />  xmpi_bsize_int .............            4<br />  xmpi_bsize_sp ..............            4<br />  xmpi_bsize_dp ..............            8<br />  xmpi_bsize_spc .............            8<br />  xmpi_bsize_dpc .............           16<br />  xmpio_bsize_frm ............            4<br />  xmpi_address_kind ..........            8<br />  xmpi_offset_kind ...........            8<br />  MPI_WTICK ..................   1.000000000000000E-006<br /> <br />================================================================================<br />== DATASET  1 ==================================================================<br />-   nproc =    8   -&gt; not optimal: autoparal keyword recommended in input file<br /> <br /> <br /> getdim_nloc : deduce lmnmax  =  18, lnmax  =   6,<br />                      lmnmaxso=  18, lnmaxso=   6.<br /> Exchange-correlation functional for the present dataset will be:<br />  GGA: Perdew-Burke-Ernzerhof functional - ixc=11<br /> Citation for XC functional:<br />  J.P.Perdew, K.Burke, M.Ernzerhof, PRL 77, 3865 (1996)<br /> <br /> Unit cell volume ucvol=  1.0214089E+04 bohr^3<br /> Angles (23,13,12)=  9.00000000E+01  9.00000000E+01  9.00000000E+01 degrees<br /> <br /> getcut: wavevector=  0.0000  0.0000  0.0000  ngfft= 120 144  72<br />         ecut(hartree)=     33.075   =&gt; boxcut(ratio)=   1.84702<br /> kpgio: loop on k-points done in parallel<br />- pspini: atom type   1  psp file is H.psp8<br />- pspatm: opening atomic psp file    H.psp8<br />- H     ONCVPSP-3.2.3.1  r_core=   1.00957   0.70586<br />-  1.00000   1.00000    170501                znucl, zion, pspdat<br />    8   11    1    4       300   0.00000      pspcod,pspxc,lmax,lloc,mmax,r2well<br />    2.99000000000000    0.00000000000000    0.00000000000000   rchrg,fchrg,qchrg<br />     nproj     2     1<br />     extension_switch     1<br /> valence charge integrates to:   0.903265027300618     <br />  pspatm : epsatm=    0.36235122<br />         --- l  ekb(1:nproj) --&gt;<br />             0   -1.701123   -0.534484<br />             1   -0.503321<br /> pspatm: atomic psp has been read  and splines computed<br /> <br />- pspini: atom type   2  psp file is C.psp8<br />- pspatm: opening atomic psp file    C.psp8<br />- C     ONCVPSP-3.2.3.1  r_core=   1.20440   1.26326<br />-  6.00000   4.00000    170503                znucl, zion, pspdat<br />    8   11    1    4       600   0.00000      pspcod,pspxc,lmax,lloc,mmax,r2well<br />    5.99000000000000    4.00000000000000    0.00000000000000   rchrg,fchrg,qchrg<br />     nproj     2     2<br />     extension_switch     1<br /> valence charge integrates to:    3.99294548436448     <br />  pspatm : epsatm=    4.31347020<br />         --- l  ekb(1:nproj) --&gt;<br />             0    6.481548    0.385504<br />             1   -4.199961   -0.877517<br /> pspatm: atomic psp has been read  and splines computed<br /> <br />- pspini: atom type   3  psp file is N.psp8<br />- pspatm: opening atomic psp file    N.psp8<br />- N     ONCVPSP-3.2.3.1  r_core=   1.20551   1.35824<br />-  7.00000   5.00000    170503                znucl, zion, pspdat<br />    8   11    1    4       600   0.00000      pspcod,pspxc,lmax,lloc,mmax,r2well<br />    5.99000000000000    4.00000000000000    0.00000000000000   rchrg,fchrg,qchrg<br />     nproj     2     2<br />     extension_switch     1<br /> valence charge integrates to:    4.99736754620843     <br />  pspatm : epsatm=    5.20978323<br />         --- l  ekb(1:nproj) --&gt;<br />             0    7.494509    0.636305<br />             1   -4.293905   -1.006988<br /> pspatm: atomic psp has been read  and splines computed<br /> <br />- pspini: atom type   4  psp file is I.psp8<br />- pspatm: opening atomic psp file    I.psp8<br />- I     ONCVPSP-3.2.3.1  r_core=   2.02042   2.17032   2.27639<br />- 53.00000   7.00000    170510                znucl, zion, pspdat<br />    8   11    2    4       600   0.00000      pspcod,pspxc,lmax,lloc,mmax,r2well<br />    5.99000000000000    4.00000000000000    0.00000000000000   rchrg,fchrg,qchrg<br />     nproj     2     2     2<br />     extension_switch     1<br /> valence charge integrates to:    6.97514833937078     <br />  pspatm : epsatm=   19.17050482<br />         --- l  ekb(1:nproj) --&gt;<br />             0    5.955518    0.916455<br />             1    4.011347    0.742302<br />             2    4.134838    0.711910<br /> pspatm: atomic psp has been read  and splines computed<br /> <br />- pspini: atom type   5  psp file is Bi.psp8<br />- pspatm: opening atomic psp file    Bi.psp8<br />- Bi    ONCVPSP-3.2.3.1  r_core=   2.42776   2.51622   2.10397<br />- 83.00000  15.00000    170503                znucl, zion, pspdat<br />    8   11    2    4       600   0.00000      pspcod,pspxc,lmax,lloc,mmax,r2well<br />    5.99000000000000    6.00000000000000    0.00000000000000   rchrg,fchrg,qchrg<br />     nproj     2     2     2<br />     extension_switch     1<br /> valence charge integrates to:    14.9229772388359     <br />  pspatm : epsatm=   43.05015443<br />         --- l  ekb(1:nproj) --&gt;<br />             0    6.017305    0.960418<br />             1    4.379636    0.528085<br />             2   -3.460145   -0.753950<br /> pspatm: atomic psp has been read  and splines computed<br /> <br />   2.29338546E+05                                ecore*ucvol(ha*bohr**3)<br /> ==== Info on pseudopotentials ====<br />  Norm-conserving pseudopotentials<br />  Number of pseudopotentials ..    5<br />  Number of types of atoms   ..    5<br />  Scalar calculation (no spin-orbit term)<br />  Nonlocal part applied using Legendre polynomials<br />  Max number of non-local projectors over l and type   2<br />  Highest angular momentum +1 .......   3<br />  Max number of (l,n)   components ..   6<br />  Max number of (l,m,n) components ..   6<br /> <br /> Pseudo-Core Charge Info: <br />   Number of radial points for pseudo-core charge .. 2501<br />   XC core-correction treatment (optnlxccc) ........    1<br />   Radius for pseudo-core charge for each type ..... <br /> <br />  - Atom type    1 has pseudo-core radius ..  0.0000<br />  - Atom type    2 has pseudo-core radius ..  5.9900<br />  - Atom type    3 has pseudo-core radius ..  5.9900<br />  - Atom type    4 has pseudo-core radius ..  5.9900<br />  - Atom type    5 has pseudo-core radius ..  5.9900<br /> <br /> Info on the Q-grid used for form factors in spline form: <br />   Number of q-points for radial functions ffspl ..   7797<br />   Number of q-points for vlspl ...................   7797<br />   vloc is computed in Reciprocal Space<br />   model core charge treated in real-space<br /> <br />  XC functional for type 1 is 11<br />  Pseudo valence available: yes<br />  XC functional for type 2 is 11<br />  Pseudo valence available: yes<br />  XC functional for type 3 is 11<br />  Pseudo valence available: yes<br />  XC functional for type 4 is 11<br />  Pseudo valence available: yes<br />  XC functional for type 5 is 11<br />  Pseudo valence available: yes<br /> <br /> wfconv:   192 bands initialized randomly with npw= 92795, for ikpt=     1<br />_setup2: Arith. and geom. avg. npw (full set) are   92816.000   92815.998<br /> initro: for itypat=  1, take pseudo charge density from pp file<br /> initro: for itypat=  2, take pseudo charge density from pp file<br /> initro: for itypat=  3, take pseudo charge density from pp file<br /> initro: for itypat=  4, take pseudo charge density from pp file<br /> initro: for itypat=  5, take pseudo charge density from pp file<br /> <br />================================================================================<br /> <br />=== [ionmov= 2] Broyden-Fletcher-Goldfard-Shanno method (forces)            <br />================================================================================<br /> <br />--- Iteration: (1/1) Internal Cycle: (1/1)<br />--------------------------------------------------------------------------------<br /> <br /> Cartesian coordinates (xcart) [bohr]<br />  1.15962099281461E+01  1.28107026341197E+01  1.09683011773415E+01<br />  1.47526982705875E+01  1.26119470220247E+01  6.04426516879367E+00<br />  1.54507901082619E+01  9.26923900042790E+00  1.31590365324959E+01<br />  2.13184723319038E+01  1.09345701138901E+01  1.01288605272357E+01<br />  1.96462988602651E+01  1.02539827148983E+01  9.46052537549631E+00<br />  2.19817755397938E+01  1.79211310238942E+01  1.04184236783175E+01<br />  2.10610364714990E+01  1.97219773274212E+01  1.00264897162471E+01<br />  2.19771370558225E+01  1.34551526490942E+01  1.04242734389454E+01<br />  0.00000000000000E+00  9.46799461252285E+00  1.09683011773415E+01<br />  0.00000000000000E+00  7.41719806954319E+00  1.09683011773415E+01<br />  2.07131501736546E+01  1.56926590094964E+01  9.84807201709571E+00<br />  1.88438411332374E+01  1.56896475608283E+01  8.99254452526307E+00<br />  0.00000000000000E+00  2.24654070640650E+00  3.65610039244718E+00<br />  2.00359315138508E+01  2.44529631850145E+00  1.33564659536880E+01<br />  1.93378396761764E+01  5.78800434009826E+00  5.84683574760152E+00<br />  1.34701574525345E+01  4.12267322663607E+00  2.81665974234130E+00<br />  1.51423309241732E+01  4.80326062562785E+00  2.14832459060196E+00<br />  1.28068542446446E+01  2.72505989976842E+01  3.10622289342312E+00<br />  1.37275933129394E+01  2.54497526941573E+01  2.71428893135278E+00<br />  1.28114927286158E+01  1.60209069143199E+00  3.11207265405103E+00<br />  1.15962099281461E+01  5.58924872800331E+00  3.65610039244718E+00<br />  1.15962099281461E+01  7.64004527098297E+00  3.65610039244718E+00<br />  1.40754796107837E+01  2.94790710120821E+01  2.53587123220136E+00<br />  1.59447886512009E+01  2.94820824607502E+01  1.68034374036872E+00<br />  8.43972158570473E+00  1.26119470220247E+01  1.26793561610068E+00<br />  7.74162974803034E+00  9.26923900042790E+00  8.77756582218718E+00<br />  1.87394752438841E+00  1.09345701138901E+01  1.18077418274474E+01<br />  3.54612099602708E+00  1.02539827148983E+01  1.24760769791867E+01<br />  1.21064431649845E+00  1.79211310238942E+01  1.15181786763656E+01<br />  2.13138338479325E+00  1.97219773274212E+01  1.19101126384359E+01<br />  1.21528280046971E+00  1.34551526490942E+01  1.15123289157377E+01<br />  2.47926968263764E+00  1.56926590094964E+01  1.20885303375873E+01<br />  4.34857872305479E+00  1.56896475608283E+01  1.29440578294200E+01<br />  3.15648834244137E+00  2.44529631850145E+00  8.58013640099503E+00<br />  3.85458018011576E+00  5.78800434009826E+00  1.46536503729283E+00<br />  9.72226240375769E+00  4.12267322663607E+00  4.49554104255305E+00<br />  8.05008893211902E+00  4.80326062562785E+00  5.16387619429239E+00<br />  1.03855656116477E+01  2.72505989976842E+01  4.20597789147123E+00<br />  9.46482654335285E+00  2.54497526941573E+01  4.59791185354157E+00<br />  1.03809271276764E+01  1.60209069143199E+00  4.20012813084332E+00<br />  9.11694024550847E+00  2.94790710120821E+01  4.77632955269299E+00<br />  7.24763120509132E+00  2.94820824607502E+01  5.63185704452563E+00<br />  1.15962099281461E+01  1.73037840469327E+01  3.65610039244718E+00<br />  8.43972158570473E+00  1.75025396590276E+01  8.58013640099503E+00<br />  7.74162974803034E+00  2.08452476806244E+01  1.46536503729283E+00<br />  1.87394752438841E+00  1.91799165671622E+01  4.49554104255305E+00<br />  3.54612099602708E+00  1.98605039661540E+01  5.16387619429239E+00<br />  1.21064431649845E+00  1.21933556571581E+01  4.20597789147123E+00<br />  2.13138338479325E+00  1.03925093536312E+01  4.59791185354157E+00<br />  1.21528280046971E+00  1.66593340319581E+01  4.20012813084332E+00<br />  0.00000000000000E+00  2.06464920685295E+01  3.65610039244718E+00<br />  0.00000000000000E+00  2.26972886115091E+01  3.65610039244718E+00<br />  2.47926968263764E+00  1.44218276715560E+01  4.77632955269299E+00<br />  4.34857872305479E+00  1.44248391202241E+01  5.63185704452563E+00<br />  0.00000000000000E+00  2.78679459746458E+01  1.09683011773415E+01<br />  3.15648834244137E+00  2.76691903625509E+01  1.26793561610068E+00<br />  3.85458018011576E+00  2.43264823409541E+01  8.77756582218718E+00<br />  9.72226240375769E+00  2.59918134544163E+01  1.18077418274474E+01<br />  8.05008893211902E+00  2.53112260554245E+01  1.24760769791867E+01<br />  1.03855656116477E+01  2.86388768336807E+00  1.15181786763656E+01<br />  9.46482654335285E+00  4.66473398689501E+00  1.19101126384359E+01<br />  1.03809271276764E+01  2.85123959896203E+01  1.15123289157377E+01<br />  1.15962099281461E+01  2.45252379530490E+01  1.09683011773415E+01<br />  1.15962099281461E+01  2.24744414100693E+01  1.09683011773415E+01<br />  9.11694024550847E+00  6.35415668970208E-01  1.20885303375873E+01<br />  7.24763120509132E+00  6.32404220302096E-01  1.29440578294200E+01<br />  1.47526982705875E+01  1.75025396590276E+01  1.33564659536880E+01<br />  1.54507901082619E+01  2.08452476806244E+01  5.84683574760152E+00<br />  2.13184723319038E+01  1.91799165671622E+01  2.81665974234130E+00<br />  1.96462988602651E+01  1.98605039661540E+01  2.14832459060196E+00<br />  2.19817755397938E+01  1.21933556571581E+01  3.10622289342312E+00<br />  2.10610364714990E+01  1.03925093536312E+01  2.71428893135278E+00<br />  2.19771370558225E+01  1.66593340319581E+01  3.11207265405103E+00<br />  2.07131501736546E+01  1.44218276715560E+01  2.53587123220136E+00<br />  1.88438411332374E+01  1.44248391202241E+01  1.68034374036872E+00<br />  2.00359315138508E+01  2.76691903625509E+01  6.04426516879367E+00<br />  1.93378396761764E+01  2.43264823409541E+01  1.31590365324959E+01<br />  1.34701574525345E+01  2.59918134544163E+01  1.01288605272357E+01<br />  1.51423309241732E+01  2.53112260554245E+01  9.46052537549631E+00<br />  1.28068542446446E+01  2.86388768336807E+00  1.04184236783175E+01<br />  1.37275933129394E+01  4.66473398689501E+00  1.00264897162471E+01<br />  1.28114927286158E+01  2.85123959896203E+01  1.04242734389454E+01<br />  1.40754796107837E+01  6.35415668970208E-01  9.84807201709571E+00<br />  1.59447886512009E+01  6.32404220302096E-01  8.99254452526307E+00<br /> Reduced coordinates (xred)<br />  5.00000000000000E-01  4.25400000000000E-01  7.50000000000000E-01<br />  6.36100000000000E-01  4.18800000000000E-01  4.13300000000000E-01<br />  6.66200000000000E-01  3.07800000000000E-01  8.99800000000000E-01<br />  9.19200000000000E-01  3.63100000000000E-01  6.92600000000000E-01<br />  8.47100000000000E-01  3.40500000000000E-01  6.46900000000000E-01<br />  9.47800000000000E-01  5.95100000000000E-01  7.12400000000000E-01<br />  9.08100000000000E-01  6.54900000000000E-01  6.85600000000000E-01<br />  9.47600000000000E-01  4.46800000000000E-01  7.12800000000000E-01<br />  0.00000000000000E+00  3.14400000000000E-01  7.50000000000000E-01<br />  0.00000000000000E+00  2.46300000000000E-01  7.50000000000000E-01<br />  8.93100000000000E-01  5.21100000000000E-01  6.73400000000000E-01<br />  8.12500000000000E-01  5.21000000000000E-01  6.14900000000000E-01<br />  0.00000000000000E+00  7.46000000000000E-02  2.50000000000000E-01<br />  8.63900000000000E-01  8.12000000000000E-02  9.13300000000000E-01<br />  8.33800000000000E-01  1.92200000000000E-01  3.99800000000000E-01<br />  5.80800000000000E-01  1.36900000000000E-01  1.92600000000000E-01<br />  6.52900000000000E-01  1.59500000000000E-01  1.46900000000000E-01<br />  5.52200000000000E-01  9.04900000000000E-01  2.12400000000000E-01<br />  5.91900000000000E-01  8.45100000000000E-01  1.85600000000000E-01<br />  5.52400000000000E-01  5.32000000000001E-02  2.12800000000000E-01<br />  5.00000000000000E-01  1.85600000000000E-01  2.50000000000000E-01<br />  5.00000000000000E-01  2.53700000000000E-01  2.50000000000000E-01<br />  6.06900000000000E-01  9.78900000000000E-01  1.73400000000000E-01<br />  6.87500000000000E-01  9.79000000000000E-01  1.14900000000000E-01<br />  3.63900000000000E-01  4.18800000000000E-01  8.67000000000001E-02<br />  3.33800000000000E-01  3.07800000000000E-01  6.00200000000000E-01<br />  8.08000000000000E-02  3.63100000000000E-01  8.07400000000000E-01<br />  1.52900000000000E-01  3.40500000000000E-01  8.53100000000000E-01<br />  5.22000000000000E-02  5.95100000000000E-01  7.87600000000000E-01<br />  9.19000000000000E-02  6.54900000000000E-01  8.14400000000000E-01<br />  5.24000000000000E-02  4.46800000000000E-01  7.87200000000000E-01<br />  1.06900000000000E-01  5.21100000000000E-01  8.26600000000000E-01<br />  1.87500000000000E-01  5.21000000000000E-01  8.85100000000000E-01<br />  1.36100000000000E-01  8.12000000000000E-02  5.86700000000000E-01<br />  1.66200000000000E-01  1.92200000000000E-01  1.00200000000000E-01<br />  4.19200000000000E-01  1.36900000000000E-01  3.07400000000000E-01<br />  3.47100000000000E-01  1.59500000000000E-01  3.53100000000000E-01<br />  4.47800000000000E-01  9.04900000000000E-01  2.87600000000000E-01<br />  4.08100000000000E-01  8.45100000000000E-01  3.14400000000000E-01<br />  4.47600000000000E-01  5.32000000000001E-02  2.87200000000000E-01<br />  3.93100000000000E-01  9.78900000000000E-01  3.26600000000000E-01<br />  3.12500000000000E-01  9.79000000000000E-01  3.85100000000000E-01<br />  5.00000000000000E-01  5.74600000000000E-01  2.50000000000000E-01<br />  3.63900000000000E-01  5.81200000000000E-01  5.86700000000000E-01<br />  3.33800000000000E-01  6.92200000000000E-01  1.00200000000000E-01<br />  8.08000000000000E-02  6.36900000000000E-01  3.07400000000000E-01<br />  1.52900000000000E-01  6.59500000000000E-01  3.53100000000000E-01<br />  5.22000000000000E-02  4.04900000000000E-01  2.87600000000000E-01<br />  9.19000000000000E-02  3.45100000000000E-01  3.14400000000000E-01<br />  5.24000000000000E-02  5.53200000000000E-01  2.87200000000000E-01<br />  0.00000000000000E+00  6.85600000000000E-01  2.50000000000000E-01<br />  0.00000000000000E+00  7.53700000000000E-01  2.50000000000000E-01<br />  1.06900000000000E-01  4.78900000000000E-01  3.26600000000000E-01<br />  1.87500000000000E-01  4.79000000000000E-01  3.85100000000000E-01<br />  0.00000000000000E+00  9.25400000000000E-01  7.50000000000000E-01<br />  1.36100000000000E-01  9.18800000000000E-01  8.67000000000001E-02<br />  1.66200000000000E-01  8.07800000000000E-01  6.00200000000000E-01<br />  4.19200000000000E-01  8.63100000000000E-01  8.07400000000000E-01<br />  3.47100000000000E-01  8.40500000000000E-01  8.53100000000000E-01<br />  4.47800000000000E-01  9.51000000000000E-02  7.87600000000000E-01<br />  4.08100000000000E-01  1.54900000000000E-01  8.14400000000000E-01<br />  4.47600000000000E-01  9.46800000000000E-01  7.87200000000000E-01<br />  5.00000000000000E-01  8.14400000000000E-01  7.50000000000000E-01<br />  5.00000000000000E-01  7.46300000000000E-01  7.50000000000000E-01<br />  3.93100000000000E-01  2.11000000000001E-02  8.26600000000000E-01<br />  3.12500000000000E-01  2.09999999999999E-02  8.85100000000000E-01<br />  6.36100000000000E-01  5.81200000000000E-01  9.13300000000000E-01<br />  6.66200000000000E-01  6.92200000000000E-01  3.99800000000000E-01<br />  9.19200000000000E-01  6.36900000000000E-01  1.92600000000000E-01<br />  8.47100000000000E-01  6.59500000000000E-01  1.46900000000000E-01<br />  9.47800000000000E-01  4.04900000000000E-01  2.12400000000000E-01<br />  9.08100000000000E-01  3.45100000000000E-01  1.85600000000000E-01<br />  9.47600000000000E-01  5.53200000000000E-01  2.12800000000000E-01<br />  8.93100000000000E-01  4.78900000000000E-01  1.73400000000000E-01<br />  8.12500000000000E-01  4.79000000000000E-01  1.14900000000000E-01<br />  8.63900000000000E-01  9.18800000000000E-01  4.13300000000000E-01<br />  8.33800000000000E-01  8.07800000000000E-01  8.99800000000000E-01<br />  5.80800000000000E-01  8.63100000000000E-01  6.92600000000000E-01<br />  6.52900000000000E-01  8.40500000000000E-01  6.46900000000000E-01<br />  5.52200000000000E-01  9.51000000000000E-02  7.12400000000000E-01<br />  5.91900000000000E-01  1.54900000000000E-01  6.85600000000000E-01<br />  5.52400000000000E-01  9.46800000000000E-01  7.12800000000000E-01<br />  6.06900000000000E-01  2.11000000000001E-02  6.73400000000000E-01<br />  6.87500000000000E-01  2.09999999999999E-02  6.14900000000000E-01<br /> Scale of Primitive Cell (acell) [bohr]<br />  2.31924198562922E+01  3.01144866810523E+01  1.46244015697887E+01<br /> Real space primitive translations (rprimd) [bohr]<br />  2.31924198562922E+01  0.00000000000000E+00  0.00000000000000E+00<br />  0.00000000000000E+00  3.01144866810523E+01  0.00000000000000E+00<br />  0.00000000000000E+00  0.00000000000000E+00  1.46244015697887E+01<br /> Unitary Cell Volume (ucvol) [Bohr^3]=  1.02140888905742E+04<br /> Angles (23,13,12)= [degrees]<br />  9.00000000000000E+01  9.00000000000000E+01  9.00000000000000E+01<br /> Lengths [Bohr]<br />  2.31924198562922E+01  3.01144866810523E+01  1.46244015697887E+01<br /> <br />---SELF-CONSISTENT-FIELD CONVERGENCE--------------------------------------------<br /> <br /> getcut: wavevector=  0.0000  0.0000  0.0000  ngfft= 120 144  72<br />         ecut(hartree)=     30.000   =&gt; boxcut(ratio)=   1.93937<br /> <br /> ITER STEP NUMBER     1<br /> vtorho : nnsclo_now=2, note that nnsclo,dbl_nnsclo,istep=0 0 1<br /> Total charge density [el/Bohr^3]<br />      Maximum=    7.5503E-02  at reduced coord.    0.9667    0.9236    0.7639<br />      Minimum=    2.0510E-05  at reduced coord.    0.0000    0.0764    0.2500<br />   Integrated=    1.6000E+01<br /> ETOT  1  -111.10430697522    -1.111E+02 1.421E-01 1.695E+06 3.711E+00 3.711E+00<br /> scprqt: &lt;Vxc&gt;= -1.3780802E-01 hartree<br /> <br />Simple mixing update:<br />  residual square of the potential :   175193.318202524<br /> scfcv: previous iteration took 07:20:09<br /> <br /> ITER STEP NUMBER     2<br /> vtorho : nnsclo_now=2, note that nnsclo,dbl_nnsclo,istep=0 0 2<br /> Total charge density [el/Bohr^3]<br />      Maximum=    2.5947E-01  at reduced coord.    0.0000    0.9514    0.7500<br />      Minimum=    1.3269E-06  at reduced coord.    0.6250    0.2847    0.2083<br />   Integrated=    1.6000E+01<br /> ETOT  2   133.06436898847     2.442E+02 3.331E-01 7.777E+05 1.492E+00 4.170E+00<br /> scprqt: &lt;Vxc&gt;= -1.1268427E-01 hartree<br /> <br /> Pulay update with  1 previous iterations:<br /> mixing of old trial potential : alpha(m:m-4)=   1.78     -0.784<br /> scfcv: previous iteration took 07:04:14<br /> <br /> ITER STEP NUMBER     3<br /> vtorho : nnsclo_now=1, note that nnsclo,dbl_nnsclo,istep=0 0 3<br /><br />Also, you mentioned that the problem might be in high array of atoms (84) set to be optimized at time.<br />But does ABINIT takes advantage of symmetry for asymmetric part of unit cell?<br /><br />Regards,<br />Artem</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="posting1cec.html?mode=reply&amp;f=9&amp;t=3946" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopica836.html?f=9&amp;t=3946&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=9&amp;t=3946">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			4 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforumfdc5.html?f=9" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Ground state”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3946&p=11868 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:24:29 GMT -->
+</html>

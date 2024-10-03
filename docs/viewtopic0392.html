@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1232&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:13:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Input for L12</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Input for L12</h2>
+		<p><a href="viewtopicaf8d.html?f=9&amp;t=1232">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1232</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Input for L12</h3>
+				<div class="date">Posted: <strong>Sat Jul 23, 2011 6:11 pm</strong></div>
+				<div class="author">by <strong>mathdu</strong></div>
+				<div class="content">Hi,<br />I am new in abinit. Last few days, i was struggling to run L12 structure, but i couldn't run it. Even i didn't find any input file for L12, L10 such common structure input file, What i have found Wurtzite structure. But it would be nice to put some common structure input file in the test. I agreed that hundreds of input file in the test but all are same kind of input file. In the following, i have put my L12 structure input file,<br /><br /># Crystalline AlSc : computation of the total energy<br />#<br /><br />#Specific to ground state calculation<br />  tolvrs   1.0d-18      # SCF stopping criterion<br />    iscf   5            # Self-consistent calculation, using algorithm 5<br /><br /><br />#######################################################################<br />#Common input variables<br /><br />#Definition of the unit cell<br />acell 3*7.7534         # This is equivalent to   10.61 10.61 10.61<br />rprim  1.0  0.0  0.0   # In lessons 1 and 2, these primitive vectors <br />       0.0  1.0  0.0   # (to be scaled by acell) were 1 0 0  0 1 0  0 0 1 <br />       0.0  0.0  1.0   # that is, the default.<br /><br />#Definition of the atom types<br />ntypat 2               # There are two types of atom<br />znucl 13 21            # The keyword &quot;znucl&quot; refers to the atomic number of the <br />                       # possible type(s) of atom. The pseudopotential(s) <br />                       # mentioned in the &quot;files&quot; file must correspond<br />                       # to the type(s) of atom. Here, type 1 is the Aluminum,<br />                       # type 2 is the Arsenic.<br /><br />#Definition of the atoms<br />natom 4                # There are two atoms<br />#natrd 2<br />typat 1 1 1 2             # The first is of type 1 (Al), the second is of type 2 (As).<br />xred                   # This keyword indicate that the location of the atoms<br />   0.0  0.5  0.5       # will follow, one triplet of number for each atom<br />   0.5  0.0  0.5<br />   0.5  0.5  0.0<br />   0.0  0.0  0.0       # Triplet giving the REDUCED coordinate of atom 1.<br />        # Triplet giving the REDUCED coordinate of atom 2.<br /><br />#Gives the number of band, explicitely (do not take the default)<br />#nband  4               # For an insulator (if described correctly as an insulator <br />                       # by DFT), there is no need to include conduction bands <br />                       # in response-function calculations<br /><br />#Exchange-correlation functional<br />ixc 11             # LDA Teter Pade parametrization<br /><br />#Definition of the planewave basis set<br />ecut   29.0           # Maximal kinetic energy cut-off, in Hartree<br /><br />#Definition of the k-point grid<br />kptopt 1          # Option for the automatic generation of k points, taking<br />                  # into account the symmetry<br />#ngkpt   4  4  2   #  Monkhorst-Pack is a 2x2x2 grid based on primitive vectors<br />nshiftk 1         # of the reciprocal space (that form a BCC lattice !),<br />                  # repeated four times, with different shifts :<br />shiftk 0.5 0.5 0.5<br />                  # In cartesian coordinates, this grid is simple cubic, and<br />                  # actually corresponds to the<br />                  # so-called 4x4x4 Monkhorst-Pack grid<br /><br />#Definition of the SCF procedure<br />nstep 25               # Maximal number of SCF cycles<br />toldfe 1.0d-6     # Will stop when, twice in a row, the difference<br />diemac 12.0             # Although this is not mandatory, it is worth to<br />                       # precondition the SCF cycle. The model dielectric<br />                       # function used as the standard preconditioner<br />                       # is described in the &quot;dielng&quot; input variable section.<br />                       # The dielectric constant of AlAs is smaller that the one of Si (=12).<br /># add to conserve old &lt; 6.7.2 behavior for calculating forces at each SCF step<br /> optforces 1<br />=====================================================<br />Please make a correct input file for me.<br />Thanks in advanced,<br />Moshiour</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Input for L12</h3>
+				<div class="date">Posted: <strong>Mon Jul 25, 2011 10:23 pm</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">Hi<br /><br />It would be helpful to have the error message... Is it normal that you have 3 Al atoms and only one As atom?<br /><br />Please provide with more information about your problem.<br /><br />Boris</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Input for L12</h3>
+				<div class="date">Posted: <strong>Tue Jul 26, 2011 5:53 pm</strong></div>
+				<div class="author">by <strong>mathdu</strong></div>
+				<div class="content">Dear Boris,<br />Thank you for replying. I have already managed to run the L12 structure.<br />best regards,<br />Moshiour</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1232&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:13:49 GMT -->
+</html>

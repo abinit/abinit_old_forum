@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=1298&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:33:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Phonon qpts in el-phon calcs of Ce</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Phonon qpts in el-phon calcs of Ce</h2>
+		<p><a href="viewtopicf5cf.html?f=12&amp;t=1298">https://forum.abinit.org/viewtopic.php?f=12&amp;t=1298</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Phonon qpts in el-phon calcs of Ce</h3>
+				<div class="date">Posted: <strong>Tue Sep 06, 2011 10:20 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Dear all,<br /><br />I have a problem while calc. el-phon coupling in Ce. I follow the input from the tutorial, and since imaginary Al fcc has the same structure as gamma-Ce, I left most of the variables the same, like the ngkpt and qpt. I used also ngkpt 4x4x4 and qpts from 2x2x2 q point mesh (gamma, (1/2,0,0) and X). Gamma point perturbations pass ok, but for qpt (1/2,0,0) I get a warning<br /><br />Phonon wavevector (reduced coordinates) :  0.50000  0.00000  0.00000<br /> Phonon energies in Hartree :<br />   0.000000E+00  0.000000E+00  0.000000E+00<br /> Phonon frequencies in cm-1    :<br />-  0.000000E+00  0.000000E+00  0.000000E+00<br /> chkph3 : WARNING -<br />  The dynamical matrix was incomplete : phonon frequencies may be wrong ...<br /><br />for all 3 directions. For X point second derivatives unconverge wildly.<br /><br />Can anyone help me with this issue? 2x2x2 mesh is a submesh of the 4x4x4, so why does it call a warning?<br /><br />Thank you all in advance!<br /><br />Yours,<br />Igor Lukacevic</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Phonon qpts in el-phon calcs of Ce</h3>
+				<div class="date">Posted: <strong>Mon Jan 23, 2012 11:18 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hi Igor (again),<br /><br />The warning is just a warning - you are doing 1 perturbation at a time, so the dynamical matrix will always be incomplete inside a given dtset (only 1 row filled, and not enough syms to complete all of it) - not a problem. Run anaddb at the end with the DDB files you get to see if anything is missing.<br /><br />If it is, you may have fewer symops with Ce because of magnetism or spin orbit. Try a normal run with 2x2x2 kpts ground state and kptopt 1 (shiftk 0 0 0) to get the qpts you need to use. You should see an extra one or 2 with respect to Al.<br /><br />matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=1298&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:33:12 GMT -->
+</html>

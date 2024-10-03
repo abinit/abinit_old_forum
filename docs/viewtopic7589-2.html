@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1979&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:58:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Changes of equilib cell dims for fixed atom positions</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Changes of equilib cell dims for fixed atom positions</h2>
+		<p><a href="viewtopic729d.html?f=9&amp;t=1979">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1979</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Changes of equilib cell dims for fixed atom positions</h3>
+				<div class="date">Posted: <strong>Sat Feb 02, 2013 10:13 pm</strong></div>
+				<div class="author">by <strong>WoodDM</strong></div>
+				<div class="content">Hello all!<br /><br />I am examining the variation of the ground state energy as I scan the location of a single atom in the primitive cell of a multi-atom hexagonal structure.  This is readily done if optcell = 0, but I'd like to check whether the changes of the atom's position causes (slight) changes in the primitive cell *dimensions* (or even just the equilibrium volume).   I envision that the atoms move along--in reduced coordinates--with the rprim.<br /><br />Alas optcell = 2 with ionmov = 0 fails:<br /><br />  The value of the input variable ionmov is    0, while it must be<br />  equal to one of the following:   2   3  13<br />  Action : you should change the input variables ionmov or optcell.<br /><br />While this is entirely consistent with the documentation, I have not been able to identify a pair of values for ionmov and optcell which permit me to do what I want (i.e.,see if changes in one atom's position cause changes to the primitive cell dimensions.)  Perhaps I do not understood whether forces on atoms are independent of stresses  on primitive cells, and that the reason I can't do this is because there can be no such coupling.<br /><br />If not, can anyone tell me what I've overlooked?<br /><br />Many thanks!<br /><br />DMW</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Changes of equilib cell dims for fixed atom positions</h3>
+				<div class="date">Posted: <strong>Mon Feb 04, 2013 12:53 pm</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">Hello<br /><br />Why don't you just use ionmov=2 and optcell=2?<br /><br />If your atom of interest is not in a terribly unstable position, it should stay at its initial location and you'll be able to quantify the change in the cell volume with respect to the atom position.<br /><br />In case the atom position is a saddle point and that your atom tends to get back to a stable location during the optimization, I think you can still manually fix the atomic position so that it's not optimized.<br /><br />Boris</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Changes of equilib cell dims for fixed atom positions</h3>
+				<div class="date">Posted: <strong>Mon Feb 04, 2013 7:18 pm</strong></div>
+				<div class="author">by <strong>WoodDM</strong></div>
+				<div class="content">Boris Dorado stated<br /><blockquote class="uncited"><div>If your atom of interest is not in a terribly unstable position, it should stay at its initial location and you'll be able to quantify the change in the cell volume with respect to the atom position.<br />In case the atom position is a saddle point and that your atom tends to get back to a stable location during the optimization, I think you can still manually fix the atomic position so that it's not optimized.</div></blockquote><br /><br />Thanks for the suggestion, Boris.  Unfortunately, what I'm really doing is scanning the location of an atom central to an understanding of the stability of the structure.  It IS unstable at an arbitrary point and there are two local minima.  I'll post if I figure out a workaround.<br /><br />Thanks again for the response.<br />DMW</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Changes of equilib cell dims for fixed atom positions</h3>
+				<div class="date">Posted: <strong>Thu Feb 07, 2013 5:19 pm</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hello,<br /><br /><br />I'm not sure if what you are looking for is physically relevant. If you are trying to analyze a transition path between two stable (or at least metastable) configurations of one particular atom, I would  advice you to keep your cell unchanged, but maybe using a larger cell (letting the cell relax is a bit curious, if you think of the whole crystal, that would mean a large increase of the dimensions of the macroscopic sample every time an atom moves from one site to another). What you might do, if I understand correctly what you would like to describe (the energy barrier from one stable configuration to another, or a minimum energy path), you might use the string method (imgmov 2) or the nudged elastic band (imgmov 5) method using images.<br /><br />Look at input variables nimage, ntimimage, imgmov, string_algo, nep_algo, and other variables mentioned in the help files for these. You might have a look at tests v6/t24.in, v6/t25.in and v6/t26.in (these are for the H2 molecule in a box but you can similarly use that scheme to an atom in a solid)<br /><br /><br />Good luck,<br /><br /><br />David</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1979&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:58:58 GMT -->
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3792&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:45:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Nonlinear response calculations with PBE functional</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Nonlinear response calculations with PBE functional</h2>
+		<p><a href="viewtopicc324.html?f=10&amp;t=3792">https://forum.abinit.org/viewtopic.php?f=10&amp;t=3792</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Nonlinear response calculations with PBE functional</h3>
+				<div class="date">Posted: <strong>Thu Mar 01, 2018 12:31 pm</strong></div>
+				<div class="author">by <strong>ahoffman</strong></div>
+				<div class="content">Dear all,<br /><br />I recently started using ABINIT to calculate Raman spectra of nanoporous materials, as this can be done efficiently via the DFPT formalism.<br />Performing linear response calculations at the PBE-D3(BJ) level of theory (ixc=11, vdw_xc=7), I could accurately reproduce phonon and IR spectra obtained earlier with the VASP code.<br />However, I did not manage to calculate the Raman spectrum as the PBE functional is not supported when doing nonlinear response simulations.<br />I found a post on this forum, initiated a couple of years ago, where it was stated that the implementation of this feature was almost completed.<br />Are there plans to make this type of simulations possible in the near future?<br /><br />Thank you in advance.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Nonlinear response calculations with PBE functional</h3>
+				<div class="date">Posted: <strong>Fri Mar 02, 2018 7:44 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear ahoffman,<br />The GGA is still not yet ready for non-linear calculations... What could be done in the meantime is to fix the cell parameters as you get them in GGA (or experimental ones), relax the internal coordinates with LDA and compute phonons and Raman stuff. You can verify if the phonon frequencies you get like that with LDA is strongly different than the ones you got with GGA, if not then this is totally fine.<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Nonlinear response calculations with PBE functional</h3>
+				<div class="date">Posted: <strong>Thu Sep 06, 2018 1:44 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Another trick is to do everything in GGA (structure GS phonons) up to the 3rd derivatives, and force those in LDA with and explicit &quot;ixc&quot; for the final DFPT calculations. There will be a warning, but many people use this approximation as the GGA 3rd derivatives (not to mention above) are a real pain.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3792&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:45:20 GMT -->
+</html>

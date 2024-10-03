@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=4366&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:43:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Errors of NLO calculation with &quot;anaddb &lt; tnlo_5.files&quot;</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Errors of NLO calculation with &quot;anaddb &lt; tnlo_5.files&quot;</h2>
+		<p><a href="viewtopic940f.html?f=10&amp;t=4366">https://forum.abinit.org/viewtopic.php?f=10&amp;t=4366</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Errors of NLO calculation with &quot;anaddb &lt; tnlo_5.files&quot;</h3>
+				<div class="date">Posted: <strong>Mon Apr 06, 2020 10:09 am</strong></div>
+				<div class="author">by <strong>cocoinsky</strong></div>
+				<div class="content">Dear Sir,<br>
+I want to ask a question about dealing NLO calculation with "Analysis of the DDB" in the link:<br>
+<a href="https://docs.abinit.org/tutorial/nlo/" class="postlink">https://docs.abinit.org/tutorial/nlo/</a>, <br>
+(Linear and non-linear responses from density functional perturbation theory (DFPT))<br>
+which is the fifth step with the command "anaddb &lt; tnlo_5.files &gt; out5".
+<ul><li>tnlo_5.in<br>
+tnlo_5.out<br>
+tnlo_4.ddb.out<br>
+tnlo_5_thm_dummy<br>
+tnlo_5_gkk_dummy<br>
+tnlo_5_ep_dummy<br>
+tnlo_5_ddk_dummy</li></ul>
+The tnlo_5.in is that:
+<ul>   <li>rfmeth  1<br>
+   enunit  0<br>
+   eivec   1<br>
+   chneut  2<br>
+   selectz 0<br>
+# Flags<br>
+#*******<br>
+   dieflag  1<br>
+   ifcflag  0<br>
+   thmflag  0<br>
+    nlflag  1<br>
+   elaflag  3<br>
+ piezoflag  3<br>
+ instrflag  1<br>
+# Nonlinear response calculation<br>
+#*******************************<br>
+   ramansr  1<br>
+    alphon  1<br>
+    prtmbm  1<br>
+# Wavevector list number 1<br>
+**************************<br>
+     nph1l  1<br>
+     qph1l  0.0 0.0 0.0 1.0 #<br>
+# Wave vector list no. 2<br>
+#***********************<br>
+     nph2l  1<br>
+     qph2l  0.0 0.0 1.0 0.0</li></ul>
+
+<strong class="text-strong">The error is that :</strong>
+<ul><li>--- !ERROR<br>
+src_file: anaddb.F90<br>
+src_line: 436<br>
+mpi_rank: 0<br>
+message: |<br>
+    Cannot find block corresponding to non-linear optical susceptibilities in DDB file<br>
+...</li></ul>
+
+I have calculated the official examples for AlAs, no errors appeared. Then, I choose LiIO3 as my first start to calculate the NLO properties. But always with this error. Hope for your help!<br>
+<br>
+Detail input is submitted as attachments! Looking forward to your reply!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Errors of NLO calculation with &quot;anaddb &lt; tnlo_5.files&quot;</h3>
+				<div class="date">Posted: <strong>Mon Apr 20, 2020 8:09 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear cocoinsky,<br>
+This is because you have forgotten to update the input flag rfatpol according to the number of atom you have in your new unit cell. AlAs has 2 atoms but you have more atoms in your case (10). The code is thus complaining that some derivative terms are missing because you asked to do atomic displacement perturbations with atom 1 and 2 only.<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=4366&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:43:47 GMT -->
+</html>

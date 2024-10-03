@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3&hilit=shiftk&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:30:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; k-point generation in ABINIT</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>k-point generation in ABINIT</h2>
+		<p><a href="viewtopic0c60.html?f=9&amp;t=3">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>k-point generation in ABINIT</h3>
+				<div class="date">Posted: <strong>Wed Oct 21, 2009 9:04 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">There are 2 standard ways to specify the kpoint grid, either with<br /><strong class="text-strong">kptrlatt</strong> or with <strong class="text-strong">ngkpt</strong> (see <a href="http://www.abinit.org/documentation/input-variables" class="postlink">http://www.abinit.org/documentation/input-variables</a>).<br />These make a single uniform grid, centered on<br />gamma, and which is either aligned with the reciprocal space lattice<br />vectors (<strong class="text-strong">ngkpt</strong>) or more general (<strong class="text-strong">kptrlatt</strong>).<br /><br /><br />Then you add on the shifts, taking the uniform grid and replicating it<br />once for each shift (so if there is no 0 0 0 shift, then gamma is not<br />contained in the final set).<br /><br />Then the grid is reduced to a general <strong class="text-strong">kptrlatt</strong> lattice, plus some shifts.<br /><br />In <em class="text-italics">all</em> of the normal cases, and all the Monkhorst Pack grids, and<br />almost all you ever want to do, it is possible to reduce to a<br />single-shifted <strong class="text-strong">kptrlatt</strong>. Often the <strong class="text-strong">kptrlatt</strong> will not be &quot;orthogonal&quot;,<br />ie not oriented along the reciprocal lattice vectors, but this is not<br />a problem. In many other codes it is not possible to generate a<br />&quot;non-orthogonal&quot; grid, even though the MP<br />specification explicitly creates these grids, in order to get a<br />uniform density of kpts in cartesian reciprocal space (as opposed to<br />reduced reciprocal space).<br /><br />However, you have full freedom to choose kpoints as you wish (you can<br />also specify them explicitly with <strong class="text-strong">nkpt</strong> <strong class="text-strong">wkpt</strong> and <strong class="text-strong">kpt</strong>). If you set:<br /><br />ngkpt 6 6 4<br />nshiftk 2<br /><span class="posthilit">shiftk</span><br />0.5 0.5 0.5<br />0.33 0.33 0.15<br /><br />then abinit will not be able to reduce the grid (I just tried, to make<br />sure), and it is a clear indicator that the grid is not homogeneous in<br />space. You may have some good reason to do this, but of course the GW<br />calculations (and others, electron-phonon, etc) do not like this<br />because they count on being able to use symmetry operations to<br />complete perturbations and wave functions. If your k grid breaks the<br />symmetry of the full crystal, this is not possible. This is shown in the following<br />figures. The unshifted hexagonal 2x2 grid<br /><div class="inline-attachment">
+			
+				<dl class="thumbnail">
+			<dt><a href="download/filed774.png?id=5&amp;mode=view"><img src="download/filed480.png?id=5&amp;t=1" class="postimage" alt="centered_kgrid.png" title="centered_kgrid.png (54.56 KiB) Viewed 11611 times" /></a></dt>
+					</dl>
+		
+		
+		
+		
+			</div><br />has 4 pink points in the Brillouin Zone.<br /><br />In this drawing a 0.5 0.5 shift is applied to the hexagonal grid:<br /><div class="inline-attachment">
+			
+				<dl class="thumbnail">
+			<dt><a href="download/file2456.png?id=4&amp;mode=view"><img src="download/filee741.png?id=4&amp;t=1" class="postimage" alt="shifted_kgrid.png" title="shifted_kgrid.png (46.6 KiB) Viewed 11611 times" /></a></dt>
+					</dl>
+		
+		
+		
+		
+			</div><br />Clearly the second grid has broken the 6-axis of the k-point grid, which is highlighted by the green hexagon.<br /><br /><br /><strong class="text-strong">So to sum up</strong>: <em class="text-italics">all</em> the grids you are ever likely to need can be described by a<br /><strong class="text-strong">kptrlatt</strong> and a single shift, which is why <strong class="text-strong">prtkpt</strong> gives you these and<br />why your inputs are usually reduced to a single shift. But even with a<br />single shift you are still not guaranteed to respect the symmetries:<br />you have to choose it appropriately (0.5 0.5 0.5 for cubic, 0 0 0.5<br />for tetragonal and hexagonal...)</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: k-point generation in ABINIT: inhomogeneous and/or targe</h3>
+				<div class="date">Posted: <strong>Sat Oct 02, 2010 2:12 am</strong></div>
+				<div class="author">by <strong>temok</strong></div>
+				<div class="content">Inhomogeneous and/or targeted kpoint list generation<br /><br />Dear All,<br /><br />I wish to calculate optical <span style="color: #0080FF">absorption</span> and optical <span style="color: #0080FF">conductivity</span> of graphene, a semi-metal with <strong class="text-strong">zero bandgap</strong> at the special K point in the Brillouin Zone. I am having trouble to get physical agreement and as these properties are known to require large number of kpoints, then I wish to generate more kpoints around K, and maybe less anywhere.<br /><br />1) Is it possible to generate a k-point list with high density in a given region / around a given k-point? I know about the <span style="color: #0080FF">wtk</span> keyword, but I'm not sure if it would do an equivalent job and if so, how to set it.<br /><br />2) Is it possible to generate a kpt list that contains a specific kpt? (say I want it to contain the point K = 1/3  1/3  0). I know about the <span style="color: #0080FF">kptbounds</span>  keyword, but in my understanding it generates a kpt list <em class="text-italics">along</em> a rectilinear path, and I think that for response calculations the wavefunctions (WFK or 1WF) need to be computed through kpts <em class="text-italics">dispersed</em> in the Brillouin Zone.<br /><br />I am using:<br /><br />#Definition of the k-point grid<br /> kptopt  1<br /> nshiftk 1<br /> <span class="posthilit">shiftk</span>  0.0 0.0 0.5    ! recommended for Hex lattices<br />  ngkpt  60 60 2        ! SCF WFK converges with 18  18  2<br /><br />Thanks,<br />Temok</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: k-point generation in ABINIT: inhomogeneous and/or targe</h3>
+				<div class="date">Posted: <strong>Mon Oct 11, 2010 12:01 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content"><blockquote><div><cite>temok wrote:</cite>Inhomogeneous and/or targeted kpoint list generation<br /><br />Dear All,<br /><br />I wish to calculate optical <span style="color: #0080FF">absorption</span> and optical <span style="color: #0080FF">conductivity</span> of graphene, a semi-metal with <strong class="text-strong">zero bandgap</strong> at the special K point in the Brillouin Zone. I am having trouble to get physical agreement and as these properties are known to require large number of kpoints, then I wish to generate more kpoints around K, and maybe less anywhere.<br /><br />1) Is it possible to generate a k-point list with high density in a given region / around a given k-point? I know about the <span style="color: #0080FF">wtk</span> keyword, but I'm not sure if it would do an equivalent job and if so, how to set it.<br /></div></blockquote><br />you need to be very prudent when setting your kpt grid by hand: you can do so with nkpt kpt and wtk (kptopt 0) but you should make sure that <br />1) your k-points are a consistent grid, compatible with symmetry<br />2) your k-point weights are appropriate so you are not weighting some part of the BZ more than others. The best would be a uniform grid (coarse), and near K splitting it into a finer grid (say 2 times finer) with weights divided by 2x2=4 (for 2 dimensions in the plane), such that the weight per unit area stays constant.<br />Usually people just hit graphene with all the k-points they can muster<br /><br /><blockquote class="uncited"><div><br />2) Is it possible to generate a kpt list that contains a specific kpt? (say I want it to contain the point K = 1/3  1/3  0). I know about the <span style="color: #0080FF">kptbounds</span>  keyword, but in my understanding it generates a kpt list <em class="text-italics">along</em> a rectilinear path, and I think that for response calculations the wavefunctions (WFK or 1WF) need to be computed through kpts <em class="text-italics">dispersed</em> in the Brillouin Zone.<br /><br />I am using:<br /><br />#Definition of the k-point grid<br /> kptopt  1<br /> nshiftk 1<br /> <span class="posthilit">shiftk</span>  0.0 0.0 0.5    ! recommended for Hex lattices<br />  ngkpt  60 60 2        ! SCF WFK converges with 18  18  2<br /><br />Thanks,<br />Temok</div></blockquote><br />If you shift 0 0 in the plane and have a ngkpt which is a multiple of 3, then you will have 1/3 1/3 (or a symmetry-equivalent point) in your grid.<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: k-point generation in ABINIT</h3>
+				<div class="date">Posted: <strong>Thu Oct 21, 2010 10:55 am</strong></div>
+				<div class="author">by <strong>hicpalm</strong></div>
+				<div class="content">hello,<br />I would suggest to put these comments about <strong class="text-strong">kptrltt </strong> in these words in the abinit doc.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: k-point generation in ABINIT</h3>
+				<div class="date">Posted: <strong>Fri Dec 24, 2010 10:35 am</strong></div>
+				<div class="author">by <strong>jtalla</strong></div>
+				<div class="content">Hello<br />I am using a visual software that generate the input files for abinit (nothing to do with the parameters, everything set visually), but every time I am running it, the simulation failed. So I need to know what is the exact conditions to setup this parameter:<br />converge SCF energy to ?? <br />I am doing a Single walled carbon nanotubes (10, 10)<br /><br />Best regards,</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: k-point generation in ABINIT</h3>
+				<div class="date">Posted: <strong>Fri Dec 24, 2010 11:33 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Hi jtalia,<br /><br />I assume you look for a reasonable value for the difference in energy between SCF cycles to stop. There is no recipe here, you should be able to find it by performing a convergence study. Just a guess ... I would say 10^-8 maybe even smaller but look on your actual model at the evolution of the energy.<br />Curiosity will kill me ... can you disclose the name of that magic visual software that produces Abinit files?<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3&hilit=shiftk&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:30:38 GMT -->
+</html>

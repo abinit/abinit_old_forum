@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3607&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:52:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Compilation Error using 8 Byte Integers (Intel Compiler)</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Compilation Error using 8 Byte Integers (Intel Compiler)</h2>
+		<p><a href="viewtopic3726.html?f=3&amp;t=3607">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3607</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Compilation Error using 8 Byte Integers (Intel Compiler)</h3>
+				<div class="date">Posted: <strong>Wed May 24, 2017 9:44 pm</strong></div>
+				<div class="author">by <strong>ThomasG</strong></div>
+				<div class="content">Dear all,<br /><br />I've previously been running ABINIT using the <strong class="text-strong">Intel compilers</strong>, <strong class="text-strong">Intel MPI </strong>and <strong class="text-strong">Intel MKL </strong>(all version <strong class="text-strong">2017</strong>), but upon calculating a slightly larger system, I received an error message because the number of entries in my WFK file is larger than supported for 4 byte integers. This message also stated that I should recompile it with 8 byte integers. However, when I do so (by adding <strong class="text-strong">-i8</strong> and <strong class="text-strong">-ilp64</strong> flags to the Fortran compiler and using the respective ilp64 options for the MKL library), the compilation fails with the following error message for the file <strong class="text-strong">m_xmpi.F90</strong> in the <strong class="text-strong">12_hide_mpi/</strong> folder:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make&#91;3&#93;: Entering directory `/home/lv70744/TGoetsch/abinit-8.2.3/src/12_hide_mpi'<br />/home/lv70744/TGoetsch/abinit-8.2.3/config/wrappers/wrap-mpifc -DHAVE_CONFIG_H -I. -I../..&nbsp; -I../../src/11_memory_mpi -I../../src/11_memory_mpi -I../../src/10_defs -I../../src/10_defs -I../../src/incs -I../../src/incs -I/home/lv70744/TGoetsch/abinit-8.2.3/fallbacks/exports/include&nbsp; &nbsp;-free -module /home/lv70744/TGoetsch/abinit-8.2.3/src/mods -i8 -ilp64 -O3 -g -extend-source -noaltparam -nofpscomp&nbsp; &nbsp;-c -o m_xmpi.o m_xmpi.F90<br />./xmpi_max.finc(71): error #5286: Ambiguous generic interface XMPI_MAX: previously declared specific procedure XMPI_MAX_INT0D_I4B is not distinguishable from this declaration. &#91;XMPI_MAX_INT0D_I8B&#93;<br />subroutine xmpi_max_int0d_i8b(xval,xmax,comm,ier)<br />-----------^<br />compilation aborted for m_xmpi.F90 (code 1)<br />make&#91;3&#93;: *** &#91;m_xmpi.o&#93; Error 1<br />make&#91;3&#93;: Leaving directory `/home/lv70744/TGoetsch/abinit-8.2.3/src/12_hide_mpi'<br />make&#91;2&#93;: *** &#91;all-recursive&#93; Error 1<br />make&#91;2&#93;: Leaving directory `/home/lv70744/TGoetsch/abinit-8.2.3/src'<br />make&#91;1&#93;: *** &#91;all-recursive&#93; Error 1<br />make&#91;1&#93;: Leaving directory `/home/lv70744/TGoetsch/abinit-8.2.3'<br />make: *** &#91;all&#93; Error 2<br /></code></pre></div><br /><br />I've used the following configuration file to make the code:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>enable_64bit_flags=&quot;yes&quot;<br />enable_optim=&quot;yes&quot;<br /><br />CC=&quot;mpiicc&quot;<br />CFLAGS_OPTIM=&quot;-O3&quot;<br />&nbsp;<br />CXX=&quot;mpiicpc&quot;<br />CXXFLAGS_OPTIM=&quot;-O3&quot;<br />&nbsp;<br />FC=&quot;mpiifort&quot;<br />FCFLAGS_OPTIM=&quot;-i8 -ilp64 -O3&quot;<br />&nbsp;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_prefix=&quot;/cm/shared/apps/intel/compilers_and_libraries_2017.4.196/linux/mpi/intel64&quot;<br />&nbsp;<br />with_trio_flavor=&quot;netcdf&quot;<br />&nbsp;<br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_incs=&quot;-I${MKLROOT}/include&quot;<br />with_fft_libs=&quot; -L${MKLROOT}/lib/intel64 -lmkl_scalapack_ilp64 -lmkl_intel_ilp64 -lmkl_sequential -lmkl_core -lmkl_blacs_intelmpi_ilp64 -lpthread -lm -ldl&quot;<br />with_linalg_flavor=&quot;mkl&quot;<br />with_linalg_incs=&quot;-I${MKLROOT}/include&quot;<br />with_linalg_libs=&quot; -L${MKLROOT}/lib/intel64 -lmkl_scalapack_ilp64 -lmkl_intel_ilp64 -lmkl_sequential -lmkl_core -lmkl_blacs_intelmpi_ilp64 -lpthread -lm -ldl&quot;<br />with_dft_flavor=&quot;atompaw+libxc+wannier90&quot;<br /></code></pre></div><br /><br />I've also played around with the placement of the -i8 flag (because I first had it in the extra flags and thought it might have something to do with the position within the flags - that's why it's in the optimization flags here), but to no avail. The error <strong class="text-strong">only comes up when I use the -i8 flag</strong> though and does not seem to be connected to the usage of the ilp64 versions of the mkl.<br /><br /><br />Does anyone have any experience with this and could maybe shed some light on that? Since I have no experience using 64 bit integers, any tips would be highly appreciated! <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /><br /><br />All the best,<br />Thomas</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compilation Error using 8 Byte Integers (Intel Compiler)</h3>
+				<div class="date">Posted: <strong>Fri Jul 21, 2017 5:24 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">I've reported this issue in the bug tracker of the Abinit Gitlab. You can follow its evolution at: <!-- m --><a class="postlink" href="https://gitlab.abinit.org/trunk/abinit/issues/19">https://gitlab.abinit.org/trunk/abinit/issues/19</a><!-- m --></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3607&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:52:34 GMT -->
+</html>

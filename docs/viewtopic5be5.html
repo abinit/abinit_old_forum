@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=445&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:33:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Compiling ABINIT on an IBM Power 750 Express</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Compiling ABINIT on an IBM Power 750 Express</h2>
+		<p><a href="viewtopicd719.html?f=3&amp;t=445">https://forum.abinit.org/viewtopic.php?f=3&amp;t=445</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Compiling ABINIT on an IBM Power 750 Express</h3>
+				<div class="date">Posted: <strong>Wed Jun 30, 2010 3:29 pm</strong></div>
+				<div class="author">by <strong>jens</strong></div>
+				<div class="content">Hi,<br /><br />I'm trying to compile ABINIT 6.0.4 in parallel on an IBM Power 750 express (AIX 6.1, Power7,xlf 13).<br /><br />I've started with a serial build and have adapted the file:<br /><br />abinit-6.0.4/doc/config/build-examples/bb_power6-xlf_ibm6_serial.ac<br /><br />and have just added options to compile for Power7 (e.g. with_fc_optflags=&quot;-qarch=pwr7 -qtune=pwr7 -q64 -O3 -qhot -lxlopt -qstrict -qcache=auto -bmaxdata:2000000000 -qmaxmem=-1 -qsuppress=1500-036&quot;)<br /><br />The compilation currently fails with:<br />/usr/bin/xlf90_r -q64 -DHAVE_CONFIG_H -I. -I../../../src/01_macroavnew_ext -I../.. -I../../src/incs -I../../../src/incs   -WF,-DHAV<br />E_CONFIG_H  -qsuffix=cpp=F90:f=f90 -qfree=f90 -qmoddir=/home/jmht/abinit-6.0.4/build/src/mods -I/home/jmht/abinit-6.0.4/build/src/mods  -qa<br />rch=pwr7 -qtune=pwr7 -q64 -O3 -qhot -lxlopt -qstrict -qcache=auto -bmaxdata:2000000000 -qmaxmem=-1 -qsuppress=1500-036 -WF,-DHAVE_CONFIG_H<br />-q64 -g  -qzerosize  -c -o io.o ../../../src/01_macroavnew_ext/io.F90<br />&quot;../../config.h&quot;, line 1.1: 1515-019 (S) Syntax is incorrect.<br />&quot;../../config.h&quot;, line 2.1: 1515-019 (S) Syntax is incorrect.<br /><br />This is because config.h is a file with C-style /* */ comments which won't work with free-format fortran code (which I think the -qfree=f90 option is setting - this isn't an option I've set myself).<br /><br />I tried removing -qfree from the above compilation line and replacing it with -qfixed, but then got a bunch of errors along the lines of:<br /><br />&quot;../../config.h&quot;, line 1.0: 1515-005 (S) Continuation line is not permitted at beginning of program or after INCLUDE, EJECT, @PROCESS statements or comment directive.  Line is ignored.<br />&quot;../../config.h&quot;, line 2.0: 1515-005 (S) Continuation line is not permitted at beginning of program or after INCLUDE, EJECT, @PROCESS statements or comment directive.  Line is ignored.<br />&quot;../../config.h&quot;, line 4.0: 1515-005 (S) Continuation line is not permitted at beginning of program or after INCLUDE, EJECT, @PROCESS statements or comment directive.  Line is ignored.<br /><br />Can anyone suggest a way around this?<br /><br />Thanks,<br /><br />Jens</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling ABINIT on an IBM Power 750 Express</h3>
+				<div class="date">Posted: <strong>Wed Jun 30, 2010 11:19 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">hello,<br /><br /><blockquote class="uncited"><div>This is because config.h is a file with C-style /* */ comments which won't work with free-format fortran code (which I think the -qfree=f90 option is setting - this isn't an option I've set myself).<br /></div></blockquote><br /><br />try this :<br />copy  the config file  xlf.cfg  ( /etc/xlf.cfg ?!? ) on your home and change <br />          cppoptions = -C<br />by <br />          cppoptions = -P<br /><br />then add to /usr/bin/xlf90_r command,  the option   -F~/xlf.cfg<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling ABINIT on an IBM Power 750 Express</h3>
+				<div class="date">Posted: <strong>Thu Jul 01, 2010 1:32 pm</strong></div>
+				<div class="author">by <strong>jens</strong></div>
+				<div class="content">Hi jbeuken,<br /><br />Thanks so much for the tip - that worked perfectly.<br /><br />I did look for a way to pass that option through to cpp with a command-line argument, but it seems like the config file is the only way.<br /><br />Just for information for anyone else compiling Abinit on a similar platform, the build then failed with the following:<br /><br />/usr/bin/xlf90_r -F/home/jmht/xlf.cfg.61 -q64 -DHAVE_CONFIG_H -I. -I../../../src/42_geometry -I../.. -I../../src/incs -I../.. /../src/incs     -WF,-DHAVE_CONFIG_H  -qsuffix=cpp=F90:f=f90 -qfree=f90 -qmoddir=/home/jmht/abinit-6.0.4/build/src/mods -I/home/jmht/ abinit-6.0.4/build/src/mods  -qarch=pwr7 -qtune=pwr7 -q64 -O3 -qhot -lxlopt -qstrict -qcache=auto -bmaxdata:2000000000 -qmaxmem=-1 -q suppress=1500-036 -WF,-DHAVE_CONFIG_H -q64 -g  -qzerosize  -c -o symfind.o ../../../src/42_geometry/symfind.F90<br />&quot;/tmp/F89306572-Ka3Mb&quot;, line 475.33: 1515-019 (S) Syntax is incorrect.<br />&quot;/tmp/F89306572-Ka3Mb&quot;, line 475.46: 1514-050 (S) Specification statement is out of order.  Statement is ignored.<br />&quot;/tmp/F89306572-Ka3Mb&quot;, 1520-031 (W) Option DLINES is ignored within Fortran 90 free form and IBM free form.<br />** symfind   === End of Compilation 1 ===<br />1501-511  Compilation failed for file symfind.F90.<br /><br />This appears to be a bug with the compiler (xlf 13.1) as the line it's complaining about (in abinit-6.0.4src/42_geometry/symfind.F90:170) appears to be perfectly valid Fortran:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>!&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ENDDEBUG<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;natomcl(iclass)=natomcl(iclass)+1<br />---&gt;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;class(natomcl(iclass),iclass)=iatom<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;foundcl=1<br /></code></pre></div><br /><br />defining a temporary integer variable foo allowed the file to compile.<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>foo=natomcl(iclass)<br />class(foo,iclass)=iatom<br /></code></pre></div><br /><br />I'll post any other gotchas I come across in this thread.<br /><br />Jens</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling ABINIT on an IBM Power 750 Express</h3>
+				<div class="date">Posted: <strong>Thu Jul 01, 2010 5:49 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">jens,<br /><br />thanks for your work around with 13.1...  ( I don't know if it's possible to install this version on a power6/AIX6.1 )<br /><br />only for information : the trunk of 6.2.1 (rc1) and 6.3.0( dev) work well with IBM/Power6/<strong class="text-strong">AIX 6.1</strong>/xlf <strong class="text-strong">12.1</strong> during the nightly test<br /><br />you can see it on <a href="http://www.abinit.org/developers/abinit-dev-status/nightly-builds/abinit-6.2" class="postlink">6.2.1</a> and  <a href="http://www.abinit.org/developers/abinit-dev-status/nightly-builds/abinit-6.3" class="postlink">6.3.0</a><br /><br />regards<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling ABINIT on an IBM Power 750 Express</h3>
+				<div class="date">Posted: <strong>Thu Jul 01, 2010 6:30 pm</strong></div>
+				<div class="author">by <strong>jens</strong></div>
+				<div class="content">Hi,<br /><br />I got nearly all the way there but have no hit a problem I've no idea how to resolve. The final link was as follows:<br /><br />/usr/bin/xlf90_r -bloadmap:map -F/home/jmht/xlf.cfg.61 -q64 -qsuffix=cpp=F90:f=f90 -qfree=f90 -qmoddir=/home/jmht/abinit-6.0.4/build/src/mods -I/home/jmht/abinit-6.0.4/build/src/mods  -qarch=pwr7 -qtune=pwr7 -q64 -O3 -qhot -lxlopt -qstrict -qcache=auto -bmaxdata:2000000000 -qmaxmem=-1 -qsuppress=1500-036 -WF,-DHAVE_CONFIG_H -q64 -g  -qzerosize    -o  abinit abinit-abinit.o   ../../src/95_drive/lib95_drive.a  ../../src/93_rdm/lib93_rdm.a  ../../src/79_seqpar_mpi/lib79_seqpar_mpi.a  ../../src/77_ddb/lib77_ddb.a  ../../src/77_suscep/lib77_suscep.a  ../../src/72_response/lib72_response.a  ../../src/72_geomoptim/lib72_geomoptim.a  ../../src/69_bse/lib69_bse.a  ../../src/68_gw/lib68_gw.a  ../../src/68_dmft/lib68_dmft.a  ../../src/68_recursion/lib68_recursion.a  ../../src/68_rsprc/lib68_rsprc.a  ../../src/67_common/lib67_common.a  ../../src/66_paw/lib66_paw.a  ../../src/66_wfs/lib66_wfs.a  ../../src/65_psp/lib65_psp.a  ../../src/65_nonlocal/lib65_nonlocal.a  ../../src/64_atompaw/lib64_atompaw.a  ../../src/62_occeig/lib62_occeig.a  ../../src/62_iowfdenpot/lib62_iowfdenpot.a  ../../src/62_wvl_wfs/lib62_wvl_wfs.a  ../../src/62_poisson/lib62_poisson.a  ../../src/62_cg_noabirule/lib62_cg_noabirule.a  ../../src/61_ionetcdf/lib61_ionetcdf.a  ../../src/59_io_mpi/lib59_io_mpi.a  ../../src/57_iovars/lib57_iovars.a  ../../src/56_recipspace/lib56_recipspace.a  ../../src/56_xc/lib56_xc.a  ../../src/53_abiutil/lib53_abiutil.a  ../../src/53_spacepar/lib53_spacepar.a  ../../src/53_ffts/lib53_ffts.a  ../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a  ../../src/51_manage_mpi/lib51_manage_mpi.a    ../../src/49_gw_toolbox_oop/lib49_gw_toolbox_oop.a  ../../src/47_xml/lib47_xml.a  ../../src/45_psp_parser/lib45_psp_parser.a  ../../src/42_nlstrain/lib42_nlstrain.a  ../../src/42_geometry/lib42_geometry.a  ../../src/42_parser/lib42_parser.a  ../../src/32_contract/lib32_contract.a  ../../src/32_util/lib32_util.a  ../../src/28_numeric_noabirule/lib28_numeric_noabirule.a  ../../src/27_toolbox_oop/lib27_toolbox_oop.a  ../../src/18_timing/lib18_timing.a  ../../src/16_hideleave/lib16_hideleave.a  ../../src/14_hidewrite/lib14_hidewrite.a  ../../src/12_hide_mpi/lib12_hide_mpi.a  ../../src/10_defs/lib10_defs.a  ../../src/01_interfaces_ext/lib01_interfaces_ext.a        -lessl /home/jmht/abinit-6.0.4/build/prereqs/linalg/lapack/liblapack.a<br /><br />Which gave the following error in the loadmap file:<br /><br />ld: 0711-318 ERROR: Undefined symbols were found.<br />        The following symbols are in error:<br /> Symbol                    Inpndx  TY CL Source-File(Object-File) OR Import-File{Shared-object}<br />                              RLD: Address  Section  Rld-type Referencing Symbol<br /> ----------------------------------------------------------------------------------------------<br /> &amp;&amp;N&amp;defs_abitypes         [649]   ER UA /tmp/F89503152_Va2ab(../../src/68_rsprc/lib68_rsprc.a[prctfvw1.o])<br />                                   00012818 .data    R_POS    [651]   &lt;&amp;&amp;N&amp;defs_abitypes&gt;<br /><br />The problem appears to be that prctfvw1 uses defs_abitypes, but can't find it.<br /><br />However several other files (e.g. prctfvw2  and interfaces_68_rsprc) that are in the same library also use that module and appear to find it o.k. - I'm assuming that because the library is created with the following command:<br /><br />/usr/bin/ar -X 64   rc lib68_rsprc.a ladielmt.o lavnl.o  mod_prc_memory.o moddiel_csrb.o  newrho.o newvtr.o prcref.o  prcref_PMA.o prctfw3.o prcrskerker2.o  prcrskerker1.o prctfvw2.o prctfvw1.o  interfaces_68_rsprc.o<br /><br />so I'd have thought that depending on which way the linker resolved things either interfaces_68_rsprc or prctfvw2 would generate the error first.<br /><br />Running nm on lib68_rsprc.a gives:<br /><br />U &amp;&amp;N&amp;defs_abitypes<br />0000000000012818 d &amp;&amp;N&amp;defs_abitypes<br /><br />so there are two symbols of that name in there - one defined, one undefined.<br /><br />I'm confused... <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":-)" title="Smile" /><br /><br />Jens</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling ABINIT on an IBM Power 750 Express</h3>
+				<div class="date">Posted: <strong>Mon Jul 05, 2010 5:24 pm</strong></div>
+				<div class="author">by <strong>jens</strong></div>
+				<div class="content">To half-answer my own question, the link failed because the:<br /><br />../../src/50_abitypes_defs/lib50_abitypes_defs.a<br /><br />library  wasn't included.<br /><br />I manually added it and I got an abinit binary - which unfortunately seg-faulted as soon as I tried to run it.<br /><br />Before I try and chase why that might be, can anyone give me some clues as to why that library was missing, as it suggests something going wrong with the configuration?<br /><br />I've attached the autoconf .ac file I'm using in case it sheds any light on what I might be doing wrong and am happy to put any other files on the web if they might be of help (sorry it's pdf - it's the only way I could get it to upload).<br /><br />Thanks,<br /><br />Jens</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=445&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:33:27 GMT -->
+</html>

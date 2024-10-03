@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=367&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:42:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; dielectric constant</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>dielectric constant</h2>
+		<p><a href="viewtopic447c.html?f=10&amp;t=367">https://forum.abinit.org/viewtopic.php?f=10&amp;t=367</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>dielectric constant</h3>
+				<div class="date">Posted: <strong>Sat May 29, 2010 5:55 pm</strong></div>
+				<div class="author">by <strong>yaser</strong></div>
+				<div class="content">Dear All,<br />I have run the lesson respons function 1,and the calculation was completed,but dielectric constant have not printed and i had the following warning:the dynamical matrix was incomplet:phonon frequencies may be wrong..<br />................<br />computation of the response to homogeneous<br /># electric field and atomic displacements, at q=0<br />#<br /><br />  ndtset  3<br /><br />#Ground state calculation<br />  kptopt1   1             # Automatic generation of k points, taking<br />                          # into account the symmetry<br />  tolvrs1   1.0d-18       # SCF stopping criterion<br />    iscf1   5             # Self-consistent calculation, using algorithm 5<br /><br />#Response Function calculation : d/dk<br />  rfelfd2   2             # Activate the calculation of the d/dk perturbation<br />   rfdir2   1 0 0         # Need to consider the perturbation in the x-direction only<br />                          # This is rather specific, due to the high symmetry of the AlAs crystal<br />                          # In general, just use rfdir 1 1 1<br />                          # In the present version of ABINIT (v4.6), symmetry cannot be used<br />                          # to reduce the number of ddk perturbations<br /><br />    nqpt2   1<br />     qpt2   0.0 0.0 0.0   # This is a calculation at the Gamma point<br /><br />  getwfk2   -1            # Uses as input the output wf of the previous dataset<br /><br />  kptopt2   2             # Automatic generation of k points,<br />                          # using only the time-reversal symmetry to decrease<br />                          # the size of the k point set.<br /><br />    iscf2  -3             # The d/dk perturbation must be treated <br />                          # in a non-self-consistent way<br />  tolwfr2   1.0d-22       # Must use tolwfr for non-self-consistent calculations<br />                          # Here, the value of tolwfr is very low.<br /><br />#Response Function calculation : electric field perturbation and phonons<br />  rfphon3   1             # Activate the calculation of the atomic dispacement perturbations<br /> rfatpol3   1 2           # All the atoms will be displaced<br />  rfelfd3   3             # Activate the calculation of the electric field perturbation<br />   rfdir3   1 1 1         # All directions are selected. However, symmetries will be used to decrease<br />                          # the number of perturbations, so only the x electric field is needed<br />                          # (and this explains why in the second dataset, rfdir was set to 1 0 0).<br /><br />    nqpt3   1<br />     qpt3   0.0 0.0 0.0   # This is a calculation at the Gamma point<br /><br />  getwfk3   -2            # Uses as input wfs the output wfs of the dataset 1<br />  getddk3   -1            # Uses as input ddk wfs the output of the dataset 2<br /><br />  kptopt3   2             # Automatic generation of k points,<br />                          # using only the time-reversal symmetry to decrease<br />                          # the size of the k point set.<br />  tolvrs3   1.0d-8<br />    iscf3   5             # Self-consistent calculation, using algorithm 5<br /><br /><br />#######################################################################<br />#Common input variables<br /><br />#Definition of the unit cell<br />acell        10.938662993   10.938662993    10.938662993 <br />angdeg       3*56.654541304   <br /><br />#Definition of the atom types<br />ntypat       2          <br />znucl        49 8           <br />natom        10 <br />spgroup      167                                       # There are two atoms<br /><br />spgaxor     2<br />typat       1 1 1 1 2 2 2 2 2 2        # They both are of type 1, that is, Silicon.<br />xred              # Reduced coordinate of atoms<br />0.35770000 0.35770000 0.35770000<br />...<br />...<br />...<br />...<br /><br />#Gives the number of band, explicitely (do not take the default)<br />nband  24               # For an insulator (if described correctly as an insulator <br />                       # by DFT), there is no need to include conduction bands <br />                       # in response-function calculations<br /><br />#Exchange-correlation functional<br />ixc 1             # LDA Teter Pade parametrization<br /><br />#Definition of the planewave basis set<br /> ecut    21         # Maximal kinetic energy cut-off, in Hartree<br /><br />#Definition of the k-point grid<br />nshiftk                1<br /> shiftk                 0.5 0.5 0.5 <br /> ngkpt  4  4  4        ! This is much too low : should be at least 24x24x24<br /><br /><br />#Definition of the SCF procedure<br />nstep      1500               # Maximal number of SCF cycles<br />diemac     10            # Although this is not mandatory, it is worth to<br />                       # precondition the SCF cycle. The model dielectric<br />                       # function used as the standard preconditioner<br />                       # is described in the &quot;dielng&quot; input variable section.<br />                       # The dielectric constant of AlAs is smaller that the one of Si (=12).<br />...............................<br />Can any one guid me?<br />asadi.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: dielectric constant</h3>
+				<div class="date">Posted: <strong>Mon Jun 14, 2010 4:20 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Can you post your output file? And did you grep your output for &quot;Dielectric&quot; (note upper-case D)?</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=367&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:42:23 GMT -->
+</html>

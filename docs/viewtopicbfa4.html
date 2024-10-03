@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=515&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; abinit 6.2.1: problem compiling m_libxc_functionals.F90</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>abinit 6.2.1: problem compiling m_libxc_functionals.F90</h2>
+		<p><a href="viewtopic7e86.html?f=3&amp;t=515">https://forum.abinit.org/viewtopic.php?f=3&amp;t=515</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>abinit 6.2.1: problem compiling m_libxc_functionals.F90</h3>
+				<div class="date">Posted: <strong>Thu Jul 29, 2010 8:13 am</strong></div>
+				<div class="author">by <strong>sbecuwe</strong></div>
+				<div class="content">Hello,<br /><br />I try to install Abinit 6.2.1 using Intel 11.x compilers, and the plugins mentioned on the webpage.  Compilation stops with m_libxc_functionals.F90<br /><br />m_libxc_functionals.F90(48): error #6457: This derived type name has not been declared.   [XC_F90_POINTER_T]<br />m_libxc_functionals.F90(49): error #6457: This derived type name has not been declared.   [XC_F90_POINTER_T]<br />m_libxc_functionals.F90(108): error #6457: This derived type name has not been declared.   [XC_F90_POINTER_T]<br />m_libxc_functionals.F90(125): error #6460: This is not a field name that is defined in the encompassing structure.   [CONF]<br />m_libxc_functionals.F90(125): error #6460: This is not a field name that is defined in the encompassing structure.   [INFO]<br />m_libxc_functionals.F90(146): error #6784: The number of actual arguments cannot be greater than the number of dummy arguments.   [XC_F90_INFO_REFS]<br />m_libxc_functionals.F90(146): error #6404: This name does not have a type, and must have an explicit type.   [STR]<br />m_libxc_functionals.F90(149): error #6784: The number of actual arguments cannot be greater than the number of dummy arguments.   [XC_F90_INFO_REFS]<br />m_libxc_functionals.F90(366): error #6404: This name does not have a type, and must have an explicit type.   [XC_F90_INFO_PROVIDES]<br />m_libxc_functionals.F90(366): error #6404: This name does not have a type, and must have an explicit type.   [XC_PROVIDES_EXC]<br />m_libxc_functionals.F90(366): warning #7319: This argument's data type is incompatible with this intrinsic procedure; procedure assumed EXTERNAL.   [IAND]<br />m_libxc_functionals.F90(366): error #6404: This name does not have a type, and must have an explicit type.   [IAND]<br />m_libxc_functionals.F90(387): error #6633: The type of the actual argument differs from the type of the dummy argument.   [1]<br />m_libxc_functionals.F90(389): error #6633: The type of the actual argument differs from the type of the dummy argument.   [1]<br />m_libxc_functionals.F90(391): error #6784: The number of actual arguments cannot be greater than the number of dummy arguments.   [XC_F90_MGGA_VXC]<br /><br />Any idea how to solve this problem?<br /><br /><br />Side question: why is the -xHOST option not used in the Intel optimization files?<br /><br />Regards<br /><br /><br />Stefan Becuwe</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 6.2.1: problem compiling m_libxc_functionals.F90</h3>
+				<div class="date">Posted: <strong>Thu Jul 29, 2010 9:50 am</strong></div>
+				<div class="author">by <strong>dcaliste</strong></div>
+				<div class="content">Hello,<br /><br />   Can you paste here the compilation line that raised these errors ? You should check also that the compilation of libXC succeeded and that the .mod files has been generated.<br /><br />Damien.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 6.2.1: problem compiling m_libxc_functionals.F90</h3>
+				<div class="date">Posted: <strong>Fri Jul 30, 2010 12:43 am</strong></div>
+				<div class="author">by <strong>sbecuwe</strong></div>
+				<div class="content">Hello,<br /><br />These are the last lines of compilation:<br /><br />ifort -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs -I/easy/libxc/1.0-alpha-fixed-ictce-3.2.1.015.u1/include -I/easy/libxc/1.0-alpha-fixed-ictce-3.2.1.015.u1/lib/finclude   -free -module /easy/abinit-6.2.1/src/mods -O2 -g -extend-source -vec-report0  -c -o m_libxc_functionals.o m_libxc_functionals.F90<br />ifort -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs -I/easy/libxc/1.0-alpha-fixed-ictce-3.2.1.015.u1/include -I/easy/libxc/1.0-alpha-fixed-ictce-3.2.1.015.u1/lib/finclude   -free -module /easy/abinit-6.2.1/src/mods -O2 -g -extend-source -vec-report0  -c -o echo_xc_name.o echo_xc_name.F90<br />ifort -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs -I/easy/libxc/1.0-alpha-fixed-ictce-3.2.1.015.u1/include -I/easy/libxc/1.0-alpha-fixed-ictce-3.2.1.015.u1/lib/finclude   -free -module /easy/abinit-6.2.1/src/mods -O2 -g -extend-source -vec-report0  -c -o hartre.o hartre.F90<br />m_libxc_functionals.F90(48): error #6457: This derived type name has not been declared.   [XC_F90_POINTER_T]<br />    type(xc_f90_pointer_t) :: conf ! the pointer used to call the library<br />---------^<br />[...]<br /><br />As far as libXC concerns: that should be ok, since we've used libXC for previous versions of abinit, without problem.<br /><br />Regards<br /><br />Stefan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 6.2.1: problem compiling m_libxc_functionals.F90</h3>
+				<div class="date">Posted: <strong>Wed Aug 04, 2010 6:42 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content"><blockquote><div><cite>sbecuwe wrote:</cite>Side question: why is the -xHOST option not used in the Intel optimization files?<br /></div></blockquote><br /><br />Because the default optimizations for ifort 11 have not been configured yet.<br /><br />Your problem looks to me as a preprocessing issue, which I find surprising with ifort. I have however no clue on how to solve this problem, since I can't reproduce it.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=515&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:55 GMT -->
+</html>

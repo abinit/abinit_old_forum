@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=4473&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 17:19:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; H2  example with PAW pseudopotential and spinorbital effects</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>H2  example with PAW pseudopotential and spinorbital effects</h2>
+		<p><a href="viewtopica097.html?f=14&amp;t=4473">https://forum.abinit.org/viewtopic.php?f=14&amp;t=4473</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>H2  example with PAW pseudopotential and spinorbital effects</h3>
+				<div class="date">Posted: <strong>Sun Jul 12, 2020 9:22 pm</strong></div>
+				<div class="author">by <strong>miro_ilias</strong></div>
+				<div class="content">Hello,<br>
+<br>
+I dowloaded <a href="https://www.quantum-espresso.org/upf_files/H.rel-pbe-kjpaw_psl.1.0.0.UPF" class="postlink">https://www.quantum-espresso.org/upf_fi ... .1.0.0.UPF</a>  PAW full-relativistic potential for H atom and tried test calculation with H2 molecule in box.<br>
+<br>
+I got error related to to reading the pseudopotential
+<blockquote class="uncited"><div>--- !ERROR<br>
+src_file: m_pspheads.F90<br>
+src_line: 519<br>
+mpi_rank: 0<br>
+message: |<br>
+    list-directed I/O syntax error, unit 1024, file /u/milias/Work/qch/projects/open-collection/theoretical_chemistry/software_runs/abinit/runs/H2_in_box/paw/H.rel-pbe-kjpaw_psl.1.0.0.UPF<br>
+...
+</div></blockquote>
+
+Does abinit work with this kind of pseudopotentials ?<br>
+<br>
+Files are attached.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: H2  example with PAW pseudopotential and spinorbital effects</h3>
+				<div class="date">Posted: <strong>Mon Jul 13, 2020 11:59 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Miro,<br>
+In my remember Abinit do not read the UPF format, somebody might correct me if not...<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: H2  example with PAW pseudopotential and spinorbital effects</h3>
+				<div class="date">Posted: <strong>Fri Sep 25, 2020 6:20 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Abinit can only read UPF1 files, the UPF2 format is not supported.<br>
+Moreover it's not possible to use PAW or Ultrasoft pseudopotentials from QE, even if they are given in UPF1 format.<br>
+For PAW calculations with Abinit, you can use the JTH table available at <a href="http://www.pseudo-dojo.org/" class="postlink">http://www.pseudo-dojo.org/</a><br>
+<br>
+Abinit and QE implement the PAW formalism in a different way and this is reflected in the information that is stored in the PAW files.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=4473&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 17:19:49 GMT -->
+</html>

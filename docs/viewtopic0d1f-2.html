@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2619&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:47:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; optical erreur</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>optical erreur</h2>
+		<p><a href="viewtopic8279.html?f=9&amp;t=2619">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2619</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>optical erreur</h3>
+				<div class="date">Posted: <strong>Tue Apr 01, 2014 2:23 pm</strong></div>
+				<div class="author">by <strong>aslassi</strong></div>
+				<div class="content">I tried to make a calculated optical properties. but I have found a following error: it Please could you help me.<br />Please, give the name of the data file ...<br /> The name of the data file is :<br />toptic_2.in                                                                                                                         <br /> Please, give the name of the output file ...<br /> The name of the output file is :<br />toptic_2.out                                                                                                                        <br /> Please, give the root name for the (non)linear optical data output file ...<br /> The root name of the output files is :<br />toptic_2<br /><br /> hdr_io : ERROR -<br />  The first line of the (WF, DEN or POT) file read in unit  10 is erroneous.<br />  headform is       57, while it should be 23, 34, 40, 41, 42, 44 or 53.<br />  Action : check the correctness of your file.<br /><br /> leave_new : decision taken to exit ...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: optical erreur</h3>
+				<div class="date">Posted: <strong>Tue Apr 01, 2014 8:45 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">You are trying to read a WFK file generated with a recent version of Abinit but the optic<br />tool found in your $PATH is too old and does not support the new fileformat.<br /><br />Use the shell command:<br /><br />$ whereis optic<br /><br />to print the location of the executable.<br />Make sure you are using a version of optic that matches the one used to generate the WFK file</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: optical erreur</h3>
+				<div class="date">Posted: <strong>Wed Apr 02, 2014 10:48 am</strong></div>
+				<div class="author">by <strong>aslassi</strong></div>
+				<div class="content">think you,<br />I have changed the version abinit. but I found the same problem: I used<br />- Abinit-6.10.3<br />- Version 5.3.4 of OPTIC</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: optical erreur</h3>
+				<div class="date">Posted: <strong>Wed Apr 02, 2014 5:02 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Note that I was suggesting to change the version of optic, and not the version of Abinit<br /><br />The version of optic you are using is too old. <br />OPTIC-5.3.4 cannot read the WFK file produced by Abinit-6.10.3 <br />since we have introduced new formats  for the WFK file.<br />Use Optic version 6.10.3, the executable is located inside ~abinit-6-10.3/src/98_main/<br />where ~abinit is the directory containing the source code used to compile the abinit executable<br />you are using in your calculations.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: optical erreur</h3>
+				<div class="date">Posted: <strong>Wed Apr 02, 2014 8:14 pm</strong></div>
+				<div class="author">by <strong>aslassi</strong></div>
+				<div class="content">Dear;<br />yes, I used optic located in  abinit6.8.3/src/98_main. but I found the same problem</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: optical erreur</h3>
+				<div class="date">Posted: <strong>Wed Apr 02, 2014 8:17 pm</strong></div>
+				<div class="author">by <strong>aslassi</strong></div>
+				<div class="content">Dear;<br />yes, I used optic located in abinit6.10.3/src/98_main. but I found the same problem. i used the inputs from optical tutorial</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: optical erreur</h3>
+				<div class="date">Posted: <strong>Wed Apr 02, 2014 9:08 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">So the next questions are:<br /><br />1) &quot;Which version of Abinit di you use to generate the files you are trying to read with optics?&quot;<br /><br />2) Can you complete the optic tutorial, if you use the executables (abinit, optic) located in abinit6.8.3/src/98_main</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: optical erreur</h3>
+				<div class="date">Posted: <strong>Wed Apr 02, 2014 9:37 pm</strong></div>
+				<div class="author">by <strong>aslassi</strong></div>
+				<div class="content">dear<br /> I used several version abinit source ( 7.6.2.... and 6.10.3 6.8.3 etc). for each version I used abinit; optic are in abinit/src/98_main ( excutable optic for every defirent version). but every time I find the same problem</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: optical erreur</h3>
+				<div class="date">Posted: <strong>Wed Apr 02, 2014 9:46 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Configuration options, compiler?<br />Attach the output of configure (config.log) and the complete output produced by optic<br />when the calculation stops</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: optical erreur</h3>
+				<div class="date">Posted: <strong>Thu Apr 03, 2014 10:43 am</strong></div>
+				<div class="author">by <strong>aslassi</strong></div>
+				<div class="content">Dear,<br />please find these files.<br />note that the files toptic_2.out is not created</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: optical erreur</h3>
+				<div class="date">Posted: <strong>Mon Apr 07, 2014 11:07 am</strong></div>
+				<div class="author">by <strong>aslassi</strong></div>
+				<div class="content">hello,<br />I have done every thing to overcome this problem. mias, Still I find the same problem.<br /><br />Cordially</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2619&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:47:44 GMT -->
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1568&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:55:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Fix for faulty path to ~abinit/config/wrappers</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Fix for faulty path to ~abinit/config/wrappers</h2>
+		<p><a href="viewtopic990d-2.html?f=3&amp;t=1568">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1568</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Fix for faulty path to ~abinit/config/wrappers</h3>
+				<div class="date">Posted: <strong>Tue Mar 13, 2012 4:49 pm</strong></div>
+				<div class="author">by <strong>jjramsey</strong></div>
+				<div class="content">I ran ./configure with the options --prefix=/usr/people/jjramsey/my_abinit_6_12_1 --enable-mpi --with-mpi-prefix=/usr/cta/unsupported/openmpi/gcc/4.4.1/openmpi-1.4.1, and the output from ./configure appeared sane enough. However, the output from running &quot;make&quot; was this:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>The build of fox has been disabled<br />make&#91;3&#93;: Leaving directory `/usr/people/jjramsey/abinit-6.12.1/fallbacks'<br />Checking build of fox fallback<br />test -e stamps/fox-install-stamp<br />make libxc<br />make&#91;3&#93;: Entering directory `/usr/people/jjramsey/abinit-6.12.1/fallbacks'<br />cd sources &amp;&amp; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gzip -cd /usr/people/jjramsey/.abinit/tarballs/libxc-1.1.0.1.tar.gz | tar xf -<br />patch -d sources/libxc-1.1.0.1 -p1 &lt;./patches/libxc-1.1.0.1-0001.patch<br />patching file src/gga_x_b88.c<br />cd sources/libxc-1.1.0.1 &amp;&amp; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; CPP=&quot;config/wrappers/wrap-mpicc -E&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; CPPFLAGS=&quot; -I/usr/people/jjramsey/abinit-6.12.1/fallbacks/exports/include&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; CC=&quot;config/wrappers/wrap-mpicc&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; CFLAGS=&quot;-g -O2&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; CXX=&quot;config/wrappers/wrap-mpicxx&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; CXXFLAGS=&quot;&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; FCCPP=&quot;cpp -P -std=c99&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; F77=&quot;config/wrappers/wrap-mpifc&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; FFLAGS=&quot;-ffixed-form -g -ffree-line-length-none&nbsp; -O2 -mtune=native -march=native -mfpmath=sse -g -O2 -I/usr/people/jjramsey/abinit-6.12.1/fallbacks/exports/include&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; F90=&quot;config/wrappers/wrap-mpifc&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; F90FLAGS=&quot;-ffree-form -g -ffree-line-length-none&nbsp; -O2 -mtune=native -march=native -mfpmath=sse -g -O2 -I/usr/people/jjramsey/abinit-6.12.1/fallbacks/exports/include&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; FC=&quot;config/wrappers/wrap-mpifc&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; FCFLAGS=&quot;-ffree-form -g -ffree-line-length-none&nbsp; -O2 -mtune=native -march=native -mfpmath=sse -g -O2 -I/usr/people/jjramsey/abinit-6.12.1/fallbacks/exports/include&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; LDFLAGS=&quot; &quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; LIBS=&quot;&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; AR=&quot;ar&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ARFLAGS=&quot;rc&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; RANLIB=&quot;ranlib&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /bin/sh ./configure \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; --prefix=&quot;/usr/people/jjramsey/abinit-6.12.1/fallbacks/exports&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; --program-suffix=&quot;-abinit&quot; \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; --enable-fortran --enable-static --disable-shared<br />checking for a BSD-compatible install... /usr/bin/install -c<br />checking whether build environment is sane... yes<br />checking for a thread-safe mkdir -p... /bin/mkdir -p<br />checking for gawk... gawk<br />checking whether make sets $(MAKE)... yes<br />checking build system type... x86_64-unknown-linux-gnu<br />checking host system type... x86_64-unknown-linux-gnu<br />checking for style of include used by make... GNU<br />checking for gcc... config/wrappers/wrap-mpicc<br />checking whether the C compiler works... no<br />configure: error: in `/usr/people/jjramsey/abinit-6.12.1/fallbacks/sources/libxc-1.1.0.1':<br />configure: error: C compiler cannot create executables<br />See `config.log' for more details.<br />make&#91;3&#93;: *** &#91;stamps/libxc-config-stamp&#93; Error 77<br />make&#91;3&#93;: Leaving directory `/usr/people/jjramsey/abinit-6.12.1/fallbacks'<br />make&#91;2&#93;: &#91;all-local&#93; Error 2 (ignored)<br />Checking build of libxc fallback<br />test -e stamps/libxc-install-stamp<br />make&#91;2&#93;: *** &#91;all-local&#93; Error 1<br />make&#91;2&#93;: Leaving directory `/usr/people/jjramsey/abinit-6.12.1/fallbacks'<br />make&#91;1&#93;: *** &#91;all-recursive&#93; Error 1<br />make&#91;1&#93;: Leaving directory `/usr/people/jjramsey/abinit-6.12.1'<br />make: *** &#91;all&#93; Error 2</code></pre></div><br /><br />If I look at config.log in ~abinit/fallbacks/sources/libxc-1.1.0.1/, I see the following lines:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>configure:3544: checking whether the C compiler works<br />configure:3566: config/wrappers/wrap-mpicc -g -O2&nbsp; -I/usr/people/jjramsey/abinit-6.12.1/fallbacks/exports/include&nbsp; &nbsp;conftest.c&nbsp; &gt;&amp;5<br />./configure: line 3568: config/wrappers/wrap-mpicc: No such file or directory</code></pre></div><br /><br />Now ~abinit/config/wrappers/wrap-mpicc does exist, and it appears that the problem is that CPP is set to a relative path not an absolute one, so &quot;make&quot; tries to run ~abinit/fallbacks/sources/libxc-1.1.0.1/config/wrappers/wrap-mpicc instead of ~abinit/config/wrappers/wrap-mpicc, which of course fails. One can fix this by applying the following patch to the main ABINIT configure script&#058;<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--- configure.orig&nbsp; &nbsp; &nbsp; 2012-03-13 13:45:57.000000000 -0400<br />+++ configure&nbsp; &nbsp;2012-03-13 12:56:22.000000000 -0400<br />@@ -9372,7 +9372,7 @@<br />&nbsp;<br />&nbsp; &nbsp; &nbsp;chmod u+x config/wrappers/wrap-mpi${tmp_name}<br />&nbsp;<br />-&nbsp; &nbsp; eval CC=&quot;config/wrappers/wrap-mpi${tmp_name}&quot;<br />+&nbsp; &nbsp; eval CC=&quot;$ac_pwd/config/wrappers/wrap-mpi${tmp_name}&quot;<br />&nbsp;<br />&nbsp; &nbsp; &nbsp;unset tmp_name<br />&nbsp;<br />@@ -9397,7 +9397,7 @@<br />&nbsp;<br />&nbsp; &nbsp; &nbsp;chmod u+x config/wrappers/wrap-mpi${tmp_name}<br />&nbsp;<br />-&nbsp; &nbsp; eval CXX=&quot;config/wrappers/wrap-mpi${tmp_name}&quot;<br />+&nbsp; &nbsp; eval CXX=&quot;$ac_pwd/config/wrappers/wrap-mpi${tmp_name}&quot;<br />&nbsp;<br />&nbsp; &nbsp; &nbsp;unset tmp_name<br />&nbsp;<br />@@ -9422,7 +9422,7 @@<br />&nbsp;<br />&nbsp; &nbsp; &nbsp;chmod u+x config/wrappers/wrap-mpi${tmp_name}<br />&nbsp;<br />-&nbsp; &nbsp; eval FC=&quot;config/wrappers/wrap-mpi${tmp_name}&quot;<br />+&nbsp; &nbsp; eval FC=&quot;$ac_pwd/config/wrappers/wrap-mpi${tmp_name}&quot;<br />&nbsp;<br />&nbsp; &nbsp; &nbsp;unset tmp_name<br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Fix for faulty path to ~abinit/config/wrappers</h3>
+				<div class="date">Posted: <strong>Tue Mar 13, 2012 7:27 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Thank you for your report. This will be fixed in the upcoming version of Abinit.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1568&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:55:41 GMT -->
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2817&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:50:52 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; usepotzero</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>usepotzero</h2>
+		<p><a href="viewtopic31ee-2.html?f=9&amp;t=2817">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2817</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>usepotzero</h3>
+				<div class="date">Posted: <strong>Sun Oct 12, 2014 3:44 pm</strong></div>
+				<div class="author">by <strong>yuuukuma</strong></div>
+				<div class="content">Dear all,<br /><br />I set usepotzero=1 with very new JHT-v0.2 PAW-PBE atomic datasets.<br />However, the calculated eigenvalues are too high to be printed in output files, and shown as follows.<br /><br /><span style="color: #0000FF">e.g. (BaO: JHT ver0.2)<br /> Fermi (or HOMO) energy (eV) =**********   Average Vxc (eV)= -10.30742<br /> Eigenvalues (   eV  ) for nkpt= 256  k points:<br /> kpt#   1, nband= 20, wtk=  0.00013, kpt=  0.0000  0.0000  0.0000 (reduced coord)<br />********************************************************************************<br />********************************************************************************<br />****************************************</span><br /><br />I found the same erroneous results in the CaO calculation, too.<br /><br />On the other hand, when using previous Jollet and Torrent PAW (PBE) potentials, usepotzero=1 looks fine.<br /><br /><span style="color: #0000FF">e.g. (BaO: Jollet and Torrent, paw_setup version=&quot;0.5&quot;)<br /> Fermi (or HOMO) energy (eV) =  11.15187   Average Vxc (eV)=  -9.73628<br /> Eigenvalues (   eV  ) for nkpt= 256  k points:<br /> kpt#   1, nband= 20, wtk=  0.00013, kpt=  0.0000  0.0000  0.0000 (reduced coord)<br /> -14.68665  -3.83095   0.78599   0.78599   0.78599  10.72484  10.72484  10.72484<br />  14.70197  15.90527  15.90527  15.90527  16.34543  18.13936  18.13936  19.55865<br />  26.06028  26.06028  26.06028  28.60952</span><br /><br />Input file for BaO is as follows:<br />------------------------------<br /><span style="color: #FF0000">#Cell and atoms definition<br /> acell 3*1 angstrom<br /> rprim<br />    0.00000    2.77898    2.77898<br />    2.77898    0.00000    2.77898<br />    2.77898    2.77898    0.00000<br /> ntypat 2  natom 2  typat 1 2<br /> xred 0.0 0.0 0.0<br />      1/2 1/2 1/2<br /> znucl 56 8 nband 20<br /><br />#Grid definitions<br /> ecut 20.<br /> pawecutdg 40.<br /><br />#SCF cycle parameters<br /> tolvrs 1.0d-10<br /> nstep 20<br /><br />#K-points and sym<br /># nsym 0       <br /> occopt 1<br /> ngkpt 20 20 20<br /> nshiftk 1<br /> shiftk 0.0 0.0 0.0<br /><br />#I/O parameters<br /> optforces 2 optstress 1<br /> prtwf 0 prtden 0  prteig 0<br /> prtvol 2<br /> enunit    1<br /><br />usepotzero 1</span><br />------------------------------<br /><br />These potentials are obtained from <br /><a href="http://www.abinit.org/downloads/PAW2/OLD-VERSIONS/JTH-TABLE-0.1/index.html" class="postlink">http://www.abinit.org/downloads/PAW2/OLD-VERSIONS/JTH-TABLE-0.1/index.html</a><br /><a href="http://www.abinit.org/downloads/PAW2" class="postlink">http://www.abinit.org/downloads/PAW2</a><br /><br />Is this a bug of the usepotzero tag?<br />Does someone have a comment/suggestion?<br /><br />Thank you very much for your help.<br />Best regards,<br />Yu Kumagai</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: usepotzero</h3>
+				<div class="date">Posted: <strong>Wed Nov 12, 2014 3:51 pm</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">Dear Yu Kumagai,<br /><br />Thanks for the bug report.<br />The usepotzero was not concerned.<br />This was a small bug occuring for some specific psps.<br />It has now been corrected and the correction will be available in the next 7.10 version of abinit (to be released in some weeks).<br /><br />Marc</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: usepotzero</h3>
+				<div class="date">Posted: <strong>Tue Nov 18, 2014 11:46 am</strong></div>
+				<div class="author">by <strong>yuuukuma</strong></div>
+				<div class="content">Dear Dr. Marc Torrent,<br /><br />Thank you very much for your info.<br />You mean the problem occurs in the abinit or PAW potential set?<br />I tried abinit-ver7.10.1, but it doesn't resolve the problem...<br /><br />Best,<br />Yu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: usepotzero</h3>
+				<div class="date">Posted: <strong>Fri Nov 21, 2014 10:46 pm</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">This was too late for the 7.10.1.<br />Will be in 7.10.2</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2817&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:50:52 GMT -->
+</html>

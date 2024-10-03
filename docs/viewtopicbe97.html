@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3646&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:06:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; U determination for oxygen monoclinic ?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>U determination for oxygen monoclinic ?</h2>
+		<p><a href="viewtopic28a0.html?f=9&amp;t=3646">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3646</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>U determination for oxygen monoclinic ?</h3>
+				<div class="date">Posted: <strong>Tue Jul 11, 2017 5:17 pm</strong></div>
+				<div class="author">by <strong>as01</strong></div>
+				<div class="content">Hello,<br /><br />I am a beginner on the use of abinit.<br />I try to determine the Hubbard term of oxygen by using O.LDA_PW-JTH.xml to perform LDA+U calculations but I get an error that is as follows :<br /><br />first without variable chkprim<br />--- !ERROR<br />message: |<br />    According to the symmetry finder, the unit cell is<br />    NOT primitive. The multiplicity is2 .<br />    The use of non-primitive unit cells is allowed<br />    only when the input variable chkprim is 0.<br />    Action : either change your unit cell (rprim or angdeg),<br />    or set chkprim to 0.<br />src_file: chkprimit.F90<br /><br />if i insert it the error is :<br /><br />   [compute-0-3:21117] *** Process received signal ***<br />[compute-0-3:21117] Signal: Segmentation fault (11)<br />[compute-0-3:21117] Signal code: Address not mapped (1)<br />[compute-0-3:21117] Failing at address: 0x10782a9d0<br />[compute-0-3:21117] [ 0] /lib64/libpthread.so.0() [0x3455a0f710]<br />[compute-0-3:21117] [ 1] /share/apps/abinit/bin/abinit(pawpuxinit_+0x3124) [0xb02804]<br />[compute-0-3:21117] [ 2] /share/apps/abinit/bin/abinit(gstate_+0xb449) [0x4ed7c9]<br />[compute-0-3:21117] [ 3] /share/apps/abinit/bin/abinit(gstateimg_+0x21a1) [0x45fa21]<br />[compute-0-3:21117] [ 4] /share/apps/abinit/bin/abinit(driver_+0xbe35) [0x4536a5]<br />[compute-0-3:21117] [ 5] /share/apps/abinit/bin/abinit(MAIN__+0xf28) [0x445098]<br />[compute-0-3:21117] [ 6] /share/apps/abinit/bin/abinit(main+0x2a) [0x155706a]<br />[compute-0-3:21117] [ 7] /lib64/libc.so.6(__libc_start_main+0xfd) [0x347201ed1d]<br />[compute-0-3:21117] [ 8] /share/apps/abinit/bin/abinit() [0x4440a9]<br />[compute-0-3:21117] *** End of error message ***<br /><br />My input file follows tudet_1.in of tutorials.<br /><br />#Unit cell<br />    acell 10.21013643 6.4798367285 9.611096333<br /><br />    spgroup 12<br />    angdeg 90.0 132.53 90.0<br />    chkprim 0<br />#Spin polarization<br />      #nsppol  1                    #1 unpolarized / 2 polarized<br />      #spinat  0 0  2.843062<br />       #       0 0  2.843062<br /><br />#Definition of the atom types<br />     ntypat  1<br />     znucl 8<br /><br />#Definition of the atoms<br />     natom 2<br />     #natrd 2<br />     typat 1 1           # atomic types<br />     xred<br />         0.0 0.0 0.0<br />         1/2 1/2 0.0<br />      ecut  35                   # Energy cutoff<br />      pawecutdg 88                   # pawecutdg &gt; 2*ecut<br />      nband  20                  # <br /><br />#Definition of the SCF procedure<br />      nstep  25                  # max  number SCF cycles<br />      tolvrs 10d-8<br /><br />#Definition of the k-point grid<br />     kptopt  1                    # 1:  automatic generation of k points<br />      ngkpt  4 4 4           # n x n x n<br />    nshiftk  1<br />     shiftk  0.0 0.0 0.0<br /><br />#Smearing<br />#     occopt 7<br />#     tsmear  0.05 eV<br /><br />#DFT+U<br />    usepawu  1                    # 1 at lim dble cnt / 2 rnd m fld dle cnt<br />      lpawu  2                    # ang moments corrrected<br /><br />#Save disk space &amp; Miscelaneous<br />     prteig  0<br />     prtden  1                    # This is the default value<br />  optforces  2<br /><br /><br />#%%&lt;BEGIN TEST_INFO&gt;<br />#%% [setup]<br /><br /><br />If the spgroup is not suitable which is the rprim definition for a moniclic structure like this one to include it in the input file ?<br />What error did I make in the definition of the input file?<br /><br />Thank you in advance for your help</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3646&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:06:22 GMT -->
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1850&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:15:52 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; elasto-optic coefficients</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>elasto-optic coefficients</h2>
+		<p><a href="viewtopic4c53.html?f=9&amp;t=1850">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1850</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>elasto-optic coefficients</h3>
+				<div class="date">Posted: <strong>Fri Oct 05, 2012 11:29 am</strong></div>
+				<div class="author">by <strong>sevket simsek</strong></div>
+				<div class="content">Dear abinit user,<br /><br />I am trying to calculate elasto-optic coefficients of some materials. how can I calculate elasto-optic coefficients in abitinit? which parameters do I need to use to be calculated elasto-optic coefficients and which lesson can help me for elasto-optic calculation?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: elasto-optic coefficients</h3>
+				<div class="date">Posted: <strong>Wed Oct 17, 2012 4:17 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Hi,<br />I have done this lots of times, in lots of ways. Basically, you have to compute the electric field response as a function of strain. I do the following series of calculations:<br />1) Relax the cell using ionmov 2 and optcell 2 to get a good starting configuration.<br />2) For each strain of interest, relax the ion locations with ionmov 2 and optcell 0.<br />3) For the cells relaxed in 2), compute the electric field response (you can do this with either the DFPT approach, computing the rfddk response followed by the rfelfd response, or by a series of finite electric field responses. The DFPT method converges faster).<br />4) Compute the photoelastic tensor elements by finite differences in the strains. For example, suppose you computed a strain at +0.005 and -0.005, then construct the dielectric tensors at each strain, invert them, then the slopes of these elements with respect to strain give you the photoelastic tensor elements (in the strain formalism). To get the elements in the stress formalism, contract with the compliance tensor. <br /><br />Some references: <br /><br />1) Zero-Stress Optic Glass Without Lead, M Guignard, L Albrecht, JW Zwanziger, Chemistry Of Materials 19, 286-290 (2007);<br /><br />2) Finite Homogeneous Electric Fields In The Projector Augmented Wave Formalism: Applications To Linear And Nonlinear Response, JW Zwanziger, J Galbraith, Y Kipouros, M Torrent, M Giantomassi, X Gonze, Computational Materials Science 58, 113-118 (2012).</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: elasto-optic coefficients</h3>
+				<div class="date">Posted: <strong>Thu Oct 18, 2012 12:06 pm</strong></div>
+				<div class="author">by <strong>sevket simsek</strong></div>
+				<div class="content">Dear Josef W. Zwanziger<br /><br />Firts of all, thank you very much your reply<br />I had done a response function calculation before and I obtained some constants such as elastic constants, static and optic dielectric constants, nonlinear optic coefficients.  Can I obtain elasto optic coefficients from this constants. I will send my output file to you. Are they enough to obtain elasto optic coefficients. Can you show me an example how I can calculate elasto optic coefficients.<br />Can you set my input file for me.<br />Best regards.<br /><br />Sevket simsek<br />Bilkent university, NANOTAM</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: elasto-optic coefficients</h3>
+				<div class="date">Posted: <strong>Thu Oct 18, 2012 3:44 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">No, elasto-optical constants are not obtainable from the DFPT responses currently coded into abinit. That's why you have to do the calculations at a series of strains near to the equilibrium cell. At the equilibrium geometry you need to do the strain, electric field, and phonon at gamma perturbations; then at finite strains you need to relax the ion coordinates, and do the electric field perturbations.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: elasto-optic coefficients</h3>
+				<div class="date">Posted: <strong>Thu Jun 25, 2020 11:36 pm</strong></div>
+				<div class="author">by <strong>jerkov</strong></div>
+				<div class="content">Hi Professor Zwanziger or whoever it may concern, <br>
+<br>
+I've followed your method to obtain the photoelastic constants, p_ijkl. However, I'm wondering if these are the same thing as the elasto-optic coefficients that go into the expression for the piezoelectric contribution to the Pockels tensor, appearing in eqn A4 in the NLO paper for Abinit (10.1103/PhysRevB.71.125107). From their definition A15 of p_ijkl, the derivative of the dielectric tensor, not its inverse, is taken to obtain the elasto-optic tensor. I appreciate this is a different method, which they make clear : "Equation A15 is different from the approach used previously by Detraux and Gonze to study the elasto-optic tensor in  alpha-quartz. The authors of Ref. 69 used finite differences with respect to strains to compute the total derivative of epsilon_ij. In their approach, the atoms where relaxed to their equilibrium positions in the strained configurations. In case of Eq. A15, the first term of the right-hand side is computed at clamped atomic positions while the effect of the strain-induced atomic relaxations is taken into account by the second term." <br>
+<br>
+Is there a difference in photoelastic and elasto-optic? I've seen them used interchangeably, but it seems like the former is a derivative of the inverse dielectric tensor wrt to strain, while the second is just of the dielectric tensor. <br>
+<br>
+Cheers, <br>
+J</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1850&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:15:52 GMT -->
+</html>

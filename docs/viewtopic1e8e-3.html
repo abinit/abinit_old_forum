@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1600&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:53:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Suggestions for MPI/IO FORTRAN file record errors</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Suggestions for MPI/IO FORTRAN file record errors</h2>
+		<p><a href="viewtopic95fa-2.html?f=3&amp;t=1600">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1600</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Suggestions for MPI/IO FORTRAN file record errors</h3>
+				<div class="date">Posted: <strong>Mon Apr 02, 2012 6:14 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello,<br /><br />several things can cause the following message:<br /><blockquote class="uncited"><div>Subroutine Unknown:0:ERROR<br />   Your architecture is not able to handle 8, 4 or 2-bytes FORTRAN file record markers !<br />  You cannot use ABINIT and MPI/IO.<br /></div></blockquote><br /><br />1) incompatible versions of mpi, between the library you linked with, the one you have loaded at execution time, and some recent versions of (open)mpi are a bit buggy.<br />2) missing input file for wavefunctions or density. There is no clear error message, but this can get the mpi io into a fit and hang the job<br />3) incompatible number of k-points/bands/fft wrt the number of processors you provide, which should be a divisor of nkpt in the default parallelization, and <strong class="text-strong">must</strong> be an exact divisor of np_kpt*np_band*np_fft in the general paral_kgb case.<br /><br />Try running in sequential or with fewer processors to see where the problem might be, or link to an older version of mpi (1.2.6 is usually ok)<br /><br />See associated posts by Jean-Michel:<br /><a href="viewtopic9630.html?f=3&amp;t=1316" class="postlink">http://forum.abinit.org/viewtopic.php?f=3&amp;t=1316</a><br /><a href="viewtopic3267.html?f=3&amp;t=1387" class="postlink">http://forum.abinit.org/viewtopic.php?f=3&amp;t=1387</a><br /><br />You should also check the tmp_XXX_LOG_P001 002 003 files, which log the errors from each processor. They will give you additional hints.<br /><br />cheers<br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1600&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:53:58 GMT -->
+</html>

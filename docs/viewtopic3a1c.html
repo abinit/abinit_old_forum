@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1667&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:02:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Bug: MPI-IO hang in WffReadWrite_mpio</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Bug: MPI-IO hang in WffReadWrite_mpio</h2>
+		<p><a href="viewtopicbc16.html?f=19&amp;t=1667">https://forum.abinit.org/viewtopic.php?f=19&amp;t=1667</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Bug: MPI-IO hang in WffReadWrite_mpio</h3>
+				<div class="date">Posted: <strong>Thu May 10, 2012 2:11 pm</strong></div>
+				<div class="author">by <strong>kaneod</strong></div>
+				<div class="content">Hi all,<br /><br />We're getting a MPI-IO hang when MPI_FILE_WRITE_ALL is called on line 229 of the wffreadwrite_mpio.F90 routine in Abinit 6.12.3. The file to be written is on a GPFS file system and we only get the hang when we run across multiple nodes on our (infiniband-connected) cluster. It's been rather difficult to isolate the problem so far, so I've included an input file below that causes the hang and a case that doesn't. <br /><br />We've found this occurs with both OpenMPI (1.4.5) and MVAPICH2 (1.8) and one of the cluster sysadmins has run ROMIO tests, we seem to have no problem with the drivers and so on. strace reveals the hang consists of repeated POLL events but that's as far as we can go ourselves as I'm not that experienced with valgrind. <br /><br />We use gfortran 4.6, fftw3 and openblas.<br /><br />A case that hangs:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># porphin molecule<br /><br /># Setting this to 1 will cause the job to hang, 0 to not hang!<br />prtwf&nbsp; &nbsp; &nbsp; &nbsp;1<br /><br /># Parallelization - set for 16 processors. Use over at least two nodes to see the hang.<br />paral_kgb&nbsp; &nbsp; &nbsp; &nbsp;1<br />npkpt&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1<br />npband&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 8<br />npfft&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp;<br />bandpp&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2<br /><br /># SCF parameters<br /><br />ecut&nbsp; &nbsp; &nbsp; &nbsp; 4.0<br />pawecutdg&nbsp; &nbsp;12.0<br />tolvrs&nbsp; &nbsp; &nbsp; 1.0d-1 # deliberately bad to quickly get to the output stage outwf.F90<br />nstep&nbsp; &nbsp; &nbsp; &nbsp;200<br />istwfk&nbsp; &nbsp; &nbsp; 2<br />occopt&nbsp; &nbsp; &nbsp; 7<br />tsmear&nbsp; &nbsp; &nbsp; 0.02<br />diemix&nbsp; &nbsp; &nbsp; 0.33<br />diemac&nbsp; &nbsp; &nbsp; 2.0&nbsp; &nbsp; &nbsp;<br /><br /># Kpoints<br />kptopt&nbsp; &nbsp; &nbsp; 1<br />ngkpt&nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp;1&nbsp; &nbsp;1<br />nshiftk&nbsp; &nbsp; &nbsp;1<br />shiftk<br />&nbsp; &nbsp; 0.0 0.0 0.0<br />nband 80<br /><br /># Geometry<br /><br />acell&nbsp; &nbsp; &nbsp; &nbsp;24.0&nbsp; &nbsp; 24.0&nbsp; &nbsp; 14.0&nbsp; &nbsp; &nbsp;angstrom<br />natom&nbsp; &nbsp; &nbsp; &nbsp;38<br />ntypat&nbsp; &nbsp; &nbsp; 3<br />znucl&nbsp; &nbsp; &nbsp; &nbsp;6 7 1<br />typat&nbsp; &nbsp; &nbsp; &nbsp;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1 1 1 1 2 2 2 2 3 3 3 3 3 3 3 3 <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3 3 3 3 3 3<br />xangst<br />14.43267826697125&nbsp; &nbsp; &nbsp;9.54719469654066&nbsp; &nbsp; &nbsp;6.98679555192892<br />9.56971890234498&nbsp; &nbsp; &nbsp;9.55740143113795&nbsp; &nbsp; &nbsp;6.98136687410452<br />9.57830669996704&nbsp; &nbsp; 14.45323690496433&nbsp; &nbsp; &nbsp;6.99729471155192<br />14.44063286032851&nbsp; &nbsp; 14.44280830865907&nbsp; &nbsp; &nbsp;7.00065218638275<br />13.09053535559251&nbsp; &nbsp; &nbsp;9.13328020797658&nbsp; &nbsp; &nbsp;6.98306316607677<br />12.67923156052460&nbsp; &nbsp; &nbsp;7.73168327773270&nbsp; &nbsp; &nbsp;6.97936199186946<br />11.31569250083367&nbsp; &nbsp; &nbsp;7.73433869282024&nbsp; &nbsp; &nbsp;6.97757649970769<br />10.90999275359248&nbsp; &nbsp; &nbsp;9.13761393307977&nbsp; &nbsp; &nbsp;6.98028668551213<br />9.09554011542721&nbsp; &nbsp; 10.87314035126708&nbsp; &nbsp; &nbsp;6.98561843864410<br />7.72903461616869&nbsp; &nbsp; 11.31936915287400&nbsp; &nbsp; &nbsp;6.98735375088374<br />7.73139760192924&nbsp; &nbsp; 12.69760130406586&nbsp; &nbsp; &nbsp;6.99113573510774<br />9.09938031597771&nbsp; &nbsp; 13.13925447483067&nbsp; &nbsp; &nbsp;6.99243851467787<br />10.92010300631924&nbsp; &nbsp; 14.86758534532777&nbsp; &nbsp; &nbsp;7.00085421660784<br />11.33151776548370&nbsp; &nbsp; 16.26917592327966&nbsp; &nbsp; &nbsp;7.00566526340061<br />12.69511949460426&nbsp; &nbsp; 16.26616429625911&nbsp; &nbsp; &nbsp;7.00672787336548<br />13.10041479027480&nbsp; &nbsp; 14.86264378806152&nbsp; &nbsp; &nbsp;7.00242954254950<br />14.91526145037882&nbsp; &nbsp; 13.12729369433697&nbsp; &nbsp; &nbsp;6.99679680639886<br />16.28188688560975&nbsp; &nbsp; 12.68157456405687&nbsp; &nbsp; &nbsp;6.99612434170756<br />16.28001488882063&nbsp; &nbsp; 11.30329858626045&nbsp; &nbsp; &nbsp;6.99265482691192<br />14.91210592507385&nbsp; &nbsp; 10.86110781146765&nbsp; &nbsp; &nbsp;6.99071674837176<br />14.13078870987637&nbsp; &nbsp; 11.99535250594183&nbsp; &nbsp; &nbsp;6.99326588288911<br />9.88047357875540&nbsp; &nbsp; 12.00482853795923&nbsp; &nbsp; &nbsp;6.98882891763749<br />12.00192233673013&nbsp; &nbsp; &nbsp;9.96929220396100&nbsp; &nbsp; &nbsp;6.98329443280378<br />12.00837527590531&nbsp; &nbsp; 14.03130874233860&nbsp; &nbsp; &nbsp;6.99948340730862<br />15.20432290532285&nbsp; &nbsp; 15.22540747831387&nbsp; &nbsp; &nbsp;7.00200372856651<br />15.19313884171311&nbsp; &nbsp; &nbsp;8.76129846997055&nbsp; &nbsp; &nbsp;6.98744336798576<br />8.80561700326767&nbsp; &nbsp; &nbsp;8.77507783974137&nbsp; &nbsp; &nbsp;6.97949471039301<br />8.81771718378007&nbsp; &nbsp; 15.23885330665432&nbsp; &nbsp; &nbsp;6.99845713352080<br />13.37257765050554&nbsp; &nbsp; 17.11992092452597&nbsp; &nbsp; &nbsp;7.01033475042726<br />10.65751847151932&nbsp; &nbsp; 17.12561065649051&nbsp; &nbsp; &nbsp;7.00718932911153<br />17.14387397433472&nbsp; &nbsp; 13.34609132569375&nbsp; &nbsp; &nbsp;6.99830189384125<br />17.14042276570114&nbsp; &nbsp; 10.63682513020204&nbsp; &nbsp; &nbsp;6.99118969243677<br />13.35278112781582&nbsp; &nbsp; &nbsp;6.87498761980712&nbsp; &nbsp; &nbsp;6.97878434452385<br />10.63876867003055&nbsp; &nbsp; &nbsp;6.88026233515408&nbsp; &nbsp; &nbsp;6.97553810680641<br />6.87131218204644&nbsp; &nbsp; 13.36438702790796&nbsp; &nbsp; &nbsp;6.99316119368211<br />6.86695286671293&nbsp; &nbsp; 10.65501172582219&nbsp; &nbsp; &nbsp;6.98633580459881<br />10.90483155436783&nbsp; &nbsp; 12.00301405431957&nbsp; &nbsp; &nbsp;6.99005188546697<br />13.10645914541739&nbsp; &nbsp; 11.99653337020754&nbsp; &nbsp; &nbsp;6.99332769226049</code></pre></div><br /><br />A case that doesn't hang:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># Simple diamond<br /><br /># Again, settings are low to skip to the important hang part.<br /><br /># SCF/Paral - set for 16 procs over 2 nodes here. Note that on my system<br /># if I set bandpp 2 or 4, I get some nasty MPI errors also (a problem to<br /># look forward to!).<br /><br />paral_kgb&nbsp; &nbsp;1<br />npkpt&nbsp; &nbsp; &nbsp; &nbsp;2<br />npband&nbsp; &nbsp; &nbsp; 8<br />npfft&nbsp; &nbsp; &nbsp; &nbsp;2<br />bandpp&nbsp; &nbsp; &nbsp; 1<br /><br />nband&nbsp; &nbsp; &nbsp; &nbsp;32<br /><br />ecut&nbsp; &nbsp; 6.0<br />pawecutdg 15.0<br />toldfe&nbsp; 1.0d-2<br /><br /># Cell geometry<br />acell&nbsp; &nbsp; &nbsp; &nbsp;3.57 3.57 3.57 angstrom<br />natom&nbsp; &nbsp; &nbsp; &nbsp;2<br />ntypat&nbsp; &nbsp; &nbsp; 1<br />typat&nbsp; &nbsp; &nbsp; &nbsp;1 1<br />znucl&nbsp; &nbsp; &nbsp; &nbsp;6<br />rprim<br />&nbsp; &nbsp; 0.0 0.5 0.5<br />&nbsp; &nbsp; 0.5 0.0 0.5<br />&nbsp; &nbsp; 0.5 0.5 0.0<br />xred<br />&nbsp; &nbsp; 0.0 0.0 0.0<br />&nbsp; &nbsp; 0.25 0.25 0.25<br /><br /># MP sampling<br />kptopt&nbsp; &nbsp; &nbsp; 1<br />ngkpt&nbsp; &nbsp; &nbsp; &nbsp;2 2 2<br />nshiftk&nbsp; &nbsp; &nbsp;4<br />shiftk<br />&nbsp; &nbsp; 0.5 0.5 0.5<br />&nbsp; &nbsp; 0.5 0.0 0.0<br />&nbsp; &nbsp; 0.0 0.5 0.0<br />&nbsp; &nbsp; 0.0 0.0 0.5<br /></code></pre></div><br /><br />I believe this hang might be at least one of the reasons people have reported MPI-IO problems. We're continuing analysis here and will post stuff as we can come up with it.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Bug: MPI-IO hang in WffReadWrite_mpio</h3>
+				<div class="date">Posted: <strong>Sun Jun 10, 2012 6:08 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hi Kane,<br /><br />thanks for the very detailed debugging. This is indeed delicate, and despite your checks might be due to the specific mpi-io implementation and not abinit (stress _might_). I have had lots of problems running across nodes with certain versions of openmpi - usually older versions like 1.2.6 were better. Could also be due to the io... The fact that mvapich also crashes is suspicious, however. Does anyone know if recent versions implement stricter versions of mpi-io?<br /><br />cheers<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Bug: MPI-IO hang in WffReadWrite_mpio</h3>
+				<div class="date">Posted: <strong>Tue Jun 12, 2012 7:53 am</strong></div>
+				<div class="author">by <strong>kaneod</strong></div>
+				<div class="content">Hi Matthieu,<br /><br />We've made some progress in this recently but we have not yet isolated the problematic sequence of events. It appears the problem is that different MPI threads are blocking each others attempts at writing during the MPI_FILE_WRITE_ALL call. We don't know exactly how yet. It only happens across infiniband and not on a single node, but the ROMIO implementation passes all conventional tests across nodes.<br /><br />All we can say for sure at the moment is that this is a thread safety/file locking problem. The WFK write is not a speed-critical element compared to the other sections of the code so one long-term strategy might be to have a safe gather policy and only write from the master process. My problem is that I need KGB parallelization and mpi-io is a prerequisite - otherwise I'd not compile it in.<br /><br />Since file locking is the problem, our guy working on this has come up with a partial workaround that prevents the MPI-IO hang. Once he's happy that he understands the problem and how his solution fixes it, we'll patch my private dev branch and test. Might be a while!<br /><br />Kane</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Bug: MPI-IO hang in WffReadWrite_mpio</h3>
+				<div class="date">Posted: <strong>Fri Aug 09, 2013 11:25 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hi Kane,<br /><br />any news on this (and perhaps fixes which appeared in 7.2)?</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1667&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:02:15 GMT -->
+</html>

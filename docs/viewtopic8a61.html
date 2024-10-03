@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3580&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:16:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; problem with paw pseudopotentials calculations.</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>problem with paw pseudopotentials calculations.</h2>
+		<p><a href="viewtopic27f9.html?f=9&amp;t=3580">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3580</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>problem with paw pseudopotentials calculations.</h3>
+				<div class="date">Posted: <strong>Mon May 01, 2017 11:13 pm</strong></div>
+				<div class="author">by <strong>lakhal</strong></div>
+				<div class="content">Dear abinit users,<br />I encounter a problem with paw pseudopotentials calculations.<br />I performed volume optimisation of LaCrO3 cell with 5 atoms using the new paw dataset from abinit website. I obtained a lattice parameter in a good agreement with other theoretical works. Next I tried to performe surface calculcations on LaCrO3 using supercell with 22 atoms, but I encounter a problem (overllaping spheres !!!), here after the error message in the log file. I tried to ajust the values of the variable pawovlp but we are performing position relaxation using ionmov variable and we areb unable to ajust the pawovlp value for each atomic move. <br />Can someone help me to resolve this problem<br /><br /><br /><br /><br /><br /><br />----------------------------------------------------------------------------------------<br />--- !ERROR<br />message: |<br />    Action: 1- decrease cutoff radius of PAW dataset<br />          OR  2- ajust &quot;pawovlp&quot; input variable to allow overlap (risky)<br />src_file: chkpawovlp.F90<br />src_line: 183<br />...<br /><br /><br /> leave_new : decision taken to exit ...<br /><br /> chkpawovlp : ERROR -<br />  PAW SPHERES ARE OVERLAPPING !<br />   Distance between atoms  13 and  20 is  :   1.26108<br />   PAW radius of the sphere around atom  13 is:   1.41465<br />   PAW radius of the sphere around atom  20 is:   1.41465<br />   This leads to a (voluminal) overlap ratio of 37.57 %<br /><br />--- !ERROR<br />message: |<br />    Action: 1- decrease cutoff radius of PAW dataset<br />          OR  2- ajust &quot;pawovlp&quot; input variable to allow overlap (risky)<br />src_file: chkpawovlp.F90<br />src_line: 183<br />...<br />--------------------------------------------------------------------------------<br />input file :<br /> surface lacrO3 terminée lao (nm)<br />iprcel 45<br />kptopt 1          # Option for the automatic generation of k points, taking<br /> # tsmear 0.04                # into account the symmetry<br />#pawovlp  5<br /><br />acell  7.322688  7.322688 51.258816<br /><br />rprim  1 0 0   # FCC primitive vectors (to be scaled by acell)<br />       0 1 0   <br />       0 0 1<br /><br />chkprim 0<br />nsym 0<br />  prtdensph 0<br />#nsppol  2<br />#nspden  2<br />#nspinor 1 <br />#spinat<br /> <br /><br /><br />#Definition of the atom types<br />ntypat  3          # There is only one type of atom<br />znucl 57 24 8          # The keyword &quot;znucl&quot; refers to the atomic number of the <br />                  # possible type(s) of atom. The pseudopotential(s) <br />                  # mentioned in the &quot;files&quot; file must correspond<br />                  # to the type(s) of atom. Here, the only type is Silicon.<br />natfixx 22<br />natfixy 22<br />natfixz 2<br />iatfixx 1  2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22  <br />iatfixy 1  2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 <br />iatfixz 1 10              <br />nband 95<br />occopt 1<br />#Definition of the atoms<br />natom 22      <br />typat   5*1     4*2     13*3<br /> xred <br /> 0.00000000  0.00000000    0.50000000<br /> 0.00000000  0.00000000    0.64285714<br /> 0.00000000  0.00000000    0.78571429<br /> 0.00000000  0.00000000    0.21428571<br /> 0.00000000  0.00000000    0.35714286<br /> <br />0.50000000     0.50000000   0.57142857<br />0.50000000     0.50000000   0.71428571<br />0.50000000     0.50000000   0.28571429<br />0.50000000     0.50000000   0.42857143<br /> <br />0.50000000    0.50000000   0.50000000<br />0.00000000    0.50000000   0.57142857<br />0.50000000    0.00000000   0.57142857<br />0.50000000    0.50000000   0.64285714<br />0.00000000    0.50000000   0.71428571<br />0.50000000    0.00000000   0.71428571<br />0.50000000    0.50000000   0.78571429<br />0.50000000    0.50000000   0.21428571<br />0.00000000    0.50000000   0.28571429<br />0.50000000    0.00000000   0.28571429<br />0.50000000    0.50000000   0.35714286<br />0.00000000    0.50000000   0.42857143<br />0.50000000    0.00000000   0.42857143<br />ntime 40<br />ionmov 2<br />#dilatmx 1.05 <br />toldff 1.0d-4<br />tolmxf 1.0d-5<br /><br />ecut 45<br />pawecutdg 90<br /><br /> ecutsm  0.5      # Maximal kinetic energy cut-off, in Hartree<br /><br />#Definition of the SCF procedure<br />nstep 40        # Maximal number of SCF cycles<br />#toldfe 1.0d-8    # Will stop when, twice in a row, the difference <br />                  # between two consecutive evaluations of total energy <br />                  # differ by less than toldfe (in Hartree) <br />                  # This value is way too large for most realistic studies of materials<br />diemac  14       # Although this is not mandatory, it is worth to<br /> diemix 0.5d0                 # precondition the SCF cycle. The model dielectric<br />                  # function used as the standard preconditioner<br />                  # is described in the &quot;dielng&quot; input variable section.<br />ixc 11<br /><br /> optforces 1</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem with paw pseudopotentials calculations.</h3>
+				<div class="date">Posted: <strong>Tue May 09, 2017 11:16 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">You can try to increase pawovlp to 50 % or so and see what happens - you don't have to change it at each step. If it ends up with a physically unreasonable situation you can check it yourself.<br /><br />Your set of constraints may make it quite hard to converge though.<br /><br />Also check out the recently developed ionmov 22 which is more efficient thant ionmov 2</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3580&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:16:16 GMT -->
+</html>

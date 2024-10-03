@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4066&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:07:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Ga-N dimer</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Ga-N dimer</h2>
+		<p><a href="viewtopic50d9.html?f=9&amp;t=4066">https://forum.abinit.org/viewtopic.php?f=9&amp;t=4066</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Ga-N dimer</h3>
+				<div class="date">Posted: <strong>Fri Mar 15, 2019 9:09 am</strong></div>
+				<div class="author">by <strong>zav_16</strong></div>
+				<div class="content">Hello,<br /><br />I try to compute cohesive energy (Ecoh) and equilibrium distance (req) of Ga-N dimer. From previous computations I have results of N-N and Ga-Ga dimers which are consistent with references. But I still have wrong results for Ga-N dimer (Ecoh = 0.8eV ref. 2.4eV, req = 1.75A ref. 1.9A). The best results (according to references) I have got in run with spin polarized option (nsppol 2 - script attached) - Ecoh = 2.3eV, req = 1.75A.<br /><br />Cohesive energy is computed with total energies of single atoms Ga/N in the box with the same dimensions.<br />All calculations were done with norm-conserving pseudopotentials from abinit webpage (<!-- m --><a class="postlink" href="https://www.abinit.org/psp-tables">https://www.abinit.org/psp-tables</a><!-- m --> - Ga.psp8, N.psp8).<br /><br />Thank you for any advise<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># Ga-N<br /># Structural optimalization of Ga-N dimer bonding distance<br /><br /><br />&nbsp; &nbsp; &nbsp; ndtset&nbsp; &nbsp;3<br /><br />&nbsp; &nbsp; &nbsp; &nbsp;acell&nbsp; &nbsp;32 32 32&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# dimensions of the empty box<br />&nbsp; &nbsp; &nbsp; &nbsp; ecut&nbsp; &nbsp;50&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# maximal kinetic energy cut-off &#91;Ha&#93;<br /><br /># First dataset: dimer Ga-N<br /><br />&nbsp; &nbsp; &nbsp; natom1&nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # there are two atoms in the unit cell<br />&nbsp; &nbsp; &nbsp;occopt1&nbsp; &nbsp;3<br />&nbsp; &nbsp; &nbsp;ionmov1&nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # can move freely<br />&nbsp; &nbsp; &nbsp;tsmear1&nbsp; &nbsp;0.001<br /><br />&nbsp; &nbsp; &nbsp; &nbsp;xred1&nbsp; &nbsp;0.45 0.0 0.0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# The starting values of the<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.55 0.0 0.0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# atomic coordinates<br />&nbsp; &nbsp; &nbsp; nband1&nbsp; &nbsp;14<br /><br />&nbsp; &nbsp; &nbsp; &nbsp;typat1&nbsp; 1 2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # these are&nbsp; Ga N<br /><br /># Second dataset: single atom of Ga<br /><br />&nbsp; &nbsp; &nbsp; natom2&nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # there is one atom in the unit cell<br />&nbsp; &nbsp; &nbsp;occopt2&nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Allow occupation numbers to be set by hand<br />&nbsp; &nbsp; &nbsp; nband2&nbsp; &nbsp;7 6&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Number of bands for spin up and spin down&nbsp; &nbsp;-----&gt; in valence 4 spin up a 1 spin down<br />&nbsp; &nbsp; &nbsp; &nbsp; occ2&nbsp; &nbsp;1 1 1 1 1 1 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Occupation numbers for spin up state and spin down state.&nbsp; ---&gt; 1st row spin up,&nbsp; 2nd row spin down<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 1 1 1 1 1 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # dimensions (nband(1)+nband(2)+...+nband(nkpt))*nsppol<br /><br />&nbsp; &nbsp; &nbsp; &nbsp;xred2&nbsp; &nbsp;0.5 0.0 0.0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # The starting values<br />&nbsp; &nbsp; &nbsp; &nbsp;nsym2&nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # not spherical symmetry<br />&nbsp; &nbsp; &nbsp;spinat2&nbsp; &nbsp;0.0 0.0 1.0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Initialisation of spin<br /><br />&nbsp; &nbsp; &nbsp; typat2&nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # This is Ga<br /><br /># Third dataset: single atom of N<br /><br />&nbsp; &nbsp; &nbsp; natom3&nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # there is one atom in the unit cell<br />&nbsp; &nbsp; &nbsp;occopt3&nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Allow occupation numbers to be set by hand<br />&nbsp; &nbsp; &nbsp; nband3&nbsp; &nbsp;4 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Number of bands for spin up and spin down&nbsp; &nbsp;-----&gt; in valence 4 spin up a 1 spin down<br />&nbsp; &nbsp; &nbsp; &nbsp; occ3&nbsp; &nbsp;1 1 1 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Occupation numbers for spin up state and spin down state.&nbsp; ---&gt; 1st row spin up,&nbsp; 2nd row spin down<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # dimensions (nband(1)+nband(2)+...+nband(nkpt))*nsppol<br /><br />&nbsp; &nbsp; &nbsp; &nbsp;xred3&nbsp; &nbsp;0.5 0.0 0.0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # The starting values<br />&nbsp; &nbsp; &nbsp; &nbsp;nsym3&nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # not spherical symmetry<br />&nbsp; &nbsp; &nbsp;spinat3&nbsp; &nbsp;0.0 0.0 1.0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Initialisation of spin<br /><br />&nbsp; &nbsp; &nbsp; typat3&nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # This is N<br /><br />#-----------------------------------------------------------------<br /><br />&nbsp; &nbsp; &nbsp; nsppol&nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Spin polarized calculation<br />&nbsp; &nbsp; &nbsp; ntypat&nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # # of atom types<br />&nbsp; &nbsp; &nbsp; &nbsp;znucl&nbsp; &nbsp;31 7&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# atomic numbers of Ga and N<br />&nbsp; &nbsp; &nbsp; &nbsp;ntime&nbsp; &nbsp;500&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # max number of iteration<br />&nbsp; &nbsp; &nbsp;optcell&nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # acell cannot change<br />&nbsp; &nbsp; &nbsp; tolmxf&nbsp; &nbsp;1.0d-4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# Stopping criterion for the geometry optimization<br /><br /># SCF calculation parameters<br /><br />&nbsp; &nbsp; &nbsp; toldfe&nbsp; &nbsp;1.0d-4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# stopping criteria for SCF<br />&nbsp; &nbsp; &nbsp; &nbsp;nstep&nbsp; &nbsp;500&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # maximal number of SCF cycles<br /><br /># Definition of K-points<br /><br />&nbsp; &nbsp; &nbsp; kptopt&nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Enter the k points manually<br />&nbsp; &nbsp; &nbsp; &nbsp; nkpt&nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Only one k point is needed for isolated system,<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # taken by default to be 0.0 0.0 0.0<br />&nbsp; &nbsp; &nbsp; diemac&nbsp; &nbsp;2.0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # macroscopic dielectric constant (speeds up SCF calculations)<br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Ga-N dimer</h3>
+				<div class="date">Posted: <strong>Fri Mar 22, 2019 5:20 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear zav_16,<br />It looks indeed strange that Ga-Ga and N-N cases are working fine but not Ga-N but after quick look I do not see what could be wrong in your input.<br />Are the reference you mention the same for the three Ga-Ga, N-N and Ga-N calculations? Are these references using the same exchange-correlation? Do you have only one reference to compare with?<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4066&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:07:43 GMT -->
+</html>

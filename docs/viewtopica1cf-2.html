@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1682&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:51:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Optimisation of ZnTe</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Optimisation of ZnTe</h2>
+		<p><a href="viewtopic50a7.html?f=9&amp;t=1682">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1682</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Optimisation of ZnTe</h3>
+				<div class="date">Posted: <strong>Mon May 28, 2012 2:53 pm</strong></div>
+				<div class="author">by <strong>malika83</strong></div>
+				<div class="content">Hello every body<br />i'm a bigginer in Abinit. i'am trying to optimise the ZnTe structure. i used optcell 0 and ionmov 2 then optcell 2 and ionmov 2.<br />i plotted Energy vs Volume. it seems strange it does not look like to the famous E vs volume.<br />what's missing? please help me.<br />Best regards</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Optimisation of ZnTe</h3>
+				<div class="date">Posted: <strong>Tue May 29, 2012 9:35 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Hi malika83!<br /><br />I've took a look (hey, this rhymes <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" />) at your files. I think there may be several reasons why you didn't get the E(V) curve.<br /><br />1] You don't have to use optcell 0 first, since atoms in zinc-blende phase have their positions fixed by symmetry. You could also use natfix and iatfix variables in optcell 2 case. Also, you can use the primitive cell in your calculation with only 2 atoms at (0,0,0) and (1/4,1/4,1/4). Then you can leave out the chkprim variable and use rprim for the fcc lattice and appropriate shifts of the k-point gird.<br />Actually, you don't even have to use BFGS method to get E(V). You could use a loop over acell, which would give you energies at several different volumes around the equilibrium volume. This way you cannot control the pressure (except indirectly via acell), but it's enough if you need only the E(V) data.<br /><br />2] Your ecut is only 10 Ha. You probably need a higher one. Same for ngkpt. Please, first make a convergence checks on these 2 variables wrt the wanted property (Etot, pressure,...). This could be the reason why your SCF cycles do not converge sometimes. The other reason could be the low SCF criterion toldfe. I would suggest 10^(-12) Ha, or maybe even better tolvrs 10^(-18).<br /><br />3] Your optimization criterion is low tolmxf 5.0000E-05 ha/bohr. I would suggest 10^(-8) with strfact 100 (or lower as needed). Maybe that's why your stresses are not near 0 [Pressure= -1.4049E-02 GPa]. It should be under 10^(-7) GPa.<br /><br />4] I don't know if diemac 12 is appropriate for ZnTe. It's good for Si, but for ZnTe it may be quite lower. Maybe that could improve your SCF convergence.<br /><br />5] There are many DFT papers on ZnTe. You may want to read some of them: RMP 75, 863 (2003); PRB 53, 6722 (1996); PRB 55, 13025 (1997).<br /><br />I hope this helps,<br /><br />Igor L.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Optimisation of ZnTe</h3>
+				<div class="date">Posted: <strong>Wed May 30, 2012 12:57 pm</strong></div>
+				<div class="author">by <strong>malika83</strong></div>
+				<div class="content">Thank you very much for the replyMr L.IGOR. I'm trying your suggestions.<br />Best regards!!!<br />Malika.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1682&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:51:08 GMT -->
+</html>

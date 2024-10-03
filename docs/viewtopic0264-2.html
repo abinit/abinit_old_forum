@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=62&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:53:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Arguments in MPI_SEND</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Arguments in MPI_SEND</h2>
+		<p><a href="viewtopic2d72.html?f=19&amp;t=62">https://forum.abinit.org/viewtopic.php?f=19&amp;t=62</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Arguments in MPI_SEND</h3>
+				<div class="date">Posted: <strong>Wed Feb 17, 2010 10:06 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">I guess this is a &quot;proposed code modification&quot;...kind of...at any rate, in berryphase_new.F90 there are several calls to MPI_SEND, in order to send wavefunctions (cg) from one processor to another (this is because in Berry's phase calculations it is necessary to overlap wavefunctions at different k points, and they may not be residing on the same processor). All of these calls include as an argument &quot;mpi_status&quot; right before &quot;ierr&quot;; however, the openmpi manual states the format for this call is <br /><br />MPI_SEND(BUF, COUNT, DATATYPE, DEST, TAG, COMM, IERROR)<br />            &lt;type&gt;    BUF(*)<br />            INTEGER   COUNT, DATATYPE, DEST, TAG, COMM, IERROR<br /><br />while the format for MPI_RECV is<br /><br />MPI_RECV(BUF, COUNT, DATATYPE, SOURCE, TAG, COMM, STATUS, IERROR)<br />            &lt;type&gt;    BUF(*)<br />            INTEGER   COUNT, DATATYPE, SOURCE, TAG, COMM<br />            INTEGER   STATUS(MPI_STATUS_SIZE), IERROR<br /><br />So, several questions: 1) why does the code even compile, let alone work? And it certainly does work. 2) with the current format, MPI_SEND returns a non-zero ierr on the first call, I think because of the &quot;wrong&quot; argument list. <br /><br />Thanks,<br />Joe</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Arguments in MPI_SEND</h3>
+				<div class="date">Posted: <strong>Thu Feb 18, 2010 11:52 am</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">Hi Joe,<br /><br />This issue is known... we regulary modify the MPI_SEND calls to suppress this extra &quot;status&quot; argument.<br />This part of the code is probably not often used... This explain why the MPI_SEND has not be corrected.<br /><br />May I give you a suggestion ?<br />You should create new xmpi_send and xmpi_receive (generic) routines in 12_hide_mpi, with the correct calls (with or without status).<br />The goal is to empty 79_seqpar directory...<br />I sometines move routines from 79_seqpar to others directories by using generic routines for MPI (I recently did that for loper3, respfn, vtorho3...).</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Arguments in MPI_SEND</h3>
+				<div class="date">Posted: <strong>Thu Feb 18, 2010 3:00 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Hi Marc,<br /><br />thanks for the response. I'm happy to do what you suggest but I don't think I quite understand. You say the goal is &quot;to empty 79_seqpar_mpi&quot;, what does that mean exactly? Is the idea that, if i replace the raw MPI_SEND and MPI_RECV with generic xmpi calls, then I can (should?) move berryphase_new.F90 to a different directory? Why? I guess I don't quite know the logic of the directory naming scheme. Or, by &quot;empty 79_seqpar_mpi&quot; you mean to empty it of calls to the raw MPI_ routines, but leave the files in place? <br /><br />Let me know--<br />thanks!<br /><br />Joe</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Arguments in MPI_SEND</h3>
+				<div class="date">Posted: <strong>Thu Feb 18, 2010 4:04 pm</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">Joe,<br /><br />My remark was related to this doc:<br /><!-- m --><a class="postlink" href="http://www.abinit.org/developers/community/abinit-6/5.8-beautification">http://www.abinit.org/developers/commun ... tification</a><!-- m --><br />(see point I03).<br />The idea is to encapsulate as much as possible calls to MPI routines (by using generic routines put in 12_hide_mpi).<br />As you probably know only directories with &quot;_mpi&quot; suffixe are compiled with the &quot;HAVE_MPI&quot; directive enabled.<br />and (I guess) the goal is to minimize the number of MPI directories.<br />So the goal is to eliminate direct calls to MPI routines (in order to be able to switch from one MPI implementation to another).<br /><br />Hope this helps...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Arguments in MPI_SEND</h3>
+				<div class="date">Posted: <strong>Thu Feb 18, 2010 4:46 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">OK, I made generic xsend_mpi and xrecv_mpi in 12_hide_mpi, they only have a couple of variants (so far) because that's all that's needed at the moment. There do not seem to be many MPI_SEND and MPI_RECV calls left in the code so I don't think I'll need to add too many other possibilities before I can replace them all with their xsend and xrecv equivalents.<br /><br />In the new xrecv_mpi, I did use the predefined status object  MPI_IGNORE_STATUS, which according to the documentation is faster because then the MPI_RECV doesn't spend time filling in the status object, and from what I can see whenever we call MPI_RECV, we don't use the status object anyway. So the new generic functions look pleasantly symmetrical:<br /><br />xsend_mpi(data,destination,tag,Comm,ierr)<br />xrecv_mpi(data,source,tag,Comm,ierr)<br /><br />So now berryphase_new.F90 is cleansed of MPI_SEND and MPI_RECV, and uses only x..mpi calls. Should I now move it to a different directory?<br /><br />thanks,<br />Joe</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Arguments in MPI_SEND</h3>
+				<div class="date">Posted: <strong>Thu Feb 18, 2010 5:32 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Hi Joe,<br /><br />you might also have a look at the xech_mpi routines defined <br />in 12_hide_mpi in which both MPI_RECV and MPI_SEND are encapsulated.<br />You might also reuse the cprj_exch and cprj_bcast routines defined in 53_abiutil/cprj_utils<br />if you need to communicate the cprj matrix elements.<br /><br />Regards<br />Matteo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Arguments in MPI_SEND</h3>
+				<div class="date">Posted: <strong>Thu Feb 18, 2010 7:48 pm</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">&quot;<em class="text-italics">So now berryphase_new.F90 is cleansed of MPI_SEND and MPI_RECV, and uses only x..mpi calls. Should I now move it to a different directory?</em>&quot;<br /><br />I'm not the manager for the 79_seqpar directory... but I would say yes.<br />One less to deal with  <img class="smilies" src="images/smilies/icon_cool.gif" alt="8-)" title="Cool" /> <br /><br />Marc</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Arguments in MPI_SEND</h3>
+				<div class="date">Posted: <strong>Thu Feb 18, 2010 10:55 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">OK, I'm trying to use cprj_exch (for example) and I know I'm being thick but I just can't understand the flow (first time I've done in // programming). With MPI_SEND and and MPI_RECV the old code does things like:<br /><br />do iproc = 1, nproc<br />  if (iproc == me) then<br />    if (relevant cprj is on my group) then<br />      get cprj<br />      MPI_SEND cprj to destinations<br />    end if<br />  end if<br />  if (iproc /= me and iproc == destination) then<br />    MPI_RECV cprj<br />  end if<br />end do<br /><br />But with cprj_exch am I supposed to do the same thing, or call it only once? (that is, every processor will call it and it will decide internally whether to act as a sender or a receiver). <br /><br />sorry for the ill-posed questions.<br />thanks-<br />Joe</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Arguments in MPI_SEND</h3>
+				<div class="date">Posted: <strong>Fri Feb 19, 2010 11:20 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">As to where to move the routine to, just check the subroutines it calls, take the maximum directory number for those (say M), and then find the most appropriate directory (by thematic) whose number is &gt; M.<br /><br />At some point the PAW directories might have to be split - a lot of stuff is ending up there  by default, just because it involves PAW (soon everything will!).<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Arguments in MPI_SEND</h3>
+				<div class="date">Posted: <strong>Sat Feb 20, 2010 1:04 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Dear Joe,<br /><br />cprj_exch is very strict in the sense that it should be called _only_ by the<br />two nodes involved in the point-to-point communication.<br />cprj_exch indeed reports an error if a node whose rank differs either from &quot;sender&quot; or &quot;receiver&quot; <br />enters the routine.<br />This precaution is needed to avoid possible programming errors that might lead to deadlocks <br />in which an MPI packet is sent but there's no receiver waiting for it or vice versa.<br /><br />I wrote cprj_exch for the generation of the KSS file needed in the GW part.<br />In this case I have to write the distributed cprj on an external file and therefore <br />each node has to send its own data to the master node that will write the final output.<br />In outkss  I'm using the following coding.<br /><br />master=0<br />receiver=master    ! We are going to collect the cprjs on master<br /><br />do iproc=0,nproc-1<br /><br />  sender = -1<br />  if (me == iproc) then <br />    sender = me<br />    !I'm the sender: extract the cprjs to be transferred and copy them in Cprj_send <br />    ....<br />  end if<br />  if (iproc = receiver) then <br />    ! I'm the receiver and I have to allocate space for the MPI packet to be received<br />    allocate(Cprj_recv)<br />    ....<br />  end <br /><br />  if (me==sender .or. me==receiver)  ! Exchange data btw the two nodes.<br />    call cprj_exch(Cprj_send,Cprj_recv,sender,receiver,spaceComm,ierr)<br />    if (me==receiver) then <br />      ! write Cprj_recv on file<br />      .....<br />      free(Cprj_recv)<br />    end if<br />  end if<br /><br />end if<br /><br />You might look at outkss.F90 for more  details.<br />I have to say, however, that I usually try to avoid MPI exchange as it complicates the implementation,<br />it's prone to errors and it's very difficult to optimize the load distribution.<br /><br />Matteo</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=62&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:53:16 GMT -->
+</html>

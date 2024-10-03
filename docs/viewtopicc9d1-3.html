@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=3268&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:32:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Can not link abinit to ELPA libraries.</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Can not link abinit to ELPA libraries.</h2>
+		<p><a href="viewtopic8610.html?f=14&amp;t=3268">https://forum.abinit.org/viewtopic.php?f=14&amp;t=3268</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Can not link abinit to ELPA libraries.</h3>
+				<div class="date">Posted: <strong>Sat Apr 16, 2016 11:51 am</strong></div>
+				<div class="author">by <strong>kinsang</strong></div>
+				<div class="content">Hi, <br />I have successfully build ELPA libraries and it passed all the tests.<br />But I can not link it to the abinit, the configure message shows  ELPA not found!<br />Have anyone successfully linked it?<br /><strong class="text-strong"><br />The .ac I wrote:</strong><br />with_linalg_flavor=&quot;mkl+elpa&quot;<br />with_linalg_incs=&quot;-I/public/soft/intel/compilers_and_libraries_2016.2.181/linux/mkl/include -I/public/home/kinsang/elpa-mmpi/include/elpa-2015.11.001/modules&quot;<br />with_linalg_libs=&quot;-L/public/soft/intel/compilers_and_libraries_2016.2.181/linux/mkl/lib/intel64 -lmkl_core  -L/public/home/kinsang/elpa-mmpi/lib -lelpa&quot;<br /><br /><strong class="text-strong">The configure log:</strong><br />==============================================================================<br /> === Feature triggers                                                       ===<br /> ==============================================================================<br /><br />configure: using tarball repository /public/home/kinsang/.abinit/tarballs<br />checking for the requested linear algebra support... mkl+elpa<br />checking whether to select a fallback for linear algebra... no<br />checking for BLAS support in specified libraries... yes<br />checking for AXPBY support in specified BLAS libraries... yes<br />checking for gemm3m in specified libraries... yes<br />checking for mkl_imatcopy in specified libraries... yes<br />checking for mkl_omatcopy in specified libraries... yes<br />checking for mkl_omatadd in specified libraries... yes<br />checking for LAPACK support in specified libraries... yes<br />checking for LAPACKE C API support in specified libraries... no<br />checking for BLACS support in specified libraries... yes<br />checking for ScaLAPACK support in specified libraries... yes<br /><span style="color: #FF0000">checking for ELPA support in specified libraries... no</span><br />checking for PLASMA support in specified libraries... no<br />checking for MAGMA (version&gt;=1.1.0) support in specified libraries... no<br /><br /><br /><br /><br /><br /><span style="color: #80BF40"><br />Btw I have passed all the ELPA tests:</span><br />make  check-TESTS<br />make[1]: Entering directory `/public/home/kinsang/workdir/elpa-2015.11.001'<br />make[2]: Entering directory `/public/home/kinsang/workdir/elpa-2015.11.001'<br />PASS: elpa1_test_real.sh<br />PASS: elpa1_test_real_with_c.sh<br />PASS: elpa1_test_real_c_version.sh<br />PASS: elpa1_test_complex_c_version.sh<br />PASS: elpa2_test_real_c_version.sh<br />PASS: elpa2_test_complex_c_version.sh<br />PASS: elpa2_test_real.sh<br />PASS: elpa2_test_real_default_kernel.sh<br />PASS: elpa1_test_complex.sh<br />PASS: elpa2_test_complex.sh<br />PASS: elpa2_test_complex_default_kernel.sh<br />PASS: elpa2_test_real_default_kernel_qr_decomposition.sh<br />PASS: elpa2_test_real_choose_kernel_with_api.sh<br />PASS: elpa2_test_complex_choose_kernel_with_api.sh<br />PASS: elpa2_print_kernels<br />============================================================================<br />Testsuite summary for elpa 2015.11.001<br />============================================================================<br /># TOTAL: 15<br /># PASS:  15<br /># SKIP:  0<br /># XFAIL: 0<br /># FAIL:  0<br /># XPASS: 0<br /># ERROR: 0<br />============================================================================<br />make[2]: Leaving directory `/public/home/kinsang/workdir/elpa-2015.11.001'<br />make[1]: Leaving directory `/public/home/kinsang/workdir/elpa-2015.11.001'</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Can not link abinit to ELPA libraries.</h3>
+				<div class="date">Posted: <strong>Mon Apr 18, 2016 10:27 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">We have identified a few bugs in the detection of linear algebra, that will be fixed in the upcoming 8.0 and 8.2 versions of Abinit.<br /><br />In the meantime, you may try the following:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../configure &#91;your options&#93; \<br />&nbsp; CPPFLAGS_EXTRA=&quot;-DHAVE_LINALG_ELPA -DHAVE_LINALG_ELPA_2015&quot; \<br />&nbsp; FPPFLAGS_EXTRA=&quot;-DHAVE_LINALG_ELPA -DHAVE_LINALG_ELPA_2015&quot;</code></pre></div></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=3268&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:32:38 GMT -->
+</html>

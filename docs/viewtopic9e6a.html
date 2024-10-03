@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=201&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:20:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Problem with paral_kgb</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Problem with paral_kgb</h2>
+		<p><a href="viewtopicc443.html?f=3&amp;t=201">https://forum.abinit.org/viewtopic.php?f=3&amp;t=201</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Problem with paral_kgb</h3>
+				<div class="date">Posted: <strong>Fri Mar 26, 2010 6:40 pm</strong></div>
+				<div class="author">by <strong>jjlow@yahoo.com</strong></div>
+				<div class="content">I have configured and built a parallel abinit executable with the Intel compilers (version 11.1.059), the mkl libraries (10.2.2.025) and mvapich2.<br /><br />I have successfully run the serial tests provided with the code.  I have run several successfull tests of parallelism over kpoints and planewaves.<br /><br />However, I have not been to run parallel over kpoints, planewaves and fft.<br /><br />I would like to use abinit on a computer with over two thousand cores and fast interconnects.  Parallelization over kpoints, planewaves and fft would help alot.<br /><br />Could anyone help me understand why my abinit executable will not run with paral_kgb=1 (parallel over kpoints, planewaves and ftt)?<br /><br />I have attached the log file from the failed si_kpt_band test case and the script I used to build the parallel version of abinit.<br /><br />Thanks<br /><br />John J. Low<br />Argonne National Laboratory</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem with paral_kgb</h3>
+				<div class="date">Posted: <strong>Thu Apr 08, 2010 4:50 pm</strong></div>
+				<div class="author">by <strong>fbottin</strong></div>
+				<div class="content">Dear John,<br /><br />I don't really understand your problem.<br />The log file enclosed in your post contains 8 datasets and a few of them involve 1 k-point only.<br />So you can't parallelize over k-point using this kind of input file.<br />In order to test the triple kpt-band-fft parallelisation I suggest to consider the 8th dataset (with 30 k-points), and only this one.<br />Set for instance npkpt=10, npband=6 and npfft=3 (these dimensions dividide nkpt, nband and ngfft, respectively).<br />For more details about these input variables, see <!-- m --><a class="postlink" href="http://www.abinit.org/documentation/helpfiles/for-v6.0/input_variables/varpar.html#paral_kgb">http://www.abinit.org/documentation/hel ... #paral_kgb</a><!-- m -->,<br />and for more details about 3-levels calculations, see our paper: <br />F. Bottin, S. Leroux, A. Knyazev and G. Zerah, Large scale ab initio calculations based on three levels of parallelization, Comput. Mat. Science 42, 329 (2008) (available on arxiv: <!-- m --><a class="postlink" href="http://arxiv.org/abs/0707.3405">http://arxiv.org/abs/0707.3405</a><!-- m -->).<br />For this 3-levels calculation you need 180 procs at all, which is a good test for a first 3-levels calculation.<br />And, you sould obtain a very poor scaling since the system is very small <img class="smilies" src="images/smilies/icon_e_wink.gif" alt=";)" title="Wink" /><br /><br />Regards,<br />Francois Bottin<br /><br />NB: I suggest also to switch to wfoptalg 14 (more efficient and more stable).</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=201&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:20:43 GMT -->
+</html>

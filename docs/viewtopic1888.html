@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=2065&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:14:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Maybe a tiny mistake in sigma.F90</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Maybe a tiny mistake in sigma.F90</h2>
+		<p><a href="viewtopic35c6.html?f=11&amp;t=2065">https://forum.abinit.org/viewtopic.php?f=11&amp;t=2065</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Maybe a tiny mistake in sigma.F90&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Tue Apr 02, 2013 7:24 pm</strong></div>
+				<div class="author">by <strong>Zhang Xiaole</strong></div>
+				<div class="content">Dear developers,<br />    Between the line 331 and 340 in code sigma.F90, the code add these lines to test the hybrid functional HSE. However, the condition<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;&#91;Dtset%gwcalctyp&gt;=200 .AND. Dtset%gwcalctyp &lt;300&#93; </code></pre></div>for the 'if' statement corresponding to the PBE0 hybrid functional, which result in the PBE0 hybrid functional was disabled. According to the output file of t41in Refs dictory, the test aslo stopped in DATASET 3 , which used to test the PBE0 hybrid functional. After i revised the sigma.F90 code by changeing the condition to <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;&#91;Dtset%gwcalctyp&gt;=100 .AND. Dtset%gwcalctyp &lt;200&#93; </code></pre></div>, everthing worked well. So i think there maybe a mistake in the sigma.F90 source code.<br /><br /><br />Sheleon</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Maybe a tiny mistake in sigma.F90</h3>
+				<div class="date">Posted: <strong>Mon May 13, 2013 9:10 am</strong></div>
+				<div class="author">by <strong>bruneval</strong></div>
+				<div class="content">Thanks.<br />It will be fixed in the forthcoming version.<br /><br />Fabien</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=2065&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:14:45 GMT -->
+</html>

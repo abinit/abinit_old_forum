@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1844&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:55:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; how to calculate surface band structure</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>how to calculate surface band structure</h2>
+		<p><a href="viewtopic4223.html?f=9&amp;t=1844">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1844</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>how to calculate surface band structure</h3>
+				<div class="date">Posted: <strong>Tue Sep 25, 2012 4:36 pm</strong></div>
+				<div class="author">by <strong>sevket simsek</strong></div>
+				<div class="content">Dear abinit user.<br /><br />I would like to calculate surface band structure of materials. Abinit can calculate surface energy of materials, but I don't know whether it calculate surface band structure. is there anyone that calculated surface band structure before.if there is, can yo send me an input file for surface band structure<br /><br />Best regards...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: how to calculate surface band structure</h3>
+				<div class="date">Posted: <strong>Wed Sep 26, 2012 3:21 am</strong></div>
+				<div class="author">by <strong>kaneod</strong></div>
+				<div class="content">Hi,<br /><br />The way people normally do a surface bandstructure calculation is to do a normal bandstructure calculation on a surface slab geometry. You should use a 2D BZ path because there should be no dispersion perpendicular to the slab for any surface states. <br /><br />There are tutorials on how to calculate bandstructure on the abinit.org website.<br /><br />The trouble with surface bandstructure is you need to determine which bands are &quot;bulk&quot; and which are &quot;surface&quot;. The easiest way to do this is to do a series of *bulk* bandstructure calculations for your bulk material around the same BZ path as your surface calculation but over a range of K values perpendicular to the slab. You superimpose these as shading over the surface bands - this is how surface bandstructure is normally displayed in papers. It's not really that easy to describe but if you understand what a surface bandstructure is and you have appropriate solid state physics knowledge you should be able to figure it out. If you search the web for talks on surface bandstructure and DFT you will find plenty of slides that show this kind of thing - if I recall correctly I think Vanderbilt (the guy who invented the ultrasoft method, not the University) himself has a set of lecture slides on this topic on the web.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: how to calculate surface band structure</h3>
+				<div class="date">Posted: <strong>Wed Sep 26, 2012 9:14 am</strong></div>
+				<div class="author">by <strong>sevket simsek</strong></div>
+				<div class="content">Dear Dr Kane,<br /><br />First of all, thank you very much for your reply,<br />I calculated bulk band structure. I don't know how is done a slab. I only need an input file example how is done a slab.   Before I have studied input file for bulk band strucure is following.<br /><br />How do I need to edit this input file  for surface band structure?<br /><br />Best regards...<br />###########################################<br /># AgNbO3 <br /># Computation of the band structure.<br />ndtset 2<br />#Dataset 1 : usual self-consistent calculation<br />kptopt1 1              <br />nshiftk1 1<br />shiftk1  0.5 0.5 0.5           <br />ngkpt1  8 8 8  <br />prtden1  1         <br />toldfe1  1.0d-6    <br />prtdos1 2<br />enunit1 1<br />#Dataset 2 : the band structure<br />iscf2    -2<br />getden2  -1<br />kptopt2  -5<br />nband2   30<br />ndivk2   10 10 10 10 10                       <br />kptbounds2  0.0  0.0  0.0 # Gamma point<br />            0.0  0.5  0.0 # X point<br />            0.5  0.5  0.0 # M point<br />            0.5  0.5  0.5 # R point<br />            0.0  0.0  0.0 # Gamma point in another cell.<br />            0.5  0.5  0.0 # M point           <br />tolwfr2  1.0d-12<br />enunit2  1           <br />#Definition of the unit cell<br />acell 3*7.4608699023E+00         <br />angdeg 3*90.0<br />#Definition of the atom types<br />ntypat 3          <br />znucl 47 41 8          <br />#Definition of the atoms<br />natom 5<br />typat 1 2 3*3  <br />xred   0.0 0.0 0.0 <br />       0.5 0.5 0.5<br />       0.5 0.5 0.0<br />       0.5 0.0 0.5<br />       0.0 0.5 0.5<br />#Definition of the planewave basis set<br />ecut 40.0        <br />#Definition of the SCF procedure<br />nstep 1000          <br /><br />###############################################</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: how to calculate surface band structure</h3>
+				<div class="date">Posted: <strong>Fri Sep 28, 2012 7:18 am</strong></div>
+				<div class="author">by <strong>kaneod</strong></div>
+				<div class="content">By &quot;slab&quot;, I just mean a cell that contains a thin section of your material and a vacuum gap - the same kind of geometry you use for studying surfaces in DFT. An excellent example (for CASTEP, not ABINIT) is given here:<br /><br /><!-- m --><a class="postlink" href="http://www.tcm.phy.cam.ac.uk/~mjr/vis/cell.html">http://www.tcm.phy.cam.ac.uk/~mjr/vis/cell.html</a><!-- m --><br /><br />As you can see in the graphic there is a thin section of material, in that case, silicon, and vacuum either side. Because of the periodic boundary conditions, this looks like an infinite sheet of material with finite thickness. You always have to converge your quantity of interest with respect to the thickness of the slab (ie number of atoms in the slab) and the vacuum gap. The use of slabs in DFT is a large subject area with lots of gotchas - if you are new to it, put calculating the surface bandstructure on the shelf for the moment and learn about things like calculating adsorption energies of atoms, optimizing surface reconstructions, calculating workfunctions, these are all good tasks for learning about DFT in surface science.<br /><br />Rather than provide an abinit input file for you, I'd rather you learnt this sort of thing for yourself as there are a *lot* of little things you need to know about what is actually going on. The easiest way in abinit to generate the surface geometry itself is just use the latest version of Avogadro (a GUI program for building structures) - it has an Abinit input file generator.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1844&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:55:27 GMT -->
+</html>

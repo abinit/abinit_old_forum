@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=3924&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:25:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; PAW dataset and spin polarized calculations</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>PAW dataset and spin polarized calculations</h2>
+		<p><a href="viewtopicb3be.html?f=14&amp;t=3924">https://forum.abinit.org/viewtopic.php?f=14&amp;t=3924</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>PAW dataset and spin polarized calculations</h3>
+				<div class="date">Posted: <strong>Sun Sep 23, 2018 8:26 am</strong></div>
+				<div class="author">by <strong>rajaraman</strong></div>
+				<div class="content">I was testing spin polarised tutorials as I need to work with Fe based systems. <br />while the abinit provided normconserving PSP is working exactly as given in tutorial, paw potential does not give spin polarisation.  Am I missing additional settings?<br />here is the &quot;occ&quot; info  from outputs.<br />PSPNC (26fe.pspnc)<br />   occopt =       3   xclevel =       1<br />    occopt =       3   xclevel =       1<br />              occ1     2.000000  2.000000  2.000000  2.000000  0.000000  0.000000<br />              occ2     1.000000  1.000000  1.000000  1.000000  0.000000  0.000000<br />           occopt           3<br />      occupation numbers for kpt#   1<br />      occupation numbers for kpt#   1<br />      occupation numbers for kpt#   1<br />              occ1     2.000000  1.999891  1.999891  1.229151  1.229151  0.286756<br />              occ2     1.000000  0.999995  0.999995  0.983960  0.983960  0.694675<br />           occopt           3<br /><br />PAW (Fe.GGA_PBE-JTH.xml)<br />    occopt =       3   xclevel =       2<br />    occopt =       3   xclevel =       2<br />              occ1     2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />              occ2     1.000000  1.000000  1.000000  1.000000  1.000000  1.000000<br />           occopt           3<br /> Augmentation waves occupancies Rhoij:<br />      occupation numbers for kpt#   1<br /> Augmentation waves occupancies Rhoij:<br />      occupation numbers for kpt#   1<br />      occupation numbers for kpt#   1<br />              occ1     2.000000  2.000000  2.000000  2.000000  2.000000  2.000000<br />              occ2     1.000000  1.000000  1.000000  1.000000  1.000000  1.000000<br />           occopt           3</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: PAW dataset and spin polarized calculations</h3>
+				<div class="date">Posted: <strong>Sun Sep 23, 2018 11:56 am</strong></div>
+				<div class="author">by <strong>rajaraman</strong></div>
+				<div class="content">Found that the spin tutorial potential file (26fe.pspnc) had 8 valance electrons, while PAW treats 16 valance electrons.<br />generated new paw potential with 8 valance electrons (4s2-3d6) (see attached file). <br />This one atleast started working for spin polarisation, though the magnetisation value is still off.<br />Mya be I have to tune the PAW potential?<br />Is it still possible to use the 16 valance electrons case for paw potential and tune other paramaters to work with spin polarised calculations?<br /><br />Fe_prim_111/spin/paw_8e$ grep Magnet ../pspnc/fe.out<br /> Magnetization (Bohr magneton)=  1.96743463E+00<br /><br />Fe_prim_111/spin/paw_8e$ grep Magnet fe.out0001<br /> Magnetization (Bohr magneton)=  2.32388264E+00</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: PAW dataset and spin polarized calculations&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Tue Oct 09, 2018 5:53 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear rajaraman,<br />Yes you can use the 16 electrons PAW dataset (JTH I guess?), no problem. However, adapt the number of band of your calculation to be sure. Be careful that the grid of k-point is not converged at all for this kind of system, please check how it goes with k-point grid.<br />For the pseudopotentials I would advise you to use the ones from the pseudodojo website:<br /><a href="http://www.pseudo-dojo.org/" class="postlink">http://www.pseudo-dojo.org/</a><br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: PAW dataset and spin polarized calculations</h3>
+				<div class="date">Posted: <strong>Sat Oct 27, 2018 12:25 pm</strong></div>
+				<div class="author">by <strong>rajaraman</strong></div>
+				<div class="content">Thank you Eric.<br />Sure I will check convergence.<br />regards'<br />-rajaraman</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=3924&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:25:56 GMT -->
+</html>

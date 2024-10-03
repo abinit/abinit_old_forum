@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=2681&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:58:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; trying and failing to add a new test</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>trying and failing to add a new test</h2>
+		<p><a href="viewtopice0d4-2.html?f=19&amp;t=2681">https://forum.abinit.org/viewtopic.php?f=19&amp;t=2681</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>trying and failing to add a new test</h3>
+				<div class="date">Posted: <strong>Wed Jun 04, 2014 6:50 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Hi,<br /><br />I'm trying to add a new test (t70.in in v7) but the system doesn't find it. I've added t70.in to tests/v7/Input, added t70.out to tests/v7/Refs, and added a line to __init__.py in the tests/v7 directory. But running the following:<br /><br />../../tests/runtests.py v7[70]<br /><br />from the tests subdirectory of my build subdirectory gives the following output:<br /><br />FortranCompiler: gfortran None<br />test_suite is empty. No test fulfills the requirements specified by the user!<br />Test_suite directory already exists! Old files will be removed<br />Running ntests = 0, MPI_nprocs = 1, py_nthreads = 1...<br />/home/jzwanzig/code/abinit/7.8/7.8.0-private/tests/pymods/testsuite.py:2962: UserWarning: len(self) == 0<br />  warn(&quot;len(self) == 0&quot;)<br />Test suite results in HTML format are available in Test_suite/suite_report.html<br /><br /><br />any suggestions?<br /><br />thanks,<br />Joe</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: trying and failing to add a new test&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Thu Jun 05, 2014 3:05 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">OK, I figured out my problem--when adding a new test it is necessary also to do<br /><br />../../tests/runtests.py --regenerate<br /><br />to re-make the database. The instructions do say this but it is buried at the bottom as an &quot;additional note&quot;. It would be better to make it step 6 of the instruction list.<br /><br />Also, I found that the --regenerate option also causes *all* the tests to be executed, in addition to just re-building the database. I think it would be better if this option only re-built the database but didn't actually run any tests. (For example, if you have compiled with all optimizations off, for debugging, and you trigger all the tests with a single thread, you're in for a long wait). Matteo, comments?<br /><br />thanks,<br />Joe</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: trying and failing to add a new test</h3>
+				<div class="date">Posted: <strong>Tue Jun 17, 2014 1:14 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Hi Joe,<br /><br />By default the script runs the entire test suite if not argument is provided. This is handy because otherwise one should<br />specify some kind of option e.g. `runtests.py --all` or an argument e.g. `runtests.py all` to run all the tests. <br />This is indeed a possible solution but on the other hand I've already taken into the case in which one wants to regenerate the pickle<br />database and then run only a subset of tests. Use<br /><br />1) runtests v1[1] --regenerate  <br /><br />to regenerate the database and run v[1])<br /><br />or<br /> <br />2) runtests --regenerate --dry-run  (or -d)<br /><br />to bypass the execution of the tests <br /><br />TIP: In the new version I've added several new handy options <br /><br />A) -m#num_make_threads<br /><br />to recompile the code before running the tests, e.g runtests.py v3 -k GW -m4 --regenerate -j2 -n2<br /> <br />B) runtests.py v3[30] --gdb <br /><br />to run the test under the control of the gnu debugger. You can also try to debug a MPI run (-n2 --gdb)<br />but there are cases in which this trick may not work<br /><br />Best,<br />Matteo</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=2681&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:58:56 GMT -->
+</html>

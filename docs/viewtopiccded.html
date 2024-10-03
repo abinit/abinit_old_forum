@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2751&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:39:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; abinit 7.8.2 tests [libxc][t03] and [v67mbpt][t28] failed</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>abinit 7.8.2 tests [libxc][t03] and [v67mbpt][t28] failed</h2>
+		<p><a href="viewtopic361f.html?f=3&amp;t=2751">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2751</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>abinit 7.8.2 tests [libxc][t03] and [v67mbpt][t28] failed</h3>
+				<div class="date">Posted: <strong>Wed Jul 30, 2014 1:09 am</strong></div>
+				<div class="author">by <strong>weitong</strong></div>
+				<div class="content">Following is my build.ac.  <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>enable_64bit_flags=&quot;yes&quot;<br />prefix=&quot;/usr/local/abinit7.8.2_mpich3intel13&quot;<br />CC=&quot;mpicc&quot;<br />CXX=&quot;mpicxx&quot;<br />FC=&quot;mpif90&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_prefix=&quot;/usr/local/mpich3_intel13&quot;<br />with_trio_flavor=&quot;netcdf+etsf_io+fox&quot;<br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_libs=&quot;-L/opt/intel/mkl/lib/intel64 -Wl,--start-group&nbsp; -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group&quot;<br />with_linalg_flavor=&quot;mkl&quot;<br />with_linalg_libs=&quot;-L/opt/intel/mkl/lib/intel64 -Wl,--start-group&nbsp; -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group&quot;<br />with_dft_flavor=&quot;atompaw+bigdft+libxc+wannier90&quot;<br />enable_gw_dpc=&quot;yes&quot;<br /></code></pre></div><br /><br />Run tests suit, it gives the results:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Suite&nbsp; &nbsp; &nbsp; &nbsp; failed&nbsp; passed&nbsp; succeeded&nbsp; skipped&nbsp; disabled&nbsp; run_etime&nbsp; tot_etime<br />atompaw&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; 17.11&nbsp; &nbsp; &nbsp; 17.59<br />bigdft&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;3&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;19&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;509.55&nbsp; &nbsp; &nbsp;512.61<br />built-in&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 7&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; 11.55&nbsp; &nbsp; &nbsp; 12.24<br />etsf_io&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 7&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; 15.86&nbsp; &nbsp; &nbsp; 16.85<br />fast&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;11&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; 42.58&nbsp; &nbsp; &nbsp; 45.42<br />fox&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; 90.13&nbsp; &nbsp; &nbsp; 90.40<br />gpu&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; 4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0.00&nbsp; &nbsp; &nbsp; &nbsp;0.00<br />libxc&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;16&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;227.47&nbsp; &nbsp; &nbsp;235.15<br />mpiio&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp;13&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;2.75&nbsp; &nbsp; &nbsp; &nbsp;2.88<br />paral&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;5&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;16&nbsp; &nbsp; &nbsp; &nbsp;68&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;487.02&nbsp; &nbsp; &nbsp;495.17<br />seq&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;18&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0.00&nbsp; &nbsp; &nbsp; &nbsp;0.01<br />tutoparal&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0.48&nbsp; &nbsp; &nbsp; &nbsp;0.53<br />tutoplugs&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; 19.72&nbsp; &nbsp; &nbsp; 20.48<br />tutorespfn&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;8&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;14&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; 1184.58&nbsp; &nbsp; 1201.21<br />tutorial&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;7&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;41&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;887.37&nbsp; &nbsp; &nbsp;902.54<br />unitary&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;21&nbsp; &nbsp; &nbsp; &nbsp;13&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; 89.71&nbsp; &nbsp; &nbsp; 90.69<br />v1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;74&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;232.01&nbsp; &nbsp; &nbsp;245.96<br />v2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; 12&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;67&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;288.21&nbsp; &nbsp; &nbsp;305.81<br />v3&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; 12&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;68&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;450.59&nbsp; &nbsp; &nbsp;479.16<br />v4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; 17&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;45&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;531.12&nbsp; &nbsp; &nbsp;555.42<br />v5&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; 17&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;57&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; 1065.16&nbsp; &nbsp; 1105.31<br />v6&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; 12&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;48&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;779.16&nbsp; &nbsp; &nbsp;809.91<br />v67mbpt&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;12&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;308.22&nbsp; &nbsp; &nbsp;314.31<br />v7&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; 13&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;16&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp;644.34&nbsp; &nbsp; &nbsp;659.04<br />vdwxc&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; 13.60&nbsp; &nbsp; &nbsp; 13.69<br />wannier90&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;7&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; 38.17&nbsp; &nbsp; &nbsp; 39.20<br /></code></pre></div><br /><br />The suite_report.html gives<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Results of test &#91;libxc&#93;&#91;t03&#93;&#91;np=1&#93;<br />MPI nprocs = 1, run_etime = 4.93 s, tot_etime = 5.02 s<br />stdin, stdout, stderr<br /><br />File_to_test &nbsp; &nbsp;Status &nbsp; &nbsp;fld_output &nbsp; &nbsp;fld_options &nbsp; &nbsp;txt_diff &nbsp; &nbsp;html_diff<br />t03.out&nbsp; &nbsp;failed&nbsp; &nbsp;t03.out.fldiff&nbsp; &nbsp;&#91;'-medium'&#93;&nbsp; &nbsp;t03.out.diff&nbsp; &nbsp;<br /><br />t03.out failed: absolute error 0.2 &gt; 0.11 <br /></code></pre></div><br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Results of test &#91;v67mbpt&#93;&#91;t28&#93;&#91;np=1&#93;<br />MPI nprocs = 1, run_etime = 4.43 s, tot_etime = 4.63 s<br />stdin, stdout, stderr<br /><br />File_to_test &nbsp; &nbsp;Status &nbsp; &nbsp;fld_output &nbsp; &nbsp;fld_options &nbsp; &nbsp;txt_diff &nbsp; &nbsp;html_diff<br />t28.out&nbsp; &nbsp;failed&nbsp; &nbsp;t28.out.fldiff&nbsp; &nbsp;&#91;'-medium'&#93;&nbsp; &nbsp;t28.out.diff&nbsp; &nbsp;<br /><br />t28.out failed: relative error 0.9148 &gt; 0.5 <br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 7.8.2 tests [libxc][t03] and [v67mbpt][t28] faile</h3>
+				<div class="date">Posted: <strong>Wed Jul 30, 2014 3:45 pm</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Hi,<br /><br />According to the fact that you have only 2 failed tests, and that the error are quite close to the tolerence criteria, you can assume your abinit works.<br /><br />Numerical error are du to the way cpu actually do the calculation and how the code was compiled. So you may give the operating system you use and the cpu on you computer and the version of each compiler/library you use as well as the dft_flavors ( in particular libxc ).<br /><br />Cheers,<br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 7.8.2 tests [libxc][t03] and [v67mbpt][t28] faile</h3>
+				<div class="date">Posted: <strong>Sat Aug 02, 2014 9:03 pm</strong></div>
+				<div class="author">by <strong>weitong</strong></div>
+				<div class="content">Thanks.<br /> My OS is CentOS 6.5- 64bit. Compiler is mpicc and mpif90 for MPICH version 3.1, icc and ifort version 13.1.3.192 Build 20130607  (gcc version 4.4.7 compatibility).<br />dft_flavor=&quot;atompaw+bigdft+libxc+wannier90&quot;, atompaw-3.1.0.2, bigdft-1.7.0.93, bigdft-abi-1.0.4, libxc-2.0.3.<br /><br /><blockquote><div><cite>Jordan wrote:</cite>Hi,<br /><br />According to the fact that you have only 2 failed tests, and that the error are quite close to the tolerence criteria, you can assume your abinit works.<br /><br />Numerical error are du to the way cpu actually do the calculation and how the code was compiled. So you may give the operating system you use and the cpu on you computer and the version of each compiler/library you use as well as the dft_flavors ( in particular libxc ).<br /><br />Cheers,<br /><br />Jordan</div></blockquote></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 7.8.2 tests [libxc][t03] and [v67mbpt][t28] faile</h3>
+				<div class="date">Posted: <strong>Mon Aug 04, 2014 3:39 pm</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Abinit is tested on CentOs 6.5 with intel 13.1.3 compiler and openmpi 1.6.5 MKL11.0 and FFTW3 (from MKL) and libxc.<br /><br />Our config file is very likely yours :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_prefix=&quot;/usr/local/openmpi_intel13&quot;<br />with_trio_flavor=&quot;netcdf+etsf_io+fox&quot;<br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_libs=&quot;-L/opt/intel/mkl/lib/intel64 -Wl,--start-group&nbsp; -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group&quot;<br />with_linalg_flavor=&quot;mkl&quot;<br />with_linalg_libs=&quot;-L/opt/intel/mkl/lib/intel64 -Wl,--start-group&nbsp; -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group&quot;<br />with_dft_flavor=&quot;atompaw+bigdft+libxc+wannier90&quot;<br />enable_clib=&quot;yes&quot;<br />enable_gw_dpc=&quot;yes&quot;<br />enable_memory_profiling=&quot;no&quot;<br />enable_openmp=&quot;no&quot;<br />enable_maintainer_checks=&quot;no&quot;<br /></code></pre></div><br /><br />The CPU is an Intel Xeon. What do you have ? You should post the t03.out and t28.out so we can investigate.<br /><br />Cheers.<br /><br />PS : As I said, I would not worry about those 2 errors (especially if you don't want to use  MBPT nor functionnal such as BLYP BP OLYP (thoses tested in t03).</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 7.8.2 tests [libxc][t03] and [v67mbpt][t28] faile</h3>
+				<div class="date">Posted: <strong>Fri Aug 08, 2014 3:15 pm</strong></div>
+				<div class="author">by <strong>weitong</strong></div>
+				<div class="content">Thanks.<br />My CPU is 2x Xeon E5-2690. Attached please find 2 files, t03.out (libxc) and t28.out (v67mbpt).<br />Meanwhile, I am going to try openmpi.<br />---Just tested: with openmpi 1.6 +intel13., it shows the same error.<br />WT</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 7.8.2 tests [libxc][t03] and [v67mbpt][t28] faile&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Mon Aug 18, 2014 5:08 pm</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">I've had a look to your tests and compared them to the references.<br />To me, there is no significant difference. For the libxc test, note that none of the dataset is converged and thus you can not expect the first 6 iterations to be exactely the same. But when convergency is reached the results should be the same.<br />The main difference is the FFT used in your case (312) when the references were built with (112). The default value has recently changed. That coul be the explanation.<br /><br />Conclusion : your installation is ready for production.<br /><br />Cheers<br /><br />Jordan</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2751&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:39:12 GMT -->
+</html>

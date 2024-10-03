@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=2193&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:02:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; MLWF calc: glibc detected invalid pointer</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>MLWF calc: glibc detected invalid pointer</h2>
+		<p><a href="viewtopicb64e.html?f=19&amp;t=2193">https://forum.abinit.org/viewtopic.php?f=19&amp;t=2193</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>MLWF calc: glibc detected invalid pointer</h3>
+				<div class="date">Posted: <strong>Thu Jun 13, 2013 5:06 pm</strong></div>
+				<div class="author">by <strong>raul_l</strong></div>
+				<div class="content">Perhaps somebody can check if the following is a bug. I'm doing a standard calculation of producing MLWFs, but my calculation terminates if I use<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>typat 1 2 3 3 3 3 1 2 3 3 3 3<br />xred<br />0.500 0.3027&nbsp; 0.75 # Cd<br />0.000 0.17847 0.25 # W<br />0.242 0.372&nbsp; &nbsp;0.384 # O<br />0.202 0.096&nbsp; &nbsp;0.951 # O<br />0.758 0.372&nbsp; &nbsp;0.116 # O<br />0.798 0.096&nbsp; &nbsp;0.549 # O<br />0.500 0.6973&nbsp; 0.25 # Cd<br />0.000 0.82153 0.75 # W<br />0.758 0.628&nbsp; &nbsp;0.616 # O<br />0.798 0.904&nbsp; &nbsp;0.049 # O<br />0.242 0.628&nbsp; &nbsp;0.884 # O<br />0.202 0.904&nbsp; &nbsp;0.451 # O<br /></code></pre></div><br />instead of<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>typat 1 1 2 2 3 3 3 3 3 3 3 3<br />xred<br />0.500 0.3027&nbsp; 0.75 # Cd<br />0.500 0.6973&nbsp; 0.25 # Cd<br />0.000 0.17847 0.25 # W<br />0.000 0.82153 0.75 # W<br />0.242 0.372&nbsp; &nbsp;0.384 # O<br />0.202 0.096&nbsp; &nbsp;0.951 # O<br />0.758 0.372&nbsp; &nbsp;0.116 # O<br />0.798 0.096&nbsp; &nbsp;0.549 # O<br />0.758 0.628&nbsp; &nbsp;0.616 # O<br />0.798 0.904&nbsp; &nbsp;0.049 # O<br />0.242 0.628&nbsp; &nbsp;0.884 # O<br />0.202 0.904&nbsp; &nbsp;0.451 # O<br /></code></pre></div><br />(The only difference is in the order.)<br />I'm not sure if this is related to abinit or wannier90. I have already described the problem <a href="viewtopic9fdd.html?f=12&amp;t=2189" class="postlink">here</a>. I have attached the input which reproduces the problem, using the following datasets taken from the abinit website:<br />048-Cd-gpbe-campos-mod<br />074-W-gpbe-nsp-campos-mod <br />008-O-gpbe--bm<br /><br />The first calculation, run in parallel, produces the required WFK and DEN files and finishes normally in either case. The second part, for generating MLWFs in serial, only finishes normally if for 'typat' and 'xred' parameters I first specify the coordinates of one atom type before moving to the next atom type.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=2193&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:02:15 GMT -->
+</html>

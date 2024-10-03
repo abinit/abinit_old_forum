@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3275&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:36:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; BUG:  about to overwrite gbound in sphereboundary.F90</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>BUG:  about to overwrite gbound in sphereboundary.F90</h2>
+		<p><a href="viewtopic1386.html?f=9&amp;t=3275">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3275</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>BUG:  about to overwrite gbound in sphereboundary.F90</h3>
+				<div class="date">Posted: <strong>Wed May 04, 2016 2:03 pm</strong></div>
+				<div class="author">by <strong>recohen</strong></div>
+				<div class="content">I am getting:<br /><br />--- !BUG<br />message: |<br />    iloop,igb,mgb=       2      69      68<br />    about to overwrite gbound.<br />src_file: sphereboundary.F90<br />src_line: 251<br />...<br /><br /><br />and<br />Image              PC                Routine            Line        Source             <br />libifcore.so.5     00002B193ABE0CC9  Unknown               Unknown  Unknown<br />abinit             00000000022B63B3  Unknown               Unknown  Unknown<br />abinit             0000000001926106  Unknown               Unknown  Unknown<br />abinit             00000000006E8788  Unknown               Unknown  Unknown<br />abinit             00000000005FE760  Unknown               Unknown  Unknown<br />abinit             00000000005A81BF  Unknown               Unknown  Unknown<br />abinit             000000000059DF1D  Unknown               Unknown  Unknown<br />abinit             0000000000590E14  Unknown               Unknown  Unknown<br />abinit             000000000053EFA9  Unknown               Unknown  Unknown<br />abinit             000000000042E1CB  Unknown               Unknown  Unknown<br />abinit             00000000004151C8  Unknown               Unknown  Unknown<br />abinit             000000000040B403  Unknown               Unknown  Unknown<br /><br />The input runs fine under abinit 7.2, but not in 7.4 or later. The input is available to someone who can help. I don't want to post it generally. It is a 10 atom relaxation calculation of an insulator using PAWs--nothing unusual.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: BUG:  about to overwrite gbound in sphereboundary.F90</h3>
+				<div class="date">Posted: <strong>Fri May 06, 2016 8:06 pm</strong></div>
+				<div class="author">by <strong>recohen</strong></div>
+				<div class="content">I don't understand it, but I changed:<br /><br />paral_kgb 1 npband 1 npfft 1 npkpt 28<br />to<br />paral_kgb 1 npband 1 npfft 4 npkpt 14<br /><br />and now it works (on more processors too). I don't understand this. I have no fft keywords in my input so it should be choosing the correct set. Before this <br />I tried dialing in nfftg by hand by any numbers I put in gave the same failure. My input without structure info is:<br /><br />paral_kgb 1 npband 1 npfft 4 npkpt 14<br />ecutsm 0.5 <br />dilatmx 1.1 <br />znucl  82 22 8 <br />ngkpt 6 6 6<br />shiftk 0.5 0.5 0.5<br />occopt 6<br />#tsmear 0.005<br />pawecutdg 56<br />ecut 40<br />ixc 23<br />nstep 100 <br />kptopt 1<br />toldfe 1.0d-8<br />iscf 17<br />npulayit 3<br />pawmixdg 1<br />iprcel 45<br />ionmov 2<br />optcell 2<br />ntime 50<br />strtarget 3*-0.002719143138176   3*0.0<br />restartxf=-2</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>segfault crash in pawgrnl</h3>
+				<div class="date">Posted: <strong>Wed May 11, 2016 2:06 am</strong></div>
+				<div class="author">by <strong>recohen</strong></div>
+				<div class="content">This problem continues. It seems it is crashing in pawgrnl with a segfault when i run on a different machine. Any suggestions?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: BUG:  about to overwrite gbound in sphereboundary.F90</h3>
+				<div class="date">Posted: <strong>Tue Jun 21, 2016 5:06 pm</strong></div>
+				<div class="author">by <strong>gabriel.antonius</strong></div>
+				<div class="content">The problem comes from the fft grid being recomputed as the cell parameters change during optimization. The specific values for your unit cell and ecut are pathological for some reason. I don't know how to fix it completely, but there is a way around.<br /><br />Try increasing the value of ecut. Since ecut dictates the size of the fft grid, by playing with this variables, you might just find a value that avoids the problem.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3275&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:36:54 GMT -->
+</html>

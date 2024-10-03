@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1116&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:23:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Actual running on gpu</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Actual running on gpu</h2>
+		<p><a href="viewtopic783d.html?f=3&amp;t=1116">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1116</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Actual running on gpu</h3>
+				<div class="date">Posted: <strong>Wed May 25, 2011 12:12 am</strong></div>
+				<div class="author">by <strong>Magniff</strong></div>
+				<div class="content">Dear friends,<br /><br />I compiled abinit 6.6.3 with mpi (mpich2) and cuda support, everything seems fine - no errors, warning etc.<br />The log of every task contains following information <br /> === Build Information === <br />  Version       : 6.6.3<br />  Build target  : x86_64_linux_gnu4.6<br />  Build date    : 20110523<br /><br /> === Compiler Suite === <br />  C compiler       : gnu4.6<br />  CFLAGS           :  -g -O2 -mtune=native -march=native -mfpmath=sse<br />  C++ compiler     : gnu4.6<br />  CXXFLAGS         :  -g -O2 -mtune=native -march=native -mfpmath=sse<br />  Fortran compiler : gnu4.6<br />  FCFLAGS          :  -g -ffree-line-length-none<br />  FC_LDFLAGS       : <br /><br /> === Optimizations === <br />  Debug level        : basic<br />  Optimization level : standard<br />  Architecture       : intel_core2<br /><br /> === MPI === <br />  Parallel build : yes<br />  Parallel I/O   : yes<br />  Time tracing   : no<br />  GPU support    : yes<br /><br /> === Connectors / Fallbacks === <br />  Connectors on : yes<br />  Fallbacks on  : yes<br />  DFT flavor    : libxc-fallback+atompaw-fallback+bigdft-fallback+wannier90-fallback<br />  FFT flavor    : none<br />  LINALG flavor : netlib<br />  MATH flavor   : none<br />  TIMER flavor  : abinit<br />  TRIO flavor   : netcdf-fallback+etsf_io-fallback<br /><br />so I guess abinit recognized my gpu nvidia gtx275<br />I use mpirun -np 2 abinit &lt; root.files &gt;&amp; log to run my &quot;root.files&quot;<br /><span style="color: #FF0000">Anyway i dont get any speedup and my gpu doesnt get any extra load while abinit running on really hard tasks (lots of k-points and bands). </span><br />my config:<br /><br />debian 6<br />cuda 3.2<br />abinit 6.6.3<br />nvidia driver is 270.41.06 (not developer one, may be this is source of trouble)<br /><br />core2duoE6600 3.2 Ghz<br />6 gb ram<br />nvidia gtx 275<br /><br />Some gay said that i should use ngfft not less then 3*16 to enable cuda, but it doesnt worked.<br />Any ideas?)</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Actual running on gpu</h3>
+				<div class="date">Posted: <strong>Wed May 25, 2011 11:36 pm</strong></div>
+				<div class="author">by <strong>mancini</strong></div>
+				<div class="content">Dear Magniff,<br />For the moment GPU are used only in a subset of ABINIT capabilties.<br />In particular GPU are used only in the recursion_method, which is a DFT for high temperature systems (direct space calculation) and <br />BigDFT (wavelet code- indipendent and distribuited also with ABINIT).<br /><br />For the rest I konw that it is in project to use GPU to do FFT and Matricial linear algebra, but I am pretty sure that it is not implemented in the<br />current version.<br /><br />Marco</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Actual running on gpu</h3>
+				<div class="date">Posted: <strong>Thu May 26, 2011 3:31 pm</strong></div>
+				<div class="author">by <strong>Magniff</strong></div>
+				<div class="content">thanx for reply, mancini<br />so, as i understood there is not any way to accelerate gs calculation in current version</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Actual running on gpu</h3>
+				<div class="date">Posted: <strong>Tue May 31, 2011 5:42 pm</strong></div>
+				<div class="author">by <strong>golden</strong></div>
+				<div class="content">HI ,<br />  I am trying to install the parallel version of abinit with open-mpi still I couldn't get it to compile correctly , I was wondering whether you can guide me in the correct direction <br />here are the posts by me on compilation ;<br /><a href="viewtopicc59f-2.html?f=3&amp;t=1099" class="postlink">http://forum.abinit.org/viewtopic.php?f=3&amp;t=1099</a><br /><br />thanks</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1116&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:23:17 GMT -->
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3727&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:36:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; I think symmetry must not change after creating supercell.</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>I think symmetry must not change after creating supercell.</h2>
+		<p><a href="viewtopic529b.html?f=9&amp;t=3727">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3727</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>I think symmetry must not change after creating supercell.</h3>
+				<div class="date">Posted: <strong>Tue Nov 28, 2017 12:46 pm</strong></div>
+				<div class="author">by <strong>Narges</strong></div>
+				<div class="content">Hello All<br /><br />I have below information for its primitive cell of CaWO4 :<br /> scalecart 2*5.2429 11.3737 angstrom<br />rprim<br /> -0.5  0.5  0.5<br />  0.5 -0.5  0.5<br />  0.5  0.5 -0.5<br />ntypat 3<br />znucl  20 74 8<br />natom  12<br />typat  1  2  3  3  1  2  3  3  3  3  3  3<br />xred<br />  5.0000000000E-01  5.0000000000E-01  0.0000000000E+00<br />  0.0000000000E+00  0.0000000000E+00  0.0000000000E+00<br />  2.3630000000E-01  3.2700000000E-01  3.9210000000E-01<br />  9.3490000000E-01  8.4420000000E-01  6.0790000000E-01<br />  2.5000000000E-01  7.5000000000E-01  5.0000000000E-01<br />  7.5000000000E-01  2.5000000000E-01  5.0000000000E-01<br />  7.7000000000E-02  1.8490000000E-01  5.9070000000E-01<br />  5.9420000000E-01  4.8630000000E-01  4.0930000000E-01<br />  5.1370000000E-01  9.2300000000E-01  1.0790000000E-01<br />  8.1510000000E-01  4.0580000000E-01  8.9210000000E-01<br />  6.7300000000E-01  6.5100000000E-02  9.0930000000E-01<br />  1.5580000000E-01  7.6370000000E-01  9.0700000000E-02<br /><br /><br />After creating  2*2*2 supercell from primitive cell CaWO4( I have attached my input file.) <br />I have gotten below message and continue my running:<br />symlatt : the Bravais lattice is tI (body-centered tetragonal)<br />  xred   is defined in input file<br /> ingeo : takes atomic coordinates from input array xred<br /> <br /> symlatt : the Bravais lattice is tI (body-centered tetragonal)<br /> <br /> symlatt : the Bravais lattice is tI (body-centered tetragonal)<br /> <br />--- !COMMENT<br />message: |<br />    The Bravais lattice determined only from the primitive<br />    vectors, bravais(1)=  4, is more symmetric<br />    than the real one, iholohedry=  1, obtained by taking into<br />    account the atomic positions. Start deforming the primitive vector set.<br />src_file: Subroutine Unknown<br />src_line: 0<br />...<br /> <br /> <br /> symlatt : the Bravais lattice is mC (one-face-centered monoclinic)<br /> <br />--- !COMMENT<br />message: |<br />    The Bravais lattice determined from modified primitive<br />    vectors, bravais(1)=  2, has a lower symmetry than before,<br />    but is still more symmetric than the real one, iholohedry=  1<br />    obtained by taking into account the atomic positions.<br />src_file: Subroutine Unknown<br />src_line: 0<br />...<br /> <br /> <br /> symlatt : the Bravais lattice is aP (primitive triclinic)<br /> symspgr : spgroup=   1  P1   (=C1^1)<br /><br />I think symmetry must not change after creating supercell. Is it correct?<br />How can i fix my problem?<br /><br /><br />Best regards, <br />Narges</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: I think symmetry must not change after creating supercel</h3>
+				<div class="date">Posted: <strong>Thu Nov 30, 2017 7:17 am</strong></div>
+				<div class="author">by <strong>NPike</strong></div>
+				<div class="content">Hello Narges,<br /><br />In my experience, this is most likely a problem with the number of digits used for xred since the symmetry finder has a rather high precision.  I suggest rebuilding your super-cell from a unit cell that contains more digits for the atomic positions (xred) with around 8 relevant decimal points.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: I think symmetry must not change after creating supercel</h3>
+				<div class="date">Posted: <strong>Fri Dec 01, 2017 7:34 pm</strong></div>
+				<div class="author">by <strong>Narges</strong></div>
+				<div class="content">Dear NPike,<br />Thank you very much. My problem is solved.<br />Best<br />Narges</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3727&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:36:55 GMT -->
+</html>

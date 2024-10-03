@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=663&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:41:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; phonon dos</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>phonon dos</h2>
+		<p><a href="viewtopicacd9.html?f=10&amp;t=663">https://forum.abinit.org/viewtopic.php?f=10&amp;t=663</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>phonon dos</h3>
+				<div class="date">Posted: <strong>Fri Oct 15, 2010 9:11 pm</strong></div>
+				<div class="author">by <strong>payam</strong></div>
+				<div class="content">Hello ABINIT Users<br />I looked at tutorial but did not find how to use ANADDB to extract or calculate phonon dos. <br />Could you please help me?<br />Best regards,Payam Norouzzadeh</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: phonon dos</h3>
+				<div class="date">Posted: <strong>Sat Oct 16, 2010 11:41 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">prtdos 1 <br />ng2qpt 40 40 40 # or more depending<br /><br /><!-- m --><a class="postlink" href="http://www.abinit.org/documentation/helpfiles/for-v6.4/users/anaddb_help.html#prtdos">http://www.abinit.org/documentation/hel ... tml#prtdos</a><!-- m --></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: phonon dos</h3>
+				<div class="date">Posted: <strong>Wed Oct 20, 2010 7:28 am</strong></div>
+				<div class="author">by <strong>payam</strong></div>
+				<div class="content">Dear Mverstra<br />Thank you very much for your reply.<br />Best regards,Payam Norouzzadeh</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: phonon dos</h3>
+				<div class="date">Posted: <strong>Wed Nov 24, 2010 5:37 am</strong></div>
+				<div class="author">by <strong>payam</strong></div>
+				<div class="content">Hello ABINIT Users<br />Does anyone know how ABINIT  prints the Phonon density of states? I used prtdos 1 and ng2qpt 20 20 20 but didn't find relevant result in output file. It should be somewhere close to thermodynamical properties but I did not see anything.<br />Best regards,Payam Norouzzadeh</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: phonon dos</h3>
+				<div class="date">Posted: <strong>Wed Nov 24, 2010 6:29 pm</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Dear payam,<br /><br />have you turned on the thermal flag in your anaddb input file? If not, you should. If you have, send your anaddb input file.<br /><br />Cheers!<br /><br />Igor Lukacevic</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: phonon dos</h3>
+				<div class="date">Posted: <strong>Thu Nov 25, 2010 12:34 am</strong></div>
+				<div class="author">by <strong>payam</strong></div>
+				<div class="content">Dear  Lukacevic<br /><br />Thank you for your attention.<br />As you can see the thermodynamical flag is on but I can't see any density of states in output file.I will be thankful  if you help me.<br /><br />Best regards,Payam Norouzzadeh<br /><br /><br /><br />!Flags<br /> ifcflag   1     ! Interatomic force constant flag<br /> thmflag   1     ! Thermodynamical properties flag<br /><br />!Wavevector grid number 1 (coarse grid, from DDB)<br />  brav    3      ! Bravais Lattice : 1-S.C., 2-F.C., 3-B.C., 4-Hex.)<br />  ngqpt   4  4  4   ! Monkhorst-Pack indices<br />  nqshft  1         ! number of q-points in repeated basic q-cell<br />  q1shft  3*0.0<br /><br />!Effective charges<br />     asr   1     ! Acoustic Sum Rule. 1 =&gt; imposed asymetrically<br />  chneut   1     ! Charge neutrality requirement for effective charges.<br /><br />!Interatomic force constant info<br />  dipdip  1      ! Dipole-dipole interaction treatment<br /><br />!Wavevector grid number 2 (series of fine grids, extrapolated from interat forces)<br />prtdos<br />  ng2qpt   20 20 20  ! sample the BZ up to ngqpt2<br />  ngrids   5         ! number of grids of increasing size<br />  q2shft   3*0.0<br /><br />!Thermal information<br />  nchan   1250   ! # of channels for the DOS with channel width 1 cm-1<br />  nwchan  5      ! # of different channel widths from this integer down to 1 cm-1<br />  thmtol  0.120  ! Tolerance on thermodynamical function fluctuations<br />  ntemper 40     ! Number of temperatures<br />  temperinc 20.  ! Increment of temperature in K for temperature dependency<br />  tempermin 20.  ! Minimal temperature in Kelvin<br /><br /># This line added when defaults were changed (v5.3) to keep the previous, old behaviour<br />  symdynmat 0</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: phonon dos</h3>
+				<div class="date">Posted: <strong>Thu Nov 25, 2010 8:09 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Dear payam,<br /><br />I think that you lack the phonon frequencies calculation in your anaddb input file. Put in eivec, nph1l, qph1l. And yes, by all means, read Phys. Rev. B 51, 8610–8613 (1995).<br /><br />Cheers!<br /><br />Igor L.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: phonon dos</h3>
+				<div class="date">Posted: <strong>Fri Nov 26, 2010 8:01 am</strong></div>
+				<div class="author">by <strong>payam</strong></div>
+				<div class="content">Dear Lukacevic<br /><br />Thank you very much for your help and introducing a very useful paper.<br /><br />Best regards,Payam Norouzzadeh</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: phonon dos</h3>
+				<div class="date">Posted: <strong>Wed Jan 05, 2011 9:21 pm</strong></div>
+				<div class="author">by <strong>somourad</strong></div>
+				<div class="content">Dear payam,<br />in your input file anaddb , add the number 1 in prtdos like this:<br /><br />prtdos 1<br /><br />best regards</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: phonon dos</h3>
+				<div class="date">Posted: <strong>Sun Feb 27, 2011 5:37 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">prtdos produces an additional external file with the DOS, called PHDOS<br />The copy in the output file for thermal calculations is not convenient and hard to extract. With prtdos you no longer need to run the thermal stuff (although it is very useful thermodynamical information).<br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=663&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:41:44 GMT -->
+</html>

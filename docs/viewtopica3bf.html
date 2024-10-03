@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=484&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Easy/standard way to get XYZ-style output from input file</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Easy/standard way to get XYZ-style output from input file</h2>
+		<p><a href="viewtopicbe26.html?f=9&amp;t=484">https://forum.abinit.org/viewtopic.php?f=9&amp;t=484</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Easy/standard way to get XYZ-style output from input file</h3>
+				<div class="date">Posted: <strong>Mon Jul 12, 2010 5:11 am</strong></div>
+				<div class="author">by <strong>spamrefuse</strong></div>
+				<div class="content">Hi,<br /><br />I need an easy and quick method to only convert an abinit input file to a standard<br />output file (e.g. XYZ-format), which can be read easily by graphical software.<br />This allows me to verify the atoms' coordinates before starting a DFT calculation.<br /><br />I am using VMD as my graphical toolkit. It cannot read abinit files natively, but<br />i already have written a plugin that converts abinit output files (DEN, GEO files)<br />for visualization. The DEN and GEO files are standardized and easy to convert.<br /><br />I'd like to read the input file too in order to double-check the initial coordinates and<br />structure of the atoms. The incredible flexibility of entering the coordinates of the atoms<br />into the input file (convenient for the user!) is a nightmare for writing a conversion plugin!!!<br /><br />Hence my request to faciliate abinit with a conversion using its own input parser and<br />just output an easy output format without doing DFT. For example:<br /><br />    abinit -xyz myinput.files &gt; myinput.XYZ<br /><br />(or any other standardized output for atomic structure &amp; coordinates).<br /><br />Thanks!<br />Rob.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Easy/standard way to get XYZ-style output from input fil</h3>
+				<div class="date">Posted: <strong>Mon Jul 12, 2010 9:51 am</strong></div>
+				<div class="author">by <strong>pmanglade</strong></div>
+				<div class="content">Unfortunately (correct me if I'm wrong) fortran codes don't stand input line options. One would have to write an explicit C main function to handle an input line option.<br />Yet, fortunately, Abinit always output in its own systematic way every input data given to him. Can't you try to directly parse the output file of Abinit to build a xyz file ? Would it be less convenient than the option you propose ?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Easy/standard way to get XYZ-style output from input fil</h3>
+				<div class="date">Posted: <strong>Mon Jul 12, 2010 11:13 am</strong></div>
+				<div class="author">by <strong>spamrefuse</strong></div>
+				<div class="content">Of course one can create some kind of rediculous input file<br />with silly criteria so that the executable effectively doesn't<br />calculate anything and just prints out the coordinates of the<br />atoms in a GEO file.<br /><br />But that solution I'd like to avoid.<br />Instead it would be great if there's an input parameter that<br />will tell abinit to just do that: don't calculate anything, but<br />read the input file and output the atomic coordinates in<br />whatever easy output format (GEO is great!).<br /><br />No need for kpoints, ecut, and tollerances.....<br /><br />Rob.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Easy/standard way to get XYZ-style output from input fil</h3>
+				<div class="date">Posted: <strong>Mon Jul 12, 2010 11:34 am</strong></div>
+				<div class="author">by <strong>pmanglade</strong></div>
+				<div class="content">Would you be satisfied with some kind of &quot;dryrun&quot; option (in the input file) that would make Abinit parse the input file, print out its usual output after analysis and escape ? In the case you answer yes, would you be interested in implemented that ? Or would you like prefer someone else to do it for you ?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Easy/standard way to get XYZ-style output from input fil</h3>
+				<div class="date">Posted: <strong>Mon Jul 12, 2010 3:05 pm</strong></div>
+				<div class="author">by <strong>spamrefuse</strong></div>
+				<div class="content">I've been given another hint via the developper's forum.<br /><br />It seems to be possible to link external software with the abinit parser<br />code so that the software can read input files with the same flexibility.<br /><br />I have to figure out how it has to be done, but that should solve my problem too.<br /><br />Rob.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=484&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:22 GMT -->
+</html>

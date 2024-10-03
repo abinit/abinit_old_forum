@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=64&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:53:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; mpi in conducti</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>mpi in conducti</h2>
+		<p><a href="viewtopic16f6.html?f=19&amp;t=64">https://forum.abinit.org/viewtopic.php?f=19&amp;t=64</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>mpi in conducti</h3>
+				<div class="date">Posted: <strong>Thu Feb 18, 2010 4:09 pm</strong></div>
+				<div class="author">by <strong>rangel</strong></div>
+				<div class="content">This is to follow a thread initiated at the abinit e-mail list.<br />My problem is when running linear_optics_paw in serial but compiling with mpi.<br />I get an error message ( I pasted the previous discussion below).<br /><br />According to Matteo's suggestion, I am to add a call to initmpi_seq at the beggining of the<br />program and to xmpi_end at the end.<br /><br />The main program is &quot;conducti&quot;.  I just want to know if all of its children are just coded for serial runs:<br />conducti_nc<br />conducti_paw<br />linear_optics_paw<br />conducti_paw<br /><br />If so, I will proceed adding these calls to the program &quot;conducti&quot;<br /><br />What do you think?<br /><br /><br /><br />&gt; Hi,<br />&gt;<br />&gt; Tonatiuh Rangel &lt;Tonatiuh.Rangel@uclouvain.be&gt; ha escrito:<br />&gt;<br />&gt;&gt; I am having an error with optics paw:<br />&gt;&gt; [...]<br />&gt;&gt;<br />&gt;&gt; But when running conducti the code stops with the following error:<br />&gt;&gt; *** An error occurred in MPI_Comm_f2c<br />&gt;&gt; *** before MPI was initialized<br />&gt;&gt; *** MPI_ERRORS_ARE_FATAL (your MPI job will now abort)<br />&gt;&gt;<br />&gt;&gt; Can anyone help me with this?<br />&gt;<br />&gt; I can just tell you what's wrong: conducti is calling routines that<br />&gt; depend on MPI, but doesn't initialize MPI itself.<br /><br /> I would add a call to initmpi_seq in order to initialize mpi_enreg<br /> before calling the different conducti routines.<br /> Besides one should call xmpi_end before the end of the main program.<br /><br />&gt;<br />&gt; A proper call to mpi_init() has to be added at an appropriate place.<br />&gt;<br />&gt; Best regards,<br />&gt;<br />&gt; Yann.<br />&gt;<br />&gt; --<br />&gt; Yann Pouillon               European Theoretical Spectroscopy Facility<br />&gt; (ETSF)<br />&gt; Tel: (+34) 943 01 83 94     Centro Joxe Mari Korta, Avenida de Tolosa, 72<br />&gt; Fax: (+34) 943 01 83 90     20018 Donostia-San Sebastián (Gipuzkoa)<br />&gt; Web: <!-- m --><a class="postlink" href="http://www.etsf.es/">http://www.etsf.es/</a><!-- m -->    España</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: mpi in conducti</h3>
+				<div class="date">Posted: <strong>Thu Feb 18, 2010 5:07 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Hi,<br />linear_optics_paw definitely works in serial only, I'm pretty sure that the others do too.<br />Joe</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: mpi in conducti</h3>
+				<div class="date">Posted: <strong>Fri Feb 19, 2010 6:56 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">In order to give you some hints, here is how I did for mrgddb:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>=== modifié fichier src/98_main/mrgddb.F90<br />--- src/98_main/mrgddb.F90&nbsp; &nbsp;2009-05-07 17:39:48 +0000<br />+++ src/98_main/mrgddb.F90&nbsp; &nbsp;2009-07-02 22:35:08 +0000<br />@@ -46,7 +46,11 @@<br />&nbsp;program mrgddb<br />&nbsp;<br />&nbsp; use defs_basis<br />+ use defs_abitypes<br />&nbsp; use m_build_info<br />+#if defined HAVE_MPI &amp;&amp; defined HAVE_MPI2<br />+ use mpi<br />+#endif<br />&nbsp;<br />&nbsp;!This section has been created automatically by the script Abilint (TD).<br />&nbsp;!Do not modify the following lines by hand.<br />@@ -58,6 +62,9 @@<br />&nbsp;!End of the abilint section<br />&nbsp;<br />&nbsp; implicit none<br />+#if defined HAVE_MPI &amp;&amp; defined HAVE_MPI1<br />+ include 'mpif.h'<br />+#endif<br />&nbsp;<br />&nbsp;!Arguments -----------------------------------<br />&nbsp;<br />@@ -71,7 +78,8 @@<br />&nbsp;!Define input and output unit numbers:<br />&nbsp; integer,parameter :: ddbun=2,unit00=1<br />&nbsp; integer :: choice,dimekb,dimekb_tmp,fullinit,fullinit8,iblok,iblok1,iblok2<br />- integer :: iddb,ii,intxc,intxc8,iscf,iscf8,ixc,ixc8,lmnmax,lnmax,matom,mband<br />+ integer :: iddb,ierr,ii,intxc,intxc8,iscf,iscf8,ixc,ixc8,lmnmax,lnmax,matom<br />+ integer :: mband<br />&nbsp; integer :: mband_tmp,mblktyp,mblok,mkpt,mpert,msize,msize_tmp,mtypat,natom<br />&nbsp; integer :: natom8,nblok,nblok8,nblokt,nddb,nkpt,nkpt8,nline,nq,nspden,nspden8<br />&nbsp; integer :: nspinor,nspinor8,nsppo8,nsppol,nsym,nsym8,ntypat,ntypat8,nunit<br />@@ -96,10 +104,62 @@<br />&nbsp; character(len=fnlen) :: filnam(mddb+1)<br />&nbsp; character(len=strlen) :: string<br />&nbsp; character(len=500) :: message<br />+ type(MPI_type) :: mpi_enreg<br />&nbsp;<br />&nbsp;!******************************************************************<br />&nbsp;!BEGIN EXECUTABLE SECTION<br />&nbsp;<br />+! Initialize MPI : one should write a separate routine -init_mpi_enreg-<br />+! for doing that !!<br />+<br />+!Default for sequential use<br />+ mpi_enreg%world_comm=0<br />+ mpi_enreg%world_group=0<br />+ mpi_enreg%me=0<br />+ mpi_enreg%nproc=1<br />+ mpi_enreg%num_group_fft = 0 ! in some cases not initialized but referenced in xdef_comm.F90<br />+ mpi_enreg%paral_compil=0<br />+ mpi_enreg%paral_compil_mpio=0<br />+!MG080916 If we want to avoid MPI preprocessing options, %proc_distr should be always allocated and <br />+!set to mpi_enreg%me. In such a way we can safely test its value inside loops parallelized over k-points <br />+!For the time being, do not remove this line since it is needed in outkss.F90.<br />+ nullify(mpi_enreg%proc_distrb)<br />+<br />+!Initialize MPI<br />+#if defined HAVE_MPI<br />+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;call MPI_INIT(ierr)<br />+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;mpi_enreg%world_comm=MPI_COMM_WORLD<br />+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;mpi_enreg%world_group=MPI_GROUP_NULL<br />+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;call MPI_COMM_RANK(MPI_COMM_WORLD,mpi_enreg%me,ierr)<br />+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;call MPI_COMM_SIZE(MPI_COMM_WORLD,mpi_enreg%nproc,ierr)<br />+!&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; write(6,*)' abinit : nproc,me=',mpi_enreg%nproc,mpi_enreg%me<br />+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;mpi_enreg%paral_compil=1<br />+#endif<br />+<br />+!Signal MPI I/O compilation has been activated<br />+#if defined HAVE_MPI_IO<br />+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;mpi_enreg%paral_compil_mpio=1<br />+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if(mpi_enreg%paral_compil==0)then<br />+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; write(message,'(6a)') ch10,&amp;<br />+&amp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ' abinit : ERROR -',ch10,&amp;<br />+&amp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; '&nbsp; In order to use MPI_IO, you must compile with the MPI flag ',ch10,&amp;<br />+&amp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; '&nbsp; Action : recompile your code with different CPP flags.'<br />+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; call wrtout(06,message,'COLL')<br />+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; call leave_new('COLL')<br />+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;end if<br />+#endif<br />+<br />+!Initialize spaceComm, used in leave_test<br />+ mpi_enreg%spaceComm=mpi_enreg%world_comm<br />+!Initialize paral_compil_kpt, actually always equal to paral_compil<br />+!(paral_compil_kpt should be suppressed after big cleaning)<br />+ mpi_enreg%paral_compil_kpt=0<br />+ if(mpi_enreg%paral_compil==1) mpi_enreg%paral_compil_kpt=1<br />+<br />+!Other values of mpi_enreg are dataset dependent, and should NOT be initialized<br />+!inside mrgddb.F90.<br />+<br />+<br />&nbsp; codename='MRGDDB'//repeat(' ',18)<br />&nbsp; call herald(codename,abinit_version,std_out)<br />&nbsp;!YP: calling dump_config() makes tests fail =&gt; commented<br />@@ -504,5 +564,9 @@<br />&nbsp; write(message, '(a)' )'+mrgddb : the run completed successfully '<br />&nbsp; call wrtout(6,message,'COLL')<br />&nbsp;<br />- end program<br />+#if defined HAVE_MPI<br />+ call MPI_FINALIZE(ierr)<br />+#endif<br />+<br />+end program mrgddb<br />&nbsp;!!***<br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: mpi in conducti</h3>
+				<div class="date">Posted: <strong>Sun Feb 21, 2010 9:43 pm</strong></div>
+				<div class="author">by <strong>rangel</strong></div>
+				<div class="content">Thanks a lot for your reply, <br /><br />I have already modified it into my public branch, and the tests passed. <br /><br />So the issue is now solved.<br /><br />Best<br />Tonatiuh</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=64&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:53:16 GMT -->
+</html>

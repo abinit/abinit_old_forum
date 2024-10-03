@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=2379&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:59:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; runtests.py -i :  AND or OR?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>runtests.py -i :  AND or OR?</h2>
+		<p><a href="viewtopic9401.html?f=19&amp;t=2379">https://forum.abinit.org/viewtopic.php?f=19&amp;t=2379</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>runtests.py -i :  AND or OR?</h3>
+				<div class="date">Posted: <strong>Wed Jan 08, 2014 6:10 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Hi,<br /><br />the documentation for runtests.py -i suggests that if two keywords are given, the tested input file must contain both. However, it appears to trigger execution if the input file contains either. For example, runtests.py -i 'berryopt, pawecutdg' causes execution of tutorial/tldau_1, which contains pawecutdg but not berryopt.<br /><br />Is this the expected behavior? Is there a way to select only files with all of a list of keywords present?<br /><br />thanks,<br />Joe</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: runtests.py -i :  AND or OR?&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Thu Jan 09, 2014 1:51 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Hi Joe,<br /><br />it's an unintended feature aka bug <img class="smilies" src="images/smilies/icon_e_wink.gif" alt=";)" title="Wink" />. Fixed in my 7.6.1 branch.<br /><br />Please note that the parser used by runtests.py is very primitive since:<br /><br />1) it does not know the default values of dtset (indefo.F90)<br />2) Only scalar integers are supported<br />3) it's a line-based parser that is not fully compatible with the grammar used for the abinit input file (tokens such as *, :, +,  are not recognized)<br /><br />I seldom use -i for my tests. I usually select a subset of tests via keywords instead of input variables.<br />If my understanding is correct, you want to select the PAW inputs where we test Berry phase calculations.<br />To select such tests one can use:<br /><br />runtests.py -k PAW BERRY  <br /><br />To restrict the search to a particular set of directories, use<br /> <br />runtests.py v1 tutorial -k PAW BERRY # only Berry phase tests in v1 and in tutorial<br /><br />This approach is more robust The price to pay is that you have to add the string BERRY to the list of keywords specified in the TEST_INFO section associated to <br />the different  input files. <br /><br />BTW, Remember to pass the option -r to runtests.py once you are done with these changes so that the script will generate a new pickle database <br />that is coherent with the new input files (-r is needed only the first time you run the script)<br /><br />Cheers,<br />Matteo</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=2379&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:59:11 GMT -->
+</html>

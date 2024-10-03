@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=5240&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:31:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Molecules in Abinit</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Molecules in Abinit</h2>
+		<p><a href="viewtopiccae6.html?f=9&amp;t=5240">https://forum.abinit.org/viewtopic.php?f=9&amp;t=5240</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Molecules in Abinit&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Wed Dec 02, 2020 5:06 pm</strong></div>
+				<div class="author">by <strong>sponce</strong></div>
+				<div class="content">Hello all, <br>
+<br>
+I have a question linked with the calculation of molecules in Abinit. <br>
+I used the tbase1_3.in input as test case but instead of H2, I'm doing NH4. <br>
+<br>
+The input file is as follow (The psp use the one of Psps_for_tests):<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>ionmov  2
+ntime   10
+tolmxf  5.0d-4
+toldff  5.0d-5
+ntypat 2
+znucl 7 1
+natom 4
+typat 1 2 2 2
+ xcart
+  0.0000000000    0.0000000000    0.0000000000
+  -1.88972687777  0.00000000  -0.75589075111
+  0.94486343888  1.63655147522  -0.75589075111
+  0.94486343888  -1.63655147522 -0.75589075111
+kptopt 0
+nkpt 1
+nstep 10
+diemac 2.0
+ pp_dirpath "$ABI_PSPDIR"
+ pseudos "Pseudodojo_nc_sr_04_pbe_standard_psp8/N.psp8, PseudosGTH_pwteter/01h.pspgth "
+acell 30 30 30
+ecut 20.0</code></pre></div>
+
+The following input crash (segfault) at the level of 
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>---SELF-CONSISTENT-FIELD CONVERGENCE--------------------------------------------
+ 
+ getcut: wavevector=  0.0000  0.0000  0.0000  ngfft= 125 125 125
+         ecut(hartree)=     20.000   =&gt; boxcut(ratio)=   2.05315
+ 
+ 1/G**2 cut-off applied in the following step : cutoff-mode = CRYSTAL
+ 
+ 1/G**2 cut-off applied in the following step : cutoff-mode = CRYSTAL
+ 
+ 1/G**2 cut-off applied in the following step : cutoff-mode = CRYSTAL
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   RANK 0 PID 693502 RUNNING AT theossrv8
+=   KILLED BY SIGNAL: 11 (Segmentation fault)
+===================================================================================</code></pre></div>
+
+However, If I reduce the ecut or decrease the box size, then it works. <br>
+For example making 
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>acell 30 30 30
+ecut 10.0</code></pre></div>
+
+runs and goes to the end. <br>
+<br>
+I'm not sure I understand why I cannot use a large ecut when the cell is big ? <br>
+<br>
+One should be able to systematically increase the ecut. <br>
+<br>
+Many thanks, <br>
+Samuel</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Molecules in Abinit</h3>
+				<div class="date">Posted: <strong>Wed Dec 02, 2020 9:51 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Hi Samuel,<br>
+<br>
+the input file works in sequential on my laptop.<br>
+The max memory allocated on the heap is ~700 Mb that is consistent with the value reported by Abinit at the beginning.<br>
+<br>
+Perhaps it's a problem with the stack triggered by automatic arrays.<br>
+Did you try to increase the stack size limit with e.g.: `ulimit -s unlimited` ?<br>
+<br>
+M</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Molecules in Abinit</h3>
+				<div class="date">Posted: <strong>Thu Dec 03, 2020 10:06 am</strong></div>
+				<div class="author">by <strong>sponce</strong></div>
+				<div class="content">Yep, that's working !<br>
+<br>
+Thanks Matteo !</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=5240&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:31:04 GMT -->
+</html>

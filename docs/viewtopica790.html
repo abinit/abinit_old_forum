@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=4433&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:43:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Recalculating electronic polarization from ground state orbitals and orbitals differentiated with respect to k</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Recalculating electronic polarization from ground state orbitals and orbitals differentiated with respect to k</h2>
+		<p><a href="viewtopic6c26.html?f=10&amp;t=4433">https://forum.abinit.org/viewtopic.php?f=10&amp;t=4433</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Recalculating electronic polarization from ground state orbitals and orbitals differentiated with respect to k</h3>
+				<div class="date">Posted: <strong>Mon Jun 01, 2020 5:38 pm</strong></div>
+				<div class="author">by <strong>kryczko</strong></div>
+				<div class="content">Dear developers,<br>
+<br>
+I would like to recompute the polarization as given in equation 1.26 of <a href="https://www.abinit.org/sites/default/files/PhD-M.Veithen.pdf" class="postlink">https://www.abinit.org/sites/default/fi ... eithen.pdf</a>. I have calculated the ground state orbitals and have written to disk the orbitals that have been differentiated with respect to k for AlAs (<a href="https://docs.abinit.org/tutorial/ffield/index.html" class="postlink">https://docs.abinit.org/tutorial/ffield/index.html</a>). <br>
+<br>
+I am then using abipy (abipy.waves.wfkfile) to read in the orbitals and compute equation 1.26 but do not get the same values as computed in abinit (I also get a complex part). Is there something I am missing here in my computation?<br>
+<br>
+Thanks,<br>
+Kevin</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Recalculating electronic polarization from ground state orbitals and orbitals differentiated with respect to k</h3>
+				<div class="date">Posted: <strong>Thu Jun 04, 2020 3:38 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Kevin,<br>
+I'm not sure if I understand, but you want to compute the polarization through the Berry phase, I guess you did it with berryopt=-1 with Abinit, right?<br>
+Now, you have to be careful with quantum of polarization problem, see for example:<br>
+<a href="http://palata.fzu.cz/abinitschool/download/We3_polarization.pdf" class="postlink">http://palata.fzu.cz/abinitschool/downl ... zation.pdf</a><br>
+I did not know Abipy is computing the Berry phase polarization, are sure about it, can you give the doc/info telling you that?<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Recalculating electronic polarization from ground state orbitals and orbitals differentiated with respect to k</h3>
+				<div class="date">Posted: <strong>Thu Jun 04, 2020 4:59 pm</strong></div>
+				<div class="author">by <strong>kryczko</strong></div>
+				<div class="content">Hi Eric,<br>
+<br>
+Thank you for the response. With the formula that I showed, you can compute the polarization once you have the derivatives of the Kohn-Sham orbitals with respect to k. This could be done with berryopt -1 (or -3 if you want the derivatives of the orbitals written) or with DFPT. <br>
+<br>
+For abipy, it itself does not compute the polarization. But it does have the ability to read the WFK files and therefore I am reading in all of the orbitals along with the derivatives of the orbitals and I am trying to compute the polarization manually.<br>
+<br>
+I hope this info makes it more clear.<br>
+<br>
+Thanks,<br>
+Kevin</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=4433&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:43:46 GMT -->
+</html>

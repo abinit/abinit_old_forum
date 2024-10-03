@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3385&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:52:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; How can I compile LIBXC-4.0.0 with abinit-8.0.8</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>How can I compile LIBXC-4.0.0 with abinit-8.0.8</h2>
+		<p><a href="viewtopicdebb.html?f=3&amp;t=3385">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3385</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>How can I compile LIBXC-4.0.0 with abinit-8.0.8</h3>
+				<div class="date">Posted: <strong>Wed Sep 21, 2016 6:12 am</strong></div>
+				<div class="author">by <strong>Mutta</strong></div>
+				<div class="content">Dear All<br /><br />For new LIBXC-4.0.0 has been a new functional LDA.<br /><br />How can I compile new libxc with abinit ?<br /><br />Mutta<br /><br />Best</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How can I compile LIBXC-4.0.0 with abinit-8.0.8</h3>
+				<div class="date">Posted: <strong>Thu Nov 24, 2016 12:08 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Abinit 8.0 is compatible with LibXC 2.2. Unless you need a very recently added functional, you should use this version.<br /><br />If you do need LibXC 3.0, please wait for the upcoming Abinit 8.2.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How can I compile LIBXC-4.0.0 with abinit-8.0.8</h3>
+				<div class="date">Posted: <strong>Fri Jun 30, 2017 1:49 pm</strong></div>
+				<div class="author">by <strong>mstud</strong></div>
+				<div class="content">Hi pouillon,<br /><br />in your posting it sounds like Abinit 8.2.x should support libxc3.0, however, when trying to build Abinit 8.2.3 with libxc3.0.0 I get the following error on configure:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>configure:37455: checking whether this is LibXC version 2.2<br />conftest.c(115): error #165: too few arguments in function call<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; xc_version(&amp;major, &amp;minor);<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;^<br /><br />compilation aborted for conftest.c (code 2)</code></pre></div><br />Then it says &quot;error: external libxc support does not work&quot;.<br />Is this a mistake on my side or did the libxc3.0 support not make it into Abinit 8.2 after all? Where can I find information on which library versions are supported in the different Abinit versions?<br />Many thanks!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How can I compile LIBXC-4.0.0 with abinit-8.0.8</h3>
+				<div class="date">Posted: <strong>Fri Jul 21, 2017 5:53 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">If you have the Autotools (autoconf, automake, libtool) installed on your computer, you can edit config/m4/conn-dft.m4 and change line 216 from:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp; &nbsp; &nbsp; &#93;&#93;)&#93;, &#91;abi_dft_libxc_version=&quot;yes&quot;&#93;, &#91;abi_dft_libxc_version=&quot;no&quot;&#93;<br /></code></pre></div><br />to:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp; &nbsp; &nbsp; &#93;&#93;)&#93;, &#91;abi_dft_libxc_version=&quot;yes&quot;&#93;, &#91;abi_dft_libxc_version=&quot;yes&quot;&#93;)<br /></code></pre></div><br /><br />and then run ''./config/scripts/makemake -s'' from the top source dir of Abinit.<br /><br />This will disable the version test of LibXC in the build system.<br /><br />Please let us know if it works with LibXC 3 and LibXC 4.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3385&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:52:31 GMT -->
+</html>

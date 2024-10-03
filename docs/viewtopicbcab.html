@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4125&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:24:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; increasing force and stress after optimization</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>increasing force and stress after optimization</h2>
+		<p><a href="viewtopic7a89.html?f=9&amp;t=4125">https://forum.abinit.org/viewtopic.php?f=9&amp;t=4125</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>increasing force and stress after optimization</h3>
+				<div class="date">Posted: <strong>Tue Jun 11, 2019 12:51 pm</strong></div>
+				<div class="author">by <strong>shima123</strong></div>
+				<div class="content">Hi, <br />I use abinit 8.2.3. Now I am running some calculations for optimizing my crystal using these parameters:<br />nspinor   2<br />optcell 2<br /> ionmov  2<br /> ntime  1000<br /> dilatmx 1.15<br /> ecutsm  0.5<br /> tolmxf  5.0d-8<br />nstep   1000<br /> diemac  12.0<br /> toldfe  1.0d-22<br />and xred, etc<br /><br />When I looked at output file, force is converged as I had requested. Also the order of stress is -11 (in hartree/bohr^3 ).<br /><br />Then I used these optimized parameters to run a scf cycle:<br />acell, angdeg, xred from the end of output.<br />Also, I use these items for scf cycles:<br />nstep   1000<br /> diemac  12.0<br /> toldfe  1.0d-22<br /><br />After, running scf, I see that the force and stress have increased! The order of force and stress are -6 in hartree/bohr and -5 in hartree/bohr^3, respectively. <br /><br />I'd appreciate if you could guide me what to do to solve this problem.<br />I should mention that my structure is Rhomohedral and I am using optimized value for kpoint grid and ecut, i.e. 8*8*8 and 16 Ha, respectively.<br /><br />Thank you so much!<br /><br />Regards,<br />Shima</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: increasing force and stress after optimization</h3>
+				<div class="date">Posted: <strong>Mon Jun 17, 2019 10:34 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Shima,<br />This is because when you do a relaxation, there are smearing on the number of plane waves (see description of ecutsm and dilatmx).<br />Your dilatmx is quite large, I would command to re run a relaxation (from your previous relaxed structure) but with a reduced dilatmx to 1.02/1.01 or so.<br />Then when you do a single point calculation you have to keep ecutsm to preserve the same number of plane wave and if it is too troublesome (mostly for the stresses that are very sensitive) you might have to keep the same fft grid (ngfft).<br />Best wishes,<br />Eric<br /><br />PS: 16 Ha sounds at the lower limit, be careful that you are well converged with ecut.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: increasing force and stress after optimization</h3>
+				<div class="date">Posted: <strong>Fri Jun 21, 2019 12:05 pm</strong></div>
+				<div class="author">by <strong>shima123</strong></div>
+				<div class="content"><blockquote><div><cite>ebousquet wrote:</cite>Dear Shima,<br />This is because when you do a relaxation, there are smearing on the number of plane waves (see description of ecutsm and dilatmx).<br />Your dilatmx is quite large, I would command to re run a relaxation (from your previous relaxed structure) but with a reduced dilatmx to 1.02/1.01 or so.<br />Then when you do a single point calculation you have to keep ecutsm to preserve the same number of plane wave and if it is too troublesome (mostly for the stresses that are very sensitive) you might have to keep the same fft grid (ngfft).<br />Best wishes,<br />Eric<br /><br />PS: 16 Ha sounds at the lower limit, be careful that you are well converged with ecut.</div></blockquote><br /><br /><br />Hi Eric,<br />I tested the smaller amount for dilatmx and it works. That was perfect. Thank you about that.<br />Just I was checking abinit variables for ecutsm to see if there is a possibility to set that to zero. It was written that it is dangerous!!<br />I'd appreciate if you could tell me what is the reason.<br />I found out that the smallest possible value is 1.0d-8Ha. Then, isn't it possible to set zero?<br />And what is your suggested amount for that? I would not like to keep ecutsm after optimization process. Actually, I prefer to do my calculation at a fixed cutoff.<br /><br />Thank you very much in advanced!<br /><br />Best,<br />Shima</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: increasing force and stress after optimization</h3>
+				<div class="date">Posted: <strong>Fri Jun 28, 2019 6:43 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Shima,<br />I would recommand you to use ecutsm=0.5 and keep it in all your future input when doing relaxation of the cell. <br />ecutsm is compulsory when doing structural relaxation to smooth the discontinuities in the energy that can appear due a change of reciprocal space shape and volume.<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4125&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:24:49 GMT -->
+</html>

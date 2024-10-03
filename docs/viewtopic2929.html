@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=5241&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:05:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; No YAML Error found abinit-9.2.2</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>No YAML Error found abinit-9.2.2</h2>
+		<p><a href="viewtopic4519.html?f=3&amp;t=5241">https://forum.abinit.org/viewtopic.php?f=3&amp;t=5241</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>No YAML Error found abinit-9.2.2&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Thu Dec 03, 2020 5:04 pm</strong></div>
+				<div class="author">by <strong>nsingh3</strong></div>
+				<div class="content"><strong class="text-strong">Dear developers,<br>
+I compiled the latest version of abinit-9.2.2 using the following configure file.</strong><br>
+<br>
+# installation location<br>
+prefix=/home/nsingh3/.local<br>
+<br>
+CC='mpicc'<br>
+CXX="mpiCC"<br>
+FC="mpif90"<br>
+<br>
+# MPI settings<br>
+with_mpi="yes"<br>
+enable_mpi_io="yes"<br>
+<br>
+# linear algebra settings<br>
+with_linalg_flavor="openblas"<br>
+LINALG_LIBS="-L/usr/lib64 -lopenblas"<br>
+<br>
+# mandatory libraries<br>
+with_hdf5="yes"<br>
+with_netcdf="yes"<br>
+with_netcdf_fortran="yes"<br>
+with_libxc="yes"<br>
+<br>
+# FFT flavor<br>
+with_fft_flavor="fftw3"<br>
+FFTW3_LIBS="-L/usr/lib64 -lfftw3 -lfftw3f"<br>
+<br>
+with_libxml2="yes"<br>
+LIBXML2_LIBS="-L/usr/include/libxml2/libxml/ -lxmlf90"<br>
+<br>
+with_libyaml="yes"<br>
+LIBYAML_LIBS="/sw/arch/RedHatEnterpriseServer7/EB_production/2020/software/libyaml/0.2.2-GCCcore-9.3.0/lib/libyaml.a"<br>
+<br>
+with_libpsml="yes"<br>
+LIBPSML_LIBS="/home/nsingh3/.local/lib/libpsml.a"<br>
+<br>
+with_xmlf90="yes"<br>
+XMLF90_FCFLAGS="-I/home/nsingh3/.local/include"<br>
+XMLF90_LIBS="-L/home/nsingh3/.local/lib/ -lxmlf90"<br>
+<br>
+# Enable Netcdf mode in Abinit (use netcdf as default I/O library)<br>
+enable_netcdf_default="yes"<br>
+<br>
+enable_openmp="yes"<br>
+<br>
+<strong class="text-strong">It sucessfully made the abinit executable but when do tests then I get the following error.</strong><br>
+<br>
+Command   /lustre1/0/einf581/abinit-9.2.2/build/src/98_main/abinit    &lt; /lustre1/0/einf581/abinit-9.2.2/build/tests/Test_suite/v1_t01/t01.stdin   &gt; /lustre1/0/einf581/abinit-9.2.2/build/tests/Test_suite/v1_t01/t01.stdout   2&gt; /lustre1/0/einf581/abinit-9.2.2/build/tests/Test_suite/v1_t01/t01.stderr <br>
+ returned exit_code: 34<br>
+<br>
+[v1][t01][np=1][run_etime: 1.59 s]: fldiff fatal error:<br>
+file 1 has more significant lines than file 2 (435 &gt; 0).<br>
+ [file=t01.out]<br>
+[v1][t01][np=1] Test was not expected to fail but subprocesses returned retcode: 34<br>
+[int2:18891] *** An error occurred in MPI_Info_dup<br>
+[int2:18891] *** reported by process [3692756993,0]<br>
+[int2:18891] *** on communicator MPI_COMM_WORLD<br>
+[int2:18891] *** MPI_ERR_INFO: invalid info object<br>
+[int2:18891] *** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,<br>
+[int2:18891] ***    and potentially your MPI job)<br>
+<br>
+No YAML Error found in: [v1][t01][np=1]<br>
+<br>
+Suite   failed  passed  succeeded  skipped  disabled  run_etime  tot_etime<br>
+v1           1       0          0        0         0       1.59       1.64<br>
+<br>
+Completed in 1.81 [s]. Average time for test=1.59 [s], stdev=0.00 [s]<br>
+Summary: failed=1, succeeded=0, passed=0, skipped=0, disabled=0<br>
+<br>
+Execution completed.<br>
+<br>
+I am attaching the config.log file.<br>
+I have tried to link libyaml both dynamically and statistically. But gives the same error.<br>
+Any help would be appreciated.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: No YAML Error found abinit-9.2.2</h3>
+				<div class="date">Posted: <strong>Fri Dec 04, 2020 10:05 am</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br>
+<br>
+This is not a YAML issue.<br>
+<br>
+The code aborts when we try to create a netcdf4 file with MPI-IO support so I believe the problem is not in the MPI library but in the hdf5/netcdf4/netcdf-fortran software stack (that depends on MPI).<br>
+<br>
+Perhaps one of these libraries has been compiled using different mpicc/mpif90 wrappers or with non-portable compilation options (note that MPI_INFO is implementation-dependent and this should explain the weird message “invalid info object”)<br>
+<br>
+To test this explanation, you can recompile Abinit with the internal fallbacks for hdf5/netcdf4/netcdf4-fortran...<br>
+<br>
+regards</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: No YAML Error found abinit-9.2.2</h3>
+				<div class="date">Posted: <strong>Sun Dec 06, 2020 9:02 am</strong></div>
+				<div class="author">by <strong>nsingh3</strong></div>
+				<div class="content">Hi, <br>
+<br>
+Thanks for the reply. I wanted to use all the libraries compiled on the cluster and I guess they were compiled correctly. However I have contacted them to look into the matter as to why I was getting that error. Meanwhile as you suggested I tried to build the fallbacks but that also resulted in the following errors. Just to be sure I had to do the following :<br>
+<br>
+1) cd /build/fallbacks/ (build is directory which had config.ac file and it made the fallbacks directory)<br>
+2) ./build-abinit-fallbacks.sh <br>
+<br>
+../../src/H5Z.c:108: error: undefined reference to 'SZ_encoder_enabled'<br>
+../../src/H5Zszip.c:321: error: undefined reference to 'SZ_BufftoBuffDecompress'<br>
+../../src/H5Zszip.c:348: error: undefined reference to 'SZ_BufftoBuffCompress'<br>
+collect2: error: ld returned 1 exit status<br>
+make[4]: *** [stab] Error 1<br>
+make[4]: *** Waiting for unfinished jobs....<br>
+../../src/H5Z.c:108: error: undefined reference to 'SZ_encoder_enabled'<br>
+../../src/H5Zszip.c:321: error: undefined reference to 'SZ_BufftoBuffDecompress'<br>
+../../src/H5Zszip.c:348: error: undefined reference to 'SZ_BufftoBuffCompress'<br>
+../../src/H5Z.c:108: error: undefined reference to 'SZ_encoder_enabled'<br>
+../../src/H5Zszip.c:321: error: undefined reference to 'SZ_BufftoBuffDecompress'<br>
+../../src/H5Zszip.c:348: error: undefined reference to 'SZ_BufftoBuffCompress'<br>
+collect2: error: ld returned 1 exit status<br>
+collect2: error: ld returned 1 exit status<br>
+../../src/H5Z.c:108: error: undefined reference to 'SZ_encoder_enabled'<br>
+../../src/H5Zszip.c:321: error: undefined reference to 'SZ_BufftoBuffDecompress'<br>
+../../src/H5Zszip.c:348: error: undefined reference to 'SZ_BufftoBuffCompress'<br>
+collect2: error: ld returned 1 exit status<br>
+../../src/H5Z.c:108: error: undefined reference to 'SZ_encoder_enabled'<br>
+../../src/H5Zszip.c:321: error: undefined reference to 'SZ_BufftoBuffDecompress'<br>
+../../src/H5Zszip.c:348: error: undefined reference to 'SZ_BufftoBuffCompress'<br>
+collect2: error: ld returned 1 exit status<br>
+../../src/H5Z.c:108: error: undefined reference to 'SZ_encoder_enabled'<br>
+../../src/H5Zszip.c:321: error: undefined reference to 'SZ_BufftoBuffDecompress'<br>
+../../src/H5Zszip.c:348: error: undefined reference to 'SZ_BufftoBuffCompress'<br>
+collect2: error: ld returned 1 exit status<br>
+../../src/H5Z.c:108: error: undefined reference to 'SZ_encoder_enabled'<br>
+../../src/H5Zszip.c:321: error: undefined reference to 'SZ_BufftoBuffDecompress'<br>
+../../src/H5Zszip.c:348: error: undefined reference to 'SZ_BufftoBuffCompress'<br>
+collect2: error: ld returned 1 exit status<br>
+make[4]: *** [cache_tagging] Error 1<br>
+make[4]: *** [lheap] Error 1<br>
+make[4]: *** [ohdr] Error 1<br>
+make[4]: *** [cache] Error 1<br>
+make[4]: *** [cache_image] Error 1<br>
+make[4]: *** [cache_api] Error 1<br>
+../../src/H5Z.c:108: error: undefined reference to 'SZ_encoder_enabled'<br>
+../../src/H5Zszip.c:321: error: undefined reference to 'SZ_BufftoBuffDecompress'<br>
+../../src/H5Zszip.c:348: error: undefined reference to 'SZ_BufftoBuffCompress'<br>
+collect2: error: ld returned 1 exit status<br>
+make[4]: *** [testhdf5] Error 1<br>
+make[4]: Leaving directory `/lustre1/0/einf581/abinit-9.2.2/build/fallbacks/abinit-fallbacks-9.2/sources/hdf5-1.10.6/tmp-build/test'<br>
+make[3]: *** [all-recursive] Error 1<br>
+make[3]: Leaving directory `/lustre1/0/einf581/abinit-9.2.2/build/fallbacks/abinit-fallbacks-9.2/sources/hdf5-1.10.6/tmp-build'<br>
+make[2]: *** [stamps/hdf5-build-stamp] Error 2<br>
+make[2]: Leaving directory `/lustre1/0/einf581/abinit-9.2.2/build/fallbacks/abinit-fallbacks-9.2'<br>
+make[1]: [all-local] Error 2 (ignored)<br>
+Checking build of hdf5 fallback<br>
+test -e stamps/hdf5-install-stamp<br>
+make[1]: *** [all-local] Error 1<br>
+make[1]: Leaving directory `/lustre1/0/einf581/abinit-9.2.2/build/fallbacks/abinit-fallbacks-9.2'<br>
+make: *** [install-recursive] Error 1<br>
+We have detected a problem while generating fallbacks : contact Abinit's team</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: No YAML Error found abinit-9.2.2</h3>
+				<div class="date">Posted: <strong>Tue Dec 08, 2020 10:18 am</strong></div>
+				<div class="author">by <strong>admin</strong></div>
+				<div class="content">Hi,<br>
+<br>
+I see in the config.log that the OS is RedHatEnterpriseServer7<br>
+<br>
+you need to install the following libraries :<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>libaec-devel
+libaec
+
+rpm -ql libaec-devel
+/usr/include/libaec.h
+/usr/include/szlib.h
+/usr/lib64/libaec.so
+/usr/lib64/libsz.so
+
+nm -D /usr/lib64/libsz.so | grep SZ_encoder_enabled
+0000000000001040 T SZ_encoder_enabled</code></pre></div>
+
+jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: No YAML Error found abinit-9.2.2</h3>
+				<div class="date">Posted: <strong>Mon Dec 14, 2020 4:30 pm</strong></div>
+				<div class="author">by <strong>nsingh3</strong></div>
+				<div class="content">Hi,<br>
+<br>
+First of all sorry for late reply as I was waiting for the cluster people to install libaec for me.<br>
+After the installation I did make clean and compiled the code again with the above config.ac file but the same error appears while running tests.<br>
+Can you guide me about where I am doing wrong in the installation process.<br>
+<br>
+Regards,<br>
+Nisha</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: No YAML Error found abinit-9.2.2</h3>
+				<div class="date">Posted: <strong>Sun Dec 27, 2020 2:30 pm</strong></div>
+				<div class="author">by <strong>nsingh3</strong></div>
+				<div class="content">Hello,<br>
+<br>
+I was able to install abinit with fallbacks finally and now I can do the calculations.<br>
+Thanks.<br>
+<br>
+-Nisha</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=5241&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:05:41 GMT -->
+</html>

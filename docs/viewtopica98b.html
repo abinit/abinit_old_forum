@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4463&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:04:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Easy and fast way to compiler with Intel parallel studio XE 2019 Update 4 -Abinit 8.10.3</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Easy and fast way to compiler with Intel parallel studio XE 2019 Update 4 -Abinit 8.10.3</h2>
+		<p><a href="viewtopic204e.html?f=3&amp;t=4463">https://forum.abinit.org/viewtopic.php?f=3&amp;t=4463</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Easy and fast way to compiler with Intel parallel studio XE 2019 Update 4 -Abinit 8.10.3</h3>
+				<div class="date">Posted: <strong>Wed Jul 01, 2020 11:40 am</strong></div>
+				<div class="author">by <strong>nhankg2016</strong></div>
+				<div class="content">Hi all,<br>
+<br>
+It's fast way to compiler with ubuntu 18.04.<br>
+<br>
+But first you need : 
+<blockquote class="uncited"><div>sudo apt update<br>
+sudo apt install build-essential<br>
+sudo apt install python</div></blockquote>
+
+If you configure with intel parallel studio XE 2019 update 4  (Intel), <br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code> enable_mpi=yes
+enable_mpi_io="yes"
+enable_gw_dpc="yes"
+enable_64bit_flags="yes"
+enable_optim="aggressive"
+CC="mpiicc"
+CXX="mpiicpc"
+FC="mpiifort"
+FCFLAGS_EXTRA=""
+with_linalg_flavor="mkl" 
+with_linalg_incs="-I/home/intel/parallel_studio_xe_2019.4.070/compilers_and_libraries_2019/linux/mkl/include/intel64/lp64 -I/home/intel/compilers_and_libraries_2019.4.243/linux/mkl/include" 
+with_linalg_lib="-L/home/intel/compilers_and_libraries_2019.4.243/linux/mkl/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lmkl_blacs_intelmpi_lp64 -lpthread -lm -ldl"
+with_mpi_ics="-I/home/intel/compilers_and_libraries_2019.4.243/linux/mpi/intel64/include"  
+with_mpi_libs="-L/home/intel/compilers_and_libraries_2019.4.243/linux/mpi/intel64/lib -lmpi_lp64"
+with_fft_flavor="dfti"
+</code></pre></div>
+
+Copy and create a text code ***.ac in Abinit folder<br>
+<br>
+Run command ./configure --with-config-file="./***.ac" in abinit floder.<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make clean
+
+make -j 4 or or make -j n for using “n” processors on a SMP machine where you have to replace “n” by its value
+
+cd tests
+export MKL_NUM_THREADS=1
+./runtests.py  fast -j 4
+
+make install</code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Easy and fast way to compiler with Intel parallel studio XE 2019 Update 4 -Abinit 8.10.3</h3>
+				<div class="date">Posted: <strong>Wed Aug 12, 2020 4:03 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Thank you a lot for the tips!<br>
+Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4463&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:04:15 GMT -->
+</html>

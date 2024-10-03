@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=676&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Make Multi and Hyper Threading</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Make Multi and Hyper Threading</h2>
+		<p><a href="viewtopicd7ee-2.html?f=3&amp;t=676">https://forum.abinit.org/viewtopic.php?f=3&amp;t=676</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Make Multi and Hyper Threading</h3>
+				<div class="date">Posted: <strong>Tue Oct 19, 2010 11:36 pm</strong></div>
+				<div class="author">by <strong>Ngeah</strong></div>
+				<div class="content">Hello everyone,<br /><br />I am running on an Intel I7 930, which has 4 physical cores which have Hyper Threading, so each physical core has 2 virtual cores (8 virtual cores total). I have successfully installed ABINIT on my system, and everything seems to be working fine, but I used the &quot;make&quot; command instead of the &quot;make multi multi_nprocs=&lt;n&gt;&quot; command.  <br /><br />I'm still a little shaky about the facts, but after a bit of googling, I want to say that I should have used the &quot;make multi&quot; command instead becuase a multi core processor is handled as an SMP architecture, and the cores are treated as multiple processors.<br /><br />Now if all that is correct, and I should in fact be using &quot;make multi multi_nprocs=&lt;n&gt;,&quot; am I supposed to set n to 4 or 8?  I searched the ABINIT forums, but I don't think this has been addressed yet.  If I'm wrong, can someone please link me to the correct thread?  Any additional information would also be appreciated.<br /><br />Thanks in advance.<br />Ngeah<br /><br />Additional info:<br />Intel I7 930<br />6GB RAM<br />Ubuntu 10.10 Maverick Meerkat (amd64)<br />ABINIT 6.4.1</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Make Multi and Hyper Threading</h3>
+				<div class="date">Posted: <strong>Wed Oct 20, 2010 10:36 am</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">There is a &quot;make multi_octo&quot; shortcut for your kind of architecture. More generally, you can set the number of processes to the total number of cores + 1.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Make Multi and Hyper Threading</h3>
+				<div class="date">Posted: <strong>Wed Oct 20, 2010 8:00 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content"><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make multi</code></pre></div> ... to run 4 parallel threads. HT is only for decoration; looks cute for a &quot;top&quot; but no efficient hardware behind.<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Make Multi and Hyper Threading</h3>
+				<div class="date">Posted: <strong>Thu Oct 21, 2010 1:15 am</strong></div>
+				<div class="author">by <strong>Ngeah</strong></div>
+				<div class="content">Thank you both for your hasty replies.  I am currently running a few jobs right now, so I won't be able to try until later tonight. <br /><br /><blockquote><div><cite>Alain_Jacques wrote:</cite>HT is only for decoration; looks cute for a &quot;top&quot; but no efficient hardware behind.</div></blockquote><br /><br />I had suspicions of this as well, but had little info to back it.  Can you explain a little further? Or better yet, do you know where I can go to read more about this?  Specifically why HT isn't effective for applications such as ABINIT?<br /><br />Also, will I get some speed increase automatically, or will I have to play with the parallelisation input variables in order to get a change in performance?  If so, which variables are most worthwhile?  I realize this may asking a bit much, so please accept my apologies and disregard this last paragraph if you think that is the case.. I've still got a lot to learn.<br /><br />Thanks again,<br />Ngeah</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Make Multi and Hyper Threading</h3>
+				<div class="date">Posted: <strong>Thu Oct 21, 2010 2:09 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Months ago, I made several tests on our brand new dual Xeon Nehalem workhorse - Gainstown X5570 CPUs. Nice system indeed with an option in the BIOS allowing to switch on/off hyperthreading. And so I ran all the combinations of 4 threads / 8 threads/CPU with HT on/off using Abinit parallel tests as benchmarks. The conclusion was that there is no speed improvement by activating HT - HT+8threads/CPU = 2 times slower than noHT+4threads/CPU // HT+4threads/CPU = noHT+4threads/CPU // HT+8threads/CPU = noHT+8threads/CPU. So even when overloading the CPU, HT was inefficient. I didn't test the effects on MKL multithreading - maybe Intel has some magic recipe to benefit from HT.<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Make Multi and Hyper Threading</h3>
+				<div class="date">Posted: <strong>Mon Oct 25, 2010 8:20 pm</strong></div>
+				<div class="author">by <strong>Ngeah</strong></div>
+				<div class="content">Thanks again Alain, for the information.  It sounds like you've done some rather extensive tests regarding the performance of HT.  If I run across more information on this, I'll be sure to post it here as well.  <br /><br />Cheers,<br />Ngeah</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=676&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:36 GMT -->
+</html>

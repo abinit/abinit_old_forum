@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2093&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:22:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Problem compiling Abinit 7.3.2 with GCC 4.7.2</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Problem compiling Abinit 7.3.2 with GCC 4.7.2</h2>
+		<p><a href="viewtopic00fa.html?f=3&amp;t=2093">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2093</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Problem compiling Abinit 7.3.2 with GCC 4.7.2</h3>
+				<div class="date">Posted: <strong>Sun Apr 21, 2013 5:46 pm</strong></div>
+				<div class="author">by <strong>sponce</strong></div>
+				<div class="content">Dear all, <br /><br />Using the following configure.ac file:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />enable_64bit_flags=&quot;yes&quot;<br />with_mpi_prefix=&quot;/usr/lib/openmpi/&quot;<br /><br />AR=ar<br />FC=&quot;mpif90&quot;<br />CC=&quot;mpicc&quot;<br />CXX=&quot;mpicxx&quot;<br /><br />enable_optim=&quot;safe&quot;<br />enable_debug=&quot;yes&quot;<br />enable_clib=&quot;yes&quot;<br /><br />with_fft_flavor=&quot;fftw3&quot;<br />with_dft_flavor=&quot;atompaw+libxc&quot;<br />with-trio-flavor=&quot;netcdf+etsf_io&quot;<br /><br />with-libxc-incs=&quot;-I/home/sponce/local/libxc-rev10384/include/&quot;<br />with-libxc-libs=&quot;-L/home/sponce/local/libxc-rev10384/lib&quot;<br /><br />with_netcdf_incs=&quot;-I/home/sponce/local/include/&quot;<br />with_netcdf_libs=&quot;-L/home/sponce/local/lib -lnetcdf -lnetcdff&quot;<br /><br />enable_test_timeout=&quot;yes&quot;<br /><br />enable_gw_dpc=&quot;yes&quot;<br />enable_gui=&quot;no&quot;<br /><br />CFLAGS=&quot;-g -O1&quot;<br />CXXFLAGS=&quot;-g -O1&quot;<br />FCFLAGS=&quot;-g -O1 -ffree-line-length-none&quot;</code></pre></div> <br /><br />I got no problem during the configure:<br /><blockquote class="uncited"><div> ==============================================================================<br /> === Final remarks                                                          ===<br /> ==============================================================================<br /><br /><br />Summary of important options:<br /><br />  * C compiler      : gnu version 4.7<br />  * Fortran compiler: gnu version 4.7<br />  * architecture    : unknown unknown (64 bits)<br /><br />  * debugging       : yes<br />  * optimizations   : safe<br /><br />  * OpenMP enabled  : no (collapse: ignored)<br />  * MPI    enabled  : yes<br />  * MPI-IO enabled  : yes<br />  * GPU    enabled  : no (none)<br /><br />  * TRIO   flavor = netcdf+etsf_io-fallback<br />  * TIMER  flavor = abinit (libs: ignored)<br />  * LINALG flavor = netlib (libs: auto-detected)<br />  * ALGO   flavor = none (libs: ignored)<br />  * FFT    flavor = fftw3 (libs: auto-detected)<br />  * MATH   flavor = none (libs: ignored)<br />  * DFT    flavor = libxc-fallback+atompaw-fallback<br /></div></blockquote><br /><br /> but while making I got:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>mpif90 -m64 -DHAVE_CONFIG_H -I. -I../../../src/01_interfaces_ext -I../.. -I../../src/incs -I../../../src/incs -I/home/sponce/program/7.3.2-private/build/fallbacks/exports/include&nbsp; &nbsp;-ffree-form -J/home/sponce/program/7.3.2-private/build/src/mods&nbsp; &nbsp;-g -O1 -ffree-line-length-none -c -o m_iso_c_bindings.o ../../../src/01_interfaces_ext/m_iso_c_bindings.F90<br />In file included from ../../../src/01_interfaces_ext/m_iso_c_bindings.F90:28:0:<br />../../config.h:669:2: error: #error &quot;HAVE_MPI1 and HAVE_MPI2 are both undefined&quot;<br />make&#91;3&#93;: *** &#91;m_iso_c_bindings.o&#93; Error 1<br />make&#91;3&#93;: Leaving directory `/home/sponce/program/7.3.2-private/build/src/01_interfaces_ext'</code></pre></div><br /><br />Any ideas?<br /><br />Cheers !<br /><br />Samuel</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem compiling Abinit 7.3.2 with GCC 4.7.2</h3>
+				<div class="date">Posted: <strong>Sun Apr 21, 2013 7:11 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Hi Samuel, <br /><br />Could you post config.log?<br /><br />BTW: Why are you setting FC, CC and CXX? <br />I would let the build system find the correct MPI wrappers since the MPI directory has been already specified via with_mpi_prefix</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem compiling Abinit 7.3.2 with GCC 4.7.2</h3>
+				<div class="date">Posted: <strong>Sun Apr 21, 2013 7:32 pm</strong></div>
+				<div class="author">by <strong>sponce</strong></div>
+				<div class="content">Hello Matteo, <br /><br />Fair point, I've tried without them and it did not solve the problem.<br /><br />I've upload the config.log<br /><br />Thank you, <br /><br />Samuel</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem compiling Abinit 7.3.2 with GCC 4.7.2</h3>
+				<div class="date">Posted: <strong>Sat Apr 27, 2013 2:08 pm</strong></div>
+				<div class="author">by <strong>sponce</strong></div>
+				<div class="content">Hey Matteo, <br /><br />Following your suggestion I've propertly set the mpi_prefix and it work but I still have a problem with fftw3:<br /><br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `__m_fftw3_MOD_fftw3_execute_dft_spc':<br />/home/sponce/program/7.3.2-private/build/src/52_fft_mpi_noabirule/../../../src/52_fft_mpi_noabirule/m_fftw3.F90:3216: undefined reference to `sfftw_execute_dft_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `__m_fftw3_MOD_cplan_many_dft':<br />/home/sponce/program/7.3.2-private/build/src/52_fft_mpi_noabirule/../../../src/52_fft_mpi_noabirule/m_fftw3.F90:2909: undefined reference to `sfftw_plan_many_dft_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `__m_fftw3_MOD_fftw3_c2c_op_spc':<br />/home/sponce/program/7.3.2-private/build/src/52_fft_mpi_noabirule/../../../src/52_fft_mpi_noabirule/m_fftw3.F90:1803: undefined reference to `sfftw_execute_dft_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `__m_fftw3_MOD_fftw3_c2c_ip_spc':<br />/home/sponce/program/7.3.2-private/build/src/52_fft_mpi_noabirule/../../../src/52_fft_mpi_noabirule/m_fftw3.F90:1556: undefined reference to `sfftw_execute_dft_'<br />collect2: error: ld returned 1 exit status<br /><br />with the following .ac file:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />enable_64bit_flags=&quot;yes&quot;<br />with_mpi_prefix=&quot;/usr/&quot;<br /><br />enable_optim=&quot;safe&quot;<br />enable_debug=&quot;yes&quot;<br />enable_clib=&quot;yes&quot;<br /><br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_incs=&quot;-I/home/sponce/local/fftw3/include/&quot;<br />with_fft_libs=&quot;-L/home/sponce/local/fftw3/lib/ -lfftw3&quot;<br /><br />with_dft_flavor=&quot;atompaw+libxc&quot;<br />with_trio_flavor=&quot;netcdf+etsf_io&quot;<br /><br />with_libxc_incs=&quot;-I/home/sponce/local/libxc-rev10384/include/&quot;<br />with_libxc_libs=&quot;-L/home/sponce/local/libxc-rev10384/lib -lxc&quot;<br /><br />with_netcdf_incs=&quot;-I/home/sponce/local/include/&quot;<br />with_netcdf_libs=&quot;-L/home/sponce/local/lib -lnetcdf -lnetcdff&quot;<br /><br />enable_test_timeout=&quot;yes&quot;<br /><br />enable_gw_dpc=&quot;yes&quot;<br />enable_gui=&quot;no&quot;<br /><br />CFLAGS=&quot;-g -O1&quot;<br />CXXFLAGS=&quot;-g -O1&quot;<br />FCFLAGS=&quot;-g -O1 -ffree-line-length-none&quot;</code></pre></div><br /><br />I've enclose the associated config.log.<br /><br />By the way, why do we have to define &quot;with_netcdf_libs&quot; with underscore _ rather than &quot;-&quot; ? When you type configure --help it tells you to put with-netcdf-libs but it is not working with &quot;-&quot;.<br /><br />Shouldn't the configure --help file updated?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem compiling Abinit 7.3.2 with GCC 4.7.2&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Sat Apr 27, 2013 5:56 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Hi Samuel, <br /><br />Starting with version7.3.1, the new version of the ABINIT-FFTW3 wrappers<br />provides native support for FFTs both in single and double precision.<br />This is the new option that must be specified in the configuration file:<br /><br />with_fft_libs=&quot;-L/usr/lib	-lfftw3 -lfftw3f&quot;<br /><br />libfftw3f is the single-precision version of FFTW3. Note that you have to enable<br />the compilation of this library during the configuration of FFTW3  <br /><br /><blockquote class="uncited"><div>By the way, why do we have to define &quot;with_netcdf_libs&quot; with underscore _ rather than &quot;-&quot; ? When you type configure --help it tells you to put with-netcdf-libs but it is not working with &quot;-&quot;.<br /></div></blockquote><br /><br />Because the configuration file uses options in the so-called normalized form.<br />The rule is simple: take the name of the option expected by configure and replace &quot;-&quot; with &quot;_&quot; everywhere.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [Solved] Problem compiling Abinit 7.3.2 with GCC 4.7.2</h3>
+				<div class="date">Posted: <strong>Wed May 01, 2013 11:00 am</strong></div>
+				<div class="author">by <strong>sponce</strong></div>
+				<div class="content">It worked !<br /><br />Thank you Matteo.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2093&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:22:39 GMT -->
+</html>

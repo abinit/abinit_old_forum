@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=547&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:53:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Energy Zero?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Energy Zero?</h2>
+		<p><a href="viewtopic3307.html?f=9&amp;t=547">https://forum.abinit.org/viewtopic.php?f=9&amp;t=547</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Energy Zero?</h3>
+				<div class="date">Posted: <strong>Fri Aug 20, 2010 1:57 am</strong></div>
+				<div class="author">by <strong>asorini</strong></div>
+				<div class="content">Hi Forum,<br /><br /> I was wondering, to what zero is the energy in ABINIT referenced? For example, if ABINIT says the chemical potential is -0.2 Hartree does that mean -0.2 Hartree relative to the vacuum, or what? I don't think it is referenced relative to the vacuum... but I could be wrong... I haven't been able to find out to what zero the values of the energy are referenced.<br /><br />Anyone know? If so I'd appreciate learning about it.<br /><br />Mostly I am interested in looking at slab calculations and extracting the Work function. For example, if the vacuum were set to the zero of energy (I.e., the true electrostatic potential far from the slab goes to zero) then the highest occupied eigenvalue would be the work function, but if not then there is a shift...<br /><br />Any tips would be appreciated. Cheers,<br /><br />Adam</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Energy Zero?</h3>
+				<div class="date">Posted: <strong>Fri Aug 20, 2010 10:27 pm</strong></div>
+				<div class="author">by <strong>gonze</strong></div>
+				<div class="content">Dear Adam,<br /><br />Technical answer : in ABINIT, the G=0 component of the <br />combined Hartree+local potential is set to zero.<br /><br />Physcal answer : with only a periodic calculation, there is no correct way<br />to compute the work function ! Indeed, the latter depends<br />on the dipole at the surface of the sample (so, different facet<br />of a crystal have -slightly- different work functions). <br />You must compute a work function by doing a slab calculation,<br />that includes : the vacuum level, for comparison, and a model for your interface.<br />And this is true not only for DFT but also GW calculations.<br />There are many references of calculations of work functions<br />with first-principles codes. For an example in which ABINIT was used,<br />see e.g. M. Verstraete et al Phys. Rev. B 70, 205427 (2004).<br /><br />Regards,<br />Xavier</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Energy Zero?</h3>
+				<div class="date">Posted: <strong>Mon Aug 23, 2010 1:28 am</strong></div>
+				<div class="author">by <strong>asorini</strong></div>
+				<div class="content">Thanks for your reply. I am indeed trying to do slab calculations. <br /><br />From the paper you referenced it looks like there are two ways to calculate the Work function. <br /><br />One way is to simply include a good amount of vacuum in the supercell and then subtract the value of the slab calculation fermi level from the value of the potential (obtained from prt1dm 1) as far from the slab as possible. I.e.,<br /><br />W=v_KS_slab(far away) - E_F_slab<br /><br />...And presumably very far from the slab the KS potential v_KS and the electrostatic (v_es = v_ext+v_hartree) potential do not differ much since the density is very low. <br /><br />The second way to calculate the work function given in the paper is to subtract the BULK fermi level corrected by the average (electrostatic) potential in the slab minus the average (electrostatic) potential in the bulk from the value of the potential as far from the slab as possible. I.e.,<br /><br />W=v_KS_slab(far away) - (&lt;v_es_slab&gt; + E_F_bulk - &lt;v_es_bulk&gt;)<br /><br />...This (&lt;v_es_slab&gt; - &lt;v_es_bulk&gt;) correction is supposed to adjust the bulk and slab calculations to roughly the same zero level, I believe.<br /><br />And one of the conclusions of the referenced paper is that the first method of calculating W works only slightly less well than the second method.<br /><br />Is this correct?<br /><br /><br /><br />Cheers,<br /><br />Adam</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Energy Zero?</h3>
+				<div class="date">Posted: <strong>Mon Aug 23, 2010 1:59 am</strong></div>
+				<div class="author">by <strong>asorini</strong></div>
+				<div class="content"><blockquote><div><cite>gonze wrote:</cite>Technical answer : in ABINIT, the G=0 component of the <br />combined Hartree+local potential is set to zero.<br /></div></blockquote><br /><br />Here I think &quot;local potential&quot; means the local part of the pseudo potential and the local part of the xc potential?<br /><br />So this means that the equations which ABINIT solves are actually<br />$$<br />\left(-\nabla^2/2 + v_{KS}-C\right)\psi = E\psi\;,<br />$$<br />where <br />$$<br />C=\int_{cell} \frac{d^3r}{V_{cell}}\left(v_{Hartree}({\bf r})+v_{loc}({\bf r})\right)\equiv &lt;v_H+v_L&gt;\;.<br />$$<br /><br />And thus the potential at infinity given by ABINIT prt1dm should be equal to -C<br />since both local and nonlocal parts of v_KS go to zero at infinity.<br /><br />But I guess it is the case that the only way in practice to extract the potential value at infinity is by printing it out for a slab with a lot of vacuum using prt1dm or prtpot?</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=547&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:53:24 GMT -->
+</html>

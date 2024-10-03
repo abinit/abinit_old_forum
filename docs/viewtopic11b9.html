@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2697&p=8311 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:39:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Unable to compile in parallel using mvapich - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopicf266-2.html?t=2697">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="1"><a href="viewforum58da.html?f=1" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Building ABINIT</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="3"><a href="viewforum4d6b.html?f=3" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Configuring and compiling ABINIT</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopicd47a.html?f=3&amp;t=2697">Unable to compile in parallel using mvapich</a>&nbsp;
+<a href="viewtopic9c9e-2.html?f=3&amp;t=2697&amp;p=8293#p8293" style="color: #006600;">
+	[SOLVED]
+</a>
+</h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">option, parallelism,...<br /></div>
+<p>
+	<strong>Moderators:</strong> <a href="memberlist5296.html?mode=viewprofile&amp;u=2740" class="username">fgoudreault</a>, <a href="memberlist7468.html?mode=viewprofile&amp;u=53" class="username">mcote</a>
+</p>
+
+	<div class="rules">
+		<div class="inner">
+
+					<strong>Forum rules</strong><br />
+			Please have a look at ~abinit/doc/config/build-config.ac in the source package for detailed and up-to-date information about the configuration of Abinit 8 builds.<br>
+For a video explanation on how to build Abinit 7.x for Linux, please go to: <a href="http://www.youtube.com/watch?v=DppLQ-KQA68" class="postlink">http://www.youtube.com/watch?v=DppLQ-KQA68</a>.<br>
+<strong class="text-strong">IMPORTANT: when an answer solves your problem, please check the little green V-like button on its upper-right corner to accept it.</strong>
+		
+		</div>
+	</div>
+
+<div class="action-bar bar-top">
+	
+			<a href="postingf5d1.html?mode=reply&amp;f=3&amp;t=2697" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopica0a7.html?f=3&amp;t=2697&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="2697" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			7 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p8283" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile8283">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistfd13.html?mode=viewprofile&amp;u=1381" class="username">IvanHito</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search1e11.html?author_id=1381&amp;sr=posts">3</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jun 12, 2014 9:07 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content8283">
+
+						<h3 class="first"><a href="#p8283">Unable to compile in parallel using mvapich</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting93c6.html?mode=quote&amp;f=3&amp;p=8283" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic11fe-2.html?p=8283#p8283" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistfd13.html?mode=viewprofile&amp;u=1381" class="username">IvanHito</a></strong> &raquo; </span>Thu Jun 12, 2014 11:01 am
+			</p>
+			
+			
+			
+			<div class="content">Greetings to all!<br /><br />I'm quite new on this forum and not well enough in abinit code. So i ask for an excuse if there would be something wrong in my question.<br /><br />My current problem is to compile abinit on a super computer with mvapich release of mpi. <br />There are configuration options i use:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure --enable-debug=paranoid --enable-mpi=&quot;yes&quot; --disable-mpi-inplace --disable-mpi-io --with-mpi-prefix=&quot;/common/mvapich-1.2rc1-gcc&quot; --enable-64bit-flags=&quot;yes&quot;</code></pre></div><br /><br />The configuration always goes well (as far as i can conclude  <img class="smilies" src="images/smilies/icon_rolleyes.gif" alt=":roll:" title="Rolling Eyes" /> ). The config log is in the attachment. The real problem arises on the make step. There is the error:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>/common/mvapich-1.2rc1-gcc/bin/mpif90 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs -I/gpfs/NETHOME/ipsm1/Lobzenko/abinit-7.6.4/fallbacks/exports/include&nbsp; &nbsp;-free -module /gpfs/NETHOME/ipsm1/Lobzenko/abinit-7.6.4/src/mods&nbsp; -O0 -g -debug all -check uninit -ftrapuv -traceback -warn all -fp-stack-check -extend-source -vec-report0 -noaltparam -nofpscomp&nbsp; &nbsp;-c -o m_GreenHyb.o m_GreenHyb.F90<br />...<br />...<br />------------------------------^<br />m_GreenHyb.F90(866): error #6404: This name does not have a type and must have an excplicit type. &#91;MPI_IN_PLACE&#93;<br />&nbsp; &nbsp; &nbsp; CALL MPI_ALLGATHERV(MPI_IN_PLACE, O, MPI_DATA_TYPE_NULL,&amp;<br />------------------------------^<br />compilation aborted from m_GreenHyb.F90 (code 1)<br />make&#91;3&#93;: *** &#91;m_GreenHyb.o&#93; Error 1<br />make&#91;2&#93;: *** &#91;all-recursive&#93; Error 1<br />make&#91;1&#93;: *** &#91;all-recursive&#93; Error 1<br />make: *** &#91;all&#93; Error 2<br /></code></pre></div><br /><br />Appreciate any hints on solving this. <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /></div>
+			
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/filec3ec.php?id=950">config.log</a></dt>
+						<dd>(138.48 KiB) Downloaded 308 times</dd>
+		</dl>
+		
+		
+			</dd>
+									</dl>
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p8287" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile8287">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlist981e.html?mode=viewprofile&amp;u=71" class="avatar"><img class="avatar" src="download/fileb0c3.png?avatar=g8_1366628657.png" width="64" height="64" alt="User avatar" /></a>														</div>
+								<a href="memberlist981e.html?mode=viewprofile&amp;u=71" style="color: #6633FF;" class="username-coloured">pouillon</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search42e4.html?author_id=71&amp;sr=posts">651</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Aug 19, 2009 10:08 am</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Spain</dd>
+												
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact pouillon">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact pouillon</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="https://www.materialsevolution.es/" title="Website">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																																																<a href="skype:ypouillon80?userinfo" title="Skype" class="last-cell">
+										<span class="contact-icon phpbb_skype-icon">Skype</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content8287">
+
+						<h3 ><a href="#p8287">Re: Unable to compile in parallel using mvapich</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting7170.html?mode=quote&amp;f=3&amp;p=8287" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic0b7e.html?p=8287#p8287" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist981e.html?mode=viewprofile&amp;u=71" style="color: #6633FF;" class="username-coloured">pouillon</a></strong> &raquo; </span>Thu Jun 12, 2014 12:15 pm
+			</p>
+			
+			
+			
+			<div class="content">This is a bug in Abinit. The case where MPI_IN_PLACE is not supported has not been taken into account in the faulty module. I'll notify the developers of this section and we'll keep you in touch.<br /><br />Thank you for your report.</div>
+			
+			
+			
+									
+									<div id="sig8287" class="signature">Yann Pouillon<br /><em class="text-italics">Simune Atomistics<br />Donostia-San Sebastián, Spain</em></div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p8293" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile8293">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist933d.html?mode=viewprofile&amp;u=1180" class="username">Jordan</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchdd2b.html?author_id=1180&amp;sr=posts">282</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue May 07, 2013 9:47 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content8293">
+
+						<h3 ><a href="#p8293">Re: Unable to compile in parallel using mvapich&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting9854.html?mode=quote&amp;f=3&amp;p=8293" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic50aa.html?p=8293#p8293" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist933d.html?mode=viewprofile&amp;u=1180" class="username">Jordan</a></strong> &raquo; </span>Thu Jun 12, 2014 6:05 pm
+			</p>
+			
+			
+			
+			<div class="content">Sorry for the bug,<br /><br />Here is a patch to apply that should work. Let me know if it does not.<br /><br />Download and copy the attached file into your abinit directory<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>$ pwd<br />/foo/bar/abinit-7.6.4/<br />$ patch -p0 &lt; 62_ctqmc.patch.log<br /></code></pre></div><br />Then try to compile again.<br /><br />Cheers,<br /><br />Jordan</div>
+			
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file1887.php?id=951">62_ctqmc.patch.log</a></dt>
+			<dd><em>Patch for 62_ctqmc without MPI_IN_PLACE</em></dd>			<dd>(5.1 KiB) Downloaded 307 times</dd>
+		</dl>
+		
+		
+			</dd>
+									</dl>
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p8311" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile8311">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistfd13.html?mode=viewprofile&amp;u=1381" class="username">IvanHito</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search1e11.html?author_id=1381&amp;sr=posts">3</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jun 12, 2014 9:07 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content8311">
+
+						<h3 ><a href="#p8311">Re: Unable to compile in parallel using mvapich</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting853e.html?mode=quote&amp;f=3&amp;p=8311" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic97ca-3.html?p=8311#p8311" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistfd13.html?mode=viewprofile&amp;u=1381" class="username">IvanHito</a></strong> &raquo; </span>Mon Jun 16, 2014 1:54 pm
+			</p>
+			
+			
+			
+			<div class="content">I didn't have access to the computer for last three days. Now I'm back to work again. <br /><br />I did the patch you kindly prepared for me and restarted the make (with distclean and the same as above ./configure befor it). But it failed again...  <img class="smilies" src="images/smilies/icon_e_sad.gif" alt=":(" title="Sad" />  though, in the other part of the compilation. Now that's what it complains about&#058;<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make&#91;3&#93;: Entering directory `/gpfs/NETHOME/ipsm1/Lobzenko/abinit-7.6.4/src/98_main'<br />/common/mvapich-1.2rc1-gcc/bin/mpif90 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs -I/gpfs/NETHOME/ipsm1/Lobzenko/abinit-7.6.4/fallbacks/exports/include&nbsp; &nbsp; &nbsp;-free -module /gpfs/NETHOME/ipsm1/Lobzenko/abinit-7.6.4/src/mods&nbsp; -O0 -g -debug all -check uninit -ftrapuv -traceback -warn all -fp-stack-check -extend-source -vec-report0 -noaltparam -nofpscomp&nbsp; &nbsp; -g -debug all -check uninit -ftrapuv -traceback -warn all -fp-stack-check -extend-source -vec-report0 -noaltparam -nofpscomp&nbsp; &nbsp;-c -o abinit-abinit.o `test -f 'abinit.F90' || echo './'`abinit.F90<br />make&#91;3&#93;: Warning: File `../../src/95_drive/lib95_drive.a' has modification time 4.1 s in the future<br />/common/mvapich-1.2rc1-gcc/bin/mpif90 -free -module /gpfs/NETHOME/ipsm1/Lobzenko/abinit-7.6.4/src/mods&nbsp; -O0 -g -debug all -check uninit -ftrapuv -traceback -warn all -fp-stack-check -extend-source -vec-report0 -noaltparam -nofpscomp&nbsp; &nbsp; -g -debug all -check uninit -ftrapuv -traceback -warn all -fp-stack-check -extend-source -vec-report0 -noaltparam -nofpscomp&nbsp; &nbsp;-static-intel -static-libgcc&nbsp; -static-intel -static-libgcc&nbsp; -o abinit abinit-abinit.o -static-intel -static-libgcc&nbsp; ../../src/95_drive/lib95_drive.a ../../src/79_seqpar_mpi/lib79_seqpar_mpi.a ../../src/77_ddb/lib77_ddb.a ../../src/77_suscep/lib77_suscep.a ../../src/72_response/lib72_response.a ../../src/71_bse/lib71_bse.a ../../src/70_gw/lib70_gw.a ../../src/69_wfdesc/lib69_wfdesc.a ../../src/68_dmft/lib68_dmft.a&nbsp; ../../src/68_recursion/lib68_recursion.a ../../src/68_rsprc/lib68_rsprc.a ../../src/67_common/lib67_common.a ../../src/66_paw/lib66_paw.a ../../src/66_wfs/lib66_wfs.a ../../src/65_psp/lib65_psp.a ../../src/65_nonlocal/lib65_nonlocal.a&nbsp; ../../src/64_atompaw/lib64_atompaw.a ../../src/62_occeig/lib62_occeig.a ../../src/62_iowfdenpot/lib62_iowfdenpot.a ../../src/62_wvl_wfs/lib62_wvl_wfs.a ../../src/62_poisson/lib62_poisson.a ../../src/62_cg_noabirule/lib62_cg_noabirule.a ../../src/62_ctqmc/lib62_ctqmc.a ../../src/61_ionetcdf/lib61_ionetcdf.a ../../src/57_iovars/lib57_iovars.a ../../src/57_iopsp_parser/lib57_iopsp_parser.a ../../src/56_recipspace/lib56_recipspace.a ../../src/56_xc/lib56_xc.a ../../src/56_mixing/lib56_mixing.a ../../src/56_io_mpi/lib56_io_mpi.a ../../src/53_abiutil/lib53_abiutil.a ../../src/53_spacepar/lib53_spacepar.a ../../src/53_ffts/lib53_ffts.a&nbsp; ../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a ../../src/51_manage_mpi/lib51_manage_mpi.a ../../src/49_gw_toolbox_oop/lib49_gw_toolbox_oop.a ../../src/47_xml/lib47_xml.a ../../src/45_geomoptim/lib45_geomoptim.a ../../src/44_abitypes_defs/lib44_abitypes_defs.a ../../src/43_wvl_wrappers/lib43_wvl_wrappers.a ../../src/43_ptgroups/lib43_ptgroups.a ../../src/42_parser/lib42_parser.a ../../src/42_nlstrain/lib42_nlstrain.a ../../src/42_libpaw/lib42_libpaw.a ../../src/41_xc_lowlevel/lib41_xc_lowlevel.a ../../src/41_geometry/lib41_geometry.a ../../src/32_util/lib32_util.a ../../src/28_numeric_noabirule/lib28_numeric_noabirule.a ../../src/27_toolbox_oop/lib27_toolbox_oop.a ../../src/21_psiesta_noabirule/lib21_psiesta_noabirule.a ../../src/18_timing/lib18_timing.a ../../src/16_hideleave/lib16_hideleave.a&nbsp; ../../src/14_hidewrite/lib14_hidewrite.a ../../src/12_hide_mpi/lib12_hide_mpi.a ../../src/11_qespresso_ext/lib11_qespresso_ext.a ../../src/11_memory_mpi/lib11_memory_mpi.a ../../src/10_defs/lib10_defs.a&nbsp; ../../src/01_linalg_ext/lib01_linalg_ext.a ../../src/01_interfaces_ext/lib01_interfaces_ext.a&nbsp; -L/gpfs/NETHOME/ipsm1/Lobzenko/abinit-7.6.4/fallbacks/exports/lib -llapack -lblas -lrt -L/usr/lib64 -L/common/mvapich-1.2rc1-gcc/lib/shared -L/common/mvapich-1.2rc1-gcc/lib -L/opt/intel/composerxe-2011.3.174/compiler/lib/intel64 -L/opt/intel/composerxe-2011.3.174/mkl/lib/intel64 -L/usr/lib/gcc/x86_64-redhat-linux/4.1.2 -L/usr/lib/gcc/x86_64-redhat-linux/4.1.2/../../../../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/4.1.2/../../.. -L/lib64 -L/lib -L/usr/lib -lmpichf90nc -lmpichfarg -lmpich -libverbs -libumad -lpthread -lrt -lifport -lifcore -limf -lsvml -lm -lipgo -lirc -lirc_s -ldl -L/usr/lib64 -L/common/mvapich-1.2rc1-gcc/lib/shared -L/common/mvapich-1.2rc1-gcc/lib -L/opt/intel/composerxe-2011.3.174/compiler/lib/intel64 -L/opt/intel/composerxe-2011.3.174/mkl/lib/intel64 -L/usr/lib/gcc/x86_64-redhat-linux/4.1.2 -L/usr/lib/gcc/x86_64-redhat-linux/4.1.2/../../../../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/4.1.2/../../.. -L/lib64 -L/lib -L/usr/lib -lmpichf90nc -lmpichfarg -lmpich -libverbs -libumad -lpthread -lrt -lifport -lifcore -limf -lsvml -lm -lipgo -lirc -lirc_s -ldl<br />../../src/12_hide_mpi/lib12_hide_mpi.a(m_xmpi.o): In function `xmpi_comm_set_errhandler':<br />/gpfs/NETHOME/ipsm1/Lobzenko/abinit-7.6.4/src/12_hide_mpi/m_xmpi.F90:1779: undefined reference to `mpi_comm_get_errhandler_'<br />/gpfs/NETHOME/ipsm1/Lobzenko/abinit-7.6.4/src/12_hide_mpi/m_xmpi.F90:1780: undefined reference to `mpi_comm_set_errhandler_'<br />make&#91;3&#93;: *** &#91;abinit&#93; Error 1<br />make&#91;3&#93;: Leaving directory `/gpfs/NETHOME/ipsm1/Lobzenko/abinit-7.6.4/src/98_main'<br />make&#91;2&#93;: *** &#91;all-recursive&#93; Error 1<br />make&#91;2&#93;: Leaving directory `/gpfs/NETHOME/ipsm1/Lobzenko/abinit-7.6.4/src'<br />make&#91;1&#93;: *** &#91;all-recursive&#93; Error 1<br />make&#91;1&#93;: Leaving directory `/gpfs/NETHOME/ipsm1/Lobzenko/abinit-7.6.4'<br />make: *** &#91;all&#93; Error 2<br /></code></pre></div></div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p8315" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile8315">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlist6f62.html?mode=viewprofile&amp;u=61" class="avatar"><img class="avatar" src="download/file96d1.jpg?avatar=61_1392074789.jpg" width="92" height="79" alt="User avatar" /></a>														</div>
+								<a href="memberlist6f62.html?mode=viewprofile&amp;u=61" class="username">gmatteo</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search9f23.html?author_id=61&amp;sr=posts">291</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun Aug 16, 2009 5:40 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content8315">
+
+						<h3 ><a href="#p8315">Re: Unable to compile in parallel using mvapich</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting5d9b-2.html?mode=quote&amp;f=3&amp;p=8315" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic574f-2.html?p=8315#p8315" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist6f62.html?mode=viewprofile&amp;u=61" class="username">gmatteo</a></strong> &raquo; </span>Mon Jun 16, 2014 8:08 pm
+			</p>
+			
+			
+			
+			<div class="content">Enable the calls to MPI_Errhandler_get and comment the <br />calls to MPI_comm_get_Errhandler in m_xmpi.F90<br />in subroutine xmpi_comm_set_errhandler<br /><br /><br />=== modified file 'src/12_hide_mpi/m_xmpi.F90'<br />--- src/12_hide_mpi/m_xmpi.F90	2014-05-12 09:22:46 +0000<br />+++ src/12_hide_mpi/m_xmpi.F90	2014-06-16 18:06:01 +0000<br />@@ -2179,14 +2179,14 @@<br /> <br />  mpierr1=MPI_SUCCESS; mpierr2=MPI_SUCCESS<br /> <br />-#if defined HAVE_MPI1<br />+!#if defined HAVE_MPI1<br />    call MPI_Errhandler_get(my_comm,old_err_handler,mpierr1)<br />    call MPI_Errhandler_set(my_comm,new_err_handler,mpierr2)<br />-#endif<br />-#if defined HAVE_MPI2<br />-   call MPI_comm_get_Errhandler(my_comm,old_err_handler,mpierr1)<br />-   call MPI_comm_set_Errhandler(my_comm,new_err_handler,mpierr2)<br />-#endif<br />+!#endif<br />+!#if defined HAVE_MPI2<br />+!   call MPI_comm_get_Errhandler(my_comm,old_err_handler,mpierr1)<br />+!   call MPI_comm_set_Errhandler(my_comm,new_err_handler,mpierr2)<br />+!#endif<br /> <br />  ierror=MPI_SUCCESS<br />  if (mpierr1/=MPI_SUCCESS) then</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p8321" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile8321">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistfd13.html?mode=viewprofile&amp;u=1381" class="username">IvanHito</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search1e11.html?author_id=1381&amp;sr=posts">3</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jun 12, 2014 9:07 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content8321">
+
+						<h3 ><a href="#p8321">Re: Unable to compile in parallel using mvapich</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting7208.html?mode=quote&amp;f=3&amp;p=8321" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicf2b9-2.html?p=8321#p8321" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistfd13.html?mode=viewprofile&amp;u=1381" class="username">IvanHito</a></strong> &raquo; </span>Tue Jun 17, 2014 1:49 pm
+			</p>
+			
+			
+			
+			<div class="content">Didn't get it from the first look, but after some attempts I understood, what you mean. <br /><br />The compilation have been <span style="color: #00BF40"><span style="font-size: 150%; line-height: 116%;"><strong class="text-strong">successfully</strong></span></span> finished  <img class="smilies" src="images/smilies/icon_e_biggrin.gif" alt=":D" title="Very Happy" /> <br /><br />I used the following version of m_xmpi.F90:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;mpierr1=MPI_SUCCESS; mpierr2=MPI_SUCCESS<br /><br />#if defined HAVE_MPI1<br />&nbsp; &nbsp;call MPI_Errhandler_get(my_comm,old_err_handler,mpierr1)<br />&nbsp; &nbsp;call MPI_Errhandler_set(my_comm,new_err_handler,mpierr2)<br />#endif<br />#if defined HAVE_MPI2<br />!! call MPI_comm_get_Errhandler(my_comm,old_err_handler,mpierr1)<br />!! call MPI_comm_set_Errhandler(my_comm,new_err_handler,mpierr2)<br />&nbsp; &nbsp;call MPI_Errhandler_get(my_comm,old_err_handler,mpierr1)<br />&nbsp; &nbsp;call MPI_Errhandler_set(my_comm,new_err_handler,mpierr2)<br />#endif<br /><br />&nbsp;ierror=MPI_SUCCESS<br /></code></pre></div><br /><br />So, basicaly i just commented two calls for MPI2 and copy/paste those for MPI1. If it wouldn't corrupt my calculations in future, I say that the problem is <span style="color: #00BF40">SOLVED</span>. Is it?</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p8324" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile8324">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlist6f62.html?mode=viewprofile&amp;u=61" class="avatar"><img class="avatar" src="download/file96d1.jpg?avatar=61_1392074789.jpg" width="92" height="79" alt="User avatar" /></a>														</div>
+								<a href="memberlist6f62.html?mode=viewprofile&amp;u=61" class="username">gmatteo</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search9f23.html?author_id=61&amp;sr=posts">291</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun Aug 16, 2009 5:40 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content8324">
+
+						<h3 ><a href="#p8324">Re: Unable to compile in parallel using mvapich</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting54f2.html?mode=quote&amp;f=3&amp;p=8324" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic101f-2.html?p=8324#p8324" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist6f62.html?mode=viewprofile&amp;u=61" class="username">gmatteo</a></strong> &raquo; </span>Tue Jun 17, 2014 10:32 pm
+			</p>
+			
+			
+			
+			<div class="content">[quote]<br />So, basicaly i just commented two calls for MPI2 and copy/paste those for MPI1. If it wouldn't corrupt my calculations in future, I say that the problem is SOLVED. Is it?<br />[/quote]<br /><br />Yes, the compilation error due to the missing MPI functions is solved. Note however, that your MPI library is outdated.<br />Try to run the tests in ~abinit/tests with the runtests.py script to validate the build.<br />If you encounter problem with Abinit in parallel, try a more recent version of  mvapich</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="postingf5d1.html?mode=reply&amp;f=3&amp;t=2697" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopica0a7.html?f=3&amp;t=2697&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=3&amp;t=2697">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			7 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforum4d6b.html?f=3" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Configuring and compiling ABINIT”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2697&p=8311 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:39:35 GMT -->
+</html>

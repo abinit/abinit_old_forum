@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3804&p=11456 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:23:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>DoS resolution in conduction bands, and prtdos - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopic48d5.html?t=3804">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="4"><a href="viewforum31e6.html?f=4" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Running Abinit</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="9"><a href="viewforumfdc5.html?f=9" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Ground state</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopic2c1b.html?f=9&amp;t=3804">DoS resolution in conduction bands, and prtdos</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Total energy, geometry optimization, DFT+U, spin....<br /></div>
+<p>
+	<strong>Moderator:</strong> <a href="memberlista146.html?mode=viewprofile&amp;u=2687" class="username">bguster</a>
+</p>
+
+
+<div class="action-bar bar-top">
+	
+			<a href="posting9a2f.html?mode=reply&amp;f=9&amp;t=3804" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopicdeb9-2.html?f=9&amp;t=3804&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="3804" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			9 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p11448" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11448">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistf12e.html?mode=viewprofile&amp;u=2099" class="username">fhssn1</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search2ae6.html?author_id=2099&amp;sr=posts">36</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Feb 26, 2018 7:52 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11448">
+
+						<h3 class="first"><a href="#p11448">DoS resolution in conduction bands, and prtdos</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingf446.html?mode=quote&amp;f=9&amp;p=11448" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicabfb.html?p=11448#p11448" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistf12e.html?mode=viewprofile&amp;u=2099" class="username">fhssn1</a></strong> &raquo; </span>Sun Mar 25, 2018 6:47 am
+			</p>
+			
+			
+			
+			<div class="content">I'm doing a GaN (Gallium Nitride) calculation in wurtzite crystal structure (4 atoms: 2 Ga, 2 N), and I'm having issues generating a good quality DoS plot, as well as learning about the relevant abinit details.<br /><br />After going through the tutorials, I thought there's no discussion on generating a good quality DoS, so it must be easy to extract one from the main calculation (the scf run after all convergence studies, and before the band-structure run). This was further supported by the fact that an abipy example plotted dos from the GSR.nc file from the main run. I did a similar thing with my calculation but the plotted dos is of low resolution / bad quality. The input file and dos plot are attached:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>kptopt 1<br />nshiftk 1<br />shiftk 0.0 0.0 0.5<br />ngkpt&nbsp; 6 6 2<br /><br />toldfe&nbsp; 1.0e-10<br /><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; acell&nbsp; &nbsp; &nbsp; 6.0911781167E+00&nbsp; 6.0911781167E+00&nbsp; 9.9164297984E+00 Bohr<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; rprim&nbsp; &nbsp; &nbsp; 1.0000000000E+00&nbsp; 0.0000000000E+00&nbsp; 0.0000000000E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -5.0000000000E-01&nbsp; 8.6602540378E-01&nbsp; 1.6076496088E-36<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;6.1232339957E-17&nbsp; 1.0605752387E-16&nbsp; 1.0000000000E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; natom&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ntypat&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; typat&nbsp; &nbsp; &nbsp; 1&nbsp; 2&nbsp; 1&nbsp; 2<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; znucl&nbsp; &nbsp; &nbsp; &nbsp;31.00000&nbsp; &nbsp; 7.00000<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;xred&nbsp; &nbsp; &nbsp; 6.6666666667E-01&nbsp; 3.3333333333E-01&nbsp; 3.7593954042E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;6.6666666667E-01&nbsp; 3.3333333333E-01 -9.3954042085E-04<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3.3333333333E-01&nbsp; 6.6666666667E-01&nbsp; 8.7593954042E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3.3333333333E-01&nbsp; 6.6666666667E-01&nbsp; 4.9906045958E-01<br /><br />ecut 25.0<br />ecutsm 0.5<br />pawecutdg 50<br /><br />nstep 50<br />diemac 12.0<br />ixc -101130<br /></code></pre></div><br /><br /><div class="inline-attachment">
+			
+		
+				<dl class="file">
+			<dt class="attach-image"><img src="download/file5cb9.png?id=1533" class="postimage" alt="gsrdos.png" onclick="viewableArea(this);" /></dt>
+						<dd>gsrdos.png (21.98 KiB) Viewed 7809 times</dd>
+		</dl>
+		
+		
+		
+			</div><br /><br />So I started looking, and it turns out there are a host of DoS generating variables (prtdos, dosdeltae, pawprtdos) that are not discussed at all in the first four tutorials, and barely touched upon in the PAW tutorial. prtdos documentation is not bad, but still doesn't help with the pros and cons of the various options. Plus it says prtdos 1 requires convergence study, but fails to mention what kind.<br /><br />I did a prtdos 1 run as well and the result does not look much better. I tried prtdos 2, the resolution looks better for the valence band (it has sharper features) but conduction band looks bad, as given below:<br /><br /><div class="inline-attachment">
+			
+		
+				<dl class="file">
+			<dt class="attach-image"><img src="download/file1e4a.png?id=1534" class="postimage" alt="prtdos2.png" onclick="viewableArea(this);" /></dt>
+						<dd>prtdos2.png (19.35 KiB) Viewed 7809 times</dd>
+		</dl>
+		
+		
+		
+			</div><br /><br />Here, by conduction band I mean the bump between 0.3 and 0.45 Ha. This bump should look different, for reference the DoS for GaN (from Diakite et al, Calculated Electronic and Related Properties of Wurtzite and Zinc Blende Gallium Nitride (GaN), 2014) looks like this:<br /><br /><div class="inline-attachment">
+			
+		
+				<dl class="file">
+			<dt class="attach-image"><img src="download/file3ef6.png?id=1535" class="postimage" alt="refwgandos.png" onclick="viewableArea(this);" /></dt>
+						<dd>refwgandos.png (28.32 KiB) Viewed 7809 times</dd>
+		</dl>
+		
+		
+		
+			</div><br /><br />So I thought maybe I need to specify a nband value like in a band-structure calculation (I had to use nband 16 to get conduction bands), so I used nband 16 with prtdos 2 and now I'm getting the error:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--- !ERROR<br />src_file: m_dtset.F90<br />src_line: 278<br />mpi_rank: 0<br />message: |<br />&nbsp; &nbsp; Initialization of occ, with occopt=&nbsp; &nbsp;1<br />&nbsp; &nbsp; There are not enough bands to get charge balance right<br />&nbsp; &nbsp; Action: modify input file ... <br />&nbsp; &nbsp; (check the pseudopotential charges, the variable charge,<br />&nbsp; &nbsp; and the declared number of bands, nband)<br /></code></pre></div><br /><br />This error is against the extra parameters added to the input file shown above, as follows:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>nshiftk 2<br />shiftk<br />&nbsp; &nbsp; 0.0 0.0 0.0<br />&nbsp; &nbsp; 0.0 0.0 0.5<br />ngkpt 8 8 4<br />nband 16<br /><br />prtdos 2<br />iscf -3<br />irdden 1<br /></code></pre></div><br /><br />The DEN file comes from the main calculation (which was done after k point and ecut convergence, as well as structural relaxation of acell as well as atomic positions. The relaxed structure was manually copied into the input file shown above). The log file of that main calculation mentions nband of 19, so I'm not sure why abinit is complaining about nband 16.<br /><br />Kindly advise as to what should be the next course of action. Thank you.<br /><br />Also since I'm using PAW dataset, should I use prtdos 3. I still haven't read that section of prtdos and it looks a bit complicated but I can try.<br /><br />Finally regarding nband 19 in the main calculation, which I did not specify, what if I want to do the main calculation (i.e., the generation of the DEN file) with higher number of bands? (btw, am I correct in thinking that the key output of the main abinit calculation is the DEN file, and once we have the DEN file we don't need anything else for band-structure and DoS and all other information, unless for efficiency reasons, e.g., we might use WFK to speed things up, I don't know.)</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p11455" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11455">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search82c3.html?author_id=682&amp;sr=posts">469</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 19, 2011 11:13 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> University of Liege, Belgium</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11455">
+
+						<h3 ><a href="#p11455">Re: DoS resolution in conduction bands, and prtdos</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting427d.html?mode=quote&amp;f=9&amp;p=11455" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicce48-2.html?p=11455#p11455" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a></strong> &raquo; </span>Mon Mar 26, 2018 6:43 pm
+			</p>
+			
+			
+			
+			<div class="content">Dear fhssn1,<br />For insulator it is recommended to use prtdos=2 ( tetrahedron method). Your plot looks good to me, what do think is wrong actually? If you want the DOS with more unoccupied states, you have to generate a density file (or WFK) that contains enough bands, otherwise it will indeed not show them (the complain with 16 is because 16 band is not enough band to put all the valence electrons, do you actually checked how many valence electron your system has?). If that was the problem, then just increase nband such that you have as many unoccupied band as you want.<br />For good comparison between plots, be careful to use the same unit and that the Fermi energy is set at 0.<br />dosdeltae would give you more resolution points in your plot but the default is often already good if you don't have to zoom in too much.<br />prtdos 3 or pawprtdos will not help you, this is for projected DOS on atoms and orbitals.<br />Best wishes,<br />Eric</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p11456" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11456">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistf12e.html?mode=viewprofile&amp;u=2099" class="username">fhssn1</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search2ae6.html?author_id=2099&amp;sr=posts">36</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Feb 26, 2018 7:52 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11456">
+
+						<h3 ><a href="#p11456">Re: DoS resolution in conduction bands, and prtdos</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingc31f.html?mode=quote&amp;f=9&amp;p=11456" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic7b36.html?p=11456#p11456" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistf12e.html?mode=viewprofile&amp;u=2099" class="username">fhssn1</a></strong> &raquo; </span>Mon Mar 26, 2018 9:08 pm
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>ebousquet wrote:</cite>Dear fhssn1,<br />Your plot looks good to me, what do think is wrong actually? If you want the DOS with more unoccupied states, you have to generate a density file (or WFK) that contains enough bands, otherwise it will indeed not show them (the complain with 16 is because 16 band is not enough band to put all the valence electrons, ).<br />Eric</div></blockquote><br /><br />Dear Eric,<br /><br />Thanks for the response. To answer your question, you guessed it right, I need better coverage of unoccupied states (what I called conduction bands). I will take your advice regarding using nband to generate DEN file (main calculation) and post an update. I used to think nband is only for post-processing (e.g., non-scf band structure generation).<br /><br /><blockquote><div><cite>ebousquet wrote:</cite>do you actually checked how many valence electron your system has?</div></blockquote><br /><br />I'm afraid I didn't check. I would look into this and post an update.<br /><br />- My guess is that if we include more electrons into valence category (meaning leaving less electrons into the core category) then we need more bands to get to the unoccupied levels?<br /><br />- Also I would need advise on what criteria, from a physics point of view, should be used (other than the &quot;convenience criteria&quot; of keeping band count low) to put electrons into valence vs core categories? e.g., one criteria I can think of is that we look at DoS plot and see the sharp/isolated level on the left-most of the plot or not relevant to our study (e.g., we're doing semiconductor study and mainly interested in valence states near fermi level and the higher unoccupied/conduction states) then we would like to reduce number of valence electrons?<br /><br />- Furthermore, in our case of GaN, consisting of Ga and N, it is advisable to keep same core electrons in both elements? e.g., if N valence consists of only 2p and higher, then Ga valence should also be only 2p and higher? I'm not sure, it would depend on how the electrons from the two elements interact to form the DoS of the compound (maybe N 2s states end up very near the fermi level, then it would not be a good idea to put N's 2s electrons into core).<br /><br /><br /><strong class="text-strong">edit</strong>: I just realized that maybe core vs valence is fixed in the pseudopotential/PAW that you provide to the calculation. So if I want to adjust that I need to regenerate the pseudopotential/PAW? or edit the exisiting one? I don't know. Kindly advise.</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p11459" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11459">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search82c3.html?author_id=682&amp;sr=posts">469</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 19, 2011 11:13 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> University of Liege, Belgium</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11459">
+
+						<h3 ><a href="#p11459">Re: DoS resolution in conduction bands, and prtdos</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting4d10.html?mode=quote&amp;f=9&amp;p=11459" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic1287.html?p=11459#p11459" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a></strong> &raquo; </span>Tue Mar 27, 2018 11:23 am
+			</p>
+			
+			
+			
+			<div class="content">The number of valence/core electrons is indeed fixed in the pseudopotential. You can see that if you open the xml file of the PAW datasets where it is explicitly mentioned at the beginning of the file. If you want to change the number of valence/core electrons you need to regenerate a new pseudo, which is not advised unless you really need that.<br />In the case you have an insulator, adding more unoccupied bands will not change the ground state properties. It is important if you want to do exited stuff like GW. In the case of DOS, you need them if you want to see them on the plot them and probe the band gap, that's it.<br />In the case of metals, then you need to have enough &quot;unnocupied&quot; bands to get correct physical properties, even ground state.<br />All the best,<br />Eric</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p11466" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11466">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistf12e.html?mode=viewprofile&amp;u=2099" class="username">fhssn1</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search2ae6.html?author_id=2099&amp;sr=posts">36</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Feb 26, 2018 7:52 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11466">
+
+						<h3 ><a href="#p11466">Re: DoS resolution in conduction bands, and prtdos</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting9fb4.html?mode=quote&amp;f=9&amp;p=11466" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic4ae5-3.html?p=11466#p11466" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistf12e.html?mode=viewprofile&amp;u=2099" class="username">fhssn1</a></strong> &raquo; </span>Tue Mar 27, 2018 7:55 pm
+			</p>
+			
+			
+			
+			<div class="content">Thanks so much Eric. I guess I have no more questions on this topic at the moment and I will take your advice to further my calculations.</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p11487" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11487">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistf12e.html?mode=viewprofile&amp;u=2099" class="username">fhssn1</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search2ae6.html?author_id=2099&amp;sr=posts">36</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Feb 26, 2018 7:52 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11487">
+
+						<h3 ><a href="#p11487">Re: DoS resolution in conduction bands, and prtdos</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting642e-2.html?mode=quote&amp;f=9&amp;p=11487" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic73d8.html?p=11487#p11487" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistf12e.html?mode=viewprofile&amp;u=2099" class="username">fhssn1</a></strong> &raquo; </span>Tue Apr 10, 2018 8:10 am
+			</p>
+			
+			
+			
+			<div class="content">I made a 2x2x2 supercell out of my system and computed the DoS, and unfortunately, I now have the opposite problem, my DoS is too high-resolution and noisy (I used prtdos 2).<br /><br /><div class="inline-attachment">
+			
+		
+				<dl class="file">
+			<dt class="attach-image"><img src="download/file2fba.png?id=1544" class="postimage" alt="noisydos.png" onclick="viewableArea(this);" /></dt>
+						<dd>noisydos.png (34.08 KiB) Viewed 7767 times</dd>
+		</dl>
+		
+		
+		
+			</div><br /><br />High-resolution is okay, but I don't want the noise. In general I know a supercell DoS becomes more noisy because of more states (I guess) compared to primitive cell. So I'm looking for 'standard procedures' to fix this issue, such that a supercell of the same system looks as good as that of primitive cell (not too smooth, not too noisy). In my case the 2nd DoS plot that I attached in the original post of this thread (with prtdos 2) looks ideal.<br /><br />Should I use a higher value of dosdeltae to fix this or is there a better/proper solution? Default dosdeltae for prtdos 2 is 0.00005 Ha, I'm running it again with 0.001 Ha (I'm not sure if this is too high).<br /><br />Another problem I have is the location of the Fermi level. I think it should be somewhere around 5 to 6 eV but I got a value of 0.366 Ha from the log file, which gives 9.97 eV (that's too high). It's also visible in the DoS plot (the fermi level, 0 of the x-axis, is showing inside the conduction/unoccupied bands and not in the band gap.) I read the 0.366 value from the following context of lines in the log file:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--- !WARNING<br />src_file: vtowfk.F90<br />src_line: 864<br />message: |<br />&nbsp; &nbsp; Wavefunctions not converged for nnsclo,ikpt=&nbsp; 100&nbsp; &nbsp; 2 max resid=&nbsp; 5.74591E-18<br />...<br /><br />&nbsp;newocc: new Fermi energy is&nbsp; &nbsp; &nbsp; &nbsp;0.366714 , with nelect=&nbsp; &nbsp; 299.000000</code></pre></div><br /><br />However at the beginning of the log file there is this line:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;in scfcv: results_gs%fermie:&nbsp; &nbsp;0.226654435641612</code></pre></div><br /><br />and this value is alot more reasonable (it gives 6.1676 eV and the fermi level lies in the band gap). Those are the only two mentions of the word 'Fermi' so I'm wondering which one should I use. Also just before the 0.366 line there is a WARNING of wavefunction not converging. Is that a problem? related to bad fermi level value? (I used iscf -3 for the prtdos 2 calculation).</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p11488" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11488">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistf12e.html?mode=viewprofile&amp;u=2099" class="username">fhssn1</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search2ae6.html?author_id=2099&amp;sr=posts">36</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Feb 26, 2018 7:52 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11488">
+
+						<h3 ><a href="#p11488">Re: DoS resolution in conduction bands, and prtdos</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting4141.html?mode=quote&amp;f=9&amp;p=11488" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic835a.html?p=11488#p11488" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistf12e.html?mode=viewprofile&amp;u=2099" class="username">fhssn1</a></strong> &raquo; </span>Tue Apr 10, 2018 6:14 pm
+			</p>
+			
+			
+			
+			<div class="content">Well I generated DoS with dosdeltae of 0.001 Ha and it was a bit of an improvement but not too much. I ran with 0.004 Ha and the plot looks like this:<br /><br /><div class="inline-attachment">
+			
+		
+				<dl class="file">
+			<dt class="attach-image"><img src="download/file5e3e.png?id=1545" class="postimage" alt="noisydos2.png" onclick="viewableArea(this);" /></dt>
+						<dd>noisydos2.png (33.22 KiB) Viewed 7760 times</dd>
+		</dl>
+		
+		
+		
+			</div><br /><br />The noise is much reduced but the result is not what I'm looking for. It looks like there are unnecessary oscillations in various regions, almost as if I'm trying to brute force noise removal. I remember doing DoS calculations from electronic structure data in the past, and the key to fixing the noise was, not varying the resolution of energy levels (dosdeltae) but replacing the &quot;summing up of the states&quot; with a better algorithm, ideally based on &quot;integration of the states&quot;. It looks like in this case the DoS is calculated through some kind of summing up of the states and probably that's why the results don't get much better.<br /><br />Any advice to improve the quality of DoS highly appreciated.<br /><br />P.S.: The fermi level issue is fixed in this plot since I'm using the lower value of 0.2x read from the beginning of the generated log file, not the 0.366x that appears later in the file. However I'm still unsure about which one to use and why there are two drastically different values, and whether this has anything to do with the wave-function convergence warning (as mentioned in my previous comment).</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p11503" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11503">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search82c3.html?author_id=682&amp;sr=posts">469</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 19, 2011 11:13 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> University of Liege, Belgium</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11503">
+
+						<h3 ><a href="#p11503">Re: DoS resolution in conduction bands, and prtdos</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting7f18.html?mode=quote&amp;f=9&amp;p=11503" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic6efc.html?p=11503#p11503" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a></strong> &raquo; </span>Wed Apr 18, 2018 9:34 pm
+			</p>
+			
+			
+			
+			<div class="content">Dear fhssn1,<br />I don't know what you have in mind regarding the DOS, but to me this looks correct, what you call the &quot;noise&quot; is related to integrated method and smoothing out the plots.<br />Regarding the prtdos=2, this is what is called the tetrahedron method, you can find some infos in the following slides:<br /><!-- m --><a class="postlink" href="https://www.abinit.org/sites/default/files/oldsites/workshop_04/Presentations/verstraete_1.pdf">https://www.abinit.org/sites/default/fi ... aete_1.pdf</a><!-- m --><br /><br />Whatever the size of the cell, the DOS should stay the same since it is an integration over the whole Brillouin zone and thus should not depend on the size of the supercell.<br /><br />Regarding the Fermi level, it is written at the beginning of the DOS file. If you have states there, this means that you indeed have a metallic case, you can cehk that directly in the DOS file by going at the Fermi energy value in the data and see if the DOS is zero or not.<br /><br />Best wishes,<br />Eric</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p11507" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11507">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistf12e.html?mode=viewprofile&amp;u=2099" class="username">fhssn1</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search2ae6.html?author_id=2099&amp;sr=posts">36</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Feb 26, 2018 7:52 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11507">
+
+						<h3 ><a href="#p11507">Re: DoS resolution in conduction bands, and prtdos</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting4c0b.html?mode=quote&amp;f=9&amp;p=11507" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicf8d0.html?p=11507#p11507" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistf12e.html?mode=viewprofile&amp;u=2099" class="username">fhssn1</a></strong> &raquo; </span>Wed Apr 18, 2018 9:52 pm
+			</p>
+			
+			
+			
+			<div class="content">Thanks Eric. I will take your advise to carry out further computations.<br /><br />In the meantime, would you be kind enough to answer my other questions in Ground State section of this forum? (especially the YbN magnetic moment one) I haven't received any answers in the past almost two weeks and I'm under a bit of a deadline. (I know you seem to be the only active person in this forum answering questions and I've already benefitted from your advice)</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="posting9a2f.html?mode=reply&amp;f=9&amp;t=3804" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopicdeb9-2.html?f=9&amp;t=3804&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=9&amp;t=3804">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			9 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforumfdc5.html?f=9" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Ground state”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3804&p=11456 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:23:08 GMT -->
+</html>

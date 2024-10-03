@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=578&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:48:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; PAW dataset for Niobium</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>PAW dataset for Niobium</h2>
+		<p><a href="viewtopic8a39.html?f=14&amp;t=578">https://forum.abinit.org/viewtopic.php?f=14&amp;t=578</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>PAW dataset for Niobium</h3>
+				<div class="date">Posted: <strong>Tue Sep 07, 2010 5:46 pm</strong></div>
+				<div class="author">by <strong>ruslan</strong></div>
+				<div class="content">Hello, abinit users.<br /><br />I am trying to create PAW dataset for Nb with five electros (4d4, 5s1 and 5p0 states handled in valence). Therefore i am using atompaw v. 2.3 with following setup:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Nb 41<br />LDA-PW scalarrelativistic loggrid<br />5 5 4 0 0 0 ! f-orbital?<br />1 0 2&nbsp; &nbsp;! 1s2<br />2 0 2&nbsp; &nbsp;! 2s2<br />2 1 6&nbsp; &nbsp;! 2p6<br />3 0 2&nbsp; &nbsp;! 3s2<br />3 1 6&nbsp; &nbsp;! 3p6<br />3 2 10&nbsp; ! 3d10<br />4 0 2&nbsp; &nbsp;! 4s2<br />4 1 6&nbsp; &nbsp;! 4p6<br />4 2 4&nbsp; &nbsp;! 4d4<br />5 0 1&nbsp; &nbsp;! 5s1<br />5 1 0&nbsp; &nbsp;! 5p0<br />0 0 0<br />c&nbsp; &nbsp; &nbsp;! 1s<br />c&nbsp; &nbsp; &nbsp;! 2s<br />c&nbsp; &nbsp; &nbsp;! 3s<br />c&nbsp; &nbsp; &nbsp;! 4s<br />v&nbsp; &nbsp; &nbsp;! 5s<br />c&nbsp; &nbsp; &nbsp;! 2p<br />c&nbsp; &nbsp; &nbsp;! 3p<br />c&nbsp; &nbsp; &nbsp;! 4p<br />v&nbsp; &nbsp; &nbsp;! 5p<br />c&nbsp; &nbsp; &nbsp;! 3d<br />v&nbsp; &nbsp; &nbsp;! 4d<br />2<br />2.45<br />y<br />3<br />n<br />y<br />-2.6<br />n<br />y<br />1.2<br />n<br />custom rrkj sinc<br />3 0 troulliermartins<br />2.35<br />2.19<br />2.3<br />2.35<br />1.78<br />2.35<br />0<br /></code></pre></div><br /><br />Logarithmic derivatives seem to be on right place and projector functions have same order of magnitude as the wavefunctions. Nevertheless the produced dataset misbehaves due to high matrix values in RHOIJ:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;*********** RHOIJ (atom&nbsp; &nbsp;1) **********<br />&nbsp;********* *********&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 ...<br />&nbsp;********* *********&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 ...<br />&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 *********&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 *********&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 ...<br />&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 *********&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 *********&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 ...<br />&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 *********&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 *********&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 ...<br />&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 *********&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 *********&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 ...<br />&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 *********&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 *********&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 ...<br />&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 *********&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 *********&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 ...<br />&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 *********&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 ...<br />&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 *********&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 ...<br />&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 *********&nbsp; &nbsp;0.00000 ...<br />&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000&nbsp; &nbsp;0.00000 ********* ...<br /></code></pre></div><br /><br />for the following input<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># test ecut convergence<br />ndtset 10<br /><br /># experimental bulk lattice constant of Nb<br />acell 3*3.30 angstrom<br /><br /># convergence crit<br />toldfe 1.0d-7<br /><br /># 1 atom per pc<br />natom 1<br />typat 1<br />znucl 41<br />xred 0 0 0<br /><br />nband 9<br /># number of kpts<br />ngkpt 6 6 6<br /><br /># bcc lattice<br />rprim<br />-0.5&nbsp; 0.5&nbsp; 0.5<br />&nbsp;0.5 -0.5&nbsp; 0.5<br />&nbsp;0.5&nbsp; 0.5 -0.5<br /><br />nshiftk 1<br />shiftk 0.5 0.5 0.5<br /><br />ecut: 10<br />pawecutdg: 10<br />ecut+ 2<br />pawecutdg+ 2<br /><br /># methfessel-paxthon<br />occopt 6<br />tsmear 0.1 eV<br /><br />prtden 0<br />prtwf 0<br />prteig 0<br /><br />nstep 60<br /><br />diemac 1000000<br /></code></pre></div><br /><br />My question is: which quantity should i change to get rid of &quot;high&quot; projector values? I tried to change shape functions and projectors with no effect. Thank you in advance,<br /><br />Ruslan Zinetullin<br /><br />P.S. I tried to use PAW datasets provided by Prof. Zwanziger in <!-- m --><a class="postlink" href="http://www.abinit.org/downloads/PAW/CONTRIB/PAWTable.html">http://www.abinit.org/downloads/PAW/CON ... Table.html</a><!-- m --> which contain 13-electron setups (which i want to replace by 5-electron one). The logarithmic derivatives for s- and p-orbitals are not really superimposed at the discontinous points. Does it mean that this criterion is not as much important as the other ones?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: PAW dataset for Niobium</h3>
+				<div class="date">Posted: <strong>Tue Sep 07, 2010 8:14 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Hi,<br />I just tried to make Nb with only 5 electrons and failed in the same way you did--I think the &quot;high&quot; occupations are coming from the 4s and 4p states, which are actually quite close to the 5s and 5p states in Nb. I really doubt that it is possible to make an accurate Nb PAW set with only 5 electrons. I've attached my latest 13-electron version for you to try and modify if you like--<br /><br />good luck,<br />Joe Zwanziger<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Nb&nbsp; 41 <br />LDA-PW scalarrelativistic loggrid 1201<br />5 5 4 0 0 0<br />4 2 4<br />5 0 1<br />5 1 0<br />0 0 0<br />c<br />c<br />c<br />v<br />v<br />c<br />c<br />v<br />v<br />c<br />v<br />2<br />2.6<br />y<br />0<br />n<br />n<br />y<br />2<br />n<br />custom rrkj<br />3 0 ultrasoft<br />2.6<br />2.6<br />2.6<br />2.6<br />2.6<br />2.6<br />2.6<br />1<br />4 2 4<br />5 0 1<br />5 1 0<br />0 0 0<br />0<br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: PAW dataset for Niobium</h3>
+				<div class="date">Posted: <strong>Tue Sep 21, 2010 7:41 pm</strong></div>
+				<div class="author">by <strong>ruslan</strong></div>
+				<div class="content"><blockquote><div><cite>jzwanzig wrote:</cite><br />Hi,<br />I just tried to make Nb with only 5 electrons and failed in the same way you did--I think the &quot;high&quot; occupations are coming from the 4s and 4p states, which are actually quite close to the 5s and 5p states in Nb. I really doubt that it is possible to make an accurate Nb PAW set with only 5 electrons. I've attached my latest 13-electron version for you to try and modify if you like--<br /><br />good luck,<br />Joe Zwanziger<br /><br /></div></blockquote><br /><br />It took time to sort things out. As i already mentioned, i needed PAW dataset with relatively small rc. I ended up with following setup:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code><br />Nb 41<br />LDA-PW loggrid 1500<br />5 5 4 0 0 0<br />4 2 4<br />5 0 1<br />5 1 0<br />0 0 0<br />c<br />c<br />c<br />v<br />v<br />c<br />c<br />v<br />v<br />c<br />v<br />2<br />2.3<br />n<br />n<br />y<br />1.5<br />n<br />vanderbilt<br />3 0 ultrasoft<br />2.0<br />2.0 ! 2.365<br />2.0<br />2.0<br />2.0<br />2.3<br />0<br />1<br />4 2 4<br />5 0 1<br />5 1 0<br />0 0 0<br />0<br /></code></pre></div><br /><br />Physical properties seem ok: a0=3.248 angstrom compared to 3.304 gives 1.7% deviation and the bulk modulus is B=179.6 compared to 170 expt. I found also, that enabling scalarrelativistic handling increases B to 200 GPa, which seems odd. <br /><br />Thank you for hints,<br />Ruslan Zinetullin</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=578&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:48:35 GMT -->
+</html>

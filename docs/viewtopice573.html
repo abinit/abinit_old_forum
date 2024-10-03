@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3561&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:19:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; ver8.2.2 make error related to BigDFT</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>ver8.2.2 make error related to BigDFT</h2>
+		<p><a href="viewtopic4c8a.html?f=3&amp;t=3561">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3561</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>ver8.2.2 make error related to BigDFT</h3>
+				<div class="date">Posted: <strong>Wed Apr 12, 2017 1:48 pm</strong></div>
+				<div class="author">by <strong>weitong</strong></div>
+				<div class="content">I am making Abinit ver 8.2.2, at the end of &quot;make&quot;, I got this error:<br /><br /><blockquote class="uncited"><div> -L/opt/intel/composer_xe_2015.1.133/compiler/lib/intel64/ -L/opt/intel/composer_xe_2015.1.133/mkl/lib/intel64/ -L/opt/intel/composer_xe_2015.1.133/ipp/../compiler/lib/intel64/ -L/opt/intel/composer_xe_2015.1.133/ipp/lib/intel64/ -L/opt/intel/composer_xe_2015.1.133/tbb/lib/intel64/gcc4.4/ -L/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../ -L/lib64 -L/lib/ -L/usr/lib64 -L/usr/lib -lmpi_usempif08 -lmpi_usempi_ignore_tkr -lmpi_mpifh -lmpi -lifport -lifcore -limf -lsvml -lm -lipgo -lirc -lpthread -lirc_s -ldl <br />/opt/intel/mkl/lib/intel64/libmkl_blacs_lp64.a(blacs_gridinfo_.o): In function `blacs_gridinfo_':<br />../../../../scalapack/BLACS/SRC/MPI/blacs_gridinfo_.c:(.text+0x0): multiple definition of `blacs_gridinfo_'<br />/home/weitong/Download/abinit-8.2.2/tmp_openmpi_intel15-2/fallbacks/exports/lib/libbigdft-1.a(blacs_fake.o):/home/weitong/Download/abinit-8.2.2/tmp_openmpi_intel15-2/fallbacks/sources/bigdft-1.7.1.23/src/modules/blacs_fake.f90:21: first defined here<br />make[4]: *** [multibinit] Error 1<br />make[4]: *** Waiting for unfinished jobs....<br />make[4]: *** [abinit] Error 1<br />make[4]: Leaving directory `/home/weitong/Download/abinit-8.2.2/tmp_openmpi_intel15-2/src/98_main'<br />make[3]: *** [all-recursive] Error 1<br />make[3]: Leaving directory `/home/weitong/Download/abinit-8.2.2/tmp_openmpi_intel15-2/src'<br />make[2]: *** [all-recursive] Error 1<br />make[2]: Leaving directory `/home/weitong/Download/abinit-8.2.2/tmp_openmpi_intel15-2'<br />make[1]: *** [all] Error 2<br />make[1]: Leaving directory `/home/weitong/Download/abinit-8.2.2/tmp_openmpi_intel15-2'<br />make: *** [multi] Error 2<br /></div></blockquote><br /><br /><br />Here is my configure.ac file:<br /><blockquote class="uncited"><div>CC=&quot;mpicc&quot;<br />CXX=&quot;mpicxx&quot;<br />FC=&quot;mpif90&quot;<br />enable_64bit_flags=&quot;yes&quot;<br />prefix=&quot;/usr/local/abinit8.2_openmpi_intel&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_prefix=&quot;/usr/local/openmpi_intel15&quot;<br />with_trio_flavor=&quot;netcdf+etsf_io&quot;<br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_incs=&quot;-I/usr/local/fftw3_intel15_openmpi/include/&quot;<br />with_fft_libs=&quot;-L/usr/local/fftw3_intel15_openmpi/lib -lfftw3 -lfftw3_mpi -lfftw3_threads&quot;<br />with_linalg_flavor=&quot;mkl&quot;<br />with_linalg_libs=&quot;-L/opt/intel/mkl/lib/intel64 -Wl,--start-group  -lmkl_intel_lp64 -lmkl_scalapack_lp64 -lmkl_blacs_lp64 -lmkl_blas95_lp64 -lmkl_lapack95_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group&quot;<br />with_dft_flavor=&quot;atompaw+libxc+wannier90+bigdft&quot;<br />enable_gw_dpc=&quot;yes&quot;<br />enable_memory_profiling=&quot;no&quot;<br />enable_openmp=&quot;no&quot;<br />enable_maintainer_checks=&quot;no&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br /></div></blockquote><br /><br />If I deselec bigdft with<br /><blockquote class="uncited"><div> with_dft_flavor=&quot;atompaw+libxc+wannier90&quot;<br /></div></blockquote><br />I got everything OK through &quot;make&quot;.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ver8.2.2 make error related to BigDFT&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Thu Apr 13, 2017 2:22 pm</strong></div>
+				<div class="author">by <strong>weitong</strong></div>
+				<div class="content">I got the solution.<br /><br />Remove &quot; -lmkl_scalapack_lp64&quot; from &quot;with_linalg_libs&quot;.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3561&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:19:16 GMT -->
+</html>

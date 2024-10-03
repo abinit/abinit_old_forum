@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=654&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Compile 6.4.1 on Mac OS X 10.6.4 using gnu compiler</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Compile 6.4.1 on Mac OS X 10.6.4 using gnu compiler</h2>
+		<p><a href="viewtopic6db2.html?f=3&amp;t=654">https://forum.abinit.org/viewtopic.php?f=3&amp;t=654</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Compile 6.4.1 on Mac OS X 10.6.4 using gnu compiler</h3>
+				<div class="date">Posted: <strong>Tue Oct 12, 2010 1:36 am</strong></div>
+				<div class="author">by <strong>jianglai</strong></div>
+				<div class="content">Hi, I've had no problem compiling previous versions (6.2.3, etc) using GNU compilers on my Mac as long as i disable libxc and netcdf. But with 6.4.1 I've got the following error:<br />----------------------------------------------------<br />gfortran -m64 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs   -ffree-form -J/Users/jianglai/Downloads/abinit-6.4.1/src/mods -O2 -m64 -g -ffree-line-length-none  -c -o timab.o timab.F90<br />timab.F90:116.20:<br /><br /> integer(C_LONG_LONG) :: flops1<br />                   1<br />Error: Kind 0 not supported for type INTEGER at (1)<br />timab.F90:117.13:<br /><br /> real(C_FLOAT) :: real_time, proc_time<br />            1<br />Error: Kind 0 not supported for type REAL at (1)<br />timab.F90:163.9:<br /><br />   flops1 = 0<br />        1<br />Error: Symbol 'flops1' at (1) has no IMPLICIT type<br />timab.F90:164.12:<br /><br />   proc_time = zero<br />           1<br />Error: Symbol 'proc_time' at (1) has no IMPLICIT type<br />timab.F90:165.12:<br /><br />   real_time = zero<br />           1<br />Error: Symbol 'real_time' at (1) has no IMPLICIT type<br />make[3]: *** [timab.o] Error 1<br />make[2]: *** [all-recursive] Error 1<br />make[1]: *** [all-recursive] Error 1<br />make: *** [all] Error 2<br />----------------------------------------------------<br /><br />The configure I used is:<br /><br />./configure --prefix=/usr/local/abinit/ --enable-64bit-flags --disable-libxc --disable-netcdf<br /><br />and I'm also attaching the config.log file.<br /><br />I tried to use ifort(11.0.89) but got an link error described here <!-- l --><a class="postlink-local" href="viewtopicdecd.html?f=2&amp;t=446">viewtopic.php?f=2&amp;t=446</a><!-- l -->. However the fix involving ranlib does not work since there is no src/01_qespresso_ext/lib01_qespresso_ext.a file.<br /><br />If anyone can give a clue it'll be really appreciated!<br /><br />Thanks all.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compile 6.4.1 on Mac OS X 10.6.4 using gnu compiler</h3>
+				<div class="date">Posted: <strong>Tue Oct 12, 2010 4:57 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">The values of C_LONG_LONG, C_FLOAT are found  in configure by calling<br />standard autoconf macros that will try to compile simple C code. <br />In your case the compilation fails due to a wrong option  passed to gcc <br />This is one of the errors reported in your config.log<br /><br />configure:22645: result: 0<br />configure:22659: checking size of unsigned int<br />configure:22664: gcc -m64 -o conftest -m64 -g -O3 -mtune=native -march=native -funroll-loops -ffast-math         conftest.c  &gt;&amp;5<br />conftest.c:1: error: bad value (native) for -march= switch<br />configure:22664: $? = 1<br />configure: program exited with status 1<br /><br />The options passed to your C compiler are stored in the environment variable:<br /><br />CFLAGS='-m64 -g -O3 -mtune=native -march=native -funroll-loops -ffast-math  '<br /><br />By default, configure uses default values for CFLAGS according to your architecture and to other options passed  to the script.  <br />In your case the default values for CFLAGS seem to be wrong since march is not among the list of options supported on Darwin. <br />See for example:<br /><!-- m --><a class="postlink" href="http://gcc.gnu.org/onlinedocs/gcc/Option-Summary.html">http://gcc.gnu.org/onlinedocs/gcc/Option-Summary.html</a><!-- m --><br /><br />Try to overwrite the default c options by passing an appropriate CFLAGS to configure, e.g.<br /><br />./configure --prefix=/usr/local/abinit/ --enable-64bit-flags --disable-libxc --disable-netcdf CFLAGS='-m64 -g -O3 -mtune=native  -funroll-loops -ffast-math  '<br /><br />BTW: There are very few C functions used in abinit hence C optimization is not so important for the overall performance of the code.<br /><br />Hope it helps,<br />Matteo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compile 6.4.1 on Mac OS X 10.6.4 using gnu compiler</h3>
+				<div class="date">Posted: <strong>Tue Oct 12, 2010 9:22 pm</strong></div>
+				<div class="author">by <strong>jianglai</strong></div>
+				<div class="content">Thanks a lot for the reply. The CFLAGS solved this problem but another emerges:<br />---------------------------------------<br />gfortran -m64 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs    -ffree-form -J/Users/jianglai/Downloads/abinit-6.4.1/src/mods -O2 -m64 -g -ffree-line-length-none  -c -o interfaces_95_drive.o interfaces_95_drive.F90<br />interfaces_95_drive.F90:1607.37:<br /><br />  type(electronpositron_type),pointer,intent(inout) :: electronpositron<br />                                    1<br />Error: POINTER attribute conflicts with INTENT attribute at (1)<br />interfaces_95_drive.F90:1630.34:<br /><br />  real(dp), intent(inout), pointer :: taug(:,:)<br />                                 1<br />Error: POINTER attribute conflicts with INTENT attribute at (1)<br />interfaces_95_drive.F90:1631.34:<br /><br />  real(dp), intent(inout), pointer :: taur(:,:)<br />                                 1<br />Error: POINTER attribute conflicts with INTENT attribute at (1)<br />interfaces_95_drive.F90:1585.33:<br /><br />  &amp;  dtset,eigen,electronpositron,hdr,initialized,&amp;  <br />                                1<br />Error: Symbol 'electronpositron' at (1) has no IMPLICIT type<br />interfaces_95_drive.F90:1589.45:<br /><br />  &amp;  rhog,rhor,rprimd,scf_history,symrec,taug,taur,wffnew,&amp;  <br />                                            1<br />Error: Symbol 'taug' at (1) has no IMPLICIT type<br />interfaces_95_drive.F90:1589.50:<br /><br />  &amp;  rhog,rhor,rprimd,scf_history,symrec,taug,taur,wffnew,&amp;  <br />                                                 1<br />Error: Symbol 'taur' at (1) has no IMPLICIT type<br />make[3]: *** [interfaces_95_drive.o] Error 1<br />make[2]: *** [all-recursive] Error 1<br />make[1]: *** [all-recursive] Error 1<br />make: *** [all] Error 2<br />----------------------------------------<br />Any idea how to fix that? An again thank you for your help!<br /><br /><blockquote><div><cite>gmatteo wrote:</cite>The values of C_LONG_LONG, C_FLOAT are found  in configure by calling<br />standard autoconf macros that will try to compile simple C code. <br />In your case the compilation fails due to a wrong option  passed to gcc <br />This is one of the errors reported in your config.log<br /><br />configure:22645: result: 0<br />configure:22659: checking size of unsigned int<br />configure:22664: gcc -m64 -o conftest -m64 -g -O3 -mtune=native -march=native -funroll-loops -ffast-math         conftest.c  &gt;&amp;5<br />conftest.c:1: error: bad value (native) for -march= switch<br />configure:22664: $? = 1<br />configure: program exited with status 1<br /><br />The options passed to your C compiler are stored in the environment variable:<br /><br />CFLAGS='-m64 -g -O3 -mtune=native -march=native -funroll-loops -ffast-math  '<br /><br />By default, configure uses default values for CFLAGS according to your architecture and to other options passed  to the script.  <br />In your case the default values for CFLAGS seem to be wrong since march is not among the list of options supported on Darwin. <br />See for example:<br /><!-- m --><a class="postlink" href="http://gcc.gnu.org/onlinedocs/gcc/Option-Summary.html">http://gcc.gnu.org/onlinedocs/gcc/Option-Summary.html</a><!-- m --><br /><br />Try to overwrite the default c options by passing an appropriate CFLAGS to configure, e.g.<br /><br />./configure --prefix=/usr/local/abinit/ --enable-64bit-flags --disable-libxc --disable-netcdf CFLAGS='-m64 -g -O3 -mtune=native  -funroll-loops -ffast-math  '<br /><br />BTW: There are very few C functions used in abinit hence C optimization is not so important for the overall performance of the code.<br /><br />Hope it helps,<br />Matteo</div></blockquote></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compile 6.4.1 on Mac OS X 10.6.4 using gnu compiler</h3>
+				<div class="date">Posted: <strong>Wed Oct 13, 2010 11:13 am</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">The -march failure with gcc makes me think that you're mixing different releases of gnu compilers - not a good idea. I would advise to check that the gfortran, gcc and cpp are in sync i.e. <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>gfortran -v &amp;&amp; gcc -v &amp;&amp; cpp -v</code></pre></div>report the same version. If not, you should modify PATH and DYLD_LIBRARY_PATH for Abinit configure to find the right toolchain.<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compile 6.4.1 on Mac OS X 10.6.4 using gnu compiler</h3>
+				<div class="date">Posted: <strong>Wed Oct 13, 2010 5:24 pm</strong></div>
+				<div class="author">by <strong>jianglai</strong></div>
+				<div class="content">They are all GCC 4.2.1 (Apple build 5664), I'v got the gfortran from AT&amp;T's website and the rest of GNU compiler from xcode 3.2.4.<br /><br /><blockquote><div><cite>Alain_Jacques wrote:</cite>The -march failure with gcc makes me think that you're mixing different releases of gnu compilers - not a good idea. I would advise to check that the gfortran, gcc and cpp are in sync i.e. <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>gfortran -v &amp;&amp; gcc -v &amp;&amp; cpp -v</code></pre></div>report the same version. If not, you should modify PATH and DYLD_LIBRARY_PATH for Abinit configure to find the right toolchain.<br /><br />Kind regards,<br /><br />Alain</div></blockquote></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compile 6.4.1 on Mac OS X 10.6.4 using gnu compiler</h3>
+				<div class="date">Posted: <strong>Wed Oct 13, 2010 5:49 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Remove intent(inout) in the declaration of the electronpositron pointer, <br />both in 95_drive/scfcv_new.F90 and 95_driver/interfaces_95_driver.<br />F90 doesn't allow to specify the intent of a pointer.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compile 6.4.1 on Mac OS X 10.6.4 using gnu compiler</h3>
+				<div class="date">Posted: <strong>Wed Oct 13, 2010 7:47 pm</strong></div>
+				<div class="author">by <strong>jianglai</strong></div>
+				<div class="content">Removing intent(out) works. Also I have to remove intent(out) for taug and taur. Thanks a lot!<br /><br />PS: I was able to compile 6.4.1 on linux with GNU compiler without modifying the source code. So is this &quot;pointer/intent(out) incompatibility&quot; really because of the F90 specification or it's gfortran's implementation on Mac that does not allow for intent of a pointer?<br /><br /><blockquote><div><cite>gmatteo wrote:</cite>Remove intent(inout) in the declaration of the electronpositron pointer, <br />both in 95_drive/scfcv_new.F90 and 95_driver/interfaces_95_driver.<br />F90 doesn't allow to specify the intent of a pointer.</div></blockquote></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compile 6.4.1 on Mac OS X 10.6.4 using gnu compiler</h3>
+				<div class="date">Posted: <strong>Wed Oct 13, 2010 10:43 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">This AT&amp;T hacked compiler (to produce universal binaries) is quite an old beast - I cannot test compliance anymore on a version 4.2.1. Building a new gcc/gfortran 4.4.5 toolchain is far from being a complicated job. Another easy way to update to recent compilers is to install them from Fink or Macport. Now if Matteo's suggestions let to pass through the error message and gives you clean tests suite results, it's fine too.<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Building 6.4.1 openmpi 1.5, OS X 10.6.4, gfortran 64 bit</h3>
+				<div class="date">Posted: <strong>Mon Oct 18, 2010 9:08 pm</strong></div>
+				<div class="author">by <strong>WoodDM</strong></div>
+				<div class="content">Howdy all.<br /><br />I have an 8-core Mac Pro, so needed MPI support.<br /><br />Following Alain Jacques's suggestion, I was careful to use a uniform release of the gfortran-related compilers, which I'd installed (in my case) with macports<br /><br />Building openmpi version 1.5 (under bash):<br /><br />export F77=/opt/local/bin/x86_64-apple-darwin10-gfortran-mp-4.4<br />export CC=/opt/local/bin/x86_64-apple-darwin10-gcc-mp-4.4<br />export FC=/opt/local/bin/x86_64-apple-darwin10-gfortran-mp-4.4<br />./configure --prefix=/opt/openmpi-1.5 --enable-shared --enable-static CFLAGS=&quot;-O3&quot; CXXFLAGS=&quot;-O3&quot; FCFLAGS=&quot;-O3&quot; FFLAGS=&quot;-O3&quot;<br /><br />(then make, make install)<br /><br />Building AB 6.4.1 (without the environment variables F77 CC, FC as set above)<br /><br />./configure --enable-mpi --with-mpi-prefix=/opt/openmpi-1.5 --enable-64bit-flags --disable-libxc  --prefix=/opt/etsf/abinit/6.4          <br /><br />(then make, make install)<br /><br />[I find that the libxc stuff has been a problem for me for the 3-4 releases of AB]<br /><br />All 30 tests upon performing make tests_fast succeed.<br /><br />Hope this helps!<br />DMW</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=654&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:41 GMT -->
+</html>

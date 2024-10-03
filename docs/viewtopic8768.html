@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=3689&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:26:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; DFT+U</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>DFT+U</h2>
+		<p><a href="viewtopic626f.html?f=14&amp;t=3689">https://forum.abinit.org/viewtopic.php?f=14&amp;t=3689</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>DFT+U</h3>
+				<div class="date">Posted: <strong>Mon Oct 02, 2017 12:42 pm</strong></div>
+				<div class="author">by <strong>lakhal</strong></div>
+				<div class="content">Dear abinit users<br />I have a question about DFT + U, I read in the abinit tutorial just the example of LDA + U, my question is: can I use GGA + U or not?<br />Thanks to all</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFT+U</h3>
+				<div class="date">Posted: <strong>Mon Mar 05, 2018 8:17 pm</strong></div>
+				<div class="author">by <strong>fhssn1</strong></div>
+				<div class="content">I would be interested in an answer to the same question. They say that LDA+U is really DFT+U, but why not GGA+U?<br /><br />I have seen a paper that mentions DFT+U and GGA as part of the computational setup, so it's likely that this is doable in general. But not sure whether it can be done in ABINIT. I haven't tried it myself.<br /><br />Secondly, the whole point of such extensions is improved accuracy of the XC functional approximation. Then why do we have 'two tracks' of accuracy enhancement: 1) better functionals (e.g., HSE06) 2) addition of '+U'? In other words, what can '+U' do that HSE06 can't, and what can HSE06 do that '+U' can't? What are the pros and cons of each enhancement.<br /><br />And is it possible to have HSE06+U?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DFT+U</h3>
+				<div class="date">Posted: <strong>Tue Mar 06, 2018 10:07 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear fhssn1 (and lakhal),<br />GGA+U works too, no problem.<br />+U correction is made on a single orbital of a given atom, then only this orbital is corrected. Different values of U can be used, this is up to the user to test the effect of U on the physical properties.<br />In short, hybrid functionals works by using a given amount of exact exchange Hartree-Fock (HF) and compensate double counting. The amount of exact exchange is fixed for a given hybrid flavor (HSE06, B1WC, etc), thought the user can change it. This correction is applied to all orbitals of all the atoms.<br />Note that HF calculation in plane wave is time consuming w.r.t. DFT+U, such as hybrids can be from 100 to 200 times slower than DFT+U.<br />Which one to chose depends on what you want to calculate, if DFT+U is enough then use DFT+U.<br />I advise you to read the seminal papers of the different hybrid functional flavors for more details.<br />All the best,<br />Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=3689&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:26:06 GMT -->
+</html>

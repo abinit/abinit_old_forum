@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1528&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:23:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; abinit 6.10 +intel 12.1.0 + mkl</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>abinit 6.10 +intel 12.1.0 + mkl</h2>
+		<p><a href="viewtopic0553.html?f=3&amp;t=1528">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1528</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>abinit 6.10 +intel 12.1.0 + mkl</h3>
+				<div class="date">Posted: <strong>Fri Feb 10, 2012 3:18 pm</strong></div>
+				<div class="author">by <strong>roginovicci</strong></div>
+				<div class="content">How should I compile abinit to force it use mkl library? I am using the following configure:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure --prefix=/opt/abinit&nbsp; --with-mpi-prefix=/opt/mpich&nbsp; --enable-mpi --enable-mpi-io \&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />--with-linalg-flavor=mkl \&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />--with-linalg-libs=&quot;-L/opt/intel/mkl/lib/intel64 \&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />-lmkl_intel_ilp64 -lmkl_intel_thread -lmkl_core -lmkl_cdft_core \&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />-lmkl_cdft_core&nbsp; -lmkl_blacs_intelmpi_ilp64&nbsp; -lmkl_lapack95_ilp64 \&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />-liomp5 -lpthread -lmkl_blas95_ilp641&quot; \&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />--with-linalg-incs=&quot;-I/opt/intel/mkl/include&quot; \&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />--with-fft-flavor=&quot;fftw3-mkl&quot; --with-fft-incs=&quot;-I/opt/intel/mkl/include/fftw&quot; \&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />&nbsp;--with-fft-libs=&quot;-L/opt/intel/mkl/lib/intel64/fftw -lfftw3xf_intel&quot;&nbsp; <br /></code></pre></div><br /><br />Compilation goes well but I get sigfault at runtime wile call from libmkl_intel_ilp64 library</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 6.10 +intel 12.1.0 + mkl</h3>
+				<div class="date">Posted: <strong>Fri Feb 10, 2012 5:02 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">It might come from a bug in the compiler and/or MKL. You should recompile with lower optimization (e.g. <em class="text-italics">--enable-optim=safe</em>) and check whether the problem persists. If yes, you may even retry without optimization at all (<em class="text-italics">--enable-optim=no</em>). If your run still crashes, then I suggest you to send us your input file, so that we can determine whether your problem is reproducible and may come from Abinit.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 6.10 +intel 12.1.0 + mkl</h3>
+				<div class="date">Posted: <strong>Fri Feb 10, 2012 8:40 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">hello,<br /><br />this .ac file is working with abinit 6.12.1 and with  intel 11.1 under CentOS 5.7/xeon  ( but it should be work with intel 12.1 )<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>enable_gw_dpc = yes<br />enable_mpi = yes<br />enable_mpi_io = yes<br />with_mpi_prefix = /usr/local/openmpi_intel<br />with_dft_flavor = atompaw+bigdft+libxc+wannier90<br />with_fft_flavor = fftw3<br />with_fft_libs = -L/opt/intel/Compiler/11.1/current/mkl/lib/em64t -Wl,--start-group -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group -lpthread<br />with_linalg_flavor = mkl<br />with_linalg_libs = -L/opt/intel/Compiler/11.1/current/mkl/lib/em64t -Wl,--start-group -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group -lpthread<br /></code></pre></div><br /><br />another config file with intel 12 but without MPI and with OpenMP<br /><br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>FC = ifort<br />CC = icc<br />CXX = icpc<br />enable_gw_dpc = yes<br />enable_mpi = no<br />with_dft_flavor = atompaw+bigdft+libxc+wannier90<br />with_fft_flavor = fftw3<br />with_fft_libs = -L/opt/intel/composerxe/mkl/lib/intel64 -Wl,--start-group&nbsp; -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -Wl,--end-group<br />with_linalg_flavor = mkl<br />with_linalg_libs = -L/opt/intel/composerxe/mkl/lib/intel64 -Wl,--start-group&nbsp; -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -Wl,--end-group<br />FC_LDFLAGS_EXTRA = -openmp<br />FCFLAGS_EXTRA = -openmp<br />enable_smp = yes</code></pre></div><br /><br /><br />regards <br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 6.10 +intel 12.1.0 + mkl</h3>
+				<div class="date">Posted: <strong>Thu Nov 22, 2012 9:28 am</strong></div>
+				<div class="author">by <strong>carsten.fortmann</strong></div>
+				<div class="content">I have similar issues with abinit 6.12.3 and mkl/intel v11.1/073:<br />here is my configure line (on linux 64bit environment) which is only slightly adjusted from the reply above (i.e. no mpi and no openmp)<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure \<br />--prefix=/usr/local \<br />--enable-64bit-flags \<br />--with-linalg-flavor=mkl \<br />--with-linalg-incs=&quot;-I/opt/intel/Compiler/11.1/073/mkl/include/&quot; \<br />--with-linalg-libs=&quot;-L/opt/intel/Compiler/11.1/073/mkl/lib/em64t -Wl,--start-group -lmkl_intel_lp64 -lmkl_sequential -lmkl_lapack -lmkl_def -lmkl_core -Wl,--end-group -lpthread -lm&quot; \<br />--with-fft-flavor=&quot;fftw3-mkl&quot; \<br />--with-fft-incs=&quot;-I/opt/intel/Compiler/11.1/073/mkl/include/ -I/opt/intel/Compiler/11.1/073/mkl/include/fftw&quot; \<br />--with-fft-libs=&quot;-L/opt/intel/Compiler/11.1/073/mkl/lib/em64t -Wl,--start-group -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group -lpthread -lfftw3xf_gnu&quot; \<br />--enable-optim=safe<br />&nbsp;\</code></pre></div><br /><br />./configure and make complete without issues, but <br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>~abinit/tests/&gt; make tests</code></pre></div><br /><br />returns a segfault in the wannier90 test:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>echo &quot;Running built-in test in_wannier90&quot;<br />Running built-in test in_wannier90<br />timeout=&quot;0&quot; perl ./Scripts/run-basic-tests.pl built-in in_wannier90 /home/cf/Downloads/abinit-6.12.3/tests<br />Segmentation fault (core dumped)<br /><br />&nbsp;Status file, with repetition rate&nbsp; 49, status number&nbsp; &nbsp;295<br /><br />&nbsp; Level abinit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: call driver&nbsp; &nbsp;<br />&nbsp; Level driver&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: call gstateimg<br />&nbsp; Level gstateimg&nbsp; &nbsp; &nbsp; : enter&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />&nbsp; Level gstate&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: call scfcv&nbsp; &nbsp; <br />&nbsp; Level scfcv&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : call outscfcv <br />&nbsp; istep&nbsp; &nbsp; &nbsp; =&nbsp; &nbsp; 3<br /></code></pre></div><br /><br />Adding <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--with-dft-flavor=&quot;libxc-fallback&quot;</code></pre></div> to the configure line helps.<br /><br />Any clues? Any help is appreciated.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 6.10 +intel 12.1.0 + mkl&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Thu Nov 22, 2012 4:02 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">To give you inspiration, please find below my config file to produce a reliable production abinit 6 with Intel 11.1 compiler. Mine with MPI - can be disabled easily -, without bigDFT - simply to spare some compilation time. To be used with --with-config-file= configure option.<br /><br />Your fft-flavor and libs look suspicious; you have to use MKL fft, not MKL fftw3 calls.<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>enable_64bit_flags=&quot;yes&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />enable_debug=&quot;no&quot;<br />enable_optim=&quot;aggressive&quot;<br />enable_atmopaw=&quot;yes&quot;<br />with_mpi_prefix=/opt/mpich2-1.3.2p1_ifc-11.1_m64<br />with_dft_flavor=&quot;atompaw+libxc+wannier90&quot;<br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_libs=&quot;-L/opt/intel/Compiler/11.1/073/mkl/lib/em64t -Wl,--start-group -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group -lpthread&quot;<br />with_linalg_flavor=&quot;mkl&quot;<br />with_linalg_libs=&quot;-L/opt/intel/Compiler/11.1/073/mkl/lib/em64t -Wl,--start-group -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group -lpthread&quot;<br />enable_gw_dpc=&quot;yes&quot;<br />AR=xiar<br />FC_LDFLAGS=&quot;-static&quot;</code></pre></div><br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: abinit 6.10 +intel 12.1.0 + mkl</h3>
+				<div class="date">Posted: <strong>Mon Nov 26, 2012 12:34 pm</strong></div>
+				<div class="author">by <strong>carsten.fortmann</strong></div>
+				<div class="content"><blockquote class="uncited"><div><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>with_fft_flavor=&quot;fftw3&quot;</code></pre></div></div></blockquote><br /><br />alain,<br /><br />thanks for the hint, that did it.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1528&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:23:54 GMT -->
+</html>

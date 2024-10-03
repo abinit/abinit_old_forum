@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1865&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:36:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; trouble with openmpi+(icc+ifort) when using paral_kgb</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>trouble with openmpi+(icc+ifort) when using paral_kgb</h2>
+		<p><a href="viewtopicdd48-2.html?f=9&amp;t=1865">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1865</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>trouble with openmpi+(icc+ifort) when using paral_kgb</h3>
+				<div class="date">Posted: <strong>Fri Oct 26, 2012 2:58 pm</strong></div>
+				<div class="author">by <strong>ppy</strong></div>
+				<div class="content">Dear abinit users and developpers,<br />I am trying to benchmark abinit on my station (16 cores). So I did several tests.<br />I used abinit 6.12.3<br />     - opempi 1.6.2 with gcc 4.7.2   (without particular configuration options except openmpi):  everything runs perfectly<br />     -         same                           + mkl library for fftw and linalgo                                    :                _        perfectly (even a bit faster)<br /><br />     - openmpi 1.6.2 with intel 2013 + mkl library                                                               : here I start to have some troubles.<br />       Actually I was able to run the test tY.in where the paral_kgb is tested so I though that everything was fine. But with my particular file (where I optimize a crystal structure) from which I am doing the benchmark, the job crashes as soon as it starts scf calculation without any notice in the log file and with this error message:<br />forrtl: error (78): process killed (SIGTERM)<br /><br />I have to say that in comparison to the tY.in test file, in my benchmark file the cell is much larger nbands 56, ecut 140 Ha, <br />At the beginning I was using npband 6 and nkpt 2 (there is only 2 kpt in the reduced cell), then I realize that it crashed systematically when I was using npband.<br />So I decided to use npfft instead (to check what happens), it seems to work but this was not satisfying since it turns out that after some iteration the scf cycle didn't converge.<br />The other thing is that I used GGA instead of LDA used in the test, I will check if that makes a difference.<br /><br />If some of you have suggestions I would be very much appreciated it.<br />Thanks a lot<br />Pierre-Yves<br /><br />PS: I am wondering if it would be possible to get the developing abinit 7.0 to see if I got the same error?... thanks.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: trouble with openmpi+(icc+ifort) when using paral_kgb</h3>
+				<div class="date">Posted: <strong>Fri Oct 26, 2012 4:43 pm</strong></div>
+				<div class="author">by <strong>ppy</strong></div>
+				<div class="content">I tried compiling with intel without mkl libraries but same problem.<br />I tried also with LDA instead of GGA...<br />In view of what Yann Pouillon suggest in this other post &quot;HALF SOLVED] abinit6.12.3 crashes in more than 1 node&quot;, I will try another version of intel compilers (I used 13.0.). I will tell you what then...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: trouble with openmpi+(icc+ifort) when using paral_kgb</h3>
+				<div class="date">Posted: <strong>Mon Oct 29, 2012 12:14 pm</strong></div>
+				<div class="author">by <strong>ppy</strong></div>
+				<div class="content">The problem now is that I have gcc 4.7 with which intel 12.1 doesn't seem to be compatible with...<br /><!-- m --><a class="postlink" href="http://software.intel.com/en-us/forums/topic/277969">http://software.intel.com/en-us/forums/topic/277969</a><!-- m --><br />So I will have to wait for a new version of intel compilers...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: trouble with openmpi+(icc+ifort) when using paral_kgb</h3>
+				<div class="date">Posted: <strong>Fri Nov 09, 2012 9:01 am</strong></div>
+				<div class="author">by <strong>ppy</strong></div>
+				<div class="content">Finally I tried to compile by installing gnu compiler 4.6 first, then intel compiler 12.1, following that openmpi 1.5.4 <br />I worked for intel compilers 4.6.3 but then when I run my abinit-6.12.3, it simply doesn't converge in my scf cycle.<br />Then I tried to compile with intel 12.1.4, but I got the following error message:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>EEEEEE : catastrophic error: **Internal compiler error: segmentation violation signal raised** Please report this error along with the circumstances in which it occurred in a Software Problem Report.&nbsp; Note: File and line given may not be explicit cause of this error.<br />compilation aborted for nmsq_pure_gkk_sumfs.F90 (code 1)</code></pre></div><br /><br />Same as in the post &quot;Compiling error for 77_ddb/nmsq_pure_gkk_sumfs.F90 in SUSE&quot;<br />Then with intel 12.1.5 the same error.<br />As I said in my first post I also tried intel 13.0, it compile but does not converge during SCF cycle.  <br />I am on opensuse 12.1, do you know if with another linux OS it could be better??<br />Do you know for a relaxation calculation the gain in time with intel compiler in comparison with GNU compiler. My cpu are Intel(R) Xeon(R) CPU E5-2650 0 @ 2.00GHz.<br /><br />Thanks in advance for any answer.<br />PY</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: trouble with openmpi+(icc+ifort) when using paral_kgb</h3>
+				<div class="date">Posted: <strong>Fri Nov 09, 2012 2:54 pm</strong></div>
+				<div class="author">by <strong>ppy</strong></div>
+				<div class="content">I tried intel 12.1.7, it compiles but does not converge during an scf cycle...</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1865&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:36:15 GMT -->
+</html>

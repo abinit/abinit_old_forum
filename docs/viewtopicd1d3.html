@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=203&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:20:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Problem with test in ABINIT 6.0.2 (Ubuntu)</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Problem with test in ABINIT 6.0.2 (Ubuntu)</h2>
+		<p><a href="viewtopic9829.html?f=3&amp;t=203">https://forum.abinit.org/viewtopic.php?f=3&amp;t=203</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Problem with test in ABINIT 6.0.2 (Ubuntu)</h3>
+				<div class="date">Posted: <strong>Fri Mar 26, 2010 10:47 pm</strong></div>
+				<div class="author">by <strong>andreim</strong></div>
+				<div class="content">Dear ABINIT users/developers,<br /><br />I installed ABINIT 6.0.2 using gfortran 4.4 without mpi and without any plugins. The compilation seemed to go without problems. The first test also ran smoothly. However, <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make testin_2</code></pre></div> failes, this test outputs<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;Status file, with repetition rate&nbsp; 49, status number&nbsp; &nbsp; 10<br /><br />&nbsp; Level abinit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: call outvars(1<br /></code></pre></div><br />ten times and ABINIT freezes, i.e. process abinit runs forever). Attached is the log file of the test. <br /><br />Also I tried other calculations (e.g. from the tutorial), and it seems that only calculations on Hydrogen run OK, all other exhibit the same behavior as test 2. <br />Can anyone explain what kind of error this is and how to get rid of it?<br />Thanks,<br /><br />Best regards,<br />Andrei</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem with test in ABINIT 6.0.2 (Ubuntu)</h3>
+				<div class="date">Posted: <strong>Sat Mar 27, 2010 11:25 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">There is not much we can use in the log file - it just stops.<br /><br />Send in config.log and try to run the internal tests:<br />cd tests/<br />make tests_fast<br /><br />or <br /><br />make tests_acc<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem with test in ABINIT 6.0.2 (Ubuntu)</h3>
+				<div class="date">Posted: <strong>Sun Mar 28, 2010 10:38 pm</strong></div>
+				<div class="author">by <strong>andreim</strong></div>
+				<div class="content">Hi Matthieu,<br /><br />I attached the config.log file. Also I tried to run tests_fast, the first two tests run OK, then test t03 freezes.<br /><br />Andrei</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem with test in ABINIT 6.0.2 (Ubuntu)</h3>
+				<div class="date">Posted: <strong>Sun Mar 28, 2010 11:47 pm</strong></div>
+				<div class="author">by <strong>andreim</strong></div>
+				<div class="content">Here is an update. I compiled ABINIT 6.0.1 and observed the same problem as with 6.0.2. However, I also compiled version 5.8.2 and all tests ran perfectly well. <br />Perhaps, this can help somehow in identifying the problem.<br /><br />Best regards,<br />Andrei</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=203&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:20:45 GMT -->
+</html>

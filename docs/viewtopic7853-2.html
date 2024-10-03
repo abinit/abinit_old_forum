@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?t=3988 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:25:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Improving calculation performance? - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopic7853-2.html?t=3988">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="4"><a href="viewforum31e6.html?f=4" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Running Abinit</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="9"><a href="viewforumfdc5.html?f=9" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Ground state</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopicb7d9.html?f=9&amp;t=3988">Improving calculation performance?</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Total energy, geometry optimization, DFT+U, spin....<br /></div>
+<p>
+	<strong>Moderator:</strong> <a href="memberlista146.html?mode=viewprofile&amp;u=2687" class="username">bguster</a>
+</p>
+
+
+<div class="action-bar bar-top">
+	
+			<a href="posting33ee.html?mode=reply&amp;f=9&amp;t=3988" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopicea85.html?f=9&amp;t=3988&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="3988" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			18 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p11958" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11958">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist7518.html?mode=viewprofile&amp;u=2221" class="username">ryne60</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search3386.html?author_id=2221&amp;sr=posts">19</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Dec 06, 2018 8:57 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11958">
+
+						<h3 class="first"><a href="#p11958">Improving calculation performance?</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting2c5f.html?mode=quote&amp;f=9&amp;p=11958" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic7354.html?p=11958#p11958" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist7518.html?mode=viewprofile&amp;u=2221" class="username">ryne60</a></strong> &raquo; </span>Thu Dec 06, 2018 9:55 am
+			</p>
+			
+			
+			
+			<div class="content">Hi All,<br /><br />I'm a new member in the forum; thanks for providing this forum.<br /><br />Currently, I'm trying to do a ground-state calculation for a nanoribbon system consisting of 30 atoms per cell with the following SCF-related parameter setup:<br /><br /># SCF cycle parameters<br />ecut 12.<br />pawecutdg 30.<br />nstep 300<br />nband 150<br />toldfe 1.0d-9<br />iprcel 44<br /><br /># K-points and sym<br />ngkpt 11 1 1<br />nshiftk 1<br />shiftk 0.0 0.0 0.0<br /><br />occopt 7<br />prtdos 0<br /><br />autoparal 1<br /><br />For the potential I'm using PAW potential (this potential is a &quot;must&quot; currently for my study). The problem with my calculation is that it's running so slow. I compared the calculation with VASP using a comparable parameter setup and it's finished in less than 10 minutes, but my calculation with ABINIT has been running for about 12 hours now. <br /><br />Did I miss some parameters in my setup so it's running so slow? Or is there a way to improve the performance of my calculation? I would appreciate it if someone could give some suggestion regarding this issue. Thanks!<br /><br />PS. Below I also put the Build-Information of my ABINIT (in case needed for further analysis):<br /><br />++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /><br /> === Build Information ===<br />  Version       : 8.6.1<br />  Build target  : x86_64_linux_gnu4.8<br />  Build date    : 20180123<br /><br /> === Compiler Suite ===<br />  C compiler       : gnu4.8<br />  C++ compiler     : gnu4.8<br />  Fortran compiler : gnu4.8<br />  CFLAGS           :  -g -O2 -mtune=native -march=native<br />  CXXFLAGS         :  -g -O2 -mtune=native -march=native<br />  FCFLAGS          :  -g -ffree-line-length-none<br />  FC_LDFLAGS       :<br /><br /> === Optimizations ===<br />  Debug level        : basic<br />  Optimization level : standard<br />  Architecture       : intel_xeon<br /><br /> === Multicore ===<br />  Parallel build : yes<br />  Parallel I/O   : auto<br />  openMP support : no<br />  GPU support    : no<br /><br /> === Connectors / Fallbacks ===<br />  Connectors on : yes<br />  Fallbacks on  : yes<br />  DFT flavor    : libxc-fallback+atompaw-fallback+wannier90-fallback<br />  FFT flavor    : none<br />  LINALG flavor : netlib-fallback<br />  MATH flavor   : none<br />  TIMER flavor  : abinit<br />  TRIO flavor   : none<br /><br /> === Experimental features ===<br />  Bindings            : @enable_bindings@<br />  Exports             : no<br />  GW double-precision : no<br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /> Default optimizations:<br />   -O2 -mtune=native -march=native<br /><br /> Optimizations for 20_datashare:<br />   -O0<br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /> CPP options activated during the build:<br /><br />                    CC_GNU                   CXX_GNU                    FC_GNU<br /><br />              HAVE_ATOMPAW HAVE_FC_ALLOCATABLE_DT...             HAVE_FC_ASYNC<br /><br />         HAVE_FC_BACKTRACE  HAVE_FC_COMMAND_ARGUMENT      HAVE_FC_COMMAND_LINE<br /><br />        HAVE_FC_CONTIGUOUS           HAVE_FC_CPUTIME              HAVE_FC_EXIT<br /><br />             HAVE_FC_FLUSH             HAVE_FC_GAMMA            HAVE_FC_GETENV<br /><br />          HAVE_FC_INT_QUAD             HAVE_FC_IOMSG     HAVE_FC_ISO_C_BINDING<br /><br />  HAVE_FC_ISO_FORTRAN_2008        HAVE_FC_LONG_LINES        HAVE_FC_MOVE_ALLOC<br /><br />           HAVE_FC_PRIVATE         HAVE_FC_PROTECTED         HAVE_FC_STREAM_IO<br /><br />            HAVE_FC_SYSTEM          HAVE_FORTRAN2003        HAVE_LIBPAW_ABINIT<br /><br />      HAVE_LIBTETRA_ABINIT                HAVE_LIBXC                  HAVE_MPI<br /><br />                 HAVE_MPI2       HAVE_MPI_IALLREDUCE        HAVE_MPI_IALLTOALL<br /><br />       HAVE_MPI_IALLTOALLV        HAVE_MPI_INTEGER16               HAVE_MPI_IO<br /><br /> HAVE_MPI_TYPE_CREATE_S...                HAVE_NUMPY             HAVE_OS_LINUX<br /><br />         HAVE_TIMER_ABINIT            HAVE_WANNIER90              USE_MACROAVE<br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p11961" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11961">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistdc56.html?mode=viewprofile&amp;u=2143" class="username">woffermans</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search53a9.html?author_id=2143&amp;sr=posts">41</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Jun 01, 2018 8:22 am</dd>		
+		
+											
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact woffermans">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact woffermans</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://www.vito.be/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11961">
+
+						<h3 ><a href="#p11961">Re: Improving calculation performance?</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting9cbf.html?mode=quote&amp;f=9&amp;p=11961" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic53cb.html?p=11961#p11961" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistdc56.html?mode=viewprofile&amp;u=2143" class="username">woffermans</a></strong> &raquo; </span>Fri Dec 07, 2018 12:23 pm
+			</p>
+			
+			
+			
+			<div class="content">Dear Ryne60 and ABINIT friends,<br /><br />If you state that the calculation is slow, then please specify what you mean with slow. Is it the convergence speed? Or do you need approx. the same amount of cycles, but each cycle is taken more time? Or something else? <br /><br />In my case, the convergence speed of ABINIT was pretty slow. It took many steps to converge to the ground electronic state and I could improve the convergence speed by a factor of 2 by changing occopt to 7.<br />Unfortunately you already have set occopt to 7.<br /><br />toldfe 1.0d-9 is pretty harsh. Please check if you specified the same value in VASP. If this is the case, then this should not be the problem.<br /><br />Furthermore, it might help if you specify (or upload) your PAW potential file. As far as I understood, the convergence also depends on the PAW potential.</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p11963" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11963">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist7518.html?mode=viewprofile&amp;u=2221" class="username">ryne60</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search3386.html?author_id=2221&amp;sr=posts">19</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Dec 06, 2018 8:57 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11963">
+
+						<h3 ><a href="#p11963">Re: Improving calculation performance?</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingf433.html?mode=quote&amp;f=9&amp;p=11963" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic6a6c.html?p=11963#p11963" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist7518.html?mode=viewprofile&amp;u=2221" class="username">ryne60</a></strong> &raquo; </span>Fri Dec 07, 2018 3:17 pm
+			</p>
+			
+			
+			
+			<div class="content">Hi Woffermans,<br /><br />Thanks for the reply! The calculation is slow in terms of time per SCF-cycle and convergence speed; it took around 2 hours per SCF-cycle and the calculation isn't converged after 300 cycles. <br /><br />Also please kindly find attached the PAW potential I use! And any further suggestion is welcome!<br /><br />PS. I renamed the file from Bi.GGA_PBE-JTH.xml to BiPAW.in since apparently files are not allowed for attachment except those with suffix .in or .out</div>
+			
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file65f5.php?id=1649">BiPAW.in</a></dt>
+			<dd><em>PAW potential</em></dd>			<dd>(923.08 KiB) Downloaded 500 times</dd>
+		</dl>
+		
+		
+			</dd>
+									</dl>
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p11965" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11965">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistd74d.html?mode=viewprofile&amp;u=1666" class="username">onion2440</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search4cf7.html?author_id=1666&amp;sr=posts">34</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Sep 05, 2015 10:04 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11965">
+
+						<h3 ><a href="#p11965">Re: Improving calculation performance?</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingee49.html?mode=quote&amp;f=9&amp;p=11965" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicfdc2.html?p=11965#p11965" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistd74d.html?mode=viewprofile&amp;u=1666" class="username">onion2440</a></strong> &raquo; </span>Sun Dec 09, 2018 2:37 am
+			</p>
+			
+			
+			
+			<div class="content">I think set toldfe 1e-9 is too expensive and generally speaking it's no need to use a so strict criterion. Some times even for calculate the phonon dispersions, most people will set toldfe 1e-7. Maybe help you.</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p11969" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11969">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist7518.html?mode=viewprofile&amp;u=2221" class="username">ryne60</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search3386.html?author_id=2221&amp;sr=posts">19</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Dec 06, 2018 8:57 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11969">
+
+						<h3 ><a href="#p11969">Re: Improving calculation performance?</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting13a2.html?mode=quote&amp;f=9&amp;p=11969" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic297a.html?p=11969#p11969" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist7518.html?mode=viewprofile&amp;u=2221" class="username">ryne60</a></strong> &raquo; </span>Mon Dec 10, 2018 10:06 am
+			</p>
+			
+			
+			
+			<div class="content">Hi onion2440,<br /><br />after 300 cycles the maximum energy diff is around 10 Ha, which is &gt;&gt; 1e-9 Ha. So even if I increase toldfe to, let's say, 1e-7, the overall calculation is still very expensive. Maybe any clue how to improve/speed-up the calculation time per cycle?</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p11971" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11971">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistdc56.html?mode=viewprofile&amp;u=2143" class="username">woffermans</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search53a9.html?author_id=2143&amp;sr=posts">41</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Jun 01, 2018 8:22 am</dd>		
+		
+											
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact woffermans">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact woffermans</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://www.vito.be/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11971">
+
+						<h3 ><a href="#p11971">Re: Improving calculation performance?</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting9d3d.html?mode=quote&amp;f=9&amp;p=11971" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopica827.html?p=11971#p11971" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistdc56.html?mode=viewprofile&amp;u=2143" class="username">woffermans</a></strong> &raquo; </span>Tue Dec 11, 2018 10:31 am
+			</p>
+			
+			
+			
+			<div class="content">Hello ryne60, onion2440 and ABINIT friends,<br /><br />The point is not the values of the parameters.<br /><br />The point is the comparison with VASP calculation.<br /><br />If the VASP input is equivalent to the ABINIT input, then the question remains why calculation speed of VASP and ABINIT is so different.<br /><br />If I understand you correctly, then you need more time per electronic cycle as well as more cycles for your ABINIT calculation, compared to VASP. Moreover the difference is significant. It is not just a couple of minutes and 3 cycles less or more.<br /><br />Though benchmarking is always very tricky. You need equal conditions for the VASP and ABINIT calculation. You need equal input for both calculations. Otherwise you compare apples with pears.<br /><br />I think you need also to upload your VASP input. Experienced users can then have a look to both input and judge if input for ABINIT and VASP is equal. <br /><br />The best would be, if someone would reproduce your comparison on a different machine/cluster. Just to be sure, that it is not the environment, who's playing tricks on you.<br /><br />I guess that the developers of ABINIT are doing benchmarks all the time. So I would expect a statement from their site as well. Maybe this is already known and taken into account.</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p11974" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11974">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist7518.html?mode=viewprofile&amp;u=2221" class="username">ryne60</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search3386.html?author_id=2221&amp;sr=posts">19</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Dec 06, 2018 8:57 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11974">
+
+						<h3 ><a href="#p11974">Re: Improving calculation performance?</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingcb63.html?mode=quote&amp;f=9&amp;p=11974" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic4024.html?p=11974#p11974" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist7518.html?mode=viewprofile&amp;u=2221" class="username">ryne60</a></strong> &raquo; </span>Thu Dec 13, 2018 9:05 am
+			</p>
+			
+			
+			
+			<div class="content">Hi woffermans,<br /><br /><blockquote><div><cite>woffermans wrote:</cite>If I understand you correctly, then you need more time per electronic cycle as well as more cycles for your ABINIT calculation, compared to VASP. Moreover the difference is significant. It is not just a couple of minutes and 3 cycles less or more.</div></blockquote><br /><br />Yes, that's correct; for the comparison, the VASP calculation needed only about 98s per cycle and 40 cycles to converge.<br /><br />I used the following minimal setup for the VASP calculation:<br /><br />PREC = Accurate<br />LREAL = .FALSE.<br />ISMEAR = -5  # tetrahedron method with Blöchl corrections<br />NBANDS = 150<br />NSW = 0 # static calculation<br />EDIFF = 1.0d-7 # in eV<br />NEDOS = 801<br />NPAR = 4<br />ENCUT = 340 eV<br /><br />In both cases I used 11 kpoints. I can't attach the potcar file because it's a copyright item but if you have access to the VASP POTCAR database I used the POTCAR with the following title: TITEL  = PAW_PBE Bi08Apr2002 . So I guess both calculations have comparable setups but I still I don't know why the ABINIT calculation took much more time per cycle (and number of cycles).</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p11975" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11975">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistdc56.html?mode=viewprofile&amp;u=2143" class="username">woffermans</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search53a9.html?author_id=2143&amp;sr=posts">41</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Jun 01, 2018 8:22 am</dd>		
+		
+											
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact woffermans">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact woffermans</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://www.vito.be/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11975">
+
+						<h3 ><a href="#p11975">Re: Improving calculation performance?</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postinge604.html?mode=quote&amp;f=9&amp;p=11975" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopica25e.html?p=11975#p11975" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistdc56.html?mode=viewprofile&amp;u=2143" class="username">woffermans</a></strong> &raquo; </span>Thu Dec 13, 2018 10:37 am
+			</p>
+			
+			
+			
+			<div class="content">Dear ryne60 and ABINIT friends,<br /><br />Is ISMEAR = -5 comparable with occopt 7?</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p11976" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11976">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist7518.html?mode=viewprofile&amp;u=2221" class="username">ryne60</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search3386.html?author_id=2221&amp;sr=posts">19</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Dec 06, 2018 8:57 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11976">
+
+						<h3 ><a href="#p11976">Re: Improving calculation performance?</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingeaa0.html?mode=quote&amp;f=9&amp;p=11976" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic2451.html?p=11976#p11976" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist7518.html?mode=viewprofile&amp;u=2221" class="username">ryne60</a></strong> &raquo; </span>Thu Dec 13, 2018 2:27 pm
+			</p>
+			
+			
+			
+			<div class="content">Hi woffermans,<br /><br />I also tried with both calculations using the Fermi smearing (ISMEAR -1 &amp; occopt 3) and the conclusion regarding the calculations' speed doesn't not change much!</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p11977" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11977">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search82c3.html?author_id=682&amp;sr=posts">469</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Apr 19, 2011 11:13 am</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> University of Liege, Belgium</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11977">
+
+						<h3 ><a href="#p11977">Re: Improving calculation performance?</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting4884.html?mode=quote&amp;f=9&amp;p=11977" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic21d6.html?p=11977#p11977" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a></strong> &raquo; </span>Fri Dec 14, 2018 4:00 pm
+			</p>
+			
+			
+			
+			<div class="content">Dear ryne60,<br />Another remark: Why do you use iprcel 44? Did you check if default preconditioning is working?<br />another remark is that autoparal=1 might not be efficient, I usually recommend to do it by hand such that you control everything and often the result is more efficient, see for example:<br /><a href="viewtopicaeb9.html?f=8&amp;t=3837" class="postlink">https://forum.abinit.org/viewtopic.php?f=8&amp;t=3837</a><br />Best wishes,<br />Eric</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p11982" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile11982">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist7518.html?mode=viewprofile&amp;u=2221" class="username">ryne60</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search3386.html?author_id=2221&amp;sr=posts">19</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Dec 06, 2018 8:57 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content11982">
+
+						<h3 ><a href="#p11982">Re: Improving calculation performance?</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingcfec.html?mode=quote&amp;f=9&amp;p=11982" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic9d8f.html?p=11982#p11982" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist7518.html?mode=viewprofile&amp;u=2221" class="username">ryne60</a></strong> &raquo; </span>Fri Dec 14, 2018 5:47 pm
+			</p>
+			
+			
+			
+			<div class="content">Hi Eric,<br /><br />I made some trial calculations with similar kind of systems but with a lot smaller size of unit cell; i.e. still 2D systems with 2 atoms per unit-cell, and thus the timing was a lot faster. In these cases, the setup with iprcel 44 finished faster than cases with other iprcel values. So I just setup the same value for bigger systems. Moreover, according to the manual iprcel 45 will more likely give a large improvement, and since iprcel 44 is just 1 number lower, so I thought it would give a similar performance as 45. But I also tried using the default value; the conclusion about the speed per cycle is still more less the same; i.e. much slower than VASP's speed per cycle.<br /><br />Regarding autopar, before I set this parameter out, I got some message from abinit that my setup was not optimal and it recommended &quot;autopar&quot;  in the input file. I also again did some test of this parameter on systems with smaller sizes, and autopar 1 resulted in the fastest timing. So I just put it in the setup of my real system.<br /><br />Anyway, thanks for recommendation. I'll do more tests with autopar.</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p12016" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile12016">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistdc56.html?mode=viewprofile&amp;u=2143" class="username">woffermans</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search53a9.html?author_id=2143&amp;sr=posts">41</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Jun 01, 2018 8:22 am</dd>		
+		
+											
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact woffermans">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact woffermans</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://www.vito.be/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content12016">
+
+						<h3 ><a href="#p12016">Re: Improving calculation performance?</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting495c.html?mode=quote&amp;f=9&amp;p=12016" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic6cde.html?p=12016#p12016" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistdc56.html?mode=viewprofile&amp;u=2143" class="username">woffermans</a></strong> &raquo; </span>Wed Jan 09, 2019 3:12 pm
+			</p>
+			
+			
+			
+			<div class="content">Dear ryne60 and ABINIT friends,<br /><br />Please don't forget to report on your findings. It is of interest of all ABINIT friends, if we can close the thread in some conclusive way.</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p12021" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile12021">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist7518.html?mode=viewprofile&amp;u=2221" class="username">ryne60</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search3386.html?author_id=2221&amp;sr=posts">19</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Dec 06, 2018 8:57 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content12021">
+
+						<h3 ><a href="#p12021">Re: Improving calculation performance?</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting66ec.html?mode=quote&amp;f=9&amp;p=12021" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicec50.html?p=12021#p12021" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist7518.html?mode=viewprofile&amp;u=2221" class="username">ryne60</a></strong> &raquo; </span>Fri Jan 11, 2019 1:02 pm
+			</p>
+			
+			
+			
+			<div class="content">Hi woffermans,<br /><br />it seems the culprit was iprcel; because of this, the first few SCF cycles took so many hours. In my opinion, somehow the following note about iprcel in the online manual is a bit misleading:  <br /><br /><blockquote class="uncited"><div>For non-homogeneous relatively large cells iprcel = 45 will likely give a large improvement over iprcel = 0.</div></blockquote><br /><br />Certainly the running time is not improved (or even much worse) compared to the setup without iprcel.<br /><br />Some other factor that has led to a different performance is the cut off energy of wavefunctions suggested by pseudopotentials, I don't know how it is possible, but in most PAW cases suggested cut off energies are much lower in VASP than in ABINIT. However, if both are set up with comparable cut off energy, the running time becomes comparable too.<br /><br />Other than this, I think the performance of ABINIT is quite comparable to VASP.<br /><br />I hope the info can be useful to others.<br /><br />Thanks again!</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p12304" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile12304">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistb32f.html?mode=viewprofile&amp;u=2287" class="username">ketong</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search7189.html?author_id=2287&amp;sr=posts">11</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Apr 25, 2019 10:44 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content12304">
+
+						<h3 ><a href="#p12304">Re: Improving calculation performance?</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting7a75.html?mode=quote&amp;f=9&amp;p=12304" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic60b8.html?p=12304#p12304" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistb32f.html?mode=viewprofile&amp;u=2287" class="username">ketong</a></strong> &raquo; </span>Thu Apr 25, 2019 11:10 am
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>ryne60 wrote:</cite>Hi woffermans,<br /><br />it seems the culprit was iprcel; because of this, the first few SCF cycles took so many hours. In my opinion, somehow the following note about iprcel in the online manual is a bit misleading:  <br /><br /><blockquote class="uncited"><div>For non-homogeneous relatively large cells iprcel = 45 will likely give a large improvement over iprcel = 0.</div></blockquote><br /><br />Certainly the running time is not improved (or even much worse) compared to the setup without iprcel.<br /><br />Some other factor that has led to a different performance is the cut off energy of wavefunctions suggested by pseudopotentials, I don't know how it is possible, but in most PAW cases suggested cut off energies are much lower in VASP than in ABINIT. However, if both are set up with comparable cut off energy, the running time becomes comparable too.<br /><br />Other than this, I think the performance of ABINIT is quite comparable to VASP.<br /><br />I hope the info can be useful to others.<br /><br />Thanks again!</div></blockquote><br /><br />Hi ryne60,<br /><br />  In your latest reply, you thought the culprit was &quot;iprcel&quot;. So it means that in your &quot;in&quot; file, the line including &quot;iprcel&quot; was deleted and the calculation with ABINIT finished in less than 10 minutes? Is it right?</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p12306" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile12306">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist7518.html?mode=viewprofile&amp;u=2221" class="username">ryne60</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search3386.html?author_id=2221&amp;sr=posts">19</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Dec 06, 2018 8:57 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content12306">
+
+						<h3 ><a href="#p12306">Re: Improving calculation performance?</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingfeeb.html?mode=quote&amp;f=9&amp;p=12306" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic4e9e.html?p=12306#p12306" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist7518.html?mode=viewprofile&amp;u=2221" class="username">ryne60</a></strong> &raquo; </span>Thu Apr 25, 2019 12:46 pm
+			</p>
+			
+			
+			
+			<div class="content">Hi ketong,<br /><br />Yes, it's been deleted since then! But, since my systems are big, the calculation time (scfcv time) is still long but now &quot;comparable&quot; to VASP because the first few scf cycles now take significantly less time.</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p12307" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile12307">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistb32f.html?mode=viewprofile&amp;u=2287" class="username">ketong</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search7189.html?author_id=2287&amp;sr=posts">11</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Apr 25, 2019 10:44 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content12307">
+
+						<h3 ><a href="#p12307">Re: Improving calculation performance?</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingf0b0.html?mode=quote&amp;f=9&amp;p=12307" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic645a.html?p=12307#p12307" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistb32f.html?mode=viewprofile&amp;u=2287" class="username">ketong</a></strong> &raquo; </span>Fri Apr 26, 2019 6:44 am
+			</p>
+			
+			
+			
+			<div class="content">Dear ryne60,<br /><br />    Thank you for your information. <br /><br />    In addition, do you have some suggestions or tricks about the setting of &quot;iprcel&quot;, &quot;diemac&quot; and &quot;diemix&quot;?<br /><br />    Thanks again!</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p12315" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile12315">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist7518.html?mode=viewprofile&amp;u=2221" class="username">ryne60</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search3386.html?author_id=2221&amp;sr=posts">19</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Dec 06, 2018 8:57 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content12315">
+
+						<h3 ><a href="#p12315">Re: Improving calculation performance?</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingc493.html?mode=quote&amp;f=9&amp;p=12315" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopiccb69-2.html?p=12315#p12315" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist7518.html?mode=viewprofile&amp;u=2221" class="username">ryne60</a></strong> &raquo; </span>Fri Apr 26, 2019 10:58 am
+			</p>
+			
+			
+			
+			<div class="content">Hi ketong,<br /><br /><blockquote><div><cite>ketong wrote:</cite>    In addition, do you have some suggestions or tricks about the setting of &quot;iprcel&quot;, &quot;diemac&quot; and &quot;diemix&quot;?<br /></div></blockquote><br /><br />unfortunately, I don't! Sorry, I didn't do much test for those parameters. Since my systems are too big, testing those parameters will be time consuming. I've been using default values, instead.</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p12321" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile12321">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistb32f.html?mode=viewprofile&amp;u=2287" class="username">ketong</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search7189.html?author_id=2287&amp;sr=posts">11</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Apr 25, 2019 10:44 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content12321">
+
+						<h3 ><a href="#p12321">Re: Improving calculation performance?</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting12ce.html?mode=quote&amp;f=9&amp;p=12321" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic4ef0.html?p=12321#p12321" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistb32f.html?mode=viewprofile&amp;u=2287" class="username">ketong</a></strong> &raquo; </span>Tue Apr 30, 2019 4:33 am
+			</p>
+			
+			
+			
+			<div class="content">Hi ryne60,<br /><br />    Anyway, thank you very much!</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="posting33ee.html?mode=reply&amp;f=9&amp;t=3988" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopicea85.html?f=9&amp;t=3988&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=9&amp;t=3988">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			18 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforumfdc5.html?f=9" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Ground state”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?t=3988 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:25:23 GMT -->
+</html>

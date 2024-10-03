@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4040&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:08:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; rprim and spacegroup</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>rprim and spacegroup</h2>
+		<p><a href="viewtopic68d7.html?f=9&amp;t=4040">https://forum.abinit.org/viewtopic.php?f=9&amp;t=4040</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>rprim and spacegroup</h3>
+				<div class="date">Posted: <strong>Sun Feb 17, 2019 6:43 pm</strong></div>
+				<div class="author">by <strong>elia</strong></div>
+				<div class="content"><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file26ff.php?id=1680">gs.out</a></dt>
+			<dd><em>optimization of the cell geometry</em></dd>			<dd>(45.68 KiB) Downloaded 298 times</dd>
+		</dl>
+		
+		
+			</div>Dear all, <br /> After full optimization of the cell geometry (using optcell=2 and ionmov=2), I have obtained gs.out file. How can I determine the rprim and spacegroup?<br />Thanks a lot.<br />Best,<br />Elia</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: rprim and spacegroup</h3>
+				<div class="date">Posted: <strong>Thu Feb 21, 2019 5:21 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Elia,<br />At the beginning of your output you have the following line:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Symmetries : space group P3 m 1 (#156); Bravais hP (primitive hexag.)</code></pre></div><br />Then for each relaxation steps you have at some point the following informations regarding the cell:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Scale of Primitive Cell (acell) &#91;bohr&#93;<br />&nbsp;7.54115899680355E+00&nbsp; 7.54115899680355E+00&nbsp; 4.54864865841844E+01<br />Real space primitive translations (rprimd) &#91;bohr&#93;<br />&nbsp;5.33240466464574E+00&nbsp; 0.00000000000000E+00&nbsp; 5.33240466464574E+00<br />&nbsp;5.33240466464574E+00&nbsp; 5.33240466464574E+00 -2.20271039884021E-32<br />-1.69152729509060E-01&nbsp; 3.21635807173835E+01&nbsp; 3.21635807173835E+01<br />Unitary Cell Volume (ucvol) &#91;Bohr^3&#93;=&nbsp; 1.83392299319453E+03<br />Angles (23,13,12)= &#91;degrees&#93;<br />&nbsp;6.01740460805992E+01&nbsp; 6.01740460805992E+01&nbsp; 6.00000000000000E+01<br />Lengths &#91;Bohr&#93;<br />&nbsp;7.54115899680355E+00&nbsp; 7.54115899680355E+00&nbsp; 4.54864865841844E+01<br /></code></pre></div><br />which, I think, is what you are looking for.<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: rprim and spacegroup</h3>
+				<div class="date">Posted: <strong>Thu Feb 21, 2019 8:09 pm</strong></div>
+				<div class="author">by <strong>elia</strong></div>
+				<div class="content">Dear Eric,<br />Thank you for your answer. In order to obtain rprim, I have used rprim(i,j) = rprimd(i,j)/acell(j).<br />:::::::::::::::::::::::::::::::::::::::::::::::::::<br />acell (Bohr)       7.54     7.54           45.486<br />rprimd<br />5.33                  0.0              5.33<br />5.33                   5.33          0.0<br />-0.16915        32.163        32.163   <br />rprim <br />0.707106         0.0               0.11723<br />0.707106         0.707106       0.0<br />-0.0224           4.265              0.70710189<br />::::::::::::::::::::::::::::::::::::::::::::::::::::::<br />But, the calculated rprim leads to space group p 1 (triclinic). How can I calculate the correct rprim?<br />Best wishes, <br />Elia</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: rprim and spacegroup</h3>
+				<div class="date">Posted: <strong>Tue Feb 26, 2019 3:48 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Elia,<br />It could be related to the number of digit at which the symmetries are detected (tolsym) is higher than the number of digits at which your rprim is rounded... You can check by reducing the tolsym flag.<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: rprim and spacegroup</h3>
+				<div class="date">Posted: <strong>Thu Feb 28, 2019 4:18 am</strong></div>
+				<div class="author">by <strong>anhhv</strong></div>
+				<div class="content">Hi Elia,<br /><br />Have you tried to use python-based tool named abipy <a href="https://github.com/abinit/abipy" class="postlink">https://github.com/abinit/abipy</a>. When it is installed, if you are in a terminal (e.g. in Linux), simply use command ``abiopen.py + name of file'' you want to extract information. This will lead you to an ipython-environment with an object called abifile. From that, you can get many things you need. For instance,<br /><br />abiopen.py your_file_name.GSR.nc<br /><br />nkpt = abifile.nkpt<br />kpoints = abifile.kpoints<br />eband = abifile.ebands<br />fermie = eband.fermie<br />struct = eband.structure<br />spg = struct.abi_spacegroup<br />symrec = spg.symrec<br /><br />Best,<br />Anh.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: rprim and spacegroup&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Thu Feb 28, 2019 4:38 am</strong></div>
+				<div class="author">by <strong>elia</strong></div>
+				<div class="content">Hi Anh,<br />Thanks a lot for the reply,,, I will try that<br />Regards,<br />Elia.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4040&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:08:21 GMT -->
+</html>

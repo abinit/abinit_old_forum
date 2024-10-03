@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=966&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:54:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; The problem of the band structure of the supercell CaO</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>The problem of the band structure of the supercell CaO</h2>
+		<p><a href="viewtopic0a6c-2.html?f=9&amp;t=966">https://forum.abinit.org/viewtopic.php?f=9&amp;t=966</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>The problem of the band structure of the supercell CaO</h3>
+				<div class="date">Posted: <strong>Fri Mar 18, 2011 3:33 am</strong></div>
+				<div class="author">by <strong>qiaofen</strong></div>
+				<div class="content">Dear all,<br />I’m a new user of abinit. After calculate the band structure of CaO, I’ve some questions on the result. The band structure of the primitive cell of CaO is <span style="color: #80BF00">indirect band gap</span>, and it is the same as the other calculation<a href="http://iopscience.iop.org/1742-6596/100/4/042006" class="postlink">http://iopscience.iop.org/1742-6596/100/4/042006</a> . However, the band structure of the 2*2*2 supercell of CaO is <span style="color: #80BF00">direct band gap</span>, the figure and input file are as follows. The <span style="color: #BF0040">xred</span> of supercell of CaO is generated from Material studio.<br /><br />Would you please help me?<br />Thank you in advance.<br /><br />The band structure figure:<br /><div class="inline-attachment">
+			
+				<dl class="thumbnail">
+			<dt><a href="download/file8cd2.jpg?id=327&amp;mode=view"><img src="download/file19ea.jpg?id=327&amp;t=1" class="postimage" alt="CaO band structure2副本.jpg" title="CaO band structure2副本.jpg (229.47 KiB) Viewed 2161 times" /></a></dt>
+					</dl>
+		
+		
+		
+		
+			</div><br /><br /><strong class="text-strong">The input file of primitive cell of CaO</strong><br /><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/filefedf.php?id=325">CaOprimituve_cell.in</a></dt>
+						<dd>(754 Bytes) Downloaded 228 times</dd>
+		</dl>
+		
+		
+			</div><br />ndtset 2<br />#dataset 1<br /><br />kptopt 1<br />nshiftk1 4<br />shiftk1<br />0.5 0.5 0.5<br />0.5 0.0 0.0<br />0.0 0.5 0.0<br />0.0 0.0 0.5<br />ngkpt1 8 8 8<br />prtden1 1<br />toldfe1 1.0d-6<br /><br />#dataset2: the band structure<br />iscf2 -2   #SCF cycle:CG based on the minim of the energy(non-selfconsistent calcylation)<br />getden2 -1<br />kptopt2 -3<br />nband2 16 <br />ndivk2 10 12 17<br />kptbounds2 <br />0.5 0 0       #L<br />0 0 0         #Gamma<br />0 0.5 0.5     #X<br />1 1 1         #Gamma in another cell<br /><br />tolwfr2 1.0d-16<br />enunit2 0  #0---hatree<br /><br /><br />#Definition of the unit cell<br />#chkprim 0<br /><br />diemac 12<br />acell 6.43 6.43 6.43 <br />angdeg 60 60 60 <br /><br />#rprim 0 0.5 0.5<br />#      0.5 0 0.5 <br />#      0.5 0.5 0   <br /><br />ntypat 2<br />znucl 20 8<br />natom 2<br />typat 1 2 <br /><br />xred 0 0 0<br />     0.5 0.5 0.5          <br />   <br />ecut 40.0<br />nstep 45<br /><br /><strong class="text-strong">The input file of 2*2*2 supercell of CaO</strong><br /><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file5869.php?id=326">222supercell.in</a></dt>
+						<dd>(1.4 KiB) Downloaded 238 times</dd>
+		</dl>
+		
+		
+			</div><br />ndtset 2<br />#dataset 1：usual self-consistent calculation<br /><br />kptopt1 1<br />nshiftk1 4 <br />shiftk1 <br />0.5 0.5 0.5<br />0.5 0 0<br />0 0.5 0<br />0 0 0.5<br />ngkpt1 4 4 4 <br />prtden1 1<br />toldfe1 1.0d-6<br /><br />#dataset2: the band structure<br />iscf2 -2               #SCF cycle:CG based on the minim of the energy(non-selfconsistent calcylation)<br />getden2 -1<br />kptopt2 -3<br />nband2 48<br />ndivk2 10 12 17<br />kptbounds2 <br />0.5 0 0               #L<br />0 0 0               	 #Gamma<br />0 0.5 0.5   	        #X<br />1 1 1                 #Gamma in another cell<br /><br />tolwfr2 1.0d-16<br />enunit2 0             #0---hatree<br /><br /><br />#Definition of the unit cell<br />chkprim 0<br /><br />#angdeg 90 90 90 <br />rprim 0 1 1  <br />      1 0 1<br />      1 1 0   <br />acell 9.093 9.093 9.093  #CaO lattice constant a=4.81 Angstrom,is equal to 9.093 bohr<br />ntypat 2<br />znucl 20 8<br />natom 16<br />typat 1 2 1 2 1 2 1 2 1 2 1 2 1 2 1 2<br />xred<br />   -0.00000  -0.00000   0.00000   <br />    0.25000   0.25000   0.25000   <br />    0.50000  -0.00000   0.00000   <br />    0.75000   0.25000   0.25000   <br />   -0.00000   0.50000   0.00000   <br />    0.25000   0.75000   0.25000   <br />    0.50000   0.50000   0.00000   <br />    0.75000   0.75000   0.25000   <br />   -0.00000  -0.00000   0.50000   <br />    0.25000   0.25000   0.75000   <br />    0.50000  -0.00000   0.50000   <br />    0.75000   0.25000   0.75000   <br />   -0.00000   0.50000   0.50000   <br />    0.25000   0.75000   0.75000 <br />    0.50000   0.50000   0.50000  <br />    0.75000   0.75000   0.75000 <br /><br />ecut 40.0<br />nstep 45<br /><br /><br />Best regards.<br /><br />Qiaofen Li<br /><span style="text-decoration: underline">qiaofen0630@163.com</span><br />School of Electronic Science and Engineering<br />Southeast University<br />2# SiPaiLou<br />Nanjing<br />Jiangsu, China</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: The problem of the band structure of the supercell CaO</h3>
+				<div class="date">Posted: <strong>Tue Jun 07, 2011 7:12 pm</strong></div>
+				<div class="author">by <strong>jtalla</strong></div>
+				<div class="content">Hello sir<br />I am struggling to know how did you get these graphs, I do have the band gap files but I do not know how to manipulate them and get the band structure they way you presented. <br />I am new to abinit and I need to learn how to present my results in a professional way like yours. <br />Thank you very much.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=966&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:54:33 GMT -->
+</html>

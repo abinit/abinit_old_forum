@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3233&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:32:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Germanium Band Structure</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Germanium Band Structure</h2>
+		<p><a href="viewtopic8bd7.html?f=9&amp;t=3233">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3233</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Germanium Band Structure</h3>
+				<div class="date">Posted: <strong>Mon Mar 21, 2016 1:08 pm</strong></div>
+				<div class="author">by <strong>FrancescoMacheda</strong></div>
+				<div class="content">Hi everybody, <br />I'm new to Abinit. I'm trying to reproduce Germanium band structure with an HGH pseudopotential and spin orbit interaction. It works pretty well, but it fails in reproducing the double degeneracy of the heavy hole at GAMMA point. I post my input:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># Computation of the band structure.<br /># First, a SCF density computation, then a non-SCF band structure calculation.<br /><br />ndtset 2<br /><br />#Dataset 1 : usual self-consistent calculation<br />kptopt1 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br /><br />ngkpt1&nbsp; 6 6 6&nbsp; <br />nshiftk1 1<br />shiftk1 0 0 0 <br />prtden1&nbsp; 1&nbsp; &nbsp; <br />toldfe1&nbsp; 1.0d-10&nbsp; &nbsp;<br /><br />#Dataset 2 : the band structure<br />iscf2&nbsp; &nbsp; -2<br />getden2&nbsp; -1<br />kptopt2&nbsp; -3<br />nband2&nbsp; 16<br />ndivk2&nbsp; &nbsp;40 40 40&nbsp; &nbsp; &nbsp;<br />kptbounds2&nbsp; 0.5&nbsp; 0.0&nbsp; 0.0 <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0&nbsp; 0.0&nbsp; 0.0 <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0&nbsp; 0.5&nbsp; 0.5 <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1.0&nbsp; 1.0&nbsp; 1.0 <br />tolwfr2&nbsp; 1.0d-12<br />enunit2&nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br /><br /><br />#Definition of the unit cell<br />acell 3*10.67&nbsp; &nbsp; &nbsp; &nbsp; <br />rprim&nbsp; 0.0&nbsp; 0.5&nbsp; 0.5&nbsp; &nbsp;<br />&nbsp; &nbsp; &nbsp; &nbsp;0.5&nbsp; 0.0&nbsp; 0.5&nbsp; &nbsp;<br />&nbsp; &nbsp; &nbsp; &nbsp;0.5&nbsp; 0.5&nbsp; 0.0<br /><br />#Definition of the atom types<br />ntypat 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />znucl 32&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br /><br />#Definition of the atoms<br />natom 2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />typat 1 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />xred&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />&nbsp; &nbsp;0.0&nbsp; 0.0&nbsp; 0.0&nbsp; <br />&nbsp; &nbsp;1/4&nbsp; 1/4&nbsp; 1/4&nbsp; <br /><br /><br />ecut 40.0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br /><br />#Definition of the SCF procedure<br />nstep 100&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />nspinor=2<br />optforces 1<br /><br /></code></pre></div><br /><br />Here is what i get:<br />[img]<br /><!-- m --><a class="postlink" href="http://postimg.org/image/7q8fcqof3/">http://postimg.org/image/7q8fcqof3/</a><!-- m --><br />[/img]<br />It can be noticed (if not, I assure that zooming it is noticeable) that all the three bands are splitted (wrong). Where is the mistake?<br /><br />Moreover, if i would like to implement HSE hybrid calculation, it is sufficient to write &quot;ixc=-524&quot; ? <br /><br />Thank you in advance,<br />Francesco Macheda<br />Graduand at Pisa University</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Germanium Band Structure</h3>
+				<div class="date">Posted: <strong>Tue Mar 22, 2016 8:33 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Hi,<br /><br />No, you cannot use hybrid XC with the current abinit. Maybe soon ...<br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Germanium Band Structure</h3>
+				<div class="date">Posted: <strong>Tue Mar 22, 2016 9:09 am</strong></div>
+				<div class="author">by <strong>FrancescoMacheda</strong></div>
+				<div class="content">Thanks for the reply. As regards the splitting error do you have any suggestion?</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3233&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:32:50 GMT -->
+</html>

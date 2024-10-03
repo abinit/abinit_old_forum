@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=211&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:13:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; KSS with HGH pseudos</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>KSS with HGH pseudos</h2>
+		<p><a href="viewtopic2d6f.html?f=11&amp;t=211">https://forum.abinit.org/viewtopic.php?f=11&amp;t=211</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>KSS with HGH pseudos</h3>
+				<div class="date">Posted: <strong>Thu Apr 01, 2010 10:04 pm</strong></div>
+				<div class="author">by <strong>aromero</strong></div>
+				<div class="content">I have been trying to store the KSS file for a calculation by using a set of HGH pseudos. The calculation<br />is with nsspinor = 1 and nsspol = 1 but in any case, Abinit is complaining with the message<br /><br /> outkss: ERROR -<br />  Variable mpspso should be 1 !<br /><br />what is the problem with this pseudo? is it only related to HGH pseudos?<br /><br />thanks<br /><br />-aldo<br /><br />PS below is the input file I am using<br /><br /><br />kptopt 1<br /><br />kssform     3<br />nbandkss   60<br /><br />toldfe 1.0d-8 <br /><br />ecut   60<br />ecutsm 0.5<br />ngkpt  8 8 4<br />nshiftk 1<br />shiftk<br />  0.0 0.0 0.5<br /><br />acell   7.6374239409E+00  7.6374239408E+00  1.7537185129E+01<br />rprim   1.0000000000E+00  0.0000000000E+00  0.0000000000E+00<br />         -5.0000000000E-01  8.6602540378E-01  0.0000000000E+00<br />          0.0000000000E+00  0.0000000000E+00  1.0000000000E+00<br /><br />xcart<br />  2.39891887130754E+00 -8.80051407953262E-22  5.84572837637288E+00<br />  3.67950573065810E+00  1.06010582009894E-21  1.46143209409322E+01<br />  2.61925253478029E+00  4.53667846806977E+00 -4.86754667936677E-16<br />  1.97895910510500E+00  3.42765771612534E+00  8.76859256455931E+00<br /> -1.19945943565377E+00  2.07752468415957E+00  1.16914567527458E+01<br /> -1.83975286532905E+00  3.18654543610400E+00  2.92286418818644E+00<br /><br /># Definition of the atom types<br />ntypat 2<br />znucl 80 16<br />natom 6                # There are two atoms<br />typat    1  2  1  2  1  2</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: KSS with HGH pseudos</h3>
+				<div class="date">Posted: <strong>Sat Apr 03, 2010 1:31 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">I believe the problem is with generating KSS files from hgh potentials, indeed. Basically, even if you do not use them, the projectors are there (mpspso is large) for the SO terms, and they cannot be copied into the KSS file, as it can't deal with spinors, multi projectors, etc...<br /><br />Someone from the GW crew should confirm this.<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: KSS with HGH pseudos</h3>
+				<div class="date">Posted: <strong>Tue Apr 20, 2010 2:42 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">The check is not completely correct in the sense that <br />abinit is able to generate the KSS file even when the SO term is included.<br />Unfortunately one cannot do a GW calculation with SO and, indeed, <br />the GW code will stop if nspinor==2. <br />Using nspinor=1 and nsppol=1 is fine though<br /><br />I can remove the check after having tested the KSS routine but one has to <br />be aware that optical properties calculated with HGH pseudo won't be reliable.<br />As Matthieu said, the KSS file doesn't contain the form factors associated to <br />multi-projectors NC pseudos therefore the matrix elements of the position operator <br />needed  for the optical limit won't be correct.<br /><br />This is something  worth implementing. Volunteers are welcome!   <br />M</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: KSS with HGH pseudos</h3>
+				<div class="date">Posted: <strong>Mon May 02, 2011 10:47 am</strong></div>
+				<div class="author">by <strong>davide.sangalli.82</strong></div>
+				<div class="content">Hi,<br />I would be interested in this too, in order to read the KSS with spinors and so with yambo.<br /><br />Thank you and best regards,<br />Davide</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=211&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:13:17 GMT -->
+</html>

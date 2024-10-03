@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2097&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:21:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; DOS with tetrahedron method error</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>DOS with tetrahedron method error</h2>
+		<p><a href="viewtopic5af5.html?f=9&amp;t=2097">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2097</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>DOS with tetrahedron method error</h3>
+				<div class="date">Posted: <strong>Tue Apr 23, 2013 6:26 pm</strong></div>
+				<div class="author">by <strong>antonio</strong></div>
+				<div class="content">Hi all,<br />I'm trying to calculate the DOS on a R3c (161) system with the tetrahedron method but I get the following error:<br /><br /> Subroutine Unknown:0:ERROR<br /> get_tetra_weight: nene must be at least 2<br /><br />I'm using the parallel version 7.0.5 of abinit; these are the main settings in the input file:<br /><br />   spgroup     161<br />   brvltt      -1<br />   spgaxor     2  <br />   ixc         3<br />   iscf        -2<br />   nstep       0<br />   ecut        800 eV<br />   ecutsm      0.5<br />   dilatmx     1.05<br />   ngkpt       5 5 5<br />   nshiftk     4<br />   shiftk      0.5 0.5 0.5<br />               0.5 0.0 0.0<br />               0.0 0.5 0.0<br />               0.0 0.0 0.5<br />   prtdos      3<br />   prtdosm     1<br />   tolwfr      1.0d-22<br /><br />I looked for the variable nene and it seems to be an internal variable that cannot be set in the input file; also, I checked the forum and on google if somebody else had the same error but I didn't find anything similar.<br /><br />I appreciate a lot your kind help<br /><br />Thanks<br /><br />Antonio</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DOS with tetrahedron method error&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Tue Apr 23, 2013 7:52 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">nene is computed from dosdeltae (<!-- m --><a class="postlink" href="http://www.abinit.org/documentation/helpfiles/for-v5.8/input_variables/vargs.html#dosdeltae">http://www.abinit.org/documentation/hel ... #dosdeltae</a><!-- m -->)<br /><br />and the maximum dispersion of your electron bands via the expression:<br /><br />nene=nint((enemax-enemin)/dosdeltae)+1<br /><br />In your case, nene is 1 and this means that dosdeltae is greater than the band dispersion.<br />How many bands did you include in the NSCF calculation?<br /><br />BTW:<br />Don't use dilatmx in the NSCF run. This variable is important only if you are doing a variable-cell optimization</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DOS with tetrahedron method error</h3>
+				<div class="date">Posted: <strong>Wed May 01, 2013 5:26 pm</strong></div>
+				<div class="author">by <strong>antonio</strong></div>
+				<div class="content">Perfect! Now it works. It was enough to specify dosdeltae.<br /><br />nband in my calculation is 120.<br /><br />Thanks a lot !</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2097&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:21:35 GMT -->
+</html>

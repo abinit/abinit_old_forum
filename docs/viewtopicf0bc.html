@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3985&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:09:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; can abinit do an all-electron calculation?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>can abinit do an all-electron calculation?</h2>
+		<p><a href="viewtopicb957.html?f=9&amp;t=3985">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3985</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>can abinit do an all-electron calculation?</h3>
+				<div class="date">Posted: <strong>Mon Dec 03, 2018 4:09 am</strong></div>
+				<div class="author">by <strong>onion2440</strong></div>
+				<div class="content">Dear all,<br />     Now I encounter a problem when I try to find the  magnetic ground state of a material. However, The PAW PP of Abinit cannot show me the right one compare with the experiment. Since the all-electron method like Wien2k always have better performance in studying the magnetic properties, here I wanna know if there is a way to do an all-electron like calculation with Abinit? Or there is a way to improve the performance of the Abinit in studying the magnetic properties?<br /><br />any helps will welcome!<br />Thank you.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: can abinit do an all-electron calculation?</h3>
+				<div class="date">Posted: <strong>Mon Dec 03, 2018 7:06 am</strong></div>
+				<div class="author">by <strong>onion2440</strong></div>
+				<div class="content">By the way, I have tested the energy cutoff, the kpt. And since I need to use GGA+U, I have to use the PAW method.<br /><br />thank everyone for yours helps.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: can abinit do an all-electron calculation?</h3>
+				<div class="date">Posted: <strong>Wed Dec 05, 2018 10:03 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear onion2440,<br />If you don't give more details about your system, it'll be hard to reply to you.<br />You could have to initialize the spinat to a much larger value than the target one, you can also increase nline and increase nnsclo to 2 (thought this will make much slower calculations, then you can set that for the first few iterations).<br />All the best,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: can abinit do an all-electron calculation?</h3>
+				<div class="date">Posted: <strong>Thu Dec 06, 2018 3:39 am</strong></div>
+				<div class="author">by <strong>onion2440</strong></div>
+				<div class="content"><blockquote><div><cite>ebousquet wrote:</cite>Dear onion2440,<br />If you don't give more details about your system, it'll be hard to reply to you.<br />You could have to initialize the spinat to a much larger value than the target one, you can also increase nline and increase nnsclo to 2 (thought this will make much slower calculations, then you can set that for the first few iterations).<br />All the best,<br />Eric</div></blockquote><br /><br />sorry for reply you later.<br />I will try it with your suggestions and will show you the results if the calculations are done.<br />The system is perovskite with an iron atom in it.  Maybe you know that correctly predict the magnetic moments for iron is difficult for DFT codes, it's a hard work for me.<br /><br />Thank you four help.<br />Chao Yang.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: can abinit do an all-electron calculation?</h3>
+				<div class="date">Posted: <strong>Mon Dec 10, 2018 1:48 am</strong></div>
+				<div class="author">by <strong>onion2440</strong></div>
+				<div class="content">Dear Eric,<br />    I have tried your suggestions, I set a very large initio magnet moment, and  also increase nline and increase nnsclo to 2.Then do the scf calculation with Abinit. However, the results are still not comparable with the Exp. <br />   Do you know the magnetic ground state problem of HCP ion under high pressure? It's very similar with that.<br /><br />Any way, thank you for your suggestions.<br />Best,<br />Chao Yang</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: can abinit do an all-electron calculation?</h3>
+				<div class="date">Posted: <strong>Fri Dec 14, 2018 4:07 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Chao Yang,<br />Did you use the DFT+U to correct the d-electron self-interaction of Fe?<br />Which perovskite is it? I'm doing magnetic perovskites and so far it was OK for magnetism, thought the amplitude of the moment is often slightly smaller than the experimental one.<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: can abinit do an all-electron calculation?</h3>
+				<div class="date">Posted: <strong>Mon Dec 17, 2018 5:28 am</strong></div>
+				<div class="author">by <strong>onion2440</strong></div>
+				<div class="content">Dear Eric, <br />I'm working on the magnetic perovskite with others. I'm not sure if it is problem to show it out. I'm very sorry for that. If they have any ideas ,I will let you know. By the way, I have used the DFT+U to correct the d-electron self-interaction. <br /><br />Thank  you,<br />Chao Yang</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3985&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:09:40 GMT -->
+</html>

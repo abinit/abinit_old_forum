@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3151&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:16:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Using spgroup in Abinit</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Using spgroup in Abinit</h2>
+		<p><a href="viewtopicee2f.html?f=9&amp;t=3151">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3151</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Using spgroup in Abinit</h3>
+				<div class="date">Posted: <strong>Thu Nov 19, 2015 1:36 pm</strong></div>
+				<div class="author">by <strong>M.Hocine TEDJINI</strong></div>
+				<div class="content">Dear Abinit users  <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /> <br />Hello,<br />i want to start calculation of material but i want to use spgroup without Xred or Rprim;<br />also i read about natrd and brvltt and i try to use that without Xred and Rprim, but calculation don't running Abinit told me it must to put Xred; also i was reading  all question here about spgroup in Abinit forum; So my question is:<br />How to use spgrooup in abinit without Xred and Rprim ( because my problem when i didn't find the primitive vectors &amp; atoms position of some compounds) ?<br />if there is solution by using  PositionsWyckoff in Bilbao Crystallographic Server ( <!-- m --><a class="postlink" href="http://www.cryst.ehu.es/">http://www.cryst.ehu.es/</a><!-- m --> ) ; i want to know it ?<br />thanks a lot all members <br />kind regards!<br /><br />M.Hocine TEDJINI</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Using spgroup in Abinit</h3>
+				<div class="date">Posted: <strong>Thu Nov 19, 2015 3:51 pm</strong></div>
+				<div class="author">by <strong>raul_l</strong></div>
+				<div class="content">Here is an example to get you started. CaWO4 is in space group 88 (tetragonal). If you know rprim and xred, the input can be something like<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>scalecart 2*5.2429 11.3737 angstrom<br />rprim<br />&nbsp;-0.5&nbsp; 0.5&nbsp; 0.5<br />&nbsp; 0.5 -0.5&nbsp; 0.5<br />&nbsp; 0.5&nbsp; 0.5 -0.5<br />ntypat 3<br />znucl&nbsp; 20 74 8<br />natom&nbsp; 12<br />typat&nbsp; 1&nbsp; 2&nbsp; 3&nbsp; 3&nbsp; 1&nbsp; 2&nbsp; 3&nbsp; 3&nbsp; 3&nbsp; 3&nbsp; 3&nbsp; 3<br />xred<br />&nbsp; 5.0000000000E-01&nbsp; 5.0000000000E-01&nbsp; 0.0000000000E+00<br />&nbsp; 0.0000000000E+00&nbsp; 0.0000000000E+00&nbsp; 0.0000000000E+00<br />&nbsp; 2.3630000000E-01&nbsp; 3.2700000000E-01&nbsp; 3.9210000000E-01<br />&nbsp; 9.3490000000E-01&nbsp; 8.4420000000E-01&nbsp; 6.0790000000E-01<br />&nbsp; 2.5000000000E-01&nbsp; 7.5000000000E-01&nbsp; 5.0000000000E-01<br />&nbsp; 7.5000000000E-01&nbsp; 2.5000000000E-01&nbsp; 5.0000000000E-01<br />&nbsp; 7.7000000000E-02&nbsp; 1.8490000000E-01&nbsp; 5.9070000000E-01<br />&nbsp; 5.9420000000E-01&nbsp; 4.8630000000E-01&nbsp; 4.0930000000E-01<br />&nbsp; 5.1370000000E-01&nbsp; 9.2300000000E-01&nbsp; 1.0790000000E-01<br />&nbsp; 8.1510000000E-01&nbsp; 4.0580000000E-01&nbsp; 8.9210000000E-01<br />&nbsp; 6.7300000000E-01&nbsp; 6.5100000000E-02&nbsp; 9.0930000000E-01<br />&nbsp; 1.5580000000E-01&nbsp; 7.6370000000E-01&nbsp; 9.0700000000E-02<br /></code></pre></div><br />If you wanted to use space group information, the input can be<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>spgroup&nbsp; &nbsp;88<br />brvltt&nbsp; &nbsp;-1<br />scalecart 2*5.2429 11.3737 angstrom<br />ntypat&nbsp; &nbsp; 3<br />znucl&nbsp; &nbsp; &nbsp;20 74 8<br />natom&nbsp; &nbsp; &nbsp;12<br />natrd&nbsp; &nbsp; &nbsp;3<br />typat&nbsp; &nbsp; &nbsp;1 2 3<br />xred<br />&nbsp;0 0 0.5<br />&nbsp;0 0 0<br />&nbsp;0.2414 0.1507 0.0856<br /></code></pre></div><br />Note that you need to know the reduced coordinates of at least some atoms, i.e., typat and xred must always be present. Spacegroup alone is not enough to uniquely identify the material.<br />Also, If you used the second option, I suggest to copy rprim from the log file into the input file and use that instead. I've found spgroup and brvltt not to work in some circumstances, such as when using spinors.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Using spgroup in Abinit</h3>
+				<div class="date">Posted: <strong>Sun Nov 22, 2015 3:06 pm</strong></div>
+				<div class="author">by <strong>M.Hocine TEDJINI</strong></div>
+				<div class="content">Dear Mr raul_l,<br />thanks a lot for your reply;<br />Firstly, I understand all your input variables in your input but in your example i compared your values of this Material CaOZ4 with values in Materials project website ( see this link <!-- m --><a class="postlink" href="https://www.materialsproject.org/materials/mp-19426/">https://www.materialsproject.org/materials/mp-19426/</a><!-- m --> ) i think there are not a same why ?, also about scalecart 2*5.2429 11.3737 angstrom ( i think 5.2429 it's mean value of acell &quot; lattice parameter&quot;) but i didn't understand why you multiple in 2; and the value of 11.3737 ?<br />for typat i think it's 1 2 3 3 3 3 not like what do you put &quot; typat  1  2  3  3  1  2  3  3  3  3  3  3 &quot; ? if yes why ?<br />finally  in second option i didn't understand how you generate this values of xred :<br />xred<br /> 0 0 0.5<br /> 0 0 0<br /> 0.2414 0.1507 0.0856<br /><br />kind regads!<br /><br />M.Hocine TEDJINI</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Using spgroup in Abinit</h3>
+				<div class="date">Posted: <strong>Mon Nov 23, 2015 11:06 pm</strong></div>
+				<div class="author">by <strong>raul_l</strong></div>
+				<div class="content">I can't log in to the website that you posted and am thus unable to comment on the differences in the lattice constants. Perhaps they used a different reference. &quot;2*5.2429&quot; is short for &quot;5.2429 5.2429&quot;, meaning that that line is parsed into <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;scalecart 5.2429 5.2429 11.3737 angstrom</code></pre></div> by abinit. The numbers following typat can be in any order as long as they are coherent with xred. As for xred, I took those numbers from PRB <strong class="text-strong">57</strong>, 12 738 (1998). For this particular system, the minimum one should specify are the position of a Ca, W, and O atom. natrd can in principle be greater than 3, but here that would be redundant.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Using spgroup in Abinit</h3>
+				<div class="date">Posted: <strong>Thu Nov 26, 2015 12:18 pm</strong></div>
+				<div class="author">by <strong>M.Hocine TEDJINI</strong></div>
+				<div class="content">dear Mr Raul Laasner,<br />thanks for reply <br />for the website, it's easy to log it by google+ or mail like yahoo or by facebook, it's must to log it by this if you want to use this website  ( <!-- m --><a class="postlink" href="https://www.materialsproject.org/materials/mp-19426/">https://www.materialsproject.org/materials/mp-19426/</a><!-- m --> ),<br />other way i still don't understand scalecart, what's does mean this values ?? : <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;scalecart 5.2429 5.2429 11.3737 angstrom </code></pre></div><br /><br />thanks a lot <br />kind regards!<br /><br />M.Hocine TEDJINI</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Using spgroup in Abinit</h3>
+				<div class="date">Posted: <strong>Thu Nov 26, 2015 2:59 pm</strong></div>
+				<div class="author">by <strong>raul_l</strong></div>
+				<div class="content">These are the scaling factors for the Cartesian coordinates, which also serve as lattice constants for this system. Instead of writing <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>scalecart 2*5.2429 11.3737 angstrom<br />rprim<br />&nbsp;-0.5&nbsp; 0.5&nbsp; 0.5<br />&nbsp; 0.5 -0.5&nbsp; 0.5<br />&nbsp; 0.5&nbsp; 0.5 -0.5</code></pre></div><br />you could also write<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>rprim<br />&nbsp;-4.95382&nbsp; 4.95382&nbsp; 10.7466<br />&nbsp; 4.95382 -4.95382&nbsp; 10.7466<br />&nbsp; 4.95382&nbsp; 4.95382 -10.7466</code></pre></div><br />Notice that rprim is given in units of bohr and thererefore the conversion from Å must be performed first. See the documentation for rprim, acell, and scalecart.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Using spgroup in Abinit</h3>
+				<div class="date">Posted: <strong>Mon Nov 30, 2015 12:55 pm</strong></div>
+				<div class="author">by <strong>M.Hocine TEDJINI</strong></div>
+				<div class="content">thanks A lot again, <br />Now I understood that; thanks <br />so how about Xred in 2nd option? <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>spgroup&nbsp; &nbsp;88<br />brvltt&nbsp; &nbsp;-1<br />scalecart 2*5.2429 11.3737 angstrom<br />ntypat&nbsp; &nbsp; 3<br />znucl&nbsp; &nbsp; &nbsp;20 74 8<br />natom&nbsp; &nbsp; &nbsp;12<br />natrd&nbsp; &nbsp; &nbsp;3<br />typat&nbsp; &nbsp; &nbsp;1 2 3<br />xred<br />&nbsp;0 0 0.5<br />&nbsp;0 0 0<br />&nbsp;0.2414 0.1507 0.0856<br /></code></pre></div><br /><br />Kind regards!<br /><br />M.Hocine TEDJINI</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Using spgroup in Abinit</h3>
+				<div class="date">Posted: <strong>Sat Dec 12, 2015 5:04 am</strong></div>
+				<div class="author">by <strong>raul_l</strong></div>
+				<div class="content"><blockquote><div><cite>M.Hocine TEDJINI wrote:</cite>so how about Xred in 2nd option?</div></blockquote><br />In the caption of Table I in the referenced paper, the A, B, and O atoms (Ca, W, and O in this case) are given the coordinates (0,1/4,5/8), (0,1/4,1/8), and (x,y,z). Using the alternative origin or coordinates, as mentioned in the text, you get the numbers that are supplied to xred. This choice is not unique and is a matter of preference.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Using spgroup in Abinit</h3>
+				<div class="date">Posted: <strong>Tue Jan 19, 2016 3:00 pm</strong></div>
+				<div class="author">by <strong>kongkkk</strong></div>
+				<div class="content"><blockquote><div><cite>raul_l wrote:</cite>Here is an example to get you started. CaWO4 is in space group 88 (tetragonal). If you know rprim and xred, the input can be something like<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>scalecart 2*5.2429 11.3737 angstrom<br />rprim<br />&nbsp;-0.5&nbsp; 0.5&nbsp; 0.5<br />&nbsp; 0.5 -0.5&nbsp; 0.5<br />&nbsp; 0.5&nbsp; 0.5 -0.5<br />ntypat 3<br />znucl&nbsp; 20 74 8<br />natom&nbsp; 12<br />typat&nbsp; 1&nbsp; 2&nbsp; 3&nbsp; 3&nbsp; 1&nbsp; 2&nbsp; 3&nbsp; 3&nbsp; 3&nbsp; 3&nbsp; 3&nbsp; 3<br />xred<br />&nbsp; 5.0000000000E-01&nbsp; 5.0000000000E-01&nbsp; 0.0000000000E+00<br />&nbsp; 0.0000000000E+00&nbsp; 0.0000000000E+00&nbsp; 0.0000000000E+00<br />&nbsp; 2.3630000000E-01&nbsp; 3.2700000000E-01&nbsp; 3.9210000000E-01<br />&nbsp; 9.3490000000E-01&nbsp; 8.4420000000E-01&nbsp; 6.0790000000E-01<br />&nbsp; 2.5000000000E-01&nbsp; 7.5000000000E-01&nbsp; 5.0000000000E-01<br />&nbsp; 7.5000000000E-01&nbsp; 2.5000000000E-01&nbsp; 5.0000000000E-01<br />&nbsp; 7.7000000000E-02&nbsp; 1.8490000000E-01&nbsp; 5.9070000000E-01<br />&nbsp; 5.9420000000E-01&nbsp; 4.8630000000E-01&nbsp; 4.0930000000E-01<br />&nbsp; 5.1370000000E-01&nbsp; 9.2300000000E-01&nbsp; 1.0790000000E-01<br />&nbsp; 8.1510000000E-01&nbsp; 4.0580000000E-01&nbsp; 8.9210000000E-01<br />&nbsp; 6.7300000000E-01&nbsp; 6.5100000000E-02&nbsp; 9.0930000000E-01<br />&nbsp; 1.5580000000E-01&nbsp; 7.6370000000E-01&nbsp; 9.0700000000E-02<br /></code></pre></div><br />If you wanted to use space group information, the input can be<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>spgroup&nbsp; &nbsp;88<br />brvltt&nbsp; &nbsp;-1<br />scalecart 2*5.2429 11.3737 angstrom<br />ntypat&nbsp; &nbsp; 3<br />znucl&nbsp; &nbsp; &nbsp;20 74 8<br />natom&nbsp; &nbsp; &nbsp;12<br />natrd&nbsp; &nbsp; &nbsp;3<br />typat&nbsp; &nbsp; &nbsp;1 2 3<br />xred<br />&nbsp;0 0 0.5<br />&nbsp;0 0 0<br />&nbsp;0.2414 0.1507 0.0856<br /></code></pre></div><br />Note that you need to know the reduced coordinates of at least some atoms, i.e., typat and xred must always be present. Spacegroup alone is not enough to uniquely identify the material.<br />Also, If you used the second option, I suggest to copy rprim from the log file into the input file and use that instead. I've found spgroup and brvltt not to work in some circumstances, such as when using spinors.</div></blockquote><br />Dear Mr raul_l,<br />Here you mentioned that &quot; I've found spgroup and brvltt not to work in some circumstances, such as when using spinors.&quot;. Would you notice that &quot;spinors&quot; changes the spgroup to be another one.Just like the trouble   I meet today.<!-- l --><a class="postlink-local" href="viewtopicde25.html?f=8&amp;t=3181">viewtopic.php?f=8&amp;t=3181</a><!-- l --><br />Would you mind giving me a hand! Thank you very much!!!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Using spgroup in Abinit</h3>
+				<div class="date">Posted: <strong>Mon Feb 01, 2016 3:01 am</strong></div>
+				<div class="author">by <strong>raul_l</strong></div>
+				<div class="content"><blockquote><div><cite>kongkkk wrote:</cite>Would you notice that &quot;spinors&quot; changes the spgroup to be another one.</div></blockquote><br />I don't remember the details anymore, unfortunately. It wasn't anything obvious like changing the spgroup. Instead, I got a segfault in the middle of the calculation for no reason, and this only happened to some systems. Maybe it's fixed by now.<br />P.S. If the OP is happy with the replies, this thread can marked Solved.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3151&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:16:34 GMT -->
+</html>

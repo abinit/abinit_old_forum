@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=482&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:33:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; error response of makemake</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>error response of makemake</h2>
+		<p><a href="viewtopicfffa.html?f=3&amp;t=482">https://forum.abinit.org/viewtopic.php?f=3&amp;t=482</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>error response of makemake</h3>
+				<div class="date">Posted: <strong>Fri Jul 09, 2010 2:50 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Hi, in my 6.3.0-private branch, after merging trunk/6.3.0-public and solving the three minor conflicts, makemake fails with:<br /><br /><br />... various abilint outputs successful, not copied here...<br /><br />Autotools framework (for Autoconf)<br />----------------------------------<br /><br />BEGIN<br /> * Generating aclocal.m4...done.<br /> * Generating config.h.in...done.<br /> * Generating configure script...done.<br /> * Generating Makefile.in for each directory:<br /> * All done.<br />END<br /><br />Branch parameters<br />-----------------<br /><br />BEGIN<br /> * BN: 6.3.0-private BR: 6.3.0-private BS: 6.3.0-private<br /> * B: 6.3.0 C: 6.3.0<br /> * branch revision: 6.3.0-private<br /> * branch has uncommitted changes<br />END<br /><br />test: 341: test: unexpected operator<br /><br />-- <br />Time elapsed : 68s<br /><br /><br />but I have no uncommitted changes, I don't know how to continue. Any suggestions?<br /><br />thanks,<br />Joe</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: error response of makemake&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Tue Jul 13, 2010 5:33 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Hi, I've just found and fixed the two bugs in makemake causing the problems. The fix is contained in my 6.3.0-public branch. The problems were:<br /><br />lines 213 and 214, awk should use print $2 and print $3 respectively, to get the correct information out of ${branch_info}<br /><br />lines 329 and 330: test on multiple conditions with -a had the wrong syntax (word &quot;test&quot; was repeated for the second condition).<br /><br />Joe</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=482&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:33:15 GMT -->
+</html>

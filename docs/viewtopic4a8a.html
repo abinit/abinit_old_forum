@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=5377&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 13:49:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; no k-resolved spectral function as in DMFT tutorial</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>no k-resolved spectral function as in DMFT tutorial</h2>
+		<p><a href="viewtopic6d65.html?f=11&amp;t=5377">https://forum.abinit.org/viewtopic.php?f=11&amp;t=5377</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>no k-resolved spectral function as in DMFT tutorial</h3>
+				<div class="date">Posted: <strong>Tue May 04, 2021 8:53 pm</strong></div>
+				<div class="author">by <strong>antonio</strong></div>
+				<div class="content">Dear all,<br>
+I use the version 9.4.0 of abinit. I have an issue in generating the k-resolved spectral function as in section 7 of the tutorial<br>
+ <br>
+<a href="https://docs.abinit.org/tutorial/dmft/#7-electronic-structure-of-srvo3-k-resolved-spectral-function" class="postlink">https://docs.abinit.org/tutorial/dmft/# ... l-function</a><br>
+<br>
+Despite I follow all the steps as described in the page, I don't get any file <br>
+<br>
+tdmft_5o_DS3_DFTDMFT_SpectralFunction_kresolved_from_realaxisself<br>
+<br>
+and the calculation ends normally. Please, attached you find the log_5_DS3 and the tdmft_5.abo files for more information - I renamed them as *.in because the page was forbidding any attachment with extensions like txt, dat, log...<br>
+Thanks a lot in advance for your help!<br>
+<br>
+Antonio</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: no k-resolved spectral function as in DMFT tutorial&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Tue Jun 01, 2021 4:16 pm</strong></div>
+				<div class="author">by <strong>amadon</strong></div>
+				<div class="content">Dear Antonio,<br>
+<br>
+Thanks for your message.<br>
+The error comes from a bug that has been added in the source file.<br>
+You have to comment the line "dtset%usedmft=0" in m_invars2.F90 such that you have (around line 3605):
+<blockquote class="uncited"><div>
+     if (dtset%nbandkss /= 0 .and. dtset%usedmft/=0) then<br>
+       dtset%plowan_compute=1<br>
+       !dtset%usedmft=0<br>
+     else if (dtset%optdriver==3) then<br>
+       dtset%plowan_compute=10<br>
+     else if(dtset%optdriver==4) then</div></blockquote>
+
+With this correction, the file tdmft_5o_DS3_DFTDMFT_SpectralFunction_kresolved_from_realaxisself is written and<br>
+the k resolved band structure can be plotted.<br>
+<br>
+Next ABINIT version will include the bug correction.<br>
+Best regards<br>
+Bernard</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: no k-resolved spectral function as in DMFT tutorial</h3>
+				<div class="date">Posted: <strong>Wed Jun 02, 2021 11:47 pm</strong></div>
+				<div class="author">by <strong>antonio</strong></div>
+				<div class="content">Dear Bernard,<br>
+now it works. Thanks a lot for the help!<br>
+<br>
+All the best<br>
+<br>
+Antonio</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=5377&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 13:49:51 GMT -->
+</html>

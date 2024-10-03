@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=147&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:48:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; MgO &amp; CaO pseudotentials</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>MgO &amp; CaO pseudotentials</h2>
+		<p><a href="viewtopic1f70.html?f=14&amp;t=147">https://forum.abinit.org/viewtopic.php?f=14&amp;t=147</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>MgO &amp; CaO pseudotentials</h3>
+				<div class="date">Posted: <strong>Thu Mar 18, 2010 1:48 pm</strong></div>
+				<div class="author">by <strong>Thomas</strong></div>
+				<div class="content">Hello,<br />I'm a beginner in the use of Abinit for quantum chemistry calculations. I wanted to start with the &quot;simple&quot; case of the MgO structure (Fm3m). I'm performing the calculations in the PAW mode, with the GGA-made pseudopotentials given on the website. Strange thing is that, these pseudopotentials are made to be used (or have been tested) in the case of a MgO (great for me so!), but with performing the optimization of the cell, it's giving me an error message about the overlap of densities of the order of 27% (overlap usually accepted is less than 5%). Is that normal?<br />In a second time if I'm launching the calculations, putting an overlap acceptance of more than 27% (which seems to be dangerous, because of possible inaccuracy of the results), I'm finding a cell size (acell) of 2.977 Bohr (instead of around 4.2, like used at the beginning).<br /><br />Are there any corrections to give to the pseudopotential file ?<br /><br />I'm also trying to do the same type of calculations for the CaO crystal (same structure, Fm3m), and I have to build, this time, the pseudopotential. Any advices?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MgO &amp; CaO pseudotentials</h3>
+				<div class="date">Posted: <strong>Sun Mar 21, 2010 7:23 pm</strong></div>
+				<div class="author">by <strong>iangay</strong></div>
+				<div class="content">4.2 Angstrom (not Bohr) is the conventional (fcc) unit cell dimension for MgO.<br />2.97A is about right for the primitive (rhombohedral) unit cell.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MgO &amp; CaO pseudotentials</h3>
+				<div class="date">Posted: <strong>Mon Mar 22, 2010 10:31 am</strong></div>
+				<div class="author">by <strong>Thomas</strong></div>
+				<div class="content">Hum... I see. I've just made one of the most stupid mistake of my life... This way, the overlap totally disappear, that's the best part.<br />Remains that the lattice parameter obtained is still too small (around 2.99 Angstr) in regards of the value with which we started (4.211 Angstr).<br />Thank you very much for this first big step anyway!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MgO &amp; CaO pseudotentials</h3>
+				<div class="date">Posted: <strong>Fri Mar 26, 2010 1:04 am</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Which PAW sets are you using exactly? My own Mg and O PAW sets with PBE give a lattice constant 2% longer than experiment and a bulk modulus of 150 GPa (rather than 165 GPa). This is fairly typical behavior for PBE.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MgO &amp; CaO pseudotentials</h3>
+				<div class="date">Posted: <strong>Fri Mar 26, 2010 9:06 am</strong></div>
+				<div class="author">by <strong>Thomas</strong></div>
+				<div class="content">I'm actually using the PAW pseudopotentiels given here :<br /><a href="http://www.wfu.edu/~natalie/papers/pwpaw/periodictable/periodictable.html" class="postlink">http://www.wfu.edu/~natalie/papers/pwpaw/periodictable/periodictable.html</a>, with the GGA form.<br />I've also tried to create my own pseudopotentials with Atompaw. For example for the Mg, I've created a pseudo like that :<br />-Valence electrons : 3s orbitals<br />- lmax = 0<br />- Critical radius rc = 2.67 Bohr (the covalent radius of the atom)<br />- with a pseudization based on the following processes : &quot;custom RRKJ&quot; and &quot;bessel&quot;. <br />- and two basis set wavefunctions (limited with the same critical radius)<br /><br />With my input file, I'm having the same problem, meaning that the cell is contracting too much, whatever are the pseudopotentials used.<br /><br />Edit : Isn't that strange to find a lattice parameter of 2% longer in regards of experimental results, as this calculations are made theoritically at 0K ? (so the cell should contract, not extend)</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MgO &amp; CaO pseudotentials</h3>
+				<div class="date">Posted: <strong>Mon Jul 26, 2010 5:30 am</strong></div>
+				<div class="author">by <strong>vimtex</strong></div>
+				<div class="content"><blockquote><div><cite>Thomas wrote:</cite>I'm actually using the PAW pseudopotentiels given here :<br /><a href="http://www.wfu.edu/~natalie/papers/pwpaw/periodictable/periodictable.html" class="postlink">http://www.wfu.edu/~natalie/papers/pwpaw/periodictable/periodictable.html</a>, with the GGA form.<br />I've also tried to create my own pseudopotentials with Atompaw. For example for the Mg, I've created a pseudo like that :<br />-Valence electrons : 3s orbitals<br />- lmax = 0<br />- Critical radius rc = 2.67 Bohr (the covalent radius of the atom)<br />- with a pseudization based on the following processes : &quot;custom RRKJ&quot; and &quot;bessel&quot;. <br />- and two basis set wavefunctions (limited with the same critical radius)<br /><br />With my input file, I'm having the same problem, meaning that the cell is contracting too much, whatever are the pseudopotentials used.<br /><br />Edit : Isn't that strange to find a lattice parameter of 2% longer in regards of experimental results, as this calculations are made theoritically at 0K ? (so the cell should contract, not extend)</div></blockquote><br /><br />In the same site, there is the result for MgO using their Mg and O PAW GGA PP. <br /><!-- m --><a class="postlink" href="http://www.wfu.edu/~natalie/papers/pwpaw/periodictable/atoms/MgO/MgO_GGA_plot.png">http://www.wfu.edu/~natalie/papers/pwpa ... A_plot.png</a><!-- m --></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=147&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:48:35 GMT -->
+</html>

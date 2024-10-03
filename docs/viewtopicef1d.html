@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=2955&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:58:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Could use some flush statements with gfortran</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Could use some flush statements with gfortran</h2>
+		<p><a href="viewtopic08b7.html?f=19&amp;t=2955">https://forum.abinit.org/viewtopic.php?f=19&amp;t=2955</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Could use some flush statements with gfortran</h3>
+				<div class="date">Posted: <strong>Tue Mar 31, 2015 12:52 pm</strong></div>
+				<div class="author">by <strong>raul_l</strong></div>
+				<div class="content">If I compile with the GNU compiler, then the 'out' file is not updated after each iteration when performing a scf calculation. After the printing of<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>chkinp: Checking input parameters for consistency.</code></pre></div><br />it prints nothing else until the calculation has finished. I can still use the log file, which is constantly updated, for checking the progress, but it would be more convenient to use the 'out' file. This is in contrast to the Intel compiler, which allows me to see information such as<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp; &nbsp; &nbsp;iter&nbsp; &nbsp;Etot(hartree)&nbsp; &nbsp; &nbsp; deltaE(h)&nbsp; residm&nbsp; &nbsp; &nbsp;vres2<br />&nbsp;ETOT&nbsp; 1&nbsp; -230.11851422961&nbsp; &nbsp; -2.301E+02 1.733E-01 8.238E+03<br />&nbsp;ETOT&nbsp; 2&nbsp; -230.26281844625&nbsp; &nbsp; -1.443E-01 1.458E-03 7.966E+03<br />...</code></pre></div><br />as the calculation is running. One way to fix this would be<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--- 67_common/scprqt.F90.bak&nbsp; &nbsp;2015-03-27 14:34:38.365438943 +0200<br />+++ 67_common/scprqt.F90&nbsp; &nbsp;2015-03-27 14:34:41.768772175 +0200<br />@@ -754,6 +754,8 @@<br />&nbsp; &nbsp; end if<br />&nbsp; end if<br />&nbsp;<br />+ call flush()<br />+ <br />&nbsp; DBG_EXIT(&quot;COLL&quot;)<br />&nbsp;<br />&nbsp; contains </code></pre></div><br />but perhaps the devs know of a better solution (I'm not so familiar with the code).</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Could use some flush statements with gfortran&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Thu Apr 02, 2015 10:02 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Your requestion has been taken into account.<br />It will be present in the next releases.<br /><br />Jordan</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=2955&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:58:18 GMT -->
+</html>

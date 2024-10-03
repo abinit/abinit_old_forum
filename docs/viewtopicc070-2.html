@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1787&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:43:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; &quot;Subroutine Unknown&quot; and bad results for elastic calculation</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>&quot;Subroutine Unknown&quot; and bad results for elastic calculation</h2>
+		<p><a href="viewtopicae7d.html?f=10&amp;t=1787">https://forum.abinit.org/viewtopic.php?f=10&amp;t=1787</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>&quot;Subroutine Unknown&quot; and bad results for elastic calculation</h3>
+				<div class="date">Posted: <strong>Fri Aug 03, 2012 4:34 am</strong></div>
+				<div class="author">by <strong>vistawanted</strong></div>
+				<div class="content">Dear all:<br />Hi.<br />I am trying to calculate elastic constants via response method in Abinit 6.12.3, which compiled by ifort in CentOS 6.3 with MKL (Blas+Lapack+FFTW3), the version of ifort is as:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>ifort -V<br />Intel(R) Fortran Intel(R) 64 Compiler XE for applications running on Intel(R) 64, Version 12.1.3.293 Build 20120212<br />Copyright (C) 1985-2012 Intel Corporation.&nbsp; All rights reserved.<br />FOR NON-COMMERCIAL USE ONLY<br /></code></pre></div><br />I have tried the example for AlAs, which gives reasonable results. But, when I calculated TiC <span style="color: blue">(Fm-3m, or, NaCl structure. Conductor)</span>, the warning occurred as in the DATASET 2, corresponding to the DDK calculation:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;ETOT&nbsp; 5&nbsp; -698.43961312179&nbsp; &nbsp; &nbsp;-4.801E-04 1.939E-02 0.000E+00<br /><br />&nbsp;Subroutine Unknown:0:WARNING<br />&nbsp; &nbsp;New trial energy at line&nbsp; &nbsp; &nbsp; &nbsp;4 =&nbsp; -1.142031E+03<br />&nbsp; &nbsp; &nbsp;is higher than former: -1.142031E+03<br /></code></pre></div><br />Such a warning kept appearing, although the calculation can be finished. But, after the calculation, I cannot get the elastic properties from anaddb analyzing, the constants are shown as:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>.Version 6.12.3 of ANADDB <br />.(MPI version, prepared for a x86_64_linux_intel12.1 computer) <br />......<br />&nbsp;Elastic Tensor (clamped ion) (unit:10^2GP):<br /><br />************************************&nbsp; &nbsp;0.0022444&nbsp; -0.0003354&nbsp; -0.0059745<br />************************************&nbsp; &nbsp;0.0058939&nbsp; -0.0000122&nbsp; -0.0059745<br />************************************&nbsp; &nbsp;0.0058940&nbsp; -0.0003354&nbsp; -0.0021273<br />&nbsp; &nbsp;0.0000000&nbsp; &nbsp;0.0000000&nbsp; &nbsp;0.0000000************&nbsp; &nbsp;0.0000000&nbsp; &nbsp;0.0000000<br />&nbsp; &nbsp;0.0000000&nbsp; &nbsp;0.0000000&nbsp; &nbsp;0.0000000&nbsp; &nbsp;0.0000000************&nbsp; &nbsp;0.0000000<br />&nbsp; &nbsp;0.0000000&nbsp; &nbsp;0.0000000&nbsp; &nbsp;0.0000000&nbsp; &nbsp;0.0000000&nbsp; &nbsp;0.0000000************<br /></code></pre></div><br />My input file is:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>ndtset&nbsp; 3<br /><br /># GS calculation<br />iscf1&nbsp; 7<br />kptopt1&nbsp; 1<br />tolvrs1&nbsp; 1.0d-18<br /><br /># DDK Calculation for Wavefunctions<br />getwfk2&nbsp; -1<br />iscf2&nbsp; -3<br />kptopt2&nbsp; 2<br />nqpt2&nbsp; 1<br />qpt2&nbsp; 0&nbsp; 0&nbsp; 0<br />rfelfd2&nbsp; 2<br />rfdir2&nbsp; 1&nbsp; 1&nbsp; 1<br />tolwfr2&nbsp; 1.0d-20<br /><br /># Linear Lesponse for Perturabtions<br />getddk3&nbsp; -1<br />getwfk3&nbsp; -2<br />iscf3&nbsp; 7<br />kptopt3&nbsp; 2<br />nqpt3&nbsp; 1<br />qpt3&nbsp; 0&nbsp; 0&nbsp; 0<br />rfphon3&nbsp; 1<br />rfatpol3&nbsp; 1&nbsp; 2<br />rfstrs3&nbsp; 3<br />rfdir3&nbsp; 1&nbsp; 1&nbsp; 1<br />tolvrs3&nbsp; 1.0d-10<br /><br /># General Parameters<br />acell&nbsp; 3*8.254628275<br />ntypat&nbsp; 2<br />znucl&nbsp; 22&nbsp; 6<br />natom&nbsp; 2<br />typat&nbsp; 1&nbsp; 2<br />rprim<br />&nbsp; &nbsp;0.0&nbsp; 0.5&nbsp; 0.5<br />&nbsp; &nbsp;0.5&nbsp; 0.0&nbsp; 0.5<br />&nbsp; &nbsp;0.5&nbsp; 0.5&nbsp; 0.0<br />xred<br />&nbsp; &nbsp;0.0&nbsp; 0.0&nbsp; 0.0<br />&nbsp; &nbsp;0.5&nbsp; 0.5&nbsp; 0.5<br />nband&nbsp; 13<br />ecut&nbsp; 45<br />ecutsm&nbsp; 0.01<br />occopt&nbsp; 4<br />tsmear&nbsp; 0.01<br />kptopt&nbsp; 1<br />ngkpt&nbsp; 13&nbsp; 13&nbsp; 13<br />nshiftk&nbsp; 4<br />shiftk<br />&nbsp; &nbsp;0.5&nbsp; 0.0&nbsp; 0.0<br />&nbsp; &nbsp;0.0&nbsp; 0.5&nbsp; 0.0<br />&nbsp; &nbsp;0.0&nbsp; 0.0&nbsp; 0.5<br />&nbsp; &nbsp;0.5&nbsp; 0.5&nbsp; 0.5<br />nstep&nbsp; 100<br />iscf&nbsp; 7<br />diemac&nbsp; 5.0<br />optforces&nbsp; 1<br /></code></pre></div><br />The pseudo-potentials I was used is, Ti:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Goedecker pseudopotential for Ti<br />&nbsp; &nbsp;22&nbsp; 12&nbsp; 070301 zatom,zion,pspdat<br />10 11&nbsp; 2 2 2001 0&nbsp; pspcod,pspxc,lmax,lloc,mmax,r2well<br />&nbsp; &nbsp; &nbsp;0.38000000&nbsp; &nbsp; 2&nbsp; &nbsp; &nbsp;8.71144218&nbsp; &nbsp; -0.70028677&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; rloc nloc c1 c2<br />&nbsp; &nbsp; 3&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;nnonloc<br />&nbsp; &nbsp; &nbsp;0.33777078&nbsp; &nbsp; 2&nbsp; &nbsp; &nbsp;2.57526386&nbsp; &nbsp; &nbsp;3.69297065&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; rs ns hs11 hs12<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-4.76760461&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;hs22<br />&nbsp; &nbsp; &nbsp;0.24253135&nbsp; &nbsp; 2&nbsp; &nbsp; -4.63054123&nbsp; &nbsp; &nbsp;8.87087502&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; rp np hp11 hp12<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -10.49616087&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;hp22<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.20121752&nbsp; &nbsp; -0.06088315&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; kp11 kp12<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.07203791&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;kp22<br />&nbsp; &nbsp; &nbsp;0.24331694&nbsp; &nbsp; 1&nbsp; &nbsp; -9.40665268&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;rd nd hd11<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.00584456&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;kd11<br /></code></pre></div><br />carbon:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Goedecker pseudopotential for C<br />&nbsp; &nbsp; 6&nbsp; &nbsp;4&nbsp; 070301 zatom,zion,pspdat<br />10 11&nbsp; 1 2 2001 0&nbsp; pspcod,pspxc,lmax,lloc,mmax,r2well<br />&nbsp; &nbsp; &nbsp;0.33847124&nbsp; &nbsp; 2&nbsp; &nbsp; -8.80367398&nbsp; &nbsp; &nbsp;1.33921085&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; rloc nloc c1 c2<br />&nbsp; &nbsp; 2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;nnonloc<br />&nbsp; &nbsp; &nbsp;0.30257575&nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp;9.62248665&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;rs ns hs11<br />&nbsp; &nbsp; &nbsp;0.29150694&nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp;0.00000000&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;rp np hp11<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.00207319&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;kp11<br /></code></pre></div><br />Would any one kindly give me some hint to solve this problem?<br />Thanks a lot.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: &quot;Subroutine Unknown&quot; and bad results for elastic calcula</h3>
+				<div class="date">Posted: <strong>Fri Aug 03, 2012 3:40 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Take out the DDK perturbation (rfelfd 2) and the electric field (rfelfd 3) and re-try. Because your system is a conductor, the electric field perturbation is irrelevant and should fail, and the DDK is an auxiliary to this and should also (if I remember correctly) fail for a conductor. Phonons and strain should be ok. One of the tutorials is explicitly for elastic properties of a metal, be sure to read it and follow the recommendations. Also, by the way, I notice you have diemac set to 5.0, this is a preconditioning value that is appropriate for an insulator, not a metal; the default value of diemac is good for a metal so I'd comment out the diemac line (it might help things converge faster).</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: &quot;Subroutine Unknown&quot; and bad results for elastic calcula</h3>
+				<div class="date">Posted: <strong>Sat Aug 04, 2012 1:07 pm</strong></div>
+				<div class="author">by <strong>vistawanted</strong></div>
+				<div class="content">Dear jzwanzig:<br />Thank you for your reply. I am sorry I haven't realized there is an example for metal before your post.<br />I have tried two ways to find the elastic constants:<br />1, GS -&gt; Converge unoccupied wfc -&gt; Response Function ( Similar as the example)<br />2, GS -&gt; Response Function<br />Both of them provides same results and a bit far from the experimental results:<br />--------------C11------C12-----C44 (GPa)<br />Abinit------564-------145------198<br />Exp---------500-------100------180<br />I think this is okey since I used low cut-off energy and rough k-mesh.<br />But, I think it is valuable to point out, these elastic properties data were obtained from the PBE-FHI pseudo-potential. GTH and HGH pseudo-potentials work very bad in this situation - the calculated elastice constants were higher than several thousands ......  <img class="smilies" src="images/smilies/icon_eek.gif" alt=":shock:" title="Shocked" /></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: &quot;Subroutine Unknown&quot; and bad results for elastic calcula</h3>
+				<div class="date">Posted: <strong>Sat Aug 04, 2012 3:30 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">You really should compare the pseudopotential performance only in *converged* calculations. You say that the PBE calculation is not converged (or only roughly converged)--then the HGH and GTH calculations will be much more poorly converged, because these types of pseudopotentials are much harder than TM pseudopotentials. In other words, a converged ecut might be 35 Ha for TM, and 80 for HGH and GTH. So the latter two pseudopotentials are not &quot;worse&quot; than TM, you are just running them under much less converged conditions.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: &quot;Subroutine Unknown&quot; and bad results for elastic calcula</h3>
+				<div class="date">Posted: <strong>Sun Aug 12, 2012 5:38 am</strong></div>
+				<div class="author">by <strong>vistawanted</strong></div>
+				<div class="content"><blockquote><div><cite>jzwanzig wrote:</cite>You really should compare the pseudopotential performance only in *converged* calculations. You say that the PBE calculation is not converged (or only roughly converged)--then the HGH and GTH calculations will be much more poorly converged, because these types of pseudopotentials are much harder than TM pseudopotentials. In other words, a converged ecut might be 35 Ha for TM, and 80 for HGH and GTH. So the latter two pseudopotentials are not &quot;worse&quot; than TM, you are just running them under much less converged conditions.</div></blockquote><br />Thank you very much, jzwanzig.<br />I checked the convergence of GTH in PWscf, they were really harder than normal NCPP......<br />I used other NCPP with reasonable ecut, and finally found the elastic constants with good agreement to experimental results.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1787&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:43:16 GMT -->
+</html>

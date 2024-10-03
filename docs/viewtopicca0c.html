@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=2300&hilit=etsf&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:25:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Question about mkphbs.F90</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Question about mkphbs.F90</h2>
+		<p><a href="viewtopic284e.html?f=19&amp;t=2300">https://forum.abinit.org/viewtopic.php?f=19&amp;t=2300</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Question about mkphbs.F90</h3>
+				<div class="date">Posted: <strong>Sun Oct 06, 2013 2:42 pm</strong></div>
+				<div class="author">by <strong>denis</strong></div>
+				<div class="content">Looks like this code is incorrect copypaste:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#ifdef HAVE_TRIO_ETSF_IO<br />&nbsp;use netcdf<br />! use etsf_io<br />#endif</code></pre></div><br />As a result, I have to compile ABINIT with both netcdf and <span class="posthilit">etsf</span>-io even if I don't need <span class="posthilit">etsf</span>-io support. Most likely correct code should be<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#ifdef HAVE_TRIO_NETCDF<br />&nbsp;use netcdf<br />#endif</code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Question about mkphbs.F90&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Sun Oct 06, 2013 4:47 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">pushed to version 7.5 - will appear in release 7.6<br /><br />There were 1 or 2 other errors in the same file, and probably tons of others in abinit, which confuses netcdf with <span class="posthilit">etsf</span>-io. Usually this is not a problem: <span class="posthilit">etsf</span>-io implies netcdf, and there are almost no bits of code using netcdf without <span class="posthilit">etsf</span>-io...<br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=2300&hilit=etsf&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:25:29 GMT -->
+</html>

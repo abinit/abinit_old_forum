@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1374&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:48:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; tsmear question - convergence</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>tsmear question - convergence</h2>
+		<p><a href="viewtopic829b-3.html?f=9&amp;t=1374">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1374</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>tsmear question - convergence</h3>
+				<div class="date">Posted: <strong>Fri Oct 14, 2011 10:53 pm</strong></div>
+				<div class="author">by <strong>kello</strong></div>
+				<div class="content">Hello:<br /><br />I have been using ABINIT for a while and one of the important aspects that the tutorial suggests is to check the convergence of tsmear. Well, I did it but I don't know if the values are correct or not. I have a Ti-Pt phase with 17 atoms, triclinic structure. I found that a k-grid of 4x4x4 is good if I want to increase de size of the system, ecut=16 Ha. I create a loop to see the tsmear convergence, but the minimum energy is achieved at 0.07 tsmear (png file attached) which is not close to the values suggested by the tutorial &quot;Default is 0.04 Ha. This should be OK for a free-electron metal like Al. For d-band metals, use 0.01 Ha.&quot; <br /><br />am I doing something wrong, maybe I forgot to add an input variable?<br /><br />I will greatly appreciate your help.<br /><br />Karem<br /><br />Code attached:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># Ti4Pt3<br /><br />ndtset 10<br />tsmear: 0.01&nbsp; &nbsp;tsmear+ 0.01<br /><br />#getwfk -1&nbsp; &nbsp; &nbsp; &nbsp; # This is to speed up the calculation, by restarting<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # from previous wavefunctions, transferred from the old <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # to the new k-points.<br /><br />#Definition of occupation numbers<br />occopt 4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; #metallic occupation of levels. Cold smearing of N. Marzari<br />#tsmear 0.07&nbsp; &nbsp; &nbsp; &nbsp;#broadening of the occupation numbers<br /><br />#Definition of the unit cell # triclinic<br />acell&nbsp; 15.1178 15.1178 9.448631<br />angdeg 88 89 120<br />spgroup 1<br /><br />#Definition of the atom types<br />npsp&nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# 2 pseudopotentials<br />ntypat 2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# 2 type of atoms<br />znucl&nbsp; 22 78&nbsp; &nbsp; &nbsp; &nbsp;# The keyword &quot;znucl&quot; refers to the atomic number of the <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# possible type(s) of atom. The pseudopotential(s) <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# mentioned in the &quot;files&quot; file must correspond<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# to the type(s) of atom.<br />nband 200<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />#Definition of the atoms<br />natom 16&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # 16 atoms<br />typat 10*1 6*2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />xred&nbsp; &nbsp;0.333333 0.666667 0.000 #Ti1<br />0.666667 0.333333 0.000<br />0.333333 0.666667 0.500 <br />0.666667 0.333333 0.500 <br />0.236000 0.000000 0.250<br />0.000000 0.236000 0.250 <br />0.236000 0.236000 0.750 <br />0.764000 0.000000 0.750 <br />0.000000 0.764000 0.750 <br />0.764000 0.764000 0.250 <br />0.599500 0.000000 0.250 <br />0.000000 0.599500 0.250 <br />0.599500 0.599500 0.750 <br />0.400500 0.000000 0.750 <br />0.000000 0.400500 0.750 <br />0.400500 0.400500 0.250 <br /><br />#Definition of the k-point grid<br />ngkpt&nbsp; &nbsp;4 4 4&nbsp; &nbsp; &nbsp; &nbsp;# Definition of the different grids<br /><br /><br />#Exchange-correlation functional<br />ixc 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# LDA Teter Pade parametrization<br /><br />#Definition of the planewave basis set<br />ecut&nbsp; 16&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# Maximal kinetic energy cut-off, in Hartree<br /><br />#Definition of the SCF procedure<br />nstep&nbsp; 300&nbsp; &nbsp; &nbsp; &nbsp;# Maximal number of SCF cycles<br />toldfe 1.0d-6&nbsp; &nbsp; # Will stop when, twice in a row, the difference <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# between two consecutive evaluations of total energy <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# differ by less than toldfe (in Hartree) <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# This value is way too large for most realistic studies of materials<br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: tsmear question - convergence</h3>
+				<div class="date">Posted: <strong>Sat Oct 15, 2011 11:21 am</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hello,<br /><br />In fact the combined tsmear/kpoints convergence is used in a different way. You do not want to find the tsmear that minimize the energy. You want to describe your system as close as possible to the fully converged one within a reasonable amount of time. For this you have to increase your k-point grid. The problem is that for metals, as some states are partially occupied, if the electronic distribution function is a step function, you will need MANY k-points to get something reasonably converged. The trick is to add a smearing (with the variable tsmear) to the distribution function so that you can reach convergence with respect to k-points more rapidly.<br /><br />In brief, you should try to have your k-point grid (a very dense one) converged for a very low tsmear (fixed, something like 0.001 Ha or less) (which would correspond to the &quot;real&quot; step function case). This system is the &quot;reference&quot; one. Then you should compare the convergence of the k-point grid with other values of tsmear (higher tsmear : 0.01 0.02 0.04 ....). At k-point convergence, the properties with this tsmear should be within some tolerance of the properties obtained with the very low tsmear.<br /><br />Usually you do this convergence study for your &quot;test&quot; case, for example the pure system. Then you use the k-point/tsmear parameters you found to use it for further studies (if you want to do GW calculations for example, or defects in a supercell -- in this case if you increase the size of the supercell by 2 in each direction for example, do not forget that the k-point grid can be decreased by 2 in each direction).<br /><br /><br />I hope it helps you<br /><br />David</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: tsmear question - convergence</h3>
+				<div class="date">Posted: <strong>Sat Oct 15, 2011 11:02 pm</strong></div>
+				<div class="author">by <strong>kello</strong></div>
+				<div class="content">David:<br /><br />Thank you very much for your answer. Now, I understand better how the convergence study has to be done.<br /><br />Karem</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1374&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:48:58 GMT -->
+</html>

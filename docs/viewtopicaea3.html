@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4122&p=12377 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:09:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Convergence of SCF cycle gets worse and worse - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopicc314.html?t=4122">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="4"><a href="viewforum31e6.html?f=4" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Running Abinit</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="9"><a href="viewforumfdc5.html?f=9" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Ground state</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopic2de3.html?f=9&amp;t=4122">Convergence of SCF cycle gets worse and worse</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Total energy, geometry optimization, DFT+U, spin....<br /></div>
+<p>
+	<strong>Moderator:</strong> <a href="memberlista146.html?mode=viewprofile&amp;u=2687" class="username">bguster</a>
+</p>
+
+
+<div class="action-bar bar-top">
+	
+			<a href="postinge2fb.html?mode=reply&amp;f=9&amp;t=4122" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic57e4.html?f=9&amp;t=4122&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="4122" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			6 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p12374" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile12374">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistc0ec.html?mode=viewprofile&amp;u=1565" class="username">jhr0311</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search20bb.html?author_id=1565&amp;sr=posts">3</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Apr 09, 2015 9:20 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content12374">
+
+						<h3 class="first"><img src="images/icons/misc/thinking.gif" width="16" height="16" alt="" title="" /> <a href="#p12374">Convergence of SCF cycle gets worse and worse</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting87ec.html?mode=quote&amp;f=9&amp;p=12374" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicfdab.html?p=12374#p12374" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistc0ec.html?mode=viewprofile&amp;u=1565" class="username">jhr0311</a></strong> &raquo; </span>Wed Jun 05, 2019 6:53 pm
+			</p>
+			
+			
+			
+			<div class="content">Dear Abiniter, <br /><br />I am calculating the adsorption of molecules on TiC (111) surface using norm-conserving pseudopotentials, and I find the convergence of SCF cycles is getting worse and worse during sturactural optimization. The 1st cycle needs about 50 steps, and the 2nd is about 70 steps. The steps needed are gradually increase and finally the SCF cycle cannot converge at the 5th cycle.  If I redo the structural optimization using the strucutre obtained at the last 5th cycle, the similar tedency reapeats. It seems something accumulates gradually and finally fails the optimization. Does anyone know the reasons and can offer some suggestions? Thanks for your kind help!<br /><br />Bests, <br />JHR</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p12375" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile12375">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlisteb86.html?mode=viewprofile&amp;u=2301" class="username">pomax</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search577b.html?author_id=2301&amp;sr=posts">7</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Jun 05, 2019 5:40 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content12375">
+
+						<h3 ><a href="#p12375">Re: Convergence of SCF cycle gets worse and worse</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting5493.html?mode=quote&amp;f=9&amp;p=12375" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic0c3c.html?p=12375#p12375" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlisteb86.html?mode=viewprofile&amp;u=2301" class="username">pomax</a></strong> &raquo; </span>Wed Jun 05, 2019 7:06 pm
+			</p>
+			
+			
+			
+			<div class="content">Hi jhr0311, <br />What is the value of nband, tsmear and occopt used? I previously had problem with convergence because my nband was too low in a metallic structure.<br /><br />Cordially, Olivier</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p12377" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile12377">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistc0ec.html?mode=viewprofile&amp;u=1565" class="username">jhr0311</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search20bb.html?author_id=1565&amp;sr=posts">3</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Apr 09, 2015 9:20 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content12377">
+
+						<h3 ><a href="#p12377">Re: Convergence of SCF cycle gets worse and worse</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting071f.html?mode=quote&amp;f=9&amp;p=12377" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic008b.html?p=12377#p12377" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistc0ec.html?mode=viewprofile&amp;u=1565" class="username">jhr0311</a></strong> &raquo; </span>Thu Jun 06, 2019 6:40 am
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>pomax wrote:</cite>Hi jhr0311, <br />What is the value of nband, tsmear and occopt used? I previously had problem with convergence because my nband was too low in a metallic structure.<br /><br />Cordially, Olivier</div></blockquote><br /><br />Hi Cordially Olivier,<br /><br />Thanks for your reply and suggestions. I use occopt=7, tsmear=0.04 and defaulted nabnd. Attached is my input parameters. nband may be the critial point and I will increase it to test. <br /><br />In fact, I have encountered convergence issue in Ti-based slab systems for a long time. I tried to  change iprcel, npulayit, nline, occopt, tseamr, diemac and diemix under PAW, but no obvious enhancement was found (maybe I did not find the best value). Then I change to NCPP, the convergence in the first SCF cycles is obviously enhanced but things get worse and worse in the following cycles.<br /><br />ionmov 2 <br />optcell 0<br />tolmxf 6.0d-4<br />ntime 500<br /><br />ngkpt 2 2 1     <br />#ngkpt 4 4 1<br />nshiftk 1<br />shiftk 0.5 0.5 0.5<br /><br />nstep 100<br />#diemac 12<br />diemix 0.1<br />ecut 34<br />toldff 4.0d-5<br /><br />#pawecutdg 50<br />#pawovlp 20<br />iscf 2<br />occopt 7<br />tsmear 0.04<br />#iprcel 45<br />#npulayit 12 <br />#nline 6<br /><br />Thanks and regards,<br />JHR</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p12380" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile12380">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlisteb86.html?mode=viewprofile&amp;u=2301" class="username">pomax</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search577b.html?author_id=2301&amp;sr=posts">7</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Jun 05, 2019 5:40 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content12380">
+
+						<h3 ><a href="#p12380">Re: Convergence of SCF cycle gets worse and worse</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingf20a.html?mode=quote&amp;f=9&amp;p=12380" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicb283.html?p=12380#p12380" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlisteb86.html?mode=viewprofile&amp;u=2301" class="username">pomax</a></strong> &raquo; </span>Thu Jun 06, 2019 4:06 pm
+			</p>
+			
+			
+			
+			<div class="content">This is probably your problem. You will need to increase it when you're working on a metal. The default value is correct for most insulators. The pseudopotential you use will consider two types of electrons : core electron and valence electron. The core electron are considered stable while the valence electron can move and may be located in more than 1 band. If you look into your *.out file and search for zion, there'll be a line looking like this.<br />- Ti    ONCVPSP-3.2.3.1  r_core=   1.35825   1.31050   1.66360<br />- 22.00000  12.00000    170504                znucl, zion, pspdat<br /><br /> zion is the number of valence electron per atom for your pseudopotential. You'll need to add the number of valence electron for each atoms of each element. For example, if you have Ti2C. You'll have 12*2 for Ti + 4*1 for C so 28 valence electron. This mean 14 (28/2) fully occupied band. But, the last bands may be partially occupied so you'll need to add about 10 bands, maybe more. <br /><br />So, nband 24 should be a good parameter for Ti2C. <br />For TiC, nband 18 should be good.<br /><br />Best regards</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p12384" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile12384">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistc0ec.html?mode=viewprofile&amp;u=1565" class="username">jhr0311</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search20bb.html?author_id=1565&amp;sr=posts">3</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Apr 09, 2015 9:20 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content12384">
+
+						<h3 ><a href="#p12384">Re: Convergence of SCF cycle gets worse and worse</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingc0b7.html?mode=quote&amp;f=9&amp;p=12384" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicb2c0.html?p=12384#p12384" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistc0ec.html?mode=viewprofile&amp;u=1565" class="username">jhr0311</a></strong> &raquo; </span>Tue Jun 11, 2019 6:34 am
+			</p>
+			
+			
+			
+			<div class="content"><blockquote><div><cite>pomax wrote:</cite>This is probably your problem. You will need to increase it when you're working on a metal. The default value is correct for most insulators. The pseudopotential you use will consider two types of electrons : core electron and valence electron. The core electron are considered stable while the valence electron can move and may be located in more than 1 band. If you look into your *.out file and search for zion, there'll be a line looking like this.<br />- Ti    ONCVPSP-3.2.3.1  r_core=   1.35825   1.31050   1.66360<br />- 22.00000  12.00000    170504                znucl, zion, pspdat<br /><br /> zion is the number of valence electron per atom for your pseudopotential. You'll need to add the number of valence electron for each atoms of each element. For example, if you have Ti2C. You'll have 12*2 for Ti + 4*1 for C so 28 valence electron. This mean 14 (28/2) fully occupied band. But, the last bands may be partially occupied so you'll need to add about 10 bands, maybe more. <br /><br />So, nband 24 should be a good parameter for Ti2C. <br />For TiC, nband 18 should be good.<br /><br />Best regards</div></blockquote><br /><br />Hi Cordially Olivier,<br /><br />Thanks for your kind help, and I tested the cases with larger nband following your suggestions in the last few days. I tried different nabnd values under both NCPP and PAW, and coupled with different occopt (3, 4, 7) and tsmear (0.001-0.04) values. It seems the convergence in each SCF cycle becomes better, but the divergence still happens at the 3rd-5th cycle (diffor suddendly increases and never comes back, as seen the attachment). So I guess nband is not the origin of this issue, but it indeed helps the convergence. I am still trying other methods to address this issue, and I appreciate if other suggestions can be given.<br /><br />-------<br />ETOT 70  -2193.5323657866    -1.041E-02 3.456E-05 1.108E+05 5.096E-04 5.441E-02<br /> ETOT 71  -2193.5410212498    -8.655E-03 1.638E-05 1.056E+05 3.455E-04 5.438E-02<br /> ETOT 72  -2193.5464934177    -5.472E-03 6.797E-06 1.023E+05 2.743E-04 5.439E-02<br /> ETOT 73  -2193.5497392948    -3.246E-03 2.816E-06 1.004E+05 1.133E-04 5.438E-02<br /> ETOT 74  -2193.5535336550    -3.794E-03 1.597E-06 9.804E+04 1.431E-04 5.438E-02<br /> ETOT 75  -2193.5608171810    -7.284E-03 3.607E-06 9.351E+04 3.183E-04 5.438E-02<br /> ETOT 76  -2193.5690532315    -8.236E-03 8.601E-06 8.831E+04 3.876E-04 5.439E-02<br /> ETOT 77  -2193.5747961819    -5.743E-03 1.512E-05 8.468E+04 2.934E-04 5.438E-02<br /> ETOT 78  -2193.5785840064    -3.788E-03 1.994E-05 8.231E+04 1.781E-04 5.440E-02<br /> ETOT 79  -2193.5797805878    -1.197E-03 2.623E-05 8.170E+04 3.471E-04 5.451E-02    <br /> ETOT 80  -2190.1148388300     3.465E+00 4.779E+00 1.936E+04 2.203E-02 4.903E-02   #diffor suddenly increases<br /> ETOT 81  -2193.4941938580    -3.379E+00 2.155E-02 8.472E+04 2.109E-02 5.428E-02<br /> ETOT 82  -2193.5734030529    -7.921E-02 5.825E-04 8.315E+04 5.954E-03 5.486E-02<br /> ETOT 83  -2191.7283470534     1.845E+00 8.154E+00 6.798E+04 1.710E-02 6.607E-02<br /> ETOT 84  -2189.7363053717     1.992E+00 7.290E+00 2.822E+04 4.462E-02 6.828E-02<br /> ETOT 85  -2193.5282038030    -3.792E+00 1.213E-02 8.391E+04 5.199E-02 4.820E-02<br /> ETOT 86  -2192.4416870260     1.087E+00 9.908E-01 6.508E+04 1.591E-02 4.365E-02<br /> ETOT 87  -2193.5625997076    -1.121E+00 9.771E-04 8.399E+04 1.834E-02 5.463E-02<br /> ETOT 88  -2191.5398254819     2.023E+00 1.342E+00 5.243E+04 4.252E-02 9.716E-02<br /> ETOT 89  -2193.5336889622    -1.994E+00 1.324E-02 8.470E+04 5.920E-02 4.338E-02<br /> ETOT 90  -2189.3282789515     4.205E+00 1.194E+01 3.625E+04 1.146E-01 1.102E-01<br /> ETOT 91  -2193.5270607888    -4.199E+00 3.948E-03 8.479E+04 1.133E-01 5.346E-02<br />---------<br /><br />Thanks and regards,<br />JHR</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p12394" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile12394">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlisteb86.html?mode=viewprofile&amp;u=2301" class="username">pomax</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search577b.html?author_id=2301&amp;sr=posts">7</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Jun 05, 2019 5:40 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content12394">
+
+						<h3 ><a href="#p12394">Re: Convergence of SCF cycle gets worse and worse</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postinga662.html?mode=quote&amp;f=9&amp;p=12394" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic2ce2.html?p=12394#p12394" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlisteb86.html?mode=viewprofile&amp;u=2301" class="username">pomax</a></strong> &raquo; </span>Fri Jun 14, 2019 8:58 pm
+			</p>
+			
+			
+			
+			<div class="content">Hi jhr031, <br />I don't know exactly why the diffor is suddenly increasing.<br /><br />First, you should do relaxation if you haven't done it yet on your structure.<br /><br />If it doesn't solve it, it may be because you're trying to converge on a degenerate bands which cause instability. I would recommend increasing the number of bands substantially around 100 and use the variable nbdbuf at 10. This is the number of bands abinit will not try to converge. So, while the bands 90 to 100 would exist, they won't converge to cause instability. <br /><br />I don't really like to adjust the following parameters because they slow considerably the simulation but aren't changing the physical properties of the structure. Neverthless, in some systems that are hard to converge, you will need to change them to get good convergence. In order of time increase, I would recommend<br />1. Increase npulayit to 15<br />2. Increase nnsclo to 2 or 3<br />3. Increase nline to 6<br /><br />Cordially, Olivier</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="postinge2fb.html?mode=reply&amp;f=9&amp;t=4122" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic57e4.html?f=9&amp;t=4122&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=9&amp;t=4122">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			6 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforumfdc5.html?f=9" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Ground state”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4122&p=12377 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:09:51 GMT -->
+</html>

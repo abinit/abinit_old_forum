@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3119&p=9569 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:24:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Only 1cpu is used among multicore-cpu - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopica121.html?t=3119">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="1"><a href="viewforum58da.html?f=1" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Building ABINIT</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="3"><a href="viewforum4d6b.html?f=3" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Configuring and compiling ABINIT</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopic64d6.html?f=3&amp;t=3119">Only 1cpu is used among multicore-cpu</a>&nbsp;
+<a href="viewtopic50c2.html?f=3&amp;t=3119&amp;p=9554#p9554" style="color: #006600;">
+	[SOLVED]
+</a>
+</h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">option, parallelism,...<br /></div>
+<p>
+	<strong>Moderators:</strong> <a href="memberlist5296.html?mode=viewprofile&amp;u=2740" class="username">fgoudreault</a>, <a href="memberlist7468.html?mode=viewprofile&amp;u=53" class="username">mcote</a>
+</p>
+
+	<div class="rules">
+		<div class="inner">
+
+					<strong>Forum rules</strong><br />
+			Please have a look at ~abinit/doc/config/build-config.ac in the source package for detailed and up-to-date information about the configuration of Abinit 8 builds.<br>
+For a video explanation on how to build Abinit 7.x for Linux, please go to: <a href="http://www.youtube.com/watch?v=DppLQ-KQA68" class="postlink">http://www.youtube.com/watch?v=DppLQ-KQA68</a>.<br>
+<strong class="text-strong">IMPORTANT: when an answer solves your problem, please check the little green V-like button on its upper-right corner to accept it.</strong>
+		
+		</div>
+	</div>
+
+<div class="action-bar bar-top">
+	
+			<a href="posting484e-2.html?mode=reply&amp;f=3&amp;t=3119" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic3d68.html?f=3&amp;t=3119&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="3119" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			8 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p9554" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile9554">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist713f.html?mode=viewprofile&amp;u=1669" class="username">anemonekgo</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchd93e.html?author_id=1669&amp;sr=posts">21</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Sep 22, 2015 3:54 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content9554">
+
+						<h3 class="first"><a href="#p9554">Only 1cpu is used among multicore-cpu&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting9940.html?mode=quote&amp;f=3&amp;p=9554" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicc536-2.html?p=9554#p9554" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist713f.html?mode=viewprofile&amp;u=1669" class="username">anemonekgo</a></strong> &raquo; </span>Sun Oct 11, 2015 2:34 am
+			</p>
+			
+			
+			
+			<div class="content">Hi<br /><br />I'm a beginner.<br />Recently I installed Abinit 7.10.4 on CentOS 6.7.<br />My PC is Corei7 990X_ex.(6core/12T) -RAM24G -SSD256G.<br />When look after a system manager when I perform Running of abinit; <br />I'm using only 1CPU(100%) in multicore-cpu(It is displayed 12CPU).<br />What setting will this have a problem with? <br />I'm getting good calculation results , but run time is long.<br />Please tell me what to do to.<br /><br />Best regards,<br />Haruyuki Satou<br /><br />======================================================================<br /><br />The following configuration information<br />======================================================================<br />#build.ac file<br />------------------------------------------------------------<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_prefix=&quot;/usr/lib64/openmpi&quot;<br />with_trio_flavor=&quot;netcdf+etsf_io&quot;<br />#with_netcdf_incs=&quot;-I/usr/include&quot;<br />#with_netcdf_libs=&quot;-L/usr/lib64 -lnetcdf -lnetcdff&quot;<br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_incs=&quot;-I/usr/include/&quot;<br />with_fft_libs=&quot;-L/usr/local/lib64/gnu/fftw/3.3.4/lib -lfftw3 -lfftw3f&quot;<br />with_linalg_flavor=&quot;atlas&quot;<br />with_linalg_libs=&quot;-L/usr/lib64/atlas -llapack -lf77blas -lcblas -latlas&quot;<br />#with_dft_flavor=&quot;atompaw+libxc&quot;<br />#with_dft_flavor=&quot;atompaw+libxc+wannier90&quot;<br />with_dft_flavor=&quot;atompaw+bigdft+libxc+wannier90&quot;<br />enable_gw_dpc=&quot;yes&quot;<br />#enable_maintainer_checks=&quot;no&quot;<br />#enable_test_timeout=&quot;yes&quot;<br />------------------------------------------------------------<br />$./configure --with-config-file=./build.ac <br />#no error<br /><br />==============================================================================<br />=== Final remarks                                                          ===<br />==============================================================================<br />Summary of important options:<br /><br />  * C compiler      : gnu version 4.9<br />  * Fortran compiler: gnu version 4.9<br />  * architecture    : unknown unknown (64 bits)<br /><br />  * debugging       : basic<br />  * optimizations   : standard<br /><br />  * OpenMP enabled  : no (collapse: ignored)<br />  * MPI    enabled  : yes<br />  * MPI-IO enabled  : yes<br />  * GPU    enabled  : no (flavor: none)<br /><br />  * TRIO   flavor = netcdf-fallback+etsf_io-fallback<br />  * TIMER  flavor = abinit (libs: ignored)<br />  * LINALG flavor = atlas (libs: user-defined)<br />  * ALGO   flavor = none (libs: ignored)<br />  * FFT    flavor = fftw3 (libs: user-defined)<br />  * MATH   flavor = none (libs: ignored)<br />  * DFT    flavor = libxc-fallback+atompaw-fallback+bigdft-fallback+wannier90-fallback<br /><br />Configuration complete.<br />You may now type &quot;make&quot; to build ABINIT.<br />(or, on a SMP machine, &quot;make mj4&quot;, or &quot;make multi multi_nprocs=&lt;n&gt;&quot;)<br /> ==============================================================================<br />$ make mj4<br />#no error<br />==============================================================================<br />$ make install<br />#no error<br /><br />**************************************************************************************************<br />$cd tests<br />$./runtests.py -j6 fast<br />Test suite completed in 9.63 s (average time for test = 2.63 s, stdev = 2.63 s)<br />failed: 0, succeeded: 10, passed: 1, skipped: 0, disabled: 0<br />Suite   failed  passed  succeeded  skipped  disabled  run_etime  tot_etime<br />fast         0       1         10        0         0      28.92      30.20<br /><br />$./runtests.py paral -j6<br />Test suite completed in 86.06 s (average time for test = 4.48 s, stdev = 12.80 s)<br />failed: 0, succeeded: 14, passed: 7, skipped: 69, disabled: 0<br />[paral][t06_MPI1][np=1] has run_etime 65.40 s<br />[paral][t51_MPI1-t52_MPI1-t53_MPI1] has run_etime 32.28 s<br />[paral][t59_MPI1][np=1] has run_etime 30.34 s<br />[paral][t71_MPI1][np=1] has run_etime 72.22 s<br />[paral][t73_MPI1][np=1] has run_etime 37.03 s<br />[paral][t91_MPI1][np=1] has run_etime 42.28 s<br />Suite   failed  passed  succeeded  skipped  disabled  run_etime  tot_etime<br />paral        0       7         14       69         0     403.01     406.55<br />**************************************************************************************************</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p9556" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile9556">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist933d.html?mode=viewprofile&amp;u=1180" class="username">Jordan</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchdd2b.html?author_id=1180&amp;sr=posts">282</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue May 07, 2013 9:47 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content9556">
+
+						<h3 ><a href="#p9556">Re: Only 1cpu is used among multicore-cpu</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingae43.html?mode=quote&amp;f=3&amp;p=9556" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopica8b7.html?p=9556#p9556" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist933d.html?mode=viewprofile&amp;u=1180" class="username">Jordan</a></strong> &raquo; </span>Mon Oct 12, 2015 7:58 am
+			</p>
+			
+			
+			
+			<div class="content">You did not compile abinit with OpenMP support *threads&quot; which means that if you want to use, let say 6 cores per calculation, you have to launch abinit with mpirun like<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>mpirun -n 6 abinit &lt; files &gt; log<br /></code></pre></div><br /><br />Or for the test suite, you need to specify -n 6 instead of -j 6. For the testsuite, the -j option means launch 6 tests at the same time (parallel launch of several tests, each one runs on 1 cpus) whereas -n X  means run each test on X cpus.<br />So for instance, runtests.py -n 6 -j 2 means do 2 tests at the same time whit 6 mpi processes for each test. So you would use 6*2=12 cores.<br /><br />Cheers<br /><br />Jordan</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p9569" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile9569">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist713f.html?mode=viewprofile&amp;u=1669" class="username">anemonekgo</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchd93e.html?author_id=1669&amp;sr=posts">21</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Sep 22, 2015 3:54 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content9569">
+
+						<h3 ><img src="images/icons/smile/mrgreen.gif" width="16" height="16" alt="" title="" /> <a href="#p9569">Re: Only 1cpu is used among multicore-cpu</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingecc1-2.html?mode=quote&amp;f=3&amp;p=9569" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic39f5.html?p=9569#p9569" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist713f.html?mode=viewprofile&amp;u=1669" class="username">anemonekgo</a></strong> &raquo; </span>Tue Oct 13, 2015 6:31 am
+			</p>
+			
+			
+			
+			<div class="content">Dear Jordan<br /><br /> Thanks for all your help.<br /><br />I could start multi-core process on abinit by writing as &quot;enable_openmp=&quot;yes&quot;&quot; in the build.ac.<br /><br />I failed before when it was &quot;./configure --enable-openmp&quot;( --&gt; * OpenMP enabled : yes  * MPI enabled : no * MPI-IO enabled : no).<br /><br />Then I tried &quot;mpirun -n 6 abinit &lt; files &gt; log&quot; command with &quot; --allow-run-as-root &quot; option.<br /><br />As a result of calculating in &quot;BaTiO3&quot; (ecut=15,ngkpt=8x8x8), and having tested it, I was able to shorten calculation time (90min. ---&gt; 5min.).<br /><br />What you just said really comforted me, thank you.<br /><br />Sincerely.<br />Haruyuki Satou</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p9581" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile9581">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist713f.html?mode=viewprofile&amp;u=1669" class="username">anemonekgo</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchd93e.html?author_id=1669&amp;sr=posts">21</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Sep 22, 2015 3:54 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content9581">
+
+						<h3 ><a href="#p9581">Re: Only 1cpu is used among multicore-cpu</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting5d48.html?mode=quote&amp;f=3&amp;p=9581" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopica300-3.html?p=9581#p9581" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist713f.html?mode=viewprofile&amp;u=1669" class="username">anemonekgo</a></strong> &raquo; </span>Fri Oct 16, 2015 11:18 am
+			</p>
+			
+			
+			
+			<div class="content">Hi <br /> <br />Thanks for your help the other day.<br /> <br />Then a problem has happened.<br /> <br />While it's calculation, Abinit stops at the following error.<br /> <br />#chkpawovlp : ERROR -                                                <br />  PAW SPHERES ARE OVERLAPPING !                                                    <br />#Distance between atoms   3 and  37 is  :   1.70352                                               <br />   PAW radius of the sphere around atom   3 is:   2.32398                                                     <br />   PAW radius of the sphere around atom  37 is:   0.90083                                                     <br />   This leads to a (voluminal) overlap ratio of 90.75 %            <br /><br />--from log file ------<br />++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br />--- !ERROR<br />message: |<br />    Action: 1- decrease cutoff radius of PAW dataset<br />          OR  2- ajust &quot;pawovlp&quot; input variable to allow overlap (risky)<br />src_file: chkpawovlp.F90<br />src_line: 183<br />...<br /><br /> leave_new : decision taken to exit ...<br />----------------------------------------------------------------------------------------------------------------------------------------------------<br />MPI_ABORT was invoked on rank 2 in communicator MPI_COMM_WORLD <br />with errorcode 14.<br /><br />NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.<br />You may or may not see output from other processes, depending on<br />exactly when Open MPI kills them.<br />----------------------------------------------------------------------------------------------------------------------------------------------------                                   <br /> <br />Even if it's made pawovlp=-1, a strange calculation result is generated.<br />(Such as nuclear fusion jokingly )<br /> <br />For example calculation is normally running to n = about 7, and a problem occurs critically after it.<br /> <br />The error has occurred using this command. <br /> <br />$　mpirun --allow-run-as-root -n 6 abinit &lt; $name.files &gt; $name.log <br /><br />I think trouble of OpenMPI.<br /> <br />I would appreciate it if you would give me some advice.<br /> <br />Best regards<br />Haruyuki Satou</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p9588" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile9588">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist933d.html?mode=viewprofile&amp;u=1180" class="username">Jordan</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchdd2b.html?author_id=1180&amp;sr=posts">282</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue May 07, 2013 9:47 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content9588">
+
+						<h3 ><a href="#p9588">Re: Only 1cpu is used among multicore-cpu</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting8b51.html?mode=quote&amp;f=3&amp;p=9588" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic987e-2.html?p=9588#p9588" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist933d.html?mode=viewprofile&amp;u=1180" class="username">Jordan</a></strong> &raquo; </span>Mon Oct 19, 2015 8:11 am
+			</p>
+			
+			
+			
+			<div class="content">Please post your input file. It might be a good starting point to analyze it before going into an informatic problem.<br />In particular, check the distance between you atoms, use any visualization software to be sure of the structure.<br /><br />In PAW overlap of PAW sphere may result in a wrong calculation, in you case you have a very high overlap therefore if this overlap is a consequence of you input file, it is probably not physical. Allowing the overlap will ensure the calculation will continue but nothing guaranty the result.</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p9591" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile9591">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist713f.html?mode=viewprofile&amp;u=1669" class="username">anemonekgo</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchd93e.html?author_id=1669&amp;sr=posts">21</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Sep 22, 2015 3:54 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content9591">
+
+						<h3 ><a href="#p9591">Re: Only 1cpu is used among multicore-cpu</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingca51.html?mode=quote&amp;f=3&amp;p=9591" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopiceba7.html?p=9591#p9591" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist713f.html?mode=viewprofile&amp;u=1669" class="username">anemonekgo</a></strong> &raquo; </span>Mon Oct 19, 2015 5:16 pm
+			</p>
+			
+			
+			
+			<div class="content">Dear Jordan<br /><br />Thank you for your reply.<br /><br />I attach an input file as you suggestion.<br /><br />I would be grateful if you could kindly confirm that you have checked it.<br /><br />Please tell me if you need something.<br /><br />Sincerely.<br />Haruyuki Satou</div>
+			
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file592b.php?id=1211">20151019.in</a></dt>
+						<dd>(5.34 KiB) Downloaded 421 times</dd>
+		</dl>
+		
+		
+			</dd>
+									</dl>
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p9593" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile9593">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist933d.html?mode=viewprofile&amp;u=1180" class="username">Jordan</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchdd2b.html?author_id=1180&amp;sr=posts">282</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue May 07, 2013 9:47 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content9593">
+
+						<h3 ><a href="#p9593">Re: Only 1cpu is used among multicore-cpu</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingbada.html?mode=quote&amp;f=3&amp;p=9593" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic0eb3.html?p=9593#p9593" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist933d.html?mode=viewprofile&amp;u=1180" class="username">Jordan</a></strong> &raquo; </span>Tue Oct 20, 2015 8:57 am
+			</p>
+			
+			
+			
+			<div class="content">Your overlap appears between a lead and an hydrogen which is a common problem with hydrogen.<br /><br />Looking in your input file, I noticed you use ecut=5 which is really small and might result in bad results or crashed if too small. I would suggest, before doing your relaxation, to run the usual convergence studies, especially on ecut. You should find  a value between 15 and 25 in PAW or probably between 35 and 50 in NC.</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p9598" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile9598">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist713f.html?mode=viewprofile&amp;u=1669" class="username">anemonekgo</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchd93e.html?author_id=1669&amp;sr=posts">21</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Sep 22, 2015 3:54 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content9598">
+
+						<h3 ><a href="#p9598">Re: Only 1cpu is used among multicore-cpu</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting976d.html?mode=quote&amp;f=3&amp;p=9598" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicc142.html?p=9598#p9598" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist713f.html?mode=viewprofile&amp;u=1669" class="username">anemonekgo</a></strong> &raquo; </span>Tue Oct 20, 2015 3:29 pm
+			</p>
+			
+			
+			
+			<div class="content">Dear Jordan<br /><br />Thank you for the valuable proposal.<br />I'm going to fix the ecut value to usual and try it.<br />Thank you again for your kindness.<br /><br />Sincerely,<br />Haruyuki Satou</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="posting484e-2.html?mode=reply&amp;f=3&amp;t=3119" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic3d68.html?f=3&amp;t=3119&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=3&amp;t=3119">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			8 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforum4d6b.html?f=3" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Configuring and compiling ABINIT”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3119&p=9569 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:24:58 GMT -->
+</html>

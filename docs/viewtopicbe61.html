@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=3514&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:03:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; lifetime effects in IR reflectivity</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>lifetime effects in IR reflectivity</h2>
+		<p><a href="viewtopic3af1.html?f=12&amp;t=3514">https://forum.abinit.org/viewtopic.php?f=12&amp;t=3514</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>lifetime effects in IR reflectivity</h3>
+				<div class="date">Posted: <strong>Thu Feb 16, 2017 10:54 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Dear Matthieu<br /><br />I am one of user abinit code. I want to quality factor by abinit code. I know quality factor is equal inverse dielectric loss tangent  (tan δ = ε2/ε1).  ε2 , ε1 are real and imaginary part dielectric.<br />I should used equation 8 of attached 33.pdf for obtaining ε2 , ε1. this relation  said that dielectric tensor along the Cartesian coordinates is obtained by j th mode oscillator strength along both a and b direction , eigenfrequency, and damping factor of the jth vibrational mode. I  calculated j th mode oscillator strength along both a and b direction by abinit code . Now  need  to calculated damping frequency. Unfortunately, i do not know how i calculate it by abinit code.  could you please  explain for me  about how can i obtain  damping frequency for all modes? In other hand, how do i calculate the IR reflectivity with damping from the frequency dependence of the dielectric constant ( I can calculate IR reflectivity without damping from the frequency dependence of the dielectric constant) by abinit code . should i use iovmov=2 and vis, ...? <br />You do favor if you provid me by guiding.  I would appreciate your consideration and I am anxiously looking forward to your reply.<br /><br />Best Regards,<br />Narges</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: lifetime effects in IR reflectivity&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Thu Feb 16, 2017 11:09 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Dear Narges,<br /><br />I am not sure I understand your question entirely, but here goes. Your quality factor has to do with the zero frequency limit of the ratio involving the real and imaginary parts of epsilon_0, correct? Typically the intrinsic IR reflectivity spectrum is actually quite good without the broadening, but obviously not perfect wrt experiment.<br /><br /><br />Your reference J. Am. Ceram. Soc., 96 [9] 2898–2905 (2013) fits experimental data with a parametrized curve for the Raman and IR intensities. Their parameters are the frequencies of phonons (those you have) and the lifetimes gamma_j (those you do not have). The lifetimes are due to two main sources of scattering for the phonons: electrons and other phonons. These do not come out of a simple phonon DFPT run, but you can fit them. <br /><br />The former can be calculated using the elphon tutorial and anaddb, though this is quite heavy because you need a lot of k points. We are working on a much faster interpolated version for the epc, but this is under development, and we'll have to update the tutorial as well.<br /><br />The latter can be calculated as well from MD or other finite displacements, using external software such as phono3py or ShengBTE. You can set the &quot;prtposcar&quot; flag in abinit to get VASP style outputs, and import the results for the anharmonic forces from abinit. You run phono3 or sheng, and get back the phonon lifetimes due to anharmonic phonon scattering. Again, for big systems this will be quite heavy as you have many perturbations to do for the 3rd interatomic force constants.<br /><br />best</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: lifetime effects in IR reflectivity</h3>
+				<div class="date">Posted: <strong>Thu Feb 16, 2017 1:23 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">PS: Atsushi Togo has just confirmed he will also make a direct abinit interface for phono3py (should be soon).<br /><br />See <!-- m --><a class="postlink" href="https://atztogo.github.io/phono3py/">https://atztogo.github.io/phono3py/</a><!-- m --><br /><!-- m --><a class="postlink" href="https://atztogo.github.io/phonopy/">https://atztogo.github.io/phonopy/</a><!-- m --></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=3514&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:03:42 GMT -->
+</html>

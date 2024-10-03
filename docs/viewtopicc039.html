@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1552&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:27:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; problems with mpi1 and mpi2 distinction</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>problems with mpi1 and mpi2 distinction</h2>
+		<p><a href="viewtopic0447-2.html?f=3&amp;t=1552">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1552</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>problems with mpi1 and mpi2 distinction</h3>
+				<div class="date">Posted: <strong>Thu Mar 01, 2012 11:44 am</strong></div>
+				<div class="author">by <strong>sipr</strong></div>
+				<div class="content">I found a weird problem with the way the configure script recognises the mpi1 and mpi2 versions of MPI installation.  If I let the configure script decide by specifying &quot;with_mpi_prefix&quot; directory, it incorrectly sets MPI to MPI2 while in fact the installation is MPI1.  As a result, the compilation crashes.<br /><br />On the other hand, if I specify MPI installation in a step-wise fashion, via with_mpi_incs, with_mpi_level, with_mpi_libs, and MPI_RUNNER, the compilation crashes as well - albeit in a different place than in the previous case.<br /><br />The situation can be fixed by running the configuration script relying in the  &quot;with_mpi_prefix&quot; directory and afterwards setting manually MPI to MPI1 instead of MPI2 in the config.h file (produced by the configure script).<br />Then everything runs okay.<br /><br />This happened with abinit versions 6.6.1 as well as 6.12.1 so it will be a more general issue.  My system is openSUSE 10.3 (X86-64), MPI installatioon is 64-bit OpenMPI version 1.4.1 (but simular problems were, e.g., with 1.3.1 as well). I did not have this issue on other systems (e.g., openSUSE 11.4 or SUSE Linux Enterprise Server 10).<br /><br />A quick fix by setting MPI to MPI1 manually in the config.h file after configuring the installation via &quot;with_mpi_prefix&quot; works.  However, it is a nuissance and it may be too cumbersome for some users.<br />My knowledge of neither abinit, MPI or configure script is good enough to do a better diagnostics.<br /><br />I tried to attach a gzipped tarball with few relevant files (and a &quot;readme.txt&quot; description) but the system does not allow *.tgz or *.tar or *.gz attachments. Everything can thus be download it from here: <!-- m --><a class="postlink" href="http://www.fzu.cz/~sipr/issues-mpi.tgz">http://www.fzu.cz/~sipr/issues-mpi.tgz</a><!-- m --> <br /><br />Ondrej</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problems with mpi1 and mpi2 distinction</h3>
+				<div class="date">Posted: <strong>Thu Mar 01, 2012 5:13 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">The build system of Abinit provides the --with-mpi-level option for broken MPI2 implementations. Please see ~abinit/doc/config/build-config.ac for details.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problems with mpi1 and mpi2 distinction</h3>
+				<div class="date">Posted: <strong>Fri Apr 06, 2012 10:45 am</strong></div>
+				<div class="author">by <strong>sipr</strong></div>
+				<div class="content"><blockquote><div><cite>pouillon wrote:</cite>The build system of Abinit provides the --with-mpi-level option for broken MPI2 implementations. Please see ~abinit/doc/config/build-config.ac for details.</div></blockquote><br /><br />I am aware of the &quot;with_mpi_level&quot; option.  I tried it (my implementation is MPI1 actually; it maybe in some way broken but certainly it works). I tried to explain and demonstrate this in the files available from the web:<br /><!-- m --><a class="postlink" href="http://www.fzu.cz/~sipr/issues-mpi.tgz">http://www.fzu.cz/~sipr/issues-mpi.tgz</a><!-- m --> <br /><br />Particularly, referrring to that tarball:<br />a) configure was run with options: <br />   config-file_mpi1.ac<br /><br />b) Output from running the configure script&#058;<br />    config_mpi1.OUT<br />    config_mpi1.log<br />A configuration file produced is this:    config.h_mpi1<br /><br />c) Compilation process crashes:<br />    make_mpi1.OUT<br /><br />In particular, even though the configure script was instructed to use an MPI-1 implementation, the compilation proceeded as if it was to use an MPI-2 implementation.  Crash followed.<br /><br />BTW: There are not really many &quot;details&quot; in the ~abinit/doc/config/build-config.ac file.  Sure, there is a lot of options and switches and I tested them all. Without success.  That's why I posted this issue.<br /><br />Ondrej</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problems with mpi1 and mpi2 distinction</h3>
+				<div class="date">Posted: <strong>Tue Apr 17, 2012 5:27 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">I see in config_mpi1.OUT that the build system of Abinit detects that MPI is not working. Looking at config_mpi1.log, it appears that CC and FC are set to non-MPI-capable compilers (gcc and gfortran). If you want to set the compilers yourself, then you should use: <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>CC=&quot;/path/to/mpicc&quot;<br />FC=&quot;/path/to/mpif90&quot;</code></pre></div><br />or let the build system detect them by unsetting CC and FC, combined with the --with-mpi-prefix option.<br /><br />Using --with-mpi-prefix is the recommended way to detect MPI. You may however set CC, CXX and FC at the same time if your MPI configuration requires them to be set. In such a case, the build system will take care of wrapping the MPI wrappers.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1552&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:27:13 GMT -->
+</html>

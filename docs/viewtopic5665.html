@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4258&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:33:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Internal compiler error of Abinit-8.10.1 in CentOS 6.9</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Internal compiler error of Abinit-8.10.1 in CentOS 6.9</h2>
+		<p><a href="viewtopicf712.html?f=3&amp;t=4258">https://forum.abinit.org/viewtopic.php?f=3&amp;t=4258</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Internal compiler error of Abinit-8.10.1 in CentOS 6.9</h3>
+				<div class="date">Posted: <strong>Fri Nov 22, 2019 11:30 am</strong></div>
+				<div class="author">by <strong>ornis</strong></div>
+				<div class="content">Dear Developers and Users<br>
+<br>
+I am new to Abinit and successfully configured Abinit-8.10.1 in CentOS-6.9 with the following command:<br>
+<br>
+<span style="font-size:85%;line-height:116%">./configure --with-config-file="./marge.in" <br>
+<br>
+The summary of the important options are:<br>
+  * C compiler      : gnu version 4.9<br>
+  * Fortran compiler: gnu version 4.9<br>
+  * architecture    : intel xeon (64 bits)<br>
+<br>
+  * debugging       : basic<br>
+  * optimizations   : standard<br>
+<br>
+  * OpenMP enabled  : no (collapse: ignored)<br>
+  * MPI    enabled  : yes<br>
+  * MPI-IO enabled  : yes<br>
+  * GPU    enabled  : no (flavor: none)<br>
+<br>
+  * TRIO   flavor = netcdf<br>
+  * TIMER  flavor = abinit (libs: ignored)<br>
+  * LINALG flavor = netlib-fallback (libs: ignored)<br>
+  * ALGO   flavor = none (libs: ignored)<br>
+  * FFT    flavor = fftw3 (libs: user-defined)<br>
+  * MATH   flavor = none (libs: ignored)<br>
+  * DFT    flavor = libxc-fallback+atompaw-fallback</span><br>
+<br>
+However, when I run the make command as 'make mj4 &gt; make.log', it ends with the following internal compiler error:<br>
+<br>
+<span style="font-size:85%;line-height:116%">m_spin_model_primitive.F90: In function ‘__final_m_spin_model_primitive_Spin_model_primitive_t’:<br>
+m_spin_model_primitive.F90:905:0: internal compiler error: in gfc_conv_descriptor_data_get, at fortran/trans-array.c:145<br>
+ end module m_spin_model_primitive<br>
+ ^<br>
+0x5e3f78 gfc_conv_descriptor_data_get(tree_node*)<br>
+	../.././gcc/fortran/trans-array.c:145<br>
+0x5e96bf gfc_array_deallocate(tree_node*, tree_node*, tree_node*, tree_node*, tree_node*, gfc_expr*)<br>
+	../.././gcc/fortran/trans-array.c:5346<br>
+0x63698a gfc_trans_deallocate(gfc_code*)<br>
+	../.././gcc/fortran/trans-stmt.c:5481<br>
+0x5e0e87 trans_code<br>
+	../.././gcc/fortran/trans.c:1798<br>
+0x634661 gfc_trans_simple_do<br>
+	../.././gcc/fortran/trans-stmt.c:1443<br>
+0x634661 gfc_trans_do(gfc_code*, tree_node*)<br>
+	../.././gcc/fortran/trans-stmt.c:1606<br>
+0x5e0f4a trans_code<br>
+	../.././gcc/fortran/trans.c:1748<br>
+0x60047b gfc_generate_function_code(gfc_namespace*)<br>
+	../.././gcc/fortran/trans-decl.c:5653<br>
+0x5e2311 gfc_generate_module_code(gfc_namespace*)<br>
+	../.././gcc/fortran/trans.c:1995<br>
+0x5a0045 translate_all_program_units<br>
+	../.././gcc/fortran/parse.c:4940<br>
+0x5a0045 gfc_parse_file()<br>
+	../.././gcc/fortran/parse.c:5150<br>
+0x5dd175 gfc_be_parse_file<br>
+	../.././gcc/fortran/f95-lang.c:212<br>
+Please submit a full bug report,<br>
+with preprocessed source if appropriate.<br>
+Please include the complete backtrace with any bug report.<br>
+See &lt;<a href="http://gcc.gnu.org/bugs.html" class="postlink">http://gcc.gnu.org/bugs.html</a>&gt; for instructions.<br>
+make[5]: *** [m_spin_model_primitive.o] Error 1<br>
+make[5]: Leaving directory `/data2/arindam/VASP/ABINIT/abinit-8.10.1/src/78_effpot'<br>
+make[4]: *** [all-recursive] Error 1<br>
+make[4]: Leaving directory `/data2/arindam/VASP/ABINIT/abinit-8.10.1/src'<br>
+make[3]: *** [all-recursive] Error 1<br>
+make[3]: Leaving directory `/data2/arindam/VASP/ABINIT/abinit-8.10.1'<br>
+make[2]: *** [all] Error 2<br>
+make[2]: Leaving directory `/data2/arindam/VASP/ABINIT/abinit-8.10.1'<br>
+make[1]: *** [multi] Error 2<br>
+make[1]: Leaving directory `/data2/arindam/VASP/ABINIT/abinit-8.10.1'<br>
+make: *** [mj4] Error 2</span><br>
+<br>
+Any suggestions to solve this issue, please? Herein, I have attached the configure (marge.in) and the error output (make.log) files. <br>
+<br>
+Thank you very much.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Internal compiler error of Abinit-8.10.1 in CentOS 6.9</h3>
+				<div class="date">Posted: <strong>Fri Nov 22, 2019 1:59 pm</strong></div>
+				<div class="author">by <strong>admin</strong></div>
+				<div class="content">Hi,<br>
+<br>
+what is the output of this command :<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>mpif90 --show</code></pre></div>
+
+the content of the make.log file is not relevant...<br>
+<br>
+can you rerun the compilation with :<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make -j 8 &gt; make.log 2&gt; make.stderr</code></pre></div>
+
+and post the make.stderr file<br>
+<br>
+jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Internal compiler error of Abinit-8.10.1 in CentOS 6.9</h3>
+				<div class="date">Posted: <strong>Mon Nov 25, 2019 4:29 am</strong></div>
+				<div class="author">by <strong>ornis</strong></div>
+				<div class="content">Dear Admin<br>
+<br>
+Thank you for your kind response. As you instructed I have run "mpif90 --show", which returns<br>
+<br>
+/home/arindam/anaconda3/bin/mpif90: line 376: x86_64-conda_cos6-linux-gnu-gfortran: command not found<br>
+<br>
+I have tried the "make -j 8 &gt; make.log 2&gt; make.stderr" and herein attached the make.stderr file.<br>
+<br>
+Thank you very much.<br>
+<br>
+Sincerely<br>
+Arindam Sannyal</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Internal compiler error of Abinit-8.10.1 in CentOS 6.9</h3>
+				<div class="date">Posted: <strong>Mon Nov 25, 2019 10:16 am</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br>
+<br>
+Sorry, I made a typo in the command ( only one dash ! )<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>mpif90 -show</code></pre></div>
+
+can you retry ?<br>
+<br>
+<br>
+In your marge.in file, there is :<br>
+
+<blockquote class="uncited"><div>with_mpi_prefix="/data2/arindam/VASP/openmpi-4.0.2"</div></blockquote>
+
+Then, the output of the "mpif90 -show" command should be something like<br>
+
+<blockquote class="uncited"><div>&gt; mpif90 -show<br>
+gfortran -I/data2/arindam/VASP/openmpi-4.0.2/include...</div></blockquote>
+
+However, I see in your post :<br>
+
+<blockquote class="uncited"><div>/home/arindam/anaconda3/bin/mpif90: line 376: x86_64-conda_cos6-linux-gnu-gfortran: command not found</div></blockquote>
+
+There is obviously a problem in your environment...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Internal compiler error of Abinit-8.10.1 in CentOS 6.9</h3>
+				<div class="date">Posted: <strong>Tue Nov 26, 2019 8:14 am</strong></div>
+				<div class="author">by <strong>ornis</strong></div>
+				<div class="content">Dear Jean-Michel Beuken<br>
+<br>
+As you instructed, I have changed the environment of my system. Now the "mpif90 -show" command returns the following output:<br>
+<br>
+<span style="font-size:85%;line-height:116%">gfortran -I/data2/arindam/VASP/openmpi-4.0.2/include -pthread -I/data2/arindam/VASP/openmpi-4.0.2/lib -Wl,-rpath -Wl,/data2/arindam/VASP/openmpi-4.0.2/lib -Wl,--enable-new-dtags -L/data2/arindam/VASP/openmpi-4.0.2/lib -lmpi_usempif08 -lmpi_usempi_ignore_tkr -lmpi_mpifh -lmpi</span><br>
+<br>
+Then I have configured Abinit with the new environment, however, the make command ends with an error. Herein, I have attached the 'marge.in' and 'make.stderr' files for your kind consideration, Can you please help me to solve the problem.<br>
+<br>
+Thank you very much for your support.<br>
+<br>
+Sincerely<br>
+Arindam Sannyal</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4258&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:33:23 GMT -->
+</html>

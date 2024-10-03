@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?p=8917 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:18:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Abinit 7.10.2 in Homebrew (OS-X) : libxc and netcdf issues - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopic798e.html?t=2910">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="1"><a href="viewforum58da.html?f=1" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Building ABINIT</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="3"><a href="viewforum4d6b.html?f=3" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Configuring and compiling ABINIT</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopicfc1a.html?f=3&amp;t=2910">Abinit 7.10.2 in Homebrew (OS-X) : libxc and netcdf issues</a>&nbsp;
+<a href="viewtopic5c78.html?f=3&amp;t=2910&amp;p=8917#p8917" style="color: #006600;">
+	[SOLVED]
+</a>
+</h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">option, parallelism,...<br /></div>
+<p>
+	<strong>Moderators:</strong> <a href="memberlist5296.html?mode=viewprofile&amp;u=2740" class="username">fgoudreault</a>, <a href="memberlist7468.html?mode=viewprofile&amp;u=53" class="username">mcote</a>
+</p>
+
+	<div class="rules">
+		<div class="inner">
+
+					<strong>Forum rules</strong><br />
+			Please have a look at ~abinit/doc/config/build-config.ac in the source package for detailed and up-to-date information about the configuration of Abinit 8 builds.<br>
+For a video explanation on how to build Abinit 7.x for Linux, please go to: <a href="http://www.youtube.com/watch?v=DppLQ-KQA68" class="postlink">http://www.youtube.com/watch?v=DppLQ-KQA68</a>.<br>
+<strong class="text-strong">IMPORTANT: when an answer solves your problem, please check the little green V-like button on its upper-right corner to accept it.</strong>
+		
+		</div>
+	</div>
+
+<div class="action-bar bar-top">
+	
+			<a href="postingd49e.html?mode=reply&amp;f=3&amp;t=2910" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopicf954.html?f=3&amp;t=2910&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="2910" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			10 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p8913" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile8913">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist65dd.html?mode=viewprofile&amp;u=1119" class="username">davydden</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searche8e8.html?author_id=1119&amp;sr=posts">17</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Feb 15, 2013 6:50 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content8913">
+
+						<h3 class="first"><a href="#p8913">Abinit 7.10.2 in Homebrew (OS-X) : libxc and netcdf issues</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting90b4.html?mode=quote&amp;f=3&amp;p=8913" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic34c2.html?p=8913#p8913" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist65dd.html?mode=viewprofile&amp;u=1119" class="username">davydden</a></strong> &raquo; </span>Sat Jan 24, 2015 1:20 pm
+			</p>
+			
+			
+			
+			<div class="content">Dear all, <br /><br />I would like to add Abinit to <a href="http://brew.sh/" class="postlink">Homebrew</a> (a package manager similar to MacPorts). <br />The current attempt is in this pull request: <!-- m --><a class="postlink" href="https://github.com/Homebrew/homebrew-science/pull/1757">https://github.com/Homebrew/homebrew-science/pull/1757</a><!-- m --><br />The file is human readable so if there are any suggestions/advices regarding the way Abinit is built, please, let me know.<br /><br />The configure for which no fast test fail is:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure<br />CC=/usr/local/bin/mpicc<br />CXX=/usr/local/bin/mpicxx<br />F77=/usr/local/bin/mpif77<br />FC=/usr/local/bin/mpif90<br />--prefix=/usr/local/Cellar/abinit/7.10.2<br />--enable-mpi=yes<br />--with-mpi-prefix=/usr/local/opt/open-mpi<br />--enable-optim=safe<br />--enable-openmp=no<br />--enable-gw-dpc<br />--with-linalg-flavor=custom<br />--with-linalg-libs=-L/usr/local/opt/veclibfort/lib -lveclibfort<br />--with-math-flavor=gsl<br />--with-math-incs=-I/usr/local/opt/gsl/include<br />--with-math-libs=-L/usr/local/opt/gsl/lib -lgsl<br />--with-fft-flavor=fftw3<br />--with-fft-incs=-I/usr/local/opt/fftw/include<br />--with-fft-libs=-L/usr/local/opt/fftw/lib -lfftw3 -lfftw3f -lfftw3_mpi -lfftw3f_mpi<br /></code></pre></div><br /><br />While configuring / compiling / running tests, <strong class="text-strong">I faced two issues</strong> :<br /><br />1) Abinit does not want to pick up Libxc 2.2.0. Configure complains that 2.0 is requested. Is it done deliberately, or shall it also be ok to use 2.2.0?<br /><br />2) If I build with NetCDF 4.3.2 by adding<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--with-trio-flavor=netcdf<br />--with-netcdf-incs=-I/usr/local/opt/netcdf/include<br />--with-netcdf-libs=-L/usr/local/opt/netcdf/lib -lnetcdff -lnetcdf<br /></code></pre></div><br />to the configure script above, all fast tests fail because the number of lines is different, i.e.<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;returned exit_code: 14<br /><br />&#91;fast&#93;&#91;t00&#93;&#91;np=1&#93;: fldiff.pl fatal error:<br />The diff analysis cannot be done: the number of lines to be analysed differ.<br />File /Users/davydden/Downloads/abinit-7.10.2/tests/fast/Refs/t00.out: 110 lines, 35 ignored<br />File /Users/davydden/Downloads/abinit-7.10.2/tests/Test_suite/fast_t00/t00.out: 109 lines, 35 ignored<br />&#91;fast&#93;&#91;t00&#93;&#91;np=1&#93;Test was not expected to fail but subrocesses returned 14<br />#0&nbsp; 0x1115bf4f2<br />#1&nbsp; 0x10ccc3663<br />#2&nbsp; 0x10c786035<br />#3&nbsp; 0x10bea4a8a<br />#4&nbsp; 0x10cd06e4e<br /></code></pre></div><br /><br />when I compare the two, the &quot;blessed&quot; output has &quot;chkinp: Checking input parameters for consistency.&quot; whereas <br />current output does not have this. It seems to have everything to do with NetCDF... <br /><br />p.s. Here is the result of otool for the case without netcdf<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>otool -L /usr/local/Cellar/abinit/7.10.2/bin/abinit<br />/usr/local/Cellar/abinit/7.10.2/bin/abinit:<br />&nbsp; &nbsp;/usr/local/lib/libfftw3.3.dylib (compatibility version 8.0.0, current version 8.4.0)<br />&nbsp; &nbsp;/usr/local/lib/libfftw3f.3.dylib (compatibility version 8.0.0, current version 8.4.0)<br />&nbsp; &nbsp;/usr/local/lib/libfftw3_mpi.3.dylib (compatibility version 8.0.0, current version 8.4.0)<br />&nbsp; &nbsp;/usr/local/lib/libfftw3f_mpi.3.dylib (compatibility version 8.0.0, current version 8.4.0)<br />&nbsp; &nbsp;/usr/local/lib/libgsl.0.dylib (compatibility version 18.0.0, current version 18.0.0)<br />&nbsp; &nbsp;/usr/local/lib/libvecLibFort.dylib (compatibility version 0.0.0, current version 0.0.0)<br />&nbsp; &nbsp;/usr/local/lib/libmpi_usempif08.0.dylib (compatibility version 7.0.0, current version 7.0.0)<br />&nbsp; &nbsp;/usr/local/lib/libmpi_mpifh.2.dylib (compatibility version 8.0.0, current version 8.0.0)<br />&nbsp; &nbsp;/usr/local/lib/libmpi.1.dylib (compatibility version 8.0.0, current version 8.0.0)<br />&nbsp; &nbsp;/usr/local/lib/gcc/4.9/libgfortran.3.dylib (compatibility version 4.0.0, current version 4.0.0)<br />&nbsp; &nbsp;/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1213.0.0)<br />&nbsp; &nbsp;/usr/local/lib/gcc/4.9/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)<br />&nbsp; &nbsp;/usr/local/lib/gcc/4.9/libquadmath.0.dylib (compatibility version 1.0.0, current version 1.0.0)<br /></code></pre></div><br />so at least it did not link against osx blas/lapack <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":-)" title="Smile" /></div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p8915" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile8915">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist933d.html?mode=viewprofile&amp;u=1180" class="username">Jordan</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchdd2b.html?author_id=1180&amp;sr=posts">282</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue May 07, 2013 9:47 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content8915">
+
+						<h3 ><a href="#p8915">Re: Abinit 7.10.2 in Homebrew (OS-X) : libxc and netcdf issu</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingf80f.html?mode=quote&amp;f=3&amp;p=8915" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic92a7.html?p=8915#p8915" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist933d.html?mode=viewprofile&amp;u=1180" class="username">Jordan</a></strong> &raquo; </span>Mon Jan 26, 2015 10:25 am
+			</p>
+			
+			
+			
+			<div class="content">I cannot help much because I am not a user of homebrew (nor OSX) but for your libxc problem, you should indeed use 2.2 (I use 2.2.1) and set the variable as<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>with_dft_flavor=&quot;libxc&quot;<br />with_libxc_incs=&quot;-I/SOMETHING/libxc-2.2.1/include&quot;<br />with_libxc_libs=&quot;-L/SOMETHING/libxc-2.2.1/lib -lxcf90 -lxc&quot;<br /></code></pre></div><br />At least on Linux system this how the new libxc can be linked with abinit <br /><br />For NetCDF, the test should all pass. The missing line is printed using standard fortran IO (write statement) and does not involve any NetCDF function.<br />Are you sure the result are the same ? Have you checked the fast00.stdout files ? and compared them ?<br /><br />Cheers<br /><br />Jordan</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p8916" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile8916">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist65dd.html?mode=viewprofile&amp;u=1119" class="username">davydden</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searche8e8.html?author_id=1119&amp;sr=posts">17</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Feb 15, 2013 6:50 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content8916">
+
+						<h3 ><a href="#p8916">Re: Abinit 7.10.2 in Homebrew (OS-X) : libxc and netcdf issu</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingfdf0.html?mode=quote&amp;f=3&amp;p=8916" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic7bce.html?p=8916#p8916" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist65dd.html?mode=viewprofile&amp;u=1119" class="username">davydden</a></strong> &raquo; </span>Mon Jan 26, 2015 3:16 pm
+			</p>
+			
+			
+			
+			<div class="content">Hi Jordan.<br /><br /><blockquote><div><cite>Jordan wrote:</cite>I cannot help much because I am not a user of homebrew (nor OSX) but for your libxc problem, you should indeed use 2.2 (I use 2.2.1) and set the variable as<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>with_dft_flavor=&quot;libxc&quot;<br />with_libxc_incs=&quot;-I/SOMETHING/libxc-2.2.1/include&quot;<br />with_libxc_libs=&quot;-L/SOMETHING/libxc-2.2.1/lib -lxcf90 -lxc&quot;<br /></code></pre></div><br />At least on Linux system this how the new libxc can be linked with abinit <br /></div></blockquote><br /><br />That's exactly how I use it,<br />yet there is configure failure:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>checking for the requested DFT support... libxc<br />checking whether to select a fallback for libxc... no<br />checking xc.h usability... yes<br />checking xc.h presence... yes<br />checking for xc.h... yes<br />checking xc_funcs.h usability... yes<br />checking xc_funcs.h presence... yes<br />checking for xc_funcs.h... yes<br />checking for Fortran module includes... none required<br />checking whether LibXC has Fortran support... yes<br />checking whether this is LibXC version 2.0... no<br />configure: error: external libxc support does not work<br /></code></pre></div><br />The libxc is `2.2.0`. I can also see it in &quot;xc_version.h&quot; in its include folder:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#define XC_VERSION &quot;2.2.0&quot;<br />#define XC_MAJOR_VERSION 2<br />#define XC_MINOR_VERSION 2<br /></code></pre></div><br />Shall work, as far as I can see...<br /><br /><blockquote><div><cite>Jordan wrote:</cite>For NetCDF, the test should all pass. The missing line is printed using standard fortran IO (write statement) and does not involve any NetCDF function.<br />Are you sure the result are the same ? Have you checked the fast00.stdout files ? and compared them ?<br /></div></blockquote><br /><br />I had another look at the output file and it is indeed NetCDF related:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--- !ERROR<br />message: |<br />&nbsp; &nbsp; Netcdf Error while closing the OUT.nc file: NetCDF: Not a valid ID<br />src_file: outvars.F90<br />src_line: 359<br />...<br /></code></pre></div><br /><br />p.s. I was trying to upload an .stdout file but neither .txt nor .zip are allowed for upload.</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p8917" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile8917">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlist981e.html?mode=viewprofile&amp;u=71" class="avatar"><img class="avatar" src="download/fileb0c3.png?avatar=g8_1366628657.png" width="64" height="64" alt="User avatar" /></a>														</div>
+								<a href="memberlist981e.html?mode=viewprofile&amp;u=71" style="color: #6633FF;" class="username-coloured">pouillon</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search42e4.html?author_id=71&amp;sr=posts">651</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Aug 19, 2009 10:08 am</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Spain</dd>
+												
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact pouillon">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact pouillon</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="https://www.materialsevolution.es/" title="Website">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																																																<a href="skype:ypouillon80?userinfo" title="Skype" class="last-cell">
+										<span class="contact-icon phpbb_skype-icon">Skype</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content8917">
+
+						<h3 ><a href="#p8917">Re: Abinit 7.10.2 in Homebrew (OS-X) : libxc and netcdf issu&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting4423.html?mode=quote&amp;f=3&amp;p=8917" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic3e0e-2.html?p=8917#p8917" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist981e.html?mode=viewprofile&amp;u=71" style="color: #6633FF;" class="username-coloured">pouillon</a></strong> &raquo; </span>Mon Jan 26, 2015 5:19 pm
+			</p>
+			
+			
+			
+			<div class="content">Abinit 7.10.2 still depends on LibXC 2.0. LibXC 2.2 will be used with Abinit 8.0.<br /><br />You may get some issues with NetCDF if you build with GCC 4.8 on Mac, but I haven't understood yet what exaclty is occurring (I don't have any Mac around to test). It could be a good idea to discuss directly with the developers of NetCDF and report back here if they provide you with a solution.</div>
+			
+			
+			
+									
+									<div id="sig8917" class="signature">Yann Pouillon<br /><em class="text-italics">Simune Atomistics<br />Donostia-San Sebastián, Spain</em></div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p8918" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile8918">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist65dd.html?mode=viewprofile&amp;u=1119" class="username">davydden</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searche8e8.html?author_id=1119&amp;sr=posts">17</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Feb 15, 2013 6:50 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content8918">
+
+						<h3 ><a href="#p8918">Re: Abinit 7.10.2 in Homebrew (OS-X) : libxc and netcdf issu</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingd338.html?mode=quote&amp;f=3&amp;p=8918" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicea78.html?p=8918#p8918" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist65dd.html?mode=viewprofile&amp;u=1119" class="username">davydden</a></strong> &raquo; </span>Mon Jan 26, 2015 5:51 pm
+			</p>
+			
+			
+			
+			<div class="content">I see... Thanks for making it clear.<br />I actually build with clang + gfortran 4.9.<br />I guess for a moment i will just avoid building with NetCDF as I do not need really need.</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p8919" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile8919">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist65dd.html?mode=viewprofile&amp;u=1119" class="username">davydden</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searche8e8.html?author_id=1119&amp;sr=posts">17</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Feb 15, 2013 6:50 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content8919">
+
+						<h3 ><a href="#p8919">Re: Abinit 7.10.2 in Homebrew (OS-X) : libxc and netcdf issu</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting1895.html?mode=quote&amp;f=3&amp;p=8919" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopice9d6.html?p=8919#p8919" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist65dd.html?mode=viewprofile&amp;u=1119" class="username">davydden</a></strong> &raquo; </span>Mon Jan 26, 2015 6:53 pm
+			</p>
+			
+			
+			
+			<div class="content">Just a small follow-up question: is it possible to move `tests` folder from the build directory and run them via the same python script externally (given that abinit is in PATH)?<br /><br />Perhaps one could consider this option for future releases?</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p8920" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile8920">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlist194b.html?mode=viewprofile&amp;u=69" class="avatar"><img class="avatar" src="download/file2b59.jpg?avatar=69_1334683785.jpg" width="78" height="92" alt="User avatar" /></a>														</div>
+								<a href="memberlist194b.html?mode=viewprofile&amp;u=69" style="color: #33CC00;" class="username-coloured">jbeuken</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search2ddf.html?author_id=69&amp;sr=posts">365</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Aug 18, 2009 9:24 pm</dd>		
+		
+											
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact jbeuken">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact jbeuken</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://www.uclouvain.be/jean-michel.beuken" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content8920">
+
+						<h3 ><a href="#p8920">Re: Abinit 7.10.2 in Homebrew (OS-X) : libxc and netcdf issu</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting0167.html?mode=quote&amp;f=3&amp;p=8920" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicd01a-2.html?p=8920#p8920" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist194b.html?mode=viewprofile&amp;u=69" style="color: #33CC00;" class="username-coloured">jbeuken</a></strong> &raquo; </span>Mon Jan 26, 2015 7:45 pm
+			</p>
+			
+			
+			
+			<div class="content">Hi,<br /><br />only for information : <br /><br />there is hope to succeed to compile netcdf with gcc48  : MacPorts does !  <img class="smilies" src="images/smilies/icon_lol.gif" alt=":lol:" title="Laughing" /> <br />I use MacPorts on our MacOS X bot on our test farm :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>port list | grep netcdf<br />netcdf&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;@4.3.2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; science/netcdf<br />netcdf-cxx&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;@4.2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; science/netcdf-cxx<br />netcdf-cxx4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; @4.2.1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; science/netcdf-cxx4<br />netcdf-fortran&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;@4.2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; science/netcdf-fortran</code></pre></div><br /><br />we can see on the MacPorts website than there are some patch files…<br /><br /><blockquote class="uncited"><div>https://trac.macports.org/browser/trunk/dports/science/netcdf-fortran/Portfile<br /><!-- m --><a class="postlink" href="https://trac.macports.org/browser/trunk/dports/science/netcdf-fortran/files">https://trac.macports.org/browser/trunk ... tran/files</a><!-- m --></div></blockquote><br /><br />my 5¢<br /><br />jmb</div>
+			
+			
+			
+									
+									<div id="sig8920" class="signature">------<br>
+Jean-Michel Beuken<br>
+Computer Scientist</div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p8922" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile8922">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist65dd.html?mode=viewprofile&amp;u=1119" class="username">davydden</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searche8e8.html?author_id=1119&amp;sr=posts">17</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Feb 15, 2013 6:50 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content8922">
+
+						<h3 ><a href="#p8922">Re: Abinit 7.10.2 in Homebrew (OS-X) : libxc and netcdf issu</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting6d4b.html?mode=quote&amp;f=3&amp;p=8922" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicc006.html?p=8922#p8922" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist65dd.html?mode=viewprofile&amp;u=1119" class="username">davydden</a></strong> &raquo; </span>Tue Jan 27, 2015 10:35 am
+			</p>
+			
+			
+			
+			<div class="content">Another related question:<br /><br />On installation there is `abinit-tests` in `share` folder. However, it does not seem that the python scripts are runnable:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>$ python runtests.py fast<br />Traceback (most recent call last):<br />&nbsp; File &quot;runtests.py&quot;, line 32, in &lt;module&gt;<br />&nbsp; &nbsp; import tests<br />ImportError: No module named tests<br /></code></pre></div></div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p8997" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile8997">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlist913b.html?mode=viewprofile&amp;u=55" class="avatar"><img class="avatar" src="download/file04d0.png?avatar=55_1376078980.png" width="71" height="92" alt="User avatar" /></a>														</div>
+								<a href="memberlist913b.html?mode=viewprofile&amp;u=55" class="username">torrent</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchf977.html?author_id=55&amp;sr=posts">127</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Aug 14, 2009 7:40 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content8997">
+
+						<h3 ><a href="#p8997">Re: Abinit 7.10.2 in Homebrew (OS-X) : libxc and netcdf issu</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting832b-2.html?mode=quote&amp;f=3&amp;p=8997" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic226a-2.html?p=8997#p8997" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist913b.html?mode=viewprofile&amp;u=55" class="username">torrent</a></strong> &raquo; </span>Mon Mar 09, 2015 2:33 am
+			</p>
+			
+			
+			
+			<div class="content">Hi,<br /><br />Thanks for having initiated this homebrew formula for ABINIT...<br /><br />I have just submitted a few additions to your formula in homebrew-science (waiting for acceptance):<br />1- use of scalapack<br />2- simple patch to make libXC 2.2 useable<br />3- patch to corect the netCDF bug (occurs only when netCDF is activated and ETSF_IO is not); I have committed the changes upstream.<br /><br />I also have added a user's guide in ABINIT package and on the wiki; it includes homebrew installation (also macports and manual install).<br /><br />Marc</div>
+			
+			
+			
+									
+									<div id="sig8997" class="signature">Marc Torrent<br /><em class="text-italics">CEA - Bruyères-le-Chatel<br />France<br /></em></div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p9008" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile9008">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist65dd.html?mode=viewprofile&amp;u=1119" class="username">davydden</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searche8e8.html?author_id=1119&amp;sr=posts">17</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Feb 15, 2013 6:50 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content9008">
+
+						<h3 ><a href="#p9008">Re: Abinit 7.10.2 in Homebrew (OS-X) : libxc and netcdf issu</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting6521.html?mode=quote&amp;f=3&amp;p=9008" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicd917.html?p=9008#p9008" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist65dd.html?mode=viewprofile&amp;u=1119" class="username">davydden</a></strong> &raquo; </span>Fri Mar 13, 2015 1:56 pm
+			</p>
+			
+			
+			
+			<div class="content">Hi Marc, <br /><br />Thanks for contributing an update to the formula. <br />Hope it will be merged soon.<br /><br />Kind regards,<br />Denis.</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="postingd49e.html?mode=reply&amp;f=3&amp;t=2910" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopicf954.html?f=3&amp;t=2910&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=3&amp;t=2910">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			10 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforum4d6b.html?f=3" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Configuring and compiling ABINIT”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?p=8917 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:18:02 GMT -->
+</html>

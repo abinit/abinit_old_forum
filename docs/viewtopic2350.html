@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=3325&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 16:24:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Intraband Contribution to Screening File</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Intraband Contribution to Screening File</h2>
+		<p><a href="viewtopic51ae.html?f=11&amp;t=3325">https://forum.abinit.org/viewtopic.php?f=11&amp;t=3325</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Intraband Contribution to Screening File</h3>
+				<div class="date">Posted: <strong>Thu Jul 14, 2016 12:12 pm</strong></div>
+				<div class="author">by <strong>Patrick</strong></div>
+				<div class="content">Hello,<br /><br />I've noticed that during a contour deformation screening calculation, prior to a GW calculation, the files containing the dielectric function *_EM1_LF and *_EM1_NLF don't appear to contain intraband contributions. It looks like calculating the intraband contribution is forcefully disabled in the source file screening.f90 . Is there a way to extract the full dielectric function with intraband contributions ? To what extent are intraband contributions to the dielectric function accounted for when calculating quasi particle energies? <br /><br />Many Thanks,<br />Patrick</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Intraband Contribution to Screening File</h3>
+				<div class="date">Posted: <strong>Sun Jul 17, 2016 3:46 am</strong></div>
+				<div class="author">by <strong>lucamontana</strong></div>
+				<div class="content">Intraband contributions are important in case of metals for which you need a very very dense k-grid (18x18X18) to obtain converged results.<br />For semi conductors and insulators intraband transitions are absent.<br /><br />LUCA</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Intraband Contribution to Screening File</h3>
+				<div class="date">Posted: <strong>Mon Jul 18, 2016 3:51 pm</strong></div>
+				<div class="author">by <strong>Patrick</strong></div>
+				<div class="content">Thanks for the reply Luca. I am looking at metals and metal-insulator transitions, so it would be good to know if the screening file (calculated using the contour deformation method: optdriver=3, gwcalctyp=2) already does contain intraband contributions. Are you able to confirm it does contain intraband contributions when using metallic occupations? If so, how is this calculated within the code and is the band structure dependent, effective mass of the electrons included?<br /><br />Line 1122 of the Abinit 8.0.7 screening.f90 file: &quot; add_chi0_intraband=.FALSE.&quot; would appear to override intraband contributions and I am reluctant to change it to &quot;.TRUE.&quot; if the associated code isn't ready yet.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Intraband Contribution to Screening File</h3>
+				<div class="date">Posted: <strong>Wed Jul 20, 2016 8:16 am</strong></div>
+				<div class="author">by <strong>lucamontana</strong></div>
+				<div class="content">It is easy to verify whether the intraband contributions are contained in the screening or not by just comparing to the results obtained for a well known metal example.<br />Just try &quot;add_chi0_intraband=.TRUE.&quot; and look what happens. I never check it.<br /><br />Intraband contributions are always band structure dependent. If you are lucky, these contributions could be small in your case. But to know this you simply have to plot the band structure with the Fermi energy. Typically the intraband contributions are calculated in a semi-empirical way by use of a DRUDE complex plasma frequency from electron energy loss spectrum. Ab-initio calculation of intraband contributions requires a huge huge number of k-point sampling of the screening.<br /><br />LUCA</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Intraband Contribution to Screening File</h3>
+				<div class="date">Posted: <strong>Fri May 22, 2020 8:05 pm</strong></div>
+				<div class="author">by <strong>cennanaradipa</strong></div>
+				<div class="content">Hi All,<br>
+<br>
+I was just wondering isthere's an update regarding this topic? I'm planning to do a simple RPA with/without local field effects but with intraband term included.<br>
+<br>
+So far, the forums don't really have any other answer except this one. I'm using a cluster so it's a bit tricky for me to modify the code manually.<br>
+<br>
+Cenna</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=3325&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 16:24:15 GMT -->
+</html>

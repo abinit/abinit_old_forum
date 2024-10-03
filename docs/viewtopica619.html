@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=243&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:56:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] Pb installation of abinit-6.0.2 with wannier90</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] Pb installation of abinit-6.0.2 with wannier90</h2>
+		<p><a href="viewtopic1075.html?f=14&amp;t=243">https://forum.abinit.org/viewtopic.php?f=14&amp;t=243</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] Pb installation of abinit-6.0.2 with wannier90</h3>
+				<div class="date">Posted: <strong>Sat Apr 17, 2010 12:46 am</strong></div>
+				<div class="author">by <strong>tchanier</strong></div>
+				<div class="content">Dear colleagues,<br /><br />I am experiencing problem to install the abinit 6 with wannier90 plugin. Here is my configuration command:<br /><br />$ ./configure --prefix=/home/chanier/ABINIT2/bin --enable-mpi=&quot;yes&quot; --enable-mpi-io=&quot;yes&quot; --with-mpi-prefix=&quot;/sw/openmpi-SNAFU&quot; --enable-64bit-flags=&quot;yes&quot;  --enable-wannier90=&quot;yes&quot; --with-wannier90-includes=-I/home/chanier/ABINIT/abinit-6.0.2/plugins/wannier90 --with-wannier90-libs=-L/home/chanier/ABINIT/abinit-6.0.2/plugins/wannier90<br />$ make<br />$ make install<br /><br />When I run the tutorial code for wannier90, it ends to this error:<br /> chkinp: ERROR -<br />         prtwant==2 is only relevant if wannier90 library is linked<br />         Action: check compilation options<br />-P-0000<br />-P-0000  leave_new : decision taken to exit ...<br /><br />How to include wanner90? Do you have any idea?<br /><br />Thanks in advance, best regards,<br /><br />Thomas Chanier</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Pb installation of abinit-6.0.2 with wannier90 plugin</h3>
+				<div class="date">Posted: <strong>Mon Apr 19, 2010 6:38 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Please look at the output of configure (&quot;Plug-ins&quot; section). It will tell you whether it was able to download Wannier90. If it is not the case, you may have to download Wannier90 1.1 manually and move it to ~/.abinit/tarballs/.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Pb installation of abinit-6.0.2 with wannier90 plugin</h3>
+				<div class="date">Posted: <strong>Tue Apr 20, 2010 11:57 pm</strong></div>
+				<div class="author">by <strong>tchanier</strong></div>
+				<div class="content">Hello,<br /><br />I copied the wannbier90-1.1.tar in the .abinit/tarball/ directory and installed wannier90-1.1. The configuration command line I used is : <br />$./configure --prefix=/home/chanier/ABINIT2/bin --enable-mpi=&quot;yes&quot; --enable-mpi-io=&quot;yes&quot; --with-mpi-prefix=&quot;/sw/openmpi-SNAFU&quot; --enable-64bit-flags=&quot;yes&quot;  --enable-wannier90=&quot;yes&quot;<br /><br />I then check the config.log file:<br />$grep &quot;wannier&quot; config.log <br />  $ ./configure --prefix=/home/chanier/ABINIT2/bin --enable-mpi=yes --enable-mpi-io=yes --with-mpi-prefix=/sw/openmpi-SNAFU --enable-64bit-flags=yes --enable-wannier90=yes --with-wannier90-includes=-I/home/chanier/.abinit/wannier90-1.1/ --with-wannier90-libs=-L/home/chanier/.abinit/wannier90-1.1/ --with-wannier90=/home/chanier/.abinit/wannier90-1.1/<br />config.status:1459: creating plugins/wannier90/Makefile<br />build_wannier90='no'<br />enable_wannier90='yes'<br />fcflags_opt_wannier90='-O2'<br />lib_wannier90_incs='-I/home/chanier/.abinit/wannier90-1.1/'<br />lib_wannier90_libs='-L/home/chanier/.abinit/wannier90-1.1/'<br />wannier90_pkg_name='wannier90-1.1'<br />wannier90_pkg_string='Wannier90 program 1.1 (upstream release)'<br />with_wannier90='/home/chanier/.abinit/wannier90-1.1/'<br />with_wannier90_includes='-I/home/chanier/.abinit/wannier90-1.1/'<br />with_wannier90_libs='-L/home/chanier/.abinit/wannier90-1.1/'<br /><br /><br />Then: <br />$make<br />I have the following error message:<br />Undefined symbols:<br />  &quot;_wannier_setup_&quot;, referenced from:<br />      _mlwfovlp_setup_ in lib67_common.a(mlwfovlp_setup.o)<br />  &quot;_wannier_run_&quot;, referenced from:<br />      _mlwfovlp_ in lib67_common.a(mlwfovlp.o)<br />ld: symbol(s) not found<br />collect2: ld returned 1 exit status<br />make[3]: *** [abinit] Error 1<br />make[2]: *** [all-recursive] Error 1<br />make[1]: *** [all-recursive] Error 1<br />make: *** [all] Error 2<br /><br />Do you have any idea to solve the problem?<br /><br />Thanks,<br /><br />Thomas</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Pb installation of abinit-6.0.2 with wannier90 plugin</h3>
+				<div class="date">Posted: <strong>Thu Apr 22, 2010 2:01 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">You were only supposed to <strong class="text-strong">copy</strong> wannier90-1.1.tar.gz to ~/.abinit/tarballs/, if and only if configure was not able to download it automatically. Installing packages under ~/.abinit/ is not recommended in any case, as it may interfere with the normal build system workflow. I suggest you to clean-up things a bit there.<br /><br />For the moment, you should not build Wannier90 outside Abinit. Patches have to be applied before, and that's precisely what the Abinit build system takes care of for you. You whould thus not use any --with-wannier90* option.<br /><br />By the way, your --with-wannier90-libs option was incomplete. It should at least include &quot;-lwannier&quot; to work.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Pb installation of abinit-6.0.2 with wannier90 plugin</h3>
+				<div class="date">Posted: <strong>Tue Apr 27, 2010 10:54 pm</strong></div>
+				<div class="author">by <strong>tchanier</strong></div>
+				<div class="content">Dear Yann Pouillon,<br /><br /><br />I tried with the following configuration script, with and without the 1.1 wannier90 tarball, and it still fails when I run the tutorial file on wannier90. I<br />Configuration script&#058; <br />./configure --prefix=/home/chanier/kirikou2 --enable-mpi=&quot;yes&quot; --enable-mpi-io=&quot;yes&quot; --with-mpi-prefix=&quot;/sw/openmpi-SNAFU&quot; --enable-64bit-flags=&quot;yes&quot;  --enable-wannier90=&quot;yes&quot;<br />Do you have an idea how to solver the problem?<br /><br />Thanks,<br /><br />Thomas</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Pb installation of abinit-6.0.2 with wannier90 plugin</h3>
+				<div class="date">Posted: <strong>Wed Apr 28, 2010 5:52 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">I don't see what could be wrong with your configuration.<br /><br />Could you send as attachements your config.log, config.mk, and the report about options at the beginning of the abinit log file?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Pb installation of abinit-6.0.2 with wannier90 plugin</h3>
+				<div class="date">Posted: <strong>Thu May 13, 2010 1:05 am</strong></div>
+				<div class="author">by <strong>tchanier</strong></div>
+				<div class="content">Dear Yann Pouillon,<br /><br />Please find enclosed herewith the config.log file. Apparently, wannier90 was not built although I included the flag withwannier90 in the confiiguration command line :<br /> <br />./configure --prefix=/home/chanier/private-SNAFU --enable-mpi=&quot;yes&quot; --enable-mpi-io=&quot;yes&quot; --with-mpi-prefix=&quot;/sw/openmpi-SNAFU&quot; --enable-64bit-flags=&quot;yes&quot;  --enable-wannier90=&quot;yes&quot;<br /> when I run it with the wannier90 tutorial it issues the following error message :<br /><br /> chkinp: ERROR -<br />         prtwant==2 is only relevant if wannier90 library is linked<br />         Action: check compilation options<br /><br /> leave_new : decision taken to exit ...<br /><br /> === Plug-ins ===<br />  BigDFT    : no<br />  ETSF I/O  : no<br />  LibXC     : no<br />  FoX       : no<br />  NetCDF    : no<br />  Wannier90 : no<br /><br />Thank you for your help,<br />Best,<br />Thomas</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Pb installation of abinit-6.0.2 with wannier90 plugin</h3>
+				<div class="date">Posted: <strong>Sat May 15, 2010 9:01 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content"><blockquote class="uncited"><div>configure:29789: checking for a source tarball of WANNIER90<br />configure:29794: result: no<br />configure:29799: downloading WANNIER90 - this may take a while<br />configure:29803: checking availability of WANNIER90 from URL 1<br />configure:29809: result: no<br />configure:29813: checking availability of WANNIER90 from URL 2<br />configure:29819: result: no<br />configure:29834: WARNING: could not download WANNIER90 plug-in tarball<br />configure:29836: WARNING: support for WANNIER90 plug-in has been disabled<br />configure:29886: checking whether to enable the WANNIER90 plug-in<br />configure:29888: result: no<br />configure:29890: checking whether to build the WANNIER90 plug-in<br />configure:29892: result: no<br /></div></blockquote><br /><br />from your config.log: the .tar.gz was not downloaded, so no build is possible. You can get it directly from <!-- m --><a class="postlink" href="http://quasiamore.mit.edu/wannier/code/wannier90-1.1.tar.gz">http://quasiamore.mit.edu/wannier/code/ ... 1.1.tar.gz</a><!-- m -->, and put it in ~/.abinit/tarballs/<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Pb installation of abinit-6.0.2 with wannier90 plugin</h3>
+				<div class="date">Posted: <strong>Tue May 18, 2010 8:26 pm</strong></div>
+				<div class="author">by <strong>tchanier</strong></div>
+				<div class="content">Dear Matthieu,<br /><br />Thank you, it solved the problem.<br /><br />Best,<br /><br />Thomas</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=243&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:56:06 GMT -->
+</html>

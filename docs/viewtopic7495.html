@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=378&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:33:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; error in reading a _DEN file with cut3d</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>error in reading a _DEN file with cut3d</h2>
+		<p><a href="viewtopic6f9b.html?f=12&amp;t=378">https://forum.abinit.org/viewtopic.php?f=12&amp;t=378</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>error in reading a _DEN file with cut3d</h3>
+				<div class="date">Posted: <strong>Thu Jun 03, 2010 5:48 pm</strong></div>
+				<div class="author">by <strong>mohua</strong></div>
+				<div class="content">Hi all,<br /><br />I am trying to prepare a density file with cut3d for a system with 10 atoms. The abinit version that I am using is 6.0.2. It gives me the following error. Could someone please help me with this. <br />Thanks<br />Mohua<br /><br /><br /><br />What is the name of the 3D function (density, potential or wavef) file ?<br />t41o_optcell0_DS1_DEN<br />  =&gt; Your 3D function file is : t41o_optcell0_DS1_DEN<br /><br />  Does this file contain formatted 3D ASCII data (=0)  <br />   or unformatted binary header + 3D data        (=1) ?<br />1<br />  1 =&gt; Your file contains unformatted binary header + 3D data<br />  The information it contains should be sufficient.<br />  cut3d : read file t41o_optcell0_DS1_DEN from unit number 19.<br /><br /><br /> hdr_io : ERROR -<br />  The first line of the (WF, DEN or POT) file read in unit  19 is erroneous.<br />  headform is       57, while it should be 23, 34, 40, 41, 42, 44 or 53.<br />  Action : check the correctness of your file.<br /><br /> leave_new : decision taken to exit ...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: error in reading a _DEN file with cut3d</h3>
+				<div class="date">Posted: <strong>Fri Jun 04, 2010 8:40 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">The density has been generated with a new version of abinit (&gt; 5.7, hence the code) but you are using an old version of cut3d (5.3), which does not accept the new format.<br /><br />Use a more recent version of cut3d, which should be present alongside your abinit executable, and remove the old cut3d.<br /><br />Try &quot;which cut3d&quot; to see which version of cut3d is actually being used on the command line.<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: error in reading a _DEN file with cut3d</h3>
+				<div class="date">Posted: <strong>Thu Nov 11, 2010 6:08 pm</strong></div>
+				<div class="author">by <strong>Renxiong Lee</strong></div>
+				<div class="content">I need your help, too. I have met the same problem. The abinit version that I am using is 5.8.3.but the question is where can I get a new version of cut3d!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: error in reading a _DEN file with cut3d</h3>
+				<div class="date">Posted: <strong>Fri Nov 12, 2010 11:50 am</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hello,<br /><br />You should find cut3d in the same directory as where the abinit executable is.<br /><br />David</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: error in reading a _DEN file with cut3d</h3>
+				<div class="date">Posted: <strong>Sat Nov 13, 2010 5:56 am</strong></div>
+				<div class="author">by <strong>Renxiong Lee</strong></div>
+				<div class="content">Yes, I find it.But I still have no idea of solving my problem.Should I update my cut3d? How can I do it? Expecting your help,thanks.<br /><br />What is the name of the 3D function (density, potential or wavef) file ?<br />t1xo_DEN<br />  =&gt; Your 3D function file is : t1xo_DEN<br /><br />  Does this file contain formatted 3D ASCII data (=0)  <br />   or unformatted binary header + 3D data        (=1) ?<br />1<br />  1 =&gt; Your file contains unformatted binary header + 3D data<br />  The information it contains should be sufficient.<br />  cut3d : read file t1xo_DEN from unit number 19.<br /><br /><br /> hdr_io : ERROR -<br />  The first line of the (WF, DEN or POT) file read in unit  19 is erroneous.<br />  headform is       57, while it should be 23, 34, 40, 41, 42, 44 or 53.<br />  Action : check the correctness of your file.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: error in reading a _DEN file with cut3d</h3>
+				<div class="date">Posted: <strong>Tue Jan 25, 2011 12:52 pm</strong></div>
+				<div class="author">by <strong>gayathri</strong></div>
+				<div class="content">Hi! I am new to abinit and have version 6.4.3. As posted by others earlier, I am not able to read the _DEN file with the cut3d provided with the above version of abinit. If you have circumveted the problem, kindly advise. P.S. I am getting the same error as reported earlier by others.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: error in reading a _DEN file with cut3d</h3>
+				<div class="date">Posted: <strong>Sun Mar 13, 2011 9:35 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Use the same distro for the abinit and cut3d executables. They should be in src/98_main/, or in the bin directory you chose if you ran &quot;make install&quot;. Obviously cut3d can not be &quot;forward compatible&quot; with abinit versions in the future...<br /><br />M.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: error in reading a _DEN file with cut3d</h3>
+				<div class="date">Posted: <strong>Thu Mar 31, 2011 3:53 am</strong></div>
+				<div class="author">by <strong>xellossssss</strong></div>
+				<div class="content">Hello,<br />I also have the same problem to use cut3d.<br />The version is 6.4.3 abinit static binaries and I put 'abinit' and 'cut3d' in the same directory. (&quot;tutorial/Input/Work&quot;).<br />Before I use 6.4.3, I tried to insatll 6.6.1 but I cannot succeed. That's why I go back to 6.4.3.<br />I run apt-get install abinit first before running cut3d.<br />I am not sure if it is the version problem.<br />Could anyone help me solve this problem ?<br /><br />Thanks</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: error in reading a _DEN file with cut3d</h3>
+				<div class="date">Posted: <strong>Thu May 19, 2011 5:55 pm</strong></div>
+				<div class="author">by <strong>Renxiong Lee</strong></div>
+				<div class="content">If you install the correct version, and the problem is still there. Try to add the cut3d 's detail path before executing it. Maybe it works.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=378&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:33:42 GMT -->
+</html>

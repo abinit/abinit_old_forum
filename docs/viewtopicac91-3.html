@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=568&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:52:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; mistake in the derivative of the bessel function?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>mistake in the derivative of the bessel function?</h2>
+		<p><a href="viewtopicd901.html?f=19&amp;t=568">https://forum.abinit.org/viewtopic.php?f=19&amp;t=568</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>mistake in the derivative of the bessel function?</h3>
+				<div class="date">Posted: <strong>Thu Sep 02, 2010 10:22 am</strong></div>
+				<div class="author">by <strong>ppy</strong></div>
+				<div class="content">Hi,<br />I am not sure but it seems to me that there is a mistake in the derivative of the bessel function during the settlement of the kleinman-bylander projector of the pseudopotential, in the file 65_psp/psp5nl.F90.<br />The mistake would be at the lines :<br />316<br />396<br />473<br />The derivative of the Bessel function should be :  <br />           $dj_n(qr)/dx = 2\pi r [ j_{n-1}(2\pi q r) - \frac{n}{2\pi q r} j_n(2\pi q r) dr]$<br />whereas the following formula is used :<br />           $dj_n(qr)/dx = 2\pi r [ j_{n-1}(2\pi q r) - \frac{n+1}{2\pi q r} j_n(2\pi q r) dr]$<br />n+1 is used instead of n in the fraction.<br /><br />Also lignes 300 and 303, I don't understand the division by 3.0?<br /><br />Thanks in advance for your answer<br />Best Regards<br />PYP</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: mistake in the derivative of the bessel function?</h3>
+				<div class="date">Posted: <strong>Thu Sep 02, 2010 10:48 am</strong></div>
+				<div class="author">by <strong>ppy</strong></div>
+				<div class="content">ok sorry, this is my mistake, the spline doesn't involve the first but the second derivative.<br />Sorry again for this message<br />PYP</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: mistake in the derivative of the bessel function?</h3>
+				<div class="date">Posted: <strong>Fri Sep 03, 2010 10:46 am</strong></div>
+				<div class="author">by <strong>ppy</strong></div>
+				<div class="content">Sorry for my second post, this is what happen when making several things at a time. But finally I am still thinking that my first post is right, <br /><br /><blockquote><div><cite>ppy wrote:</cite>The derivative of the Bessel function should be :<br />$dj_n(qr)/dx = 2\pi r [ j_{n-1}(2\pi q r) - \frac{n}{2\pi q r} j_n(2\pi q r) dr]$<br />whereas the following formula is used :<br />$dj_n(qr)/dx = 2\pi r [ j_{n-1}(2\pi q r) - \frac{n+1}{2\pi q r} j_n(2\pi q r) dr]$<br />n+1 is used instead of n in the fraction.</div></blockquote><br /><br />so maybe somebody would have some suggestions...<br /><br />Thanks for your answers</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: mistake in the derivative of the bessel function?</h3>
+				<div class="date">Posted: <strong>Sat Sep 04, 2010 9:11 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello, <br /><br />could you supply a patch file with some context lines around the ones you think are wrong? The line numbers change all the time so I don't know which ones you are looking at.<br /><br />How did you come upon this? Do you have an erroneous result or some failing test of your own?<br /><br />thanks<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: mistake in the derivative of the bessel function?</h3>
+				<div class="date">Posted: <strong>Sun Sep 05, 2010 5:33 pm</strong></div>
+				<div class="author">by <strong>ppy</strong></div>
+				<div class="content">Thanks for your answer, I understood MY mistake, I was using the Bessel function of the first kind instead of the spherical ones.<br />To answer your question I am trying to implement a pseudo empirical code, and I am trying to calculate the Kleinman-Bylander form of the pseudopotential, since I am a fortunate user of Abinit and I like this code, I am checking step by step if what I am doing is fine and my understanding fairly well. This proves that it was necessary.<br />Best Regards!<br />PYP</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: mistake in the derivative of the bessel function?</h3>
+				<div class="date">Posted: <strong>Mon Sep 06, 2010 8:32 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">So the formulas in psp5nl are fine? <br /><br />If you are looking for a pseudopotential code, the bits of abinit are quite limited. You could look at fhi98pp, APE, or OPIUM for more complete codes with all of the trappings.<br /><br />cheers<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: mistake in the derivative of the bessel function?</h3>
+				<div class="date">Posted: <strong>Mon Sep 06, 2010 11:15 am</strong></div>
+				<div class="author">by <strong>ppy</strong></div>
+				<div class="content">Yes I think every thing is fine is the routine pspnl.f90.<br />Thanks for the advice, actually I am also looking at the fhi98pp code in the same time, but I probably did it too fast and I didn't notice my mistake.<br />Best Regards</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=568&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:52:40 GMT -->
+</html>

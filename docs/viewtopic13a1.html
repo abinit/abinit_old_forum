@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2931&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:51:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; parallel error</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>parallel error</h2>
+		<p><a href="viewtopicf08a.html?f=3&amp;t=2931">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2931</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>2</strong></div>
+					<div class="post">
+				<h3>parallel error</h3>
+				<div class="date">Posted: <strong>Sun Feb 15, 2015 5:09 am</strong></div>
+				<div class="author">by <strong>hammouri</strong></div>
+				<div class="content">I'm trying to compile abinit for parallel version but I'm getting this error:<br />checking whether to enable OpenMP support... no<br />checking whether to build MPI code... yes<br />checking whether the C compiler supports MPI... no<br />checking whether the C++ compiler supports MPI... no<br />checking whether the Fortran Compiler supports MPI... no<br />checking whether MPI is usable... no<br />configure: error: MPI support is broken - please fix your config parameters and/or MPI installation<br />....<br />Any comment!<br /><br />Regards,<br />MH</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel error</h3>
+				<div class="date">Posted: <strong>Sun Feb 15, 2015 7:10 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">need more infos !!!<br /><br />your configure command  ( ./configure  and/or the config.log )<br />your environment ( env, PATH, which mpif90, mpif90 -show,… )<br /><br />thx</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel error</h3>
+				<div class="date">Posted: <strong>Mon Feb 16, 2015 4:24 am</strong></div>
+				<div class="author">by <strong>hammouri</strong></div>
+				<div class="content">I used what it mention at : <!-- m --><a class="postlink" href="http://www.abinit.org/documentation/build-system/mpi-support">http://www.abinit.org/documentation/bui ... pi-support</a><!-- m --><br />----------------------------------------------------------------------------------------------------<br />  cd abinit-5.8.0<br />  mkdir tmp-serial<br />  cd tmp-serial<br />  ../configure \<br />    --program-suffix=&quot;-seq&quot; \<br />    --disable-mpi<br />  make<br />  cd ..<br />  mkdir tmp-scalapack<br />  cd tmp-scalapack<br />  ../configure \<br />    --program-suffix=&quot;-mpi&quot; \<br />    --enable-mpi \<br />    --enable-scalapack \<br />    --with-scalapack-libs=&quot;-lscalapack -lblacs&quot; \<br />    FC=gfortran<br />  make<br />--------------------------------------------------------------------------------------------------</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel error</h3>
+				<div class="date">Posted: <strong>Mon Feb 16, 2015 10:09 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">outdated ! <br />please use a more recent version of abinit ( 7.10.2 )</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel error</h3>
+				<div class="date">Posted: <strong>Mon Feb 16, 2015 10:18 pm</strong></div>
+				<div class="author">by <strong>hammouri</strong></div>
+				<div class="content">I'm using it!<br />I just used the commands that mention on the link I posted. commands line do not depend on the version, right?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel error</h3>
+				<div class="date">Posted: <strong>Tue Feb 17, 2015 8:58 am</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content"><blockquote class="uncited"><div>I just used the commands that mention on the link I posted. commands line do not depend on the version, right?</div></blockquote><br /><br />yes and no !<br /><br />some configure options have been removed while others have been added …<br /><br />concerning the MPI support, what are the results of theses commands :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>env<br />which mpif90<br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel error</h3>
+				<div class="date">Posted: <strong>Fri Feb 20, 2015 9:18 am</strong></div>
+				<div class="author">by <strong>hammouri</strong></div>
+				<div class="content">I just used this command line :<br />./configure --enable-mpi --with-mpi-prefix=&quot;/usr/bin&quot;<br />but I've got this error:<br /><br />configure: error: MPI support is broken - please fix your config parameters and/or MPI installation<br />This error is weird because I'm using another code without any problems, so how MPI is broken??<br /><br />I do not know what env is on the cluster.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel error</h3>
+				<div class="date">Posted: <strong>Fri Feb 20, 2015 9:27 am</strong></div>
+				<div class="author">by <strong>hammouri</strong></div>
+				<div class="content"><blockquote><div><cite>jbeuken wrote:</cite><blockquote class="uncited"><div>I just used the commands that mention on the link I posted. commands line do not depend on the version, right?</div></blockquote><br /><br />yes and no !<br /><br />some configure options have been removed while others have been added …<br /><br />concerning the MPI support, what are the results of theses commands :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>env<br />which mpif90<br /></code></pre></div></div></blockquote><br /><br /><br /><strong class="text-strong">mpif90:</strong><br />/usr/local/openmpi/bin/mpif90<br /><br /><br /><strong class="text-strong">env:</strong><br />MKLROOT=/opt/intel/composer_xe_2011_sp1.10.319/mkl<br />LESSKEY=/etc/lesskey.bin<br />NNTPSERVER=news<br />MANPATH=/opt/intel/composer_xe_2011_sp1.10.319/man/en_US:/opt/intel/composer_xe_2011_sp1.10.319/man/en_US:/opt/intel/composer_xe_2011_sp1.10.319/man/en_US:/usr/local/man:/usr/share/man:<br />XDG_SESSION_ID=22748<br />HOSTNAME=whisper<br />XKEYSYMDB=/usr/X11R6/lib/X11/XKeysymDB<br />INTEL_LICENSE_FILE=/opt/intel/composer_xe_2011_sp1.10.319/licenses:/opt/intel/licenses:/home/mhammouri/intel/licenses<br />HOST=whisper<br />TERM=vt100<br />SHELL=/bin/bash<br />PROFILEREAD=true<br />HISTSIZE=1000<br />SSH_CLIENT=172.16.117.71 49194 22<br />LIBRARY_PATH=/opt/intel/composer_xe_2011_sp1.10.319/compiler/lib/intel64:/opt/intel/composer_xe_2011_sp1.10.319/mkl/lib/intel64:/opt/intel/composer_xe_2011_sp1.10.319/compiler/lib/intel64:/opt/intel/composer_xe_2011_sp1.10.319/compiler/lib/intel64:/opt/intel/composer_xe_2011_sp1.10.319/mkl/lib/intel64<br />FPATH=/opt/intel/composer_xe_2011_sp1.10.319/mkl/include:/opt/intel/composer_xe_2011_sp1.10.319/mkl/include<br />MORE=-sl<br />SSH_TTY=/dev/pts/16<br />JRE_HOME=/usr/lib64/jvm/jre<br />USER=mhammouri<br />LS_COLORS=no=00:fi=00:di=01;34:ln=00;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=41;33;01:ex=00;32:*.cmd=00;32:*.exe=01;32:*.com=01;32:*.bat=01;32:*.btm=01;32:*.dll=01;32:*.tar=00;31:*.tbz=00;31:*.tgz=00;31:*.rpm=00;31:*.deb=00;31:*.arj=00;31:*.taz=00;31:*.lzh=00;31:*.lzma=00;31:*.zip=00;31:*.zoo=00;31:*.z=00;31:*.Z=00;31:*.gz=00;31:*.bz2=00;31:*.tb2=00;31:*.tz2=00;31:*.tbz2=00;31:*.xz=00;31:*.avi=01;35:*.bmp=01;35:*.fli=01;35:*.gif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mng=01;35:*.mov=01;35:*.mpg=01;35:*.pcx=01;35:*.pbm=01;35:*.pgm=01;35:*.png=01;35:*.ppm=01;35:*.tga=01;35:*.tif=01;35:*.xbm=01;35:*.xpm=01;35:*.dl=01;35:*.gl=01;35:*.wmv=01;35:*.aiff=00;32:*.au=00;32:*.mid=00;32:*.mp3=00;32:*.ogg=00;32:*.voc=00;32:*.wav=00;32:<br />LD_LIBRARY_PATH=/usr/local/openmpi/lib64:/opt/intel/composer_xe_2011_sp1.10.319/compiler/lib/intel64:/opt/intel/composer_xe_2011_sp1.10.319/mkl/lib/intel64:/opt/intel/composer_xe_2011_sp1.10.319/compiler/lib/intel64:/opt/intel/composer_xe_2011_sp1.10.319/compiler/lib/intel64:/opt/intel/composer_xe_2011_sp1.10.319/mkl/lib/intel64:/opt/intel/composer_xe_2011_sp1.10.319/debugger/lib/intel64:/opt/intel/composer_xe_2011_sp1.10.319/mpirt/lib/intel64<br />XNLSPATH=/usr/share/X11/nls<br />HYDRA_HOST_FILE=/usr/local/mpich2/share/machines.LINUX<br />CPATH=/opt/intel/composer_xe_2011_sp1.10.319/mkl/include:/opt/intel/composer_xe_2011_sp1.10.319/mkl/include<br />HOSTTYPE=x86_64<br />CONFIG_SITE=/usr/share/site/x86_64-unknown-linux-gnu<br />FROM_HEADER=<br />PAGER=less<br />CSHEDIT=emacs<br />XDG_CONFIG_DIRS=/etc/xdg<br />NLSPATH=/opt/intel/composer_xe_2011_sp1.10.319/mkl/lib/intel64/locale/%l_%t/%N:/opt/intel/composer_xe_2011_sp1.10.319/compiler/lib/intel64/locale/%l_%t/%N:/opt/intel/composer_xe_2011_sp1.10.319/mkl/lib/intel64/locale/%l_%t/%N:/opt/intel/composer_xe_2011_sp1.10.319/debugger/intel64/locale/%l_%t/%N<br />MINICOM=-c on<br />MAIL=/var/mail/mhammouri<br />PATH=/usr/local/openmpi/bin:.:/opt/intel/composer_xe_2011_sp1.10.319/bin/intel64:/home/mhammouri/bin:/usr/local/bin:/usr/bin:/bin:/usr/bin/X11:/usr/X11R6/bin:/usr/games:/usr/lib64/jvm/jre/bin:/opt/intel/composer_xe_2011_sp1.10.319/mpirt/bin/intel64:/usr/local/mpich2/bin<br />CPU=x86_64<br />JAVA_BINDIR=/usr/lib64/jvm/jre/bin<br />INPUTRC=/home/mhammouri/.inputrc<br />PWD=/home/mhammouri/mhmood/abinit/abinit-7<br />JAVA_HOME=/usr/lib64/jvm/jre<br />LANG=en_US.UTF-8<br />PYTHONSTARTUP=/etc/pythonstart<br />GPG_TTY=/dev/pts/16<br />QT_SYSTEM_DIR=/usr/share/desktop-data<br />SHLVL=1<br />HOME=/home/mhammouri<br />SDL_AUDIODRIVER=pulse<br />ALSA_CONFIG_PATH=/etc/alsa-pulse.conf<br />LESS_ADVANCED_PREPROCESSOR=no<br />OSTYPE=linux<br />LS_OPTIONS=-N --color=tty -T 0<br />XCURSOR_THEME=DMZ<br />WINDOWMANAGER=/usr/bin/startkde<br />G_FILENAME_ENCODING=@locale,UTF-8,ISO-8859-15,CP1252<br />LESS=-M -I -R<br />MACHTYPE=x86_64-suse-linux<br />LOGNAME=mhammouri<br />CVS_RSH=ssh<br />XDG_DATA_DIRS=/usr/share<br />SSH_CONNECTION=172.16.117.71 49194 128.123.210.194 22<br />LESSOPEN=lessopen.sh %s<br />XDG_RUNTIME_DIR=/run/user/mhammouri<br />INCLUDE=/opt/intel/composer_xe_2011_sp1.10.319/mkl/include:/opt/intel/composer_xe_2011_sp1.10.319/mkl/include<br />LESSCLOSE=lessclose.sh %s %s<br />G_BROKEN_FILENAMES=1<br />JAVA_ROOT=/usr/lib64/jvm/jre<br />COLORTERM=1<br />_=/usr/bin/env<br />OLDPWD=/home/mhammouri</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel error&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Fri Feb 20, 2015 7:39 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">ok…<br /><br /><blockquote class="uncited"><div>mpif90:<br />/usr/local/openmpi/bin/mpif90<br /></div></blockquote><br /><br />then, at least, the configure command must be :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure --enable-mpi --with-mpi-prefix=&quot;/usr/local/openmpi&quot;</code></pre></div><br /><br />we progress…</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel error</h3>
+				<div class="date">Posted: <strong>Sun Mar 15, 2015 5:54 pm</strong></div>
+				<div class="author">by <strong>hammouri</strong></div>
+				<div class="content">Still have problems ...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel error</h3>
+				<div class="date">Posted: <strong>Mon Mar 16, 2015 9:27 pm</strong></div>
+				<div class="author">by <strong>hammouri</strong></div>
+				<div class="content">Hello jbeuken,<br />I thought I have the parallel version of abinit. I tried to test a simple parallel job by following the simple run that already mention at the website of abinit, I got these lines from the output file which indicates I do not have the parallel version yet:<br /> === Multicore === <br />  Parallel build : no<br />  Parallel I/O   : no<br />  openMP support : no<br />  GPU support    : no<br />===============<br />Going back to your last post, I used this command :<br />./configure --enable-mpi --with-mpi-prefix=&quot;/usr/local/openmpi&quot;<br />and after  it finished I got this summery :<br /> ==============================================================================<br /> === Final remarks                                                          ===<br /> ==============================================================================<br /><br /><br />        +--------------------------------------------------------------+<br />        | About the Intel Fortran compiler                             |<br />        +--------------------------------------------------------------+<br />        | Your compiler will work properly only if the LD_LIBRARY_PATH |<br />        | and INTEL_LICENSE_FILE environment variables are correctly   |<br />        | set-up. Please make sure that this is the case before        |<br />        | building ABINIT.                                             |<br />        |                                                              |<br />        | In most cases it means sourcing a script in the Intel        |<br />        | compiler install directory, e.g.:                            |<br />        |                                                              |<br />        | . /opt/intel/fc/9.1/bin/ifortvars.sh                         |<br />        |                                                              |<br />        | for a Bourne-like shell (do not forget the leading dot), or  |<br />        |                                                              |<br />        | source /opt/intel/fc/9.1/bin/ifortvars.csh                   |<br />        |                                                              |<br />        | for a C-like shell.                                          |<br />        |                                                              |<br />        | If you do not know what this is all about, please refer to   |<br />        | the Intel documentation or ask your system administrator.    |<br />        |                                                              |<br />        | Please note that the same holds for the Intel C and C++      |<br />        | compilers.                                                   |<br />        +--------------------------------------------------------------+<br /><br /><br />Summary of important options:<br /><br />  * C compiler      : gnu version 4.6<br />  * Fortran compiler: intel version 12.1<br />  * architecture    : amd opteron (64 bits)<br /><br />  * debugging       : basic<br />  * optimizations   : standard<br /><br />  * OpenMP enabled  : no (collapse: ignored)<br />  * MPI    enabled  : yes<br />  * MPI-IO enabled  : auto<br />  * GPU    enabled  : no (flavor: none)<br /><br />  * TRIO   flavor = none<br />  * TIMER  flavor = abinit (libs: ignored)<br />  * LINALG flavor = netlib (libs: auto-detected)<br />  * ALGO   flavor = none (libs: ignored)<br />  * FFT    flavor = none (libs: ignored)<br />  * MATH   flavor = none (libs: ignored)<br />  * DFT    flavor = none<br /><br />Configuration complete.<br />You may now type &quot;make&quot; to build ABINIT.<br />(or, on a SMP machine, &quot;make mj4&quot;, or &quot;make multi multi_nprocs=&lt;n&gt;&quot;)<br />===========================================<br />Then I typed &quot;make&quot;. <br />But It seems no parallel run is there.<br />What do you think?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel error</h3>
+				<div class="date">Posted: <strong>Wed Mar 18, 2015 9:49 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">The log file you posted is from the configure step.<br /><br />As you can read :<br /><strong class="text-strong">* MPI enabled : yes</strong> means that your abinit will support MPI jobs, ie parallel jobs.<br />The compilation, however, is build in sequential, meaning that only one core will build abinit. This is due to the fact that you use &quot;make&quot; only.<br />If you want to speed up the compilation and use several cores to build abinit then use<br />[code]<br />make multi multi_nprocs=X<br />[code]<br />where X is the number of cores you want to use (typically at least the number of core you CPU has).<br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel error</h3>
+				<div class="date">Posted: <strong>Wed Mar 18, 2015 10:02 pm</strong></div>
+				<div class="author">by <strong>hammouri</strong></div>
+				<div class="content">Thank you Jordan for your reply, I still have the problem:<br />This is what I did in detail:<br />1) unzip abinit-7.10.2<br />2) go inside the folder and type:     ./configure --enable-mpi --with-mpi-prefix=&quot;/usr/local/openmpi&quot;<br />3) after it finished I typed :    make multi multi_nprocs=64<br /><br />Then, I went to &quot;src/98_main&quot; directory and copied abinit executable<br />I made a new directory and I copied  tbasepar_1.in &amp;   tbasepar_1.files and run them on 2, 10, and 16 processors, but all cases failed. <br />take a look at the log file.<br />What do think now?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel error</h3>
+				<div class="date">Posted: <strong>Fri Mar 20, 2015 4:20 am</strong></div>
+				<div class="author">by <strong>hammouri</strong></div>
+				<div class="content">I tried to type : make install, this is what I've got:<br />:<br />:<br />:<br />:<br />test -z &quot;/usr/local/bin&quot; || /bin/mkdir -p &quot;/usr/local/bin&quot;<br />  /usr/bin/install -c abinit aim anaddb band2eps bsepostproc conducti cut3d fftprof ioprof kss2wfk lapackprof mrgddb mrggkk mrgscr optic ujdet vdw_kernelgen macroave '/usr/local/bin'<br />/usr/bin/install: cannot create regular file `/usr/local/bin/abinit': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/aim': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/anaddb': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/band2eps': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/bsepostproc': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/conducti': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/cut3d': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/fftprof': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/ioprof': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/kss2wfk': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/lapackprof': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/mrgddb': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/mrggkk': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/mrgscr': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/optic': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/ujdet': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/vdw_kernelgen': Permission denied<br />/usr/bin/install: cannot create regular file `/usr/local/bin/macroave': Permission denied<br />make[3]: *** [install-binPROGRAMS] Error 1<br />make[2]: *** [install-am] Error 2<br />make[1]: *** [install-recursive] Error 1<br />make: *** [install-recursive] Error 1<br /><br /><br />any help guys!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel error</h3>
+				<div class="date">Posted: <strong>Tue Mar 24, 2015 11:37 pm</strong></div>
+				<div class="author">by <strong>hammouri</strong></div>
+				<div class="content">No one is here to help me?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel error</h3>
+				<div class="date">Posted: <strong>Wed Mar 25, 2015 11:11 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />you don't had permission to write in the /usr/local/bin :<br /><br /><blockquote class="uncited"><div>/usr/bin/install: cannot create regular file `/usr/local/bin/abinit': Permission denied</div></blockquote><br /><br />try with :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>sudo make install</code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel error</h3>
+				<div class="date">Posted: <strong>Thu Mar 26, 2015 8:09 am</strong></div>
+				<div class="author">by <strong>hammouri</strong></div>
+				<div class="content"><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>sudo make install</code></pre></div><br /><br />I'm not a root user!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel error</h3>
+				<div class="date">Posted: <strong>Sun Mar 29, 2015 12:06 pm</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">add to your configure line<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure &quot;your options&quot; --prefix=/where/to/install<br /></code></pre></div><br />you should have permissions for this &quot;prefix&quot; directory.<br /><br />Note you don't need to &quot;make install&quot; to use abinit.<br /><br />The seg fault you got in your log file might come from the linear algebra library you use.<br />Which one do you use ? the lapack-fallback ? atlas ? mkl ? acml ?... ?<br />With what compiler ?<br />What kind of CPU (brand and model)?<br />What supercomputer ?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel error</h3>
+				<div class="date">Posted: <strong>Sun Mar 29, 2015 7:32 pm</strong></div>
+				<div class="author">by <strong>hammouri</strong></div>
+				<div class="content">these are some info about my machine :<br />Linux version 3.1.10-1.9-desktop (geeko@buildhost) (gcc version 4.6.2 (SUSE Linux) ) #1 SMP PREEMPT<br />Architecture:          x86_64<br />CPU op-mode(s):        32-bit, 64-bit<br />Byte Order:            Little Endian<br />Vendor ID:             AuthenticAMD<br />CPU family:            21<br />For math libraries i do not know which one i have but i can tell I'm using siesta and quantum espresso, and i was able to compile abinit for the serial version.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel error</h3>
+				<div class="date">Posted: <strong>Mon Mar 30, 2015 10:23 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Ok,<br /><br />I don't have much ideas but as you use intel12, I would suggest to compile abinit with the MKL library (for example with --with-linalg-flavor=&quot;mkl&quot; --with-linalg-incs=&quot;-I$MKLROOT/include/intel64/lp64&quot; --with-linalg_libs=&quot;-L$MKLROOT/lib/intel64 -Wl,--start-group  -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group&quot; --with-fft-flavor=fftw3 --with-fft-libs=&quot;-L$MKLROOT/lib/intel64 -Wl,--start-group  -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group&quot;)<br />I would also add FCFLAGS_EXTRA=&quot;-traceback&quot; on you configure line.<br /><br />This should 1) use MKLlibrary and avoid old netlib bugs, 2) if the segfaul occures, it shoud give the file and subroutine where it happens.<br />When you do the ./configure, at the end, please check that you do have mkl and fftw3 for the linalg flavor and fft flavor respectively.<br />Please  don't forget to &quot;make clean&quot; before &quot;make&quot; <br />and before the make command terminates, be sure that you do have the -traceback option in the compilation lines.<br />If everything is fine, then rerun the test which failed.<br /><br />PS : You should adapt the --with-*-* I gave to fit you system. You can also look inside abinit/doc/build/config-examples for some examples (Note that in a .ac file, the &quot;-&quot; are replaced by &quot;_&quot;</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel error</h3>
+				<div class="date">Posted: <strong>Mon Mar 30, 2015 5:47 pm</strong></div>
+				<div class="author">by <strong>hammouri</strong></div>
+				<div class="content">Why did you assume I'm using intel 12</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel error</h3>
+				<div class="date">Posted: <strong>Tue Mar 31, 2015 7:32 am</strong></div>
+				<div class="author">by <strong>hammouri</strong></div>
+				<div class="content">if i just follow what is mention in this video : <!-- m --><a class="postlink" href="https://www.youtube.com/watch?v=DppLQ-KQA68">https://www.youtube.com/watch?v=DppLQ-KQA68</a><!-- m --><br />will solve my problem?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel error</h3>
+				<div class="date">Posted: <strong>Tue Mar 31, 2015 4:49 pm</strong></div>
+				<div class="author">by <strong>hammouri</strong></div>
+				<div class="content">I tried this :<br />./configure --with-linalg-flavor=&quot;mkl&quot; --with-linalg-incs=&quot;-I$opt/intel/composer_xe_2011_sp1.10.319/mkl/include/intel64/lp64&quot; --with-linalg_libs=&quot;-L$opt/intel/composer_xe_2011_sp1.10.319/mkl/lib/intel64 -Wl,--start-group -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group&quot; --with-fft-flavor=fftw3 --with-fft-libs=&quot;-L$opt/intel/composer_xe_2011_sp1.10.319/mkl/lib/intel64 -Wl,--start-group -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,FCFLAGS_EXTRA=&quot;-traceback&quot;,--end-group&quot;<br /><br />and this is the result: <br />checking for the requested linear algebra support... mkl<br />checking whether to select a fallback for linear algebra... no<br />checking for BLAS support in specified libraries... yes<br />checking for AXPBY support in specified BLAS libraries... yes<br />checking for gemm3m in specified libraries... yes<br />checking for mkl_imatcopy in specified libraries... yes<br />checking for mkl_omatcopy in specified libraries... yes<br />checking for mkl_omatadd in specified libraries... yes<br />checking for LAPACK support in specified libraries... yes<br />checking for LAPACKE C API support in specified libraries... no<br />checking for BLACS support in specified libraries... no<br />checking for ScaLAPACK support in specified libraries... no<br />checking for ELPA support in specified libraries... no<br />checking for PLASMA support in specified libraries... no<br />checking for MAGMA (version&gt;=1.1.0) support in specified libraries... no<br />checking whether we have a serial linear algebra support... yes<br />checking whether we have a MPI linear algebra support... no<br />checking whether we have a GPU linear algebra support... no<br />checking for the actual linear algebra support... mkl<br />checking for the requested FFT support... fftw3<br />checking for the actual FFT support... broken<br /><br />        +--------------------------------------------------------------+<br />        | Connector detection failure                                  |<br />        +--------------------------------------------------------------+<br />        | The build system of Abinit has not been able to detect       |<br />        | one or more requested external packages, probably because    |<br />        | you did not provide sufficient information. This means       |<br />        | that the build cannot proceed, and the configure script      |<br />        | will thus abort now with an error.                           |<br />        |                                                              |<br />        | To address this issue, you may:                              |<br />        |                                                              |<br />        | * make sure that the prerequisites of the external           |<br />        | packages are available and enabled, e.g.                     |<br />        | --with-dft-flavor=&quot;libxc+bigdft&quot; or                          |<br />        | --with-trio-flavor=&quot;netcdf+etsf_io&quot;                          |<br />        |                                                              |<br />        | * use the --with-*-bins, --with-*-incs, and                  |<br />        | --with-*-libs options of configure to provide                |<br />        | additional information; please see the section related       |<br />        | to connectors in                                             |<br />        | ~abinit/doc/build/config-template.ac for available           |<br />        | options and details;                                         |<br />        |                                                              |<br />        | * disable the corresponding extensions, by using the         |<br />        | associated --with-*-flavor=&quot;none&quot; options of                 |<br />        | configure; please see the section associated to              |<br />        | connectors in ~abinit/doc/build/config-template.ac for       |<br />        | details.                                                     |<br />        |                                                              |<br />        +--------------------------------------------------------------+<br /><br />configure: error: the specified FFT libraries do not work</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel error</h3>
+				<div class="date">Posted: <strong>Wed Apr 01, 2015 4:59 pm</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">You can try the video but it assumes you have a package manager.<br /><br />Your command is wrong you have <br /> --with-fft-libs=&quot;-L$opt/intel/composer_xe_2011_sp1.10.319/mkl/lib/intel64 -Wl,--start-group -lmkl_intel_lp64 -lmkl_sequential -lmkl_core <strong class="text-strong">-Wl,FCFLAGS_EXTRA=&quot;-traceback&quot;,--end-group&quot;</strong><br /><br />Which should be <br /> --with-fft-libs=&quot;-L$opt/intel/composer_xe_2011_sp1.10.319/mkl/lib/intel64 -Wl,--start-group -lmkl_intel_lp64 -lmkl_sequential -lmkl_core<strong class="text-strong"> -Wl,--end-group&quot; FCFLAGS_EXTRA=&quot;-traceback&quot;</strong><br /><br />I said intel12 because I must have seen it in you previsous attached file</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel error</h3>
+				<div class="date">Posted: <strong>Thu Apr 02, 2015 1:05 am</strong></div>
+				<div class="author">by <strong>hammouri</strong></div>
+				<div class="content">if use this command line:<br />./configure --with-linalg-flavor=&quot;mkl&quot; --with-linalg-incs=&quot;-I$opt/intel/composer_xe_2011_sp1.10.319/mkl/include/intel64/lp64&quot; --with-linalg_libs=&quot;-L$opt/intel/composer_xe_2011_sp1.10.319/mkl/lib/intel64 -Wl,--start-group -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group&quot; --with-fft-flavor=fftw3 --with-fft-libs=&quot;-L$mhmood/fftw-3.3.4 -Wl,--start-group -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group&quot;FCFLAGS_EXTRA=&quot;-traceback&quot;<br />do I need to make build.ac? becuase when i used the above lines it came with no mpi.<br />And it is ok to uncomment the netcdf lines?</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>2</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2931&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:51:35 GMT -->
+</html>

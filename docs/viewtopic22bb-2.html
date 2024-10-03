@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1578&p=4996 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:36:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>[SOLVED] nlo calculation stops with segmentation fault - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopic5c4d.html?t=1578">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="4"><a href="viewforum31e6.html?f=4" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Running Abinit</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="10"><a href="viewforum15ca.html?f=10" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Response calculations</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopic6a10.html?f=10&amp;t=1578">[SOLVED] nlo calculation stops with segmentation fault</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Phonons, DFPT, electron-phonon, electric-field response, mechanical response…<br /></div>
+<p>
+	<strong>Moderators:</strong> <a href="memberlist32d1.html?mode=viewprofile&amp;u=72" class="username">mverstra</a>, <a href="memberlistce31.html?mode=viewprofile&amp;u=2727" class="username">joaocarloscabreu</a>
+</p>
+
+
+<div class="action-bar bar-top">
+	
+			<a href="postingbb92-2.html?mode=reply&amp;f=10&amp;t=1578" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic0c67-2.html?f=10&amp;t=1578&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="1578" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			5 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p4927" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile4927">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistab3b.html?mode=viewprofile&amp;u=127" class="username">ilukacevic</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search4ff0.html?author_id=127&amp;sr=posts">271</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Jan 16, 2010 12:05 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Dept. of Physics, University J. J. Strossmayer, Osijek, Croatia</dd>
+							
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact ilukacevic">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact ilukacevic</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://www.fizika.unios.hr/~ilukacevic/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content4927">
+
+						<h3 class="first"><a href="#p4927">[SOLVED] nlo calculation stops with segmentation fault</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting9d50.html?mode=quote&amp;f=10&amp;p=4927" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic64e0.html?p=4927#p4927" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistab3b.html?mode=viewprofile&amp;u=127" class="username">ilukacevic</a></strong> &raquo; </span>Thu Mar 22, 2012 12:02 pm
+			</p>
+			
+			
+			
+			<div class="content">Dear all,<br /><br />I'm trying to calculate the Raman spectrum of SiO2 at several pressures. At one pressure everything went fine, but when I changed the cell parameters to target the different pressure, the nlo calculation stops with the following errors in the log file just as it starts the 5th dataset (input file is bellow):<br /><br /><br /> ioarr: data read from disk file t11o_DS4_DEN22<br /><br /> mv_3dte : finite difference expression of the k-point derivative<br />           is performed using the PEAD formulation of the third-order energy<br />           (see Nunes and Gonze PRB 63, 155107 (2001) Eq. 102)<br /><br />forrtl: severe (174): SIGSEGV, segmentation fault occurred<br />forrtl: severe (174): SIGSEGV, segmentation fault occurred<br />Image              PC                Routine            Line        Source<br />libpthread.so.0    00002B90AB5EE9DD  Unknown               Unknown  Unknown<br />libiomp5.so        00002B90AB4B289E  Unknown               Unknown  Unknown<br />forrtl: severe (28): CLOSE error, unit 7, file &quot;Unknown&quot;<br />Image              PC                Routine            Line        Source<br />libirc.so          00002B90AE144B2D  Unknown               Unknown  Unknown<br />libirc.so          00002B90AE143635  Unknown               Unknown  Unknown<br />libifcore.so.5     00002B90ADA41535  Unknown               Unknown  Unknown<br />libifcore.so.5     00002B90AD9B3A2D  Unknown               Unknown  Unknown<br />libifcore.so.5     00002B90AD9B9C3D  Unknown               Unknown  Unknown<br />libifcore.so.5     00002B90AD9B39BA  Unknown               Unknown  Unknown<br />libifcore.so.5     00002B90AD9C2FD1  Unknown               Unknown  Unknown<br />libpthread.so.0    00002B90AB5EEB10  Unknown               Unknown  Unknown<br />libpthread.so.0    00002B90AB5EE9DD  Unknown               Unknown  Unknown<br />libiomp5.so        00002B90AB4B289E  Unknown               Unknown  Unknown<br />MPI process terminated unexpectedly<br />Exit code -5 signaled from node001.srce.cro-ngi.hr<br />Killing remote processes...forrtl: error (69): process interrupted (SIGINT)<br />Image              PC                Routine            Line        Source<br />libpthread.so.0    00002ACFE220A9DD  Unknown               Unknown  Unknown<br />libiomp5.so        00002ACFE20CE89E  Unknown               Unknown  Unknown<br />forrtl: error (69): process interrupted (SIGINT)<br />Image              PC                Routine            Line        Source<br />libpthread.so.0    00002B003A7899DD  Unknown               Unknown  Unknown<br />libiomp5.so        00002B003A64D89E  Unknown               Unknown  Unknown<br />forrtl: error (69): process interrupted (SIGINT)<br />Image              PC                Routine            Line        Source<br />libpthread.so.0    00002AB788FC49DD  Unknown               Unknown  Unknown<br />libiomp5.so        00002AB788E8889E  Unknown               Unknown  Unknown<br />forrtl: severe (174): SIGSEGV, segmentation fault occurred<br />forrtl: error (69): process interrupted (SIGINT)<br />Image              PC                Routine            Line        Source<br />libpthread.so.0    00002AABDC77C9DD  Unknown               Unknown  Unknown<br />libiomp5.so        00002AABDC64089E  Unknown               Unknown  Unknown<br />forrtl: error (69): process interrupted (SIGINT)<br />Image              PC                Routine            Line        Source<br />libpthread.so.0    00002B024C2DF9DD  Unknown               Unknown  Unknown<br />libiomp5.so        00002B024C1A389E  Unknown               Unknown  Unknown<br />forrtl: error (69): process interrupted (SIGINT)<br />Image              PC                Routine            Line        Source<br />libpthread.so.0    00002B7A2684C9DD  Unknown               Unknown  Unknown<br />libiomp5.so        00002B7A2671089E  Unknown               Unknown  Unknown<br />DONE<br /><br /><br />How can this be? Has anyone ever encountered smth like this in nlo?<br /><br />I'm using abinit 6.10.2 on a linux cluster with  Intel Fortran/C 11.1,  MKL 10.2p and mvapich 1.1.0-0.20091222.1.el5 compilers.<br /><br />Yours,<br /><br />Igor Lukacevic<br /><br /><br />INPUT FILE<br /><br /># Linear and nonlinear response calculation for SiO2 - CaCl2<br /># Perturbations: electric fields &amp; atomic displacements<br /><br />#Definition of lattice parameters p = 50 GPa<br />#*******************************************<br />   acell       7.5573554382E+00  7.3978865685E+00  4.8581739040E+00<br />   angdeg      90  90  90<br />   spgroup     58<br />   brvltt     -1<br /><br />#Definition of atomic positions and types<br />#****************************************<br />   natom       6<br />   natrd       3<br />   ntypat      3<br />   typat       1  2  2<br />   znucl       14 8  8<br />   xred        0.00              0.00              0.00<br />               3.1370358896E-01  2.9039323040E-01  0.00<br />              -3.1370358896E-01 -2.9039323040E-01  0.00<br />   ixc         3<br /><br />#Parameters of the SCF cycles<br />#****************************<br />   iscf        7<br />npulayit       7<br />   nnsclo      2<br />   nline       6<br />   nstep       100<br /><br />#Plane wave basis and k-point grid<br />#*********************************<br />   ecut        50<br />   ecutsm      0.5<br />   dilatmx     1.2<br />   ngkpt       4 4 8<br />   nshiftk     1<br />   shiftk      0.5  0.5  0.5<br /><br />#Perturbation datasets<br />#*********************<br />   ndtset      5<br />   jdtset      1 2 3 4 5<br /><br />#DATASET1 : scf calculation: GS WF in the BZ<br />#*******************************************<br />   prtden1    1<br />   kptopt1    1<br />   tolvrs1    1.0d-18<br /><br />#DATASET2 : non-scf calculation: GS WF in the whole BZ<br />#*****************************************************<br />   getden2    1<br />   kptopt2    2<br />     iscf2   -2<br />   getwfk2    1<br />   tolwfr2    1.0d-22<br />    nband2    16<br /><br />#DATASET3 : d/dk on the MP grid of k-points<br />#******************************************<br />   getwfk3    2<br />    rfdir3    1 1 1<br />   rfelfd3    2<br />   tolwfr3    1.0d-22<br />    nband3    16<br />   kptopt3    2<br /><br />#DATASET4 : d/dE on the MP grid of k-points<br />#******************************************<br />   prtden4    1<br />   getwfk4    2<br />   getddk4    3<br />    rfdir4    1 1 1<br />   rfphon4    1<br />  rfatpol4    1 6<br />   tolvrs4    1.0d-12<br />   rfelfd4    3<br />    nband4    16<br />   kptopt4    2<br />  prepanl4    1<br /><br />#DATASET5 : 3DTE calculation<br />#***************************<br />   getden5    1<br />  get1den5    4<br />   getwfk5    2<br />   get1wf5    4<br />    nband5    16<br />   kptopt5    2<br />optdriver5    5<br />  rf1elfd5    1<br />  rf1phon5    1<br /> rf1atpol5    1 6<br />   rf1dir5    1 1 1<br />  rf2elfd5    1<br />   rf2dir5    1 1 1<br />  rf3elfd5    1<br />   rf3dir5    1 1 1<br />   tolvrs5    1.0d-12<br /><br />nbdbuf 0<br />timopt  2</div>
+			
+			
+			
+													<div class="notice">
+					Last edited by <a href="memberlistab3b.html?mode=viewprofile&amp;u=127" class="username">ilukacevic</a> on Thu May 03, 2012 9:48 am, edited 1 time in total.
+									</div>
+			
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p4932" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile4932">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist3c3b.html?mode=viewprofile&amp;u=549" class="username">roginovicci</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searche23d.html?author_id=549&amp;sr=posts">75</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Dec 02, 2010 10:36 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content4932">
+
+						<h3 ><a href="#p4932">Re: nlo calculation stops with segmentation fault</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting2cfa.html?mode=quote&amp;f=10&amp;p=4932" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic57ef.html?p=4932#p4932" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist3c3b.html?mode=viewprofile&amp;u=549" class="username">roginovicci</a></strong> &raquo; </span>Thu Mar 22, 2012 9:31 pm
+			</p>
+			
+			
+			
+			<div class="content">Do you use strtarget in pressure calculations?</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p4952" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile4952">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistab3b.html?mode=viewprofile&amp;u=127" class="username">ilukacevic</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search4ff0.html?author_id=127&amp;sr=posts">271</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Jan 16, 2010 12:05 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Dept. of Physics, University J. J. Strossmayer, Osijek, Croatia</dd>
+							
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact ilukacevic">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact ilukacevic</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://www.fizika.unios.hr/~ilukacevic/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content4952">
+
+						<h3 ><a href="#p4952">Re: nlo calculation stops with segmentation fault</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting23dc.html?mode=quote&amp;f=10&amp;p=4952" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic0741.html?p=4952#p4952" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistab3b.html?mode=viewprofile&amp;u=127" class="username">ilukacevic</a></strong> &raquo; </span>Tue Mar 27, 2012 1:03 pm
+			</p>
+			
+			
+			
+			<div class="content">Yes, I do. Not in nlo, but in preparational relaxation calc.<br /><br />Igor</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p4996" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile4996">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist32d1.html?mode=viewprofile&amp;u=72" class="username">mverstra</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search1bef.html?author_id=72&amp;sr=posts">655</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Aug 19, 2009 12:01 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content4996">
+
+						<h3 ><a href="#p4996">Re: nlo calculation stops with segmentation fault</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingdf1e.html?mode=quote&amp;f=10&amp;p=4996" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic4911.html?p=4996#p4996" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist32d1.html?mode=viewprofile&amp;u=72" class="username">mverstra</a></strong> &raquo; </span>Mon Apr 02, 2012 10:25 pm
+			</p>
+			
+			
+			
+			<div class="content">Hi again Igor,<br /><br />a bug has been fixed for v6.13.3 in this part, which _could_ explain your errors. Change line 326 to the following:<br /><br />             tag = jkpt_rbz<br />&gt;          count1 = npwarr(jkpt_rbz)*mband*nspinor<br />             ABI_ALLOCATE(buffer,(2,3*count1))<br /><br />tell us what happens<br /><br /><br />ciao<br /><br />Matthieu</div>
+			
+			
+			
+									
+									<div id="sig4996" class="signature">Matthieu Verstraete<br />University of Liege, Belgium</div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p5160" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile5160">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistab3b.html?mode=viewprofile&amp;u=127" class="username">ilukacevic</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search4ff0.html?author_id=127&amp;sr=posts">271</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Jan 16, 2010 12:05 pm</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Dept. of Physics, University J. J. Strossmayer, Osijek, Croatia</dd>
+							
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact ilukacevic">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact ilukacevic</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://www.fizika.unios.hr/~ilukacevic/" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content5160">
+
+						<h3 ><a href="#p5160">Re: nlo calculation stops with segmentation fault</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingebb0.html?mode=quote&amp;f=10&amp;p=5160" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic719b-2.html?p=5160#p5160" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistab3b.html?mode=viewprofile&amp;u=127" class="username">ilukacevic</a></strong> &raquo; </span>Thu May 03, 2012 9:48 am
+			</p>
+			
+			
+			
+			<div class="content">We are most probably going to switch to 6.13 version, since I'm not allowed to edit the code to be compiled on the grid, and my desktop computer is too slow to run such a calculation.<br /><br />Thanks for the solution.<br /><br />Igor L.</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="postingbb92-2.html?mode=reply&amp;f=10&amp;t=1578" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic0c67-2.html?f=10&amp;t=1578&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=10&amp;t=1578">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			5 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforum15ca.html?f=10" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Response calculations”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1578&p=4996 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:36:26 GMT -->
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3318&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:43:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; problem for install abinit 8.0.8</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>problem for install abinit 8.0.8</h2>
+		<p><a href="viewtopic1c19.html?f=3&amp;t=3318">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3318</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>problem for install abinit 8.0.8</h3>
+				<div class="date">Posted: <strong>Fri Jul 08, 2016 1:36 am</strong></div>
+				<div class="author">by <strong>jianzhifu</strong></div>
+				<div class="content">Hi,all<br />when I use intel 2016 to install abinit 8.0.8, then turn to GNU C and fortran.<br /><br />that is :<br />Summary of important options:<br /><br />  * C compiler      : gnu version 4.4<br />  * Fortran compiler: gnu version 4.4<br />  * architecture    : intel xeon (64 bits)<br />and the configure :<br /><br />./configure CC=&quot;mpicc&quot; CXX=&quot;mpicxx&quot; FC=&quot;mpiifort&quot; \<br />--prefix=/public/software/abinit/808 \<br />--with-tardir=/public/software/abinit/tarballs \<br />--enable-64bit-flags=&quot;yes&quot; \<br />--enable-mpi \<br />--with-mpi-prefix=&quot;/public/software/intel2016/compilers_and_libraries_2016.3.210/linux/mpi/intel64&quot; \<br />--with-trio-flavor=&quot;netcdf+etsf_io&quot; \<br />--with-fft-flavor=&quot;fftw3&quot; \<br />--with-fft-libs=&quot;-L/public/software/intel2016/mkl/lib/intel64 -Wl,--start-group  -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group&quot; \<br />--with-linalg-flavor=&quot;mkl&quot; \<br />--with-linalg-libs=&quot;-L/public/software/intel2016/mkl/lib/intel64 -Wl,--start-group  -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group&quot; \<br />--with-dft-flavor=&quot;atompaw+bigdft+libxc+wannier90&quot; \<br />--enable-gw-dpc=&quot;yes&quot;<br /><br />how to resolve the problem?<br /><br />Thanks!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem for install abinit 8.0.8</h3>
+				<div class="date">Posted: <strong>Fri Jul 08, 2016 10:28 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Hello<br /><br />What does mpiifort --version an mpicc --version return you ?<br />If Intel Ifort ou Intel ICC then we need to investigate more, otherwise, it means you intelmpi was not compile with intel compilers and so the default compiler for mpi is not intel.<br />Rebuilt you intelmpi or force the compiler to be ifort.<br /><br />Cheers<br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem for install abinit 8.0.8</h3>
+				<div class="date">Posted: <strong>Mon Jul 25, 2016 2:46 am</strong></div>
+				<div class="author">by <strong>jianzhifu</strong></div>
+				<div class="content"><blockquote><div><cite>Jordan wrote:</cite>Hello<br /><br />What does mpiifort --version an mpicc --version return you ?<br />If Intel Ifort ou Intel ICC then we need to investigate more, otherwise, it means you intelmpi was not compile with intel compilers and so the default compiler for mpi is not intel.<br />Rebuilt you intelmpi or force the compiler to be ifort.<br /><br />Cheers<br /><br />Jordan</div></blockquote><br /><br />Hi, Jordan<br /><br />this is the mpiifort and mpicc version<br />[root@admin abinit]# mpicc -v<br />mpigcc for the Intel(R) MPI Library 5.1.3 for Linux*<br />Copyright(C) 2003-2015, Intel Corporation.  All rights reserved.<br />Using built-in specs.<br />Target: x86_64-redhat-linux<br />Configured with: ../configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-bootstrap --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-languages=c,c++,objc,obj-c++,java,fortran,ada --enable-java-awt=gtk --disable-dssi --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-1.5.0.0/jre --enable-libgcj-multifile --enable-java-maintainer-mode --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --disable-libjava-multilib --with-ppl --with-cloog --with-tune=generic --with-arch_32=i686 --build=x86_64-redhat-linux<br />Thread model: posix<br />gcc version 4.4.7 20120313 (Red Hat 4.4.7-4) (GCC) <br />[root@admin abinit]# mpiicc -v<br />mpiicc for the Intel(R) MPI Library 5.1.3 for Linux*<br />Copyright(C) 2003-2015, Intel Corporation.  All rights reserved.<br />icc version 16.0.3 (gcc version 4.4.7 compatibility)<br />[root@admin abinit]# mpiifort -v<br />mpiifort for the Intel(R) MPI Library 5.1.3 for Linux*<br />Copyright(C) 2003-2015, Intel Corporation.  All rights reserved.<br />ifort version 16.0.3<br /><br />Thanks!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem for install abinit 8.0.8</h3>
+				<div class="date">Posted: <strong>Mon Jul 25, 2016 8:48 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Hi,<br /><br />So don't use mpicc but mpi<strong class="text-strong">i</strong>cc.<br />Try without the --with-mpi-prefix, just keep the CC=mpiicc CXX=mpiicc and FC=mpiifort flags.<br />Something is messing up the configuration.<br /><br />Cheers<br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem for install abinit 8.0.8</h3>
+				<div class="date">Posted: <strong>Thu Jul 28, 2016 9:40 am</strong></div>
+				<div class="author">by <strong>sheng</strong></div>
+				<div class="content">For IntelMPI compilers, mpicc, mpif90, mpicxx etc is just wrappers to the actual compilers. It means that the same commands can be used refer to either the gnu version of intel version, depending on the environmental variables. The default configuration is to link to the gnu versions, which is why you get gnu version in your output.<br /><br />To direct IntelMPI to use intel compilers, just export theses environmental variables before building Abinit:<br />export I_MPI_CC=icc<br />export I_MPI_CXX=icpc<br />export I_MPI_F77=ifort<br />export I_MPI_F90=ifort<br /><br />PS: It works for IntelMPI 2015, and I do not know whether it will work for the 2016 version.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem for install abinit 8.0.8</h3>
+				<div class="date">Posted: <strong>Thu Aug 04, 2016 3:23 pm</strong></div>
+				<div class="author">by <strong>marco.digennaro</strong></div>
+				<div class="content">Dear all,<br /><br />I have gone through the configuration fine, but I have problem on the make part. It's abinit 8 on a ubuntu 16 machine<br />The problem is an undefined reference to `sfftw_execute_dft_' in src/52_fft_mpi_noabirule m_fftw3.F90:3246<br />Below you can find the lasts few lines on my terminal <br /><br />Thanks in advance.<br /><br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o):/home/marco/CODES/abinit-8.0.8/tmp/src/52_fft_mpi_noabirule/../../../src/52_fft_mpi_noabirule/m_fftw3.F90:3246: more undefined references to `sfftw_execute_dft_' follow<br />collect2: error: ld returned 1 exit status<br />Makefile:3436: recipe for target 'abinit' failed<br />make[3]: *** [abinit] Error 1<br />make[3]: Leaving directory '/home/marco/CODES/abinit-8.0.8/tmp/src/98_main'<br />Makefile:930: recipe for target 'all-recursive' failed<br />make[2]: *** [all-recursive] Error 1<br />make[2]: Leaving directory '/home/marco/CODES/abinit-8.0.8/tmp/src'<br />Makefile:2238: recipe for target 'all-recursive' failed<br />make[1]: *** [all-recursive] Error 1<br />make[1]: Leaving directory '/home/marco/CODES/abinit-8.0.8/tmp'<br />Makefile:2167: recipe for target 'all' failed<br />make: *** [all] Error 2<br />marco@qmrcd:~/CODES/abinit-8.0.8/tmp$</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem for install abinit 8.0.8</h3>
+				<div class="date">Posted: <strong>Fri Aug 05, 2016 12:29 am</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />can you provide some more infos :<br /><br />- version of os  : 16.04 or 16.10<br />- dpkg --list<br />- cat ubuntu.ac<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem for install abinit 8.0.8</h3>
+				<div class="date">Posted: <strong>Fri Aug 05, 2016 10:12 am</strong></div>
+				<div class="author">by <strong>marco.digennaro</strong></div>
+				<div class="content">Absolutely:<br /><br />- Ubuntu 16.04<br />- dpkg --list (see attachment)<br />- cat .abinit/build/ubuntu.ac<br />prefix=&quot;/usr/local&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_prefix=&quot;/usr&quot;<br />with_netcdf_incs=&quot;-I/usr/include&quot;<br />with_netcdf_libs=&quot;-L/usr/lib64 -lnetcdf -lnetcdff&quot;<br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_incs=&quot;-I/usr/include/&quot;<br />with_fft_libs=&quot;-L/usr/lib64 -lfftw3&quot;<br />with_linalg_flavor=&quot;atlas&quot;<br />with_linalg_libs=&quot;-L/usr/lib64 -llapack -lf77blas -lcblas -latlas&quot;<br />with_dft_flavor=&quot;atompaw+bigdft+libxc+wannier90&quot;<br />enable_gw_dpc=&quot;yes&quot;<br />enable_maintainer_checks=&quot;no&quot;<br />- end of .abinit/build/ubuntu.ac<br /><br />BR<br />MDG</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem for install abinit 8.0.8</h3>
+				<div class="date">Posted: <strong>Sat Aug 06, 2016 9:16 am</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi<br /><br />forgot to attach &quot;dpkg -l&quot; ?<br /><br /><br />your ac file :<br /><br /><blockquote class="uncited"><div>prefix=&quot;/usr/local&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_prefix=&quot;/usr&quot;<br />with_netcdf_incs=&quot;-I/usr/include&quot;<br />with_netcdf_libs=&quot;-L/usr/lib64 -lnetcdf -lnetcdff&quot;<br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_incs=&quot;-I/usr/include/&quot;<br />with_fft_libs=&quot;-L/usr/lib64 -lfftw3&quot;<br />with_linalg_flavor=&quot;atlas&quot;<br />with_linalg_libs=&quot;-L/usr/lib64 -llapack -lf77blas -lcblas -latlas&quot;<br />with_dft_flavor=&quot;atompaw+bigdft+libxc+wannier90&quot;<br />enable_gw_dpc=&quot;yes&quot;<br />enable_maintainer_checks=&quot;no&quot;</div></blockquote><br /><br />a little remark :  install a fresh ubuntu 16.04 and the /usr/lib64 doesn't exist...<br /><br />you can see in the config.log <br /><br /><blockquote class="uncited"><div>configure:28447: /usr/bin/mpif90 -o conftest  -g -ffree-line-length-none          conftest.F90 -L/usr/lib64 -llapack -lf77blas -lcblas -latlas       -L/usr/lib/openmpi/lib -L/usr/lib/gcc/x86_64-linux-gnu/5 -L/usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/5/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/5/../../.. -lmpi_usempif08 -lmpi_usempi_ignore_tkr -lmpi_mpifh -lmpi -lgfortran -lm -lquadmath -lpthread    &gt;&amp;5<br />/usr/bin/ld: cannot find -llapack<br />/usr/bin/ld: cannot find -lf77blas<br />/usr/bin/ld: cannot find -lcblas<br />/usr/bin/ld: cannot find -latlas</div></blockquote><br /><br />but the build system is able to find automatically the libs fftw3, atlas...<br /><br /><br />to use netcdf , add with_trio_flavor<br />and, last but not least , forgot -lfftw3f  in with_fft_libs<br /><br />then , my  .ac file is <br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>prefix=&quot;/usr/local&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_prefix=&quot;/usr&quot;<br />with_trio_flavor=&quot;netcdf&quot; <br />with_netcdf_incs=&quot;-I/usr/include&quot;<br />with_netcdf_libs=&quot;-L/usr/lib -lnetcdf -lnetcdff&quot;<br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_incs=&quot;-I/usr/include/&quot;<br />with_fft_libs=&quot;-L/usr/lib -lfftw3 -lfftw3f&quot;<br />with_linalg_flavor=&quot;atlas&quot;<br />with_linalg_libs=&quot;-L/usr/lib -llapack -lf77blas -lcblas -latlas&quot;<br />with_dft_flavor=&quot;atompaw+bigdft+libxc+wannier90&quot;<br />enable_gw_dpc=&quot;yes&quot;<br />enable_maintainer_checks=&quot;no&quot;</code></pre></div><br /><br />and the tail of the output of my ./configure command :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Summary of important options:<br /><br />&nbsp; * C compiler&nbsp; &nbsp; &nbsp; : gnu version 5.4<br />&nbsp; * Fortran compiler: gnu version 5.4<br />&nbsp; * architecture&nbsp; &nbsp; : intel xeon (64 bits)<br /><br />&nbsp; * debugging&nbsp; &nbsp; &nbsp; &nbsp;: basic<br />&nbsp; * optimizations&nbsp; &nbsp;: standard<br /><br />&nbsp; * OpenMP enabled&nbsp; : no (collapse: ignored)<br />&nbsp; * MPI&nbsp; &nbsp; enabled&nbsp; : yes<br />&nbsp; * MPI-IO enabled&nbsp; : yes<br />&nbsp; * GPU&nbsp; &nbsp; enabled&nbsp; : no (flavor: none)<br /><br />&nbsp; * TRIO&nbsp; &nbsp;flavor = netcdf<br />&nbsp; * TIMER&nbsp; flavor = abinit (libs: ignored)<br />&nbsp; * LINALG flavor = atlas (libs: user-defined)<br />&nbsp; * ALGO&nbsp; &nbsp;flavor = none (libs: ignored)<br />&nbsp; * FFT&nbsp; &nbsp; flavor = fftw3 (libs: user-defined)<br />&nbsp; * MATH&nbsp; &nbsp;flavor = none (libs: ignored)<br />&nbsp; * DFT&nbsp; &nbsp; flavor = libxc-fallback+atompaw-fallback+bigdft-fallback+wannier90-fallback</code></pre></div><br /><br />compilation ok for me...<br /><br />regards</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem for install abinit 8.0.8</h3>
+				<div class="date">Posted: <strong>Mon Aug 08, 2016 12:17 pm</strong></div>
+				<div class="author">by <strong>marco.digennaro</strong></div>
+				<div class="content">thank you,<br /><br />the dpkg.in is now here.<br />I inserted the &lt;&lt; with_netcdf_incs=&quot;-I/usr/include&quot; &gt;&gt; line to my .ac file.<br />I also included the compilers: <br /><br />&gt;&gt; FC=/usr/bin/mpif90<br />&gt;&gt; CC=/usr/bin/mpicc<br />&gt;&gt; CXX=/usr/bin/mpicc<br /><br />but still, the configuration crashes with the following error message.<br /><br />checking for netcdf.h... yes<br />checking for Fortran module includes... unknown<br /><br />        +--------------------------------------------------------------+<br />        | Connector detection failure                                  |<br />        +--------------------------------------------------------------+<br />        | The build system of Abinit has not been able to detect       |<br />        | one or more requested external packages, probably because    |<br />        | you did not provide sufficient information. This means       |<br />        | that the build cannot proceed, and the configure script      |<br />        | will thus abort now with an error.                           |<br />        |                                                              |<br />        | To address this issue, you may:                              |<br />        |                                                              |<br />        | * make sure that the prerequisites of the external           |<br />        | packages are available and enabled, e.g.                     |<br />        | --with-dft-flavor=&quot;libxc+bigdft&quot; or                          |<br />        | --with-trio-flavor=&quot;netcdf+etsf_io&quot;                          |<br />        |                                                              |<br />        | * use the --with-*-bins, --with-*-incs, and                  |<br />        | --with-*-libs options of configure to provide                |<br />        | additional information; please see the section related       |<br />        | to connectors in                                             |<br />        | ~abinit/doc/build/config-template.ac for available           |<br />        | options and details;                                         |<br />        |                                                              |<br />        | * disable the corresponding extensions, by using the         |<br />        | associated --with-*-flavor=&quot;none&quot; options of                 |<br />        | configure; please see the section associated to              |<br />        | connectors in ~abinit/doc/build/config-template.ac for       |<br />        | details.                                                     |<br />        |                                                              |<br />        +--------------------------------------------------------------+<br /><br />configure: error: external netcdf support does not work<br />marco@qmrcd:~/CODES/abinit-8.0.8/tmp$</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem for install abinit 8.0.8&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Mon Aug 08, 2016 7:50 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">please read carefully my post...<br /><br />I didn't speak about &quot;with_netcdf_incs=&quot;-I/usr/include&quot;<br /><br />but about :<br /><br />1) replace everywhere &quot;/usr/lib64&quot; by &quot;/usr/lib&quot;  in your ac file<br />2) add -lfftw3f   then replace<br /><br />with_fft_libs=&quot;-L/usr/lib64 -lfftw3&quot;<br /><br />by<br /><br />with_fft_libs=&quot;-L/usr/lib64 -lfftw3 -lfftw3f &quot;<br /><br />3) you forgot alos to install fortran netcdf <br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>apt install libnetcdff-dev</code></pre></div><br /><br />in fact, you can use my ac file...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problem for install abinit 8.0.8</h3>
+				<div class="date">Posted: <strong>Tue Aug 09, 2016 9:53 am</strong></div>
+				<div class="author">by <strong>marco.digennaro</strong></div>
+				<div class="content">Touche' <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /><br /><br />It now indeed works. The only difference I can say wrt your output is:<br />  * LINALG flavor = netlib-fallback (libs: ignored)<br />instead of:<br />  * LINALG flavor = atlas (libs: user-defined)<br />I have no idea if this could lead to problems in the future.<br /><br />BTW also the compliation went through.<br /><br />Thanks a lot<br /><br />MDG</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3318&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:43:46 GMT -->
+</html>

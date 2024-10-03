@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1395&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:44:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Segmentation fault (core dumped) problem in NLO calculation</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Segmentation fault (core dumped) problem in NLO calculation</h2>
+		<p><a href="viewtopiccdb7.html?f=10&amp;t=1395">https://forum.abinit.org/viewtopic.php?f=10&amp;t=1395</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Segmentation fault (core dumped) problem in NLO calculation</h3>
+				<div class="date">Posted: <strong>Wed Nov 02, 2011 7:26 am</strong></div>
+				<div class="author">by <strong>Zhang Xiaole</strong></div>
+				<div class="content">Hello Dear abinit usrs,<br />         I am trying to repeat the NLO calculation of BaTiO3 recently. After much effort, i still can not obtain the results. Hope someone could help me out.<br />         I am sorry i cannot using the 'Upload attachment' for my input file, so i have to paste them instead.<br />        This is my structure optimization input file <br />############################################<br />   spgroup 99<br />   ngkpt  10 10 10 <br />   natom 5<br />   ntypat 3<br />   znucl 56 22 8<br />   brvltt -1<br />   natrd 4<br />   typat 1 2 3 3<br />   acell 3.994 3.994 4.033 Angstrom<br />   angdeg 90.000 90.000 90.000<br />   xred  0.000  0.000  0.000<br />         0.500  0.500  0.512<br />         0.500  0.500  0.006<br />         0.000  0.500  0.500<br />   ixc 1<br /><br />#Definition of the scf procedure<br />#******************************<br />   iscf 5<br />   nstep  1500<br /><br />#Definition of the plane wave basis<br />#************************************<br />   ecut  50<br />   ecutsm 0.5<br />   dilatmx 1.05<br /><br />   nshiftk   1<br />   shiftk   0.5 0.5 0.5<br /><br />#Structural relaxation<br />#*********************<br />   ionmov 2<br />   optcell 0<br />   tolvrs 1.0d-15<br />   tolmxf 1.0d-5<br />   ntime 1500<br /><br /># add to conserve old &lt; 6.7.2 behavior for calculating forces at each SCF step<br /> optforces 1<br />########################################################<br /><br /><br />and the output seems everything is OK except several WARNINGS about ‘Potential-based CG line minimization has trouble to converge.’，and then i search the forum one post said it is not a problem,because the wavefuction is actually converged <br />then i do the NLO calculation using the optimized parameter and the following is my input files<br /><br /><br /><br />###################################################<br />  spgroup     99<br />   natom       5<br />   ntypat      3<br />   znucl       56 22 8<br />   brvltt      -1<br />   natrd       4<br />   typat       1 2 3 3 3<br />   acell       3.944 3.944 4.033 Angstrom<br />   angdeg      90.000 90.000 90.000<br />   xred        -7.9601674852E-19 -7.9601674853E-19  1.2874227760E-02<br />                5.0000000000E-01  5.0000000000E-01  5.2638115439E-01<br />                5.0000000000E-01  5.0000000000E-01 -1.3986167188E-02<br />                2.2472869684E-19  5.0000000000E-01  4.9636539252E-01<br />                5.0000000000E-01  2.2472869683E-19  4.9636539252E-01<br />   ixc         3<br /><br />#Parameters of the SCF cycles<br />#****************************<br />   iscf        5<br />   nstep       1000<br /><br /><br />#Plane wave basis and k-point grid<br />#*********************************<br />   ecut        50<br />   ecutsm      0.5<br />   dilatmx     1.05<br />   ngkpt       10 10 10<br />   nshiftk     1<br />   shiftk      0.5 0.5 0.5<br /><br />ndtset 5     jdtset 1 2 3 4 5<br /><br />#DATASET1 : scf calculation: GS WF in the BZ<br />#********************************************<br />   prtden1    1<br />   kptopt1    1<br />   toldfe1    1.0d-10<br /><br />#DATASET2 : non scf calculation: GS WF in the whole BZ<br />#*****************************************************<br />   getden2    1<br />   kptopt2    2<br />     iscf2   -2<br />   getwfk2    1<br />   tolwfr2    1.0d-20<br />    nband2    20<br /><br /><br />#DATASET3 : ddk on the MP grid of k-points<br />#*****************************************<br />   getwfk3    2<br />    rfdir3    1 1 1<br />   rfelfd3    2<br />   tolwfr3    1.0d-20<br />    nband3    20<br />   kptopt3    2<br /><br />#DATASET4 : ddE on the MP grid of k-points<br />#*****************************************<br />   prtden4    1<br />   getwfk4    2<br />   getddk4    3<br />    rfdir4    1 1 1<br />   rfphon4    1<br />  rfatpol4    1 2<br />   tolvrs4    1.0d-10<br />   rfelfd4    3<br />    nband4    20<br />   kptopt4    2<br />  prepanl4    1<br /><br />#DATASET5 : 3DTE calculation<br />#***************************<br />   getden5    1<br />  get1den5    4<br />   getwfk5    2<br />   get1wf5    4<br />    nband5    20<br />   kptopt5    2<br />optdriver5    5<br />  rf1elfd5    1<br />  rf1phon5    1<br /> rf1atpol5    1 5<br />   rf1dir5    1 1 1<br />  rf2elfd5    1<br />   rf2dir5    1 1 1<br />  rf3elfd5    1<br />   rf3dir5    1 1 1<br /><br />nbdbuf 0<br />##############################################<br /><br /><br />when it finished , the log file come up with thounds of WARNING but still finished, and the WARNING most concentrate in the 'cgwf3.F90:702:WARNING' and the last of my log file it said 'The dynamical matrix was incomplete : phonon frequencies may be wrong ...' and 'matrix of third-order energies incomplete  changes in the dielectric susceptibility may be wrong.' According to the Frecuently asked questions' ,mverstra said the dynamical matrix was incomplete owing to not all the purturbation  was included, so i just neglected this warning and go ahead. after merging the add files i run anaddb it come up with the following.<br />  (except for gamma, not yet able to use time-reversal symmetry)<br /> Now the whole DDB is in central memory<br /> gtblk9 : enter gtblk9<br /> gtblk9 :<br />  Unable to find block corresponding to the following specifications :<br /> Type (rfmeth) =  1<br /> ider qphon(3)         qphnrm   rfphon rfelfd rfstrs<br />   1  0.00  0.00  0.00  0.00      1      0      0<br />   2 -0.00 -0.00 -0.00  0.00      1      0      0<br /> gtblk9 : enter gtblk9<br /> gtblk9 :<br />  Unable to find block corresponding to the following specifications :<br /> Type (rfmeth) =  1<br /> ider qphon(3)         qphnrm   rfphon rfelfd rfstrs<br />   1  0.00  0.00  0.00  0.00      1      2      0<br />   2 -0.00 -0.00 -0.00  0.00      1      2      0<br /> gtblk9 : enter gtblk9<br /> gtblk9 :<br />  Unable to find block corresponding to the following specifications :<br /> Type (rfmeth) =  3<br /> ider qphon(3)         qphnrm   rfphon rfelfd rfstrs<br />   1  0.00  0.00  0.00  1.00      1      2      0<br />   2  0.00  0.00  0.00  1.00      0      2      0<br />   3  0.00  0.00  0.00  1.00      0      2      0<br />Segmentation fault (core dumped)<br />###############################################<br /><br />and no output at al, i have no idea what should do next to fix these problem,please help me. Thanks in advanced<br /><br /><br />Xiaole</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault (core dumped) problem in NLO calculat</h3>
+				<div class="date">Posted: <strong>Tue Jun 21, 2016 12:14 pm</strong></div>
+				<div class="author">by <strong>mazibi</strong></div>
+				<div class="content">Hi Xiaole<br />i have the same problem for calculate NLO of TiO2, have you solved this problem?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault (core dumped) problem in NLO calculat</h3>
+				<div class="date">Posted: <strong>Sat Jul 16, 2016 4:14 pm</strong></div>
+				<div class="author">by <strong>otahiri</strong></div>
+				<div class="content">i cant't have the nonlinear result and i have this<br />!ERROR<br />message: |<br />    Aborting now<br />src_file: m_optic_tools.F90<br />src_line: 856<br />...<br /><br />#0  0xB6A20133<br />#1  0x815BDE8 in show_backtrace at m_errors.F90:951<br />#2  0x811B19A in __m_optic_tools_MOD_nlinopt at m_optic_tools.F90:856<br />#3  0x804DCC3 in optic at optic.F90:423</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault (core dumped) problem in NLO calculat</h3>
+				<div class="date">Posted: <strong>Mon Jul 23, 2018 9:19 am</strong></div>
+				<div class="author">by <strong>new_986</strong></div>
+				<div class="content">Hi <br />I know this post is not new, but have anybody solved the problem? I have the same problem with abinit 8.6.3<br /><br />Regards<br /><br />Nawzad</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault (core dumped) problem in NLO calculat</h3>
+				<div class="date">Posted: <strong>Fri Oct 05, 2018 7:18 am</strong></div>
+				<div class="author">by <strong>wangxy</strong></div>
+				<div class="content">In non-linear calculation， the nband should be equal to the number of valence band. I want to know how to confirm the value?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault (core dumped) problem in NLO calculat&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Fri Oct 05, 2018 10:01 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello<br /><br />A first problem is rfatpol in dtset 4. It needs to be &quot;1 natom&quot; to be sure all of the needed perturbations are done. Those are the blocks missing from the dynamical matrix (at gamma only here) and so the Raman coefficients and born effective charges are incomplete. Please do all of the simpler tutorials (rf 1 &amp; 2) before embarking on the others. <br /><br />Please forget iscf 5 ever existed - the new default  (7 or 17) is much better and the tutorials will be updated if that's not already done.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1395&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:44:38 GMT -->
+</html>

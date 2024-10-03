@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?p=6210 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:42:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>abinit7.0.4 segmentation fault - compiled with intel11.1 mpi - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopicb084.html?t=1964">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="1"><a href="viewforum58da.html?f=1" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Building ABINIT</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="3"><a href="viewforum4d6b.html?f=3" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Configuring and compiling ABINIT</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopicb74a-2.html?f=3&amp;t=1964">abinit7.0.4 segmentation fault - compiled with intel11.1 mpi</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">option, parallelism,...<br /></div>
+<p>
+	<strong>Moderators:</strong> <a href="memberlist5296.html?mode=viewprofile&amp;u=2740" class="username">fgoudreault</a>, <a href="memberlist7468.html?mode=viewprofile&amp;u=53" class="username">mcote</a>
+</p>
+
+	<div class="rules">
+		<div class="inner">
+
+					<strong>Forum rules</strong><br />
+			Please have a look at ~abinit/doc/config/build-config.ac in the source package for detailed and up-to-date information about the configuration of Abinit 8 builds.<br>
+For a video explanation on how to build Abinit 7.x for Linux, please go to: <a href="http://www.youtube.com/watch?v=DppLQ-KQA68" class="postlink">http://www.youtube.com/watch?v=DppLQ-KQA68</a>.<br>
+<strong class="text-strong">IMPORTANT: when an answer solves your problem, please check the little green V-like button on its upper-right corner to accept it.</strong>
+		
+		</div>
+	</div>
+
+<div class="action-bar bar-top">
+	
+			<a href="postingf161-2.html?mode=reply&amp;f=3&amp;t=1964" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic713f-2.html?f=3&amp;t=1964&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="1964" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			4 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p6200" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile6200">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistafb6.html?mode=viewprofile&amp;u=1110" class="username">Mansour</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchf034.html?author_id=1110&amp;sr=posts">2</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jan 24, 2013 12:45 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content6200">
+
+						<h3 class="first"><a href="#p6200">abinit7.0.4 segmentation fault - compiled with intel11.1 mpi</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting877e.html?mode=quote&amp;f=3&amp;p=6200" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic0f8a.html?p=6200#p6200" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistafb6.html?mode=viewprofile&amp;u=1110" class="username">Mansour</a></strong> &raquo; </span>Thu Jan 24, 2013 2:02 pm
+			</p>
+			
+			
+			
+			<div class="content">Hello<br />This is first time I am using abinit; but anyway I have compiled its 7.0.4 version on Linux 2.6.32-279.9.1.el6.x86_64 (Red Hat 4.4.6-4) with a simple mpi-prefix option as : <br /><span style="color: #0000FF">../abinit-7.0.4/configure --enable-mpi --with-mpi-prefix=/cluster/mpi/openmpi/1.6.3/intel/</span><br />Of course I loaded related modules before: <br /><span style="color: #0000FF">Currently Loaded Modulefiles:<br />  1) intel/11.1046             2) mpi/intel/openmpi/1.6.3</span><br />there were some warnings but it could finish configuration finally. After that, by make -j4 final step was done.<br />Unfortunately, when I try to test it by make tests_in or tests_min lots of segmentation errors came out. I also submit it on cluster with 8 cpus on an nod (for tbasepar_1test case) but same problem was occurred (i.e. segmentation fault).<br />The last part of its log file is like: <br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;pspatm: atomic psp has been read&nbsp; and splines computed<br /><br />&nbsp; &nbsp;2.39408461E+03&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ecore*ucvol(ha*bohr**3)<br />&nbsp;symatm: atom number&nbsp; &nbsp; &nbsp;1 is reached starting at atom<br />&nbsp; &nbsp;1&nbsp; 3&nbsp; 2&nbsp; 4&nbsp; 1&nbsp; 3&nbsp; 2&nbsp; 4&nbsp; 1&nbsp; 3&nbsp; 2&nbsp; 4&nbsp; 1&nbsp; 3&nbsp; 2&nbsp; 4&nbsp; 1&nbsp; 3&nbsp; 2&nbsp; 4&nbsp; 1&nbsp; 3&nbsp; 2&nbsp; 4<br />&nbsp;symatm: atom number&nbsp; &nbsp; &nbsp;2 is reached starting at atom<br />&nbsp; &nbsp;2&nbsp; 4&nbsp; 1&nbsp; 3&nbsp; 2&nbsp; 4&nbsp; 1&nbsp; 3&nbsp; 4&nbsp; 2&nbsp; 3&nbsp; 1&nbsp; 3&nbsp; 1&nbsp; 4&nbsp; 2&nbsp; 3&nbsp; 1&nbsp; 4&nbsp; 2&nbsp; 4&nbsp; 2&nbsp; 3&nbsp; 1<br />&nbsp;symatm: atom number&nbsp; &nbsp; &nbsp;3 is reached starting at atom<br />&nbsp; &nbsp;3&nbsp; 1&nbsp; 4&nbsp; 2&nbsp; 4&nbsp; 2&nbsp; 3&nbsp; 1&nbsp; 2&nbsp; 4&nbsp; 1&nbsp; 3&nbsp; 2&nbsp; 4&nbsp; 1&nbsp; 3&nbsp; 4&nbsp; 2&nbsp; 3&nbsp; 1&nbsp; 3&nbsp; 1&nbsp; 4&nbsp; 2<br />&nbsp;symatm: atom number&nbsp; &nbsp; &nbsp;4 is reached starting at atom<br />&nbsp; &nbsp;4&nbsp; 2&nbsp; 3&nbsp; 1&nbsp; 3&nbsp; 1&nbsp; 4&nbsp; 2&nbsp; 3&nbsp; 1&nbsp; 4&nbsp; 2&nbsp; 4&nbsp; 2&nbsp; 3&nbsp; 1&nbsp; 2&nbsp; 4&nbsp; 1&nbsp; 3&nbsp; 2&nbsp; 4&nbsp; 1&nbsp; 3<br />&nbsp;newkpt: spin channel isppol2 =&nbsp; &nbsp; &nbsp;1<br />-P-0000&nbsp; wfconv:&nbsp; &nbsp; 40 bands initialized randomly with npw=&nbsp; &nbsp;675, for ikpt=&nbsp; &nbsp; &nbsp;1<br />&nbsp;newkpt: spin channel isppol2 =&nbsp; &nbsp; &nbsp;2<br />&nbsp;newkpt: loop on k-points done in parallel<br />-P-0000&nbsp; leave_test : synchronization done...<br />&nbsp;pareigocc : MPI_ALLREDUCE<br /><br />&nbsp;setup2: Arith. and geom. avg. npw (full set) are&nbsp; &nbsp; &nbsp;675.000&nbsp; &nbsp; &nbsp;675.000<br />&nbsp;initro : for itypat=&nbsp; 1, take decay length=&nbsp; &nbsp; &nbsp; 0.8000,<br />&nbsp;initro : indeed, coreel=&nbsp; &nbsp; &nbsp;18.0000, nval=&nbsp; 8 and densty=&nbsp; 0.0000E+00.<br /><br />================================================================================<br /><br />&nbsp;getcut: wavevector=&nbsp; 0.0000&nbsp; 0.0000&nbsp; 0.0000&nbsp; ngfft=&nbsp; 36&nbsp; 36&nbsp; 36<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ecut(hartree)=&nbsp; &nbsp; &nbsp;30.000&nbsp; &nbsp;=&gt; boxcut(ratio)=&nbsp; &nbsp;2.08583<br /><br />&nbsp;ewald : nr and ng are&nbsp; &nbsp; 3 and&nbsp; &nbsp;15<br /><br />&nbsp;ITER STEP NUMBER&nbsp; &nbsp; &nbsp;1<br />&nbsp;vtorho : nnsclo_now=&nbsp; 2, note that nnsclo,dbl_nnsclo,istep=&nbsp; 0 0&nbsp; 1<br />&nbsp; ****&nbsp; In vtorho for isppol=&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1<br />&nbsp; ****&nbsp; In vtorho for isppol=&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2<br />--------------------------------------------------------------------------<br />mpirun noticed that process rank 1 with PID 25632 on node node156.cluster.icams.ruhr-uni-bochum.de exited on signal 11 (Segmentation fault).<br />--------------------------------------------------------------------------<br /></code></pre></div><br /> I read other posts especially this <a href="viewtopic329f.html?f=3&amp;t=1514&amp;start=25" class="postlink">http://forum.abinit.org/viewtopic.php?f=3&amp;t=1514&amp;start=25</a> but I couldn't realize the problem yet. While the discussed OS was different in that post but I guess in my case also a wrong mixture of different libraries was chosen.<br />I attached config.log file which includes required information about my platform and probable wrong options. <br /><br />Thanks in advance for your helps.<br />Mansour</div>
+			
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/fileb8a3.php?id=699">config.log</a></dt>
+						<dd>(152.84 KiB) Downloaded 377 times</dd>
+		</dl>
+		
+		
+			</dd>
+									</dl>
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p6201" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile6201">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberliste9a7.html?mode=viewprofile&amp;u=60" class="avatar"><img class="avatar" src="download/filecff2.jpg?avatar=60_1348167350.jpg" width="92" height="92" alt="User avatar" /></a>														</div>
+								<a href="memberliste9a7.html?mode=viewprofile&amp;u=60" class="username">Alain_Jacques</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search1175.html?author_id=60&amp;sr=posts">279</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Aug 15, 2009 9:34 pm</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Université catholique de Louvain - Belgium</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content6201">
+
+						<h3 ><a href="#p6201">Re: abinit7.0.4 segmentation fault - compiled with intel11.1</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting7e05-2.html?mode=quote&amp;f=3&amp;p=6201" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicdbc0.html?p=6201#p6201" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberliste9a7.html?mode=viewprofile&amp;u=60" class="username">Alain_Jacques</a></strong> &raquo; </span>Thu Jan 24, 2013 3:58 pm
+			</p>
+			
+			
+			
+			<div class="content">Hi Mansour,<br /><br />I suspect that your abinit has been linked to a flaky linear algebra library as configure Russian roulette seems to find one apparently suitable to replace the fallback NETLIB. As a consequence the binary crashes at the first call of a dot product function - you can check this with a run of gdb.<br />Anyway there are several ways to circumvent this by trying either:<br /><br />* to configure with --with-linalg-flavor=&quot;none&quot;, recompile and test with a make tests_v1 - this is the safest choice but there is a speed penalty.<br />* or to configure with --enable-zdot-bugfix=&quot;yes&quot;, recompile and re-check (may use your enhanced lib but wannier90 is probably broken)<br />* or use MKL libraries for BLAS, LAPACK and FFT, probably the most efficient choice.<br /><br />Kind regards,<br /><br />Alain</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p6206" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile6206">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistafb6.html?mode=viewprofile&amp;u=1110" class="username">Mansour</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchf034.html?author_id=1110&amp;sr=posts">2</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jan 24, 2013 12:45 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content6206">
+
+						<h3 ><a href="#p6206">Re: abinit7.0.4 segmentation fault - compiled with intel11.1</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting2fb7.html?mode=quote&amp;f=3&amp;p=6206" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic9273.html?p=6206#p6206" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistafb6.html?mode=viewprofile&amp;u=1110" class="username">Mansour</a></strong> &raquo; </span>Fri Jan 25, 2013 12:05 pm
+			</p>
+			
+			
+			
+			<div class="content">Dear Alain<br /><br />Thank you very much for your quick reply. Yes, it does work. In fact by that linalg-flavor flag it set the NETLIB for linear algebra package correctly.<br /><span style="color: #0000BF">../abinit-7.0.4/configure --enable-mpi=yes --enable-optim=yes --with-mpi-prefix=/cluster/mpi/openmpi/1.6.3/intel/ --with-linalg\<br />-flavor=none</span><br /><br /> But I am suspected whether its version is proper for mpi calculation or not. As I saw during <span style="color: #0000BF">make</span> command the <blockquote class="uncited"><div>sequential version of linear algebra package</div></blockquote> has been chosen. Dose it really matter for parallel calculation? (new config.log is attached)<br /><br />I also run <em class="text-italics">tests_v1</em> successfully. The tutorial first test case <em class="text-italics">tbasepar_1</em> was also fine with different number of cpus but I was confused with results for second test case <em class="text-italics">tbasepar_2</em> which is considered spin calculation. In fact its results is depending on number of cpus!. I checked with different number of cpus (1,8 and 16); the first one's result was quite same as reference output file but for two next cases the calculated energy and stress tensor components have significant  deviation from reference value (+-10 times higher). While results for 8 and 16 cpus are the same. The question is that, treating this case with larger number of cpus causes the problem (because it has too few K-points) or is there any mistake related to code compiling?<br /><br />The comparison by sdiff command between 8-cpu and reference output files is shown here: (both are attached also)<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>-------------------------------------------------------------&nbsp; &nbsp;-------------------------------------------------------------<br />&nbsp;Components of total free energy (in Hartree) :&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Components of total free energy (in Hartree) :<br /><br />&nbsp; &nbsp; Kinetic energy&nbsp; =&nbsp; 1.57704767360493E+02&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp;Kinetic energy&nbsp; =&nbsp; 1.25650794248530E+02<br />&nbsp; &nbsp; Hartree energy&nbsp; =&nbsp; 1.82744721367767E+01&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp;Hartree energy&nbsp; =&nbsp; 1.44063774642969E+01<br />&nbsp; &nbsp; XC energy&nbsp; &nbsp; &nbsp; &nbsp;= -2.01317375494705E+01&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp;XC energy&nbsp; &nbsp; &nbsp; &nbsp;= -1.70626672615728E+01<br />&nbsp; &nbsp; Ewald energy&nbsp; &nbsp; = -8.36499227815283E+01&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Ewald energy&nbsp; &nbsp; = -8.36499227815283E+01<br />&nbsp; &nbsp; PspCore energy&nbsp; =&nbsp; 6.97983851565236E+00&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;PspCore energy&nbsp; =&nbsp; 6.97983851565236E+00<br />&nbsp; &nbsp; Loc. psp. energy= -5.37285622189003E+01&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp;Loc. psp. energy= -4.83382491267464E+01<br />&nbsp; &nbsp; NL&nbsp; &nbsp;psp&nbsp; energy= -1.00332543896596E+02&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp;NL&nbsp; &nbsp;psp&nbsp; energy= -7.79796526379097E+01<br />&nbsp; &nbsp; &gt;&gt;&gt;&gt;&gt; Internal E= -7.48836884335736E+01&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp;&gt;&gt;&gt;&gt;&gt; Internal E= -7.99934815792781E+01<br /><br />&nbsp; &nbsp; -kT*entropy&nbsp; &nbsp; &nbsp;= -2.32062757842293E-02&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp;-kT*entropy&nbsp; &nbsp; &nbsp;= -9.13291316865402E-02<br />&nbsp; &nbsp; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; Etotal= -7.49068947093578E+01&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; Etotal= -8.00848107109647E+01<br /><br />&nbsp;Other information on the energy :&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Other information on the energy :<br />&nbsp; &nbsp; Total energy(eV)= -2.03832026569694E+03 ; Band energy (Ha |&nbsp; &nbsp; &nbsp;Total energy(eV)= -2.17921852561150E+03 ; Band energy (Ha<br />-------------------------------------------------------------&nbsp; &nbsp;-------------------------------------------------------------<br /><br />&nbsp;Cartesian components of stress tensor (hartree/bohr^3)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Cartesian components of stress tensor (hartree/bohr^3)<br />&nbsp; sigma(1 1)= -9.13362800E-03&nbsp; sigma(3 2)=&nbsp; 0.00000000E+00&nbsp; &nbsp; |&nbsp; &nbsp;sigma(1 1)=&nbsp; 2.37971568E-02&nbsp; sigma(3 2)=&nbsp; 0.00000000E+00<br />&nbsp; sigma(2 2)= -9.13362800E-03&nbsp; sigma(3 1)=&nbsp; 0.00000000E+00&nbsp; &nbsp; |&nbsp; &nbsp;sigma(2 2)=&nbsp; 2.37971568E-02&nbsp; sigma(3 1)=&nbsp; 0.00000000E+00<br />&nbsp; sigma(3 3)= -9.13362800E-03&nbsp; sigma(2 1)=&nbsp; 0.00000000E+00&nbsp; &nbsp; |&nbsp; &nbsp;sigma(3 3)=&nbsp; 2.37971568E-02&nbsp; sigma(2 1)=&nbsp; 0.00000000E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |<br />-Cartesian components of stress tensor (GPa)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&#91;Pressur | -Cartesian components of stress tensor (GPa)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&#91;Pressur<br />- sigma(1 1)= -2.68720568E+02&nbsp; sigma(3 2)=&nbsp; 0.00000000E+00&nbsp; &nbsp; | - sigma(1 1)=&nbsp; 7.00136408E+02&nbsp; sigma(3 2)=&nbsp; 0.00000000E+00<br />- sigma(2 2)= -2.68720568E+02&nbsp; sigma(3 1)=&nbsp; 0.00000000E+00&nbsp; &nbsp; | - sigma(2 2)=&nbsp; 7.00136408E+02&nbsp; sigma(3 1)=&nbsp; 0.00000000E+00<br />- sigma(3 3)= -2.68720568E+02&nbsp; sigma(2 1)=&nbsp; 0.00000000E+00&nbsp; &nbsp; | - sigma(3 3)=&nbsp; 7.00136408E+02&nbsp; sigma(2 1)=&nbsp; 0.00000000E+00<br /><br />== END DATASET(S) ===========================================&nbsp; &nbsp;== END DATASET(S) ===========================================<br />=============================================================&nbsp; &nbsp;=============================================================<br /><br />&nbsp;-outvars: echo values of variables after computation&nbsp; ------&nbsp; &nbsp; -outvars: echo values of variables after computation&nbsp; ------<br />&nbsp; &nbsp; &nbsp; &nbsp; accesswff&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; acell&nbsp; &nbsp; &nbsp; 7.0000000000E+00&nbsp; 7.0000000000E+00&nbsp; 7.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;acell&nbsp; &nbsp; &nbsp; 7.0000000000E+00&nbsp; 7.0000000000E+00&nbsp; 7.<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; amu&nbsp; &nbsp; &nbsp; 5.58470000E+01&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;amu&nbsp; &nbsp; &nbsp; 5.58470000E+01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;bandpp&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ecut&nbsp; &nbsp; &nbsp; 3.00000000E+01 Hartree&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ecut&nbsp; &nbsp; &nbsp; 3.00000000E+01 Hartree<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;etotal&nbsp; &nbsp; &nbsp;-7.4906894709E+01&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; etotal&nbsp; &nbsp; &nbsp;-8.0084810711E+01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; fcart&nbsp; &nbsp; &nbsp;-1.4955468720E-01 -1.4955468720E-01 -1. |&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;fcart&nbsp; &nbsp; &nbsp;-1.4955719002E-02 -1.4955719002E-02 -1.<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1.4955468720E-01&nbsp; 1.4955468720E-01 -1. |&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1.4955719002E-02&nbsp; 1.4955719002E-02 -1.<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1.4955468720E-01 -1.4955468720E-01&nbsp; 1. |&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1.4955719002E-02 -1.4955719002E-02&nbsp; 1.<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -1.4955468720E-01&nbsp; 1.4955468720E-01&nbsp; 1. |&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-1.4955719002E-02&nbsp; 1.4955719002E-02&nbsp; 1.<br /></code></pre></div><br /><br />Regarding your comment to use <em class="text-italics">mkl</em> libraries I checked and found its proper <em class="text-italics">BLAS</em> and <em class="text-italics">LAPACK</em> libraries for <em class="text-italics">intel</em> but not for <em class="text-italics">fftw</em>; instead, <em class="text-italics">fftw 3.2.2-intel </em>was separately installed.<br />could I use <em class="text-italics">BLAS</em> and <em class="text-italics">LAPACK</em> from <em class="text-italics">mkl </em>and this <em class="text-italics">fftw</em> ? Also, dose it better (more efficient) than current <em class="text-italics">NETLIB</em> I have?<br /><br />And final question, same procedure should I use for <span style="color: #0000BF">ABINIT7.0.5</span>?<br /><br />Best Regards<br /><br />Mansour</div>
+			
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file22f4.php?id=700">config.log</a></dt>
+			<dd><em>new config.log</em></dd>			<dd>(143.48 KiB) Downloaded 319 times</dd>
+		</dl>
+		
+		
+			</dd>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file13ef.php?id=701">tbasepar_2.out</a></dt>
+			<dd><em>with 8-cpu calculated</em></dd>			<dd>(30.28 KiB) Downloaded 328 times</dd>
+		</dl>
+		
+		
+			</dd>
+									</dl>
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p6210" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile6210">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberliste9a7.html?mode=viewprofile&amp;u=60" class="avatar"><img class="avatar" src="download/filecff2.jpg?avatar=60_1348167350.jpg" width="92" height="92" alt="User avatar" /></a>														</div>
+								<a href="memberliste9a7.html?mode=viewprofile&amp;u=60" class="username">Alain_Jacques</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search1175.html?author_id=60&amp;sr=posts">279</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sat Aug 15, 2009 9:34 pm</dd>		
+		
+											<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Université catholique de Louvain - Belgium</dd>
+							
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content6210">
+
+						<h3 ><a href="#p6210">Re: abinit7.0.4 segmentation fault - compiled with intel11.1</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting1f12-2.html?mode=quote&amp;f=3&amp;p=6210" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicfdc5.html?p=6210#p6210" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberliste9a7.html?mode=viewprofile&amp;u=60" class="username">Alain_Jacques</a></strong> &raquo; </span>Fri Jan 25, 2013 6:43 pm
+			</p>
+			
+			
+			
+			<div class="content">Dear Mansour,<br /><br />When I perform parallel calculations using MPI, I generally switch to sequential linear algebra in order to avoid CPU overloading. With multithreaded blas/lapack, if you start a job on a 4 cores node by specifying mpirun -np 4 ... and each of these MPI slots open concurrent threads, you end up with more than one task per core which is inefficient due to context switching. It is difficult to control two different parallelization technologies ignoring each other. So if a MPI program has been compiled with multithreaded MKL libs, I use the info on <a href="http://software.intel.com/en-us/articles/recommended-settings-for-calling-intelr-mkl-routines-from-multi-threaded-applications" class="postlink">http://software.intel.com/en-us/articles/recommended-settings-for-calling-intelr-mkl-routines-from-multi-threaded-applications</a> to switch to sequential MKL i.e. export MKL_NUM_THREADS=1. If you're cautious when treating a problem with poor MPI parallelization but a large amount of data that may benefit from faster blas/lapack, you may keep multithreading but you have to be sure that (mpirun -np) x (MKL_NUM_THREADS=) &lt;= allocated cores.<br /><br />Now concerning the difference between 1, 2, 8, ... 16 cpus on tbasepar_2 ... You have to look at converged results. I see in the input file nstep=5 ... no way to reach convergence with such a small number of SCF loops. Retry with nstep=200 (maybe even more) and compare the results obtained with a sequential run and a parallel run on 2 processes (for spin up/down) ; they should match but be sure that both runs are converged. To use more cpus, also increase ngktp and again do comparisons between converged outputs.<br /><br />MKL provides BLAS, LAPACK and fast fourier transform and is arguably the most efficient library. As an example, I use the following extra options for a production abinit ...<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--enable-debug=&quot;no&quot;<br />--enable-optim=&quot;aggressive&quot;<br />--with-fft-flavor=&quot;fftw3&quot;<br />--with-fft-libs=&quot;-L/opt/intel/Compiler/11.1/073/mkl/lib/em64t -Wl,--start-group -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group -lpthread&quot;<br />--with-linalg-flavor=&quot;mkl&quot;<br />--with-linalg-libs=&quot;-L/opt/intel/Compiler/11.1/073/mkl/lib/em64t -Wl,--start-group -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group -lpthread&quot;<br /></code></pre></div><br />Adapt to your paths, make and test (yeah, fftw3 flavor for MKL fft). If you experience the same segfaults, add --enable-zdot-bugfix=&quot;yes&quot; and disable wannier90.<br /><br />Kind regards,<br /><br />Alain</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="postingf161-2.html?mode=reply&amp;f=3&amp;t=1964" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic713f-2.html?f=3&amp;t=1964&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=3&amp;t=1964">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			4 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforum4d6b.html?f=3" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Configuring and compiling ABINIT”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?p=6210 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:42:19 GMT -->
+</html>

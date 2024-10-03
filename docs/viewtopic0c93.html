@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=872&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:19:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Integration of the potential files</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Integration of the potential files</h2>
+		<p><a href="viewtopic82fb.html?f=12&amp;t=872">https://forum.abinit.org/viewtopic.php?f=12&amp;t=872</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Integration of the potential files</h3>
+				<div class="date">Posted: <strong>Thu Feb 03, 2011 9:40 pm</strong></div>
+				<div class="author">by <strong>getvioletic</strong></div>
+				<div class="content">I am interested in using the potential file that is output by abinit for further analysis and I want to make sure that I understand the file and it's contents.  Currently when I integrate the contents of the file after multiplying by the proper charge density I still do not arrive at the proper value in the *.out file.  <br /><br />For example if I only consider the Hartree potential alone I intgrate to a value of exactly double what is shown in the *.out file.  As another example when I only consider the XC part fo the potential I integrate to a value that is just about 4/3 larger than the value in the *.out file.  <br /><br />Where in the code can I find the routines that are used to carry out this integration?  I would like to recreate these numbers in matlab to verify my understanding of these files and ensure I have not come across a bug in the abinit code.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Integration of the potential files</h3>
+				<div class="date">Posted: <strong>Sun Mar 13, 2011 9:29 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">The Hartree smells like<br />1) spin or<br />2) you have forgotten that each electron &quot;pair&quot; interaction should be counted only once<br /><br />The XC is more delicate, there is some double counting in all the potentials between \int n * v and E_tot. Have a look at the book by Richard Martin <!-- m --><a class="postlink" href="http://electronicstructure.org/">http://electronicstructure.org/</a><!-- m --><br /><br />For the routines, you will have to walk around in the source, in particular inside rhotov.F90 to find the H+XC subroutines. The energy calculations are in a separate set of subroutines (in particular one called... energy.F90).<br /><br />grep will get you there.<br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=872&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:19:20 GMT -->
+</html>

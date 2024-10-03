@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1455&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:42:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; P63mmc centrosymmetric being found to have polarization</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>P63mmc centrosymmetric being found to have polarization</h2>
+		<p><a href="viewtopic3fa1.html?f=10&amp;t=1455">https://forum.abinit.org/viewtopic.php?f=10&amp;t=1455</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>P63mmc centrosymmetric being found to have polarization</h3>
+				<div class="date">Posted: <strong>Fri Dec 02, 2011 5:03 pm</strong></div>
+				<div class="author">by <strong>brehmj</strong></div>
+				<div class="content">Hi,<br />So I ran a relaxation calculation with the xred in the P63/mmc (#194) space group and forced abinit to find a sol'n within this space group by using the spgroup variable and setting it equal to 194.<br /><br />this calc returns xred in the 194 group.  fine so far.<br /><br />Now, 194 is a hexagonal space group.  so, I do not define rprim, but I define angdeg as 90 90 120.  And I supply the acell coords in the proper order.<br /><br />So the I run a berry polarization using:<br />rfdir 1 1 1<br />berryopt -1  (since my occopt 1).<br /><br />I use a kpt of 8 8 8, with a shiftk 0.5 0.5 0.5   (side note:   a kpt of 6 6 6 ... leads to abinit hanging...)<br /><br />I expect to get a polarization in x, y, and z all equal to 0.<br /><br />I get:<br />Electronic berry phase:                  -0.217863665E-17  -0.690143852E-18  -0.210435482E-01<br />     Expectation value (PAW only):  0.000000000E+00   0.000000000E+00   0.000000000E+00<br />     Ionic:                                      0.626624034E-15  -0.888009271E-15  -0.996822686E-16<br />     Total:                                      0.624445397E-15  -0.888699414E-15  -0.210435482E-01<br /><br />So, all is &quot;good&quot;  except the z dir polarization.   It is too high in abs. val to be ignored, yes?<br /><br />What could I be doing wrong?<br /><br />My output xred coordinates from my relaxation calc (which are the input coords to my Polar. calc) are listed below:<br />           0           0           0<br />           0           0         0.5<br />  0.33333333  0.66666667        0.75<br />  0.66666667  0.33333333        0.25<br />  0.17426253 -0.17426253        0.25<br />  0.17426253  0.34852506        0.25<br /> -0.34852506 -0.17426253        0.25<br /> -0.17426253  0.17426253        0.75<br /> -0.17426253 -0.34852506        0.75<br />  0.34852506  0.17426253        0.75<br /><br />The ntypat is 3 and typat is 2*1 2*2 6*3<br /><br />thanks for looking into this,<br />John B.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: P63mmc centrosymmetric being found to have polarization</h3>
+				<div class="date">Posted: <strong>Sat Dec 10, 2011 11:44 am</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">I'm not sure whether this is ok or not (I'm the main developer currently working on berryopt with PAW). If you send me your input files I'll look into it more carefully, I can't tell from what you posted.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1455&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:42:51 GMT -->
+</html>

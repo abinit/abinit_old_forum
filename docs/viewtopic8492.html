@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3265&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:37:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Can not link intel-dfti to abinit-7.10.5</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Can not link intel-dfti to abinit-7.10.5</h2>
+		<p><a href="viewtopicbb6e.html?f=3&amp;t=3265">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3265</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Can not link intel-dfti to abinit-7.10.5</h3>
+				<div class="date">Posted: <strong>Fri Apr 15, 2016 9:14 am</strong></div>
+				<div class="author">by <strong>kinsang</strong></div>
+				<div class="content">Hi, everyone.<br />When I tried to link intel-dfti to abinit-7.10.5, compiling error occurs as follows:<br />Have anyone successfully link dfti to abinit? <br /><br />mpiifort -DHAVE_CONFIG_H -I. -I../..  -I../../src/32_util -I../../src/32_util -I../../src/28_numeric_noabirule -I../../src/28_numeric_noabirule -I../../src/44_abitypes_defs -I../../src/44_abitypes_defs -I../../src/41_geometry -I../../src/41_geometry -I../../src/51_manage_mpi -I../../src/51_manage_mpi -I../../src/18_timing -I../../src/18_timing -I../../src/12_hide_mpi -I../../src/12_hide_mpi -I../../src/10_defs -I../../src/10_defs -I../../src/11_memory_mpi -I../../src/11_memory_mpi -I../../src/16_hideleave -I../../src/16_hideleave -I../../src/14_hidewrite -I../../src/14_hidewrite -I../../src/incs -I../../src/incs -I/opt/intel/ICC2016/compilers_and_libraries_2016.1.150/linux/mkl/include -I/home/kinsang/new_home/kinsang/Ab_impi-cdft/abinit-7.10.5/fallbacks/exports/include   -free -module /home/kinsang/new_home/kinsang/Ab_impi-cdft/abinit-7.10.5/src/mods -xHost -w -O2 -mkl -extend-source -noaltparam -nofpscomp  -openmp -c -o m_sg2002.o m_sg2002.F90<br /><span style="color: #FF0000">./dfti_fftrisc.finc(926): error #6404: This name does not have a type, and must have an explicit type.   [WEIGHT]<br />           denpot(2*ix-1,iy,iz) = denpot(2*ix-1,iy,iz) + weight* REAL(slice_b(sidx))**2<br />---------------------------------------------------------------------^</span><br />compilation aborted for m_dfti.F90 (code 1)<br />make[4]: *** [m_dfti.o] Error 1<br />make[4]: *** Waiting for unfinished jobs....</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Can not link intel-dfti to abinit-7.10.5</h3>
+				<div class="date">Posted: <strong>Fri Apr 15, 2016 10:33 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Replace src/52_fft_mpi_noabirule/dfti_fftrisc.finc with the file attached.<br /><br />btw: The DFTI library provided by MKL should be activated only if you are compiling Abint with OpenMP threads (and indeed you are doing).<br />Remember to pass --enable-openmp to the configure script because there are sections of code inside Abinit that should be activated<br />when OpenMP is used.<br /><br />fft_flavor=fftw3 supports both the true FFTW3 library as well as the FFT library provided by Intel and can be used <br />when OpenMP is not activated.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3265&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:37:26 GMT -->
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1815&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:50:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Berry phase calculation crashing under MPI</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Berry phase calculation crashing under MPI</h2>
+		<p><a href="viewtopic9ac3.html?f=10&amp;t=1815">https://forum.abinit.org/viewtopic.php?f=10&amp;t=1815</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Berry phase calculation crashing under MPI</h3>
+				<div class="date">Posted: <strong>Thu Aug 30, 2012 7:35 am</strong></div>
+				<div class="author">by <strong>paulfons</strong></div>
+				<div class="content">I am running 12.6.3 on OpenSuse 11.3.  Abinit was compiled with the latest Intel fortran/cc/mpi software.  I have been preparing to do Berry phase calculations for a finite electric field by practicing on GaAs before I start using a more complicated structure.  I have included my input and corresponding output files below for reference.  I am interested in including spin-orbit-coupling on my real structure thus I am using the HGH pseudopotentials for GaAs.  The input file calculates the SCF for GaAs on 8x8x8 M-P grid with shifting that gives rise to a total of 28 k-points in the irreducible Brillouin zone.  I would like to parallelize my calculation over these k-points. If I remove the final two lines<br /><br />berryopt -1<br />rfdir 1 1 1<br /><br />the calculation runs to completion under mpi with 28 cores with no errors.  When I add the berryopt -1 input variable, the program crashes violently with as you can see below. <br /><br /><br /> initberry: enter<br />       Simple Lattice Grid<br />  initberry: for direction 1, nkstr =   8, nstr = 256<br />  initberry: for direction 2, nkstr =   8, nstr = 256<br />  initberry: for direction 3, nkstr =   8, nstr = 256<br />forrtl: severe (174): SIGSEGV, segmentation fault occurred<br />Image              PC                Routine            Line        Source             <br />abinit             000000000140301E  Unknown               Unknown  Unknown<br />abinit             0000000000D01F30  Unknown               Unknown  Unknown<br />abinit             00000000004E7C5E  Unknown               Unknown  Unknown<br />abinit             000000000041ECEE  Unknown               Unknown  Unknown<br />abinit             00000000004101F8  Unknown               Unknown  Unknown<br />abinit             000000000040853A  Unknown               Unknown  Unknown<br />abinit             00000000004070DC  Unknown               Unknown  Unknown<br />libc.so.6          00002B735E744BFD  Unknown               Unknown  Unknown<br />abinit             0000000000406FD9  Unknown               Unknown  Unknown<br />APPLICATION TERMINATED WITH THE EXIT STRING: Hangup (signal 1)<br /><br />Running the same input file in serial form results in the calculation proceeding to completion, e.g. the same section as above reads<br /><br /><br />setup2: Arith. and geom. avg. npw (full set) are    3265.773    3265.765<br /> symatm: atom number     1 is reached starting at atom<br />   1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1<br /> symatm: atom number     2 is reached starting at atom<br />   2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2<br /> initberry: enter<br />       Simple Lattice Grid<br />  initberry: for direction 1, nkstr =   8, nstr = 256<br />  initberry: for direction 2, nkstr =   8, nstr = 256<br />  initberry: for direction 3, nkstr =   8, nstr = 256<br /> initro : for itypat=  1, take decay length=      1.1500,<br /> initro : indeed, coreel=     28.0000, nval=  3 and densty=  0.0000E+00.<br /> initro : for itypat=  2, take decay length=      1.0000,<br /> initro : indeed, coreel=     28.0000, nval=  5 and densty=  0.0000E+00.<br /><br />================================================================================<br /><br /> getcut: wavevector=  0.0000  0.0000  0.0000  ngfft=  45  45  45<br />         ecut(hartree)=     35.000   =&gt; boxcut(ratio)=   2.23590<br /><br />with a final result of:<br /><br /> DATA TYPE INFORMATION: <br /> REAL:      Data type name: REAL(DP) <br />            Kind value:      8<br />            Precision:      15<br />            Smallest nonnegligible quantity relative to 1:  0.22204460E-15<br />            Smallest positive number:                       0.22250739-307<br />            Largest representable number:                   0.17976931+309<br /> INTEGER:   Data type name: INTEGER(default) <br />            Kind value: 4<br />            Bit size:   32<br />            Largest representable number: 2147483647<br /> LOGICAL:   Data type name: LOGICAL <br />            Kind value: 4<br /> CHARACTER: Data type name: CHARACTER             Kind value: 1<br /><br /><br />What can I do to get the mpi version working correctly.  My actually structure is quite large (a slab calculation) and I really need to use more than one cpu for speed reasons.  Have I encountered a bug or I am doing something wrong.  Any help offered would be gratefully received.<br /><br />Paul Fons</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Berry phase calculation crashing under MPI</h3>
+				<div class="date">Posted: <strong>Mon Sep 10, 2012 6:51 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Hi, <br />it's not an MPI problem, it's a berry's phase problem. In version 6.12.3 the spin polarized and spinor versions of the berry's phase code were not very thoroughly implemented and debugged (especially the nspinor part). I did that for both norm conserving and PAW since that version, I just tested your case GaAs with HGH and parallelized over kpts, with berryopt -1, and it ran fine on version 7.0.1 (the current development version). If you like I can ask Xavier if it's ok to send you a snapshot of the current code base.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1815&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:50:20 GMT -->
+</html>

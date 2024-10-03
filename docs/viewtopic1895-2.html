@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1608&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:53:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; make magma</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>make magma</h2>
+		<p><a href="viewtopic7f85.html?f=3&amp;t=1608">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1608</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>make magma</h3>
+				<div class="date">Posted: <strong>Sun Apr 08, 2012 3:39 pm</strong></div>
+				<div class="author">by <strong>Magniff</strong></div>
+				<div class="content">Hello there, friends<br /><br />I am currently trying to build MAGMA lib, which, i believe, provides the gs gpu routines; <br /><br />so i got a problem (i know, that magma is not your product, but i hope some of you compiled it correctly)<br /><br />so that is my make file:<br /><br /><span style="color: #FF0000"><br /># GPU_TARGET specifies for which GPU you want to compile MAGMA<br />#      0: Tesla family<br />#      1: Fermi Family<br />#<br />GPU_TARGET = 0<br /><br />CC        = /usr/bin/gcc-4.4<br />NVCC      = /usr/local/cuda/bin/nvcc<br />FORT      = /usr/bin/gfortran-4.4<br /><br />ARCH      = ar<br />ARCHFLAGS = cr<br />RANLIB    = ranlib<br /><br />OPTS      = -O3 -DADD_<br />FOPTS     = -O3 -DADD_ -x f95-cpp-input<br />NVOPTS    = --compiler-options -fno-strict-aliasing -DUNIX -O3 -DADD_<br />LDOPTS    = -fPIC -Xlinker -zmuldefs<br /><br />LIB       = /usr/lib/lapack/liblapack.a \<br />            -lf77blas -latlas -lcblas -lf2c -lcublas -lm<br /><br />CUDADIR   = /usr/local/cuda<br /><br />LIBDIR    = -L/usr/lib/atlas-base \<br />            -L/usr/lib \<br />            -L/lib \<br />            -L/home/magniff/Desktop/downloads/magma_1.1.0/lib  \<br />            -L/usr/lib/lapack \<br />            -L$(CUDADIR)/lib64 \<br />            -L$(CUDADIR)/lib<br />INC       = -I$(CUDADIR)/include \<br /><br />LIBMAGMA     = /home/magniff/Desktop/downloads/magma_1.1.0/lib/magma.a<br />LIBMAGMABLAS = /home/magniff/Desktop/downloads/magma_1.1.0/lib/magmablas.a</span><br /><br />so it starts and runs for a couple of mins, and then crushes:<br /><span style="color: #FF0000">/usr/bin/ld: cannot find -lmagma</span><br /> <br />i dont really get it, maby some of you got the same error?<br /><br />sys:<br />debian 6<br />nvidia gtx275<br />last dev. drivers;<br /><br />magniff;</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: make magma</h3>
+				<div class="date">Posted: <strong>Sun Apr 08, 2012 6:48 pm</strong></div>
+				<div class="author">by <strong>VasiaS</strong></div>
+				<div class="content">hello, I have successfully installed the magma in two ways. try delete this:<br />LIBMAGMA = /home/magniff/Desktop/downloads/magma_1.1.0/lib/magma.a<br />LIBMAGMABLAS = /home/magniff/Desktop/downloads/magma_1.1.0/lib/magmablas.a<br />These lines were commented in my &quot;make file&quot;.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: make magma</h3>
+				<div class="date">Posted: <strong>Sun Apr 08, 2012 8:24 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi magniff,<br /><br /><blockquote class="uncited"><div>LIBDIR = -L/usr/lib/atlas-base \<br />-L/usr/lib \<br />-L/lib \<br />-L/home/magniff/Desktop/downloads/magma_1.1.0/lib \<br />-L/usr/lib/lapack \<br />-L$(CUDADIR)/lib64 \<br />-L$(CUDADIR)/lib<br />INC = -I$(CUDADIR)/include \<br /><br />LIBMAGMA = /home/magniff/Desktop/downloads/magma_1.1.0/lib/magma.a<br />LIBMAGMABLAS = /home/magniff/Desktop/downloads/magma_1.1.0/lib/magmablas.a</div></blockquote><br /><br />the  LIBDIR is used to find the blas/lapack and cuda libraries not for magma !<br /><br />you must remove the line &quot;-L/home/magniff/Desktop/downloads/magma_1.1.0/lib \&quot; in LIBDIR section<br /><br />the LIBMAGMA and LIBMAGMABLAS are used to &quot;install&quot; the magma libraries during the compilation ( not during the installation...)<br /><br />regards<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: make magma</h3>
+				<div class="date">Posted: <strong>Sun Apr 08, 2012 10:04 pm</strong></div>
+				<div class="author">by <strong>Magniff</strong></div>
+				<div class="content">ok, now the error message is <br /><br />/usr/bin/ld: warning: libcudart.so.4, needed by /usr/local/cuda/lib64/libcublas.so, not found (try using -rpath or -rpath-link)<br /><br />but i found link to libcudart.so.4 in /usr/local/cuda/lib64/ and /usr/local/cuda/lib/ folders<br /><br />maby i need to use some special key while running make (sorry, i am noob ^_^ )<br /><br />any idea?)</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: make magma</h3>
+				<div class="date">Posted: <strong>Mon Apr 09, 2012 9:54 am</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />If the environment is 64bits, try without &quot;-L$(CUDADIR)/lib&quot;<br /><br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>...<br />LIBDIR = -L/usr/lib/atlas-base \<br />-L/usr/lib \<br />-L/lib \<br />-L/usr/lib/lapack \<br />-L$(CUDADIR)/lib64<br /><br />INC = -I$(CUDADIR)/include<br />...</code></pre></div><br /><br />jmb</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1608&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:53:54 GMT -->
+</html>

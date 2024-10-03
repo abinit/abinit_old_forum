@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=507&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; compiling on hopper/NERSC</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>compiling on hopper/NERSC</h2>
+		<p><a href="viewtopic6224-2.html?f=3&amp;t=507">https://forum.abinit.org/viewtopic.php?f=3&amp;t=507</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>compiling on hopper/NERSC</h3>
+				<div class="date">Posted: <strong>Thu Jul 22, 2010 3:06 am</strong></div>
+				<div class="author">by <strong>asorini</strong></div>
+				<div class="content">Hi,<br /><br /> I'm trying to compile abinit 6.2.1 on the NERSC machine hopper (<!-- m --><a class="postlink" href="http://www.nersc.gov/nusers/systems/hopper/">http://www.nersc.gov/nusers/systems/hopper/</a><!-- m -->). Previously I was able to compile 5.8.4 on their machine franklin and NERSC consulting compiled it on hopper. <br /><br />But now it seems that 6.2.1 is having issues. I used the configure script with the options set using the .ac file as:<br /><br />enable_debug=&quot;no&quot;<br />CC=&quot;cc&quot;<br />CFLAGS=&quot;-O3 -fno-unsafe-math-optimizations&quot;<br />CXX=&quot;CC&quot;<br />CXXFLAGS=&quot;-O3 -fno-unsage-math-optimizations&quot;<br />FC=&quot;ftn&quot;<br />FCFLAGS=&quot;-O3 -fno-unsafe-math-optimizations&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />enable_bigdft=&quot;no&quot;<br />enable_etsf_io=&quot;no&quot;<br />enable_libxc=&quot;no&quot;<br />enable_netcdf=&quot;no&quot;<br />enable_wannier90=&quot;no&quot;<br /><br />and configure finds the correct compilers but then in the &quot;Connectors&quot; section of the configurations is say that the Mpi is not usable &quot;MPI support is broken!&quot;. <br /><br />Does anyone have advice on compiling on hopper which can help me fix this problem? Thanks very much. Cheers,<br /><br />Adam<br /><br /><br /><br />P.S. I went ahead and tried to &quot;make&quot; even though the configure script said MPI was broken... and, as expected, it didn't work.<br />I get a number of errors if I still try to make such as:<br /><br />pathf95-113 pathf90-3.2: ERROR XALLGATHER_MPI_INT, File = ../../../src/12_hide_mpi/xallgather_mpi.F90, Line = 74, Column = 19<br />  IMPLICIT NONE is specified in the local scope, therefore an explicit type must be specified for data object &quot;MPI_COMM_SELF&quot;<br /><br />and similar errors for &quot;MPI_COMM_NULL&quot;, etc.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: compiling on hopper/NERSC</h3>
+				<div class="date">Posted: <strong>Thu Jul 22, 2010 5:44 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br /><blockquote class="uncited"><div>enable_debug=&quot;no&quot;<br />CC=&quot;cc&quot;<br />CFLAGS=&quot;-O3 -fno-unsafe-math-optimizations&quot;<br />CXX=&quot;CC&quot;<br />CXXFLAGS=&quot;-O3 -fno-unsage-math-optimizations&quot;<br />FC=&quot;ftn&quot;<br />FCFLAGS=&quot;-O3 -fno-unsafe-math-optimizations&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />enable_bigdft=&quot;no&quot;<br />enable_etsf_io=&quot;no&quot;<br />enable_libxc=&quot;no&quot;<br />enable_netcdf=&quot;no&quot;<br />enable_wannier90=&quot;no&quot;</div></blockquote><br /><br />please, when you use mpi, specify the path of your mpi installation with something like this : <br /><br />with_mpi_prefix=&quot;/usr/local/openmpi&quot;<br /><br />AND <br /><br />don't specify FC, CC and CXX<br /><br />regards<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: compiling on hopper/NERSC</h3>
+				<div class="date">Posted: <strong>Fri Jul 23, 2010 1:24 am</strong></div>
+				<div class="author">by <strong>asorini</strong></div>
+				<div class="content">Hi,<br /><br /> Thanks for your help...<br /><br /> At least one of the consultants at NERSC seems to think that I should not use --with-mpi-prefix. Rather I am supposed to use the compilation wrappers such as &quot;ftn&quot;, &quot;cc&quot;, and &quot;CC&quot;. But, of course, that doesn't really work. <br /><br /> Maybe I should try to instal l openmpi in my own home and use that with the with-mpi-prefix that openmpi installation?<br /><br /> Anyone ever install abinit on hopper and have advice?<br /><br />Cheers,<br /><br />Adam</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: compiling on hopper/NERSC</h3>
+				<div class="date">Posted: <strong>Fri Jul 23, 2010 11:28 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi<br /><br /><blockquote class="uncited"><div>At least one of the consultants at NERSC seems to think that I should not use --with-mpi-prefix</div></blockquote><br /><br />which are the results of these commands :<br /><br />which mpif90<br /><br />mpif90 -show<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: compiling on hopper/NERSC</h3>
+				<div class="date">Posted: <strong>Fri Aug 06, 2010 10:43 pm</strong></div>
+				<div class="author">by <strong>asorini</strong></div>
+				<div class="content">no mpif90 found</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: compiling on hopper/NERSC</h3>
+				<div class="date">Posted: <strong>Fri Aug 20, 2010 1:29 am</strong></div>
+				<div class="author">by <strong>asorini</strong></div>
+				<div class="content">Hi forum,<br /><br /> NERSC staff was able to compile abinit6.2.2 on hopper in case anyone is still interested in how to do it. Here is what they did:<br /><br />module swap PrgEnv-pgi PrgEnv-gnu<br />cd /usr/common/usg/abinit/Build/abinit-6.2.2<br />mkdir gnu<br />cd gnu<br />../configure  --prefix=/usr/common/usg/abinit/6.2.2 --enable-mpi=yes --enable-mpi-io=yes --with-linalg-libs=-lsci FC=ftn CC=cc CXX=CC FLAGS=-O3 FCFLAGS=-O3 CXXFLAGS=-O3<br /><br />vi config.h<br />line 144 change<br />/*undef HAVE_MPI2 */<br />--&gt;<br />#define HAVE_MPI2 1<br /><br />make  # make -j8 breaks at some points<br /><br />please note when compiling src/66_paw/indgrid.F90 you may see the make fails due to the line 120 is more than 132 characters, you can add -ffree-line-length-none (whole line will be included) to make the code compile, so the compile line for src/66_paw/indgrid.F90 is<br /><br />zz217@hopper08:/global/common/hopper/usg/abinit/Build/abinit-6.2.2/gnu/src/66_paw&gt; ftn -DHAVE_CONFIG_H -ffree-line-length-none -I. -I../../../src/66_paw -I../.. -I../../src/incs -I../../../src/incs -I/global/common/hopper/usg/abinit/Build/abinit-6.2.2/gnu/plugins/etsf_io -I/global/common/hopper/usg/abinit/Build/abinit-6.2.2/gnu/plugins/netcdf   -ffree-form -J/global/common/hopper/usg/abinit/Build/abinit-6.2.2/gnu/src/mods  -O3 -c -o indgrid.o ../../../src/66_paw/indgrid.F90</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=507&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:53 GMT -->
+</html>

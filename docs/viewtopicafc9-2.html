@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=590&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:20:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED]Self-consistent GW: Is E^GW gap dependent on nkptgw?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED]Self-consistent GW: Is E^GW gap dependent on nkptgw?</h2>
+		<p><a href="viewtopicdbe6.html?f=11&amp;t=590">https://forum.abinit.org/viewtopic.php?f=11&amp;t=590</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED]Self-consistent GW: Is E^GW gap dependent on nkptgw?</h3>
+				<div class="date">Posted: <strong>Mon Sep 13, 2010 1:06 pm</strong></div>
+				<div class="author">by <strong>thanusit</strong></div>
+				<div class="content">Dear All<br /><br />I've tried to run the self-consistent gw calculations, by using the &quot;tests/wannier90/Input/t03.in&quot; for Si as a guide but running it only the gw part. <br />In order to speed up the convergence study of gw corrections with respected to the number of self-consistent iterations, I tried reducing the &quot;nkptgw&quot; from 8 to 1 <br />and used only &quot;kptgw&quot; at gamma point. The remaining part of the input were kept the same as the original run, excepting that the parts involving Wannier interface <br />were commented out. Please see the attached files: t03_gw_8kptgw.in and  t03_gw_at_gamma.in, for details. The psp was 14si.pspnc.<br /><br />However, I've found that the &quot;E^GW_gap&quot; for the gamma point in the 2nd iteration were different between the runs using nkptgw=8 and nkptgw=1, as given below.<br /><br />*For the Run using nkptgw = 8, kptgw = 0 0 0 and others 7 kptgw's <br />   GW iteration                1st           2nd<br />      E^0_gap                   2.521      3.312<br />      E^GW_gap              3.328      <span style="color: #FF0000">3.428</span><br />      DeltaE^GW_gap    0.807      <span style="color: #FF0000">0.116 </span>    <br /><br />*For the Run using nkptgw = 1, kptgw = 0 0 0 only <br />   GW iteration               1st           2nd<br />      E^0_gap                  2.521      3.312<br />      E^GW_gap             3.328      <span style="color: #FF0000">3.120</span><br />      DeltaE^GW_gap   0.807     <span style="color: #FF0000">-0.192</span><br /><br />Is the above result a common thing for self-consistent gw calcuations? Or is there something wrong? <br />I cannot figure out what might cause the difference in the E^GW_gap. <br /><br />Looking forward to your replies,<br /><br />Kind regards,<br />Thanusit<div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file4018.php?id=173">t03_gw_8kptgw.in</a></dt>
+						<dd>(3.94 KiB) Downloaded 389 times</dd>
+		</dl>
+		
+		
+			</div><br /><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/filef546.php?id=174">t03_gw_at_gamma.in</a></dt>
+						<dd>(3.99 KiB) Downloaded 238 times</dd>
+		</dl>
+		
+		
+			</div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Self-consistent GW: Is E^GW gap dependent on nkptgw?</h3>
+				<div class="date">Posted: <strong>Fri Oct 15, 2010 8:17 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">It's normal as the self-energy and the QP density are obtained by integrating the <br />wavefunctions in k-space. <br />In your gamma-only calculation only the wave-functions at Gamma have been updated<br />while the remaining k-points in the mesh are not updated and are treated at the Kohn-Sham level.<br />This is erroneous and the final SCGW results are not reliable.<br /><br />Long time ago I've added a check in order to stop the code if SCGW is done on a subset <br />of the k-mesh used in the KSS file.<br />Unfortunately  this prevented users from performing one-shot calculations on top of SCGW results.<br />I will reintroduce a warning to warn the user that not all the k-points are included in the SCGW run.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=590&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:20:36 GMT -->
+</html>

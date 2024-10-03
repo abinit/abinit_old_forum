@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1048&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:51:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; a general question a bout relation between pseudopotential a</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>a general question a bout relation between pseudopotential a</h2>
+		<p><a href="viewtopicbc52.html?f=9&amp;t=1048">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1048</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>a general question a bout relation between pseudopotential a</h3>
+				<div class="date">Posted: <strong>Mon Apr 25, 2011 10:57 pm</strong></div>
+				<div class="author">by <strong>bahaar</strong></div>
+				<div class="content">Hi dear users<br />I have a general question a bout relation between pseudopotential and density of state.In  pseudopotentials used in abinit, the atomic configuration (i mean the  separate orbital) isn't determined So i think should use Dos for recognize it.but for the element like Sr(z=38)(4s2 4p2 4d0 5s2), i have two questions:1- why in Dos i have only (l=0, l=1, l=2..l=4)=(4s2 4p2 4d? 4f..) what happen for 5s2(l=0)?      2- why we have maximum density of state for d orbital in Dosfile despite this orbital shoud be empty in ground state?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a general question a bout relation between pseudopotenti</h3>
+				<div class="date">Posted: <strong>Thu Apr 28, 2011 9:37 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">When you generate a pseudopotential you are computing properties of a free atom, and using a few angular momentum channels to make the description. Some of the channels might be empty, in the free atom. When you embed the atom into a solid it loses its rotational symmetry and therefore good atomic quantum numbers are now only somewhat preserved, in particular states that were empty in the atom may now have some occupancy when the total electron distribution in the solid is developed into angular components around a particular atom.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a general question a bout relation between pseudopotenti</h3>
+				<div class="date">Posted: <strong>Mon May 09, 2011 9:49 am</strong></div>
+				<div class="author">by <strong>bahaar</strong></div>
+				<div class="content">Hi dear professor.<br />Sorry I'm late, I thank you very much.<br />I'm calculating density of state for SrS(strantium sulfide) in NaCl structure:<br />Sr: (Kr)4s2 4p6 5s2 , S:(Ne)3s2 3p4  by using  all of the pseudopotential are in abinit website.<br />I have 2 questions:<br />1.why in none of the pseudopotential used in abinit it doesn't determine what orbitals used for valence states;so i'm not sure 4s2 4p2 5s2 orbitals are used in this pseudopotential.I only know Zion=2 so i guess it should used of 4s2 4p2 5s2 orbitals (i mean perhaps 4s2 4p2 4d2 configuration used for valence orbitals).But when i do the calculation by using  ( Sr_pbe-nsp-van_UP  pseudopotential) in Quantum Espresso software [it determines 4s2 4p2 5s2  for valence states] and when i get the output for Dos achive the same orbitals:4s2 4p2 5s2  for Sr.(in output we have same orbitals in pseudo). In the Q.Espresso we have also many choise for atomic configuration for Sr in different pseudopotentials (for example  4s2 4p2 5s1 5d1, 4s2 4p2 5s2 , and so on).I used all of the pseudopotentials that are in abinit website and all of them have only l=0 l=1 l=2 l=3 l=4 orbital(i mean we can't have boht of the  4s2 and 5s2 simulataneous)only the shre of them is different in different pseudopotentials.<br />So why i  get different l (angular momentum )for this compund in two software?<br /><br />2.why the share of different orbitals in various psp. is different?<br />for example the d orbital in fhi psp has very large share in compared whith it's share in pspnc pseudopotential and which of them is correct?<br /><br />Dear professor your description was very useful for me, is it possible for you suggest me a refrence or give me more informations for my problems.<br />Thank you vary much for your guide.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a general question a bout relation between pseudopotenti</h3>
+				<div class="date">Posted: <strong>Mon May 09, 2011 9:24 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">From your question it appears that you are using norm-conserving pseudopotentials in abinit, while you are certainly using ultrasoft pseudopotentials in QE. The two schemes are very different. In the abinit case you say that your file gives Zion = 2, for strontium it is probably using only 5s2 valence, the rest in core. This is not a choice that abinit (or QE) makes, it is a choice that was made by the creator of the pseudopotential. Abinit (or QE) has no choice but to stick with this description because it is only given information about the core and valence spaces from the pseudopotential input file. So, comparing abinit and QE output on these grounds doesn't really make much sense because the inputs are so different. It would be better (in many ways) to use PAW in abinit, rather than norm-conserving pseudopotentials. Then it is easy to get more flexibility including multiple s, p, etc states in a single pseudopotential (ultrasoft pseudopotentials, as used by QE, are similar in this regard, in fact the two methods are &quot;cousins&quot; with PAW being more accurate than ultrasoft).</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a general question a bout relation between pseudopotenti</h3>
+				<div class="date">Posted: <strong>Mon May 30, 2011 1:53 pm</strong></div>
+				<div class="author">by <strong>bahaar</strong></div>
+				<div class="content">dear professor.<br />thanks alot.I try to do it with PAW.Just one question. It didn't clear for me,so isn't possible from the partial Dos, guess what orbital are use'd  for valence? I mean  we have Zion=8 for Sr in pspnc pseudopotential, and in output in partial Dos i get l=0 l=1 l=2,.. So i can't say which of this configuration (4s2 4p6 4d2) or (4s2 4p6 5s2) is use'd in this pspeudopotential?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a general question a bout relation between pseudopotenti</h3>
+				<div class="date">Posted: <strong>Tue May 31, 2011 12:28 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Well, the angular momentum states used in the pseudopotential generation are describing the valence space of the atom. Then this description is embedded into the solid and used to compute the electron density distribution, which no longer has the rotational symmetry of the atom. Therefore, when the DOS is computed by projecting it around different atoms, there can be nonzero projections that weren't used in the atom (because the symmetry is lower). So you can't work backward from the DOS to guess about the pseudopotential. But you can typically figure it all out from the first few lines of the pseudo or paw file. Why don't you post the first 15 lines or so of your pseudo file and I can help you figure out what they mean.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a general question a bout relation between pseudopotenti</h3>
+				<div class="date">Posted: <strong>Wed Jun 01, 2011 5:51 pm</strong></div>
+				<div class="author">by <strong>bahaar</strong></div>
+				<div class="content">Hi dear professor.<br />you are kind  <img class="smilies" src="images/smilies/icon_razz.gif" alt=":P" title="Razz" /> .These are the first lines of different pspudopotential for Sr and S.(also i don't know  1.why in Teter extended psp for Sr the both of 4d and 5s are considered empty and 2.what are the meaning of fraction numbers for different angular momentum in Teter psp. for S).<br /><br /> 1.Troullier-Martins psp for element  Sr:<br /><br />    Troullier-Martins psp for element  Sr        Thu Oct 27 17:38:43 EDT 1994<br />  38.00000   8.00000    940714                zatom, zion, pspdat<br />    1    1    2    0      2001    .00000      pspcod,pspxc,lmax,lloc,mmax,r2well<br />    0   2.366   4.501    0   3.4899770        l,e99.0,e99.9,nproj,rcpsp<br />    .00000000    .0000000000    .0000000000    .00000000   rms,ekb1,ekb2,epsatm<br />    1   5.648   7.450    1   2.2816189        l,e99.0,e99.9,nproj,rcpsp<br />    .00000000    .0000000000    .0000000000    .00000000   rms,ekb1,ekb2,epsatm<br />    2   6.873   9.594    1   2.5854217        l,e99.0,e99.9,nproj,rcpsp<br />    .00000000    .0000000000    .0000000000    .00000000   rms,ekb1,ekb2,epsatm<br />    1.59650627399569    1.18317454436055    4.20153213633989   rchrg,fchrg,qchrg<br />    0 =l for Troullier-Martins pseudopotential<br />  -3.1560345690530291E+00  -3.1560345690530305E+00  -3.1560345690530323E+00<br />  -3.1560345690530345E+00  -3.1560345690530376E+00  -3.1560345690530407E+00<br />  -3.1560345690530447E+00  -3.1560345690530491E+00  -3.1560345690530536E+00<br />  -3.1560345690530598E+00  -3.1560345690530660E+00  -3.1560345690530727E+00<br /><br />2.Fhi-LDA psp for Sr:<br /><br />strontium, fhi98PP : Trouiller-Martins-type, LDA Ceperley/Alder Perdew/Wang (1992), l= 0 local<br /> 38.000  2.000    011001              zatom,zion,pspdat<br />   6         7    3   0    537     0       pspcod,pspxc,lmax,lloc,mmax,r2well<br />  7.562  1.000  0.000                 rchrg, fchrg, qchrg<br />5--- These two lines are available for giving more information, later<br />6<br />7-Here follows the cpi file from the fhi98pp code-<br />0.20000000000000E+01   4<br />  0.0000    0.0000    0.0000   0.0000<br />  0.0000    .00e+00   .00e+00<br />  0.0000    .00e+00   .00e+00<br />  0.0000    .00e+00   .00e+00<br />  0.0000    .00e+00   .00e+00<br />  0.0000    .00e+00   .00e+00<br />  0.0000    .00e+00   .00e+00<br />  0.0000    .00e+00   .00e+00<br />  0.0000    .00e+00   .00e+00<br />  0.0000    .00e+00   .00e+00<br />537  0.10247000000000E+01<br />   1 0.16447368421053E-03 0.32739981569257E-05 0.29607438163913E+01<br />   2 0.16853618421053E-03 0.33548659114018E-05 0.29607438023726E+01<br /><br />3.LDATeter (extended norm-conserving) psp for Sr:<br /><br />(Ar+3d10) + 4s2 4p6 5s0 4d0; rcs=rcp=rcd=1.7, no chem-hard, exnc(11);ecut 25/34<br />  38.00000  10.00000  950923      z,zion,pspdat<br />  4         3         2   2      2001    0  pspcod,pspxc,lmax,lloc,mmax,r2well<br />  0  0  0   2    1.69654886360351576          l,e99.0,e99.9,nproj,rcpsp<br />  .000 .000 .000 .000                         rms,ekb1,ekb2,epsatm<br />  1  0  0   2    1.69654886360351576          l,e99.0,e99.9,nproj,rcpsp<br />  .000 .000 .000 .000                         rms,ekb1,ekb2,epsatm<br />  2  0  0   0    1.69654886360351576          l,e99.0,e99.9,nproj,rcpsp<br />  .000 .000 .000 .000                         rms,ekb1,ekb2,epsatm<br />  .000   .000   .000                          rchrg,fchrg,qchrg<br />  0 = l<br />  -2.2247194387122864E+00  -2.2247194387122864E+00  -2.2247194387122864E+00<br />  -2.2247194387122864E+00  -2.2247194387122864E+00  -2.2247194387122859E+00<br />  -2.2247194387122855E+00  -2.2247194387122851E+00  -2.2247194387122842E+00<br />  -2.2247194387122819E+00  -2.2247194387122806E+00  -2.2247194387122780E+00<br /><br />4.LDATeter (extended norm-conserving) psp for S:<br /><br /><br />(Ne)+ 3s2 3p3.5 3d0.5, rcs=rcp=1.9 rcd=1.4 (exnc=11); ecut15/25 no chem-hard<br />  16.00000   6.00000  960928      z,zion,pspdat<br />  4         3         2   2      2001    0  pspcod,pspxc,lmax,lloc,mmax,r2well<br />  0  0  0   2    1.89711175661132825          l,e99.0,e99.9,nproj,rcpsp<br />  .000 .000 .000 .000                         rms,ekb1,ekb2,epsatm<br />  1  0  0   2    1.89711175661132825          l,e99.0,e99.9,nproj,rcpsp<br />  .000 .000 .000 .000                         rms,ekb1,ekb2,epsatm<br />  2  0  0   0    1.40296873333759975          l,e99.0,e99.9,nproj,rcpsp<br />  .000 .000 .000 .000                         rms,ekb1,ekb2,epsatm<br />  .000   .000000000000000000E+00   .000000000000000000E+00 rchrg,fchrg,qchrg<br />  0 = l<br />  -1.0764213653231351E+00  -1.0764213653231351E+00  -1.0764213653231351E+00<br />  -1.0764213653231351E+00  -1.0764213653231351E+00  -1.0764213653231349E+00<br />  -1.0764213653231347E+00  -1.0764213653231343E+00  -1.0764213653231334E+00<br />  -1.0764213653231332E+00  -1.0764213653231314E+00  -1.0764213653231305E+00<br /><br />Thanks.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a general question a bout relation between pseudopotenti</h3>
+				<div class="date">Posted: <strong>Tue Jun 21, 2011 10:39 pm</strong></div>
+				<div class="author">by <strong>bahaar</strong></div>
+				<div class="content">Dear professor<br />I get these PAW datas for abinit from USppPAW table but i yet can't determine  orbitals and occupation numbers of them are used for valence states. please guide me.<br /><br />016-S-gpbe-n-campos-mod/<span style="color: #BF00FF">S_ps.abinit.paw</span>:<br />sulfur - PAW data extracted from US-psp (D.Vanderbilt) - generated by USpp2Abinit v2.3.0<br />  16.000   6.000 20090106               : zatom,zion,pspdat<br />  7 11  1 0   617 0.                    : pspcod,pspxc,lmax,lloc,mmax,r2well<br /> paw4 2230                              : pspfmt,creatorID<br />  4  8                                  : basis_size,lmn_size<br /> 0 0 1 1                                : orbitals<br /> 5                                      : number_of_meshes<br /> 1 2  617 5.6992622847E-05 1.6666666667E-02 : mesh 1, type,size,rad_step[,log_step]<br /> 2 2  613 5.6992622847E-05 1.6666666667E-02 : mesh 2, type,size,rad_step[,log_step]<br /> 3 2  657 5.6992622847E-05 1.6666666667E-02 : mesh 3, type,size,rad_step[,log_step]<br /> 4 2  725 5.6992622847E-05 1.6666666667E-02 : mesh 4, type,size,rad_step[,log_step]<br /> 5 2  731 5.6992622847E-05 1.6666666667E-02 : mesh 5, type,size,rad_step[,log_step]<br />  1.5078832036                          : r_cut(PAW)<br /> 3 0.                                   : shape_type,rshape<br />===== PHI 1 =====   [phi(r)=PHI(r)/r*Ylm(th,ph)]<br /> 1  : radial mesh index<br />  0.0000000000000000E+00  1.0769697682528407E-05<br />...........................  <br /><br />038-Sr-gpbe-nsp-campos-mod/<span style="color: #BF00FF">Sr_ps.abinit.paw</span><br /><br />strontium_4.0 - PAW data extracted from US-psp (D.Vanderbilt) - generated by USpp2Abinit v2.3.0<br />  38.000  10.000 20090106               : zatom,zion,pspdat<br />  7 11  2 0   621 0.                    : pspcod,pspxc,lmax,lloc,mmax,r2well<br /> paw4 2230                              : pspfmt,creatorID<br />  6 18                                  : basis_size,lmn_size<br /> 0 0 1 1 2 2                            : orbitals<br /> 5                                      : number_of_meshes<br /> 1 2  621 6.5230320439E-05 1.6949152542E-02 : mesh 1, type,size,rad_step[,log_step]<br /> 2 2  618 6.5230320439E-05 1.6949152542E-02 : mesh 2, type,size,rad_step[,log_step]<br /> 3 2  644 6.5230320439E-05 1.6949152542E-02 : mesh 3, type,size,rad_step[,log_step]<br /> 4 2  705 6.5230320439E-05 1.6949152542E-02 : mesh 4, type,size,rad_step[,log_step]<br /> 5 2  748 6.5230320439E-05 1.6949152542E-02 : mesh 5, type,size,rad_step[,log_step]<br />  2.1948483044                          : r_cut(PAW)<br /> 3 0.                                   : shape_type,rshape<br />===== PHI 1 =====   [phi(r)=PHI(r)/r*Ylm(th,ph)]<br /> 1  : radial mesh index<br />  0.0000000000000000E+00 -3.2449161850156284E-05 -6<br /><br />Thankful.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: a general question a bout relation between pseudopotenti</h3>
+				<div class="date">Posted: <strong>Wed Oct 12, 2011 4:33 pm</strong></div>
+				<div class="author">by <strong>bahaar</strong></div>
+				<div class="content">Hi<br />To find the atomic configuration Sr([Ar] 4s2 4p6 5s2) in norm conserving psp. , I do this:<br />1- Is it correct?<br />I set one Sr atom in a bcc unit cell with big acell to avoid interaction to another atoms and change the atomic orbitals and then get partial DOS.In yhe output I get DOS of the 4s 4p and 4d orbitals.<br /> <br />2- It  seems abinit never don't show simultaneity the pDOS  of orbitals with the same number. I mean is it impossible i have pDOS for (4s and 5s) simultaneity? I do this work for pseudopotential with Zion=2 and Zion=10 but in two case i can't get any Dos for 5s orbital.<br /><br />thanks.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1048&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:51:35 GMT -->
+</html>

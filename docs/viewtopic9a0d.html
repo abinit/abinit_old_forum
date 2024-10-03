@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?t=2657 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:52:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Compile abinit-7.6.3 with levmar library - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopic9a0d.html?t=2657">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="1"><a href="viewforum58da.html?f=1" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Building ABINIT</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="3"><a href="viewforum4d6b.html?f=3" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Configuring and compiling ABINIT</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopic57b4.html?f=3&amp;t=2657">Compile abinit-7.6.3 with levmar library</a>&nbsp;
+<a href="viewtopic43a2.html?f=3&amp;t=2657&amp;p=8159#p8159" style="color: #006600;">
+	[SOLVED]
+</a>
+</h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">option, parallelism,...<br /></div>
+<p>
+	<strong>Moderators:</strong> <a href="memberlist5296.html?mode=viewprofile&amp;u=2740" class="username">fgoudreault</a>, <a href="memberlist7468.html?mode=viewprofile&amp;u=53" class="username">mcote</a>
+</p>
+
+	<div class="rules">
+		<div class="inner">
+
+					<strong>Forum rules</strong><br />
+			Please have a look at ~abinit/doc/config/build-config.ac in the source package for detailed and up-to-date information about the configuration of Abinit 8 builds.<br>
+For a video explanation on how to build Abinit 7.x for Linux, please go to: <a href="http://www.youtube.com/watch?v=DppLQ-KQA68" class="postlink">http://www.youtube.com/watch?v=DppLQ-KQA68</a>.<br>
+<strong class="text-strong">IMPORTANT: when an answer solves your problem, please check the little green V-like button on its upper-right corner to accept it.</strong>
+		
+		</div>
+	</div>
+
+<div class="action-bar bar-top">
+	
+			<a href="posting6321.html?mode=reply&amp;f=3&amp;t=2657" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic3a85.html?f=3&amp;t=2657&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="2657" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			4 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p8150" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile8150">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist72df.html?mode=viewprofile&amp;u=117" class="username">thanusit</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search19db.html?author_id=117&amp;sr=posts">70</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jan 14, 2010 4:20 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content8150">
+
+						<h3 class="first"><a href="#p8150">Compile abinit-7.6.3 with levmar library</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting30b1.html?mode=quote&amp;f=3&amp;p=8150" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic791a.html?p=8150#p8150" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist72df.html?mode=viewprofile&amp;u=117" class="username">thanusit</a></strong> &raquo; </span>Tue May 06, 2014 9:11 am
+			</p>
+			
+			
+			
+			<div class="content">Dear all<br />I'm trying to compile abinit-7.6.3 with the supporting levmar library on Rock_clusters-6.1.1/centos6.5/linux_x86_64. The compilers are as follows.  <br />$ gcc --version<br />gcc (GCC) 4.4.7 20120313 (Red Hat 4.4.7-4)<br />$ gfortran --version<br />GNU Fortran (GCC) 4.4.7 20120313 (Red Hat 4.4.7-4)<br />$ mpicc --version<br />gcc (GCC) 4.4.7 20120313 (Red Hat 4.4.7-4)<br />$ mpif90 --version<br />GNU Fortran (GCC) 4.4.7 20120313 (Red Hat 4.4.7-4)<br />$ mpirun --version<br />mpirun (Open MPI) 1.6.2<br /><br />In the configure step, I used <br /><br />$ ../abinit-7.6.3/configure --with-config-file=./build.ac --prefix=/export/home/thanusit/apps/gcc-4.4.7/abinit/7.6.3_try_levmar.<br /><br />The details of build.ac is listed below. The configure passed (config.log is attached) but make failed with the error: <br /><br />../../src/70_gw/lib70_gw.a(m_model_screening.o): In function `__m_model_screening_MOD_sequential_fitting':<br />/state/partition1/home/thanusit/src_build/abinit-7.6.3_build_dir_gcc-4.4.7_try_levmar/src/70_gw/../../../abinit-7.6.3/src/70_gw/m_model_screening.F90:479: undefined reference to `dfit_re_and_im_screening_'<br />collect2: ld returned 1 exit status.<br />(please see ==make's errors== below for more detais).<br /><br />However, if with_algo_flavor=&quot;levmar&quot; and the associating &quot;with_algo_incs&quot; and &quot;with_algo_libs&quot; flags were commented out, the make was succesful. This suggests that the other libraries are good and that the error has something to do with the attemp to use the levmar library. The levmar libray was installed via rpm using:levmar-devel-2.5-8.fc19.x86_64.rpm and levmar-2.5-8.fc19.x86_64.rpm. <br /><br />I dont know what I'm missing. Is the installed levmar library the right one for abinit? Is the gcc too old? Any suggestion would be greatly appreciated.<br /><br />Best Regards,<br />Thanusit<br /><br />==vi build.ac==<br />#enable_fallbacks=&quot;no&quot;<br />enable_exports=&quot;yes&quot;<br />enable_pkg_check=&quot;yes&quot;<br />enable_64bit_flags=&quot;yes&quot;<br />enable_gw_dpc=&quot;yes&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_prefix=&quot;/opt/openmpi&quot;<br />with_trio_flavor=&quot;netcdf+etsf_io+fox&quot;<br />with_netcdf_incs=&quot;-I/usr/include -I/usr/lib64/gfortran/modules&quot;<br />with_netcdf_libs=&quot;-L/usr/lib64 -lnetcdf -lnetcdff&quot;<br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_incs=&quot;-I/usr/include&quot;<br />with_fft_libs=&quot;-L/usr/lib64 -lfftw3 -lfftw3f&quot;<br />with_linalg_flavor=&quot;atlas&quot;<br />with_linalg_incs=&quot;-I/usr/include&quot;<br />with_linalg_libs=&quot;-L/usr/lib64/atlas -llapack -lf77blas -lcblas -latlas&quot;<br />with_algo_flavor=&quot;levmar&quot;<br />with_algo_incs=&quot;-I/usr/include&quot;<br />with_algo_libs=&quot;-L/usr/lib64 -llevmar&quot;<br />with_math_flavor=&quot;gsl&quot;<br />with_math_incs=&quot;-I/usr/include&quot;<br />with_math_libs=&quot;-L/usr/lib64 -lgsl -lgslcblas -lm&quot;<br />with_dft_flavor=&quot;atompaw+bigdft+libxc+wannier90&quot;<br />========================================================<br /><br />===make's errors====<br />...<br />Making all in 98_main<br />make[3]: Entering directory `/state/partition1/home/thanusit/src_build/abinit-7.6.3_build_dir_gcc-4.4.7_try_levmar/src/98_main'<br />/opt/openmpi/bin/mpif90 -m64 -DHAVE_CONFIG_H -I. -I../../../abinit-7.6.3/src/98_main -I../.. -I../../src/incs -I../../../abinit-7.6.3/src/incs -I/state/partition1/home/thanusit/src_build/abinit-7.6.3_build_dir_gcc-4.4.7_try_levmar/fallbacks/exports/include   -I/state/partition1/home/thanusit/src_build/abinit-7.6.3_build_dir_gcc-4.4.7_try_levmar/fallbacks/exports/include -I/state/partition1/home/thanusit/src_build/abinit-7.6.3_build_dir_gcc-4.4.7_try_levmar/fallbacks/exports/include -I/usr/include -I/usr/lib64/gfortran/modules -I/state/partition1/home/thanusit/src_build/abinit-7.6.3_build_dir_gcc-4.4.7_try_levmar/fallbacks/exports/include -I/state/partition1/home/thanusit/src_build/abinit-7.6.3_build_dir_gcc-4.4.7_try_levmar/fallbacks/exports/include -I/usr/include -I/usr/include -I/usr/include -I/usr/include   -ffree-form -J/state/partition1/home/thanusit/src_build/abinit-7.6.3_build_dir_gcc-4.4.7_try_levmar/src/mods  -O2 -mtune=native -march=native -m64 -g -ffree-line-length-none -fPIC    -m64 -g -ffree-line-length-none -fPIC   -c -o abinit-abinit.o `test -f 'abinit.F90' || echo '../../../abinit-7.6.3/src/98_main/'`abinit.F90<br />/opt/openmpi/bin/mpif90 -m64 -ffree-form -J/state/partition1/home/thanusit/src_build/abinit-7.6.3_build_dir_gcc-4.4.7_try_levmar/src/mods  -O2 -mtune=native -march=native -m64 -g -ffree-line-length-none -fPIC    -m64 -g -ffree-line-length-none -fPIC     -o abinit abinit-abinit.o  ../../src/95_drive/lib95_drive.a ../../src/79_seqpar_mpi/lib79_seqpar_mpi.a ../../src/77_ddb/lib77_ddb.a ../../src/77_suscep/lib77_suscep.a ../../src/72_response/lib72_response.a ../../src/71_bse/lib71_bse.a ../../src/70_gw/lib70_gw.a ../../src/69_wfdesc/lib69_wfdesc.a ../../src/68_dmft/lib68_dmft.a  ../../src/68_recursion/lib68_recursion.a ../../src/68_rsprc/lib68_rsprc.a ../../src/67_common/lib67_common.a ../../src/66_paw/lib66_paw.a ../../src/66_wfs/lib66_wfs.a ../../src/65_psp/lib65_psp.a ../../src/65_nonlocal/lib65_nonlocal.a  ../../src/64_atompaw/lib64_atompaw.a ../../src/62_occeig/lib62_occeig.a ../../src/62_iowfdenpot/lib62_iowfdenpot.a ../../src/62_wvl_wfs/lib62_wvl_wfs.a ../../src/62_poisson/lib62_poisson.a ../../src/62_cg_noabirule/lib62_cg_noabirule.a ../../src/62_ctqmc/lib62_ctqmc.a ../../src/61_ionetcdf/lib61_ionetcdf.a ../../src/57_iovars/lib57_iovars.a ../../src/57_iopsp_parser/lib57_iopsp_parser.a ../../src/56_recipspace/lib56_recipspace.a ../../src/56_xc/lib56_xc.a ../../src/56_mixing/lib56_mixing.a ../../src/56_io_mpi/lib56_io_mpi.a ../../src/53_abiutil/lib53_abiutil.a ../../src/53_spacepar/lib53_spacepar.a ../../src/53_ffts/lib53_ffts.a  ../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a ../../src/51_manage_mpi/lib51_manage_mpi.a ../../src/49_gw_toolbox_oop/lib49_gw_toolbox_oop.a ../../src/47_xml/lib47_xml.a ../../src/45_geomoptim/lib45_geomoptim.a ../../src/44_abitypes_defs/lib44_abitypes_defs.a ../../src/43_wvl_wrappers/lib43_wvl_wrappers.a ../../src/43_ptgroups/lib43_ptgroups.a ../../src/42_parser/lib42_parser.a ../../src/42_nlstrain/lib42_nlstrain.a ../../src/42_libpaw/lib42_libpaw.a ../../src/41_xc_lowlevel/lib41_xc_lowlevel.a ../../src/41_geometry/lib41_geometry.a ../../src/32_util/lib32_util.a ../../src/28_numeric_noabirule/lib28_numeric_noabirule.a ../../src/27_toolbox_oop/lib27_toolbox_oop.a ../../src/21_psiesta_noabirule/lib21_psiesta_noabirule.a ../../src/18_timing/lib18_timing.a ../../src/16_hideleave/lib16_hideleave.a  ../../src/14_hidewrite/lib14_hidewrite.a ../../src/12_hide_mpi/lib12_hide_mpi.a ../../src/11_qespresso_ext/lib11_qespresso_ext.a ../../src/11_memory_mpi/lib11_memory_mpi.a ../../src/10_defs/lib10_defs.a  ../../src/01_linalg_ext/lib01_linalg_ext.a ../../src/01_interfaces_ext/lib01_interfaces_ext.a ../../src/01_gsl_ext/lib01_gsl_ext.a -L/state/partition1/home/thanusit/src_build/abinit-7.6.3_build_dir_gcc-4.4.7_try_levmar/fallbacks/exports/lib -lwannier90 -L/state/partition1/home/thanusit/src_build/abinit-7.6.3_build_dir_gcc-4.4.7_try_levmar/fallbacks/exports/lib -lbigdft -ldft_common -labinit -L/state/partition1/home/thanusit/src_build/abinit-7.6.3_build_dir_gcc-4.4.7_try_levmar/fallbacks/exports/lib -letsf_io_low_level -letsf_io_utils -letsf_io -L/usr/lib64 -lnetcdf -lnetcdff -L/state/partition1/home/thanusit/src_build/abinit-7.6.3_build_dir_gcc-4.4.7_try_levmar/fallbacks/exports/lib -lxc -L/state/partition1/home/thanusit/src_build/abinit-7.6.3_build_dir_gcc-4.4.7_try_levmar/fallbacks/exports/lib -lFoX_sax -lFoX_utils -lFoX_fsys -lFoX_common -L/usr/lib64 -lfftw3 -lfftw3f -L/usr/lib64 -lgsl -lgslcblas -lm -L/usr/lib64 -llevmar -L/usr/lib64/atlas -llapack -lf77blas -lcblas -latlas -lrt -L/opt/openmpi/lib -L/usr/lib/gcc/x86_64-redhat-linux/4.4.7 -L/usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../.. -lmpi_f90 -lmpi_f77 -lmpi -libverbs -ldat -lrt -lnsl -lutil -lgfortranbegin -lgfortran -lm -ldl -lpthread -L/opt/openmpi/lib -L/usr/lib/gcc/x86_64-redhat-linux/4.4.7 -L/usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../.. -lmpi_f90 -lmpi_f77 -lmpi -libverbs -ldat -lrt -lnsl -lutil -lgfortranbegin -lgfortran -lm -ldl -lpthread <br />../../src/70_gw/lib70_gw.a(m_model_screening.o): In function `__m_model_screening_MOD_sequential_fitting':<br />/state/partition1/home/thanusit/src_build/abinit-7.6.3_build_dir_gcc-4.4.7_try_levmar/src/70_gw/../../../abinit-7.6.3/src/70_gw/m_model_screening.F90:479: undefined reference to `dfit_re_and_im_screening_'<br />collect2: ld returned 1 exit status<br />make[3]: *** [abinit] Error 1<br />make[3]: Leaving directory `/state/partition1/home/thanusit/src_build/abinit-7.6.3_build_dir_gcc-4.4.7_try_levmar/src/98_main'<br />make[2]: *** [all-recursive] Error 1<br />make[2]: Leaving directory `/state/partition1/home/thanusit/src_build/abinit-7.6.3_build_dir_gcc-4.4.7_try_levmar/src'<br />make[1]: *** [all-recursive] Error 1<br />make[1]: Leaving directory `/state/partition1/home/thanusit/src_build/abinit-7.6.3_build_dir_gcc-4.4.7_try_levmar'<br />make: *** [all] Error 2<br />=============================================================================</div>
+			
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file8f23.php?id=920">config.log</a></dt>
+						<dd>(159.25 KiB) Downloaded 306 times</dd>
+		</dl>
+		
+		
+			</dd>
+									</dl>
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p8156" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile8156">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlist194b.html?mode=viewprofile&amp;u=69" class="avatar"><img class="avatar" src="download/file2b59.jpg?avatar=69_1334683785.jpg" width="78" height="92" alt="User avatar" /></a>														</div>
+								<a href="memberlist194b.html?mode=viewprofile&amp;u=69" style="color: #33CC00;" class="username-coloured">jbeuken</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search2ddf.html?author_id=69&amp;sr=posts">365</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Aug 18, 2009 9:24 pm</dd>		
+		
+											
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact jbeuken">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact jbeuken</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://www.uclouvain.be/jean-michel.beuken" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content8156">
+
+						<h3 ><a href="#p8156">Re: Compile abinit-7.6.3 with levmar library</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting60ec.html?mode=quote&amp;f=3&amp;p=8156" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopica9ac.html?p=8156#p8156" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist194b.html?mode=viewprofile&amp;u=69" style="color: #33CC00;" class="username-coloured">jbeuken</a></strong> &raquo; </span>Tue May 06, 2014 9:40 pm
+			</p>
+			
+			
+			
+			<div class="content">hi,<br /><br />you must add in your build.ac file :<br /><br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>enable_clib=&quot;yes&quot;</code></pre></div><br /><br />jmb</div>
+			
+			
+			
+									
+									<div id="sig8156" class="signature">------<br>
+Jean-Michel Beuken<br>
+Computer Scientist</div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p8159" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile8159">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist72df.html?mode=viewprofile&amp;u=117" class="username">thanusit</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search19db.html?author_id=117&amp;sr=posts">70</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Thu Jan 14, 2010 4:20 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content8159">
+
+						<h3 ><a href="#p8159">Re: Compile abinit-7.6.3 with levmar library&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting40a8-2.html?mode=quote&amp;f=3&amp;p=8159" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicbaec.html?p=8159#p8159" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist72df.html?mode=viewprofile&amp;u=117" class="username">thanusit</a></strong> &raquo; </span>Wed May 07, 2014 6:47 pm
+			</p>
+			
+			
+			
+			<div class="content">Dear jmb<br />Thank you for your suggestion. The flag enable_clib=&quot;yes&quot; did fix the above error. However, make still got a hiccup with another error:<br />------------------------------------------------------------------------------------<br /> ../../../abinit-7.6.3/src/98_main/mrgscr.F90:2313.15:<br /><br />           if (is_scr/=.true.) then<br />               1 <br />Error: Logicals at (1) must be compared with .neqv. instead of /=<br />make[3]: *** [mrgscr-mrgscr.o] Error 1.<br />------------------------------------------------------------------------------------<br /><br />As suggested in the error messege, I tried to fix this new error by making a slight modification to ../src/98_main/mrgscr.F90,  e.g.  <br />by replacing &quot;if (is_scr/=.true.) then&quot; with &quot;if (is_scr.neqv..true.) then&quot;, and the trick worked. &quot;make&quot; was successful. &quot;make tests&quot; were all succesful and &quot;./runtests.py fast&quot; gave:<br />---------------------------------------------------------------------------------------------------<br />Test suite completed in 27.24 s (average time for test = 2.35 s, stdev = 2.20 s)<br />failed: 0, succeeded: 10, passed: 1, skipped: 0, disabled: 0<br />Suite   failed  passed  succeeded  skipped  disabled  run_etime  tot_etime<br />fast         0       1         10        0         0      25.81      26.89<br /> --------------------------------------------------------------------------------------------------<br /><br />I'm no developer but hope that is a proper way of resolving it.<br /><br />Best regards,<br />Thanusit</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p8160" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile8160">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlist194b.html?mode=viewprofile&amp;u=69" class="avatar"><img class="avatar" src="download/file2b59.jpg?avatar=69_1334683785.jpg" width="78" height="92" alt="User avatar" /></a>														</div>
+								<a href="memberlist194b.html?mode=viewprofile&amp;u=69" style="color: #33CC00;" class="username-coloured">jbeuken</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search2ddf.html?author_id=69&amp;sr=posts">365</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Aug 18, 2009 9:24 pm</dd>		
+		
+											
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact jbeuken">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact jbeuken</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="http://www.uclouvain.be/jean-michel.beuken" title="Website" class="last-cell">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content8160">
+
+						<h3 ><img src="images/icons/smile/redface.gif" width="16" height="16" alt="" title="" /> <a href="#p8160">Re: Compile abinit-7.6.3 with levmar library</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingb53e.html?mode=quote&amp;f=3&amp;p=8160" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicf0d2.html?p=8160#p8160" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist194b.html?mode=viewprofile&amp;u=69" style="color: #33CC00;" class="username-coloured">jbeuken</a></strong> &raquo; </span>Wed May 07, 2014 7:48 pm
+			</p>
+			
+			
+			
+			<div class="content">sorry Thanusit,<br /><br />I had the same problem and I forgot to mention it on my last post ! <br />the suggestion is correct : fix on the development branch…<br /><br />jmb</div>
+			
+			
+			
+									
+									<div id="sig8160" class="signature">------<br>
+Jean-Michel Beuken<br>
+Computer Scientist</div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="posting6321.html?mode=reply&amp;f=3&amp;t=2657" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic3a85.html?f=3&amp;t=2657&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=3&amp;t=2657">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			4 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforum4d6b.html?f=3" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Configuring and compiling ABINIT”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?t=2657 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:52:35 GMT -->
+</html>

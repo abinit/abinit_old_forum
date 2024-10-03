@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=396&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Size of WF disk file?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Size of WF disk file?</h2>
+		<p><a href="viewtopicc4d4.html?f=9&amp;t=396">https://forum.abinit.org/viewtopic.php?f=9&amp;t=396</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Size of WF disk file?</h3>
+				<div class="date">Posted: <strong>Fri Jun 11, 2010 2:20 pm</strong></div>
+				<div class="author">by <strong>dima</strong></div>
+				<div class="content">Hello dear Abinitiers. Sorry for my poor english <br />Then nkpt, mpw and mband are rather large, for example 2800, 2110, 24, WF disk file becomes negative = -1973 Mb. This is because  nkpt, mpw and mband are integer*4 and during the calculation of WF disk file (mbdiskwf in memory.F90) from them, mbdiskwf becomes negative.<br />Is it a bug? or it is connected with my computer?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Size of WF disk file?</h3>
+				<div class="date">Posted: <strong>Sat Jun 12, 2010 10:42 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">no, this is a small bug - your analysis is correct - the integers are being &quot;overflowed&quot; and give negative results.<br />Could you try the following patch to see if it works?<br /><br />--- src/57_iovars/memory.F90	2010-01-17 21:50:15 +0000<br />+++ src/57_iovars/memory.F90	2010-06-12 08:39:29 +0000<br />@@ -870,7 +870,7 @@<br /> !in the WF group. For the time being, nprocwf=1<br />  nprocwf=mpi_enreg%nproc_fft<br /> <br />- mbdiskwf=(8*2*mpw*nprocwf*sum(nband(1:nkpt*nsppol)))/1024._dp**2 + 0.002_dp<br />+ mbdiskwf=(8*two*mpw*nprocwf*sum(nband(1:nkpt*nsppol)))/1024._dp**2 + 0.002_dp<br />  mbdiskpd=(8*nfftf*nsppol)/1024._dp**2 + 0.002_dp<br /> <br /> !Determine the largest array out of cg (cg_disk), f_fftgr (f_fftgr_disk), or pawfgrtab%gylm<br /><br /><br />recompile abinit, and run with your old test case which gave negative memory.<br /><br />matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Size of WF disk file?</h3>
+				<div class="date">Posted: <strong>Sat Jun 12, 2010 1:37 pm</strong></div>
+				<div class="author">by <strong>dima</strong></div>
+				<div class="content">Thank you! Your patch is working and now WF disk file is positive. <br />I also try such string: mbdiskwf=(8*2._dp*mpw*nprocwf*sum(nband(1:nkpt*nsppol)))/1024._dp**2 + 0.002_dp and it is working too.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=396&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:23 GMT -->
+</html>

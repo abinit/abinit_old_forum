@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1670&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:37:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Large memory on IBM machine for response calculation</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Large memory on IBM machine for response calculation</h2>
+		<p><a href="viewtopice6e6-2.html?f=10&amp;t=1670">https://forum.abinit.org/viewtopic.php?f=10&amp;t=1670</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Large memory on IBM machine for response calculation</h3>
+				<div class="date">Posted: <strong>Tue May 15, 2012 9:43 pm</strong></div>
+				<div class="author">by <strong>vranjan</strong></div>
+				<div class="content">Hello,<br /><br />I am trying to calculate phonons for 24 atoms system. I calculate it in three steps:<br /><br />Dataset 1: Ground state calculation<br />Dataset 2: d/dk calculation<br />Dataset 3: Response function calculation at Gamma with electric field perturbation<br /><br />some parameters I have used are:<br /><br />ecut 46.<br />ngkpt 6 6 6<br />nband 48<br />ixc 11<br />fhi pseudopotential : Trouiller-Martins-type, GGA Perdew/Burke/Ernzerhof (1996)<br /><br /><br />abinit estimates the following memory usage:<br />DATASET 1: This job should need less than                     111.604 Mbytes of memory.<br />DATASET 2: This job should need less than                     146.624 Mbytes of memory.<br />DATASET 3: This job should need less than                     176.287 Mbytes of memory.<br /><br />However, the program always stops when memory usage exceeds 50 GB/node. I am currently using 36 nodes with 9 processors each. Still the program stopped because it exceeded 50 GB/node. Its currently using 1787.16 GB total memory. The 50 GB/node is a upper limit set by admn on the IBM system I am using. <br /><br />Earlier I used 18 processor/node on 18 nodes and the abinit ran till the 1st direction of 11 atoms (892 GB memory was used). With 9 processors/node on 36 nodes it ran till 3rd direction of 22nd atoms. So, the memory used doubled from the 1st to the 2nd run (1787.16 GB).<br /><br />Wonder if it is normal to expect such large memory usage. <br /><br />Thanks,<br /><br />Vivek</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Large memory on IBM machine for response calculation</h3>
+				<div class="date">Posted: <strong>Wed May 23, 2012 6:15 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello,<br /><br />0) As always, a post is halfway useless if you do not specify your version, platform and full details. <strong class="text-strong">Please</strong> follow the nettiquette.<br /><br />1) are you really using 324 cores? You have relatively few k-points, so this may not work very efficiently. There is some band parallelization, which is automatic, but the i/o is in need of optimization (being done as we speak for the new versions of abinit). Further, the number of k is different for each q, as a function of the remaining symmetry operations. This may explain why some dtset are fine and others not.<br /><br />2) the memory estimation is not great, but it should not miss by an order of magnitude. I did not understand your comments as to how much memory is being used by whom... 1.7TB for the whole job? This makes 47 Gb/node which should be ok based on what you say, but still a lot more than 9*176 MB.<br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1670&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:37:28 GMT -->
+</html>

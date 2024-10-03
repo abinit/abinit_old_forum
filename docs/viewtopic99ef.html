@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=3959&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:25:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Parameter disagreement</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Parameter disagreement</h2>
+		<p><a href="viewtopic04a2.html?f=14&amp;t=3959">https://forum.abinit.org/viewtopic.php?f=14&amp;t=3959</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Parameter disagreement</h3>
+				<div class="date">Posted: <strong>Tue Nov 06, 2018 9:31 am</strong></div>
+				<div class="author">by <strong>woffermans</strong></div>
+				<div class="content">Dear ABINIT friends,<br /><br />In the log file of a geometry optimisation calculation, I noticed the following WARNING:<br /><br />--- !WARNING<br />src_file: pspatm.F90<br />src_line: 402<br />message: |<br />    Pseudopotential file pspxc= -101130,<br />    not equal to input ixc= 11.<br />    These parameters must agree to get the same xc <br />    in ABINIT code as in psp construction.<br />    Action: check psp design or input file.<br />    Assume experienced user. Execution will continue.<br />...<br /><br />My pseudopotential file was downloaded from abinit.org:<br /><br /><!-- m --><a class="postlink" href="https://www.abinit.org/ATOMICDATA/046-pd/Pd.GGA_PBE-JTH.xml">https://www.abinit.org/ATOMICDATA/046-p ... BE-JTH.xml</a><!-- m --><br /><br />What is going on?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Parameter disagreement</h3>
+				<div class="date">Posted: <strong>Thu Nov 15, 2018 12:10 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Willem,<br />This is because you used an ixc in the input file that does not correspond to the one of the pseudo. In this case it does not matter since the ixc=11 is internall PBE of Abinit and ixc=-101130 is PBE from libxc, and so they are the same Exc functional.<br />You can also do not specify the ixc in the input, it will be read from the Pseudo directly such that you are sure to have the same.<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Parameter disagreement&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Thu Nov 15, 2018 12:55 pm</strong></div>
+				<div class="author">by <strong>woffermans</strong></div>
+				<div class="content">Dear Eric,<br /><br />Thnx for the clarification. It certainly helps.<br /><br />The following link explains the nomenclature of the cryptic ixc = 11 and ixc = -101130 notation:<br /><!-- m --><a class="postlink" href="https://docs.abinit.org/variables/basic/#ixc">https://docs.abinit.org/variables/basic/#ixc</a><!-- m --><br /><br />I feel guilty for not checking this out before I submitted the topic.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=3959&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:25:56 GMT -->
+</html>

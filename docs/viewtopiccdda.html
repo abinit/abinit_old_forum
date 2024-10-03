@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1437&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:04:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Compiling 6.11.2</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Compiling 6.11.2</h2>
+		<p><a href="viewtopic238a.html?f=3&amp;t=1437">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1437</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Compiling 6.11.2</h3>
+				<div class="date">Posted: <strong>Mon Nov 21, 2011 5:50 pm</strong></div>
+				<div class="author">by <strong>aromero</strong></div>
+				<div class="content">After configure in my computer, I did just use the make to go through the compilation process but<br />after that and only few lines I am getting<br /><br /><br />make  all-recursive<br />Making all in fallbacks<br />make fox<br />The build of fox has been disabled<br />touch: stamps/fox-install-stamp: No such file or directory<br />make[3]: *** [fox] Error 1<br /><br />Is there any problem with the new build system in  6.11.2?<br /><br />Thanks a lot!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling 6.11.2</h3>
+				<div class="date">Posted: <strong>Tue Nov 22, 2011 1:05 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">There have been substantial build-system changes in 6.11.1. Although I've carefully checked my developments and they have been submitted to the test farm in my branch and the trunk, it is probable that some bugs are still there.<br /><br />Could you give me more info on your configuration (architecture, compilers with versions, configure options, whether you use a builddir, config.log, ...)?<br /><br />Could you  also tell me whether the <em class="text-italics">stamps/</em> subdirectory has been created in <em class="text-italics">fallbacks/</em>?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling 6.11.2</h3>
+				<div class="date">Posted: <strong>Tue Nov 22, 2011 2:16 pm</strong></div>
+				<div class="author">by <strong>aromero</strong></div>
+				<div class="content">Dear Yann<br /><br />I am including here the config.log. I am compiling it in my mac ox 10.6.8, where I have been using Abinit for development for the<br />last few years. I have not changed anything in my configuration in the last few months and all previous Abinit versions did pass<br />the compilation, I was using gfortran..<br /><br />Within the fallbacks I have<br /><br />-rw-r--r--   1 aldoromero  staff   37310 Nov 21 10:45 Makefile<br />-rw-r--r--   1 aldoromero  staff   26525 Nov 21 10:45 config.log<br />-rwxr-xr-x   1 aldoromero  staff   37117 Nov 21 10:45 config.status<br />-rw-r--r--   1 aldoromero  staff    4699 Nov 21 10:45 config.mk<br />-rw-r--r--   1 aldoromero  staff   43320 Nov 21 10:38 Makefile.in<br />drwxr-xr-x   7 aldoromero  staff     238 Nov 21 10:38 autom4te.cache<br />-rwxr-xr-x   1 aldoromero  staff  256619 Nov 21 10:38 configure<br />-rw-r--r--   1 aldoromero  staff   34768 Nov 21 10:38 aclocal.m4<br />-rw-r--r--   1 aldoromero  staff   18220 Nov 21 10:38 Makefile.am<br />drwxr-xr-x  12 aldoromero  staff     408 Nov 21 10:25 patches<br />drwxr-xr-x   3 aldoromero  staff     102 Nov 21 10:25 transient<br />-rw-r--r--   1 aldoromero  staff       0 Nov 21 10:24 AUTHORS<br />-rw-r--r--   1 aldoromero  staff   35147 Nov 21 10:24 COPYING<br />-rw-r--r--   1 aldoromero  staff       0 Nov 21 10:24 ChangeLog<br />-rw-r--r--   1 aldoromero  staff   15578 Nov 21 10:24 INSTALL<br />-rw-r--r--   1 aldoromero  staff       0 Nov 21 10:24 NEWS<br />-rw-r--r--   1 aldoromero  staff       0 Nov 21 10:24 README<br />-rwxr-xr-x   1 aldoromero  staff    1633 Nov 21 10:24 autogen.sh<br />-rw-r--r--   1 aldoromero  staff    5288 Nov 21 10:24 config.mk.in<br />-rw-r--r--   1 aldoromero  staff    6301 Nov 21 10:24 configure.ac<br />-rwxr-xr-x   1 aldoromero  staff    1482 Nov 21 10:24 wipeout.sh<br />drwxr-xr-x   7 aldoromero  staff     238 Nov 21 10:24 config<br /><br /><br />No directory as the one you are referring to exist..<br /><br /><br />Thanks</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling 6.11.2</h3>
+				<div class="date">Posted: <strong>Tue Nov 29, 2011 3:56 pm</strong></div>
+				<div class="author">by <strong>aromero</strong></div>
+				<div class="content">I did download the recent merge version of 6.11.2 and still I am unable to compile. I did create the stamps directory within the fallbacks but that did not help. When<br />I did so, I got the error<br /><br /><br />make  all-recursive<br />Making all in fallbacks<br />make fox<br />The build of fox has been disabled<br />Checking build of fox fallback<br />test -e stamps/fox-install-stamp<br />make libxc<br />The build of libxc has been disabled<br />Checking build of libxc fallback<br />test -e stamps/libxc-install-stamp<br />make linalg<br />The build of linalg has been disabled<br />Checking build of linalg fallback<br />test -e stamps/linalg-install-stamp<br />make netcdf<br />cd sources &amp;&amp; \<br />	  gzip -cd /Users/aldoromero/.abinit/tarballs/netcdf-4.1.1.tar.gz | tar xf -<br />/bin/sh: line 0: cd: sources: No such file or directory<br />make[3]: *** [stamps/netcdf-unfold-stamp] Error 1<br />make[2]: [all-local] Error 2 (ignored)<br />Checking build of netcdf fallback<br />test -e stamps/netcdf-install-stamp<br />make[2]: *** [all-local] Error 1<br />make[1]: *** [all-recursive] Error 1<br />make: *** [all] Error 2<br /><br /><br />Without creating the stamps directory, I am getting the same error than before.<br />Any ideas Yann?<br /><br />Thanks in advance!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling 6.11.2</h3>
+				<div class="date">Posted: <strong>Tue Nov 29, 2011 4:34 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Let's concentrate on the fallbacks. You can go to the fallbacks/ subdir of Abinit and create a tmp/ build dir there. Just copy the config.mk file from ~abinit/your_builddir/fallbacks/ and run ../configure.<br /><br />If the sources/, exports/, and stamps/ subdirs do not exist, retry with <strong class="text-strong">../configure MKDIR_P=&quot;gmkdir -p&quot;</strong> or something similar.<br /><br />If they stil don't exist, create them manually in ~abinit/your_builddir/fallbacks/.<br /><br />Please report what happens in any case, so that I know what I have to update / check in the fallbacks build system.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling 6.11.2</h3>
+				<div class="date">Posted: <strong>Tue Nov 29, 2011 6:34 pm</strong></div>
+				<div class="author">by <strong>aromero</strong></div>
+				<div class="content">Yann.<br /><br />I did the makedist first, after I did create the tmp in the fallbacks directory, copy the config.mk from the fallbacks directory into this directory, then, I did<br />run configure (the three subdirectories you were talking about were created) and I did try to compile but it stops in the usual place for the xc that I have been <br />having problems always in my mac.<br /><br />I did also use ../configure with_dft_flavor=none or <br />../configure with_dft_flavor=atompaw+wannier90<br /><br />but in all cases, it stop by complaining a problem with the libxc.<br /><br />It seems to me that it is not choosing any flavor then..<br /><br />thanks again</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling 6.11.2</h3>
+				<div class="date">Posted: <strong>Wed Nov 30, 2011 11:48 am</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Then, the only thing I can think of is a misconfiguration in your development environment. But without physical access to the computer, it will be very difficult for me to pinpoint the issue.<br /><br />Could you copy - including both STDOUT and STDERR (2&gt;&amp;1) - the contents of:<br /><ul>  <li>your config file;</li>  <li>the output of makemake (freshly run after a clean-source-tree);</li>  <li>the output of Abinit's configure (*not* the config.log);</li></ul>in code blocks, so that I get a chance to grasp a hint about what's happening to you?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling 6.11.2</h3>
+				<div class="date">Posted: <strong>Wed Nov 30, 2011 2:26 pm</strong></div>
+				<div class="author">by <strong>aromero</strong></div>
+				<div class="content">Dear Yann<br /><br />after<br />config/scripts/clean-source-tree<br /><br />I did issue the makemake and the configure. I am including here both outputs (the screen outputs)<br /><br />Thanks a lot</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiling 6.11.2&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Wed Nov 30, 2011 3:37 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Sorry, I misunderstood your previous answer. After re-reading it, it seems that the problem is not in the build system at all. I could not identify any anomaly in the data you sent me. In any case, there are MacOS X computers in the test farm which are all fine with the current build system, and some developers use such computers as well, apparently without any problem.<br /><br />Again, I'm pretty sure that the problem is coming from a misconfiguration of your computer, but I cannot tell you more without physically accessing the computer itself. In particular if you say that this is a recurrent problem that you've been having with several versions of Abinit. As long as you've not identified precisely what it is really about and its origin, there will be no solution. And in the present case, I'll be able to help only when the problem has been fully formulated.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1437&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:04:03 GMT -->
+</html>

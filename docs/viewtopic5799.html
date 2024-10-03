@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=296&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Difficulty with Make for 6.03 on Blue Gene/P</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Difficulty with Make for 6.03 on Blue Gene/P</h2>
+		<p><a href="viewtopicce6f.html?f=3&amp;t=296">https://forum.abinit.org/viewtopic.php?f=3&amp;t=296</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Difficulty with Make for 6.03 on Blue Gene/P</h3>
+				<div class="date">Posted: <strong>Tue May 04, 2010 2:56 pm</strong></div>
+				<div class="author">by <strong>aslopis</strong></div>
+				<div class="content">Hi,<br /><br />We have been trying to install Abinit 6.03 on a Blue Gene/P machine. One of our system administrators got the errors below when trying to compile the code. Please could you assist, what do we need to do.<br /><br />Thanks so much,<br />Anton<br /><br />##############################################################<br />Error: Symbol 'mpi_comm_null' at (1) has no IMPLICIT type<br /> In file xallgather_mpi.F90:138<br /> <br />   call MPI_ALLGATHER(xval,nelem,MPI_INTEGER,recvcounts,nelem,MPI_INTEGER,space<br />                                           1<br />Error: Symbol 'mpi_integer' at (1) has no IMPLICIT type<br /> In file xallgather_mpi.F90:136<br /> <br /> if (spaceComm /= MPI_COMM_SELF .and. spaceComm /= MPI_COMM_NULL) then<br />                              1<br />Error: Symbol 'mpi_comm_self' at (1) has no IMPLICIT type<br /> In file xallgather_mpi.F90:197<br /> <br /> if (spaceComm /= MPI_COMM_SELF .and. spaceComm /= MPI_COMM_NULL) then<br />                              1<br />Error: Symbol 'mpi_comm_self' at (1) has no IMPLICIT type<br /> In file xallgather_mpi.F90:197<br /> <br /> if (spaceComm /= MPI_COMM_SELF .and. spaceComm /= MPI_COMM_NULL) then<br />                                                               1<br />Error: Symbol 'mpi_comm_null' at (1) has no IMPLICIT type<br /> In file xallgather_mpi.F90:199<br /> <br />   call MPI_ALLGATHER(xval,nelem,MPI_DOUBLE_PRECISION,recvcounts,nelem,MPI_DOUB<br />                                                    1<br />Error: Symbol 'mpi_double_precision' at (1) has no IMPLICIT type<br /> In file xallgather_mpi.F90:258<br /> <br /> if (spaceComm /= MPI_COMM_SELF .and. spaceComm /= MPI_COMM_NULL) then<br />                                                               1<br />Error: Symbol 'mpi_comm_null' at (1) has no IMPLICIT type<br /> In file xallgather_mpi.F90:258<br /> <br /> if (spaceComm /= MPI_COMM_SELF .and. spaceComm /= MPI_COMM_NULL) then<br />                              1<br />Error: Symbol 'mpi_comm_self' at (1) has no IMPLICIT type<br /> In file xallgather_mpi.F90:260<br /> <br />   call MPI_ALLGATHER(xval,nelem,MPI_DOUBLE_PRECISION,recvcounts,nelem,MPI_DOUB<br />                                                    1<br />Error: Symbol 'mpi_double_precision' at (1) has no IMPLICIT type<br />make[3]: *** [xallgather_mpi.o] Error 1<br />make[2]: *** [all-recursive] Error 1<br />make[1]: *** [all-recursive] Error 1<br />make: *** [all] Error 2<br /><br />##############################################################################</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Difficulty with Make for 6.03 on Blue Gene/P</h3>
+				<div class="date">Posted: <strong>Tue May 04, 2010 5:27 pm</strong></div>
+				<div class="author">by <strong>aslopis</strong></div>
+				<div class="content">The problem appears to have been resolved now, our sys admin has managed to install Abinit 6.03. Thanks for your time and interest.<br /><br />Thanks,<br />Anton</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Difficulty with Make for 6.03 on Blue Gene/P</h3>
+				<div class="date">Posted: <strong>Wed May 05, 2010 9:22 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello,<br /><br />good news. Could you provide the config.log, so other bluegene users can try the same configure options?<br /><br />Cheers<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Difficulty with Make for 6.03 on Blue Gene/P</h3>
+				<div class="date">Posted: <strong>Thu Jul 15, 2010 3:43 pm</strong></div>
+				<div class="author">by <strong>mazuju</strong></div>
+				<div class="content"><blockquote><div><cite>aslopis wrote:</cite>The problem appears to have been resolved now, our sys admin has managed to install Abinit 6.03. Thanks for your time and interest.<br /><br />Thanks,<br />Anton</div></blockquote><br /><br /><br />I had  the same problems. could you tell me how to solve the problems.<br />Thank you very much<br /><br />Zj Ma</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Problem Running 6.03 on Blue Gene/P</h3>
+				<div class="date">Posted: <strong>Thu Aug 26, 2010 5:15 pm</strong></div>
+				<div class="author">by <strong>aslopis</strong></div>
+				<div class="content">Hi All,<br /><br />I'm using version 6.03 and trying to run on a BGP. I have the following errors in my log file (below). Does anyone have an idea what's wrong. I've sought advice from our systems admin, and he's been waiting for help from someone he knows who could help. I know that the BGP architecture can make things more complicated. The compilation details from my config.log might help as well (see my other post today).<br /><br />I would appreciate any ideas.<br /><br />Thanks so much,<br />Anton<br /><br /><br />&lt;Jun 02 17:25:15.502077&gt; BE_MPI (ERROR): Job execution failed<br />&lt;Jun 02 17:25:15.502162&gt; BE_MPI (ERROR): Job 7233 is in state ERROR ('E')<br />&lt;Jun 02 17:19:57.131892&gt; FE_MPI (ERROR): Job execution failed (error code - 50)<br />&lt;Jun 02 17:19:57.132085&gt; FE_MPI (ERROR):  - Job execution failed - job<br />switched to an error state<br />&lt;Jun 02 17:25:15.672481&gt; BE_MPI (ERROR): The error message in the job<br />record is as follows:<br />&lt;Jun 02 17:25:15.672526&gt; BE_MPI (ERROR):   &quot;Load failed on<br />172.16.100.6: Magic value in ELF header of executable file is invalid&quot;<br />&lt;Jun 02 17:19:57.446879&gt; FE_MPI (ERROR): Failure list:<br />&lt;Jun 02 17:19:57.446935&gt; FE_MPI (ERROR):   - 1. Job execution failed -<br />job switched to an error state (failure #50)</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=296&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:53 GMT -->
+</html>

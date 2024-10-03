@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=3310&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 20:29:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; what are the correct GW energies</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>what are the correct GW energies</h2>
+		<p><a href="viewtopicd0e6.html?f=11&amp;t=3310">https://forum.abinit.org/viewtopic.php?f=11&amp;t=3310</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>what are the correct GW energies</h3>
+				<div class="date">Posted: <strong>Mon Jun 20, 2016 9:44 pm</strong></div>
+				<div class="author">by <strong>bmatt</strong></div>
+				<div class="content">Hello,<br />This is probably a very simple answer but here is my question.<br />When performing a GW calculation, the code outputs a series of information (which includes the GW energies)<br />starts with --- k = (k-point) <br />Band E_0   ...   ...  ... E<br />for gwcalctyp&lt;10: the last column is E and corresponds to the GW energy<br />then it describes the bandgap from DFT and then GW<br /><br />for gwcalctyp&gt;10 after the 1st iteration: <br />starts with --- k = (k-point)<br />Band   E_lda ... ... E(N)_pert   E(N)_diago<br />during the second tutorial on GW, it says that the last column provides the energy, but the band gap calculated right after this section corresponds to the energies given by E(N)_pert<br /><br />So what are the updated GW energies(maybe iteration dependent?), the column labeled E(N)_pert or the column E(N)_diago?<br /><br />I ran 2 calculations to test, one with gwcalctyp=2 and one with gwcalctyp=12, <br />for =2, the GW energy was labeled with E (as expected)<br />for =12, the GW energy was contained in E(N)_pert after the 1st iteration.<br />does this change for the hybrid approach when gwcalctyp=125?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: what are the correct GW energies&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Sun Jul 17, 2016 4:09 am</strong></div>
+				<div class="author">by <strong>lucamontana</strong></div>
+				<div class="content">E(N)_pert is the pertubatively calculated quasi particle energies at the N-th iteration step and<br />the column E(N)_diago is the exact quasi particle energy (at the N-th iteration step) by performing <br />an exact diagonalization of the subspace of quasi particle Hamiltonian.<br /><br />Example :<br /><br />Band     E_lda   &lt;Vxclda&gt;   E(N-1)  &lt;Hhartree&gt;   SigX  SigC[E(N-1)]    Z     dSigC/dE  Sig[E(N)]  DeltaE  E(N)_pert E(N)_diago<br /><br /> 60       0.634   -16.482     0.634    17.116    -7.786    -7.136     1.000     0.000   -14.922     1.560     2.194     <strong class="text-strong">2.229</strong><br /><br /> 60       0.634   -16.482  <strong class="text-strong">   2.229 </strong>   16.172    -7.273    -7.280     1.000     0.000   -14.553    -0.610     1.619     <strong class="text-strong">1.630</strong><br /><br /> 60       0.634   -16.482     <strong class="text-strong">1.630 </strong>   16.566    -7.672    -7.198     1.000     0.000   -14.870     0.066     1.696     1.708<br /><br />LUCA</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=3310&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 20:29:55 GMT -->
+</html>

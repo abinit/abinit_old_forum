@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3141&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:28:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; ERROR message in elastic calculation</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>ERROR message in elastic calculation</h2>
+		<p><a href="viewtopicbb69.html?f=10&amp;t=3141">https://forum.abinit.org/viewtopic.php?f=10&amp;t=3141</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>ERROR message in elastic calculation</h3>
+				<div class="date">Posted: <strong>Sun Nov 08, 2015 12:37 am</strong></div>
+				<div class="author">by <strong>DAHAME</strong></div>
+				<div class="content">Dear friends; I tray to calculate some proreties (NLO, Elastic..) in 6 dataset, and my calculation always stops at the beginning of 6th datasat with following message:[/b][/b] <br />k-point set must have full space-group symmetry<br />    there is no match for kpt   1 transformed by symmetry   2<br />    Action: change kptopt to 2 or 3 and/or change or use shiftk<br />    shiftk = 0 0 0 is always a safe choice.<br />src_file: symkchk.F90<br />src_line: 163<br />...<br /><br /><br /> leave_new : decision taken to exit ...<br />[linux-jmub.site:10906] MPI_ABORT invoked on rank 0 in communicator MPI_COMM_WORLD with errorcode 14<br />May input file as following:<br /># Linear and nonlinear response calculation for InPS4<br /># Perturbations: electric fields &amp; atomic displacements<br /># (M. Veithen, 21.4.2005)<br /><br />autoparal 1<br /><br />#Definition of lattice parameters<br />#********************************<br />#acell    5.623    5.623     9.058    Angstroms<br /><br />angdeg   90.0000   90.0000   90.0000<br />   <br />rprim    10.625934233725200          0                   0<br />          0                         10.625934233725200   0<br />          5.312967116862600          5.312967116862600   8.558573029440055<br />         <br /><br />scalecart  3*1    <br />acell      3*9.8231102399E-01 Bohr<br /><br />Chksymbreak  0     <br /><br />#Definition des atomes<br />#*********************<br />   natom 6<br />   ntypat 3<br />   znucl 49   15   16<br />   typat 1*1    1*2    4*3     <br />   <br />         <br />   xred  <br />                       0.0000000000E+00  0.0000000000E+00  0.0000000000E+00<br />                       2.5000000000E-01  7.5000000000E-01  5.0000000000E-01<br />                       1.8220536512E-01  1.2080736996E-01  2.5735963399E-01<br />                       5.6043500089E-01  6.2183299605E-01  2.5735963399E-01<br />                       8.7919263004E-01  4.3956499911E-01  7.4264036601E-01<br />                       3.7816700395E-01  8.1779463488E-01  7.4264036601E-01      <br />  ixc 7<br /><br />#Definition de la procedure scf<br />#******************************<br />   iscf 5<br />   nstep  100<br />   diemac 12<br />   <br />#Pland wave basis and k-point grid<br />#*********************************<br />   ecut        650 eV<br />   ecutsm      0.5<br />   dilatmx     1.05<br />   ngkpt      4 4 3<br />   <br />nshiftk   1<br />shiftk    0.5    0.5    0.5 <br />ndtset 1     jdtset    6<br /><br />#DATASET1 : scf calculation: GS WF in the BZ<br />#********************************************<br />   prtden1    1<br />   kptopt1    1<br />   toldfe1    1.0d-12<br />   #nband1    26<br />#DATASET2 : non scf calculation: GS WF in the whole BZ<br />#*****************************************************<br />   getden2    1<br />   kptopt2    2<br />     iscf2   -2<br />   getwfk2    1<br />   tolwfr2    1.0d-22<br />    nband2    16<br /><br /><br />#DATASET3 : ddk on the MP grid of k-points<br />#*****************************************<br />   getwfk3    2<br />    rfdir3    1 1 1<br />   rfelfd3    2<br />   tolwfr3    1.0d-22<br />    nband3    16<br />   kptopt3    2<br /><br />#DATASET4 : ddE on the MP grid of k-points<br />#*****************************************<br />   prtden4    1<br />   getwfk4    2<br />   getddk4    3<br />    rfdir4    1 1 1<br />   rfphon4    1<br />  rfatpol4    1 6<br />   toldfe4    1.0d-12<br />   rfelfd4    3<br />    nband4    16<br />   kptopt4    2<br />  prepanl4    1<br /><br />#DATASET5 : 3DTE calculation<br />#***************************<br />   getden5    1<br />  get1den5    4<br />   getwfk5    2<br />   get1wf5    4<br />    nband5    16<br />   kptopt5    2<br />optdriver5    5<br />  rf1elfd5    1<br />  rf1phon5    1<br /> rf1atpol5    1 6<br />   rf1dir5    1 1 1<br />  rf2elfd5    1<br />   rf2dir5    1 1 1<br />  rf3elfd5    1<br />   rf3dir5    1 1 1<br /><br />#DATASET6 : strain response<br />#**************************<br />   getwfk6    2<br />   getddk6    3<br />    rfdir6    1 1 1<br />   rfstrs6    3<br />   toldfe6    1.0d-12<br />    nband6    16<br />   kptopt6    2<br /><br />nbdbuf 0<br /><br />If any one can solve me this problem, i will be very grateful.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ERROR message in elastic calculation</h3>
+				<div class="date">Posted: <strong>Mon Nov 09, 2015 8:07 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Have you tried to set <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>shitfk 0 0 0<br /></code></pre></div><br />?<br /><br />You use 0.5 0.5 0.5 which shifts the original grid to an other one.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ERROR message in elastic calculation</h3>
+				<div class="date">Posted: <strong>Mon Nov 09, 2015 1:20 pm</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">You can also read the warning message that tells you how to solve this problem.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ERROR message in elastic calculation</h3>
+				<div class="date">Posted: <strong>Tue Nov 10, 2015 11:39 am</strong></div>
+				<div class="author">by <strong>DAHAME</strong></div>
+				<div class="content">Thank you for everyone, of course I tried with all the proposed solutions, but the error persists</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3141&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:28:54 GMT -->
+</html>

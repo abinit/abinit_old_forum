@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=283&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:03:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; berry phase polarization with PAW?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>berry phase polarization with PAW?</h2>
+		<p><a href="viewtopicce1b.html?f=9&amp;t=283">https://forum.abinit.org/viewtopic.php?f=9&amp;t=283</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>berry phase polarization with PAW?</h3>
+				<div class="date">Posted: <strong>Fri Apr 30, 2010 4:12 pm</strong></div>
+				<div class="author">by <strong>cashman</strong></div>
+				<div class="content">Dear Abinit,<br /><br />I am trying to perform a berry-phase polarization calculation using the PAW method.  Previously I have been able to do this successfully using the FHI pseudopotentials however I would like to know the difference, if any, with a fixed cell/atomic positions, between the two methods.  I am currently using the Abinit version 6.0.3 but I have tried in earlier versions also, with no success.  After running to SCF convergence I get the message pased below from my log file.  Below the log file I supply the input file.<br /><br />My question is, can one use the berry phase method for polarization calculation with PAW or has this not yet been implemented?  Sorry but I have not been able to find it stated explicitly one way or the other in the tutorials.  As a follow-up, if it is implemented, does someone know which flags I might have improperly set to perform such a calculation?<br /><br />Thanks very much for any help with this issue.<br /><br />Chris<br /><br />Excerpt from log file:<br /><br /> At SCF step   15, etot is converged :<br />  for the second time, diff in etot=  7.656E-09 &lt; toldfe=  1.000E-07<br />  berryphase_new : enter<br />  berryphase_new : enter<br />  berryphase_new : enter<br />  berryphase_new : enter<br />  berryphase_new : enter<br />  berryphase_new : enter<br />  berryphase_new : enter<br />  berryphase_new : enter<br />  berryphase_new : enter<br />  berryphase_new : enter<br />  berryphase_new : enter<br />  berryphase_new : enter<br />  berryphase_new : enter<br />  berryphase_new : enter<br />  berryphase_new : enter<br />  berryphase_new : enter<br />Error in cprj_copy: n2 wrong sizes !<br />Error in cprj_copy: n2 wrong sizes !<br />Error in cprj_copy: n2 wrong sizes !<br />MPI: MPI_COMM_WORLD rank 8 has terminated without calling MPI_Finalize()<br />MPI: aborting job<br /><br />Input file:<br /><br />  dilatmx   1.1<br />  ecutsm    0.5<br /><br />#Ground state calculation<br />  toldfe   1.0d-7         # SCF stopping criterion<br />                          # causes SCF cycle to stop ions to be moved).<br />  getwfk -1         # This is to speed up the calculation, by restarting<br />                    # from previous wavefunctions, transferred from the old<br />                    # to the new k-points.<br />  occopt 1<br />#========================================================<br /># Printing options<br />#========================================================<br /> prtwf=1<br />#========================================================<br /># Parallelization<br />#========================================================<br />#===========================================================<br />#Setup of SCF calc.<br />#===========================================================<br />#Gives the number of band, explicitely (do not take the default)<br /> nband 160             # For an insulator (if described correctly as an insulator<br />                       # by DFT), there is no need to include conduction bands<br />                       # in response-function calculations<br /><br />#Exchange-correlation functional<br />ixc 11            # GGA PBE parameterization<br />#Definition of the planewave basis set<br />  ecut       20.0          # Maximal kinetic energy cut-off, in Hartree<br />  pawecutdg  40.0<br />  pawovlp    -1.0<br />  pawmixdg 1<br />#===========================================================<br />#Gives the number of band, explicitely (do not take the default)<br />#Definition of the k-point grid<br />#kptopt   2                # For RF Calc.<br />#kptopt   1                # Automatic generation of k points, taking<br />kptopt   3                # Automatic generation of k points, no symmetry (eg paw)<br />kptrlatt 4 0 0  0 4 0  0 0 4<br />nshiftk 1<br />shiftk 0.500 0.500 0.500<br /># shiftk 0.000 0.000 0.000<br />#===========================================================<br />#Definition of the SCF procedure<br />iprcel 49             # compute RPA dielectric matrix at first step, recompute at later step, take into account mixing factor diemix<br />diemix 0.50            # factor of the preconditioned residual potential to be transferred in the SCF cycle<br />iscf 17                # Anderson mixing of potential/Pullay mixing with prev. 2 iter<br />nstep 80               # Maximal number of SCF cycles<br />diemac 3.0             # Although this is not mandatory, it is worth to<br />                       # precondition the SCF cycle. The model dielectric<br />                                                                 <br />#===========================================================<br /># Berry phase calculation of the polarization<br />#===========================================================<br />   berryopt -1<br />   rfdir 1 1 1<br />   nbdbuf 0<br />#===========================================================<br />#######################################################################<br />#Setup of the cell<br /><br />#Definition of the unit cell<br />  I leave the cell structure out, but I can send it if it's helpful</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: berry phase polarization with PAW?</h3>
+				<div class="date">Posted: <strong>Tue May 04, 2010 12:52 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">This has certainly been coded for PAW, although I am not certain what is the status in 6.0.3. Try running a serial calculation (eventually with low cutoff for testing). Otherwise your input looks ok<br /><br /><blockquote class="uncited"><div>Error in cprj_copy: n2 wrong sizes !</div></blockquote><br /><br />smacks of a bug. It looks like the 6.1.2 code is more coherent, and there may have been a bug in 6.0.3:<br /><br />Check line 273 in file src/79_seqpar_mpi/berryphase_new.F90 and print out dtefield%fnkpt, nkpt, and mkmem. If the last 2 are different that's the bug.<br /><br />1) Did you use mkmem 0?<br />2) check that your k-grid shift is consistent with the full symmetry of the cell (basically must be cubic for 0.5 0.5 0.5). For hexagonal or tetragonal, use 0 0 0.5 and otherwise try with 0 0 0. We at least need the unit cell structure, if not the positions.<br /><br />If we can confirm that there is a real bug, we can try to fix it in 6.0.4 (MG?)<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: berry phase polarization with PAW?</h3>
+				<div class="date">Posted: <strong>Tue May 04, 2010 6:35 pm</strong></div>
+				<div class="author">by <strong>cashman</strong></div>
+				<div class="content">I will post your response in quotes below.  Mine are not in quotes.<br /><br />&quot;Check line 273 in file src/79_seqpar_mpi/berryphase_new.F90 and print out dtefield%fnkpt, nkpt, and mkmem. If the last 2 are different that's the bug.&quot;<br /><br />Inside the log file I find the line:<br /><br /> invars1: mkmem  undefined in the input file. Use default mkmem  = nkpt<br /> invars1: With nkpt_me=    4 and mkmem  =    64, ground state wf handled in core.<br /><br />I do not know if this is the same information as you recommend in the above quote.  I am trying a different shiftk at the moment.  If that doesn't work I will go back and print out the above information.<br /><br />&quot;1) Did you use mkmem 0?&quot;<br /><br />I did not set mkmem, but according to the Abinit web page input variables section the default is mkmem=nkpt.<br /><br />&quot;2) check that your k-grid shift is consistent with the full symmetry of the cell (basically must be cubic for 0.5 0.5 0.5). For hexagonal or tetragonal, use 0 0 0.5 and otherwise try with 0 0 0. We at least need the unit cell structure, if not the positions.&quot;<br /><br />I have a tetragonal cell:<br />#Definition of the unit cell<br />acell   1.4603809311E+01  1.4603809311E+01  1.5250022218E+01<br />rprim=  1.0000000000E+00  0.0000000000E+00  0.0000000000E+00<br />        0.0000000000E+00  1.0000000000E+00  0.0000000000E+00<br />        0.0000000000E+00  0.0000000000E+00  1.0000000000E+00<br /><br />Sorry for leaving that information out in my previous e-mail and thanks for recognizing it.  I am now hoping that my problem is an improper choice of shiftk.  I used the 0.5 0.5 0.5.  I am now trying the shiftk = 0.0 0.0 0.5.  I will keep you posted.  <br /><br />Thanks very much for your reply.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: berry phase polarization with PAW?</h3>
+				<div class="date">Posted: <strong>Wed May 05, 2010 3:31 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Hi, I am the one currently doing the electric field + PAW developments. In 6.0 the serial calculation works well but not the MPI version. The 6.1 branch is currently developing and improving rapidly. There will be major updates to electric field plus PAW shortly, probably within 2 weeks. <br /><br />Joe</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: berry phase polarization with PAW?</h3>
+				<div class="date">Posted: <strong>Wed May 05, 2010 11:22 pm</strong></div>
+				<div class="author">by <strong>cashman</strong></div>
+				<div class="content">I have tried using both shiftk=0 0 0 and 0 0 .5.  Both crash with the same error message.  I am also running it in serial mode but this will take a few days.  I will post the result as to whether it ran successfully or not. <br /><br />I have tried a smaller system (rhombohedral BTO with a 5 atom cell).  The serial version works fine and I get a reasonable output.  The parallel version crashes at about the same point (shortly after entering berryphase_new--although I don't know if it's still in there when it crashes).<br /><br />I would gladly post my input file and error message for this if it is of interest.<br /><br />Thanks again to both of you for your comments.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: berry phase polarization with PAW?</h3>
+				<div class="date">Posted: <strong>Thu Sep 09, 2010 9:14 pm</strong></div>
+				<div class="author">by <strong>cashman</strong></div>
+				<div class="content">Just want to finish this posting by stating that it worked in serial.  I am able to do the parallel berry phase calculation using the abinit 6.2.2.<br /><br />Thanks for the wonderful, well managed code.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=283&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:03:51 GMT -->
+</html>

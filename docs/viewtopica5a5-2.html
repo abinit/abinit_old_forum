@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1879&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:48:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] Probable bugs 6.12.3 with SLURM and GSL</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] Probable bugs 6.12.3 with SLURM and GSL</h2>
+		<p><a href="viewtopicc406-3.html?f=3&amp;t=1879">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1879</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] Probable bugs 6.12.3 with SLURM and GSL</h3>
+				<div class="date">Posted: <strong>Mon Nov 12, 2012 12:59 am</strong></div>
+				<div class="author">by <strong>yurtesen</strong></div>
+				<div class="content">I am not sure if the following are bugs or not but, but they look like it. Feel free to comment <img class="smilies" src="images/smilies/icon_e_biggrin.gif" alt=":D" title="Very Happy" /><br /><br />SLURM problem:<br /><br />We are using mvapich2 with slurm and there is no 'mpirun/mpiexec' due to this (srun<br />is used). It appears the configure script thinks MPI is broken due to this.<br /><br />I had to use CC, FC, CXX env variables and hydra process manager (which includes mpirun) to<br />fool the installer.<br /><br /><br /><br />MATH includes problem:<br /><br />(configured with    <br />--with-math-flavor=&quot;gsl&quot; --with-math-incs=&quot;-I/export/modules/devel/gsl/1.15/gnu/include&quot; <br />--with-math-libs=&quot;-L/export/modules/devel/gsl/1.15/gnu/lib -lgsl -lgslcblas&quot;  \<br /><br /><br />It appears the math includes which was set in Makefile is not passed to compilation. In<br />Makefile:<br /><br />lib_math_incs = -I/export/modules/devel/gsl/1.15/gnu/include<br />with_math_incs = -I/export/modules/devel/gsl/1.15/gnu/include<br /><br />Error (the /export/modules/devel/gsl/1.15/gnu/include/gsl/gsl_sf_bessel.h exists):<br /><br />make[3]: Entering directory `/home/eyurtese/temp/abinit-6.12.3/src/01_gsl_ext'<br />mpicc -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs -I/home/eyurtese/temp/abinit-6.12.3/fallbacks/exports/include   -O3 -march=native -mtune=native -O3 -march=native -mtune=native -MT gsl_f90_sf_bessel_j0.o -MD -MP -MF .deps/gsl_f90_sf_bessel_j0.Tpo -c -o gsl_f90_sf_bessel_j0.o gsl_f90_sf_bessel_j0.c<br />gsl_f90_sf_bessel_j0.c:5:31: fatal error: gsl/gsl_sf_bessel.h: No such file or directory<br />compilation terminated.<br />make[3]: *** [gsl_f90_sf_bessel_j0.o] Error 1<br />make[3]: Leaving directory `/home/eyurtese/temp/abinit-6.12.3/src/01_gsl_ext'<br />make[2]: *** [all-recursive] Error 1<br />make[2]: Leaving directory `/home/eyurtese/temp/abinit-6.12.3/src'<br />make[1]: *** [all-recursive] Error 1<br />make[1]: Leaving directory `/home/eyurtese/temp/abinit-6.12.3'<br />make: *** [all] Error 2<br /><br />I added $(with_math_incs) to /home/eyurtese/temp/abinit-6.12.3/src/01_gsl_ext/Makefile<br />at DEFAULT_INCLUDES and compilation continued, obviously a real fix is required:<br /><br />DEFAULT_INCLUDES = -I. -I$(top_builddir)<br />vs<br />DEFAULT_INCLUDES = -I. $(with_math_incs) -I$(top_builddir)<br /><br /><br /><br /><br />make: *** [all] Error 2</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Probable bugs 6.12.3 with SLURM and GSL</h3>
+				<div class="date">Posted: <strong>Tue Nov 13, 2012 4:53 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">hi,<br /><br /><blockquote class="uncited"><div>SLURM problem:<br /><br />We are using mvapich2 with slurm and there is no 'mpirun/mpiexec' due to this (srun<br />is used). It appears the configure script thinks MPI is broken due to this.</div></blockquote><br /><br />on our testfarm, we have a bot with slurm and, as workaround, we create a symbolic in mpich2/bin<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&#91;buildbot@max2 bin&#93;$ ll<br />total 52<br />-rwxr-xr-x. 1 root root&nbsp; 9078 Nov&nbsp; 1&nbsp; 2011 mpicc<br />-rwxr-xr-x. 1 root root&nbsp; 9376 Nov&nbsp; 1&nbsp; 2011 mpich2version<br />lrwxrwxrwx. 1 root root&nbsp; &nbsp; 25 Nov&nbsp; 1&nbsp; 2011 mpiexec -&gt; /usr/local/bin/mpiexec.pl<br />-rwxr-xr-x. 1 root root 10720 Nov&nbsp; 1&nbsp; 2011 mpif77<br />-rwxr-xr-x. 1 root root 12676 Nov&nbsp; 1&nbsp; 2011 mpif90</code></pre></div><br /><br />the mpiexec.pl  on <a href="http://pastie.org/5372203" class="postlink">http://pastie.org/5372203</a><br /><br /><br />we have also a bot to test gsl 1.15 with gcc4.5.3<br /><br />this is my build.ac :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>enable_mpi=&quot;yes&quot;<br />with_mpi_prefix=&quot;/usr/local/openmpi_gcc45&quot;<br />with_linalg_flavor=&quot;none&quot;<br /><br />with_math_flavor=&quot;gsl&quot;<br />with_math_incs=&quot;-I/usr/local/gsl/include&quot;<br />with_math_libs=&quot;-L/usr/local/gsl/lib -lgsl -lgslcblas&quot;<br />CFLAGS_EXTRA=&quot;-I/usr/local/gsl/include&quot;<br />enable_clib=&quot;yes&quot;<br />enable_gw_dpc=&quot;yes&quot;</code></pre></div><br /><br />and it works ( tail of stdout   of   ./configure --with-config-file=./build.ac  )<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Summary of important options:<br /><br />&nbsp; * C compiler&nbsp; &nbsp; &nbsp; : gnu version 4.5<br />&nbsp; * Fortran compiler: gnu version 4.5<br />&nbsp; * architecture&nbsp; &nbsp; : intel xeon (64 bits)<br /><br />&nbsp; * debugging&nbsp; &nbsp; &nbsp; &nbsp;: basic<br />&nbsp; * optimizations&nbsp; &nbsp;: standard<br /><br />&nbsp; * MPI&nbsp; &nbsp; enabled&nbsp; : yes<br />&nbsp; * MPI-IO enabled&nbsp; : yes<br />&nbsp; * GPU&nbsp; &nbsp; enabled&nbsp; : no (none)<br /><br />&nbsp; * TRIO&nbsp; &nbsp;flavor = netcdf-fallback+etsf_io-fallback<br />&nbsp; * TIMER&nbsp; flavor = abinit (libs: ignored)<br />&nbsp; * LINALG flavor = netlib-fallback (libs: internal)<br />&nbsp; * ALGO&nbsp; &nbsp;flavor = none (libs: ignored)<br />&nbsp; * FFT&nbsp; &nbsp; flavor = none (libs: ignored)<br />&nbsp; * MATH&nbsp; &nbsp;flavor = gsl (libs: user-defined)<br />&nbsp; * DFT&nbsp; &nbsp; flavor = libxc-fallback+atompaw-fallback+bigdft-fallback+wannier90-fallback<br /></code></pre></div><br /><br />and the compilation succeeds !<br /><br />my 5¢<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Probable bugs 6.12.3 with SLURM and GSL</h3>
+				<div class="date">Posted: <strong>Tue Nov 13, 2012 6:11 pm</strong></div>
+				<div class="author">by <strong>yurtesen</strong></div>
+				<div class="content">About slurm,  thanks for the script, your script does not seem to be running (I fixed the srun path) and I didnt try to debug it since we just taught people to use srun <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /><br /><br />My point was that it is premature to decide that the MPI support is broken because mpiexec is missing. Missing mpiexec &quot;will not&quot; stop people from compiling (or even running) mpi programs. Why check it at all? is it even necessary?<br /><br />About GSL, you seem to be using <br />CFLAGS_EXTRA=&quot;-I/usr/local/gsl/include&quot;<br />I have already gave<br />with_math_incs=&quot;-I/usr/local/gsl/include&quot;<br />and expected that this would be enough. As long as you use CFLAGS_EXTRA (which as I understand is a general extra flags variable) why bother with with_math_incs at all... (this is not intuitive)<br /><br />Are you able to compile with gsl support, without giving the include path with CFLAGS_EXTRA ? <br /><br />Thanks,<br />Evren</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Probable bugs 6.12.3 with SLURM and GSL</h3>
+				<div class="date">Posted: <strong>Tue Nov 13, 2012 9:15 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Evren,<br /><br /><blockquote class="uncited"><div>About GSL, you seem to be using <br />CFLAGS_EXTRA=&quot;-I/usr/local/gsl/include&quot;<br />I have already gave<br />with_math_incs=&quot;-I/usr/local/gsl/include&quot;<br />and expected that this would be enough. As long as you use CFLAGS_EXTRA (which as I understand is a general extra flags variable) why bother with with_math_incs at all... (this is not intuitive)<br /></div></blockquote><br /><br />It seems that this is the trick for the version 6.12.3... ( without CFLAGS_EXTRA, I have the same error )<br />but , good news, the problem is solved in version 7.0.3 ( this version will be released in 2 weeks )<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Probable bugs 6.12.3 with SLURM and GSL</h3>
+				<div class="date">Posted: <strong>Tue Nov 13, 2012 9:42 pm</strong></div>
+				<div class="author">by <strong>yurtesen</strong></div>
+				<div class="content"><blockquote><div><cite>jbeuken wrote:</cite>It seems that this is the trick for the version 6.12.3... ( without CFLAGS_EXTRA, I have the same error )<br />but , good news, the problem is solved in version 7.0.3 ( this version will be released in 2 weeks )<br /></div></blockquote><br /><br />Hi,<br /><br />Thats great news. I am trying to make packages which will be used in HPC clusters, I just thought it would be nice to report these probllems. I hope someday the configure script would also stop looking for mpiexec which is not necessary for building programs <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /><br /><br />Thanks,<br />Evren</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Probable bugs 6.12.3 with SLURM and GSL</h3>
+				<div class="date">Posted: <strong>Wed Nov 28, 2012 3:25 pm</strong></div>
+				<div class="author">by <strong>yurtesen</strong></div>
+				<div class="content">The problem continues with 7.0.3 release! I am sorry to say that this is a bug and it should be fixed.<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Making all in 01_gsl_ext<br />make&#91;5&#93;: Entering directory `/home/eyurtese/tmp/abinit-7.0.3/src/01_gsl_ext'<br />mpicc -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs -I/home/eyurtese/tmp/abinit-7.0.3/fallbacks/exports/include&nbsp; &nbsp; -g -O3 -mtune=native -march=native&nbsp; &nbsp;-MT gsl_f90_sf_bessel_j0.o -MD -MP -MF .deps/gsl_f90_sf_bessel_j0.Tpo -c -o gsl_f90_sf_bessel_j0.o gsl_f90_sf_bessel_j0.c<br />mpicc -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs -I/home/eyurtese/tmp/abinit-7.0.3/fallbacks/exports/include&nbsp; &nbsp; -g -O3 -mtune=native -march=native&nbsp; &nbsp;-MT gsl_f90_sf_bessel_jl.o -MD -MP -MF .deps/gsl_f90_sf_bessel_jl.Tpo -c -o gsl_f90_sf_bessel_jl.o gsl_f90_sf_bessel_jl.c<br />mpicc -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs -I/home/eyurtese/tmp/abinit-7.0.3/fallbacks/exports/include&nbsp; &nbsp; -g -O3 -mtune=native -march=native&nbsp; &nbsp;-MT gsl_f90_sf_gamma.o -MD -MP -MF .deps/gsl_f90_sf_gamma.Tpo -c -o gsl_f90_sf_gamma.o gsl_f90_sf_gamma.c<br />mpif90 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs -I/home/eyurtese/tmp/abinit-7.0.3/fallbacks/exports/include&nbsp; &nbsp;-ffree-form -J/home/eyurtese/tmp/abinit-7.0.3/src/mods -O3 -mtune=native -march=native -g -ffree-line-length-none&nbsp; &nbsp;-c -o interfaces_01_gsl_ext.o interfaces_01_gsl_ext.F90<br />gsl_f90_sf_bessel_jl.c:5:31: fatal error: gsl/gsl_sf_bessel.h: No such file or directory<br />compilation terminated.<br />gsl_f90_sf_bessel_j0.c:5:31: fatal error: gsl/gsl_sf_bessel.h: No such file or directory<br />gsl_f90_sf_gamma.c:5:30: fatal error: gsl/gsl_sf_gamma.h: No such file or directory<br />compilation terminated.<br />compilation terminated.<br />make&#91;5&#93;: *** &#91;gsl_f90_sf_bessel_jl.o&#93; Error 1<br />make&#91;5&#93;: *** Waiting for unfinished jobs....<br />make&#91;5&#93;: *** &#91;gsl_f90_sf_bessel_j0.o&#93; Error 1<br />make&#91;5&#93;: *** &#91;gsl_f90_sf_gamma.o&#93; Error 1<br />make&#91;5&#93;: Leaving directory `/home/eyurtese/tmp/abinit-7.0.3/src/01_gsl_ext'<br />make&#91;4&#93;: *** &#91;all-recursive&#93; Error 1<br />make&#91;4&#93;: Leaving directory `/home/eyurtese/tmp/abinit-7.0.3/src'<br />make&#91;3&#93;: *** &#91;all-recursive&#93; Error 1<br />make&#91;3&#93;: Leaving directory `/home/eyurtese/tmp/abinit-7.0.3'<br />make&#91;2&#93;: *** &#91;all&#93; Error 2<br />make&#91;2&#93;: Leaving directory `/home/eyurtese/tmp/abinit-7.0.3'<br />make&#91;1&#93;: *** &#91;multi&#93; Error 2<br />make&#91;1&#93;: Leaving directory `/home/eyurtese/tmp/abinit-7.0.3'<br />make: *** &#91;mj4&#93; Error 2<br />-bash-4.1$</code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Probable bugs 6.12.3 with SLURM and GSL</h3>
+				<div class="date">Posted: <strong>Mon Jan 28, 2013 11:50 am</strong></div>
+				<div class="author">by <strong>yurtesen</strong></div>
+				<div class="content">Problem still continues with 7.0.5 release. I still have been using the same workaround of changing DEFAULT_INCLUDES in src/01_gsl_ext/Makefile<br />DEFAULT_INCLUDES = -I. -I$(top_builddir) -I$(GSL_INCLUDE)<br /><br />Since configure finds GSL correctly, I still say this is a bug. Please fix the configure system. Thanks!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Probable bugs 6.12.3 with SLURM and GSL</h3>
+				<div class="date">Posted: <strong>Thu Feb 07, 2013 6:48 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">I finally found the bug. It was a very well hidden one!<br /><br />Will be fixed in Abinit 7.2.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1879&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:48:27 GMT -->
+</html>

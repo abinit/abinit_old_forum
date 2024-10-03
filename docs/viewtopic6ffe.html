@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=62&p=199 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:59:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Arguments in MPI_SEND - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopic106a.html?t=62">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="5"><a href="viewforume774.html?f=5" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Developing Abinit</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="19"><a href="viewforum218b.html?f=19" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Improving ABINIT</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopic2d72.html?f=19&amp;t=62">Arguments in MPI_SEND</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">Documentation, Web site and code modifications<br /></div>
+<p>
+	<strong>Moderators:</strong> <a href="memberlist4183.html?mode=viewprofile&amp;u=1676" class="username">baguetl</a>, <a href="memberlistccd1.html?mode=viewprofile&amp;u=2257" class="username">routerov</a>
+</p>
+
+
+<div class="action-bar bar-top">
+	
+			<a href="posting6b87.html?mode=reply&amp;f=19&amp;t=62" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic0264-2.html?f=19&amp;t=62&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="62" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			10 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p192" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile192">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlistc2d1.html?mode=viewprofile&amp;u=64" class="avatar"><img class="avatar" src="download/file8810.jpg?avatar=64_1334681793.jpg" width="92" height="61" alt="User avatar" /></a>														</div>
+								<a href="memberlistc2d1.html?mode=viewprofile&amp;u=64" class="username">jzwanzig</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search9859.html?author_id=64&amp;sr=posts">504</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Aug 17, 2009 9:25 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content192">
+
+						<h3 class="first"><a href="#p192">Arguments in MPI_SEND</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingbf2d.html?mode=quote&amp;f=19&amp;p=192" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic5a6a-2.html?p=192#p192" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistc2d1.html?mode=viewprofile&amp;u=64" class="username">jzwanzig</a></strong> &raquo; </span>Wed Feb 17, 2010 10:06 pm
+			</p>
+			
+			
+			
+			<div class="content">I guess this is a &quot;proposed code modification&quot;...kind of...at any rate, in berryphase_new.F90 there are several calls to MPI_SEND, in order to send wavefunctions (cg) from one processor to another (this is because in Berry's phase calculations it is necessary to overlap wavefunctions at different k points, and they may not be residing on the same processor). All of these calls include as an argument &quot;mpi_status&quot; right before &quot;ierr&quot;; however, the openmpi manual states the format for this call is <br /><br />MPI_SEND(BUF, COUNT, DATATYPE, DEST, TAG, COMM, IERROR)<br />            &lt;type&gt;    BUF(*)<br />            INTEGER   COUNT, DATATYPE, DEST, TAG, COMM, IERROR<br /><br />while the format for MPI_RECV is<br /><br />MPI_RECV(BUF, COUNT, DATATYPE, SOURCE, TAG, COMM, STATUS, IERROR)<br />            &lt;type&gt;    BUF(*)<br />            INTEGER   COUNT, DATATYPE, SOURCE, TAG, COMM<br />            INTEGER   STATUS(MPI_STATUS_SIZE), IERROR<br /><br />So, several questions: 1) why does the code even compile, let alone work? And it certainly does work. 2) with the current format, MPI_SEND returns a non-zero ierr on the first call, I think because of the &quot;wrong&quot; argument list. <br /><br />Thanks,<br />Joe</div>
+			
+			
+			
+									
+									<div id="sig192" class="signature">Josef W. Zwanziger<br />Professor, Department of Chemistry<br />Canada Research Chair in NMR Studies of Materials<br />Dalhousie University<br />Halifax, NS B3H 4J3 Canada<br /><!-- e --><a href="mailto:jzwanzig@gmail.com">jzwanzig@gmail.com</a><!-- e --></div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p193" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile193">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlist913b.html?mode=viewprofile&amp;u=55" class="avatar"><img class="avatar" src="download/file04d0.png?avatar=55_1376078980.png" width="71" height="92" alt="User avatar" /></a>														</div>
+								<a href="memberlist913b.html?mode=viewprofile&amp;u=55" class="username">torrent</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchf977.html?author_id=55&amp;sr=posts">127</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Aug 14, 2009 7:40 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content193">
+
+						<h3 ><a href="#p193">Re: Arguments in MPI_SEND</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting7014.html?mode=quote&amp;f=19&amp;p=193" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic28c5.html?p=193#p193" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist913b.html?mode=viewprofile&amp;u=55" class="username">torrent</a></strong> &raquo; </span>Thu Feb 18, 2010 11:52 am
+			</p>
+			
+			
+			
+			<div class="content">Hi Joe,<br /><br />This issue is known... we regulary modify the MPI_SEND calls to suppress this extra &quot;status&quot; argument.<br />This part of the code is probably not often used... This explain why the MPI_SEND has not be corrected.<br /><br />May I give you a suggestion ?<br />You should create new xmpi_send and xmpi_receive (generic) routines in 12_hide_mpi, with the correct calls (with or without status).<br />The goal is to empty 79_seqpar directory...<br />I sometines move routines from 79_seqpar to others directories by using generic routines for MPI (I recently did that for loper3, respfn, vtorho3...).</div>
+			
+			
+			
+									
+									<div id="sig193" class="signature">Marc Torrent<br /><em class="text-italics">CEA - Bruyères-le-Chatel<br />France<br /></em></div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p194" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile194">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlistc2d1.html?mode=viewprofile&amp;u=64" class="avatar"><img class="avatar" src="download/file8810.jpg?avatar=64_1334681793.jpg" width="92" height="61" alt="User avatar" /></a>														</div>
+								<a href="memberlistc2d1.html?mode=viewprofile&amp;u=64" class="username">jzwanzig</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search9859.html?author_id=64&amp;sr=posts">504</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Aug 17, 2009 9:25 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content194">
+
+						<h3 ><a href="#p194">Re: Arguments in MPI_SEND</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting0d77.html?mode=quote&amp;f=19&amp;p=194" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicc8fa.html?p=194#p194" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistc2d1.html?mode=viewprofile&amp;u=64" class="username">jzwanzig</a></strong> &raquo; </span>Thu Feb 18, 2010 3:00 pm
+			</p>
+			
+			
+			
+			<div class="content">Hi Marc,<br /><br />thanks for the response. I'm happy to do what you suggest but I don't think I quite understand. You say the goal is &quot;to empty 79_seqpar_mpi&quot;, what does that mean exactly? Is the idea that, if i replace the raw MPI_SEND and MPI_RECV with generic xmpi calls, then I can (should?) move berryphase_new.F90 to a different directory? Why? I guess I don't quite know the logic of the directory naming scheme. Or, by &quot;empty 79_seqpar_mpi&quot; you mean to empty it of calls to the raw MPI_ routines, but leave the files in place? <br /><br />Let me know--<br />thanks!<br /><br />Joe</div>
+			
+			
+			
+									
+									<div id="sig194" class="signature">Josef W. Zwanziger<br />Professor, Department of Chemistry<br />Canada Research Chair in NMR Studies of Materials<br />Dalhousie University<br />Halifax, NS B3H 4J3 Canada<br /><!-- e --><a href="mailto:jzwanzig@gmail.com">jzwanzig@gmail.com</a><!-- e --></div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p197" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile197">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlist913b.html?mode=viewprofile&amp;u=55" class="avatar"><img class="avatar" src="download/file04d0.png?avatar=55_1376078980.png" width="71" height="92" alt="User avatar" /></a>														</div>
+								<a href="memberlist913b.html?mode=viewprofile&amp;u=55" class="username">torrent</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchf977.html?author_id=55&amp;sr=posts">127</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Aug 14, 2009 7:40 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content197">
+
+						<h3 ><a href="#p197">Re: Arguments in MPI_SEND</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postinga8da.html?mode=quote&amp;f=19&amp;p=197" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic85b3.html?p=197#p197" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist913b.html?mode=viewprofile&amp;u=55" class="username">torrent</a></strong> &raquo; </span>Thu Feb 18, 2010 4:04 pm
+			</p>
+			
+			
+			
+			<div class="content">Joe,<br /><br />My remark was related to this doc:<br /><!-- m --><a class="postlink" href="http://www.abinit.org/developers/community/abinit-6/5.8-beautification">http://www.abinit.org/developers/commun ... tification</a><!-- m --><br />(see point I03).<br />The idea is to encapsulate as much as possible calls to MPI routines (by using generic routines put in 12_hide_mpi).<br />As you probably know only directories with &quot;_mpi&quot; suffixe are compiled with the &quot;HAVE_MPI&quot; directive enabled.<br />and (I guess) the goal is to minimize the number of MPI directories.<br />So the goal is to eliminate direct calls to MPI routines (in order to be able to switch from one MPI implementation to another).<br /><br />Hope this helps...</div>
+			
+			
+			
+									
+									<div id="sig197" class="signature">Marc Torrent<br /><em class="text-italics">CEA - Bruyères-le-Chatel<br />France<br /></em></div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p199" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile199">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlistc2d1.html?mode=viewprofile&amp;u=64" class="avatar"><img class="avatar" src="download/file8810.jpg?avatar=64_1334681793.jpg" width="92" height="61" alt="User avatar" /></a>														</div>
+								<a href="memberlistc2d1.html?mode=viewprofile&amp;u=64" class="username">jzwanzig</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search9859.html?author_id=64&amp;sr=posts">504</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Aug 17, 2009 9:25 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content199">
+
+						<h3 ><a href="#p199">Re: Arguments in MPI_SEND</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting0d68.html?mode=quote&amp;f=19&amp;p=199" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic5051.html?p=199#p199" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistc2d1.html?mode=viewprofile&amp;u=64" class="username">jzwanzig</a></strong> &raquo; </span>Thu Feb 18, 2010 4:46 pm
+			</p>
+			
+			
+			
+			<div class="content">OK, I made generic xsend_mpi and xrecv_mpi in 12_hide_mpi, they only have a couple of variants (so far) because that's all that's needed at the moment. There do not seem to be many MPI_SEND and MPI_RECV calls left in the code so I don't think I'll need to add too many other possibilities before I can replace them all with their xsend and xrecv equivalents.<br /><br />In the new xrecv_mpi, I did use the predefined status object  MPI_IGNORE_STATUS, which according to the documentation is faster because then the MPI_RECV doesn't spend time filling in the status object, and from what I can see whenever we call MPI_RECV, we don't use the status object anyway. So the new generic functions look pleasantly symmetrical:<br /><br />xsend_mpi(data,destination,tag,Comm,ierr)<br />xrecv_mpi(data,source,tag,Comm,ierr)<br /><br />So now berryphase_new.F90 is cleansed of MPI_SEND and MPI_RECV, and uses only x..mpi calls. Should I now move it to a different directory?<br /><br />thanks,<br />Joe</div>
+			
+			
+			
+									
+									<div id="sig199" class="signature">Josef W. Zwanziger<br />Professor, Department of Chemistry<br />Canada Research Chair in NMR Studies of Materials<br />Dalhousie University<br />Halifax, NS B3H 4J3 Canada<br /><!-- e --><a href="mailto:jzwanzig@gmail.com">jzwanzig@gmail.com</a><!-- e --></div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p201" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile201">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlist6f62.html?mode=viewprofile&amp;u=61" class="avatar"><img class="avatar" src="download/file96d1.jpg?avatar=61_1392074789.jpg" width="92" height="79" alt="User avatar" /></a>														</div>
+								<a href="memberlist6f62.html?mode=viewprofile&amp;u=61" class="username">gmatteo</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search9f23.html?author_id=61&amp;sr=posts">291</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun Aug 16, 2009 5:40 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content201">
+
+						<h3 ><a href="#p201">Re: Arguments in MPI_SEND</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingbfb8.html?mode=quote&amp;f=19&amp;p=201" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic5721.html?p=201#p201" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist6f62.html?mode=viewprofile&amp;u=61" class="username">gmatteo</a></strong> &raquo; </span>Thu Feb 18, 2010 5:32 pm
+			</p>
+			
+			
+			
+			<div class="content">Hi Joe,<br /><br />you might also have a look at the xech_mpi routines defined <br />in 12_hide_mpi in which both MPI_RECV and MPI_SEND are encapsulated.<br />You might also reuse the cprj_exch and cprj_bcast routines defined in 53_abiutil/cprj_utils<br />if you need to communicate the cprj matrix elements.<br /><br />Regards<br />Matteo</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p204" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile204">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlist913b.html?mode=viewprofile&amp;u=55" class="avatar"><img class="avatar" src="download/file04d0.png?avatar=55_1376078980.png" width="71" height="92" alt="User avatar" /></a>														</div>
+								<a href="memberlist913b.html?mode=viewprofile&amp;u=55" class="username">torrent</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="searchf977.html?author_id=55&amp;sr=posts">127</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Fri Aug 14, 2009 7:40 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content204">
+
+						<h3 ><a href="#p204">Re: Arguments in MPI_SEND</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting324d-3.html?mode=quote&amp;f=19&amp;p=204" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopiccb89.html?p=204#p204" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist913b.html?mode=viewprofile&amp;u=55" class="username">torrent</a></strong> &raquo; </span>Thu Feb 18, 2010 7:48 pm
+			</p>
+			
+			
+			
+			<div class="content">&quot;<em class="text-italics">So now berryphase_new.F90 is cleansed of MPI_SEND and MPI_RECV, and uses only x..mpi calls. Should I now move it to a different directory?</em>&quot;<br /><br />I'm not the manager for the 79_seqpar directory... but I would say yes.<br />One less to deal with  <img class="smilies" src="images/smilies/icon_cool.gif" alt="8-)" title="Cool" /> <br /><br />Marc</div>
+			
+			
+			
+									
+									<div id="sig204" class="signature">Marc Torrent<br /><em class="text-italics">CEA - Bruyères-le-Chatel<br />France<br /></em></div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p205" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile205">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlistc2d1.html?mode=viewprofile&amp;u=64" class="avatar"><img class="avatar" src="download/file8810.jpg?avatar=64_1334681793.jpg" width="92" height="61" alt="User avatar" /></a>														</div>
+								<a href="memberlistc2d1.html?mode=viewprofile&amp;u=64" class="username">jzwanzig</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search9859.html?author_id=64&amp;sr=posts">504</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Aug 17, 2009 9:25 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content205">
+
+						<h3 ><a href="#p205">Re: Arguments in MPI_SEND</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postinge15a.html?mode=quote&amp;f=19&amp;p=205" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicc140-2.html?p=205#p205" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistc2d1.html?mode=viewprofile&amp;u=64" class="username">jzwanzig</a></strong> &raquo; </span>Thu Feb 18, 2010 10:55 pm
+			</p>
+			
+			
+			
+			<div class="content">OK, I'm trying to use cprj_exch (for example) and I know I'm being thick but I just can't understand the flow (first time I've done in // programming). With MPI_SEND and and MPI_RECV the old code does things like:<br /><br />do iproc = 1, nproc<br />  if (iproc == me) then<br />    if (relevant cprj is on my group) then<br />      get cprj<br />      MPI_SEND cprj to destinations<br />    end if<br />  end if<br />  if (iproc /= me and iproc == destination) then<br />    MPI_RECV cprj<br />  end if<br />end do<br /><br />But with cprj_exch am I supposed to do the same thing, or call it only once? (that is, every processor will call it and it will decide internally whether to act as a sender or a receiver). <br /><br />sorry for the ill-posed questions.<br />thanks-<br />Joe</div>
+			
+			
+			
+									
+									<div id="sig205" class="signature">Josef W. Zwanziger<br />Professor, Department of Chemistry<br />Canada Research Chair in NMR Studies of Materials<br />Dalhousie University<br />Halifax, NS B3H 4J3 Canada<br /><!-- e --><a href="mailto:jzwanzig@gmail.com">jzwanzig@gmail.com</a><!-- e --></div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p208" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile208">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlist32d1.html?mode=viewprofile&amp;u=72" class="username">mverstra</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search1bef.html?author_id=72&amp;sr=posts">655</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Aug 19, 2009 12:01 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content208">
+
+						<h3 ><a href="#p208">Re: Arguments in MPI_SEND</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting7be2.html?mode=quote&amp;f=19&amp;p=208" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic0eba.html?p=208#p208" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist32d1.html?mode=viewprofile&amp;u=72" class="username">mverstra</a></strong> &raquo; </span>Fri Feb 19, 2010 11:20 am
+			</p>
+			
+			
+			
+			<div class="content">As to where to move the routine to, just check the subroutines it calls, take the maximum directory number for those (say M), and then find the most appropriate directory (by thematic) whose number is &gt; M.<br /><br />At some point the PAW directories might have to be split - a lot of stuff is ending up there  by default, just because it involves PAW (soon everything will!).<br /><br />Matthieu</div>
+			
+			
+			
+									
+									<div id="sig208" class="signature">Matthieu Verstraete<br />University of Liege, Belgium</div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p213" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile213">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlist6f62.html?mode=viewprofile&amp;u=61" class="avatar"><img class="avatar" src="download/file96d1.jpg?avatar=61_1392074789.jpg" width="92" height="79" alt="User avatar" /></a>														</div>
+								<a href="memberlist6f62.html?mode=viewprofile&amp;u=61" class="username">gmatteo</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search9f23.html?author_id=61&amp;sr=posts">291</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Sun Aug 16, 2009 5:40 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content213">
+
+						<h3 ><a href="#p213">Re: Arguments in MPI_SEND</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingf4fa.html?mode=quote&amp;f=19&amp;p=213" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicf3dd.html?p=213#p213" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist6f62.html?mode=viewprofile&amp;u=61" class="username">gmatteo</a></strong> &raquo; </span>Sat Feb 20, 2010 1:04 am
+			</p>
+			
+			
+			
+			<div class="content">Dear Joe,<br /><br />cprj_exch is very strict in the sense that it should be called _only_ by the<br />two nodes involved in the point-to-point communication.<br />cprj_exch indeed reports an error if a node whose rank differs either from &quot;sender&quot; or &quot;receiver&quot; <br />enters the routine.<br />This precaution is needed to avoid possible programming errors that might lead to deadlocks <br />in which an MPI packet is sent but there's no receiver waiting for it or vice versa.<br /><br />I wrote cprj_exch for the generation of the KSS file needed in the GW part.<br />In this case I have to write the distributed cprj on an external file and therefore <br />each node has to send its own data to the master node that will write the final output.<br />In outkss  I'm using the following coding.<br /><br />master=0<br />receiver=master    ! We are going to collect the cprjs on master<br /><br />do iproc=0,nproc-1<br /><br />  sender = -1<br />  if (me == iproc) then <br />    sender = me<br />    !I'm the sender: extract the cprjs to be transferred and copy them in Cprj_send <br />    ....<br />  end if<br />  if (iproc = receiver) then <br />    ! I'm the receiver and I have to allocate space for the MPI packet to be received<br />    allocate(Cprj_recv)<br />    ....<br />  end <br /><br />  if (me==sender .or. me==receiver)  ! Exchange data btw the two nodes.<br />    call cprj_exch(Cprj_send,Cprj_recv,sender,receiver,spaceComm,ierr)<br />    if (me==receiver) then <br />      ! write Cprj_recv on file<br />      .....<br />      free(Cprj_recv)<br />    end if<br />  end if<br /><br />end if<br /><br />You might look at outkss.F90 for more  details.<br />I have to say, however, that I usually try to avoid MPI exchange as it complicates the implementation,<br />it's prone to errors and it's very difficult to optimize the load distribution.<br /><br />Matteo</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="posting6b87.html?mode=reply&amp;f=19&amp;t=62" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic0264-2.html?f=19&amp;t=62&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=19&amp;t=62">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			10 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforum218b.html?f=19" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Improving ABINIT”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=62&p=199 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:59:35 GMT -->
+</html>

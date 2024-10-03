@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1686&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:36:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] Problem when compiling 6.12.3 with Openmpi</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] Problem when compiling 6.12.3 with Openmpi</h2>
+		<p><a href="viewtopic2d50.html?f=3&amp;t=1686">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1686</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] Problem when compiling 6.12.3 with Openmpi</h3>
+				<div class="date">Posted: <strong>Fri Jun 08, 2012 5:41 am</strong></div>
+				<div class="author">by <strong>ljludwig</strong></div>
+				<div class="content">Hello Everyone: <br />            I struggled for a while, find no where else to get solution, and come here as the last station:<br /><br />1. The Abinit 6.12.3 has been compiled well in serial and works perfect. <br /><br />2. However, when I try to compile it with openmpi1.3.4, like<br /><br />/configure CC=mpicc CXX=mpicxx FC=mpif90 --enable-mpi --with-mpi-prefix=/usrname/software/mpi/openmpi1.3.4/ --prefix=/usrname/software/abinit-6.12.3<br /><br />The compiler mpicc cannot even produce a.out file and configuration terminates immediately.<br /><br />3. So I tried a newer version openmpi1.5.4, it can compile, but cannot make to the end. It says /lib is a directory, but it needs a file... which is quite odd to me<br /><br />4. Fortunately, when I use another mpi, mvapich2-17rc1-intel, other than openmpi, it can get to the end, I use <br />make multi multi_nprocs=12<br />make install<br /><br />5.Unfortunately, even it compiles ans installs successfully (abinit generated in /bin folder), abinit still cannot run, use command <br />mpirun -np 12 /usrname/software/abinit-6.12.3/bin/abinit &lt;filename.files&gt;&amp; log<br /><br />the log file shows <br />Fatal error in MPI_Init: Other MPI error <br /><br />Notice, the env. vars have all been setup well, but script, even by source to ~/.bashrc file:<br /><br />MPI_HOME=/usrname/software/mpi/mvapich2-17rc1-intel/<br />export  PATH=${MPI_HOME}/bin:$PATH<br />export  LD_LIBRARY_PATH=${MPI_HOME}/lib:$LD_LIBRARY_PATH<br />export  MANPATH=${MPI_HOME}/share/man:$MANPATH<br /><br />Thus, to this end, can anyone tell me what might be going wrong? Is that caused by wrong setting in the step of configuration?<br />Another question, what is the real difference between<br />make,  make mj4, and make multi multi_nprocsX ?<br /><br />Many thanks in advance.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem when compiling 6.12.3 with Openmpi</h3>
+				<div class="date">Posted: <strong>Tue Jun 12, 2012 8:11 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br /><blockquote class="uncited"><div>5.Unfortunately, even it compiles ans installs successfully (abinit generated in /bin folder), abinit still cannot run, use command <br />mpirun -np 12 /usrname/software/abinit-6.12.3/bin/abinit &lt;filename.files&gt;&amp; log<br /><br />the log file shows <br />Fatal error in MPI_Init: Other MPI error </div></blockquote><br /><br />what are the results of these commands :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>mpif90 -show<br />mpif90 -V<br />mpif90 --version<br /></code></pre></div><br /><br /><blockquote class="uncited"><div>Notice, the env. vars have all been setup well, but script, even by source to ~/.bashrc file:<br /><br />MPI_HOME=/usrname/software/mpi/mvapich2-17rc1-intel/<br />export PATH=${MPI_HOME}/bin:$PATH<br />export LD_LIBRARY_PATH=${MPI_HOME}/lib:$LD_LIBRARY_PATH<br />export MANPATH=${MPI_HOME}/share/man:$MANPATH<br /></div></blockquote><br /><br />what is the result of this command :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>env</code></pre></div><br /><br /><blockquote class="uncited"><div>Thus, to this end, can anyone tell me what might be going wrong? Is that caused by wrong setting in the step of configuration?<br />Another question, what is the real difference between<br />make, make mj4, and make multi multi_nprocsX ?</div></blockquote><br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make&nbsp; =&gt;&nbsp; &nbsp;make multi multi_nprocs=1&nbsp; &nbsp; ( sequential make )<br />make mj4&nbsp; =&gt; make multi multi_nprocs=4<br /></code></pre></div><br />regards<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem when compiling 6.12.3 with Openmpi</h3>
+				<div class="date">Posted: <strong>Sat Jun 16, 2012 8:45 pm</strong></div>
+				<div class="author">by <strong>ljludwig</strong></div>
+				<div class="content">Hello jmb:<br /><br />Thank you very much for your kind reply. It does help a lot. Eventually I managed to compile, make and install it successfully, and run it in a cluser, with 1 node and 12 intel xeron cores.<br /><br /> The configuration files I used is:<br /><br />#./configure CC=mpicc FC=mpif90 CXX=mpicxx --prefix=/public/home/usrname/software/abinit-6.12.3 --enable-mpi --with-linalg-libs=&quot;-L/public/software/intel/Compiler/11.1/059/mkl/lib/em64t -lmkl_scalapack_lp64 -lmkl_cdft_core -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lmkl_blacs_intelmpi_lp64 -lpthread -lm&quot; --with-mpi-prefix=/public/software/mpi/openmpi1.5.4-intel --with-linalg-includes=/public/software/intel/Compiler/11.1/059/mkl/include --with-linalg-flavor=mkl --with-dft-flavor=&quot;bigdft+libxc+wannier90&quot;<br /><br />In other wors, I used mpicc, mpif90 and mpicxx as compiler, set the install path in &quot;--prefix&quot;. <br /><br />The linear algebra should be mkl, however, even if I used &quot;--with-linalg-libs&quot;, &quot;---with-linalg-includes&quot;, and &quot;--with-linalg-flavor&quot;, it does not recognize but still use the internal blas and lapack libraries.<br /><br />Then, I enable MPI with &quot;-enable-mpi&quot;, and &quot;--with-mpi-prefix&quot; is set to OpenMPI version 1.5.4<br /><br />The important thing which makes it work is in the step of atompaw; if atompaw is in the &quot;with-dft-flavor&quot;, it will cause crash, so I select dft flavor manually, without atompaw. Hopefully it will only affect the generation of paw data, not using PAW method.<br /><br />Then, after configure, I use <br />#/public/software/intel/Compiler/11.1/059/bin/iccvars.sh intel64<br />#/public/software/intel/Compiler/11.1/059/bin/ifortvars.sh intel64<br /><br /><br />After that, I did <br />#make multi multi_nprocs=12 <br /><br />With the aid of these steps, eventually it can run the program, at least in the current stage. <br /><br />I believe this session can be labeled as &quot;Solved&quot; and hopefully it will be more or less helpful for future reference.<br /><br />Cheers!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] Problem when compiling 6.12.3 with Openmpi</h3>
+				<div class="date">Posted: <strong>Sun Jun 17, 2012 8:07 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />I didn't remember precisely why  but it's better to use the intel version 11.1.073 ( in any case to use mpiio )<br /><br />concerning the problem to use mkl and/or the compile atompaw, this is my recipe working on our test farm :<br /><br />before to run configure, set your env by <br />( I use the paths of your env, you replace &quot;<strong class="text-strong">current</strong>&quot; in paths by the current version of your intel compiler (seems 059)  ) :<br /><br /><blockquote class="uncited"><div>source /public/software/Compiler/11.1/<strong class="text-strong"><span style="text-decoration: underline">current</span></strong>/bin/ifortvars.sh intel64<br />source/public/software/Compiler/11.1/<strong class="text-strong"><span style="text-decoration: underline">current</span></strong>/bin/iccvars.sh intel64<br />export PATH=/public/software/mpi/openmpi1.5.4-intel/bin:$PATH<br />export LD_LIBRARY_PATH= /public/software/mpi/openmpi1.5.4-intel/lib:$LD_LIBRARY_PATH<br /></div></blockquote><br /><br />create the file &quot;build.ac&quot; with :<br /><br /><blockquote class="uncited"><div>enable_gw_dpc = yes<br />enable_mpi = yes<br />enable_mpi_io = yes<br />with_mpi_prefix = /public/software/mpi/openmpi1.5.4-intel <br />with_dft_flavor = atompaw+bigdft+libxc+wannier90<br />with_fft_flavor = fftw3<br />with_fft_libs = -L/public/software/Compiler/11.1/<strong class="text-strong"><span style="text-decoration: underline">current</span></strong>/mkl/lib/em64t -Wl,--start-group -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group -lpthread<br />with_linalg_flavor = mkl<br />with_linalg_libs = -L/public/software/Compiler/11.1/<strong class="text-strong"><span style="text-decoration: underline">current</span></strong>/mkl/lib/em64t -Wl,--start-group -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group -lpthread<br />FC_LDFLAGS_EXTRA = -static-intel -static-libgcc<br />FCFLAGS_EXTRA = -static-intel -static-libgcc<br /></div></blockquote><br /><br />and run configure :<br /><br /><blockquote class="uncited"><div>./configure --with-config-file=./build.ac</div></blockquote><br /><br />regards<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] Problem when compiling 6.12.3 with Openmpi</h3>
+				<div class="date">Posted: <strong>Fri Jun 22, 2012 11:04 pm</strong></div>
+				<div class="author">by <strong>ljludwig</strong></div>
+				<div class="content"><blockquote><div><cite>jbeuken wrote:</cite>Hi,<br /><br />I didn't remember precisely why  but it's better to use the intel version 11.1.073 ( in any case to use mpiio )<br /><br />concerning the problem to use mkl and/or the compile atompaw, this is my recipe working on our test farm :<br /><br />before to run configure, set your env by <br />( I use the paths of your env, you replace &quot;<strong class="text-strong">current</strong>&quot; in paths by the current version of your intel compiler (seems 059)  ) :<br /><br /><blockquote class="uncited"><div>source /public/software/Compiler/11.1/<strong class="text-strong"><span style="text-decoration: underline">current</span></strong>/bin/ifortvars.sh intel64<br />source/public/software/Compiler/11.1/<strong class="text-strong"><span style="text-decoration: underline">current</span></strong>/bin/iccvars.sh intel64<br />export PATH=/public/software/mpi/openmpi1.5.4-intel/bin:$PATH<br />export LD_LIBRARY_PATH= /public/software/mpi/openmpi1.5.4-intel/lib:$LD_LIBRARY_PATH<br /></div></blockquote><br /><br />create the file &quot;build.ac&quot; with :<br /><br /><blockquote class="uncited"><div>enable_gw_dpc = yes<br />enable_mpi = yes<br />enable_mpi_io = yes<br />with_mpi_prefix = /public/software/mpi/openmpi1.5.4-intel <br />with_dft_flavor = atompaw+bigdft+libxc+wannier90<br />with_fft_flavor = fftw3<br />with_fft_libs = -L/public/software/Compiler/11.1/<strong class="text-strong"><span style="text-decoration: underline">current</span></strong>/mkl/lib/em64t -Wl,--start-group -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group -lpthread<br />with_linalg_flavor = mkl<br />with_linalg_libs = -L/public/software/Compiler/11.1/<strong class="text-strong"><span style="text-decoration: underline">current</span></strong>/mkl/lib/em64t -Wl,--start-group -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -Wl,--end-group -lpthread<br />FC_LDFLAGS_EXTRA = -static-intel -static-libgcc<br />FCFLAGS_EXTRA = -static-intel -static-libgcc<br /></div></blockquote><br /><br />and run configure :<br /><br /><blockquote class="uncited"><div>./configure --with-config-file=./build.ac</div></blockquote><br /><br />regards<br /><br />jmb</div></blockquote><br /><br /><br />Hello jmb!! Thank you very much for your kind advice. I never thought it can be compiled that way. I deleted the previous one, and compiled under your suggestion. For me, it is super cool! The mkl, linear algebra can be incorporated, which is awesome! !</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] Problem when compiling 6.12.3 with Openmpi</h3>
+				<div class="date">Posted: <strong>Fri Jul 27, 2012 9:24 am</strong></div>
+				<div class="author">by <strong>future_wl</strong></div>
+				<div class="content">hi ljludwig and experts here:<br />  I met a similar problem  when configuring and making abinit  6.12.3 that <strong class="text-strong"><span style="font-size: 150%; line-height: 116%;">atompaw</span></strong> play a key role. <br />  If I took atompaw in the &quot;with-dft-favor&quot;, it will occur an unexpected error when installation, however ,if I don't write &quot;atompaw&quot; in &quot;with-dft-favor&quot; manually, the installation will be correctly finished <br /> I wonder that without atompaw in dft favor is there some restriction when I calculate with abinit ,such as calculation with PAW. If so ,how could I solve this problem<br /><br />Thanks so much!<br /><br />P.S<br />ifort=10.1<br />icc=10.1<br />openmpi=1.4.2</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] Problem when compiling 6.12.3 with Openmpi</h3>
+				<div class="date">Posted: <strong>Fri Jul 27, 2012 3:16 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br /><blockquote class="uncited"><div>I met a similar problem when configuring and making abinit 6.12.3 that atompaw play a key role. <br />If I took atompaw in the &quot;with-dft-favor&quot;, it will occur an unexpected error when installation, however ,if I don't write &quot;atompaw&quot; in &quot;with-dft-favor&quot; manually, the installation will be correctly finished </div></blockquote><br /><br />what is the &quot;unexpected error&quot; ?<br />( PS : is f<strong class="text-strong">l</strong>avor not favor... typo I suppose )<br /><br />with abinit 6.12.3 /  ifort 10.1 / openmpi 1.6, and  this  abinit.ac  file :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>CC = icc<br />CXX = icpc<br />FC = ifort<br /><br />with_dft_flavor = atompaw+libxc+wannier90<br />with_trio_flavor = netcdf+etsf_io<br /><br />with_mpi_prefix = /usr/local/openmpi_intel10<br />enable_gw_dpc = yes<br />enable_mpi = yes<br /><br />prefix = /opt/etsf</code></pre></div><br /><br />these commands succeed :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure --with-config-file=./abinit.ac<br />make mj4<br />make install</code></pre></div><br /><br />you can find all binaries in /opt/etsf/bin/  as expected :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>ls /opt/etsf/bin/<br />abinetcdf&nbsp; abinit&nbsp; aim&nbsp; anaddb&nbsp; band2eps&nbsp; conducti&nbsp; cut3d&nbsp; fftprof&nbsp; kss2wfk&nbsp; lapackprof&nbsp; lwf&nbsp; macroave&nbsp; mrgddb&nbsp; mrggkk&nbsp; mrgscr&nbsp; newsp&nbsp; optic&nbsp; timeout&nbsp; ujdet<br /></code></pre></div><br /><br />except the binaries of fallbacks that seems forgotten...<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>ls fallbacks/exports/bin/<br />atompaw-abinit&nbsp; etsf_io-abinit&nbsp; graphatom-abinit&nbsp; nc-config-abinit&nbsp; nccopy-abinit&nbsp; ncdump-abinit&nbsp; ncgen3-abinit&nbsp; ncgen-abinit&nbsp; wannier90.x-abinit<br /></code></pre></div><br /><br />...totally missed in the &quot;make install&quot;... ( also in the 6.15.2 version...)<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] Problem when compiling 6.12.3 with Openmpi</h3>
+				<div class="date">Posted: <strong>Wed Aug 01, 2012 5:09 am</strong></div>
+				<div class="author">by <strong>future_wl</strong></div>
+				<div class="content">Thanks  jbeuken so much for your help, and the unexpected error is :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>ifort: command line warning #10156: ignoring option '-r'; no argument required<br />ifort: command line warning #10156: ignoring option '-r'; no argument required<br />ipo: error #11021: OBJREAD Error: Could not create mapping for /opt/openmpi-1.4.2/lib<br />ifort: error #10014: problem during multi-file optimization compilation (code 1)<br />make&#91;6&#93;: *** &#91;atompaw&#93; Error 1<br />make&#91;6&#93;: Leaving directory `/opt/abinit/fallbacks/sources/atompaw-3.0.1.3/src'<br />make&#91;5&#93;: *** &#91;all-recursive&#93; Error 1<br />make&#91;5&#93;: Leaving directory `/opt/abinit/fallbacks/sources/atompaw-3.0.1.3'<br />make&#91;4&#93;: *** &#91;all&#93; Error 2<br />make&#91;4&#93;: Leaving directory `/opt/abinit/fallbacks/sources/atompaw-3.0.1.3'<br />make&#91;3&#93;: *** &#91;stamps/atompaw-build-stamp&#93; Error 2<br />make&#91;3&#93;: Leaving directory `/opt/abinit/fallbacks'<br />make&#91;2&#93;: &#91;all-local&#93; Error 2 (ignored)<br />Checking build of atompaw fallback<br />test -e stamps/atompaw-install-stamp<br />make&#91;2&#93;: *** &#91;all-local&#93; Error 1<br />make&#91;2&#93;: Leaving directory `/opt/abinit/fallbacks'<br />make&#91;1&#93;: *** &#91;multi&#93; Error 2<br />make&#91;1&#93;: Leaving directory `/opt/abinit'<br />make: *** &#91;mj4&#93; Error 2</code></pre></div><br /><br />When I don't write &quot;atompaw&quot; into -with_dft-flavor, these error won't appear, and  the installation is correct.<br /><br />And, I'm sorry for the typo that it's &quot;flavor&quot;, not &quot;favor&quot; <img class="smilies" src="images/smilies/icon_redface.gif" alt=":oops:" title="Embarrassed" /></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] Problem when compiling 6.12.3 with Openmpi</h3>
+				<div class="date">Posted: <strong>Wed Aug 01, 2012 10:56 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />I'm not sure but it seems that this is a problem with your openmpi <br /><br /><blockquote class="uncited"><div>ifort: command line warning #10156: ignoring option '-r'; no argument required<br />ifort: command line warning #10156: ignoring option '-r'; no argument required<br />ipo: error #11021: OBJREAD Error: Could not create mapping for /opt/openmpi-1.4.2/lib<br />ifort: error #10014: problem during multi-file optimization compilation (code 1)</div></blockquote><br /><br />have you compiled openmpi from source ? with ifort ? same version ?<br />have you already compiled abinit without MPI but with atompaw ?<br /><br />regards<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] Problem when compiling 6.12.3 with Openmpi</h3>
+				<div class="date">Posted: <strong>Tue Aug 21, 2012 5:07 am</strong></div>
+				<div class="author">by <strong>future_wl</strong></div>
+				<div class="content">Thanks jbeuken so much for your instruction:<br />     I did compile openmpi from the source with the same version of ifort (ifort 10.0), actually, it does work if i don't take &quot; autopaw &quot;  into -with_dft_flavor<br />     With your instruction, I tried to compile abinit without MPI but with atompaw, and it really worked.<br />     I wander that is there any relation between &quot;autopaw&quot; and &quot;openmpi&quot;, and how can I successfully compiled abinit with openmpi and &quot;autopaw&quot; simultaneously?<br /><br />Thank you!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] Problem when compiling 6.12.3 with Openmpi</h3>
+				<div class="date">Posted: <strong>Fri Aug 24, 2012 10:19 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi  future_wl,<br /><br /><blockquote class="uncited"><div>I wander that is there any relation between &quot;autopaw&quot; and &quot;openmpi&quot;, and how can I successfully compiled abinit with openmpi and &quot;autopaw&quot; simultaneously?<br /></div></blockquote><br /><br />I think there is no relation between...<br /><br /><blockquote class="uncited"><div>and how can I successfully compiled abinit with openmpi and &quot;autopaw&quot; simultaneously?</div></blockquote><br /><br />peharps, with this recipe<br /><br /><blockquote class="uncited"><div>- compile abinit without openmpi<br />- copy atompaw found under fallbacks/exports/[bin,lib,include] to , for example, /usr/local/atompaw[bin,lib,include]<br /></div></blockquote><br />and, in the .ac file , add <br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>with_atompaw_bins = /usr/local/atompaw/bin<br />with_atompaw_incs = -I/usr/local/atompaw/include<br />with_atompaw_libs = -L/usr/local/atompaw/lib -latompaw<br /></code></pre></div><br /><br />and recompile abinit with openmpi<br /><br />but, it's important to upgrade intel ifort version to 11.1 or 12.1.4 because 10.x is no longer supported <br /><br />regards<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] Problem when compiling 6.12.3 with Openmpi</h3>
+				<div class="date">Posted: <strong>Thu Sep 13, 2012 4:31 pm</strong></div>
+				<div class="author">by <strong>ppy</strong></div>
+				<div class="content">Dear Abinit users and developpers,<br /><br />I was wondering if anybody already tried to compile abinit 6.12.3 on opensuse with openmpi and GNU compilers.<br />I guess I have some trouble because of the command:<br /><br />gfortran -V<br />With compiler I got the following error message:<br /><br />gfortran: error: unrecognized option ‘-V’<br />gfortran: fatal error: no input files<br /><br />Actually '-V' is an option on Red Hat but not on SUSE Linux...<br />This is a very specific question but would anybody have some suggestions (except use intel compilers that I would like to avoid<br />for the moment)?<br />Thanks a lot in advance.<br />PY</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] Problem when compiling 6.12.3 with Openmpi</h3>
+				<div class="date">Posted: <strong>Thu Sep 13, 2012 4:36 pm</strong></div>
+				<div class="author">by <strong>ppy</strong></div>
+				<div class="content">Sorry I forgot to paste the error message that I got  from the compilation :<br /><br />abinit-6.12.3/fallbacks/exports/lib -lnetcdf&quot; --with-moduledir=&quot;/home/prodhomme/Simulation/abinit-6.12.3/fallbacks/exports/include&quot;<br />configure: loading site script /usr/share/site/x86_64-unknown-linux-gnu<br />checking for a BSD-compatible install... /usr/bin/install -c<br />checking whether build environment is sane... yes<br />checking for a thread-safe mkdir -p... /bin/mkdir -p<br />checking for gawk... gawk<br />checking whether make sets $(MAKE)... yes<br />checking whether the Fortran compiler works... no<br />configure: error: in `/home/prodhomme/Simulation/abinit-6.12.3/fallbacks/sources/etsf_io-1.0.4':<br />configure: error: Fortran compiler cannot create executables<br />See `config.log' for more details.<br />make[3]: *** [stamps/etsf_io-config-stamp] Erreur 77<br />make[3] : on quitte le répertoire « /home/prodhomme/Simulation/abinit-6.12.3/fallbacks »<br />make[2]: [all-local] Erreur 2 (ignorée)<br />Checking build of etsf_io fallback<br />test -e stamps/etsf_io-install-stamp<br />make[2]: *** [all-local] Erreur 1<br />make[2] : on quitte le répertoire « /home/prodhomme/Simulation/abinit-6.12.3/fallbacks »<br />make[1]: *** [multi] Erreur 2<br />make[1] : on quitte le répertoire « /home/prodhomme/Simulation/abinit-6.12.3 »<br />make: *** [mj4] Erreur 2<br />[prodhomme@linux-63vp abinit-6.12.3]$ gfortran -V<br />gfortran: error: unrecognized option ‘-V’<br />gfortran: fatal error: no input files<br />compilation terminated.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] Problem when compiling 6.12.3 with Openmpi</h3>
+				<div class="date">Posted: <strong>Thu Sep 13, 2012 6:02 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content"><blockquote class="uncited"><div>I guess I have some trouble because of the command:<br />gfortran -V<br />With compiler I got the following error message:<br />gfortran: error: unrecognized option ‘-V’<br />gfortran: fatal error: no input files</div></blockquote><br /><br />The correct command is: gfortran --version<br /><br /><blockquote class="uncited"><div>configure: error: in `/home/prodhomme/Simulation/abinit-6.12.3/fallbacks/sources/etsf_io-1.0.4':<br />configure: error: Fortran compiler cannot create executables<br />See `config.log' for more details.</div></blockquote><br /><br />As indicated in your error message, the information about the error is in the config.log of ETSF_IO, in ~abinit/fallbacks/sources/etsf_io-1.0.4/. Look for the last occurence of &quot;failed&quot; in there. If you cannot resolve the issue, I suggest you to disable ETSF_IO support (see with_trio_flavor in ~abinit/doc/config/build-config.ac). You may repeat this strategy disabling as many options as necessary until your build environment complies with what you ask.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] Problem when compiling 6.12.3 with Openmpi</h3>
+				<div class="date">Posted: <strong>Thu Sep 13, 2012 10:24 pm</strong></div>
+				<div class="author">by <strong>ppy</strong></div>
+				<div class="content">Thanks a lot for your answer,<br />I will give a try to this flavor.<br />Actullay I tried to disable etsf-io with &quot;--enable-etsf-io=no&quot; but it looks like it was not a good idea since I got the same error message.<br />Thanks again, I will let you know about my progress...<br />PY</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] Problem when compiling 6.12.3 with Openmpi</h3>
+				<div class="date">Posted: <strong>Wed Sep 19, 2012 2:16 pm</strong></div>
+				<div class="author">by <strong>ppy</strong></div>
+				<div class="content">I finally got through it...<br />I used openmpi, icc and ifort on openuse 12.1 (but I think I would have the same behavior with gcc and gfortran).<br />Actually what happens to me was that during the compilation the lib for netcdf was not redirected in the good directory:<br />it was directed to: ~/abinit/fallbacks/exports/lib<br />though the lib had been created in ~/abinit/fallbacks/exports/lib64.<br />Probably my environment is not set properly...?<br />So I tried to specify the link to the netcdf lib during the config mit --with-netcdf-libs=&quot;L/home/..../fallbacks/exports/lib64&quot;<br />But It didn't work so I simply linked the .../lib to the .../lib64.<br />This is not a nice way to recover it but it works.<br />Then I simply had further troubles with atompaw compilation (same error as future_wl). I didn't have the courage to go through so I just skip the compilation of atompaw. That I already compiled anyway with a former version of abinit.<br />So Finally it works...<br />I just wonder if there is nicer way to tell the compilation where to find the netcdf (and others) libs...<br />Thanks a lot<br />PY</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] Problem when compiling 6.12.3 with Openmpi</h3>
+				<div class="date">Posted: <strong>Thu Sep 20, 2012 11:35 am</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><blockquote class="uncited"><div>But It didn't work so I simply linked the .../lib to the .../lib64.<br />This is not a nice way to recover it but it works.</div></blockquote><br />for information, this &quot;problem&quot; is solved in the build system of Abinit version 7<br />2 bots in our testfarm run now on openSUSE 12.1 and Fedora 16, both OS know to use lib64</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] Problem when compiling 6.12.3 with Openmpi</h3>
+				<div class="date">Posted: <strong>Thu Sep 20, 2012 12:08 pm</strong></div>
+				<div class="author">by <strong>ppy</strong></div>
+				<div class="content">Hi,<br />ok good news!<br />Do you have any expected date for the next abinit released?<br />Thanks</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] Problem when compiling 6.12.3 with Openmpi</h3>
+				<div class="date">Posted: <strong>Thu Sep 20, 2012 9:10 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">very soon, early next week, the version 7.0.1-rc1 should be completed and<br />then, I hope so, in one or two weeks, the final 7.0.1 will be available ...<br /><br />jmb</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1686&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:36:15 GMT -->
+</html>

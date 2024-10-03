@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1500&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:18:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; ABINIT on GPU</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>ABINIT on GPU</h2>
+		<p><a href="viewtopica080.html?f=3&amp;t=1500">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1500</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>ABINIT on GPU</h3>
+				<div class="date">Posted: <strong>Sat Jan 21, 2012 10:56 pm</strong></div>
+				<div class="author">by <strong>fabienfontaine</strong></div>
+				<div class="content">Hi everybody,<br />Does anywone tried to compile ABINIT on CUDA-GPU ?<br />Which routines are GPU oriented ? <br />Thx <br /><br />Fabien Fontaine-Vive<br />Institut de Chimie de Nice</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ABINIT on GPU</h3>
+				<div class="date">Posted: <strong>Mon Jan 23, 2012 5:25 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hello,<br /><br />To make you wait, we can read in the release notes (abstract) of 6.12.1 version ( not yet released ) <br /><br /><blockquote class="uncited"><div>B.  Most noticeable achievements<br /><br />B.1 The Ground-state calculations can benefit from GPUs, with CUDA library.<br />    See the input variable use_gpu_cuda, as well as the tests contained in the tests/gpu<br />    subdirectory.	<br />    This functionnality is still in <strong class="text-strong"><em class="text-italics"><span style="text-decoration: underline">beta stage</span></em></strong> and has to be used carefully.		<br />    Note that to take benefit of the GPU efficiency the computation load has to be large enough.		<br />    Abinit has to be compiled with the NVidia Cuda package (v3.2+) as well as the Magma library (<!-- m --><a class="postlink" href="http://icl.cs.utk.edu/magma/">http://icl.cs.utk.edu/magma/</a><!-- m -->).		<br />    Relevant configure options: --enable-gpu, --with-gpu-flavor, --with-gpu-prefix, NVCC, NVCC_FLAGS		<br />    and --with-linalg-flavor (for Magma activation).		<br />    When Abinit has been compiled with Cuda and an available Graphics card is detected, ground-states calculations		<br />     are automatically done on the GPU.<br />    (F. Dahm and M. Torrent, with some testing by JM Beuken)		<br /></div></blockquote><br /><br />regards<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ABINIT on GPU</h3>
+				<div class="date">Posted: <strong>Fri Feb 03, 2012 10:16 pm</strong></div>
+				<div class="author">by <strong>VasiaS</strong></div>
+				<div class="content">Hello, then I use abinit with cuda for t11.in (for H2 from Examples) I get in log this: ERROR while fft work_gpu ==&gt; fofr: CUFFT_EXEC_FAILED and the program does not complete the calculation. Abinit was successfully installed at options:<br />./configure         --enable-mpi FC=mpif90 --enable-gpu    --with-gpu-flavor=cuda-double --with-gpu-libs=&quot;-L/usr/local/cuda/lib64 -lcublas -lcufft -lcudart&quot; --with-gpu-incs=&quot;-I/usr/local/cuda/include&quot; NVCC=&quot;/usr/local/cuda/bin/nvcc&quot; NVCC_CPPFLAGS=&quot;-DHAVE_CUDA_SDK&quot; NVCC_CFLAGS=&quot;-O3 -arch=sm_13 -Xptxas=-v --use_fast_math --compiler-options -O3,-Wall,-fPIC,-g  -I/home/vasia/NVIDIA_GPU_Computing_SDK/CUDALibraries/common/inc  -I/usr/local/cuda/include  -I${PWDloc}/../src/incs&quot;<br />I tried yet with --with-fft-flavor=&quot;fftw3-mkl&quot; and -arch=sm_20 but I get the same case. I have 560 gtx. Can You help me? please <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /><br />ps: sorry for my english</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ABINIT on GPU</h3>
+				<div class="date">Posted: <strong>Mon Feb 06, 2012 6:19 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Cuda libraries are linked dynamically. Did you check that the LD_LIBRARY_PATH variable is properly set when running Abinit?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ABINIT on GPU</h3>
+				<div class="date">Posted: <strong>Tue Feb 07, 2012 1:00 pm</strong></div>
+				<div class="author">by <strong>VasiaS</strong></div>
+				<div class="content">hmm... I tried this: export LD_LIBRARY_PATH=/usr/local/cuda/lib64   and   export C_INCLUDE_PATH=/usr/local/cuda/include  but it didn't help. Then I did ./configure... I get this: <br />checking cuda_runtime_api.h usability... yes<br />checking cuda_runtime_api.h presence... yes<br />checking for cuda_runtime_api.h... yes<br />checking cufft.h usability... yes<br />checking cufft.h presence... yes<br />checking for cufft.h... yes<br />checking cublas.h usability... yes<br />checking cublas.h presence... yes<br />checking for cublas.h... yes<br />checking whether Cuda programs can be compiled... yes<br />checking whether we have Cuda &lt; 4... no<br />checking for the actual GPU support... cuda-double<br /><br />I don't know much Linux and I do not know how else to check it.<br />I think the cause of my problem is the input file because input file from abinit/tests/gpu/input/t01.in works well.<br />Thank You for your help</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ABINIT on GPU</h3>
+				<div class="date">Posted: <strong>Tue Feb 07, 2012 7:21 pm</strong></div>
+				<div class="author">by <strong>crischawo</strong></div>
+				<div class="content">I would be very interested in some benchmarks vs. CPU - if You have the time to do some.<br />Chr.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ABINIT on GPU</h3>
+				<div class="date">Posted: <strong>Wed Feb 08, 2012 12:50 pm</strong></div>
+				<div class="author">by <strong>VasiaS</strong></div>
+				<div class="content">I have made the tests (built-in, cpu, fast and gpu). But I could not upload my files (43Mb) here (The extension is not allowed.). Сan You give me your e-mail?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ABINIT on GPU</h3>
+				<div class="date">Posted: <strong>Wed Feb 08, 2012 5:47 pm</strong></div>
+				<div class="author">by <strong>VasiaS</strong></div>
+				<div class="content">files containing my tests, can be found here <!-- m --><a class="postlink" href="https://www.yousendit.com/download/T2dkQndNR3M3bUJqQThUQw">https://www.yousendit.com/download/T2dk ... bUJqQThUQw</a><!-- m -->   File expiration date: February 15, 2012</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ABINIT on GPU</h3>
+				<div class="date">Posted: <strong>Wed Feb 08, 2012 6:42 pm</strong></div>
+				<div class="author">by <strong>crischawo</strong></div>
+				<div class="content">Thank You very much, I will have a look at it now.<br />Chr</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ABINIT on GPU</h3>
+				<div class="date">Posted: <strong>Fri Feb 10, 2012 8:18 pm</strong></div>
+				<div class="author">by <strong>VasiaS</strong></div>
+				<div class="content">That You think about my errors in some tests?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ABINIT on GPU</h3>
+				<div class="date">Posted: <strong>Mon Feb 27, 2012 12:40 pm</strong></div>
+				<div class="author">by <strong>nicspalla</strong></div>
+				<div class="content">Hi VasiaS,<br />can you re-upload your tests?<br /><br />thanks<br />Nicola</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ABINIT on GPU</h3>
+				<div class="date">Posted: <strong>Tue Feb 28, 2012 11:25 pm</strong></div>
+				<div class="author">by <strong>VasiaS</strong></div>
+				<div class="content"><!-- m --><a class="postlink" href="https://www.yousendit.com/dl?phi_action=app/orchestrateDownload&amp;rurl=https%253A%252F%252Fwww.yousendit.com%252Ftransfer.php%253Faction%253Dbatch_download%2526send_id%253D1393213586%2526email%253D76834619c6cfb3023314dbb64894d334&amp;s=19104&amp;cid=tx-02002207350200000000">https://www.yousendit.com/dl?phi_action ... 0200000000</a><!-- m --></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ABINIT on GPU</h3>
+				<div class="date">Posted: <strong>Thu Jan 08, 2015 5:56 am</strong></div>
+				<div class="author">by <strong>roshan</strong></div>
+				<div class="content">Hi VasiaS,<br />can you re-upload your tests?<br /><br />thanks<br />Roshan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ABINIT on GPU</h3>
+				<div class="date">Posted: <strong>Thu Jan 22, 2015 5:55 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">@Roshan: this thread dates back to 2012. The tests were likely removed a long time ago.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1500&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:18:03 GMT -->
+</html>

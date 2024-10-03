@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=39&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:56:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; revPBE Pseudos</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>revPBE Pseudos</h2>
+		<p><a href="viewtopic6669.html?f=14&amp;t=39">https://forum.abinit.org/viewtopic.php?f=14&amp;t=39</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>revPBE Pseudos</h3>
+				<div class="date">Posted: <strong>Thu Jan 28, 2010 3:48 pm</strong></div>
+				<div class="author">by <strong>aromero</strong></div>
+				<div class="content">We are doing some testing on different pseudopotentials and I have found that revPBE give<br />some cases superior results than normal PBE but I do not find any pseudo or code to<br />create revPBE pseudos to be read from Abinit. Does anybody knows any code or place<br />to find those?<br /><br />Thanks!<br /><br />-aldo.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: revPBE Pseudos</h3>
+				<div class="date">Posted: <strong>Thu Jan 28, 2010 5:39 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Did you try APE?<br /><br /><!-- m --><a class="postlink" href="http://www.tddft.org/programs/APE/">http://www.tddft.org/programs/APE/</a><!-- m --></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: revPBE Pseudos</h3>
+				<div class="date">Posted: <strong>Thu Jan 28, 2010 6:05 pm</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">Yann,<br />I don't think APE is for PAW (NC-pseudopotentials only).<br /><br />Aldo,<br />if you want to use rePBE with atompaw or uspp2abinit you have to hack these codes (replace Pbe routines by revPbe ones). But this probably needs some work.<br />I have begun to include libXC in atompaw but this work is not finished and it is (unfortunately) not on top of my stack...<br /><br />Cheers,<br />Marc</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: revPBE Pseudos</h3>
+				<div class="date">Posted: <strong>Tue Feb 23, 2010 7:44 pm</strong></div>
+				<div class="author">by <strong>proffess</strong></div>
+				<div class="content">Dear all,<br /><br />  Would it be correct, that in order to use any functional from libxc library (for example, AM05) one need to have a pseudopotential generated for this specific type of functional? Can I use PBE (PAW) pseudopotential and ixc value, that activates an AM05 functional? From some papers (unfortunately, where VASP was used), people use PBE datasets for PBEsol or AM05 functionals. Can we do the same in ABINIT?<br /><br />Thanks,<br /> P.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: revPBE Pseudos</h3>
+				<div class="date">Posted: <strong>Wed Feb 24, 2010 1:36 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content"><blockquote><div><cite>proffess wrote:</cite>Dear all,<br /><br />  Would it be correct, that in order to use any functional from libxc library (for example, AM05) one need to have a pseudopotential generated for this specific type of functional? Can I use PBE (PAW) pseudopotential and ixc value, that activates an AM05 functional? From some papers (unfortunately, where VASP was used), people use PBE datasets for PBEsol or AM05 functionals. Can we do the same in ABINIT?<br /><br />Thanks,<br /> P.</div></blockquote><br /><br /><br />This should be a new thread - could someone detach it?<br /><br />I agree with your critique: formally it is completely wrong and evil to mix XC types between pseudopotential and GS, or between GS and GW and so on. In some cases it's harmless, but as AM05 adds non-trivial things compared to PBE, I think it's not a good idea. To some extent you are counting on a cancellation of the xc contribution from core electrons with the valence, and if these have been included in the pseudopotential using a different functional, then the results will be wrong.<br /><br />You can do the same in abinit: just set ixc by hand and it will override the pseudopotential input xc type.<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: revPBE Pseudos</h3>
+				<div class="date">Posted: <strong>Wed Feb 24, 2010 4:14 pm</strong></div>
+				<div class="author">by <strong>proffess</strong></div>
+				<div class="content">Hi Mattiew,<br /><br />  Thanks for reply.<br /><br />   I indeed try to active AM05 functional from libxc while using PBE-PAW pseudopotential. ABINIT warns me about that:<br /><br /> pspatm: WARNING -<br />  Pseudopotential file pspxc=      11,<br />  not equal to input ixc= -120135.<br />  These parameters must agree to get the same xc <br />  in ABINIT code as in psp construction.<br />  Action : check psp design or input file.<br />  Assume experienced user. Execution will continue.<br />  .....<br /><br />but soon crashed with error message :<br /><br />.....<br /><br />     iter   Etot(hartree)      deltaE(h)  residm     nres2    diffor    maxfor<br /><br /> FFT (fine) grid used in SCF cycle:<br /><br /> getcut: wavevector=  0.0000  0.0000  0.0000  ngfft=  30  30  30<br />         ecut(hartree)=     50.000   =&gt; boxcut(ratio)=   2.07678<br />  scfcv : before setvtr, energies%e_hartree=  0.000000000000000E+000<br /><br /> ewald : nr and ng are    4 and   11<br />  setvtr : istep,n1xccc,moved_rhor=           1           1           0<br /><br /> drivexc : ERROR -<br />  At least one of the functionals is a GGA or a MGGA,<br />  but not all the necessary arrays are present.<br />  ixc=-120135  nvxcdgr=     0  ngr2=     1<br />-P-0000<br />-P-0000  leave_new : decision taken to exit ...<br /><br />Did I forget something?<br /><br />Thanks,<br /> P.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: revPBE Pseudos</h3>
+				<div class="date">Posted: <strong>Wed Feb 24, 2010 7:59 pm</strong></div>
+				<div class="author">by <strong>gonze</strong></div>
+				<div class="content">Seems a bug. Indeed, the exchange AM05 is working properly, and also the correlation AM05,<br />see the test in tests/libxc/Input/t04.in , but they are not tested together in this automatic test ...<br />Strange ...</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=39&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:56:56 GMT -->
+</html>

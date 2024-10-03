@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4496&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:15:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; About nph1l</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>About nph1l</h2>
+		<p><a href="viewtopic6eb9.html?f=9&amp;t=4496">https://forum.abinit.org/viewtopic.php?f=9&amp;t=4496</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>About nph1l</h3>
+				<div class="date">Posted: <strong>Mon Aug 10, 2020 6:50 am</strong></div>
+				<div class="author">by <strong>hmao</strong></div>
+				<div class="content">I'm sorry to ask this simple question, but it really bothered me for a long time。。。<br>
+I want to plot the phonon dispersion curve, but I don’t understand how to set ‘’nph1l‘’ in the tutorial，It has some explanations about nph1l, but I don’t understand how to generate it. When I used nph1l=71 in the tutorial, I got such a dispersion curve. I think there are some problems in it. Who can you help me? I will be very grateful.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: About nph1l</h3>
+				<div class="date">Posted: <strong>Wed Aug 12, 2020 11:53 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear hmao,<br>
+nph1l is the number of q-points in which the phonon frequencies will be computed and plotted, then you have to give the list of q-point directions by qph1l with a user defined path in the reciprocal space, as you have in your input file. I would advise to put more q-points to have smoother curves.<br>
+In your case it seems that you have unstable phonon modes (appearing as negative numbers but they are actually imaginary). If you have an insulator then you'll have to correct the LO-TO splitting by, either editing the file where the eigenvalues are written for Gamma point and replace by the corresponding frequencies obtained in the second list of wavectors where the non-analytical correction is applied. A shortcut tip for this LO-TO is to put a qpt value very close to Gamma instead of exactly Gamma in the qph1l, for example:<br>
+0.0001 0.0001 0.0001   1.0<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: About nph1l</h3>
+				<div class="date">Posted: <strong>Tue Aug 18, 2020 11:20 am</strong></div>
+				<div class="author">by <strong>hmao</strong></div>
+				<div class="content">Dear Eric,<br>
+Thanks a lot to reply me. <img class="smilies" src="images/smilies/icon_e_biggrin.gif" width="15" height="17" alt=":D" title="Very Happy"> <br>
+I am a new, and I am trying to add more q-points, but I want to know if there is a script that generates q-points with abinit.<br>
+<br>
+Best wishes,<br>
+Mao</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: About nph1l</h3>
+				<div class="date">Posted: <strong>Sat Aug 29, 2020 5:52 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Mao,<br>
+You're welcome!<br>
+For q-point grid you can either use nqpath and qpath, but if you want to control exactly the number of q-point and their direction, you can do it with a small script or with a spread shit, etc.<br>
+Abipy might do that for you too, but I'm not expert with it...<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4496&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:15:44 GMT -->
+</html>

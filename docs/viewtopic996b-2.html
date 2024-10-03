@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1067&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:51:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; libxc no longer builds on macosx gfortran 4.5</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>libxc no longer builds on macosx gfortran 4.5</h2>
+		<p><a href="viewtopic9ddc-3.html?f=3&amp;t=1067">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1067</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>libxc no longer builds on macosx gfortran 4.5</h3>
+				<div class="date">Posted: <strong>Wed May 04, 2011 11:03 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello everybody,<br /><br />just merged trunk, and libxc no longer builds. I have tried repeated removes and cleans of the plugins and the tgz file, but still:<br /><br /><blockquote class="uncited"><div>libtool: link: ( cd &quot;.libs&quot; &amp;&amp; rm -f &quot;libxc.la&quot; &amp;&amp; ln -s &quot;../libxc.la&quot; &quot;libxc.la&quot; )<br />make[8]: *** No rule to make target `xc_f90_lib_m.mod', needed by `all-am'.  Stop.<br />make[7]: *** [all] Error 2<br />make[6]: *** [all-recursive] Error 1<br />make[5]: *** [all] Error 2<br />make[4]: *** [build-stamp] Error 2<br />make[3]: *** [package-ready] Error 2<br />make[2]: *** [all-recursive] Error 1<br />make[1]: *** [all-recursive] Error 1<br />make: *** [all] Error 2<br /></div></blockquote><br /><br />the only mod file which is generated is libxc-1.0/src/libxc_funcs_m.mod<br /><br />The tgz file has not been changed, so the error must come from<br />1) the build system <br />or <br />2) a new patch (did not see any... in bzr diff) <br /><br />While I'm at it, the new configure script and makemake output is very helpful!<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: libxc no longer builds on macosx gfortran 4.5</h3>
+				<div class="date">Posted: <strong>Wed May 04, 2011 12:22 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content"><blockquote class="uncited"><div>just merged trunk, and libxc no longer builds.</div></blockquote><br />Does not come from me. I haven't touched the plugins/fallbacks part for while.<br /><br /><blockquote class="uncited"><div>While I'm at it, the new configure script and makemake output is very helpful!</div></blockquote><br />My pleasure.  <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /> I can still refine it a little bit, but I'd like to keep it as compact as possible (i.e. readable on a 80x24 terminal).</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: libxc no longer builds on macosx gfortran 4.5</h3>
+				<div class="date">Posted: <strong>Wed May 04, 2011 2:17 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Still fails after a full source tree clean and rebuild from new build directory. I don't get it....</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: libxc no longer builds on macosx gfortran 4.5</h3>
+				<div class="date">Posted: <strong>Wed May 04, 2011 2:37 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">The problem appears to be that FCCPP is set to ' ', so it is considered set, whereas it is useless. For some reason libxc build does not fail when it is unable to preprocess/compile libxc_master.F90<br /><br />How can I pass FCCPP to libxc? Or get it to default to CPP, which would be fine.<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: libxc no longer builds on macosx gfortran 4.5</h3>
+				<div class="date">Posted: <strong>Wed May 04, 2011 2:54 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Ok, looks solved - my fault: there was a missing /usr/bin/cpp, which is in a non-standard place on mac OSX. I added a link, and abinit found the proper cpp instead of gcc -E, and then libxc followed.<br /><br />ciao</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] libxc no longer builds on macosx gfortran 4.5</h3>
+				<div class="date">Posted: <strong>Fri May 27, 2011 12:37 pm</strong></div>
+				<div class="author">by <strong>paulfons</strong></div>
+				<div class="content">Hi compiling libxc using ifort has also been causing me trouble.  I was hoping you might be so kind as to elaborate on the problems with getting cpp to properly parse the libxc.f90 source.  I note that the cpp file on my macs (10.6.7) both have a cpp at /usr/bin/cpp and I am still having problems.  What link must me made to eliminate these problems?  Any help would be gratefully received as I have found evidence of others having the same problem and the solution to date has been not to compile libxc (which is of course undesirable).  Thanks for your help.<br /><br /><br /><br />/bin/sh ../libtool  --tag=FC --tag=F77  --mode=compile /opt/openmpi//bin/mpif90  -free -g -extend-source -vec-report0 -noaltparam -nofpscomp  -O3 -xHost -c -o libxc_la-libxc.lo  `test -f 'libxc.f90' || echo './'`libxc.f90<br />libtool: ignoring unknown tag F77<br />libtool: compile:  /opt/openmpi//bin/mpif90 -free -g -extend-source -vec-report0 -noaltparam -nofpscomp -O3 -xHost -c libxc.f90 -o libxc_la-libxc.o<br />libxc.f90(30): error #5078: Unrecognized token '#' skipped</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] libxc no longer builds on macosx gfortran 4.5&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Sun Jun 05, 2011 8:28 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">This is very ugly, but I have highjacked the default cpp, which is normally found in the Xcode directories, by adding the following symbolic link<br /><br />/usr/bin/cpp -&gt; /opt/local/bin/cpp-mp-4.5<br />(or whichever version of cpp/gcc you have installed - I use macports)<br /><br /><br />otherwise abinit/libxc default to gcc -E, which does not behave quite the same way (in particular for libxc which is heavily pre-processed).<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] libxc no longer builds on macosx gfortran 4.5</h3>
+				<div class="date">Posted: <strong>Fri Sep 14, 2012 9:12 pm</strong></div>
+				<div class="author">by <strong>mlazar</strong></div>
+				<div class="content">Thank you Matthieu, your suggestion perfectly solved my problem (compiling abinit on a Mac):<br /><br />1. I made a backup of /usr/bin/cpp by typing: sudo /usr/bin/cpp /usr/bin/backup<br />2. I made a symbolic link by typing: sudo ln -s /opt/local/bin/cpp-mp-4.5 /usr/bin/cpp<br />3. I compiled the program by typing: sudo make install<br />4. I unlinked the symbolic link by typing: sudo unlink /usr/bin/cpp<br />5. I put back the original link by typing: sudo mv /usr/bin/backup /usr/bin/cpp<br /><br />This solved my problem of compiling abinit on a Mac OS X.  I spelled things out more in case someone doesn't know how to do the linking etc.<br /><br />Thank you.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1067&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:51:40 GMT -->
+</html>

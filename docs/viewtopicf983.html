@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=587&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:52:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Using UPF files with a large number of mesh points</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Using UPF files with a large number of mesh points</h2>
+		<p><a href="viewtopicf00e-2.html?f=19&amp;t=587">https://forum.abinit.org/viewtopic.php?f=19&amp;t=587</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Using UPF files with a large number of mesh points</h3>
+				<div class="date">Posted: <strong>Sat Sep 11, 2010 3:35 am</strong></div>
+				<div class="author">by <strong>emurray</strong></div>
+				<div class="content">I was testing a UPF pseudopotential with 2000 mesh points and I noticed it would cause abinit to exit when it tried to read the projector section.<br /><br />It seems that the section that reads the number of mesh points for the projector is read with the format '(i6)'. Since UPF files seem to usually have 3 leading spaces here it only reads the first 3 digits of the number - so in my case it reads 200 instead of 2000.<br /><br />This could be fixed pretty easily with the following patch:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--- old/read_upf_pwscf.F90&nbsp; &nbsp;2010-09-10 17:51:24.986995185 -0700<br />+++ new/read_upf_pwscf.F90&nbsp; &nbsp;2010-09-10 18:19:02.303994978 -0700<br />@@ -265,7 +265,7 @@<br />&nbsp; &nbsp;do nb = 1, nbeta (is)&nbsp; <br />&nbsp; &nbsp; &nbsp; call scan_begin (iunps, &quot;BETA&quot;, .false.)&nbsp; <br />&nbsp; &nbsp; &nbsp; read (iunps, *, err = 100, iostat = ios) idum, lll(nb,is), dummy<br />-&nbsp; &nbsp; &nbsp;read (iunps, '(i6)', err = 100, iostat = ios) ikk2(nb,is)&nbsp; <br />+&nbsp; &nbsp; &nbsp;read (iunps, *, err = 100, iostat = ios) ikk2(nb,is)&nbsp; <br />&nbsp; &nbsp; &nbsp; read (iunps, *, err = 100, iostat = ios) &amp;<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(betar(ir,nb,is), ir=1,ikk2(nb,is))<br />&nbsp; &nbsp; &nbsp; do ir = ikk2(nb,is) + 1, mesh (is)&nbsp; </code></pre></div><br /><br />My concern is that I assume there was a reason '(i6)' was used here in the first place, since it's one of the only places where the format is specified, though I don't know what this might be.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Using UPF files with a large number of mesh points</h3>
+				<div class="date">Posted: <strong>Wed Sep 22, 2010 4:17 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hi,<br /><br />this code has been copied verbatim from pwscf, so you should ask them why. Normally for I6 you can read up to 6 digits, so it's probably enough for you to remove leading white space to get it to read all the 2000<br /><br />I have added your patch to 6.4.0, and if it passes tests it will be included in the soon to be released versions of abinit 6.4.x<br /><br />Cheers<br /><br />matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=587&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:52:40 GMT -->
+</html>

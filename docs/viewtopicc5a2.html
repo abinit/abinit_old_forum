@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=2419&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 20:39:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; gw on V4O6</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>gw on V4O6</h2>
+		<p><a href="viewtopic3615.html?f=11&amp;t=2419">https://forum.abinit.org/viewtopic.php?f=11&amp;t=2419</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>gw on V4O6</h3>
+				<div class="date">Posted: <strong>Thu Feb 06, 2014 6:50 pm</strong></div>
+				<div class="author">by <strong>vitoversace</strong></div>
+				<div class="content">Hi all,<br /><br />I don't know why when i run a GW calculation on V4O6 system,<br />i don't get the optical and fundamental band gap any more after Etot is converged.<br />For Si2 i obtain optical and fundamental band gap after iterations are completed but not any more for V4O6.<br />Is there some thing wrong in my input file ?<br /><br />By the way my input geometry is a hexagonal, but abinit reads it as primitive triclinic. WHY?<br /><br />How can i visualize GW corrected band structure ???<br /><br />With best wishes</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: gw on V4O6</h3>
+				<div class="date">Posted: <strong>Fri Feb 07, 2014 9:19 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content"><blockquote class="uncited"><div>For Si2 i obtain optical and fundamental band gap after iterations are completed but not any more for V4O6.<br />Is there some thing wrong in my input file ?<br /></div></blockquote><br /><br />The log file tells me that you are killing the run during the computation of the correlated part of the self-energy,<br />perhaps because it takes too long. Well this is normal, since you're computing the GW corrections for *all* the k-points <br />and all the *nband* bands included in the calculation (you are not specifying nkptgw and bdgw in the input file)<br /><br />I strongly recommend you read carefully the tutorials<br /> <br /><!-- m --><a class="postlink" href="http://www.abinit.org/documentation/helpfiles/for-v7.4/tutorial/lesson_gw1.html">http://www.abinit.org/documentation/hel ... n_gw1.html</a><!-- m --><br /><!-- m --><a class="postlink" href="http://www.abinit.org/documentation/helpfiles/for-v7.4/tutorial/lesson_gw2.html">http://www.abinit.org/documentation/hel ... n_gw2.html</a><!-- m --><br /><br />and the GW notes  <br /><br /><!-- m --><a class="postlink" href="http://www.abinit.org/documentation/helpfiles/for-v7.4/tutorial/theory_mbt.html">http://www.abinit.org/documentation/hel ... y_mbt.html</a><!-- m --><br /><br />btw: why are you setting ppmfrq2 to the same value as the one used for Silicon? Are you sure that <br />the plasmon frequency of V406 is 16.7 eV?<br /><br /><blockquote class="uncited"><div>By the way my input geometry is a hexagonal, but abinit reads it as primitive triclinic. WHY?<br /></div></blockquote><br /><br /><ul><li> Check the atomic positions. Some entries are very small e.g  2.937523603808E-16 and can be replaced with zeros </li><li> Increase the value <!-- m --><a class="postlink" href="http://www.abinit.org/documentation/helpfiles/for-v7.4/input_variables/vargeo.html#tolsym">http://www.abinit.org/documentation/hel ... tml#tolsym</a><!-- m --></li></ul><br /><blockquote class="uncited"><div>How can i visualize GW corrected band structure ???<br /></div></blockquote><br /><br />This FAQ is discussed in the GW tutorial. End of section 9 in <!-- m --><a class="postlink" href="http://www.abinit.org/documentation/helpfiles/for-v7.4/tutorial/lesson_gw1.html">http://www.abinit.org/documentation/hel ... n_gw1.html</a><!-- m --></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=2419&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 20:39:37 GMT -->
+</html>

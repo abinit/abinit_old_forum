@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3576&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:52:52 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Strange behavior in Second Harmonic vs Strain</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Strange behavior in Second Harmonic vs Strain</h2>
+		<p><a href="viewtopicfd97.html?f=10&amp;t=3576">https://forum.abinit.org/viewtopic.php?f=10&amp;t=3576</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Strange behavior in Second Harmonic vs Strain</h3>
+				<div class="date">Posted: <strong>Thu Apr 27, 2017 9:47 pm</strong></div>
+				<div class="author">by <strong>beachk2</strong></div>
+				<div class="content">Hello. I have been performing second harmonic calculations as a function of strain for monolayer materials and have been getting some strange results that do not agree with other codes that do not use the Berry phase to calculate Chi^(2). <br /><br />My procedure has been as follows: I start with a basic self consistent calculation with ngkpt=12 12 1. I then perform an iscf=-2 calculation with ngkpt=48 48 1. Next I perform three iscf=-3 perturbation calculations (one for each rfdir axis). Finally I perform a Nonlinear Optics calculation to find the second order susceptibility. <br /><br />The results I have been getting are strange. The magnitude of Chi^(2) drops off discontinuously for most of the nonzero tensor components I have calculated at seemingly random intervals. The points that do not drop off seem to follow a logical looking trend, which leads me to believe this is due to a calculation error. This effect has occurred for both PBE and LDA calculations. I suspect this is a numerical artifact that might have something to do with the way you calculate the Berry Phase. Any ideas? Thank you.<br /><br />Best regards,<br />Kory Beach</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Strange behavior in Second Harmonic vs Strain</h3>
+				<div class="date">Posted: <strong>Tue May 09, 2017 11:45 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">You are running the optic executable? This runs RPA sums over states, not Berry phase, I think. Your iscf -3 is a ddk calculation, which is an analytical perturbation wrt k.<br /><br />Your post is not explicit enough: need details on input output versions etc... See the netiquette. <br /><br />Some possibilities:<br />* are you sure you are converged with bands and ecut (event k)?<br />* the discontinuity is with respect to what? If it's strain, you may be changing the sphere of G vectors discontinuously. Increase ecut a bit and add ecutsm 0.5 or 1.0 Ha to smooth things.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Strange behavior in Second Harmonic vs Strain</h3>
+				<div class="date">Posted: <strong>Mon May 22, 2017 5:00 am</strong></div>
+				<div class="author">by <strong>beachk2</strong></div>
+				<div class="content">Sorry about not being explicit enough. I am running the Optic executable in ABINIT 8.0.8 to do the Second Harmonic Generation calculations, and the problem I am experiencing is when I calculate the second harmonic as a function of strain, the intensity of the second harmonic has discontinuous drops for certain strains. My method for changing the strain has simply been to change the lattice constants by some percentage in whatever Cartesian direction I am varying. In this image I show the second harmonic intensity at 1.5 eV and 3.0 eV for various strains to demonstrate what I mean by the intensity dropping:<br /><img src="http://i.imgur.com/vokApuO.png" class="postimage" alt="Image" /><br /><br /> I have tested the convergence of my cutoff energy and it looks fine for my PBE norm conserving pseudopotential (this also happens for LDA), but just to be sure I tried changing the cutoff energy to higher values with ecutsm set to both 0.5 and 1 like you said. This doesn't change the discontinuous behavior in the second harmonic.<br /><br />I have attached the input files I used for one strain calculation. The order of my calculations is scf &gt; wfc &gt; ddk &gt; optics.<br /><br />Thank you for your help.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Strange behavior in Second Harmonic vs Strain</h3>
+				<div class="date">Posted: <strong>Mon May 22, 2017 10:46 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hi again,<br /><br />strange - it does look like a &quot;quantum of polarization&quot; effect in Berry phases, but again I don't think Berry is used, and anyway you are not looking at P.<br /><br />Could you check your outputs to see if the ngfft jumps at the corresponding chi2 jumps? Or the total energy or something else (strain forces...)? I.e. is there something in the ground state which follows these discontinuities? Could it be going metallic, or perhaps not converging the scf cycle (or not as well)?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Strange behavior in Second Harmonic vs Strain</h3>
+				<div class="date">Posted: <strong>Tue May 23, 2017 12:53 am</strong></div>
+				<div class="author">by <strong>beachk2</strong></div>
+				<div class="content">So I have tried quite a few things to test this, but nothing seems to change the optical behavior so far:<br /><br /><ol style="list-style-type: decimal">I don't see any difference between the ngfft recommended for the strains where the intensity drops compared to the normal cases, at least none that corresponds to the dropping in intensity. <br /><br />I have also looked at the band structures and there is hardly any change shown there-- definitely doesn't look like a semiconductor to metal transition. <br /><br />The total energy as a function of strain gives a nice quadratic-looking curve with 0% strain at the minimum, as we would expect. Pressure as a function of strain decreases roughly linearly as strain goes from negative to positive.<br /><br />I tried turning off symmetry in my initial scf calculation by doing kptopt 3, but that didn't change anything. I also tried circumventing the DDK process by using berryopt to output my WF files, but that seemed to be incompatible with the optic executable so it just crashed.<br /><br />In terms of the scf convergence the number of steps it takes for each strain to converge does not seem to be at all correlated with whether or not the optics are affected. <br /></ol><br />Do you have any other suggestions for parameters to try? Thanks again for all your help.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Strange behavior in Second Harmonic vs Strain</h3>
+				<div class="date">Posted: <strong>Tue May 23, 2017 5:41 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Is the parallelization strategy changing? Grep for npfft npkpt etc... How many processors?<br /><br />Can you tell if the last unoccupied bands are well converged in the non scf calculation?<br /><br />In passing, your positions in xred are not very symmetric (not 1/3 2/3) - could be due to strain but needs to be checked carefully. This might impact things for certain strains if the atom positions hit a grid point or not. Your space group is probably not correctly recognized.<br /><br />Why impose chkprim 0?<br /><br />Have you checked convergence wrt nband?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Strange behavior in Second Harmonic vs Strain</h3>
+				<div class="date">Posted: <strong>Tue Jun 06, 2017 10:37 pm</strong></div>
+				<div class="author">by <strong>beachk2</strong></div>
+				<div class="content">Sorry for the delayed reply. I have used a variety of parallelization strategies to see if it had something to do with that, but the dropping behavior is consistent across all parallelization methods, as well as on a different computer. <br /><br />The structure in my input file was with some applied strain, so the xred coordinates are relaxed with the strained lattice constants, which means we wouldn't expect the symmetry to be preserved. That being said, my space group has not been properly identified by the code.<br /><br />I have tried the calculations with and without chkprim with no difference in the result.<br /><br />I have tried a higher nband as well, but this didn't change anything either.<br /><br />I also tried increasing the kpoint grid density to 64 64 1 since I thought that perhaps the sampling was too sparse for a changing unit cell, but this also had no effect either. The WFC band convergence looks good enough for the unoccupied bands (max resid ~ 10^-19).<br /><br />I am about ready to move to a different method of calculating the second harmonic. I would appreciate any other suggestions. Thank you very much for your help.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Strange behavior in Second Harmonic vs Strain</h3>
+				<div class="date">Posted: <strong>Wed Jun 07, 2017 11:27 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">You might write Valerie Veniard (Polytechnique Palaiseau) and Nicolas Dejean (now Max Planck Hamburg): in his phd they used &quot;2light&quot; for the SHG (also starting from abinit), and they will certainly have insight.<br /><br />etsf.polytechnique.fr/system/files/Thesis_Nicolas_Tancogne-Dejean_0.pdf<br /><br />If there are delicate effects due to k-points hitting specific bands/contributions/frequency differences with varying strain, you might need even more k. I have no empirical feeling for this.<br /><br />Have you looked at the internal smearing parameters in optic (broadening and domega)? Or cutting down tolerance: perhaps there are few non zero terms in the SHG sum, and specific terms are getting counted or not as a function of strain, because of the cutoff.<br /><br />cheers</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3576&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:52:52 GMT -->
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=198&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [solved] anormal(?) memory utilization while writing WFK</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[solved] anormal(?) memory utilization while writing WFK</h2>
+		<p><a href="viewtopic5d28.html?f=9&amp;t=198">https://forum.abinit.org/viewtopic.php?f=9&amp;t=198</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[solved] anormal(?) memory utilization while writing WFK</h3>
+				<div class="date">Posted: <strong>Wed Mar 24, 2010 9:27 pm</strong></div>
+				<div class="author">by <strong>Levesque</strong></div>
+				<div class="content">Hi everyone, thanks in advance for your advices.<br /><br />My KSS calculation ended while writing the WFK file (this is the tail of the .log file) :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;----iterations are completed or convergence reached----<br /><br />&nbsp;outwf&nbsp; : write wavefunction to file pSSxo_DS1_WFK<br />-P-0000&nbsp; leave_test : synchronization done...<br />-----</code></pre></div><br /><br />The system admin told me that the memory utilization increase dramatically in one processor while writing the file, while other processors of the node remain unutilized (this is normal since I use one proc. per node). This is the error message from the system :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&#91;&#91;32890,1&#93;,0&#93;&#91;btl_openib_component.c:2948:handle_wc&#93; from compute-0-6.local to: compute-0-7 error polling LP CQ with status LOCAL LENGTH ERROR status number 1 for wr_id 374141704 opcode 0&nbsp; vendor error 105 qp_idx 3<br />--------------------------------------------------------------------------<br />mpirun has exited due to process rank 0 with PID 27682 on<br />node compute-0-6.local exiting without calling &quot;finalize&quot;. This may<br />have caused other processes in the application to be<br />terminated by signals sent by mpirun (as reported here).<br />--------------------------------------------------------------------------<br /></code></pre></div><br /><br />I try to understand what append and how to fix it (since I think this cause problem to my SCR calculation that has an &quot;open g-shell&quot;). I think anybody who know how abinit write the file in question could help.<br /><br />Thanks,<br /><br />SL<br /><br /><span style="font-size: 85%; line-height: 116%;"><strong class="text-strong">Calculation made</strong><br />- on Intel Xeon proc. E5462 quad-cores (3.0 GHz) 16 GB mem/node, requiring 6 nodes and one proc. per node to maximise total memory,<br />- with abinit-5.9.1 using Tr.-Mart. psp,<br />- Here is the .in file (without xcoord, znucl, etc.):</span><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>ndtset 1<br />acell&nbsp; 15.6&nbsp; 16&nbsp; 8.08613283 angstrom<br />dilatmx&nbsp; &nbsp; 1.20000000E+00<br />ecut&nbsp; &nbsp; 20 Hartree<br />kptopt&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1<br />nband&nbsp; &nbsp; &nbsp; &nbsp; 1300<br />nstep&nbsp; &nbsp; &nbsp; &nbsp;500<br />ngkpt 1 1 10 <br />shiftk 0. 0. 0.<br />nshiftk 1<br />getden 1<br />kssform 3<br />nbandkss 1300<br />symmorphi 0<br />istwfk *1<br />iscf -2<br />tolwfr&nbsp; 1.0d-5<br />zcut 0.0037<br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: anormal(?) memory utilization while writing the WFK file</h3>
+				<div class="date">Posted: <strong>Wed Mar 31, 2010 11:43 pm</strong></div>
+				<div class="author">by <strong>Mamikon Gulian</strong></div>
+				<div class="content">Hello,<br /><br />I don't know much about it, but maybe using MPI I/O for wavefunction files will help decrease the dramatic memory utilization by one processor. See the documentation for the variable accesswff:<br /><br /><!-- m --><a class="postlink" href="http://www.abinit.org/documentation/helpfiles/for-v6.0/input_variables/vardev.html#accesswff">http://www.abinit.org/documentation/hel ... #accesswff</a><!-- m --><br /><br />-Mamikon</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: anormal(?) memory utilization while writing the WFK file</h3>
+				<div class="date">Posted: <strong>Wed Apr 07, 2010 7:11 pm</strong></div>
+				<div class="author">by <strong>Levesque</strong></div>
+				<div class="content"><blockquote><div><cite>Mamikon Gulian wrote:</cite>maybe using MPI I/O for wavefunction files will help decrease the dramatic memory utilization by one processor... </div></blockquote><br /><br />Thanks, I will look at that. <br /><br />Here are more details : in STATUS files, one of the last functions called is vtowfk which call lobpcgccwf. This last one crashed when calling zgemm which is a part of BLAS library (matrix operation). It seems that it keep 4 to 6 copies of the object which explain the problem.<br /><br />Anyway, the problem is solved when mpw is reduced...<br /><br />Cheers,<br /><br />SL</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [solved] anormal(?) memory utilization while writing WFK</h3>
+				<div class="date">Posted: <strong>Fri Apr 09, 2010 11:00 am</strong></div>
+				<div class="author">by <strong>bruneval</strong></div>
+				<div class="content">The writing of the KSS file is not yet compatible with the use of the parallelization paral_kgb=1.<br />The usual strategy is to run a parallel job to output a WFK file and then run a 'fake' sequential job that reads the WFK file and write the KSS file.<br /><br />Fabien</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=198&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:46 GMT -->
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=2708&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:44:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; question about metaGGA pseudopotential</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>question about metaGGA pseudopotential</h2>
+		<p><a href="viewtopicf269.html?f=14&amp;t=2708">https://forum.abinit.org/viewtopic.php?f=14&amp;t=2708</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>question about metaGGA pseudopotential</h3>
+				<div class="date">Posted: <strong>Thu Jun 19, 2014 4:18 am</strong></div>
+				<div class="author">by <strong>dfshao</strong></div>
+				<div class="content">Dear abinit developers and users,<br /><br />I want to use metagga-TB09 to calculate the band structure of semiconductor. I generated the PAW  pseudopotential using ATOMPAW together with LIBXC, but when i started running the calculation, the error &quot; When usekden is non-zero, it is not possible to use pseudopotentials  with a non-linear core correction....  Action : either set usekden=0 in input file, or change this pseudopotential file&quot; appeared. Is the metagga not implemented in paw in ABINIT? <br /><br />I also trie to generate  pseudopotential using APE code. But maybe due to the problem of APE code itself (I found the same error i met in <!-- m --><a class="postlink" href="http://www.tddft.org/pipermail/ape-users/2010-November/000018.html">http://www.tddft.org/pipermail/ape-user ... 00018.html</a><!-- m -->), I failed to generate TB09 pseudopotential. Are there other ways to generate MetaGGA pseudopotential for abinit?<br /> <br />Just for test, I use a standard PBE pseudopotential with pspxc=11, in the input file, i use ixc=-208012 (the TB09 case). And a good band structure with a good band gap was obtained. Is such treatment reasonable?  <br /><br />Any suggestion will be appreciated. <br /><br />Yours<br />Ding-Fu Shao</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: question about metaGGA pseudopotential</h3>
+				<div class="date">Posted: <strong>Sun Jun 22, 2014 12:38 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content"><blockquote class="uncited"><div>Is the metagga not implemented in paw in ABINIT? <br /></div></blockquote><br /><br />No, meta-GGA with PAW is not available<br /><br /><blockquote class="uncited"><div>I also trie to generate pseudopotential using APE code. But maybe due to the problem of APE code itself (I found the same error i met in <!-- m --><a class="postlink" href="http://www.tddft.org/pipermail/ape-user">http://www.tddft.org/pipermail/ape-user</a><!-- m --> ... 00018.html), I failed to generate TB09 pseudopotential. Are there other ways to generate MetaGGA pseudopotential for abinit?<br /></div></blockquote><br /><br />There are several pseudopotential generators freely available but APE is interfaced with libxc hence it uses the same implementation for the meta-GGA vxc <br />as the one employed in Abinit. I would say that APE is highly recommended if you want to perform meta-GGA calculations with Abinit.   <br />Did you check if the problem you have encountered with the meta-GGA pseudo has been solved in the recent releases of APE?<br /><br />Matteo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: question about metaGGA pseudopotential</h3>
+				<div class="date">Posted: <strong>Tue Jun 24, 2014 5:39 pm</strong></div>
+				<div class="author">by <strong>dfshao</strong></div>
+				<div class="content"><blockquote class="uncited"><div><br />There are several pseudopotential generators freely available but APE is interfaced with libxc hence it uses the same implementation for the meta-GGA vxc <br />as the one employed in Abinit. I would say that APE is highly recommended if you want to perform meta-GGA calculations with Abinit.   <br />Did you check if the problem you have encountered with the meta-GGA pseudo has been solved in the recent releases of APE?<br /><br />Matteo</div></blockquote><br /><br />Dear Matteo，<br /><br /> Thanks very much for your reply! After browsing the archive of the mail lists of APE, I found the error can be fixed by changing the input parameters of Mixing.<br /><br />Now I can generate the TB09  pseudopotential. The related band gap is still largely underestimated. I will try to tune the radius of each orbital and hope it can be improved.<br /><br /><blockquote class="uncited"><div>No, meta-GGA with PAW is not available</div></blockquote><br /><br />Hope the meta-GGA can be performed in the future release of Abinit. Is there any plan about it ?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: question about metaGGA pseudopotential</h3>
+				<div class="date">Posted: <strong>Wed Jun 25, 2014 2:00 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content"><blockquote class="uncited"><div>Hope the meta-GGA can be performed in the future release of Abinit. Is there any plan about it ?<br /></div></blockquote><br /><br />I'm not aware of any plan about meta-GGA with PAW</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=2708&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:44:02 GMT -->
+</html>

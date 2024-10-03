@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=3313&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:04:30 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; diag_moldyn.py gets error for MD ouput files of Abinit-8.0.7</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>diag_moldyn.py gets error for MD ouput files of Abinit-8.0.7</h2>
+		<p><a href="viewtopic35e6.html?f=12&amp;t=3313">https://forum.abinit.org/viewtopic.php?f=12&amp;t=3313</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>diag_moldyn.py gets error for MD ouput files of Abinit-8.0.7&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Mon Jun 27, 2016 7:23 am</strong></div>
+				<div class="author">by <strong>thanusit</strong></div>
+				<div class="content">Dear All<br /><br />I performed the tutorial lesson on Molecular Dynamics, tmoldyn_01, with Abinit-8.0.7. The calculation was successfully completed but post processing of the MD results with diag_moldyn.py got the following error:<br />...<br />[thanusit@physics-clusters tmoldyn_01]$ python diag_moldyn.py <br />Vous n'avez pas de fichier netcdf pour diagnostics !<br />...<br /><br />I wonder if this is due to the script cannot cope with the change of file extension introduced in abinit-8.0.7, i.e. from _HIST to _HIST.nc, or other issues?<br /><br />(Please note that my Abinit-8.0.7 was built with links against python-2.7.5, netcdf-4.3.1, hdf-5.18.12, openmpi-1.6.5.)<br /><br /><br />Regards,<br />Thanusit</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: diag_moldyn.py gets error for MD ouput files of Abinit-8</h3>
+				<div class="date">Posted: <strong>Wed Jun 29, 2016 1:25 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content"><blockquote class="uncited"><div>I wonder if this is due to the script cannot cope with the change of file extension introduced in abinit-8.0.7, i.e. from _HIST to _HIST.nc, or other issues?<br /></div></blockquote><br /><br />Yes, could you try this patch?<br /><br /><br />=== modified file 'doc/tutorial/lesson_paral_moldyn/diag_moldyn.py'<br />--- doc/tutorial/lesson_paral_moldyn/diag_moldyn.py	2015-01-24 08:15:18 +0000<br />+++ doc/tutorial/lesson_paral_moldyn/diag_moldyn.py	2016-06-29 11:22:09 +0000<br />@@ -43,7 +43,7 @@<br /> 	ok_OUT=-1;ok_MOLDYN=-1<br /> 	if len(OUT_list) &gt; 0 :<br /> 		OUT_list.sort() ; OUT_list.reverse()<br />-		fic_HIST=OUT_list[0][1].replace('_OUT.nc','_HIST')<br />+		fic_HIST=OUT_list[0][1].replace('_OUT.nc','_HIST.nc')<br /> 		if os.path.exists(fic_HIST) :<br /> 			fiche = fic_HIST<br /> 			ok_OUT=0<br />@@ -74,7 +74,7 @@<br /> 		TypeFichier=1<br /> 		fichier1=file<br /> 		fichier2=''<br />-	elif file.find('_HIST') == len(file)-5 :<br />+	elif file.find('_HIST.nc') == len(file)-8 :<br /> 		TypeFichier=2<br /> 		fichier1=file<br /> 		fichier2=file.replace('_HIST','_OUT.nc')</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: diag_moldyn.py gets error for MD ouput files of Abinit-8</h3>
+				<div class="date">Posted: <strong>Thu Jun 30, 2016 7:08 am</strong></div>
+				<div class="author">by <strong>thanusit</strong></div>
+				<div class="content">Dear Gmatteo<br /><br />Thank you for your reply. <br />I tried the patch you suggested. This fixes the above error but a new one came up, as shown below.<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&#91;thanusit@physics-clusters tmoldyn_01&#93;$ python diag_moldyn_patched.py <br />Traceback (most recent call last):<br />&nbsp; File &quot;diag_moldyn_patched.py&quot;, line 213, in &lt;module&gt;<br />&nbsp; &nbsp; FDR = lireNetcdf()<br />&nbsp; File &quot;diag_moldyn_patched.py&quot;, line 60, in lireNetcdf<br />&nbsp; &nbsp; ConvNetCdf_Ascii(fiche)<br />&nbsp; File &quot;diag_moldyn_patched.py&quot;, line 122, in ConvNetCdf_Ascii<br />&nbsp; &nbsp; ncfile2 = netcdf.netcdf_file(fichier2, 'r')<br />&nbsp; File &quot;/share/apps/python2.7/gcc-4.7.2/lib/python2.7/site-packages/scipy/io/netcdf.py&quot;, line 198, in __init__<br />&nbsp; &nbsp; self.fp = open(self.filename, '%sb' % mode)<br />IOError: &#91;Errno 2&#93; No such file or directory: 'tmoldyn_out_OUT.nc.nc'<br />Exception AttributeError: &quot;'netcdf_file' object has no attribute 'fp'&quot; in &lt;bound method netcdf_file.close of &lt;scipy.io.netcdf.netcdf_file object at 0xfb0610&gt;&gt; ignored<br /><br /></code></pre></div><br /><br />It looks like the '.nc' extension is appended to '_OUT.nc' so that the script is looking for '_OUT.nc.nc' which doesn't exist.<br /><br />Regards,<br />Thanusit</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: diag_moldyn.py gets error for MD ouput files of Abinit-8</h3>
+				<div class="date">Posted: <strong>Thu Jun 30, 2016 11:01 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">I'm attaching another version of the script that seems to work.<br />I had to change the file extension by adding a `.log` at the end in order  to upload the file.<br /><br />HTH<br />M</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: diag_moldyn.py gets error for MD ouput files of Abinit-8</h3>
+				<div class="date">Posted: <strong>Fri Jul 01, 2016 12:27 am</strong></div>
+				<div class="author">by <strong>thanusit</strong></div>
+				<div class="content">Dear Gmatteo <br /><br />That works.<br /><br />Thank you very much.<br />Thanusit</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=3313&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:04:30 GMT -->
+</html>

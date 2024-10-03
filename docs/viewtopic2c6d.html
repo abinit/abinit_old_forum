@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1191&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:44:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; problems in configuring Abinit 6.8.1</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>problems in configuring Abinit 6.8.1</h2>
+		<p><a href="viewtopic8450.html?f=3&amp;t=1191">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1191</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>problems in configuring Abinit 6.8.1</h3>
+				<div class="date">Posted: <strong>Wed Jun 29, 2011 9:00 am</strong></div>
+				<div class="author">by <strong>DrSingh</strong></div>
+				<div class="content">Dear Members<br /><br />I tried to configure Abinit-6.8.1. After I have untar the latest version of Abinit. Following error occurs after configure command<br /><br /><strong class="text-strong">checking for the requested transferable I/O support... netcdf+etsf_io<br />checking netcdf.h usability... no<br />checking netcdf.h presence... no<br />checking for netcdf.h... no<br />checking for library containing nc_open... no<br />checking for Fortran module includes... unknown<br />configure: WARNING: falling back to internal netcdf version<br />configure: WARNING: ETSF_IO requires missing NetCDF support<br />configure: WARNING: falling back to internal etsf_io version<br />checking for the actual transferable I/O support... netcdf-fallback+etsf_io-fallback<br />checking for the requested timer support... abinit<br />checking for the actual timer support... abinit<br />checking for the requested linear algebra support... netlib<br />checking for library containing zgemm... no<br />checking for library containing zhpev... no<br />checking whether we have a serial linear algebra support... no<br />configure: WARNING: falling back to internal linear algebra libraries<br />checking whether we have a parallel linear algebra support... no<br />checking for the actual linear algebra support... netlib-fallback<br />checking for the requested math support... none<br />checking for the actual math support... none<br />checking for the requested FFT support... none<br />checking for the actual FFT support... none<br />checking for the requested DFT support... atompaw+bigdft+libxc+wannier90<br />checking xc.h usability... no<br />checking xc.h presence... no<br />checking for xc.h... no<br />checking xc_funcs.h usability... no<br />checking xc_funcs.h presence... no<br />checking for xc_funcs.h... no<br />checking for library containing xc_func_init... no<br />checking for Fortran module includes... unknown<br />configure: WARNING: falling back to internal libxc version<br />configure: WARNING: AtomPAW recommends missing LibXC support<br />configure: WARNING: BigDFT requires missing linear algebra support<br />configure: WARNING: falling back to internal atompaw version<br />configure: WARNING: BigDFT requires missing LibXC support<br />configure: WARNING: BigDFT requires missing linear algebra support<br />configure: WARNING: falling back to internal bigdft version<br />configure: WARNING: wannier90 requires missing linear algebra support<br />configure: WARNING: falling back to internal wannier90 version<br />checking for the actual DFT support... libxc-fallback+atompaw-fallback+bigdft-fallback+wannier90-fallback<br />configure: using former plugins as a temporary workaround<br />configure: fallbacks to enable =&gt; atompaw bigdft etsf_io libxc linalg netcdf wannier90<br />checking whether to build atompaw... yes<br />checking whether to build bigdft... yes<br />checking whether to build etsf_io... yes<br />checking whether to build fox... no<br />checking whether to build libxc... yes<br />checking whether to build linalg... yes<br />checking whether to build netcdf... yes<br />checking whether to build wannier90... yes<br />configure: using tarball repository /home/guri/.abinit/tarballs<br />checking for a source tarball of LINALG... yes<br />checking for md5sum... md5sum<br />configure: tarball MD5 check succeeded<br />configure: applying LINALG tricks (vendor: gnu, version: 4.5)<br />checking whether to enable the LINALG fallback... yes<br />checking whether to build the LINALG fallback... yes<br />checking whether to enable the FOX fallback... no<br />checking whether to build the FOX fallback... no<br />checking for a source tarball of NETCDF... no<br />configure: downloading NETCDF - this may take a while<br />checking availability of NETCDF from URL 1... no<br />checking availability of NETCDF from URL 2... no<br />configure: WARNING: could not download NETCDF fallback tarball<br /></strong><br /><br />When configuring my computer is connected to Internet, couldn't understand why it cannot download. I have also tried to download netcdf-4.1.1.tar.gz from internet separately and put it in the folder tarballs, but with no help. Same problem occurs with earlier versions of Abinit. Any clue to this problem.<br /><br />Cheers<br />Dr Singh</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: problems in configuring Abinit 6.8.1</h3>
+				<div class="date">Posted: <strong>Wed Jun 29, 2011 5:11 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">As shown in the output of configure, this is where you should put the downloaded tarballs:<br /><blockquote class="uncited"><div>configure: using tarball repository /home/guri/.abinit/tarballs</div></blockquote><br /><br />Otherwise, there is no reason for the download to fail, except if both wget and curl are not installed on your system, which is extremely rare.<br /><br />A quick-and-dirty fix would be to disable NetCDF and ETSF_IO:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../configure --with-trio-flavor=&quot;none&quot;</code></pre></div></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1191&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:44:44 GMT -->
+</html>

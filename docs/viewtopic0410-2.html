@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=32&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:53:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [DONE] Missing dummy line in tnlo_5.files</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[DONE] Missing dummy line in tnlo_5.files</h2>
+		<p><a href="viewtopic3c3e-2.html?f=19&amp;t=32">https://forum.abinit.org/viewtopic.php?f=19&amp;t=32</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[DONE] Missing dummy line in tnlo_5.files</h3>
+				<div class="date">Posted: <strong>Fri Jan 22, 2010 11:45 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Dear all,<br /><br />while analysing merged DDBs from nlo &amp; strain calc., I encountered that anaddb asks for another dummy line in tnlo_5.files file - tnlo_5_dummy4. Otherwise, I got an error:<br />At line 79 of file init9.F90 (unit = 5, file = 'stdin')<br />Fortran runtime error: End of file<br /><br />It concerns the ddk ddb for elphon. I used tnlo_5.in  and tnlo_5.files from tutorial without changes.<br /><br />If I'm again wrong (as in nlo Tutorial) or this happens only in my specific case, I apologize in advance.<br /><br />Cheers!<br /><br />Igor Lukacevic</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Missing dummy line in tnlo_5.files</h3>
+				<div class="date">Posted: <strong>Sat Jan 23, 2010 7:17 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content"><blockquote><div><cite>ilukacevic wrote:</cite>Dear all,<br /><br />while analysing merged DDBs from nlo &amp; strain calc., I encountered that anaddb asks for another dummy line in tnlo_5.files file - tnlo_5_dummy4. Otherwise, I got an error:<br />At line 79 of file init9.F90 (unit = 5, file = 'stdin')<br />Fortran runtime error: End of file<br /><br />It concerns the ddk ddb for elphon. I used tnlo_5.in  and tnlo_5.files from tutorial without changes.<br /></div></blockquote><br />Hello Igor,<br /><br />Normally the file should be ok: the composition of the files file should be 7 lines (my modifications):<br /><br />tnlo_5.in<br />tnlo_5.out<br />tnlo_4.ddb.out<br />tnlo_5_thm_dummy<br />tnlo_5_gkk_dummy<br />tnlo_5_ep_dummy<br />tnlo_5_ddk_dummy<br /><br />It should be ok, but is not actually tested because in the tests the anaddb files file is created on the fly, and the tnlo_5.files is not used. I have corrected the anaddb documentation as well, and put a reference in the html doc to explain the process. This files file should actually be in doc/ and not in tests/ as it is not really used for the tests. We'll have to think about how to reorganize things.<br /><br />For your error, something else is going on... Could you give us the version of anaddb/abinit, and the files file you are using? It may be that they are incompatible, as things have changed from 5.4 to 5.8 and so on<br /><br /><br /><blockquote class="uncited"><div>If I'm again wrong (as in nlo Tutorial) or this happens only in my specific case, I apologize in advance.<br /><br />Cheers!<br /><br />Igor Lukacevic</div></blockquote><br /><br />Not at all - your comment was quite correct in that the correspondence between input acell and acell inside the program is not transparent: for the input conventional units are more convenient, and inside the lattice vector lengths are always used.<br /><br />To make matters worse, there are often compensating factors, such as  1./sqrt(2) (=0.7) or 1/sqrt(3) (=0.57), and the bohr radius (=0.53), which are more or less similar, so you end up getting numbers which are close for a_cubic in Angstrom and acell_primitive in bohr - terrible! If you have a suggestion on how to make things clearer in output and tutorial, tell us.<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Missing dummy line in tnlo_5.files</h3>
+				<div class="date">Posted: <strong>Mon Jan 25, 2010 11:01 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content"><blockquote><div><cite>mverstra wrote:</cite>Hello Igor,<br /><br />Normally the file should be ok: the composition of the files file should be 7 lines (my modifications):<br /><br />tnlo_5.in<br />tnlo_5.out<br />tnlo_4.ddb.out<br />tnlo_5_thm_dummy<br />tnlo_5_gkk_dummy<br />tnlo_5_ep_dummy<br />tnlo_5_ddk_dummy<br /><br />It should be ok, but is not actually tested because in the tests the anaddb files file is created on the fly, and the tnlo_5.files is not used. I have corrected the anaddb documentation as well, and put a reference in the html doc to explain the process. This files file should actually be in doc/ and not in tests/ as it is not really used for the tests. We'll have to think about how to reorganize things.</div></blockquote><br /><br />I understand and agree. The files from the tutorial directory are the first ones a newbie uses and builds hers/his calculations upon. The Tutorial itself directs users to them.<br /><br /><blockquote><div><cite>mverstra wrote:</cite>For your error, something else is going on... Could you give us the version of anaddb/abinit, and the files file you are using? It may be that they are incompatible, as things have changed from 5.4 to 5.8 and so on</div></blockquote><br /><br />I'm using abinit.5.8.4p and anaddb which came with it. The files are in the attachment. tnlo_5.files contains the 4th dummy line I added. After adding, anaddb runs without problem. The one I took from the abinit-5.8.4/tests/tutorespfn/Input directory doesn't contain this additional line (the last one).<br /><br /><blockquote><div><cite>mverstra wrote:</cite>Not at all - your comment was quite correct in that the correspondence between input acell and acell inside the program is not transparent: for the input conventional units are more convenient, and inside the lattice vector lengths are always used.<br /><br />To make matters worse, there are often compensating factors, such as  1./sqrt(2) (=0.7) or 1/sqrt(3) (=0.57), and the bohr radius (=0.53), which are more or less similar, so you end up getting numbers which are close for a_cubic in Angstrom and acell_primitive in bohr - terrible! If you have a suggestion on how to make things clearer in output and tutorial, tell us.</div></blockquote><br /><br />Now You're digging me out of the hole <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":-)" title="Smile" /> I don't think that one can do much about the similarity of these numbers. But Your comparison sentence is quite good and gives a nice example. Maybe it should also find its place inside the Tutorial (at least I don't remember seeing it). It is like the fact that you repeat throughout the Tutorial that the convergence testing should be done on the property wanted, and not just ex. energy. After one finishes the Tutorial, this fact remains on mind.<br />My opinion is that when one tries to explain smth to someone, repeating is one of the key issues. If you repeat smth (what you think might be confusing or controversial (too strong word) in the future) from the beginning, then after enough time it will get into the ones ear and she/he will remember it, i.e. have it in mind. This can be tedious, for it usually concerns the basics, but the issue is what you want do achieve with the tutorial. Remembering is the start for understanding.<br />But You were absolutely right, anyone with even starting knowledge on crystals understands the difference between the input and inside acell.<br /><br />Cheers!<br /><br />Igor Lukacevic</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=32&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:53:16 GMT -->
+</html>

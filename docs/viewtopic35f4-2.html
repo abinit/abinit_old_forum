@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3442&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:23:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Large metal oxide surface cell SCF convergence</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Large metal oxide surface cell SCF convergence</h2>
+		<p><a href="viewtopic0766.html?f=9&amp;t=3442">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3442</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Large metal oxide surface cell SCF convergence</h3>
+				<div class="date">Posted: <strong>Thu Dec 01, 2016 2:35 pm</strong></div>
+				<div class="author">by <strong>dyu</strong></div>
+				<div class="content">Does anyone have success in calculating a large surface cell? If you do, can you please share your input files?<br />I have trouble in obtaining the SCF convergence with a metal oxide (roughly 10 x10 x25 angstrom) surface even I am using a norm-conserving pseudo-potential.<br />I am kind of frustrated with ABINIT now. Those calculations are supposed to be a very routine and straightforward calculation with commercial software like VASP.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Large metal oxide surface cell SCF convergence</h3>
+				<div class="date">Posted: <strong>Fri Dec 02, 2016 11:42 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Dyu,<br />The convergence might depend on the system you are running on. You said to run a metal oxide, do you really mean a metallic system or a transition-metal oxide?<br />How bad is your convergence? Does it succeed to converge up to a given precision and then it is stuck at this precision or is it completely bad from the beginning or does it converge and then starts to diverge, do you have an error/wraning message, etc?<br />The first input variables you can play with are diemix and diemac, did you try to modify them away from default values (reducing diemix for example)? You can also test to increase the nline flag (10 or 12 or more depending how it goes).<br />Something that might help for your case is to change the preconditioning, see iprcel input flag. I got some large and inhomogeneous systems (insulators with small gaps) going from not converging or converging within several hundred of steps to converging within 10 to 20 steps by tuning the iprcel flag.<br />The default values in Abinit might not be the best ones for your systems.<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Large metal oxide surface cell SCF convergence</h3>
+				<div class="date">Posted: <strong>Mon Dec 05, 2016 3:40 pm</strong></div>
+				<div class="author">by <strong>dyu</strong></div>
+				<div class="content">Eric,<br /><br />Thanks for your reply. What I tried to study is CuFeS2 surface.<br />Below is my input file. The output file is also attached. The log file is too large to attach. <br />I tried your suggestions. But so far, none has worked.<br />Anyhow, I appreciate it your response.<br />Best Regards,<br />DYU<br /><br /><br />####################################################<br /># Atoms Stucture created by CellToAbinit Converter !<br />####################################################<br /><br /># Definition of the unit cell<br />#The length of the primitive vectors<br />#                    1 Bohr=0.5291772108 Angstroms<br /># acell 10.497600 10.497600 25.000000 Angstroms<br />acell 19.837589 19.837589 47.243153<br />rprim<br />    1.000000  0.000000  0.000000<br />    0.000000  1.000000  0.000000<br />    0.000000  0.000000  1.000000<br /><br />#Definition of the atom types<br />#      10 kind of atoms<br />#       ['H', 'C', 'O']<br />ntypat 3<br />znucl  29 26 16<br /><br />#Definition of tha atoms<br />natom  64<br />typat  16*1 16*2 32*3<br />xred<br />  0.0009752852724159  0.0009706455887686  0.3001052552236945<br />  0.2510431823076404  0.2510627587651560  0.1042064982470400<br />  0.2508868797775855  0.0009716751043642  0.1987684168066323<br />  0.0009382144490147  0.2509448826398426  0.0000000000000000<br />  0.5009752852724160  0.0009706455887686  0.3001052552236945<br />  0.7510431823076408  0.2510627587651560  0.1042064982470400<br />  0.7508868797775856  0.0009716751043642  0.1987684168066323<br />  0.5009382144490147  0.2509448826398426  0.0000000000000000<br />  0.0009752852724159  0.5009706455887686  0.3001052552236945<br />  0.2510431823076404  0.7510627587651559  0.1042064982470400<br />  0.2508868797775855  0.5009716751043642  0.1987684168066323<br />  0.0009382144490147  0.7509448826398426  0.0000000000000000<br />  0.5009752852724160  0.5009706455887686  0.3001052552236945<br />  0.7510431823076408  0.7510627587651559  0.1042064982470400<br />  0.7508868797775856  0.5009716751043642  0.1987684168066323<br />  0.5009382144490147  0.7509448826398426  0.0000000000000000<br />  0.0009380269960699  0.0009357052108406  0.0979545194752402<br />  0.2509275772737494  0.2509063243995641  0.2963638269775226<br />  0.2509573616826728  0.0009958466697171  0.0000039199999975<br />  0.0009321972921387  0.2509131989197733  0.1966289128943849<br />  0.5009380269960702  0.0009357052108406  0.0979545194752402<br />  0.7509275772737495  0.2509063243995641  0.2963638269775226<br />  0.7509573616826728  0.0009958466697171  0.0000039199999975<br />  0.5009321972921389  0.2509131989197733  0.1966289128943849<br />  0.0009380269960699  0.5009357052108405  0.0979545194752402<br />  0.2509275772737494  0.7509063243995636  0.2963638269775226<br />  0.2509573616826728  0.5009958466697171  0.0000039199999975<br />  0.0009321972921387  0.7509131989197729  0.1966289128943849<br />  0.5009380269960702  0.5009357052108405  0.0979545194752402<br />  0.7509275772737495  0.7509063243995636  0.2963638269775226<br />  0.7509573616826728  0.5009958466697171  0.0000039199999975<br />  0.5009321972921389  0.7509131989197729  0.1966289128943849<br />  0.1817200187612814  0.0884933525842759  0.3393552265550508<br />  0.3201932735921075  0.4132977138357516  0.3393339708594195<br />  0.1116742540284368  0.1211365491383456  0.1500537542312304<br />  0.1214970073454634  0.3577896450660130  0.2479035614919708<br />  0.3759627914951977  0.1206330018289918  0.0519043199999984<br />  0.3803481412579053  0.1440096184562397  0.2479083626831271<br />  0.1259647919524483  0.3812931527206231  0.0518892400000013<br />  0.3902508329501212  0.3808357296738636  0.1501043590418803<br />  0.6817199235014176  0.0884933525842759  0.3393552265550508<br />  0.8201933688519789  0.4132977138357516  0.3393339708594195<br />  0.6116741587685659  0.1211365491383456  0.1500537542312304<br />  0.6214971026053346  0.3577896450660130  0.2479035614919708<br />  0.8759627914951977  0.1206330018289918  0.0519043199999984<br />  0.8803481412579052  0.1440096184562397  0.2479083626831271<br />  0.6259647919524483  0.3812931527206231  0.0518892400000013<br />  0.8902507376902499  0.3808357296738636  0.1501043590418803<br />  0.1817200187612814  0.5884933525842763  0.3393552265550508<br />  0.3201932735921075  0.9132977138357511  0.3393339708594195<br />  0.1116742540284368  0.6211365491383459  0.1500537542312304<br />  0.1214970073454634  0.8577895498061420  0.2479035614919708<br />  0.3759627914951977  0.6206330018289918  0.0519043199999984<br />  0.3803481412579053  0.6440096184562397  0.2479083626831271<br />  0.1259647919524483  0.8812931527206231  0.0518892400000013<br />  0.3902508329501212  0.8808358249337349  0.1501043590418803<br />  0.6817199235014176  0.5884933525842763  0.3393552265550508<br />  0.8201933688519789  0.9132977138357511  0.3393339708594195<br />  0.6116741587685659  0.6211365491383459  0.1500537542312304<br />  0.6214971026053346  0.8577895498061420  0.2479035614919708<br />  0.8759627914951977  0.6206330018289918  0.0519043199999984<br />  0.8803481412579052  0.6440096184562397  0.2479083626831271<br />  0.6259647919524483  0.8812931527206231  0.0518892400000013<br />  0.8902507376902499  0.8808358249337349  0.1501043590418803<br />#fix atoms<br />natfix 16<br />iatfix 4 8 12 16 19 23 27 31 37 39 45 47 53 55 61 63<br /><br /><br />#Basis definitions<br /> ixc 11<br /> ecut 20<br /> ecutsm 0.5<br /># pawecutdg 30.<br /><br />#geometry optimziation<br />ionmov  2              # Use the modified Broyden algorithm<br />ntime   100             # Maximum number of Broyden &quot;timesteps&quot;<br />tolmxf  5.0d-5         # Stopping criterion for the geometry optimization : when<br /><br />                       # the residual forces are less than tolmxf, the Broyden<br />                       #                        # algorithm can stop<br /><br />#Definition of occupation numbers<br />occopt 3<br />tsmear 0.01<br />#<br />#SCF cycle parameters<br /> tolvrs 1.0d-10<br /> nstep 200<br /><br />#K-points and sym<br />kptopt 0  # Enter the k points manually<br />nkpt   1  # one k point<br />kpt 0 0 0<br />#dielectric<br />#iprcel 45<br />#pawsushat 1<br />#diemac 12.0<br />diemix 0.1<br />#nsppol 2<br />#spinmagntarget 0<br />charge 0<br /><br />#pawovlp 15.0<br />iscf 12<br />usepotzero 2<br />#parallization parameters<br />autoparal 1<br /><br />#I/O parameters<br /> prtwf 1 prtden 0  prteig 0<br /> getwfk -1</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Large metal oxide surface cell SCF convergence</h3>
+				<div class="date">Posted: <strong>Mon Dec 12, 2016 11:27 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Dyu,<br />Did you try to converge more deeply the first scf step to have a better wave function? The converge is indeed very slow in your case but it is difficult to tell you more about it without running the calculation myself. The problem might also depends on the compilation flags you used to generate your executable, just to check it, which flags (or what did you put in your .ac file) did you use to compile abinit?<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3442&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:23:55 GMT -->
+</html>

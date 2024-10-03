@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1175&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:09:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Memory Issue When Running Abinit In Parallel</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Memory Issue When Running Abinit In Parallel</h2>
+		<p><a href="viewtopicf4dd.html?f=9&amp;t=1175">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1175</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Memory Issue When Running Abinit In Parallel</h3>
+				<div class="date">Posted: <strong>Wed Jun 22, 2011 12:45 am</strong></div>
+				<div class="author">by <strong>xmilchmann</strong></div>
+				<div class="content">Hello,<br /><br />I'm attempting to calculate the total energy of a single aluminum atom using the parallel version of abinit (abinip). I've done the calculation with the serial version of abinit thus far, and determined that running the calculation with a cell size of 80x80x80 and an energy cutoff (ecut) of 40.0 is necessary to get a properly converged value.<br /><br />Where my problem lies is when I try to run the calculation using these parameters and the parallel version of abinit on my cluster. When I try to do this, I either get the error &quot;forrtl: severe (41): insufficient virtual memory&quot; in my log file and the job terminates, or my cluster terminates the job due to excessive memory usage (resource violation). I've tried increasing my memory allotment when I run the job (setting pmem=4000mb in my PBS script), and increasing the number of processors (32 tried last), but to no avail. Bear in mind that ~4gb of memory for each of 32 processors gives me a total of ~128gb of memory... and i'm still running out. The email I get when the job is terminated looks like this:<br /><br />Execution terminated<br />Exit_status=41<br />resources_used.cput=00:31:59<br />resources_used.mem=146545824kb<br />resources_used.vmem=282983892kb<br />resources_used.walltime=00:02:42<br /><br />That's over 280gb of virtual memory used!!! This confuses me as the calculation was able to be run in serial on the head node of my cluster without issue (this has much less memory). Why is it consuming so much memory in parallel? I've done other calculations using the parallel version of abinit, so I know that the software works.<br /><br />Eventually, I will need to calculate the energy of a CLUSTER of aluminum atoms as well, so I foresee myself needing an even larger cell size/cutoff value to get the correct results. Is this a calculation that is able to be run in a parallel environment, or is it beyond the capabilities of abinit and current hardware? What am I missing?<br /><br />I've attached my input file for examination. Any help more experienced abinit users could offer would be greatly appreciated.<br /><br />Thanks,<br />Mike</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1175&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:09:02 GMT -->
+</html>

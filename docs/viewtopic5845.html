@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1400&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:51:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; wf file</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>wf file</h2>
+		<p><a href="viewtopic4317-3.html?f=9&amp;t=1400">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1400</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>wf file</h3>
+				<div class="date">Posted: <strong>Fri Nov 04, 2011 4:48 pm</strong></div>
+				<div class="author">by <strong>bahaar</strong></div>
+				<div class="content">Hi<br />I try to do &quot;optic&quot; calculations but I have no enough memory to do sixth dataset corresponding to tutorial in one run. So i used 5 seprate runs instead one.<br />1. In the first run, the input include two first datasets that are in tutorial.Then i renamed &quot;...-optic_1o_DS1_DEN&quot; to &quot;...-optic_3i_DS1_DEN &quot; and &quot;...-optic_1o_DS1_WFK&quot; to &quot; ...-optic_3i_DS1_WFK&quot;. Then I changed &quot;...-optic_1.files&quot; in this way:<br />...-optic_1.in<br />...-optic_3.out<br />...-optic_3i<br />...-optic_3o<br />...-optic_3<br />....<br />2. second input includ third dataset in tutorial. and this is my input:<br />ndtset 1<br />#Third dataset : NSC run with large number of bands, and points in the the full BZ<br />iscf3 -2<br />nband3 18<br />nstep3 100<br />kptopt3 2<br />irdwfk3 1 irdden3 1<br />....<br />then i renamed the &quot;...-optic_3o_DS1_WFK&quot; to &quot; ...-optic_4i_DS1_WFK&quot;. Then I changed &quot;...-optic_1.files&quot; in this way:<br />...-optic_1.in<br />...-optic_4.out<br />...-optic_4i_DS1_WFK<br />...-optic_4o<br />...-optic_4<br />....<br />3. third input includ fourth dataset in tutorial. and this is my input:<br />ndtset 1<br />#Fourth dataset : ddk response function along axis 1<br />iscf4 -3<br />nband4 18<br />nstep4 1 nline4 0<br />kptopt4 2<br />nqpt4 1 qpt4 0.0d0 0.0d0 0.0d0<br />rfdir4 1 0 0<br />rfelfd4 2<br />irdwfk4 1<br /><br />i continued this running for all six datasets. After last run i again renamed the &quot;...-optic_6i_DS1_WFK&quot; to &quot;...-optic_3o_DS1_WFK&quot;. Then for getting dielectric function i do the last step and used &quot;SrS-optic-2.files&quot; and &quot;SrS-optic-2.in&quot; as tutorial.But i changed the name of  Wf7, Wf8, Wf9 to Wfk!? I have no Wf . This is the &quot;SrS-optic-2.in&quot;:<br /><br />...-optic_4o_DS1_WFK<br />...-optic_5o_DS1_WFK<br />...-optic_6o_DS1_WFK<br />...-optic_3o_DS1_WFK<br />.....<br />but the running stoped fast and this error appeared in the log file:<br />rwwf.F90:615:ERROR<br />Reading option of rwwf. Trying to read<br />a RF eigenvalue record of a wf file, unit= 11<br />gave iostat=5016. Your file is likely not correct.<br />Action: check your input wf file.<br />leave_new : decision taken to exit ...<br />DATA TYPE INFORMATION:<br />REAL: Data type name: REAL(DP)<br />....<br />Which of these Input i should used in the &quot;...-optic_1.files&quot;, &quot;...-optic_4i&quot; or &quot;...-optic_4i_DS1_WFK&quot;.<br />Thanks.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: wf file</h3>
+				<div class="date">Posted: <strong>Sat Feb 09, 2013 11:21 pm</strong></div>
+				<div class="author">by <strong>ljludwig</strong></div>
+				<div class="content">If you want to use sth as input, you should use the root name, i.e. the name before &quot;_WFK&quot;. in your case &quot;...-optic_4i_DS1&quot;. Then using irdwfk, it will find &quot;...-optic_4i_DS1_WFK&quot;.<br /><br />Good luck.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1400&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:51:35 GMT -->
+</html>

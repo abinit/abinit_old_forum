@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4435&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:16:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; SCF cycle is not starting</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>SCF cycle is not starting</h2>
+		<p><a href="viewtopic1a37.html?f=9&amp;t=4435">https://forum.abinit.org/viewtopic.php?f=9&amp;t=4435</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>SCF cycle is not starting</h3>
+				<div class="date">Posted: <strong>Wed Jun 03, 2020 4:07 pm</strong></div>
+				<div class="author">by <strong>ssh77</strong></div>
+				<div class="content">Hi,<br>
+As I am new to Abinit I have tried to make an input file out of Mn2O3 an include all basic input parameters needed to make an initial relaxation of the ions. Then I would like to do it for the electrons and finally for the geometry and cell.<br>
+<br>
+However, the input file that I have attached does not start any SCF cycle and I cannot figure out what I have done wrong. It seems as if the calculation is aborted after the psp is read but no error in the err file either.<br>
+<br>
+I have attached the input file and its corresponding files file, with the latter named .in in order to be able to attach the file.<br>
+<br>
+Is anyone able to try and see what is wrong with the input file? <br>
+The psp8 files have been downloaded from the pseudo dojo. <br>
+What ixc do I use for the PBEsol? PBE I use ixc=11 in this file, which I hope is correct.<br>
+What ixc do I use for the PBE from the JTH psp files?<br>
+<br>
+I hopoe somebody can help me get this going.<br>
+<br>
+Many thanks!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF cycle is not starting</h3>
+				<div class="date">Posted: <strong>Thu Jun 04, 2020 3:31 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear ssh77,<br>
+I ran your input and everything goes through fine after reading the psp files, so I don't know what can be your problem.<br>
+Can it be a memory problem (the job takes 6-7 Gb)?<br>
+Regarding the ixc, if you don't specify a value there, it'll be read directly from the pseudo file and set automatically to the right value (norm-conserving or PAW); always check in the output what is the value used. You can however reinforce a value that is different than the one from the pseudo.<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF cycle is not starting</h3>
+				<div class="date">Posted: <strong>Fri Jun 05, 2020 5:33 pm</strong></div>
+				<div class="author">by <strong>ssh77</strong></div>
+				<div class="content">Dear Eric,<br>
+<br>
+Thanks for testing the testscript I made. Did you get the SCF running? I am running on a laptop so maybe it stops before or I have to wait until it is finished? How do I see if the job is running still? when I refresh it just seems as if an output file and log file is added but the output file does not contain any SCF and seems as if it abruptly has stopped.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF cycle is not starting</h3>
+				<div class="date">Posted: <strong>Mon Jun 08, 2020 9:23 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear ssh77,<br>
+You are running a calculation with 80 atoms on a laptop?? How many CPU and RAM do you have, this is a big calculation that would require a multicore-job to get it running within a decent time...<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF cycle is not starting</h3>
+				<div class="date">Posted: <strong>Mon Jun 08, 2020 2:46 pm</strong></div>
+				<div class="author">by <strong>ssh77</strong></div>
+				<div class="content">Dear Eric,<br>
+<br>
+I have 16 gB RAM and a quad core i7(I installed with make mj4 but still shows 1 proc during calculations, but I assume it still uses 4 since it is relatively fast), but would like to use the GPU cores later if possible. Right now I don't know really how to install the GPU support. I would need help with that later when I am more familiar with abinit and its capabilities and would want to speed up things. <br>
+<br>
+Currently I am trying to test with a 30 atom cell and in the beginning of the out file it says the job should need less than ~176 mb of memory. But maybe that is physical storage on the hard drive and not RAM. <br>
+<br>
+Was it possible to check what jobs are running in the background and to stop them?<br>
+Should the SCF energies reach the same values if one would use the same settings as in VASP and "same" psp files? or are the energies fundamentally different due to different ways of calculating them in the two different softwares?<br>
+<br>
+Btw. off topic but where can I find the psp for all the lanthanides? only a couple are available from the JTH and the pseudo dojo.<br>
+I tried to install libxc but since I am new to this I don't know how to do it correctly, but I guess there's a lot more psps from the libxc.<br>
+<br>
+Thanks!<br>
+ssh77</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF cycle is not starting</h3>
+				<div class="date">Posted: <strong>Wed Jun 10, 2020 8:45 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content"><blockquote><div><cite><a href="memberlistc471.html?mode=viewprofile&amp;u=2802">ssh77</a> wrote: <a href="viewtopicd524.html?p=13134#p13134" data-post-id="13134" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><div class="responsive-hide">Mon Jun 08, 2020 2:46 pm</div></cite>
+I have 16 gB RAM and a quad core i7(I installed with make mj4 but still shows 1 proc during calculations, but I assume it still uses 4 since it is relatively fast), but would like to use the GPU cores later if possible. Right now I don't know really how to install the GPU support. I would need help with that later when I am more familiar with abinit and its capabilities and would want to speed up things. 
+</div></blockquote>
+
+make mj4 does not compile a parallel version of Abinit it just make the compilation in parallel. To activate the parallelism you have to activate the flags at the configure level. If you see it running on a single CPU means it is not a parallel job.<br>
+I do not know about the GPU usage, I never used it...<br>
+
+<blockquote><div><cite><a href="memberlistc471.html?mode=viewprofile&amp;u=2802">ssh77</a> wrote: <a href="viewtopicd524.html?p=13134#p13134" data-post-id="13134" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><div class="responsive-hide">Mon Jun 08, 2020 2:46 pm</div></cite>
+Currently I am trying to test with a 30 atom cell and in the beginning of the out file it says the job should need less than ~176 mb of memory. But maybe that is physical storage on the hard drive and not RAM. 
+</div></blockquote>
+It is a rough estimation, you can check in your system how much memory the executable is using to know the exact value but for 30 atoms with several symmetries and reasonable ecut, 200Mb sounds reasonable.<br>
+
+<blockquote><div><cite><a href="memberlistc471.html?mode=viewprofile&amp;u=2802">ssh77</a> wrote: <a href="viewtopicd524.html?p=13134#p13134" data-post-id="13134" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><div class="responsive-hide">Mon Jun 08, 2020 2:46 pm</div></cite>
+Was it possible to check what jobs are running in the background and to stop them?<br>
+Should the SCF energies reach the same values if one would use the same settings as in VASP and "same" psp files? or are the energies fundamentally different due to different ways of calculating them in the two different softwares?
+</div></blockquote>
+Vasp and Abinit have a different implementation and probably different algo of convergence and they have different pseudos such that the number of SCF and the value reached will be different.<br>
+
+<blockquote><div><cite><a href="memberlistc471.html?mode=viewprofile&amp;u=2802">ssh77</a> wrote: <a href="viewtopicd524.html?p=13134#p13134" data-post-id="13134" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><div class="responsive-hide">Mon Jun 08, 2020 2:46 pm</div></cite>
+Btw. off topic but where can I find the psp for all the lanthanides? only a couple are available from the JTH and the pseudo dojo.<br>
+I tried to install libxc but since I am new to this I don't know how to do it correctly, but I guess there's a lot more psps from the libxc.
+</div></blockquote>
+On the JTH v1.1 there are all of them, no? (<a href="https://www.abinit.org/psp-tables" class="postlink">https://www.abinit.org/psp-tables</a>)<br>
+<br>
+There are also other Ln PAW-pseudos with f-electron in the following webpage:<br>
+<a href="http://www.mineralscloud.com/resources/repaw/index.shtml" class="postlink">http://www.mineralscloud.com/resources/ ... ndex.shtml</a><br>
+<br>
+With norm-conserving pseudo-dojo only Ln with f in the core are available.<br>
+<br>
+Best,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF cycle is not starting</h3>
+				<div class="date">Posted: <strong>Fri Jun 12, 2020 12:47 pm</strong></div>
+				<div class="author">by <strong>ssh77</strong></div>
+				<div class="content"><blockquote><div><cite><a href="memberlist58ee.html?mode=viewprofile&amp;u=682">ebousquet</a> wrote: <a href="viewtopic02e7.html?p=13142#p13142" data-post-id="13142" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><div class="responsive-hide">Wed Jun 10, 2020 8:45 am</div></cite>
+<blockquote><div><cite><a href="memberlistc471.html?mode=viewprofile&amp;u=2802">ssh77</a> wrote: <a href="viewtopicd524.html?p=13134#p13134" data-post-id="13134" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><div class="responsive-hide">Mon Jun 08, 2020 2:46 pm</div></cite>
+I have 16 gB RAM and a quad core i7(I installed with make mj4 but still shows 1 proc during calculations, but I assume it still uses 4 since it is relatively fast), but would like to use the GPU cores later if possible. Right now I don't know really how to install the GPU support. I would need help with that later when I am more familiar with abinit and its capabilities and would want to speed up things. 
+</div></blockquote>
+
+make mj4 does not compile a parallel version of Abinit it just make the compilation in parallel. To activate the parallelism you have to activate the flags at the configure level. If you see it running on a single CPU means it is not a parallel job.<br>
+I do not know about the GPU usage, I never used it...
+</div></blockquote>
+Okay, I have asked about this in a different thread now. Hopefully I can receive some help enabling multicore.<br>
+
+<blockquote><div><cite><a href="memberlist58ee.html?mode=viewprofile&amp;u=682">ebousquet</a> wrote: <a href="viewtopic02e7.html?p=13142#p13142" data-post-id="13142" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><div class="responsive-hide">Wed Jun 10, 2020 8:45 am</div></cite>
+<blockquote><div><cite><a href="memberlistc471.html?mode=viewprofile&amp;u=2802">ssh77</a> wrote: <a href="viewtopicd524.html?p=13134#p13134" data-post-id="13134" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><div class="responsive-hide">Mon Jun 08, 2020 2:46 pm</div></cite>
+Btw. off topic but where can I find the psp for all the lanthanides? only a couple are available from the JTH and the pseudo dojo.<br>
+I tried to install libxc but since I am new to this I don't know how to do it correctly, but I guess there's a lot more psps from the libxc.
+</div></blockquote>
+On the JTH v1.1 there are all of them, no? (<a href="https://www.abinit.org/psp-tables" class="postlink">https://www.abinit.org/psp-tables</a>)<br>
+<br>
+There are also other Ln PAW-pseudos with f-electron in the following webpage:<br>
+<a href="http://www.mineralscloud.com/resources/repaw/index.shtml" class="postlink">http://www.mineralscloud.com/resources/ ... ndex.shtml</a><br>
+<br>
+With norm-conserving pseudo-dojo only Ln with f in the core are available.
+</div></blockquote>
+
+<br>
+Thanks! It seems as if the JTH psps also work properly and do contain the lanthanides. Previously I couldn't get it to work but that was probably due to the large number of kpoints I used which was too heavy for the cpu.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4435&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:16:18 GMT -->
+</html>

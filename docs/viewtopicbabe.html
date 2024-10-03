@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=546&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:14:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; MPI has run out of internal group entries.</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>MPI has run out of internal group entries.</h2>
+		<p><a href="viewtopic70fd.html?f=3&amp;t=546">https://forum.abinit.org/viewtopic.php?f=3&amp;t=546</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>MPI has run out of internal group entries.</h3>
+				<div class="date">Posted: <strong>Thu Aug 19, 2010 4:15 pm</strong></div>
+				<div class="author">by <strong>arras</strong></div>
+				<div class="content">Hi,<br />  I'm trying to perform a parallel calculation on 4 procs using the syntax:<br />abinit -n 4 &lt; ab.files &gt; log<br /><br />And I get the following message:<br /><blockquote class="uncited"><div>MPI has run out of internal group entries.                                                                                                                                                                                                                                     <br />Please set the environment variable MPI_GROUP_MAX for additional space.                                                                                                                                                                                                        <br />The current value of MPI_GROUP_MAX is 32                                                                                                                                                                                                                                       <br />MPI has run out of internal group entries.                                                                                                                                                                                                                                     <br />Please set the environment variable MPI_GROUP_MAX for additional space.                                                                                                                                                                                                        <br />The current value of MPI_GROUP_MAX is 32                                                                                                                                                                                                                                       <br />MPI: MPI_COMM_WORLD rank 0 has terminated without calling MPI_Finalize()                                                                                                                                                                                                       <br />MPI: aborting job<br /></div></blockquote><br /><br />There are 20 kpoints in my calculation and paral_kgb=0. Yet other calculations with less kpoints have passed allright.<br />Thus I confess I don't quite understand the complain...<br />I'm using Abinit 6.0.3 on SGI Altix 4700 (<!-- m --><a class="postlink" href="http://www.lrz.de/services/compute/hlrb/">http://www.lrz.de/services/compute/hlrb/</a><!-- m -->)<br /><br />Thank you for any help..<br /><br />Emmanuel ARRAS</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MPI has run out of internal group entries.</h3>
+				<div class="date">Posted: <strong>Mon Aug 23, 2010 3:37 pm</strong></div>
+				<div class="author">by <strong>mcote</strong></div>
+				<div class="content">Hi,<br /><br />We had similar problems on our SGI machine some times ago. We had to set the environment variables (in bash):<br /><br />export MPI_GROUP_MAX=20000<br />export MPI_COMM_MAX=1000<br /><br />We set these variables in the submission script, PBS in our case. I know that ABINIT uses one group(maybe more) per k-point. Somehow, the default for these environment variables in the SGI implementation is lower than on other machines.<br /><br />Michel</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MPI has run out of internal group entries.</h3>
+				<div class="date">Posted: <strong>Wed Aug 25, 2010 12:15 pm</strong></div>
+				<div class="author">by <strong>arras</strong></div>
+				<div class="content">All right, I'll try that.<br />Thank you for the tip !<br /><br />Emmanuel</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MPI has run out of internal group entries.</h3>
+				<div class="date">Posted: <strong>Fri Dec 03, 2010 12:25 pm</strong></div>
+				<div class="author">by <strong>arras</strong></div>
+				<div class="content">Hi again,<br />  I'm using paral_kgb parallelisation with the following parameters:<br /><br /><blockquote class="uncited"><div>paral_kgb 1<br />nband 448<br /><br />npband 16<br />npfft 1<br />npkpt 4<br /><br />acell   19.537533  28.2       12   Angstrom<br /></div></blockquote><br />on 64 processors with Abinit 6.4.1. The calculations runs allright, but the writting of the WFK file fails. The complain is :<br /><blockquote class="uncited"><div>Please set the environment variable MPI_TYPE_MAX for additional space.<br />The current value of MPI_TYPE_MAX is 8192</div></blockquote><br />So I increased MPI_TYPE_MAX up to 1048576 ! And it still complains (yet on less lines). Is that normal ?? Is there a limit I should not cross on the number MPI_TYPE_MAX ? Or can I increase it until it works ?<br /><br />Thanks !<br /><br />Emmanuel</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MPI has run out of internal group entries.</h3>
+				<div class="date">Posted: <strong>Wed Dec 15, 2010 3:45 pm</strong></div>
+				<div class="author">by <strong>mcote</strong></div>
+				<div class="content">I never had this problem but I presume that is because you are using MPI IO? I searched the web and it seems to be a specific SGI problem, for example see:<br /><br />linux.math.tifr.res.in/programming-doc/lam/lam-users-guide.ps<br /><br />and search for &quot;for additional space&quot;.<br /><br />It looks like you are doing the right thing to increase MPI_TYPE_MAX. Maybe you should increase it more...<br /><br />Michel</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=546&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:14:25 GMT -->
+</html>

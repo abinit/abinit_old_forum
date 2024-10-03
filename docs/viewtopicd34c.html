@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1632&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:13:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; calculating the graphene DOS using tetrahedron method</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>calculating the graphene DOS using tetrahedron method</h2>
+		<p><a href="viewtopic80cd.html?f=9&amp;t=1632">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1632</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>calculating the graphene DOS using tetrahedron method</h3>
+				<div class="date">Posted: <strong>Mon Apr 23, 2012 2:08 pm</strong></div>
+				<div class="author">by <strong>samabdel</strong></div>
+				<div class="content">I have calculated the DOS of graphene using the following input:<br />-------------------------------------------------------------------------<br />acell   4.6411685 4.6411685 12<br />xred 0    0    0<br />     1/3 1/3  0<br /><br />rprim  1.0 0.0 0.0               # Hex. primitive vectors(to be scaled by acell)<br />       0.5  0.8660254037844386  0.0<br />       0.0 0.0  1.0<br /><br />ntypat 1<br />znucl 6<br /><br />#DA  : Definition of the atoms<br /><br />natom 2<br />typat 1 1<br /><br />#DPWset : Definition of the plane wave basis set<br /><br />ecut 35<br /><br />#Dkptgrid : Definition of the k-points grid<br /><br />#kptopt 1<br />   kptopt 3<br />   nshiftk 1<br />   shiftk  0.0 0.0 0.0<br />   ngkpt   10 10 1<br /><br />nband 6<br />occopt 3<br />tsmear 0.006<br />#DSCFproc : Definition of the SCF procedure<br />prtdos 1<br />prtden 1<br />nstep 50<br />toldfe 1e-8<br />------------------------------------------<br />But when I try to use the tetrahedron method (prtdos=2) I get a dos with a gap at the Fermi level of around 1.36 eV (0.05 Htr).<br />Many thanks.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: calculating the graphene DOS using tetrahedron method</h3>
+				<div class="date">Posted: <strong>Thu May 03, 2012 12:04 pm</strong></div>
+				<div class="author">by <strong>MPis86</strong></div>
+				<div class="content">Dear Samabel<br />probably the band gap come from the k point sampling that fails to get the K point. You can try to increase the number of k-points in your sampling. I'm not so experienced with the option you used in the definition of the primitive vectors. However you can try a sempling n n 1 with n a multiple of 3. This should include the K point. Finally, probably the distance between two slab (acell(3)) is too small.<br />hope it helps<br />Michele</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: calculating the graphene DOS using tetrahedron method</h3>
+				<div class="date">Posted: <strong>Sat May 19, 2012 9:26 am</strong></div>
+				<div class="author">by <strong>samabdel</strong></div>
+				<div class="content">Dear Michele,<br />You're right. Apparently that was a problem of k-point sampling.<br />Thank you so much,<br />Yours,<br />Samir</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: calculating the graphene DOS using tetrahedron method</h3>
+				<div class="date">Posted: <strong>Mon Apr 14, 2014 8:03 am</strong></div>
+				<div class="author">by <strong>Seba Darshan</strong></div>
+				<div class="content">hai<br /><br />I am trying to plot the DOS of graphene using Xmgrace. I got the dos file after running the input file. But for plotting the dos file in xmgrace in Linux, I understood the command to be used is as follows (from ABINIT tutorials)<br /><br />xmgrace -block filename_DOS -bxy 2:3<br /><br />But the columns 2 and 3 corresponds to DOS and Integr. DOS repectively.<br /><br />I would like to know whether this command is correct? Because we want Dos versus energies in electron-volts.<br />Also I would like to know how can I plot the energies in electron volts instead of Hartree that DOS file shows.<br /><br />Regards<br />seba</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: calculating the graphene DOS using tetrahedron method</h3>
+				<div class="date">Posted: <strong>Tue Apr 15, 2014 12:59 pm</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Hi!<br /><br />For future reference you can use enunit variable set to 1 (<a href="http://www.abinit.org/documentation/helpfiles/for-v7.6/input_variables/vargs.html#enunit" class="postlink">http://www.abinit.org/documentation/helpfiles/for-v7.6/input_variables/vargs.html#enunit</a>). This will give you energies in eV. Actually, I'm not sure whether this works for DOS files, too. Try it.<br /><br />As you already have a DOS file, just convert Ha into eV, using whatever way you want (awk, for example). I think that you can even operate the wanted column inside Xmgrace to give you eV.<br /><br />Best regards,<br /><br />Igor</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: calculating the graphene DOS using tetrahedron method</h3>
+				<div class="date">Posted: <strong>Wed Jun 11, 2014 12:51 pm</strong></div>
+				<div class="author">by <strong>Seba Darshan</strong></div>
+				<div class="content">hai<br /><br />I would like to know how can I convert hartree to electron volts using awk. I don't know how to do this. Can you shed some light on this.<br /><br />As you have mentioned how can I operate the wanted column in Xmgrace corresponding to energy (in Hartrees)  to give its values in electronvolts.<br /><br />Hope for a positive reply,<br /><br />Seba</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1632&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:13:55 GMT -->
+</html>

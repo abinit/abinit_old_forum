@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1024&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:42:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Multiplicity in Primitive cell?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Multiplicity in Primitive cell?</h2>
+		<p><a href="viewtopic2458.html?f=9&amp;t=1024">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1024</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Multiplicity in Primitive cell?</h3>
+				<div class="date">Posted: <strong>Thu Apr 14, 2011 2:46 pm</strong></div>
+				<div class="author">by <strong>robsimps</strong></div>
+				<div class="content">Dear All,<br />I am running Abinit 6.6.2 on a Mac Pro under OSX 10.6.7. I would like to calculate a single energy point using a Bi2Se3 reduced cell. However, Abinit informs me that the unit cell is not primitive and has a multiplicity of 3 (chkprimit : ERROR -). This seems strange since I am using the definition of a primitive cell given in the Pearson Tables. Bi2Te3 belongs to space group 166, therefore I set the basis to Hexagonal with spgaxor=1.  <br /><br />I have copied my input file and the log's error message below. I would be grateful if anybody can help me with this. <br /><br />Kind Regards,<br />Rob Simpson<br /><br />ERROR MESSAGE<br />===============<br />chkprimit : ERROR -<br /> According to the symmetry finder, the unit cell is<br /> NOT primitive. The multiplicity is  3 .<br /> The use of non-primitive unit cells is allowed<br /> only when the input variable chkprim is 0.<br /> Action : either change your unit cell (rprim or angdeg),<br /> or set chkprim to 0.<br />-P-0000<br />-P-0000  leave_new : decision taken to exit ...<br /><br />INPUT FILE<br />=========<br /><br /># Bi2Se3  <br /># Energy cutoff convergence study for zero point energy<br />                        <br />ndtset   5        # number of data sets<br /><br />ionmov   0        # do not move atoms - single point energy calc<br />nstep    50       # maximum number of scf steps<br />ntime    500      # Maximum number of optimization steps<br />tolmxf   5.0d-5   # Optimization is converged when maximum force <br />                  # (Hartree/Bohr) is less than this maximum<br /><br />ecutsm 0.5        # Energy CUToff SMearing<br /><br />#=================================================<br /># Structure<br /><br />spgroup 166              #Space Group (1=p1)<br />spgaxor 1                #space group 166 can be define as Rhombohedral (2) or Hex (1)-- need to specify hex<br /> <br />natom 3<br />ntypat 2                 #number of types of Atoms<br />znucl 34 83              #Z-number of atom types Ge32, Sb51, Te52<br />typat 1 2 1              #typat is an array to label the atoms<br /><br />acell   4.1345 4.1345 28.63620 Angstr   #lengths of vectors to describe unit cell<br />angdeg  90 90 120        #ang(1) between 2nd and 3rd vectors, ang(2)<br /><br />xred     #better to define as fractions for accuracy. Also some atoms will be repeats due to symmetry translations<br />0 0 0.0000<br />0 0 0.4008<br />0 0 0.2117<br /><br />#=================================================<br /># KptGrid which was found from the k-point study above<br />kptopt 1<br />ngkpt5 8 8 8 <br />ngkpt4 7 7 7<br />ngkpt3 6 6 6 <br />ngkpt2 4 4 4 <br />ngkpt1 2 2 2<br />shiftk 5.0000E-01 5.0000E-01 5.0000E-01<br />#=================================================<br /><br />getxred   -1       # Start with relaxed coordinates from dataset D.S<br />getwfk    -1       # Start with wave functions from previous D.S<br /><br />ixc  11            #    choice of exchange correlation i.e. LDA (paul uses 7, castep 2 but need to pseudo pots)<br />ecut 12<br />dilatmx 1.05        #    Maximum scaling allowed for lattice parameters<br /><br />occopt 3           #	Smearing of Bands<br />tsmear 0.001 Ha    #	Temperature of Smearing, 0.001 Ha = 27.2113845 meV = 315.773 Kelvin <br />diemix 1           #	Dielectric Mixing Factor<br />diemac 9           #	model DIElectric MACroscopic constant <br />iscf  7            #	Integer for Self-Consistent-Field cycles (7 pulay mixing)<br />npulayit 7        # 	Number of PULAY ITerations for SC mixing <br />#iprcel 45         #    SCF preconditioning, compute the RPA dielectric matrix at the first step, and recompute each step<br />#toldff 5.0d-5     #    TOLerance on the DiFference of force for stopping SCF, d is the same as 10 to the power of but means double precision<br />tolvrs 1.0d-12     #    Tolerence for stopping SCF<br />#=================================================</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Multiplicity in Primitive cell?</h3>
+				<div class="date">Posted: <strong>Thu Apr 14, 2011 3:17 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Hi Rob,<br /><br />Probably same discussion as in <a href="viewtopiced3e.html?f=8&amp;t=944" class="postlink">http://forum.abinit.org/viewtopic.php?f=8&amp;t=944</a> and <a href="viewtopicdb36.html?f=8&amp;t=843&amp;start=0" class="postlink">http://forum.abinit.org/viewtopic.php?f=8&amp;t=843&amp;start=0</a><br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Multiplicity in Primitive cell?</h3>
+				<div class="date">Posted: <strong>Mon May 23, 2011 10:51 am</strong></div>
+				<div class="author">by <strong>robsimps</strong></div>
+				<div class="content">Thanks Alain. Sorry for the late reply- my attention has been diverted recently. Those posts seemed to solve the problem.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1024&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:42:48 GMT -->
+</html>

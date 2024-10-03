@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4390&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:31:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Make fails due to automake version</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Make fails due to automake version</h2>
+		<p><a href="viewtopica010.html?f=3&amp;t=4390">https://forum.abinit.org/viewtopic.php?f=3&amp;t=4390</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Make fails due to automake version</h3>
+				<div class="date">Posted: <strong>Thu Apr 30, 2020 6:58 pm</strong></div>
+				<div class="author">by <strong>BaconEgg</strong></div>
+				<div class="content">I'm trying to compile on a remote cluster and ./configure comes back clean, but running make -d gives<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>...
+Considering target file `Makefile'.
+   Considering target file `Makefile.in'.
+     Considering target file `Makefile.am'.
+      Looking for an implicit rule for `Makefile.am'.
+      Trying pattern rule with stem `Makefile.am'.
+      Trying implicit prerequisite `Makefile.am,v'.
+      Trying pattern rule with stem `Makefile.am'.
+      Trying implicit prerequisite `RCS/Makefile.am,v'.
+      Trying pattern rule with stem `Makefile.am'.
+      Trying implicit prerequisite `RCS/Makefile.am'.
+      Trying pattern rule with stem `Makefile.am'.
+      Trying implicit prerequisite `s.Makefile.am'.
+      Trying pattern rule with stem `Makefile.am'.
+      Trying implicit prerequisite `SCCS/s.Makefile.am'.
+      No implicit rule found for `Makefile.am'.
+      Finished prerequisites of target file `Makefile.am'.
+     No need to remake target `Makefile.am'.
+...
+    Prerequisite `aclocal.m4' is newer than target `Makefile.in'.
+   Must remake target `Makefile.in'.
+Invoking recipe from Makefile:424 to update target `Makefile.in'.
+make[1]: Entering directory `/home/username/abinit-8.10.3/fallbacks'
+Putting child 0x16ba180 (Makefile.in) PID 225284 on the chain.
+Live child 0x16ba180 (Makefile.in) PID 225284 
+ cd . &amp;&amp; /bin/sh /home/username/abinit-8.10.3/fallbacks/config/gnu/missing automake-1.16 --gnu
+/home/username/abinit-8.10.3/fallbacks/config/gnu/missing: line 81: automake-1.16: command not found
+WARNING: 'automake-1.16' is missing on your system.
+         You should only need it if you modified 'Makefile.am' or
+         'configure.ac' or m4 files included by 'configure.ac'.
+         The 'automake' program is part of the GNU Automake package:
+         &lt;https://www.gnu.org/software/automake&gt;
+         It also requires GNU Autoconf, GNU m4 and Perl in order to run:
+         &lt;https://www.gnu.org/software/autoconf&gt;
+         &lt;https://www.gnu.org/software/m4/&gt;
+         &lt;https://www.perl.org/&gt;</code></pre></div>
+
+I get the same problem with abinit 8.10.3 and 9.0.3. The cluster has automake 1.13.4 but I don't have a way to change the version. Everything compiles fine on my mac, which does not have automake. Running ./autogen.sh gives a fatal error that abisrc.py is not found, which indeed I don't see abisrc.py in /src. Running automake and aclocal on the cluster didn't help. Not sure how to proceed. Should I be looking for a way to ignore the available automake?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Make fails due to automake version</h3>
+				<div class="date">Posted: <strong>Sat Jun 27, 2020 10:04 am</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>wget https://www.abinit.org/sites/default/files/packages/abinit-8.10.3.tar.gz
+tar xzf abinit-8.10.3.tar.gz
+cd abinit-8.10.3/
+./configure
+make -j 12</code></pre></div>
+
+works for me...<br>
+<br>
+where did you find the tarball?</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4390&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:31:48 GMT -->
+</html>

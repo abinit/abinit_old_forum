@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1497&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:55:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; how to calculate and plot Projected Bulk Band Structure</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>how to calculate and plot Projected Bulk Band Structure</h2>
+		<p><a href="viewtopicd65c.html?f=9&amp;t=1497">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1497</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>how to calculate and plot Projected Bulk Band Structure</h3>
+				<div class="date">Posted: <strong>Tue Jan 17, 2012 1:37 pm</strong></div>
+				<div class="author">by <strong>psychologist</strong></div>
+				<div class="content">Dear all,<br /><br />I have been trying to plot the projected bulk band structure(PBBS) to extract surface states.<br />I calculated Surface band structure by using slab model.<br />And I know the basic principle of PBBS.<br />But I don't know the details of calculating and plotting the PBBS, such as how to project the band along the K_z to the plane of K_//(x,y). <br /><br />Could anyone help me with this, please? Any tips are highly appreciated.<br /><br />Best regards,<br />Zhe</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: how to calculate and plot Projected Bulk Band Structure</h3>
+				<div class="date">Posted: <strong>Tue Feb 28, 2012 9:36 am</strong></div>
+				<div class="author">by <strong>sevket simsek</strong></div>
+				<div class="content">Dear psychologist<br /><br />I try to calculate surface band structure of materials. ı don't know how it is calculated.<br /><br /> can you send me your input file for surface band structure.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: how to calculate and plot Projected Bulk Band Structure</h3>
+				<div class="date">Posted: <strong>Wed Mar 14, 2012 11:57 pm</strong></div>
+				<div class="author">by <strong>kaneod</strong></div>
+				<div class="content">Hi,<br /><br />I don't know an *automated* way to do this in any DFT code, but you can do this from first principles with some effort. First use your surface slab model to calculate a band structure around a surface BZ path (should be 2D). Then, using the bulk structure for your material (ie, a small primitive cell), you need to run many conventional BS calculations around a path that is equivalent to your surface BZ path but offset along k_perp by an increasing value.<br /><br />The difficulty is translating the path from the surface BZ back to the equivalent path in the bulk BZ. Once you have done that, just take that same set of k-points and add a constant k_{perp} for increasing values of k_{perp} until you reach the BZ boundary.<br /><br />There are further subtleties if the path in the bulk starts to intersect the BZ boundaries for some intermediate value of k_{perp}.<br /><br />In any case, if you do this for a sufficient number of k_{perp} values and plot the bandstructures overlaying each other it is easy to see which regions are forbidden and so on - you can shade the projected band structure however you like (again, no automated way of doing this) and then overlay the actual surface slab band structure to see which states are resonances and so on.<br /><br />I have only done this in CASTEP and not Abinit so I don't have an example to send you but if you understand the physics of what is going on it should be straightforward to follow what I'm saying here. <br /><br />Kane</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1497&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:55:27 GMT -->
+</html>

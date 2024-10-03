@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3938&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:44:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; DDBS</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>DDBS</h2>
+		<p><a href="viewtopicf8a7.html?f=10&amp;t=3938">https://forum.abinit.org/viewtopic.php?f=10&amp;t=3938</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>DDBS</h3>
+				<div class="date">Posted: <strong>Fri Oct 12, 2018 3:10 pm</strong></div>
+				<div class="author">by <strong>aria</strong></div>
+				<div class="content">Dear all,<br />Hello, I'm trying to calculate the phonon band structures and thermodynamical properties of a hexagonal system. So, similar to what ABINIT did, at first, I generate q wavevectors using trf2_2.in.<br />trf2_2.in=============<br /> ngkpt  4 4 4<br /> nshiftk 1<br /> shiftk 0 0 0.0<br /> # Note the dummy values of nstep and nline<br />    nstep   1         # Maximal number of SCF cycles<br />    nline   1         # Maximal number of SCF cycles<br />#Gives the number of band, explicitely (do not take the default)<br />    nband   50  <br />....       <br />============<br />Then, the derivative databases are generated using trf2_1.in==========<br /> ndtset   14<br />#Set 1 : ground state self-consistency<br /> getwfk1   0            # Cancel default<br />  kptopt1   1            # Automatic generation of k points, taking<br />    nqpt1   0            # Cancel default<br />  tolvrs1   1.0d-18      # SCF stopping criterion (modify default)<br />  rfphon1   0            # Cancel default<br /> <br />     nqpt   1            # One qpt for each dataset (only 0 or 1 allowed)<br />                                  <br />                   <br />                        qpt2    0.00000000E+00  0.00000000E+00  0.00000000E+00<br />                        qpt3    0.00000000E+00  0.00000000E+00  0.00000000E+00<br />                        qpt4    2.50000000E-01  0.00000000E+00  0.00000000E+00<br />                        qpt5    5.00000000E-01  0.00000000E+00  0.00000000E+00<br />                        qpt6    2.50000000E-01  2.50000000E-01  0.00000000E+00<br />                        qpt7    0.00000000E+00  0.00000000E+00  2.50000000E-01<br />                        qpt8    2.50000000E-01  0.00000000E+00  2.50000000E-01<br />                        qpt9    5.00000000E-01  0.00000000E+00  2.50000000E-01<br />                        qpt10   2.50000000E-01  2.50000000E-01  2.50000000E-01<br />                        qpt11   0.00000000E+00  0.00000000E+00  5.00000000E-01<br />                        qpt12   2.50000000E-01  0.00000000E+00  5.00000000E-01<br />                        qpt13   5.00000000E-01  0.00000000E+00  5.00000000E-01<br />                        qpt14   2.50000000E-01  2.50000000E-01  5.00000000E-01<br />                       <br />                       <br />#Set 2 : Response function calculation of d/dk wave function <br /><br />    iscf2   -3         # Need this non-self-consistent option for d/dk<br />  kptopt2   2          # Modify default to use time-reversal symmetry<br />  rfphon2   0          # Cancel default<br />  rfelfd2   2          # Calculate d/dk wave function only<br />  tolwfr2   1.0d-22    # Use wave function residual criterion instead<br /><br />#Set 3 : Response function calculation of Q=0 phonons and electric field pert.<br /><br />  getddk3   2          # d/dk wave functions from last dataset<br />  kptopt3   2          # Modify default to use time-reversal symmetry<br />  rfelfd3   3          # Electric-field perturbation response only<br /><br />#Sets 4-10 : Finite-wave-vector phonon calculations (defaults for all datasets)<br /><br />   getwfk   1          # Use GS wave functions from dataset1<br />   kptopt   3          # Need full k-point set for finite-Q response<br />   rfphon   1          # Do phonon response<br />  rfatpol   1 6       # Treat displacements of all atoms<br />    rfdir   1 1 1      # Do all directions (symmetry will be used)<br />   tolvrs   1.0d-8     # This default is active for sets 3-10<br /><br />#Gives the number of band, explicitely (do not take the default)<br />    nband  26        <br />#Exchange-correlation functional<br /><br />     # ixc   1             # LDA Teter Pade parametrization<br /><br />#Definition of the planewave basis set<br /><br />     ecut   55.0           # Maximal kinetic energy cut-off, in Hartree<br />     ecutsm 0.5<br />#Definition of the k-point grid<br />    ngkpt   4  4  4          <br />  nshiftk 1        # of the reciprocal space (that form a BCC lattice !),<br />                  # repeated four times, with different shifts :<br />shiftk 0.0 0.0 0.0<br />#Definition of the SCF procedure<br />    nstep   250000         # Maximal number of SCF cycles<br />============================<br />But , in the manipulation of the derivative databases, trf2_3.in=====<br /> trf2_3.ddb.out<br />MoS2 phonons on 4 4 4 mesh<br />12<br />trf2_1o_DS3_DDB<br />trf2_1o_DS4_DDB<br />trf2_1o_DS5_DDB<br />trf2_1o_DS6_DDB<br />trf2_1o_DS7_DDB<br />trf2_1o_DS8_DDB<br />trf2_1o_DS9_DDB<br />trf2_1o_DS10_DDB<br />trf2_1o_DS11_DDB<br />trf2_1o_DS12_DDB<br />trf2_1o_DS13_DDB<br />trf2_1o_DS14_DDB=======<br />I have faced with the following ERROR:===<br />Comparing integers for variable  nkpt.<br />    Value from input DDB is        36 and<br />    from transfer DDB is        64.<br />    Action: check your DDBs.<br />==============<br />Please tell me how to solve this problem.<br />I'm Impatiently waiting for your help.<br />Thank you.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DDBS&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Fri Oct 12, 2018 4:10 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello<br /><br />_all_ DFPT runs should be done with kptopt 3 so change line<br /><br /> kptopt3 2 # Modify default to use time-reversal symmetry<br /><br />etc...<br /><br />The trouble is that perturbations reduce the symmetry, and the code itself has to find the small group, and then always reduces the k by symmetry, including TR (you have to set nsym to 1 to avoid this). Here for Gamma you reduced the k points, but depending on whether the atoms, or especially the E fields, are displaced along x y or z, the k-points might be chosen differently, and this is not allowed in the merging of the ddb. In this case, for Gamma only, and just for the case of TR symmetry, the 2DTE are probably fine, but the mrgddb check is rigorous and correct. <br /><br />Last resort (but you should really test that this gives identical results) is to go modify the DDB file by hand, to enforce nkpt=64.<br />Don't tell anyone I recommended this... The clean thing to do is set kptopt 3 always.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DDBS</h3>
+				<div class="date">Posted: <strong>Sat Oct 13, 2018 7:13 am</strong></div>
+				<div class="author">by <strong>aria</strong></div>
+				<div class="content">Hi, Dear Pr.Verstraete<br />Thank you very much.<br />Y. Asadi</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DDBS</h3>
+				<div class="date">Posted: <strong>Mon Oct 15, 2018 8:55 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content"><blockquote class="uncited"><div>Last resort (but you should really test that this gives identical results) is to go modify the DDB file by hand, to enforce nkpt=64.<br /></div></blockquote><br /><br />Alternatively, one can use the --nostrict option to disable the check:<br /><br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;mrgddb --help<br /><br />&nbsp;Usage:<br />&nbsp; &nbsp; &nbsp;mrgddb&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Interactive prompt.<br />&nbsp; &nbsp; &nbsp;mrgddb &lt; run.files&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Read arguments from run.files.<br />&nbsp; &nbsp; &nbsp;mrgddb out_DDB in1_DDB in2_DDB&nbsp; &nbsp;Merge list of input DDB files, produce new out_DDB file.<br />&nbsp; &nbsp; &nbsp;mrgddb out_DDB in*_DDB&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Same as above but use shell wildcards instead of file list.<br /><br />&nbsp;Available options:<br />&nbsp; &nbsp; &nbsp;-v, --version&nbsp; &nbsp; &nbsp; Show version number and exit.<br />&nbsp; &nbsp; &nbsp;-f&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Overwrite output DDB if file already exists.<br />&nbsp; &nbsp; &nbsp;--nostrict&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Disable consistency checks<br />&nbsp; &nbsp; &nbsp;-h, --help&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Show this help and exit.<br /><br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DDBS</h3>
+				<div class="date">Posted: <strong>Wed Oct 17, 2018 7:05 pm</strong></div>
+				<div class="author">by <strong>aria</strong></div>
+				<div class="content">Hi, Dear Pr.gmatteo<br />Thank you very much.<br />Y. Asadi</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3938&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:44:32 GMT -->
+</html>

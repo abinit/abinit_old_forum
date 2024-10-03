@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=2085&p=6571 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:25:30 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Introducing Spin-Orbit coupling for zincblende CdTe - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopic8807.html?t=2085">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="4"><a href="viewforum31e6.html?f=4" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Running Abinit</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="14"><a href="viewforum9780.html?f=14" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Link to other codes</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopic9aa5.html?f=14&amp;t=2085">Introducing Spin-Orbit coupling for zincblende CdTe</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">External optional components of Abinit (BigDFT, Wannier90...) and codes using/providing data from/to Abinit (AtomPAW, ONCVPSP, EXC, DP, Yambo...)<br /></div>
+<p>
+	<strong>Moderators:</strong> <a href="memberlist58ee.html?mode=viewprofile&amp;u=682" class="username">ebousquet</a>, <a href="memberlist3946.html?mode=viewprofile&amp;u=826" class="username">bxu</a>
+</p>
+
+
+<div class="action-bar bar-top">
+	
+			<a href="posting363b.html?mode=reply&amp;f=14&amp;t=2085" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic574d.html?f=14&amp;t=2085&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="2085" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			7 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p6571" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile6571">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistbb10.html?mode=viewprofile&amp;u=1140" class="username">bjornar</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search7a81.html?author_id=1140&amp;sr=posts">12</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Mar 12, 2013 2:00 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content6571">
+
+						<h3 class="first"><a href="#p6571">Introducing Spin-Orbit coupling for zincblende CdTe</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingbb0e.html?mode=quote&amp;f=14&amp;p=6571" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopice7a1.html?p=6571#p6571" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistbb10.html?mode=viewprofile&amp;u=1140" class="username">bjornar</a></strong> &raquo; </span>Thu Apr 18, 2013 10:59 am
+			</p>
+			
+			
+			
+			<div class="content">Hi everybody,<br /><br />I am performing PAW calculations, I have already succeeded in calculating the band structured for CdTe without Spin-Orbit coupling. Now I am trying to introduce this effect, but the program quits due to inconsistencies in the two data sets, so i hope somebody could help me figuring out what the problems are. The input file I used in an attempt to include the Spin-Orbit coupling is attached.<br />This file is almost identical to the one I used to perform the first band structure calculations (without Spin-Orbit coupling), only the variables pawspnorb and usepaw in lines 20 and 21 are not pressent, and kptopt1 is changed from 1 (in line 24) to 3 (in line 26).<br /><br />Kind regards<br />Bjornar Karlsen</div>
+			
+			
+							<dl class="attachbox">
+					<dt>
+						Attachments
+					</dt>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file4faa.php?id=754">tpaw1_1.in</a></dt>
+			<dd><em>Input file without Spin-Orbit coupling</em></dd>			<dd>(1.35 KiB) Downloaded 604 times</dd>
+		</dl>
+		
+		
+			</dd>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/filec81a.php?id=755">tpaw1_2.in</a></dt>
+			<dd><em>Input file with Spin-Orbit coupling</em></dd>			<dd>(1.37 KiB) Downloaded 551 times</dd>
+		</dl>
+		
+		
+			</dd>
+											<dd>
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/filef5eb.php?id=756">tpaw1_2.out</a></dt>
+			<dd><em>Output file for case with Spin-Orbit coupling</em></dd>			<dd>(14.46 KiB) Downloaded 428 times</dd>
+		</dl>
+		
+		
+			</dd>
+									</dl>
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p6572" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile6572">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlistc2d1.html?mode=viewprofile&amp;u=64" class="avatar"><img class="avatar" src="download/file8810.jpg?avatar=64_1334681793.jpg" width="92" height="61" alt="User avatar" /></a>														</div>
+								<a href="memberlistc2d1.html?mode=viewprofile&amp;u=64" class="username">jzwanzig</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search9859.html?author_id=64&amp;sr=posts">504</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Aug 17, 2009 9:25 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content6572">
+
+						<h3 ><a href="#p6572">Re: Introducing Spin-Orbit coupling for zincblende CdTe</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting60fd.html?mode=quote&amp;f=14&amp;p=6572" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopiccbe0.html?p=6572#p6572" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistc2d1.html?mode=viewprofile&amp;u=64" class="username">jzwanzig</a></strong> &raquo; </span>Thu Apr 18, 2013 11:12 am
+			</p>
+			
+			
+			
+			<div class="content">Hi, in the spin orbit case you could use kptopt1 4 (uses space symmetries but not time reversal); your pawecutdg is really large (for an ecut of 8 I'd use maybe 12 for the dg); the main thing *I think* is that nband differs between the two datasets. Try it with nband set globally, not only within dataset 2. What PAW sets are you using for Cd and Zn?</div>
+			
+			
+			
+									
+									<div id="sig6572" class="signature">Josef W. Zwanziger<br />Professor, Department of Chemistry<br />Canada Research Chair in NMR Studies of Materials<br />Dalhousie University<br />Halifax, NS B3H 4J3 Canada<br /><!-- e --><a href="mailto:jzwanzig@gmail.com">jzwanzig@gmail.com</a><!-- e --></div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p6573" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile6573">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistbb10.html?mode=viewprofile&amp;u=1140" class="username">bjornar</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search7a81.html?author_id=1140&amp;sr=posts">12</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Mar 12, 2013 2:00 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content6573">
+
+						<h3 ><a href="#p6573">Re: Introducing Spin-Orbit coupling for zincblende CdTe</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting9d1b.html?mode=quote&amp;f=14&amp;p=6573" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicfd3f.html?p=6573#p6573" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistbb10.html?mode=viewprofile&amp;u=1140" class="username">bjornar</a></strong> &raquo; </span>Thu Apr 18, 2013 11:48 am
+			</p>
+			
+			
+			
+			<div class="content">Hi prof. Zwanziger,<br /><br />Ok, done that, but the program stops due to inconsistencies. I am not quite sure what exactly you mean by &quot;What PAW sets&quot;. Do you mean which pseudopotentials I have used? If so, I can tel you that I generated them through AtomPAW v2.2, using the following input files, and then converted them to &quot;ABINIT-format&quot; using Atompaw2Abinit v3.2.0 .<br /><br /><br /><span style="text-decoration: underline">For Cd:</span><br /><br />Cd 48                                       ! Definition of material<br />LDA-PW scalarrelativistic loggrid 2000      ! All-electrons calc.: LDA - log.grid with 2000 pts<br />5 5 4 0 0 0                                 ! Max. n per angular momentum: 5s 5p 4d<br />4 2 10                                      ! Partially occupied states: 3d: occ=10<br />5 1 0                                       !                            4p: occ=0<br />5 0 2                                       !                            5s: occ=2<br />0 0 0                                       !             End of occupation section<br />c                                           ! 1s: core state<br />c                                           ! 2s: core state<br />c                                           ! 3s: core state<br />c                                           ! 4s: core state<br />v                                           ! 5s: valence state<br />c                                           ! 2p: core state<br />c                                           ! 3p: core state<br />c                                           ! 4p: core state<br />v                                           ! 5p: valence state<br />c                                           ! 3d: core state<br />v                                           ! 4d: valence state<br />2                                           ! Max. l for partial waves basis<br />2.3                                         ! r_PAW radius<br />y                                           ! Do we add an additional s partial wave ? yes<br />0.                                          ! Reference energy for this new s partial wave (Ryd)<br />n                                           ! Do we add an additional s partial wave ? no<br />y                                           ! Do we add an additional p partial wave ? yes<br />0.                                          ! Reference energy for this p new partial wave (Ryd)<br />n                                           ! Do we add an additional p partial wave ? no<br />y                                           ! Do we add an additional d partial wave ? yes<br />0.                                          ! Reference energy for this new d partial wave (Ryd)<br />n                                           ! Do we add an additional s partial wave ? no<br />bloechl                                     ! Scheme for PS partial waves and projectors<br />3 0. troulliermartins                       ! Scheme for pseudopotential (l_loc=3, E_loc=0Ry)<br />0                                           ! End of file<br /><br /><br /><span style="text-decoration: underline">For Te:</span><br /><br /><br />Te 52                                       ! Definition of material<br />LDA-PW scalarrelativistic loggrid 2000      ! All-electrons calc.: LDA - log.grid with 2000 pts<br />5 5 4 0 0 0                                 ! Max. n per angular momentum: 5s 5p 4d<br />4 2 10                                      ! Partially occupied states: 4d: occ=10<br />5 1 4                                       !                            5p: occ=4<br />5 0 2                                       !                            5s: occ=2<br />0 0 0                                       !             End of occupation section<br />c                                           ! 1s: core state<br />c                                           ! 2s: core state<br />c                                           ! 3s: core state<br />c                                           ! 4s: core state<br />v                                           ! 5s: valence state<br />c                                           ! 2p: core state<br />c                                           ! 3p: core state<br />c                                           ! 4p: core state<br />v                                           ! 5p: valence state<br />c                                           ! 3d: core state<br />v                                           ! 4d: valence state<br />2                                           ! Max. l for partial waves basis<br />2.3                                         ! r_PAW radius<br />y                                           ! Do we add an additional s partial wave ? yes<br />0.                                          ! Reference energy for this new s partial wave (Ryd)<br />n                                           ! Do we add an additional s partial wave ? no<br />y                                           ! Do we add an additional p partial wave ? yes<br />0.                                          ! Reference energy for this p new partial wave (Ryd)<br />n                                           ! Do we add an additional p partial wave ? no<br />y                                           ! Do we add an additional d partial wave ? yes<br />0.                                          ! Reference energy for this new d partial wave (Ryd)<br />n                                           ! Do we add an additional s partial wave ? no<br />bloechl                                     ! Scheme for PS partial waves and projectors<br />3 0. troulliermartins                       ! Scheme for pseudopotential (l_loc=3, E_loc=0Ry)<br />0                                           ! End of file<br /><br /><br /><br />Kind regards<br />Bjornar Karlsen</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p6575" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile6575">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlistc2d1.html?mode=viewprofile&amp;u=64" class="avatar"><img class="avatar" src="download/file8810.jpg?avatar=64_1334681793.jpg" width="92" height="61" alt="User avatar" /></a>														</div>
+								<a href="memberlistc2d1.html?mode=viewprofile&amp;u=64" class="username">jzwanzig</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search9859.html?author_id=64&amp;sr=posts">504</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Aug 17, 2009 9:25 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content6575">
+
+						<h3 ><a href="#p6575">Re: Introducing Spin-Orbit coupling for zincblende CdTe</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting8307-2.html?mode=quote&amp;f=14&amp;p=6575" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic32b2.html?p=6575#p6575" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistc2d1.html?mode=viewprofile&amp;u=64" class="username">jzwanzig</a></strong> &raquo; </span>Thu Apr 18, 2013 12:00 pm
+			</p>
+			
+			
+			
+			<div class="content">thanks--can you send your log file? it might have more detail than the .out file does. thanks--</div>
+			
+			
+			
+									
+									<div id="sig6575" class="signature">Josef W. Zwanziger<br />Professor, Department of Chemistry<br />Canada Research Chair in NMR Studies of Materials<br />Dalhousie University<br />Halifax, NS B3H 4J3 Canada<br /><!-- e --><a href="mailto:jzwanzig@gmail.com">jzwanzig@gmail.com</a><!-- e --></div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p6577" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile6577">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistbb10.html?mode=viewprofile&amp;u=1140" class="username">bjornar</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search7a81.html?author_id=1140&amp;sr=posts">12</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Mar 12, 2013 2:00 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content6577">
+
+						<h3 ><a href="#p6577">Re: Introducing Spin-Orbit coupling for zincblende CdTe</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting4c2a.html?mode=quote&amp;f=14&amp;p=6577" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicb897.html?p=6577#p6577" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistbb10.html?mode=viewprofile&amp;u=1140" class="username">bjornar</a></strong> &raquo; </span>Thu Apr 18, 2013 12:36 pm
+			</p>
+			
+			
+			
+			<div class="content">Hi,<br /><br />It turns out the log file may not be uploaded as an attachement, so here it is quoted.<br /><br /><blockquote class="uncited"><div>  ABINIT <br />  <br />  Give name for formatted input file: <br />tpaw1_2.in<br />  Give name for formatted output file:<br />tpaw1_2.out<br />  Give root name for generic input files:<br />tpaw1_2i<br />  Give root name for generic output files:<br />tpaw1_2o<br />  Give root name for generic temporary files:<br />tpaw1_2tmp<br /><br /> herald :  WARNING -<br />  The starting date is more than 3 years after the initial release<br />  of this version of ABINIT, namely Jan 2010.<br />  This version of ABINIT is not supported anymore.<br />  Action : please, switch to a more recent version of ABINIT.<br /><br />.Version 6.2.3  of ABINIT <br />.(sequential version, prepared for a x86_64_linux_gnu4.4 computer) <br /><br />.Copyright (C) 1998-2010 ABINIT group . <br /> ABINIT comes with ABSOLUTELY NO WARRANTY.<br /> It is free software, and you are welcome to redistribute it<br /> under certain conditions (GNU General Public License,<br /> see ~abinit/COPYING or <!-- m --><a class="postlink" href="http://www.gnu.org/copyleft/gpl.txt">http://www.gnu.org/copyleft/gpl.txt</a><!-- m -->).<br /><br /> ABINIT is a project of the Universite Catholique de Louvain,<br /> Corning Inc. and other collaborators, see ~abinit/doc/developers/contributors.txt .<br /> Please read ~abinit/doc/users/acknowledgments.html for suggested<br /> acknowledgments of the ABINIT effort.<br /> For more information, see <!-- m --><a class="postlink" href="http://www.abinit.org/">http://www.abinit.org</a><!-- m --> .<br /><br />.Starting date : Thu 18 Apr 2013.<br />  <br /><br /> herald :  WARNING -<br />  The starting date is more than 3 years after the initial release<br />  of this version of ABINIT, namely Jan 2010.<br />  This version of ABINIT is not supported anymore.<br />  Action : please, switch to a more recent version of ABINIT.<br /><br /> herald :  WARNING -<br />  The starting date is more than 3 years after the initial release<br />  of this version of ABINIT, namely Jan 2010.<br />  This version of ABINIT is not supported anymore.<br />  Action : please, switch to a more recent version of ABINIT.<br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /><br /> === Build Information === <br />  Version       : 6.2.3<br />  Build target  : x86_64_linux_gnu4.4<br />  Build date    : 20130318<br /><br /> === Compiler Suite === <br />  C compiler       : gnu4.4<br />  CFLAGS           :  -g -O2<br />  C++ compiler     : gnu4.4<br />  CXXFLAGS         :  -g -O2<br />  Fortran compiler : gnu4.4<br />  FCFLAGS          :  -g -ffree-line-length-none<br />  FC_LDFLAGS       : <br /><br /> === Optimizations === <br />  Debug level        : yes<br />  Optimization level : standard<br />  Architecture       : unknown_unknown<br /><br /> === MPI === <br />  Parallel build : no<br />  Parallel I/O   : no<br /><br /> === Linear algebra === <br />  Library flavor : @linalg_flavor@<br />  Use ScaLAPACK  : no<br /><br /> === Plug-ins === <br />  BigDFT    : no<br />  ETSF I/O  : yes<br />  LibXC     : yes<br />  FoX       : no<br />  NetCDF    : yes<br />  Wannier90 : yes<br /><br /> === Experimental features === <br />  Bindings            : no<br />  Exports             : no<br />  GW double-precision : no<br />  Macroave build      : yes<br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /><br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /> Default optimizations:<br />   -O2<br /><br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /><br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /> CPP options activated during the build:<br /><br />                    CC_GNU                   CXX_GNU                    FC_GNU<br /><br />              HAVE_ETSF_IO              HAVE_FC_EXIT             HAVE_FC_FLUSH<br /><br />             HAVE_FC_GAMMA            HAVE_FC_GETENV          HAVE_FC_INT_QUAD<br /><br />     HAVE_FC_ISO_C_BINDING        HAVE_FC_LONG_LINES              HAVE_FC_NULL<br /><br />          HAVE_FORTRAN2003                HAVE_LIBXC               HAVE_LINALG<br /><br />        HAVE_LINALG_NETLIB        HAVE_LINALG_SERIAL               HAVE_NETCDF<br /><br />             HAVE_OS_LINUX              HAVE_STDIO_H            HAVE_WANNIER90<br /><br />              USE_MACROAVE<br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /><br />- input  file    -&gt; tpaw1_2.in<br />- output file    -&gt; tpaw1_2.out<br />- root for input  files -&gt; tpaw1_2i<br />- root for output files -&gt; tpaw1_2o<br /><br /> instrng :    56 lines of input have been read<br /><br /> iofn2 : Please give name of formatted atomic psp file<br /> iofn2 : for atom type   1 , psp file is Psps/48cd.lda.atompaw<br /><br /> iofn2 : Please give name of formatted atomic psp file<br /> iofn2 : for atom type   2 , psp file is Psps/52te.lda.atompaw<br />  read the values zionpsp= 12.0 , pspcod=   7 , lmax=   2<br /> 2 0.                                   : shape_type,rshape                      <br />  read the values zionpsp= 16.0 , pspcod=   7 , lmax=   2<br /> 2 0.                                   : shape_type,rshape                      <br /><br /> inpspheads : deduce mpsang  =   3, n1xccc  =   1.<br /><br /> invars1m : enter jdtset=     1<br /> invars1 : treat image number     1<br /><br /> symlatt : the Bravais lattice is cF (face-centered cubic)<br />  xred   is defined in input file<br /> ingeo : takes atomic coordinates from input array xred<br /><br /> symlatt : the Bravais lattice is cF (face-centered cubic)<br /><br /> symlatt : the Bravais lattice is cF (face-centered cubic)<br /> symspgr : the symmetry operation no.   1 is the identity<br /> symaxes : the symmetry operation no.   2 is a 2-axis<br /> symaxes : the symmetry operation no.   3 is a 2-axis<br /> symaxes : the symmetry operation no.   4 is a 2-axis<br /> symaxes : the symmetry operation no.   5 is a 3-axis<br /> symaxes : the symmetry operation no.   6 is a 3-axis<br /> symaxes : the symmetry operation no.   7 is a 3-axis<br /> symaxes : the symmetry operation no.   8 is a 3-axis<br /> symaxes : the symmetry operation no.   9 is a 3-axis<br /> symaxes : the symmetry operation no.  10 is a 3-axis<br /> symaxes : the symmetry operation no.  11 is a 3-axis<br /> symaxes : the symmetry operation no.  12 is a 3-axis<br /> symspgr : the symmetry operation no.  13 is a pure translation<br /> symaxes : the symmetry operation no.  14 is a 2_1-axis<br /> symaxes : the symmetry operation no.  15 is a 2_1-axis<br /> symaxes : the symmetry operation no.  16 is a 2-axis<br /> symaxes : the symmetry operation no.  17 is a 3, 3_1 or 3_2 axis<br /> symaxes : the symmetry operation no.  18 is a 3-axis<br /> symaxes : the symmetry operation no.  19 is a 3, 3_1 or 3_2 axis<br /> symaxes : the symmetry operation no.  20 is a 3-axis<br /> symaxes : the symmetry operation no.  21 is a 3, 3_1 or 3_2 axis<br /> symaxes : the symmetry operation no.  22 is a 3, 3_1 or 3_2 axis<br /> symaxes : the symmetry operation no.  23 is a 3-axis<br /> symaxes : the symmetry operation no.  24 is a 3-axis<br /> symspgr : the symmetry operation no.  25 is a pure translation<br /> symaxes : the symmetry operation no.  26 is a 2-axis<br /> symaxes : the symmetry operation no.  27 is a 2_1-axis<br /> symaxes : the symmetry operation no.  28 is a 2_1-axis<br /> symaxes : the symmetry operation no.  29 is a 3, 3_1 or 3_2 axis<br /> symaxes : the symmetry operation no.  30 is a 3-axis<br /> symaxes : the symmetry operation no.  31 is a 3-axis<br /> symaxes : the symmetry operation no.  32 is a 3, 3_1 or 3_2 axis<br /> symaxes : the symmetry operation no.  33 is a 3, 3_1 or 3_2 axis<br /> symaxes : the symmetry operation no.  34 is a 3-axis<br /> symaxes : the symmetry operation no.  35 is a 3, 3_1 or 3_2 axis<br /> symaxes : the symmetry operation no.  36 is a 3-axis<br /> symspgr : the symmetry operation no.  37 is a pure translation<br /> symaxes : the symmetry operation no.  38 is a 2_1-axis<br /> symaxes : the symmetry operation no.  39 is a 2-axis<br /> symaxes : the symmetry operation no.  40 is a 2_1-axis<br /> symaxes : the symmetry operation no.  41 is a 3, 3_1 or 3_2 axis<br /> symaxes : the symmetry operation no.  42 is a 3, 3_1 or 3_2 axis<br /> symaxes : the symmetry operation no.  43 is a 3-axis<br /> symaxes : the symmetry operation no.  44 is a 3-axis<br /> symaxes : the symmetry operation no.  45 is a 3, 3_1 or 3_2 axis<br /> symaxes : the symmetry operation no.  46 is a 3-axis<br /> symaxes : the symmetry operation no.  47 is a 3-axis<br /> symaxes : the symmetry operation no.  48 is a 3, 3_1 or 3_2 axis<br /> symspgr : spgroup= 196  F2 3   (=T^2)<br /> getkgrid : length of smallest supercell vector (bohr)=    7.350000E+01<br />       Simple Lattice Grid<br /> symkpt : found identity, with number  1<br /> invars1: mkmem  undefined in the input file. Use default mkmem  = nkpt<br /> invars1: With nkpt_me=   76 and mkmem  =    76, ground state wf handled in core.<br /> invars1: mkqmem undefined in the input file. Use default mkqmem = nkpt<br /> invars1: With nkpt_me=   76 and mkqmem =    76, ground state wf handled in core.<br /> invars1: mk1mem undefined in the input file. Use default mk1mem = nkpt<br /> invars1: With nkpt_me=   76 and mk1mem =    76, ground state wf handled in core.<br /><br /> invars1m : enter jdtset=     2<br /> invars1 : treat image number     1<br /><br /> symlatt : the Bravais lattice is cF (face-centered cubic)<br />  xred   is defined in input file<br /> ingeo : takes atomic coordinates from input array xred<br /><br /> symlatt : the Bravais lattice is cF (face-centered cubic)<br /><br /> symlatt : the Bravais lattice is cF (face-centered cubic)<br /> symspgr : the symmetry operation no.   1 is the identity<br /> symaxes : the symmetry operation no.   2 is a 2-axis<br /> symaxes : the symmetry operation no.   3 is a 2-axis<br /> symaxes : the symmetry operation no.   4 is a 2-axis<br /> symaxes : the symmetry operation no.   5 is a 3-axis<br /> symaxes : the symmetry operation no.   6 is a 3-axis<br /> symaxes : the symmetry operation no.   7 is a 3-axis<br /> symaxes : the symmetry operation no.   8 is a 3-axis<br /> symaxes : the symmetry operation no.   9 is a 3-axis<br /> symaxes : the symmetry operation no.  10 is a 3-axis<br /> symaxes : the symmetry operation no.  11 is a 3-axis<br /> symaxes : the symmetry operation no.  12 is a 3-axis<br /> symspgr : the symmetry operation no.  13 is a pure translation<br /> symaxes : the symmetry operation no.  14 is a 2_1-axis<br /> symaxes : the symmetry operation no.  15 is a 2_1-axis<br /> symaxes : the symmetry operation no.  16 is a 2-axis<br /> symaxes : the symmetry operation no.  17 is a 3, 3_1 or 3_2 axis<br /> symaxes : the symmetry operation no.  18 is a 3-axis<br /> symaxes : the symmetry operation no.  19 is a 3, 3_1 or 3_2 axis<br /> symaxes : the symmetry operation no.  20 is a 3-axis<br /> symaxes : the symmetry operation no.  21 is a 3, 3_1 or 3_2 axis<br /> symaxes : the symmetry operation no.  22 is a 3, 3_1 or 3_2 axis<br /> symaxes : the symmetry operation no.  23 is a 3-axis<br /> symaxes : the symmetry operation no.  24 is a 3-axis<br /> symspgr : the symmetry operation no.  25 is a pure translation<br /> symaxes : the symmetry operation no.  26 is a 2-axis<br /> symaxes : the symmetry operation no.  27 is a 2_1-axis<br /> symaxes : the symmetry operation no.  28 is a 2_1-axis<br /> symaxes : the symmetry operation no.  29 is a 3, 3_1 or 3_2 axis<br /> symaxes : the symmetry operation no.  30 is a 3-axis<br /> symaxes : the symmetry operation no.  31 is a 3-axis<br /> symaxes : the symmetry operation no.  32 is a 3, 3_1 or 3_2 axis<br /> symaxes : the symmetry operation no.  33 is a 3, 3_1 or 3_2 axis<br /> symaxes : the symmetry operation no.  34 is a 3-axis<br /> symaxes : the symmetry operation no.  35 is a 3, 3_1 or 3_2 axis<br /> symaxes : the symmetry operation no.  36 is a 3-axis<br /> symspgr : the symmetry operation no.  37 is a pure translation<br /> symaxes : the symmetry operation no.  38 is a 2_1-axis<br /> symaxes : the symmetry operation no.  39 is a 2-axis<br /> symaxes : the symmetry operation no.  40 is a 2_1-axis<br /> symaxes : the symmetry operation no.  41 is a 3, 3_1 or 3_2 axis<br /> symaxes : the symmetry operation no.  42 is a 3, 3_1 or 3_2 axis<br /> symaxes : the symmetry operation no.  43 is a 3-axis<br /> symaxes : the symmetry operation no.  44 is a 3-axis<br /> symaxes : the symmetry operation no.  45 is a 3, 3_1 or 3_2 axis<br /> symaxes : the symmetry operation no.  46 is a 3-axis<br /> symaxes : the symmetry operation no.  47 is a 3-axis<br /> symaxes : the symmetry operation no.  48 is a 3, 3_1 or 3_2 axis<br /> symspgr : spgroup= 196  F2 3   (=T^2)<br /> invars1: mkmem  undefined in the input file. Use default mkmem  = nkpt<br /> invars1: With nkpt_me=   40 and mkmem  =    40, ground state wf handled in core.<br /> invars1: mkqmem undefined in the input file. Use default mkqmem = nkpt<br /> invars1: With nkpt_me=   40 and mkqmem =    40, ground state wf handled in core.<br /> invars1: mk1mem undefined in the input file. Use default mk1mem = nkpt<br /> invars1: With nkpt_me=   40 and mk1mem =    40, ground state wf handled in core.<br /><br /> DATASET    1 : space group F2 3 (#196); Bravais cF (face-center cubic)<br /> getkgrid : length of smallest supercell vector (bohr)=    7.350000E+01<br />       Simple Lattice Grid<br /> symkpt : found identity, with number  1<br /> chkneu : initialized the occupation numbers for occopt=    1<br />    spin-unpolarized case :<br />  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00<br />  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00<br />  1.00  1.00  1.00  1.00  0.00  0.00  0.00  0.00<br /><br /> getng is called for the coarse grid:<br /> For input ecut=  8.000000E+00 best grid ngfft=      24      24      24<br />       max ecut=  9.470874E+00<br /><br /> ==== FFT mesh ====<br />  FFT mesh divisions ........................    24   24   24<br />  Augmented FFT divisions ...................    25   25   24<br />  FFT algorithm .............................   112<br />  FFT cache size ............................    16<br /> getmpw: optimal value of mpw=     522<br /><br /> getng is called for the fine grid:<br /> Using supplied coarse mesh as initial guess.<br /> For input ecut=  1.200000E+01 best grid ngfft=      30      30      30<br />       max ecut=  1.483113E+01<br /><br /> ==== FFT mesh ====<br />  FFT mesh divisions ........................    30   30   30<br />  Augmented FFT divisions ...................    31   31   30<br />  FFT algorithm .............................   112<br />  FFT cache size ............................    16<br />  getdim_nloc : enter<br />  pspheads(1)%nproj(0:3)=           2           2           2           0<br /><br /> getdim_nloc : deduce lmnmax  =  18, lnmax  =   6,<br />                      lmnmaxso=  18, lnmaxso=   6.<br /> memory : analysis of memory needs<br />================================================================================<br /> Values of the parameters that define the memory need for DATASET  1.<br />   intxc =         0  ionmov =         0    iscf =        17 xclevel =         1<br />  lmnmax =        18   lnmax =         6   mband =        32  mffmem =         1<br />P  mgfft =        24   mkmem =        76 mpssoang=         3     mpw =       522<br />  mqgrid =      3001   natom =         2    nfft =     13824    nkpt =        76<br />  nloalg =         4  nspden =         1 nspinor =         2  nsppol =         1<br />    nsym =        12  n1xccc =         1  ntypat =         2  occopt =         1<br /> PAW method is used; the additional fine FFT grid is defined by:<br />   mgfftf=        30    nfftf =     27000<br />================================================================================<br />P This job should need less than                      56.860 Mbytes of memory.<br />  Rough estimation (10% accuracy) of disk space for files :<br />  WF disk file :     19.373 Mbytes ; DEN or POT disk file :      0.208 Mbytes.<br />================================================================================<br /><br /> Biggest array : cg(disk), with     19.3731 MBytes.<br /> memana : allocated an array of     19.373 Mbytes, for testing purposes.<br /> memana : allocated      56.860 Mbytes, for testing purposes.<br /> The job will continue.<br /><br /> DATASET    2 : space group F2 3 (#196); Bravais cF (face-center cubic)<br /> chkneu : initialized the occupation numbers for occopt=    1<br />    spin-unpolarized case :<br />  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00<br />  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00  1.00<br />  1.00  1.00  1.00  1.00  0.00  0.00  0.00  0.00<br /><br /> getng is called for the coarse grid:<br /> For input ecut=  8.000000E+00 best grid ngfft=      24      24      24<br />       max ecut=  9.470874E+00<br /><br /> ==== FFT mesh ====<br />  FFT mesh divisions ........................    24   24   24<br />  Augmented FFT divisions ...................    25   25   24<br />  FFT algorithm .............................   112<br />  FFT cache size ............................    16<br /> getmpw: optimal value of mpw=     531<br /><br /> getng is called for the fine grid:<br /> Using supplied coarse mesh as initial guess.<br /> For input ecut=  1.200000E+01 best grid ngfft=      30      30      30<br />       max ecut=  1.483113E+01<br /><br /> ==== FFT mesh ====<br />  FFT mesh divisions ........................    30   30   30<br />  Augmented FFT divisions ...................    31   31   30<br />  FFT algorithm .............................   112<br />  FFT cache size ............................    16<br />  getdim_nloc : enter<br />  pspheads(1)%nproj(0:3)=           2           2           2           0<br /><br /> getdim_nloc : deduce lmnmax  =  18, lnmax  =   6,<br />                      lmnmaxso=  18, lnmaxso=   6.<br /> memory : analysis of memory needs<br />================================================================================<br /> Values of the parameters that define the memory need for DATASET  2.<br />   intxc =         0  ionmov =         0    iscf =        -2 xclevel =         1<br />  lmnmax =        18   lnmax =         6   mband =        32  mffmem =         1<br />P  mgfft =        24   mkmem =        40 mpssoang=         3     mpw =       531<br />  mqgrid =      3001   natom =         2    nfft =     13824    nkpt =        40<br />  nloalg =         4  nspden =         1 nspinor =         2  nsppol =         1<br />    nsym =        12  n1xccc =         1  ntypat =         2  occopt =         1<br /> PAW method is used; the additional fine FFT grid is defined by:<br />   mgfftf=        30    nfftf =     27000<br />================================================================================<br />P This job should need less than                      33.309 Mbytes of memory.<br />  Rough estimation (10% accuracy) of disk space for files :<br />  WF disk file :     10.373 Mbytes ; DEN or POT disk file :      0.208 Mbytes.<br />================================================================================<br /><br /> Biggest array : cg(disk), with     10.3731 MBytes.<br /> memana : allocated an array of     10.373 Mbytes, for testing purposes.<br /> memana : allocated      33.309 Mbytes, for testing purposes.<br /> The job will continue.<br />  tolsym=  1.00000000000000002E-008  1.00000000000000002E-008  1.00000000000000002E-008<br /> -outvars: echo values of preprocessed input variables --------<br />            acell    1.2250000000E+01  1.2250000000E+01  1.2250000000E+01 Bohr<br />              amu    1.12411000E+02  1.27600000E+02<br />             ecut    8.00000000E+00 Hartree<br />           ecutsm    5.00000000E-01 Hartree<br />           enunit1        0<br />           enunit2        1<br />           getden1        0<br />           getden2       -1<br />             iscf1       17<br />             iscf2       -2<br />           istwfk2     3    0    0    0    0    0    0    0    0    0<br />                       2    0    0    0    0    0    0    0    0    0<br />                       0    0    8    0    0    0    0    0    0    0<br />                       0    0    0    0    0    0    0    0    0    0<br />              ixc         7<br />           jdtset      1    2<br />              kpt1  -8.33333333E-02 -1.66666667E-01  0.00000000E+00<br />                    -8.33333333E-02 -8.33333333E-02  8.33333333E-02<br />                    -8.33333333E-02 -3.33333333E-01  0.00000000E+00<br />                    -1.66666667E-01 -2.50000000E-01  0.00000000E+00<br />                    -8.33333333E-02 -2.50000000E-01  8.33333333E-02<br />                    -1.66666667E-01 -1.66666667E-01  8.33333333E-02<br />                    -8.33333333E-02 -1.66666667E-01  1.66666667E-01<br />                    -2.50000000E-01 -8.33333333E-02  8.33333333E-02<br />                    -1.66666667E-01 -8.33333333E-02  1.66666667E-01<br />                    -8.33333333E-02 -8.33333333E-02  2.50000000E-01<br />                    -8.33333333E-02  5.00000000E-01  0.00000000E+00<br />                    -1.66666667E-01 -4.16666667E-01  0.00000000E+00<br />                    -8.33333333E-02 -4.16666667E-01  8.33333333E-02<br />                    -2.50000000E-01 -3.33333333E-01  0.00000000E+00<br />                    -1.66666667E-01 -3.33333333E-01  8.33333333E-02<br />                    -8.33333333E-02 -3.33333333E-01  1.66666667E-01<br />                    -2.50000000E-01 -2.50000000E-01  8.33333333E-02<br />                    -1.66666667E-01 -2.50000000E-01  1.66666667E-01<br />                    -8.33333333E-02 -2.50000000E-01  2.50000000E-01<br />                    -3.33333333E-01 -1.66666667E-01  8.33333333E-02<br />                    -2.50000000E-01 -1.66666667E-01  1.66666667E-01<br />                    -1.66666667E-01 -1.66666667E-01  2.50000000E-01<br />                    -8.33333333E-02 -1.66666667E-01  3.33333333E-01<br />                    -4.16666667E-01 -8.33333333E-02  8.33333333E-02<br />                    -3.33333333E-01 -8.33333333E-02  1.66666667E-01<br />                    -2.50000000E-01 -8.33333333E-02  2.50000000E-01<br />                    -1.66666667E-01 -8.33333333E-02  3.33333333E-01<br />                    -8.33333333E-02 -8.33333333E-02  4.16666667E-01<br />                    -8.33333333E-02  3.33333333E-01  0.00000000E+00<br />                    -1.66666667E-01  4.16666667E-01  0.00000000E+00<br />                    -2.50000000E-01  5.00000000E-01  0.00000000E+00<br />                    -1.66666667E-01  5.00000000E-01  8.33333333E-02<br />                    -8.33333333E-02  5.00000000E-01  1.66666667E-01<br />                    -3.33333333E-01 -4.16666667E-01  0.00000000E+00<br />                    -2.50000000E-01 -4.16666667E-01  8.33333333E-02<br />                    -1.66666667E-01 -4.16666667E-01  1.66666667E-01<br />                    -8.33333333E-02 -4.16666667E-01  2.50000000E-01<br />                    -3.33333333E-01 -3.33333333E-01  8.33333333E-02<br />                    -2.50000000E-01 -3.33333333E-01  1.66666667E-01<br />                    -1.66666667E-01 -3.33333333E-01  2.50000000E-01<br />                    -8.33333333E-02 -3.33333333E-01  3.33333333E-01<br />                    -4.16666667E-01 -2.50000000E-01  8.33333333E-02<br />                    -3.33333333E-01 -2.50000000E-01  1.66666667E-01<br />                    -2.50000000E-01 -2.50000000E-01  2.50000000E-01<br />                    -1.66666667E-01 -2.50000000E-01  3.33333333E-01<br />                    -8.33333333E-02 -2.50000000E-01  4.16666667E-01<br />                    -4.16666667E-01 -1.66666667E-01  1.66666667E-01<br />                    -3.33333333E-01 -1.66666667E-01  2.50000000E-01<br />                    -1.66666667E-01 -1.66666667E-01  4.16666667E-01<br />                    -4.16666667E-01 -8.33333333E-02  2.50000000E-01<br />                       outvar1 : prtvol=0, do not print more k-points.<br />              kpt2   5.00000000E-01  0.00000000E+00  0.00000000E+00<br />                     4.50000000E-01  0.00000000E+00  0.00000000E+00<br />                     4.00000000E-01  0.00000000E+00  0.00000000E+00<br />                     3.50000000E-01  0.00000000E+00  0.00000000E+00<br />                     3.00000000E-01  0.00000000E+00  0.00000000E+00<br />                     2.50000000E-01  0.00000000E+00  0.00000000E+00<br />                     2.00000000E-01  0.00000000E+00  0.00000000E+00<br />                     1.50000000E-01  0.00000000E+00  0.00000000E+00<br />                     1.00000000E-01  0.00000000E+00  0.00000000E+00<br />                     5.00000000E-02  0.00000000E+00  0.00000000E+00<br />                     0.00000000E+00  0.00000000E+00  0.00000000E+00<br />                     0.00000000E+00  4.16666667E-02  4.16666667E-02<br />                     0.00000000E+00  8.33333333E-02  8.33333333E-02<br />                     0.00000000E+00  1.25000000E-01  1.25000000E-01<br />                     0.00000000E+00  1.66666667E-01  1.66666667E-01<br />                     0.00000000E+00  2.08333333E-01  2.08333333E-01<br />                     0.00000000E+00  2.50000000E-01  2.50000000E-01<br />                     0.00000000E+00  2.91666667E-01  2.91666667E-01<br />                     0.00000000E+00  3.33333333E-01  3.33333333E-01<br />                     0.00000000E+00  3.75000000E-01  3.75000000E-01<br />                     0.00000000E+00  4.16666667E-01  4.16666667E-01<br />                     0.00000000E+00  4.58333333E-01  4.58333333E-01<br />                     0.00000000E+00  5.00000000E-01  5.00000000E-01<br />                     5.88235294E-02  5.29411765E-01  5.29411765E-01<br />                     1.17647059E-01  5.58823529E-01  5.58823529E-01<br />                     1.76470588E-01  5.88235294E-01  5.88235294E-01<br />                     2.35294118E-01  6.17647059E-01  6.17647059E-01<br />                     2.94117647E-01  6.47058824E-01  6.47058824E-01<br />                     3.52941176E-01  6.76470588E-01  6.76470588E-01<br />                     4.11764706E-01  7.05882353E-01  7.05882353E-01<br />                     4.70588235E-01  7.35294118E-01  7.35294118E-01<br />                     5.29411765E-01  7.64705882E-01  7.64705882E-01<br />                     5.88235294E-01  7.94117647E-01  7.94117647E-01<br />                     6.47058824E-01  8.23529412E-01  8.23529412E-01<br />                     7.05882353E-01  8.52941176E-01  8.52941176E-01<br />                     7.64705882E-01  8.82352941E-01  8.82352941E-01<br />                     8.23529412E-01  9.11764706E-01  9.11764706E-01<br />                     8.82352941E-01  9.41176471E-01  9.41176471E-01<br />                     9.41176471E-01  9.70588235E-01  9.70588235E-01<br />                     1.00000000E+00  1.00000000E+00  1.00000000E+00<br />          kptrlen1   7.35000000E+01<br />          kptrlen2   3.00000000E+01<br />           kptopt1        4<br />           kptopt2       -3<br />         kptrlatt    6 -6  6  -6  6  6  -6 -6  6<br />P           mkmem1       76<br />P           mkmem2       40<br />            natom         2<br />            nband1    32<br />            nband2    32<br />           nbdbuf1        0<br />           nbdbuf2        4<br />           ndtset         2<br />            ngfft        24      24      24<br />          ngfftdg        30      30      30<br />             nkpt1       76<br />             nkpt2       40<br />          nspinor         2<br />             nsym        12<br />           ntypat         2<br />              occ    1.000000  1.000000  1.000000  1.000000  1.000000  1.000000<br />                     1.000000  1.000000  1.000000  1.000000  1.000000  1.000000<br />                     1.000000  1.000000  1.000000  1.000000  1.000000  1.000000<br />                     1.000000  1.000000  1.000000  1.000000  1.000000  1.000000<br />                     1.000000  1.000000  1.000000  1.000000  0.000000  0.000000<br />                     0.000000  0.000000<br />        optforces         2<br />        pawcpxocc         2<br />        pawecutdg    1.20000000E+01 Hartree<br />        pawspnorb         1<br />           prtden1        1<br />           prtden2        0<br />            prtwf         0<br />            rprim    0.0000000000E+00  5.0000000000E-01  5.0000000000E-01<br />                     5.0000000000E-01  0.0000000000E+00  5.0000000000E-01<br />                     5.0000000000E-01  5.0000000000E-01  0.0000000000E+00<br />           shiftk    5.00000000E-01  5.00000000E-01  5.00000000E-01<br />          spgroup       196<br />           symrel    1  0  0   0  1  0   0  0  1       0 -1  1   0 -1  0   1 -1  0<br />                    -1  0  0  -1  0  1  -1  1  0       0  1 -1   1  0 -1   0  0 -1<br />                    -1  0  1  -1  1  0  -1  0  0       0 -1  0   1 -1  0   0 -1  1<br />                     1  0 -1   0  0 -1   0  1 -1       0  1  0   0  0  1   1  0  0<br />                     0  0 -1   0  1 -1   1  0 -1       1 -1  0   0 -1  1   0 -1  0<br />                     0  0  1   1  0  0   0  1  0      -1  1  0  -1  0  0  -1  0  1<br />           toldfe1   1.00000000E-06 Hartree<br />           toldfe2   0.00000000E+00 Hartree<br />  tolsym=  1.00000000000000002E-008  1.00000000000000002E-008  1.00000000000000002E-008<br />           tolwfr1   0.00000000E+00<br />           tolwfr2   1.00000000E-12<br />            typat    1  2<br />           useylm         1<br />              wtk1     0.01389    0.01389    0.01389    0.01389    0.01389    0.01389<br />                       0.01389    0.01389    0.01389    0.01389    0.01389    0.01389<br />                       0.01389    0.01389    0.01389    0.01389    0.01389    0.01389<br />                       0.01389    0.01389    0.01389    0.01389    0.01389    0.01389<br />                       0.01389    0.01389    0.01389    0.01389    0.01389    0.01389<br />                       0.01389    0.01389    0.01389    0.01389    0.01389    0.01389<br />                       0.01389    0.01389    0.01389    0.01389    0.01389    0.01389<br />                       0.01389    0.01389    0.01389    0.01389    0.01389    0.01389<br />                       0.01389    0.01389<br />                       outvars : prtvol=0, do not print more k-points.<br />              wtk2     1.00000    1.00000    1.00000    1.00000    1.00000    1.00000<br />                       1.00000    1.00000    1.00000    1.00000    1.00000    1.00000<br />                       1.00000    1.00000    1.00000    1.00000    1.00000    1.00000<br />                       1.00000    1.00000    1.00000    1.00000    1.00000    1.00000<br />                       1.00000    1.00000    1.00000    1.00000    1.00000    1.00000<br />                       1.00000    1.00000    1.00000    1.00000    1.00000    1.00000<br />                       1.00000    1.00000    1.00000    1.00000<br />           xangst    0.0000000000E+00  0.0000000000E+00  0.0000000000E+00<br />                     1.6206052013E+00  1.6206052013E+00  1.6206052013E+00<br />            xcart    0.0000000000E+00  0.0000000000E+00  0.0000000000E+00<br />                     3.0625000000E+00  3.0625000000E+00  3.0625000000E+00<br />             xred    0.0000000000E+00  0.0000000000E+00  0.0000000000E+00<br />                     2.5000000000E-01  2.5000000000E-01  2.5000000000E-01<br />            znucl     48.00000   52.00000<br /><br />================================================================================<br /><br /> chkinp: machine precision is   2.2204460492503131E-16<br /><br /> chkinp: Checking input parameters for consistency, jdtset= 1.<br />dtsetcopy : copying area  algalch    the actual size (     2) of the index (     1)  differs from its standard size (     0)<br />dtsetcopy : copying area  atvshift   the actual size (     0) of the index (     3)  differs from its standard size (     2)<br />dtsetcopy : copying area  kberry     the actual size (    20) of the index (     2)  differs from its standard size (     1)<br />dtsetcopy : copying area  nband      the actual size (    76) of the index (     1)  differs from its standard size (     1)<br />dtsetcopy : copying area  mixalch    the actual size (     2) of the index (     1)  differs from its standard size (     0)<br />dtsetcopy : copying area  mixalch    the actual size (     2) of the index (     2)  differs from its standard size (     0)<br />dtsetcopy : copying area  shiftk     the actual size (     8) of the index (     2)  differs from its standard size (     1)<br /><br /> chkinp: Checking input parameters for consistency, jdtset= 2.<br />dtsetcopy : copying area  algalch    the actual size (     2) of the index (     1)  differs from its standard size (     0)<br />dtsetcopy : copying area  atvshift   the actual size (     0) of the index (     3)  differs from its standard size (     2)<br />dtsetcopy : copying area  istwfk     the actual size (    76) of the index (     1)  differs from its standard size (    40)<br />dtsetcopy : copying area  kberry     the actual size (    20) of the index (     2)  differs from its standard size (     1)<br />dtsetcopy : copying area  nband      the actual size (    76) of the index (     1)  differs from its standard size (     1)<br />dtsetcopy : copying area  kpt        the actual size (    76) of the index (     2)  differs from its standard size (    40)<br />dtsetcopy : copying area  kptns      the actual size (    76) of the index (     2)  differs from its standard size (    40)<br />dtsetcopy : copying area  mixalch    the actual size (     2) of the index (     1)  differs from its standard size (     0)<br />dtsetcopy : copying area  mixalch    the actual size (     2) of the index (     2)  differs from its standard size (     0)<br />dtsetcopy : copying area  occ_orig   the actual size (  2432) of the index (     1)  differs from its standard size (  1280)<br />dtsetcopy : copying area  shiftk     the actual size (     8) of the index (     2)  differs from its standard size (     1)<br />dtsetcopy : copying area  wtk        the actual size (    76) of the index (     1)  differs from its standard size (    40)<br /><br /> chkvars : ERROR - <br />  Found the token USEPAW in the input file.<br />  This name is not one of the registered input variable names (see the Web list of input variables).<br />  Action : check your input file. You likely mistyped the input variable.<br /><br /> leave_new : decision taken to exit ...<br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /><br /> === Build Information === <br />  Version       : 6.2.3<br />  Build target  : x86_64_linux_gnu4.4<br />  Build date    : 20130318<br /><br /> === Compiler Suite === <br />  C compiler       : gnu4.4<br />  CFLAGS           :  -g -O2<br />  C++ compiler     : gnu4.4<br />  CXXFLAGS         :  -g -O2<br />  Fortran compiler : gnu4.4<br />  FCFLAGS          :  -g -ffree-line-length-none<br />  FC_LDFLAGS       : <br /><br /> === Optimizations === <br />  Debug level        : yes<br />  Optimization level : standard<br />  Architecture       : unknown_unknown<br /><br /> === MPI === <br />  Parallel build : no<br />  Parallel I/O   : no<br /><br /> === Linear algebra === <br />  Library flavor : @linalg_flavor@<br />  Use ScaLAPACK  : no<br /><br /> === Plug-ins === <br />  BigDFT    : no<br />  ETSF I/O  : yes<br />  LibXC     : yes<br />  FoX       : no<br />  NetCDF    : yes<br />  Wannier90 : yes<br /><br /> === Experimental features === <br />  Bindings            : no<br />  Exports             : no<br />  GW double-precision : no<br />  Macroave build      : yes<br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /><br /></div></blockquote></div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p6584" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile6584">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlistc2d1.html?mode=viewprofile&amp;u=64" class="avatar"><img class="avatar" src="download/file8810.jpg?avatar=64_1334681793.jpg" width="92" height="61" alt="User avatar" /></a>														</div>
+								<a href="memberlistc2d1.html?mode=viewprofile&amp;u=64" class="username">jzwanzig</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search9859.html?author_id=64&amp;sr=posts">504</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Aug 17, 2009 9:25 am</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content6584">
+
+						<h3 ><a href="#p6584">Re: Introducing Spin-Orbit coupling for zincblende CdTe</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="postingec78.html?mode=quote&amp;f=14&amp;p=6584" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopicb2e8.html?p=6584#p6584" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistc2d1.html?mode=viewprofile&amp;u=64" class="username">jzwanzig</a></strong> &raquo; </span>Sat Apr 20, 2013 9:25 am
+			</p>
+			
+			
+			
+			<div class="content">Hi, the problem is that you have USEPAW in the input file, this variable has been moved to &quot;internal&quot; status, it is set by the content of the pseudopotential files and must not be set by the input file (in the log file you posted, this error is described near the bottom, it was flagged in the &quot;chkvar&quot; routine). I think in earlier versions of abinit you could set &quot;usepaw&quot; in the input file, but we changed it because it is strictly impossible to mix norm-conserving and PAW formalisms in the same calculation. So, re-try without usepaw in the input file and let me know how it goes.<br /><br />Joe</div>
+			
+			
+			
+									
+									<div id="sig6584" class="signature">Josef W. Zwanziger<br />Professor, Department of Chemistry<br />Canada Research Chair in NMR Studies of Materials<br />Dalhousie University<br />Halifax, NS B3H 4J3 Canada<br /><!-- e --><a href="mailto:jzwanzig@gmail.com">jzwanzig@gmail.com</a><!-- e --></div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p6607" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile6607">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistbb10.html?mode=viewprofile&amp;u=1140" class="username">bjornar</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search7a81.html?author_id=1140&amp;sr=posts">12</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Tue Mar 12, 2013 2:00 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content6607">
+
+						<h3 ><a href="#p6607">Re: Introducing Spin-Orbit coupling for zincblende CdTe</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting1fde.html?mode=quote&amp;f=14&amp;p=6607" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic4347-2.html?p=6607#p6607" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistbb10.html?mode=viewprofile&amp;u=1140" class="username">bjornar</a></strong> &raquo; </span>Mon Apr 22, 2013 2:15 pm
+			</p>
+			
+			
+			
+			<div class="content">Hi,<br /><br />That actually solved my problems. Thank you very much for taking the time to help me.<br /><br />Kind regards<br />Bjornar Karlsen</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="posting363b.html?mode=reply&amp;f=14&amp;t=2085" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic574d.html?f=14&amp;t=2085&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=14&amp;t=2085">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			7 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforum9780.html?f=14" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Link to other codes”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=2085&p=6571 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:25:30 GMT -->
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=2852&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:58:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Difficulty creating a new test</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Difficulty creating a new test</h2>
+		<p><a href="viewtopic1026.html?f=19&amp;t=2852">https://forum.abinit.org/viewtopic.php?f=19&amp;t=2852</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Difficulty creating a new test</h3>
+				<div class="date">Posted: <strong>Mon Nov 10, 2014 3:37 pm</strong></div>
+				<div class="author">by <strong>abokhanc</strong></div>
+				<div class="content">Hi all,<br /><br />I'm trying to make a new test for my fold2Bloch utility, which is being integrated into abinit-7.11.2. The documentation says to edit the parser in testsuite.py, but I'm not sure where to start.<br />I know I need to change the executable and other parameters in the tXX.in file, as well as my output file to be tested. Fold2Bloch, however, requires the following command line to run:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>fold2Bloch H6o_WFK 1:2:3</code></pre></div><br />where:<br />H6O_WFK is the input file (unformatted 750kB in size)<br />1:2:3 is the multiplicity in the corresponding direction used when constructing the super-cell (x:y:z)<br /><br />I renamed my output file fold2Bloch.out into t01.out, and I put H6o_WFK as my &quot;extra_inputs&quot;. My t01.in contains only the &lt;TEST_INFO&gt; part. So when I run &quot;runtests.py&quot;, it says my input file doesn't have a valid &quot;testcnf&quot; ? section.<br /> Any help will be greatly appreciated.<br /><br />Thank you,<br /><br />Anton</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Difficulty creating a new test</h3>
+				<div class="date">Posted: <strong>Fri Nov 14, 2014 10:02 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Hi,<br /><br />I may not be helpful on the testsuite topic (Matteo is the person of interest) but I do have 3 remarks:<br /><br />- Since November 4th we are at version 7.11.3, so you should branch this new version and merge your work into this branch.<br />- Using command line argument is only possible if the GET_COMMAND_ARGUMENT function is available in your compilater suite (which is tested by the build system). You may want to have a back up solution if you can not read the command arguments.<br />A quick solution would be to read those arguments from the stdin as in abinit : fold2Block &lt; arguments_files &gt; log <br />- Could you provide you tXX.in file so we can see what is in it ?<br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Difficulty creating a new test</h3>
+				<div class="date">Posted: <strong>Fri Nov 14, 2014 10:39 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">You input file probably lacks a section of formatted comments at the end of the file that runtests.py is expecting to know how to run your test. Please have a look at random tests inputs for examples of what to put in these comments.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Difficulty creating a new test</h3>
+				<div class="date">Posted: <strong>Mon Nov 17, 2014 4:15 pm</strong></div>
+				<div class="author">by <strong>abokhanc</strong></div>
+				<div class="content">So here is what I've got for my t01.in :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#%%&lt;BEGIN TEST_INFO&gt;<br />#%% &#91;setup&#93;<br />#%% executable = fold2Bloch<br />#%% &#91;files&#93;<br />#%% files_to_test = <br />#%%&nbsp; &nbsp;t01.out, tolnlines = 0, tolabs = 0.0, tolrel = 0.0, fld_options =&nbsp; -medium<br />#%% &#91;paral_info&#93;<br />#%% max_nprocs = 1<br />#%% &#91;extra_info&#93;<br />#%% authors = <br />#%% keywords = fold2Bloch<br />#%% description = <br />#%%&nbsp; &nbsp;Test the unfolding of a Hydrogen Supercell<br />#%%&lt;END TEST_INFO&gt;</code></pre></div><br /><br />However, the actual input file used by FOLD2BLOCH is a binary _WFK file, created by ABINIT. So I'm not sure how to insert a binary file as input. Do I have to do it in two steps: run ABINIT first to create the file, then run FOLD2BLOCH? Or do I need to make my binary t02.in and put it in as extra input files?<br />For the Hydrogen test, _WFK file is 750kB<br /><br />I read that when created a test for a new executable, the actual testsuite.py needs to be edited, the BASETEST class to be specific. However, I'm not sure where to start. Do I need to make a new subclass?<br /><br />Thank you,<br /><br />Anton</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Difficulty creating a new test</h3>
+				<div class="date">Posted: <strong>Thu Nov 20, 2014 11:03 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Usually, when you need an input _WFK file, what you do is creat one test that runs abinit to creat the files you need.<br />Then creat a second test chained with the first one.<br /><br />So in your first test you must have<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#%% &#91;setup&#93;<br />#%% executable = abinit<br />#%% test_chain = t01.in , t02.in<br />#%%&#91;shell&#93;<br />#%% post_commands = ww_cp t01o_WFK t02i_WFK<br /></code></pre></div><br />This is just an example, you can use ww_mv as well.<br /><br />Then you set up your t02 to run fold2bloch<br /><br />Then to modify the testsuite, I think you should <br />1) modify tests/__init__.py and add you executable to the list (l. 798)<br />2) You have to creat a subclass of BaseTest to adapt the creation of files, copy of files, run of you code and so on.<br />But I am really not sure you can use the command line arguments to run your code since a JobRunner runs with only the # of MPI procs, bin_path stdin, stdout, stderr and path as arguments.<br />A JobRunner basically runs with <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>executable &lt; stdin&gt; stdou 2&gt; stderr<br /></code></pre></div><br />mpirun, valgrind or gdb can be inserted at the beginning of the line with some arguments that are passed through by the parser of runtests.py<br /><br />Matteo G. is the person who can help you.<br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Difficulty creating a new test</h3>
+				<div class="date">Posted: <strong>Wed Dec 03, 2014 8:05 pm</strong></div>
+				<div class="author">by <strong>abokhanc</strong></div>
+				<div class="content">Can you please give me his email. <br /><br />Thank you,</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Difficulty creating a new test</h3>
+				<div class="date">Posted: <strong>Thu Dec 04, 2014 9:29 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">You can find it here : <!-- m --><a class="postlink" href="http://www.uclouvain.be/matteo.giantomassi">http://www.uclouvain.be/matteo.giantomassi</a><!-- m --><br /><br />Jordan</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=2852&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:58:18 GMT -->
+</html>

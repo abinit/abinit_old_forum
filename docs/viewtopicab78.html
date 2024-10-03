@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=4037&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:44:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; IFC and unit of freq in PHDOS</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>IFC and unit of freq in PHDOS</h2>
+		<p><a href="viewtopicd16a.html?f=10&amp;t=4037">https://forum.abinit.org/viewtopic.php?f=10&amp;t=4037</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>IFC and unit of freq in PHDOS</h3>
+				<div class="date">Posted: <strong>Wed Feb 13, 2019 11:41 am</strong></div>
+				<div class="author">by <strong>ganck</strong></div>
+				<div class="content">i would to get the IFC in ifcinfo.out so that I can analyse IFC myself.<br /><br />With<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>!Input file for the anaddb code. Analysis of the SiO2 DDB<br /><br />!Flags<br />&nbsp;ifcflag&nbsp; &nbsp;1&nbsp; &nbsp; &nbsp;! Interatomic force constant flag<br />&nbsp;ifcout&nbsp; &nbsp; -1<br />&nbsp;thmflag&nbsp; &nbsp;1&nbsp; &nbsp; &nbsp;! Thermodynamical properties flag<br />&nbsp;enunit 2<br /><br />!Wavevector grid number 1 (coarse grid, from DDB)<br />&nbsp; brav&nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; ! Bravais Lattice : 1-S.C., 2-F.C., 3-B.C., 4-Hex.)<br />&nbsp; ngqpt&nbsp; &nbsp;9&nbsp; 9&nbsp; 9&nbsp; &nbsp;! Monkhorst-Pack indices<br />&nbsp; nqshft&nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;! number of q-points in repeated basic q-cell<br />&nbsp; q1shft&nbsp; 3*0.0<br /><br />!Effective charges<br />&nbsp; chneut&nbsp; &nbsp;1&nbsp; &nbsp; &nbsp;! Charge neutrality requirement for effective charges.<br /><br />!Interatomic force constant info<br />&nbsp; dipdip&nbsp; 1&nbsp; &nbsp; &nbsp; ! Dipole-dipole interaction treatment<br /><br />!Wavevector grid number 2 (series of fine grids, extrapolated from interat forces)<br />&nbsp; prtdos 1<br />&nbsp; ng2qpt&nbsp; &nbsp;30 30 30&nbsp; ! sample the BZ up to ngqpt2<br />&nbsp; ngrids&nbsp; &nbsp;5&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;! number of grids of increasing size<br />&nbsp; q2shft&nbsp; &nbsp;3*0.0<br />&nbsp; prt_ifc 1<br /><br />!Thermal information<br />&nbsp; nchan&nbsp; &nbsp;1250&nbsp; &nbsp;! # of channels for the DOS with channel width 1 cm-1<br />&nbsp; nwchan&nbsp; 5&nbsp; &nbsp; &nbsp; ! # of different channel widths from this integer down to 1 cm-1<br />&nbsp; thmtol&nbsp; 0.120&nbsp; ! Tolerance on thermodynamical function fluctuations<br />&nbsp; ntemper 10&nbsp; &nbsp; &nbsp;! Number of temperatures<br />&nbsp; temperinc 20.&nbsp; ! Increment of temperature in K for temperature dependency<br />&nbsp; tempermin 20.&nbsp; ! Minimal temperature in Kelvin<br /><br /></code></pre></div><br /><br />anaddb &lt; xfiles7<br /><br />runs well, but zero file size for ifcinfo.out<br /><br />0 Feb 13 18:36 ifcinfo.out<br /><br />Sorry I do not understand.<br /><br />Also I would like to get the unit of   freq not to be Hartree<br />in <br /><br />trf2_7.out_PHDOS<br /><br />but no matter what enunit I used, the freq in PHDOS is still Hartree, and not 1/cm that I want.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: IFC and unit of freq in PHDOS</h3>
+				<div class="date">Posted: <strong>Wed Feb 20, 2019 11:16 am</strong></div>
+				<div class="author">by <strong>ganck</strong></div>
+				<div class="content">The json files of Petretto et al. ph_dos on 1521 compounds [Scientific Data<br />2018] seem to have x having cm^{-1} for Frequency, and 1/eV for the phonon density of states.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: IFC and unit of freq in PHDOS</h3>
+				<div class="date">Posted: <strong>Thu Feb 21, 2019 5:31 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear ganck,<br />I think only Hartree units are printed in the DOS file... The eunit flag of anaddb is only for the main output (<a href="https://docs.abinit.org/variables/anaddb/#enunit" class="postlink">https://docs.abinit.org/variables/anaddb/#enunit</a>).<br />Regarding the IFC printing, are you sure ifcout -1 is permitted (<a href="https://docs.abinit.org/variables/anaddb/#ifcout" class="postlink">https://docs.abinit.org/variables/anaddb/#ifcout</a>)?<br />best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: IFC and unit of freq in PHDOS</h3>
+				<div class="date">Posted: <strong>Mon Apr 01, 2019 1:54 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Regarding the output units, you are correct that they are not implemented systematically. Some files, but mainly the output+log were implemented a long time ago, and more recent developments (probably the PHDOS file as well) are only in Hartree a.u. This is not a big deal to post-process, and the main guarantee is that abinit uses Ha a.u. internally systematically, and usually for output as well.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=4037&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:44:28 GMT -->
+</html>

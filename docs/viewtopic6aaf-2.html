@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2805&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:52:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Error in detecting liblzma.so.5.0.7</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Error in detecting liblzma.so.5.0.7</h2>
+		<p><a href="viewtopicebd1.html?f=3&amp;t=2805">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2805</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Error in detecting liblzma.so.5.0.7</h3>
+				<div class="date">Posted: <strong>Thu Sep 25, 2014 12:11 pm</strong></div>
+				<div class="author">by <strong>sheng</strong></div>
+				<div class="content">Hi,<br />I am using the newest abinit 7.8.2, and I notice that it is dependent on liblzma library to work.<br />The problem is that while I have the library version 5.0.7 installed and paths correctly configured, Abinit won't accept any version other than liblzma.so.0.<br />I have circumvent this by creating a symbolic link to liblzma.so.5.0.7 by the name of liblzma.so.0.<br />Is this the correct way to do this?<br /><br />Thank you<br /><br />Goh</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Error in detecting liblzma.so.5.0.7</h3>
+				<div class="date">Posted: <strong>Mon Sep 29, 2014 9:07 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />some precisions are required to help you...<br /><br />- OS<br />- your configure command ( or your .ac  and/or the config.log file(s)... )<br />- result of  the command : ldd src/98_main/abinit<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Error in detecting liblzma.so.5.0.7</h3>
+				<div class="date">Posted: <strong>Tue Oct 28, 2014 4:15 am</strong></div>
+				<div class="author">by <strong>sheng</strong></div>
+				<div class="content">Sorry for late reply.<br /><br />OS : Rocks 5.3 (Rolled Tacos)<br /><br />config.ac:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>prefix=&quot;/share/apps/estools/abinit/7.8.2/&quot;<br />enable_64bit_flags=&quot;yes&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />enable_openmp=&quot;yes&quot;<br />with_mpi_prefix=&quot;/share/apps/openmpi/1.8.1/gcc4.9.0&quot;<br />with_trio_flavor=&quot;netcdf+etsf_io&quot;<br />with_netcdf_incs=&quot;-I/share/apps/estools/netcdf/4.3.2/include&quot;<br />with_netcdf_libs=&quot;-L/share/apps/estools/netcdf/4.3.2/lib -lnetcdf -lnetcdff&quot;<br />with_etsf_io_incs=&quot;-I/share/apps/estools/etsf_io/1.0.4/include/gcc&quot;<br />with_etsf_io_libs=&quot;-L/share/apps/estools/etsf_io/1.0.4/lib -letsf_io_low_level -letsf_io_utils -letsf_io&quot;<br />with_fft_flavor=&quot;fftw3&quot;<br />with_fft_incs=&quot;-I/share/apps/fftw/3.3.4/include&quot;<br />with_fft_libs=&quot;-L/share/apps/fftw/3.3.4/lib -lfftw3 -lfftw3f&quot;<br />with_linalg_flavor=&quot;atlas+scalapack&quot;<br />with_linalg_incs=&quot;-I/share/apps/estools/ScaLAPACK/include -I/share/apps/ATLAS/3.10.1/include&quot;<br />with_linalg_libs=&quot;-L/share/apps/estools/ScaLAPACK/lib -lscalapack -L/share/apps/ATLAS/3.10.1/lib -llapack -lf77blas -lcblas -latlas&quot;<br />with_math_flavor=&quot;gsl&quot;<br />with_math_incs=&quot;-I/share/apps/estools/gsl/1.16/include&quot;<br />with_math_libs=&quot;-L/share/apps/estools/gsl/1.16/lib -lgsl -lgslcblas&quot;<br />with_dft_flavor=&quot;atompaw+bigdft+libxc+wannier90&quot;<br />with_atompaw_bins=&quot;/share/apps/estools/atompaw/4.0.0.10/bin&quot;<br />with_atompaw_incs=&quot;-I/share/apps/estools/atompaw/4.0.0.10/include&quot;<br />with_atompaw_libs=&quot;-L/share/apps/estools/atompaw/4.0.0.10/lib -latompaw&quot;<br />with_bigdft_incs=&quot;-I/share/apps/estools/bigdft/1.7.1/include&quot;<br />with_bigdft_libs=&quot;-L/share/apps/estools/libarchive/3.1.2/lib -larchive -L/share/apps/estools/bigdft/1.7.1/lib -lyaml -lbigdft-1 -labinit -L/share/apps/estools/etsf_io/1.0.4/lib -letsf_io_low_level -letsf_io_utils -letsf_io -L/share/apps/estools/netcdf/4.3.2/lib -lnetcdf -lnetcdff&quot;<br />with_libxc_incs=&quot;-I/share/apps/estools/libxc/2.0.3/include&quot;<br />with_libxc_libs=&quot;-L/share/apps/estools/libxc/2.0.3/lib -lxc&quot;<br />with_wannier90_bins=&quot;/share/apps/estools/wannier90/2.0.0/bin&quot;<br />with_wannier90_incs=&quot;-I/share/apps/estools/wannier90/2.0.0/include&quot;<br />with_wannier90_libs=&quot;-L/share/apps/estools/wannier90/2.0.0/lib -lwannier&quot;<br />enable_gw_dpc=&quot;yes&quot;<br /></code></pre></div><br /><br />result of ldd src/98_main/abinit:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>libarchive.so.13 =&gt; /share/apps/estools/libarchive/3.1.2/lib/libarchive.so.13 (0x00002b8ac16dc000)<br />&nbsp; &nbsp;libyaml-0.so.2 =&gt; /share/apps/estools/bigdft/1.7.1/lib/libyaml-0.so.2 (0x00002b8ac1984000)<br />&nbsp; &nbsp;libnetcdf.so.7 =&gt; /share/apps/estools/netcdf/4.3.2/lib/libnetcdf.so.7 (0x00002b8ac1ba3000)<br />&nbsp; &nbsp;libnetcdff.so.6 =&gt; /share/apps/estools/netcdf/4.3.2/lib/libnetcdff.so.6 (0x00002b8ac1ebc000)<br />&nbsp; &nbsp;libxc.so.1 =&gt; /share/apps/estools/libxc/2.0.3/lib/libxc.so.1 (0x00002b8ac2135000)<br />&nbsp; &nbsp;libfftw3.so.3 =&gt; /share/apps/fftw/3.3.4/lib/libfftw3.so.3 (0x00002b8ac23d2000)<br />&nbsp; &nbsp;libfftw3f.so.3 =&gt; /share/apps/fftw/3.3.4/lib/libfftw3f.so.3 (0x00002b8ac26ea000)<br />&nbsp; &nbsp;libgsl.so.0 =&gt; /share/apps/estools/gsl/1.16/lib/libgsl.so.0 (0x00002b8ac29fa000)<br />&nbsp; &nbsp;libgslcblas.so.0 =&gt; /share/apps/estools/gsl/1.16/lib/libgslcblas.so.0 (0x00002b8ac2e41000)<br />&nbsp; &nbsp;librt.so.1 =&gt; /lib64/librt.so.1 (0x000000360dc00000)<br />&nbsp; &nbsp;libmpi_usempi.so.1 =&gt; /share/apps/openmpi/1.8.1/gcc4.9.0/lib/libmpi_usempi.so.1 (0x00002b8ac30a6000)<br />&nbsp; &nbsp;libmpi_mpifh.so.2 =&gt; /share/apps/openmpi/1.8.1/gcc4.9.0/lib/libmpi_mpifh.so.2 (0x00002b8ac33ad000)<br />&nbsp; &nbsp;libmpi.so.1 =&gt; /share/apps/openmpi/1.8.1/gcc4.9.0/lib/libmpi.so.1 (0x00002b8ac3601000)<br />&nbsp; &nbsp;libgfortran.so.3 =&gt; /share/apps/gcc/4.9.0/lib64/libgfortran.so.3 (0x00002b8ac38e9000)<br />&nbsp; &nbsp;libm.so.6 =&gt; /lib64/libm.so.6 (0x000000360cc00000)<br />&nbsp; &nbsp;libquadmath.so.0 =&gt; /share/apps/gcc/4.9.0/lib64/libquadmath.so.0 (0x00002b8ac3c13000)<br />&nbsp; &nbsp;libpthread.so.0 =&gt; /lib64/libpthread.so.0 (0x000000360d400000)<br />&nbsp; &nbsp;libgomp.so.1 =&gt; /share/apps/gcc/4.9.0/lib64/libgomp.so.1 (0x00002b8ac3e52000)<br />&nbsp; &nbsp;libgcc_s.so.1 =&gt; /share/apps/gcc/4.9.0/lib64/libgcc_s.so.1 (0x00002b8ac4068000)<br />&nbsp; &nbsp;libc.so.6 =&gt; /lib64/libc.so.6 (0x000000360c800000)<br />&nbsp; &nbsp;libcrypto.so.6 =&gt; /lib64/libcrypto.so.6 (0x0000003884200000)<br />&nbsp; &nbsp;liblzma.so.0 =&gt; /share/apps/estools/xz/5.0.7/lib/liblzma.so.0 (0x00002b8ac4280000)<br />&nbsp; &nbsp;libbz2.so.1 =&gt; /usr/lib64/libbz2.so.1 (0x0000003620e00000)<br />&nbsp; &nbsp;libxml2.so.2 =&gt; /usr/lib64/libxml2.so.2 (0x0000003884a00000)<br />&nbsp; &nbsp;libz.so.1 =&gt; /lib64/libz.so.1 (0x0000003883e00000)<br />&nbsp; &nbsp;libhdf5_hl.so.8 =&gt; /share/apps/estools/hdf5/1.8.13/lib/libhdf5_hl.so.8 (0x00002b8ac44a6000)<br />&nbsp; &nbsp;libhdf5.so.8 =&gt; /share/apps/estools/hdf5/1.8.13/lib/libhdf5.so.8 (0x00002b8ac46d4000)<br />&nbsp; &nbsp;libdl.so.2 =&gt; /lib64/libdl.so.2 (0x000000360d000000)<br />&nbsp; &nbsp;/lib64/ld-linux-x86-64.so.2 (0x000000360c400000)<br />&nbsp; &nbsp;libopen-rte.so.7 =&gt; /share/apps/openmpi/1.8.1/gcc4.9.0/lib/libopen-rte.so.7 (0x00002b8ac4b8a000)<br />&nbsp; &nbsp;libopen-pal.so.6 =&gt; /share/apps/openmpi/1.8.1/gcc4.9.0/lib/libopen-pal.so.6 (0x00002b8ac4e0b000)<br />&nbsp; &nbsp;libnsl.so.1 =&gt; /lib64/libnsl.so.1 (0x000000360f800000)<br />&nbsp; &nbsp;libutil.so.1 =&gt; /lib64/libutil.so.1 (0x0000003618000000)<br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Error in detecting liblzma.so.5.0.7</h3>
+				<div class="date">Posted: <strong>Tue Oct 28, 2014 10:24 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">According to your cluster website you are running on CentOS 5.3.<br /><br />Your ldd command return a found liblzma.so.0 which I guess is the symbolic link you created ?<br />This library is an API for compression which is not used directly by abinit but might be used by one of the packages you added or a library your linked with.<br /><br />Usually for such generic libraries, there are several symbolic links to the same libxxxxx.so that are created during the installation process. Adding a new one should not be a problem.<br /><br />If you run the test suite and don't have error/or very few/or with very small error tolerances, then I would say that everything works fine.<br /><br />To do so, from where you are after typing make :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>cd tests<br />../../tests/runtests.py -j XX<br /></code></pre></div><br />when XX is the number of simultaneous tests (very often the number of cores your CPU has). This -j option is optional.<br /><br />Cheers<br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Error in detecting liblzma.so.5.0.7</h3>
+				<div class="date">Posted: <strong>Tue Oct 28, 2014 2:29 pm</strong></div>
+				<div class="author">by <strong>sheng</strong></div>
+				<div class="content">Hi, liblzma.so.0 is indeed the symbolic link I created to the new liblzma.so.7.<br />From what I notice there seems to be no problem running abinit so far.<br />It seems that abinit only accepts version 0 of the library, or is that intended specifically?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Error in detecting liblzma.so.5.0.7&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Thu Oct 30, 2014 9:40 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Si I would said that everything works well.<br />Maybe the linker did something strange linking against .so.0 instead of the one you have.<br />As I said, usually there are all symbolic links to only one .so</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2805&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:52:26 GMT -->
+</html>

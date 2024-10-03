@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1491&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:54:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] Cannot configure Abinit v6.10.1</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] Cannot configure Abinit v6.10.1</h2>
+		<p><a href="viewtopic7f8c.html?f=3&amp;t=1491">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1491</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] Cannot configure Abinit v6.10.1</h3>
+				<div class="date">Posted: <strong>Thu Jan 12, 2012 11:50 am</strong></div>
+				<div class="author">by <strong>sestak</strong></div>
+				<div class="content">Dear Abinit users,<br /><br />I would like to ask what does mean the <em class="text-italics">configure: error: invalid library statement</em>. I can see this error during the configuration of the Abinit with some static library (e.g. lapack or fft libs). I tried link the code with ACML static lapack library and I got this message. I solved this by using Intel MKL dynamic library. Now I am trying link code with external fft lib and I received this error message again and does not matter if it is dynamic or static library. I will be grateful for any help.<br /><br />Petr Sestak</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Cannot configure Abinit v6.10.1</h3>
+				<div class="date">Posted: <strong>Thu Jan 12, 2012 12:25 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Would be great if you told us at least how you run configure ...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Cannot configure Abinit v6.10.1</h3>
+				<div class="date">Posted: <strong>Thu Jan 12, 2012 1:15 pm</strong></div>
+				<div class="author">by <strong>sestak</strong></div>
+				<div class="content">Thanks for answer.<br />I run configuration script&#058; <em class="text-italics">./configure --with-dft-flavor=&quot;none&quot; --with-trio-flavor=&quot;none&quot;</em>.<br /><br />I cannot upload entire file with my configuration settings. The extension is not allowed. So, my samples with lapack and fft follows:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># ---------------------------------------------------------------------------- #<br /># Linear algebra connector&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;#<br /># ---------------------------------------------------------------------------- #<br /><br /># Flavor of linear algebra libraries to use (default is netlib)<br />#<br /># Supported libraries:<br />#<br />#&nbsp; &nbsp;* acml<br />#&nbsp; &nbsp;* asl<br />#&nbsp; &nbsp;* atlas<br />#&nbsp; &nbsp;* custom&nbsp; &nbsp; (just check, do not try to detect)<br />#&nbsp; &nbsp;* essl<br />#&nbsp; &nbsp;* goto&nbsp; &nbsp; &nbsp; (using GotoBLAS and Netlib's LAPACK)<br />#&nbsp; &nbsp;* mkl<br />#&nbsp; &nbsp;* mlib<br />#&nbsp; &nbsp;* netlib<br />#&nbsp; &nbsp;* none&nbsp; &nbsp; &nbsp; (disable external linear algebra support)<br />#&nbsp; &nbsp;* scalapack (enable ScaLAPACK support)<br />#&nbsp; &nbsp;* sgimath<br />#&nbsp; &nbsp;* sunperf<br />#<br /># You may combine &quot;scalapack&quot; with any other flavor, using '+' as a<br /># separator<br />#<br /># Note: &quot;custom&quot; also works when the Fortran compiler provides a full<br />#&nbsp; &nbsp; &nbsp; &nbsp;BLAS+LAPACK implementation internally (e.g. Lahey Fortran)<br />#<br /># Note: the include and link flags for ScaLAPACK have to be specified<br />#&nbsp; &nbsp; &nbsp; &nbsp;with those of BLAS and LAPACK (see options below)<br />#<br /># Note: please consult the MKL link line advisor if you experience<br />#&nbsp; &nbsp; &nbsp; &nbsp;problems with MKL, by going to<br />#&nbsp; &nbsp; &nbsp; &nbsp;http://software.intel.com/en-us/articles/intel-mkl-link-line-advisor/<br />#<br />with_linalg_flavor=&quot;acml&quot;<br /><br /># Include flags for the external linear algebra libraries<br />#<br />with_linalg_incs=&quot;-I/opt/acml5.0.0/ifort64/include&quot;<br /><br /># Link flags for the external linear algebra libraries (default is unset)<br />#<br />with_linalg_libs=&quot;/opt/acml5.0.0/ifort64/lib/libacml.a&quot;<br /><br /># ---------------------------------------------------------------------------- #<br /># FFT connector&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; #<br /># ---------------------------------------------------------------------------- #<br /><br /># Flavor of FFT library to support (default is unset)<br />#<br /># Supported libraries:<br />#<br />#&nbsp; &nbsp;* asl<br />#&nbsp; &nbsp;* custom&nbsp; &nbsp; &nbsp; &nbsp; (bypass build-system checks)<br />#&nbsp; &nbsp;* fftw2<br />#&nbsp; &nbsp;* fftw2-threads<br />#&nbsp; &nbsp;* fftw3<br />#&nbsp; &nbsp;* fftw3-mkl<br />#&nbsp; &nbsp;* fftw3-threads<br />#&nbsp; &nbsp;* none&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (disable external FFT support)<br />#&nbsp; &nbsp;* sgimath<br />#<br /># Notes:<br />#<br />#&nbsp; &nbsp;* By default, Abinit will use the internal Goedecker FFT library<br />#&nbsp; &nbsp;* This is highly experimental - USE AT YOUR OWN RISKS!<br />#<br />with_fft_flavor=&quot;fftw3&quot;<br /><br /># Include flags for the FFT library (default is unset)<br />#<br />#with_fft_incs=&quot;&quot;<br /><br /># Link flags for the FFT library (default is unset)<br />#<br />with_fft_libs=&quot;/opt/shared_libs/lib/libfftw3&quot;</code></pre></div><br /><br />Petr Sestak</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Cannot configure Abinit v6.10.1</h3>
+				<div class="date">Posted: <strong>Thu Jan 12, 2012 1:28 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">You have to specify the library flags as &quot;-L/path/to/lib/dir -lname&quot;, as shown in the numerous examples you can find in doc/config/build-config.ac.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Cannot configure Abinit v6.10.1</h3>
+				<div class="date">Posted: <strong>Thu Jan 12, 2012 2:07 pm</strong></div>
+				<div class="author">by <strong>sestak</strong></div>
+				<div class="content">Thanks,<br /><br />yes I had a wrong line (with_fft_libs=&quot;/opt/shared_libs/lib/libfftw3&quot;). I changed it to &quot;with_fft_libs=&quot;-L/opt/shared_libs/lib -lfftw3&quot; and now the FFT libs are OK. However I thought that the style &quot;-L/path/to/lib/dir -lname&quot; is used to link dynamic libs not static. The ACML is static lib (with_linalg_libs=&quot;/opt/acml5.0.0/ifort64/lib/libacml.a&quot;). I would like to know what to do if I want to make static link ACML and FFT libs.<br /><br />Petr Sestak</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Cannot configure Abinit v6.10.1</h3>
+				<div class="date">Posted: <strong>Thu Jan 12, 2012 10:25 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br /><blockquote><div><cite>sestak wrote:</cite>yes I had a wrong line (with_fft_libs=&quot;/opt/shared_libs/lib/libfftw3&quot;). I changed it to &quot;with_fft_libs=&quot;-L/opt/shared_libs/lib -lfftw3&quot; and now the FFT libs are OK. However I thought that the style &quot;-L/path/to/lib/dir -lname&quot; is used to link dynamic libs not static. The ACML is static lib (with_linalg_libs=&quot;/opt/acml5.0.0/ifort64/lib/libacml.a&quot;). I would like to know what to do if I want to make static link ACML and FFT libs.<br /></div></blockquote><br /><br />concerning the ACML lib, it is preferable to use the 4.4 version ( I tested the 5.0 but there are numerous errors with test suite )<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>with_linalg_flavor = custom<br />with_linalg_libs = -L/opt/acml4.4.0/ifort64/lib -lacml</code></pre></div><br /><br />rem :<br />I think  that &quot;-L/path/to/lib/dir -lname&quot; is used to link <strong class="text-strong">static</strong> lib <br />it's equivalent to :  /path/to/lib/dir/libname.a<br /><br />but, in the final link, if the *.so libs also exist in the &quot;/path/to/lib/dir/&quot; , the link will be dynamic<br /><br />regards<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Cannot configure Abinit v6.10.1</h3>
+				<div class="date">Posted: <strong>Sat Jan 14, 2012 10:06 am</strong></div>
+				<div class="author">by <strong>sestak</strong></div>
+				<div class="content">Hi jmb and Yann,<br /><br />many thanks for all your advices. I was playing with configuring/compiling/linking almost entire last day and now everything is alright including all tests (v1-v6). Thanks for advice about ACML libs, with the ACML 5.0.0 the several tests failed (four or five probably) during the automatic tests (make tests_min4). I switched to MKL intel libs and now all tests are OK.<br /><br />Petr Sestak</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1491&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:54:45 GMT -->
+</html>

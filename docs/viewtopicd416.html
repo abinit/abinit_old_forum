@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2385&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:22:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; GS scf with spin-orbit coupling</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>GS scf with spin-orbit coupling</h2>
+		<p><a href="viewtopic2bc0-2.html?f=9&amp;t=2385">https://forum.abinit.org/viewtopic.php?f=9&amp;t=2385</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>GS scf with spin-orbit coupling</h3>
+				<div class="date">Posted: <strong>Sat Jan 11, 2014 11:33 am</strong></div>
+				<div class="author">by <strong>sponce</strong></div>
+				<div class="content">Dear all, <br /><br />I'm trying for the first time the SO coupling capabilities of Abinit and stumble upon some issue. <br /><br />1) I studied a perovskite material with norm-conserving GGA (fhi) psps. I would like to treat the Pb with SO coupling. Is it mandatory to use HGH psp? It would make the calculations a lot heavier. <br />I tried with the GGA psps to see:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;<br />&nbsp;nspinor 2 # Spin-polarized (collinear) calculation.<br />&nbsp;nsppol 1&nbsp; # Calculation with spin up and sping down that cannot be disantengled.<br />&nbsp;nspden 4&nbsp; # Vector magnztization. <br />&nbsp;so_psp 1 1 1 1 1 # Pb 4*other psp 1==&gt; automatic treatment<br /><br />&nbsp;paral_kgb 0&nbsp; # To be sure ...<br />&nbsp;autoparal 0&nbsp; &nbsp;# To be on the safe side.<br /></code></pre></div><br /><br />The scf cycle seems to work:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;ETOT&nbsp; 1&nbsp; -128.77044980075&nbsp; &nbsp; -1.288E+02 1.106E-02 1.880E+03<br />&nbsp;ETOT&nbsp; 2&nbsp; -128.95234512014&nbsp; &nbsp; -1.819E-01 4.890E-06 2.658E+02<br />&nbsp;ETOT&nbsp; 3&nbsp; -128.96664200898&nbsp; &nbsp; -1.430E-02 7.374E-04 5.352E+01<br />&nbsp;ETOT&nbsp; 4&nbsp; -128.97321356721&nbsp; &nbsp; -6.572E-03 3.226E-04 1.292E+01<br />&nbsp;ETOT&nbsp; 5&nbsp; -128.97433018342&nbsp; &nbsp; -1.117E-03 5.321E-05 7.140E-01<br />&nbsp;ETOT&nbsp; 6&nbsp; -128.97441044789&nbsp; &nbsp; -8.026E-05 4.097E-06 6.116E-02<br />&nbsp;ETOT&nbsp; 7&nbsp; -128.97441768406&nbsp; &nbsp; -7.236E-06 2.032E-07 2.482E-03<br />&nbsp;ETOT&nbsp; 8&nbsp; -128.97441776467&nbsp; &nbsp; -8.061E-08 2.187E-09 2.746E-04<br />&nbsp;ETOT&nbsp; 9&nbsp; -128.97441777455&nbsp; &nbsp; -9.875E-09 3.611E-10 5.096E-05<br />&nbsp;ETOT 10&nbsp; -128.97441777734&nbsp; &nbsp; -2.788E-09 1.140E-10 1.632E-05<br />&nbsp;ETOT 11&nbsp; -128.97441777863&nbsp; &nbsp; -1.295E-09 1.714E-11 4.851E-07<br />&nbsp;ETOT 12&nbsp; -128.97441777864&nbsp; &nbsp; -1.089E-11 4.624E-13 3.662E-08<br />&nbsp;ETOT 13&nbsp; -128.97441777864&nbsp; &nbsp; -1.961E-12 1.106E-13 6.907E-09<br />&nbsp;ETOT 14&nbsp; -128.97441777865&nbsp; &nbsp; -1.506E-12 2.444E-14 8.435E-10<br />&nbsp;ETOT 15&nbsp; -128.97441777864&nbsp; &nbsp; &nbsp;1.677E-12 1.120E-15 1.837E-10<br />&nbsp;ETOT 16&nbsp; -128.97441777864&nbsp; &nbsp; -5.969E-13 1.996E-16 5.538E-11<br />&nbsp;ETOT 17&nbsp; -128.97441777865&nbsp; &nbsp; -9.095E-13 6.924E-17 1.514E-11<br />&nbsp;ETOT 18&nbsp; -128.97441777864&nbsp; &nbsp; &nbsp;2.274E-13 1.840E-17 4.168E-12<br />&nbsp;ETOT 19&nbsp; -128.97441777864&nbsp; &nbsp; &nbsp;7.674E-13 3.535E-18 1.126E-12<br />&nbsp;ETOT 20&nbsp; -128.97441777864&nbsp; &nbsp; -2.842E-14 8.201E-19 3.397E-13<br />&nbsp;ETOT 21&nbsp; -128.97441777865&nbsp; &nbsp; -1.165E-12 4.452E-19 1.016E-13<br />&nbsp;ETOT 22&nbsp; -128.97441777865&nbsp; &nbsp; &nbsp;1.990E-13 9.470E-20 2.249E-14<br />&nbsp;ETOT 23&nbsp; -128.97441777864&nbsp; &nbsp; &nbsp;3.979E-13 2.586E-20 6.971E-15<br />&nbsp;ETOT 24&nbsp; -128.97441777865&nbsp; &nbsp; -3.979E-13 9.846E-21 1.581E-15<br />&nbsp;ETOT 25&nbsp; -128.97441777865&nbsp; &nbsp; -9.663E-13 2.157E-21 3.655E-16<br />&nbsp;ETOT 26&nbsp; -128.97441777865&nbsp; &nbsp; -1.137E-13 5.759E-22 1.001E-16<br />&nbsp;ETOT 27&nbsp; -128.97441777865&nbsp; &nbsp; &nbsp;2.558E-13 1.874E-22 2.022E-17</code></pre></div><br /><br />And there is twice as much eigenenergies (as it should). <br /><br />The issue is that I get a crash (abinit version 7.6.1) while writing the _DEN file:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;Cartesian components of stress tensor (hartree/bohr^3)<br />&nbsp; sigma(1 1)= -2.13553508E-07&nbsp; sigma(3 2)=&nbsp; 7.26873239E-08<br />&nbsp; sigma(2 2)= -4.17058858E-07&nbsp; sigma(3 1)=&nbsp; 1.38768846E-08<br />&nbsp; sigma(3 3)= -4.89733734E-07&nbsp; sigma(2 1)= -5.54571747E-08<br /><br />&nbsp; &nbsp;1<br />&nbsp; &nbsp;2<br />&nbsp; &nbsp;3<br />&nbsp; &nbsp;4<br />&nbsp; &nbsp;5<br />&nbsp; &nbsp;6<br />&nbsp; &nbsp;7<br />&nbsp; &nbsp;8<br />&nbsp; &nbsp;9<br />&nbsp; 10<br />&nbsp; 11<br />&nbsp; 12<br />&nbsp;ioarr: writing density data<br />ioarr: file name is bandstructureo_DS1_DEN<br />forrtl: Remote I/O error<br />forrtl: severe (30): open failure, unit 9, file /mnt/fhgfs/sponce/perovskite/bandstructure_SO/bandstructureo_DS1_DEN</code></pre></div><br /><br />Is there a reason for that? Is it due to the fact that I'm not using a HGH psp? <br /><br />Thank you!<br /><br />Samuel Poncé.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: GS scf with spin-orbit coupling&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Tue Jan 14, 2014 1:41 pm</strong></div>
+				<div class="author">by <strong>sponce</strong></div>
+				<div class="content">After investigation its likely to be a machine related problem. The file system is probably wrong somehow. <br /><br />acesswff 1 enable mpi IO which help a bit but I got a similar problem later on. I decide to test it on a different cluster. <br /><br />Anyway it not really related directly to Abinit so I will mark it as solve.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=2385&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:22:05 GMT -->
+</html>

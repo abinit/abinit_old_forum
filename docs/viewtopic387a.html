@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=586&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:20:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; calculation question</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>calculation question</h2>
+		<p><a href="viewtopicbc18.html?f=11&amp;t=586">https://forum.abinit.org/viewtopic.php?f=11&amp;t=586</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>calculation question</h3>
+				<div class="date">Posted: <strong>Thu Sep 09, 2010 6:41 pm</strong></div>
+				<div class="author">by <strong>Newlife1982</strong></div>
+				<div class="content">Hi all,<br /><br />In my calculations, there is a comment as follows:<br /><br />symanal : COMMENT -<br />  The Bravais lattice determined only from the primitive<br />  vectors, bravais(1)=  4, is more symmetric<br />  than the real one, iholohedry=  1, obtained by taking into<br />  account the atomic positions.<br /> symspgr : the symmetry operation no.   1 is the identity<br /> symspgr : spgroup=   1  P1   (=C1^1)<br /> getkgrid : length of smallest supercell vector (bohr)=    8.946400E+01<br />       Simple Lattice Grid<br /> npfft, npband and npkpt           1           1           8<br /> mpi_enreg%sizecart(1),np_fft           1           1<br /> mpi_enreg%sizecart(2),np_band           1           1<br /> mpi_enreg%sizecart(3),np_kpt           8           8<br /> in initmpi_grid : me_fft, me_band, me_kpt are           0           0           0<br /> invars1: mkmem  undefined in the input file. Use default mkmem  = nkpt<br /> invars1: With nkpt_me=   32 and mkmem  =   256, ground state wf handled in core.<br /> Resetting mkmem  to nkpt_me to save memory space.<br /> invars1: mkqmem undefined in the input file. Use default mkqmem = nkpt<br /> invars1: With nkpt_me=   32 and mkqmem =   256, ground state wf handled in core.<br /> Resetting mkqmem to nkpt_me to save memory space.<br /> invars1: mk1mem undefined in the input file. Use default mk1mem = nkpt<br /> invars1: With nkpt_me=   32 and mk1mem =   256, ground state wf handled in core.<br /> Resetting mk1mem to nkpt_me to save memory space.<br /><br /><br />As we know, the default of  mkqmem is nkpt. Why nkpt_me is different from mkqmem. what is the difference between nkpt and nkpt_me?  How to change the setup of nkpt_me or mkqmem?<br /><br />Thank you very much!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: calculation question</h3>
+				<div class="date">Posted: <strong>Thu Sep 16, 2010 4:24 am</strong></div>
+				<div class="author">by <strong>Robin</strong></div>
+				<div class="content">According to the comment of invars1.F90, nkpt_me means &quot; the maximal number of k points treated per processor&quot; and &quot;nkpt_me may differ from processor to processor&quot;.<br /><br />Sincerely,<br />Guangfu Luo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: calculation question</h3>
+				<div class="date">Posted: <strong>Fri Oct 15, 2010 5:55 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">At this stage, during the treatment of input, mkmem will be equal to either<br />* 0 if you are using mkmem 0 for disk paging, or<br />* nkpt (256) which is your case.<br /><br />as Guangfu says, nkpt_me is the number of kpt per processor<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: calculation question</h3>
+				<div class="date">Posted: <strong>Fri Oct 15, 2010 7:51 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Just a small comment: mkmem, mkqmen and nkpt_me are not used in the GW code.<br />One should use gwmem to control the amount of memory allocated for the wavefunctions and <br />the dielectric matrix.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=586&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:20:36 GMT -->
+</html>

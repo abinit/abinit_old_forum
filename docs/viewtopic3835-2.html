@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=427&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:16:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; GW accurancy</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>GW accurancy</h2>
+		<p><a href="viewtopic5da0.html?f=11&amp;t=427">https://forum.abinit.org/viewtopic.php?f=11&amp;t=427</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>GW accurancy</h3>
+				<div class="date">Posted: <strong>Thu Jun 24, 2010 2:26 pm</strong></div>
+				<div class="author">by <strong>Newlife1982</strong></div>
+				<div class="content">Hi all,<br /><br />I do the GW calculations about crystal Si. The band gap is about 1.34 eV, which is not very good compared with the experimental value 1.17 eV and others calculated value 1.24 eV. <br />I increase the cutoff energy and use different gwcalctyp methods as well as different exchange functional. But the calculated values are also bigger than 1.34. I do not know what is wrong <br />with my calculations. Anybody know  about it? It would be very nice if you could give me some advices. Thank you very much.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: GW accurancy</h3>
+				<div class="date">Posted: <strong>Thu Jun 24, 2010 2:58 pm</strong></div>
+				<div class="author">by <strong>bruneval</strong></div>
+				<div class="content">1.34 eV is not that bad.<br /><br />Difficult to help you without your input files...<br /><br />Fabien</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: GW accurancy</h3>
+				<div class="date">Posted: <strong>Fri Jun 25, 2010 11:14 am</strong></div>
+				<div class="author">by <strong>Newlife1982</strong></div>
+				<div class="content">The input files are as follows. Thank you in advance for your reply.<br /><br /># Create the KSS file<br /><br />kssform     1<br />nbandkss   100<br /><br />nband      100<br />prtwf      0<br /><br />#Definition of occupation numbers<br />occopt 1<br />tsmear 0.01<br /><br />#Definition of the unit cell<br />acell 3*10.259<br /><br />rprim  0.0  0.5  0.5   # FCC primitive vectors (to be scaled by acell)<br />       0.5  0.0  0.5<br />       0.5  0.5  0.0<br /><br />#Definition of the atom types<br />ntypat 1<br />znucl 14<br /><br />#Definition of the atoms<br />natom 2<br />typat 1 1<br />xred  0.0  0.0  0.0<br />      0.25 1.25 0.25<br /><br />#Definition of the planewave basis set<br />ecut  20.0<br /><br />#Definition of the k-point grid<br />ngkpt       4 4 4<br /><br />#64 k points<br /> nshiftk     1<br /> shiftk      0.  0.  0.<br /> istwfk     8*1<br />#256 k points<br />#nshiftk 4<br />#shiftk 0 0 0   1/2 1/2 0   1/2 0 1/2  0 1/2 1/2<br />#istwfk     19*1<br /><br />#Definition of the SCF procedure<br />nstep 50<br />toldfe 1.0d-8<br /><br />prtvol     5<br />enunit     1<br /><br /><br />.............................................................................................................................................<br /><br /># create the screening file<br /><br />#Parameter for the screening calculation<br />optdriver    3<br />gwcalctyp    28<br />nband       100<br />ecuteps     17.0<br />ecutwfn     17.0<br /><br />nfreqim      4<br />nfreqre     10<br />freqremax    1.<br />awtr        0       # Note : the default awtr 1 is better<br /><br />#Definition of occupation numbers<br />occopt 1<br />tsmear 0.05<br /><br />#Definition of the unit cell<br />acell 3*10.259<br /><br />rprim  0.0  0.5  0.5   # FCC primitive vectors (to be scaled by acell)<br />       0.5  0.0  0.5<br />       0.5  0.5  0.0<br /><br />#Definition of the atom types<br />ntypat 1<br />znucl 14<br /><br />#Definition of the atoms<br />natom 2<br />typat 1 1<br />xred  0.0  0.0  0.0<br />      0.25 1.25 0.25<br /><br />#Definition of the planewave basis set<br />ecut  20.0<br /><br />#Definition of the k-point grid<br />ngkpt        4 4 4<br />nshiftk      1<br />shiftk       0.  0.  0.<br />istwfk       8*1<br /><br />#Definition of the SCF procedure<br />nstep       50<br />toldfe      1.0d-8<br /><br />prtvol     5<br />enunit     1<br /><br />........................................................................................................................................<br /><br />calculation of the quasi-particle Fermi energy<br /><br />#Parameters for the GW calculation<br />optdriver    4<br />nband       100<br />ecutsigx    17<br />ecutwfn     17<br /><br />gwcalctyp   28<br /><br />nkptgw       8<br />kptgw<br />      0.000000    0.000000    0.000000<br />      0.250000    0.000000    0.000000<br />      0.500000    0.000000    0.000000<br />      0.250000    0.250000    0.000000<br />      0.500000    0.250000    0.000000<br />     -0.250000    0.250000    0.000000<br />      0.500000    0.500000    0.000000<br />     -0.250000    0.500000    0.250000<br />bdgw<br />             1 50<br />             1 50<br />             1 50<br />             1 50<br />             1 50<br />             1 50<br />             1 50<br />             1 50<br /><br />#Definition of occupation numbers<br />occopt 1<br />tsmear 0.01<br /><br />#Definition of the unit cell<br />acell 3*10.259<br /><br />rprim  0.0  0.5  0.5   # FCC primitive vectors (to be scaled by acell)<br />       0.5  0.0  0.5<br />       0.5  0.5  0.0<br /><br />#Definition of the atom types<br />ntypat 1<br />znucl 14<br /><br />#Definition of the atoms<br />natom 2<br />typat 1 1<br />xred  0.0  0.0  0.0<br />      0.25 1.25 0.25<br />#Definition of the planewave basis set<br />ecut  20.0<br />#Definition of the k-point grid<br />ngkpt         4 4 4<br />nshiftk       1<br />shiftk        0.  0.  0.<br />istwfk        8*1<br /><br />#Definition of the SCF procedure<br />nstep 50<br />toldfe 1.0d-8<br /><br />prtvol     5<br />enunit     1</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: GW accurancy</h3>
+				<div class="date">Posted: <strong>Tue Jun 29, 2010 1:43 pm</strong></div>
+				<div class="author">by <strong>bruneval</strong></div>
+				<div class="content">Your k-point set appears a bit too small. Try to increase it.<br /><br />Fabien</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: GW accurancy</h3>
+				<div class="date">Posted: <strong>Tue Jun 29, 2010 4:59 pm</strong></div>
+				<div class="author">by <strong>Newlife1982</strong></div>
+				<div class="content">Fabien:<br /><br />Thank you very much. I am trying the new K-point.<br /><br />Wang</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: GW accurancy</h3>
+				<div class="date">Posted: <strong>Sat Apr 07, 2012 10:37 pm</strong></div>
+				<div class="author">by <strong>Steve</strong></div>
+				<div class="content">You really use 1.25?<br />xred 0.0 0.0 0.0<br /> 0.25 1.25 0.25<br />Best regards, Steve.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=427&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:16:03 GMT -->
+</html>

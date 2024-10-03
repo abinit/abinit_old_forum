@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1384&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:17:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Maintaining a designated space group for a relaxation</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Maintaining a designated space group for a relaxation</h2>
+		<p><a href="viewtopice254.html?f=9&amp;t=1384">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1384</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Maintaining a designated space group for a relaxation</h3>
+				<div class="date">Posted: <strong>Wed Oct 26, 2011 5:21 pm</strong></div>
+				<div class="author">by <strong>brehmj</strong></div>
+				<div class="content">Hi everyone:<br />maybe I just am not understanding the abinit input variables involving space groups.<br /><br />Here is my question:  How do I perform a relaxation that maintains a particular space group throughout?<br />say I input starting coords that are for space group 63.  How do I keep abinit only searching within space group 63 for a minimum in energy, and not go to solutions outside of this space group?<br /><br />Thanks,<br />John</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Maintaining a designated space group for a relaxation</h3>
+				<div class="date">Posted: <strong>Wed Oct 26, 2011 5:55 pm</strong></div>
+				<div class="author">by <strong>jolafc</strong></div>
+				<div class="content">Hi, <br /><br />By symmetry, the forces are supposed to keep your structure in the same space group throughout relaxation. However, the numerical errors can add up to a level where Abinit breaks the symmetry of your structure during relaxation. To help prevent this, it is useful to input coordinates using fractions as much as possible. For instance, with an fcc structure (say, silicon), one could use :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>rprim<br />1/2 1/2 0<br />1/2 0 1/2<br />0 0 1/2<br />xred <br />0 0 0<br />1/4 1/4 1/4<br /></code></pre></div><br />Instead of giving the coordinates using xcart with a lot of digits. Is it what you're currently doing? Posting your input file would help us diagnose your problem...<br /><br />Jonathan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Maintaining a designated space group for a relaxation</h3>
+				<div class="date">Posted: <strong>Wed Oct 26, 2011 6:43 pm</strong></div>
+				<div class="author">by <strong>brehmj</strong></div>
+				<div class="content">I am not looking for a ground state though...   for example:  I would like to see how a NaCl BCC energy compares to a NaCL FCC ground state.  Now, this is an easy state as none of the coords are on decimal sites.... but a lot of xray diffraction results show atoms to be on decimal sites.   So, for another example, suppose I pull off of ICSD coordinates for a SrMnO3.  And the coords are on decimal sites.  And now I'd like to see the energy of a BaMnO3 (for this email, let's assume it is not in the ICSD database) in the same space group as SrMnO3.   I use as my starting coords the xred for the ICSD SrMnO3.   But, I don't want ABINIT to leave that space group.<br />How can I ensure that it won't?</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1384&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:17:20 GMT -->
+</html>

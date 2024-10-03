@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2066&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:41:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Abinit 7.2.1 GCC 4.7 compilation problem</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Abinit 7.2.1 GCC 4.7 compilation problem</h2>
+		<p><a href="viewtopicade7.html?f=3&amp;t=2066">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2066</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Abinit 7.2.1 GCC 4.7 compilation problem</h3>
+				<div class="date">Posted: <strong>Wed Apr 03, 2013 6:43 pm</strong></div>
+				<div class="author">by <strong>yurtesen</strong></div>
+				<div class="content"><blockquote class="uncited"><div>checking whether we are using the GNU Fortran compiler... no<br />checking whether mpif90 accepts -g... yes<br />checking if libtool supports shared libraries... yes<br />checking whether to build shared libraries... no<br />checking whether to build static libraries... yes<br />libtool.m4: error: problem compiling FC test program<br />checking for mpif90 option to produce PIC...<br />checking if mpif90 static flag  works... no<br />checking if mpif90 supports -c -o file.o... no<br />checking if mpif90 supports -c -o file.o... (cached) no<br />checking whether the mpif90 linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes<br />checking dynamic linker characteristics... (cached) GNU/Linux ld.so<br />checking how to hardcode library paths into programs... immediate<br />checking for Fortran flag to compile .f90 files... unknown<br />configure: error: Fortran could not compile .f90 files<br />make[3]: *** [stamps/libxc-config-stamp] Error 1<br />make[3]: Leaving directory `/home/eyurtese/tmp/abinit-7.2.1/fallbacks'<br />make[2]: [all-local] Error 2 (ignored)<br />Checking build of libxc fallback<br />test -e stamps/libxc-install-stamp<br />make[2]: *** [all-local] Error 1<br />make[2]: Leaving directory `/home/eyurtese/tmp/abinit-7.2.1/fallbacks'<br />make[1]: *** [all-recursive] Error 1<br />make[1]: Leaving directory `/home/eyurtese/tmp/abinit-7.2.1'<br />make: *** [all] Error 2</div></blockquote><br /><br />and ./fallbacks/sources/libxc-2.0.1/config.log shows<br /><br /><blockquote class="uncited"><div>configure:13186: checking for Fortran compiler version<br />configure:13195: mpif90 --version &gt;&amp;5<br />GNU Fortran (Abo Akademi <!-- m --><a class="postlink" href="http://www.abo.fi/">http://www.abo.fi/</a><!-- m -->) 4.7.2<br />Copyright (C) 2012 Free Software Foundation, Inc.<br /><br />GNU Fortran comes with NO WARRANTY, to the extent permitted by law.<br />You may redistribute copies of GNU Fortran<br />under the terms of the GNU General Public License.<br />For more information about these matters, see the file named COPYING<br /><br />configure:13206: $? = 0<br />configure:13195: mpif90 -v &gt;&amp;5<br />mpif90 for MVAPICH2 version 1.9b<br />Using built-in specs.<br />COLLECT_GCC=gfortran<br />COLLECT_LTO_WRAPPER=/export/modules/compilers/gnu/gcc/4.7.2/libexec/gcc/x86_64-unknown-linux-gnu/4.7.2/lto-wrapper<br />Target: x86_64-unknown-linux-gnu<br />Configured with: ./configure --prefix=/export/modules/compilers/gnu/gcc/4.7.2 --enable-languages=c,c++,fortran --disable-multilib --with-pkgversion='Abo Akademi <!-- m --><a class="postlink" href="http://www.abo.fi/'">http://www.abo.fi/'</a><!-- m --><br />Thread model: posix<br />gcc version 4.7.2 (Abo Akademi <!-- m --><a class="postlink" href="http://www.abo.fi/">http://www.abo.fi/</a><!-- m -->)<br />configure:13206: $? = 0<br />configure:13195: mpif90 -V &gt;&amp;5<br />gfortran: error: unrecognized command line option '-V'<br />configure:13206: $? = 1<br />configure:13195: mpif90 -qversion &gt;&amp;5<br />gfortran: error: unrecognized command line option '-qversion'<br />configure:13206: $? = 1<br />configure:13215: checking whether we are using the GNU Fortran compiler<br />configure:13228: mpif90 -c -ffree-form -g -ffree-line-length-none   -03 -mtune=native -march=native -faggressive-function-elimination -fstack-arrays -g -O2 -I/home/eyurtese/tmp/abinit-7.2.1/fallbacks/exports/include  conftest.F &gt;&amp;5<br />gfortran: error: unrecognized command line option '-03'<br />configure:13228: $? = 1<br />configure: failed program was:<br />|       program main<br />| #ifndef __GNUC__<br />|        choke me<br />| #endif<br />|<br />|       end<br />configure:13237: result: no<br />configure:13243: checking whether mpif90 accepts -g<br />configure:13254: mpif90 -c -g  conftest.F90 &gt;&amp;5<br />configure:13254: $? = 0<br />configure:13262: result: yes<br />configure:13406: checking if libtool supports shared libraries<br />configure:13408: result: yes<br />configure:13411: checking whether to build shared libraries<br />configure:13431: result: no<br />configure:13434: checking whether to build static libraries<br />configure:13438: result: yes<br />configure:13472: mpif90 -c -ffree-form -g -ffree-line-length-none   -03 -mtune=native -march=native -faggressive-function-elimination -fstack-arrays -g -O2 -I/home/eyurtese/tmp/abinit-7.2.1/fallbacks/exports/include  conftest.F90 &gt;&amp;5<br />gfortran: error: unrecognized command line option '-03'<br />configure:13475: $? = 1<br />configure:13922: checking for mpif90 option to produce PIC<br />configure:13929: result:<br />configure:13995: checking if mpif90 static flag  works<br />configure:14023: result: no<br />configure:14035: checking if mpif90 supports -c -o file.o<br />configure:14056: mpif90 -c -ffree-form -g -ffree-line-length-none   -03 -mtune=native -march=native -faggressive-function-elimination -fstack-arrays -g -O2 -I/home/eyurtese/tmp/abinit-7.2.1/fallbacks/exports/include -o out/conftest2.o  conftest.F90 &gt;&amp;5<br />gfortran: error: unrecognized command line option '-03'<br />configure:14060: $? = 1<br />configure:14082: result: no<br />configure:14087: checking if mpif90 supports -c -o file.o<br />configure:14134: result: no<br />configure:14164: checking whether the mpif90 linker (/usr/bin/ld -m elf_x86_64) supports shared libraries<br />configure:15267: result: yes<br />configure:15408: checking dynamic linker characteristics<br />configure:16073: result: GNU/Linux ld.so<br />configure:16126: checking how to hardcode library paths into programs<br />configure:16151: result: immediate<br />configure:16197: checking for Fortran flag to compile .f90 files<br />configure:16213: mpif90 -c -ffree-form -g -ffree-line-length-none   -03 -mtune=native -march=native -faggressive-function-elimination -fstack-arrays -g -O2 -I/home/eyurtese/tmp/abinit-7.2.1/fallbacks/exports/include  conftest.f90 &gt;&amp;5<br />gfortran: error: unrecognized command line option '-03'<br />configure:16213: $? = 1<br />configure: failed program was:<br />|       program main<br />|<br />|       end<br />configure:16213: mpif90 -c -ffree-form -g -ffree-line-length-none   -03 -mtune=native -march=native -faggressive-function-elimination -fstack-arrays -g -O2 -I/home/eyurtese/tmp/abinit-7.2.1/fallbacks/exports/include -qsuffix=f=f90 conftest.f90 &gt;&amp;5<br />gfortran: error: unrecognized command line option '-03'<br />gfortran: error: unrecognized command line option '-qsuffix=f=f90'<br />configure:16213: $? = 1<br />configure: failed program was:<br />|       program main<br />|<br />|       end<br />configure:16213: mpif90 -c -ffree-form -g -ffree-line-length-none   -03 -mtune=native -march=native -faggressive-function-elimination -fstack-arrays -g -O2 -I/home/eyurtese/tmp/abinit-7.2.1/fallbacks/exports/include -Tf conftest.f90 &gt;&amp;5<br />gfortran: error: unrecognized command line option '-03'<br />configure:16213: $? = 1<br />configure: failed program was:<br />|       program main<br />|<br />|       end<br />configure:16222: result: unknown<br />configure:16225: error: Fortran could not compile .f90 files<br /></div></blockquote><br /><br />I couldnt quite figure out why it would say it does not recognize -O3 ? I used to be able to compile other 6.x and 7.x versions in the past with same options...<br /><br />Thanks,<br />Evren</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit 7.2.1 GCC 4.7 compilation problem</h3>
+				<div class="date">Posted: <strong>Wed Apr 03, 2013 6:52 pm</strong></div>
+				<div class="author">by <strong>yurtesen</strong></div>
+				<div class="content">ah right, it seems to use 03 and not O3!!!<br /><br />Now I wonder, is this a known bug? somebody put 0 instead of O into files or did I do this somehow?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit 7.2.1 GCC 4.7 compilation problem</h3>
+				<div class="date">Posted: <strong>Wed Apr 03, 2013 9:59 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi Evren,<br /><br />I quickly installed mpich3.0.3/gcc4.7.2 under CentOS 6.3<br />I compiled 7.2.1 with all fallbacks  without problem  <img class="smilies" src="images/smilies/icon_cool.gif" alt="8-)" title="Cool" /> <br /><br />I run the tests fast and parallel  : no error   <img class="smilies" src="images/smilies/icon_cool.gif" alt="8-)" title="Cool" /> <br /><br />this is my build.ac ( use  : ./configure --with-config-file=./build.ac )<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>enable_gw_dpc = yes<br />enable_mpi = yes<br />enable_mpi_io = yes<br />enable_openmp = yes<br />with_mpi_prefix = /usr/local/mpich3_gcc47<br />with_mpi_level = 1<br />with_dft_flavor = atompaw+bigdft+libxc+wannier90<br />with_trio_flavor = netcdf+etsf_io+fox<br />with_linalg_flavor = netlib<br />with_linalg_incs = -I/usr/local/include<br />with_linalg_libs = -L/usr/local/lib64 -llapack -lblas<br /></code></pre></div><br /><br />see the post <a href="viewtopicf234.html?f=3&amp;t=1990" class="postlink">http://forum.abinit.org/viewtopic.php?f=3&amp;t=1990</a> concerning the parameter : &quot;with_mpi_level=1&quot;<br /><br />then, it seems that your problem is not related to mpich3 and/or gcc 4.7.x<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit 7.2.1 GCC 4.7 compilation problem&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Tue Apr 09, 2013 5:39 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">This is a typo in default optimization flags for Abinit. Fixed in 7.2.2.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2066&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:41:38 GMT -->
+</html>

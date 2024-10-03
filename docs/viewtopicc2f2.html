@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=3970&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 17:38:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Segmentation fault occurred in sample input (/v3/t78.in)</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Segmentation fault occurred in sample input (/v3/t78.in)</h2>
+		<p><a href="viewtopicd6c3.html?f=19&amp;t=3970">https://forum.abinit.org/viewtopic.php?f=19&amp;t=3970</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Segmentation fault occurred in sample input (/v3/t78.in)</h3>
+				<div class="date">Posted: <strong>Mon Nov 19, 2018 2:02 am</strong></div>
+				<div class="author">by <strong>Hiroki</strong></div>
+				<div class="content">Dear developers and users, <br /><br />I'm trying to calculate the optical conductivity for metals with conducti modules.<br />According to the conducti manual, the 3 steps are required to calculate the conductivity:<br />1. SCF calculation (iscf=3)<br />2. non-SCF calculation (iscf=-2)<br />3. response function calculations (iscf=-3)<br /><br />First of all, I tried to calculate with the sample input.<br />When I had executed the sample input file for the calculation of response functions (v3/t78.in), the segmentation fault occurred in the RF step(&gt;DS3). <br />The last lines in the log file are following:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>At SCF step&nbsp; &nbsp;12&nbsp; &nbsp;max residual=&nbsp; 9.42E-23 &lt; tolwfr=&nbsp; 1.00E-22 =&gt;converged.<br />forrtl: severe (174): SIGSEGV, segmentation fault occurred<br />Image&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PC&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Routine&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Line&nbsp; &nbsp; &nbsp; &nbsp; Source<br />libifcoremt.so.5&nbsp; &nbsp;00002AAAAC642F0C&nbsp; for__signal_handl&nbsp; &nbsp; &nbsp;Unknown&nbsp; Unknown<br />libpthread-2.17.s&nbsp; 00002AAAAEB40680&nbsp; Unknown&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Unknown&nbsp; Unknown<br />libblas.so.3.4.2&nbsp; &nbsp;00002AAAAB464AAC&nbsp; zdotc_&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Unknown&nbsp; Unknown<br />abinit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;000000000212CBF7&nbsp; Unknown&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Unknown&nbsp; Unknown<br />abinit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0000000000925747&nbsp; Unknown&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Unknown&nbsp; Unknown<br />abinit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;00000000007A26BF&nbsp; Unknown&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Unknown&nbsp; Unknown<br />abinit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0000000000520824&nbsp; Unknown&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Unknown&nbsp; Unknown<br />abinit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0000000000457028&nbsp; Unknown&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Unknown&nbsp; Unknown<br />abinit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;000000000041576C&nbsp; Unknown&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Unknown&nbsp; Unknown<br />abinit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;000000000040A258&nbsp; Unknown&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Unknown&nbsp; Unknown<br />abinit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;00000000004079CE&nbsp; Unknown&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Unknown&nbsp; Unknown<br />libc-2.17.so&nbsp; &nbsp; &nbsp; &nbsp;00002AAAAF32C3D5&nbsp; __libc_start_main&nbsp; &nbsp; &nbsp;Unknown&nbsp; Unknown<br />abinit&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;00000000004078C9&nbsp; Unknown&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Unknown&nbsp; Unknown<br /></code></pre></div><br />SCF(DS1) and non-SCF(DS2) steps were terminated and output files were created successfully.<br /><br />Why does this problem happen? I was trying to solve this problem and looking for the post regarding this matter, but I couldn't solve it...<br />ABINIT version is 8.8.4, and the executable is parallelized.<br />For parallel version, I used &quot;autoparal 1&quot; in the sample file. <br />The used pseudopotential is &quot;Al.GGA_PBE-JTH.xml&quot;, which is distributed in ABINIT web.<br />Here is the compile option:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>=== Build Information === <br />&nbsp; Version&nbsp; &nbsp; &nbsp; &nbsp;: 8.8.4<br />&nbsp; Build target&nbsp; : x86_64_linux_intel18.0<br />&nbsp; Build date&nbsp; &nbsp; : 20181110<br />&nbsp;<br />&nbsp;=== Compiler Suite === <br />&nbsp; C compiler&nbsp; &nbsp; &nbsp; &nbsp;: intel18.0<br />&nbsp; C++ compiler&nbsp; &nbsp; &nbsp;: gnu4.9<br />&nbsp; Fortran compiler : intel18.0<br />&nbsp; CFLAGS&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:&nbsp; -g -O2 -vec-report0<br />&nbsp; CXXFLAGS&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:&nbsp; -g -O2 -mtune=native -march=native<br />&nbsp; FCFLAGS&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; :&nbsp; -g -extend-source -noaltparam -nofpscomp&nbsp; -qopenmp<br />&nbsp; FC_LDFLAGS&nbsp; &nbsp; &nbsp; &nbsp;:&nbsp; &nbsp; -static-intel -static-libgcc<br />&nbsp;<br />&nbsp;=== Optimizations === <br />&nbsp; Debug level&nbsp; &nbsp; &nbsp; &nbsp; : basic<br />&nbsp; Optimization level : standard<br />&nbsp; Architecture&nbsp; &nbsp; &nbsp; &nbsp;: intel_xeon<br />&nbsp;<br />&nbsp;=== Multicore === <br />&nbsp; Parallel build : yes<br />&nbsp; Parallel I/O&nbsp; &nbsp;: auto<br />&nbsp; openMP support : yes<br />&nbsp; GPU support&nbsp; &nbsp; : no<br />&nbsp;<br />&nbsp;=== Connectors / Fallbacks === <br />&nbsp; Connectors on : yes<br />&nbsp; Fallbacks on&nbsp; : yes<br />&nbsp; DFT flavor&nbsp; &nbsp; : none<br />&nbsp; FFT flavor&nbsp; &nbsp; : none<br />&nbsp; LINALG flavor : netlib<br />&nbsp; MATH flavor&nbsp; &nbsp;: none<br />&nbsp; TIMER flavor&nbsp; : abinit<br />&nbsp; TRIO flavor&nbsp; &nbsp;: none<br />&nbsp;<br />&nbsp;=== Experimental features === <br />&nbsp; Bindings&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : @enable_bindings@<br />&nbsp; Exports&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: no<br />&nbsp; GW double-precision : no<br /></code></pre></div><br /><br />Sincerely yours,</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault occurred in sample input (/v3/t78.in)</h3>
+				<div class="date">Posted: <strong>Wed Nov 21, 2018 8:45 am</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">can you try without mpi and with mkl as linalg ?<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault occurred in sample input (/v3/t78.in)</h3>
+				<div class="date">Posted: <strong>Thu Nov 22, 2018 10:21 am</strong></div>
+				<div class="author">by <strong>Hiroki</strong></div>
+				<div class="content">Dear Jbeuken, <br />Thank you for your reply.<br /><br />I tried to compile using 'with_linalg_flavor=mkl', I got the following:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;* LINALG flavor = netlib-fallback (libs: ignored)<br /></code></pre></div><br />I couldn't compile abinit with mkl...<br /><br />Anyway, I'd like to compile the parallel version.<br />Which option do I choose together with mpi and openmp to calculate the response function without SIGSEG?<br />Or, mkl has to be required?<br /><br />Sincerely yours<br />Hiroki,</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault occurred in sample input (/v3/t78.in)&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Wed Nov 28, 2018 11:43 pm</strong></div>
+				<div class="author">by <strong>Hiroki</strong></div>
+				<div class="content">Dear Jbeuken, <br /><br />I could compile ABINIT with mkl as linalg(also with mpi).<br />And I tried to calculate the sample input, then the calculation have done successfully.<br /><br />Thank you very much for your help!<br />Hiroki,</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=3970&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 17:38:24 GMT -->
+</html>

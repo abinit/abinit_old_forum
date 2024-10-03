@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1845&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:51:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Problem with rprim vectors and how they are input</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Problem with rprim vectors and how they are input</h2>
+		<p><a href="viewtopic900b.html?f=9&amp;t=1845">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1845</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Problem with rprim vectors and how they are input</h3>
+				<div class="date">Posted: <strong>Fri Sep 28, 2012 1:11 am</strong></div>
+				<div class="author">by <strong>TPFleming</strong></div>
+				<div class="content">I'm working on Graphene so I'm using a 2 atom unit cell that produces a hexagonal structure.    Here is the input file that produces the hexagonal geometry of Graphene<br /><br /># Hexagonal Structure Graphene<br />#<br /><br /># Definition of the Hexogonal unit cell <br /># d = 2.4612 Angstrom = 4.650615 Bohr <br /><br /># a1 = (3/2)d  x_hat  - (sqrt(3)/2)d  y_hat<br /># a2 = (3/2)d  x_hat  + (sqrt(3)/2)d  y_hat<br /><br />acell 1 1 1<br />rprim 6.9759225 -4.027550733 0.00000000<br />6.9759225 4.027550733 0.00000000<br />0.000000000 0.000000000 24.00000000<br /><br />ntypat 1  # There is only one type of atom<br />znucl 6<br /><br />Chksymbreak 0<br /><br />ixc 11 <br /><br />prt1dm 1 <br /><br />natom 2  # There are two atoms<br />typat 1 1 <br />xangst<br />2.4612 0.00 0.00<br />4.9224 0.00 0.00<br /><br />My question is how one inputs the rprim vectors.  In this file I've entered the rprim vectors as row vectors.  My visualization tools (Venus/Vesta and Jmol) show that this produces the correct geometry however the manual seems to indicate that rprim vectors should be input as column vectors.  When I do input them as column vectors the geometry is all wrong.  Can anyone say what is going on here?<br /><br />Also I need guidance regarding what pseudopotential should be used with what exchange functional.  I've not a clue.  Any help would be appreciated.  Thanks.<br /><br /><br /><br />kptopt 1<br />ngkpt 12 12 2 <br />nshiftk 4<br />shiftk 0.5 0.5 0.5<br />       0.5 0.0 0.0<br />       0.0 0.5 0.0<br />       0.0 0.0 0.5<br /><br />nstep 20<br /><br />optforces 1<br /><br />ecut 15<br /><br /># SCF definition<br />iscf 2<br />diemac 12.0<br />nsppol=1<br />toldfe 1.0e-08</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem with rprim vectors and how they are input</h3>
+				<div class="date">Posted: <strong>Fri Oct 19, 2012 2:12 pm</strong></div>
+				<div class="author">by <strong>rangel</strong></div>
+				<div class="content">According to the documentation:<br /><br />the primitive vectors a1,a2, a3, which are R1p, R2p, R3p below are obtained as:<br />rprimd<br /><br />This internal variable gives the dimensional real space primitive vectors, computed from acell, scalecart, and rprim.<br /><br />    R1p(i)=rprimd(i,1)=scalecart(i)*rprim(i,1)*acell(1) for i=1,2,3 (x,y,and z)<br />    R2p(i)=rprimd(i,2)=scalecart(i)*rprim(i,2)*acell(2) for i=1,2,3<br />    R3p(i)=rprimd(i,3)=scalecart(i)*rprim(i,3)*acell(3) for i=1,2,3<br /><br /><br />you could check out this operation to see if you obtain the correct primitive vectors.<br />Note that scalecart=1<br /><br />Best<br />Tonatiuh Rangel</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem with rprim vectors and how they are input</h3>
+				<div class="date">Posted: <strong>Sat Oct 27, 2012 10:31 pm</strong></div>
+				<div class="author">by <strong>riemann</strong></div>
+				<div class="content">Dear Abinit User<br /><br />I want to define Graphene Nanoribon lattice in Abinit, but since i am beginer i don know how i shoul do this.<br /><br />You do favor if You give me a sample file for using as sample.<br /><br />Sincerely Yours <br /><br />Riemann</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1845&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:51:27 GMT -->
+</html>

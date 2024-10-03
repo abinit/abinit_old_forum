@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=925&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:40:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Building libxc (or disabling it) in AB 6.6.1, OS X</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Building libxc (or disabling it) in AB 6.6.1, OS X</h2>
+		<p><a href="viewtopicacd9-2.html?f=3&amp;t=925">https://forum.abinit.org/viewtopic.php?f=3&amp;t=925</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Building libxc (or disabling it) in AB 6.6.1, OS X</h3>
+				<div class="date">Posted: <strong>Thu Mar 03, 2011 6:22 am</strong></div>
+				<div class="author">by <strong>WoodDM</strong></div>
+				<div class="content">Howdy all!<br /><br />For the last several 5.x and 6.x releases of ABINIT I've had trouble building libxc support under Mac OS 10.x (10.6.6 at the moment), so have used --disable-libxc. Since that's no longer an option, I'm trying to actually find out what was stopping libxc from building correctly during the 'make' phase of abinit.  <br /><br />So I have TWO real questions:<br /><br />1) What am I doing wrong when configuring AB: e.g., by  ./configure --enable-mpi --with-mpi-prefix=/opt/openmpi-1.5 --enable-64bit-flags<br />The configure *succeeds* but make crashes in libxc:<br /><br />libtool: ignoring unknown tag F77<br />libtool: compile:  /opt/openmpi-1.5/bin/mpif90 -m64 -ffree-form -m64 -g -ffree-line-length-none -O2 -mtune=native -march=native -mfpmath=sse -c libxc.f90 -o libxc_la-libxc.o<br />libxc.f90:30:<br /><br />module xc_f90_ ## types_m<br />1<br />Error: Unclassifiable statement at (1)<br />libxc.f90:34.17:<br /><br />  integer, public, parameter :: xc_f90_kind = selected_real_kind(14)<br />                 1<br />Error: PUBLIC attribute at (1) is not allowed outside of the specification part of a module<br />libxc.f90:37.2:<br /><br />  type xc_f90_ ## pointer_t<br />  1<br />Error: Unclassifiable statement at (1)<br />libxc.f90:38.11:<br /><br />    private<br />           1<br />Error: PRIVATE statement at (1) is only allowed in the specification part of a module<br /><br />2) Is it possible to work around this problem by building libxc EXTERNALLY, then linking to the libraries via flags in ~/.abinit/build/machinename.ac?  (I tried this but the configure script for AB 6.6.1 doesn't like the resulting libraries and include files in /opt/etsf<br /><br />=========Building libxc============<br />To my surprise, I was able to build and install the 'free-standing' libxc libraries in /opt/etsf by copying the libxc-1.0.tar.gz to /tmp, setting the following environment variables in bash<br />export FC=&quot;gfortran-mp-4.4 -m64&quot;<br />export F77=&quot;gfortran-mp-4.4 -m64&quot;<br />export F90=&quot;gfortran-mp-4.4 -m64&quot;<br />export CC=&quot;gcc-mp-4.4 -m64&quot;<br />export CXX=&quot;g++-mp-4.4 -m64&quot;<br />export CPP=&quot;cpp-mp-4.4 -m64 -C -ansi&quot;<br />export FCCPP=&quot;cpp-mp-4.4 -m64 -C -ansi&quot;<br />export FCFLAGS=&quot;-O3&quot;<br />export FFLAGS=&quot;-O3&quot;<br /><br />then:<br /><br />./configure --enable-static<br />make<br /><br />make install (as root) yields<br />libtool: install: /sw/bin/ginstall -c .libs/libxc.0.dylib /opt/etsf/lib/libxc.0.dylib<br />libtool: install: (cd /opt/etsf/lib &amp;&amp; { ln -s -f libxc.0.dylib libxc.dylib || { rm -f libxc.dylib &amp;&amp; ln -s libxc.0.dylib libxc.dylib; }; })<br />libtool: install: /sw/bin/ginstall -c .libs/libxc.lai /opt/etsf/lib/libxc.la<br />libtool: install: /sw/bin/ginstall -c .libs/libxc.a /opt/etsf/lib/libxc.a<br />libtool: install: chmod 644 /opt/etsf/lib/libxc.a<br />libtool: install: ranlib /opt/etsf/lib/libxc.a<br />ranlib: file: /opt/etsf/lib/libxc.a(libxc_la-libxc_funcs.o) has no symbols<br />ranlib: file: /opt/etsf/lib/libxc.a(libxc_la-libxc.o) has no symbols<br />=========End of building libxc============<br /><br /><br />======Configuring AB 6.6.1======<br />Upon enabling the lines in antbee.ac (machine name=antbee) in ~dmwood/.abinit/build<br /><br />with_libxc_incs=&quot;-I/opt/etsf/include&quot;<br />with_libxc_libs=&quot;-L/opt/etsf/lib -llibxc&quot;<br /><br />configure (invoked by simply ./configure in AB 6.6.1's top-level directory) gives:<br /><br />configure: reading options from /Volumes/Backups/AntbeeHome/dmwood/.abinit/build/antbee.ac<br /><br />but terminates with<br /><br />configure: error: external libxc support does not work<br /><br />[Note: If I configure libxc via <br />./configure --enable-static --enable-shared=false<br />I get libxc.a and libxc.la in /opt/etsf/lib but the same problem:<br />configure: error: external libxc support does not work]<br /><br />In the config.log are the lines:<br /><br />========BEGINNING of partial config.log listing ================<br />checking xc.h usability<br />/opt/openmpi-1.5/bin/mpicc -m64 -c -m64 -g -O2 -mtune=native -march=native -mfpmath=sse        -I/opt/e<br />tsf/include conftest.c &gt;&amp;5<br />$? = 0<br />result: yes<br />checking xc.h presence<br />/opt/openmpi-1.5/bin/mpicc -E      -I/opt/etsf/include conftest.c<br />$? = 0<br />result: yes<br />checking for xc.h<br />result: yes<br />checking xc_funcs.h usability<br />/opt/openmpi-1.5/bin/mpicc -m64 -c -m64 -g -O2 -mtune=native -march=native -mfpmath=sse        -I/opt/e<br />tsf/include conftest.c &gt;&amp;5<br />$? = 0<br />result: yes<br />checking xc_funcs.h presence<br />/opt/openmpi-1.5/bin/mpicc -E      -I/opt/etsf/include conftest.c<br />$? = 0<br />result: yes<br />checking for xc_funcs.h<br />result: yes<br />checking for Fortran module includes<br />result: unknown (cached)<br />error: external libxc support does not work<br />========END of partial config.log listing ================<br /><br />So something is wrong with the includes in /opt/etsf/includes??<br />-rw-r--r--  1 root  admin  30874 Mar  2 21:36 libxc_funcs_m.mod<br />-rw-r--r--  1 root  admin  10673 Mar  2 21:36 xc.h<br />-rw-r--r--  1 root  admin    634 Mar  2 21:36 xc_config.h<br />-rw-r--r--  1 root  admin  78853 Mar  2 21:36 xc_f90_lib_m.mod<br />-rw-r--r--  1 root  admin   1237 Mar  2 21:36 xc_f90_types_m.mod<br />-rw-r--r--  1 root  admin  12516 Mar  2 21:36 xc_funcs.h<br /><br />I'm over my head, so would be grateful for any suggestions.<br /><br />DMW</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Building libxc (or disabling it) in AB 6.6.1, OS X</h3>
+				<div class="date">Posted: <strong>Thu Mar 03, 2011 8:53 am</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hello,<br /><br />to define the DFT libraries, we use   ( from 6.6.x and above )<br /><br />--with-dft-flavor=&quot;atompaw+bigdft+libxc+wannier90&quot;   (  the default )<br /><br />then , to disable libxc<br /><br />--with-dft-flavor=&quot;atompaw+bigdft+wannier90&quot;<br /><br />meanwhile, I succeed to compile abinit 6.6.1 with libxc on Mac OS X 10.5 / intel , <br />this is my .ac :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>enable_64bit_flags=&quot;yes&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_prefix=&quot;/opt/local/openmpi-gcc43_m64&quot;<br />with_trio_flavor=&quot;netcdf+etsf_io+fox&quot;<br />enable_gw_dpc=&quot;no&quot;<br />enable_maintainer_checks=&quot;no&quot;<br />enable_test_timeout=&quot;yes&quot;<br />FC_LDFLAGS_EXTRA=&quot;-Wl,-search_paths_first&quot;<br /></code></pre></div><br /><br />( see for ex: <!-- m --><a class="postlink" href="http://www.abinit.org:8010/builders/bigmac_gcc43/builds/2082">http://www.abinit.org:8010/builders/big ... uilds/2082</a><!-- m --> )<br /><br />regards<br /><br />jmb</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=925&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:40:45 GMT -->
+</html>

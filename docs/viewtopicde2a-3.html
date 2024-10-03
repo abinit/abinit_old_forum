@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1496&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:37:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; phonon spectrum for rhombohedral crystal</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>phonon spectrum for rhombohedral crystal</h2>
+		<p><a href="viewtopic4a6b.html?f=10&amp;t=1496">https://forum.abinit.org/viewtopic.php?f=10&amp;t=1496</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>phonon spectrum for rhombohedral crystal</h3>
+				<div class="date">Posted: <strong>Tue Jan 17, 2012 7:53 am</strong></div>
+				<div class="author">by <strong>dps</strong></div>
+				<div class="content">Dear all,<br />I am trying to simulate Sb2Te3 phonon spectrum as described in tutorial rf2. As the calculations are quite time consuming for converged ecut, I used rhombohedral primary cell:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#Definition of the unit cell<br />#from previous cell optimization<br />&nbsp; acell&nbsp; &nbsp; 1.6656138762E+01&nbsp; 1.6656138762E+01&nbsp; 1.6656138762E+01<br />&nbsp; rprim&nbsp; &nbsp;2.9828161671E-01&nbsp; 0.0000000000E+00&nbsp; 9.5447790814E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -1.4914080836E-01&nbsp; 2.5831945755E-01&nbsp; 9.5447790814E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -1.4914080836E-01 -2.5831945755E-01&nbsp; 9.5447790814E-01<br /><br />#Definition of the atom types<br />&nbsp; ntypat 2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # There are two types of atoms<br />&nbsp; znucl 51 52&nbsp; &nbsp; &nbsp;# Sb, Te<br /><br />#Definition of the atoms<br />&nbsp; natom 5&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# There are 5 atoms<br />&nbsp; typat 1 2 2 2 1&nbsp; # 1 - Sb, 2 - Te&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />&nbsp; # from previous cell optimization<br />&nbsp; xred<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3.9999873689E-01&nbsp; 3.9999873689E-01&nbsp; 3.9999873689E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2.0966603731E-01&nbsp; 2.0966603731E-01&nbsp; 2.0966603731E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0000000000E+00&nbsp; 0.0000000000E+00&nbsp; 0.0000000000E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -2.0966603731E-01 -2.0966603731E-01 -2.0966603731E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -3.9999873689E-01 -3.9999873689E-01 -3.9999873689E-01 <br /></code></pre></div><br /><br />Then, how should I plot phonon spectrum in anaddb? In particular, anaddb help file said that brav=1 is for all lattices? Then, can I use it with my results for rhombohedral one? And what is the difference between brav=1 and brav=4, e.g. for hexagonal lattice, or brav=1 and brav=2 for FCC? <br />I am asking because I have plotted phonon spectrum for Si as an exercise. At first I calculate ddb using FCC cell and then plot phonon spectrum using brav=2 and brav=1 - they look similar but for brav=1 - curves look less smooth. But in general: is it correct at all?<br /><br />Thank you,<br />dps</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: phonon spectrum for rhombohedral crystal</h3>
+				<div class="date">Posted: <strong>Thu May 24, 2012 2:06 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">brav &gt; 1 is more accurate if you have the appropriate symmetry (fcc bcc or hcp) _AND_ if you have the correct rprim and alignment of the lattice. This is described in the anaddb help page for the brav input variable. For your Rhombohedral cell there is no equivalent brav coded in anaddb, so brav 1 is your best bet.<br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1496&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:37:26 GMT -->
+</html>

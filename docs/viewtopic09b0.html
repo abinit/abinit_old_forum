@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3397&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:13:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; DOS AND PDOS for PbTiO3</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>DOS AND PDOS for PbTiO3</h2>
+		<p><a href="viewtopice763.html?f=9&amp;t=3397">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3397</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>DOS AND PDOS for PbTiO3</h3>
+				<div class="date">Posted: <strong>Wed Oct 12, 2016 9:23 am</strong></div>
+				<div class="author">by <strong>MANISH ANAND</strong></div>
+				<div class="content">Hi Abinit users,<br />I wanted to calculate total density of states and partial density of states for PbTiO3.I have used HGH pseudopotential. here is the the content of of my input file. As PbTiO3 is an insulator in cubical phase. I should get a band but I am not able to observe it also I am not able to figure out to calulate total partial density of states out of angular momentum resolved PDOS. The DOS plot is also attached in as &quot;dos.pdf&quot;.  <br />#Definition of the unit cell<br />ndtset 3<br />prtden1 1<br />acell  3.89239000   3.89239000  3.89239000 # The keyword &quot;acell&quot; refers to the<br />                  # lengths of the primitive vectors (in Bohr)<br />rprim 1 0 0 <br />      0 1 0<br />      0 0 1 # This line, defining orthogonal primitive vectors,<br />                  # is commented, because it is precisely the default value of rprim<br /><br />#Definition of the atom types<br />ntypat 3            # There is only one type of atom<br />znucl 82 22 8       # The keyword &quot;znucl&quot; refers to the atomic number of the <br />                    # possible type(s) of atom. The pseudopotential(s) <br />                    # mentioned in the &quot;files&quot; file must correspond<br />                    # to the type(s) of atom. Here, the only type is Hydrogen.<br />                         <br /><br />#Definition of the atoms<br />natom 5                # There are 91 atoms in the complex<br />typat 1 2 3 3 3  # The formula of the complex is C_33 H_29 N_12 O_13 Cl_3 Fe<br /><br />#Definition of the planewave basis set<br />ecut 40      # Maximal plane-wave kinetic energy cut-off, in Hartree<br />#Definition of the k-point grid<br />kptopt  1<br />occopt1  1<br />ngkpt1 15 15 15<br />ngkpt2 15 15 15<br />nband1 17<br />#Definition of the SCF proceed         # Maximal number of SCF cycles<br />#toldff 1.0d-8      <br />diemac 4.0             <br />toldfe  1.0d-10<br />ixc 1<br />nstep 200                          <br />                  <br />prtdos2 1<br />occopt2 7<br />tsmear2 0.02<br />iscf2 -3<br />getden2 -1<br />nband2 20<br />prtdos3 3<br />#ngkpt2 10 10 10<br />#nband 20                   # Here, we follow the prescriptions for molecules <br />#ionmov 2<br />#ntime 20<br />#optcell 2<br />#dilatmx 1.5<br />#tolmxf 1.0d-6<br />#getden2 -1<br />#getwfk2 -1<br />tolwfr2 1.0d-15<br />occopt3 7<br />iscf3 -3<br />tolwfr3 1.0d-20<br />getden3 -1<br />dosdeltae3 0.01    <br />natsph3 5<br />iatsph3 1 2 3 4 5<br />ratsph3 3.50 4.50  1.5 1.5 1.5<br /># coordinate of the complex<br />xred<br /> 0.0000000000000000  0.0000000000000000  0.0000000000000000 <br /> 0.5000000000000000  0.5000000000000000  0.5000000000000000 <br /> 0.0000000000000000  0.5000000000000000  0.5000000000000000 <br /> 0.5000000000000000  0.0000000000000000  0.5000000000000000 <br /> 0.5000000000000000  0.5000000000000000  0.0000000000000000 <br /> <br />#%% [files]<br />#%% [paral_info]<br />#%% max_nprocs = 1<br />#%% [extra_info]<br />#%% authors = Unknown<br />#%% keywords = <br />#%% descrition = DFT calculation for PbTiO3</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DOS AND PDOS for PbTiO3</h3>
+				<div class="date">Posted: <strong>Thu Oct 13, 2016 8:50 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Hi<br /><br />Your acell is wrong. <br />Abinit expects bohr but you use angstrom. So you can change you acell to bohr (*0.52918) or add the word angstrom after the three parameters.<br /><br />With such a small acell (3.89 bohr) your system is under high pressure and thus becomes metallic.<br /><br />Cheers<br /><br />Jordan</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3397&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:13:03 GMT -->
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1452&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:54:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Packaging abinit for Fedora/RHEL/CentOS</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Packaging abinit for Fedora/RHEL/CentOS</h2>
+		<p><a href="viewtopic7102.html?f=3&amp;t=1452">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1452</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Packaging abinit for Fedora/RHEL/CentOS</h3>
+				<div class="date">Posted: <strong>Thu Dec 01, 2011 12:19 pm</strong></div>
+				<div class="author">by <strong>shakthimaan</strong></div>
+				<div class="content">Hi,<br /><br />I am interested in making abinit available for Fedora/RHEL/CentOS *nix distributions. I have been able to compile abinit-6.10.2 on Fedora 15 (x86_64) using:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>$ ./configure --disable-mpi<br />$ make<br /></code></pre></div><br /><br />I would like to know if there are any specific dependency packages that are required for abinit, and/or specific options that end users would like enabled when building abinit.<br /><br />Please let me know.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Packaging abinit for Fedora/RHEL/CentOS</h3>
+				<div class="date">Posted: <strong>Fri Dec 02, 2011 5:00 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Thank you for your packaging efforts. I'm coordinating a similar project for Debian-based distributions. My suggestion about the organization of binary packages is to separate the test suite from the executables, as the test suite is requiring a lot of disk space. For Debian, the future packages will very likely be: abinit, abinit-doc, abinit-gui, abinit-test, libabinit, and libabinit-dev.<br /><br />Regarding dependencies, the most used ones are LibXC, NetCDF, and ETSF_IO. LibXC 1.0 &amp; 1.1 have already been packaged by Jussi Lehtola for Fedora, which is fine with Abinit, from 6.6 to 6.12 at least, but note that 1.1 can only be used from 6.12 on. Any version of NetCDF between 3.6.3 and 4.1.1 is known to work with Abinit, and more recent versions should work as well. ETSF_IO has however been packaged for Debian only in its 1.0.3 version, compatible with Abinit from 6.2 to 6.10, and likely with 6.12 (untested). Wannier90 1.2 is also quite popular, but it is currently packaged experimentally (<!-- m --><a class="postlink" href="https://launchpad.net/~pouillon/+archive/etsf-ubuntu">https://launchpad.net/~pouillon/+archive/etsf-ubuntu</a><!-- m -->). Just have a look at the --with-*-flavor options if you want to fine-tune optional features. The ~abinit/doc/config/build-config.ac file will also be useful to you.<br /><br />Of course, Abinit requires BLAS &amp; LAPACK to run. The choice of the implementation (Netlib, ATLAS, ...) is up to you.<br /><br />You can benefit from multicore architectures by using MPI for now. OpenMP support is in progress.<br /><br />For configuration, I would recommend the following options:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../configure \<br />&nbsp; --disable-config-file \<br />&nbsp; --disable-fallbacks \<br />&nbsp; --enable-exports \<br />&nbsp; --enable-pkg-check \<br />&nbsp; --with-trio-flavor=&quot;netcdf+etsf_io&quot; \<br />&nbsp; --with-dft-flavor=&quot;libxc&quot; \<br />&nbsp; --with-linalg-libs=&quot;-lyour_preferred_libs ...&quot;</code></pre></div><br /><br />Switching on --enable-gui is up to you, as it will require Java. Please note that you can build the GUI separately in any case.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Packaging abinit for Fedora/RHEL/CentOS</h3>
+				<div class="date">Posted: <strong>Mon Dec 05, 2011 3:37 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">HI,<br /><br />I would like to share my experience with the MPI packages with ABinit 6.10.x  under Fedora Core 16 ( x86_64 )<br /><br />I tried with theses two packages without success  <img class="smilies" src="images/smilies/icon_e_sad.gif" alt=":(" title="Sad" />  <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>openmpi-1.5-4.fc16.x86_64<br />openmpi-devel-1.5-4.fc16.x86_64<br /><br />mpich2-1.4.1p1-1.fc16.x86_64<br />mpich2-devel-1.4.1p1-1.fc16.x86_64</code></pre></div><br /><br />1) OpenMPI =&gt; runtime problem <br /><br /> <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Your architecture is not able to handle 16, 8, 4 or 2-bytes FORTRAN file record markers! <br />&nbsp;You cannot use ABINIT and MPI/IO.<br />&nbsp; MPI_ERROR_STRING: MPI_ERR_UNKNOWN: unknown error<br /></code></pre></div><br />I have not yet understood what the problem was...<br />but the version 1.5.x is not yet supported by our testfarm : <strong class="text-strong">not stable version of OpenMPI</strong><br /><br />2) MPICH2 =&gt; compilation problem<br /><br />there is a bug in the 1.4.1p1 version of mpich2 ( resolved in the svn version... )  <br />see the topic for more details : <!-- l --><a class="postlink-local" href="viewtopic0700.html?f=3&amp;t=1206#p4228">viewtopic.php?f=3&amp;t=1206#p4228</a><!-- l --><br /><br />Then, I compiled  the version openmpi 1.4.3 from sources and everything working...<br /><br /><strong class="text-strong">In brief,</strong> when one of the two  MPI packages will be operational for abinit,  <br />here is a recipe to compile abinit 6.12.x ( with all plugins + openmpi or mpich2 )  under a fresh Fedora Core 16 (x86_64) :<br /><br />1) installed pakages :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>yum install gcc-gfortran.x86_64<br />yum install netcdf<br />yum install netcdf-devel<br />yum install atlas<br />yum install atlas-devel<br />yum install fftw3<br />yum install fftw3-devel<br />yum install openmpi<br />yum install openmpi-devel<br />yum install mpich2<br />yum install mpich2-devel<br />yum install libxc<br />yum install libxc-devel<br />yum install patch<br /></code></pre></div><br /><br />2) create a file &quot;build.ac&quot; with these lines :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#enable_fallbacks=&quot;no&quot;<br />enable_exports=&quot;yes&quot;<br />enable_pkg_check=&quot;yes&quot;<br /><br />enable_gw_dpc = yes<br />enable_mpi = yes<br />enable_mpi_io = yes<br />with_mpi_prefix = /usr/lib64/openmpi<br />with_trio_flavor=&quot;netcdf+etsf_io+fox&quot;<br />with_dft_flavor = atompaw+bigdft+libxc+wannier90<br />with_linalg_flavor = atlas<br />with_linalg_libs = -L/usr/lib64/atlas -llapack -lf77blas -lcblas -latlas<br />with_fft_flavor = fftw3<br />with_fft_incs = -I/usr/include/<br />with_fft_libs = -L/usr/lib64 -lfftw3<br />with_netcdf_incs = -I/usr/lib64/gfortran/modules<br />with_netcdf_libs = -L/usr/lib64 -lnetcdf -lnetcdff<br />with_libxc_incs=&quot;-I/usr/include -I/usr/lib64/gfortran/modules&quot;<br />with_libxc_libs=&quot;-L/usr/lib64 -lxc&quot;<br /></code></pre></div><br /><br />3) execute theses commands :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>export PATH=/usr/lib64/openmpi/bin/:$PATH<br />export LD_LIBRARY_PATH=/usr/lib64/openmpi/lib:$LD_LIBRARY_PATH<br /><br />./configure --with-config-file=./build.ac<br />make mj4<br />make install<br /></code></pre></div><br /><br />all binaries are installed in &quot;/usr/local/bin&quot; then you can add the dir in the PATH :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>export PATH=/usr/lib64/openmpi/bin/:$PATH</code></pre></div><br /><br /><br />Notes :  tested with a 6.11.x : <br /><ul>-ok for ./configure and compilation<br />- some numerical errors with some tests ( not  insuppressible to resolve...  <img class="smilies" src="images/smilies/icon_rolleyes.gif" alt=":roll:" title="Rolling Eyes" />  )<br />- not good with the libxc 1.1 package  <img class="smilies" src="images/smilies/icon_e_surprised.gif" alt=":o" title="Surprised" /> <br /></ul><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>6.11.2-private/r782<br />======================================================<br />Tests SEQ start at 13:37 and done after&nbsp; &nbsp; &nbsp;1734s <br />test built_in OK<br />========================================================<br />&nbsp; &nbsp; &nbsp;Serie&nbsp; #tests&nbsp; #succes&nbsp; #passed&nbsp; #failed&nbsp; #missing <br />========================================================<br />&nbsp; &nbsp;atompaw&nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp; bigdft&nbsp; &nbsp; 13&nbsp; &nbsp; &nbsp; &nbsp;13&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp;etsf_io&nbsp; &nbsp; 10&nbsp; &nbsp; &nbsp; &nbsp;10&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp; &nbsp; fast&nbsp; &nbsp; 27&nbsp; &nbsp; &nbsp; &nbsp;26&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp; &nbsp; &nbsp;fox&nbsp; &nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp; &nbsp; gwdp&nbsp; &nbsp; 31&nbsp; &nbsp; &nbsp; &nbsp;17&nbsp; &nbsp; &nbsp; 13&nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp; &nbsp;libxc&nbsp; &nbsp; 13&nbsp; &nbsp; &nbsp; &nbsp; 2&nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; 10&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp;tutoplugs&nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />tutorespfn&nbsp; &nbsp; 46&nbsp; &nbsp; &nbsp; &nbsp;34&nbsp; &nbsp; &nbsp; &nbsp;7&nbsp; &nbsp; &nbsp; &nbsp;5&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; tutorial&nbsp; &nbsp; 57&nbsp; &nbsp; &nbsp; &nbsp;45&nbsp; &nbsp; &nbsp; &nbsp;9&nbsp; &nbsp; &nbsp; &nbsp;3&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp;unitary&nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; 4&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp; &nbsp; &nbsp; v1&nbsp; &nbsp; 96&nbsp; &nbsp; &nbsp; &nbsp;91&nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp; &nbsp; &nbsp; v2&nbsp; &nbsp; 95&nbsp; &nbsp; &nbsp; &nbsp;80&nbsp; &nbsp; &nbsp; 10&nbsp; &nbsp; &nbsp; &nbsp;5&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp; &nbsp; &nbsp; v3&nbsp; &nbsp; 93&nbsp; &nbsp; &nbsp; &nbsp;80&nbsp; &nbsp; &nbsp; &nbsp;9&nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp; &nbsp; &nbsp; v4&nbsp; &nbsp; 94&nbsp; &nbsp; &nbsp; &nbsp;73&nbsp; &nbsp; &nbsp; 18&nbsp; &nbsp; &nbsp; &nbsp;3&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp; &nbsp; &nbsp; v5&nbsp; &nbsp; 99&nbsp; &nbsp; &nbsp; &nbsp;72&nbsp; &nbsp; &nbsp; 12&nbsp; &nbsp; &nbsp; 15&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp; &nbsp; &nbsp; v6&nbsp; &nbsp;101&nbsp; &nbsp; &nbsp; &nbsp;79&nbsp; &nbsp; &nbsp; 18&nbsp; &nbsp; &nbsp; &nbsp;4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp;wannier90&nbsp; &nbsp; &nbsp;3&nbsp; &nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp; &nbsp; &nbsp;3&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp; &nbsp;paral&nbsp; &nbsp; 66&nbsp; &nbsp; &nbsp; &nbsp;49&nbsp; &nbsp; &nbsp; 17&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />&nbsp; &nbsp; &nbsp;mpiio&nbsp; &nbsp; &nbsp;9&nbsp; &nbsp; &nbsp; &nbsp; 8&nbsp; &nbsp; &nbsp; &nbsp;1&nbsp; &nbsp; &nbsp; &nbsp;0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0<br />========================================================<br />Paral Tests DONE ( time elapsed: 1055s ) <br />========================================================<br />Powered by Analysis V2.7.0rc1<br />Date : 12/05/2011<br />========================================================<br /></code></pre></div><br />regards<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Packaging abinit for Fedora/RHEL/CentOS</h3>
+				<div class="date">Posted: <strong>Wed Dec 14, 2011 3:36 pm</strong></div>
+				<div class="author">by <strong>Zhang Xiaole</strong></div>
+				<div class="content">According to your solution, my promlem has sovled as well. Thanks a lot ~<br />but i complied with <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>with_trio_flavor=&quot;none&quot;<br />with_dft_flavor=&quot;none&quot;<br /></code></pre></div><br />coulde it be a problem for my future calculation?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Packaging abinit for Fedora/RHEL/CentOS</h3>
+				<div class="date">Posted: <strong>Wed Dec 14, 2011 11:24 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">with_trio_flavor=&quot;none&quot; could be a problem only if you have to use binary files produced by Abinit on a different computer architecture from that on which they have been produced.<br /><br />with_dft_flavor=&quot;none&quot; will prevent you from using the wealth of XC functionals provided by LibXC. Nor will you be able to use Wannier functions.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Packaging abinit for Fedora/RHEL/CentOS</h3>
+				<div class="date">Posted: <strong>Thu Dec 15, 2011 5:59 pm</strong></div>
+				<div class="author">by <strong>Zhang Xiaole</strong></div>
+				<div class="content"><blockquote><div><cite>pouillon wrote:</cite>with_trio_flavor=&quot;none&quot; could be a problem only if you have to use binary files produced by Abinit on a different computer architecture from that on which they have been produced.<br /><br />with_dft_flavor=&quot;none&quot; will prevent you from using the wealth of XC functionals provided by LibXC. Nor will you be able to use Wannier functions.</div></blockquote><br />Thank you for your replay, i know a little bit how dos it works. one more quesion, when i enable the libxc atompaw wannier bigdft, and i put the corresponding files in the dictory .abinit/tarballs/. the atompaw can build but the bigdft cant. why was that?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Packaging abinit for Fedora/RHEL/CentOS</h3>
+				<div class="date">Posted: <strong>Thu Dec 15, 2011 6:17 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">This topic is about packaging Abinit for RPM-based distributions, and we have already drifted away a lot.<br /><br />If you wish to dicuss about a problem when building BigDFT, I suggest you to open a new topic and attach BigDFT's config.log (found in plugins/bigdft/bigdft-x.y.z.a/) to your message.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1452&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:54:58 GMT -->
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=1490&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:33:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [resolved] WFK file in ASCII</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[resolved] WFK file in ASCII</h2>
+		<p><a href="viewtopic8508.html?f=12&amp;t=1490">https://forum.abinit.org/viewtopic.php?f=12&amp;t=1490</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[resolved] WFK file in ASCII</h3>
+				<div class="date">Posted: <strong>Wed Jan 11, 2012 6:14 pm</strong></div>
+				<div class="author">by <strong>MPis86</strong></div>
+				<div class="content">Dear Abinit users.<br />I used abinit to meke some ground state calculation and I want to obtain the converged wavefunctions, written as expansion_coefficient*plane_wave.<br />Is there a post processing tool in the abinit package that makes this job?<br />I suppose that this information are written in the _WFK file in fact<br /><!-- m --><a class="postlink" href="http://www.abinit.org/documentation/helpfiles/for-v6.10/users/abinit_help.html#wavefctfile">http://www.abinit.org/documentation/hel ... avefctfile</a><!-- m --><br />however I wasn't able to read this file. What I need is a file converter that rewrites the information contained in the wfk file in ASCII or another format readable with a text editor.<br />Thank you</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: WFK file in ASCII</h3>
+				<div class="date">Posted: <strong>Wed Jan 11, 2012 7:33 pm</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hello,<br /><br />If you want to have a look at the wavefunction, you can use the cut3d post-processing tool. You can for example visualize the wavefunction for a specific state. You can use cut3d for analyzing densities (_DEN), potentials (_POT), wavefunctions (_WFK), ....<br /><br />I hope it helps you<br /><br />David</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: WFK file in ASCII</h3>
+				<div class="date">Posted: <strong>Thu Jan 12, 2012 11:27 am</strong></div>
+				<div class="author">by <strong>MPis86</strong></div>
+				<div class="content">Thanks for the reply,<br />In fact cut3d is useful to plot the wave-functions, however what I need is the expansion of the wave-functions in plane waves because I need to calculate other quantities that depend on the one electron wave-functions. In fact what I need is a tool to convert the (I think) binary file _WFK to a file readable with a text editor, then I think that I can do the reading by myself.<br />Thank you</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: WFK file in ASCII</h3>
+				<div class="date">Posted: <strong>Thu Jan 12, 2012 10:19 pm</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hello,<br /><br />Well in that case you might have to &quot;hack&quot; a little bit the code. For example you can change the cut3d.F90 routine so that it reads in the wavefunctions (this is already done) and then writes it to a file. I guess it would not be too difficult.<br /><br />But what are the other quantities you are looking for ? Maybe there is already some tool to do this automatically.<br /><br />David</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: WFK file in ASCII</h3>
+				<div class="date">Posted: <strong>Fri Jan 13, 2012 1:32 pm</strong></div>
+				<div class="author">by <strong>MPis86</strong></div>
+				<div class="content">Thanks again David.<br />In fact modifing the cut3d code is a good idea, nevertheless I solved the problem in a different way.<br /><br />It is possible to make abinit write everything, including the _WFK file, in the netcdf format. It is done by putting &quot;accesswff 3&quot; in the input file. Only little care has to be taken to the &quot;istwfk&quot; that must be 1 for all the k points. Unfortunately I wasn't able to use my converged densities, because I think that the code needs also netcdf files reading the density (for instance in a non-scf run), probably one can bypass this problem with some tricks.<br /><br />Anyway, when one has the output file in netcdf format (they should be &quot;something.nc&quot;) one can use a converter from the nc-format to text-format. One possibility is given by the &quot;ncdump&quot; script (see <!-- m --><a class="postlink" href="http://www.unidata.ucar.edu/software/netcdf/docs/ncdump-man-1.html">http://www.unidata.ucar.edu/software/ne ... man-1.html</a><!-- m --> ), that is released within the abinit package, by writing (for standard installation) <br />ncdump your-file.nc &gt; your-file.txt<br />and it's all over.<br /><br />Hope it helps other users having the same problem as me.<br />Regards<br />Michele</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=1490&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:33:12 GMT -->
+</html>

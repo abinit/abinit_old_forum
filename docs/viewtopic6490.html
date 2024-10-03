@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=97&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:53:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Nullified pointers and xlf (Fock)</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Nullified pointers and xlf (Fock)</h2>
+		<p><a href="viewtopicfd75.html?f=19&amp;t=97">https://forum.abinit.org/viewtopic.php?f=19&amp;t=97</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Nullified pointers and xlf (Fock)</h3>
+				<div class="date">Posted: <strong>Mon Mar 01, 2010 1:37 pm</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">Hello everybody,<br />After Xavier's mail about a partial merge of v6.1.0, I take the opportunity because I encounter a problem with xlf on Fock and I don't know how to solve it.<br />According to Xavier's email:<br /><em class="text-italics"><br />Not merged because of failing tests or problems with abirules :<br />torrent               revno  137   (segfault on Fock for two tests, unfortunately) <br /></em><br /><br />The segfault in my branch is due to a &quot;nullified&quot; pointer which is not accepted by xlf as argument of a routine.<br />This is not the first time I encounter the problem and I find it &quot;un-elegant&quot; to solve it.<br /><br />More precisely:<br />when I nullifed a pointer (nullify(ptr)), xlf does not accept it as an argument:<br />&quot;call subrout(..., ptr,...)&quot; crashes, EVEN if the pointer is NOT USED inside the routine.<br />The only solution I found is to give a target to the pointer... which can be dangerous...<br />I thought that nullifying a pointer was sufficient to handle it without problems; apparently not...<br /><br />This problem occurs only on Fock under xlf...<br /><br />Any idea ?<br /><br />Marc</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Nullified pointers and xlf (Fock)</h3>
+				<div class="date">Posted: <strong>Mon Mar 01, 2010 1:40 pm</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">In passing:<br />I didn't know where to place this thread in the forum...<br />There is no appropriate folder for such messages...<br />Should we add another topic ?...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Nullified pointers and xlf (Fock)</h3>
+				<div class="date">Posted: <strong>Mon Mar 01, 2010 8:29 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Maybe &quot;Troubleshooting compiler issues&quot;?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Nullified pointers and xlf (Fock)</h3>
+				<div class="date">Posted: <strong>Tue Mar 02, 2010 12:19 pm</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">Yes, its a compiler issue...<br />but you also can have &quot;help request&quot; from one developer... we also could include this in the title...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Nullified pointers and xlf (Fock)</h3>
+				<div class="date">Posted: <strong>Tue Mar 02, 2010 1:26 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">What about &quot;Help wanted&quot;?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Nullified pointers and xlf (Fock)</h3>
+				<div class="date">Posted: <strong>Tue Mar 02, 2010 6:21 pm</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">Just for info:<br /><br />same error on the ibm6 station (under xlf12.1) ; fock is under xlf9...<br />So, my problem is not connected to Fock but to xlf</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Nullified pointers and xlf (Fock)</h3>
+				<div class="date">Posted: <strong>Tue Mar 02, 2010 7:03 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">What happens if you configure with the following?<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>FCFLAGS_EXTRA=&quot;-qinit=f90ptr&quot;<br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Nullified pointers and xlf (Fock)</h3>
+				<div class="date">Posted: <strong>Wed Mar 03, 2010 2:15 pm</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">Code: Select all<br />    FCFLAGS_EXTRA=&quot;-qinit=f90ptr&quot;<br /><br />It does not change the behaviour (at least on xlf12).<br />This was expected because my pointers are in NULL status...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Nullified pointers and xlf (Fock)</h3>
+				<div class="date">Posted: <strong>Wed Mar 03, 2010 7:13 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">I had not many expectations. That was just in case.<br /><br />I'm basically clueless. We may have to ask someone from IBM.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=97&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:53:16 GMT -->
+</html>

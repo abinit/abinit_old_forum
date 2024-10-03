@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4373&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:16:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; DOS</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>DOS</h2>
+		<p><a href="viewtopic7297.html?f=9&amp;t=4373">https://forum.abinit.org/viewtopic.php?f=9&amp;t=4373</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>DOS</h3>
+				<div class="date">Posted: <strong>Thu Apr 09, 2020 8:43 am</strong></div>
+				<div class="author">by <strong>hameed1987</strong></div>
+				<div class="content">Dear All,<br>
+To calculate DOS (tspin_3) input file in the Abinit tutorials, there is a variable called spinat which relates to spin, I have read its description, for 2 atoms it is clear (spin up and spin down), but in my case it is five atoms per unit cell and it is Perovskite solar cell, this is not explained in the description. I used many ways, but it gives errors,, all the errors are due to this variable.<br>
+<br>
+Please be helpful with me if any one of you have an answer to this question <br>
+<br>
+Regards</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DOS</h3>
+				<div class="date">Posted: <strong>Wed Apr 15, 2020 6:36 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Hamid,<br>
+The spinat variable contains x, y, z value of magnetic moment for each atom. For collinear case only z component will be read such that for 5 atoms example you should have something like that:<br>
+<br>
+0.0 .0.0 magnetic-moment(atom 1)<br>
+0.0 .0.0 magnetic-moment(atom 2)<br>
+0.0 .0.0 magnetic-moment(atom 3)<br>
+0.0 .0.0 magnetic-moment(atom 4)<br>
+0.0 .0.0 magnetic-moment(atom 5)<br>
+<br>
+where magnetic-moment(atom X) is the initial magnetic moment value you want to give to atom X (in Bohr magneton).<br>
+For example it can be, if only the first atom is magnetic:<br>
+<br>
+0.0 .0.0 5.0<br>
+0.0 .0.0 0.0<br>
+0.0 .0.0 0.0<br>
+0.0 .0.0 0.0<br>
+0.0 .0.0 0.0<br>
+<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DOS</h3>
+				<div class="date">Posted: <strong>Sun Apr 19, 2020 10:14 am</strong></div>
+				<div class="author">by <strong>hameed1987</strong></div>
+				<div class="content">Dear Eric<br>
+<br>
+Thank you</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4373&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:16:32 GMT -->
+</html>

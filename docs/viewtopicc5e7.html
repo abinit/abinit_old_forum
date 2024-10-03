@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4058&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 17:46:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Abinit not compatible with libxc-4.x.y</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Abinit not compatible with libxc-4.x.y</h2>
+		<p><a href="viewtopicc052.html?f=3&amp;t=4058">https://forum.abinit.org/viewtopic.php?f=3&amp;t=4058</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Abinit not compatible with libxc-4.x.y</h3>
+				<div class="date">Posted: <strong>Tue Mar 05, 2019 6:53 am</strong></div>
+				<div class="author">by <strong>frodo</strong></div>
+				<div class="content">Hello,<br /><br />I'm working on abinit 8.10.2 with libxc. I noted that the fallback library is libxc-3.0.0 and that the configure script tests for the libxc version being in the range 2.2 &lt;-&gt;4.2.<br /><br />The tddft.org website lists libxc-3.0.1 (the last in the 3 series) as having almost a dozen bug fixes, so i downloaded and built that, and then built abinit. This went well, with the libxc tests showing 6 passed and 29 succeeded.<br /><br />Then I did the same thing with libxc-4.0.0, which is supposed to be in the acceptable version range for libxc. However, now the libxc tests show 13 failed, 4 passed, and 18 succeeded. 5 of the failures are because of SCF convergence in a different number of iterations and the remaining 8 are because the erroneous lines exceeded the tolnlines value for the test (e.g., 117 instead of 0 for t68). Inspecting the .out files for the failed tests shows that the numerical differences are substantial in a number of places.<br /><br />Curious whether this was just a buggy early 4.0 version, I zoomed ahead to libxc-4.3.3. I bypassed the abinit configure check to build with this version. The libxc test results were identical to that for libxc-4.0.0, with the same 13 tests failing. I then went a step further and compared the .out files for all 35 libxc tests, either compiled with libxc-4.0.0 or libxc-4.3.3. Every single pair of files were completely identical. There was zero change in output using either libxc-4.0.0 or libxc-4.3.3.<br /><br />I conclude that abinit is not compatible with libxc-4.x.y, even if x&lt;=2. If this is incorrect, please let me know. If true, than at a minimum, the libxc version test in configure should be corrected.<br /><br />Best Regards</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4058&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 17:46:50 GMT -->
+</html>

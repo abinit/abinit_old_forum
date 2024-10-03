@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=408&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:42:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Phonons in Copper</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Phonons in Copper</h2>
+		<p><a href="viewtopic6022.html?f=10&amp;t=408">https://forum.abinit.org/viewtopic.php?f=10&amp;t=408</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Phonons in Copper</h3>
+				<div class="date">Posted: <strong>Fri Jun 18, 2010 3:08 pm</strong></div>
+				<div class="author">by <strong>Gabriel</strong></div>
+				<div class="content">Dear All,<br /><br />As part of my very first project with abinit, I'm aiming at reproducing the complete phonon dispersion curve of Copper using the LDA Trouilliers-Martins norm-conserving pseudopotential. Following the instructions given in the second tutorial on Response Functions and in the first part of the tutorial on electron-phonon interactions (elphon), I produced the attached input script for calculating the DDBs with the 2DTE for each phonon perturbation q. Furthermore, I used the set of q point mesh  adjusted to the k point mesh used for the electronic structure as outlined in the Response function tutorial 2. However, by the time the code starts calculating the 3rd DDB, it crashes with the following error:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;ITER STEP NUMBER&nbsp; &nbsp; &nbsp;1<br /><br />&nbsp;Non-SCF iterations; k pt #&nbsp; &nbsp; 1&nbsp; k= -0.05000 -0.10000&nbsp; 0.00000&nbsp; band residuals:<br />&nbsp; cgwf3 : enter<br />&nbsp;not treated in sg_fourwf<br /><br />&nbsp;leave_new : decision taken to exit ...</code></pre></div><br /><br /><br />I also repeatedly get the following worrying warning message in my log file:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;hdr_check: WARNING -<br />&nbsp; Restart of self-consistent calculation need translated wavefunctions.<br />&nbsp; Indeed, critical differences between current calculation and<br />&nbsp; restart file have been detected in:<br />&nbsp; &nbsp; &nbsp; &nbsp; * the number, position, or weight of k-points<br />&nbsp; &nbsp; &nbsp; &nbsp; * the format of wavefunctions (istwfk)</code></pre></div><br /><br /><br />Any input as to why this happens  would be greatly appreciated, but bear in mind that I'm still a neophyte to ABINIT and DFT in general, so please be patient with me! <br /><br />Thank you!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Phonons in Copper</h3>
+				<div class="date">Posted: <strong>Tue Jun 22, 2010 4:13 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello,<br /><br />1) have a look at the latest (v6) version of the el-ph tutorial - you can simplify your input file a lot<br /><br />2) I believe the problem comes from the parallelization options: you have set paral_kgb to 0, but left the others, and response function calculations are probably not coded with these options<br /><br />[quote]<br />paral_kgb 0<br /><br />npband 2<br />npfft 1<br />npkpt 2<br /><br />wfoptalg 4<br />fftalg 401 <br />fft_opt_lob 2 <br />nloalg 4<br />[\quote]<br /><br />Remove these and use the defaults to see if it works. Response functions parallelize automatically over k-points, and can do bands as well, so leave it up to the code.<br /><br />matthieu<br /><br />PS: good as an exercise, but el-ph coupling in Cu should be ridiculously small</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Phonons in Copper</h3>
+				<div class="date">Posted: <strong>Tue Jun 22, 2010 4:14 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">PPS: you should use a non-shifted k-point grid for the el-ph calculation. I believe some things work ok, but the interpolation will be wrong at some stage.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=408&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:42:19 GMT -->
+</html>

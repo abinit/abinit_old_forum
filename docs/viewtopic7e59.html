@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2626&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:39:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; parallel run error &quot;iofn1.F90 (unit = 5, file = 'stdin')&quot;</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>parallel run error &quot;iofn1.F90 (unit = 5, file = 'stdin')&quot;</h2>
+		<p><a href="viewtopic0382.html?f=3&amp;t=2626">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2626</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>parallel run error &quot;iofn1.F90 (unit = 5, file = 'stdin')&quot;</h3>
+				<div class="date">Posted: <strong>Mon Apr 07, 2014 9:49 am</strong></div>
+				<div class="author">by <strong>weitong</strong></div>
+				<div class="content">When I aparallel run abinit (7.6.2), I got errors, like following in the log file:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&#91;weitong@magnetics tets1_mpichintel_parallel&#93;$ /usr/local/mpich3_intel12/bin/mpiexec -np 8 /usr/local/abinit7.6.2_openmpi1.6GNU/bin/abinit &lt; /home/weitong/setup/abinit/AbinitGUI/MySims/tets1_mpichintel_parallel/test1.files &gt;&amp; /home/weitong/setup/abinit/AbinitGUI/MySims/tets1_mpichintel_parallel/logfiles/test1.log<br /></code></pre></div><br /><br />iofn1.F90 problems:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>At line 155 of file ../../../src/95_drive/iofn1.F90 (unit = 5, file = 'stdin')<br />Fortran runtime error: End of file<br />&nbsp; ABINIT <br />&nbsp; <br />&nbsp; Give name for formatted input file: <br />At line 155 of file ../../../src/95_drive/iofn1.F90 (unit = 5, file = 'stdin')<br />Fortran runtime error: End of file<br />&nbsp; ABINIT<br /></code></pre></div><br /><br />But serial run works fine.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel run error &quot;iofn1.F90 (unit = 5, file = 'stdin')&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Tue Apr 08, 2014 9:39 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br /><blockquote class="uncited"><div>/usr/local/mpich3_intel12/bin/mpiexec -np 8 /usr/local/abinit7.6.2_openmpi1.6GNU/bin/abinit</div></blockquote><br /><br />strange cmd  <img class="smilies" src="images/smilies/icon_eek.gif" alt=":shock:" title="Shocked" /> <br />you mixed a lot of think :<br /><br />mpich3 compiled intel12 use to execute <br />an  abinit compiled with a openmpi compiled by a GNU compiler  <img class="smilies" src="images/smilies/icon_rolleyes.gif" alt=":roll:" title="Rolling Eyes" /><br /><br /> <img class="smilies" src="images/smilies/icon_question.gif" alt=":?:" title="Question" /></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallel run error &quot;iofn1.F90 (unit = 5, file = 'stdin')</h3>
+				<div class="date">Posted: <strong>Wed Apr 09, 2014 1:53 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">you should use the mpiexec provided by the MPI library used to build abinit.<br />In this particular case, the mpiexec provided by the openmpi1.6 library compiled with the GNU compiler collection<br /><br />Tip: mpiexec --version</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2626&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:39:12 GMT -->
+</html>

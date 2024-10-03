@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2650&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:55:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; &quot;make multi nproc=8&quot; still only seems to run on 1 processor</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>&quot;make multi nproc=8&quot; still only seems to run on 1 processor</h2>
+		<p><a href="viewtopic31ae.html?f=3&amp;t=2650">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2650</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>&quot;make multi nproc=8&quot; still only seems to run on 1 processor</h3>
+				<div class="date">Posted: <strong>Mon Apr 28, 2014 6:44 pm</strong></div>
+				<div class="author">by <strong>Fm3m</strong></div>
+				<div class="content">Hello,<br /><br />I'm compiling abinit 7.6.2 to run on a cluster. We have 8 processors per node, so I used<br />&gt;make multi_nprocs=8<br />when I was compiling. Compilation ran without errors.<br /><br />When I run abinit, I do not use mpi to handle the job. Rather, I log in to a compute node (which has 8 processors) and run abinit directly. However, if I do this and then separately run<br />&gt;top<br />there is only one process running. Furthermore, when I run abinit and check the log, abinit has output<br /> nproc =    1<br /><br />Any suggestions?<br /><br />Thanks in advance.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: &quot;make multi nproc=8&quot; still only seems to run on 1 proces</h3>
+				<div class="date">Posted: <strong>Mon Apr 28, 2014 7:31 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />make <strong class="text-strong"><span style="text-decoration: underline">multi</span></strong> multi_nprocs=x    ( not make multi_nprocs=x )<br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: &quot;make multi nproc=8&quot; still only seems to run on 1 proces</h3>
+				<div class="date">Posted: <strong>Mon Apr 28, 2014 9:35 pm</strong></div>
+				<div class="author">by <strong>Fm3m</strong></div>
+				<div class="content">Thank you for the suggestion. However, the problem persists.<br /><br />&gt;./configure --prefix=/home/fs03/ehs73/bin/abinit-7.6.2<br />&gt; make clean<br />&gt; make multi multi_nprocs=8<br />&gt; make install<br /><br />Followed by <br />abinit &lt;input.files&gt;&amp; log<br /><br />still only runs on one processor.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: &quot;make multi nproc=8&quot; still only seems to run on 1 proces</h3>
+				<div class="date">Posted: <strong>Tue Apr 29, 2014 12:40 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">make multi multi_nprocs=8 means that it will use 8 processors to build abinit (which is faster than using 1 processor to build abinit). <br /><br />When you RUN abinit, you have to tell it how many processors to use, typically (if you are using MPI as your parallel environment) through<br />mpirun -np 8 abinit &lt; foo.files &amp;&gt; log<br /><br />mpirun launches abinit using in this case 8 processors. Note the following: the value you use for np need not correspond to the number of physical cores on your machine, although it will get quite inefficient if you use a number much larger than the number of physical processors. Secondly, mpirun (or mpiexec etc) are not part of abinit, they are part of the MPI environment which has to have been installed separately (and usually is in multi-core linux-type systems).</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: &quot;make multi nproc=8&quot; still only seems to run on 1 proces</h3>
+				<div class="date">Posted: <strong>Wed Apr 30, 2014 5:33 pm</strong></div>
+				<div class="author">by <strong>Fm3m</strong></div>
+				<div class="content">I am not using mpirun, just evoking abinit from the command line (see earlier post in this thread).</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: &quot;make multi nproc=8&quot; still only seems to run on 1 proces&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Wed Apr 30, 2014 8:24 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Yes, I saw that you are not using mpirun, and that's exactly why abinit is only running on one processor. Like any other parallelized program, abinit to run in parallel must be explicitly launched in the parallel environment with the desired number of processors. mpirun is the program that takes care of this. make multi_nproc has nothing to do with this aspect. You could use make multi_nproc to build a purely serial version of abinit if you wanted to. It sounds like you are building a parallel version (are you? is it being compiled by mpif90, as opposed to gfortran or ifort?) Then to executed on multiple processors you have to start abinit using mpirun, not by running all by itself.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: &quot;make multi nproc=8&quot; still only seems to run on 1 proces</h3>
+				<div class="date">Posted: <strong>Thu May 01, 2014 5:10 pm</strong></div>
+				<div class="author">by <strong>Fm3m</strong></div>
+				<div class="content">OK, thanks. I see now.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2650&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:55:32 GMT -->
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2814&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:18:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; nfs version 3 with noac needed</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>nfs version 3 with noac needed</h2>
+		<p><a href="viewtopic806c.html?f=3&amp;t=2814">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2814</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>nfs version 3 with noac needed</h3>
+				<div class="date">Posted: <strong>Wed Oct 08, 2014 3:42 pm</strong></div>
+				<div class="author">by <strong>backelj</strong></div>
+				<div class="content">Hello,<br /><br />We have ABINIT-7.8.2 installed on our system (built with EasyBuild, file ABINIT-7.8.2-ictce-5.5.0.eb). We are using mpiexec to run it as follows:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>mpiexec -pernode -verbose abinit&nbsp; &lt; Bi2Te2Se_Positron_GGA_SO.files &gt;&amp; out_Positron</code></pre></div><br />It is running fine on our GPFS filesystems mounted using the GPFS clients. But it is not running on our cNFS mounted filesystems. Here it gives this error:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&gt; cat out_Positron<br />mpiexec: resolve_exe: found &quot;PATH_TO/bin/abinit&quot; in path.<br />node&nbsp; 0: name THISNODE, cpu avail 1<br />mpiexec: process_start_event: evt 2 task 0 on THISNODE.<br />mpiexec: All 1 task (spawn 0) started.<br />mpiexec: wait_tasks: waiting for THISNODE.<br />mpiexec: accept_pmi_conn: cmd=initack pmiid=0.<br />mpiexec: accept_pmi_conn: rank 0 (spawn 0) checks in.<br />mpiexec: accept_pmi_conn: cmd=init pmi_version=1 pmi_subversion=1.<br />File locking failed in ADIOI_Set_lock(fd 4,cmd F_SETLKW/7,type F_RDLCK/0,whence 0) with return value FFFFFFFF and errno 25.<br />- If the file system is NFS, you need to use NFS version 3, ensure that the lockd daemon is running on all the machines, and mount the directory with the 'noac' option (no attribute caching).<br />- If the file system is LUSTRE, ensure that the directory is mounted with the 'flock' option.<br />ADIOI_Set_lock:: No locks available<br />ADIOI_Set_lock:offset 20, length 20<br />application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0<br />mpiexec: process_obit_event: evt 3 task 0 on THISNODE stat 1.<br />mpiexec: Warning: task 0 exited with status 1. </code></pre></div><br />So it is complaining on the fact that I do not have the 'noac' option specified in our NFS version 3 mounts. However, we do have this:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&gt; ssh THISNODE<br />&#91;root@THISNODE~&#93;# nfsstat -m<br />/CNFS-MOUNT from GPFS-SERVER:/CNFS-MOUNT<br />&nbsp;Flags:&nbsp; &nbsp;rw,sync,vers=3,rsize=1048576,wsize=1048576,acregmin=0,acregmax=0,acdirmin=0,acdirmax=0,hard,intr,noac,proto=tcp,timeo=600,retrans=2,sec=sys,addr=GPFS-SERVER<br /></code></pre></div><br />As said, it is working fine on our GPFS-mounted filesystems, e.g.:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>GPFS-SERVER:/CNFS-MOUNT on /CNFS-MOUNT type nfs (rw,bg,nfsvers=3,proto=tcp,hard,intr,noac,addr=XXX)<br />/dev/GPFS-MOUNT on /GPFS-MOUNT type gpfs (rw,mtime,quota=userquota;groupquota;filesetquota,dev=scratch,autostart)<br /></code></pre></div><br /><br />Does anyone have an idea what is wrong here?<br /><br />Many thanks for your reply, Franky</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: nfs version 3 with noac needed</h3>
+				<div class="date">Posted: <strong>Wed Oct 08, 2014 5:36 pm</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Hi,<br /><br />Could you give more details on how you/someone compiled abinit, version of libraries, NetCDF, ETSF_IO, ... and on your system ?<br /><br />Have you tried an other MPI code with the same compilation option,version ?<br /><br />Cheers,<br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: nfs version 3 with noac needed</h3>
+				<div class="date">Posted: <strong>Wed Oct 08, 2014 5:46 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">This issue has nothing to do with Abinit but is due to a misconfiguration of your computer. Please ask your system administrator to:<br /><ul>  <li>review and fix the mount parameters of the file system on all nodes;<br />  </li><li>check that all required daemons are running on all nodes;<br />  </li><li>provide you with a MPI implementation compatible with your hardware and compiled adequately.</li></ul></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2814&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:18:13 GMT -->
+</html>

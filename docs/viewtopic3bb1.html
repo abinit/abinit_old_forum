@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1102&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:11:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; ixc=1 problem in nonlinear response calculation</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>ixc=1 problem in nonlinear response calculation</h2>
+		<p><a href="viewtopic1a88-2.html?f=10&amp;t=1102">https://forum.abinit.org/viewtopic.php?f=10&amp;t=1102</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>ixc=1 problem in nonlinear response calculation</h3>
+				<div class="date">Posted: <strong>Thu May 19, 2011 10:32 am</strong></div>
+				<div class="author">by <strong>mazuju</strong></div>
+				<div class="content">Dear all,<br /><br />I have a problem in the nonlinear response calculation.<br />The input file is show below.<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># Linear and nonlinear response calculation<br /># Perturbations: electric fields &amp; atomic displacements<br /># (M. Veithen, 21.4.2005)<br /><br />#Definition of lattice parameters<br />#********************************<br />acell&nbsp; &nbsp; &nbsp;2.1514196567E+01&nbsp; 1.0930762115E+01&nbsp; 2.1913430467E+01 Bohr<br />angdeg&nbsp; &nbsp; 90.00000000&nbsp; 89.15405976&nbsp; 90.00000000<br /><br />#Definition of atomic positions and types<br />#*************************************<br />&nbsp; &nbsp;natom&nbsp; &nbsp; &nbsp; &nbsp;32<br />&nbsp; &nbsp;ntypat&nbsp; &nbsp; &nbsp; 3<br />&nbsp; &nbsp;znucl&nbsp; &nbsp; &nbsp; &nbsp;11 33 34<br />&nbsp; &nbsp;typat&nbsp; &nbsp; &nbsp; &nbsp;8*1 8*2 16*3<br />&nbsp; &nbsp;xred&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 9.7952872705E-01&nbsp; 4.7802694231E-01&nbsp; 7.6400207817E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2.3853805048E-01&nbsp; 9.8178542576E-01&nbsp; 2.4386528385E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4.7998601442E-01&nbsp; 5.0972762118E-01&nbsp; 7.3663927906E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;7.3818964742E-01&nbsp; 5.2768042659E-01&nbsp; 5.0131769572E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;9.7952872705E-01 -4.7802694231E-01&nbsp; 1.2640020782E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2.3853805048E-01 -9.8178542576E-01&nbsp; 7.4386528385E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4.7998601442E-01 -5.0972762118E-01&nbsp; 1.2366392791E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;7.3818964742E-01 -5.2768042659E-01&nbsp; 1.0013176957E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;7.4380025684E-01&nbsp; 9.3299475525E-01&nbsp; 7.7576256468E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2.9307365002E-04&nbsp; 9.1639727973E-01 -4.2041522417E-03<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2.4094987151E-01&nbsp; 5.4607695553E-01&nbsp; 9.6440799078E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4.9815309108E-01&nbsp; 9.8226685013E-01&nbsp; 9.5348113633E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;7.4380025684E-01 -9.3299475525E-01&nbsp; 1.2757625647E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2.9307365002E-04 -9.1639727973E-01&nbsp; 4.9579584776E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2.4094987151E-01 -5.4607695553E-01&nbsp; 1.4644079908E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4.9815309108E-01 -9.8226685013E-01&nbsp; 1.4534811363E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;9.6396337901E-01&nbsp; 9.7936941322E-01&nbsp; 7.9685495820E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2.2929107707E-01&nbsp; 5.1868627655E-01&nbsp; 7.6630383948E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4.6092710204E-01&nbsp; 5.8373017861E-01&nbsp; 9.8874037255E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;5.0203857945E-01&nbsp; 9.8897530069E-01&nbsp; 2.5480739275E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;7.1231004160E-01&nbsp; 9.7372615953E-01&nbsp; 9.8154633776E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2.1614239417E-01&nbsp; 9.5830849506E-01&nbsp; 9.9433331845E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;9.9806264760E-01&nbsp; 4.8087697596E-01&nbsp; 5.1414702901E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;7.3031610201E-01&nbsp; 5.3770831975E-01&nbsp; 7.5162494626E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;9.6396337901E-01 -9.7936941322E-01&nbsp; 1.2968549582E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2.2929107707E-01 -5.1868627655E-01&nbsp; 1.2663038395E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4.6092710204E-01 -5.8373017861E-01&nbsp; 1.4887403726E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;5.0203857945E-01 -9.8897530069E-01&nbsp; 7.5480739275E-01<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;7.1231004160E-01 -9.7372615953E-01&nbsp; 1.4815463378E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2.1614239417E-01 -9.5830849506E-01&nbsp; 1.4943333184E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;9.9806264760E-01 -4.8087697596E-01&nbsp; 1.0141470290E+00<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;7.3031610201E-01 -5.3770831975E-01&nbsp; 1.2516249463E+00<br />&nbsp; &nbsp;ixc&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3&nbsp; # ???<br /><br />#Parameters of the SCF cycles<br />#****************************<br />&nbsp; &nbsp;iscf&nbsp; &nbsp; &nbsp; &nbsp; 7<br />&nbsp; &nbsp;nstep&nbsp; &nbsp; &nbsp; &nbsp;100<br /><br /><br />#Plane wave basis and k-point grid<br />#*********************************<br />&nbsp; &nbsp;ecut&nbsp; &nbsp; &nbsp; &nbsp; 45<br />&nbsp; &nbsp;ecutsm&nbsp; &nbsp; &nbsp; 0.5<br />&nbsp; &nbsp;dilatmx&nbsp; &nbsp; &nbsp;1.05<br />&nbsp; &nbsp;ngkpt&nbsp; &nbsp; &nbsp; &nbsp;4 6 4<br />&nbsp; &nbsp;nshiftk&nbsp; &nbsp; &nbsp;1<br />&nbsp; &nbsp;shiftk&nbsp; &nbsp; &nbsp; 0.5 0.5 0.5<br /><br /><br />ndtset 2&nbsp; &nbsp; &nbsp;<br /><br />#DATASET1 : scf calculation: GS WF in the BZ<br />#********************************************<br />&nbsp; &nbsp;prtden1&nbsp; &nbsp; 1<br />&nbsp; &nbsp;kptopt1&nbsp; &nbsp; 1<br />&nbsp; &nbsp;toldfe1&nbsp; &nbsp; 1.0d-12<br /><br />#DATASET2 : non scf calculation: GS WF in the whole BZ<br />#*****************************************************<br />&nbsp; &nbsp;getden2&nbsp; &nbsp; 1<br />&nbsp; &nbsp;kptopt2&nbsp; &nbsp; 2<br />&nbsp; &nbsp; &nbsp;iscf2&nbsp; &nbsp;-2<br />&nbsp; &nbsp;getwfk2&nbsp; &nbsp; 1<br />&nbsp; &nbsp;tolwfr2&nbsp; &nbsp; 1.0d-22<br />&nbsp; &nbsp; nband2&nbsp; &nbsp; 72<br /><br /><br />#DATASET3 : ddk on the MP grid of k-points<br />#*****************************************<br />&nbsp; &nbsp;getwfk3&nbsp; &nbsp; 2<br />&nbsp; &nbsp; rfdir3&nbsp; &nbsp; 1 1 1<br />&nbsp; &nbsp;rfelfd3&nbsp; &nbsp; 2<br />&nbsp; &nbsp;tolwfr3&nbsp; &nbsp; 1.0d-22<br />&nbsp; &nbsp; nband3&nbsp; &nbsp; 72<br />&nbsp; &nbsp;kptopt3&nbsp; &nbsp; 2<br /><br />#DATASET4 : ddE on the MP grid of k-points<br />#*****************************************<br />&nbsp; &nbsp;prtden4&nbsp; &nbsp; 1<br />&nbsp; &nbsp;getwfk4&nbsp; &nbsp; 2<br />&nbsp; &nbsp;getddk4&nbsp; &nbsp; 3<br />&nbsp; &nbsp; rfdir4&nbsp; &nbsp; 1 1 1<br />&nbsp; &nbsp;rfphon4&nbsp; &nbsp; 1<br />&nbsp; rfatpol4&nbsp; &nbsp; 1 32<br />&nbsp; &nbsp;tolvrs4&nbsp; &nbsp; 1.0d-12<br />&nbsp; &nbsp;rfelfd4&nbsp; &nbsp; 3<br />&nbsp; &nbsp; nband4&nbsp; &nbsp; 72<br />&nbsp; &nbsp;kptopt4&nbsp; &nbsp; 2<br />&nbsp; prepanl4&nbsp; &nbsp; 1<br /><br />#DATASET5 : 3DTE calculation<br />#***************************<br />&nbsp; &nbsp;getden5&nbsp; &nbsp; 1<br />&nbsp; get1den5&nbsp; &nbsp; 4<br />&nbsp; &nbsp;getwfk5&nbsp; &nbsp; 2<br />&nbsp; &nbsp;get1wf5&nbsp; &nbsp; 4<br />&nbsp; &nbsp; nband5&nbsp; &nbsp; 72<br />&nbsp; &nbsp;kptopt5&nbsp; &nbsp; 2<br />optdriver5&nbsp; &nbsp; 5<br />&nbsp; rf1elfd5&nbsp; &nbsp; 1<br />&nbsp; rf1phon5&nbsp; &nbsp; 1<br />&nbsp;rf1atpol5&nbsp; &nbsp; 1 32<br />&nbsp; &nbsp;rf1dir5&nbsp; &nbsp; 1 1 1<br />&nbsp; rf2elfd5&nbsp; &nbsp; 1<br />&nbsp; &nbsp;rf2dir5&nbsp; &nbsp; 1 1 1<br />&nbsp; rf3elfd5&nbsp; &nbsp; 1<br />&nbsp; &nbsp;rf3dir5&nbsp; &nbsp; 1 1 1<br /><br />nbdbuf 0</code></pre></div><br />When I used the LDA pseudopotential files(LDA_TM) and the ixc = 1, the calculation will stop and the log file shows：<br />____________________________________________________________________<br />&quot;chkint_prt: ERROR -<br />Context : the value of the variable ixc is 1.<br />The value of the input variable optdriver is 5, while it must be<br />different from one of the following: 5<br />Action : you should change the input variables optdriver or ixc.<br />&quot;_____________________________________________________________________<br /><br />If I changed  ixc=3 , the calculation will finish sucessfully.<br />But the log file will show a WARNING:<br />--------------------------------------------------------------------------------------------------<br /> pspatm: WARNING -<br />  Pseudopotential file pspxc=       1,<br />  not equal to input ixc=       3.<br />  These parameters must agree to get the same xc<br />  in ABINIT code as in psp construction.<br />  Action : check psp design or input file.<br />  Assume experienced user. Execution will continue.<br />--------------------------------------------------------------------------------------------------<br />Anyone can give me some suggestions? Thank you!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ixc=1 problem in nonlinear response calculation</h3>
+				<div class="date">Posted: <strong>Fri May 20, 2011 7:34 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Dear mazuju,<br /><br />The first error tells you that non-lin. response is not yet implemented for pseudos with ixc=1.<br /><br />The second warning tells you that you have set up ixc=3 in your input file, while kept using the pseudo with ixc=1 (check your files file and your pseudos' headers to see which ixc it correlates to). I presume that you have to change your pseudos to the ones which correlate to ixc=3 (Teters' extended norm conserving pseudos - you have some on the abinit web site).<br /><br />Cheers!<br /><br />Igor L.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ixc=1 problem in nonlinear response calculation</h3>
+				<div class="date">Posted: <strong>Wed May 25, 2011 4:58 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">this should be ok: it's just another implementation of LDA. Check the source code of chkprt for the values of ixc which are acceptable. To be really clean, follow Igor's recommendation.<br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1102&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:11:14 GMT -->
+</html>

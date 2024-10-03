@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1689&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:02:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Bad Fix: parallel RF calculations</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Bad Fix: parallel RF calculations</h2>
+		<p><a href="viewtopic387b.html?f=19&amp;t=1689">https://forum.abinit.org/viewtopic.php?f=19&amp;t=1689</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Bad Fix: parallel RF calculations</h3>
+				<div class="date">Posted: <strong>Sun Jun 10, 2012 6:04 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello - in the mpi distribution of k and bands over the processors (src/57_iovars/mpi_setup1.F90) there is the following around line 430:<br /><blockquote class="uncited"><div>!      If the number of bands was estimated, there might be a side effect<br />!      when the definitive number of bands is known. k points<br />!      might be attributed to different processors than the present<br />!      proc_distrb describes. At most, the number of k points could<br />!      increase by 1 ...<br />       if(tnband==0)nkpt_me=nkpt_me+1<br /></div></blockquote><br /><br />This is horrendous!!!! If I try to parallelize fully over k (mkmem=1) and do not specify nband in the input file the code sets mkmem=2, and doubles my memory usage. This in unacceptable. The final number of bands should be determined with certainty before distribution, not fudging things with safety margins that potentially double memory footprint! We need some serious cleaning of the distribution routine, perhaps with separate, clearer, subroutines for each case (GS, RF ...). I do not dare modify this line, which probably came from a bug with implicit estimation of the nband - could someone have a look at it?<br /><br />ciao!<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Bad Fix: parallel RF calculations&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Mon Jun 11, 2012 9:36 am</strong></div>
+				<div class="author">by <strong>jollet</strong></div>
+				<div class="content">Dear Matthieu,<br /><br />These lines are very old (before Abinit-5.1.2 !) and were initially in invars1.F90. I have only moved them to mpi_setup1.F90 without changing anything. I intend to rationalize mpi_setup1 in a next future and I shall try to understand where it comes from at that moment.<br /><br />Sincerely yours<br /><br />François</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1689&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:02:34 GMT -->
+</html>

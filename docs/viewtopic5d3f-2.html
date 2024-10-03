@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2067&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:41:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; mvapich2 1.9b compilation problem, related to mpich3?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>mvapich2 1.9b compilation problem, related to mpich3?</h2>
+		<p><a href="viewtopic6df4-2.html?f=3&amp;t=2067">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2067</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>mvapich2 1.9b compilation problem, related to mpich3?</h3>
+				<div class="date">Posted: <strong>Wed Apr 03, 2013 7:22 pm</strong></div>
+				<div class="author">by <strong>yurtesen</strong></div>
+				<div class="content">I am getting the following error when compiling with mvapich2 1.9b, please let me know if there is more information I can provide... Thanks! Evren<br /><br /><blockquote class="uncited"><div>mpif90 -DHAVE_CONFIG_H -I. -I../.. -I../../src/incs -I../../src/incs -I/export/modules/devel/fftw/3.3.3/gnu/include -I/home/eyurtese/tmp/abinit-7.2.1/fallbacks/exports/include   -ffree-form -J/home/eyurtese/tmp/abinit-7.2.1/src/mods  -O3 -mtune=native -march=native -faggressive-function-elimination -fstack-arrays -g -ffree-line-length-none   -c -o applypot.o applypot.F90<br />accrho.F90:59.12:<br /><br />        use mpi<br />            1<br />Error: Name 'mpi_comm' at (1) is an ambiguous reference to 'mpi_comm' from current program unit<br />accrho.F90:76.54:<br /><br />        integer            :: md1,md2proc,md3,mpi_comm,nproc,iproc,paral_kgb<br />                                                      1<br />Error: Name 'mpi_comm' at (1) is an ambiguous reference to 'mpi_comm' from current program unit<br />accrho.F90:224.55:<br /><br />                          MPI_double_precision,mpi_comm,ierr)<br />                                                       1<br />Error: Name 'mpi_comm' at (1) is an ambiguous reference to 'mpi_comm' from current program unit<br />accrho.F90:7.25:<br /><br />        subroutine accrho(icplexwf,ndat,n1,n2,n3,nd1,nd2,nd3proc,&amp;<br />                         1<br />Error: Name 'mpi_comm' at (1) is an ambiguous reference to 'mpi_comm' from current program unit<br />make[5]: *** [accrho.o] Error 1<br />make[5]: *** Waiting for unfinished jobs....<br />applypot.F90:59.5:<br /><br /> use mpi<br />     1<br />Error: Name 'mpi_comm' at (1) is an ambiguous reference to 'mpi_comm' from current program unit<br />applypot.F90:78.57:<br /><br />        integer :: max1o,max2o,max3o,m1o,m2o,m3o,mpi_comm,nproc,iproc<br />                                                         1<br />Error: Name 'mpi_comm' at (1) is an ambiguous reference to 'mpi_comm' from current program unit<br />applypot.F90:251.55:<br /><br />                          MPI_double_precision,mpi_comm,ierr)<br />                                                       1<br />Error: Name 'mpi_comm' at (1) is an ambiguous reference to 'mpi_comm' from current program unit<br />applypot.F90:431.55:<br /><br />                          MPI_double_precision,mpi_comm,ierr)<br />                                                       1<br />Error: Name 'mpi_comm' at (1) is an ambiguous reference to 'mpi_comm' from current program unit<br />applypot.F90:7.27:<br /><br />        subroutine applypot(icplexwf,icplex,ndat,n1,n2,n3,nd1,nd2,nd3proc,&amp;<br />                           1<br />Error: Name 'mpi_comm' at (1) is an ambiguous reference to 'mpi_comm' from current program unit<br />make[5]: *** [applypot.o] Error 1<br />make[5]: Leaving directory `/home/eyurtese/tmp/abinit-7.2.1/src/52_fft_mpi_noabirule'<br />make[4]: *** [all-recursive] Error 1<br />make[4]: Leaving directory `/home/eyurtese/tmp/abinit-7.2.1/src'<br />make[3]: *** [all-recursive] Error 1<br />make[3]: Leaving directory `/home/eyurtese/tmp/abinit-7.2.1'<br />make[2]: *** [all] Error 2<br />make[2]: Leaving directory `/home/eyurtese/tmp/abinit-7.2.1'<br />make[1]: *** [multi] Error 2<br />make[1]: Leaving directory `/home/eyurtese/tmp/abinit-7.2.1'<br />make: *** [mj2] Error 2<br />-bash-4.1$ mpif90 -v<br />mpif90 for MVAPICH2 version 1.9b<br />Using built-in specs.<br />COLLECT_GCC=gfortran<br />COLLECT_LTO_WRAPPER=/export/modules/compilers/gnu/gcc/4.7.2/libexec/gcc/x86_64-unknown-linux-gnu/4.7.2/lto-wrapper<br />Target: x86_64-unknown-linux-gnu<br />Configured with: ./configure --prefix=/export/modules/compilers/gnu/gcc/4.7.2 --enable-languages=c,c++,fortran --disable-multilib --with-pkgversion='Abo Akademi <!-- m --><a class="postlink" href="http://www.abo.fi/'">http://www.abo.fi/'</a><!-- m --><br />Thread model: posix<br />gcc version 4.7.2 (Abo Akademi <!-- m --><a class="postlink" href="http://www.abo.fi/">http://www.abo.fi/</a><!-- m -->)<br />-bash-4.1$</div></blockquote></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: mvapich2 1.9b compilation problem, related to mpich3?</h3>
+				<div class="date">Posted: <strong>Thu Apr 04, 2013 8:44 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">HI,<br /><br />can you try with :<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--with-mpi-level=1</code></pre></div><br /><br />see the post :<a href="viewtopicf234.html?f=3&amp;t=1990" class="postlink">http://forum.abinit.org/viewtopic.php?f=3&amp;t=1990</a><br /><br />jmb</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: mvapich2 1.9b compilation problem, related to mpich3?</h3>
+				<div class="date">Posted: <strong>Wed Apr 17, 2013 2:57 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />this is resolved by changing all mpi_com by mpicom  ( mpi_  is  &quot;reserved&quot; for MPI ) in the applypot.F90 and accrho.F90  files ( corrected in 7.3.2 )<br /><br />no more needed &quot;--with-mpi-level=1&quot;<br /><br />jmb</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2067&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:41:38 GMT -->
+</html>

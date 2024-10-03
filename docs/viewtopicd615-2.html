@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=2294&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 20:39:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Segmentation fault error.</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Segmentation fault error.</h2>
+		<p><a href="viewtopic22de.html?f=11&amp;t=2294">https://forum.abinit.org/viewtopic.php?f=11&amp;t=2294</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Segmentation fault error.&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Tue Oct 01, 2013 9:58 am</strong></div>
+				<div class="author">by <strong>sidiq</strong></div>
+				<div class="content">Hi,<br /><br />I'm trying to perform a screening calculation for nio as given in my file &quot;gwscreening.in&quot;. I have previously obtained the DEN and KSS files from an SCF and non-SCF calculations as given in &quot;gwscf.in&quot; and &quot;gwnscf.in&quot; respectively. For some insight, If run on just one machine, I'll get this error<br /><br /> screening : taking advantage of time-reversal symmetry <br /> Maximum band index for partially occupied states nbvw =    18<br /> Remaining bands to be divided among processors   nbcw =    82<br /> Number of bands treated by each node ~   82<br />Distributing bands across the nodes<br />Segmentation fault<br /><br />When I run in parallel, I would just get the Segmentation fault error. Is it a problem with gwpara? I've found that gwpara 1 and 2 also give the segmentation fault error. For gwpara 1 I get<br /><br /> screening : taking advantage of time-reversal symmetry <br /> Maximum band index for partially occupied states nbvw =    18<br /> Remaining bands to be divided among processors   nbcw =    82<br /> Number of bands treated by each node ~   82<br />Parallel over transitions. NO memory reduction except for the spin.<br />Segmentation fault<br /><br /><br />If anyone has some insight or advice, I would be very thankful.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault error.</h3>
+				<div class="date">Posted: <strong>Tue Oct 01, 2013 10:27 am</strong></div>
+				<div class="author">by <strong>sidiq</strong></div>
+				<div class="content">Here is the log file and subsequent error for gwpara 2<br /><br />[Utarid:12955] *** Process received signal ***<br />[Utarid:12955] Signal: Segmentation fault (11)<br />[Utarid:12955] Signal code: Address not mapped (1)<br />[Utarid:12955] Failing at address: 0xc27dd008<br />[Utarid:12955] [ 0] [0xbb840c]<br />[Utarid:12955] [ 1] abinit(__m_wfs_MOD_wfd_init+0xbb5) [0x8408e75]<br />[Utarid:12955] [ 2] abinit(screening_+0x1aec) [0x80c629c]<br />[Utarid:12955] [ 3] abinit(driver_+0x32ef) [0x8092f6f]<br />[Utarid:12955] [ 4] abinit(MAIN__+0xa2c) [0x808e19c]<br />[Utarid:12955] [ 5] abinit(main+0x2c) [0x91c849c]<br />[Utarid:12955] [ 6] /lib/libc.so.6(__libc_start_main+0xe6) [0x7b8ce6]<br />[Utarid:12955] [ 7] abinit() [0x808d6d1]<br />[Utarid:12955] *** End of error message ***<br />--------------------------------------------------------------------------<br />mpirun noticed that process rank 7 with PID 12955 on node  exited on signal 11 (Segmentation fault).<br />--------------------------------------------------------------------------</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault error.</h3>
+				<div class="date">Posted: <strong>Thu Oct 03, 2013 1:25 pm</strong></div>
+				<div class="author">by <strong>sidiq</strong></div>
+				<div class="content">I've added the term fftgw 11 as used in <br /><br />gwdp/Input/tv5_63.in<br />gwdp/Input/tv5_68.in<br /><br />and the error disappeared.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segmentation fault error.</h3>
+				<div class="date">Posted: <strong>Thu Jan 23, 2014 12:51 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">This is a memory problem. fftgw 11 allows one to reduce the memory footprint</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=2294&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 20:39:37 GMT -->
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1883&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:42:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; ACML or ACML_MP ?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>ACML or ACML_MP ?</h2>
+		<p><a href="viewtopic31d3.html?f=3&amp;t=1883">https://forum.abinit.org/viewtopic.php?f=3&amp;t=1883</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>ACML or ACML_MP ?</h3>
+				<div class="date">Posted: <strong>Thu Nov 15, 2012 10:08 am</strong></div>
+				<div class="author">by <strong>yurtesen</strong></div>
+				<div class="content">Is there any difference between using ACML or ACML MP?<br /><br />The reason I am asking is if I start  4 MPI jobs on a machine with 4 cores, if I use acml mp, will each mpi job make 4 threads (totaling up to 16?)<br /><br />Thanks,<br />Evren</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ACML or ACML_MP ?</h3>
+				<div class="date">Posted: <strong>Fri Nov 16, 2012 11:32 am</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Dear Evren,<br /><br />You may have performance enhancements with ACML_MP library  thanks to the multithreading of some of its functions - on large linalg systems and assuming you have available cores. Performance comparisons are somewhat complicated by the fact that recent multicores processors automatically tune the core frequencies depending on the number of cores that are busy.<br />Anyway Abinit and ACML_MP use different parallelization techniques - Abinit uses a MPI and OpenMP mixture, ACML_MP is OpenMP only so it's possible to overload the cores. Up to you - and your specific study (many k points? many bands? ...) to find the right balance between the two schemes. Furthermore, the number of threads opened by OpenMP routines can be adjusted with the OMP_NUM_THREADS environment variable so you can compile parallel Abinit and decide at runtime.<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ACML or ACML_MP ?</h3>
+				<div class="date">Posted: <strong>Mon Nov 19, 2012 11:29 am</strong></div>
+				<div class="author">by <strong>yurtesen</strong></div>
+				<div class="content">I understand that. I am building packages for a cluster so I wanted to make sure that the settings were not badly selected. It is difficult to teach people how to run their programs. It is diffult to make people set environment variables <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /> <br /><br />As far as I understand, it would be best to use OMP_NUM_THREADS set to 1 when running MPI tasks on a cluster as long as each processor gets an MPI task on a node. However if the MPI would run 1 process per node then it is better to unset OMP_NUM_THREADS.  Am I understanding correctly?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ACML or ACML_MP ?</h3>
+				<div class="date">Posted: <strong>Tue Nov 20, 2012 11:09 am</strong></div>
+				<div class="author">by <strong>yurtesen</strong></div>
+				<div class="content">It appears when ATLAS is configured to run with a specific number of threads, it ignores OMP_NUM_THREADS variable. <img class="smilies" src="images/smilies/icon_e_sad.gif" alt=":(" title="Sad" /></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ACML or ACML_MP ?</h3>
+				<div class="date">Posted: <strong>Tue Nov 20, 2012 3:47 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Right. Most of the time I build a MPI abinit with sequential blas/lapack and a sequential abinit with multithreaded blas/lapack libraries. And I'm lucky enough to have small unit cells and many k points so my studies efficiently run with MPI parallelism. If the case is sequential, I give it a few cores to please blas/lapack ... but don't expect linear performance gain.<br />I also suggest to split the different parts of an input file - most of the time, the parallelization requirements are very different, no need to waste CPUs.<br />IMHO ACML performances are so so ... if you have some time to spare on benchmarks, I suggest OpenBLAS or even MKL on AMD CPUs.<br /><br />Kind regards,<br /><br />Alain<br /><br /><br />... and yes, ATLAS hardcodes the number of threads at compile time ... most Linux packages default to 2 threads - pretty arbitrary</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: ACML or ACML_MP ?</h3>
+				<div class="date">Posted: <strong>Tue Nov 20, 2012 7:02 pm</strong></div>
+				<div class="author">by <strong>yurtesen</strong></div>
+				<div class="content">Actually, I sort of forgot that the thread I made was about ACML <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /> While ATLAS does not obey the openmp environment variables, ACML actually is able to run with 1 thread. The question now is if there is a performance penalty of running threaded acml with 1 thread, compared to serial acml <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /> I will let you know after running some tests, it is in my task queue <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=1883&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:42:19 GMT -->
+</html>

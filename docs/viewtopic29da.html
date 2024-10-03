@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1409&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:05:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] Variational principle in abinit</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] Variational principle in abinit</h2>
+		<p><a href="viewtopic64f9.html?f=9&amp;t=1409">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1409</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] Variational principle in abinit</h3>
+				<div class="date">Posted: <strong>Sat Nov 12, 2011 6:30 pm</strong></div>
+				<div class="author">by <strong>sponce</strong></div>
+				<div class="content">Dear all, <br /><br />I obtain what seems to be a breaking of the variational principle using Abinit 6.10.1<br /><br />I was making a convergence study on the number of planewaves (increasing ecut) for a supercell of CaS (16 atoms) with one of the Ca atom replaced by an Eu one. <br /><br />I got the following convergence:<br /><br />ecut       etot<br />10	-171.709291322976<br />15	-174.987947912499<br />20	-188.871468450272<br />25	-192.252478537605<br />30	-192.702344777715<br />35	-192.699296456479<br /><br />So the total energy is actually lower for ecut 30 than for ecut 35.<br /><br />All the calculation are converged (it took around 300 steps) with respect to my tolvrs 1.0d-20 criteria. (the algo used for SCF is iscf 7). I'm using TM nc psp. (I have 0 warning in the log file).<br /><br />Any idea?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Variational principle in abinit</h3>
+				<div class="date">Posted: <strong>Mon Nov 14, 2011 10:11 pm</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hello Samuel,<br /><br /><br />Could you check how much is the value of mqgrid for your calculations (it might change from one ecut to another or be 3001 for all of them) and, also check with a very high value of mqgrid (let's say 10 times the highest value of mqgrid you have.<br /><br />David</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Variational principle in abinit</h3>
+				<div class="date">Posted: <strong>Tue Nov 15, 2011 2:15 pm</strong></div>
+				<div class="author">by <strong>sponce</strong></div>
+				<div class="content">Thank you David for your answer.<br /><br />The value of the mqgrid is between 3001 (the default min) to 4449 (set automatically by abinit) for my highest ecut 65 Ha.<br /><br />As it is the value set automatically by Abinit, I don't really understand why I would obtain a different result increasing it to 40000?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Variational principle in abinit</h3>
+				<div class="date">Posted: <strong>Tue Nov 15, 2011 7:28 pm</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hello,<br /><br />In old times (meaning a few months ago <img class="smilies" src="images/smilies/icon_e_wink.gif" alt=";-)" title="Wink" />, this variable was 3001 by default. I discovered similar problems (breaking of the variatonal principle) when going to high ecut values and implemented an automatic setting of this mqgrid variable (the minimum would ALWAYS be 3001 and if the ecut is high, it would be set to a higher value, I do not get into details here). So maybe this automatic setting is not robust enough.<br /><br />When I was getting these problems (with high ecut values), I was getting back a good variational principle by using a very high mqgrid value, so just try with 40000 and tell me if it's changing things or not. If yes, I might change the setmqgrid routine.<br /><br />David</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Variational principle in abinit</h3>
+				<div class="date">Posted: <strong>Thu Nov 17, 2011 10:28 am</strong></div>
+				<div class="author">by <strong>sponce</strong></div>
+				<div class="content">I suppose you can happily dig back inside the setmqgrid routine because:<br /><br />with default mqgrid <br />ECUT    ETOT<br />10	-171.709291322976<br />15	-174.987947912499<br />20	-188.871468450272<br />25	-192.252478537605<br />30	-192.702344777715<br />35	-192.699296456479<br />40	-192.70089663413<br />45	-192.73004367069<br />50	-192.73246135<br />55	-192.733544383505<br /><br />with mqgrid = 40.000<br />ECUT    ETOT<br />10	-171.70929132294<br />15	-174.98794791251<br />20	-188.87146844996<br />25	-192.26853488098<br />30	-192.67692884945<br />35	-192.72477497287<br />..<br /><br />So it did solve the problem <img class="smilies" src="images/smilies/icon_e_wink.gif" alt=";)" title="Wink" /><br /><br />Thank you. <br /><br />PS: I'm interested by the technical explanation of it</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1409&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:05:35 GMT -->
+</html>

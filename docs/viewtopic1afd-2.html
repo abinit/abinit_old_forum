@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=2978&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:58:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; _HIST file</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>_HIST file</h2>
+		<p><a href="viewtopicbca4.html?f=19&amp;t=2978">https://forum.abinit.org/viewtopic.php?f=19&amp;t=2978</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>_HIST file</h3>
+				<div class="date">Posted: <strong>Mon May 04, 2015 5:24 pm</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Dear all,<br /><br />The _HIST file contains very useful data for MD simulation but lacks some information by itself.<br />Indeed, without the _OUT.nc file, there is no way to know what kind of atoms are studied and what type of atom  each atom is.<br /><br />I would like to add the ntypat, typat and znucl variables in the _HIST file as well as some other relevant variables for MD like dtion which again is in _OUT.nc rather than in _HIST.<br />Those data should be written only once at the beginning (when there are actually written in the _OUT.nc).<br /><br />Of course, those variables would remain in the _OUT.nc file.<br /><br />Do you have any objection ?<br /><br />Cheers,<br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: _HIST file</h3>
+				<div class="date">Posted: <strong>Mon May 04, 2015 7:12 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">exquisite idea. Go for it!<br /><br />The file has some overlap with the GSR and other .nc files but serves its own purpose. It is convenient, but incomplete as you mentioned.<br /><br />ciao!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: _HIST file</h3>
+				<div class="date">Posted: <strong>Tue May 05, 2015 10:49 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Hi Jordan,<br /><br />I've already implemented this modification in my 7.11 branch but the code must be merged by<br />Xavier in trunk. Before doing so, however, I have to remove all the calls to the etsf-io library<br />used to write the data in netcdf format since, as we agreed in Liege, Abinit8 won't rely on etsf-io anymore.<br /><br />Cheers,<br />Matteo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: _HIST file</h3>
+				<div class="date">Posted: <strong>Tue May 05, 2015 11:22 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Great !<br /><br />If you need help, we can split the work.<br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: _HIST file</h3>
+				<div class="date">Posted: <strong>Tue May 05, 2015 11:44 am</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">Matteo, Jordan,<br /><br />I didn't look at Matteo's modifs (yes, sometimes, I don't spy!) but I suppose you have stored these time-independent data once for all in the HIST file and not at every time step...<br />Is it the case ?<br /><br />Also, if we decide to suppress the necessary use of the OUT.nc file, it is important to store in the HIST file all the quantities needed to analyse a trajectory (not only the ones you need now); for instance, the time step dtion.<br /><br />A good starting point could be APPA to list all these needed quantities; they are not numerous...<br />Looking at APPA src files, I found the following variables: natom, typat, amu, dtion, znucl<br />Could you please add these when committing your changes?<br /><br />A+<br />Marc</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: _HIST file</h3>
+				<div class="date">Posted: <strong>Tue May 05, 2015 12:38 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content"><blockquote class="uncited"><div> didn't look at Matteo's modifs (yes, sometimes, I don't spy!) but I suppose you have stored these time-independent data once for all in the HIST file and not at every time step...<br />Is it the case ?<br /></div></blockquote><br /><br />Yes<br /><br /><blockquote class="uncited"><div>A good starting point could be APPA to list all these needed quantities; they are not numerous...<br />Looking at APPA src files, I found the following variables: natom, typat, amu, dtion, znucl<br />Could you please add these when committing your changes?<br /></div></blockquote><br /><br />OK</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: _HIST file</h3>
+				<div class="date">Posted: <strong>Wed May 06, 2015 2:27 pm</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content"><blockquote><div><cite>torrent wrote:</cite>Matteo, Jordan,<br />Looking at APPA src files, I found the following variables: natom, typat, amu, dtion, znucl<br /></div></blockquote><br /><br />natom is already in the _HIST file ;o)<br /><br />Ok ok I ---&gt;</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=2978&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:58:18 GMT -->
+</html>

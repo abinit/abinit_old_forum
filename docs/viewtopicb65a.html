@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3900&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:48:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Polarisation for AlAs</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Polarisation for AlAs</h2>
+		<p><a href="viewtopic5182.html?f=9&amp;t=3900">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3900</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Polarisation for AlAs</h3>
+				<div class="date">Posted: <strong>Wed Aug 01, 2018 5:43 pm</strong></div>
+				<div class="author">by <strong>srajpand</strong></div>
+				<div class="content">Hi abinit users,<br /><br />I have been using abinit for various calculations but got an error when trying to calculate Berry phase polarisations for AlAs given in abinit website version 8.4.4.<br /><br />My input file ,log  files are  attached below:<br /><br />On top of that I used same version(8.4.4) of abinit to submit my job.<br /><br /><br />Could you kindly let me know why I am getting an error?<br /><br />Thanking in advance.<br /><br />Best regards,<br />Suman</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Polarisation for AlAs</h3>
+				<div class="date">Posted: <strong>Wed Aug 01, 2018 10:39 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">--- !ERROR<br />src_file: m_dtset.F90<br />src_line: 278<br />mpi_rank: 0<br />message: |<br />    Initialization of occ, with occopt=   1<br />    There are not enough bands to get charge balance right<br />    Action: modify input file ... <br />    (check the pseudopotential charges, the variable charge,<br />    and the declared number of bands, nband)<br />...<br /><br />You are using a set of pseudopotentials that differ from the one used in the tutorial.<br /><br />Your calculation uses:<br /><br /> Please give name of formatted atomic psp file<br /> iofn2 : for atom type 1, psp file is ../../Al.psp8<br /><br /> Please give name of formatted atomic psp file<br /> iofn2 : for atom type 2, psp file is ../../As.psp8<br />  read the values zionpsp=  3.0 , pspcod=   8 , lmax=   2<br />  read the values zionpsp= 15.0 , pspcod=   8 , lmax=   2<br /><br />so there are 18 valence electrons per unit cell in your calculaton (As has semi-core states)<br />whereas the pseudo for As used in the tutorial has 5 valence electrons<br /><br />$ abiopen.py  ~/git_repos/abinit/tests/Psps_for_tests/33as.pspnc  -p<br />&lt;NcAbinitPseudo: 33as.pspnc&gt;<br />  summary: Troullier-Martins psp for element  As        Thu Oct 27 17:37:14 EDT 1994<br />  number of valence electrons: 5.0<br />  maximum angular momentum: p<br />  angular momentum for local part: p<br />  XC correlation: LDA_XC_TETER93<br />  supports spin-orbit: False<br />  radius for non-linear core correction: 2.0573171556401<br />  hint for low accuracy: ecut: 0.0, pawecutdg: 0.0<br />  hint for normal accuracy: ecut: 0.0, pawecutdg: 0.0<br />  hint for high accuracy: ecut: 0.0, pawecutdg: 0.0<br /><br />The input file of the tutorial uses nband = 4    (3 for Al + 5 for As) / 2<br />while your input file should have nband = (15 + 3) / 2 = 9<br /><br />HTH<br />Matteo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Polarisation for AlAs</h3>
+				<div class="date">Posted: <strong>Fri Aug 03, 2018 5:08 am</strong></div>
+				<div class="author">by <strong>srajpand</strong></div>
+				<div class="content">Hi Gmatteo,<br /><br />Thank you for your help and really appreciated.<br /><br />I have one question regarding Berry Phase calculation of polarisation of GeS. In my calculation,<br /><br />For pseudopotential I have used ONCVPSP (Ge.psp8,S.psp8).<br /><br />Finally, I was able to get polarisation 0.253 C/m^2 which doesn't match with actual value  1.8 C/m^2 where I have used no of bands 100.<br /><br />I have an impression there could be error in the no of bands in the input file or something else.<br /><br />Could you kindly let me know the error in my input files?<br /><br />Please find the attachment of input and log files.<br /><br />Thanks in advance.<br /><br />Best regards,<br />Suman</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3900&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:48:03 GMT -->
+</html>

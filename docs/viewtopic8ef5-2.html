@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=2431&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:03:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; PAW: Density went too small (xc_denpos)</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>PAW: Density went too small (xc_denpos)</h2>
+		<p><a href="viewtopic345f.html?f=14&amp;t=2431">https://forum.abinit.org/viewtopic.php?f=14&amp;t=2431</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>PAW: Density went too small (xc_denpos)</h3>
+				<div class="date">Posted: <strong>Wed Feb 19, 2014 7:13 am</strong></div>
+				<div class="author">by <strong>temok</strong></div>
+				<div class="content">Dear ABINIT Devs and Users,<br /><br />I am facing problems to do the convergence study and the structure relaxation<br />for a supercell calculation of a system made of Tin atoms, <br />where the lattice constant is about 9 Bohrs and the vacuum is about 30 Bohr.<br /><br />This problem occurs either if I use the new  PAW_JTH atomic files<br />  <a href="http://www.abinit.org/downloads/PAW2/JTH-TABLE/index.html" class="postlink">http://www.abinit.org/downloads/PAW2/JTH-TABLE/index.html</a><br />or if I use the usual atomic PAW files located at the ~/Psps_for_tests folder;<br />the problem is absent for HGH pseudos (which I should not use, <br />as I wish to include 4d_electrons)<br /><br />The problem is that for certain values of acell_3 (the vacuum), <br />or certain k-grids (ngkpt) or certain values of ecut, ABINIT prints warnings like<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--- !WARNING<br />message: |<br />&nbsp; &nbsp; The second and third dimension of the FFT grid: 0, 0<br />&nbsp; &nbsp; were imposed to be multiple of the number of processors for the FFT: 1<br />src_file: getng.F90<br />src_line: 200<br /><br />... followed by a numerous lines like<br /><br />scf.log_back:== DATASET&nbsp; 3 ========================================<br />scf.log_back:&nbsp; &nbsp; Density went too small (lower than xc_denpos) at&nbsp; &nbsp; 111866 points<br />scf.log_back:&nbsp; &nbsp; Density went too small (lower than xc_denpos) at&nbsp; &nbsp; &nbsp;75786 points<br />&nbsp;.<br />&nbsp;. bla bla bla<br />&nbsp;.<br />scf.log_back:== DATASET&nbsp; 4 ========================================<br />scf.log:&nbsp; &nbsp; Density went too small (lower than xc_denpos) at&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 points<br />scf.log:&nbsp; &nbsp; Density went too small (lower than xc_denpos) at&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 points<br />&nbsp;.<br />&nbsp;. bla bla bla<br />&nbsp;.<br />scf.log_back:== DATASET&nbsp; 5 ========================================<br />scf.log_back:&nbsp; &nbsp; Density went too small (lower than xc_denpos) at&nbsp; &nbsp; 341866 points<br />scf.log_back:&nbsp; &nbsp; Density went too small (lower than xc_denpos) at&nbsp; &nbsp; &nbsp;79743 points</code></pre></div><br />...<br />etcetera, etc<br /><br />followed by <br />     <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>xc_denpos=&nbsp; 1.00E-14.&nbsp; Lowest was&nbsp; -0.62E-05<br />&nbsp; &nbsp; &nbsp;Likely due to too low boxcut or too low ecut for pseudopotential core charge.</code></pre></div><br />(all 'lowest' values are in this order)<br /><br />Certainly they are &quot;warnings&quot;, but the real problem is that ETOTAL zig-zags<br />from one dataset to the other by +/-0.1 eV, making the convergence study hopeless.<br /><br />From the log file this seems to be related to inconsistencies in the<br />FFT-grid, and I have gone around it by setting a higher value of<br />PAWECUTDG, ~34 Ha (having ecut=16), every time I face these<br />warnings. Then ETOTAL behaves well and I can decide on a converged<br />value for a given parameter, except for the vacuum and the relaxation<br />of acell, for which this warnings become numerous.<br /><br />The description of xc_denpos suggests to change the default value from<br />1e-14 to 1e-7, but this would make things worst, because my minimum values are<br />as low as *minus* 1e-5.<br /><a href="http://www.abinit.org/documentation/helpfiles/for-v7.6/input_variables/vardev.html#xc_denpos" class="postlink">http://www.abinit.org/documentation/helpfiles/for-v7.6/input_variables/vardev.html#xc_denpos</a><br /><br />I and will  appreciate any suggestions,<br />Thanks,<br />Temok<br /><br />(I am using ABINIT v7.6.2.)</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: PAW: Density went too small (xc_denpos)</h3>
+				<div class="date">Posted: <strong>Mon Feb 24, 2014 10:01 pm</strong></div>
+				<div class="author">by <strong>JEJohns</strong></div>
+				<div class="content">Hi Temok,<br />  Can you post your input file?    I had a similar issue with some PAW calculations with a vacuum region, and found the problem to be not with the actual PAWs, FFT, or ECUT/PAWECUTDG, but with the model dielectric function.  When doing NC calculations I would typically use iprcel =45, but for reasons I still don't understand, that caused PAW calculations to crash.  Instead, I was able to reach convergence by changing diemac to 20 and diemix to 0.6.  Totally anecdotal help here, so use w/ caution.  Let me know if that helps<br />James</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: PAW: Density went too small (xc_denpos)</h3>
+				<div class="date">Posted: <strong>Wed Jun 25, 2014 7:44 am</strong></div>
+				<div class="author">by <strong>Hantarto</strong></div>
+				<div class="content">I also encounter similar case when calculating single atoms in a large vacuum nonmagnetically. This is my typical script :<br /><br />chksymbreak 0<br />ngkpt  1 1 1<br />#Definition of the unit cell<br />acell 3*20 angstrom<br />#Definition of the atom types<br />ntypat 1<br />znucl 24<br />nsym 1<br />#Definition of the atoms<br />natom 1<br />typat 1<br />xred <br />  0.0 0.0 0.0<br />ecut 20<br />pawecutdg 40<br />nstep 1000         <br />toldfe 1.0d-6<br /><br />It works for almost all elements, except V, Cr, Mn, Fe, Co, Ni, Mo, Tc, Ru, Os, Ir and Pt (12 elements). Convergence is hard to achieve on those 12 elements. I've tried changing k-points, lattice size, ecut, nsym, pawcutdg, diemac etc, but still failed to converged. But with nsppol 2 (spin polarization), it converged.<br />Does anybody know how to calculate these elements nonmagnetically ?</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=2431&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:03:46 GMT -->
+</html>

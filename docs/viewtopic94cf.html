@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4316&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:32:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Abinit 8.10.3 compiled with gnu 9.1: DFT calculation crash</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Abinit 8.10.3 compiled with gnu 9.1: DFT calculation crash</h2>
+		<p><a href="viewtopic26e1.html?f=3&amp;t=4316">https://forum.abinit.org/viewtopic.php?f=3&amp;t=4316</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Abinit 8.10.3 compiled with gnu 9.1: DFT calculation crash</h3>
+				<div class="date">Posted: <strong>Mon Feb 03, 2020 10:43 am</strong></div>
+				<div class="author">by <strong>davide.sangalli.82</strong></div>
+				<div class="content">Dear abinit developers,<br>
+I'm trying to run abinit to test the interface with the yambo code.<br>
+<br>
+I've compiled the branch release-8-10 of gitlab.<br>
+the compilation is succesfull, however when I try to run the code it crashes with the message<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Program received signal SIGSEGV: Segmentation fault - invalid memory reference.
+
+Backtrace for this error:
+
+#0  0x7f34a2c5ef1f in ???
+#1  0x7f34a03a0070 in ???
+</code></pre></div>
+
+Attached few files (Report.log is a tar.gz file):<br>
+- config.log (two different compilations, both give th esame result)<br>
+- .out and .log of the crash (crash folder) and two .log and .out which worked with an older version of abinit (reference folder)<br>
+- input file and pseudopotentials I used<br>
+<br>
+Thank you in advance.<br>
+Best,<br>
+D.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit 8.10.3 compiled with gnu 9.1: DFT calculation crash</h3>
+				<div class="date">Posted: <strong>Mon Feb 03, 2020 12:18 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi Davide,<br>
+
+<blockquote class="uncited"><div>I've compiled the branch release-8-10 of gitlab.<br>
+the compilation is succesfull, however when I try to run the code it crashes with the message</div></blockquote>
+
+little question :  abinit crahes with "abinit -b" and/or with fast tests suite ?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit 8.10.3 compiled with gnu 9.1: DFT calculation crash</h3>
+				<div class="date">Posted: <strong>Mon Feb 03, 2020 6:25 pm</strong></div>
+				<div class="author">by <strong>davide.sangalli.82</strong></div>
+				<div class="content"><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>abinit -b</code></pre></div> works fine<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make check</code></pre></div> instead produces errors similar to my DFT simulation.<br>
+<br>
+See below.<br>
+Complete output attached.<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Command   /data/sangalli/Lavoro/Codici/abinit/abinit-git/releases/8.10/compile_netcdf/src/98_main/abinit &lt; /data/sangalli/Lavoro/Codici/abinit/abinit-git/releases/8.10/compile_netcdf/tests/Test_suite/fast_t00/t00.stdin &gt; /data/sangalli/Lavoro/Codici/abinit/abinit-git/releases/8.10/compile_netcdf/tests/Test_suite/fast_t00/t00.stdout 2&gt; /data/sangalli/Lavoro/Codici/abinit/abinit-git/releases/8.10/compile_netcdf/tests/Test_suite/fast_t00/t00.stderr
+ returned exit_code: 139
+
+[fast][t00][np=1]: fldiff.pl fatal error:
+The diff analysis cannot be done: the number of lines to be analysed differ.
+File /data/sangalli/Lavoro/Codici/abinit/abinit-git/releases/8.10/tests/fast/Refs/t00.out: 171 lines, 47 ignored
+File /data/sangalli/Lavoro/Codici/abinit/abinit-git/releases/8.10/compile_netcdf/tests/Test_suite/fast_t00/t00.out: 170 lines, 47 ignored [file=t00.out]
+[fast][t00][np=1]Test was not expected to fail but subprocesses returned 139
+
+Program received signal SIGSEGV: Segmentation fault - invalid memory reference.
+
+Backtrace for this error:
+#0  0x7fc12ac86f1f in ???
+#1  0x7fc129a562e0 in ???
+#2  0x7fc12cb18484 in ???
+#3  0xa46e83 in __m_cgwf_MOD_cgwf
+        at ../../../src/67_common/m_cgwf.F90:509
+#4  0x57564a in __m_vtowfk_MOD_vtowfk
+        at ../../../src/79_seqpar_mpi/m_vtowfk.F90:410
+#5  0x55f161 in __m_vtorho_MOD_vtorho
+        at ../../../src/79_seqpar_mpi/m_vtorho.F90:943
+#6  0x52d908 in __m_scfcv_core_MOD_scfcv_core
+        at ../../../src/94_scfcv/m_scfcv_core.F90:1552
+#7  0x52249d in scfcv_scfcv
+        at ../../../src/94_scfcv/m_scfcv.F90:746
+#8  0x51ad47 in __m_mover_MOD_mover
+        at ../../../src/95_drive/m_mover.F90:604
+#9  0x50d878 in __m_gstate_MOD_gstate
+        at ../../../src/95_drive/m_gstate.F90:1345
+#10  0x422e61 in __m_gstateimg_MOD_gstateimg
+        at ../../../src/95_drive/m_gstateimg.F90:573
+#11  0x412ed1 in __m_driver_MOD_driver
+        at ../../../src/95_drive/m_driver.F90:705
+#12  0x40a30e in abinit
+        at ../../../src/98_main/abinit.F90:444
+#13  0x406d2c in main
+        at ../../../src/98_main/abinit.F90:94
+/usr/bin/timeout: the monitored command dumped core
+Segmentation fault
+</code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit 8.10.3 compiled with gnu 9.1: DFT calculation crash&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Tue Feb 04, 2020 12:52 pm</strong></div>
+				<div class="author">by <strong>davide.sangalli.82</strong></div>
+				<div class="content">A follow up on the topic.<br>
+<br>
+I figured out that the configure and linnkig of abinit were messing up in between the loaded gnu compilers and libraries (via module load) and the pre-installed compiler and libraries on my ubuntu desktop.<br>
+<br>
+Moreover I found two problems.<br>
+1) I run the configure with <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--with-trio-flavor="netcdf" --enable-netcdf-default</code></pre></div> and then compiled. abinit was ginving as error
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--netcdf-default is on but netcdf library does not support MPI-IO. Aborting now</code></pre></div>
+the linked library was however with MPI-IO support.<br>
+The message error was due to the fact that <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>HAVE_NETCDF_MPI</code></pre></div> was not defined by the configure<br>
+Indeed simply adding also the option <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--enable-mpi-io</code></pre></div> everything worked. A simple fix would be that <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--enable-netcdf-default</code></pre></div> automatically activates the MPI-IO.<br>
+<br>
+2) I'm testing the variable <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>prtkbff</code></pre></div>
+Setting it to 1 in the input abinit crashes, gives an error due to a bag.<br>
+Below the patch
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>diff --git a/src/67_common/m_iowf.F90 b/src/67_common/m_iowf.F90
+index 4691596c3..7f879f552 100644
+--- a/src/67_common/m_iowf.F90
++++ b/src/67_common/m_iowf.F90
+@@ -379,11 +379,11 @@ subroutine outwf(cg,dtset,psps,eigen,filnam,hdr,kg,kptns,mband,mcg,mkmem,&amp;
+                write(msg,'(a10,i5)') 'atype ',iat
+                call wrtout(ab_out,msg,'COLL')
+                do iproj=1,psps%lnmax
+-                 write(msg,'(a10,i5,a,a10,e12.4,a,3(a10,2e12.4,a))') &amp;
++                 write(msg,'(a10,i5,a,a10,e12.4,a,2(a10,2e12.4,a))') &amp;
+                         'projector ', iproj,ch10, &amp;
+                         'vkbsign   ', vkbsign(iproj,iat), ch10, &amp;
+-                        'vkb       ', vkb(1,iproj,iat),  vkb(npwk_disk,:,iat), ch10, &amp;
+-                        'vkbd      ', vkbd(1,iproj,iat), vkbd(npwk_disk,:,iat), ''
++                        'vkb       ', vkb(1,iproj,iat),  vkb(npwk_disk,iproj,iat), ch10, &amp;
++                        'vkbd      ', vkbd(1,iproj,iat), vkbd(npwk_disk,iproj,iat), ''
+                  call wrtout(ab_out,msg,'COLL')
+                end do
+              end do
+</code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit 8.10.3 compiled with gnu 9.1: DFT calculation crash</h3>
+				<div class="date">Posted: <strong>Fri Feb 07, 2020 3:38 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Dear Davide,<br>
+<br>
+Thank you for reaching out and for the patch. From what I see, this is already fixed in the development branch of ABINIT.<br>
+<br>
+FYI, the --enable-netcdf-default option is only used for testing purposes and will be removed from the upcoming ABINIT 9.0.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit 8.10.3 compiled with gnu 9.1: DFT calculation crash</h3>
+				<div class="date">Posted: <strong>Sat Feb 08, 2020 8:19 pm</strong></div>
+				<div class="author">by <strong>davide.sangalli.82</strong></div>
+				<div class="content">Thanks Yann.<br>
+<br>
+I used the --enable-netcdf-default because I needed the WFs to be printed in NETCDF format.<br>
+Is there an alternative/standard way to obtain that ?<br>
+Related, is it possible to have the WFs printed in NETCDF format without enabling parallel I/O ?<br>
+<br>
+I'd like to create a page on the yambo website with the procedure to read the WFs from the abinit code (and thus which are the needed flags for the abinit configure).<br>
+<br>
+Best,<br>
+D.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit 8.10.3 compiled with gnu 9.1: DFT calculation crash</h3>
+				<div class="date">Posted: <strong>Sat Feb 15, 2020 9:21 am</strong></div>
+				<div class="author">by <strong>davide.sangalli.82</strong></div>
+				<div class="content">Dear abinit developers,<br>
+any suggestion on how to obtain wave-functions in NETCDF format without the flag --enable-netcdf-default ?<br>
+<br>
+Best,<br>
+D.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit 8.10.3 compiled with gnu 9.1: DFT calculation crash</h3>
+				<div class="date">Posted: <strong>Tue Feb 25, 2020 2:30 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">I confirm that the bug in the write statement has been fixed in Abinit9.<br>
+
+<blockquote class="uncited"><div>
+I'd like to create a page on the yambo website with the procedure to read the WFs from the abinit code (and thus which are the needed flags for the abinit configure).
+</div></blockquote>
+
+I would suggest to wait for the release of Abinit9 as several options will change at the level of the configure script.<br>
+The default output format is still Fortran binary files but one can change it by setting  iomode to 3 or via --enable-netcdf-default.<br>
+<br>
+It's clear that producing large WKF.nc files for Yambo will require netcdf4/hdf5 with parallel-IO support but users should pass to the configure script  C/Fortran libraries that are compatible with the software stack (Fortran compiler, MPI-library).<br>
+I started to work on a tutorial to explain how to compile from source all the libs and how to pass the correct options to configure but it will take some time before having this tutorial available on the internet because we are still working on the finalization of the new build system.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Abinit 8.10.3 compiled with gnu 9.1: DFT calculation crash</h3>
+				<div class="date">Posted: <strong>Fri Feb 28, 2020 4:28 pm</strong></div>
+				<div class="author">by <strong>Olivier.5590</strong></div>
+				<div class="content">Thanks, I can now start working again! I was stuck with compilation compatibility issues, all while my boss demanded that I wrote a market analysis for these <a href="https://tranio.com/france/provence-alpes-cote_d_azur/cannes/detached" class="postlink">houses in Cannes</a> (because working with windows and doors is the same thing as working in the real estate market, amirite?) and it made me lose time for both... Now it's fixed though, thanks again!</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4316&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:32:38 GMT -->
+</html>

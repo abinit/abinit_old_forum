@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=3172&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:04:30 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Electronic charge density around the Fermi level</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Electronic charge density around the Fermi level</h2>
+		<p><a href="viewtopice121.html?f=12&amp;t=3172">https://forum.abinit.org/viewtopic.php?f=12&amp;t=3172</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Electronic charge density around the Fermi level</h3>
+				<div class="date">Posted: <strong>Wed Jan 06, 2016 7:54 am</strong></div>
+				<div class="author">by <strong>Seba Darshan</strong></div>
+				<div class="content">Hai Abinit users,<br /><br />I would like to know how can I plot the charge density around the Fermi level. Using cut3d, I generated the .xsf file and I got only the total density. I wish to know whether I could get the energy projected density using the cut3d utility of Abinit. <br /><br />Any comments on the above are greatly appreciated.<br /><br />Thanks in advance<br />Seba</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Electronic charge density around the Fermi level</h3>
+				<div class="date">Posted: <strong>Fri Apr 01, 2016 1:51 am</strong></div>
+				<div class="author">by <strong>temok</strong></div>
+				<div class="content">Hi Seba,<br /><br />You can get the density associated with each band by doing a multi-dataset run, using<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>ndataset&nbsp; &lt;n&gt; # as many datasets as (occupied bands * nspinor)<br />charge&nbsp; &nbsp;# set such that you establish charge balance in your system<br />occopt&nbsp; 0<br /><br /># Set occ such that you turn off all but one band.<br /># put as many columns as (occupied bands * nspinor)<br /># for example, for nspinor = 1, <br />occ1&nbsp; 2.0&nbsp; 0.0&nbsp; 0.00 ...<br />occ2&nbsp; 0.0&nbsp; 2.0&nbsp; 0.00 ...<br />occ3&nbsp; 0.0&nbsp; 0.0&nbsp; 2.00 ...<br />.<br />.<br />.<br />occ&lt;n&gt; 0.0&nbsp; 0.0&nbsp; .... 2.0<br /></code></pre></div><br />then you will get &lt;n&gt; different _DEN files; each _DEN will be associated with a given band. Now you can process them with CUT3D and get the &quot;charge density-per-band&quot;. I guess what you need is that associated with the upper occupied band.<br /><br />Cheers,<br />Temok</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=3172&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:04:30 GMT -->
+</html>

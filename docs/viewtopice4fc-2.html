@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=1828&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:48:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] paw dataset creation error with atompaw</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] paw dataset creation error with atompaw</h2>
+		<p><a href="viewtopicd51b.html?f=14&amp;t=1828">https://forum.abinit.org/viewtopic.php?f=14&amp;t=1828</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] paw dataset creation error with atompaw</h3>
+				<div class="date">Posted: <strong>Tue Sep 11, 2012 12:48 pm</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Dear all,<br /><br />I'm trying to create paw datasets for Ir and O. O dataset creation went well, however, I have a problem with Ir dataset. When I run atompaw, I get an error:<br /><br /> To generate the local pseudopotential, this code can use:<br />   1- a Troullier-Martins scheme for specified l value and energy<br />   2- a non norm-conserving pseudopotential scheme for specified l value and energy<br />   3- a simple pseudization scheme using a single spherical Bessel function<br /> For choice 1, enter (high) l value and energy e<br /> For choice 2, enter (high) l value, energy e and &quot;ultrasoft&quot;<br /> For choice 3, enter &quot;bessel&quot;<br />At line 407 of file atompaw_prog.f90<br />Fortran runtime error: Bad integer for item 1 in list input<br /><br />Here's my atompaw input file for Ir:<br /><br />Ir 77<br />GGA-PBE loggrid 2001<br />6 5 5 4 0 0<br />5 2 7<br />0 0 0<br />c<br />c<br />c<br />c<br />c<br />c<br />c<br />c<br />c<br />c<br />c<br />c<br />v<br />v<br />2<br />2.5164685227<br />y <br />2 <br />n <br />y <br />2 <br />n <br />VANDERBILT<br />2 0<br />2.5164685227<br />2.5164685227<br />2.5164685227<br />2.5164685227<br />2<br />default<br />0<br /><br /><br />Does anyone know what this error means and what is the problem here? I use atompaw compiled within abinit 6.10.3.<br /><br />Thanks in advance.<br /><br />Yours,<br /><br />Igor L.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: paw dataset creation error with atompaw</h3>
+				<div class="date">Posted: <strong>Tue Sep 11, 2012 5:54 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">From your input file your valence space appears to be 5d7 4f14, but the 2 after the last &quot;v&quot; indicates that the highest state to pseudize (lmax) is 2, I think this should be 3.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: paw dataset creation error with atompaw</h3>
+				<div class="date">Posted: <strong>Wed Sep 12, 2012 12:48 pm</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Hmmm, now I see it...I made a mistake. I attributed wrong levels as valence ones. It should be<br /><br />c<br />c<br />c<br />c<br />c<br />v<br />c<br />c<br />c<br />c<br />c<br />c<br />v<br />c<br /><br />so that 5d7 6s2 are valence ones. But then the number 2 after the last &quot;v&quot; is correct, right? Yet, again, the code stops with the same message (after I corrected the above mistake). Do you have an idea why?<br /><br />Igor</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: paw dataset creation error with atompaw</h3>
+				<div class="date">Posted: <strong>Sat Sep 15, 2012 12:06 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Hi Igor,<br /><br />No, you want to build a dataset up to f electrons so the maximum quantum number for the partial waves in the PAW basis should be 3, not 2. And similarly, the reference quantum number for the local pseudopotential scheme (l loc in the documentation) should be the maximum +1, so I suggest to change the line after the Vanderbilt scheme keyword to 4 0. (I would also switch the scalar relativistic approximation on, use a smaller grid and more projectors).<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: paw dataset creation error with atompaw</h3>
+				<div class="date">Posted: <strong>Sat Sep 15, 2012 7:21 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Hi again ...<br /><br />IMHO the PAW radius could be reduced - Iridium is quite small. Valence electrons are 5d7 6s2 so I would start, for a 9 electrons PAW pseudo, with something like:<br /><br />Ir 77<br />GGA-PBE scalarrelativistic loggrid 801<br />6 5 5 4 0<br />5 2 7<br />6 0 2<br />0 0 0<br />c<br />c<br />c<br />c<br />c<br />v<br />c<br />c<br />c<br />c<br />c<br />c<br />v<br />c<br />3<br />2.2<br />y<br />1.0<br />n<br />y<br />1.0<br />y<br />2.0<br />n<br />y<br />1.0<br />n<br />y<br />1.0<br />y<br />2.0<br />n<br />Vanderbilt<br />4 0 ultrasoft<br />2.2<br />2.2<br />2.2<br />2.2<br />2.2<br />2.2<br />2.2<br />2.2<br />2<br />default<br />0<br /><br />only a suggestion template with 2 projectors per state - I didn't even try to adjust the reference energies or the radii.<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: paw dataset creation error with atompaw</h3>
+				<div class="date">Posted: <strong>Mon Sep 17, 2012 10:46 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Hi, Alain!<br /><br />Thanks for the effort. It truly helps. I have some questions, however, regarding your suggestion:<br /><br />1] Is there any special reason to why did you add 6s shell (line 5), while it's a full shell and not an empty or a partially occupied one? Marcs' instructions say that full shells can be omitted (&quot;but do not have to be&quot;). Therefore, I suppose your line won't hurt.<br /><br />2] Why do you suggest ultrasoft scheme for obtaining the V_loc? I built my oxygen PAW with troullier-martens scheme. Won't they interfere if they're built with different schemes?<br /><br />Best regards,<br /><br />Igor</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: paw dataset creation error with atompaw</h3>
+				<div class="date">Posted: <strong>Tue Sep 18, 2012 8:03 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Hello Igor,<br /><br />[1] ... I added 6s2 for truly cosmetic reasons. It allows me to know that it is a 9 valence electrons pseudo without having to decode the c c c v etc. spaghetti . Quite useful when you'll have several &quot;plain&quot; and semi core pseudos of the same atom with different core/valence configurations. Both ways are equivalent, the valence states will be included in the pseudo basis.<br /><br />[2] ... it's only a suggestion <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":-)" title="Smile" /> When I start a new pseudo, in the process of optimizing the different variables, I generally start with Vanderbilt/ultrasoft combo because I feel that atompaw converges and often gives decent solutions (i.e. no crazy amplitudes, later on already good ecut, ...). Then I play with the partial waves reference energies to cover a good range (gs or GW?) and to return good looking logderivs, ...<br />There is no problem mixing pseudos made with different pseudization schemes - but it's not advisable to mix different exchange - correlation functionals - Abinit should complain in this case.<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: paw dataset creation error with atompaw</h3>
+				<div class="date">Posted: <strong>Wed Sep 19, 2012 9:22 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content"><blockquote><div><cite>Alain_Jacques wrote:</cite>Hi Igor,<br /><br />No, you want to build a dataset up to f electrons so the maximum quantum number for the partial waves in the PAW basis should be 3, not 2.</div></blockquote><br /><br />You're right, I made another mistake here.<br /><br /><blockquote><div><cite>Alain_Jacques wrote:</cite>And similarly, the reference quantum number for the local pseudopotential scheme (l loc in the documentation) should be the maximum +1, so I suggest to change the line after the Vanderbilt scheme keyword to 4 0. (I would also switch the scalar relativistic approximation on, use a smaller grid and more projectors).<br />Kind regards,<br />Alain</div></blockquote><br /><br />Got it. I followed the Marc's document for atompaw and there it states l_loc = l quantum number and nothing else. But in abinit tutorial PAW2 is states l_loc=l_max+1. <br /><br />Now that you helped me solve the problem and teach me a couple of things more, I can turn to paw testing.<br /><br />Thanks again.<br /><br />Cheers!<br /><br />Igor</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] paw dataset creation error with atompaw</h3>
+				<div class="date">Posted: <strong>Wed Sep 19, 2012 4:36 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Hi Igor,<br /><br />If you have some time, maybe you'll want to compare the results of your pseudo with the one I'm working on ... 5p6 5d7 6s2 valence i.e. 62/15 e- Iridium. Work in progress, no warranty ... I decline any responsibility for physical or moral damages <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":-)" title="Smile" /> More seriously it should be first tested on a plain Ir bulk. ecut= 16Ha @1mHa<br /><br />Ir 77<br />GGA-PBE scalarrelativistic loggrid 801<br />6 6 5 4 0<br />6 0 2<br />6 1 0<br />5 1 6<br />5 2 7<br />0 0 0<br />c<br />c<br />c<br />c<br />c<br />v<br />c<br />c<br />c<br />v<br />v<br />c<br />c<br />v<br />c<br />3<br />2.42<br />y<br />1.7<br />n<br />y<br />3.8<br />n<br />y<br />0.0<br />n<br />y<br />0.0<br />y<br />3.2<br />n<br />Vanderbilt<br />4 0 ultrasoft<br />2.40<br />2.40<br />2.40<br />2.40<br />2.40<br />2.40<br />2.40<br />2.40<br />2.40<br />2<br />default<br />0<br /><br /><br />Enjoy,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] paw dataset creation error with atompaw</h3>
+				<div class="date">Posted: <strong>Thu Sep 20, 2012 8:52 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Hi, Alain!<br /><br />I will have some time, so I will try it later on. But I also have a question: why do you include 5p6 electron as valence ones? Aren't they lower in energy than 4f14 ones?<br /><br />Igor</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] paw dataset creation error with atompaw</h3>
+				<div class="date">Posted: <strong>Thu Sep 20, 2012 7:38 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Hi Igor,<br /><br />Iridium - as most d-elements - starts to be tricky. Generally, I treat the semicore p of the 4d transition elements as valence states  when its eigenenergy lies above 1.5 Ha. I agree that the case of 5d elements may be quite different because the 5p states are strongly localized as the 4f shell becomes filled. And so for the Iridium: most of the published pseudos have 9 valence electrons - but not all, I've seen already 15 valence electrons pseudos. So I wanted to try and compare. Well, it's probably not completely bogus as this 5p valence pseudo gives me an equilibrium fcc lattice constant of 3.879 Angstrom to be compared to the experimental 3.839 Angstrom from Wickoff and ﻿the GGA 3.895 Angstrom mentioned in F. Tran PhysRevB.75.115131 (see attached image).<br /><br /><div class="inline-attachment">
+			
+				<dl class="thumbnail">
+			<dt><a href="download/file1166.png?id=608&amp;mode=view"><img src="download/file043d.png?id=608&amp;t=1" class="postimage" alt="total energy (in Ha) vs. cell size (acell in Bohr) for fcc Ir bulk" title="Ir_15.png (14.93 KiB) Viewed 12162 times" /></a></dt>
+			<dd> total energy (in Ha) vs. cell size (acell in Bohr) for fcc Ir bulk</dd>		</dl>
+		
+		
+		
+		
+			</div><br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] paw dataset creation error with atompaw</h3>
+				<div class="date">Posted: <strong>Fri Sep 21, 2012 8:25 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Hi, Alain!<br /><br />That's very close to experiment. What's the agreement for the 9-valence electron bulk Ir?<br /><br />Since I'm interested in Ir compounds, I wonder what would happen with the localization of 5p states when Ir starts to bond with some other element, like O (which is more electronegative than Ir). It will be worthwhile to test, as you are doing. Currently I'm trying to make projectors to be of the same order of magnitude as partials waves. For example, for s states I have to set very high E_ref (above 10).<br /><br />Thanks again!<br /><br />Best regards,<br /><br />Igor</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] paw dataset creation error with atompaw</h3>
+				<div class="date">Posted: <strong>Fri Sep 21, 2012 10:31 am</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">my 9e- valence Ir PAW pseudo still has ugly p components. I have to improve it before doing a decent comparison. I'll keep you informed.<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] paw dataset creation error with atompaw</h3>
+				<div class="date">Posted: <strong>Sat Sep 22, 2012 7:58 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Hi Igor,<br /><br />my current 9e- valence Iridium PAW pseudo ...<br /><br />Ir 77<br />GGA-PBE scalarrelativistic loggrid 801<br />6 6 5 4 0<br />6 0 2<br />6 1 0<br />5 2 7<br />0 0 0<br />c<br />c<br />c<br />c<br />c<br />v<br />c<br />c<br />c<br />c<br />v<br />c<br />c<br />v<br />c<br />3<br />2.50<br />y<br />1.3<br />n<br />y<br />3.3<br />n<br />y<br />1.0<br />n<br />y<br />0.0<br />y<br />3.0<br />n<br />Vanderbilt<br />4 0 ultrasoft<br />2.50<br />2.50<br />2.50<br />2.50<br />2.50<br />2.50<br />2.50<br />2.50<br />2<br />default<br />0<br /><br /><br />... it gives an equilibrium fcc Ir lattice constant of 3.8599 Angstrom. I'm still not fully satisfied - there is a ghost state in p states.<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] paw dataset creation error with atompaw</h3>
+				<div class="date">Posted: <strong>Fri Sep 28, 2012 9:26 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Hi, Alain!<br /><br />Smth weird happened...a few days ago I posted you a reply, but not until today I saw that there is no reply here at the forum. I'm posting it again.<br /><br />I have 2 questions:<br /><br />1] By looking at your 9-electron configuration, it seems that you set 3d10 4f14 6s2 electron as valence ones, am I right?<br /><br />c  1s2<br />c  2s2<br />c  3s2<br />c  4s2<br />c  5s2<br />v  6s2<br />c  2p6<br />c  3p6<br />c  4p6<br />c  5p6<br />v  3d10<br />c  4d10<br />c  5d7<br />v  4f14<br />c  ???<br /><br /><br />This does not coincide even with your 15-electron Ir. <br /><br /><br />2] In my 9-electron configuration I have 8 partial waves. However, when I run atompaw, I get 13 wavefunctions. How can I know which wavefunction corresponds to which partial wave?<br /><br />Cheers!<br /><br />Igor</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: [SOLVED] paw dataset creation error with atompaw</h3>
+				<div class="date">Posted: <strong>Sat Sep 29, 2012 12:38 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Hi Igor,<br /><br />Yeah, I only saw your questions today.<br /><br /><blockquote class="uncited"><div>1] By looking at your 9-electron configuration, it seems that you set 3d10 4f14 6s2 electron as valence ones, am I right?</div></blockquote><br /><br />No ... if you look at the fifth line in my pseudo input file, you'll notice that I added an extra empty 6p valence state to build the basis. And so<br /><br />c = 1s2<br />c = 2s2<br />c = 3s2<br />c = 4s2<br />c = 5s2<br />v = 6s2<br />c = 2p6<br />c = 3p6<br />c = 4p6<br />c = 5p6<br />v = 6p0<br />c = 3d10<br />c = 4d10<br />v = 5d7<br />c = 4f14<br /><br />i.e. 5d7 6s2 6p0 = 9 valence electrons<br /><br /><blockquote class="uncited"><div>2]How can I know which wavefunction corresponds to which partial wave?</div></blockquote><br /><br />I agree that the wfn1, wfn2, wfn3, ... naming scheme is all but self explanatory.<br />The basis functions are listed in the order of the outer to inner principal numbers first i.e. start with n=6 then 5, ... For a given principal quantum number, the valence bound states are listed first then any additional unbound (*) partial waves. To build my pseudo, I've added one s, one p, one d and two f partial waves to the basis, so the order of the 8 basis functions is 6s2 / s* / 6p0 / p* / 5d7 / d* / f1* / f2*<br /><br />Hope this helps,<br /><br />Alain</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=1828&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:48:38 GMT -->
+</html>

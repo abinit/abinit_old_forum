@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=409&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:54:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; hydrogen energy levels</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>hydrogen energy levels</h2>
+		<p><a href="viewtopic8e72.html?f=9&amp;t=409">https://forum.abinit.org/viewtopic.php?f=9&amp;t=409</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>hydrogen energy levels</h3>
+				<div class="date">Posted: <strong>Sat Jun 19, 2010 5:04 pm</strong></div>
+				<div class="author">by <strong>sand7000</strong></div>
+				<div class="content">I attempted to calculate the hydrogen energy levels, by plotting the bands of a lone hydrogen atom in a large box. I expected the lowest band to lie at -13.6eV but it was actually at around -6eV. The band is flat, as it should be, so I believe it is well converged. Anyone have any suggestions for what I am doing wrong? <br /><br />I am using the Troullier-Martins LDA psuedopotential and my input file is as follows:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#########<br />#hydrogen<br />#########<br />chkprim 0&nbsp; &nbsp; &nbsp;# the unit cell is not primitive so do not check<br /><br />ndtset 2<br /><br />##########################################################################<br />#Spin Info taken from .../tutorial/Input/t15.in.<br />##########################################################################<br />nsppol1 2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Allow a spin-polarized calculation<br />occopt1 2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Allow occupation numbers to be set by hand<br />nband1&nbsp; 1 1&nbsp; &nbsp; &nbsp; &nbsp; # Number of bands for spin up and spin down<br />occ1&nbsp; &nbsp; 1.0&nbsp; 0.0&nbsp; &nbsp;# Occupation numbers for spin up state and spin down state.<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # The spin up state is occupied, not the spin down state.<br />spinat1 0.0 0.0 1.0&nbsp; # Gives an initial estimation of the spin on the atom (easy)<br /><br />############################<br />#Definition of the unit cell<br />############################<br />acell&nbsp; &nbsp; 3*30<br /><br />rprim&nbsp; &nbsp; 1.0&nbsp; 0.0&nbsp; 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0&nbsp; 1.0&nbsp; 0.0<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.0&nbsp; 0.0&nbsp; 1.0<br /><br />#############################<br />#Definition of the atom types<br />#############################<br />ntypat 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # There is only one type of atom<br />znucl 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# The keyword &quot;znucl&quot; refers to the atomic number of the <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # possible type(s) of atom.<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />########################<br />#Definition of the atoms<br />########################<br />natom 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# There is one atom<br />typat 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# It is hydrogen.<br /><br />xred<br />1/2 1/2 1/2<br /><br />######################################<br />#Definition of the planewave basis set<br />######################################<br />ecut 40.0<br /><br />###########################################<br />#Definition of the k-point grid # First Run<br />###########################################<br />kptopt 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Option for the automatic generation of k points, taking<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # into account the symmetry<br />ngkpt&nbsp; 1 1 1<br /><br />################################<br />#Definition of the SCF procedure<br />################################<br />nstep 30&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Maximal number of SCF cycles<br />toldfe 1.0d-8&nbsp; &nbsp; &nbsp;# Will stop when, twice in a row, the difference <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # between two consecutive evaluations of total energy <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # differ by less than toldfe (in Hartree) <br />diemac 1.0&nbsp; &nbsp; &nbsp; &nbsp; # Hydrogen requires a number between 1 and 3<br /><br /><br />########################<br />#Plot the band structure<br />########################<br />iscf2&nbsp; &nbsp;-2<br />getden2&nbsp; &nbsp;-1<br />nband2&nbsp; &nbsp;10<br />kptopt2&nbsp; &nbsp;-1<br /><br />ndivk2&nbsp; &nbsp;10<br />kptbounds2&nbsp; &nbsp;0.0&nbsp; 0.0&nbsp; 0.0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# Gamma point<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1.0&nbsp; 1.0&nbsp; 0.0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# Gamma point in another cell.<br />tolwfr2&nbsp; 1.0d-12<br />enunit2&nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: hydrogen energy levels</h3>
+				<div class="date">Posted: <strong>Sat Jun 19, 2010 10:05 pm</strong></div>
+				<div class="author">by <strong>gonze</strong></div>
+				<div class="content">The major problem is with the exchange-correlation functional ...<br />None of the LDA or GGAs is self-interaction free and exact for the Hydrogen case.<br />By contrast, for the hydrogen atom, using -1/r, that is<br />the so called Fermi-Amaldi correction (ixc=20), is the exact XC functional.<br /><br />Actually, this example is treated in test/v1 #25 (see tests/v1/Input/t25.in,<br />as well as the documentation in tests/v1/README ). There, one uses the bare<br />hydrogenic potential (instead of a pseudopotential), and not sufficiently<br />large values of acell and ecut (for testing purposes), and you will see<br />that the 1s-2s splitting is obtained as 0.368 Ha, instead of the exact 0.375 Ha.<br />Simply increasing the ecut and acell will give a better (closer to the exact value) splitting.<br />One is able to obtain a good value for the ionisation potential, but the acell<br />has to be quite large.<br /><br />So, using ixc=20, wth the base hydrogen nuclei potential, with a high ecut and large acell<br />will give you the value of 0.5 Ha.<br /><br />X.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: hydrogen energy levels</h3>
+				<div class="date">Posted: <strong>Sun Jun 20, 2010 3:56 pm</strong></div>
+				<div class="author">by <strong>sand7000</strong></div>
+				<div class="content">Thanks gonze, that makes sense. I have one further question. If the band structure for a lone hydrogen is so far off, am I able to have any faith in the band structure for a hydrogen compound, such as hydrogen on a silicon substrate?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: hydrogen energy levels</h3>
+				<div class="date">Posted: <strong>Tue Jun 22, 2010 3:58 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Self interaction tends to be a smaller effect in larger systems. H is the extreme case : 50% correction for self interaction energy.<br /><br />There are, of course, leftovers, and errors which can be treated with other methods (GW, hybrids, SIC...) in particular the band gap discontinuity.<br /><br />matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=409&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:54:02 GMT -->
+</html>

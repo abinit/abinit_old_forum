@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3088&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:56:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Structural relaxation with force as a convergence criterion</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Structural relaxation with force as a convergence criterion</h2>
+		<p><a href="viewtopicee84-2.html?f=9&amp;t=3088">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3088</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Structural relaxation with force as a convergence criterion</h3>
+				<div class="date">Posted: <strong>Wed Sep 02, 2015 10:44 am</strong></div>
+				<div class="author">by <strong>alen1981</strong></div>
+				<div class="content">Hi guys, I'am a new ABINIT user and have some problem running ABINIT when force &quot;toldff&quot; is used as a convergence criterion.<br /><br />I have a 32 atoms system, 30 nickel and 2 (neighboring) molybdenum atoms. Initially all atoms are placed on the nickel FCC lattice, however I expect that the Mo-Mo chemical bond will change in lenght and this is what I want to simulate. I allready performed several ABINIT simulations using enegry &quot;toldfe&quot; as a convergence criterion and got nice results. Now, I want to run the same simulation using no MD steps and 500 electronic &quot;ntime&quot; steps in order to see the convergence of the force. However, after 290 SCF steps, no convergence is reached, individual ETOT-s (my former energy criterion) are close to each other, but jump around approx 1 eV.<br /><br />Below my input file, please comment:<br /><br />##################################################<br /># Ni-2Mo material system 2x2x2 lattice parameters in size<br /><br /># Definition of occupation numbers<br />occopt 4<br />tsmear 0.07<br /><br /># Defines how many energy bands are necessary to conduct a stable simulation. This varialbe is material dependent (insulator, semiconductor,<br /># metall). In case of occupt not equal to 0 or 2 the specification of nband can be omitted. Instead, the variable fband will be used to automatically<br /># calculate the rigth number of energy bands. For metallic case the initial value of fband is 0.5.<br />#nband 1000<br />fband 0.5<br /><br />optforces 1  # calculation of forces at each SCF iteration, allowing to use forces as criterion to stop the SCF cycles<br /><br />optcell 0<br />ionmov  0<br /><br />iscf 17 # Integer for Self-Consistent-Field cycles<br /><br />timopt 2 # show CPU times for the run<br /># Definition of the atom types<br />ntypat 2<br />znucl 28 42  # Nickel, Moybdenum<br /><br />nsym 0<br /><br /># activate automatic parallelization<br />AUTOPARAL 2<br /><br /># Definition of the cell<br />acell 3*7.04 angstrom<br />natom 32            # 32 atoms in the cell<br />typat 30*1 2*2      # 30 Nickel, 2 Molybdenum<br />xangst              # X-, Y- und Z-coordinates of all atoms in angstroem<br /><br />#Definition of Nickel atoms<br />0.880000 0.880000 0.880000<br />0.880000 0.880000 4.400000<br />0.880000 2.640000 2.640000<br />0.880000 2.640000 6.160000<br />0.880000 4.400000 0.880000<br />0.880000 4.400000 4.400000<br />0.880000 6.160000 2.640000<br />0.880000 6.160000 6.160000<br />2.640000 0.880000 2.640000<br />2.640000 0.880000 6.160000<br />2.640000 2.640000 0.880000<br />2.640000 2.640000 4.400000<br />2.640000 4.400000 6.160000<br />2.640000 6.160000 0.880000<br />2.640000 6.160000 4.400000<br />4.400000 0.880000 0.880000<br />4.400000 0.880000 4.400000<br />4.400000 2.640000 6.160000<br />4.400000 4.400000 0.880000<br />4.400000 4.400000 4.400000<br />4.400000 6.160000 2.640000<br />4.400000 6.160000 6.160000<br />6.160000 0.880000 2.640000<br />6.160000 0.880000 6.160000<br />6.160000 2.640000 0.880000<br />6.160000 2.640000 4.400000<br />6.160000 4.400000 2.640000<br />6.160000 4.400000 6.160000<br />6.160000 6.160000 0.880000<br />6.160000 6.160000 4.400000<br /><br />#Definition of Molybdenum atoms<br />2.640000 4.400000 2.640000<br />4.400000 2.640000 2.640000<br /><br />#Definition of the planewave basis set<br />ecut 350 eV       <br />pawecutdg 500 eV  <br /><br /># Exchange-correlation functional<br />ixc -101130 	   # for PBE GGA<br />kptopt 1           # kpunktoption fuer groundstatecalc<br /><br /># Definition of the k-point grid<br />ngkpt 6 6 6       # This is a 2x2x2 FCC grid, based on the primitive vectors<br /><br />nshiftk 1 <br />shiftk 0.5 0.5 0.5<br /><br /># Define electronic integration steps<br />nstep 500         # maximum number of SCF cycles<br />toldff 0.0001     # for structural relaxation, it is better to use force<br />                  # convergence than energy convergence (toldff for electrons and tolmxf for ions)<br />########################################################################################<br /><br />Here also a short &quot;grep&quot; of the log file. Can someone tell me what other columns, I couldnt unterstand it from log file itself.<br /><br /> ETOT  275  -5232.4434728059     1.054E+00 2.031E-01 1.537E+03 4.767E-01 2.731E-01<br /> ETOT  276  -5233.0374418101    -5.940E-01 2.093E-01 1.311E+03 3.096E-01 2.004E-01<br /> ETOT  277  -5234.0053537850    -9.679E-01 2.413E-01 1.273E+03 2.705E-01 1.713E-01<br /> ETOT  278  -5233.1067522228     8.986E-01 2.257E-01 1.264E+03 2.816E-01 3.006E-01<br /> ETOT  279  -5233.7853387279    -6.786E-01 2.602E-01 1.286E+03 4.170E-01 1.783E-01<br /> ETOT  280  -5233.6793145517     1.060E-01 1.654E-01 1.274E+03 2.776E-01 2.488E-01<br /> ETOT  281  -5232.3101713091     1.369E+00 2.237E-01 1.567E+03 4.888E-01 2.489E-01<br /> ETOT  282  -5232.6880242259    -3.779E-01 2.226E-01 1.290E+03 3.643E-01 1.652E-01<br /> ETOT  283  -5233.7286984310    -1.041E+00 2.089E-01 1.607E+03 4.197E-01 3.266E-01<br /> ETOT  284  -5232.4360593211     1.293E+00 2.001E-01 1.539E+03 4.718E-01 2.688E-01<br /> ETOT  285  -5233.0218131538    -5.858E-01 2.223E-01 1.307E+03 3.040E-01 2.131E-01<br /> ETOT  286  -5233.9881202503    -9.663E-01 2.830E-01 1.271E+03 2.773E-01 1.717E-01<br /> ETOT  287  -5233.0238243918     9.643E-01 3.291E-01 1.262E+03 2.783E-01 2.983E-01<br /> ETOT  288  -5233.8048254696    -7.810E-01 2.418E-01 1.285E+03 4.142E-01 1.768E-01<br /> ETOT  289  -5233.5672227615     2.376E-01 1.910E-01 1.272E+03 2.807E-01 2.496E-01<br /> ETOT  290  -5232.3370664490     1.230E+00 2.087E-01 1.565E+03 4.958E-01 2.461E-01<br /><br />Best regards<br /><br />Alen</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3088&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:56:37 GMT -->
+</html>

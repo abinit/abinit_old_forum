@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4050&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:24:52 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Some questions about slab calculations</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Some questions about slab calculations</h2>
+		<p><a href="viewtopic53fa.html?f=9&amp;t=4050">https://forum.abinit.org/viewtopic.php?f=9&amp;t=4050</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Some questions about slab calculations</h3>
+				<div class="date">Posted: <strong>Tue Feb 26, 2019 5:56 pm</strong></div>
+				<div class="author">by <strong>domakani</strong></div>
+				<div class="content">Hi Dear ABINIT users,<br />I want to perform a ZnSe slab calculations. I have built a slab consistent of 3 layers of ZnSe in the (0,0,1) direction using the cif2cell. I could only optimize the ionic positions and cell parameters using the LDA (Troullier-Martins) pseudopotential files, pspnc (gs1.in, gs2.in). But, the calculated results of optimized ionic positions and cell parameters (gs3.in) have led to zero energy band gap which is not accordance with our expectations. When I have replaced the pspnc pseudopotential files by norm-conserving pseudopotentials on the ABINIT site (psp8), the calculations did not converge. I have done the calculations with 4 and 5 layers of ZnSe. But, the calculations using both pseudopotentials did not converge. How can I overcome this problem?<br />Best<br />Y. A. Domakani</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Some questions about slab calculations</h3>
+				<div class="date">Posted: <strong>Thu Feb 28, 2019 5:33 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Yasr Asadi,<br />A first comment regarding your input. If you want to relax the cell parameters of a slab, you cannot use optcell=2 otherwise it will relax the vacuum too (see the other options for optcell, like 7,8,9 in your case, but it is for cartesian cells only, so might not be useful for you)! This might explain that at some point your relaxation diverges and might also explain why you have metallic behaviour (this could be another problem, lets see)?<br />I'm looking a bit at your system...<br />Regarding the pseudodojo psp8, converged ecut is usually between 30 and 50 Ha...<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Some questions about slab calculations</h3>
+				<div class="date">Posted: <strong>Thu Feb 28, 2019 8:09 pm</strong></div>
+				<div class="author">by <strong>domakani</strong></div>
+				<div class="content">Hi Dear Eric,<br />Thanks a lot for the reply. For neglecting the band gap problem with the LDA (Troullier-Martins) pseudopotential files (pspnc), I have done some calculations with the pseudodojo psp8. In the first step, optimization of the ionic positions with optcell=0 and ionmov=2, the calculations did not converge. The forces acting on any atoms only reached to 8 mhartree/Bohr. Is this situation ok? Can I use the new atomic positions in the second step, optimization of cell parameters with optcell 7,8,9 as you recommended?<br />Regards,<br />Yaser Asadi.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Some questions about slab calculations</h3>
+				<div class="date">Posted: <strong>Fri Mar 01, 2019 11:35 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Hi Yaser Asadi,<br />100% sure, use the pseudodojo psps!<br />I gave a test of the bulk material P6_3mc phase and I have a gap with pseudodojo LDA or GGA-PBEsol (see ex of input below for PBEsol, it takes 12-13 minutes on 4 Xeon CPUs 2.4 Gz), but I don't know how this will change in the slab. LDA gives a smaller gap than GGA, maybe GGA would be better for your slab?<br />Regarding the slab I would advise you to use the hexagonal setting, it'll be easier for the slab construction, etc than the rhombohedral one and easier to relax the in-plane cells and fixing z with optcell 9.<br />Also, if you are close to a metallic phase, I would advise you to use metallic occopt with a very small smearing, if your relaxation has to cross a metallic case, the convergence will be less troublesome.<br />Best wishes,<br />Eric<br />PS: please test convergence of ecut on the bulk, it'll be the same for the slab but will cost less CPU time...<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>ixc&nbsp; -116133<br /><br />natom&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4<br />ntypat&nbsp; &nbsp; &nbsp; &nbsp; 2<br />#&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Zn&nbsp; Se&nbsp; <br />znucl&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;30&nbsp; 34&nbsp; <br />typat&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2*1 2*2&nbsp; &nbsp;<br />acell&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2*3.97 6.52 Angstrom<br />angdeg&nbsp; &nbsp; &nbsp; &nbsp; 2*90 120 <br />xred<br />3.33333333333333E-01&nbsp; 6.66666666666667E-01&nbsp; 4.93012372360893E-04<br />6.66666666666667E-01&nbsp; 3.33333333333333E-01&nbsp; 5.00493012372360E-01<br />3.33333333333333E-01&nbsp; 6.66666666666667E-01&nbsp; 3.74506987627639E-01<br />6.66666666666667E-01&nbsp; 3.33333333333333E-01&nbsp; 8.74506987627640E-01<br /><br />tolsym&nbsp; 1E-04<br /><br />occopt&nbsp; 3<br />tsmear&nbsp; 0.001<br />prtdos&nbsp; 1<br /><br />kptopt&nbsp; 1<br />ngkpt&nbsp; &nbsp;8 8 4<br />nshiftk 1<br />shiftk&nbsp; 0.0 0.0 0.5<br /><br />ecut&nbsp; 40<br />ecutsm 0.5<br /><br />ionmov 2<br />optcell 2<br />ntime&nbsp; &nbsp;50<br />dilatmx 1.1<br />tolmxf&nbsp; 1E-5<br />toldff&nbsp; 1E-6<br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Some questions about slab calculations</h3>
+				<div class="date">Posted: <strong>Sat Mar 02, 2019 10:26 am</strong></div>
+				<div class="author">by <strong>domakani</strong></div>
+				<div class="content">Hi Dear Eric,<br />Thanks a lot for the reply. <br />Thanks and best wishes,<br />Y. A. Domakani</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Some questions about slab calculations</h3>
+				<div class="date">Posted: <strong>Fri May 03, 2019 10:15 am</strong></div>
+				<div class="author">by <strong>elia</strong></div>
+				<div class="content">Dear Domakani,<br />I have the same problem.<br />Best wishes,</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Some questions about slab calculations</h3>
+				<div class="date">Posted: <strong>Fri May 03, 2019 10:47 am</strong></div>
+				<div class="author">by <strong>domakani</strong></div>
+				<div class="content">Hi Dear Eric,<br />To achieve a favorable outcome, I constructed a new ZnSe slab structure using cif2cell (tg1.ZnSe).<br />First of all, I still have doubts about the correctness of the produced structure. Can this be a real and correct structure?  If this is the case, how can I write a suitable input file for optimizing the atomic positions and lattice parameter?<br />Best</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Some questions about slab calculations&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Fri May 10, 2019 10:18 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Y. A. Domakani,<br />The best, I think, is to build it by hand such you know what you do...<br />The input file you sent could not be for a slab since it gives the same cell parameter for the three directions while one direction should contain at least 10 Angstrom of vacuum.<br />The best is to start from the bulk input I used and take the Cartesian coordinates and just change the cell parameter along z by adding 10 Angstrom.<br />In any case always visualize the result with Vesta or other visualization software (there is this new Agate dev, which is directly interfaced with Abinit input/output, you can install it on Linux like that:<br />sudo add-apt-repository ppa:piti-diablotin/abiout<br />sudo apt-get update<br />sudo apt install -y qagate<br />)<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Some questions about slab calculations</h3>
+				<div class="date">Posted: <strong>Wed Jun 12, 2019 2:46 pm</strong></div>
+				<div class="author">by <strong>domakani</strong></div>
+				<div class="content">Hi Dear Eric,<br />Thanks a lot for the reply. <br />best wishes,<br />Y. A. Domakani</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4050&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:24:52 GMT -->
+</html>

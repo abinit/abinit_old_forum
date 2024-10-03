@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=561&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:04:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; restartxf,irdwfk in parallel run: error on npw,npw1</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>restartxf,irdwfk in parallel run: error on npw,npw1</h2>
+		<p><a href="viewtopicac91-2.html?f=9&amp;t=561">https://forum.abinit.org/viewtopic.php?f=9&amp;t=561</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>restartxf,irdwfk in parallel run: error on npw,npw1</h3>
+				<div class="date">Posted: <strong>Tue Aug 31, 2010 3:34 pm</strong></div>
+				<div class="author">by <strong>elena.mol</strong></div>
+				<div class="content">Hello,<br />I found a problem which is quite similar to the one already discussed in <!-- l --><a class="postlink-local" href="viewtopicc0a5.html?f=9&amp;t=84&amp;p=243&amp;hilit=chaining#p243">viewtopic.php?f=9&amp;t=84&amp;p=243&amp;hilit=chaining#p243</a><!-- l -->.<br />However in my case the situation seems (at least to me?) a bit different, I made some further tests, and moreover it's not so clear to me which was the solution to the issue in the above mentioned post.<br /><br />I'm trying to &quot;chain&quot; geometry optimization (ionmov=2) calculations, not by using any multi-dataset mode, but &quot;manually&quot; by perfoming several separate runs (which was the option suggested in the previous post if i understood well), each of which reads in input the WFK file created by the previous one, and using (starting from the 2nd run) the keywords: restartxf and irdwfk.<br />If I do this in a serial run (both with abinit5.8.4 and abinit6.0.4) everything works.<br />For parallel runs instead I find several kinds of errors (in the &quot;2nd&quot; run, i.e. the first time i use restartxf and irdwfk).<br /><br />In particular:<br /><br />1) using abinit5.8.4 or 6.0.4, both compiled without enable-mpi-io, and using for parallelization only the keywords paral_kgb and npband, I find an error similar to the one mentioned in<br /><!-- l --><a class="postlink-local" href="viewtopicc0a5.html?f=9&amp;t=84&amp;p=243&amp;hilit=chaining#p243">viewtopic.php?f=9&amp;t=84&amp;p=243&amp;hilit=chaining#p243</a><!-- l -->, i.e. (in the .log file)<br /><br />-P-0000  hdr_check:  Wavefunction file is OK for direct restart of calculation<br />-P-0000 ================================================================================<br />-P-0000  rwwf : BUG -<br />-P-0000   Reading option of rwwf. One should have npw=npw1<br />-P-0000   However, npw= 4404, and npw1=88083.<br /><br /><br /><br />2) with abinit6.0.4 compiled with enable-mpi-io (but without enable-mpi-io-test), and using in input the keywords restartxf and irdwfk, (and paral_kgb and npband for parallelization), the code stops writing in the output files before the 1st scf step, but still appears to be running. These are the last lines written in the .log file:<br /><br />[1,0]&lt;stdout&gt;: ITER STEP NUMBER     1<br />[1,0]&lt;stdout&gt;: vtorho : nnsclo_now=  2, note that nnsclo,dbl_nnsclo,istep=  0 0  1<br />[1,0]&lt;stdout&gt;: starting lobpcg, with nblockbd,mpi_enreg%nproc_band          13           2<br />[1,0]&lt;stdout&gt;:WARNING in dpotrf, info=  1<br />[1,0]&lt;stdout&gt;: WARNING in zhegv, info=           3<br />[1,0]&lt;stdout&gt;:WARNING in dpotrf, info=  1<br />[1,0]&lt;stdout&gt;:WARNING in dpotrf, info=  1<br /><br />The same happens with abinit6.0.4 compiled with enable-mpi-io and enable-mpi-io-test,  but using a more complete set of parallelization keywords, i.e.:<br />PARAL_KGB= 1<br />NPKPT= 1<br />NPBAND= N<br />NPFFT= 1<br />WFOPTALG= 14<br />NLOALG= 4<br />FFTALG= 401<br />FFT_OPT_LOB= 2<br />ACCESSWFF = 1<br /><br /><br /><br />3) abinit6.0.4 compiled with enable-mpi-io and enable-mpi-io-test, but with the &quot;short&quot; set of parall keywords (only paral_kgb and npband) stops with a segmentation fault. In this case the last lines of the .log file are:<br /><br />[1,0]&lt;stdout&gt;: pspatm: atomic psp has been read  and splines computed<br />[1,0]&lt;stdout&gt;:<br />[1,0]&lt;stdout&gt;:  -4.82082600E+01                                ecore*ucvol(ha*bohr**3)<br />[1,0]&lt;stderr&gt;:[node108:25684] *** Process received signal ***<br />[1,0]&lt;stderr&gt;:[node108:25684] Signal: Segmentation fault (11)<br />[1,0]&lt;stderr&gt;:[node108:25684] Signal code:  (128)<br />[1,0]&lt;stderr&gt;:[node108:25684] Failing at address: (nil)<br />[1,0]&lt;stderr&gt;:[node108:25684] [ 0] /lib64/libpthread.so.0 [0x2af69f66db10]<br />[1,0]&lt;stderr&gt;:[node108:25684] [ 1] abinit(hdr_comm_+0x31f9) [0xb11129]<br />[1,0]&lt;stderr&gt;:[node108:25684] [ 2] abinit(hdr_io_wfftype_+0x10f) [0xb188ff]<br />[1,0]&lt;stderr&gt;:[node108:25684] [ 3] abinit(inwffil_+0x440c) [0x52e04c]<br />[1,0]&lt;stderr&gt;:[node108:25684] [ 4] abinit(gstate_+0x1ba2) [0x48f1c2]<br />[1,0]&lt;stderr&gt;:[node108:25684] [ 5] abinit(gstateimg_+0x2446) [0x4343c6]<br />[1,0]&lt;stderr&gt;:[node108:25684] [ 6] abinit(driver_+0x7283) [0x42ca73]<br />[1,0]&lt;stderr&gt;:[node108:25684] [ 7] abinit(MAIN__+0x328d) [0x42395d]<br />[1,0]&lt;stderr&gt;:[node108:25684] [ 8] abinit(main+0xe) [0x100ef5e]<br />[1,0]&lt;stderr&gt;:[node108:25684] [ 9] /lib64/libc.so.6(__libc_start_main+0xf4) [0x2af69f898994]<br />[1,0]&lt;stderr&gt;:[node108:25684] [10] abinit [0x420619]<br />[1,0]&lt;stderr&gt;:[node108:25684] *** End of error message ***<br /><br />I hope these further tests can help, without confusing the subject. Does anyone know how to solve this problem? i.e. which is the best set of keywords/version/etc to use?<br /><br />many thanks in advance<br />Elena Molteni<br />Department of Physics<br />University of Milan<br />via Celoria, 16 <br />20133, Milan, Italy</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: restartxf,irdwfk in parallel run: error on npw,npw1</h3>
+				<div class="date">Posted: <strong>Sat Sep 04, 2010 9:34 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello Elena,<br /><br />could you please try 6.2.2? Things have been improved and debugged in mpi-io, and it is possible your bug has been corrected. If not we will have to wait for answers from the mpiio experts<br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=561&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:04:08 GMT -->
+</html>

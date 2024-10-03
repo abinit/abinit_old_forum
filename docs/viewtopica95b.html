@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3005&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:55:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Cell Optimization problem</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Cell Optimization problem</h2>
+		<p><a href="viewtopic8af8-3.html?f=9&amp;t=3005">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3005</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Cell Optimization problem</h3>
+				<div class="date">Posted: <strong>Tue May 26, 2015 2:58 pm</strong></div>
+				<div class="author">by <strong>Emile</strong></div>
+				<div class="content">Dear abiniters,<br /><br />I am encountering a little but quite annoying problem.<br />I am performing a cell optimization within a HCP structure, that provides me relaxed cell parameters with a zeroed pressure (-1E-6 GPa).<br /><br />When I reuse these cell parameters and perform a static ground state calculation (just turn off the optcell value and related parameters), I get a non negligible pressure (about -1 GPa)<br /><br />I thought it could be due to Pulay stress or inaccuracies, but the initial cell values are very closed to the final ones and I increased k-point grid and cutoff energy without success.<br /><br />Can anyone have a suggestion to fix this?<br /><br />Here is the cell relaxation input file:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code># Ni Primitive Cell <br /><br />autoparal 1<br /><br />prtdos 0<br />prtden 0<br />prtwf&nbsp; 0<br /><br />#Definition of the relaxation parameters<br />optcell 2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # kind of cell relaxation<br />tolmxf&nbsp; 1.0d-6&nbsp; &nbsp; &nbsp; &nbsp;# cell convergence criteria<br />dilatmx 1.1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # used to avoid Pulay stress<br />ecutsm&nbsp; 0.1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # used to avoid Pulay stress<br />strfact 10000.0&nbsp; &nbsp; &nbsp; # stress forces x 100 (accelerate cell relaxation)<br />ionmov&nbsp; 2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # kind of atom displacement<br />ntime&nbsp; &nbsp;200&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # number of steps<br /><br /><br />#Definition of the unit cell<br />charge&nbsp; &nbsp;0.0<br />acell&nbsp; &nbsp; 2*4.7202993505&nbsp; 7.8814711929<br />angdeg&nbsp; &nbsp;90.0&nbsp; 90.0&nbsp; 120.0<br /><br />#Definition of the atom types<br />ntypat 1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # There is only one type of atom<br />znucl 28&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # The keyword &quot;znucl&quot; refers to the atomic number of the <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # possible type(s) of atom. The pseudopotential(s) <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # mentioned in the &quot;files&quot; file must correspond<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # to the type(s) of atom. Here, the only type is Hydrogen.<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br /><br />#Definition of the atoms<br />natom 2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />typat 2*1&nbsp; <br />xred&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br />#Ni<br />&nbsp; &nbsp; 0.0 0.0 0.0<br />&nbsp; &nbsp; 1/3 2/3 1/2<br /><br />#Definition of the planewave basis set<br />ecut&nbsp; 60.0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# Maximal plane-wave kinetic energy cut-off, in Hartree<br /><br />#Definition of the k-point grid<br />kptopt 1<br />ngkpt&nbsp; 24 24 16&nbsp; &nbsp; &nbsp; # Only one k point is needed for isolated system,<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# taken by default to be 0.0 0.0 0.0<br /><br />nshiftk 1<br />shiftk<br />&nbsp; 0.0 0.0 0.5<br /><br />occopt 3<br />nband&nbsp; 20<br />tsmear 0.001<br /><br />#Definition of the SCF procedurei<br />nstep&nbsp; 100&nbsp; &nbsp; &nbsp; &nbsp; # Maximal number of SCF cycles<br />tolvrs 1.0d-20&nbsp; &nbsp; # Will stop when, twice in a row, the difference <br />#diemac 1.0&nbsp; &nbsp; &nbsp; &nbsp;# Although this is not mandatory, it is worth to<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # precondition the SCF cycle. The model dielectric<br />#diemix 0.5&nbsp; &nbsp; &nbsp; &nbsp;# function used as the standard preconditioner<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # is described in the &quot;dielng&quot; input variable section.<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Here, we follow the prescriptions for molecules <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # in a big box<br /></code></pre></div><br /><br />Optimized cell parameters : 4.7204534418    7.8790390028</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Cell Optimization problem</h3>
+				<div class="date">Posted: <strong>Thu May 28, 2015 8:28 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">I ran your input file using PAW for nickel--<br /><br />some comments:<br />at least for the PAW set I used, the valence space was 18 electrons, so 36 in your unit cell. Thus 20 bands worked but barely, I increased it to nband 32, which worked better and gave some empty bands even after smearing (which usually helps with convergence).<br /><br />secondly, this system is magnetic, so I ran it with nsppol 2.<br /><br />third, after optimization I also got 1E-6 for stress, and then re-running the new cell I got 1E-2. This is normal and indicates usually that you have to go to pretty dense k point sampling (typical of stress and very typical for metals). You say you got -1 upon re-running, that shows a real problem, maybe because you didn't treat it as magnetic? Anyway, from 1E-6 to 1E-2 is not atypical but shows that very tight convergence parameters are needed if you need to sample very small stress changes.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Cell Optimization problem</h3>
+				<div class="date">Posted: <strong>Mon Jun 01, 2015 10:24 am</strong></div>
+				<div class="author">by <strong>Emile</strong></div>
+				<div class="content">Dear Pr.  Zwanziger,<br /><br />Thank you for having taking the time to work on my problem.<br /><br />First of all, I want to precise that I use a 10 electron GGA pseudopotential for Ni, so 10 bands per atom was fine, I increased this number without seeing improvement so I came back to that initial number.<br /><br />I am not really interested by magnetic properties, I know it can affect the cell parameter but if I neglect it in the cell optimization run and in the static run, well, I suppose I should not see any effect. Actually, I neglected it in HCP and FCC phase also, and as long as I do not have SCF convergence issue, I am ok with this.<br /><br />These calculations are starting points for a study within a warmed electronic subsystem, and tsmear is both a convergence parameter and the electronic temperature parameter, so it's use is ambiguous to me, and the most important is to get the lowest pressure for a low tsmear value.<br /><br />So, according to these points and from what you tell concerning these stress differences, my best option is to work with a much denser k-point grid. For the FCC cell I worked with a 32x32x32 kpoint grid, got converged up to 1E-6 GPa and static calculation provide something like 1E-2 GPa, this is ok. Maybe I had a too low reciprocal mesh with the HCP structure.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3005&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:55:03 GMT -->
+</html>

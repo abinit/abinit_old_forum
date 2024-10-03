@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=123&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:19:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; GW calculation for arbitrary K point</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>GW calculation for arbitrary K point</h2>
+		<p><a href="viewtopic4e8d.html?f=11&amp;t=123">https://forum.abinit.org/viewtopic.php?f=11&amp;t=123</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>GW calculation for arbitrary K point</h3>
+				<div class="date">Posted: <strong>Thu Mar 11, 2010 4:55 am</strong></div>
+				<div class="author">by <strong>mongon</strong></div>
+				<div class="content">Dear all Abinit users:<br /><br />I'm studying the band structure of BC8 Carbon and want to get  the band structure with GW correction.<br /><br />For GW calculation, the kptgw must belong to the k-mesh generated for the KSS file. So, is there a good way to get GW correction for common k-points so that we can construct a band structure along the high symmetry lines?<br /><br />Many thanks for your comments and advices.<br /><br />Yu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: GW calculation for arbitrary K point</h3>
+				<div class="date">Posted: <strong>Thu Mar 11, 2010 10:11 am</strong></div>
+				<div class="author">by <strong>bruneval</strong></div>
+				<div class="content">Due to the non-locality of the exact-exchange and of the self-energy operator, there is no possibility to avoid the use of a regular grid within GW.<br />My advice to obtain the GW band structure is to perform the GW corrections for all the the k-points in the full Brillouin Zone and then perform a Fourier interpolation to obtain the GW band structure along a given line.<br />This is not so straightforward. We should definitely provide a tool to do that operation...<br /><br />Fabien</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: GW calculation for arbitrary K point</h3>
+				<div class="date">Posted: <strong>Thu Mar 11, 2010 4:32 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">At present one can use wannier90 to perform the Wannier interpolation of the <br />GW band structure produced by abinit. See test/wannier90/t03.in and <br />the test/wannier90/README. <br /><br />I agree however that we should provide an automatic and painless way <br />for interpolating QP band structures.   <br /><br />Matteo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: GW calculation for arbitrary K point</h3>
+				<div class="date">Posted: <strong>Sat Mar 13, 2010 7:35 am</strong></div>
+				<div class="author">by <strong>mongon</strong></div>
+				<div class="content">Dear Fabien and Matteo,<br /><br />Thanks for your reply. That's helpful!<br /><br />Best regards,<br /><br />Yu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: GW calculation for arbitrary K point</h3>
+				<div class="date">Posted: <strong>Sat May 01, 2010 2:19 pm</strong></div>
+				<div class="author">by <strong>hou</strong></div>
+				<div class="content">Dear all, <br /><br />Can do it in the following way?:<br />1) First perform a self consistent LDA/GGA calculation using a conventional file with a regular k-grid.<br />2) Copy the  values for keywords related to the generated k-point such as  nkpt, kpt, and wtk, and explicitly add all desired k-points along high-symmetry lines of the BZ that are needed for the band structure plot. Add the them into the input file, but set the weights of these added k-points (i.e., the k-points for band structure plots) to 0. Correspondingly, set the number of k-points (i.e., the value of nkpt) in input file correctly (to the number of the k-points used in the standard mesh PLUS the number of the k-points along the lines), such that all k-points are used for the calculations.<br />3) Perform a second LDA/GGA calculation;<br />4) Perform a GW calculation with k points in the step 2);<br />5) The GW-eigenvalues of the states along the high-symmetry lines are written in output;  cut the k-points required for the band structure from one of output file and proceed as usual.<br /><br />I observed that such way is adopted in the VASP code for the hybrid functional calculation of band structure. I wondered whether this way is feasible to do the GW calculation of band structure with ABINIT code.  Welcome to your comments. <br /><br />Best regards<br />Hou</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: GW calculation for arbitrary K point</h3>
+				<div class="date">Posted: <strong>Mon May 03, 2010 9:34 am</strong></div>
+				<div class="author">by <strong>bruneval</strong></div>
+				<div class="content">No, the k-points need to be regularly spaced in a GW calculation. The same is also true for the exact-exchange. So I don't know what VASP is doing for hybrid.<br /><br />Fabien</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: GW calculation for arbitrary K point</h3>
+				<div class="date">Posted: <strong>Sun May 16, 2010 3:13 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">It sounds like it is integrating E, n, etc... only on the first kpt (with weights) but calculate all the eigenvalues so you get the BS at the same time.<br /><br />I'm not sure this would work in abinit - there are a few places where the weights might not be used explicitly, and then you would get spurious kpt contributions. Interesting test though! Try it for a ground state run and tell us if it works.<br /><br />cheers<br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=123&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:19:44 GMT -->
+</html>

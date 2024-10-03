@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2818&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:18:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Installing fftw3 (3.3.4) on Mac OS 10.6.8</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Installing fftw3 (3.3.4) on Mac OS 10.6.8</h2>
+		<p><a href="viewtopicd5a2.html?f=3&amp;t=2818">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2818</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Installing fftw3 (3.3.4) on Mac OS 10.6.8</h3>
+				<div class="date">Posted: <strong>Sun Oct 12, 2014 11:53 pm</strong></div>
+				<div class="author">by <strong>esr3d</strong></div>
+				<div class="content">Hi,<br /><br />I would like to install the fftw3 library to use with ABINIT.  I am currently trying to install fftw-3.3.4 on Mac OS 10.6.8 (snow leopard).  I have been using the following steps to install:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure --enable-sse2 --enable-shared CC=/usr/bin/gcc-4.2 CPP=/usr/bin/cpp-4.2 F77=/usr/local/bin/gfortran</code></pre></div><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make</code></pre></div><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>sudo make install</code></pre></div><br /><br />Then when I use 'make check' to test the library, for most things it tells me there is 'nothing to be done'.  And when I try to compile ABINIT with the fftw3 library, it says it either can't find the library or the library does not work.  I have included the full output from make check in an attachment.<br />Any suggestions on how to properly install the fftw library on Mac 10.6.8?<br /><br />Thank you.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Installing fftw3 (3.3.4) on Mac OS 10.6.8&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Mon Oct 13, 2014 3:15 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">This forum is dedicated to Abinit. For questions related to FFTW, please use their own mailing lists and forums.<br /><br />This said, if you configured FFTW without specifying a prefix, the most probable is that it is installed in /usr/local. The corresponding options of the configure script of Abinit would thus be:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--with-fft-flavor=fftw3 --with-fft-incs=&quot;-I/usr/local/include&quot; --with-fft-libs=&quot;-L/usr/local/lib -lfftw3f -lfftw3&quot;</code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Installing fftw3 (3.3.4) on Mac OS 10.6.8</h3>
+				<div class="date">Posted: <strong>Mon Oct 13, 2014 5:01 pm</strong></div>
+				<div class="author">by <strong>esr3d</strong></div>
+				<div class="content">Sorry, I will check their forums.  Thank you for your suggestion.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2818&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:18:13 GMT -->
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4264&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:32:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; compilation error on Fedora 30, Abinit version 8.10.3</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>compilation error on Fedora 30, Abinit version 8.10.3</h2>
+		<p><a href="viewtopicfc95-2.html?f=3&amp;t=4264">https://forum.abinit.org/viewtopic.php?f=3&amp;t=4264</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>compilation error on Fedora 30, Abinit version 8.10.3&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Fri Nov 29, 2019 2:38 pm</strong></div>
+				<div class="author">by <strong>standa</strong></div>
+				<div class="content">Dear Abinit user/developers,<br>
+<br>
+   after upgrading to Fedora 30 distribution I'm not able to compile the abinit source code (8.10.3 version). Configure with options set to<br>
+                                    ./configure CC=mpicc CXX=mpic++ FC=mpif90<br>
+went without errors. Unfortunately, during make process the following error appears:<br>
+<br>
+mpif90 -DHAVE_CONFIG_H -I. -I../..  -I../../src/77_ddb -I../../src/77_ddb -I../../src/32_util -I../../src/32_util -I../../src/44_abitools -I../../src/44_abitools -I../../src/27_toolbox_oop -I../../src/27_toolbox_oop -I../../src/44_abitypes_defs -I../../src/44_abitypes_defs -I../../src/72_response -I../../src/72_response -I../../src/16_hideleave -I../../src/16_hideleave -I../../src/42_parser -I../../src/42_parser -I../../src/55_abiutil -I../../src/55_abiutil -I../../src/41_geometry -I../../src/41_geometry -I../../src/45_geomoptim -I../../src/45_geomoptim -I../../src/12_hide_mpi -I../../src/12_hide_mpi -I../../src/10_defs -I../../src/10_defs -I../../src/14_hidewrite -I../../src/14_hidewrite -I../../src/57_iovars -I../../src/57_iovars -I../../src/28_numeric_noabirule -I../../src/28_numeric_noabirule -I../../src/incs -I../../src/incs -I/home/standa/work2/tmp/abinit-8.10.3/fallbacks/exports/include   -ffree-form -J/home/standa/work2/tmp/abinit-8.10.3/src/mods -O2 -mtune=native -march=native -g -ffree-line-length-none   -c -o m_polynomial_coeff.o m_polynomial_coeff.F90<br>
+m_polynomial_coeff.F90<img alt=":2883:" class="emoji smilies" draggable="false" src="http://twemoji.maxcdn.com/2/svg/2883.svg">67:<br>
+<br>
+ 2800 |    do icoeff1=icoeff,ncoeff+nstr<br>
+      |                                2                                   <br>
+......<br>
+ 2883 | &amp;                                     index_coeff,list_combination,icoeff1,max_power_strain,&amp;<br>
+      |                                                                   1<br>
+Error: Variable ‘icoeff1’ at (1) not definable inside loop beginning at (2) as INTENT(INOUT) argument to subroutine ‘computecombinationfromlist’<br>
+m_polynomial_coeff.F90<img alt=":2643:" class="emoji smilies" draggable="false" src="http://twemoji.maxcdn.com/2/svg/2643.svg">26:<br>
+<br>
+ 2553 |    do icoeff1=icoeff,ncoeff+nstr<br>
+      |                                2<br>
+......<br>
+ 2643 | &amp;                         icoeff1,icoeff_tot,natom,ncoeff,nstr,ncoeff_out,nrpt,nsym,power_disp+1,&amp;<br>
+      |                          1<br>
+Error: Variable ‘icoeff1’ at (1) not definable inside loop beginning at (2) as INTENT(INOUT) argument to subroutine ‘computenorder’<br>
+make[3]: *** [Makefile<img alt=":1021:" class="emoji smilies" draggable="false" src="http://twemoji.maxcdn.com/2/svg/1021.svg"> m_polynomial_coeff.o] Error 1<br>
+make[3]: Leaving directory '/home/standa/work2/tmp/abinit-8.10.3/src/78_effpot'<br>
+make[2]: *** [Makefile:934: all-recursive] Error 1<br>
+make[2]: Leaving directory '/home/standa/work2/tmp/abinit-8.10.3/src'<br>
+make[1]: *** [Makefile<img alt=":2323:" class="emoji smilies" draggable="false" src="http://twemoji.maxcdn.com/2/svg/2323.svg"> all-recursive] Error 1<br>
+make[1]: Leaving directory '/home/standa/work2/tmp/abinit-8.10.3'<br>
+make: *** [Makefile<img alt=":2252:" class="emoji smilies" draggable="false" src="http://twemoji.maxcdn.com/2/svg/2252.svg"> all] Error 2<br>
+<br>
+<br>
+Fedora 30 comes with mpicc/mpic++ /mpif90 version 9.2.1 20190827 (Red Hat 9.2.1-1). <br>
+<br>
+Could you, please, help me what to do in order to compile abinit source code?<br>
+<br>
+Thank you very much,<br>
+<br>
+Standa</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: compilation error on Fedora 30, Abinit version 8.10.3</h3>
+				<div class="date">Posted: <strong>Sat Jan 25, 2020 4:29 pm</strong></div>
+				<div class="author">by <strong>admin</strong></div>
+				<div class="content">resolved in version 9.0.1  ( dispo soon, end of january )<br>
+jmb</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=4264&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:32:40 GMT -->
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3449&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:47:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; meta-GGA via libxc in abinit</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>meta-GGA via libxc in abinit</h2>
+		<p><a href="viewtopiceee6.html?f=9&amp;t=3449">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3449</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>meta-GGA via libxc in abinit</h3>
+				<div class="date">Posted: <strong>Wed Dec 07, 2016 9:44 pm</strong></div>
+				<div class="author">by <strong>EBIsaacs</strong></div>
+				<div class="content">Hi all,<br /><br /><span style="font-size: 150%; line-height: 116%;">Short version: Is it possible to use meta-GGAs in abinit via libxc for forces and total energies?</span><br /><br />Longer version:<br /><br />I'm interested in using abinit to run <span style="text-decoration: underline">meta-GGA</span> calculations (e.g. TPSS and SCAN functionals) via <span style="text-decoration: underline">libxc</span>. I did the following:<br /><br /><ol style="list-style-type: decimal"><li>Compiled the latest version of libxc (rev12537).<br /></li><li>Compiled abinit-7.10.5 with this libxc. To get this to compile, I modified ~abinit/config/m4/conn-dft.m4 to circumvent the libxc version check. Additionally, I made a few small changes to ~abinit/src/41_xc_lowlevel/m_libxc_functionals.F90 that were causing compilation errors (presumably related to changes in libxc since version 2).<br /></li><li>Performed some calculations on <span style="text-decoration: underline">bulk fcc aluminum</span> using PBE (ixc=11 or ixc=-101130), TPSS (ixc=-202231), and SCAN (ixc=-263267). For testing, I am just using a norm-conserving (Troullier-Martins) FHI <span style="text-decoration: underline">PBE pseudopotential</span>.</li></ol><br />I am finding strange results for the relaxed lattice parameter for the meta-GGAs. For example, when I relax with SCAN I get a quite low value of lattice parameter (<strong class="text-strong">3.801 A</strong>), whereas by doing several static runs varying the lattice parameter, I find the minimum at <strong class="text-strong">4.038 A</strong>. I find the relaxation result is unchanged when I ramp up the convergence parameters, vary the initial coordinates, or use another pseudopotential. With TPSS I also find a similar discrepancy, whereas for PBE things seem fine and agree with the literature (<strong class="text-strong">4.046 A</strong>).<br /><br />Therefore, I am wondering if something is missing to be able to run libxc meta-GGA calculations in abinit, or if there is some other error I am making?<br /><br />The main parameters I am using are: ngkpt 25 25 25, ecut 600 eV, usekden 1, ionmov 2, optcell 1, ecutsm 0.5, tolmxf 1.0d-8, dilatmx 1.8, occopt 6, tsmear 0.2 eV. I am running on a linux cluster using Intel compilers, MPI, and FFTW3. The output and log files for the SCAN relaxation are attached.<br /><br />Thanks very much,<br />Eric Isaacs<br />Northwestern University</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: meta-GGA via libxc in abinit</h3>
+				<div class="date">Posted: <strong>Thu Dec 15, 2016 8:10 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Eric,<br />Indeed, this looks weird. Which version of libxc does it correspond? What did you change in the routines?<br />Be also aware of the following post: <a href="viewtopicb5f9.html?f=3&amp;t=3385&amp;p=10448#p10448" class="postlink">http://forum.abinit.org/viewtopic.php?f=3&amp;t=3385&amp;p=10448#p10448</a><br />This effect might also comes from convergence problem (ecut) and related to dilatmx and ecusm flags that are going to adapt/smear the number of plane waves when relaxing while when you compute single point energies at fixed volume the number of plane wave/fft grid will change such as if you are not converged enough with ecut you'll not find consistency between the two methods.<br />What did you use as tolmxf (and potentially strfact)?<br />All the best,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: meta-GGA via libxc in abinit</h3>
+				<div class="date">Posted: <strong>Fri Dec 16, 2016 8:09 pm</strong></div>
+				<div class="author">by <strong>EBIsaacs</strong></div>
+				<div class="content">Eric:<br /><br />Thanks very much for the reply.<br /><br />Since the SCAN functional was implemented recently, I am using the developer's version of libxc. I understand this is ahead of the recommended version (2.0), but according to one of the libxc developers the API has not significantly changed since this version.<br /><br />To avoid some compilation errors I was experiencing, in ~abinit/src/41_xc_lowlevel/m_libxc_functionals.F90 I commented out the call to xc_f90_lda_c_xalpha_set_par. I also commented out the section with the call to xc_f90_mgga_x_tb09_set_par. These appear to set parameters for Slater's Xalpha method and the Tran-Blaha functional, which I am not interested in for my testing.<br /><br />I also changed 'xc_f90_info_refs(funcs(ii)%info,jj,str,message)' to 'xc_f90_info_refs(funcs(ii)%info,jj,message)' in libxc_functionals_init.<br /><br />I was not aware of the strfact variable, so this must have been default (100 Bohr^2). However, when I made ecut 900 eV, tolmxf 1.0d-9, and toldfe 1.0d-7 eV, I still got the same answer and the stresses are well converged (around 1E-7 GPa or less). I have played around with the ecutsm and dilatmx parameters, but the answer is unchanged.<br /><br />Thanks again,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: meta-GGA via libxc in abinit</h3>
+				<div class="date">Posted: <strong>Mon Dec 19, 2016 12:34 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Hi Eric,<br />Hummm this looks strange indeed.<br />strfact might be in play here, but to check whether this comes from the MetaGGA or not, can you run the same calculation quickly but with a normal GGA (PBE, still with libxc)?<br />All the best,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: meta-GGA via libxc in abinit</h3>
+				<div class="date">Posted: <strong>Mon Dec 19, 2016 11:51 pm</strong></div>
+				<div class="author">by <strong>EBIsaacs</strong></div>
+				<div class="content">Hi Eric,<br /><br />Thanks again for these suggestions.<br /><br />I changed strfact from 100 to 200 Bohr^2 in the SCAN relaxation and I get the same answer. Additionally, I tried relaxing using the libxc PBE (ixc = -101130) and I get the same result as with the built-in PBE (ixc = 11).<br /><br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: meta-GGA via libxc in abinit</h3>
+				<div class="date">Posted: <strong>Fri Dec 23, 2016 4:55 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Hi Eric,<br />That's strange, can you send me your input file in case I see something wrong and to play with it?<br />Thanks,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: meta-GGA via libxc in abinit</h3>
+				<div class="date">Posted: <strong>Fri Dec 23, 2016 5:34 pm</strong></div>
+				<div class="author">by <strong>EBIsaacs</strong></div>
+				<div class="content">Sure, much appreciated. My input files are attached here.<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: meta-GGA via libxc in abinit</h3>
+				<div class="date">Posted: <strong>Fri Jan 13, 2017 12:46 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Hi Eric,<br />I went through your problem and on my side I find the same cell parameter if I relay or if I do single point energies.<br />I did it with PBE and the norm conserving pseudopotential coming from the Abinit table (ONCVPSP generator/pseudo-dojo), so I don't know what is wrong in your calculations.<br />The main comment I will have is that you used a too large dilatmx, please re-read the documentation regarding this flag. In my run I used dilatmx=1.1.<br /><br />Here is my input adapted from yours for single point energy:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>#ionmov&nbsp; &nbsp; &nbsp;2<br />#optcell&nbsp; &nbsp; 1<br />ecutsm&nbsp; &nbsp; &nbsp;0.5<br />#ntime&nbsp; &nbsp; &nbsp; 30<br />#tolmxf&nbsp; &nbsp; &nbsp;1.0d-8<br />#dilatmx&nbsp; &nbsp; 1.1<br />enunit&nbsp; &nbsp; &nbsp;1<br />ndtset 5<br />acell:&nbsp; &nbsp; &nbsp; 0.95 0.95 0.95 angstrom<br />acell+&nbsp; &nbsp; &nbsp; 0.025 0.025 0.025 angstrom<br />rprim&nbsp; &nbsp; &nbsp; 0.000000&nbsp; 2.0025&nbsp; 2.0025<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2.0025&nbsp; 0.000000&nbsp; 2.0025<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2.0025&nbsp; 2.0025&nbsp; 0.000000<br />ntypat&nbsp; &nbsp; &nbsp;1<br />znucl&nbsp; &nbsp; &nbsp; 13<br />natom&nbsp; &nbsp; &nbsp; 1<br />typat&nbsp; &nbsp; &nbsp; 1<br />xred&nbsp; &nbsp; &nbsp; &nbsp;0.0 0.0 0.0<br />ixc&nbsp; &nbsp; &nbsp; &nbsp; 11<br />#usekden&nbsp; &nbsp; 1<br />nsppol&nbsp; &nbsp; &nbsp;1<br />occopt&nbsp; &nbsp; &nbsp;6<br />tsmear&nbsp; &nbsp; &nbsp;0.2 eV<br />ecut&nbsp; &nbsp; &nbsp; &nbsp;800 eV<br />nstep&nbsp; &nbsp; &nbsp; 50<br />toldfe&nbsp; &nbsp; &nbsp;1.0d-10 eV<br />nband&nbsp; &nbsp; &nbsp; 6<br />ngkpt&nbsp; &nbsp; &nbsp; 25 25 25<br />shiftk&nbsp; &nbsp; &nbsp;0 0 0<br />prtden&nbsp; &nbsp; &nbsp;0<br />prtwf&nbsp; &nbsp; &nbsp; 0<br />prtelf&nbsp; &nbsp; &nbsp;0<br />prtkden&nbsp; &nbsp; 0<br />prteig&nbsp; &nbsp; &nbsp;0<br /></code></pre></div><br /><br />Removing the multidaset and uncomenting the commented flags is my input for automatic relaxation.<br /><br />I let you play around with these new informations, let me know what you get on your side with your pseudo.<br /><br />All the best,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: meta-GGA via libxc in abinit</h3>
+				<div class="date">Posted: <strong>Wed Jan 25, 2017 9:14 pm</strong></div>
+				<div class="author">by <strong>EBIsaacs</strong></div>
+				<div class="content">Hello Eric,<br /><br />Thanks for taking a look at this.<br /><br />Just to clarify, with PBE I have no disagreement between the structure from relaxation and that from static runs. This is true for the two pseudopotentials I tried previously, as well as the one you used (Al.psp8). It is <span style="text-decoration: underline">only</span> meta-GGA that is giving me trouble.<br /><br />I could not try meta-GGA with your pseudopotential since the nonlinear core correction are not currently supported for that. However, I tried a few things:<br /><br />(1) I used your input parameters to redo my calculations. Here I find the same result (e.g., lattice parameter of 3.801 A with the SCAN relaxation).<br /><br />(2) Previously I was using dilatmx of 1.2 and got the same results, so I had cranked it up to 1.8 (I agree this is too large in general). Anyway, I redid the calculations with dilatmx 1.1 and this does not resolve the discrepancy. For the SCAN relaxation I get a lattice parameter of 3.800 A.<br /><br />Thanks,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: meta-GGA via libxc in abinit</h3>
+				<div class="date">Posted: <strong>Thu Jan 26, 2017 12:24 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Hi Eric,<br />Sorry for the misunderstanding, I though PBE was not working too!<br />OK, then this sounds indeed a Meta-GGA specific problem and I'm less specialist of it. Let me warn some more specific guys who can have a look on that!<br />All the best,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: meta-GGA via libxc in abinit</h3>
+				<div class="date">Posted: <strong>Thu Jan 26, 2017 6:32 pm</strong></div>
+				<div class="author">by <strong>EBIsaacs</strong></div>
+				<div class="content">No problem. Sounds good -- will look forward to hearing back.<br />Thanks,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: meta-GGA via libxc in abinit</h3>
+				<div class="date">Posted: <strong>Thu Jan 26, 2017 8:48 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Hi Eric,<br />Unfortunately, the stress has not been implemented for metaGGA, so you have to do it from the Energy vs Volume curve.<br />Sounds to be the same in several other codes, no stress implemented for metaGGA...<br />All the best,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: meta-GGA via libxc in abinit</h3>
+				<div class="date">Posted: <strong>Fri Jan 27, 2017 5:09 pm</strong></div>
+				<div class="author">by <strong>EBIsaacs</strong></div>
+				<div class="content">That would explain it! Sorry to hear that, but thanks very much for all your help.<br /><br />Best,<br />Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3449&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:47:34 GMT -->
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3618&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:06:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; elastic constants</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>elastic constants</h2>
+		<p><a href="viewtopicd6a2.html?f=9&amp;t=3618">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3618</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>elastic constants</h3>
+				<div class="date">Posted: <strong>Mon Jun 05, 2017 4:37 pm</strong></div>
+				<div class="author">by <strong>M.Hocine TEDJINI</strong></div>
+				<div class="content">Hi all members,<br /><br />i'm using calculation of elastic constants for ternary material of Zinc blend structure, in input file i used:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>occopt 1</code></pre></div><br /><br />the calculation stopped and show me this error:<br /><br />--- !ERROR<br />message: |<br />    In a non-metallic case (occopt&lt;3), for a RF calculation,<br />    if the eigenvalues are degenerate, the occupation numbers must also be degenerate.<br />    However, the following pair of states gave :<br />    k -state, band number   8, occ=    2.000000E+00eigenvalue=   -5.304725E-02,<br />     kq-state, band number   9, occ=    7.500000E-01, eigenvalue=   -5.304725E-02.<br />    Action : change occopt, consistently, in GS and RF calculations.<br />src_file: occeig.F90<br />src_line: 117<br />...<br /><br />after, i restard the same calculation and changed occopt 3 by using LDA<br />the calculation completed and i find  results :<br /><br /> Rigid-atom elastic tensor , in cartesian coordinates,<br />     j1       j2             matrix element<br />  dir pert dir pert     real part    imaginary part<br />  <br />   1    5   1    5         0.0173180338         0.0000000000<br />   1    5   2    5        -0.0025196114         0.0000000000<br />   1    5   3    5        -0.0025191941         0.0000000000<br />   1    5   1    6        -0.0000000002         0.0000000000<br />   1    5   2    6         0.0000000007         0.0000000000<br />   1    5   3    6         0.0000000002         0.0000000000<br />  <br />   2    5   1    5        -0.0025191170         0.0000000000<br />   2    5   2    5         0.0173300200         0.0000000000<br />   2    5   3    5        -0.0025191939         0.0000000000<br />   2    5   1    6         0.0000000000         0.0000000000<br />   2    5   2    6         0.0000000007         0.0000000000<br />   2    5   3    6         0.0000000002         0.0000000000<br />  <br />   3    5   1    5        -0.0025191167         0.0000000000<br />   3    5   2    5        -0.0025196110         0.0000000000<br />   3    5   3    5         0.0173218120         0.0000000000<br />   3    5   1    6         0.0000000000         0.0000000000<br />   3    5   2    6         0.0000000007         0.0000000000<br />   3    5   3    6         0.0000000000         0.0000000000<br />  <br />   1    6   1    5        -0.0000000000         0.0000000000<br />   1    6   2    5        -0.0000000000         0.0000000000<br />   1    6   3    5        -0.0000000000         0.0000000000<br />   1    6   1    6         0.0103930714         0.0000000000<br />   1    6   2    6         0.0000000000         0.0000000000<br />   1    6   3    6        -0.0000000000         0.0000000000<br />  <br />   2    6   1    5        -0.0000000000         0.0000000000<br />   2    6   2    5         0.0000000000         0.0000000000<br />   2    6   3    5         0.0000000000         0.0000000000<br />   2    6   1    6         0.0000000000         0.0000000000<br />   2    6   2    6         0.0103805301         0.0000000000<br />   2    6   3    6        -0.0000000000         0.0000000000<br />  <br />   3    6   1    5         0.0000000000         0.0000000000<br />   3    6   2    5         0.0000000000         0.0000000000<br />   3    6   3    5         0.0000000000         0.0000000000<br />   3    6   1    6        -0.0000000000         0.0000000000<br />   3    6   2    6        -0.0000000000         0.0000000000<br />   3    6   3    6         0.0103888474         0.0000000000<br /> <br />finally i get elastic constants:<br /><br /> Elastic Tensor (clamped ion) (unit:10^2GP):<br /><br />   5.0951406  -0.7412951  -0.7411724  -0.0000000   0.0000002   0.0000001<br />  -0.7411497   5.0986670  -0.7411723   0.0000000   0.0000002   0.0000001<br />  -0.7411496  -0.7412950   5.0962522   0.0000000   0.0000002   0.0000000<br />  -0.0000000  -0.0000000  -0.0000000   3.0577467   0.0000000  -0.0000000<br />  -0.0000000   0.0000000   0.0000000   0.0000000   3.0540569  -0.0000000<br />   0.0000000   0.0000000   0.0000000  -0.0000000  -0.0000000   3.0565039<br /><br /> Elastic Tensor (relaxed ion) (unit:10^2GP):<br />  (at fixed electric field boundary condition)<br /><br />   5.0951406  -0.7412951  -0.7411724  -0.0000000   0.0000002   0.0000001<br />  -0.7411497   5.0986670  -0.7411723  -0.0000000   0.0000002   0.0000001<br />  -0.7411496  -0.7412950   5.0962522   0.0000000   0.0000002   0.0000000<br />  -0.0000000  -0.0000000   0.0000000   3.0434104   0.0000000   0.0000000<br />  -0.0000000   0.0000000   0.0000000   0.0000000   3.0396484  -0.0000000<br />  -0.0000000   0.0000000   0.0000000   0.0000000  -0.0000000   3.0421411<br /><br />so my question is it this results logic, if not how i resolve it ?<br /><br />thanks all<br /><br />kind regards<br /><br />Hocine</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3618&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:06:25 GMT -->
+</html>

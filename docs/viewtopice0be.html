@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=5186&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:32:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; How to perform Delta SCF calculations using ABINIT?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>How to perform Delta SCF calculations using ABINIT?</h2>
+		<p><a href="viewtopicd6c6.html?f=9&amp;t=5186">https://forum.abinit.org/viewtopic.php?f=9&amp;t=5186</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>How to perform Delta SCF calculations using ABINIT?&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Wed Oct 07, 2020 7:08 pm</strong></div>
+				<div class="author">by <strong>bp432</strong></div>
+				<div class="content">Dear colleagues,<br>
+<br>
+   I tried to use Delta SCF method to simulate photoexcitation. However, I got an error message:<br>
+<br>
+--- !ERROR<br>
+src_file: m_dtset.F90<br>
+src_line: 1229<br>
+mpi_rank: 0<br>
+message: |<br>
+    Action: check input file for occ,wtk, and charge.<br>
+    Note that wtk is NOT automatically normalized when occopt=2,<br>
+    but IS automatically normalized otherwise.<br>
+<br>
+   Or sometimes the message can be:<br>
+<br>
+   --- !ERROR<br>
+src_file: m_parser.F90<br>
+src_line: 611<br>
+mpi_rank: 0<br>
+message: |<br>
+    It is observed in the input file: mytest.in line number 39,<br>
+    that more than 264 columns are used.<br>
+    This is not allowed. Change this line of your input file.<br>
+<br>
+   Could anyone please share an example of the input files for Delta SCF? In the ABINIT homepage there is no etra example on this. Thank you in advances!<br>
+<br>
+<br>
+Best regards,<br>
+Bo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to perform Delta SCF calculations using ABINIT?</h3>
+				<div class="date">Posted: <strong>Tue Oct 13, 2020 3:31 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Bo,<br>
+By photoexcitation, do you mean what has been used by C. Paillard and co-workers, e.g.<br>
+- Phys. Rev. B 96, 045205, 2017 <a href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.96.045205" class="postlink">https://journals.aps.org/prb/abstract/1 ... .96.045205</a><br>
+- Phys. Rev. Lett. 123, 087601, 2019 <a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.123.087601" class="postlink">https://journals.aps.org/prl/abstract/1 ... 123.087601</a><br>
+?<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to perform Delta SCF calculations using ABINIT?</h3>
+				<div class="date">Posted: <strong>Tue Oct 13, 2020 4:03 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Bo,<br>
+could you also deliver the input file since it sounds a problem when reading it?<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to perform Delta SCF calculations using ABINIT?</h3>
+				<div class="date">Posted: <strong>Wed Oct 14, 2020 11:12 am</strong></div>
+				<div class="author">by <strong>bp432</strong></div>
+				<div class="content">Hi Eric,<br>
+<br>
+   Yes exactly. I actually tried this in VASP, but as Delta SCF is not properly defined in VASP. I think ABINIT is a better approach. Please find my input below! Thank you very much!<br>
+<br>
+<br>
+Best regards,<br>
+Bo<br>
+<br>
+<br>
+#ndtset 2<br>
+<br>
+#Optimization of the lattice parameters<br>
+optcell 2<br>
+ionmov  2<br>
+ntime  200<br>
+dilatmx 1.05<br>
+ecutsm  0.5<br>
+pawmixdg 1<br>
+iscf 12<br>
+<br>
+#Definition of the k-point grids<br>
+kptopt 1          # Option for the automatic generation of k points, taking<br>
+                  # into account the symmetry<br>
+<br>
+nshiftk 1<br>
+shiftk  0 0 0<br>
+#        0.5 0.5 0.5  # These shifts will be the same for all grids<br>
+#        0.5 0.0 0.0<br>
+#        0.0 0.5 0.0<br>
+#        0.0 0.0 0.5<br>
+<br>
+ngkpt  6 6 6<br>
+#ngkpt2  4 4 4 <br>
+#ngkpt3  6 6 6    Not used ! <br>
+#ngkpt4  8 8 8  <br>
+<br>
+getwfk -1         # This is to speed up the calculation, by restarting<br>
+                  # from previous wavefunctions, transferred from the old <br>
+                  # to the new k-points.<br>
+<br>
+#Occupation<br>
+occopt  2<br>
+occu  2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0      2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0      2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0      2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0      2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0      2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0      2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0      2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0      2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0      2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0      2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0      2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0      2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0     2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0      2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0      2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0      2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0      2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0      2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0      2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0 2<br>
+<br>
+#Definition of the unit cell<br>
+acell 3*11.360030647          # This is equivalent to   10.18 10.18 10.18<br>
+#rprim  0.0  0.5  0.5   # FCC primitive vectors (to be scaled by acell)<br>
+#       0.5  0.0  0.5   <br>
+#       0.5  0.5  0.0<br>
+<br>
+#Definition of the atom types<br>
+ntypat 3          # There is only one type of atom<br>
+znucl 55 82 35    # The keyword "znucl" refers to the atomic number of the <br>
+                  # possible type(s) of atom. The pseudopotential(s) <br>
+                  # mentioned in the "files" file must correspond<br>
+                  # to the type(s) of atom. Here, the only type is Silicon.<br>
+<br>
+<br>
+#Definition of the atoms<br>
+natom 5           # There are two atoms<br>
+typat 1 2 3 3 3         # They both are of type 1, that is, Silicon.<br>
+xred              # This keyword indicate that the location of the atoms<br>
+   0.5  0.5  0.5  # will follow, one triplet of number for each atom<br>
+   0.0  0.0  0.0  # Triplet giving the REDUCED coordinate of atom 1.<br>
+   0.5  0.0  0.0<br>
+   0.0  0.5  0.0<br>
+   0.0  0.0  0.5  # Triplet giving the REDUCED coordinate of atom 2.<br>
+<br>
+#Definition of the planewave basis set<br>
+ecut 10.0         # Maximal kinetic energy cut-off, in Hartree<br>
+pawecutdg 50<br>
+<br>
+#Definition of the SCF procedure<br>
+nstep 100          # Maximal number of SCF cycles<br>
+toldfe 1.0d-6     # Will stop when, twice in a row, the difference <br>
+                  # between two consecutive evaluations of total energy <br>
+                  # differ by less than toldfe (in Hartree) <br>
+                  # This value is way too large for most realistic studies of materials<br>
+#diemac 12.0       # Although this is not mandatory, it is worth to<br>
+                  # precondition the SCF cycle. The model dielectric<br>
+                  # function used as the standard preconditioner<br>
+                  # is described in the "dielng" input variable section.<br>
+                  # Here, we follow the prescription for bulk silicon.<br>
+<br>
+<br>
+#%%&lt;BEGIN TEST_INFO&gt;<br>
+#%% [setup]<br>
+#%% executable = abinit<br>
+#%% [files]<br>
+#%% files_to_test = <br>
+#%%   tbase3_4.out, tolnlines=  0, tolabs=  6.200e-07, tolrel=  1.100e-03, fld_options=-medium<br>
+#%% psp_files =  14si.pspnc<br>
+#%% [paral_info]<br>
+#%% max_nprocs = 4<br>
+#%% [extra_info]<br>
+#%% authors = Unknown<br>
+#%% keywords = <br>
+#%% description = <br>
+#%%    Crystalline silicon : computation of the optimal lattice parameter<br>
+#%%    Convergence with respect to the number of k points.<br>
+#%%&lt;END TEST_INFO&gt;</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to perform Delta SCF calculations using ABINIT?</h3>
+				<div class="date">Posted: <strong>Wed Oct 14, 2020 3:17 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Bo,<br>
+I think the 2nd error message tells you one of the problem:
+<blockquote class="uncited"><div>It is observed in the input file: mytest.in line number 39,<br>
+that more than 264 columns are used.<br>
+This is not allowed. Change this line of your input file.</div></blockquote>
+I think you need to split the lonnng occu line into several lines.<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to perform Delta SCF calculations using ABINIT?</h3>
+				<div class="date">Posted: <strong>Fri Oct 16, 2020 4:00 pm</strong></div>
+				<div class="author">by <strong>bp432</strong></div>
+				<div class="content">Dear Eric,<br>
+<br>
+   Thank you for this! I tried to replace the input as:<br>
+<br>
+occu  2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0<br>
+          2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0<br>
+          2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0<br>
+          2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0<br>
+          2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0<br>
+          2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0<br>
+          2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0<br>
+          2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0<br>
+          2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0<br>
+          2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0<br>
+          2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0<br>
+          2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0<br>
+          2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0<br>
+          2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0<br>
+          2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0<br>
+          2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0<br>
+          2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0<br>
+          2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0<br>
+          2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0<br>
+          2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0 2<br>
+<br>
+   But now the error message is:<br>
+<br>
+--- !ERROR<br>
+src_file: m_dtset.F90<br>
+src_line: 1229<br>
+mpi_rank: 0<br>
+message: |<br>
+    Action: check input file for occ,wtk, and charge.<br>
+    Note that wtk is NOT automatically normalized when occopt=2,<br>
+    but IS automatically normalized otherwise.<br>
+ <br>
+...<br>
+<br>
+   I am really confused now. Thanks in advances for your kind help!<br>
+<br>
+<br>
+Best regards,<br>
+Bo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to perform Delta SCF calculations using ABINIT?</h3>
+				<div class="date">Posted: <strong>Tue Oct 20, 2020 3:28 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Bo,<br>
+The combination of occopt=2 and weight of the k-points (wtk) that are not equal for all k-points gives non-neutral cell if you transfer electrons between two k-points that have different weight.<br>
+If you  put an electron (in the conduction) in a k-point k2 that has a weight of, e.g. 1/4 while taking it from a k-point k1 (from the valence) that has a different weight of, lets say, 1/2, then you have to put an occupation of 1 in the conduction of k2 and remove 0.5e from the conduction of k1.<br>
+I think it is your problem.<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to perform Delta SCF calculations using ABINIT?</h3>
+				<div class="date">Posted: <strong>Sun Oct 25, 2020 7:06 am</strong></div>
+				<div class="author">by <strong>gonze</strong></div>
+				<div class="content">Dear Bo, I think that there is a typo in your input file: "occu" should be replaced be "occ" .</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to perform Delta SCF calculations using ABINIT?</h3>
+				<div class="date">Posted: <strong>Thu Oct 29, 2020 9:23 pm</strong></div>
+				<div class="author">by <strong>dbennett1994</strong></div>
+				<div class="content">Hi, is it possible to optimize the cell geometry using the Delta SCF method? Building on Bo's input, I tried to do a calculation using the images method. I have two images:<br>
+<br>
+occ 22*2.0 0.0 <br>
+<br>
+occ_2img 21*2.0 0.0 2.0<br>
+<br>
+And I want to do a set of calculations at points between the two images, i.e. (1-x)*img1 + x*img2 where x goes from 0 to 1:<br>
+<br>
+mixesimgf1   1.0 0.0<br>
+mixesimgf2   0.9 0.1<br>
+mixesimgf3   0.8 0.2<br>
+mixesimgf4   0.7 0.3<br>
+mixesimgf5   0.6 0.4<br>
+mixesimgf6   0.5 0.5<br>
+mixesimgf7   0.4 0.6<br>
+mixesimgf8   0.3 0.7<br>
+mixesimgf9   0.2 0.8<br>
+mixesimgf10  0.1 0.9<br>
+mixesimgf11  0.0 1.0<br>
+<br>
+and added other options related to the image method similarly to the file v8/Input/t20.in:<br>
+<br>
+#Parameters for the image dynamics<br>
+imgmov 6<br>
+ntimimage 200<br>
+tolimg   1.0d-8<br>
+mixesimgf 1.0<br>
+imgwfstor 1<br>
+<br>
+and commented out ntime. When I run with ionmov 2 and optcell 1, I get the error:<br>
+<br>
+ chkint_prt: ERROR -<br>
+ Context: the value of the variable optcell is 1.<br>
+  The value of the input variable ionmov is 2, while it must be<br>
+  equal to 0<br>
+  Action: you should change the input variables ionmov or optcell.<br>
+<br>
+is it not possible to optimize the cell volume here?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to perform Delta SCF calculations using ABINIT?</h3>
+				<div class="date">Posted: <strong>Mon Nov 02, 2020 8:57 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear dbenett1994,<br>
+You are not doing a simple relaxation of the cell, right? <br>
+It looks like that with imgmov only optcell=0? I'll ask the dev to see if he confirms...<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: How to perform Delta SCF calculations using ABINIT?</h3>
+				<div class="date">Posted: <strong>Fri Nov 20, 2020 11:32 am</strong></div>
+				<div class="author">by <strong>dbennett1994</strong></div>
+				<div class="content">Yes, I wanted to relax the unit cell with optcell 1 for each image. I found that it worked if I modified the occupation numbers manually. Is there much of a difference between doing that and using images?<br>
+<br>
+Thanks,<br>
+<br>
+Danny</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=5186&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:32:00 GMT -->
+</html>

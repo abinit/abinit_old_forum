@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=865&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:41:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] Are there using coordinate transf in caculating RF?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] Are there using coordinate transf in caculating RF?</h2>
+		<p><a href="viewtopic24c1.html?f=10&amp;t=865">https://forum.abinit.org/viewtopic.php?f=10&amp;t=865</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] Are there using coordinate transf in caculating RF?</h3>
+				<div class="date">Posted: <strong>Thu Jan 27, 2011 1:27 am</strong></div>
+				<div class="author">by <strong>lzl8181</strong></div>
+				<div class="content">we know there exist three sets of coordinates in solid physics or crystal physics: the conventional unit (basal vector of this coordinate: A, B,C), the primitive unit (basal vector :a,b,c), and the Cartesian coordinate (basal vector : x,y,z), but in usual caculation, we often adopt the primitive unit (basal vector :a,b,c) or self-defined unit cell (in supercell case) to reduce the weight of caculation, so the confusion comes:<br />    when we set the direction of perturbation (rfdir), which coordinate of the above three it adopts? is that of primitive unit ?<br />if rfdir=100, which direction it refers to, the direction of vector a, or of vector A, or of vector X? As i know, often the macroscopic symmetry of a crystal is anylyzed in the conventional unit, and many physical properties, such as dielectric function, elastic constants,etc, must correlate with the macroscopic symmetry. <br />     if it's true,  does there exist coordinate transformation inside Abinit to get those  symmtery-imposed results using the coordinate of primitive unit ? how can this coordinate just give out symmtery-imposed results as we can see from the results of course of elasic tensor caculation?<br />      sorry for my poor english, best wishs!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Are there using coordinate transformation in caculating </h3>
+				<div class="date">Posted: <strong>Thu Jan 27, 2011 4:01 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">rfdir refers to cartesian directions. rprim is the map from cartesian to crystal (abc) directions. The output of the perturbation calculations rfelfd (electric field) and rfstrs (strains, thus elastic constants) are in cartesian directions. How this works will depend a bit on how you define your input structure; for example, an FCC crystal could be orientated such that its conventional axes lie along x/y/z cartesian directions, then rprim will be (0,1/2,1/2),(1/2,0,1/2),(1/2,1/2,0). It could also be imagined to be arbitrarily rotated, and then rprim will reflect this; however, this would be a very hard way to solve the problem. Easiest to imagine your starting crystal as close to an obvious x/y/z orientation as possible.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Are there using coordinate transformation in caculating </h3>
+				<div class="date">Posted: <strong>Thu Jan 27, 2011 9:42 pm</strong></div>
+				<div class="author">by <strong>lzl8181</strong></div>
+				<div class="content">Dear prof. Zwanziger, <br />       I'm very glad to receive you timely reply!  Thank you for your help! That question has confused me for a long time, many articles give different blurred expressions, it is sloved today!</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=865&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:41:54 GMT -->
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=4497&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 16:00:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; repfn calculation crashes because ngfftdg doesnt match</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>repfn calculation crashes because ngfftdg doesnt match</h2>
+		<p><a href="viewtopiccacf.html?f=10&amp;t=4497">https://forum.abinit.org/viewtopic.php?f=10&amp;t=4497</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>repfn calculation crashes because ngfftdg doesnt match</h3>
+				<div class="date">Posted: <strong>Mon Aug 10, 2020 9:00 pm</strong></div>
+				<div class="author">by <strong>tyst3273</strong></div>
+				<div class="content">Hi Abinit users,<br>
+<br>
+I am doing some phonon calculations with version 9.0.4 and have been running into a problem regarding ngfftdg. <br>
+<br>
+<br>
+Here is a short summary:<br>
+<br>
+First, I do a ground state calculation to generate wavefunction and density files.<br>
+Then, I do an nscf calculation with iscf = -2 and nqpt = 1 at the desired qpoint. <br>
+Then I do the response calculation (rfphon = 1) reading the wavefunctions (WFK and WFQ) from the groundstate and nscf runs. <br>
+<br>
+I keep ecut, pawecutdg, acell, and rprim the same for all calculations. <br>
+<br>
+The problem I am having is, after reading the ground state density in the nscf run, Abinit determines a different ngfftdg value than the groundstate run and then crashes with a message that the ngfftdg number doesn't match the density file.<br>
+<br>
+--- !ERROR<br>
+src_file: m_hdr.F90<br>
+src_line: 3964<br>
+mpi_rank: 0<br>
+message: |<br>
+    fft grids must be the same for restart from a density file.<br>
+    Action: change your fft grid or your restart file.<br>
+...<br>
+<br>
+<br>
+<br>
+If I go look at the .abo file from the groundstate run and manually set the ngfftdg values in the nscf calculation, it runs without crashing. This is an okay hack, but it disrupts my workflow and I would like to not have to manually read the groundstate output file and set this manually. <br>
+<br>
+<br>
+I have attached the groundstate and an example phonon dfpt input file. The value ngfftdg in the .abo file from the response run is:<br>
+            ngfft          36      36     100<br>
+          ngfftdg1         45      45     135<br>
+          ngfftdg2         48      48     135<br>
+In the ground state run, ngfftdg   =    48 48 144.<br>
+<br>
+<br>
+I am not sure if this is some sort of bug or if I have made some error, so any advice is appreciated!<br>
+<br>
+Thanks a lot,<br>
+<br>
+Ty</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: repfn calculation crashes because ngfftdg doesnt match&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Wed Aug 12, 2020 12:07 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Ty, <br>
+This problem usually happens when a cell relaxation is done in the ground state (the fft grid is in real space and is calculated w.r.t. cell parameters), is it the case here, I do not see a relaxation of the cell in your gs input?<br>
+Otherwise you can enforce the fft grids by setting them in the input file of the DFPT calculation.<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: repfn calculation crashes because ngfftdg doesnt match</h3>
+				<div class="date">Posted: <strong>Wed Aug 12, 2020 3:37 pm</strong></div>
+				<div class="author">by <strong>tyst3273</strong></div>
+				<div class="content">Hi Eric, <br>
+Thanks a lot for the reply!<br>
+There is no relaxation in the ground state calculation, and the cell parameters are identical in all runs (gs and all pert). Enforcing ngfft and ngfftdg works, thanks a lot. <br>
+Ty</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=4497&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 16:00:45 GMT -->
+</html>

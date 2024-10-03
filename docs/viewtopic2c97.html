@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=361&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; statically link libraries</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>statically link libraries</h2>
+		<p><a href="viewtopicdc1d.html?f=3&amp;t=361">https://forum.abinit.org/viewtopic.php?f=3&amp;t=361</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>statically link libraries</h3>
+				<div class="date">Posted: <strong>Thu May 27, 2010 5:27 pm</strong></div>
+				<div class="author">by <strong>sand7000</strong></div>
+				<div class="content">I would like to compile abinit with statically linked libraries. I used the following configuration options<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;./configure&nbsp; &nbsp; --prefix=$HOME/program/abinit&nbsp; &nbsp;--program-suffix=&quot;-mpi&quot;&nbsp; &nbsp; &nbsp;--enable-mpi&nbsp; &nbsp;--with-linalg-libs=&quot;-Wl,-rpath,/usr/local/intel-11.1.056/mkl/lib/em64t -Wl,--start-group /usr/local/intel-11.1.056/mkl/lib/em64t/libmkl_intel_lp64.a /usr/local/intel-11.1.056/mkl/lib/em64t/libmkl_sequential.a /usr/local/intel-11.1.056/mkl/lib/em64t/libmkl_core.a -Wl,--end-group -lguide -lpthread -lm&quot;&nbsp; &nbsp; &nbsp;--enable-scalapack&nbsp; &nbsp;-with-scalapack-libs=&quot;-Wl,-rpath,/usr/local/intel-11.1.056/mkl/lib/em64t -Wl,--start-group /usr/local/intel-11.1.056/mkl/lib/em64t/libmkl_intel_lp64.a /usr/local/intel-11.1.056/mkl/lib/em64t/libmkl_sequential.a /usr/local/intel-11.1.056/mkl/lib/em64t/libmkl_core.a -Wl,--end-group -lpthread&quot;&nbsp; &nbsp; &nbsp;FC=mpif90 CC=mpiCC<br /></code></pre></div><br />but I get the following error<br /><blockquote class="uncited"><div>configure: parsing command-line options<br />configure: error: invalid library statement in with_linalg_libs: /usr/local/intel-11.1.056/mkl/lib/em64t/libmkl_intel_lp64.a<br /></div></blockquote><br />Can anyone tell me the mistake I am making?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: statically link libraries</h3>
+				<div class="date">Posted: <strong>Thu May 27, 2010 7:09 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">See this thread: <!-- l --><a class="postlink-local" href="viewtopic0a4b.html?f=3&amp;t=311">viewtopic.php?f=3&amp;t=311</a><!-- l --><br /><br />With ifort, you might have to add options like &quot;-i-static&quot;, but it is not guaranteed that it will work on all platforms.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: statically link libraries</h3>
+				<div class="date">Posted: <strong>Wed Jul 28, 2010 6:35 pm</strong></div>
+				<div class="author">by <strong>vimtex</strong></div>
+				<div class="content"><blockquote><div><cite>sand7000 wrote:</cite>I would like to compile abinit with statically linked libraries. I used the following configuration options<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;./configure&nbsp; &nbsp; --prefix=$HOME/program/abinit&nbsp; &nbsp;--program-suffix=&quot;-mpi&quot;&nbsp; &nbsp; &nbsp;--enable-mpi&nbsp; &nbsp;--with-linalg-libs=&quot;-Wl,-rpath,/usr/local/intel-11.1.056/mkl/lib/em64t -Wl,--start-group /usr/local/intel-11.1.056/mkl/lib/em64t/libmkl_intel_lp64.a /usr/local/intel-11.1.056/mkl/lib/em64t/libmkl_sequential.a /usr/local/intel-11.1.056/mkl/lib/em64t/libmkl_core.a -Wl,--end-group -lguide -lpthread -lm&quot;&nbsp; &nbsp; &nbsp;--enable-scalapack&nbsp; &nbsp;-with-scalapack-libs=&quot;-Wl,-rpath,/usr/local/intel-11.1.056/mkl/lib/em64t -Wl,--start-group /usr/local/intel-11.1.056/mkl/lib/em64t/libmkl_intel_lp64.a /usr/local/intel-11.1.056/mkl/lib/em64t/libmkl_sequential.a /usr/local/intel-11.1.056/mkl/lib/em64t/libmkl_core.a -Wl,--end-group -lpthread&quot;&nbsp; &nbsp; &nbsp;FC=mpif90 CC=mpiCC<br /></code></pre></div><br />but I get the following error<br /><blockquote class="uncited"><div>configure: parsing command-line options<br />configure: error: invalid library statement in with_linalg_libs: /usr/local/intel-11.1.056/mkl/lib/em64t/libmkl_intel_lp64.a<br /></div></blockquote><br />Can anyone tell me the mistake I am making?</div></blockquote><br /><br />The configure script like to check whether the library statement is valid or not by &quot;grep '^-LlW'&quot;<br />try<br /><br />./configure ........... --with-linalg-libs=&quot;-L/usr/local/intel-11.1.056/mkl/lib/em64t  -lmkl_intel_lp64 -l ....   -liomp5 -lpthread &quot;<br /><br />and use -i-static option as suggested</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=361&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:32:55 GMT -->
+</html>

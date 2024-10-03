@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=55&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:55:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Meaning of &quot;command sign differs&quot;</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Meaning of &quot;command sign differs&quot;</h2>
+		<p><a href="viewtopicf317.html?f=19&amp;t=55">https://forum.abinit.org/viewtopic.php?f=19&amp;t=55</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Meaning of &quot;command sign differs&quot;</h3>
+				<div class="date">Posted: <strong>Thu Feb 11, 2010 3:22 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Hi all,<br />my public branch fails one test, tv6_43, on the build farm with the failure information<br /><br /> Case_43<br />The diff analysis cannot be pursued : the command sign differ.<br />File 1, line 895, 89 ignored, character: <br />File 2, line 895, 89 ignored, character:=<br /><br />Summary Case_43 : fatal error, see above message<br /><br />This test runs fine on my machine. On my machine line 895 of the output file is a string of &quot;=&quot; signs beginning in the left most column, I assume this is the problem? But I'm not at all sure what I should do about it (my code additions didn't add any output writing). Any help you can suggest would be much appreciated.<br /><br />thanks,<br />Joe</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Meaning of &quot;command sign differs&quot;</h3>
+				<div class="date">Posted: <strong>Thu Feb 11, 2010 5:45 pm</strong></div>
+				<div class="author">by <strong>gonze</strong></div>
+				<div class="content">Hi Joe,<br /><br />From the information provided on the buildbot Web pages, you could not identify what was the problem.<br />You should have had access to the full t43.diff file to see what was going wrong. It is planned<br />to give full access to these *.diff files in the future (and no more the 50 last lines).<br /><br />Now, back to your problem : I did access the testf machine, to see what was wrong.<br />It is only a very small problem of portability. Actually, using nstep=10 should fix it.<br />If you agree, I can fix it and proceed with the usual week-end merge with your branch included ...<br />Indeed, this is the only problem of your branch.<br /><br />Best regards,<br />Xavier</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Meaning of &quot;command sign differs&quot;</h3>
+				<div class="date">Posted: <strong>Thu Feb 11, 2010 5:57 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Hi,<br />thanks for the tip. Are the test files always supposed to have an nstep=10 limit? I can add that and push again.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Meaning of &quot;command sign differs&quot;</h3>
+				<div class="date">Posted: <strong>Thu Feb 11, 2010 8:59 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">I agree - the error message is horrible - I have changed it in my 6.1.0<br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=55&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:55:13 GMT -->
+</html>

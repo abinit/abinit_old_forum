@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=13&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:20:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] Linalg detection</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] Linalg detection</h2>
+		<p><a href="viewtopicd850.html?f=3&amp;t=13">https://forum.abinit.org/viewtopic.php?f=3&amp;t=13</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] Linalg detection</h3>
+				<div class="date">Posted: <strong>Tue Dec 01, 2009 6:44 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">I don't want to compile BLAS/LAPACK ever again! This is primitive, and we (well, sorry Yann, I mean you) should automate native linalg detection by default.<br /><br />I know, I know &lt;grumble&gt; <br />with_linalg_libs=&quot;-L/cvos/shared/apps/gotoblas/penryn/64/1.26/ -lgoto -llapack&quot;<br />with_linalg_includes=&quot;&quot;<br />with_linalg_type=&quot;&quot;<br /><br />At least trying -lblas -llapack before defaulting to abinit libs<br /><br />Matthieu<br /><br />PS: how do I delete my other post under bazaar?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Linalg detection</h3>
+				<div class="date">Posted: <strong>Tue Dec 01, 2009 7:42 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">I've been having plans for an improved linalg support for a few years now, and have already made a few unsuccessful attempts. It slowly goes to higher and higher priority ranks on my todo list, but there are many other emergencies. Difficult to choose what to do first, sometimes ...<br /><br />If the weather is sufficiently bad for Christmas, Santa Claus might bring some linalg support for Linux.  <img class="smilies" src="images/smilies/icon_e_wink.gif" alt=";)" title="Wink" /></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Linalg detection</h3>
+				<div class="date">Posted: <strong>Sat Mar 06, 2010 1:23 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Looks like it works, but now (latest 6.1 trunk merge) I have a missing object: Matteo has added ilaver to a module, and this is not packaged in my distro /usr/lib64/liblapack.so.3 in CVOS. Problem...<br /><br />Could either Matteo remove this from src/53_abiutil/m_abilasi.F90 or Yann add a test for ilaver in the lapack detection? We could also consider &quot;patching&quot; and adding the 2-3 routines that are not in all distrib lapacks to a &quot;snack&quot; library to be added to the main lapack if needed. Is it that ilaver only exists in recent distributions of lapack? In that case we need a metatest before calling it.<br /><br />Why the @$^@#^@! don't they package a complete and full lapack distribution? What the hell is hard about this?<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Linalg detection</h3>
+				<div class="date">Posted: <strong>Sun Mar 07, 2010 10:32 am</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">Hi,<br /><br />We had the same problem (missing ilaver) one month ago...<br />We used mkl8 on one of our distro. I was able to compile by adding manually ilaver.o.<br />Now, on the same architecture, we are in mkl10 and everything is OK.<br />An idea is perhaps to furnish ilaver.f90 in the package (temporarilly)... or suppress it... or furnish a fake version of it...<br /><br />Marc</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Linalg detection</h3>
+				<div class="date">Posted: <strong>Mon Mar 08, 2010 3:19 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Or to not use it if it is not vital...</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=13&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:20:49 GMT -->
+</html>

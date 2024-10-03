@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1368&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:39:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Band Structure of Graphene</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Band Structure of Graphene</h2>
+		<p><a href="viewtopic8dc4.html?f=9&amp;t=1368">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1368</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Band Structure of Graphene</h3>
+				<div class="date">Posted: <strong>Tue Oct 11, 2011 5:27 am</strong></div>
+				<div class="author">by <strong>rohan</strong></div>
+				<div class="content">Hey,<br />     I am trying to calculate the band structure of graphene and I used the attached input file. The bands look decent except the two bands highest in energy. If anyone knows why... please shed some light on this issue.<br />Thanks,<br />Rohan<br /><br /># Crystalline graphene (graphite) <br />#<br /># Computation of the band structure.<br /># First, a SCF density computation, then a non-SCF band structure calculation.<br /><br />ndtset 2<br /><br />#Dataset 1 : usual self-consistent calculation<br />kptopt1 1          # Option for the automatic generation of k points,<br />                   # taking into account the symmetry<br />iscf1 3<br />nshiftk1 1<br />shiftk1  0 0 0.0  # These shifts will be the same for all grids<br /><br />ngkpt1  5 5 1  <br />nband1 8<br />prtden1  1         # Print the density, for use by dataset 2<br />toldfe1  1.0d-8<br /><br />#Dataset 2 : the band structure<br />iscf2    -2<br />getden2  -1<br />kptopt2  -3<br />nband2   8<br />ndivk2   20 12 24      # 20, 12 and 24 divisions of the 3 segments, delimited<br />                       # by 4 points.<br />kptbounds2  0.0  0.0  0.0 # Gamma point<br />            0.5  0.5  0.0 # M point<br />            0.66667  0.33333  0.0 # K point <br />            0.0  0.0  0.0  # Gamma point again <br />        <br />tolwfr2  1.0d-12<br />enunit2  1             # Will output the eigenenergies in eV <br /><br /><br />#Definition of the unit cell<br />acell 4.6415 4.6415 24.6415 #  in Bohr radii<br />rprim  0.8660  -0.5      0   # Graphene (graphite) primitive column vectors scaled acell<br />       0.8660  0.5     0   <br />       0       0       1<br /><br />#Definition of the atom types<br />ntypat 1          # There is only one type of atom<br />znucl 6          # The keyword &quot;znucl&quot; refers to the atomic number of the <br /># possible type(s) of atom. The pseudopotential(s) <br /># mentioned in the &quot;files&quot; file must correspond<br /># to the type(s) of atom. Here, the only type is Carbon<br /><br />#Definition of the atoms: 2 atoms of type 1, Carbon<br />natom 2<br />typat 1 1<br />xangst              # This keyword indicate that the location of the atoms in ANGSTROM<br />                  # will follow, one triplet of number for each atom<br />0.0  0.0  0.0  # Triplet giving the  coordinate of atom 1.<br />0.71  1.22975  0.0  # Triplet giving the  coordinate of atom 2.<br /><br />#Definition of the planewave basis set<br />ecut 20.0         # Maximal kinetic energy cut-off, in Hartree<br /><br />#Definition of the SCF procedure<br />nstep 25          # Maximal number of SCF cycles<br />diemac 1000000       # Although this is not mandatory, it is worth to<br /># precondition the SCF cycle. The model dielectric<br /># function used as the standard preconditioner<br /># is described in the &quot;dielng&quot; input variable section.<br /># Here, we follow the prescription for a metal</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Band Structure of Graphene</h3>
+				<div class="date">Posted: <strong>Thu Oct 13, 2011 7:05 pm</strong></div>
+				<div class="author">by <strong>jolafc</strong></div>
+				<div class="content">Hi,<br /><br />There is nothing wrong with your input file. In abinit, the 2 bands highest in energy are not as well converged as the others. If you want all of the bands in your band structure to look nice, calculate at least 2 more bands in your abinit calculations than you display in your final band structure.<br /><br />Good luck,<br /><br />Jonathan Laflamme Janssen</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Band Structure of Graphene</h3>
+				<div class="date">Posted: <strong>Tue Feb 25, 2014 8:34 am</strong></div>
+				<div class="author">by <strong>Seba Darshan</strong></div>
+				<div class="content">hai<br />I m now trying to plot the band structure and density of states of graphene. When I looked through the input file, I found the input variables 'acell' and 'rprim'.Can you help me to understand these input variables and how you have selected these for your input file.<br /><br /><br />Regards<br />Seba</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Band Structure of Graphene</h3>
+				<div class="date">Posted: <strong>Wed Mar 26, 2014 3:31 am</strong></div>
+				<div class="author">by <strong>kazem.manzoor</strong></div>
+				<div class="content">Hi Dear <br />I'm new in abinit and use your input file for test.<br />i use pseudopotential:abinit-7.6.2/tests/Psps_for_tests/6c.pspnc. <em class="text-italics">is it correct?<br />when run , see this error please help me:</em><br /><br /> chkinp: Checking input parameters for consistency.<br /><br /> chkinp: ERROR -<br />   Chksymbreak=1 . A potentially symmetry-breaking value of tnons has been observed :<br />   for the symmetry number    2<br />   symrel is  -1  0  0  0 -1  0  0  0 -1<br />   tnons is    -3.337787E-01   -3.324254E-01    0.000000E+00<br />   Please, read the description of the input variable chksymbreak,<br />   then, if you feel confident, you might switch it to zero, or consult with the forum.<br /><br /> chkinp: ERROR -<br />   Chksymbreak=1 . A potentially symmetry-breaking value of tnons has been observed :<br />   for the symmetry number    3<br />   symrel is  -1  0  0  0 -1  0  0  0  1<br />   tnons is    -3.337787E-01   -3.324254E-01    0.000000E+00<br />   Please, read the description of the input variable chksymbreak,<br />   then, if you feel confident, you might switch it to zero, or consult with the forum.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Band Structure of Graphene</h3>
+				<div class="date">Posted: <strong>Wed Mar 26, 2014 3:59 am</strong></div>
+				<div class="author">by <strong>kazem.manzoor</strong></div>
+				<div class="content"><blockquote><div><cite>Seba Darshan wrote:</cite>hai<br />I m now trying to plot the band structure and density of states of graphene. When I looked through the input file, I found the input variables 'acell' and 'rprim'.Can you help me to understand these input variables and how you have selected these for your input file.<br /><br /><br />Regards<br />Seba</div></blockquote><br />you can find your answer in this page : <!-- m --><a class="postlink" href="http://www.abinit.org/documentation/helpfiles/for-v7.6/input_variables/varbas.html">http://www.abinit.org/documentation/hel ... arbas.html</a><!-- m --><br />for initialize you need know graphene structure and try to optimize with K points,ecut and lattice parameters.<br />you can find more information in tutorial3 in abinit documents!<br /><br />manzoor</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1368&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:39:12 GMT -->
+</html>

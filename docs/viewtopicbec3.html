@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=2126&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:08:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] Subroutine unknown error</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] Subroutine unknown error</h2>
+		<p><a href="viewtopic6584.html?f=10&amp;t=2126">https://forum.abinit.org/viewtopic.php?f=10&amp;t=2126</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] Subroutine unknown error</h3>
+				<div class="date">Posted: <strong>Thu May 09, 2013 11:33 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content">Dear all!<br /><br />I'm trying to calculate the phonon freqs in a single q point. After finishing the first dataset with smooth convergence, dataset 2 stops almost immediately with an error given bellow. Can anyone help me with explaining why this happens?<br /><br />Thank you in advance!<br /><br />Yours,<br /><br />Igor Lukacevic<br /><br /><br /><br /> inwffil : examining the header of disk file t11o_DS1_WFK<br />-P-0000<br />-P-0000 ================================================================================<br />-P-0000<br />-P-0000           - hdr_check: checking restart file header for consistency -<br />-P-0000<br />-P-0000<br />-P-0000         current calculation                         restart file<br />-P-0000         -------------------                         ------------<br />-P-0000<br />-P-0000   calculation expects a wf_planewave    |  input file contains a wf_planewave<br />-P-0000 . ABINIT  code version 7.0.5            |  ABINIT  code version ^@^@^@^@^@^@<br /><br /> Subroutine Unknown:0:ERROR<br />   input fform=         2 differs from disk file fform=         0.<br />-P-0000<br />-P-0000  leave_new : decision taken to exit ...<br /> DATA TYPE INFORMATION:<br /> REAL:      Data type name: REAL(DP)<br />            Kind value:      8<br />            Precision:      15<br />            Smallest nonnegligible quantity relative to 1:  0.22204460E-15<br />            Smallest positive number:                       0.22250739-307<br />            Largest representable number:                   0.17976931+309<br /> INTEGER:   Data type name: INTEGER(default)<br />            Kind value: 4<br />            Bit size:   32<br />            Largest representable number: 2147483647<br /> LOGICAL:   Data type name: LOGICAL<br />            Kind value: 4<br /> CHARACTER: Data type name: CHARACTER             Kind value: 1<br />  ==== Using MPI-1 specifications ====<br />  MPI-IO support is ON<br />  xmpi_tag_ub ................   2147483647<br />  xmpi_bsize_ch ..............            1<br />  ==== Using MPI-1 specifications ====<br />  MPI-IO support is ON<br />  xmpi_tag_ub ................   2147483647<br />  xmpi_bsize_ch ..............            1<br />  xmpi_bsize_int .............            4<br />  xmpi_bsize_sp ..............            4<br />  xmpi_bsize_dp ..............            8<br />  xmpi_bsize_spc .............            8<br />  xmpi_bsize_dpc .............           16<br />  xmpio_bsize_frm ............            4<br />  xmpi_address_kind ..........            8<br />  xmpi_offset_kind ...........            8<br />  MPI_WTICK ..................   9.99999999999999955E-007<br /><br /><br /><br />Here's my input file:<br /><br /># computation of the response to atomic displacements, at q=X<br /><br />   ndtset   18<br />   udtset   9 2<br /><br />#Set 1 : ground state self-consistency<br /><br />  kptopt?1   1            # Automatic generation of k points, taking<br />                          # into account the symmetry<br />  tolvrs?1   1.0d-18<br /><br />#Set 2 : finite-wave-vector phonon calculations at X point<br /><br />    nqpt?2   1<br />     qpt?2   0.0 0.5 0.0  # q=X<br />  getwfk?2   1            # Use GS wave functions from dataset1<br />  kptopt?2   3            # Need full k-point set for finite-Q response<br />  rfphon?2   1            # Do phonon response<br /> rfatpol?2   1 2          # Treat displacements of all atoms<br />   rfdir?2   1 1 1        # Do all directions (symmetry will be used)<br />  tolvrs?2   1.0d-8<br /><br />#######################################################################<br />#Common input variables<br /><br />#Definition of the unit cell<br />acell   3*7.7<br />rprim   0.0  0.5  0.5<br />        0.5  0.0  0.5<br />        0.5  0.5  0.0<br /><br />#Number of bands<br />nband   18<br /><br />#Exchange-correlation functional<br />ixc     1<br /><br />#Definition of the planewave basis set<br />ecut:?  20<br />ecut+?  10<br />ecutsm  0.5<br />dilatmx 1.1<br /><br />#Definition of the k-point grid<br />ngkpt   3*4<br />nshiftk 4<br />shiftk  0.5  0.5  0.5<br />        0.5  0.0  0.0<br />        0.0  0.5  0.0<br />        0.0  0.0  0.5<br /><br />#Definition of the SCF procedure<br />iscf     7<br />#nnsclo   10<br />#nline    8<br />#npulayit 12<br />nstep    300<br />diemac   4<br /><br />timopt   2</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Subroutine unknown error</h3>
+				<div class="date">Posted: <strong>Thu May 09, 2013 3:26 pm</strong></div>
+				<div class="author">by <strong>gabriel.antonius</strong></div>
+				<div class="content">The problem is <br />getwfk?2 1 <br /><br />Since you use multi dataset mode with<br />  ndtset 18<br />  udtset 9 2<br />the first dataset index is &quot;11&quot; and the second is &quot;12&quot;, but now it's looking for dataset &quot;1&quot;<br />Just use<br />getwfk?2 -1</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Subroutine unknown error</h3>
+				<div class="date">Posted: <strong>Fri May 10, 2013 10:56 am</strong></div>
+				<div class="author">by <strong>ilukacevic</strong></div>
+				<div class="content"><img class="smilies" src="images/smilies/icon_redface.gif" alt=":oops:" title="Embarrassed" />   Dear Gabriel, you made me feel ashamed.<br /><br />thnx<br /><br />Igor</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=2126&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:08:48 GMT -->
+</html>

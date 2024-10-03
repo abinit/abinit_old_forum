@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=2360&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:16:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Too Many q Points in GKK files?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Too Many q Points in GKK files?</h2>
+		<p><a href="viewtopic4e7c.html?f=12&amp;t=2360">https://forum.abinit.org/viewtopic.php?f=12&amp;t=2360</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Too Many q Points in GKK files?</h3>
+				<div class="date">Posted: <strong>Fri Dec 06, 2013 5:31 pm</strong></div>
+				<div class="author">by <strong>ljludwig</strong></div>
+				<div class="content">Dear All:<br /><br />I am calculating electron-phonon properties. The unit cell contains 5 atoms, with k-mesh 8x8x8, and q mesh 2x2x2. There are 8 in-equivalent q points. This leads to a 5x3x8=120 perturbations in MRGGKK input, and 8 DDB files in MRGDDB input.<br /><br />the mrgddb and mrggkk seems both OK. However, when running anaddb, it says:<br /><br />read_gkk.F90:302:ERROR<br />found too many qpoints in GKK file wrt anaddb input<br />nqpt_anaddb nqpt_gkk = 6 7<br /><br /><br />I have no single clue that what might be going on, that where the number &quot;6&quot; and &quot;7&quot; come from. Any suggestions? Many thanks!!!<br /><br />Best,<br /><br /><br />ps: Due to the too many problem I've met, I am serious thinking of co-authorship if we could conquer these difficulties together. Looking for help sincerely.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Too Many q Points in GKK files?</h3>
+				<div class="date">Posted: <strong>Tue May 27, 2014 12:19 am</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello,<br /><br />Please read the nettiquette - it gets really hard to guess what is going on.<br /><br />For 8 inequivalent q from a 2x2x2 grid that means you have no symmetries at all?<br /><br />The values read_gkk is complaining about are <br />1) the number it has calculated from your ngqpt and shifts<br />2) the number it reads from your main GKK file<br /><br />the two should agree of course, and it looks like it has found some symmetries, but without any log or output or input or anything it's a bit hard to tell.<br /><br />Also check that your GKK files are merged grouped together by qpt.<br /><br />Finally you might try the latest abinit/anaddb version. From 7.6.4 there is a new procedure to calculate the matrix elements separately, on a k-point grid of your choosing (check the doc and tutorials). You may have to be careful to specify the Fermi level explicitly with elph_fermie if you use this non self-consistent scheme.<br /><br />cheers<br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=12&t=2360&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:16:32 GMT -->
+</html>

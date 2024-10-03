@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1085&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:05:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; relativistic TM potentials</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>relativistic TM potentials</h2>
+		<p><a href="viewtopic2fe4.html?f=19&amp;t=1085">https://forum.abinit.org/viewtopic.php?f=19&amp;t=1085</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>relativistic TM potentials</h3>
+				<div class="date">Posted: <strong>Thu May 12, 2011 5:58 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hello,<br /><br />if for the moment you input a relativistic TM potential (pspcod 5) and a default input file, the code will crash with:<br /><br /><blockquote class="uncited"><div> psp5in: ERROR -<br />  Pseudopotential input file does not have<br />  angular momenta in order expected for first projection  operator.<br /> Values are      0     2<br />  Action : check your pseudopotential input file.<br /><br /> leave_new : decision taken to exit ...<br /><br /></div></blockquote><br /><br />You need to specify at least &quot;nspinor 2&quot; in the input file in order to make it run: as there are 2 projectors per ang mom channel, the reading of the psp file gets messed up. The error message is not clear about this, and it looks like the psp file is wrong...<br /><br />For HGH this does not happen because for the default nspinor 1 it just reads in the average projectors with scalar relativistic coupling, and throws away the SO coupling (this should probably be mentioned somewhere, lest users believe they have done a calculation with SOC).<br /><br />possibilities for pspcod 5:<br />1) the same could be done for relativistic TM as HGH, by averaging the projectors inside abinit (a pain, and I don't know which wf to associate to the averaged potential...)<br />2) nspinor could be set to 2 forcefully just after the reading of the psp headers (this could get ugly)<br />3) modify the error message so that the additional possibility of a relativistic TM psp but nspinor 1 in input is mentioned (these are incompatible).<br /><br />As this is a bug with the potential to confuse users (admittedly very specific ones) I suggest this go into 5.8.1, and I vote for option 3.<br /><br />ciao<br /><br />Matthieu</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: relativistic TM potentials</h3>
+				<div class="date">Posted: <strong>Thu May 12, 2011 6:01 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">PS: we also need an output line specifying whether a SO correction is being calculated or not! And which one...</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1085&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:05:39 GMT -->
+</html>

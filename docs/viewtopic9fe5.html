@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4437&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:16:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Using spgroup correctly</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Using spgroup correctly</h2>
+		<p><a href="viewtopicbc3e.html?f=9&amp;t=4437">https://forum.abinit.org/viewtopic.php?f=9&amp;t=4437</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Using spgroup correctly</h3>
+				<div class="date">Posted: <strong>Fri Jun 05, 2020 5:58 pm</strong></div>
+				<div class="author">by <strong>ssh77</strong></div>
+				<div class="content">Hi,<br>
+<br>
+Using xred and adding all positions for all atoms and providing typat for each atom does not result in any error but when I want to avoid adding each position of all the atoms using spgroup I get this:<br>
+    There is a problem with the input file : maybe  <br>
+    a disagreement between the declared dimension of the array,<br>
+    and the number of data actually provided. <br>
+    Action: correct your input file, and especially the keywork XRED<br>
+<br>
+I have tried different ways of fixing it by changing typat from 4*1 4*2 4*2 to only 1 2 2 but it doesn't help. I have tried to check input files from different tutorials and cannot understand why it doesn't work. Each atom has 4 i miultiplicity so there are 4 of each. In this test I tried MnO2 to simplify but still try to understand how the input file parameters are connected and how they should be manipulated correctly.<br>
+<br>
+I attach the input file, hopefully it is something very obvious that I have missed.<br>
+<br>
+This is the cif file of the MnO2:<br>
+# generated using pymatgen<br>
+data_MnO2<br>
+_symmetry_space_group_name_H-M   Pnma<br>
+_cell_length_a   9.44849993<br>
+_cell_length_b   2.92155351<br>
+_cell_length_c   4.58575959<br>
+_cell_angle_alpha   90.00000000<br>
+_cell_angle_beta   90.00000000<br>
+_cell_angle_gamma   90.00000000<br>
+_symmetry_Int_Tables_number   62<br>
+_chemical_formula_structural   MnO2<br>
+_chemical_formula_sum   'Mn4 O8'<br>
+_cell_volume   126.58667490<br>
+_cell_formula_units_Z   4<br>
+loop_<br>
+ _symmetry_equiv_pos_site_id<br>
+ _symmetry_equiv_pos_as_xyz<br>
+  1  'x, y, z'<br>
+  2  '-x, -y, -z'<br>
+  3  '-x+1/2, -y, z+1/2'<br>
+  4  'x+1/2, y, -z+1/2'<br>
+  5  'x+1/2, -y+1/2, -z+1/2'<br>
+  6  '-x+1/2, y+1/2, z+1/2'<br>
+  7  '-x, y+1/2, -z'<br>
+  8  'x, -y+1/2, z'<br>
+loop_<br>
+ _atom_site_type_symbol<br>
+ _atom_site_label<br>
+ _atom_site_symmetry_multiplicity<br>
+ _atom_site_fract_x<br>
+ _atom_site_fract_y<br>
+ _atom_site_fract_z<br>
+ _atom_site_occupancy<br>
+  Mn  Mn0  4  0.134761  0.750000  0.478910  1<br>
+  O  O1  4  0.036581  0.250000  0.287517  1<br>
+  O  O2  4  0.216024  0.250000  0.691604  1<br>
+<br>
+Many thanks!<br>
+ssh77</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Using spgroup correctly</h3>
+				<div class="date">Posted: <strong>Mon Jun 08, 2020 9:36 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear ssh77,<br>
+Abinit works with the unit cell and not the asymmetric unit cell (i.e. with only minimal Wyckoff sites) such that you have to list all the atoms of the unit cell and not the asymmetric ones. Well, I guess this is your problem.<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Using spgroup correctly</h3>
+				<div class="date">Posted: <strong>Mon Jun 08, 2020 2:06 pm</strong></div>
+				<div class="author">by <strong>ssh77</strong></div>
+				<div class="content">Dear Eric<br>
+So you mean that I have to list all atoms in the unit cell at all times? I thought the spgroup was able to use symmetry operators and construct the whole cell by providing the Wyckoff positions of the assymetric cell.<br>
+Is spgroup only used to specifically designate a space group type to the calculation and not for the generation of the unit cell?<br>
+<br>
+Thanks!<br>
+ssh77</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Using spgroup correctly</h3>
+				<div class="date">Posted: <strong>Wed Jun 10, 2020 8:32 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content"><blockquote><div><cite><a href="memberlistc471.html?mode=viewprofile&amp;u=2802">ssh77</a> wrote: <a href="viewtopic7c89.html?p=13133#p13133" data-post-id="13133" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><div class="responsive-hide">Mon Jun 08, 2020 2:06 pm</div></cite>
+Dear Eric<br>
+So you mean that I have to list all atoms in the unit cell at all times? I thought the spgroup was able to use symmetry operators and construct the whole cell by providing the Wyckoff positions of the assymetric cell.
+</div></blockquote>
+Yes, you have to list all atoms of the unit cell, Abinit does not reconstruct them from Wyckoff sites. You can use Abipy or qAgate to do it, they will build the input for you providing a cif file.<br>
+
+<blockquote><div><cite><a href="memberlistc471.html?mode=viewprofile&amp;u=2802">ssh77</a> wrote: <a href="viewtopic7c89.html?p=13133#p13133" data-post-id="13133" onclick="if(document.getElementById(hash.substr(1)))href=hash">↑</a><div class="responsive-hide">Mon Jun 08, 2020 2:06 pm</div></cite>
+Is spgroup only used to specifically designate a space group type to the calculation and not for the generation of the unit cell?
+</div></blockquote>
+Yes, this is it, spgroup is just there to be sure you are running in a given space group such that the code will stop if it is not the case.<br>
+<br>
+Best,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Using spgroup correctly</h3>
+				<div class="date">Posted: <strong>Fri Jun 12, 2020 12:27 pm</strong></div>
+				<div class="author">by <strong>ssh77</strong></div>
+				<div class="content">Thanks!<br>
+That answers my questions.<br>
+How does one close the thread?<br>
+ssh77</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Using spgroup correctly</h3>
+				<div class="date">Posted: <strong>Fri Jun 19, 2020 4:35 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">It is possible to use the asymmetric part of the cell (see <a href="https://docs.abinit.org/topics/SmartSymm/" class="postlink">https://docs.abinit.org/topics/SmartSymm/</a>)<br>
+but I usually prefer to use abipy (that uses the CIF parser of pymatgen) to build the unit cell in the Abinit convention from CIF with e.g<br>
+<br>
+abistruct.py convert FILE.cif</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4437&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:16:18 GMT -->
+</html>

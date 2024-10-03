@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3264&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:32:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Emergency. The parallel 7.10.5 can't be build with openmpi</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Emergency. The parallel 7.10.5 can't be build with openmpi</h2>
+		<p><a href="viewtopica15b.html?f=3&amp;t=3264">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3264</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Emergency. The parallel 7.10.5 can't be build with openmpi</h3>
+				<div class="date">Posted: <strong>Thu Apr 14, 2016 7:09 pm</strong></div>
+				<div class="author">by <strong>kinsang</strong></div>
+				<div class="content">Hi, everyone.<br />When I try to build the abinit-7.10.5 with Openmpi 1.10.2, <br />even if I enable mpi, it seems that I always got the sequential version instead of the parallel one.<br /><br />The sequential abinit works well, but when I run the parallel version with command like &quot;mpirun -np $num abinit &lt; ......&quot;<br />Abinit stop at the beginning with such message:<br /><strong class="text-strong">  Give name for formatted input file:</strong><br /><br />I am sure the PATH and LD_LIBRARY_PATH are set correctly:<br /><br />[kinsang@c0 Config]$ mpirun --version<br />mpirun (Open MPI) 1.10.2<br /><br />[kinsang@c0 Config]$ mpicc --version<br />icc (ICC) 16.0.2 20160204<br />Copyright (C) 1985-2016 Intel Corporation.  All rights reserved.<br /><br /><strong class="text-strong">The configure file is as follows:<br />FC=mpifort<br />CC=mpicc<br />CXX=mpicxx<br /><br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />with_mpi_prefix=&quot;/public/soft/ompi-v1.10&quot;</strong><br /><br />Thanks a lot !!!<br />Enclosing with the Conf.log</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Emergency. The parallel 7.10.5 can't be build with openm</h3>
+				<div class="date">Posted: <strong>Fri Apr 15, 2016 9:53 am</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Hi<br /><br />You do have the parallel version of abinit. See your log file<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp; * MPI&nbsp; &nbsp; enabled&nbsp; : yes<br />&nbsp; * MPI-IO enabled&nbsp; : yes<br /></code></pre></div><br /><br />The code stop because of your mpi environment. The mpirun does not how to handle the stdin stream there for it waits for the user input.<br />Basically you should read the sentence and thus type the input file name<br />then you'll be ask the output file name and so on.<br />Those names are exactly, line by line what is in you files file.<br /><br />If you run abinit with mpirun -np $num abinit, you'll have exactly the same behaviour.<br /><br />Ask you admin to explain to you how to run the mpirun with stream redirection like &quot;&lt; files&quot; (you should be on a filesystem readable by all mpi processes) or if you are the admin, check you mpi compilation.<br /><br />Cheers<br /><br />Jordan</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3264&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:32:49 GMT -->
+</html>

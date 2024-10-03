@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2782&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:15:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Inconsistency of number of processors in openmp</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Inconsistency of number of processors in openmp</h2>
+		<p><a href="viewtopicef22.html?f=3&amp;t=2782">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2782</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Inconsistency of number of processors in openmp</h3>
+				<div class="date">Posted: <strong>Thu Sep 04, 2014 5:15 pm</strong></div>
+				<div class="author">by <strong>sheng</strong></div>
+				<div class="content">Lately when I scan through the log file I found that peculiarity of Num_procs in OpenMP parallelism.<br />For example, the command I enter is mpirun -np 4 which suppose to use 4 processors. But I discover the figure in openmp is different:<br /><br />  ==== OpenMP parallelism is ON ====<br />- Max_threads:       2<br />- Num_threads:       2<br />- Num_procs:         2<br />- Dynamic:           F<br />- Nested:            F<br /><br />However the indication stated at the start of dataset is correct<br />== DATASET  1 ==================================================================<br />-   nproc =    4<br /><br />I tried with other values but still with same discrepancy:<br />mpi 2, openmp 1<br />mpi 5, openmp 8<br /><br />This has not happened before when I did the tutorial (if I am not mistaken).<br />Any idea what could possibly goes wrong?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Inconsistency of number of processors in openmp</h3>
+				<div class="date">Posted: <strong>Thu Sep 04, 2014 9:06 pm</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">The command mpirun only tells you how many MPI processes you want.<br />Each MPI process can use a given number of OpenMP threads so the total number of threads you actually use is nprocs*Num_threads<br />For example, on a computer with 8 cores, you can either launch 2 MPI processes with 4 OpenMp threads each, or 4 MPI processes with 2 OpenMp threads. That would be the recommanded use.<br /><br />The number of MPI processes (nproc) is given to mpirun with -n or -np, both are equivalent.<br />The number of OpenMP threads (Num_threads) for each MPI process is given by the environment variable OMP_NUM_THREADS. By default the value is usually the number of cores of your cpu (Num_procs).<br /><br />If you don't configure correctly MPI and OpenMP, you can overload your cpu. For example, if your cpu has 4 cores and you launch a mpi job with -np 4 and auto OpenMP detection, you might have a moment during the execution when you have 16 threads at the same time. It can sometimes be what you want to do if  threads have limitated load due to other operations (I/O, locks,...) but for intensive calculation you just want one thread per core, ie nproc*Num_threads=number of cores available.<br /><br />On supercomputers, you usually need to request either the number of mpi and the number of threads per mpi or the total number of cores you want and use the mpirun to set the mpi processes on all nodes (on recent OpenMPI you have --npersocket --npernode and so on to manage the repartition of the processes) and set the OMP_NUM_THREADS variable.<br /><br />Cheers<br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Inconsistency of number of processors in openmp</h3>
+				<div class="date">Posted: <strong>Fri Sep 05, 2014 4:38 am</strong></div>
+				<div class="author">by <strong>sheng</strong></div>
+				<div class="content">Thanks Jordan for your quick and extensive explanation.<br /><br /><blockquote class="uncited"><div>By default the value is usually the number of cores of your cpu (Num_procs).</div></blockquote><br />The number of cores of my cpu is 8, then I suppose Num_procs should 8 be default, but then this is not the case stated by abinit by auto detection:<br />mpi=4, OpenMP Num_procs=2<br />mpi=2, OpenMP Num_procs=1<br />mpi=5, OpenMP Num_procs=8<br /><br />Is the OpenMP Num_procs important or I just need to take care number of OpenMP threads (Num_threads) and ignoring Num_procs?<br /><br />Thank you.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Inconsistency of number of processors in openmp</h3>
+				<div class="date">Posted: <strong>Mon Sep 08, 2014 4:23 pm</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">What's your cpu model/reference ? Do you have HyperThreading ?<br /><br />The function omp_get_num_procs (used to print Num_procs) returns the number of online cpus. <br />My hypothesis is that some of you cores are asleep when you just submit few MPI processes to save energy.  <br /><br />In any case, if you impose OMP_NUM_THREADS to the value you want, you should see the correct value of Num_threads and the code should run smoothly. As I mentioned, if you have Num_threads &gt; Num_procs that would mean that you have an overload. But if you know exactly what you do (meaning you know your computer), you're fine. When the OpenMP starts, the asleep cores will wake up to work and I guess that a new call to the omp_get_num_procs should be 8 at that time.<br /><br />You can check with the program htop or any other utility (gnome-system-monitor) that all of your cores work.<br /><br />If you wanna dig deeper, you can write a small code with only one line : write(*,*) omp_get_num_procs() and compile it with your favourite mpi compiler.<br />Then run the code with 2,4,8 MPI processes and see if you got something like abinit or not.<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>PROGRAM testOMP<br /><br />&nbsp; USE OMP_LIB<br /><br />&nbsp; IMPLICIT NONE<br /><br />&nbsp; WRITE(*,*) &quot;Num procs&quot;, omp_get_num_procs()<br /><br />END PROGRAM testOMP<br /></code></pre></div><br /><br />mpif90 -fopenmp for gfortran or mpif90 -openmp for intel<br /><br />Cheers<br /><br />Jordan</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2782&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:15:50 GMT -->
+</html>

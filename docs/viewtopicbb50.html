@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=523&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] Segfault / Invalid Pointer during SCF cycle</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] Segfault / Invalid Pointer during SCF cycle</h2>
+		<p><a href="viewtopice563.html?f=9&amp;t=523">https://forum.abinit.org/viewtopic.php?f=9&amp;t=523</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] Segfault / Invalid Pointer during SCF cycle</h3>
+				<div class="date">Posted: <strong>Sat Jul 31, 2010 12:05 am</strong></div>
+				<div class="author">by <strong>Steven Miller</strong></div>
+				<div class="content">Hello! I'm attempting to run an optimization run on tetragonal zirconia using a custom Zr PAW dataset and I appear to have discovered a bug in the abinit code. The dataset I used provided good results in a cubic configuration, but will cause abinit to crash under certain conditions in the tetragonal arrangement. Changing the dataset does not fix the problem. The code appears to crash during the first SCF cycle. The error occurs in versions 6.0.4 and 6.2.1. The code appears to run correctly if ecut is about 16 Ha, but crashes at 20 Ha. In past attempts, it seemed to crash for values of ecut between 19 and 26, but would run for values of ecut between 12 and 18, or for values above 26 Ha, but in some cases would produce warnings about negative charge densities. Also, making changes to the dataset using atompaw did not seem to help, even when changing the type of basis functions or projectors, etc (ie bloechl, vanderbilt, rrkj, etc.) According to the plots made when generating the PAW, the hamiltonians of the exact function  and the PAW function seemed to agree very well, and the wfn.i plots all seemed pretty reasonable.<br /><br />Has anyone encountered such a problem before? If not, I would like to try to track down the problem, but could use some assistance in finding the bug. I attached the input file for abinit. The point where abinit fails in the log has the following:<br /><br /> ITER STEP NUMBER     1<br /> vtorho : nnsclo_now=  2, note that nnsclo,dbl_nnsclo,istep=  0 0  1<br /> leave_test : synchronization done...<br /> vtorho: loop on k-points and spins done in parallel<br /> leave_test : synchronization done...<br /><br /> *********** RHOIJ (atom   1) **********<br />   2.06391  -0.01834   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000  -0.02995   0.00000 ...<br />  -0.01834   0.05303   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000  -0.00097   0.00000 ...<br />   0.00000   0.00000   1.98097   0.00000   0.00000   0.00587   0.00000   0.00000   0.00000   0.00000   0.00000   0.14258 ...<br />   0.00000   0.00000   0.00000   2.09851   0.00000   0.00000  -0.03432   0.00000   0.16676   0.00000   0.00000   0.00000 ...<br />   0.00000   0.00000   0.00000   0.00000   1.98097   0.00000   0.00000   0.00587   0.00000   0.14258   0.00000   0.00000 ...<br />   0.00000   0.00000   0.00587   0.00000   0.00000   0.02812   0.00000   0.00000   0.00000   0.00000   0.00000  -0.03304 ...<br />   0.00000   0.00000   0.00000  -0.03432   0.00000   0.00000   0.03735   0.00000  -0.03763   0.00000   0.00000   0.00000 ...<br />   0.00000   0.00000   0.00000   0.00000   0.00587   0.00000   0.00000   0.02812   0.00000  -0.03304   0.00000   0.00000 ...<br />   0.00000   0.00000   0.00000   0.16676   0.00000   0.00000  -0.03763   0.00000   0.41508   0.00000   0.00000   0.00000 ...<br />   0.00000   0.00000   0.00000   0.00000   0.14258   0.00000   0.00000  -0.03304   0.00000   0.39175   0.00000   0.00000 ...<br />  -0.02995  -0.00097   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.00000   0.30738   0.00000 ...<br />   0.00000   0.00000   0.14258   0.00000   0.00000  -0.03304   0.00000   0.00000   0.00000   0.00000   0.00000   0.39175 ...<br />   ...  only 12  components have been written...<br /><br /> *********** RHOIJ (atom   6) **********<br />   2.11479   0.04015   0.00000  -0.01752   0.00000   0.00000  -0.00289   0.00000<br />   0.04015   0.01195   0.00000  -0.00158   0.00000   0.00000  -0.00182   0.00000<br />   0.00000   0.00000   2.03026   0.00000   0.03309   0.01767   0.00000   0.00198<br />  -0.01752  -0.00158   0.00000   2.01532   0.00000   0.00000   0.03259   0.00000<br /><br /><br />At this point, abinit ends with a &quot;Segmentation Fault&quot; message. Does anyone have any ideas or hints on how to tackle this? If it helps, atoms 1 and 2 are Zr, and atoms 3-6 are oxygen. Thanks!<br /><br />Also, FYI, I'm running it on an Ubuntu 10.04 LTS workstation cluster 64-bit edition using gcc to compile. I'm using MPICH2, although the problem occurs whether running in parallel or not.<br />-Steve<br /><br />Update: I compiled and reran abinit with the configure options --enable-debug=yes --enable-optim=no --enable-mpi=no, and the log file shows a little more diagnostic information. At the very end, after the &quot;RHOIJ (atom   6)&quot; lines, it ends with:<br /><br />symrhoij.F90:745 : exit<br /><br />pawmknhat.F90:117 : enter<br /><br />pawmknhat.F90:359 : exit<br /><br />transgrid.F90:108 : enter</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Segfault / Invalid Pointer during SCF cycle</h3>
+				<div class="date">Posted: <strong>Tue Aug 03, 2010 11:24 pm</strong></div>
+				<div class="author">by <strong>Steven Miller</strong></div>
+				<div class="content">Ok, I found the problem. It seems that in the log file for the ecut=20 case, the coarse FFT mesh was actually finer along one dimension than the fine FFT mesh:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;getng is called for the coarse grid:<br />&nbsp;For input ecut=&nbsp; 2.205000E+01 best grid ngfft=&nbsp; &nbsp; &nbsp; 20&nbsp; &nbsp; &nbsp; 30&nbsp; &nbsp; &nbsp; 40<br />&nbsp; &nbsp; &nbsp; &nbsp;max ecut=&nbsp; 2.211017E+01<br />&nbsp;However, must be changed due to symmetry =&gt;&nbsp; &nbsp; &nbsp; 20&nbsp; &nbsp; &nbsp; 40&nbsp; &nbsp; &nbsp; 40<br />&nbsp; &nbsp; &nbsp; &nbsp;with max ecut=&nbsp; 0.221102E+02<br /><br />&nbsp;==== FFT mesh ====<br />&nbsp; FFT mesh divisions ........................&nbsp; &nbsp; 20&nbsp; &nbsp;40&nbsp; &nbsp;40<br />&nbsp; Augmented FFT divisions ...................&nbsp; &nbsp; 21&nbsp; &nbsp;41&nbsp; &nbsp;40<br />&nbsp; FFT algorithm .............................&nbsp; &nbsp;112<br />&nbsp; FFT cache size ............................&nbsp; &nbsp; 16<br />&nbsp;getmpw: optimal value of mpw=&nbsp; &nbsp; 1036<br /><br />&nbsp;getng is called for the fine grid:<br />&nbsp;For input ecut=&nbsp; 3.528000E+01 best grid ngfft=&nbsp; &nbsp; &nbsp; 27&nbsp; &nbsp; &nbsp; 36&nbsp; &nbsp; &nbsp; 54<br />&nbsp; &nbsp; &nbsp; &nbsp;max ecut=&nbsp; 3.654946E+01<br />&nbsp;However, must be changed due to symmetry =&gt;&nbsp; &nbsp; &nbsp; 36&nbsp; &nbsp; &nbsp; 36&nbsp; &nbsp; &nbsp; 54<br />&nbsp; &nbsp; &nbsp; &nbsp;with max ecut=&nbsp; 0.365495E+02<br /><br />&nbsp;==== FFT mesh ====<br />&nbsp; FFT mesh divisions ........................&nbsp; &nbsp; 36&nbsp; &nbsp;36&nbsp; &nbsp;54<br />&nbsp; Augmented FFT divisions ...................&nbsp; &nbsp; 37&nbsp; &nbsp;37&nbsp; &nbsp;54<br />&nbsp; FFT algorithm .............................&nbsp; &nbsp;112<br />&nbsp; FFT cache size ............................&nbsp; &nbsp; 16<br />&nbsp; getdim_nloc : enter<br />&nbsp; pspheads(1)%nproj(0:3)=&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0</code></pre></div><br /><br />It seems that the grid generation relied on the assumption that the fine FFT mesh is always finer along each dimension than the coarse mesh. This was causing an incomplete coatofin vector to be created in the indgrid subroutine, which was eventually causing memory corruption in the transgrid subroutine when it attempted to remap the rhog array into a finer mesh in vectg. This problem is solved in the latest version of ABINIT 6.2.2, and you can also get around it by making sure your fine grid is always coarser than your course grid.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=523&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:14 GMT -->
+</html>

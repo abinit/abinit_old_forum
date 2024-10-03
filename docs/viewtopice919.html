@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=979&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:42:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; [SOLVED] Problem about configure 6.6.1 on Blue Gene</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>[SOLVED] Problem about configure 6.6.1 on Blue Gene</h2>
+		<p><a href="viewtopic19c9.html?f=3&amp;t=979">https://forum.abinit.org/viewtopic.php?f=3&amp;t=979</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>[SOLVED] Problem about configure 6.6.1 on Blue Gene</h3>
+				<div class="date">Posted: <strong>Thu Mar 24, 2011 3:10 pm</strong></div>
+				<div class="author">by <strong>xiangpisai</strong></div>
+				<div class="content">Hi all, <br />I tried to run the configure file on Blue Gene but everytime it gives me an error. My hostname.ac file is as follows:<br /><br />CC=&quot;mpixlc&quot;<br />CXX=&quot;mpixlcxx&quot;<br />FC=&quot;mpixlf90&quot;<br />F77=&quot;mpixlf77&quot;<br />enable_fc_wrapper=&quot;yes&quot;<br />#enable_stdin=&quot;no&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />MPI_RUNNER=&quot;/bgl/BlueLight/ppcfloor/bglsys/bin/mpirun&quot;<br />#enable_dft=&quot;no&quot;<br />#with_dft_flavor=&quot;libxc&quot;<br />#enable_netcdf=&quot;no&quot;<br />#enable_wannier90=&quot;no&quot;<br /><br />When I compile, I use cross-compiling by specifying --host=powerpc-unknown-linux. However this prompts an error saying<br /><br />checking whether to build netcdf... yes<br />checking whether to build wannier90... yes<br />configure: using tarball repository /XXXX(my directory)/.abinit/tarballs<br />checking for a source tarball of LINALG... no<br />configure: downloading LINALG - this may take a while<br />checking availability of LINALG from URL 1... no<br />configure: WARNING: could not download LINALG fallback tarball<br />configure: error: cannot build Abinit - aborting<br /><br />But if I tried to uncomment the last line of my hostname.ac file, it will not run at all. <br />Can anybody give me a hint about this error? Thank you so much!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem about configure 6.6.1 on Blue Gene</h3>
+				<div class="date">Posted: <strong>Thu Mar 24, 2011 3:43 pm</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">Hi<br /><br />Abinit stops because it cannot find the linear algebra libraries. Therefore, you need to specify yourself the linear algebra libraries that you want to use. I think mkl is available on Blue Gene. So try to to add (for instance with mkl):<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&nbsp;--with-linalg-flavor=mkl&nbsp; --with-linalg-libs=&quot;-L/path/to/mkl/libraries/lib/em64 -lblas -llapack&quot;</code></pre></div><br /><br />Boris<br /><br />Edit : Or maybe you can download the <a href="http://archives.abinit.org/plugins/lapack-abinit_6.0.tar.gz" class="postlink">lapack libraries</a> on the abinit website, put them in the /tarballs directory and Abinit will install them automatically. I did not try this option but it should work.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem about configure 6.6.1 on Blue Gene</h3>
+				<div class="date">Posted: <strong>Thu Mar 24, 2011 4:03 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">When Abinit configure doesn't find suitable Lapack/Blas libraries, it tries to download a plain distribution from Abinit website using wget. For a reason I cannot guess without config.log, configure fails to get it - maybe because your BG system doesn't allow to access Internet for security reasons. The packages are available from <a href="http://www.abinit.org/downloads/plug-in-sources" class="postlink">http://www.abinit.org/downloads/plug-in-sources</a>. Use whatever method to obtain and copy them to /XXXX(my directory)/.abinit/tarballs/ and configure will find them there. Caution: the atompaw package is outdated, get <a href="http://archives.abinit.org/plugins/atompaw-3.0.1.tar.gz" class="postlink">http://archives.abinit.org/plugins/atompaw-3.0.1.tar.gz</a> instead<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem about configure 6.6.1 on Blue Gene</h3>
+				<div class="date">Posted: <strong>Thu Mar 24, 2011 4:10 pm</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">... as far as I know, Blue Gene is PowerPC based - I would be rather surprised if Intel provides optimized libraries to competitors. On PowerPC architecture, the equivalent of MKL is ESSL but this library hasn't been recently tested with Abinit.<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem about configure 6.6.1 on Blue Gene</h3>
+				<div class="date">Posted: <strong>Thu Mar 24, 2011 4:15 pm</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content"><blockquote><div><cite>Alain_Jacques wrote:</cite>... as far as I know, Blue Gene are PowerPC based - I would be rather surprised if Intel provides optimized libraries to competitors. On PowerPC architecture, the equivalent of MKL is ESSL but this library hasn't been tested with MKL.<br /><br />Alain</div></blockquote><br /><br />Oh, ok. Good to know. Then I guess the simplest way of doing this is to DL the lapack libraries on the abinit website.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem about configure 6.6.1 on Blue Gene</h3>
+				<div class="date">Posted: <strong>Thu Mar 24, 2011 4:44 pm</strong></div>
+				<div class="author">by <strong>xiangpisai</strong></div>
+				<div class="content"><blockquote><div><cite>Alain_Jacques wrote:</cite>When Abinit configure doesn't find suitable Lapack/Blas libraries, it tries to download a plain distribution from Abinit website using wget. For a reason I cannot guess without config.log, configure fails to get it - maybe because your BG system doesn't allow to access Internet for security reasons. The packages are available from <a href="http://www.abinit.org/downloads/plug-in-sources" class="postlink">http://www.abinit.org/downloads/plug-in-sources</a>. Use whatever method to obtain and copy them to /XXXX(my directory)/.abinit/tarballs/ and configure will find them there. Caution: the atompaw package is outdated, get <a href="http://archives.abinit.org/plugins/atompaw-3.0.1.tar.gz" class="postlink">http://archives.abinit.org/plugins/atompaw-3.0.1.tar.gz</a> instead<br /><br />Kind regards,<br /><br />Alain</div></blockquote><br />Hi, I used your method and the configure process went out smoothly. Thank you very much! But when I type &quot;make&quot; command, it gave me an error after 5 minutes or so, saying &quot;cannot run C compiled files, if you mean to cross-compile, use --host&quot;. I have met this error many times before because I am using cross-compiling. In my configure command, I specified --host=powerpc-unknown-linux, which is correct. But I don't think make --host=powerpc-unknown-linux will work since this is not an option of make.<br />Could you please tell me where the problem is? Thank you very much!<br />Best regards<br /><br />BTW: I have attached my config.log file, after the make command. You may check it if needed. This is actually a .zip file. Since the original file is over 256kb size and the forum won't accept the compressed format(zip), I have to compress it and modify the extension. So please change the extension to zip and extract it. Thank you very much!<br /><br />More to mention:<br />There seems no change after the make command, so I am putting the result of the make command:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>checking whether a win32 DLL is desired... no<br />checking whether separate fortran libs are desired... no<br />configure: finding C compiler<br />checking whether the C compiler works... yes<br />checking for C compiler default output file name... a.out<br />checking for suffix of executables...<br />checking whether we are cross compiling... configure: error: in `/XXXX/abinit-6.6.1/plugins/netcdf/netcdf-4.1.1':<br />configure: error: cannot run C compiled programs.<br />If you meant to cross compile, use `--host'.<br />See `config.log' for more details.<br />make&#91;4&#93;: *** &#91;configure-stamp&#93; Error 1<br />make&#91;4&#93;: Leaving directory `/XXXX/abinit-6.6.1/plugins/netcdf'<br />make&#91;3&#93;: *** &#91;package-ready&#93; Error 2<br />make&#91;3&#93;: Leaving directory `/XXXX/abinit-6.6.1/plugins/netcdf'<br />make&#91;2&#93;: *** &#91;all-recursive&#93; Error 1<br />make&#91;2&#93;: Leaving directory `/XXXX/abinit-6.6.1/plugins'<br />make&#91;1&#93;: *** &#91;all-recursive&#93; Error 1<br />make&#91;1&#93;: Leaving directory `/XXXX/abinit-6.6.1'<br />make: *** &#91;all&#93; Error 2<br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem about configure 6.6.1 on Blue Gene</h3>
+				<div class="date">Posted: <strong>Thu Mar 24, 2011 5:14 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Without more precise information, I cannot pinpoint the exact problem you're encountering.<br /><br />However, this is likely an error during the compilation of an external package. If you don't need any advanced feature, you can try to configure with the following options:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../configure --with-trio-flavor=&quot;none&quot; --with-dft-flavor=&quot;none&quot;</code></pre></div><br />This will remove support for NetCDF, ETSF_IO, FoX, AtomPAW, BigDFT, LibXC, and Wannier90.<br /><br />You may also try with only one of these two options.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem about configure 6.6.1 on Blue Gene</h3>
+				<div class="date">Posted: <strong>Fri Mar 25, 2011 5:02 am</strong></div>
+				<div class="author">by <strong>xiangpisai</strong></div>
+				<div class="content"><blockquote><div><cite>pouillon wrote:</cite>Without more precise information, I cannot pinpoint the exact problem you're encountering.<br /><br />However, this is likely an error during the compilation of an external package. If you don't need any advanced feature, you can try to configure with the following options:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>../configure --with-trio-flavor=&quot;none&quot; --with-dft-flavor=&quot;none&quot;</code></pre></div><br />This will remove support for NetCDF, ETSF_IO, FoX, AtomPAW, BigDFT, LibXC, and Wannier90.<br /><br />You may also try with only one of these two options.</div></blockquote><br />Hi, I used your option and it worked well! Thank you very much! But there is a new problem. I run the tgw1_1.in file with bluegene. I specified 512 nodes to it and it takes 180 seconds to complete the calculation. But if I use 32 AMD processors it takes only 43 seconds. In our common sense, Blue Gene is faster than normal AMD processors. But why there is such a big difference? I don't know what information you guys need, so would you please reply to tell me that? Thank you so much!<br />Best regards!<br />xiangpisai</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem about configure 6.6.1 on Blue Gene</h3>
+				<div class="date">Posted: <strong>Fri Mar 25, 2011 11:12 am</strong></div>
+				<div class="author">by <strong>Alain_Jacques</strong></div>
+				<div class="content">Dear xiangpisai,<br /><br />Despite the common sense proverb saying quod abundat non vitiat, it is quite easy to do less with more.<br /><br />First of all, the input files of the test suite are designed to check accuracy, not as  benchmarks for speed - at least not without modifications. So don't take any of them, launch it on 512 cpus and expect a 512 fold increase of performance. Abinit has several options to parallelize computations, some of them scale linealy, others not - the art of clusters is to weight resources vs. efficiency, not to use brute force.<br /><br />For the particular case of tgw1_1, considering the plain k-points grid as defined, I would say that about a quarter of your 512 cpus were busy calculating and the rest slowing down the process (and it's probably even worse than that).<br />So please have a look on the tutorials and variables relevant to Abinit parallelization and, in particular, the paral_kgb variable with negative values that can provide a guidance about the efficiency of parallel options in your specific input. And maybe look at tests/paral/Input/si_kpt_band_fft.in as a starting point to design a large scale benchmark and study the effects of the different combinations.<br /><br />Kind regards,<br /><br />Alain</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem about configure 6.6.1 on Blue Gene</h3>
+				<div class="date">Posted: <strong>Fri Mar 25, 2011 6:52 pm</strong></div>
+				<div class="author">by <strong>xiangpisai</strong></div>
+				<div class="content"><blockquote><div><cite>Alain_Jacques wrote:</cite>Dear xiangpisai,<br /><br />Despite the common sense proverb saying quod abundat non vitiat, it is quite easy to do less with more.<br /><br />First of all, the input files of the test suite are designed to check accuracy, not as  benchmarks for speed - at least not without modifications. So don't take any of them, launch it on 512 cpus and expect a 512 fold increase of performance. Abinit has several options to parallelize computations, some of them scale linealy, others not - the art of clusters is to weight resources vs. efficiency, not to use brute force.<br /><br />For the particular case of tgw1_1, considering the plain k-points grid as defined, I would say that about a quarter of your 512 cpus were busy calculating and the rest slowing down the process (and it's probably even worse than that).<br />So please have a look on the tutorials and variables relevant to Abinit parallelization and, in particular, the paral_kgb variable with negative values that can provide a guidance about the efficiency of parallel options in your specific input. And maybe look at tests/paral/Input/si_kpt_band_fft.in as a starting point to design a large scale benchmark and study the effects of the different combinations.<br /><br />Kind regards,<br /><br />Alain</div></blockquote><br />Dear Alain, <br />I will do it. Thank you so much for your kind help.<br />Best regards<br />Xiangpisai</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=979&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:42:55 GMT -->
+</html>

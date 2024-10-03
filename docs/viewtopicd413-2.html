@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3994&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:08:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Error: About to overwrite gbound array (FFT mesh too small)</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Error: About to overwrite gbound array (FFT mesh too small)</h2>
+		<p><a href="viewtopic7f61.html?f=9&amp;t=3994">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3994</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Error: About to overwrite gbound array (FFT mesh too small)</h3>
+				<div class="date">Posted: <strong>Mon Dec 17, 2018 11:50 pm</strong></div>
+				<div class="author">by <strong>jbarrat</strong></div>
+				<div class="content">Dear all,<br /><br />I am trying to use the test script libxc/Input/t42.in, which is designed for hybrid functional calculation of diamond structure, with a monoclinic primitive unit cell (space group 12). Before that I ran some convergence tests with the relevant gga potentials without hybrid, and that worked well, which I guess shows that the input of the structure is correct. The t42.in script runs fine, however, when I run mine I always get the following error message:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--- !BUG<br />src_file: sphereboundary.F90<br />src_line: 252<br />mpi_rank: 0<br />message: |<br />&nbsp; &nbsp; About to overwrite gbound array (FFT mesh too small) <br />&nbsp; &nbsp; &nbsp; &nbsp;iloop, igb, mgb = 2 59 58 <br />&nbsp; &nbsp; &nbsp; &nbsp;istwfk, mgfft, npw = 1 27 11747 <br />&nbsp; &nbsp; &nbsp; &nbsp;minval(kg_k) = -18 -18 -17 <br />&nbsp; &nbsp; &nbsp; &nbsp;maxval(kg_k) = 19 19 17</code></pre></div><br /><br />I've read in the source code of sphereboundary.F90 that this error is displayed when igb+1&gt;mgb. But no matter the settings that I put for the calculation, it always comes out that igb is one unit bigger than mgb, so the script stopped. Here is my input file:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>ndtset&nbsp; &nbsp;4<br />enunit&nbsp; &nbsp;1 <br /><br /># Dataset1: usual self-consistent ground-state calculation<br /># Definition of the k-point grid<br />ngkpt&nbsp; &nbsp; &nbsp;2 2 2<br />nshiftk&nbsp; &nbsp;4<br />shiftk&nbsp; &nbsp;0.0 0.0 0.0&nbsp; # This grid contains the Gamma point<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0 0.5 0.5<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.5 0.0 0.5<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.5 0.5 0.0<br />tolvrs&nbsp; &nbsp;1.0d-6 #set very high for debugging<br />nband&nbsp; &nbsp; &nbsp; 50<br />istwfk&nbsp; &nbsp; &nbsp;*1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# Option needed for Gamma<br /><br /># Common to all hybrid calculations<br />getwfk1&nbsp; &nbsp; &nbsp;0<br />getwfk&nbsp; &nbsp; &nbsp; 1&nbsp; &nbsp; &nbsp; &nbsp; # Obtain WFK file from previous dataset<br />ecutwfn&nbsp; &nbsp; &nbsp;11.5&nbsp; &nbsp; &nbsp;# Planewaves to be used to represent the wavefunctions<br />ecutsigx&nbsp; &nbsp; 11.5&nbsp; &nbsp; &nbsp;# Planewaves to be used to represent the exchange operator<br />gwcalctyp&nbsp; &nbsp;25<br />getqps&nbsp; &nbsp; &nbsp;-1<br />ixc_sigma&nbsp; -428<br /><br /># Dataset2: Calculation of the 1st HSE06 iteration<br />optdriver2&nbsp; 4 <br /><br /># Dataset3: Calculation of the 2nd HSE06 iteration<br />optdriver3&nbsp; 4<br />&nbsp; &nbsp;getqps3 -1<br /><br /># Dataset4: Calculation of the 3rd HSE06 iteration<br />optdriver4&nbsp; 4<br />&nbsp; &nbsp;getqps4 -1<br /><br /># Interpolate energies at the end of the sigma run.<br /># Use k-path specified by nkpath, ndivsm, kptbounds and write energies in gnuplot format.<br />#<br />prtebands4 2&nbsp; &nbsp; &nbsp; # gnuplot format.<br />einterp4 1 5 0 0&nbsp; # Star function interpolation with 5 star functions per k-point<br />ndivsm4 10&nbsp; &nbsp; &nbsp; &nbsp; # k-path<br />nkpath4 2<br />kptbounds4<br />0.0 0.0 0.0 #Gamma<br />0.0 0.0 0.5 #A<br /><br />#Definition of primitive cell<br />acell 6.41421 6.41421 5.87615 angstrom<br />angdeg 76.72488 103.27512 152.18873<br /><br />#Definition of atom types<br />ntypat 2<br />znucl 31 8<br /><br />#Definition of atoms<br />natom 10<br />typat 4*1 6*2<br />xred&nbsp; &nbsp;0.658731666119&nbsp; &nbsp; &nbsp; 0.341268333881&nbsp; &nbsp; &nbsp; 0.315010706391<br />&nbsp; &nbsp; &nbsp; &nbsp;0.341268333881&nbsp; &nbsp; &nbsp; 0.658731666119&nbsp; &nbsp; &nbsp; 0.684989293609<br />&nbsp; &nbsp; &nbsp; &nbsp;0.090301675668&nbsp; &nbsp; &nbsp; 0.909698324332&nbsp; &nbsp; &nbsp; 0.794397839232<br />&nbsp; &nbsp; &nbsp; &nbsp;0.909698324332&nbsp; &nbsp; &nbsp; 0.090301675668&nbsp; &nbsp; &nbsp; 0.205602160768<br />&nbsp; &nbsp; &nbsp; &nbsp;<br />&nbsp; &nbsp; &nbsp; &nbsp;0.496451881967&nbsp; &nbsp; &nbsp; 0.503548118033&nbsp; &nbsp; &nbsp; 0.257200455262<br />&nbsp; &nbsp; &nbsp; &nbsp;0.503548118033&nbsp; &nbsp; &nbsp; 0.496451881967&nbsp; &nbsp; &nbsp; 0.742799544738<br />&nbsp; &nbsp; &nbsp; &nbsp;0.173967775327&nbsp; &nbsp; &nbsp; 0.826032224673&nbsp; &nbsp; &nbsp; 0.562356228312<br />&nbsp; &nbsp; &nbsp; &nbsp;0.826032224673&nbsp; &nbsp; &nbsp; 0.173967775327&nbsp; &nbsp; &nbsp; 0.437643771688<br />&nbsp; &nbsp; &nbsp; &nbsp;0.835460169676&nbsp; &nbsp; &nbsp; 0.164539830324&nbsp; &nbsp; &nbsp; 0.889767629327<br />&nbsp; &nbsp; &nbsp; &nbsp;0.164539830324&nbsp; &nbsp; &nbsp; 0.835460169676&nbsp; &nbsp; &nbsp; 0.110232370673<br /><br /># Definition of the planewave basis set<br />ecut 30.0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # Maximal kinetic energy cut-off, in Hartree<br /><br /># Definition of the SCF procedure<br />nstep&nbsp; &nbsp;250&nbsp; &nbsp; &nbsp; &nbsp; # Maximal number of SCF cycles<br />diemac&nbsp; 12.0</code></pre></div><br /><br />I have tried to vary ecut, ecutwfn, ecutsigx, ngkpt without any success. Then I realized that the problem comes from the size of the FFT grid, and I could solve the error by setting ngfft manually:<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>fftgw 0 0<br />ngfft 60 60 60</code></pre></div><br /><br />But when I do that, the file xxx_INTERP_EBANDS.data is not anymore produced like in the t42.in case... I haven't found a way so far to get around this problem, it seems to me that the manual ngfft prevents the calculation of the band structure because (maybe) the number of k-points doesn't match the input for dataset 4. Sometimes, with some other settings, the use of ngfft resulted in an error at the dataset 4 about a mismatch between the expected value of ngkpt and the input, but I couldn't manage to reproduce it right now.<br /><br />Any idea what could be causing this error to occur or of what I could do in order to get around the issue? I've been struggling for days with this issue!<br /><br />Thank you very much in advance for your help! <br /><br />Julien.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Error: About to overwrite gbound array (FFT mesh too sma</h3>
+				<div class="date">Posted: <strong>Thu Jan 31, 2019 3:51 am</strong></div>
+				<div class="author">by <strong>en victory</strong></div>
+				<div class="content"><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--- !BUG<br />src_file: sphereboundary.F90<br />src_line: 252<br />mpi_rank: 0<br />message: |<br />&nbsp; &nbsp; About to overwrite gbound array (FFT mesh too small)<br />&nbsp; &nbsp; &nbsp; &nbsp;iloop, igb, mgb = 2 85 84<br />&nbsp; &nbsp; &nbsp; &nbsp;istwfk, mgfft, npw = 1 40 24485<br />&nbsp; &nbsp; &nbsp; &nbsp;minval(kg_k) = -21 -21 -14<br />&nbsp; &nbsp; &nbsp; &nbsp;maxval(kg_k) = 21 21 14<br /><br />...<br /><br />&nbsp; Action: contact ABINIT group (please attach the output of `abinit -b`)<br /></code></pre></div><br /><br />Dear all,<br />I have a some problem when I ran a 2D material.<br />Anyone can help?<br />Thank you.<br /><br />En Victory</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3994&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:08:21 GMT -->
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3839&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:33:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Error message in compiling 8.8.1</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Error message in compiling 8.8.1</h2>
+		<p><a href="viewtopic3c72.html?f=3&amp;t=3839">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3839</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Error message in compiling 8.8.1</h3>
+				<div class="date">Posted: <strong>Tue May 08, 2018 9:39 am</strong></div>
+				<div class="author">by <strong>natalie</strong></div>
+				<div class="content">I am always amazed and grateful when abinit compiles without error, but for 8.8.1, the script I have been using for several previous versions failed.    The compile script that failed is:<br />-----------------<br />#!/bin/tcsh<br /><br />source /etc/profile.d/modules.csh<br />module load openmpi/1.6-intel<br /><br />../configure --prefix=/home/natalie/EL6/publiccode/abinit/abinit-8.8.1 --exec-prefix=/home/natalie/EL6/publiccode/abinit/abinit-8.8.1 --enable-mpi --with-mpi- prefix=/deac/opt/openmpi/1.6-intel --with-fft-flavor=fftw3-mkl --with-linalg-flavor=mkl --with-dft-flavor=libxc --with-trio-flavor=netcdf FC=mpif90 CC=mpicc CPP='mpicc -E --no-create --no-recursion'<br /><br />make<br />make install<br />--------------------------------<br />Several modules compiled correctly, but the error occurred in 78_eph.  Thanks in advance for any suggestions. I cannot upload the full log file, but the bottom of the file looks like:<br />------------------------<br />make[2]: Leaving directory `/home/natalie/EL6/publiccode/abinit/abinit-8.8.1/cmd<br />/src/78_effpot'<br />Making install in 78_eph<br />make[2]: Entering directory `/home/natalie/EL6/publiccode/abinit/abinit-8.8.1/cm<br />d/src/78_eph'<br />mpif90 -DHAVE_CONFIG_H -I. -I../../../src/78_eph -I../..  -I../../src/77_ddb -I.<br />./../../src/77_ddb -I../../src/59_ionetcdf -I../../../src/59_ionetcdf -I../../sr<br />c/27_toolbox_oop -I../../../src/27_toolbox_oop -I../../src/42_libpaw -I../../../<br />src/42_libpaw -I../../src/72_response -I../../../src/72_response -I../../src/66_<br />nonlocal -I../../../src/66_nonlocal -I../../src/17_libtetra_ext -I../../../src/1<br />7_libtetra_ext -I../../src/62_iowfdenpot -I../../../src/62_iowfdenpot -I../../sr<br />c/18_timing -I../../../src/18_timing -I../../src/12_hide_mpi -I../../../src/12_h<br />ide_mpi -I../../src/14_hidewrite -I../../../src/14_hidewrite -I../../src/69_wfde<br />sc -I../../../src/69_wfdesc -I../../src/32_util -I../../../src/32_util -I../../s<br />rc/28_numeric_noabirule -I../../../src/28_numeric_noabirule -I../../src/44_abity<br />pes_defs -I../../../src/44_abitypes_defs -I../../src/61_occeig -I../../../src/61<br />_occeig -I../../src/16_hideleave -I../../../src/16_hideleave -I../../src/65_paw <br />-I../../../src/65_paw -I../../src/56_recipspace -I../../../src/56_recipspace -I.<br />./../src/52_fft_mpi_noabirule -I../../../src/52_fft_mpi_noabirule -I../../src/66<br />_wfs -I../../../src/66_wfs -I../../src/41_geometry -I../../../src/41_geometry -I<br />../../src/11_memory_mpi -I../../../src/11_memory_mpi -I../../src/10_defs -I../..<br />/../src/10_defs -I../../src/53_ffts -I../../../src/53_ffts -I../../src/incs -I..<br />/../../src/incs -I/home/natalie/EL6/publiccode/abinit/abinit-8.8.1/cmd/fallbacks<br />/exports/include -I/home/natalie/EL6/publiccode/abinit/abinit-8.8.1/cmd/fallbacks/exports/include   -free -module /home/natalie/EL6/publiccode/abinit/abinit-8.8.1/cmd/src/mods -O3 -g -extend-source -vec-report0 -noaltparam -nofpscomp   -c -o m_sigmaph.o ../../../src/78_eph/m_sigmaph.F90<br />../../../src/78_eph/m_sigmaph.F90(2389): error #5274: Token incorrectly continued across lines <br /> netcdf_check(nf90_put_var(self%ncid, nctk_idname(self%ncid, &quot;vals_e0ks&quot;), c2r(self%vals_e0ks), start=[1,1,1,ikcalc,spin]),&quot;No msg from caller&quot;&amp;<br />^<br />../../../src/78_eph/m_sigmaph.F90(2413): error #5274: Token incorrectly continued across lines <br /> netcdf_check(nf90_put_var(self%ncid, nctk_idname(self%ncid, &quot;vals_wr&quot;), c2r(self%vals_wr), start=[1,1,1,1,ikcalc,spin]),&quot;No msg from caller&quot;&amp;<br />^<br />compilation aborted for ../../../src/78_eph/m_sigmaph.F90 (code 1)<br />make[2]: *** [m_sigmaph.o] Error 1<br />make[2]: Leaving directory `/home/natalie/EL6/publiccode/abinit/abinit-8.8.1/cmd/src/78_eph'<br />make[1]: *** [install-recursive] Error 1<br />make[1]: Leaving directory `/home/natalie/EL6/publiccode/abinit/abinit-8.8.1/cmd/src'<br />make: *** [install-recursive] Error 1</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Error message in compiling 8.8.1</h3>
+				<div class="date">Posted: <strong>Sun May 13, 2018 12:30 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">I was not able to reproduce the problem with the intel-based configurations we use for the test farm<br />but I think the compilation error is due to the preprocessing done by the compiler.<br /><br />From your error message, it seems that one of the CPP macros used in the code <br />goes beyond the 132 column limit of F90 and the preprocessor does not handle it correctly.<br /><br />Could you try to pass FCFLAGS_EXTRA=&quot;-stand f03&quot; to configure?<br /><br />If this doesn't work, I would suggest to change manually the include file in src/incs/abi_common.h<br />by setting:<br /><br />#undef HAVE_FC_LONG_LINES<br /><br />at the beginning of the file <br /><br />PS: Could you post the output of abinit -b  ?<br /><br />Matteo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Error message in compiling 8.8.1&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Mon May 14, 2018 3:48 pm</strong></div>
+				<div class="author">by <strong>natalie</strong></div>
+				<div class="content">Dear Matteo,<br />        Thanks for your helpful reply.    I did succeed in the installation by using a more recent version of openmpi.   The abinit -b output follows.   At the end I have some documentation for the earlier openmpi version and its error messages.<br /> DATA TYPE INFORMATION: <br /> REAL:      Data type name: REAL(DP) <br />            Kind value:      8<br />            Precision:      15<br />            Smallest nonnegligible quantity relative to 1:  0.22204460E-15<br />            Smallest positive number:                       0.22250739-307<br />            Largest representable number:                   0.17976931+309<br /> INTEGER:   Data type name: INTEGER(default) <br />            Kind value: 4<br />            Bit size:   32<br />            Largest representable number: 2147483647<br /> LOGICAL:   Data type name: LOGICAL <br />            Kind value: 4<br /> CHARACTER: Data type name: CHARACTER             Kind value: 1<br />  ==== Using MPI-2 specifications ==== <br />  MPI-IO support is ON<br />  xmpi_tag_ub ................   2147483647<br />  xmpi_bsize_ch ..............            1<br />  xmpi_bsize_int .............            4<br />  xmpi_bsize_sp ..............            4<br />  xmpi_bsize_dp ..............            8<br />  xmpi_bsize_spc .............            8<br />  xmpi_bsize_dpc .............           16<br />  xmpio_bsize_frm ............            4<br />  xmpi_address_kind ..........            8<br />  xmpi_offset_kind ...........            8<br />  MPI_WTICK ..................   1.000000000000000E-009<br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /> CPP options activated during the build:<br /><br />                  CC_INTEL                 CXX_INTEL                  FC_INTEL<br /> <br /> HAVE_FC_ALLOCATABLE_DT...             HAVE_FC_ASYNC  HAVE_FC_COMMAND_ARGUMENT<br /> <br />      HAVE_FC_COMMAND_LINE        HAVE_FC_CONTIGUOUS           HAVE_FC_CPUTIME<br /> <br />             HAVE_FC_ETIME              HAVE_FC_EXIT             HAVE_FC_FLUSH<br /> <br />             HAVE_FC_GAMMA            HAVE_FC_GETENV            HAVE_FC_GETPID<br /> <br />   HAVE_FC_IEEE_EXCEPTIONS             HAVE_FC_IOMSG     HAVE_FC_ISO_C_BINDING<br /> <br />  HAVE_FC_ISO_FORTRAN_2008        HAVE_FC_LONG_LINES        HAVE_FC_MOVE_ALLOC<br /> <br />           HAVE_FC_PRIVATE         HAVE_FC_PROTECTED         HAVE_FC_STREAM_IO<br /> <br />            HAVE_FC_SYSTEM                  HAVE_FFT        HAVE_FFT_FFTW3_MKL<br /> <br />              HAVE_FFT_MPI           HAVE_FFT_SERIAL        HAVE_LIBPAW_ABINIT<br /> <br />      HAVE_LIBTETRA_ABINIT                HAVE_LIBXC               HAVE_LINALG<br /> <br />        HAVE_LINALG_SERIAL                  HAVE_MPI                 HAVE_MPI2<br /> <br />       HAVE_MPI_IALLREDUCE        HAVE_MPI_IALLTOALL       HAVE_MPI_IALLTOALLV<br /> <br />        HAVE_MPI_INTEGER16               HAVE_MPI_IO HAVE_MPI_TYPE_CREATE_S...<br /> <br />               HAVE_NETCDF                HAVE_NUMPY             HAVE_OS_LINUX<br /> <br />         HAVE_TIMER_ABINIT              USE_MACROAVE                            <br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /><br /> <br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /> <br /> === Build Information === <br />  Version       : 8.8.1<br />  Build target  : x86_64_linux_intel17.0<br />  Build date    : 20180513<br /> <br /> === Compiler Suite === <br />  C compiler       : intel17.0<br />  C++ compiler     : intel17.0<br />  Fortran compiler : intel17.0<br />  CFLAGS           :  -g -O2 -vec-report0<br />  CXXFLAGS         :  -g -O2 -vec-report0<br />  FCFLAGS          :  -g<br />  FC_LDFLAGS       : <br /> <br /> === Optimizations === <br />  Debug level        : basic<br />  Optimization level : standard<br />  Architecture       : intel_xeon<br /> <br /> === Multicore === <br />  Parallel build : yes<br />  Parallel I/O   : auto<br />  openMP support : no<br />  GPU support    : no<br /> === Connectors / Fallbacks === <br />  Connectors on : yes<br />  Fallbacks on  : yes<br />  DFT flavor    : libxc-fallback<br />  FFT flavor    : fftw3-mkl<br />  LINALG flavor : mkl<br />  MATH flavor   : none<br />  TIMER flavor  : abinit<br />  TRIO flavor   : netcdf-fallback<br /> <br /> === Experimental features === <br />  Bindings            : @enable_bindings@<br />  Exports             : no<br />  GW double-precision : no<br /> <br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /> <br /><br /> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /> Default optimizations:<br />   -O3<br /><br /> Optimizations for 20_datashare:<br />   -O0<br /><br />--------------------------------------------------------------------------------<br />Some comments on the openmpi 1.6/intel12.0 version which failed. --<br />Using the flag --  FCFLAGS_EXTRA=&quot;-stand f03&quot; did solve the long line problem, but caused a later error in the compilation with<br />the error message <br />&quot;../../../src/78_eph/m_sigmaph.F90(1114): warning #7416: Fortran 2003 does not allow this intrinsic procedure.   [DCMPLX]<br />             dkpap = dcmplx(displ_cart(1, idir2, ipert2, nu), displ_cart(2, idir2, ipert2, nu))<br />---------------------^<br />../../../src/78_eph/m_sigmaph.F90(1115): warning #7416: Fortran 2003 does not allow this intrinsic procedure.   [DCONJG]<br />             tpp(ip1,ip2) = dka * dconjg(dkap) + dkpa * dconjg(dkpap) ....&quot;<br /><br />I did not yet try your other suggestions, but will keep them in mind for the future.   It is our experience that this version (2.1.0)  of openmpi does not always<br />work for large calculations...      Your recommendations are very much appreciated.      Thanks!    Natalie</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Error message in compiling 8.8.1</h3>
+				<div class="date">Posted: <strong>Tue Jul 30, 2019 3:44 pm</strong></div>
+				<div class="author">by <strong>pomax</strong></div>
+				<div class="content">Hi, I'm a bit late but I guess it could help others if I post my solution. <br /><br />I've had a similar error during make on version 8.11.8 because my gfortran version was lower than 5 (I had 4.8).<br /> I am on Centos7 so I had to install devtools-7 then install gfortran-7. The installation seems to work, still got an error F77 unknown tag though.<br />Here's the code I've written into the terminal (I don't think the second line is necessary).<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>sudo yum install centos-release-scl<br />sudo yum-config-manager --enable rhel-server-rhscl-7-rpms<br />sudo yum install devtoolset-7<br />scl enable devtoolset-7 bash<br />sudo yum update gfortran<br /></code></pre></div><br /><br />And write the following line to enable gfortran-7 instead of your old version into a new terminal window :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>scl enable devtoolset-7 bash</code></pre></div><br />Or this line into .bashrc to have it automatically every time you open the terminal :<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>source scl_source enable devtoolset-7</code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Error message in compiling 8.8.1</h3>
+				<div class="date">Posted: <strong>Fri Nov 29, 2019 5:36 pm</strong></div>
+				<div class="author">by <strong>Olivier.5590</strong></div>
+				<div class="content">Great, thanks to everyone for having the detailed solution to the problem! I ran into it as well, and it's not every day you see help forums being actually helpful, with useful solutions to your issues  <img class="smilies" src="images/smilies/icon_lol.gif" width="15" height="17" alt=":lol:" title="Laughing"></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3839&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:33:04 GMT -->
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=5215&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:06:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; MPI level = 3 fails</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>MPI level = 3 fails</h2>
+		<p><a href="viewtopiccdd6.html?f=3&amp;t=5215">https://forum.abinit.org/viewtopic.php?f=3&amp;t=5215</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>MPI level = 3 fails</h3>
+				<div class="date">Posted: <strong>Wed Nov 18, 2020 10:13 am</strong></div>
+				<div class="author">by <strong>zeroth</strong></div>
+				<div class="content">When trying to use MPI level 3 (--with-mpi-level=3) the build crashes.<br>
+<br>
+The reason is quite simple,<br>
+<br>
+Look at shared/common/src/11_memory_mpi/m_profiling_abi.F90<br>
+<br>
+There you have:<br>
+#ifdef HAVE_MPI2<br>
+ use mpi<br>
+#endif<br>
+...<br>
+#if defined HAVE_MPI1<br>
+ include 'mpif.h'<br>
+#endif<br>
+<br>
+<br>
+but no where do you have HAVE_MPI3.<br>
+This results in undefined variables (MPI_COMM_WORLD etc.)<br>
+<br>
+Oh, and this is for v9.2.1 and v9.2.2 (sorry)</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: MPI level = 3 fails</h3>
+				<div class="date">Posted: <strong>Tue Dec 01, 2020 4:19 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content"><blockquote class="uncited"><div>
+When trying to use MPI level 3 (--with-mpi-level=3) the build crashes.
+</div></blockquote>
+
+I don't think this option has some effect at the level of the source code except for making the compilation abort!<br>
+<br>
+The build system automatically detects whether the MPI library provides the mpi module (MPI2+) <br>
+or if we have to fallback to MPI1 include files.<br>
+<br>
+There are MPI2+ extensions that are used in the code (e.g. non-blocking collective communications) but the presence of these extension is tested at runtime and CPP flags are defined accordingly.<br>
+Moreover, the MPI2+ features we are presently using do not require the mpi_f08 module so for the time being we do not require a library that is fully MPI3-compliant.<br>
+<br>
+In a nutshell, there's no need to use with-mpi-level=3 to take advantage of (part) of the MPI3 specs.<br>
+This is what you should get at configure time if you are using a recent MPI implementation<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>checking whether to build MPI I/O code... yes
+checking which level of MPI is supported by the Fortran compiler... 2
+configure: forcing MPI-2 standard level support
+checking whether the MPI library supports MPI_INTEGER16... yes
+checking whether the MPI library supports MPI_CREATE_TYPE_STRUCT... yes
+checking whether the MPI library supports MPI_IBCAST (MPI3)... yes
+checking whether the MPI library supports MPI_IALLGATHER (MPI3)... yes
+checking whether the MPI library supports MPI_IALLTOALL (MPI3)... yes
+checking whether the MPI library supports MPI_IALLTOALLV (MPI3)... yes
+checking whether the MPI library supports MPI_IGATHERV (MPI3)... yes
+checking whether the MPI library supports MPI_IALLREDUCE (MPI3)... yes
+</code></pre></div>
+
+Best,<br>
+Matteo</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=5215&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:06:03 GMT -->
+</html>

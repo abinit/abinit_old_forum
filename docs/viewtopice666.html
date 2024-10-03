@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1346&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:50:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; exit code 14?</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>exit code 14?</h2>
+		<p><a href="viewtopic362e.html?f=10&amp;t=1346">https://forum.abinit.org/viewtopic.php?f=10&amp;t=1346</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>exit code 14?</h3>
+				<div class="date">Posted: <strong>Wed Sep 28, 2011 12:25 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Hi,<br />I'm trying to run a strain response function calculation with a very large unit cell, and it is failing with linux exit code 14. Other perturbations on the same system are working (ddk completed, electric field and phonons at gamma are running successfully as separate jobs). I can't reproduce this failure on a smaller system. Can anyone give hints on how to learn what is going wrong, based on the exit code?<br /><br />thanks,<br />Joe</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: exit code 14?</h3>
+				<div class="date">Posted: <strong>Thu Sep 29, 2011 2:03 pm</strong></div>
+				<div class="author">by <strong>Magniff</strong></div>
+				<div class="content">I have exit code 11 on centos, so jzwanzig if you figure out by yourself what does it mean please post it here;</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: exit code 14?</h3>
+				<div class="date">Posted: <strong>Mon Apr 02, 2012 7:03 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hi Joe,<br /><br />I'm afraid the only thing that works is running interactively (or as a batch) and catching the main abinit process (presuming this is a parallel job) with gdb:<br /><br />gdb /path/to/abinit &lt;pid&gt;<br /><br />gdb prompt&gt; continue<br />.<br />.<br />.<br />crash with some information...<br /><br />You can also run your smaller calculations with valgrind:<br /><br />valgrind --log-file=abi --track-origins=yes --leak-check=full -v --show-reachable=yes /path/to/abinit &lt; files.file<br />.<br />.<br />.<br />runs for a long time (30x slower than normal)<br />read file &quot;abi&quot; or &quot;abi.&lt;pid&gt;&quot; to see errors in allocation or initialization. Often the error is present and seen by valgrind even if it does not crash.<br /><br />cheers<br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=1346&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:50:31 GMT -->
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1265&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:20:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Geometry Constraints for Selected Atoms</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Geometry Constraints for Selected Atoms</h2>
+		<p><a href="viewtopic3eea-2.html?f=9&amp;t=1265">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1265</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Geometry Constraints for Selected Atoms</h3>
+				<div class="date">Posted: <strong>Mon Aug 15, 2011 7:25 pm</strong></div>
+				<div class="author">by <strong>Fermionae</strong></div>
+				<div class="content">Hello all,<br /><br />    I need to put some constraints on the relevant positions of some of the atoms in the supercell, but I don't know how exactly I can do it. It seems the input variable 'wtatcon':<br /><br /><!-- m --><a class="postlink" href="http://www.abinit.org/documentation/helpfiles/for-v5.7/input_variables/varrlx.html#wtatcon">http://www.abinit.org/documentation/hel ... ml#wtatcon</a><!-- m --><br /><br />and the other associated input variables should do the job. However, the variable description is not clear to me and I couldn't find any example of it anywhere. <br />    I would be extremely grateful if you could help me implement  the  'wtatcon' variable, or if you know another way to set geometry constraints in abinit. <br />    Thank you very much in advance.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Geometry Constraints for Selected Atoms</h3>
+				<div class="date">Posted: <strong>Tue Aug 16, 2011 9:38 am</strong></div>
+				<div class="author">by <strong>david.waroquiers</strong></div>
+				<div class="content">Hello,<br /><br />It depends on the constraints you want to set. For example, it is very easy to fix some atoms with the variables natfix and iatfix or natfixx/natfixy/natfixz and iatfixx/iatfixy/iatfixz.<br />What are the geometry constraints you need ?<br /><br />David</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Geometry Constraints for Selected Atoms</h3>
+				<div class="date">Posted: <strong>Wed Aug 17, 2011 1:24 am</strong></div>
+				<div class="author">by <strong>Fermionae</strong></div>
+				<div class="content">Thanks for the response David.<br /><br />I am working on a 80 atoms supercell. The constraints are on 14 atoms. <br /><br />In the simplest case, I want to keep the relative positions of the selected atoms fixed, but still letting them move all together. It seems it is doable by 'wtatcon', though it is not clear to me how I should consider the difference in the masses of the atoms involved. <br /> <br />In the ideal case, I wish to loosen the constraints and let all the atomic coordinates relax, but still the position of the selected atoms should satisfy a constraint in the form of a linear relation such as:<br />a * x_1 + b * x_2 + c * x_3 + ... = d<br />where a, b, c, d, ... are constants and x_i is the coordinate of atom i in the x-direction.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Geometry Constraints for Selected Atoms</h3>
+				<div class="date">Posted: <strong>Fri Mar 18, 2016 12:26 pm</strong></div>
+				<div class="author">by <strong>ChrisAblitt</strong></div>
+				<div class="content">Dear all,<br /><br />I notice that this topic has not received a reply in a number of years but I wonder if anyone would be able to provide an answer.<br /><br />Does anyone know if it is possible to apply more complex geometric constraints in abinit than those given in the example for the keyword wtatcon? In the example two atoms of the same type are free to move by equal (yet opposite) amounts in a given direction. I am interested in a a situation where I have two pairs of equivalent atoms (say one pair of O and one of Ca) and I would like each pair of atoms to obey constraints similar to those expressed in the example. However, I would also like the additional constraint that the sum of the separate displacements the O and the Ca atoms are equal to a constant value (i.e. the overall magnitude of the displacement is fixed but the individual ions are free to move in certain directions given this constraint). Are these sorts of constraints possible to implement in abinit?<br /><br />Thank you in advance for any responses.<br /><br />Chris</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Geometry Constraints for Selected Atoms</h3>
+				<div class="date">Posted: <strong>Sun Jun 05, 2016 5:29 am</strong></div>
+				<div class="author">by <strong>Vladimir</strong></div>
+				<div class="content">Hi, all.<br /><br />I want to optimize geometry of some metal azides (KN3, AgN3, etc.)<br />It is obvious that the NN distance and NNN angle must be kept in the geometry optimization of the cell.<br />whether it is possible to set such constrains?<br /><br />Best.<br />Vladimir.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1265&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:20:43 GMT -->
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=751&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:41:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Problem with elastic constants</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Problem with elastic constants</h2>
+		<p><a href="viewtopic37a8.html?f=10&amp;t=751">https://forum.abinit.org/viewtopic.php?f=10&amp;t=751</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Problem with elastic constants</h3>
+				<div class="date">Posted: <strong>Mon Nov 15, 2010 6:05 pm</strong></div>
+				<div class="author">by <strong>aromero</strong></div>
+				<div class="content">Dear Abinitiers<br /><br />I have been running a calculation to obtain the elastic constants from response theory. After I did run my selfconsistent calculation and obtain the<br />corresponding DDB, I did calculate the elastic constant through the anaddb facility. But I am getting the following error<br /><br /><br /> Elastic Tensor (relaxed ion) (unit:10^2GP):<br />  (at fixed electric field boundary condition)<br /><br />   1.3389475   0.8551265   0.8533415   0.0000097  -0.0000015   0.0000072<br />   0.8551265   1.3389780   0.8533415   0.0000031  -0.0000014   0.0000072<br />   0.8533192   0.8533564   1.2750271  -0.0000021   0.0000068  -0.0000125<br />  -0.0000038   0.0000051  -0.0000002   0.5463930   0.0000033  -0.0000066<br />  -0.0000029   0.0000035  -0.0000000   0.0000033   0.5465175   0.0000021<br />  -0.0000004  -0.0000004   0.0000000  -0.0000066   0.0000021   0.5575427<br /><br /> Compliance Tensor (relaxed ion)  (unit: 10^-2GP^-1):<br />  (at fixed electric field boundary condition)<br /><br />   1.5087627  -0.5580331  -0.6362978  -0.0000260   0.0000106  -0.0000265<br />  -0.5580821   1.5087519  -0.6362579  -0.0000010   0.0000101  -0.0000266<br />  -0.6362321  -0.6363181   1.6359809   0.0000211  -0.0000236   0.0000531<br />   0.0000154  -0.0000183   0.0000023   1.8301846  -0.0000110   0.0000218<br />   0.0000114  -0.0000126   0.0000008  -0.0000110   1.8297676  -0.0000069<br />   0.0000007   0.0000006  -0.0000009   0.0000218  -0.0000069   1.7935845<br /><br /> matrginv : BUG -<br />  The matrix that has been passed in argument of this subroutine<br />  is probably either singular or nearly singular.<br />  The LAPACK routine dgetrf failed.<br />  Action : Contact ABINIT group<br />  Action : contact ABINIT group.<br /><br /><br />is there anything weird I should be aware? any info you need from my side to get more feedback from your side ?<br /><br />Regards and thanks!<br /><br />-aldo.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Problem with elastic constants</h3>
+				<div class="date">Posted: <strong>Sun Feb 27, 2011 5:44 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">looks like this failed on the third call to matrginv, for the stress corrected value of the compliance tensor<br /><br />is your residual stress large? Try without elaflag 5 (no input file, Aldo? Shame on you!)<br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=751&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:41:44 GMT -->
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1733&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:59:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; update DDB output whenever possible</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>update DDB output whenever possible</h2>
+		<p><a href="viewtopic6979.html?f=19&amp;t=1733">https://forum.abinit.org/viewtopic.php?f=19&amp;t=1733</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>update DDB output whenever possible</h3>
+				<div class="date">Posted: <strong>Fri Jul 06, 2012 12:49 pm</strong></div>
+				<div class="author">by <strong>jzwanzig</strong></div>
+				<div class="content">Hi,<br /><br />currently during a response function run, the DDB file appears to be written only at the end; thus if say three perturbations are computed, the DDB contains all three but is not written until all three are done. Would it be possible to change this behavior such that it is updated every time a perturbation is completed, or, maybe better, a separate DDB file is written for each perturbation, say with the usual ipert numbering scheme appended, as we do for 1WF and 1DEN and so forth? In big systems you end up using mrgddb on lots of DDB files anyway, and that takes negligible time. It would save us (me, this morning, for example) for losing work when a computer glitch or disk quota issue occurs and kills a calculation that has lasted a few days and for which some but not all of the iperts were already finished, but the DDB still hasn't been written.<br /><br />thanks,<br />Joe</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: update DDB output whenever possible</h3>
+				<div class="date">Posted: <strong>Fri Sep 13, 2013 2:13 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Hear Hear!!<br /><br />I have requested this a while ago as well. The trouble is that the non-self-consistent DDB elements you get are not trivially augmented when you have 1 pert then another - you can get a number of symmetric ones from the both which are not accessible separately, depending on the symops in your system. The main culprits are rotations where the reduced x goes to y or x+/-y depending, e.g. with 3-fold axes.<br /><br />At any rate partial information should be output to DDB1 DDB2 etc... as the calculation goes along, I agree. It's not just an issue of calling the output routine, though, but propagating down the non-stationary completion of other perturbations, instead of doing that only at the end of the full dataset. So: doable but not trivial.<br /><br />cheers<br /><br />Matthieu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=1733&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:59:15 GMT -->
+</html>

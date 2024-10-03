@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=214&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; BigDFT SCF convergence and parameters</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>BigDFT SCF convergence and parameters</h2>
+		<p><a href="viewtopic66e5.html?f=9&amp;t=214">https://forum.abinit.org/viewtopic.php?f=9&amp;t=214</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>BigDFT SCF convergence and parameters</h3>
+				<div class="date">Posted: <strong>Fri Apr 02, 2010 11:44 am</strong></div>
+				<div class="author">by <strong>dcaliste</strong></div>
+				<div class="content">I'm transfering here the mail of Ronaldo Giro sent to the mailing list:<br />«<br />I am trying to use BigDFT with Abinit and I have some doubts:<br /><br />1) I do not need any convergence study, like for wvl_hgrid wich is the similar <br />as ecut in psp-normconserv.? I just need convergence study for k points if my<br />system is not a &quot;molecule in a big box&quot; ?<br /><br />2) There is some gain in CPU time and hardware resources like memory if I use<br />BigDFT instead of plane wave formalism to deal with systems containing many<br />atoms and a vacuum layer?<br /><br />Thanks in advance,<br /><br />Ronaldo Giro<br />»</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: BigDFT SCF convergence and parameters</h3>
+				<div class="date">Posted: <strong>Fri Apr 02, 2010 11:57 am</strong></div>
+				<div class="author">by <strong>dcaliste</strong></div>
+				<div class="content"><blockquote><div><cite>dcaliste wrote:</cite>1) I do not need any convergence study, like for wvl_hgrid wich is the similar <br />as ecut in psp-normconserv.? I just need convergence study for k points if my<br />system is not a &quot;molecule in a big box&quot; ?<br /></div></blockquote><br />The current version of wavelets inside ABINIT (BigDFT 1.2) does not take into account the k points. This is a current development of BigDFT stand-alone and will be available with version 1.4. The inclusion of this future version inside ABINIT is not planned yet.<br /><br />Regarding the convergence study, yes, wavelets requires also to check convergence. With respect to two main parameters, wvl_hgrid, which define the quality of the grid (like ecut defines the quality of the plane-wave projection) and wvl_crmult which is related to the spatial expansion of the grid. Typical values for hgrid varies from 0.50 Bohr to 0.25 Bohr, depending on your pseudo (silicon is happy with 0.45 while carbon prefers 0.35 for high quality results). The typical values for wvl_crmult are betwen 4 and 7 (multiplying factor).<br />An important point regarding to convergence study with wavelets is that, both <strong class="text-strong">wvl_crmult and wvl_hgrid should be improved together</strong>, otherwise the error raised by one will mask the improvement of the other one.<br /><br /><blockquote><div><cite>dcaliste wrote:</cite>2) There is some gain in CPU time and hardware resources like memory if I use<br />BigDFT instead of plane wave formalism to deal with systems containing many<br />atoms and a vacuum layer?<br /></div></blockquote><br />Yes, mainly. The better improvements are definitely achieved for dipolar surfaces since the Green function treatment in the Poisson solver is exact in that case, while the vacuum part for super-cell approachs must be wide. Moreover, there no convergence study with respect to vacuum size to be done.<br />But, currently, wavelets in ABINIT are not using the surface conditions. This is nevertheless possible with BigDFT stand-alone.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=214&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:48 GMT -->
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4152&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:24:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Cs2AgBiCl6 structural optimizati under pressure boxcut error</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Cs2AgBiCl6 structural optimizati under pressure boxcut error</h2>
+		<p><a href="viewtopica0b3.html?f=9&amp;t=4152">https://forum.abinit.org/viewtopic.php?f=9&amp;t=4152</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Cs2AgBiCl6 structural optimizati under pressure boxcut error</h3>
+				<div class="date">Posted: <strong>Mon Jul 22, 2019 8:09 am</strong></div>
+				<div class="author">by <strong>erichyang</strong></div>
+				<div class="content">Hello ABINIT forums,<br /><br />I am currently working on the structural optimization of the double perovskite Cs2AgBiCl6 under 15 GPa of pressure. I have already read many posts of this general topic on the forum and from other sources. This is what I've managed to come up within my input file. The problem I am encountering is as follows: <br /><br />  Choice of acell, ngfft, and ecut<br />      ===&gt; basis sphere extends BEYOND fft box !<br />      Recall that boxcut=Gcut(box)/Gcut(sphere)  must be &gt; 1.<br />      Action : try larger ngfft or smaller ecut.<br />      Note that ecut=effcut/boxcut**2 and effcut=   37.823589<br /><br />What can I change to resolve this issue? <br /><br />Thanks!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Cs2AgBiCl6 structural optimizati under pressure boxcut e</h3>
+				<div class="date">Posted: <strong>Tue Jul 23, 2019 11:03 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear erichyang,<br />Looking at your input, you are doing a cell relaxation but you did not define dilatmx flag, the default value is 1.0, which should be changed to 1.02-1.05 or so, I think this could make you boxcut problem.<br />Otherwise, a small advice, since you have internal atomic relaxations too, you better use toldff flag to stop the SCF instead of toldfe, a good advise is to use toldff=tolmxf/10.<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Cs2AgBiCl6 structural optimizati under pressure boxcut e</h3>
+				<div class="date">Posted: <strong>Mon Aug 05, 2019 10:25 am</strong></div>
+				<div class="author">by <strong>hameed1987</strong></div>
+				<div class="content">Dear Eric<br /><br /> Your answer is also useful to me as well because of optimization, but Ii did not understand the value of toldff=tolmxf/10. please tell me that These both should be 10?<br /><br />Hameed</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Cs2AgBiCl6 structural optimizati under pressure boxcut e</h3>
+				<div class="date">Posted: <strong>Mon Aug 05, 2019 10:38 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Hameed,<br />I meant toldff should be at least 10 times smaller than tolmxf. Toldff is a flag to stop the SCF electronic cycle by taking the residual on the forces to stop it and not on energy or so. Since you are relaxing your structure it is better to stop the SCF on the forces rather than on the energy since the important quantity here is the forces and not the energy.<br />Best wishes,<br />Eric</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4152&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:24:29 GMT -->
+</html>

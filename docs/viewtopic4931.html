@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=4352&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 17:20:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Pseudopotential file pspxc not equal to input ixc</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Pseudopotential file pspxc not equal to input ixc</h2>
+		<p><a href="viewtopicc2ec.html?f=14&amp;t=4352">https://forum.abinit.org/viewtopic.php?f=14&amp;t=4352</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Pseudopotential file pspxc not equal to input ixc&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Wed Mar 25, 2020 1:48 pm</strong></div>
+				<div class="author">by <strong>andyamygto</strong></div>
+				<div class="content">Hi <br>
+<br>
+I was doing some simple test with ABINIT8.10.3 and using the ONCVPSP-PW-PDv0.4 pseudo potentials<br>
+<br>
+<a href="https://github.com/abinit/pseudo_dojo/tree/master/pseudo_dojo/pseudos" class="postlink">https://github.com/abinit/pseudo_dojo/t ... jo/pseudos</a><br>
+<br>
+And in my calculation, the code says that   <br>
+<br>
+--- !WARNING<br>
+src_file: m_pspini.F90<br>
+src_line: 1088<br>
+message: |<br>
+    Pseudopotential file pspxc= -1012,<br>
+    not equal to input ixc= 7.<br>
+    These parameters must agree to get the same xc<br>
+    in ABINIT code as in psp construction.<br>
+    Action: check psp design or input file.<br>
+    Assume experienced user. Execution will continue.<br>
+<br>
+<br>
+This message i got is normal and i know it was causing by different XC functional in the psp and the calculation.<br>
+But there are two questions.<br>
+<br>
+1,What's the XC functional type with index -1012 ? I can't find any index or information for it on the variable page.<br>
+2,In order to find the XC functional. I find the .out format with the psp file, and it says<br>
+functional part 1 Slater exchange<br>
+functional part 2 Perdew &amp; Wang<br>
+in this situation, how can i determined what ixc should i use for the calculation?<br>
+<br>
+Can anyone help?<br>
+<br>
+Cheers<br>
+Andy</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Pseudopotential file pspxc not equal to input ixc</h3>
+				<div class="date">Posted: <strong>Mon Mar 30, 2020 8:58 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Andy,<br>
+The negative ixc is linked to libxc library:<br>
+<a href="https://www.tddft.org/programs/libxc/functionals/" class="postlink">https://www.tddft.org/programs/libxc/functionals/</a><br>
+<br>
+The positive values are internal exchange-correlation implemented in Abinit.<br>
+In your case ixc=-1012 and ixc=7 are actually the same such that it is fine. What would be more problematic is to use two very different ixc in the pseudo and in the inout (GGA vs LDA for example), thought it often works fine... This message is just to warn the user that there is a difference and the user is aware of it.<br>
+<br>
+If you don't specify ixc in your input it'll use the one from the pseudo by default and you'll be sure to be consistent.<br>
+<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Pseudopotential file pspxc not equal to input ixc</h3>
+				<div class="date">Posted: <strong>Mon Mar 30, 2020 2:19 pm</strong></div>
+				<div class="author">by <strong>andyamygto</strong></div>
+				<div class="content">Dear Eric <br>
+<br>
+Thanks for the info.The calculation successes and work perfectly,.<br>
+<br>
+Cheers,<br>
+Andy Hsu</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=4352&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 17:20:00 GMT -->
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2769&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:20:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Compiler detection</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Compiler detection</h2>
+		<p><a href="viewtopic996b.html?f=3&amp;t=2769">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2769</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Compiler detection</h3>
+				<div class="date">Posted: <strong>Thu Aug 21, 2014 7:39 pm</strong></div>
+				<div class="author">by <strong>Jordan</strong></div>
+				<div class="content">Hi,<br /><br />On NERSC Hopper supercomputer, they ask to use a wrapper &quot;ftn&quot; as for a fortran compiler, no matter the compiler we use (intel,gcc,cray).<br />But when typing <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>ftn -V<br />ftn --version<br /></code></pre></div><br />return a first line that is useless and then the compiler vendor/version.<br /><br />The problem is that in the configure script (or more precisely m4/lang-fortran.m4) the detection of the compiler is done using<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>$1 -V | head -n 1<br /></code></pre></div><br />which will fail for all compiler since the first line is not related to the compiler.<br /><br />I could bypass this behavior for my cas (Intel) modifying the line with <br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>sed -n &quot;2p&quot;<br /></code></pre></div><br />which worked.<br />Abinit now detects &quot;intel 13.1&quot; instead of &quot;generic 0.0&quot;.<br /><br />This issue caused the compilation line not to use the option &quot;-module&quot; which messed up the module compilation and crashed at the very beginning.<br /><br />Maybe the &quot;head -n 1&quot; should be replaced by a grep line the next line ?<br /><br />Anyways, I had the problem and solved it myself but I wanted to report it here for any other user in the same situation.<br /><br />Cheers<br /><br />Jordan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Compiler detection</h3>
+				<div class="date">Posted: <strong>Tue Aug 26, 2014 12:06 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">For unusual configurations, you can use the <em class="text-italics">--with-fc-vendor</em> and <em class="text-italics">--with-fc-version</em> options of configure, in order to bypass the build-system detection process.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2769&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:20:16 GMT -->
+</html>

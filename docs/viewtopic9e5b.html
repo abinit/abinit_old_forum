@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=4321&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 17:20:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Print wave-functions in NETCDF format</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Print wave-functions in NETCDF format</h2>
+		<p><a href="viewtopicac1c.html?f=14&amp;t=4321">https://forum.abinit.org/viewtopic.php?f=14&amp;t=4321</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Print wave-functions in NETCDF format</h3>
+				<div class="date">Posted: <strong>Mon Feb 17, 2020 10:18 am</strong></div>
+				<div class="author">by <strong>davide.sangalli.82</strong></div>
+				<div class="content">Dear abinit developers,<br>
+for the interface of abinit with yambo I need the wave-functions printed in NETCD format in abinit 8.10<br>
+<br>
+So far I achieved that only using the flags
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--enable-mpi-io  --enable-netcdf-default</code></pre></div>
+
+However Yann warned me that the option --enable-netcdf-default is there only for testing purposes and that it is going to be dismissed in abinit 9. Thus I was wandering if there is an alternative way to achieve that.<br>
+For reference see also this post: <a href="viewtopic895e.html?p=12797#p12797" class="postlink">viewtopic.php?p=12797#p12797</a><br>
+<br>
+Kind regards,<br>
+Davide</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Print wave-functions in NETCDF format&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Tue Feb 25, 2020 2:19 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Dear Davide,<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>for the interface of abinit with yambo I need the wave-functions printed in NETCD format in abinit 8.10
+</code></pre></div>
+
+To activate the output of the WFK (DEN, POT) in netcdf format, set iomode to 3 in the input file.<br>
+See also the documentation: <a href="https://docs.abinit.org/variables/dev/#iomode" class="postlink">https://docs.abinit.org/variables/dev/#iomode</a><br>
+<br>
+By default, abinit writes (reads) Fortran binary files. The internal implementation uses Fortran read/write statements if MPI is not activated and uses **direct** calls to the MPI-IO primitives to implement parallel-IO on Fortran binary files (record-based access).<br>
+<br>
+Some algorithms such as paral_kgb 1 requires MPI-IO support but this is an extension that was added in the MPI2+ specifications and there are still  several old (or buggy) MPI libraries around that do not implement the MPI-IO specs.<br>
+This is the reason why the build system exposes the --enable-mpi-io option to deactivate this part (by default, the build system auto-detects if the MPI implementation provides the MPI-IO primitives we need).<br>
+<br>
+Note also that --enable-mpi-io is not related to the possible support for parallel-IO at the level of the netcdf4/hdf5 library.<br>
+Understanding whether netcdf4 provides support for parallel-IO at the level of the configure script is tricky because<br>
+the  nf90_open_par symbol is always present in the netcdff library  even if the lib does not support parallel IO.<br>
+Hopefully the detection of parallel-IO capabilities in the hdf5 library will improve in Abinit9<br>
+ 
+<blockquote class="uncited"><div>
+However Yann warned me that the option --enable-netcdf-default is there only for testing purposes and that it is going to be dismissed in abinit 9.
+</div></blockquote>
+
+--enable-netcdf-default is an option used by the buildbot test farm to run all the test of the test suite in netcdf mode so that we can test whether the netcdf version and the "standard" implementation based on Fortran-files+MP-IO are on par. <br>
+<br>
+-enable-netcdf-default changes the default value of iomode from 1 to 3 and this option may be used by users who wish to use netcdf for WFK/DEN/POT files by default without having to set iomode in the input file.<br>
+ <br>
+I would say that this option won't be removed in Abinit9 because we still need it to validate new implementations.<br>
+Abinit9 will require netcdf4/hdf5 but we don't explicitly require parallel-IO capabilities for netcdf files.<br>
+By default, users running in parallel with e.g. paral_kgb will still get Fortran files unless iomode is set to 3 or --enable-netcdf-default is used.<br>
+<br>
+Ciao<br>
+Matteo<br>
+<br>
+-</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Print wave-functions in NETCDF format</h3>
+				<div class="date">Posted: <strong>Tue Feb 25, 2020 12:47 pm</strong></div>
+				<div class="author">by <strong>davide.sangalli.82</strong></div>
+				<div class="content">Thanks Matteo.
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>iomod 3 </code></pre></div>
+and abinit compiled with
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--with-trio-flavor="netcdf"</code></pre></div>
+did the job for serial netcd I/O<br>
+(I tried it as a first step but it did not work probably because I was having issues with the compilation)<br>
+<br>
+<br>
+<br>
+<br>
+I understand that
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--enable-netcdf-default </code></pre></div>
+and
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>--enable-mpi-io</code></pre></div>
+are independent. However the former without the latter makes abinit stop with error message.<br>
+See here: <a href="viewtopic26e1.html?f=3&amp;t=4316#p12792" class="postlink">viewtopic.php?f=3&amp;t=4316#p12792</a><br>
+<br>
+Best,<br>
+D.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Print wave-functions in NETCDF format</h3>
+				<div class="date">Posted: <strong>Thu Mar 19, 2020 11:47 am</strong></div>
+				<div class="author">by <strong>saikrishna</strong></div>
+				<div class="content">Dear Abinit users,<br>
+I have run a band structure calculation with iomode as 3 for the non scf calculation. I am interested in getting out the netcdf file and there is an error in the terminal which I have attached here. Can someone help me with this?<br>
+--- !ERROR<br>
+src_file: m_ioarr.F90<br>
+src_line: 882<br>
+mpi_rank: 0<br>
+message: |<br>
+    Wrong iomode: 3<br>
+...<br>
+<br>
+Please this is urgent.<br>
+<br>
+Thanks in advance<br>
+Sai krishna N.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=4321&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 17:20:00 GMT -->
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2132&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:19:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; how to run internal test &quot;make testin_1&quot; etc</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>how to run internal test &quot;make testin_1&quot; etc</h2>
+		<p><a href="viewtopic1515.html?f=3&amp;t=2132">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2132</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>how to run internal test &quot;make testin_1&quot; etc</h3>
+				<div class="date">Posted: <strong>Sun May 12, 2013 9:11 am</strong></div>
+				<div class="author">by <strong>weitong</strong></div>
+				<div class="content">I am beginner with abinit.<br />Yestoday I just finished the installation with the help from this forums.<br /><br />Today I continue to work on it following the installation notes from the web <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>http://www.abinit.org/documentation/helpfiles/for-v7.2/install_notes/install.html</code></pre></div><br /><br />Come to the third part:<span style="color: #0000BF"> 3. How to make the internal tests?</span><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&#91;weitong@localhost abinit-7.2.1&#93;$ make testin_1</code></pre></div><br /><span style="color: #FF0000">make: *** No rule to make target `testin_1'.  Stop.</span><br /><br />I serached the abinit folder, found some files named test &quot;testin_v1.in&quot; , &quot;testin_v5.in&quot;, &quot;testin_bigdft.in&quot;, etc, in ~ /abinit-7.2.1/tets/built-in/Input.  But there is no &quot;testin_1&quot; or &quot;test_in&quot;.<br /><br /><span style="color: #408000">PS: my installation steps:<br />1.export LD_LIBRARY_PATH=/usr/lib64/openmpi/lib:$LD_LIBRARY_PATH<br />2. $ ./configure --enable-mpi  --with-mpi-prefix=/usr/lib64/openmpi/ --with-tardir=/home/weitong/.abinit/tarballs/<br />3. make mj4<br />4. make install<br />5. export LD_LIBRARY_PATH=/usr/lib64/openmpi/lib:$LD_LIBRARY_PATH</span></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: how to run internal test &quot;make testin_1&quot; etc&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Sun May 12, 2013 11:29 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content"><blockquote class="uncited"><div> serached the abinit folder, found some files named test &quot;testin_v1.in&quot; , &quot;testin_v5.in&quot;, &quot;testin_bigdft.in&quot;, etc, in ~ /abinit-7.2.1/tets/built-in/Input. But there is no &quot;testin_1&quot; or &quot;test_in&quot;.<br /></div></blockquote><br /><br />There's a typo in the documentation. Use<br /><br />make testin_v1 <br />make testin_v5<br />make testin_bigdft <br />...<br /><br />BTW:<br />make without arguments will give the list of available options</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: how to run internal test &quot;make testin_1&quot; etc</h3>
+				<div class="date">Posted: <strong>Sun May 12, 2013 11:46 am</strong></div>
+				<div class="author">by <strong>weitong</strong></div>
+				<div class="content">Got it.<br />Thanks!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: how to run internal test &quot;make testin_1&quot; etc</h3>
+				<div class="date">Posted: <strong>Thu Mar 09, 2017 10:02 pm</strong></div>
+				<div class="author">by <strong>dumindasamarakoon</strong></div>
+				<div class="content">I installed abinit-7.4.1, using the following set of commands in a linux server.<br /><br />1. Download, gunzip and untar the latest version.<br />2. ./configure<br />3. make<br />4. make install<br /><br />Then I run the command <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make testin_v1</code></pre></div>.<br />I got the following error message,<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make: *** No rule to make target `testin_v1'.&nbsp; Stop.<br /></code></pre></div><br /><br />But, <div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make tests_in</code></pre></div> command output the following message,<br /><br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>make basic_tests<br />make&#91;1&#93;: Entering directory `/root/Downloads/abinit-7.4.1'<br />cd ./tests &amp;&amp; make tests_in<br />make&#91;2&#93;: Entering directory `/root/Downloads/abinit-7.4.1/tests'<br />make testin_fast testin_v1 testin_v5 testin_bigdft testin_etsf_io testin_libxc testin_wannier90<br />make&#91;3&#93;: Entering directory `/root/Downloads/abinit-7.4.1/tests'<br />echo &quot;Running built-in test in_fast&quot;<br />Running built-in test in_fast<br />timeout=&quot;0&quot; perl ./Scripts/run-basic-tests.pl built-in in_fast /root/Downloads/abinit-7.4.1/tests<br /><br />&nbsp;Status file, reporting on built-in test fast<br /><br />&nbsp;==&gt; The run finished cleanly.<br />&nbsp; &nbsp; &nbsp;Moreover, comparison of the total energy, and other (few) relevant quantities with reference values has been successful.<br />&nbsp; &nbsp; &nbsp;This does not mean that no problem is present, however.<br />&nbsp; &nbsp; &nbsp;Please run the complete set of ABINIT tests to gain a better confidence in your installation.<br /><br />echo &quot;Running built-in test in_v1&quot;<br />Running built-in test in_v1<br />timeout=&quot;0&quot; perl ./Scripts/run-basic-tests.pl built-in in_v1 /root/Downloads/abinit-7.4.1/tests<br /><br />&nbsp;Status file, reporting on built-in test v1<br /><br />&nbsp;==&gt; The run finished cleanly.<br />&nbsp; &nbsp; &nbsp;Moreover, comparison of the total energy, and other (few) relevant quantities with reference values has been successful.<br />&nbsp; &nbsp; &nbsp;This does not mean that no problem is present, however.<br />&nbsp; &nbsp; &nbsp;Please run the complete set of ABINIT tests to gain a better confidence in your installation.<br /><br />echo &quot;Running built-in test in_v5&quot;<br />Running built-in test in_v5<br />timeout=&quot;0&quot; perl ./Scripts/run-basic-tests.pl built-in in_v5 /root/Downloads/abinit-7.4.1/tests<br /><br />&nbsp;Status file, reporting on built-in test v5<br /><br />&nbsp;==&gt; The run finished cleanly.<br />&nbsp; &nbsp; &nbsp;Moreover, comparison of the total energy, and other (few) relevant quantities with reference values has been successful.<br />&nbsp; &nbsp; &nbsp;This does not mean that no problem is present, however.<br />&nbsp; &nbsp; &nbsp;Please run the complete set of ABINIT tests to gain a better confidence in your installation.<br /><br />make&#91;3&#93;: Nothing to be done for `testin_bigdft'.<br />make&#91;3&#93;: Nothing to be done for `testin_etsf_io'.<br />make&#91;3&#93;: Nothing to be done for `testin_libxc'.<br />make&#91;3&#93;: Nothing to be done for `testin_wannier90'.<br />make&#91;3&#93;: Leaving directory `/root/Downloads/abinit-7.4.1/tests'<br />make&#91;2&#93;: Leaving directory `/root/Downloads/abinit-7.4.1/tests'<br />make&#91;1&#93;: Leaving directory `/root/Downloads/abinit-7.4.1'</code></pre></div><br /><br />What could be the issue with the testin_v1 ?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: how to run internal test &quot;make testin_1&quot; etc</h3>
+				<div class="date">Posted: <strong>Sun Mar 26, 2017 5:51 pm</strong></div>
+				<div class="author">by <strong>thelifeofapanca</strong></div>
+				<div class="content"><blockquote><div><cite>gmatteo wrote:</cite><blockquote class="uncited"><div> serached the abinit folder, found some files named test &quot;testin_v1.in&quot; , &quot;testin_v5.in&quot;, &quot;testin_bigdft.in&quot;, etc, in ~ /abinit-7.2.1/tets/built-in/Input. But there is no &quot;testin_1&quot; or &quot;test_in&quot;.<br /></div></blockquote><br /><br />There's a typo in the documentation. Use<br /><br />make testin_v1 <br />make testin_v5<br />make testin_bigdft <br />...<br /><br />BTW:<br />make without arguments will give the list of available options</div></blockquote><br /><br /><br />Great thx!</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2132&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:19:17 GMT -->
+</html>

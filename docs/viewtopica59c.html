@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=5248&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:30:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; extremely large forces outputted by abinit for the equilibrium structure</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>extremely large forces outputted by abinit for the equilibrium structure</h2>
+		<p><a href="viewtopicc17e.html?f=9&amp;t=5248">https://forum.abinit.org/viewtopic.php?f=9&amp;t=5248</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>extremely large forces outputted by abinit for the equilibrium structure</h3>
+				<div class="date">Posted: <strong>Thu Dec 17, 2020 4:19 am</strong></div>
+				<div class="author">by <strong>whw19850730</strong></div>
+				<div class="content">Dear Abinit developer, <br>
+<br>
+   I am Hongwei Wang, a postdoctoral fellow at the University of Minnesota.<br>
+I am trying to study the two-dimensional material SnSe with Abinit code.<br>
+When I use Abinit to calculate the equilibrium structure optimized by VASP code，<br>
+the output forces are extremely large，indicating the structure is unstable for<br>
+Abinit. I have tried with both official PAW and norm conservation pseudo potentials，<br>
+but this problem is unsolved. However, the output forces are small and acceptable when I use Quantum Espresso to calculate with the same pseudopotentials. I have investigated many three-dimensional oxide materials before，Abinit can always give consistent results with VASP and Quantum Espresso. I think there must be certain specific parameters needed to add to the Abinit input file, I hope you could help me solve this problem. <br>
+I look forward to your reply, Thanks.<br>
+<br>
+<br>
+The attachments are my Abinit input files for SnSe. I cannot upload pseudopotentials to<br>
+the mail-list system, which are psp8 format downloaded from Abinit homepage.<br>
+<br>
+#####################################<br>
+forces calculated by  Abinit<br>
+<br>
+ cartesian forces (hartree/bohr) at end:<br>
+    1      0.00000000000000    -0.20198131688915     0.03608491415769<br>
+    2      0.00000000000000    -0.20198131688915    -0.03608491415769<br>
+    3      0.00000000000000     0.20198131688915     0.03888216878455<br>
+    4      0.00000000000000     0.20198131688915    -0.03888216878455<br>
+ <br>
+ cartesian forces (eV/Angstrom) at end:<br>
+    1      0.00000000000000   -10.38629604072255     1.85556073610250<br>
+    2      0.00000000000000   -10.38629604072255    -1.85556073610250<br>
+    3      0.00000000000000    10.38629604072255     1.99940134029009<br>
+    4      0.00000000000000    10.38629604072255    -1.99940134029009<br>
+################################<br>
+forces calculated by  Quantum Espresso<br>
+     Forces acting on atoms (cartesian axes, Ry/au):<br>
+<br>
+     atom    1 type  1   force =     0.00000000   -0.00226581    0.00006872<br>
+     atom    2 type  1   force =     0.00000000   -0.00226581   -0.00006872<br>
+     atom    3 type  2   force =     0.00000000    0.00226581   -0.00149451<br>
+     atom    4 type  2   force =     0.00000000    0.00226581    0.00149451<br>
+####################################<br>
+<br>
+Best Regards<br>
+<br>
+Hongwei</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: extremely large forces outputted by abinit for the equilibrium structure</h3>
+				<div class="date">Posted: <strong>Thu Dec 24, 2020 5:00 pm</strong></div>
+				<div class="author">by <strong>gonze</strong></div>
+				<div class="content">Dear Hongwei Wang,<br>
+<br>
+I tried to reproduce your problem with ABINIT 9.2.2, but I got good forces.<br>
+ I note that you are using v8.8.4, with the following warning<br>
+appearing in the output file that you have posted:<br>
+<br>
+The starting date is more than 2 years after the initial release<br>
+of this version of ABINIT, namely Jul 2018.<br>
+Note that the use beyond 3 years after the release will not be supported.<br>
+Action: please, switch to a more recent version of ABINIT.<br>
+<br>
+I also suppressed the input variables <br>
+chksymbreak 0<br>
+chkprim  0<br>
+because there is no need to have them, and finally, I suppressed<br>
+tolsym 1.e-5<br>
+since this is the default value for ABINIT9.2.2.<br>
+<br>
+Fro the attached input file, I got the attached output file, with small residual forces.<br>
+<br>
+            fcart     -0.0000000000E+00 -2.6846053275E-06  1.5633831339E-04<br>
+                        -0.0000000000E+00 -2.6846053275E-06 -1.5633831339E-04<br>
+                        -0.0000000000E+00  2.6846053275E-06 -1.4704458212E-04<br>
+                        -0.0000000000E+00  2.6846053275E-06  1.4704458212E-04<br>
+<br>
+So, the problem does not show up, on my machine (also 16 processors like you, but I used gnu9.3 while you used intel15.0) with the use of v9.2.2 and suppression of the above-mentioned input variables.<br>
+I have not tried to reproduce your problem with v8.8.4  or on another machine.<br>
+Please, may I suggest that you switch to v9.2.2. If you still have the problem, then I will try to see what is happening when I compile with intel15.0.<br>
+<br>
+Best wishes,<br>
+Xavier</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=5248&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:30:51 GMT -->
+</html>

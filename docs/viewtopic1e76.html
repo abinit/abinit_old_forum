@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=1915&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:47:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Accuracy issues with non-linear core correction</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Accuracy issues with non-linear core correction</h2>
+		<p><a href="viewtopic0eee-2.html?f=14&amp;t=1915">https://forum.abinit.org/viewtopic.php?f=14&amp;t=1915</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Accuracy issues with non-linear core correction</h3>
+				<div class="date">Posted: <strong>Thu Dec 13, 2012 3:26 pm</strong></div>
+				<div class="author">by <strong>mstengel</strong></div>
+				<div class="content">Dear All,<br /><br />I've been experiencing some accuracy issues while doing (both ground state and <br />response-function) calculations with ABINIT (I'm using version 6.12.3) and <br />Troullier-Martins (FHI, type 6) pseudopotentials with non-linear core correction <br />(NLCC). The problem is that there is a large net force (violation of the acoustic <br />sum rule) on the atoms of the cell. This issue was hard to spot at first, as ABINIT <br />does an automatic &quot;fix&quot; of the ASR on the Cartesian forces -- one has to look <br />at the dE/dt information. This net force _does not_ go away by simply<br />increasing the energy cut-off. <br /><br />To give you a flavor of the problem, I have performed some cross-checks with a <br />different code, LAUTREC, where I can use the same identical pseudopotentials, <br />XC functional (ixc=7, LDA PW92) and basis set. Indeed, when not using NLCC, <br />the two codes are in excellent numerical agreement (typically 10^-6 Ha in <br />the total energy values). When atomic species using NLCC are present, the agreement <br />in the total energy worsens somewhat (to 10^-4 Ha). This is not yet a reason to worry in <br />principle, as different codes do somewhat different things. However, if I compute the <br />total forces along y on a sample system that I shall explain below, I obtain the following <br />results:<br />------------------   25Ha ---------   35Ha<br />ABINIT        0.000004001827        0.000001075583<br />LAUTREC    0.000000002215       -0.000000000045<br /><br />The net drift is _large_ in ABINIT, and does not appear to decrease that much with the cut-off,<br />unlike the LAUTREC results. At 35Ry, the drift is of the order of 4*10^-10 Ha/bohr in LAUTREC, 1*10^-6 <br />in ABINIT, i.e. 3-4 orders of magnitude difference!<br /><br />The system is a 4-atom NaCl cell, where I have displaced one Na atom by a small distance<br />in the yz plane (along 110). You can find the complete files necessary to run the ABINIT<br />calculation at the following URL: <br /><br /><!-- m --><a class="postlink" href="http://www.icmab.es/leem/stengel/nacl_test.tar">http://www.icmab.es/leem/stengel/nacl_test.tar</a><!-- m --><br /><br />Note that I run into the same issue, if not worse, when attempting response <br />functions (phonon) calculations. I see two possibilities to explain this fact:<br /><br />1) I overlooked some important parameter in my input files (or in the header<br />of the na.fhi file, that I prepared myself), which would explain the lack<br />of accuracy in the atomic forces.<br /><br />2) The implementation of the non-linear core corrections are simply different<br />in LAUTREC and ABINIT. If this turns out to be the case, I think it would be <br />maybe worth checking if there's anything that can be done in the code to<br />improve the accuracy of the NLCC part.<br /><br />Thanks in advance for helping me out with this.<br /><br />Best regards,<br />Massimiliano</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=14&t=1915&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 01:47:00 GMT -->
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3437&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:20:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Tests failure Ubuntu 2x_Xeon Intel 2017 compilers</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Tests failure Ubuntu 2x_Xeon Intel 2017 compilers</h2>
+		<p><a href="viewtopic08bf.html?f=3&amp;t=3437">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3437</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Tests failure Ubuntu 2x_Xeon Intel 2017 compilers</h3>
+				<div class="date">Posted: <strong>Mon Nov 28, 2016 8:40 am</strong></div>
+				<div class="author">by <strong>korepashka</strong></div>
+				<div class="content">Dear colleagues,<br />we are trying to set-up Abinit under Ubuntu 16.04 (2x6-core Xeon, with Intel compilers), and always get severe failures during the tests. (Configure and make seem ok at a first glance).<br />Can anyone help us to figure out what we are doing wrong?<br /><div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/filed4d2.php?id=1349">config.log</a></dt>
+			<dd><em>configure log</em></dd>			<dd>(661.47 KiB) Downloaded 318 times</dd>
+		</dl>
+		
+		
+			</div><br />Below are the parameters used to configure:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>FC=mpiifort<br />CC=mpiicc<br />CXX=mpiicpc<br />enable_gw_dpc=&quot;yes&quot;<br />enable_mpi=&quot;yes&quot;<br />enable_mpi_io=&quot;yes&quot;<br />enable_openmp=&quot;yes&quot;<br />enable_optim=&quot;aggressive&quot;<br />with_fc_vendor=&quot;intel&quot;<br />with_dft_flavor=&quot;atompaw+bigdft+libxc+wannier90&quot;<br />with_fft_flavor=&quot;fftw3-mkl&quot;<br />with_linalg_flavor=&quot;mkl&quot;<br />with-linalg-incs=&quot;-I/opt/intel/compilers_and_libraries_2017/linux/mkl/include/intel64/lp64 -I/opt/intel/compilers_and_libraries_2016/linux/mkl/include&quot;<br />with-linalg-libs=&quot;-L/opt/intel/compilers_and_libraries_2017/linux/mkl/lib/intel64 -lmkl_blas95_lp64 -lmkl_lapack95_lp64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_core -lmkl_intel_thread -lmkl_blacs_openmpi_lp64 -lpthread -lm -ldl&quot; <br />with-fft-libs=&quot;-L/opt/intel/compilers_and_libraries_2017/linux/mkl/interfaces -lfftw3xf -lfftw2xc -lfftw2x_cdft -lfftw2xf -lfftw3xc -lfftw3x_cdft&quot; <br />with-fft-incs=&quot;-I/opt/intel/mkl/include&quot;<br /># enable-64bit-flags FCFLAGS_EXTRA=&quot;-O2 -axAVX,SSE4.2&quot; CFLAGS_EXTRA=&quot;-O2 -axAVX,SSE4.2&quot; CXXFLAGS_EXTRA=&quot;-O2 -axAVX,SSE4.2&quot;<br />enable_fc_wrapper = &quot;yes&quot;</code></pre></div><br /><br />The output of the test command:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>vitaly@parovoz:~/Abinit/abinit-8.0.8i$ make tests_in<br />make test_fast test_v1 test_v5 test_bigdft test_etsf_io test_libxc test_wannier90<br />make&#91;1&#93;: Entering directory '/home/vitaly/Abinit/abinit-8.0.8i'<br />cp ./src/98_main/abinit ./tests/built-in/Input/abinit &amp;&amp; cd ./tests/built-in/Input &amp;&amp; ./abinit &lt; testin_fast.files &gt;&amp; testin_fast.stdout &amp;&amp; cat testin_fast_tmp_STATUS &amp;&amp; rm -f abinit *DDB *EIG *out* *nc *WFK<br />&nbsp;<br />&nbsp;Status file, reporting on built-in test fast<br />&nbsp;<br />&nbsp;==&gt; The run finished cleanly.<br />&nbsp; &nbsp; &nbsp;Moreover, comparison of the total energy, and other (few) relevant quantities with reference values has been successful.<br />&nbsp; &nbsp; &nbsp;This does not mean that no problem is present, however. <br />&nbsp; &nbsp; &nbsp;Please run the complete set of ABINIT tests to gain a better confidence in your installation.<br />&nbsp;<br />cp ./src/98_main/abinit ./tests/built-in/Input/abinit &amp;&amp; cd ./tests/built-in/Input &amp;&amp; ./abinit &lt; testin_v1.files &gt;&amp; testin_v1.stdout &amp;&amp; cat testin_v1_tmp_STATUS &amp;&amp; rm -f abinit *DDB *EIG *out* *nc *WFK<br />&nbsp;<br />&nbsp;Status file, reporting on built-in test v1<br />&nbsp;<br />&nbsp;==&gt; The run finished cleanly.<br />&nbsp; &nbsp; &nbsp;Moreover, comparison of the total energy, and other (few) relevant quantities with reference values has been successful.<br />&nbsp; &nbsp; &nbsp;This does not mean that no problem is present, however. <br />&nbsp; &nbsp; &nbsp;Please run the complete set of ABINIT tests to gain a better confidence in your installation.<br />&nbsp;<br />cp ./src/98_main/abinit ./tests/built-in/Input/abinit &amp;&amp; cd ./tests/built-in/Input &amp;&amp; ./abinit &lt; testin_v5.files &gt;&amp; testin_v5.stdout &amp;&amp; cat testin_v5_tmp_STATUS &amp;&amp; rm -f abinit *DDB *EIG *out* *nc *WFK<br />&nbsp;<br />&nbsp;Status file, reporting on built-in test v5<br />&nbsp;<br />&nbsp;==&gt; The run finished cleanly.<br />&nbsp; &nbsp; &nbsp;Moreover, comparison of the total energy, and other (few) relevant quantities with reference values has been successful.<br />&nbsp; &nbsp; &nbsp;This does not mean that no problem is present, however. <br />&nbsp; &nbsp; &nbsp;Please run the complete set of ABINIT tests to gain a better confidence in your installation.<br />&nbsp;<br />cp ./src/98_main/abinit ./tests/built-in/Input/abinit &amp;&amp; cd ./tests/built-in/Input &amp;&amp; ./abinit &lt; testin_bigdft.files &gt;&amp; testin_bigdft.stdout &amp;&amp; cat testin_bigdft_tmp_STATUS &amp;&amp; rm -f abinit *DDB *EIG *out* *nc *WFK<br />&nbsp;<br />&nbsp;Status file, reporting on built-in test bigdft<br />&nbsp;<br />&nbsp;Error for total energy : <br />&nbsp; &nbsp; &nbsp; &nbsp; expected&nbsp; -0.56231990141000D+00&nbsp; with maximum&nbsp; &nbsp;deviation&nbsp; 0.3000D-06<br />&nbsp; &nbsp; &nbsp; &nbsp; computed&nbsp; &nbsp;0.20160902914790D+02&nbsp; with effective deviation&nbsp; 0.2072D+02<br />&nbsp;Error for stress strten(1)<br />&nbsp; &nbsp; &nbsp; &nbsp; expected&nbsp; -0.22537238382000D-01&nbsp; with maximum&nbsp; &nbsp;deviation&nbsp; 0.1000D-06<br />&nbsp; &nbsp; &nbsp; &nbsp; computed&nbsp; -0.11695375134221D+00&nbsp; with effective deviation&nbsp; 0.9442D-01<br />&nbsp;Error for stress strten(2)<br />&nbsp; &nbsp; &nbsp; &nbsp; expected&nbsp; -0.22536232141000D-01&nbsp; with maximum&nbsp; &nbsp;deviation&nbsp; 0.1000D-06<br />&nbsp; &nbsp; &nbsp; &nbsp; computed&nbsp; -0.11353580559692D+00&nbsp; with effective deviation&nbsp; 0.9100D-01<br />&nbsp;Error for stress strten(3)<br />&nbsp; &nbsp; &nbsp; &nbsp; expected&nbsp; -0.22529038043000D-01&nbsp; with maximum&nbsp; &nbsp;deviation&nbsp; 0.1000D-06<br />&nbsp; &nbsp; &nbsp; &nbsp; computed&nbsp; -0.23077584492658D+00&nbsp; with effective deviation&nbsp; 0.2082D+00<br />&nbsp;Error for stress strten(4)<br />&nbsp; &nbsp; &nbsp; &nbsp; expected&nbsp; &nbsp;0.39104928264000D-06&nbsp; with maximum&nbsp; &nbsp;deviation&nbsp; 0.1000D-06<br />&nbsp; &nbsp; &nbsp; &nbsp; computed&nbsp; -0.59820755493547D-02&nbsp; with effective deviation&nbsp; 0.5982D-02<br />&nbsp;Error for stress strten(5)<br />&nbsp; &nbsp; &nbsp; &nbsp; expected&nbsp; &nbsp;0.62823846408000D-06&nbsp; with maximum&nbsp; &nbsp;deviation&nbsp; 0.1000D-06<br />&nbsp; &nbsp; &nbsp; &nbsp; computed&nbsp; -0.23795935555632D-02&nbsp; with effective deviation&nbsp; 0.2380D-02<br />&nbsp;Error for stress strten(6)<br />&nbsp; &nbsp; &nbsp; &nbsp; expected&nbsp; &nbsp;0.38414124658992D-09&nbsp; with maximum&nbsp; &nbsp;deviation&nbsp; 0.1000D-06<br />&nbsp; &nbsp; &nbsp; &nbsp; computed&nbsp; &nbsp;0.29660661083105D-01&nbsp; with effective deviation&nbsp; 0.2966D-01<br />&nbsp;<br />cp ./src/98_main/abinit ./tests/built-in/Input/abinit &amp;&amp; cd ./tests/built-in/Input &amp;&amp; ./abinit &lt; testin_etsf_io.files &gt;&amp; testin_etsf_io.stdout &amp;&amp; cat testin_etsf_io_tmp_STATUS &amp;&amp; rm -f abinit *DDB *EIG *out* *nc *WFK<br />Makefile:2593: recipe for target 'test_etsf_io' failed<br />make&#91;1&#93;: *** &#91;test_etsf_io&#93; Error 13<br />make&#91;1&#93;: Leaving directory '/home/vitaly/Abinit/abinit-8.0.8i'<br />Makefile:2602: recipe for target 'tests_in' failed<br />make: *** &#91;tests_in&#93; Error 2</code></pre></div></div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3437&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:20:41 GMT -->
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=5346&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:30:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; SCF convergence deteriorates during structural relaxation resulting in crash</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>SCF convergence deteriorates during structural relaxation resulting in crash</h2>
+		<p><a href="viewtopic9055.html?f=9&amp;t=5346">https://forum.abinit.org/viewtopic.php?f=9&amp;t=5346</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>SCF convergence deteriorates during structural relaxation resulting in crash</h3>
+				<div class="date">Posted: <strong>Mon Mar 15, 2021 12:43 pm</strong></div>
+				<div class="author">by <strong>kalkm1</strong></div>
+				<div class="content">Hi,<br>
+<br>
+I am trying to relax a 64 atom supercell of CdMnTe using ionmov 2 and optcell 2.<br>
+<br>
+When dealing with bulk CdTe, the SCF loop converges and the structure relaxes below my tolerance (10e-4 tolmxf) after a few Broyden iterations - all good!<br>
+<br>
+However, once I introduce Mn to the supercell (e.g. Cd0.5Mn0.5Te) the SCF loop does not converge but noticeably also starts at a very high density residual (nres2=2.060E+02) which does not improve after 30 SCF iterations (nres2=7.362E+02). After a few Broyden interations of the SCF loop not finding convergence, the calculation then crashes. <br>
+<br>
+Any suggestions as to why this is happening and what steps/parameters I can change to get the SCF convergence to work would be greatly appreciated. I have played around with changing diemac (8, 12, 50) but this has not helped. <br>
+<br>
+I have attached my input file for the CdMnTe supercell calculation and the corresponding output file.<br>
+
+<div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/filea1d5.php?id=2061">den.in</a></dt>
+						<dd>(5.75 KiB) Downloaded 422 times</dd>
+		</dl>
+		
+		
+			</div>
+<div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file115a.php?id=2062">den_oc2im2_d50.out</a></dt>
+						<dd>(74.45 KiB) Downloaded 361 times</dd>
+		</dl>
+		
+		
+			</div>
+
+Cheers,<br>
+kalkm1</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF convergence deteriorates during structural relaxation resulting in crash</h3>
+				<div class="date">Posted: <strong>Wed Mar 17, 2021 6:58 pm</strong></div>
+				<div class="author">by <strong>kalkm1</strong></div>
+				<div class="content">Update!:<br>
+<br>
+Okay I have managed to get the SCF loop to behave by changing diemix to 0.1 from 0.7, and it now converges in about 60 steps in the first Broyden iteration (output file is attached).<br>
+<br>
+However, I have now encountered a new issue during subsequent SCF convergence loops during the Broyden structural relaxation iterations. The SCF initially improves finding convergence in ~30 steps for the first 5 Broyden iterations but then begins to deteriorate during steps 6 and 7, not finding convergence in 100 SCF steps, with the calculation crashing after the 7th Broyden iteration. <br>
+<br>
+I should note that during some identical calculations (64 atoms Cd0.5Mn0.5Te) the SCF convergence does not deteriorate and the calculation completes successfully. Other times it crashes as described above.<br>
+<br>
+When the SCF loop deteriorates, is this a case of the structural relaxation not finding it's minimum? If so, how come the calculation crashes after the SCF loop has already completed and, according to the log file (last lines of log file attached),  as Abinit is trying to create an HDf-5 file? The last line in the log file before the calculation terminates is always: 
+<blockquote class="uncited"><div>- Creating HDf5 file with MPI-IO support: tmp/den_o_GSR.nc</div></blockquote>
+
+I've attached a figure showing the total energy as a function of stress on the supercell: this shows the structural relaxation progressing well before the stress suddenly increases and the calculation crashes.<br>
+<br>
+If you have more understanding as to why this is happening - whether it is an issue with the code or a minimization problem - and what can be done to avoid it, please let me know!<br>
+<br>
+
+<div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/file6430.php?id=2063">den_oc2im2_d8_O2sm.out</a></dt>
+						<dd>(262.88 KiB) Downloaded 368 times</dd>
+		</dl>
+		
+		
+			</div>
+<div class="inline-attachment">
+			
+		
+		
+				<dl class="file">
+			<dt><img src="images/upload_icons/txt.gif" alt="" /> <a class="postlink" href="download/fileb7b7.php?id=2064">den.log</a></dt>
+						<dd>(7.74 KiB) Downloaded 359 times</dd>
+		</dl>
+		
+		
+			</div>
+<div class="inline-attachment">
+			
+				<dl class="thumbnail">
+			<dt><a href="download/file9ae4.png?id=2065&amp;mode=view"><img src="download/file6ddd.png?id=2065&amp;t=1" class="postimage" alt="Figure_1.png" title="Figure_1.png (26.85 KiB) Viewed 10109 times" /></a></dt>
+					</dl>
+		
+		
+		
+		
+			</div>
+
+Cheers,<br>
+kalkm1</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF convergence deteriorates during structural relaxation resulting in crash</h3>
+				<div class="date">Posted: <strong>Sat Mar 20, 2021 5:04 am</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content"><blockquote class="uncited"><div>
+The last line in the log file before the calculation terminates is always:<br>
+- Creating HDf5 file with MPI-IO support: tmp/den_o_GSR.nc
+</div></blockquote>
+
+The problem is not necessarily due to the output of the GSR file.<br>
+In your log file, I find the following section:<br>
+
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>- Creating HDf5 file with MPI-IO support: tmp/den_o_GSR.nc
+application called MPI_Abort(MPI_COMM_WORLD, 13) - process 27
+application called MPI_Abort(MPI_COMM_WORLD, 13) - process 28
+application called MPI_Abort(MPI_COMM_WORLD, 13) - process 29
+application called MPI_Abort(MPI_COMM_WORLD, 13) - process 31
+application called MPI_Abort(MPI_COMM_WORLD, 13) - process 32
+application called MPI_Abort(MPI_COMM_WORLD, 13) - process 33
+application called MPI_Abort(MPI_COMM_WORLD, 13) - process 46
+application called MPI_Abort(MPI_COMM_WORLD, 13) - process 47
+application called MPI_Abort(MPI_COMM_WORLD, 13) - process 48
+application called MPI_Abort(MPI_COMM_WORLD, 13) - process 49
+</code></pre></div>
+
+This indicates that abinit aborted execution because a critical condition occurred but this critical <br>
+event is explicitly handled by the developer who calls MPI_ABORT to shutdown everything.<br>
+In principle, there should be an __ABI_MPIABORTFILE__ file with the error message produced by the first MPI process<br>
+that invokes MPI_ABORT. Having the error message would be useful to pinpoint the problem.<br>
+<br>
+Unfortunately, it may happen that  __ABI_MPIABORTFILE__ is empty since the MPI runtime environment may kill all the processes  without giving them enough time to flush their IO buffer to file.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF convergence deteriorates during structural relaxation resulting in crash</h3>
+				<div class="date">Posted: <strong>Sun Mar 21, 2021 12:18 pm</strong></div>
+				<div class="author">by <strong>kalkm1</strong></div>
+				<div class="content">Thanks for your response!<br>
+<br>
+I do usually get an __ABI_MPIABORTFILE__ file when the runs crash, but as you correctly predicted, it is always empty. I was confused as to why it is empty, so your answer does clarify this somewhat. Unfortunately, this makes it more tricky to diagnose the issue.<br>
+<br>
+I have since made some more observations which might be of interest. For the 64 atom supercell, as I have already mentioned in an above post, sometimes the calculation crashes with this error in the log file, but sometimes it also completes. <br>
+<br>
+For a 216 atom supercell, the calculation will never complete and always crashes at Broyden iteration ~7/8 with the SCF deteriorating after the ~4/5 Broyden iteration (i.e. SCF no longer finding convergence in 100 steps). If I restart the calculation with the atomic positions and acell from one of the relaxation steps which found convergence (e.g. Broyden iteration 4), the calculation will again run for 4/5 Broyden iterations before the SCF deteriorates and the job crashes.<br>
+<br>
+This forum post describes a similar issue:<span style="text-decoration:underline"> <a href="viewtopicee6f.html?f=8&amp;t=4131" class="postlink">viewtopic.php?f=8&amp;t=4131</a></span> and suggests compiling Abinit with the -O2 and --enable-avx-safe-mode flags. This solved the issue for the user in the original post, but has not made any difference in my case.<br>
+<br>
+Cheers,<br>
+kalkm1</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=5346&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 15:30:40 GMT -->
+</html>

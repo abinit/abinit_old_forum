@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=326&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Quantum stress tensor and one-electron density matrix</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Quantum stress tensor and one-electron density matrix</h2>
+		<p><a href="viewtopiccd30.html?f=9&amp;t=326">https://forum.abinit.org/viewtopic.php?f=9&amp;t=326</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Quantum stress tensor and one-electron density matrix</h3>
+				<div class="date">Posted: <strong>Wed May 19, 2010 3:54 am</strong></div>
+				<div class="author">by <strong>srk</strong></div>
+				<div class="content">Hello,<br /><br />I am looking for a way to calculate the quantum stress tensor at an arbitrary point in the simulation cell. I have it on good authority that the quantum stress tensor can be calculated from the one-electron density matrix.<br /><br />Can the one-electron density matrix be extracted from the results of an ABINIT calculation (e.g. through postprocessing, verbose output options etc.), or would it be essential to first project onto, e.g. Wannier functions using Wannier90? If so, how could this be done?<br /><br />Many thanks!<br />Steve Kirk</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: One-electron density matrix</h3>
+				<div class="date">Posted: <strong>Mon May 31, 2010 9:57 am</strong></div>
+				<div class="author">by <strong>srk</strong></div>
+				<div class="content">bump</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Quantum stress tensor and one-electron density matrix (UPDAT</h3>
+				<div class="date">Posted: <strong>Tue Jun 01, 2010 11:52 am</strong></div>
+				<div class="author">by <strong>srk</strong></div>
+				<div class="content">Hello,<br /><br />OK, I have found some useful code from another piece of software which uses molecular orbitals instead of plane waves:<br /><br />In terms of MOs (canonical SCF MOs, natural MOs, or whatever) and Fortran code, the upper-triangular part of the (symmetric) stress-tensor Sigma at a point is calculated as:<br /><br />      Pt5=0.5d0<br />       Call ArrayZero(9,Sigma)<br />       Do L=1,NMO<br />        Sigma(1,1)=Sigma(1,1)-Pt5*Occ(L)*(Psi(L,2)*Psi(L,2)-<br />      $                                    Psi(L,1)*Psi(L,5))<br />        Sigma(1,2)=Sigma(1,2)-Pt5*Occ(L)*(Psi(L,2)*Psi(L,3)-<br />      $                                    Psi(L,1)*Psi(L,6))<br />        Sigma(1,3)=Sigma(1,3)-Pt5*Occ(L)*(Psi(L,2)*Psi(L,4)-<br />      $                                    Psi(L,1)*Psi(L,7))<br />        Sigma(2,2)=Sigma(2,2)-Pt5*Occ(L)*(Psi(L,3)*Psi(L,3)-<br />      $                                    Psi(L,1)*Psi(L,8))<br />        Sigma(2,3)=Sigma(2,3)-Pt5*Occ(L)*(Psi(L,3)*Psi(L,4)-<br />      $                                    Psi(L,1)*Psi(L,9))<br />        Sigma(3,3)=Sigma(3,3)-Pt5*Occ(L)*(Psi(L,4)*Psi(L,4)-<br />      $                                    Psi(L,1)*Psi(L,10))<br />     EndDo<br /><br />where NMO is the number of MOs, Occ is the array of MO occupancies and<br />Psi is the array of MO values and their first and second derivatives.<br /><br /> Psi(L,1) = Value of the Lth MO<br /> Psi(L,2) = X 1st derivative of the Lth MO<br /> Psi(L,3) = Y 1st derivative of the Lth MO<br /> Psi(L,4) = Z 1st derivative of the Lth MO<br /> Psi(L,5) = XX 2nd derivative of the Lth MO<br /> Psi(L,6) = XY 2nd derivative of the Lth MO<br /> Psi(L,7) = XZ 2nd derivative of the Lth MO<br /> Psi(L,8) = YY 2nd derivative of the Lth MO<br /> Psi(L,9) = YZ 2nd derivative of the Lth MO<br /> Psi(L,10) = ZZ 2nd derivative of the Lth MO<br /><br />Can anyone please suggest a) what the equivalent quantities would be in ABINIT, and b) what part of the source should I look at to make the modifications. I want be able to evaluate this matrix at any point in the simulation cell, so perhaps it might be best used as a post-processing tool.<br /><br />Again, very grateful for any helpful advice!<br /><br />Dr. Steven R. Kirk<br />College of Chemistry and Chemical Engineering<br />Hunan Normal University<br />Changsha 410000, Hunan Province, PRC</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=326&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:19:24 GMT -->
+</html>

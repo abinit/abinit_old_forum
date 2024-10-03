@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3299&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:25:30 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; DOS of PVA (polyvinyl alcohol)</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>DOS of PVA (polyvinyl alcohol)</h2>
+		<p><a href="viewtopic9433-2.html?f=9&amp;t=3299">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3299</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>DOS of PVA (polyvinyl alcohol)</h3>
+				<div class="date">Posted: <strong>Tue Jun 07, 2016 12:02 pm</strong></div>
+				<div class="author">by <strong>maths</strong></div>
+				<div class="content">Hello,<br />I recently opened a topic about how to calculate the DOS of PE (polyethylene) -&gt; Link: <!-- l --><a class="postlink-local" href="viewtopic45c3.html?f=8&amp;t=3188">viewtopic.php?f=8&amp;t=3188</a><!-- l --><br /><br />This I could already succelsfully simulate with Abinint. Now i tried the same with PVA, but it failed. <br />I think it is because of the asymmetry of the monomer, and the fact that the initial coordinates have to be quite close to the real one otherwise it dose not congregate to the correct molecules.<br /><br />First I tried it by simply change one H to OH... didn't congregate ...<br />Then I switched to relativ coordinates ... tried it with one monomer ...failed<br />Then I tried it with two monomers in one cell and oriented the OH groups contrary. ...but also this did not converged ...  <br />How I proceeded last time for the PE:<br />1. relax with acell 0<br />2. vary acell fint min energy<br />3 relax with new acell <br />4 calculate DOS<br />(now I failed at step 1.)<br /><br />Hier the input of the last try. (want to relax the atomic position) ...(cell size is from a paper... should be not too far from the real one)<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>optcell 0<br />ionmov 2<br />ntime 1000<br />toldfe 1.5d-5<br /><br />acell 5.04 6 6 angstrom<br />ntypat 3&nbsp; natom 14&nbsp; typat 2*1 1*2 4*3 2*1 1*2 4*3 <br />xred<br />0 0 0<br />0.25 0 0.142<br />0.25 0.2 0.35<br />0 0.2 -0.2<br />0 -0.2 -0.2<br />0.25 -0.2 0.35<br />0.25 0.4 0.35<br />0.5 0 0<br />0.5 0 0.142<br />0.75 -0.2 0.35<br />0.5 0.2 -0.2<br />0.5 -0.2 -0.2<br />0.75 0.2 0.35<br />0.75 0.4 0.35<br /><br />znucl 6 8 1 6 8 1&nbsp; band 36<br />ecut 25<br />ecutsm 0.5<br />ngkpt 40 1 1<br /></code></pre></div><br />If any one has an idea how this could converge, I would be very thankful <img class="smilies" src="images/smilies/icon_e_smile.gif" alt=":)" title="Smile" /><br />thx<br />BR<br />maths</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: DOS of PVA (polyvinyl alcohol)</h3>
+				<div class="date">Posted: <strong>Wed Jul 06, 2016 11:46 am</strong></div>
+				<div class="author">by <strong>maths</strong></div>
+				<div class="content">Hello!<br />I already fixed the problem of &quot;structure/force&quot; convergence. Therefore I used ionmov 1 before and took the structure parameter after a few steps were it seemed to congregate (but very slow). Afterwards I turned on damping (vis=20) and did the same. Finally I tried it again with ionmov 2 and it worked.<br />Unfortunately  the DOS looks not really good  <img class="smilies" src="images/smilies/icon_e_sad.gif" alt=":(" title="Sad" /> don't know why. Maybe I should use GAA instead of LDA, but it looks that bands are even to small.<br />If anyone has an idea plz let me know. <br />BR<br />maths</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3299&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:25:30 GMT -->
+</html>

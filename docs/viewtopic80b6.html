@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=342&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:35:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; About phonon and eigenvector</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>About phonon and eigenvector</h2>
+		<p><a href="viewtopic459e.html?f=10&amp;t=342">https://forum.abinit.org/viewtopic.php?f=10&amp;t=342</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>About phonon and eigenvector</h3>
+				<div class="date">Posted: <strong>Thu May 20, 2010 12:07 pm</strong></div>
+				<div class="author">by <strong>fang</strong></div>
+				<div class="content">Dear Abiniters,<br /><br />Hi,I have two questions.<br />(1). I try to calculate phonon frequencies at gamma point of the hexagonal phase of GaSe.<br />  And this is my input(a part):<br />  rfphon 1<br />  rfdir 1 1 1<br />  nqpt 1<br />  kptopt 2<br />  tolvrs  1.0d-8<br />  ngkpt  6 6 2<br />  nshiftk  1<br />  iscf  5<br />  ixc  11<br />  diemac 12<br />  nband  30<br />  ecut 30<br />  nstep 300<br /><br />But I got the negative phonon frequency:<br />  Phonon wavevector (reduced coordinates) :  0.00000  0.00000  0.00000<br />  Phonon energies in Hartree :<br />   -9.336844E-05 -9.176884E-05  1.059004E-05  3.827890E-05  9.361631E-05<br />     9.510691E-05  2.332906E-04  2.334972E-04  2.682767E-04  2.684224E-04<br />     5.393799E-04  5.406935E-04  8.573927E-04  8.578686E-04  8.654459E-04<br />     8.659214E-04  8.796197E-04  8.800295E-04  8.874010E-04  8.878130E-04<br />     1.050585E-03  1.072045E-03  1.327610E-03  1.327859E-03<br />  Phonon frequencies in cm-1    :<br />     -2.049200E+01 -2.014093E+01  2.324246E+00  8.401248E+00  2.054641E+01<br />       2.087355E+01  5.120136E+01  5.124672E+01  5.887994E+01  5.891190E+01<br />       1.183802E+02  1.186685E+02  1.881759E+02  1.882804E+02  1.899434E+02<br />       1.900478E+02  1.930542E+02  1.931442E+02  1.947620E+02  1.948524E+02<br />       2.305767E+02  2.352868E+02  2.913767E+02  2.914313E+02<br /><br />Then I increase ecut to 40 Ha, I got all positive frequency:<br /> <br />      Phonon wavevector (reduced coordinates) :  0.00000  0.00000  0.00000<br />      Phonon energies in Hartree :<br />         5.416151E-05  5.552603E-05  1.431128E-04  1.436117E-04  2.497892E-04<br />         2.501201E-04  2.829831E-04  2.832167E-04  3.348836E-04  3.380225E-04<br />         6.304938E-04  6.320513E-04  8.714120E-04  8.718104E-04  8.794336E-04<br />         8.798505E-04  8.925478E-04  8.928840E-04  9.002979E-04  9.006614E-04<br />         1.086787E-03  1.105199E-03  1.356178E-03  1.356358E-03<br />     Phonon frequencies in cm-1    :<br />         1.188708E+01  1.218656E+01  3.140964E+01  3.151912E+01  5.482238E+01<br />         5.489502E+01  6.210762E+01  6.215888E+01  7.349846E+01  7.418737E+01<br />         1.383774E+02  1.387192E+02  1.912528E+02  1.913403E+02  1.930134E+02<br />         1.931049E+02  1.958916E+02  1.959654E+02  1.975925E+02  1.976723E+02<br />         2.385221E+02  2.425632E+02  2.976466E+02  2.976861E+02<br /><br />But it's seems incorrect,there are no acoustics mode.<br />when I calculate Relax, the input parameter tolmxf 10 d-7,toldfe 10d-8,is that enough?<br />Or I should increase ecut to calculate phonon?<br />By the way, I use GGA-PBE-HGH: Ga-q3.HGH and  Se-q6.HGH<br />Someone can give me better suggestions?<br /><br />(2).When after a phonon calculation at Gamma point how could I obtain the <br />      phonon eigendisplacements(that is how the atom move)?<br /><br />Thank you to all<br /><br />with regards<br />fang</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: About phonon and eigenvector</h3>
+				<div class="date">Posted: <strong>Thu May 20, 2010 3:27 pm</strong></div>
+				<div class="author">by <strong>ilyes</strong></div>
+				<div class="content">Dear Fang,<br /><br />I think with a little bit of search in the abinit forum, you should find your answers (Read the Nettiquette before posting). However, concerning your two questions:<br /> you should use anaddb code to get your results by imposing the acoustic sum rule in the input of the anaddb file (asr =1 or 2) to get vanishing acoustic modes at Gamma and use in the same input file eivec = 3 to get the eigenvectors.<br /><br />Best regards<br /><br />Ass. Prof. Ilyes Hamdi<br />Department of electronics and automatics<br />Institute of applied sciences and technology Gafsa<br />Tunisia</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: About phonon and eigenvector</h3>
+				<div class="date">Posted: <strong>Fri May 21, 2010 6:00 am</strong></div>
+				<div class="author">by <strong>fang</strong></div>
+				<div class="content">Dear Prof. Ilyes Hamdi,<br />Thank you for the suggestions.<br />I will try again.<br />Thanks very much.<br /><br />Fang.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: About phonon and eigenvector</h3>
+				<div class="date">Posted: <strong>Fri May 21, 2010 10:23 am</strong></div>
+				<div class="author">by <strong>fang</strong></div>
+				<div class="content">Dear Prof. Ilyes Hamdi,<br />I study the tutorespfn lesson 2,and abinit forum.<br />But I still have some questions.<br />The tutorespfn lesson 2 has many q points, but in my job only gamma,<br />Can I only ues the input eivec and ars to run? It's seems not ok.<br />What input variables I need to add?<br />I can't understand  the tutorespfn lesson 2, it's too complicated,<br />and I have no one can discuss, so I come here,sorry.<br />Thanks very much.<br />Fang.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: About phonon and eigenvector</h3>
+				<div class="date">Posted: <strong>Fri May 21, 2010 2:17 pm</strong></div>
+				<div class="author">by <strong>ilyes</strong></div>
+				<div class="content">Dear Fang,<br /><br />Before starting any response function calculations to get the phonon spectra of a given material, you should read the paper behind the theory, namely:<br /><br />1) Responses to atomic displacements and macroscopic electric fields : detailed description of an implementation based on plane waves and separable pseudopotentials.  X. Gonze, Phys. Rev. B55, 10337 (1997).<br />2) Dynamical matrices, Born effective charges, dielectric permittivity tensors and interatomic force constants <br />X. Gonze and C. Lee, Phys. Rev. B55, 10355 (1997).<br />Then, DO the response function 1 and 2 tutorials.<br /><br />For a brief summary, the abinit code is able to calculate the response to an atomic displacement (the interatomic force constants (IFCS) at a certain q vector) using the density functional pertubation theory (DFPT). From the IFCS, one can obtain the phonon mode caracterized by a q vector.<br />To get the phonon spectra of a material, you should calculate the IFCS (or the DDB  if you want) with abinit (from DFPT) at a certain number  of q vectors (corresponding to a non shifted Monkhorst-Pack (MP) grid), then use the anaddb to get the IFCS at any q vectors (q vectors that do not belong to the MP grid) by fourier interpolation.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=342&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 00:35:35 GMT -->
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3821&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:46:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; SCF cycle deteriorates during molecular dynamics</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>SCF cycle deteriorates during molecular dynamics</h2>
+		<p><a href="viewtopic1dfe.html?f=9&amp;t=3821">https://forum.abinit.org/viewtopic.php?f=9&amp;t=3821</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>SCF cycle deteriorates during molecular dynamics</h3>
+				<div class="date">Posted: <strong>Fri Apr 13, 2018 7:21 pm</strong></div>
+				<div class="author">by <strong>gabriel.antonius</strong></div>
+				<div class="content">Dear all,<br /><br />I’ve encountered this problem several times. During molecular dynamics, the SCF cycles degrades at each iteration, and at some point, the SCF cycle no longer converges for the remaining iterations (see image). However, restarting the molecular dynamics from the last non-converging step stabilizes the cycle for a number of iterations until it starts diverging again. This point to a bug in the code, rather than a physical feature, and it tends to appear in large systems (bulk supercells or 2D slabs with vacuum).<br /><br /><div class="inline-attachment">
+			
+		
+				<dl class="file">
+			<dt class="attach-image"><img src="download/file2872.jpg?id=1549" class="postimage" alt="plot-51-110-md-scf.jpg" onclick="viewableArea(this);" /></dt>
+						<dd>plot-51-110-md-scf.jpg (96.02 KiB) Viewed 7614 times</dd>
+		</dl>
+		
+		
+		
+			</div><br /><br />I’ve reported this problem <a href="viewtopic4650.html?f=9&amp;t=3505" class="postlink">before</a>, and the solution was to disable vectorization when compiling Abinit. This time however, I’m not using any vectorization, and no optimization either. I use Intel compilers with mkl on a Cray XC40 system with Intel Xeon &quot;Haswell&quot; processor nodes. Here are some compilation flags appearing in my config.log file.<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>FCFLAGS='-O0 -z muldefs'<br />FCFLAGS_64BITS=''<br />FCFLAGS_DEBUG=''<br />FCFLAGS_EXTRA=''<br />FCFLAGS_F90=''<br />FCFLAGS_FIXEDFORM='-fixed'<br />FCFLAGS_FREEFORM='-free'<br />FCFLAGS_HINTS='-extend-source -vec-report0 -noaltparam -nofpscomp'<br />FCFLAGS_MODDIR='-module $(abinit_moddir)'<br />FCFLAGS_OPENMP=''<br />FCFLAGS_OPTIM=''</code></pre></div><br /><br />Here attached are input and output files for a &quot;minimal&quot; working example. It is a supercell with 40 atoms. I hope we can track this bug soon, and I'm looking for any work-around you might know of.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF cycle deteriorates during molecular dynamics</h3>
+				<div class="date">Posted: <strong>Tue Apr 17, 2018 9:37 pm</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">Hi<br /><br />I have the exact same issue for a large 64 atom actinide supercell with spin orbit coupling. The SCF cycle slowly degrades as the dynamics goes on, except that I cannot restart the molecular dynamics due to convergence issue.<br /><br />I have not been able yet to identify the source of this problem but we know it exists. If you run into anything that can help us, please let us know. Try to deactivate open MP if you're using it.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF cycle deteriorates during molecular dynamics</h3>
+				<div class="date">Posted: <strong>Thu Apr 19, 2018 5:17 pm</strong></div>
+				<div class="author">by <strong>jbeuken</strong></div>
+				<div class="content">Hi,<br /><br />Have you already tried OpenBLAS or netlib instead of MKL?<br />It's probably slower...<br /><br />my 5¢</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF cycle deteriorates during molecular dynamics</h3>
+				<div class="date">Posted: <strong>Mon Apr 23, 2018 1:53 am</strong></div>
+				<div class="author">by <strong>gabriel.antonius</strong></div>
+				<div class="content">Yes, I tried compiling with Netlib and the gnu compilers, but the result is the same.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF cycle deteriorates during molecular dynamics</h3>
+				<div class="date">Posted: <strong>Mon Apr 30, 2018 4:56 am</strong></div>
+				<div class="author">by <strong>gabriel.antonius</strong></div>
+				<div class="content">So I have been playing with various parameters to alter the SCF cycle and try to work around the bug, without success. Here I wanted to give a small update.<br /><br />When I increase the convergence criterion tolvrs, I see that the error in V2res builds up progressively from one iteration to the next. This means that it’s really a noise being added to the potential that grows bigger at each iteration.<br /><br /><div class="inline-attachment">
+			
+		
+				<dl class="file">
+			<dt class="attach-image"><img src="download/file4bee.jpg?id=1553" class="postimage" alt="plot-53-106-md-scf.jpg" onclick="viewableArea(this);" /></dt>
+						<dd>plot-53-106-md-scf.jpg (120.23 KiB) Viewed 7559 times</dd>
+		</dl>
+		
+		
+		
+			</div><br /><br />For this last test, Abinit was compiled with the gnu compilers, without openMP, and without any external library (using all the fallbacks).<br /><br />I would like to emphasis again that this bug is frequent, and that it is an important barrier to the usability of the code...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF cycle deteriorates during molecular dynamics</h3>
+				<div class="date">Posted: <strong>Tue May 01, 2018 3:50 am</strong></div>
+				<div class="author">by <strong>gabriel.antonius</strong></div>
+				<div class="content">I realized the problem was linked to fft parallelism, and arises for all fft libraries I've tried. So the work-around is to set npfft=1.<br /><br />I am trying to take advantage of openmp parallelism to circumvent this limitation, but that's another story...</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF cycle deteriorates during molecular dynamics</h3>
+				<div class="date">Posted: <strong>Wed May 02, 2018 9:25 am</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content">Are you sure it is linked to the FFT parallelism? Because I'm using npfft 1 and I am still having this issue.<br /><br />Openmp should not be a problem if you're using the latest version of abinit with the new implementation of the lobpcg algorithm (set by default). It works fairly well with openmp.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCF cycle deteriorates during molecular dynamics</h3>
+				<div class="date">Posted: <strong>Fri May 04, 2018 8:53 am</strong></div>
+				<div class="author">by <strong>Boris</strong></div>
+				<div class="content"><blockquote><div><cite>gabriel.antonius wrote:</cite>I realized the problem was linked to fft parallelism, and arises for all fft libraries I've tried. So the work-around is to set npfft=1.<br /><br />I am trying to take advantage of openmp parallelism to circumvent this limitation, but that's another story...</div></blockquote><br /><br />We may have a clue about what's going on here. We have found out that forces are not synchronized correctly, so that each MPI process does its own calculation, until the difference between each MPI process is too large, and the Broyden goes nuts.<br /><br />This is indeed linked to the FFT parallelism and can be worked around by setting npfft 1. However, if you turn openmp on, you will have the same issue, because you will basically &quot;replace&quot; the fft parallelism by openmp threads.<br /><br />We're working on it!</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=3821&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 23:46:57 GMT -->
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1747&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:55:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; error in convergence</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>error in convergence</h2>
+		<p><a href="viewtopic56be.html?f=9&amp;t=1747">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1747</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>error in convergence</h3>
+				<div class="date">Posted: <strong>Fri Jul 13, 2012 6:52 am</strong></div>
+				<div class="author">by <strong>gogia</strong></div>
+				<div class="content">Dear Abinit Users<br />                           I am working on phase change materials which have composition (Ge2Sb2Te5). I have carried out structure relaxation successfully on supercell having 58 atoms (32 Te atoms, 13-Germanium atoms, 13 Antimony atoms and 6 vacancies) for these materials. This material has rock salt structure. But when I dope this materials with Tin, replacing three germanium atoms with tin atoms, there is problem in convergence in some time steps. It converges for first two iterations where as it fails to converge for next iterations with Total energy like <br /><br />ETOT  1  -483.27013332199    -4.833E+02 2.862E-05 4.034E+03 3.926E-02 6.952E-02<br /> ETOT  2  -483.34344528548    -7.331E-02 4.228E-06 1.258E+03 2.389E-02 4.563E-02<br />ETOT  3  -483.37978241776    -3.634E-02 3.850E-06 1.234E+02 3.487E-02 1.327E-02<br />ETOT  4  -483.38271544981    -2.933E-03 6.860E-07 3.887E+01 1.093E-02 1.617E-02<br /> ETOT  5  -483.38359859723    -8.831E-04 2.608E-07 2.760E+01 8.591E-03 2.272E-02<br />ETOT  6  -483.38402102748    -4.224E-04 5.501E-08 7.162E+00 1.557E-03 2.376E-02<br />ETOT  7  -483.38105168408     2.969E-03 3.121E-08 1.146E+02 1.723E-02 2.491E-02<br />ETOT  8  -483.38415045183    -3.099E-03 4.436E-09 2.847E+00 1.504E-02 2.399E-02<br />ETOT  9  -483.38404951578     1.009E-04 9.700E-10 6.358E+00 2.252E-03 2.442E-02<br />ETOT 10  -483.38411689736    -6.738E-05 6.430E-12 4.016E+00 8.496E-04 2.437E-02<br />ETOT 11  -483.38414970944    -3.281E-05 1.563E-10 3.017E+00 1.334E-03 2.427E-02<br />ETOT 12  -483.38411435640     3.535E-05 6.753E-11 3.815E+00 1.624E-03 2.446E-02<br />ETOT 13  -483.38414977061    -3.541E-05 9.369E-11 2.626E+00 6.814E-04 2.439E-02<br />ETOT 14  -483.38415914727    -9.377E-06 1.289E-10 2.263E+00 1.877E-04 2.437E-02<br />ETOT 15  -483.37672877615     7.430E-03 2.417E-10 2.983E+02 1.355E-02 2.694E-02<br />.............................................................................<br /><br />My input file is <br /><br />acell 3*21.00 <br /> diemix 0.333333d0<br /> ecut 45<br /> enunit 2<br /> intxc 0<br /> ntime 60<br /> nline 6<br /> nnsclo 4<br /> nsym 1<br /> occopt  1<br /> ortalg -2<br /> prtcml 1<br /> prtvol 0<br /> rprim   1 0 0 <br />         0 1 0 <br />         0 0 1<br /> kptopt 1         <br /> nshiftk 1<br /> shiftk  0.5 0.5 0.5         <br /> ngkpt  1 1 1    <br /> <br />    #Definition of the atom types<br />    ntypat 4         <br />    znucl 32 50 51 52 <br />    #Definition of the atoms<br />    natom  58<br />typat 4 4 4 4 4 . . . . .<br />xcart                0.0000000000E+00  0.0000000000E+00  0.0000000000E+00<br />                       1.0500000000E+01  0.0000000000E+00  0.0000000000E+00<br />                       0.0000000000E+00  1.0500000000E+01  0.0000000000E+00<br />                       1.0500000000E+01  1.0500000000E+01  0.0000000000E+00<br />                       0.0000000000E+00  0.0000000000E+00  1.0500000000E+01<br />                       1.0500000000E+01  0.0000000000E+00  1.0500000000E+01<br />                      ..........................................................<br />toldff 5.0d-6<br /> iprcel 45<br /> npulayit 16<br /> <br /><br /># Definition of the SCF procedure<br />nstep 200           <br />diemac 35<br /><br />optcell 2  ionmov 3 <br />ndtset 2<br />    <br />#Definition of the atomic positions without relaxing the lattice parameters <br />optcell1 0<br />ionmov1 3<br />#Definition of the basis of the geometry determined by dataset 1 (so using getxcart 1)<br />getxcart2 1<br />optcell2 2<br />ionmov2 3<br />dilatmx2 1.2<br />ecutsm2 0.5<br /><br />I m using Troullier-Martins pseudo-potentials. Is this error related to pseudo-potentials. Kindly help.<br /><br />Cheers<br />Dr Singh</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: error in convergence</h3>
+				<div class="date">Posted: <strong>Sun Jul 15, 2012 5:40 pm</strong></div>
+				<div class="author">by <strong>mab</strong></div>
+				<div class="content">Dear Dr Singh,<br /><br />You have a serious problems in you input file. I advice to:<br />- organize your file structural information, kpont, Ecut, print in th last.<br />- Read a very nice and good abinit tutorial.<br /><br />Good lunck<br /><br />Mab</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: error in convergence</h3>
+				<div class="date">Posted: <strong>Mon Jul 16, 2012 5:03 pm</strong></div>
+				<div class="author">by <strong>gogia</strong></div>
+				<div class="content">Dear Mab<br />                  Thanks for your reply. I m sorry for having input file not arranged in proper way. Please find the file in much organized manner below<br /><br />#Definition of the unit cell<br /><br /><br /><br /> acell 3*21.00 <br /><br /><br />    #Definition of the atom types<br /><br />    ntypat 4         <br /><br />    znucl 32 50 51 52 <br /><br />    #Definition of the atoms<br /><br />    natom  58<br /><br />    typat 4 4 4 4........ <br /><br />  <br /><br />  xcart                0.0000000000E+00  0.0000000000E+00  0.0000000000E+00<br /><br />                       1.0500000000E+01  0.0000000000E+00  0.0000000000E+00<br /><br />                       0.0000000000E+00  1.0500000000E+01  0.0000000000E+00<br /><br />                       1.0500000000E+01  1.0500000000E+01  0.0000000000E+00<br />                        ........................................................................<br /><br />rprim   1 0 0 <br /><br />         0 1 0 <br /><br />         0 0 1<br /><br /><br /><br />kptopt 1         <br /><br /> nshiftk 1<br /><br /> shiftk  0.5 0.5 0.5         <br /><br /> ngkpt  1 1 1 <br /><br />ecut 45<br /> enunit 2   <br /><br /> diemix 0.333333d0<br /> diemac 35<br /> iprcel 45<br /> npulayit 16<br />intxc 0<br />nline 6<br /> nnsclo 4<br /><br /> nsym 1<br /><br /> occopt  1<br /><br /> ortalg -2<br />toldff 5.0d-6<br /><br /># Definition of the SCF procedure<br /><br />nstep 200   <br /><br />optcell 2  ionmov 3 <br /><br />ndtset 2<br /><br />    <br /><br /><br /><br />#Definition of the atomic positions without relaxing the lattice parameters <br /><br />optcell1 0<br /><br />ionmov1 3<br /><br /><br /><br /><br /><br />#Definition of the basis of the geometry determined by dataset 1 (so using getxcart 1)<br /><br />getxcart2 1<br /><br />optcell2 2<br /><br />ionmov2 3<br /><br />dilatmx2 1.2<br /><br />ecutsm2 0.5<br /><br />ntime 60<br /><br />  prtcml 1<br /><br /> prtvol 0      <br /><br /><br />Kindly suggest that which input variables are incorrect.<br /><br />Cheers<br />Dr Singh</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1747&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:55:58 GMT -->
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3291&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:37:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; trying to install; after build, get segmentation error on th</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>trying to install; after build, get segmentation error on th</h2>
+		<p><a href="viewtopic8bcf.html?f=3&amp;t=3291">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3291</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>trying to install; after build, get segmentation error on th</h3>
+				<div class="date">Posted: <strong>Tue May 31, 2016 8:11 pm</strong></div>
+				<div class="author">by <strong>MurrayDaw</strong></div>
+				<div class="content">I did a &quot;quickie&quot; install on my MacBook Pro, using<br />./configure          and<br />make<br /><br />Seemed to compile and load OK, but when I ran the first test suggested in the on-line install notes<br />make test_fast<br /><br />I got a segmentation fault.<br /><br />So I went down into the test directory and did it manually:<br />./abinit &lt; testin_fast.files &gt; testin_fast_stdout.txt<br /><br />which showed some steps before the segfault. I tried to attach the stdout here but it won't let me.<br />So I clipped the last part of the stdout here:<br /><br /> ==== Info on pseudopotentials ====<br />  Norm-conserving pseudopotentials<br />  Number of pseudopotentials ..    1<br />  Number of types of atoms   ..    1<br />  Scalar calculation (no spin-orbit term)<br />  Nonlocal part applied using Legendre polynomials<br />  Highest angular momentum +1 .......   1<br />  Max number of (l,n)   components ..   1<br />  Max number of (l,m,n) components ..   1<br /><br /> Info on the Q-grid used for form factors in spline form: <br />   Number of q-points for radial functions ffspl ..   3001<br />   Number of q-points for vlspl ...................   3001<br />   vloc is computed in Reciprocal Space<br />   model core charge treated in real-space<br /><br />  XC functional for type 1 is 1<br />  Pseudo valence available: no<br />  Pseudo number              1  read from ../../Psps_for_tests/01h.pspgth<br />  Format or code             2<br />  Generation date       960508<br />  Content of first line: Goedecker-Teter-Hutter  Wed May  8 14:27:44 EDT 1996<br /><br /> wfconv:     1 bands initialized randomly with npw=   544, for ikpt=     1<br />_setup2: Arith. and geom. avg. npw (full set) are     544.000     544.000<br /> initro: for itypat=  1, take decay length=      0.6000,<br /> initro: indeed, coreel=      0.0000, nval=  1 and densty=  0.0000E+00.<br /><br />================================================================================<br />  status : statnu, output_rate, shift_rate=          19          99           1<br /> level,routine=         102 init          <br /> active(level)=           1<br /> counter,actual_counter(level,1:2)=           0           0           0<br /> List of active levels :<br />  Active level number=           1<br />  Active level number=           2<br />  Active level number=         100<br /><br />Program received signal SIGSEGV: Segmentation fault - invalid memory reference.<br /><br />Backtrace for this error:<br />#0  0x113ebf729<br />#1  0x113ebeaf5<br />#2  0x7fff90340529<br />#3  0x7fff9db6b93e<br />#4  0x10fcd4192<br />#5  0x10fcd43ec<br />#6  0x10f46d9ff<br />#7  0x10f0dd20a<br />#8  0x10f0e3e11<br />#9  0x10f0b604d<br />#10  0x10f0a4dfe<br />#11  0x10f02cf23<br />#12  0x10f007394<br />#13  0x10f00c130<br />#14  0x10efe6d29<br />#15  0x10efd11e0<br />#16  0x10fd3feee</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: trying to install; after build, get segmentation error o&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Tue May 31, 2016 9:29 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content">Possible explanation:<br />Your Abinit is linked against the Blas implementation provided by Mac OSx  (a.k.a. veclib)<br />The ABI of the veclib routines zdotc and cdotc is not compatible with Fortran and this causes nasty <br />segmentation faults at the beginning of the run. <br /><br />Were this true, I would recommend passing <br /> <br />--enable-zdot-bugfix=&quot;yes&quot;<br /><br />to the configure script, reconfigure and finally make clean &amp;&amp; make<br /><br />If you have gdb installed on your Mac and Abinit has been compiled with &quot;-g&quot;<br />you can try to run testin_fast.file under the control of the debugger.<br />Use<br />  <br />    gdb ./abinit<br /><br />to load the executable and start gdb<br />Then, inside the gdb terminal, execute:<br /><br />run &lt; testin_fast.files<br /><br />wait for the segmentation fault and post the output <br />M</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: trying to install; after build, get segmentation error o</h3>
+				<div class="date">Posted: <strong>Tue May 31, 2016 10:49 pm</strong></div>
+				<div class="author">by <strong>MurrayDaw</strong></div>
+				<div class="content">Thank you, gmatteo. That solved the problem exactly. Thank you also for being so quick to reply!</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3291&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 02:37:25 GMT -->
+</html>

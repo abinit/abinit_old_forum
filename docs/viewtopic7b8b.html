@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3940&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:41:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; compile abinit 8.8.4 with levmar 2.6</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>compile abinit 8.8.4 with levmar 2.6</h2>
+		<p><a href="viewtopic375a.html?f=3&amp;t=3940">https://forum.abinit.org/viewtopic.php?f=3&amp;t=3940</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>compile abinit 8.8.4 with levmar 2.6</h3>
+				<div class="date">Posted: <strong>Sat Oct 13, 2018 3:04 pm</strong></div>
+				<div class="author">by <strong>jun1234</strong></div>
+				<div class="content">When I compile abinit 8.8.4 with levmar 2.6, I got some error message about calling_levmar.c and build fail.<br />So, I modify calling_levmar.c.<br /><br />      ret=dlevmar_bc_dif(dre_and_im_screening, coeffs, yvals, c_ncoeffs, c_nvals, lower_bounds, upper_bounds, 1000, opts, info, NULL, NULL, (void *)&amp;adata); // Box boundary conditions without Jacobian<br />to   ret=dlevmar_bc_dif(dre_and_im_screening, coeffs, yvals, c_ncoeffs, c_nvals, lower_bounds, upper_bounds, NULL, 1000, opts, info, NULL, NULL, (void *)&amp;adata); // Box boundary conditions without Jacobian<br /><br />Is it ok or is support for levmar deprecated?<br /><br />Thank you.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: compile abinit 8.8.4 with levmar 2.6</h3>
+				<div class="date">Posted: <strong>Mon Oct 15, 2018 9:00 pm</strong></div>
+				<div class="author">by <strong>gmatteo</strong></div>
+				<div class="content"><blockquote class="uncited"><div>Is it ok or is support for levmar deprecated?<br /></div></blockquote><br /><br />Levmar is only used in a specialized section of the GW code.<br />99.9% of the Abinit features  do not rely on this piece of code.<br /><br /><blockquote class="uncited"><div>When I compile abinit 8.8.4 with levmar 2.6, I got some error message about calling_levmar.c and build fail.<br />So, I modify calling_levmar.c.<br /></div></blockquote><br /><br />Error message?</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: compile abinit 8.8.4 with levmar 2.6</h3>
+				<div class="date">Posted: <strong>Tue Oct 16, 2018 5:05 pm</strong></div>
+				<div class="author">by <strong>jun1234</strong></div>
+				<div class="content">I got this error message.<br />&quot;<br />../../../src/02_clib/calling_levmar.c:221:11: error: too few arguments to function ‘dlevmar_bc_dif’<br />       ret=dlevmar_bc_dif(dre_and_im_screening, coeffs, yvals, c_ncoeffs, c_nvals, \<br />           ^~~~~~~~~~~~~~<br />&quot;<br /><br />When I check levmar.h and compare it to calling_levmar.c, I found parameter for &quot;double *dscl&quot; is missing.<br /><br />Thank you.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=3940&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:41:04 GMT -->
+</html>

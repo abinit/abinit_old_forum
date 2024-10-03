@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3329&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:57:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; lda+paw phonon mode anot consistent from v-7.10.5 to v-8.0.8</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>lda+paw phonon mode anot consistent from v-7.10.5 to v-8.0.8</h2>
+		<p><a href="viewtopic4655.html?f=10&amp;t=3329">https://forum.abinit.org/viewtopic.php?f=10&amp;t=3329</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>lda+paw phonon mode anot consistent from v-7.10.5 to v-8.0.8&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Wed Jul 20, 2016 7:36 pm</strong></div>
+				<div class="author">by <strong>bmatt</strong></div>
+				<div class="content">Hello abinitors,<br />I am calculating response at Gamma to get an IR spectrum using LDA+PAW in abinit-8.0.8<br />* Ti_1.0N_1.0 is fine during all calcs, the problem occurs when doing TiN_0.75X_0.25<br />* the calculated frequencies (with an E-field perturbation rfelfd = 2 or 3) are garbage, where 50% of the optical modes are at ~-2000.0 cm-1 (obviously wrong.<br />* when using abinit-7.10.5 (just to calculate the modes without an E-field perturbation rfelfd = 0) the frequencies are good. When performing the same calculation with abinit-8.0.8, they are back to being very bad.<br />* everything is fine when running LDA+nC or PBE+NC for each calculation type<br /><br />looking to get an infrared spectrum using anaddb, so just getting the modes with v-7.10.5 is not helpful, so I need v-8.0.8 to apply the E-field (rfelfd=2 or 3) using paw</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: lda+paw phonon mode anot consistent from v-7.10.5 to v-8</h3>
+				<div class="date">Posted: <strong>Thu Jul 21, 2016 6:55 pm</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">Dear  bmatt,<br /><br />It's difficult to help you without an input file, showing that 7.10.5 and 8.0.8 give different results.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: lda+paw phonon mode anot consistent from v-7.10.5 to v-8</h3>
+				<div class="date">Posted: <strong>Fri Jul 22, 2016 12:48 am</strong></div>
+				<div class="author">by <strong>bmatt</strong></div>
+				<div class="content">Here are the 4 output files that shows my problem...<br />ir-eos_LDApaw8-TiN-X.out is the pure TiN (a metal) with no problems<br />v7 = v-7.10.5 and v8 = v-8.0.8<br /><br />ir-eos_LDApaw8-TiNB.out is the issue where the formula is Ti_4N_3B_1<br />v7 = v-7.10.5 and v8 = v-8.0.8<br />* did not apply the rfelfd = 3 for v8 calc just to show my point</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: lda+paw phonon mode anot consistent from v-7.10.5 to v-8</h3>
+				<div class="date">Posted: <strong>Sat Jul 23, 2016 12:15 am</strong></div>
+				<div class="author">by <strong>torrent</strong></div>
+				<div class="content">Ok, found!<br />it seems that you have identified a (recently introduced) bug. Thanks!<br /><br />First of all, I guess you could explain some differences between version 7.10.5 and version 8.0.8 version. The main one is that the default value for tsmear (smearing temperature) has changed: from 0.0.4 Ha to 0.0.1 Ha.<br />This explains the differences for the datasets 1 and 2 in your case. Note also that, for the v7.10.5, your value of nband is too low (the last band is still occupied). With the new value of tsmear (v8.0.8), this is OK.<br /><br />Then, thanks to your example files, I have found the origin of the inconsistency beween 7.10.5 and 8.0.8.<br />This will be corrected in the next version.<br /><br />In the meanwhile, if you want to apply the correction now, just apply the following patch to the src/66_nonlocal/nonlop.F90 file (one line to change):<br /><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>-- src/66_nonlocal/nonlop.F90&nbsp; &nbsp;2016-07-22 23:57:35.000000000 +0200<br />***************<br />*** 545,551 ****<br />&nbsp; &nbsp; &nbsp;ABI_ALLOCATE(enl_,(dimenl1,1,hamk%nspinor**2))<br />&nbsp; &nbsp; &nbsp;do ispden=1,hamk%nspinor**2<br />&nbsp; &nbsp; &nbsp; &nbsp;if (dimenl2==hamk%natom) then<br />!&nbsp; &nbsp; &nbsp; &nbsp; enl_(:,1,ispden)=enl_ptr(:,iatm,ispden)<br />&nbsp; &nbsp; &nbsp; &nbsp;else if (dimenl2==hamk%ntypat) then<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;enl_(:,1,ispden)=enl_ptr(:,itypat,ispden)<br />&nbsp; &nbsp; &nbsp; &nbsp;else<br />--- 545,551 ----<br />&nbsp; &nbsp; &nbsp;ABI_ALLOCATE(enl_,(dimenl1,1,hamk%nspinor**2))<br />&nbsp; &nbsp; &nbsp;do ispden=1,hamk%nspinor**2<br />&nbsp; &nbsp; &nbsp; &nbsp;if (dimenl2==hamk%natom) then<br />!&nbsp; &nbsp; &nbsp; &nbsp; enl_(:,1,ispden)=enl_ptr(:,iatom_only_,ispden)<br />&nbsp; &nbsp; &nbsp; &nbsp;else if (dimenl2==hamk%ntypat) then<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;enl_(:,1,ispden)=enl_ptr(:,itypat,ispden)<br />&nbsp; &nbsp; &nbsp; &nbsp;else<br /></code></pre></div></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: lda+paw phonon mode anot consistent from v-7.10.5 to v-8</h3>
+				<div class="date">Posted: <strong>Mon Aug 08, 2016 8:27 am</strong></div>
+				<div class="author">by <strong>gonze</strong></div>
+				<div class="content">Dear all,<br /><br />The bug fix posted by Marc is OK for PAW, but introduces another bug for norm-conserving pseudos.<br />Actually, Marc has introduced the correct bug fix in ABINITv8.0.8b, available (soon) on the <br />abinit Web site. There are two lines to modify :<br /><br />     if (dimenl2==hamk%natom .and.hamk%usepaw==1) then<br />       enl_(:,1,ispden)=enl_ptr(:,iatom_only_,ispden)<br /><br />Best wishes,<br />Xavier</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=10&t=3329&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:57:38 GMT -->
+</html>

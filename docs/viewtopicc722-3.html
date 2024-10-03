@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1471&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:17:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; SOLVED:Error in the input file for bandstructure calculation</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>SOLVED:Error in the input file for bandstructure calculation</h2>
+		<p><a href="viewtopicfdcd.html?f=9&amp;t=1471">https://forum.abinit.org/viewtopic.php?f=9&amp;t=1471</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>SOLVED:Error in the input file for bandstructure calculation</h3>
+				<div class="date">Posted: <strong>Sun Dec 18, 2011 4:30 am</strong></div>
+				<div class="author">by <strong>hisap-nano</strong></div>
+				<div class="content">hello, i am a new about ABINIT, is there anyone who can kindly help me solve the problem about the  input file for the bandstructure calculation of metal Be.<br />at first, the structure was optimized, and then bandstructure was calculated based on the optimized structure.<br />according to this consideration, i wrote a input file, but it does not seem to work and no expected bandstructure data output. the bandstructuremaker said that the dataset 2 is not completed.  i will be very appreciated if someone know where is the problem and how to solve it.<br />the following are the input file and error description<br /> input file:<br />ndtset 2<br /><br />#Optimization of the lattice parameters<br />optcell1 1<br />ionmov1 3<br />ntime1 10<br />dilatmx1 1.05<br />ecutsm1 0.5<br /><br />iscf1 5<br />nstep1 10 <br />toldfe1 1.0d-8 <br /><br />#Definition of the k-point grids<br />kptopt1 1 <br />nshiftk1 1 <br />shiftk1 0.0 0.0 0.5 <br />ngkpt1 6 6 6 <br />prtden1 1<br /><br /><br />#Dataset 2 : the band structure<br />iscf2 -2<br />nstep2 15<br />getden2 -1<br /><br />kptopt2 -5 # the absolut value represent the segments<br /><br />ndivk2 15 15 15 15 15 # 15, 15, 15, 15 and 15 divisions of the 5 segments, delimited by 6 points.<br />kptbounds2 <br />0.0 0.0 0.5<br />0.0 0.0 0.0<br />0.5 0.0 0.0<br />1/3 1/3 0.0<br />1/3 1/3 0.5 <br />1.0 1.0 1.0 <br /><br />tolwfr2 1.0d-12<br />enunit2 1 <br /><br /><br /><br /><br />#Definition of the unit cell<br />acell 8.4776 8.4776 13.2906 <br />rprim 1.0 0.0 0.0<br />-0.5 sqrt(0.75) 0.0<br />0.0 0.0 1.0<br /><br />#Definition of the atom types<br />ntypat 1 <br />znucl 4 <br /><br />#Definition of the atoms<br />chkprim 0<br />natom 16 # There are 16 atoms<br />typat 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1<br />xred<br />0.16667 0.33333 0.12500 <br />0.33333 0.16667 0.37500 <br />0.66667 0.33333 0.12500 <br />0.83333 0.16667 0.37500 <br />0.16667 0.83333 0.12500 <br />0.33333 0.66667 0.37500 <br />0.66667 0.83333 0.12500 <br />0.83333 0.66667 0.37500 <br />0.16667 0.33333 0.62500 <br />0.33333 0.16667 0.87500 <br />0.66667 0.33333 0.62500 <br />0.83333 0.16667 0.87500 <br />0.16667 0.83333 0.62500 <br />0.33333 0.66667 0.87500 <br />0.66667 0.83333 0.62500 <br />0.83333 0.66667 0.87500 <br /><br />#Definition of the planewave basis set<br /> <br />ecut 10.0 <br /><br />Error description<br /> 2 dataset(s) detected<br />the last dataset is not completed and will be ignored<br />Traceback (most recent call last):<br />  File &quot;AbinitBandStructureMaker.py&quot;, line 1012, in ?<br />    dico[k] = '{l%s}' %ctrl.alphabet[L]<br />KeyError: 27</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Error in the input file for bandstructure calculation</h3>
+				<div class="date">Posted: <strong>Mon Dec 19, 2011 7:35 pm</strong></div>
+				<div class="author">by <strong>jolafc</strong></div>
+				<div class="content">Hi,<br /><br />Solving your problem would require knowing why Abinit didn't properly run the second part of your calculation. In order to help you with this, I would need you to post you .out (or .log) file on the forum. <br /><br />Jonathan</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Error in the input file for bandstructure calculation</h3>
+				<div class="date">Posted: <strong>Tue Dec 20, 2011 12:38 am</strong></div>
+				<div class="author">by <strong>hisap-nano</strong></div>
+				<div class="content"><blockquote><div><cite>jolafc wrote:</cite>Hi, Jonathan, thank you so much for your replying. i have solved the problem. as i said i was new on ABINIT,  there are some minor mistakes in input files that i have not noticed, thus the second part of my input file cann't be calculated. now the problem is solved after checking the input file carefully. thanks a lot again. <br /><br />Solving your problem would require knowing why Abinit didn't properly run the second part of your calculation. In order to help you with this, I would need you to post you .out (or .log) file on the forum. <br /><br />Jonathan</div></blockquote></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Error in the input file for bandstructure calculation</h3>
+				<div class="date">Posted: <strong>Sun Jan 22, 2012 4:12 pm</strong></div>
+				<div class="author">by <strong>mverstra</strong></div>
+				<div class="content">Please change the title of your initial post to add &quot;[solved]&quot;. You might also state what was wrong and fixed...</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=1471&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:17:20 GMT -->
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=757&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:32:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; SCR calculation bug, EMERGENCY!</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>SCR calculation bug, EMERGENCY!</h2>
+		<p><a href="viewtopic5dae.html?f=11&amp;t=757">https://forum.abinit.org/viewtopic.php?f=11&amp;t=757</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>SCR calculation bug, EMERGENCY!</h3>
+				<div class="date">Posted: <strong>Tue Nov 16, 2010 10:05 pm</strong></div>
+				<div class="author">by <strong>zhooshmand</strong></div>
+				<div class="content">Dear All,<br />I am already calculating GW calculations on a system. in 2nd step, I mean SCR calculations, I have this message:<br /> setmesh: npwwfn        =     2625; Max (m1,m2,m3)   =      6     6    14<br />          npweps/npwsigx=     2625; Max (mm1,mm2,mm3)=      7     7    14<br />          mG0 added     =   1  1  0<br /> calculated ecutwfn          =   7.995 [Ha]<br /> calculated ecutsigx/ecuteps =   7.995 [Ha]<br /> using method =  2 with ecuteff =  31.978 [Ha]<br /><br /> finding a FFT mesh compatible with all the symmetries<br /> setmesh: divisor mesh  1  1  1<br /> setmesh: FFT mesh size selected  =  25x 27x 60<br />          total number of points  =    40500<br /><br /><br /> setup_coulombian : cutoff-mode = CRYSTAL<br /> q-points for optical limit:   1<br />     1)      0.000010    0.000020    0.000030<br /><br /> setup_screening.F90:511:ERROR<br /> Mismatch between Dtset%wtk and Kmesh%wt<br />-P-0000<br />-P-0000  leave_new : decision taken to exit ...<br /><br />I dont know what is exactly the problem?! is there any variable missed? please Note that these calculations belong to the last part of Brillouine zone calculations on a system, if you need to know the exact reason for variables setting.<br /><br />I really need your help as an emergency!<br />I have attached tgw2_1.in, tgw2_1.out,tgw2_2.in.<br /><br />yours sincerely<br />Zahra</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCR calculation bug, EMERGENCY!</h3>
+				<div class="date">Posted: <strong>Mon Nov 22, 2010 5:33 pm</strong></div>
+				<div class="author">by <strong>bruneval</strong></div>
+				<div class="content">The shifts of your kpoint grids are weird.<br />Try to turn to, let's say, a unique Gamma centered grid.<br /><br />Fabien</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCR calculation bug, EMERGENCY!</h3>
+				<div class="date">Posted: <strong>Wed Nov 07, 2012 12:06 pm</strong></div>
+				<div class="author">by <strong>lorenzo.sponza</strong></div>
+				<div class="content">I address again this subject.<br /><br />I am using abinit 6.12.3 and I am making some test calculation on Silicon to compute the SCR file.<br />When I try to compute SCR with a non-shifted grid 3x3x1 I can not start the SCR calculation, exiting with error:<br /><em class="text-italics">   setup_screening.F90:659:ERROR<br />   Mismatch between Dtset%wtk and Kmesh%wt</em><br />Indeed the list of k-points generated in the SCR calculation using symmetries is not correct at all and the weights of the k-points (wtk) in the echo of input variables is not the same of that computed in  the K-mesh for wavefunctions.<br />My input file is in attachment.<br /><br />I also tried to change kptopt, changing to 2,3,4 and even 0. Each time an error of the kind  <br /><em class="text-italics">   m_bz_mesh.F90:399:BUG<br />   Not allowed value for kptopt: 2<br />   Action : contact ABINIT group.</em><br />or similar.<br /><br />Just to conclude, If I try the same calculation with Graphite (cell has a different symmetry) it works.<br />Can you figure out what's wrong with it? Thanks a lot.<br /><br />Lorenzo</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCR calculation bug, EMERGENCY!</h3>
+				<div class="date">Posted: <strong>Fri Nov 09, 2012 12:22 am</strong></div>
+				<div class="author">by <strong>gabriel.antonius</strong></div>
+				<div class="content">Dear Lorenzo,<br /><br />The problem is that you are using a non-regular k-point mesh. It is a 2D mesh, while your cell has 3D symmetry. I'm not surprised it works in graphene!<br /><br />Try breaking the symmetry like this:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>acell&nbsp; &nbsp;10.217&nbsp; &nbsp;10.217&nbsp; &nbsp;10.2170001<br /></code></pre></div><br /><br />You should get a different but manageable error message:<br /><br />  Not able to found umklapp G0 vector among ***** vectors<br /> Increase mg0sh such as k1-k2 = kf+G0, present value = 50<br /> point1 =    5 -3.33333333E-01 -3.33333333E-01 -3.33333333E-01<br /> point2 =    3  0.00000000E+00  3.33333333E-01  0.00000000E+00<br /><br />The parameter &quot;mg0sh&quot; is hard-coded. Is is a guess of how anisotropic your k-point grid might be.<br />Just go in the subroutine &quot;70_gw/setup_screening.F90&quot; and look for the line &quot;mg0sh=50&quot;.<br />You can change it to some higher value.<br /><br />Cheers!</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: SCR calculation bug, EMERGENCY!</h3>
+				<div class="date">Posted: <strong>Tue Nov 13, 2012 2:53 pm</strong></div>
+				<div class="author">by <strong>lorenzo.sponza</strong></div>
+				<div class="content">Great Gabriel, thanks for the answer!<br />Cheers.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=11&t=757&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 22:32:29 GMT -->
+</html>

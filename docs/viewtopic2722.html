@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4486&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:15:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; Smearing types</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>Smearing types</h2>
+		<p><a href="viewtopic4b08.html?f=9&amp;t=4486">https://forum.abinit.org/viewtopic.php?f=9&amp;t=4486</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>Smearing types</h3>
+				<div class="date">Posted: <strong>Fri Jul 24, 2020 12:28 am</strong></div>
+				<div class="author">by <strong>cgs12</strong></div>
+				<div class="content">Hi,<br>
+<br>
+May I ask if it is possible to use a smearing type for metals that are not in the 'occopt' options, e.g. Marzari-Vanderbilt smearing? If I would have to change the code myself to use a different smearing type, what files do I need to change?<br>
+<br>
+Thank you!<br>
+<br>
+Best,<br>
+Ying Shi</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Smearing types</h3>
+				<div class="date">Posted: <strong>Sun Jul 26, 2020 5:28 pm</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Ying Shi,<br>
+Isn't it one of the occopt=4, 5 or 6?<br>
+Do you have a reference paper/thesis for the smearing you want (just to certify that it is not one already implemented)?<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Smearing types</h3>
+				<div class="date">Posted: <strong>Sun Jul 26, 2020 5:43 pm</strong></div>
+				<div class="author">by <strong>cgs12</strong></div>
+				<div class="content">Dear Eric,<br>
+<br>
+Thanks for your reply. I am referring to this paper:<br>
+<a href="https://doi.org/10.1103/PhysRevLett.82.3296" class="postlink">https://doi.org/10.1103/PhysRevLett.82.3296</a><br>
+This particular form seems to be recommended compared to the forms in occopt=4 or occopt=5.<br>
+<br>
+Best,<br>
+Ying Shi</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Smearing types</h3>
+				<div class="date">Posted: <strong>Mon Jul 27, 2020 8:09 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Ying Shi,<br>
+In the limit of what I understand, the PRL paper you mention would correspond to the cold smearing implemented within occopt 4/5, it is not the case?<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Smearing types</h3>
+				<div class="date">Posted: <strong>Mon Jul 27, 2020 5:57 pm</strong></div>
+				<div class="author">by <strong>cgs12</strong></div>
+				<div class="content">Dear Eric,<br>
+<br>
+My understanding is that the smearing types in the PRL paper, as well as in occopt=4 or 5 are all cold smearing but of different flavors. The cases of occopt=4 and occopt=5 correspond to the form in Marzari's thesis: <a href="http://theossrv1.epfl.ch/Main/Theses?action=download&amp;upname=Marzari_thesis_1996.pdf" class="postlink">http://theossrv1.epfl.ch/Main/Theses?ac ... s_1996.pdf</a> (See eqn 4.45 in pg 134 for the broadened delta function). However there is a revised and hence more elegant version of cold smearing in the PRL paper shortly after (See eqn 1 in the PRL paper). The ones that are already implemented in Abinit may work as good as this in practice but I thought I would ask beforehand to confirm.<br>
+<br>
+The other reason for my question is that I need to know the explicit expression of generalized entropy for my work. However I don't know it for the ones in occopt=4 or 5, while it is readily available in equation 2 for the form in the PRL paper. Therefore if you happen to know the generalized entropy expression, that'd be great since I can then simply switch to using occopt=4 or 5.<br>
+<br>
+Sorry for the long message and thanks so much for your attention!<br>
+<br>
+Best,<br>
+Ying Shi</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Smearing types&nbsp;&nbsp;<span style="color: #006600">[SOLVED]</span></h3>
+				<div class="date">Posted: <strong>Wed Jul 29, 2020 10:27 am</strong></div>
+				<div class="author">by <strong>ebousquet</strong></div>
+				<div class="content">Dear Yin Shi,<br>
+It sounds like it is not clear what is implemented exactly. In the following presentation (slide 53):<br>
+<a href="https://pitp.phas.ubc.ca/confs/sherbrooke2014/archives/DFT_with_ABINIT_Gian-Marco_Rignanese.pdf" class="postlink">https://pitp.phas.ubc.ca/confs/sherbroo ... nanese.pdf</a><br>
+it is mentioned the PRL of Marzari for occopt=4/5 but if I grep this PRL reference in Abinit I find it in the bibliography but this reference is not used anywhere and in the documentation of occopt it is mentioned the Marzari's thesis...<br>
+<br>
+For the management of occupancy, entropy, you can look the routines of the folder src/61_occeig. <br>
+In init_occ_ent.F90 you can find the following:
+<div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>!      Cold smearing of Marzari, two values of the "a" parameter being possible
+!      first value gives minimization of the bump
+       if(occopt==4)aa=-.5634
+!      second value gives monotonic occupation function
+       if(occopt==5)aa=-.8165
+
+       dsqrpi=1.0_dp/sqrt(pi)
+       do ii=0,nptsdiv2_def
+         xx=xgrid_prev(ii)
+         gauss=dsqrpi*exp(-xx**2)
+         smdfun_prev( ii,1)=gauss*(1.5_dp+xx*(-aa*1.5_dp+xx*(-1.0_dp+aa*xx)))
+         smdfun_prev(-ii,1)=gauss*(1.5_dp+xx*( aa*1.5_dp+xx*(-1.0_dp-aa*xx)))
+       end do
+</code></pre></div>
+
+Does it corresponds to the thesis or the PRL (sorry, I'm not familiar with these)?<br>
+Best wishes,<br>
+Eric</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: Smearing types</h3>
+				<div class="date">Posted: <strong>Tue Aug 04, 2020 6:26 pm</strong></div>
+				<div class="author">by <strong>cgs12</strong></div>
+				<div class="content">Dear Eric,<br>
+<br>
+Thanks for all the information! The implementation corresponds to the one in the thesis, not the PRL paper. The expression of entropy is actually available in the thesis so that would work.<br>
+<br>
+Thanks so much for all your replies.<br>
+<br>
+Best,<br>
+Ying Shi</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=9&t=4486&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 19:15:47 GMT -->
+</html>

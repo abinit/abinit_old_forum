@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2374&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:09:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; parallelization on cluster</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>parallelization on cluster</h2>
+		<p><a href="viewtopic6f8d.html?f=3&amp;t=2374">https://forum.abinit.org/viewtopic.php?f=3&amp;t=2374</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>parallelization on cluster</h3>
+				<div class="date">Posted: <strong>Wed Jan 01, 2014 11:07 am</strong></div>
+				<div class="author">by <strong>marsusi</strong></div>
+				<div class="content">Hello all,<br /><br />My spin-unpolarized input file includes 32 jdtset, 64 nkpt, 53 nband. When put to execute on a cluster using 32 cores, stops without any error in the first stage of running after checking input parameters. This is the last line of log file:<br />chkinp: Checking input parameters for consistency, jdtset=  32.<br />the cluster script file:<br />#! /bin/bash<br />#$-S /bin/bash<br />#$-N Abinit<br />#$-cwd<br />#$-l h_vmem=1G<br />#$-l hostname=amd-10-4.local<br />#$-j n<br />#$-pe mpifill 32<br />source /opt/intel/Compiler/11.1/069/bin/iccvars.sh intel64<br />source /opt/intel/Compiler/11.1/069/bin/ifortvars.sh intel64<br />export PATH=/storage/softwares/computing/mpi/intel/openmpi-1.6.5/bin:/storage/softwares/computing/Abinit/Abinit-7.4.3/bin:$PATH<br />export LD_LIBRARY_PATH=/storage/softwares/computing/mpi/intel/openmpi-1.6.5/lib:/storage/softwares/computing/Abinit/Abinit-7.4.3/lib:$LD_LIBRARY_PATH<br />mpirun -np $NSLOTS abinit &lt; x.files&gt;&amp;log<br /><br />Any help would be appriciated,<br /><br />Farah Marsusi.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallelization on cluster</h3>
+				<div class="date">Posted: <strong>Fri Jan 17, 2014 12:10 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">Please provide your config.log file as attachment.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallelization on cluster</h3>
+				<div class="date">Posted: <strong>Mon Jan 20, 2014 5:58 pm</strong></div>
+				<div class="author">by <strong>marsusi</strong></div>
+				<div class="content">Dear Yann,<br /><br />Unfortunately I have no access to config.log file as a user of the cluster, but I believe it may be an abinit 7.4.3 bug. My crystal has monoclinic structure, and I got the error as you can see it in log files, or the job stops after checking the DATASETS. I have run other examples, but with with the FCC structure this time, the job was performed in parallel without any problem. So, I put my job in older abinit distribution. Please let me know, if you find the source of the problem.<br /><br />Thanks a alot,<br /><br />Marsusi.</div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: parallelization on cluster</h3>
+				<div class="date">Posted: <strong>Mon Jan 20, 2014 6:58 pm</strong></div>
+				<div class="author">by <strong>pouillon</strong></div>
+				<div class="content">In this case, you should open a thread in one of the &quot;Running Abinit&quot; section of the forum, providing your input file.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=2374&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Sep 2024 03:09:49 GMT -->
+</html>

@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=529 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:53:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Compiling Abinit 6.2.2 with FFTW3 support on Ubuntu Lucid - ABINIT Discussion Forums</title>
+
+
+	<link rel="canonical" href="viewtopic6c75.html?t=529">
+
+<!--
+	phpBB style name: Flat Style
+	Based on style:   prosilver (this is the default phpBB3 style)
+	Original author:  Tom Beddard ( http://www.subBlue.com/ )
+	Modified by:      Ian Bradley
+-->
+
+<link href="assets/css/font-awesome.minaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+<link href="styles/flat-style/theme/en/stylesheetaea1.css?assets_version=57" rel="stylesheet">
+
+
+
+
+<!--[if lte IE 9]>
+	<link href="./styles/flat-style/theme/tweaks.css?assets_version=57" rel="stylesheet">
+<![endif]-->
+
+<meta name="google-site-verification" content="PLdTN48UENWHvJ5ViWhDTahZKzoMyw5e1QZgw1IECVw" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="app.php/smartfeed/feed.html" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="app.php/smartfeed/feed9830.html?y=2" />
+
+<link href="ext/crizzo/aboutus/styles/prosilver/theme/aboutusaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/dmzx/topicageday/styles/prosilver/theme/topicagedayaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/clock/styles/all/theme/clockaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/hifikabin/googlesearch/styles/prosilver/theme/googlesearchaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/kinerity/bestanswer/styles/prosilver/theme/bestansweraea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbb/collapsiblecategories/styles/all/theme/collapsiblecategoriesaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/phpbbservices/smartfeed/styles/prosilver/theme/customaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/senky/userstatistics/styles/prosilver/theme/userstatisticsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+<link href="ext/tierra/topicsolved/styles/prosilver/theme/buttonsaea1.css?assets_version=57" rel="stylesheet" media="screen" />
+
+
+
+</head>
+<body id="phpbb" class="nojs notouch section-viewtopic ltr ">
+
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar" role="banner">
+					<div class="inner">
+
+			<div id="site-description">
+				<a id="logo" class="logo" href="index-2.html" title="Board index"><span class="site_logo"></span></a>
+				<div  class="site-description">
+					<h1>ABINIT Discussion Forums</h1>
+					<p>The meeting place for ABINIT users and developers</p>
+					<p class="skiplink"><a href="#start_here">Skip to content</a></p>
+				</div>
+			</div>
+
+			</div>
+					</div>
+				<div class="navbar navbar-top" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-main" class="nav-main linklist" role="menubar">
+
+		<li id="quick-links" class="quick-links dropdown-container responsive-menu" data-skip-responsive="true">
+			<a href="#" class="dropdown-trigger">
+				<i class="icon fa-bars fa-fw" aria-hidden="true"></i><span>Quick links</span>
+			</a>
+			<div class="dropdown">
+				<div class="pointer"><div class="pointer-inner"></div></div>
+				<ul class="dropdown-contents" role="menu">
+					
+											<li class="separator"></li>
+																									<li>
+								<a href="search33a7.html?search_id=unanswered" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Unanswered topics</span>
+								</a>
+							</li>
+							<li>
+								<a href="search526f.html?search_id=active_topics" role="menuitem">
+									<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>Active topics</span>
+								</a>
+							</li>
+							<li class="separator"></li>
+							<li>
+								<a href="search.html" role="menuitem">
+									<i class="icon fa-search fa-fw" aria-hidden="true"></i><span>Search</span>
+								</a>
+							</li>
+					
+										
+										<li class="separator"></li>
+
+									</ul>
+			</div>
+		</li>
+
+			<li class="small-icon icon-smartfeed no-bulletin"><a href="app.php/smartfeed/ui.html">Smartfeed</a></li>		<li data-skip-responsive="true">
+			<a href="app.php/help/faq.html" rel="help" title="Frequently Asked Questions" role="menuitem">
+				<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>FAQ</span>
+			</a>
+		</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Main Site</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://www.abinit.org/packages" title="" role="menuitem" target="_blank">
+				<i class="icon fa-download fa-fw" aria-hidden="true"></i><span>Download</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>Documentations</span>
+				</a>
+			</li>
+								<li data-last-responsive="true">
+				<a href="https://docs.abinit.org/tutorial/" title="" role="menuitem" target="_blank">
+				<i class="icon fa-graduation-cap fa-fw" aria-hidden="true"></i><span>Tutorials</span>
+				</a>
+			</li>
+							
+			<li class="rightside"  data-skip-responsive="true">
+			<a href="ucp26c3.html?mode=login" title="Login" accesskey="x" role="menuitem">
+				<i class="icon fa-power-off fa-fw" aria-hidden="true"></i><span>Login</span>
+			</a>
+		</li>
+						</ul>
+    </div>
+</div>
+
+<div class="navbar" role="navigation">
+	<div class="inner">
+	<ul id="nav-breadcrumbs" class="nav-breadcrumbs linklist navlinks" role="menubar">
+								<li class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+										<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope><a href="index-2.html" itemtype="https://schema.org/Thing" itemprop="item" accesskey="h" data-navbar-reference="index"><i class="icon fa-home fa-fw"></i><span itemprop="name">Board index</span></a><meta itemprop="position" content="1" /></span>
+											<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="1"><a href="viewforum58da.html?f=1" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Building ABINIT</span></a><meta itemprop="position" content="2" /></span>
+															<span class="crumb"  itemtype="http://schema.org/ListItem" itemprop="itemListElement" itemscope data-forum-id="3"><a href="viewforum4d6b.html?f=3" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name">Configuring and compiling ABINIT</span></a><meta itemprop="position" content="3" /></span>
+												</li>
+		<li class="rightside responsive-hide">
+	<div id="show-clock">
+		<div id="liveclock" class="outer_face">
+			<div class="marker oneseven"></div>
+			<div class="marker twoeight"></div>
+			<div class="marker fourten"></div>
+			<div class="marker fiveeleven"></div>
+			<div class="inner_face">
+				<div class="hand hour"></div>
+				<div class="hand minute"></div>
+				<div class="hand second"></div>
+			</div>
+		</div>
+	</div>
+</li><!--[if !IE]><!-->
+<li id="g-search-box" class="search-box rightside responsive-hide">
+	<form action="https://forum.abinit.org/app.php/googlesearch">
+	<fieldset>
+		<input name="cx" type="hidden" value="017804512478788106347:tlftx8kncg4">
+		<input name="q" type="search" maxlength="255" class="inputbox search tiny" value="" placeholder="Google Search ...">
+		<button class="button button-search-google" type="submit" name="sitesearch" title="Google Search">
+		<i class="icon fa-search fa-fw" aria-hidden="true"></i>
+		</button>
+	</fieldset>
+</form>
+</li>
+<!--<![endif]-->
+
+							<li id="search-box" class="rightside search-box responsive-hide" role="search">
+				<form action="https://forum.abinit.org/search.php" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…" />
+					<button class="button button-search" type="submit" title="Search">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+					</button>
+					<a href="search.html" class="button button-search-end" title="Advanced search">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+					</a>
+					
+				</fieldset>
+				</form>
+			</li>
+
+			<li class="rightside responsive-search">
+				<a href="search.html" title="View the advanced search options" role="menuitem">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</a>
+			</li>
+					</ul>
+
+	</div>
+</div>
+	</div>
+
+	
+	<a id="start_here" class="anchor"></a>
+	<div id="page-body" class="page-body" role="main">
+		
+		﻿
+<h2 class="topic-title"><a href="viewtopic5524.html?f=3&amp;t=529">Compiling Abinit 6.2.2 with FFTW3 support on Ubuntu Lucid</a></h2>
+<!-- NOTE: remove the style="display: none" when you want to have the forum description on the topic body -->
+<div style="display: none !important;">option, parallelism,...<br /></div>
+<p>
+	<strong>Moderators:</strong> <a href="memberlist5296.html?mode=viewprofile&amp;u=2740" class="username">fgoudreault</a>, <a href="memberlist7468.html?mode=viewprofile&amp;u=53" class="username">mcote</a>
+</p>
+
+	<div class="rules">
+		<div class="inner">
+
+					<strong>Forum rules</strong><br />
+			Please have a look at ~abinit/doc/config/build-config.ac in the source package for detailed and up-to-date information about the configuration of Abinit 8 builds.<br>
+For a video explanation on how to build Abinit 7.x for Linux, please go to: <a href="http://www.youtube.com/watch?v=DppLQ-KQA68" class="postlink">http://www.youtube.com/watch?v=DppLQ-KQA68</a>.<br>
+<strong class="text-strong">IMPORTANT: when an answer solves your problem, please check the little green V-like button on its upper-right corner to accept it.</strong>
+		
+		</div>
+	</div>
+
+<div class="action-bar bar-top">
+	
+			<a href="postingcbdd.html?mode=reply&amp;f=3&amp;t=529" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+	
+			<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic8f5c.html?f=3&amp;t=529&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+	
+			<div class="search-box" role="search">
+			<form method="get" id="topic-search" action="https://forum.abinit.org/search.php">
+			<fieldset>
+				<input class="inputbox search tiny"  type="search" name="keywords" id="search_keywords" size="20" placeholder="Search this topic…" />
+				<button class="button button-search" type="submit" title="Search">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
+				</button>
+				<a href="search.html" class="button button-search-end" title="Advanced search">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">Advanced search</span>
+				</a>
+				<input type="hidden" name="t" value="529" />
+<input type="hidden" name="sf" value="msgonly" />
+
+			</fieldset>
+			</form>
+		</div>
+	
+			<div class="pagination">
+			3 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+		</div>
+
+
+
+
+			<div id="p1508" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile1508">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistb578.html?mode=viewprofile&amp;u=449" class="username">prk17</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search23ee.html?author_id=449&amp;sr=posts">2</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Aug 09, 2010 8:01 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content1508">
+
+						<h3 class="first"><a href="#p1508">Compiling Abinit 6.2.2 with FFTW3 support on Ubuntu Lucid</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting21c9.html?mode=quote&amp;f=3&amp;p=1508" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic99b7.html?p=1508#p1508" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistb578.html?mode=viewprofile&amp;u=449" class="username">prk17</a></strong> &raquo; </span>Mon Aug 09, 2010 8:21 pm
+			</p>
+			
+			
+			
+			<div class="content">Dear Abinit Forums,<br /><br />Great program, I'm able to throw all the configuration switches I want except for FFT.  I understand external FFT is in development, but I just wanted to make sure I wasn't doing anything wrong.<br /><br />On a clean Ubuntu installation, I throw the following command to install FFTW3 headers and libraries to places findable by compilers, also installing gfortran, since no Fortran compiler is provided by default.<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>sudo apt-get install fftw3-dev gfortran</code></pre></div><br /><br />I configure by simply throwing<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>./configure --enable-fft</code></pre></div><br /><br />Relevant lines from config.log are:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>configure:38751: checking whether to use optimized FFT libraries<br />configure:38753: result: yes<br />configure:38977: checking for the requested FFT support<br />configure:38979: result: fftw3<br />configure:39481: checking for dfftw_execute in -lfftw3<br />configure:39499: gfortran -o conftest&nbsp; -g -ffree-line-length-none&nbsp; &nbsp; &nbsp; &nbsp; conftest.F90 -lfftw3&nbsp; &nbsp; &gt;&amp;5<br />configure:39506: $? = 0<br />configure:39527: result: yes<br />configure:39697: checking for dfftw_init_threads in -lfftw3_threads<br />configure:39715: gfortran -o conftest&nbsp; -g -ffree-line-length-none&nbsp; &nbsp; &nbsp; &nbsp; conftest.F90 -lfftw3_threads&nbsp; -lfftw3&nbsp; &nbsp;&gt;&amp;5<br />configure:39722: $? = 0<br />configure:39743: result: yes<br />configure:40519: checking for the actual FFT support<br />configure:40521: result: fftw3-threads<br /></code></pre></div><br />Configure finishes successfully.<br /><br />All of the make process goes smoothly, until I reach 98_main:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>Making all in 98_main<br />make&#91;3&#93;: Entering directory `/home/kumar/Downloads/abinit-6.2.2/src/98_main'<br />gfortran -ffree-form -J/home/kumar/Downloads/abinit-6.2.2/src/mods -O3 -fschedule-insns2 -march=nocona -mmmx -msse -msse2 -msse3 -mfpmath=sse -g -ffree-line-length-none&nbsp; &nbsp;-g -ffree-line-length-none&nbsp; &nbsp; -o abinit abinit-abinit.o&nbsp; ../../src/95_drive/lib95_drive.a ../../src/93_rdm/lib93_rdm.a ../../src/79_seqpar_mpi/lib79_seqpar_mpi.a ../../src/77_ddb/lib77_ddb.a ../../src/77_suscep/lib77_suscep.a ../../src/72_response/lib72_response.a ../../src/72_geomoptim/lib72_geomoptim.a ../../src/69_bse/lib69_bse.a ../../src/68_gw/lib68_gw.a ../../src/68_dmft/lib68_dmft.a ../../src/68_recursion/lib68_recursion.a ../../src/68_rsprc/lib68_rsprc.a ../../src/67_common/lib67_common.a ../../src/66_paw/lib66_paw.a ../../src/66_wfs/lib66_wfs.a ../../src/65_psp/lib65_psp.a ../../src/65_nonlocal/lib65_nonlocal.a ../../src/64_atompaw/lib64_atompaw.a ../../src/62_occeig/lib62_occeig.a ../../src/62_iowfdenpot/lib62_iowfdenpot.a ../../src/62_wvl_wfs/lib62_wvl_wfs.a ../../src/62_poisson/lib62_poisson.a ../../src/62_cg_noabirule/lib62_cg_noabirule.a ../../src/61_ionetcdf/lib61_ionetcdf.a ../../src/59_io_mpi/lib59_io_mpi.a ../../src/57_iovars/lib57_iovars.a ../../src/56_recipspace/lib56_recipspace.a ../../src/56_xc/lib56_xc.a ../../src/53_abiutil/lib53_abiutil.a ../../src/53_spacepar/lib53_spacepar.a ../../src/53_ffts/lib53_ffts.a ../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a ../../src/51_manage_mpi/lib51_manage_mpi.a&nbsp; ../../src/49_gw_toolbox_oop/lib49_gw_toolbox_oop.a ../../src/47_xml/lib47_xml.a ../../src/45_psp_parser/lib45_psp_parser.a ../../src/43_ptgroups/lib43_ptgroups.a ../../src/42_nlstrain/lib42_nlstrain.a ../../src/42_geometry/lib42_geometry.a ../../src/42_parser/lib42_parser.a&nbsp; ../../src/32_util/lib32_util.a ../../src/28_numeric_noabirule/lib28_numeric_noabirule.a ../../src/27_toolbox_oop/lib27_toolbox_oop.a ../../src/18_timing/lib18_timing.a ../../src/16_hideleave/lib16_hideleave.a ../../src/14_hidewrite/lib14_hidewrite.a&nbsp; ../../src/12_hide_mpi/lib12_hide_mpi.a ../../src/10_defs/lib10_defs.a&nbsp; ../../src/01_qespresso_ext/lib01_qespresso_ext.a ../../src/01_interfaces_ext/lib01_interfaces_ext.a&nbsp; &nbsp; -L/home/kumar/Downloads/abinit-6.2.2/plugins/libxc -lxc&nbsp; -L/home/kumar/Downloads/abinit-6.2.2/plugins/etsf_io -letsf_io_low_level -letsf_io_utils -letsf_io -L/home/kumar/Downloads/abinit-6.2.2/plugins/netcdf -lnetcdf -L/home/kumar/Downloads/abinit-6.2.2/prereqs/linalg -llapack -lblas -L/usr/lib/gcc/x86_64-linux-gnu/4.4.3 -L/usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../.. -L/usr/lib/x86_64-linux-gnu -lgfortranbegin -lgfortran -lm <br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `insert_plan':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1173: undefined reference to `dfftw_destroy_plan_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `destroy_plans':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1233: undefined reference to `dfftw_destroy_plan_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `__m_fftw3_MOD_fftw3_set_nthreads':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1398: undefined reference to `dfftw_plan_with_nthreads_'<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1376: undefined reference to `dfftw_init_threads_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `__m_fftw3_MOD_dplan_many_dft':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:2014: undefined reference to `dfftw_plan_many_dft_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `__m_fftw3_MOD_fftw3_fftpad':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1680: undefined reference to `dfftw_execute_dft_'<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1696: undefined reference to `dfftw_execute_dft_'<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1624: undefined reference to `dfftw_execute_dft_'<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1639: undefined reference to `dfftw_execute_dft_'<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1634: undefined reference to `dfftw_execute_dft_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o):/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1686: more undefined references to `dfftw_execute_dft_' follow<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `__m_fftw3_MOD_fftw3_fftpad':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1658: undefined reference to `dfftw_destroy_plan_'<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1592: undefined reference to `dfftw_destroy_plan_'<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1660: undefined reference to `dfftw_destroy_plan_'<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1659: undefined reference to `dfftw_destroy_plan_'<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1594: undefined reference to `dfftw_destroy_plan_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o):/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1593: more undefined references to `dfftw_destroy_plan_' follow<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `__m_fftw3_MOD_zplan_many_dft':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:2074: undefined reference to `dfftw_plan_many_dft_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `fftw3_fftpad_cplx':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1927: undefined reference to `dfftw_execute_dft_'<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1943: undefined reference to `dfftw_execute_dft_'<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1871: undefined reference to `dfftw_execute_dft_'<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1886: undefined reference to `dfftw_execute_dft_'<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1881: undefined reference to `dfftw_execute_dft_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o):/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1933: more undefined references to `dfftw_execute_dft_' follow<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `fftw3_fftpad_cplx':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1905: undefined reference to `dfftw_destroy_plan_'<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1839: undefined reference to `dfftw_destroy_plan_'<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1907: undefined reference to `dfftw_destroy_plan_'<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1906: undefined reference to `dfftw_destroy_plan_'<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1841: undefined reference to `dfftw_destroy_plan_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o):/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1840: more undefined references to `dfftw_destroy_plan_' follow<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `__m_fftw3_MOD_dplan_many_dft_r2c':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:2115: undefined reference to `dfftw_plan_many_dft_r2c_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `__m_fftw3_MOD_dplan_many_dft_c2r':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:2173: undefined reference to `dfftw_plan_many_dft_c2r_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `fftw3_c2c_ip':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:252: undefined reference to `dfftw_execute_dft_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `insert_plan':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1173: undefined reference to `dfftw_destroy_plan_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `fftw3_c2c_op':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:352: undefined reference to `dfftw_execute_dft_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `insert_plan':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1173: undefined reference to `dfftw_destroy_plan_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `fftw3_many_dft_op':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:807: undefined reference to `dfftw_execute_dft_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `insert_plan':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1173: undefined reference to `dfftw_destroy_plan_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `fftw3_many_dft_ip':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:911: undefined reference to `dfftw_execute_dft_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `insert_plan':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1173: undefined reference to `dfftw_destroy_plan_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `fftw3_r2c_op':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:454: undefined reference to `dfftw_plan_dft_r2c_3d_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `insert_plan':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1173: undefined reference to `dfftw_destroy_plan_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `fftw3_r2c_op':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:478: undefined reference to `dfftw_execute_dft_r2c_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `destroy_plans':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1233: undefined reference to `dfftw_destroy_plan_'<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1233: undefined reference to `dfftw_destroy_plan_'<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1233: undefined reference to `dfftw_destroy_plan_'<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1233: undefined reference to `dfftw_destroy_plan_'<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1233: undefined reference to `dfftw_destroy_plan_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o):/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1233: more undefined references to `dfftw_destroy_plan_' follow<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `fftw3_c2r_op':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:686: undefined reference to `dfftw_plan_dft_c2r_3d_'<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:706: undefined reference to `dfftw_execute_dft_c2r_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `destroy_plans':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1233: undefined reference to `dfftw_destroy_plan_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `insert_plan':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1173: undefined reference to `dfftw_destroy_plan_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `destroy_plans':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1233: undefined reference to `dfftw_destroy_plan_'<br />../../src/52_fft_mpi_noabirule/lib52_fft_mpi_noabirule.a(m_fftw3.o): In function `fftw3_cleanup':<br />/home/kumar/Downloads/abinit-6.2.2/src/52_fft_mpi_noabirule/m_fftw3.F90:1309: undefined reference to `dfftw_cleanup_threads_'<br />collect2: ld returned 1 exit status<br />make&#91;3&#93;: *** &#91;abinit&#93; Error 1<br />make&#91;3&#93;: Leaving directory `/home/kumar/Downloads/abinit-6.2.2/src/98_main'<br />make&#91;2&#93;: *** &#91;all-recursive&#93; Error 1<br />make&#91;2&#93;: Leaving directory `/home/kumar/Downloads/abinit-6.2.2/src'<br />make&#91;1&#93;: *** &#91;all-recursive&#93; Error 1<br />make&#91;1&#93;: Leaving directory `/home/kumar/Downloads/abinit-6.2.2'<br />make: *** &#91;all&#93; Error 2</code></pre></div><br /><br />Which is weird, because while configure shows FFTW3 is properly installed, it doesn't seem like any external fft library is linked to in the end.<br />Any illumination on this is greatly appreciated!</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p1509" class="post has-profile bg1 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile1509">
+			<dt class="no-profile-rank no-avatar">
+				<div class="avatar-container">
+																			</div>
+								<a href="memberlistb578.html?mode=viewprofile&amp;u=449" class="username">prk17</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search23ee.html?author_id=449&amp;sr=posts">2</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Mon Aug 09, 2010 8:01 pm</dd>		
+		
+						
+						
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content1509">
+
+						<h3 ><a href="#p1509">Re: Compiling Abinit 6.2.2 with FFTW3 support on Ubuntu Luci</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting279c-2.html?mode=quote&amp;f=3&amp;p=1509" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic9e5e.html?p=1509#p1509" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlistb578.html?mode=viewprofile&amp;u=449" class="username">prk17</a></strong> &raquo; </span>Mon Aug 09, 2010 8:29 pm
+			</p>
+			
+			
+			
+			<div class="content">I just got a small breakthrough,<br /><br />For the abinit, cut3d, and fftprof executables, the following flags never get passed<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>-lfftw3_threads -lfftw3</code></pre></div><br /><br />I manually copied the failed make commands, adding those libraries to the list, and manually executing the command for those 3 executables, and the whole project properly compiles.</div>
+			
+			
+			
+									
+									
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+				<div id="p1616" class="post has-profile bg2 offline">
+		<div class="inner">
+
+		<dl class="postprofile" id="profile1616">
+			<dt class="no-profile-rank has-avatar">
+				<div class="avatar-container">
+																<a href="memberlist981e.html?mode=viewprofile&amp;u=71" class="avatar"><img class="avatar" src="download/fileb0c3.png?avatar=g8_1366628657.png" width="64" height="64" alt="User avatar" /></a>														</div>
+								<a href="memberlist981e.html?mode=viewprofile&amp;u=71" style="color: #6633FF;" class="username-coloured">pouillon</a>							</dt>
+
+									
+		<dd class="profile-posts"><strong>Posts:</strong> <a href="search42e4.html?author_id=71&amp;sr=posts">651</a></dd>		<dd class="profile-joined"><strong>Joined:</strong> Wed Aug 19, 2009 10:08 am</dd>		
+		
+																<dd class="profile-custom-field profile-phpbb_location"><strong>Location:</strong> Spain</dd>
+												
+							<dd class="profile-contact">
+				<strong>Contact:</strong>
+				<div class="dropdown-container dropdown-left">
+					<a href="#" class="dropdown-trigger" title="Contact pouillon">
+						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">Contact pouillon</span>
+					</a>
+					<div class="dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents contact-icons">
+																																								<div>
+																	<a href="https://www.materialsevolution.es/" title="Website">
+										<span class="contact-icon phpbb_website-icon">Website</span>
+									</a>
+																																																<a href="skype:ypouillon80?userinfo" title="Skype" class="last-cell">
+										<span class="contact-icon phpbb_skype-icon">Skype</span>
+									</a>
+																	</div>
+																					</div>
+					</div>
+				</div>
+			</dd>
+				
+		</dl>
+
+		<div class="postbody">
+						<div id="post_content1616">
+
+						<h3 ><a href="#p1616">Re: Compiling Abinit 6.2.2 with FFTW3 support on Ubuntu Luci</a></h3>
+
+													<ul class="post-buttons">
+																																									<li>
+							<a href="posting645e.html?mode=quote&amp;f=3&amp;p=1616" title="Reply with quote" class="button button-icon-only">
+								<i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">Quote</span>
+							</a>
+						</li>
+														</ul>
+							
+						<p class="author">
+									<a class="unread" href="viewtopic881d.html?p=1616#p1616" title="Post">
+						<i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">Post</span>
+					</a>
+								<span class="responsive-hide">by <strong><a href="memberlist981e.html?mode=viewprofile&amp;u=71" style="color: #6633FF;" class="username-coloured">pouillon</a></strong> &raquo; </span>Fri Sep 03, 2010 6:03 pm
+			</p>
+			
+			
+			
+			<div class="content">There was a typo in the support for FFT libraries. This will be fixed in the upcoming 6.2.3.<br /><br />Thank you for reporting.</div>
+			
+			
+			
+									
+									<div id="sig1616" class="signature">Yann Pouillon<br /><em class="text-italics">Simune Atomistics<br />Donostia-San Sebastián, Spain</em></div>
+						</div>
+
+		</div>
+
+				<div class="back2top">
+						<a href="#top" class="top" title="Top">
+				<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i>
+				<span class="sr-only">Top</span>
+			</a>
+					</div>
+		
+		</div>
+	</div>
+
+	<hr class="divider" />
+	
+
+	<div class="action-bar bar-bottom">
+	
+			<a href="postingcbdd.html?mode=reply&amp;f=3&amp;t=529" class="button" title="This topic is locked, you cannot edit posts or make further replies.">
+							<span>Locked</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					</a>
+		
+		<div class="dropdown-container dropdown-button-control topic-tools">
+		<span title="Topic tools" class="button button-secondary dropdown-trigger dropdown-select">
+			<i class="icon fa-wrench fa-fw" aria-hidden="true"></i>
+			<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+		</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																												<li>
+					<a href="viewtopic8f5c.html?f=3&amp;t=529&amp;view=print" title="Print view" accesskey="p">
+						<i class="icon fa-print fa-fw" aria-hidden="true"></i><span>Print view</span>
+					</a>
+				</li>
+											</ul>
+		</div>
+	</div>
+
+			<form method="post" action="https://forum.abinit.org/viewtopic.php?f=3&amp;t=529">
+		<div class="dropdown-container dropdown-container-left dropdown-button-control sort-tools">
+	<span title="Display and sorting options" class="button button-secondary dropdown-trigger dropdown-select">
+		<i class="icon fa-sort-amount-asc fa-fw" aria-hidden="true"></i>
+		<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+	</span>
+	<div class="dropdown hidden">
+		<div class="pointer"><div class="pointer-inner"></div></div>
+		<div class="dropdown-contents">
+			<fieldset class="display-options">
+							<label>Display: <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select></label>
+								<label>Sort by: <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select></label>
+				<label>Direction: <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select></label>
+								<hr class="dashed" />
+				<input type="submit" class="button2" name="sort" value="Go" />
+						</fieldset>
+		</div>
+	</div>
+</div>
+		</form>
+	
+	
+	
+			<div class="pagination">
+			3 posts
+							&bull; Page <strong>1</strong> of <strong>1</strong>
+					</div>
+	</div>
+
+
+<div class="action-bar actions-jump">
+		<p class="jumpbox-return">
+		<a href="viewforum4d6b.html?f=3" class="left-box arrow-left" accesskey="r">
+			<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>Return to “Configuring and compiling ABINIT”</span>
+		</a>
+	</p>
+	
+		<div class="jumpbox dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+			<span title="Jump to" class="button button-secondary dropdown-trigger dropdown-select">
+				<span>Jump to</span>
+				<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+			</span>
+		<div class="dropdown">
+			<div class="pointer"><div class="pointer-inner"></div></div>
+			<ul class="dropdown-contents">
+																				<li><a href="viewforumffeb.html?f=20" class="jumpbox-forum-link"> <span> News &amp; Announcements</span></a></li>
+																<li><a href="viewforum8011.html?f=23" class="jumpbox-forum-link"> <span> Jobs and Other Announcements</span></a></li>
+																<li><a href="viewforum58da.html?f=1" class="jumpbox-cat-link"> <span> Building ABINIT</span></a></li>
+																<li><a href="viewforum4d6b.html?f=3" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Configuring and compiling ABINIT</span></a></li>
+																<li><a href="viewforum31e6.html?f=4" class="jumpbox-cat-link"> <span> Running Abinit</span></a></li>
+																<li><a href="viewforumfdc5.html?f=9" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Ground state</span></a></li>
+																<li><a href="viewforum15ca.html?f=10" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Response calculations</span></a></li>
+																<li><a href="viewforum8a83.html?f=11" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Many-body perturbation theory</span></a></li>
+																<li><a href="viewforum01c9.html?f=12" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Other tools and postprocessing in ABINIT</span></a></li>
+																<li><a href="viewforum345c.html?f=24" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Python interfacing : Abipy ecosystem</span></a></li>
+																<li><a href="viewforum9780.html?f=14" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Link to other codes</span></a></li>
+																<li><a href="viewforume774.html?f=5" class="jumpbox-cat-link"> <span> Developing Abinit</span></a></li>
+																<li><a href="viewforum218b.html?f=19" class="jumpbox-sub-link"><span class="spacer"></span> <span>&#8627; &nbsp; Improving ABINIT</span></a></li>
+											</ul>
+		</div>
+	</div>
+
+	</div>
+
+
+			</div>
+
+
+<div id="page-footer" class="page-footer" role="contentinfo">
+	<div class="navbar navbar-bottom" role="navigation">
+	<div class="inner">
+
+	<ul id="nav-footer" class="nav-footer linklist" role="menubar">
+		<li class="breadcrumbs">
+									<span class="crumb"><a href="index-2.html" data-navbar-reference="index"><i class="icon fa-home fa-fw" aria-hidden="true"></i><span>Board index</span></a></span>					</li>
+		
+				
+							<li class="rightside">
+				<a href="ucp033a.html?mode=delete_cookies" data-ajax="true" data-refresh="true" role="menuitem">
+					<i class="icon fa-trash fa-fw" aria-hidden="true"></i><span>Delete cookies</span>
+				</a>
+			</li>
+				
+		<li class="rightside" data-last-responsive="true"><a href="app.php/aboutus.html" role="menuitem"><i class="icon fa-info-circle fa-fw" aria-hidden="true"></i><span>About us</span></a></li>			</ul>
+
+	</div>
+</div>
+
+	<div class="copyright">
+		<script type="text/javascript">
+copyright=new Date();
+
+update=copyright.getFullYear();
+
+document.write("Copyright\u0020\u0026copy\u003B 2009 - "+ update +	" ABINIT Discussion Forums All\u0020rights\u0020reserved.");
+
+</script>
+<br /><br />		<p class="footer-row">
+			<span class="footer-copyright">Flat Style by <a href="http://phpbbstyles.oo.gd/">Ian Bradley</a></span>
+		</p>
+        <p class="footer-row">
+			<span class="footer-copyright">Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited</span>
+		</p>
+						<p class="footer-row">
+			<a class="footer-link" href="ucp4d86.html?mode=privacy" title="Privacy" role="menuitem">
+				<span class="footer-link-text">Privacy</span>
+			</a>
+			|
+			<a class="footer-link" href="ucp226b.html?mode=terms" title="Terms" role="menuitem">
+				<span class="footer-link-text">Terms</span>
+			</a>
+		</p>
+					</div>
+
+	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="AJAX error" data-ajax-error-text="Something went wrong when processing your request." data-ajax-error-text-abort="User aborted request." data-ajax-error-text-timeout="Your request timed out; please try again." data-ajax-error-text-parsererror="Something went wrong with the request and the server returned an invalid reply.">
+		<div id="darken" class="darken">&nbsp;</div>
+	</div>
+
+	<div id="phpbb_alert" class="phpbb_alert" data-l-err="Error" data-l-timeout-processing-req="Request timed out.">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+	</div>
+	<div id="phpbb_confirm" class="phpbb_alert">
+		<a href="#" class="alert_close">
+			<i class="icon fa-times-circle fa-fw" aria-hidden="true"></i>
+		</a>
+		<div class="alert_text"></div>
+	</div>
+</div>
+
+</div>
+
+<div>
+	<a id="bottom" class="anchor" accesskey="z"></a>
+	</div>
+
+<script src="assets/javascript/jquery.minaea1.js?assets_version=57"></script>
+<script src="assets/javascript/coreaea1.js?assets_version=57"></script>
+
+
+
+<script>
+	(function() {
+		var cx = '017804512478788106347\u003Atlftx8kncg4';
+		var gcse = document.createElement('script');
+		gcse.type = 'text/javascript';
+		gcse.async = true;
+		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//cse.google.com/cse.js?cx=' + cx;
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gcse, s);
+	})();
+</script>
+<script type="text/javascript">
+(function($) {  // Avoid conflicts with other libraries
+
+'use strict';
+	
+	phpbb.addAjaxCallback('reporttosfs', function(data) {
+		if (data.postid !== "undefined") {
+			$('#sfs' + data.postid).hide();
+			phpbb.closeDarkenWrapper(5000);
+		}
+	});
+
+})(jQuery);
+</script>
+<script src="ext/hifikabin/clock/styles/all/template/js/js_clockaea1.js?assets_version=57"></script>
+<script src="ext/phpbb/collapsiblecategories/styles/all/template/js/collapsiblecategoriesaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/forum_fnaea1.js?assets_version=57"></script>
+<script src="styles/prosilver/template/ajaxaea1.js?assets_version=57"></script>
+
+
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=3&t=529 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 18:53:29 GMT -->
+</html>

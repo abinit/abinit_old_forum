@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-gb">
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=3377&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:57:30 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex" />
+
+<title>ABINIT Discussion Forums &bull; POWER8 Compatibility: Preprocessor- &quot;unsigned int&quot; duplicate</title>
+
+<link href="styles/flat-style/theme/print.css" rel="stylesheet">
+<link href="styles/flat-style/theme/bidi.css" rel="stylesheet">
+</head>
+<body id="phpbb" class="ltr">
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+
+	<div id="page-header">
+		<h1>ABINIT Discussion Forums</h1>
+		<p>The meeting place for ABINIT users and developers<br /><a href="index.html">https://forum.abinit.org/</a></p>
+
+		<h2>POWER8 Compatibility: Preprocessor- &quot;unsigned int&quot; duplicate</h2>
+		<p><a href="viewtopicb764.html?f=19&amp;t=3377">https://forum.abinit.org/viewtopic.php?f=19&amp;t=3377</a></p>
+	</div>
+
+	<div id="page-body" class="page-body">
+		<div class="page-number">Page <strong>1</strong> of <strong>1</strong></div>
+					<div class="post">
+				<h3>POWER8 Compatibility: Preprocessor- &quot;unsigned int&quot; duplicate</h3>
+				<div class="date">Posted: <strong>Fri Sep 09, 2016 3:19 pm</strong></div>
+				<div class="author">by <strong>jlost</strong></div>
+				<div class="content">After manually setting the build type and removing -march=native from the Makefiles, I am able to make some progress in the build. However, it chokes here next:<br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code>&#91;u0017592@sys-82824 abinit-8.0.8&#93;$ make<br />make&nbsp; all-recursive<br />make&#91;1&#93;: Entering directory `/home/u0017592/projects/abinit-8.0.8'<br />Making all in fallbacks<br />make&#91;2&#93;: Entering directory `/home/u0017592/projects/abinit-8.0.8/fallbacks'<br />make libxc<br />make&#91;3&#93;: Entering directory `/home/u0017592/projects/abinit-8.0.8/fallbacks'<br />The build of libxc has been disabled<br />make&#91;3&#93;: Leaving directory `/home/u0017592/projects/abinit-8.0.8/fallbacks'<br />Checking build of libxc fallback<br />test -e stamps/libxc-install-stamp<br />make linalg<br />make&#91;3&#93;: Entering directory `/home/u0017592/projects/abinit-8.0.8/fallbacks'<br />The build of linalg has been disabled<br />make&#91;3&#93;: Leaving directory `/home/u0017592/projects/abinit-8.0.8/fallbacks'<br />Checking build of linalg fallback<br />test -e stamps/linalg-install-stamp<br />make netcdf<br />make&#91;3&#93;: Entering directory `/home/u0017592/projects/abinit-8.0.8/fallbacks'<br />The build of netcdf has been disabled<br />make&#91;3&#93;: Leaving directory `/home/u0017592/projects/abinit-8.0.8/fallbacks'<br />Checking build of netcdf fallback<br />test -e stamps/netcdf-install-stamp<br />make atompaw<br />make&#91;3&#93;: Entering directory `/home/u0017592/projects/abinit-8.0.8/fallbacks'<br />The build of atompaw has been disabled<br />make&#91;3&#93;: Leaving directory `/home/u0017592/projects/abinit-8.0.8/fallbacks'<br />Checking build of atompaw fallback<br />test -e stamps/atompaw-install-stamp<br />make wannier90<br />make&#91;3&#93;: Entering directory `/home/u0017592/projects/abinit-8.0.8/fallbacks'<br />The build of wannier90 has been disabled<br />make&#91;3&#93;: Leaving directory `/home/u0017592/projects/abinit-8.0.8/fallbacks'<br />Checking build of wannier90 fallback<br />test -e stamps/wannier90-install-stamp<br />make etsf_io<br />make&#91;3&#93;: Entering directory `/home/u0017592/projects/abinit-8.0.8/fallbacks'<br />The build of etsf_io has been disabled<br />make&#91;3&#93;: Leaving directory `/home/u0017592/projects/abinit-8.0.8/fallbacks'<br />Checking build of etsf_io fallback<br />test -e stamps/etsf_io-install-stamp<br />make bigdft<br />make&#91;3&#93;: Entering directory `/home/u0017592/projects/abinit-8.0.8/fallbacks'<br />The build of bigdft has been disabled<br />make&#91;3&#93;: Leaving directory `/home/u0017592/projects/abinit-8.0.8/fallbacks'<br />Checking build of bigdft fallback<br />test -e stamps/bigdft-install-stamp<br />make&#91;2&#93;: Leaving directory `/home/u0017592/projects/abinit-8.0.8/fallbacks'<br />Making all in src<br />make&#91;2&#93;: Entering directory `/home/u0017592/projects/abinit-8.0.8/src'<br />Making all in incs<br />make&#91;3&#93;: Entering directory `/home/u0017592/projects/abinit-8.0.8/src/incs'<br />There is no buildable file here<br />make&#91;3&#93;: Leaving directory `/home/u0017592/projects/abinit-8.0.8/src/incs'<br />Making all in mods<br />make&#91;3&#93;: Entering directory `/home/u0017592/projects/abinit-8.0.8/src/mods'<br />There is no buildable file here<br />make&#91;3&#93;: Leaving directory `/home/u0017592/projects/abinit-8.0.8/src/mods'<br />Making all in 01_linalg_ext<br />make&#91;3&#93;: Entering directory `/home/u0017592/projects/abinit-8.0.8/src/01_linalg_ext'<br />gfortran -DHAVE_CONFIG_H -I. -I../..&nbsp; -I../../src/incs -I../../src/incs -I/home/u0017592/projects/abinit-8.0.8/fallbacks/exports/include&nbsp; &nbsp;-ffree-form -J/home/u0017592/projects/abinit-8.0.8/src/mods -O2 -mtune=native -g -ffree-line-length-none&nbsp; &nbsp;-c -o m_linalg_interfaces.o m_linalg_interfaces.F90<br />rm -f lib01_linalg_ext.a<br />ar rc lib01_linalg_ext.a m_linalg_interfaces.o<br />ranlib lib01_linalg_ext.a<br />make&#91;3&#93;: Leaving directory `/home/u0017592/projects/abinit-8.0.8/src/01_linalg_ext'<br />Making all in 01_macroavnew_ext<br />make&#91;3&#93;: Entering directory `/home/u0017592/projects/abinit-8.0.8/src/01_macroavnew_ext'<br />gfortran -DHAVE_CONFIG_H -I. -I../..&nbsp; -I../../src/incs -I../../src/incs -I/home/u0017592/projects/abinit-8.0.8/fallbacks/exports/include&nbsp; &nbsp;-ffree-form -J/home/u0017592/projects/abinit-8.0.8/src/mods -O2 -mtune=native -g -ffree-line-length-none&nbsp; &nbsp;-c -o iorho.o iorho.F90<br />gfortran -DHAVE_CONFIG_H -I. -I../..&nbsp; -I../../src/incs -I../../src/incs -I/home/u0017592/projects/abinit-8.0.8/fallbacks/exports/include&nbsp; &nbsp;-ffree-form -J/home/u0017592/projects/abinit-8.0.8/src/mods -O2 -mtune=native -g -ffree-line-length-none&nbsp; &nbsp;-c -o numeric.o numeric.F90<br />gfortran -DHAVE_CONFIG_H -I. -I../..&nbsp; -I../../src/incs -I../../src/incs -I/home/u0017592/projects/abinit-8.0.8/fallbacks/exports/include&nbsp; &nbsp;-ffree-form -J/home/u0017592/projects/abinit-8.0.8/src/mods -O2 -mtune=native -g -ffree-line-length-none&nbsp; &nbsp;-c -o surpla.o surpla.F90<br />gfortran -DHAVE_CONFIG_H -I. -I../..&nbsp; -I../../src/incs -I../../src/incs -I/home/u0017592/projects/abinit-8.0.8/fallbacks/exports/include&nbsp; &nbsp;-ffree-form -J/home/u0017592/projects/abinit-8.0.8/src/mods -O2 -mtune=native -g -ffree-line-length-none&nbsp; &nbsp;-c -o thetaft.o thetaft.F90<br />gfortran -DHAVE_CONFIG_H -I. -I../..&nbsp; -I../../src/incs -I../../src/incs -I/home/u0017592/projects/abinit-8.0.8/fallbacks/exports/include&nbsp; &nbsp;-ffree-form -J/home/u0017592/projects/abinit-8.0.8/src/mods -O2 -mtune=native -g -ffree-line-length-none&nbsp; &nbsp;-c -o volcel.o volcel.F90<br />gfortran -DHAVE_CONFIG_H -I. -I../..&nbsp; -I../../src/incs -I../../src/incs -I/home/u0017592/projects/abinit-8.0.8/fallbacks/exports/include&nbsp; &nbsp;-ffree-form -J/home/u0017592/projects/abinit-8.0.8/src/mods -O2 -mtune=native -g -ffree-line-length-none&nbsp; &nbsp;-c -o interfaces_01_macroavnew_ext.o interfaces_01_macroavnew_ext.F90<br />rm -f lib01_macroavnew_ext.a<br />ar rc lib01_macroavnew_ext.a iorho.o numeric.o surpla.o thetaft.o volcel.o interfaces_01_macroavnew_ext.o<br />ranlib lib01_macroavnew_ext.a<br />make&#91;3&#93;: Leaving directory `/home/u0017592/projects/abinit-8.0.8/src/01_macroavnew_ext'<br />Making all in 02_clib<br />make&#91;3&#93;: Entering directory `/home/u0017592/projects/abinit-8.0.8/src/02_clib'<br />gcc -DHAVE_CONFIG_H -I. -I../..&nbsp; -I../../src/incs -I../../src/incs -I/home/u0017592/projects/abinit-8.0.8/fallbacks/exports/include&nbsp; &nbsp; -g -O2 -mtune=native&nbsp; &nbsp;-MT align.o -MD -MP -MF .deps/align.Tpo -c -o align.o align.c<br />In file included from ../../src/incs/abi_clib.h:26:0,<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;from align.c:20:<br />../../config.h:739:16: error: duplicate ‘unsigned’<br />&nbsp;#define size_t unsigned int<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ^<br />../../config.h:739:25: error: two or more data types in declaration specifiers<br />&nbsp;#define size_t unsigned int<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;^<br />make&#91;3&#93;: *** &#91;align.o&#93; Error 1<br />make&#91;3&#93;: Leaving directory `/home/u0017592/projects/abinit-8.0.8/src/02_clib'<br />make&#91;2&#93;: *** &#91;all-recursive&#93; Error 1<br />make&#91;2&#93;: Leaving directory `/home/u0017592/projects/abinit-8.0.8/src'<br />make&#91;1&#93;: *** &#91;all-recursive&#93; Error 1<br />make&#91;1&#93;: Leaving directory `/home/u0017592/projects/abinit-8.0.8'<br />make: *** &#91;all&#93; Error 2<br /></code></pre></div><br /><br />I found a SO answer that seems to be related here: <!-- m --><a class="postlink" href="http://stackoverflow.com/questions/8827150/stddef-h-error-duplicate-unsigned">http://stackoverflow.com/questions/8827 ... e-unsigned</a><!-- m --></div>
+			</div>
+			<hr />
+					<div class="post">
+				<h3>Re: POWER8 Compatibility: Preprocessor- &quot;unsigned int&quot; dupli</h3>
+				<div class="date">Posted: <strong>Fri Sep 09, 2016 4:17 pm</strong></div>
+				<div class="author">by <strong>jlost</strong></div>
+				<div class="content">I dug a bit further and found the following file is specifically commented as nonportable:<br /><br /><span style="text-decoration: underline">src/02_clib/align.c</span><br /><div class="codebox"><p>Code: <a href="#" onclick="selectCode(this); return false;">Select all</a></p><pre><code><br />#include &quot;abi_clib.h&quot;<br /><br />/* Returns in algn the alignment of a pointer modulo nbytes NONPORTABLE */<br />void<br />FC_FUNC_(clib_alignment_of,clib_ALIGNMENT_OF)<br />&nbsp; (void *p, int *nbytes, int *algn)<br />{<br />&nbsp; if (*nbytes){<br />&nbsp; &nbsp; *algn = (int)(((uintptr_t) p) % *nbytes);<br />&nbsp; &nbsp; &nbsp;/*printf(&quot;address = %p; uintptr = %d\n&quot;, p, (uintptr_t) p);*/<br />&nbsp; }<br />&nbsp; else<br />&nbsp; &nbsp; *algn = 0;<br />}<br /></code></pre></div><br /><br />Feel free to move this thread over to &quot;Platform specific questions&quot; if that's more appropriate.<br />This would probably at least require an alternate POWER8-compatible version switched by a preprocessor directive to work.</div>
+			</div>
+			<hr />
+			</div>
+
+	<div id="page-footer" class="page-footer">
+		<div class="page-number">All times are <span title="Europe/Brussels">UTC+02:00</span><br />Page <strong>1</strong> of <strong>1</strong></div>
+			<div class="copyright">
+				<p>Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Limited
+				</p>
+							</div>
+	</div>
+</div>
+
+</body>
+
+<!-- Mirrored from forum.abinit.org/viewtopic.php?f=19&t=3377&view=print by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 21:57:30 GMT -->
+</html>
